@@ -12,7 +12,7 @@ module Aws::S3Outposts
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict with this action, and it could not be completed.</p>
@@ -21,7 +21,7 @@ module Aws::S3Outposts
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_id
@@ -56,7 +56,7 @@ module Aws::S3Outposts
       :access_type,
       :customer_owned_ipv4_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -65,7 +65,7 @@ module Aws::S3Outposts
     class CreateEndpointResult < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_id
@@ -78,7 +78,7 @@ module Aws::S3Outposts
       :endpoint_id,
       :outpost_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. 
@@ -135,20 +135,7 @@ module Aws::S3Outposts
       :customer_owned_ipv4_pool,
       :failed_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointAccessType
-      PRIVATE = 'Private'
-      CUSTOMER_OWNED_IP = 'CustomerOwnedIp'
-    end
-
-    module EndpointStatus
-      PENDING = 'Pending'
-      AVAILABLE = 'Available'
-      DELETING = 'Deleting'
-      CREATE_FAILED = 'Create_Failed'
-      DELETE_FAILED = 'Delete_Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The failure reason, if any, for a create or delete endpoint operation.</p>
@@ -162,7 +149,7 @@ module Aws::S3Outposts
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an exception with the internal server.</p>
@@ -171,7 +158,7 @@ module Aws::S3Outposts
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -185,7 +172,7 @@ module Aws::S3Outposts
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -199,7 +186,7 @@ module Aws::S3Outposts
       :endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -215,7 +202,7 @@ module Aws::S3Outposts
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outposts
@@ -239,7 +226,7 @@ module Aws::S3Outposts
       :outposts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -257,7 +244,7 @@ module Aws::S3Outposts
       :max_results,
       :outpost_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -271,7 +258,7 @@ module Aws::S3Outposts
       :endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the network interface.</p>
@@ -281,7 +268,7 @@ module Aws::S3Outposts
     class NetworkInterface < Struct.new(
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for the Outpost object.</p>
@@ -307,7 +294,7 @@ module Aws::S3Outposts
       :owner_id,
       :capacity_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:capacity_in_bytes] = 0 unless options.key?(:capacity_in_bytes)
@@ -321,7 +308,7 @@ module Aws::S3Outposts
     class OutpostOfflineException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource was not found.</p>
@@ -330,7 +317,7 @@ module Aws::S3Outposts
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -339,7 +326,7 @@ module Aws::S3Outposts
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an exception validating this data.</p>
@@ -348,7 +335,7 @@ module Aws::S3Outposts
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

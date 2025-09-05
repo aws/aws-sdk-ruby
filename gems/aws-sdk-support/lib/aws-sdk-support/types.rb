@@ -25,7 +25,7 @@ module Aws::Support
       :attachment_set_id,
       :attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID and expiry time of the attachment set returned by the <a>AddAttachmentsToSet</a> operation.</p>
@@ -42,7 +42,7 @@ module Aws::Support
       :attachment_set_id,
       :expiry_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -68,7 +68,7 @@ module Aws::Support
       :cc_email_addresses,
       :attachment_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the <a>AddCommunicationToCase</a> operation.</p>
@@ -79,7 +79,7 @@ module Aws::Support
     class AddCommunicationToCaseResponse < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:result] = false unless options.key?(:result)
@@ -99,7 +99,7 @@ module Aws::Support
       :file_name,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file name and ID of an attachment to a case communication. You can use the ID to
@@ -114,7 +114,7 @@ module Aws::Support
       :attachment_id,
       :file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attachment with the specified ID could not be found.</p>
@@ -124,7 +124,7 @@ module Aws::Support
     class AttachmentIdNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit for the number of attachment sets created in a short period of time has been
@@ -136,7 +136,7 @@ module Aws::Support
     class AttachmentLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The expiration time of the attachment set has passed. The set expires 1 hour after it
@@ -148,7 +148,7 @@ module Aws::Support
     class AttachmentSetExpired < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attachment set with the specified ID could not be found.</p>
@@ -158,7 +158,7 @@ module Aws::Support
     class AttachmentSetIdNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit for the size of an attachment set has been exceeded. The limits are three
@@ -170,7 +170,7 @@ module Aws::Support
     class AttachmentSetSizeLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The case creation limit for the account has been exceeded.</p>
@@ -181,7 +181,7 @@ module Aws::Support
     class CaseCreationLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON-formatted object that contains the metadata for a support case. It is contained
@@ -399,7 +399,7 @@ module Aws::Support
       :cc_email_addresses,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested <code>caseId</code> couldn't be located.</p>
@@ -409,7 +409,7 @@ module Aws::Support
     class CaseIdNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON-formatted name/value pair that represents the category name and category code
@@ -425,7 +425,7 @@ module Aws::Support
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A communication associated with a support case. The communication consists of the case
@@ -460,7 +460,7 @@ module Aws::Support
       :time_created,
       :attachment_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON-formatted object that contains the CommunicationTypeOptions for creating a case for a certain
@@ -509,7 +509,7 @@ module Aws::Support
       :supported_hours,
       :dates_without_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subject
@@ -569,7 +569,7 @@ module Aws::Support
       :issue_type,
       :attachment_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The support case ID returned by a successful completion of the <a>CreateCase</a> operation.</p>
@@ -582,7 +582,7 @@ module Aws::Support
     class CreateCaseResponse < Struct.new(
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Date and time (UTC) format in RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.</p>
@@ -600,7 +600,7 @@ module Aws::Support
       :start_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit for the number of <a>DescribeAttachment</a> requests in a short
@@ -612,7 +612,7 @@ module Aws::Support
     class DescribeAttachmentLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -621,7 +621,7 @@ module Aws::Support
     class DescribeAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content and file name of the attachment returned by the <a>DescribeAttachment</a> operation.</p>
@@ -635,7 +635,7 @@ module Aws::Support
     class DescribeAttachmentResponse < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id_list
@@ -683,7 +683,7 @@ module Aws::Support
       :language,
       :include_communications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns an array of <a href="https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html">CaseDetails</a>
@@ -699,7 +699,7 @@ module Aws::Support
       :cases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -729,7 +729,7 @@ module Aws::Support
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The communications returned by the <a>DescribeCommunications</a>
@@ -744,7 +744,7 @@ module Aws::Support
       :communications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute issue_type
@@ -771,7 +771,7 @@ module Aws::Support
       :language,
       :category_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language_availability
@@ -804,7 +804,7 @@ module Aws::Support
       :language_availability,
       :communication_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code_list
@@ -819,7 +819,7 @@ module Aws::Support
       :service_code_list,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of Amazon Web Services services returned by the <a>DescribeServices</a>
@@ -830,7 +830,7 @@ module Aws::Support
     class DescribeServicesResponse < Struct.new(
       :services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language
@@ -841,7 +841,7 @@ module Aws::Support
     class DescribeSeverityLevelsRequest < Struct.new(
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of severity levels returned by the <a>DescribeSeverityLevels</a>
@@ -853,7 +853,7 @@ module Aws::Support
     class DescribeSeverityLevelsResponse < Struct.new(
       :severity_levels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute issue_type
@@ -873,7 +873,7 @@ module Aws::Support
       :service_code,
       :category_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute supported_languages
@@ -884,7 +884,7 @@ module Aws::Support
     class DescribeSupportedLanguagesResponse < Struct.new(
       :supported_languages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_ids
@@ -897,7 +897,7 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
       :check_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The statuses of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> operation.</p>
@@ -907,7 +907,7 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Struct.new(
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -969,7 +969,7 @@ module Aws::Support
       :check_id,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the Trusted Advisor check returned by the <a>DescribeTrustedAdvisorCheckResult</a> operation.</p>
@@ -979,7 +979,7 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckResultResponse < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_ids
@@ -988,7 +988,7 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckSummariesRequest < Struct.new(
       :check_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summaries of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckSummaries</a> operation.</p>
@@ -998,7 +998,7 @@ module Aws::Support
     class DescribeTrustedAdvisorCheckSummariesResponse < Struct.new(
       :summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language
@@ -1054,7 +1054,7 @@ module Aws::Support
     class DescribeTrustedAdvisorChecksRequest < Struct.new(
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorChecks</a> operation.</p>
@@ -1064,7 +1064,7 @@ module Aws::Support
     class DescribeTrustedAdvisorChecksResponse < Struct.new(
       :checks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred.</p>
@@ -1074,7 +1074,7 @@ module Aws::Support
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The five most recent communications associated with the case.</p>
@@ -1088,7 +1088,7 @@ module Aws::Support
       :communications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1102,7 +1102,7 @@ module Aws::Support
     class RefreshTrustedAdvisorCheckRequest < Struct.new(
       :check_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current refresh status of a Trusted Advisor check.</p>
@@ -1113,7 +1113,7 @@ module Aws::Support
     class RefreshTrustedAdvisorCheckResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1125,7 +1125,7 @@ module Aws::Support
     class ResolveCaseRequest < Struct.new(
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the case returned by the <a>ResolveCase</a> operation.</p>
@@ -1140,7 +1140,7 @@ module Aws::Support
       :initial_case_status,
       :final_case_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services service returned by the <a>DescribeServices</a>
@@ -1163,7 +1163,7 @@ module Aws::Support
       :name,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A code and name pair that represents the severity level of a support case. The
@@ -1213,7 +1213,7 @@ module Aws::Support
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Time range object with <code>startTime</code> and <code>endTime</code> range in RFC 3339 format. <code>'HH:mm:ss.SSS'</code>.</p>
@@ -1231,7 +1231,7 @@ module Aws::Support
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1259,7 +1259,7 @@ module Aws::Support
       :language,
       :display,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1270,7 +1270,7 @@ module Aws::Support
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for summary information that relates to the category of the Trusted Advisor
@@ -1282,7 +1282,7 @@ module Aws::Support
     class TrustedAdvisorCategorySpecificSummary < Struct.new(
       :cost_optimizing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description and metadata for a Trusted Advisor check.</p>
@@ -1313,7 +1313,7 @@ module Aws::Support
       :category,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The refresh status of a Trusted Advisor check.</p>
@@ -1358,7 +1358,7 @@ module Aws::Support
       :status,
       :millis_until_next_refreshable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:millis_until_next_refreshable] = 0 unless options.key?(:millis_until_next_refreshable)
@@ -1395,7 +1395,7 @@ module Aws::Support
       :category_specific_summary,
       :flagged_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a Trusted Advisor check result, including the alert status, last refresh, and
@@ -1428,7 +1428,7 @@ module Aws::Support
       :resources_summary,
       :category_specific_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_flagged_resources] = false unless options.key?(:has_flagged_resources)
@@ -1450,7 +1450,7 @@ module Aws::Support
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated_monthly_savings] = 0 unless options.key?(:estimated_monthly_savings)
@@ -1486,7 +1486,7 @@ module Aws::Support
       :is_suppressed,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_suppressed] = false unless options.key?(:is_suppressed)
@@ -1515,7 +1515,7 @@ module Aws::Support
       :resources_ignored,
       :resources_suppressed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:resources_processed] = 0 unless options.key?(:resources_processed)

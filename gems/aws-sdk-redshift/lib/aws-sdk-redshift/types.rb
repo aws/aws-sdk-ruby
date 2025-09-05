@@ -19,7 +19,7 @@ module Aws::Redshift
       :reserved_node_id,
       :target_reserved_node_offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exchanged_reserved_node
@@ -28,7 +28,7 @@ module Aws::Redshift
     class AcceptReservedNodeExchangeOutputMessage < Struct.new(
       :exchanged_reserved_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are not authorized to access the cluster.</p>
@@ -37,7 +37,7 @@ module Aws::Redshift
     class AccessToClusterDeniedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The owner of the specified snapshot has not authorized your account to access the
@@ -47,7 +47,7 @@ module Aws::Redshift
     class AccessToSnapshotDeniedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A name value pair that describes an aspect of an account. </p>
@@ -61,7 +61,7 @@ module Aws::Redshift
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Web Services account authorized to restore a snapshot.</p>
@@ -77,13 +77,7 @@ module Aws::Redshift
       :account_id,
       :account_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionType
-      RESTORE_CLUSTER = 'restore-cluster'
-      RECOMMEND_NODE_CONFIG = 'recommend-node-config'
-      RESIZE_CLUSTER = 'resize-cluster'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -104,7 +98,7 @@ module Aws::Redshift
       :database_name,
       :partner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -117,7 +111,7 @@ module Aws::Redshift
       :database_name,
       :partner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation that uses this structure is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>
@@ -131,19 +125,7 @@ module Aws::Redshift
       :aqua_status,
       :aqua_configuration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AquaConfigurationStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      AUTO = 'auto'
-    end
-
-    module AquaStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      APPLYING = 'applying'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -169,7 +151,7 @@ module Aws::Redshift
       :consumer_region,
       :allow_writes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -199,7 +181,7 @@ module Aws::Redshift
       :managed_by,
       :data_share_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the custom domain name association.</p>
@@ -217,7 +199,7 @@ module Aws::Redshift
       :custom_domain_certificate_expiry_date,
       :certificate_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an attribute value.</p>
@@ -227,7 +209,7 @@ module Aws::Redshift
     class AttributeValueTarget < Struct.new(
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an authentication profile.</p>
@@ -242,7 +224,7 @@ module Aws::Redshift
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication profile already exists.</p>
@@ -251,7 +233,7 @@ module Aws::Redshift
     class AuthenticationProfileAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication profile can't be found.</p>
@@ -260,7 +242,7 @@ module Aws::Redshift
     class AuthenticationProfileNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size or number of authentication profiles has exceeded the quota.
@@ -270,7 +252,7 @@ module Aws::Redshift
     class AuthenticationProfileQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CIDR block or EC2 security group is already authorized for the
@@ -280,7 +262,7 @@ module Aws::Redshift
     class AuthorizationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CIDR IP range or EC2 security group is not authorized for the
@@ -290,7 +272,7 @@ module Aws::Redshift
     class AuthorizationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization quota for the cluster security group has been reached.</p>
@@ -299,12 +281,7 @@ module Aws::Redshift
     class AuthorizationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthorizationStatus
-      AUTHORIZED = 'Authorized'
-      REVOKING = 'Revoking'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -330,7 +307,7 @@ module Aws::Redshift
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_security_group
@@ -339,7 +316,7 @@ module Aws::Redshift
     class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -357,7 +334,7 @@ module Aws::Redshift
       :consumer_identifier,
       :allow_writes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -387,7 +364,7 @@ module Aws::Redshift
       :managed_by,
       :data_share_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -404,7 +381,7 @@ module Aws::Redshift
       :account,
       :vpc_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across Amazon Web Services accounts.</p>
@@ -446,7 +423,7 @@ module Aws::Redshift
       :allowed_vp_cs,
       :endpoint_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -482,7 +459,7 @@ module Aws::Redshift
       :snapshot_cluster_identifier,
       :account_with_restore_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -491,7 +468,7 @@ module Aws::Redshift
     class AuthorizeSnapshotAccessResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorized token issuer for the Amazon Redshift IAM Identity Center application.</p>
@@ -506,7 +483,7 @@ module Aws::Redshift
       :trusted_token_issuer_arn,
       :authorized_audiences_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an availability zone.</p>
@@ -520,7 +497,7 @@ module Aws::Redshift
       :name,
       :supported_platforms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifiers
@@ -529,7 +506,7 @@ module Aws::Redshift
     class BatchDeleteClusterSnapshotsRequest < Struct.new(
       :identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -542,7 +519,7 @@ module Aws::Redshift
       :resources,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number for a batch delete of snapshots has been reached. The limit is
@@ -552,7 +529,7 @@ module Aws::Redshift
     class BatchDeleteRequestSizeExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number for snapshot identifiers has been reached. The limit is 100.
@@ -562,7 +539,7 @@ module Aws::Redshift
     class BatchModifyClusterSnapshotsLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_identifier_list
@@ -585,7 +562,7 @@ module Aws::Redshift
       :manual_snapshot_retention_period,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -598,7 +575,7 @@ module Aws::Redshift
       :resources,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Could not find the specified S3 bucket.</p>
@@ -607,7 +584,7 @@ module Aws::Redshift
     class BucketNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -617,7 +594,7 @@ module Aws::Redshift
     class CancelResizeMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of a cluster resize operation.</p>
@@ -712,7 +689,7 @@ module Aws::Redshift
       :target_encryption_type,
       :data_transfer_progress_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster ID and custom domain name tied to a specific certificate. These are typically 
@@ -727,7 +704,7 @@ module Aws::Redshift
       :custom_domain_name,
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a cluster.</p>
@@ -1145,7 +1122,7 @@ module Aws::Redshift
       :multi_az,
       :multi_az_secondary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account already has a cluster with the given identifier.</p>
@@ -1154,7 +1131,7 @@ module Aws::Redshift
     class ClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1168,7 +1145,7 @@ module Aws::Redshift
       :cluster_identifier,
       :schedule_association_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a <code>ClusterDbRevision</code>.</p>
@@ -1191,7 +1168,7 @@ module Aws::Redshift
       :database_revision_release_date,
       :revision_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -1207,7 +1184,7 @@ module Aws::Redshift
       :marker,
       :cluster_db_revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Identity and Access Management (IAM) role that can be used by the associated
@@ -1241,7 +1218,7 @@ module Aws::Redshift
       :iam_role_arn,
       :apply_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier of a node in a cluster.</p>
@@ -1259,7 +1236,7 @@ module Aws::Redshift
       :private_ip_address,
       :public_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
@@ -1269,7 +1246,7 @@ module Aws::Redshift
     class ClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cluster is already on the latest database revision.</p>
@@ -1278,7 +1255,7 @@ module Aws::Redshift
     class ClusterOnLatestRevisionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a parameter group.</p>
@@ -1301,7 +1278,7 @@ module Aws::Redshift
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster parameter group with the same name already exists.</p>
@@ -1310,7 +1287,7 @@ module Aws::Redshift
     class ClusterParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter group name does not refer to an existing parameter group.</p>
@@ -1319,7 +1296,7 @@ module Aws::Redshift
     class ClusterParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
@@ -1332,7 +1309,7 @@ module Aws::Redshift
     class ClusterParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a parameter group.</p>
@@ -1354,7 +1331,7 @@ module Aws::Redshift
       :parameter_apply_status,
       :cluster_parameter_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeClusterParameterGroups</a>
@@ -1374,7 +1351,7 @@ module Aws::Redshift
       :marker,
       :parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a parameter group.</p>
@@ -1433,7 +1410,7 @@ module Aws::Redshift
       :parameter_apply_status,
       :parameter_apply_error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would exceed the allowed number of cluster instances for this account.
@@ -1446,7 +1423,7 @@ module Aws::Redshift
     class ClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group.</p>
@@ -1475,7 +1452,7 @@ module Aws::Redshift
       :ip_ranges,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster security group with the same name already exists.</p>
@@ -1484,7 +1461,7 @@ module Aws::Redshift
     class ClusterSecurityGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a cluster security group.</p>
@@ -1498,7 +1475,7 @@ module Aws::Redshift
       :cluster_security_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1516,7 +1493,7 @@ module Aws::Redshift
       :marker,
       :cluster_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster security group name does not refer to an existing cluster security
@@ -1526,7 +1503,7 @@ module Aws::Redshift
     class ClusterSecurityGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
@@ -1539,7 +1516,7 @@ module Aws::Redshift
     class ClusterSecurityGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value specified as a snapshot identifier is already used by an existing
@@ -1549,7 +1526,7 @@ module Aws::Redshift
     class ClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the destination region and retention period that are configured for
@@ -1577,7 +1554,7 @@ module Aws::Redshift
       :manual_snapshot_retention_period,
       :snapshot_copy_grant_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot identifier does not refer to an existing cluster snapshot.</p>
@@ -1586,7 +1563,7 @@ module Aws::Redshift
     class ClusterSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of cluster
@@ -1596,7 +1573,7 @@ module Aws::Redshift
     class ClusterSnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a subnet group.</p>
@@ -1631,7 +1608,7 @@ module Aws::Redshift
       :tags,
       :supported_cluster_ip_address_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <i>ClusterSubnetGroupName</i> is already used by an existing
@@ -1641,7 +1618,7 @@ module Aws::Redshift
     class ClusterSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeClusterSubnetGroups</a> action.
@@ -1660,7 +1637,7 @@ module Aws::Redshift
       :marker,
       :cluster_subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster subnet group name does not refer to an existing cluster subnet
@@ -1670,7 +1647,7 @@ module Aws::Redshift
     class ClusterSubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in user exceeding the allowed number of cluster subnet
@@ -1683,7 +1660,7 @@ module Aws::Redshift
     class ClusterSubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in user exceeding the allowed number of subnets in a
@@ -1696,7 +1673,7 @@ module Aws::Redshift
     class ClusterSubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a cluster version, including the parameter group family and description
@@ -1715,7 +1692,7 @@ module Aws::Redshift
       :cluster_parameter_group_family,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeClusterVersions</a> action.
@@ -1734,7 +1711,7 @@ module Aws::Redshift
       :marker,
       :cluster_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeClusters</a> action. </p>
@@ -1753,7 +1730,7 @@ module Aws::Redshift
       :marker,
       :clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is a conflict while updating the resource policy.</p>
@@ -1762,7 +1739,7 @@ module Aws::Redshift
     class ConflictPolicyUpdateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1820,7 +1797,7 @@ module Aws::Redshift
       :target_snapshot_identifier,
       :manual_snapshot_retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -1829,7 +1806,7 @@ module Aws::Redshift
     class CopyClusterSnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cross-region snapshot copy was temporarily disabled. Try your request
@@ -1839,7 +1816,7 @@ module Aws::Redshift
     class CopyToRegionDisabledFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -1853,7 +1830,7 @@ module Aws::Redshift
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -1866,7 +1843,7 @@ module Aws::Redshift
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2246,7 +2223,7 @@ module Aws::Redshift
       :multi_az,
       :redshift_idc_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2292,7 +2269,7 @@ module Aws::Redshift
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_parameter_group
@@ -2301,7 +2278,7 @@ module Aws::Redshift
     class CreateClusterParameterGroupResult < Struct.new(
       :cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2310,7 +2287,7 @@ module Aws::Redshift
     class CreateClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2343,7 +2320,7 @@ module Aws::Redshift
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_security_group
@@ -2352,7 +2329,7 @@ module Aws::Redshift
     class CreateClusterSecurityGroupResult < Struct.new(
       :cluster_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2395,7 +2372,7 @@ module Aws::Redshift
       :manual_snapshot_retention_period,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -2404,7 +2381,7 @@ module Aws::Redshift
     class CreateClusterSnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2442,7 +2419,7 @@ module Aws::Redshift
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_subnet_group
@@ -2451,7 +2428,7 @@ module Aws::Redshift
     class CreateClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_domain_name
@@ -2468,7 +2445,7 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_domain_name
@@ -2489,7 +2466,7 @@ module Aws::Redshift
       :cluster_identifier,
       :custom_domain_cert_expiry_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -2518,7 +2495,7 @@ module Aws::Redshift
       :subnet_group_name,
       :vpc_security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Redshift-managed VPC endpoint.</p>
@@ -2564,7 +2541,7 @@ module Aws::Redshift
       :vpc_security_groups,
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2634,7 +2611,7 @@ module Aws::Redshift
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -2643,7 +2620,7 @@ module Aws::Redshift
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2658,7 +2635,7 @@ module Aws::Redshift
       :hsm_client_certificate_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hsm_client_certificate
@@ -2669,7 +2646,7 @@ module Aws::Redshift
     class CreateHsmClientCertificateResult < Struct.new(
       :hsm_client_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2705,7 +2682,7 @@ module Aws::Redshift
       :hsm_server_public_certificate,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hsm_configuration
@@ -2716,7 +2693,7 @@ module Aws::Redshift
     class CreateHsmConfigurationResult < Struct.new(
       :hsm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -2755,7 +2732,7 @@ module Aws::Redshift
       :additional_encryption_context,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -2808,7 +2785,7 @@ module Aws::Redshift
       :additional_encryption_context,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute idc_instance_arn
@@ -2843,7 +2820,7 @@ module Aws::Redshift
       :authorized_token_issuer_list,
       :service_integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redshift_idc_application
@@ -2852,7 +2829,7 @@ module Aws::Redshift
     class CreateRedshiftIdcApplicationResult < Struct.new(
       :redshift_idc_application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_action_name
@@ -2898,7 +2875,7 @@ module Aws::Redshift
       :end_time,
       :enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. 
@@ -2955,7 +2932,7 @@ module Aws::Redshift
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the <code>CreateSnapshotCopyGrant</code> action.</p>
@@ -2993,7 +2970,7 @@ module Aws::Redshift
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_copy_grant
@@ -3009,7 +2986,7 @@ module Aws::Redshift
     class CreateSnapshotCopyGrantResult < Struct.new(
       :snapshot_copy_grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedule_definitions
@@ -3040,7 +3017,7 @@ module Aws::Redshift
       :dry_run,
       :next_invocations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a snapshot schedule. You can set a regular interval for creating
@@ -3075,7 +3052,7 @@ module Aws::Redshift
       :associated_cluster_count,
       :associated_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <code>CreateTags</code> action. </p>
@@ -3095,7 +3072,7 @@ module Aws::Redshift
       :resource_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -3136,7 +3113,7 @@ module Aws::Redshift
       :breach_action,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a usage limit object for a cluster. </p>
@@ -3188,7 +3165,7 @@ module Aws::Redshift
       :breach_action,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred when an attempt was made to change the custom domain association.</p>
@@ -3197,7 +3174,7 @@ module Aws::Redshift
     class CustomCnameAssociationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred. The custom domain name couldn't be found.</p>
@@ -3206,7 +3183,7 @@ module Aws::Redshift
     class CustomDomainAssociationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3219,7 +3196,7 @@ module Aws::Redshift
       :marker,
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute total_backup_size_in_mega_bytes
@@ -3232,7 +3209,7 @@ module Aws::Redshift
       :total_backup_size_in_mega_bytes,
       :total_provisioned_storage_in_mega_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -3262,7 +3239,7 @@ module Aws::Redshift
       :managed_by,
       :data_share_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The association of a datashare from a producer account with a data consumer.
@@ -3298,33 +3275,7 @@ module Aws::Redshift
       :producer_allowed_writes,
       :consumer_accepted_writes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataShareStatus
-      ACTIVE = 'ACTIVE'
-      PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION'
-      AUTHORIZED = 'AUTHORIZED'
-      DEAUTHORIZED = 'DEAUTHORIZED'
-      REJECTED = 'REJECTED'
-      AVAILABLE = 'AVAILABLE'
-    end
-
-    module DataShareStatusForConsumer
-      ACTIVE = 'ACTIVE'
-      AVAILABLE = 'AVAILABLE'
-    end
-
-    module DataShareStatusForProducer
-      ACTIVE = 'ACTIVE'
-      AUTHORIZED = 'AUTHORIZED'
-      PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION'
-      DEAUTHORIZED = 'DEAUTHORIZED'
-      REJECTED = 'REJECTED'
-    end
-
-    module DataShareType
-      INTERNAL = 'INTERNAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a cluster while it is in the process of resizing with an
@@ -3356,7 +3307,7 @@ module Aws::Redshift
       :estimated_time_to_completion_in_seconds,
       :elapsed_time_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -3370,7 +3321,7 @@ module Aws::Redshift
       :data_share_arn,
       :consumer_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -3400,7 +3351,7 @@ module Aws::Redshift
       :managed_by,
       :data_share_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the default cluster parameters for a parameter group family.</p>
@@ -3423,7 +3374,7 @@ module Aws::Redshift
       :marker,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a deferred maintenance window</p>
@@ -3441,7 +3392,7 @@ module Aws::Redshift
       :defer_maintenance_start_time,
       :defer_maintenance_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -3450,7 +3401,7 @@ module Aws::Redshift
     class DeleteAuthenticationProfileMessage < Struct.new(
       :authentication_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -3459,7 +3410,7 @@ module Aws::Redshift
     class DeleteAuthenticationProfileResult < Struct.new(
       :authentication_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3523,7 +3474,7 @@ module Aws::Redshift
       :final_cluster_snapshot_identifier,
       :final_cluster_snapshot_retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3542,7 +3493,7 @@ module Aws::Redshift
     class DeleteClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3551,7 +3502,7 @@ module Aws::Redshift
     class DeleteClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3561,7 +3512,7 @@ module Aws::Redshift
     class DeleteClusterSecurityGroupMessage < Struct.new(
       :cluster_security_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3581,7 +3532,7 @@ module Aws::Redshift
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3601,7 +3552,7 @@ module Aws::Redshift
       :snapshot_identifier,
       :snapshot_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -3610,7 +3561,7 @@ module Aws::Redshift
     class DeleteClusterSnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3620,7 +3571,7 @@ module Aws::Redshift
     class DeleteClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -3633,7 +3584,7 @@ module Aws::Redshift
       :cluster_identifier,
       :custom_domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -3642,7 +3593,7 @@ module Aws::Redshift
     class DeleteEndpointAccessMessage < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Redshift-managed VPC endpoint.</p>
@@ -3688,7 +3639,7 @@ module Aws::Redshift
       :vpc_security_groups,
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3698,7 +3649,7 @@ module Aws::Redshift
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3708,7 +3659,7 @@ module Aws::Redshift
     class DeleteHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3718,7 +3669,7 @@ module Aws::Redshift
     class DeleteHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -3727,7 +3678,7 @@ module Aws::Redshift
     class DeleteIntegrationMessage < Struct.new(
       :integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -3780,7 +3731,7 @@ module Aws::Redshift
       :additional_encryption_context,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -3801,7 +3752,7 @@ module Aws::Redshift
       :database_name,
       :partner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -3814,7 +3765,7 @@ module Aws::Redshift
       :database_name,
       :partner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redshift_idc_application_arn
@@ -3823,7 +3774,7 @@ module Aws::Redshift
     class DeleteRedshiftIdcApplicationMessage < Struct.new(
       :redshift_idc_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3832,7 +3783,7 @@ module Aws::Redshift
     class DeleteResourcePolicyMessage < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_action_name
@@ -3841,7 +3792,7 @@ module Aws::Redshift
     class DeleteScheduledActionMessage < Struct.new(
       :scheduled_action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the <code>DeleteSnapshotCopyGrant</code> action.</p>
@@ -3851,7 +3802,7 @@ module Aws::Redshift
     class DeleteSnapshotCopyGrantMessage < Struct.new(
       :snapshot_copy_grant_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedule_identifier
@@ -3860,7 +3811,7 @@ module Aws::Redshift
     class DeleteSnapshotScheduleMessage < Struct.new(
       :schedule_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <code>DeleteTags</code> action. </p>
@@ -3875,7 +3826,7 @@ module Aws::Redshift
       :resource_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage_limit_id
@@ -3884,7 +3835,7 @@ module Aws::Redshift
     class DeleteUsageLimitMessage < Struct.new(
       :usage_limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dependent service denied access for the integration.</p>
@@ -3893,7 +3844,7 @@ module Aws::Redshift
     class DependentServiceAccessDeniedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be completed because a dependent service is throttling requests
@@ -3903,7 +3854,7 @@ module Aws::Redshift
     class DependentServiceRequestThrottlingFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request cannot be completed because a dependent internal service is
@@ -3913,7 +3864,7 @@ module Aws::Redshift
     class DependentServiceUnavailableFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_identifier
@@ -3928,7 +3879,7 @@ module Aws::Redshift
       :namespace_identifier,
       :consumer_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -3938,7 +3889,7 @@ module Aws::Redshift
     class DeregisterNamespaceOutputMessage < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_names
@@ -3947,7 +3898,7 @@ module Aws::Redshift
     class DescribeAccountAttributesMessage < Struct.new(
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_attributes
@@ -3956,7 +3907,7 @@ module Aws::Redshift
     class DescribeAccountAttributesOutput < Struct.new(
       :account_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -3965,7 +3916,7 @@ module Aws::Redshift
     class DescribeAuthenticationProfilesMessage < Struct.new(
       :authentication_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profiles
@@ -3974,7 +3925,7 @@ module Aws::Redshift
     class DescribeAuthenticationProfilesResult < Struct.new(
       :authentication_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -4006,7 +3957,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4055,7 +4006,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4093,7 +4044,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeClusterParameters</a> action.
@@ -4113,7 +4064,7 @@ module Aws::Redshift
       :parameters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4164,7 +4115,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4284,7 +4235,7 @@ module Aws::Redshift
       :cluster_exists,
       :sorting_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4331,7 +4282,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute maintenance_track_name
@@ -4353,7 +4304,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4401,7 +4352,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4450,7 +4401,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_domain_name
@@ -4471,7 +4422,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumer_arn
@@ -4501,7 +4452,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_shares
@@ -4519,7 +4470,7 @@ module Aws::Redshift
       :data_shares,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute producer_arn
@@ -4549,7 +4500,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_shares
@@ -4567,7 +4518,7 @@ module Aws::Redshift
       :data_shares,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -4587,7 +4538,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_shares
@@ -4600,7 +4551,7 @@ module Aws::Redshift
       :data_shares,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4629,7 +4580,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_cluster_parameters
@@ -4638,7 +4589,7 @@ module Aws::Redshift
     class DescribeDefaultClusterParametersResult < Struct.new(
       :default_cluster_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -4672,7 +4623,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_access_list
@@ -4688,7 +4639,7 @@ module Aws::Redshift
       :endpoint_access_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -4721,7 +4672,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_authorization_list
@@ -4737,7 +4688,7 @@ module Aws::Redshift
       :endpoint_authorization_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4749,7 +4700,7 @@ module Aws::Redshift
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4797,7 +4748,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4901,7 +4852,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4950,7 +4901,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4999,7 +4950,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -5031,7 +4982,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of elements to filter the returned integrations.</p>
@@ -5045,14 +4996,7 @@ module Aws::Redshift
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribeIntegrationsFilterName
-      INTEGRATION_ARN = 'integration-arn'
-      SOURCE_ARN = 'source-arn'
-      SOURCE_TYPES = 'source-types'
-      STATUS = 'status'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -5081,7 +5025,7 @@ module Aws::Redshift
       :marker,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5093,7 +5037,7 @@ module Aws::Redshift
     class DescribeLoggingStatusMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of logging for a cluster.</p>
@@ -5133,7 +5077,7 @@ module Aws::Redshift
       :log_destination_type,
       :log_exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -5187,7 +5131,7 @@ module Aws::Redshift
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5224,7 +5168,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -5245,7 +5189,7 @@ module Aws::Redshift
       :database_name,
       :partner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partner_integration_info_list
@@ -5254,7 +5198,7 @@ module Aws::Redshift
     class DescribePartnersOutputMessage < Struct.new(
       :partner_integration_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redshift_idc_application_arn
@@ -5278,7 +5222,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redshift_idc_applications
@@ -5296,7 +5240,7 @@ module Aws::Redshift
       :redshift_idc_applications,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_node_id
@@ -5324,7 +5268,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_node_exchange_status_details
@@ -5338,7 +5282,7 @@ module Aws::Redshift
       :reserved_node_exchange_status_details,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5367,7 +5311,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5396,7 +5340,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5409,7 +5353,7 @@ module Aws::Redshift
     class DescribeResizeMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of a cluster resize operation.</p>
@@ -5504,7 +5448,7 @@ module Aws::Redshift
       :target_encryption_type,
       :data_transfer_progress_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_action_name
@@ -5555,7 +5499,7 @@ module Aws::Redshift
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the <code>DescribeSnapshotCopyGrants</code> action.</p>
@@ -5601,7 +5545,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -5639,7 +5583,7 @@ module Aws::Redshift
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_schedules
@@ -5656,7 +5600,7 @@ module Aws::Redshift
       :snapshot_schedules,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5686,7 +5630,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5775,7 +5719,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage_limit_id
@@ -5829,7 +5773,7 @@ module Aws::Redshift
       :tag_keys,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage_limits
@@ -5847,7 +5791,7 @@ module Aws::Redshift
       :usage_limits,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5859,7 +5803,7 @@ module Aws::Redshift
     class DisableLoggingMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of logging for a cluster.</p>
@@ -5899,7 +5843,7 @@ module Aws::Redshift
       :log_destination_type,
       :log_exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5912,7 +5856,7 @@ module Aws::Redshift
     class DisableSnapshotCopyMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -5921,7 +5865,7 @@ module Aws::Redshift
     class DisableSnapshotCopyResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -5944,7 +5888,7 @@ module Aws::Redshift
       :consumer_arn,
       :consumer_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -5974,7 +5918,7 @@ module Aws::Redshift
       :managed_by,
       :data_share_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon EC2 security group.</p>
@@ -5997,7 +5941,7 @@ module Aws::Redshift
       :ec2_security_group_owner_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of the elastic IP (EIP) address.</p>
@@ -6011,7 +5955,7 @@ module Aws::Redshift
       :elastic_ip,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6051,7 +5995,7 @@ module Aws::Redshift
       :log_destination_type,
       :log_exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of logging for a cluster.</p>
@@ -6091,7 +6035,7 @@ module Aws::Redshift
       :log_destination_type,
       :log_exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6129,7 +6073,7 @@ module Aws::Redshift
       :snapshot_copy_grant_name,
       :manual_snapshot_retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -6138,7 +6082,7 @@ module Aws::Redshift
     class EnableSnapshotCopyResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a connection endpoint.</p>
@@ -6156,7 +6100,7 @@ module Aws::Redshift
       :port,
       :vpc_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Redshift-managed VPC endpoint.</p>
@@ -6202,7 +6146,7 @@ module Aws::Redshift
       :vpc_security_groups,
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account already has a Redshift-managed VPC endpoint with the given identifier.</p>
@@ -6211,7 +6155,7 @@ module Aws::Redshift
     class EndpointAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across Amazon Web Services accounts.</p>
@@ -6253,7 +6197,7 @@ module Aws::Redshift
       :allowed_vp_cs,
       :endpoint_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization already exists for this endpoint.</p>
@@ -6262,7 +6206,7 @@ module Aws::Redshift
     class EndpointAuthorizationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization for this endpoint can't be found.</p>
@@ -6271,7 +6215,7 @@ module Aws::Redshift
     class EndpointAuthorizationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of endpoint authorizations per cluster has exceeded its limit.</p>
@@ -6280,7 +6224,7 @@ module Aws::Redshift
     class EndpointAuthorizationsPerClusterLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint name doesn't refer to an existing endpoint.</p>
@@ -6289,7 +6233,7 @@ module Aws::Redshift
     class EndpointNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of Redshift-managed VPC endpoints per authorization has exceeded its limit.</p>
@@ -6298,7 +6242,7 @@ module Aws::Redshift
     class EndpointsPerAuthorizationLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of Redshift-managed VPC endpoints per cluster has exceeded its limit.</p>
@@ -6307,7 +6251,7 @@ module Aws::Redshift
     class EndpointsPerClusterLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an event.</p>
@@ -6343,7 +6287,7 @@ module Aws::Redshift
       :date,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes event categories.</p>
@@ -6358,7 +6302,7 @@ module Aws::Redshift
       :source_type,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6368,7 +6312,7 @@ module Aws::Redshift
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes event information.</p>
@@ -6391,7 +6335,7 @@ module Aws::Redshift
       :event_description,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes event subscriptions.</p>
@@ -6464,7 +6408,7 @@ module Aws::Redshift
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would exceed the allowed number of event subscriptions for this
@@ -6477,7 +6421,7 @@ module Aws::Redshift
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6495,7 +6439,7 @@ module Aws::Redshift
       :marker,
       :event_subscriptions_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6513,7 +6457,7 @@ module Aws::Redshift
       :marker,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -6522,7 +6466,7 @@ module Aws::Redshift
     class FailoverPrimaryComputeInputMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -6531,7 +6475,7 @@ module Aws::Redshift
     class FailoverPrimaryComputeResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters to get cluster credentials.</p>
@@ -6644,7 +6588,7 @@ module Aws::Redshift
       :db_groups,
       :custom_domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Temporary credentials with authorization to log on to an Amazon Redshift database.
@@ -6669,7 +6613,7 @@ module Aws::Redshift
       :db_password,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_name
@@ -6694,7 +6638,7 @@ module Aws::Redshift
       :duration_seconds,
       :custom_domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_user
@@ -6715,7 +6659,7 @@ module Aws::Redshift
       :expiration,
       :next_refresh_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_type
@@ -6747,7 +6691,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -6763,7 +6707,7 @@ module Aws::Redshift
       :marker,
       :reserved_node_configuration_option_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6784,7 +6728,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -6802,7 +6746,7 @@ module Aws::Redshift
       :marker,
       :reserved_node_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6811,7 +6755,7 @@ module Aws::Redshift
     class GetResourcePolicyMessage < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -6820,7 +6764,7 @@ module Aws::Redshift
     class GetResourcePolicyResult < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an HSM client certificate. The certificate is stored in a
@@ -6841,7 +6785,7 @@ module Aws::Redshift
       :hsm_client_certificate_public_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is already an existing Amazon Redshift HSM client certificate with the specified
@@ -6851,7 +6795,7 @@ module Aws::Redshift
     class HsmClientCertificateAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6870,7 +6814,7 @@ module Aws::Redshift
       :marker,
       :hsm_client_certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no Amazon Redshift HSM client certificate with the specified
@@ -6880,7 +6824,7 @@ module Aws::Redshift
     class HsmClientCertificateNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for HSM client certificates has been reached. 
@@ -6892,7 +6836,7 @@ module Aws::Redshift
     class HsmClientCertificateQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an HSM configuration, which is an object that describes
@@ -6921,7 +6865,7 @@ module Aws::Redshift
       :hsm_partition_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is already an existing Amazon Redshift HSM configuration with the specified
@@ -6931,7 +6875,7 @@ module Aws::Redshift
     class HsmConfigurationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6949,7 +6893,7 @@ module Aws::Redshift
       :marker,
       :hsm_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no Amazon Redshift HSM configuration with the specified identifier.</p>
@@ -6958,7 +6902,7 @@ module Aws::Redshift
     class HsmConfigurationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for HSM configurations has been reached. 
@@ -6970,7 +6914,7 @@ module Aws::Redshift
     class HsmConfigurationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of changes to HSM settings.</p>
@@ -6992,7 +6936,7 @@ module Aws::Redshift
       :hsm_configuration_identifier,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IP range used in a security group.</p>
@@ -7010,13 +6954,7 @@ module Aws::Redshift
       :cidrip,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImpactRankingType
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      LOW = 'LOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the allowed number of table restore requests. Wait for your
@@ -7026,7 +6964,7 @@ module Aws::Redshift
     class InProgressTableRestoreQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content of an inbound integration.</p>
@@ -7056,7 +6994,7 @@ module Aws::Redshift
       :errors,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -7073,7 +7011,7 @@ module Aws::Redshift
       :marker,
       :inbound_integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified options are incompatible.</p>
@@ -7082,7 +7020,7 @@ module Aws::Redshift
     class IncompatibleOrderableOptions < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of nodes specified exceeds the allotted capacity of the
@@ -7092,7 +7030,7 @@ module Aws::Redshift
     class InsufficientClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster does not have read bucket or put object permissions on the S3 bucket
@@ -7102,7 +7040,7 @@ module Aws::Redshift
     class InsufficientS3BucketPolicyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -7155,7 +7093,7 @@ module Aws::Redshift
       :additional_encryption_context,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration you are trying to create already exists.</p>
@@ -7164,7 +7102,7 @@ module Aws::Redshift
     class IntegrationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflicting conditional operation is currently in progress against this resource.
@@ -7175,7 +7113,7 @@ module Aws::Redshift
     class IntegrationConflictOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration is in an invalid state and can't perform the requested operation.</p>
@@ -7184,7 +7122,7 @@ module Aws::Redshift
     class IntegrationConflictStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error of an inbound integration.</p>
@@ -7198,7 +7136,7 @@ module Aws::Redshift
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration can't be found.</p>
@@ -7207,7 +7145,7 @@ module Aws::Redshift
     class IntegrationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't create any more zero-ETL or S3 event integrations because the quota has been reached.</p>
@@ -7216,7 +7154,7 @@ module Aws::Redshift
     class IntegrationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified integration source can't be found.</p>
@@ -7225,7 +7163,7 @@ module Aws::Redshift
     class IntegrationSourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified integration target can't be found.</p>
@@ -7234,7 +7172,7 @@ module Aws::Redshift
     class IntegrationTargetNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -7249,7 +7187,7 @@ module Aws::Redshift
       :marker,
       :integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication profile request is not valid. The profile name can't be null or empty. 
@@ -7259,7 +7197,7 @@ module Aws::Redshift
     class InvalidAuthenticationProfileRequestFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the authorization is not valid.</p>
@@ -7268,7 +7206,7 @@ module Aws::Redshift
     class InvalidAuthorizationStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster parameter group action can not be completed because another task is in
@@ -7279,7 +7217,7 @@ module Aws::Redshift
     class InvalidClusterParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the cluster security group is not <code>available</code>. </p>
@@ -7288,7 +7226,7 @@ module Aws::Redshift
     class InvalidClusterSecurityGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster snapshot schedule state is not valid.</p>
@@ -7297,7 +7235,7 @@ module Aws::Redshift
     class InvalidClusterSnapshotScheduleStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified cluster snapshot is not in the <code>available</code> state, or other
@@ -7307,7 +7245,7 @@ module Aws::Redshift
     class InvalidClusterSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified cluster is not in the <code>available</code> state. </p>
@@ -7316,7 +7254,7 @@ module Aws::Redshift
     class InvalidClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster subnet group cannot be deleted because it is in use.</p>
@@ -7325,7 +7263,7 @@ module Aws::Redshift
     class InvalidClusterSubnetGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the subnet is invalid.</p>
@@ -7334,7 +7272,7 @@ module Aws::Redshift
     class InvalidClusterSubnetStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided cluster track name is not valid.</p>
@@ -7343,7 +7281,7 @@ module Aws::Redshift
     class InvalidClusterTrackFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is an error with the datashare.</p>
@@ -7352,7 +7290,7 @@ module Aws::Redshift
     class InvalidDataShareFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Elastic IP (EIP) is invalid or cannot be found.</p>
@@ -7361,7 +7299,7 @@ module Aws::Redshift
     class InvalidElasticIpFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the endpoint is not valid.</p>
@@ -7370,7 +7308,7 @@ module Aws::Redshift
     class InvalidEndpointStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified HSM client certificate is not in the <code>available</code> state, or
@@ -7380,7 +7318,7 @@ module Aws::Redshift
     class InvalidHsmClientCertificateStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified HSM configuration is not in the <code>available</code> state, or it
@@ -7390,7 +7328,7 @@ module Aws::Redshift
     class InvalidHsmConfigurationStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The namespace isn't valid because the namespace doesn't exist. Provide a valid namespace.</p>
@@ -7399,7 +7337,7 @@ module Aws::Redshift
     class InvalidNamespaceFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource policy isn't valid.</p>
@@ -7408,7 +7346,7 @@ module Aws::Redshift
     class InvalidPolicyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the Reserved Node being exchanged is not in an active state.</p>
@@ -7417,7 +7355,7 @@ module Aws::Redshift
     class InvalidReservedNodeStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The restore is invalid.</p>
@@ -7426,7 +7364,7 @@ module Aws::Redshift
     class InvalidRestoreFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retention period specified is either in the past or is not a valid value.</p>
@@ -7436,7 +7374,7 @@ module Aws::Redshift
     class InvalidRetentionPeriodFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket name is invalid. For more information about naming rules, go to
@@ -7448,7 +7386,7 @@ module Aws::Redshift
     class InvalidS3BucketNameFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The string specified for the logging S3 key prefix does not comply with the
@@ -7458,7 +7396,7 @@ module Aws::Redshift
     class InvalidS3KeyPrefixFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schedule you submitted isn't valid.</p>
@@ -7467,7 +7405,7 @@ module Aws::Redshift
     class InvalidScheduleFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduled action is not valid. </p>
@@ -7476,7 +7414,7 @@ module Aws::Redshift
     class InvalidScheduledActionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot copy grant can't be deleted because it is used by one or more
@@ -7486,7 +7424,7 @@ module Aws::Redshift
     class InvalidSnapshotCopyGrantStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet is not valid, or not all of the subnets are in the same
@@ -7496,7 +7434,7 @@ module Aws::Redshift
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subscription request is invalid because it is a duplicate request. This
@@ -7506,7 +7444,7 @@ module Aws::Redshift
     class InvalidSubscriptionStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value specified for the <code>sourceDatabaseName</code>,
@@ -7517,7 +7455,7 @@ module Aws::Redshift
     class InvalidTableRestoreArgumentFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag is invalid.</p>
@@ -7526,7 +7464,7 @@ module Aws::Redshift
     class InvalidTagFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The usage limit is not valid.</p>
@@ -7535,7 +7473,7 @@ module Aws::Redshift
     class InvalidUsageLimitFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster subnet group does not cover all Availability Zones.</p>
@@ -7544,7 +7482,7 @@ module Aws::Redshift
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are no subnets in your VPC with associated IPv6 CIDR blocks. To use dual-stack mode,
@@ -7554,7 +7492,7 @@ module Aws::Redshift
     class Ipv6CidrBlockNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lake Formation scope.</p>
@@ -7564,7 +7502,7 @@ module Aws::Redshift
     class LakeFormationQuery < Struct.new(
       :authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of scopes set up for Lake Formation integration.</p>
@@ -7575,7 +7513,7 @@ module Aws::Redshift
       :lake_formation_query,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class LakeFormationQuery < LakeFormationScopeUnion; end
       class Unknown < LakeFormationScopeUnion; end
@@ -7587,7 +7525,7 @@ module Aws::Redshift
     class LimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -7617,7 +7555,7 @@ module Aws::Redshift
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendations
@@ -7635,12 +7573,7 @@ module Aws::Redshift
       :recommendations,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDestinationType
-      S3 = 's3'
-      CLOUDWATCH = 'cloudwatch'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a maintenance track that determines which Amazon Redshift version to apply
@@ -7664,12 +7597,7 @@ module Aws::Redshift
       :database_version,
       :update_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Mode
-      STANDARD = 'standard'
-      HIGH_PERFORMANCE = 'high-performance'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -7682,7 +7610,7 @@ module Aws::Redshift
       :cluster_identifier,
       :aqua_configuration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aqua_configuration
@@ -7691,7 +7619,7 @@ module Aws::Redshift
     class ModifyAquaOutputMessage < Struct.new(
       :aqua_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -7705,7 +7633,7 @@ module Aws::Redshift
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_name
@@ -7718,7 +7646,7 @@ module Aws::Redshift
       :authentication_profile_name,
       :authentication_profile_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -7734,7 +7662,7 @@ module Aws::Redshift
       :cluster_identifier,
       :revision_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7743,7 +7671,7 @@ module Aws::Redshift
     class ModifyClusterDbRevisionResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -7767,7 +7695,7 @@ module Aws::Redshift
       :remove_iam_roles,
       :default_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7776,7 +7704,7 @@ module Aws::Redshift
     class ModifyClusterIamRolesResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -7807,7 +7735,7 @@ module Aws::Redshift
       :defer_maintenance_end_time,
       :defer_maintenance_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7816,7 +7744,7 @@ module Aws::Redshift
     class ModifyClusterMaintenanceResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8103,7 +8031,7 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a modify cluster parameter group operation. </p>
@@ -8122,7 +8050,7 @@ module Aws::Redshift
       :parameter_group_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8138,7 +8066,7 @@ module Aws::Redshift
       :parameter_group_name,
       :parameter_group_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -8147,7 +8075,7 @@ module Aws::Redshift
     class ModifyClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_identifier
@@ -8169,7 +8097,7 @@ module Aws::Redshift
       :manual_snapshot_retention_period,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -8178,7 +8106,7 @@ module Aws::Redshift
     class ModifyClusterSnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -8198,7 +8126,7 @@ module Aws::Redshift
       :schedule_identifier,
       :disassociate_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8217,7 +8145,7 @@ module Aws::Redshift
       :description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_subnet_group
@@ -8226,7 +8154,7 @@ module Aws::Redshift
     class ModifyClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_domain_name
@@ -8243,7 +8171,7 @@ module Aws::Redshift
       :custom_domain_certificate_arn,
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_domain_name
@@ -8264,7 +8192,7 @@ module Aws::Redshift
       :cluster_identifier,
       :custom_domain_cert_expiry_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -8277,7 +8205,7 @@ module Aws::Redshift
       :endpoint_name,
       :vpc_security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Redshift-managed VPC endpoint.</p>
@@ -8323,7 +8251,7 @@ module Aws::Redshift
       :vpc_security_groups,
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8373,7 +8301,7 @@ module Aws::Redshift
       :severity,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -8382,7 +8310,7 @@ module Aws::Redshift
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -8399,7 +8327,7 @@ module Aws::Redshift
       :description,
       :integration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -8452,7 +8380,7 @@ module Aws::Redshift
       :additional_encryption_context,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redshift_idc_application_arn
@@ -8483,7 +8411,7 @@ module Aws::Redshift
       :authorized_token_issuer_list,
       :service_integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute redshift_idc_application
@@ -8492,7 +8420,7 @@ module Aws::Redshift
     class ModifyRedshiftIdcApplicationResult < Struct.new(
       :redshift_idc_application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_action_name
@@ -8534,7 +8462,7 @@ module Aws::Redshift
       :end_time,
       :enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. 
@@ -8591,7 +8519,7 @@ module Aws::Redshift
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -8626,7 +8554,7 @@ module Aws::Redshift
       :retention_period,
       :manual,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -8635,7 +8563,7 @@ module Aws::Redshift
     class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedule_identifier
@@ -8649,7 +8577,7 @@ module Aws::Redshift
       :schedule_identifier,
       :schedule_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a snapshot schedule. You can set a regular interval for creating
@@ -8684,7 +8612,7 @@ module Aws::Redshift
       :associated_cluster_count,
       :associated_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage_limit_id
@@ -8703,7 +8631,7 @@ module Aws::Redshift
       :amount,
       :breach_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a usage limit object for a cluster. </p>
@@ -8755,7 +8683,7 @@ module Aws::Redshift
       :breach_action,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store union of values for a 
@@ -8771,16 +8699,11 @@ module Aws::Redshift
       :provisioned_identifier,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ServerlessIdentifier < NamespaceIdentifierUnion; end
       class ProvisionedIdentifier < NamespaceIdentifierUnion; end
       class Unknown < NamespaceIdentifierUnion; end
-    end
-
-    module NamespaceRegistrationStatus
-      REGISTERING = 'Registering'
-      DEREGISTERING = 'Deregistering'
     end
 
     # <p>Describes a network interface. </p>
@@ -8806,7 +8729,7 @@ module Aws::Redshift
       :availability_zone,
       :ipv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of node configurations.</p>
@@ -8828,7 +8751,7 @@ module Aws::Redshift
       :estimated_disk_utilization_percent,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of elements to filter the returned node configurations.</p>
@@ -8853,14 +8776,7 @@ module Aws::Redshift
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeConfigurationOptionsFilterName
-      NODE_TYPE = 'NodeType'
-      NUM_NODES = 'NumberOfNodes'
-      ESTIMATED_DISK_UTILIZATION_PERCENT = 'EstimatedDiskUtilizationPercent'
-      MODE = 'Mode'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_configuration_option_list
@@ -8877,7 +8793,7 @@ module Aws::Redshift
       :node_configuration_option_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation would exceed the number of nodes allowed for a cluster.</p>
@@ -8886,7 +8802,7 @@ module Aws::Redshift
     class NumberOfNodesPerClusterLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation would exceed the number of nodes allotted to the account.
@@ -8899,17 +8815,7 @@ module Aws::Redshift
     class NumberOfNodesQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperatorType
-      EQ = 'eq'
-      LT = 'lt'
-      GT = 'gt'
-      LE = 'le'
-      GE = 'ge'
-      IN = 'in'
-      BETWEEN = 'between'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an orderable cluster option.</p>
@@ -8931,7 +8837,7 @@ module Aws::Redshift
       :node_type,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeOrderableClusterOptions</a>
@@ -8951,7 +8857,7 @@ module Aws::Redshift
       :orderable_cluster_options,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a parameter in a cluster parameter group.</p>
@@ -9000,12 +8906,7 @@ module Aws::Redshift
       :is_modifiable,
       :minimum_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterApplyType
-      static = 'static'
-      dynamic = 'dynamic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a partner integration.</p>
@@ -9035,14 +8936,7 @@ module Aws::Redshift
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartnerIntegrationStatus
-      Active = 'Active'
-      Inactive = 'Inactive'
-      RuntimeFailure = 'RuntimeFailure'
-      ConnectionFailure = 'ConnectionFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the partner was not found.</p>
@@ -9051,7 +8945,7 @@ module Aws::Redshift
     class PartnerNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a pause cluster operation. For example, a scheduled action to run the <code>PauseCluster</code> API operation. </p>
@@ -9061,7 +8955,7 @@ module Aws::Redshift
     class PauseClusterInput < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a pause cluster operation. For example, a scheduled action to run the <code>PauseCluster</code> API operation. </p>
@@ -9071,7 +8965,7 @@ module Aws::Redshift
     class PauseClusterMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9080,7 +8974,7 @@ module Aws::Redshift
     class PauseClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes cluster attributes that are in a pending state. A change to one or more
@@ -9140,7 +9034,7 @@ module Aws::Redshift
       :maintenance_track_name,
       :encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier for a provisioned cluster.</p>
@@ -9150,7 +9044,7 @@ module Aws::Redshift
     class ProvisionedIdentifier < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9166,7 +9060,7 @@ module Aws::Redshift
       :reserved_node_offering_id,
       :node_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_node
@@ -9176,7 +9070,7 @@ module Aws::Redshift
     class PurchaseReservedNodeOfferingResult < Struct.new(
       :reserved_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9189,7 +9083,7 @@ module Aws::Redshift
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -9198,7 +9092,7 @@ module Aws::Redshift
     class PutResourcePolicyResult < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 Access Grants scope.</p>
@@ -9208,7 +9102,7 @@ module Aws::Redshift
     class ReadWriteAccess < Struct.new(
       :authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9218,7 +9112,7 @@ module Aws::Redshift
     class RebootClusterMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9227,7 +9121,7 @@ module Aws::Redshift
     class RebootClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Redshift Advisor recommended action on the Amazon Redshift cluster.</p>
@@ -9281,7 +9175,7 @@ module Aws::Redshift
       :recommended_actions,
       :reference_links,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommended action from the Amazon Redshift Advisor recommendation.</p>
@@ -9303,12 +9197,7 @@ module Aws::Redshift
       :command,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendedActionType
-      SQL = 'SQL'
-      CLI = 'CLI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a recurring charge.</p>
@@ -9323,7 +9212,7 @@ module Aws::Redshift
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains properties for the Redshift IDC application.</p>
@@ -9369,7 +9258,7 @@ module Aws::Redshift
       :authorized_token_issuer_list,
       :service_integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application you attempted to add already exists.</p>
@@ -9378,7 +9267,7 @@ module Aws::Redshift
     class RedshiftIdcApplicationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application you attempted to find doesn't exist.</p>
@@ -9387,7 +9276,7 @@ module Aws::Redshift
     class RedshiftIdcApplicationNotExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of Redshift IAM Identity Center applications was exceeded.</p>
@@ -9396,7 +9285,7 @@ module Aws::Redshift
     class RedshiftIdcApplicationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A link to an Amazon Redshift Advisor reference for more information about a recommendation.</p>
@@ -9410,7 +9299,7 @@ module Aws::Redshift
       :text,
       :link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace_identifier
@@ -9425,7 +9314,7 @@ module Aws::Redshift
       :namespace_identifier,
       :consumer_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9435,7 +9324,7 @@ module Aws::Redshift
     class RegisterNamespaceOutputMessage < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -9444,7 +9333,7 @@ module Aws::Redshift
     class RejectDataShareMessage < Struct.new(
       :data_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_share_arn
@@ -9474,7 +9363,7 @@ module Aws::Redshift
       :managed_by,
       :data_share_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a reserved node. You can call the <a>DescribeReservedNodeOfferings</a> API to obtain the available reserved node
@@ -9556,7 +9445,7 @@ module Aws::Redshift
       :recurring_charges,
       :reserved_node_offering_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User already has a reservation with the given identifier.</p>
@@ -9565,7 +9454,7 @@ module Aws::Redshift
     class ReservedNodeAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the reserved node has already been exchanged.</p>
@@ -9574,7 +9463,7 @@ module Aws::Redshift
     class ReservedNodeAlreadyMigratedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a reserved-node exchange. Examples include the node type for a
@@ -9594,12 +9483,7 @@ module Aws::Redshift
       :target_reserved_node_count,
       :target_reserved_node_offering,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedNodeExchangeActionType
-      RESTORE_CLUSTER = 'restore-cluster'
-      RESIZE_CLUSTER = 'resize-cluster'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reserved-node exchange status wasn't found.</p>
@@ -9608,7 +9492,7 @@ module Aws::Redshift
     class ReservedNodeExchangeNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved-node status details, such as the source reserved-node
@@ -9652,16 +9536,7 @@ module Aws::Redshift
       :target_reserved_node_type,
       :target_reserved_node_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedNodeExchangeStatusType
-      REQUESTED = 'REQUESTED'
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      RETRYING = 'RETRYING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified reserved compute node not found.</p>
@@ -9670,7 +9545,7 @@ module Aws::Redshift
     class ReservedNodeNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a reserved node offering.</p>
@@ -9717,7 +9592,7 @@ module Aws::Redshift
       :recurring_charges,
       :reserved_node_offering_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified offering does not exist.</p>
@@ -9726,12 +9601,7 @@ module Aws::Redshift
     class ReservedNodeOfferingNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedNodeOfferingType
-      Regular = 'Regular'
-      Upgradable = 'Upgradable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9749,7 +9619,7 @@ module Aws::Redshift
       :marker,
       :reserved_node_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would exceed the user's compute node quota. 
@@ -9761,7 +9631,7 @@ module Aws::Redshift
     class ReservedNodeQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9779,7 +9649,7 @@ module Aws::Redshift
       :marker,
       :reserved_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9803,7 +9673,7 @@ module Aws::Redshift
       :reset_all_parameters,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -9819,7 +9689,7 @@ module Aws::Redshift
       :parameter_group_name,
       :parameter_group_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>
@@ -9855,7 +9725,7 @@ module Aws::Redshift
       :reserved_node_id,
       :target_reserved_node_offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>
@@ -9891,7 +9761,7 @@ module Aws::Redshift
       :reserved_node_id,
       :target_reserved_node_offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9900,7 +9770,7 @@ module Aws::Redshift
     class ResizeClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resize operation.</p>
@@ -9914,7 +9784,7 @@ module Aws::Redshift
       :resize_type,
       :allow_cancel_resize,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resize operation for the specified cluster is not found.</p>
@@ -9923,7 +9793,7 @@ module Aws::Redshift
     class ResizeNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -9932,7 +9802,7 @@ module Aws::Redshift
     class ResourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy that is attached to a resource.</p>
@@ -9946,7 +9816,7 @@ module Aws::Redshift
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10206,7 +10076,7 @@ module Aws::Redshift
       :ip_address_type,
       :multi_az,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -10215,7 +10085,7 @@ module Aws::Redshift
     class RestoreFromClusterSnapshotResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a cluster restore action. Returns null if the cluster was
@@ -10255,7 +10125,7 @@ module Aws::Redshift
       :elapsed_time_in_seconds,
       :estimated_time_to_completion_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10303,7 +10173,7 @@ module Aws::Redshift
       :new_table_name,
       :enable_case_sensitive_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_restore_status
@@ -10313,7 +10183,7 @@ module Aws::Redshift
     class RestoreTableFromClusterSnapshotResult < Struct.new(
       :table_restore_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resume cluster operation. For example, a scheduled action to run the <code>ResumeCluster</code> API operation. </p>
@@ -10323,7 +10193,7 @@ module Aws::Redshift
     class ResumeClusterInput < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resume cluster operation. For example, a scheduled action to run the <code>ResumeCluster</code> API operation. </p>
@@ -10333,7 +10203,7 @@ module Aws::Redshift
     class ResumeClusterMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -10342,7 +10212,7 @@ module Aws::Redshift
     class ResumeClusterResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a <code>RevisionTarget</code>.</p>
@@ -10362,7 +10232,7 @@ module Aws::Redshift
       :description,
       :database_revision_release_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10395,7 +10265,7 @@ module Aws::Redshift
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_security_group
@@ -10404,7 +10274,7 @@ module Aws::Redshift
     class RevokeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -10426,7 +10296,7 @@ module Aws::Redshift
       :vpc_ids,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across Amazon Web Services accounts.</p>
@@ -10468,7 +10338,7 @@ module Aws::Redshift
       :allowed_vp_cs,
       :endpoint_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10493,7 +10363,7 @@ module Aws::Redshift
       :snapshot_cluster_identifier,
       :account_with_restore_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -10502,7 +10372,7 @@ module Aws::Redshift
     class RevokeSnapshotAccessResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10515,7 +10385,7 @@ module Aws::Redshift
     class RotateEncryptionKeyMessage < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -10524,7 +10394,7 @@ module Aws::Redshift
     class RotateEncryptionKeyResult < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of scopes set up for S3 Access Grants integration.</p>
@@ -10535,7 +10405,7 @@ module Aws::Redshift
       :read_write_access,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ReadWriteAccess < S3AccessGrantsScopeUnion; end
       class Unknown < S3AccessGrantsScopeUnion; end
@@ -10548,7 +10418,7 @@ module Aws::Redshift
     class SNSInvalidTopicFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have permission to publish to the specified Amazon SNS topic.</p>
@@ -10557,7 +10427,7 @@ module Aws::Redshift
     class SNSNoAuthorizationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon SNS topic with the specified Amazon Resource Name (ARN) does not
@@ -10567,7 +10437,7 @@ module Aws::Redshift
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition you submitted is not supported.</p>
@@ -10576,13 +10446,7 @@ module Aws::Redshift
     class ScheduleDefinitionTypeUnsupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleState
-      MODIFYING = 'MODIFYING'
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scheduled action. You can use a scheduled action to trigger some Amazon Redshift API operations on a schedule. 
@@ -10639,7 +10503,7 @@ module Aws::Redshift
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduled action already exists. </p>
@@ -10648,7 +10512,7 @@ module Aws::Redshift
     class ScheduledActionAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of elements to filter the returned scheduled actions. </p>
@@ -10662,12 +10526,7 @@ module Aws::Redshift
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduledActionFilterName
-      CLUSTER_IDENTIFIER = 'cluster-identifier'
-      IAM_ROLE = 'iam-role'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduled action cannot be found. </p>
@@ -10676,7 +10535,7 @@ module Aws::Redshift
     class ScheduledActionNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for scheduled actions exceeded. </p>
@@ -10685,12 +10544,7 @@ module Aws::Redshift
     class ScheduledActionQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduledActionState
-      ACTIVE = 'ACTIVE'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action type that specifies an Amazon Redshift API operation that is supported by the Amazon Redshift scheduler. </p>
@@ -10708,7 +10562,7 @@ module Aws::Redshift
       :pause_cluster,
       :resume_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action type specified for a scheduled action is not supported. </p>
@@ -10717,13 +10571,7 @@ module Aws::Redshift
     class ScheduledActionTypeUnsupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduledActionTypeValues
-      RESIZE_CLUSTER = 'ResizeCluster'
-      PAUSE_CLUSTER = 'PauseCluster'
-      RESUME_CLUSTER = 'ResumeCluster'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -10741,7 +10589,7 @@ module Aws::Redshift
       :marker,
       :scheduled_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AvailabilityZone and ClusterNodes information of the secondary compute unit.</p>
@@ -10755,7 +10603,7 @@ module Aws::Redshift
       :availability_zone,
       :cluster_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier for a serverless namespace.</p>
@@ -10770,12 +10618,7 @@ module Aws::Redshift
       :namespace_identifier,
       :workgroup_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceAuthorization
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of service integrations.</p>
@@ -10790,7 +10633,7 @@ module Aws::Redshift
       :s3_access_grants,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class LakeFormation < ServiceIntegrationsUnion; end
       class S3AccessGrants < ServiceIntegrationsUnion; end
@@ -10986,13 +10829,7 @@ module Aws::Redshift
       :master_password_secret_kms_key_id,
       :snapshot_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotAttributeToSortBy
-      SOURCE_TYPE = 'SOURCE_TYPE'
-      TOTAL_SIZE = 'TOTAL_SIZE'
-      CREATE_TIME = 'CREATE_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster already has cross-region snapshot copy disabled.</p>
@@ -11001,7 +10838,7 @@ module Aws::Redshift
     class SnapshotCopyAlreadyDisabledFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster already has cross-region snapshot copy enabled.</p>
@@ -11010,7 +10847,7 @@ module Aws::Redshift
     class SnapshotCopyAlreadyEnabledFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cross-region snapshot copy was temporarily disabled. Try your request
@@ -11020,7 +10857,7 @@ module Aws::Redshift
     class SnapshotCopyDisabledFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
@@ -11046,7 +10883,7 @@ module Aws::Redshift
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot copy grant can't be created because a grant with the same name already
@@ -11056,7 +10893,7 @@ module Aws::Redshift
     class SnapshotCopyGrantAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11076,7 +10913,7 @@ module Aws::Redshift
       :marker,
       :snapshot_copy_grants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified snapshot copy grant can't be found. Make sure that the name is typed
@@ -11086,7 +10923,7 @@ module Aws::Redshift
     class SnapshotCopyGrantNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services account has exceeded the maximum number of snapshot copy grants in this
@@ -11096,7 +10933,7 @@ module Aws::Redshift
     class SnapshotCopyGrantQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the errors returned by a snapshot.</p>
@@ -11118,7 +10955,7 @@ module Aws::Redshift
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output from the <a>DescribeClusterSnapshots</a> action.
@@ -11137,7 +10974,7 @@ module Aws::Redshift
       :marker,
       :snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a snapshot schedule. You can set a regular interval for creating
@@ -11172,7 +11009,7 @@ module Aws::Redshift
       :associated_cluster_count,
       :associated_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified snapshot schedule already exists. </p>
@@ -11181,7 +11018,7 @@ module Aws::Redshift
     class SnapshotScheduleAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We could not find the specified snapshot schedule. </p>
@@ -11190,7 +11027,7 @@ module Aws::Redshift
     class SnapshotScheduleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the quota of snapshot schedules. </p>
@@ -11199,7 +11036,7 @@ module Aws::Redshift
     class SnapshotScheduleQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified snapshot schedule is already being updated.</p>
@@ -11208,7 +11045,7 @@ module Aws::Redshift
     class SnapshotScheduleUpdateInProgressFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a sorting entity</p>
@@ -11222,12 +11059,7 @@ module Aws::Redshift
       :attribute,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortByOrder
-      ASCENDING = 'ASC'
-      DESCENDING = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon Redshift event source could not be found.</p>
@@ -11236,15 +11068,7 @@ module Aws::Redshift
     class SourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      cluster = 'cluster'
-      cluster_parameter_group = 'cluster-parameter-group'
-      cluster_security_group = 'cluster-security-group'
-      cluster_snapshot = 'cluster-snapshot'
-      scheduled_action = 'scheduled-action'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a subnet.</p>
@@ -11262,7 +11086,7 @@ module Aws::Redshift
       :subnet_availability_zone,
       :subnet_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified subnet is already in use by another cluster.</p>
@@ -11271,7 +11095,7 @@ module Aws::Redshift
     class SubnetAlreadyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is already an existing event notification subscription with the specified
@@ -11281,7 +11105,7 @@ module Aws::Redshift
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value specified for the event category was not one of the allowed values, or it
@@ -11292,7 +11116,7 @@ module Aws::Redshift
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Redshift event with the specified event ID does not exist.</p>
@@ -11301,7 +11125,7 @@ module Aws::Redshift
     class SubscriptionEventIdNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Redshift event notification subscription with the specified name does not
@@ -11311,7 +11135,7 @@ module Aws::Redshift
     class SubscriptionNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value specified for the event severity was not one of the allowed values, or it
@@ -11322,7 +11146,7 @@ module Aws::Redshift
     class SubscriptionSeverityNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the operations that are allowed on a maintenance track.</p>
@@ -11332,7 +11156,7 @@ module Aws::Redshift
     class SupportedOperation < Struct.new(
       :operation_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of supported platforms for orderable clusters.</p>
@@ -11342,7 +11166,7 @@ module Aws::Redshift
     class SupportedPlatform < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of tables in the cluster exceeds the limit for the requested new cluster
@@ -11352,7 +11176,7 @@ module Aws::Redshift
     class TableLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified <code>TableRestoreRequestId</code> value was not found.</p>
@@ -11361,7 +11185,7 @@ module Aws::Redshift
     class TableRestoreNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a <a>RestoreTableFromClusterSnapshot</a>
@@ -11431,7 +11255,7 @@ module Aws::Redshift
       :target_schema_name,
       :new_table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11445,15 +11269,7 @@ module Aws::Redshift
       :table_restore_status_details,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableRestoreStatusType
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag consisting of a name/value pair for a resource.</p>
@@ -11467,7 +11283,7 @@ module Aws::Redshift
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the number of tags allowed.</p>
@@ -11476,7 +11292,7 @@ module Aws::Redshift
     class TagLimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag and its associated resource.</p>
@@ -11527,7 +11343,7 @@ module Aws::Redshift
       :resource_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11545,7 +11361,7 @@ module Aws::Redshift
       :tagged_resources,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute maintenance_tracks
@@ -11561,7 +11377,7 @@ module Aws::Redshift
       :maintenance_tracks,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your account is not authorized to perform the requested operation.</p>
@@ -11570,7 +11386,7 @@ module Aws::Redshift
     class UnauthorizedOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The partner integration is not authorized.</p>
@@ -11579,7 +11395,7 @@ module Aws::Redshift
     class UnauthorizedPartnerIntegrationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified region is incorrect or does not exist.</p>
@@ -11588,7 +11404,7 @@ module Aws::Redshift
     class UnknownSnapshotCopyRegionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation isn't supported.</p>
@@ -11597,7 +11413,7 @@ module Aws::Redshift
     class UnsupportedOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request option was specified that is not supported.</p>
@@ -11606,7 +11422,7 @@ module Aws::Redshift
     class UnsupportedOptionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -11635,7 +11451,7 @@ module Aws::Redshift
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -11648,7 +11464,7 @@ module Aws::Redshift
       :database_name,
       :partner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A maintenance track that you can switch the current track to.</p>
@@ -11666,7 +11482,7 @@ module Aws::Redshift
       :database_version,
       :supported_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a usage limit object for a cluster. </p>
@@ -11718,7 +11534,7 @@ module Aws::Redshift
       :breach_action,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The usage limit already exists. </p>
@@ -11727,24 +11543,7 @@ module Aws::Redshift
     class UsageLimitAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageLimitBreachAction
-      LOG = 'log'
-      EMIT_METRIC = 'emit-metric'
-      DISABLE = 'disable'
-    end
-
-    module UsageLimitFeatureType
-      SPECTRUM = 'spectrum'
-      CONCURRENCY_SCALING = 'concurrency-scaling'
-      CROSS_REGION_DATASHARING = 'cross-region-datasharing'
-    end
-
-    module UsageLimitLimitType
-      TIME = 'time'
-      DATA_SCANNED = 'data-scanned'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The usage limit identifier can't be found.</p>
@@ -11753,13 +11552,7 @@ module Aws::Redshift
     class UsageLimitNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageLimitPeriod
-      DAILY = 'daily'
-      WEEKLY = 'weekly'
-      MONTHLY = 'monthly'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.</p>
@@ -11777,7 +11570,7 @@ module Aws::Redshift
       :vpc_id,
       :network_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the members of a VPC security group.</p>
@@ -11791,17 +11584,7 @@ module Aws::Redshift
       :vpc_security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ZeroETLIntegrationStatus
-      CREATING = 'creating'
-      ACTIVE = 'active'
-      MODIFYING = 'modifying'
-      FAILED = 'failed'
-      DELETING = 'deleting'
-      SYNCING = 'syncing'
-      NEEDS_ATTENTION = 'needs_attention'
+      include ::Smithy::Schema::Structure
     end
 
   end

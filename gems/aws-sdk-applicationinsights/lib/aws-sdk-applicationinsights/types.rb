@@ -12,7 +12,7 @@ module Aws::ApplicationInsights
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -29,7 +29,7 @@ module Aws::ApplicationInsights
       :component_name,
       :workload_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -42,7 +42,7 @@ module Aws::ApplicationInsights
       :workload_id,
       :workload_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a standalone resource or similarly grouped resources that the application is
@@ -79,7 +79,7 @@ module Aws::ApplicationInsights
       :monitor,
       :detected_workload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of the application.</p>
@@ -144,7 +144,7 @@ module Aws::ApplicationInsights
       :discovery_type,
       :attach_missing_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not understood by the server.</p>
@@ -153,14 +153,7 @@ module Aws::ApplicationInsights
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudWatchEventSource
-      EC2 = 'EC2'
-      CODE_DEPLOY = 'CODE_DEPLOY'
-      HEALTH = 'HEALTH'
-      RDS = 'RDS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The event information. </p>
@@ -200,20 +193,7 @@ module Aws::ApplicationInsights
       :event_detail,
       :event_resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationEventResourceType
-      CLOUDWATCH_ALARM = 'CLOUDWATCH_ALARM'
-      CLOUDWATCH_LOG = 'CLOUDWATCH_LOG'
-      CLOUDFORMATION = 'CLOUDFORMATION'
-      SSM_ASSOCIATION = 'SSM_ASSOCIATION'
-    end
-
-    module ConfigurationEventStatus
-      INFO = 'INFO'
-      WARN = 'WARN'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -270,7 +250,7 @@ module Aws::ApplicationInsights
       :grouping_type,
       :attach_missing_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_info
@@ -279,7 +259,7 @@ module Aws::ApplicationInsights
     class CreateApplicationResponse < Struct.new(
       :application_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -296,12 +276,12 @@ module Aws::ApplicationInsights
       :component_name,
       :resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateComponentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -336,7 +316,7 @@ module Aws::ApplicationInsights
       :pattern,
       :rank,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_pattern
@@ -349,7 +329,7 @@ module Aws::ApplicationInsights
       :log_pattern,
       :resource_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -358,12 +338,12 @@ module Aws::ApplicationInsights
     class DeleteApplicationRequest < Struct.new(
       :resource_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -376,12 +356,12 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteComponentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -398,12 +378,12 @@ module Aws::ApplicationInsights
       :pattern_set_name,
       :pattern_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLogPatternResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -416,7 +396,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_info
@@ -425,7 +405,7 @@ module Aws::ApplicationInsights
     class DescribeApplicationResponse < Struct.new(
       :application_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -451,7 +431,7 @@ module Aws::ApplicationInsights
       :workload_name,
       :recommendation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_configuration
@@ -461,7 +441,7 @@ module Aws::ApplicationInsights
     class DescribeComponentConfigurationRecommendationResponse < Struct.new(
       :component_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -478,7 +458,7 @@ module Aws::ApplicationInsights
       :component_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor
@@ -499,7 +479,7 @@ module Aws::ApplicationInsights
       :tier,
       :component_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -516,7 +496,7 @@ module Aws::ApplicationInsights
       :component_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component
@@ -530,7 +510,7 @@ module Aws::ApplicationInsights
       :application_component,
       :resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -551,7 +531,7 @@ module Aws::ApplicationInsights
       :pattern_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -568,7 +548,7 @@ module Aws::ApplicationInsights
       :account_id,
       :log_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observation_id
@@ -581,7 +561,7 @@ module Aws::ApplicationInsights
       :observation_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observation
@@ -590,7 +570,7 @@ module Aws::ApplicationInsights
     class DescribeObservationResponse < Struct.new(
       :observation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute problem_id
@@ -603,7 +583,7 @@ module Aws::ApplicationInsights
       :problem_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute related_observations
@@ -612,7 +592,7 @@ module Aws::ApplicationInsights
     class DescribeProblemObservationsResponse < Struct.new(
       :related_observations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute problem_id
@@ -625,7 +605,7 @@ module Aws::ApplicationInsights
       :problem_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute problem
@@ -640,7 +620,7 @@ module Aws::ApplicationInsights
       :problem,
       :sns_notification_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -661,7 +641,7 @@ module Aws::ApplicationInsights
       :workload_id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -678,26 +658,7 @@ module Aws::ApplicationInsights
       :workload_remarks,
       :workload_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiscoveryType
-      RESOURCE_GROUP_BASED = 'RESOURCE_GROUP_BASED'
-      ACCOUNT_BASED = 'ACCOUNT_BASED'
-    end
-
-    module FeedbackKey
-      INSIGHTS_FEEDBACK = 'INSIGHTS_FEEDBACK'
-    end
-
-    module FeedbackValue
-      NOT_SPECIFIED = 'NOT_SPECIFIED'
-      USEFUL = 'USEFUL'
-      NOT_USEFUL = 'NOT_USEFUL'
-    end
-
-    module GroupingType
-      ACCOUNT_BASED = 'ACCOUNT_BASED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an internal error and is unable to complete the request.</p>
@@ -706,7 +667,7 @@ module Aws::ApplicationInsights
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -724,7 +685,7 @@ module Aws::ApplicationInsights
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_info_list
@@ -738,7 +699,7 @@ module Aws::ApplicationInsights
       :application_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -760,7 +721,7 @@ module Aws::ApplicationInsights
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_list
@@ -773,7 +734,7 @@ module Aws::ApplicationInsights
       :application_component_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -817,7 +778,7 @@ module Aws::ApplicationInsights
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_list
@@ -834,7 +795,7 @@ module Aws::ApplicationInsights
       :event_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -856,7 +817,7 @@ module Aws::ApplicationInsights
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -878,7 +839,7 @@ module Aws::ApplicationInsights
       :log_pattern_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -904,7 +865,7 @@ module Aws::ApplicationInsights
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -926,7 +887,7 @@ module Aws::ApplicationInsights
       :log_patterns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -967,7 +928,7 @@ module Aws::ApplicationInsights
       :component_name,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute problem_list
@@ -989,7 +950,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -999,7 +960,7 @@ module Aws::ApplicationInsights
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1010,7 +971,7 @@ module Aws::ApplicationInsights
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1036,7 +997,7 @@ module Aws::ApplicationInsights
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_list
@@ -1049,13 +1010,7 @@ module Aws::ApplicationInsights
       :workload_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogFilter
-      ERROR = 'ERROR'
-      WARN = 'WARN'
-      INFO = 'INFO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the log patterns that belongs to a
@@ -1093,7 +1048,7 @@ module Aws::ApplicationInsights
       :pattern,
       :rank,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rank] = 0 unless options.key?(:rank)
@@ -1295,12 +1250,7 @@ module Aws::ApplicationInsights
       :x_ray_node_name,
       :x_ray_node_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OsType
-      WINDOWS = 'WINDOWS'
-      LINUX = 'LINUX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a problem that is detected by correlating observations.</p>
@@ -1376,13 +1326,7 @@ module Aws::ApplicationInsights
       :visibility,
       :resolution_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationType
-      INFRA_ONLY = 'INFRA_ONLY'
-      WORKLOAD_ONLY = 'WORKLOAD_ONLY'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes observations related to the problem.</p>
@@ -1392,7 +1336,7 @@ module Aws::ApplicationInsights
     class RelatedObservations < Struct.new(
       :observation_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1409,18 +1353,12 @@ module Aws::ApplicationInsights
       :component_name,
       :workload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveWorkloadResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolutionMethod
-      MANUAL = 'MANUAL'
-      AUTOMATIC = 'AUTOMATIC'
-      UNRESOLVED = 'UNRESOLVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is already created or in use.</p>
@@ -1429,7 +1367,7 @@ module Aws::ApplicationInsights
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource does not exist in the customer account.</p>
@@ -1438,22 +1376,7 @@ module Aws::ApplicationInsights
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SeverityLevel
-      Informative = 'Informative'
-      Low = 'Low'
-      Medium = 'Medium'
-      High = 'High'
-    end
-
-    module Status
-      IGNORE = 'IGNORE'
-      RESOLVED = 'RESOLVED'
-      PENDING = 'PENDING'
-      RECURRING = 'RECURRING'
-      RECOVERING = 'RECOVERING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the tags associated with an application. A
@@ -1494,7 +1417,7 @@ module Aws::ApplicationInsights
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1510,12 +1433,12 @@ module Aws::ApplicationInsights
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags are already registered for the specified application ARN.</p>
@@ -1524,33 +1447,7 @@ module Aws::ApplicationInsights
     class TagsAlreadyExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Tier
-      CUSTOM = 'CUSTOM'
-      DEFAULT = 'DEFAULT'
-      DOT_NET_CORE = 'DOT_NET_CORE'
-      DOT_NET_WORKER = 'DOT_NET_WORKER'
-      DOT_NET_WEB_TIER = 'DOT_NET_WEB_TIER'
-      DOT_NET_WEB = 'DOT_NET_WEB'
-      SQL_SERVER = 'SQL_SERVER'
-      SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP = 'SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP'
-      MYSQL = 'MYSQL'
-      POSTGRESQL = 'POSTGRESQL'
-      JAVA_JMX = 'JAVA_JMX'
-      ORACLE = 'ORACLE'
-      SAP_HANA_MULTI_NODE = 'SAP_HANA_MULTI_NODE'
-      SAP_HANA_SINGLE_NODE = 'SAP_HANA_SINGLE_NODE'
-      SAP_HANA_HIGH_AVAILABILITY = 'SAP_HANA_HIGH_AVAILABILITY'
-      SAP_ASE_SINGLE_NODE = 'SAP_ASE_SINGLE_NODE'
-      SAP_ASE_HIGH_AVAILABILITY = 'SAP_ASE_HIGH_AVAILABILITY'
-      SQL_SERVER_FAILOVER_CLUSTER_INSTANCE = 'SQL_SERVER_FAILOVER_CLUSTER_INSTANCE'
-      SHAREPOINT = 'SHAREPOINT'
-      ACTIVE_DIRECTORY = 'ACTIVE_DIRECTORY'
-      SAP_NETWEAVER_STANDARD = 'SAP_NETWEAVER_STANDARD'
-      SAP_NETWEAVER_DISTRIBUTED = 'SAP_NETWEAVER_DISTRIBUTED'
-      SAP_NETWEAVER_HIGH_AVAILABILITY = 'SAP_NETWEAVER_HIGH_AVAILABILITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of the provided tags is beyond the limit, or the number of total tags you are
@@ -1564,7 +1461,7 @@ module Aws::ApplicationInsights
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1582,12 +1479,12 @@ module Aws::ApplicationInsights
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1630,7 +1527,7 @@ module Aws::ApplicationInsights
       :auto_config_enabled,
       :attach_missing_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_info
@@ -1639,7 +1536,7 @@ module Aws::ApplicationInsights
     class UpdateApplicationResponse < Struct.new(
       :application_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1673,12 +1570,12 @@ module Aws::ApplicationInsights
       :component_configuration,
       :auto_config_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateComponentConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1699,12 +1596,12 @@ module Aws::ApplicationInsights
       :new_component_name,
       :resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateComponentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1739,7 +1636,7 @@ module Aws::ApplicationInsights
       :pattern,
       :rank,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1752,7 +1649,7 @@ module Aws::ApplicationInsights
       :resource_group_name,
       :log_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute problem_id
@@ -1772,16 +1669,12 @@ module Aws::ApplicationInsights
       :update_status,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateProblemResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateStatus
-      RESOLVED = 'RESOLVED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_group_name
@@ -1802,7 +1695,7 @@ module Aws::ApplicationInsights
       :workload_id,
       :workload_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -1815,7 +1708,7 @@ module Aws::ApplicationInsights
       :workload_id,
       :workload_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter is not valid.</p>
@@ -1824,12 +1717,7 @@ module Aws::ApplicationInsights
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Visibility
-      IGNORED = 'IGNORED'
-      VISIBLE = 'VISIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the workloads on a component.</p>
@@ -1859,7 +1747,7 @@ module Aws::ApplicationInsights
       :workload_remarks,
       :missing_workload_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the workload.</p>
@@ -1877,7 +1765,7 @@ module Aws::ApplicationInsights
       :tier,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

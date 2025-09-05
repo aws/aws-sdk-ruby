@@ -21,12 +21,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Action
-      INITIALIZE_RESET = 'initiateDatabaseReset'
-      PERFORM_RESET = 'performDatabaseReset'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request is submitted that cannot be processed.</p>
@@ -44,7 +39,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a specified bulk-load job ID cannot be found.</p>
@@ -62,7 +57,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -71,7 +66,7 @@ module Aws::Neptunedata
     class CancelGremlinQueryInput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -80,7 +75,7 @@ module Aws::Neptunedata
     class CancelGremlinQueryOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_id
@@ -89,7 +84,7 @@ module Aws::Neptunedata
     class CancelLoaderJobInput < Struct.new(
       :load_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -98,7 +93,7 @@ module Aws::Neptunedata
     class CancelLoaderJobOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -115,7 +110,7 @@ module Aws::Neptunedata
       :neptune_iam_role_arn,
       :clean,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -124,7 +119,7 @@ module Aws::Neptunedata
     class CancelMLDataProcessingJobOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -141,7 +136,7 @@ module Aws::Neptunedata
       :neptune_iam_role_arn,
       :clean,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -150,7 +145,7 @@ module Aws::Neptunedata
     class CancelMLModelTrainingJobOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -167,7 +162,7 @@ module Aws::Neptunedata
       :neptune_iam_role_arn,
       :clean,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -176,7 +171,7 @@ module Aws::Neptunedata
     class CancelMLModelTransformJobOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -189,7 +184,7 @@ module Aws::Neptunedata
       :query_id,
       :silent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -202,7 +197,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a user cancelled a request.</p>
@@ -220,7 +215,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request timed out in the client.</p>
@@ -238,7 +233,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request attempts to modify data that is concurrently being modified by another process.</p>
@@ -256,7 +251,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a value in a request field did not satisfy required constraints.</p>
@@ -274,7 +269,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -315,7 +310,7 @@ module Aws::Neptunedata
       :instance_count,
       :volume_encryption_kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -332,7 +327,7 @@ module Aws::Neptunedata
       :arn,
       :creation_time_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains custom model training parameters. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-custom-models.html">Custom models in Neptune ML</a>.</p>
@@ -350,7 +345,7 @@ module Aws::Neptunedata
       :training_entry_point_script,
       :transform_entry_point_script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains custom model transform parameters. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html">Use a trained model to generate new model artifacts</a>.</p>
@@ -364,7 +359,7 @@ module Aws::Neptunedata
       :source_s3_directory_path,
       :transform_entry_point_script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -381,7 +376,7 @@ module Aws::Neptunedata
       :neptune_iam_role_arn,
       :clean,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -390,7 +385,7 @@ module Aws::Neptunedata
     class DeleteMLEndpointOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -407,7 +402,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -424,7 +419,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The payload for DeleteStatistics.</p>
@@ -438,7 +433,7 @@ module Aws::Neptunedata
       :active,
       :statistics_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An edge structure.</p>
@@ -452,11 +447,7 @@ module Aws::Neptunedata
       :count,
       :edge_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Encoding
-      GZIP = 'gzip'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -469,7 +460,7 @@ module Aws::Neptunedata
       :action,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -482,7 +473,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gremlin_query
@@ -491,7 +482,7 @@ module Aws::Neptunedata
     class ExecuteGremlinExplainQueryInput < Struct.new(
       :gremlin_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output
@@ -500,7 +491,7 @@ module Aws::Neptunedata
     class ExecuteGremlinExplainQueryOutput < Struct.new(
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gremlin_query
@@ -525,7 +516,7 @@ module Aws::Neptunedata
       :serializer,
       :index_ops,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output
@@ -534,7 +525,7 @@ module Aws::Neptunedata
     class ExecuteGremlinProfileQueryOutput < Struct.new(
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gremlin_query
@@ -547,7 +538,7 @@ module Aws::Neptunedata
       :gremlin_query,
       :serializer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -568,7 +559,7 @@ module Aws::Neptunedata
       :result,
       :meta,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_cypher_query
@@ -585,7 +576,7 @@ module Aws::Neptunedata
       :parameters,
       :explain_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -594,7 +585,7 @@ module Aws::Neptunedata
     class ExecuteOpenCypherExplainQueryOutput < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_cypher_query
@@ -607,7 +598,7 @@ module Aws::Neptunedata
       :open_cypher_query,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -616,7 +607,7 @@ module Aws::Neptunedata
     class ExecuteOpenCypherQueryOutput < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request attempts to access an stream that has expired.</p>
@@ -634,7 +625,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request fails.</p>
@@ -652,7 +643,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the fast reset token used to initiate a fast reset.</p>
@@ -662,16 +653,7 @@ module Aws::Neptunedata
     class FastResetToken < Struct.new(
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      CSV = 'csv'
-      OPENCYPHER = 'opencypher'
-      NTRIPLES = 'ntriples'
-      NQUADS = 'nquads'
-      RDFXML = 'rdfxml'
-      TURTLE = 'turtle'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -728,7 +710,7 @@ module Aws::Neptunedata
       :features,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -737,7 +719,7 @@ module Aws::Neptunedata
     class GetGremlinQueryStatusInput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -754,7 +736,7 @@ module Aws::Neptunedata
       :query_string,
       :query_eval_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_id
@@ -779,7 +761,7 @@ module Aws::Neptunedata
       :page,
       :errors_per_page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -792,7 +774,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -805,7 +787,7 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -822,7 +804,7 @@ module Aws::Neptunedata
       :id,
       :processing_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -835,7 +817,7 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -856,7 +838,7 @@ module Aws::Neptunedata
       :endpoint,
       :endpoint_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -869,7 +851,7 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -898,7 +880,7 @@ module Aws::Neptunedata
       :model_transform_job,
       :ml_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -911,7 +893,7 @@ module Aws::Neptunedata
       :id,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -936,7 +918,7 @@ module Aws::Neptunedata
       :remote_model_transform_job,
       :models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -945,7 +927,7 @@ module Aws::Neptunedata
     class GetOpenCypherQueryStatusInput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -962,7 +944,7 @@ module Aws::Neptunedata
       :query_string,
       :query_eval_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -975,7 +957,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -1000,7 +982,7 @@ module Aws::Neptunedata
       :op_num,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_event_id
@@ -1025,7 +1007,7 @@ module Aws::Neptunedata
       :records,
       :total_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mode
@@ -1034,7 +1016,7 @@ module Aws::Neptunedata
     class GetPropertygraphSummaryInput < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -1047,7 +1029,7 @@ module Aws::Neptunedata
       :status_code,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mode
@@ -1056,7 +1038,7 @@ module Aws::Neptunedata
     class GetRDFGraphSummaryInput < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -1069,7 +1051,7 @@ module Aws::Neptunedata
       :status_code,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1082,7 +1064,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -1107,7 +1089,7 @@ module Aws::Neptunedata
       :op_num,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_event_id
@@ -1132,12 +1114,7 @@ module Aws::Neptunedata
       :records,
       :total_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GraphSummaryType
-      BASIC = 'basic'
-      DETAILED = 'detailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Captures the status of a Gremlin query (see the <a href="https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html">Gremlin query status API</a> page).</p>
@@ -1155,7 +1132,7 @@ module Aws::Neptunedata
       :query_string,
       :query_eval_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains status components of a Gremlin query.</p>
@@ -1173,7 +1150,7 @@ module Aws::Neptunedata
       :code,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when an argument in a request is not supported.</p>
@@ -1191,7 +1168,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the processing of the request failed unexpectedly.</p>
@@ -1209,7 +1186,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when an argument in a request has an invalid value.</p>
@@ -1227,7 +1204,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when invalid numerical data is encountered when servicing a request.</p>
@@ -1245,7 +1222,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a parameter value is not valid.</p>
@@ -1263,14 +1240,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IteratorType
-      AT_SEQUENCE_NUMBER = 'AT_SEQUENCE_NUMBER'
-      AFTER_SEQUENCE_NUMBER = 'AFTER_SEQUENCE_NUMBER'
-      TRIM_HORIZON = 'TRIM_HORIZON'
-      LATEST = 'LATEST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_waiting
@@ -1279,7 +1249,7 @@ module Aws::Neptunedata
     class ListGremlinQueriesInput < Struct.new(
       :include_waiting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accepted_query_count
@@ -1296,7 +1266,7 @@ module Aws::Neptunedata
       :running_query_count,
       :queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -1309,7 +1279,7 @@ module Aws::Neptunedata
       :limit,
       :include_queued_loads,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1322,7 +1292,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_items
@@ -1335,7 +1305,7 @@ module Aws::Neptunedata
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -1344,7 +1314,7 @@ module Aws::Neptunedata
     class ListMLDataProcessingJobsOutput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_items
@@ -1357,7 +1327,7 @@ module Aws::Neptunedata
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -1366,7 +1336,7 @@ module Aws::Neptunedata
     class ListMLEndpointsOutput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_items
@@ -1379,7 +1349,7 @@ module Aws::Neptunedata
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -1388,7 +1358,7 @@ module Aws::Neptunedata
     class ListMLModelTrainingJobsOutput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_items
@@ -1401,7 +1371,7 @@ module Aws::Neptunedata
       :max_items,
       :neptune_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -1410,7 +1380,7 @@ module Aws::Neptunedata
     class ListMLModelTransformJobsOutput < Struct.new(
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_waiting
@@ -1419,7 +1389,7 @@ module Aws::Neptunedata
     class ListOpenCypherQueriesInput < Struct.new(
       :include_waiting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accepted_query_count
@@ -1436,7 +1406,7 @@ module Aws::Neptunedata
       :running_query_count,
       :queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when access is denied to a specified load URL.</p>
@@ -1454,7 +1424,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of load IDs.</p>
@@ -1464,7 +1434,7 @@ module Aws::Neptunedata
     class LoaderIdResult < Struct.new(
       :load_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a specified machine-learning resource could not be found.</p>
@@ -1482,7 +1452,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a query is submitted that is syntactically incorrect or does not pass additional validation.</p>
@@ -1500,7 +1470,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mode
@@ -1509,7 +1479,7 @@ module Aws::Neptunedata
     class ManagePropertygraphStatisticsInput < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1522,7 +1492,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mode
@@ -1531,7 +1501,7 @@ module Aws::Neptunedata
     class ManageSparqlStatisticsInput < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1544,7 +1514,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request fails because of insufficient memory resources. The request can be retried.</p>
@@ -1562,7 +1532,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the HTTP method used by a request is not supported by the endpoint being used.</p>
@@ -1580,7 +1550,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a required parameter is missing.</p>
@@ -1598,7 +1568,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a Neptune ML configuration.</p>
@@ -1612,7 +1582,7 @@ module Aws::Neptunedata
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a Neptune ML resource.</p>
@@ -1642,13 +1612,7 @@ module Aws::Neptunedata
       :failure_reason,
       :cloudwatch_log_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Mode
-      RESUME = 'RESUME'
-      NEW = 'NEW'
-      AUTO = 'AUTO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A node structure.</p>
@@ -1666,20 +1630,7 @@ module Aws::Neptunedata
       :node_properties,
       :distinct_outgoing_edge_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenCypherExplainMode
-      STATIC = 'static'
-      DYNAMIC = 'dynamic'
-      DETAILS = 'details'
-    end
-
-    module Parallelism
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      OVERSUBSCRIBE = 'OVERSUBSCRIBE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a parsing issue is encountered.</p>
@@ -1697,7 +1648,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a precondition for processing a request is not satisfied.</p>
@@ -1715,7 +1666,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Gremlin or openCypher change record.</p>
@@ -1745,7 +1696,7 @@ module Aws::Neptunedata
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure of a property graph record.</p>
@@ -1771,7 +1722,7 @@ module Aws::Neptunedata
       :op,
       :is_last_op,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The graph summary API returns a read-only list of node and edge labels and property keys, along with counts of nodes, edges, and properties. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-pg-response">Graph summary response for a property graph (PG)</a>.</p>
@@ -1833,7 +1784,7 @@ module Aws::Neptunedata
       :node_structures,
       :edge_structures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Payload for the property graph summary response.</p>
@@ -1851,7 +1802,7 @@ module Aws::Neptunedata
       :last_statistics_computation_time,
       :graph_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure to capture query statistics such as how many queries are running, accepted or waiting and their details.</p>
@@ -1873,7 +1824,7 @@ module Aws::Neptunedata
       :cancelled,
       :subqueries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure for expressing the query language version.</p>
@@ -1883,7 +1834,7 @@ module Aws::Neptunedata
     class QueryLanguageVersion < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the number of active queries exceeds what the server can process. The query in question can be retried when the system is less busy.</p>
@@ -1901,7 +1852,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the size of a query exceeds the system limit.</p>
@@ -1919,7 +1870,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the body of a query is too large.</p>
@@ -1937,7 +1888,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RDF graph summary API returns a read-only list of classes and predicate keys, along with counts of quads, subjects, and predicates.</p>
@@ -1971,7 +1922,7 @@ module Aws::Neptunedata
       :predicates,
       :subject_structures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Payload for an RDF graph summary response.</p>
@@ -1989,7 +1940,7 @@ module Aws::Neptunedata
       :last_statistics_computation_time,
       :graph_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request attempts to write to a read-only resource.</p>
@@ -2007,7 +1958,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics for <code>REFRESH</code> mode.</p>
@@ -2017,46 +1968,7 @@ module Aws::Neptunedata
     class RefreshStatisticsIdMap < Struct.new(
       :statistics_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3BucketRegion
-      US_EAST_1 = 'us-east-1'
-      US_EAST_2 = 'us-east-2'
-      US_WEST_1 = 'us-west-1'
-      US_WEST_2 = 'us-west-2'
-      CA_CENTRAL_1 = 'ca-central-1'
-      SA_EAST_1 = 'sa-east-1'
-      EU_NORTH_1 = 'eu-north-1'
-      EU_WEST_1 = 'eu-west-1'
-      EU_WEST_2 = 'eu-west-2'
-      EU_WEST_3 = 'eu-west-3'
-      EU_CENTRAL_1 = 'eu-central-1'
-      ME_SOUTH_1 = 'me-south-1'
-      AF_SOUTH_1 = 'af-south-1'
-      AP_EAST_1 = 'ap-east-1'
-      AP_NORTHEAST_1 = 'ap-northeast-1'
-      AP_NORTHEAST_2 = 'ap-northeast-2'
-      AP_SOUTHEAST_1 = 'ap-southeast-1'
-      AP_SOUTHEAST_2 = 'ap-southeast-2'
-      AP_SOUTH_1 = 'ap-south-1'
-      CN_NORTH_1 = 'cn-north-1'
-      CN_NORTHWEST_1 = 'cn-northwest-1'
-      US_GOV_WEST_1 = 'us-gov-west-1'
-      US_GOV_EAST_1 = 'us-gov-east-1'
-      CA_WEST_1 = 'ca-west-1'
-      EU_SOUTH_2 = 'eu-south-2'
-      IL_CENTRAL_1 = 'il-central-1'
-      ME_CENTRAL_1 = 'me-central-1'
-      AP_NORTHEAST_3 = 'ap-northeast-3'
-      AP_SOUTHEAST_3 = 'ap-southeast-3'
-      AP_SOUTHEAST_4 = 'ap-southeast-4'
-      AP_SOUTHEAST_5 = 'ap-southeast-5'
-      AP_SOUTHEAST_7 = 'ap-southeast-7'
-      MX_CENTRAL_1 = 'mx-central-1'
-      AP_EAST_2 = 'ap-east-2'
-      AP_SOUTH_2 = 'ap-south-2'
-      EU_CENTRAL_2 = 'eu-central-2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when there is a problem accessing Amazon S3.</p>
@@ -2074,7 +1986,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the server shuts down while processing a request.</p>
@@ -2092,7 +2004,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Neptune logs are converted to SPARQL quads in the graph using the Resource Description Framework (RDF) <a href="https://www.w3.org/TR/n-quads/">N-QUADS</a> language defined in the W3C RDF 1.1 N-Quads specification</p>
@@ -2102,7 +2014,7 @@ module Aws::Neptunedata
     class SparqlData < Struct.new(
       :stmt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A serialized SPARQL stream record capturing a change-log entry for the RDF graph.</p>
@@ -2128,7 +2040,7 @@ module Aws::Neptunedata
       :op,
       :is_last_op,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -2181,7 +2093,7 @@ module Aws::Neptunedata
       :dependencies,
       :user_provided_edge_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2194,7 +2106,7 @@ module Aws::Neptunedata
       :status,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2259,7 +2171,7 @@ module Aws::Neptunedata
       :volume_encryption_kms_key,
       :s3_output_encryption_kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2276,7 +2188,7 @@ module Aws::Neptunedata
       :arn,
       :creation_time_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2353,7 +2265,7 @@ module Aws::Neptunedata
       :enable_managed_spot_training,
       :custom_model_training_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2370,7 +2282,7 @@ module Aws::Neptunedata
       :arn,
       :creation_time_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2431,7 +2343,7 @@ module Aws::Neptunedata
       :volume_encryption_kms_key,
       :s3_output_encryption_kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2448,7 +2360,7 @@ module Aws::Neptunedata
       :arn,
       :creation_time_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains statistics information. The DFE engine uses information about the data in your Neptune graph to make effective trade-offs when planning query execution. This information takes the form of statistics that include so-called characteristic sets and predicate statistics that can guide query planning. See <a href="https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html">Managing statistics for the Neptune DFE to use</a>.</p>
@@ -2478,13 +2390,7 @@ module Aws::Neptunedata
       :note,
       :signature_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatisticsAutoGenerationMode
-      DISABLE_AUTOCOMPUTE = 'disableAutoCompute'
-      ENABLE_AUTOCOMPUTE = 'enableAutoCompute'
-      REFRESH = 'refresh'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when statistics needed to satisfy a request are not available.</p>
@@ -2502,7 +2408,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the characteristic sets generated in the statistics.</p>
@@ -2520,7 +2426,7 @@ module Aws::Neptunedata
       :instance_count,
       :predicate_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when stream records requested by a query cannot be found.</p>
@@ -2538,7 +2444,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subject structure.</p>
@@ -2552,7 +2458,7 @@ module Aws::Neptunedata
       :count,
       :predicates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the rate of requests exceeds the maximum throughput. Requests can be retried after encountering this exception.</p>
@@ -2570,7 +2476,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the an operation exceeds the time limit allowed for it.</p>
@@ -2588,7 +2494,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when the number of requests being processed exceeds the limit.</p>
@@ -2606,7 +2512,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a request attempts to initiate an operation that is not supported.</p>
@@ -2624,7 +2530,7 @@ module Aws::Neptunedata
       :request_id,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

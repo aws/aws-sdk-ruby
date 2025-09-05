@@ -12,7 +12,7 @@ module Aws::EventBridge
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -21,7 +21,7 @@ module Aws::EventBridge
     class ActivateEventSourceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an API destination.</p>
@@ -63,22 +63,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApiDestinationHttpMethod
-      POST = 'POST'
-      GET = 'GET'
-      HEAD = 'HEAD'
-      OPTIONS = 'OPTIONS'
-      PUT = 'PUT'
-      PATCH = 'PATCH'
-      DELETE = 'DELETE'
-    end
-
-    module ApiDestinationState
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the GraphQL operation to be parsed and executed, if the event target is an
@@ -91,7 +76,7 @@ module Aws::EventBridge
     class AppSyncParameters < Struct.new(
       :graph_ql_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An <code>Archive</code> object that contains details about an archive.</p>
@@ -130,27 +115,13 @@ module Aws::EventBridge
       :event_count,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size_bytes] = 0 unless options.key?(:size_bytes)
         options[:event_count] = 0 unless options.key?(:event_count)
         super
       end
-    end
-
-    module ArchiveState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-    end
-
-    module AssignPublicIp
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
     end
 
     # <p>This structure specifies the VPC subnets and security groups for the task, and whether a
@@ -175,7 +146,7 @@ module Aws::EventBridge
       :security_groups,
       :assign_public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The array properties for the submitted job, such as the size of the array. The array size
@@ -188,7 +159,7 @@ module Aws::EventBridge
     class BatchArrayProperties < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -221,7 +192,7 @@ module Aws::EventBridge
       :array_properties,
       :retry_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry strategy to use for failed jobs, if the target is an Batch job.
@@ -233,7 +204,7 @@ module Aws::EventBridge
     class BatchRetryStrategy < Struct.new(
       :attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:attempts] = 0 unless options.key?(:attempts)
@@ -247,7 +218,7 @@ module Aws::EventBridge
     class CancelReplayRequest < Struct.new(
       :replay_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replay_arn
@@ -264,7 +235,7 @@ module Aws::EventBridge
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a capacity provider strategy. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html">CapacityProviderStrategyItem</a> in the Amazon ECS API Reference.</p>
@@ -286,7 +257,7 @@ module Aws::EventBridge
       :weight,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
@@ -301,7 +272,7 @@ module Aws::EventBridge
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON string which you can use to limit the event bus permissions you are granting to
@@ -331,7 +302,7 @@ module Aws::EventBridge
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a connection.</p>
@@ -372,7 +343,7 @@ module Aws::EventBridge
       :last_modified_time,
       :last_authorized_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the authorization parameters for the connection if API Key is specified as the
@@ -384,7 +355,7 @@ module Aws::EventBridge
     class ConnectionApiKeyAuthResponseParameters < Struct.new(
       :api_key_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tthe authorization parameters to use for the connection.</p>
@@ -414,13 +385,7 @@ module Aws::EventBridge
       :invocation_http_parameters,
       :connectivity_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionAuthorizationType
-      BASIC = 'BASIC'
-      OAUTH_CLIENT_CREDENTIALS = 'OAUTH_CLIENT_CREDENTIALS'
-      API_KEY = 'API_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization parameters for the connection if Basic is specified as the
@@ -431,7 +396,7 @@ module Aws::EventBridge
     class ConnectionBasicAuthResponseParameters < Struct.new(
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional parameter included in the body. You can include up to 100 additional body
@@ -450,7 +415,7 @@ module Aws::EventBridge
       :value,
       :is_value_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_value_secret] = false unless options.key?(:is_value_secret)
@@ -474,7 +439,7 @@ module Aws::EventBridge
       :value,
       :is_value_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_value_secret] = false unless options.key?(:is_value_secret)
@@ -497,7 +462,7 @@ module Aws::EventBridge
       :query_string_parameters,
       :body_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client response parameters for the connection when OAuth is specified as the
@@ -508,13 +473,7 @@ module Aws::EventBridge
     class ConnectionOAuthClientResponseParameters < Struct.new(
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionOAuthHttpMethod
-      GET = 'GET'
-      POST = 'POST'
-      PUT = 'PUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response parameters when OAuth is specified as the authorization type.</p>
@@ -536,7 +495,7 @@ module Aws::EventBridge
       :http_method,
       :o_auth_http_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Any additional query string parameter for the connection. You can include up to 100 additional
@@ -556,24 +515,12 @@ module Aws::EventBridge
       :value,
       :is_value_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_value_secret] = false unless options.key?(:is_value_secret)
         super
       end
-    end
-
-    module ConnectionState
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      AUTHORIZED = 'AUTHORIZED'
-      DEAUTHORIZED = 'DEAUTHORIZED'
-      AUTHORIZING = 'AUTHORIZING'
-      DEAUTHORIZING = 'DEAUTHORIZING'
-      ACTIVE = 'ACTIVE'
-      FAILED_CONNECTIVITY = 'FAILED_CONNECTIVITY'
     end
 
     # <p>The Amazon Resource Name (ARN) of the Amazon VPC Lattice resource configuration for the resource endpoint.</p>
@@ -583,7 +530,7 @@ module Aws::EventBridge
     class ConnectivityResourceConfigurationArn < Struct.new(
       :resource_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for EventBridge to use when invoking the resource endpoint.</p>
@@ -593,7 +540,7 @@ module Aws::EventBridge
     class ConnectivityResourceParameters < Struct.new(
       :resource_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -623,7 +570,7 @@ module Aws::EventBridge
       :http_method,
       :invocation_rate_limit_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_destination_arn
@@ -644,7 +591,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_name
@@ -685,7 +632,7 @@ module Aws::EventBridge
       :retention_days,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_arn
@@ -706,7 +653,7 @@ module Aws::EventBridge
       :state_reason,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API key authorization parameters for the connection.</p>
@@ -720,7 +667,7 @@ module Aws::EventBridge
       :api_key_name,
       :api_key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization parameters for the connection.</p>
@@ -756,7 +703,7 @@ module Aws::EventBridge
       :invocation_http_parameters,
       :connectivity_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Basic authorization parameters to use for the connection.</p>
@@ -770,7 +717,7 @@ module Aws::EventBridge
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Basic authorization parameters to use for the connection.</p>
@@ -785,7 +732,7 @@ module Aws::EventBridge
       :client_id,
       :client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the OAuth authorization parameters to use for the connection.</p>
@@ -809,7 +756,7 @@ module Aws::EventBridge
       :http_method,
       :o_auth_http_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -852,7 +799,7 @@ module Aws::EventBridge
       :invocation_connectivity_parameters,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -873,7 +820,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -908,7 +855,7 @@ module Aws::EventBridge
       :event_buses,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -941,7 +888,7 @@ module Aws::EventBridge
       :role_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1014,7 +961,7 @@ module Aws::EventBridge
       :log_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_bus_arn
@@ -1045,7 +992,7 @@ module Aws::EventBridge
       :dead_letter_config,
       :log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1064,7 +1011,7 @@ module Aws::EventBridge
       :name,
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source_arn
@@ -1073,7 +1020,7 @@ module Aws::EventBridge
     class CreatePartnerEventSourceResponse < Struct.new(
       :event_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1082,7 +1029,7 @@ module Aws::EventBridge
     class DeactivateEventSourceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details of the Amazon SQS queue for EventBridge to use as a
@@ -1095,7 +1042,7 @@ module Aws::EventBridge
     class DeadLetterConfig < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1104,7 +1051,7 @@ module Aws::EventBridge
     class DeauthorizeConnectionRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -1129,7 +1076,7 @@ module Aws::EventBridge
       :last_modified_time,
       :last_authorized_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1138,12 +1085,12 @@ module Aws::EventBridge
     class DeleteApiDestinationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApiDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_name
@@ -1152,12 +1099,12 @@ module Aws::EventBridge
     class DeleteArchiveRequest < Struct.new(
       :archive_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteArchiveResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1166,7 +1113,7 @@ module Aws::EventBridge
     class DeleteConnectionRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -1193,7 +1140,7 @@ module Aws::EventBridge
       :last_modified_time,
       :last_authorized_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1203,12 +1150,12 @@ module Aws::EventBridge
     class DeleteEndpointRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1217,7 +1164,7 @@ module Aws::EventBridge
     class DeleteEventBusRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1231,7 +1178,7 @@ module Aws::EventBridge
       :name,
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1253,7 +1200,7 @@ module Aws::EventBridge
       :event_bus_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1262,7 +1209,7 @@ module Aws::EventBridge
     class DescribeApiDestinationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_destination_arn
@@ -1312,7 +1259,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_name
@@ -1321,7 +1268,7 @@ module Aws::EventBridge
     class DescribeArchiveRequest < Struct.new(
       :archive_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_arn
@@ -1376,7 +1323,7 @@ module Aws::EventBridge
       :event_count,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size_bytes] = 0 unless options.key?(:size_bytes)
@@ -1395,7 +1342,7 @@ module Aws::EventBridge
     class DescribeConnectionConnectivityParameters < Struct.new(
       :resource_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1404,7 +1351,7 @@ module Aws::EventBridge
     class DescribeConnectionRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for EventBridge to use when invoking the resource endpoint.</p>
@@ -1422,7 +1369,7 @@ module Aws::EventBridge
       :resource_configuration_arn,
       :resource_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -1486,7 +1433,7 @@ module Aws::EventBridge
       :last_modified_time,
       :last_authorized_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1501,7 +1448,7 @@ module Aws::EventBridge
       :name,
       :home_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1559,7 +1506,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1569,7 +1516,7 @@ module Aws::EventBridge
     class DescribeEventBusRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1616,7 +1563,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1625,7 +1572,7 @@ module Aws::EventBridge
     class DescribeEventSourceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1658,7 +1605,7 @@ module Aws::EventBridge
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1667,7 +1614,7 @@ module Aws::EventBridge
     class DescribePartnerEventSourceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1680,7 +1627,7 @@ module Aws::EventBridge
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replay_name
@@ -1689,7 +1636,7 @@ module Aws::EventBridge
     class DescribeReplayRequest < Struct.new(
       :replay_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replay_name
@@ -1742,7 +1689,7 @@ module Aws::EventBridge
       :replay_start_time,
       :replay_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1756,7 +1703,7 @@ module Aws::EventBridge
       :name,
       :event_bus_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1810,7 +1757,7 @@ module Aws::EventBridge
       :event_bus_name,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1824,7 +1771,7 @@ module Aws::EventBridge
       :name,
       :event_bus_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom parameters to be used when the target is an Amazon ECS task.</p>
@@ -1915,7 +1862,7 @@ module Aws::EventBridge
       :reference_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_ecs_managed_tags] = false unless options.key?(:enable_ecs_managed_tags)
@@ -1935,7 +1882,7 @@ module Aws::EventBridge
       :name,
       :event_bus_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A global endpoint used to improve your application's availability by making it
@@ -2003,7 +1950,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event buses the endpoint is associated with.</p>
@@ -2013,17 +1960,7 @@ module Aws::EventBridge
     class EndpointEventBus < Struct.new(
       :event_bus_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointState
-      ACTIVE = 'ACTIVE'
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An event bus receives events from a source, uses rules to evaluate them, applies any
@@ -2059,7 +1996,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A partner event source is created by an SaaS partner. If a customer creates a partner
@@ -2095,13 +2032,7 @@ module Aws::EventBridge
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourceState
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The failover configuration for an endpoint. This includes what triggers failover and what
@@ -2117,7 +2048,7 @@ module Aws::EventBridge
       :primary,
       :secondary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are custom parameter to be used when the target is an API Gateway APIs or
@@ -2139,7 +2070,7 @@ module Aws::EventBridge
       :header_parameters,
       :query_string_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred because a replay can be canceled only when the state is Running or
@@ -2149,12 +2080,7 @@ module Aws::EventBridge
     class IllegalStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IncludeDetail
-      NONE = 'NONE'
-      FULL = 'FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters needed for you to provide custom input to a target based on one or
@@ -2240,7 +2166,7 @@ module Aws::EventBridge
       :input_paths_map,
       :input_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs due to unexpected causes.</p>
@@ -2249,7 +2175,7 @@ module Aws::EventBridge
     class InternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event pattern is not valid.</p>
@@ -2258,7 +2184,7 @@ module Aws::EventBridge
     class InvalidEventPatternException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified state is not a valid state for an event source.</p>
@@ -2267,7 +2193,7 @@ module Aws::EventBridge
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object enables you to specify a JSON path to extract from the event and use as the
@@ -2282,20 +2208,7 @@ module Aws::EventBridge
     class KinesisParameters < Struct.new(
       :partition_key_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchType
-      EC2 = 'EC2'
-      FARGATE = 'FARGATE'
-      EXTERNAL = 'EXTERNAL'
-    end
-
-    module Level
-      OFF = 'OFF'
-      ERROR = 'ERROR'
-      INFO = 'INFO'
-      TRACE = 'TRACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it attempted to create resource beyond the allowed service
@@ -2305,7 +2218,7 @@ module Aws::EventBridge
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2330,7 +2243,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_destinations
@@ -2347,7 +2260,7 @@ module Aws::EventBridge
       :api_destinations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2376,7 +2289,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archives
@@ -2392,7 +2305,7 @@ module Aws::EventBridge
       :archives,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2417,7 +2330,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -2433,7 +2346,7 @@ module Aws::EventBridge
       :connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2460,7 +2373,7 @@ module Aws::EventBridge
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -2476,7 +2389,7 @@ module Aws::EventBridge
       :endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2499,7 +2412,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_buses
@@ -2515,7 +2428,7 @@ module Aws::EventBridge
       :event_buses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2538,7 +2451,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_sources
@@ -2554,7 +2467,7 @@ module Aws::EventBridge
       :event_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_source_name
@@ -2576,7 +2489,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partner_event_source_accounts
@@ -2592,7 +2505,7 @@ module Aws::EventBridge
       :partner_event_source_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2615,7 +2528,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partner_event_sources
@@ -2631,7 +2544,7 @@ module Aws::EventBridge
       :partner_event_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2660,7 +2573,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replays
@@ -2676,7 +2589,7 @@ module Aws::EventBridge
       :replays,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -2701,7 +2614,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_names
@@ -2717,7 +2630,7 @@ module Aws::EventBridge
       :rule_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -2742,7 +2655,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -2758,7 +2671,7 @@ module Aws::EventBridge
       :rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2767,7 +2680,7 @@ module Aws::EventBridge
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2776,7 +2689,7 @@ module Aws::EventBridge
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -2801,7 +2714,7 @@ module Aws::EventBridge
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -2817,7 +2730,7 @@ module Aws::EventBridge
       :targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging configuration settings for the event bus.</p>
@@ -2835,7 +2748,7 @@ module Aws::EventBridge
       :include_detail,
       :level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This rule was created by an Amazon Web Services service on behalf of your account. It is
@@ -2849,7 +2762,7 @@ module Aws::EventBridge
     class ManagedRuleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies the network configuration for an ECS task.</p>
@@ -2861,7 +2774,7 @@ module Aws::EventBridge
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation you are attempting is not available in this region.</p>
@@ -2870,7 +2783,7 @@ module Aws::EventBridge
     class OperationDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A partner event source is created by an SaaS partner. If a customer creates a partner
@@ -2886,7 +2799,7 @@ module Aws::EventBridge
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services account that a partner event source has been offered to.</p>
@@ -2912,7 +2825,7 @@ module Aws::EventBridge
       :expiration_time,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a constraint on task placement. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the Amazon Elastic Container Service Developer Guide.</p>
@@ -2929,12 +2842,7 @@ module Aws::EventBridge
       :type,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementConstraintType
-      DISTINCT_INSTANCE = 'distinctInstance'
-      MEMBER_OF = 'memberOf'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task placement strategy for a task or service. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task Placement Strategies</a> in the Amazon Elastic Container Service Service Developer
@@ -2958,13 +2866,7 @@ module Aws::EventBridge
       :type,
       :field,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementStrategyType
-      RANDOM = 'random'
-      SPREAD = 'spread'
-      BINPACK = 'binpack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event bus policy is too long. For more information, see the limits.</p>
@@ -2973,7 +2875,7 @@ module Aws::EventBridge
     class PolicyLengthExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The primary Region of the endpoint.</p>
@@ -2984,11 +2886,7 @@ module Aws::EventBridge
     class Primary < Struct.new(
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PropagateTags
-      TASK_DEFINITION = 'TASK_DEFINITION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3008,7 +2906,7 @@ module Aws::EventBridge
       :entries,
       :endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an event to be submitted.</p>
@@ -3077,7 +2975,7 @@ module Aws::EventBridge
       :event_bus_name,
       :trace_header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entry_count
@@ -3094,7 +2992,7 @@ module Aws::EventBridge
       :failed_entry_count,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:failed_entry_count] = 0 unless options.key?(:failed_entry_count)
@@ -3190,7 +3088,7 @@ module Aws::EventBridge
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -3199,7 +3097,7 @@ module Aws::EventBridge
     class PutPartnerEventsRequest < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about an event generated by an SaaS partner.</p>
@@ -3249,7 +3147,7 @@ module Aws::EventBridge
       :detail_type,
       :detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entry_count
@@ -3267,7 +3165,7 @@ module Aws::EventBridge
       :failed_entry_count,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:failed_entry_count] = 0 unless options.key?(:failed_entry_count)
@@ -3292,7 +3190,7 @@ module Aws::EventBridge
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_bus_name
@@ -3345,7 +3243,7 @@ module Aws::EventBridge
       :condition,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3417,7 +3315,7 @@ module Aws::EventBridge
       :tags,
       :event_bus_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -3426,7 +3324,7 @@ module Aws::EventBridge
     class PutRuleResponse < Struct.new(
       :rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -3444,7 +3342,7 @@ module Aws::EventBridge
       :event_bus_name,
       :targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entry_count
@@ -3457,7 +3355,7 @@ module Aws::EventBridge
       :failed_entry_count,
       :failed_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:failed_entry_count] = 0 unless options.key?(:failed_entry_count)
@@ -3482,7 +3380,7 @@ module Aws::EventBridge
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are custom parameters to be used when the target is a Amazon Redshift cluster
@@ -3524,7 +3422,7 @@ module Aws::EventBridge
       :with_event,
       :sqls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:with_event] = false unless options.key?(:with_event)
@@ -3548,7 +3446,7 @@ module Aws::EventBridge
       :remove_all_permissions,
       :event_bus_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -3574,7 +3472,7 @@ module Aws::EventBridge
       :ids,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entry_count
@@ -3587,7 +3485,7 @@ module Aws::EventBridge
       :failed_entry_count,
       :failed_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:failed_entry_count] = 0 unless options.key?(:failed_entry_count)
@@ -3612,7 +3510,7 @@ module Aws::EventBridge
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>Replay</code> object that contains details about a replay.</p>
@@ -3656,7 +3554,7 @@ module Aws::EventBridge
       :replay_start_time,
       :replay_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>ReplayDestination</code> object that contains details about a replay.</p>
@@ -3671,16 +3569,7 @@ module Aws::EventBridge
       :arn,
       :filter_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplayState
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      CANCELLING = 'CANCELLING'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Endpoints can replicate all events to the secondary Region.</p>
@@ -3690,12 +3579,7 @@ module Aws::EventBridge
     class ReplicationConfig < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you are trying to create already exists.</p>
@@ -3704,7 +3588,7 @@ module Aws::EventBridge
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity that you specified does not exist.</p>
@@ -3713,7 +3597,7 @@ module Aws::EventBridge
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>RetryPolicy</code> object that includes information about the retry policy
@@ -3730,7 +3614,7 @@ module Aws::EventBridge
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The routing configuration of the endpoint.</p>
@@ -3741,7 +3625,7 @@ module Aws::EventBridge
     class RoutingConfig < Struct.new(
       :failover_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a rule in Amazon EventBridge.</p>
@@ -3821,13 +3705,7 @@ module Aws::EventBridge
       :managed_by,
       :event_bus_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS = 'ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This parameter contains the criteria (either InstanceIds or a tag) used to specify which
@@ -3839,7 +3717,7 @@ module Aws::EventBridge
     class RunCommandParameters < Struct.new(
       :run_command_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the EC2 instances that are to be sent the command, specified as
@@ -3860,7 +3738,7 @@ module Aws::EventBridge
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Name/Value pair of a parameter to start execution of a SageMaker AI Model Building
@@ -3877,7 +3755,7 @@ module Aws::EventBridge
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are custom parameters to use when the target is a SageMaker AI Model Building
@@ -3889,7 +3767,7 @@ module Aws::EventBridge
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The secondary Region that processes events when failover is triggered or replication is
@@ -3900,7 +3778,7 @@ module Aws::EventBridge
     class Secondary < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure includes the custom parameter to be used when the target is an SQS FIFO
@@ -3911,7 +3789,7 @@ module Aws::EventBridge
     class SqsParameters < Struct.new(
       :message_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replay_name
@@ -3943,7 +3821,7 @@ module Aws::EventBridge
       :event_end_time,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replay_arn
@@ -3964,7 +3842,7 @@ module Aws::EventBridge
       :state_reason,
       :replay_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair associated with an Amazon Web Services resource. In EventBridge,
@@ -3980,7 +3858,7 @@ module Aws::EventBridge
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3993,12 +3871,12 @@ module Aws::EventBridge
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Targets are the resources to be invoked when a rule is triggered. For a complete list of
@@ -4109,7 +3987,7 @@ module Aws::EventBridge
       :retry_policy,
       :app_sync_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_pattern
@@ -4164,7 +4042,7 @@ module Aws::EventBridge
       :event_pattern,
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -4173,7 +4051,7 @@ module Aws::EventBridge
     class TestEventPatternResponse < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:result] = false unless options.key?(:result)
@@ -4187,7 +4065,7 @@ module Aws::EventBridge
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4200,12 +4078,12 @@ module Aws::EventBridge
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4234,7 +4112,7 @@ module Aws::EventBridge
       :http_method,
       :invocation_rate_limit_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_destination_arn
@@ -4255,7 +4133,7 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_name
@@ -4291,7 +4169,7 @@ module Aws::EventBridge
       :retention_days,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute archive_arn
@@ -4312,7 +4190,7 @@ module Aws::EventBridge
       :state_reason,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the API key authorization parameters to use to update the connection.</p>
@@ -4326,7 +4204,7 @@ module Aws::EventBridge
       :api_key_name,
       :api_key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the additional parameters to use for the connection.</p>
@@ -4359,7 +4237,7 @@ module Aws::EventBridge
       :invocation_http_parameters,
       :connectivity_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Basic authorization parameters for the connection.</p>
@@ -4373,7 +4251,7 @@ module Aws::EventBridge
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth authorization parameters to use for the connection.</p>
@@ -4387,7 +4265,7 @@ module Aws::EventBridge
       :client_id,
       :client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth request parameters to use for the connection.</p>
@@ -4412,7 +4290,7 @@ module Aws::EventBridge
       :http_method,
       :o_auth_http_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4450,7 +4328,7 @@ module Aws::EventBridge
       :invocation_connectivity_parameters,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -4475,7 +4353,7 @@ module Aws::EventBridge
       :last_modified_time,
       :last_authorized_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4504,7 +4382,7 @@ module Aws::EventBridge
       :event_buses,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4547,7 +4425,7 @@ module Aws::EventBridge
       :endpoint_url,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4605,7 +4483,7 @@ module Aws::EventBridge
       :dead_letter_config,
       :log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4640,7 +4518,7 @@ module Aws::EventBridge
       :dead_letter_config,
       :log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -15,7 +15,7 @@ module Aws::DevOpsGuru
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Returns the number of open reactive insights, the number of open proactive insights,
@@ -33,7 +33,7 @@ module Aws::DevOpsGuru
       :account_id,
       :insight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the number of open reactive and proactive insights that can be used
@@ -50,7 +50,7 @@ module Aws::DevOpsGuru
       :open_proactive_insights,
       :open_reactive_insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:open_proactive_insights] = 0 unless options.key?(:open_proactive_insights)
@@ -67,7 +67,7 @@ module Aws::DevOpsGuru
     class AddNotificationChannelRequest < Struct.new(
       :config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -76,7 +76,7 @@ module Aws::DevOpsGuru
     class AddNotificationChannelResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about your account's integration with Amazon CodeGuru Profiler. This
@@ -89,7 +89,7 @@ module Aws::DevOpsGuru
     class AmazonCodeGuruProfilerIntegration < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -127,7 +127,7 @@ module Aws::DevOpsGuru
       :number_of_log_lines_scanned,
       :log_anomaly_showcases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_log_lines_scanned] = 0 unless options.key?(:number_of_log_lines_scanned)
@@ -148,7 +148,7 @@ module Aws::DevOpsGuru
       :open_time,
       :close_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services resources in which DevOps Guru detected unusual behavior that resulted in the
@@ -165,13 +165,7 @@ module Aws::DevOpsGuru
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalySeverity
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details about the source of the anomalous operational data that triggered the
@@ -188,7 +182,7 @@ module Aws::DevOpsGuru
       :cloud_watch_metrics,
       :performance_insights_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about the detection source that generates proactive anomalies. The anomaly is
@@ -207,12 +201,7 @@ module Aws::DevOpsGuru
       :source_resource_name,
       :source_resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalyStatus
-      ONGOING = 'ONGOING'
-      CLOSED = 'CLOSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A time range that specifies when the observed unusual behavior in an anomaly started
@@ -228,12 +217,7 @@ module Aws::DevOpsGuru
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalyType
-      CAUSAL = 'CAUSAL'
-      CONTEXTUAL = 'CONTEXTUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about Amazon Web Services CloudFormation stacks. You can use up to 500
@@ -246,7 +230,7 @@ module Aws::DevOpsGuru
     class CloudFormationCollection < Struct.new(
       :stack_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about Amazon Web Services CloudFormation stacks. You can use up to 500
@@ -259,7 +243,7 @@ module Aws::DevOpsGuru
     class CloudFormationCollectionFilter < Struct.new(
       :stack_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services CloudFormation stack used to create a monthly cost estimate
@@ -273,7 +257,7 @@ module Aws::DevOpsGuru
     class CloudFormationCostEstimationResourceCollectionFilter < Struct.new(
       :stack_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the health of Amazon Web Services resources in your account that are specified by
@@ -296,13 +280,7 @@ module Aws::DevOpsGuru
       :insight,
       :analyzed_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudWatchMetricDataStatusCode
-      COMPLETE = 'Complete'
-      INTERNAL_ERROR = 'InternalError'
-      PARTIAL_DATA = 'PartialData'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the analyzed metrics that displayed anomalous behavior.
@@ -318,7 +296,7 @@ module Aws::DevOpsGuru
       :timestamp_metric_value_pair_list,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about an Amazon CloudWatch metric. </p>
@@ -355,7 +333,7 @@ module Aws::DevOpsGuru
       :period,
       :metric_data_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:period] = 0 unless options.key?(:period)
@@ -377,18 +355,7 @@ module Aws::DevOpsGuru
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudWatchMetricsStat
-      SUM = 'Sum'
-      AVERAGE = 'Average'
-      SAMPLE_COUNT = 'SampleCount'
-      MINIMUM = 'Minimum'
-      MAXIMUM = 'Maximum'
-      P99 = 'p99'
-      P90 = 'p90'
-      P50 = 'p50'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An exception that is thrown when a conflict occurs. </p>
@@ -405,7 +372,7 @@ module Aws::DevOpsGuru
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a filter used to specify which Amazon Web Services resources are analyzed to
@@ -458,17 +425,7 @@ module Aws::DevOpsGuru
       :cloud_formation,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CostEstimationServiceResourceState
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-    end
-
-    module CostEstimationStatus
-      ONGOING = 'ONGOING'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time range of a cost estimation.</p>
@@ -482,7 +439,7 @@ module Aws::DevOpsGuru
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -491,17 +448,17 @@ module Aws::DevOpsGuru
     class DeleteInsightRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInsightResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountHealthRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_reactive_insights
@@ -532,7 +489,7 @@ module Aws::DevOpsGuru
       :resource_hours,
       :analyzed_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:open_reactive_insights] = 0 unless options.key?(:open_reactive_insights)
@@ -556,7 +513,7 @@ module Aws::DevOpsGuru
       :from_time,
       :to_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reactive_insights
@@ -576,7 +533,7 @@ module Aws::DevOpsGuru
       :proactive_insights,
       :mean_time_to_recover_in_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:reactive_insights] = 0 unless options.key?(:reactive_insights)
@@ -595,7 +552,7 @@ module Aws::DevOpsGuru
       :id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_anomaly
@@ -608,12 +565,12 @@ module Aws::DevOpsGuru
       :proactive_anomaly,
       :reactive_anomaly,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeEventSourcesConfigRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_sources
@@ -622,7 +579,7 @@ module Aws::DevOpsGuru
     class DescribeEventSourcesConfigResponse < Struct.new(
       :event_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -631,7 +588,7 @@ module Aws::DevOpsGuru
     class DescribeFeedbackRequest < Struct.new(
       :insight_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_feedback
@@ -640,7 +597,7 @@ module Aws::DevOpsGuru
     class DescribeFeedbackResponse < Struct.new(
       :insight_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -653,7 +610,7 @@ module Aws::DevOpsGuru
       :id,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_insight
@@ -666,7 +623,7 @@ module Aws::DevOpsGuru
       :proactive_insight,
       :reactive_insight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -679,7 +636,7 @@ module Aws::DevOpsGuru
       :account_ids,
       :organizational_unit_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_reactive_insights
@@ -704,7 +661,7 @@ module Aws::DevOpsGuru
       :metrics_analyzed,
       :resource_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:open_reactive_insights] = 0 unless options.key?(:open_reactive_insights)
@@ -736,7 +693,7 @@ module Aws::DevOpsGuru
       :account_ids,
       :organizational_unit_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reactive_insights
@@ -751,7 +708,7 @@ module Aws::DevOpsGuru
       :reactive_insights,
       :proactive_insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:reactive_insights] = 0 unless options.key?(:reactive_insights)
@@ -787,7 +744,7 @@ module Aws::DevOpsGuru
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_formation
@@ -848,7 +805,7 @@ module Aws::DevOpsGuru
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_collection_type
@@ -865,7 +822,7 @@ module Aws::DevOpsGuru
       :resource_collection_type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_formation
@@ -923,12 +880,12 @@ module Aws::DevOpsGuru
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeServiceIntegrationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_integration
@@ -938,7 +895,7 @@ module Aws::DevOpsGuru
     class DescribeServiceIntegrationResponse < Struct.new(
       :service_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A range of time that specifies when anomalous behavior in an anomaly or insight
@@ -953,7 +910,7 @@ module Aws::DevOpsGuru
       :from_time,
       :to_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An Amazon Web Services resource event. Amazon Web Services resource events and metrics are analyzed by DevOps Guru to
@@ -999,20 +956,7 @@ module Aws::DevOpsGuru
       :event_class,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventClass
-      INFRASTRUCTURE = 'INFRASTRUCTURE'
-      DEPLOYMENT = 'DEPLOYMENT'
-      SECURITY_CHANGE = 'SECURITY_CHANGE'
-      CONFIG_CHANGE = 'CONFIG_CHANGE'
-      SCHEMA_CHANGE = 'SCHEMA_CHANGE'
-    end
-
-    module EventDataSource
-      AWS_CLOUD_TRAIL = 'AWS_CLOUD_TRAIL'
-      AWS_CODE_DEPLOY = 'AWS_CODE_DEPLOY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Amazon Web Services resource that emitted an event. Amazon Web Services resource events and metrics are
@@ -1032,12 +976,7 @@ module Aws::DevOpsGuru
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourceOptInStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the integration of DevOps Guru as consumer with another AWS service, such
@@ -1049,7 +988,7 @@ module Aws::DevOpsGuru
     class EventSourcesConfig < Struct.new(
       :amazon_code_guru_profiler,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The time range during which an Amazon Web Services event occurred. Amazon Web Services resource events and
@@ -1065,7 +1004,7 @@ module Aws::DevOpsGuru
       :from_time,
       :to_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1075,7 +1014,7 @@ module Aws::DevOpsGuru
     class GetCostEstimationRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_collection
@@ -1111,7 +1050,7 @@ module Aws::DevOpsGuru
       :total_cost,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_cost] = 0 unless options.key?(:total_cost)
@@ -1131,7 +1070,7 @@ module Aws::DevOpsGuru
       :resource_collection_type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_collection
@@ -1148,7 +1087,7 @@ module Aws::DevOpsGuru
       :resource_collection,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about insight feedback received from a customer. </p>
@@ -1162,15 +1101,7 @@ module Aws::DevOpsGuru
       :id,
       :feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsightFeedbackOption
-      VALID_COLLECTION = 'VALID_COLLECTION'
-      RECOMMENDATION_USEFUL = 'RECOMMENDATION_USEFUL'
-      ALERT_TOO_SENSITIVE = 'ALERT_TOO_SENSITIVE'
-      DATA_NOISY_ANOMALY = 'DATA_NOISY_ANOMALY'
-      DATA_INCORRECT = 'DATA_INCORRECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the number of open reactive and proactive insights that can be used
@@ -1189,24 +1120,13 @@ module Aws::DevOpsGuru
       :open_reactive_insights,
       :mean_time_to_recover_in_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:open_proactive_insights] = 0 unless options.key?(:open_proactive_insights)
         options[:open_reactive_insights] = 0 unless options.key?(:open_reactive_insights)
         super
       end
-    end
-
-    module InsightSeverity
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    module InsightStatus
-      ONGOING = 'ONGOING'
-      CLOSED = 'CLOSED'
     end
 
     # <p> A time ranged that specifies when the observed behavior in an insight started and
@@ -1221,12 +1141,7 @@ module Aws::DevOpsGuru
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsightType
-      REACTIVE = 'REACTIVE'
-      PROACTIVE = 'PROACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal failure in an Amazon service occurred.</p>
@@ -1240,7 +1155,7 @@ module Aws::DevOpsGuru
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1282,7 +1197,7 @@ module Aws::DevOpsGuru
       :opt_in_status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1318,7 +1233,7 @@ module Aws::DevOpsGuru
       :opt_in_status,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1330,7 +1245,7 @@ module Aws::DevOpsGuru
     class ListAnomaliesForInsightFilters < Struct.new(
       :service_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -1364,7 +1279,7 @@ module Aws::DevOpsGuru
       :account_id,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_anomalies
@@ -1384,7 +1299,7 @@ module Aws::DevOpsGuru
       :reactive_anomalies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -1405,7 +1320,7 @@ module Aws::DevOpsGuru
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -1427,7 +1342,7 @@ module Aws::DevOpsGuru
       :anomalous_log_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filters you can use to specify which events are returned when <code>ListEvents</code>
@@ -1463,7 +1378,7 @@ module Aws::DevOpsGuru
       :data_source,
       :resource_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1487,7 +1402,7 @@ module Aws::DevOpsGuru
       :next_token,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -1501,7 +1416,7 @@ module Aws::DevOpsGuru
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Used to filter for insights that have any status. </p>
@@ -1517,7 +1432,7 @@ module Aws::DevOpsGuru
       :type,
       :start_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Used to filter for insights that have the status <code>CLOSED</code>. </p>
@@ -1533,7 +1448,7 @@ module Aws::DevOpsGuru
       :type,
       :end_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Used to filter for insights that have the status <code>ONGOING</code>. </p>
@@ -1544,7 +1459,7 @@ module Aws::DevOpsGuru
     class ListInsightsOngoingStatusFilter < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_filter
@@ -1564,7 +1479,7 @@ module Aws::DevOpsGuru
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_insights
@@ -1582,7 +1497,7 @@ module Aws::DevOpsGuru
       :reactive_insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A filter used by <code>ListInsights</code> to specify which insights to return.
@@ -1604,7 +1519,7 @@ module Aws::DevOpsGuru
       :closed,
       :any,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1624,7 +1539,7 @@ module Aws::DevOpsGuru
       :resource_permission,
       :resource_type_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1645,7 +1560,7 @@ module Aws::DevOpsGuru
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitored_resource_identifiers
@@ -1661,7 +1576,7 @@ module Aws::DevOpsGuru
       :monitored_resource_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1671,7 +1586,7 @@ module Aws::DevOpsGuru
     class ListNotificationChannelsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channels
@@ -1685,7 +1600,7 @@ module Aws::DevOpsGuru
       :channels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_filter
@@ -1713,7 +1628,7 @@ module Aws::DevOpsGuru
       :organizational_unit_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_insights
@@ -1733,7 +1648,7 @@ module Aws::DevOpsGuru
       :reactive_insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_id
@@ -1755,7 +1670,7 @@ module Aws::DevOpsGuru
       :locale,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendations
@@ -1769,21 +1684,7 @@ module Aws::DevOpsGuru
       :recommendations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Locale
-      DE_DE = 'DE_DE'
-      EN_US = 'EN_US'
-      EN_GB = 'EN_GB'
-      ES_ES = 'ES_ES'
-      FR_FR = 'FR_FR'
-      IT_IT = 'IT_IT'
-      JA_JP = 'JA_JP'
-      KO_KR = 'KO_KR'
-      PT_BR = 'PT_BR'
-      ZH_CN = 'ZH_CN'
-      ZH_TW = 'ZH_TW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1833,7 +1734,7 @@ module Aws::DevOpsGuru
       :number_of_log_lines_occurrences,
       :log_event_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_log_lines_occurrences] = 0 unless options.key?(:number_of_log_lines_occurrences)
@@ -1852,18 +1753,7 @@ module Aws::DevOpsGuru
     class LogAnomalyShowcase < Struct.new(
       :log_anomaly_classes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogAnomalyType
-      KEYWORD = 'KEYWORD'
-      KEYWORD_TOKEN = 'KEYWORD_TOKEN'
-      FORMAT = 'FORMAT'
-      HTTP_CODE = 'HTTP_CODE'
-      BLOCK_FORMAT = 'BLOCK_FORMAT'
-      NUMERICAL_POINT = 'NUMERICAL_POINT'
-      NUMERICAL_NAN = 'NUMERICAL_NAN'
-      NEW_FIELD_NAME = 'NEW_FIELD_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1875,7 +1765,7 @@ module Aws::DevOpsGuru
     class LogsAnomalyDetectionIntegration < Struct.new(
       :opt_in_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1887,7 +1777,7 @@ module Aws::DevOpsGuru
     class LogsAnomalyDetectionIntegrationConfig < Struct.new(
       :opt_in_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1926,7 +1816,7 @@ module Aws::DevOpsGuru
       :last_updated,
       :resource_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a notification channel. A notification channel is used to notify
@@ -1950,7 +1840,7 @@ module Aws::DevOpsGuru
       :id,
       :config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about notification channels you have configured with DevOps Guru.
@@ -1977,7 +1867,7 @@ module Aws::DevOpsGuru
       :sns,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1999,15 +1889,7 @@ module Aws::DevOpsGuru
       :severities,
       :message_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationMessageType
-      NEW_INSIGHT = 'NEW_INSIGHT'
-      CLOSED_INSIGHT = 'CLOSED_INSIGHT'
-      NEW_ASSOCIATION = 'NEW_ASSOCIATION'
-      SEVERITY_UPGRADED = 'SEVERITY_UPGRADED'
-      NEW_RECOMMENDATION = 'NEW_RECOMMENDATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about whether DevOps Guru is configured to create an OpsItem in Amazon Web Services Systems Manager
@@ -2019,7 +1901,7 @@ module Aws::DevOpsGuru
     class OpsCenterIntegration < Struct.new(
       :opt_in_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about whether DevOps Guru is configured to create an OpsItem in Amazon Web Services Systems Manager
@@ -2031,21 +1913,7 @@ module Aws::DevOpsGuru
     class OpsCenterIntegrationConfig < Struct.new(
       :opt_in_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> Specifies if DevOps Guru is enabled to create an Amazon Web Services Systems Manager OpsItem for each created
-    # 			insight. </p>
-    module OptInStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module OrganizationResourceCollectionType
-      AWS_CLOUD_FORMATION = 'AWS_CLOUD_FORMATION'
-      AWS_SERVICE = 'AWS_SERVICE'
-      AWS_ACCOUNT = 'AWS_ACCOUNT'
-      AWS_TAGS = 'AWS_TAGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical grouping of Performance Insights metrics for a related subject area. For example, the
@@ -2220,7 +2088,7 @@ module Aws::DevOpsGuru
       :dimensions,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single query to be processed. Use these parameters to query the Performance Insights
@@ -2295,7 +2163,7 @@ module Aws::DevOpsGuru
       :group_by,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about Performance Insights metrics.</p>
@@ -2348,7 +2216,7 @@ module Aws::DevOpsGuru
       :stats_at_anomaly,
       :stats_at_baseline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reference scalar values and other metrics that DevOps Guru displays on a graph in its
@@ -2368,7 +2236,7 @@ module Aws::DevOpsGuru
       :reference_scalar,
       :reference_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reference data used to evaluate Performance Insights to determine if its performance is anomalous or
@@ -2386,7 +2254,7 @@ module Aws::DevOpsGuru
       :name,
       :comparison_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reference metric used to evaluate Performance Insights.</p>
@@ -2396,7 +2264,7 @@ module Aws::DevOpsGuru
     class PerformanceInsightsReferenceMetric < Struct.new(
       :metric_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference value to compare Performance Insights metrics against to determine if the metrics
@@ -2407,7 +2275,7 @@ module Aws::DevOpsGuru
     class PerformanceInsightsReferenceScalar < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A statistic in a Performance Insights collection.</p>
@@ -2421,7 +2289,7 @@ module Aws::DevOpsGuru
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The time range during which anomalous behavior in a proactive anomaly or an insight
@@ -2437,7 +2305,7 @@ module Aws::DevOpsGuru
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an anomaly. This object is returned by
@@ -2516,7 +2384,7 @@ module Aws::DevOpsGuru
       :anomaly_resources,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a proactive anomaly. This object is returned by
@@ -2596,7 +2464,7 @@ module Aws::DevOpsGuru
       :anomaly_resources,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a proactive insight. This object is returned by
@@ -2647,7 +2515,7 @@ module Aws::DevOpsGuru
       :ssm_ops_item_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a proactive insight. This object is returned by
@@ -2699,7 +2567,7 @@ module Aws::DevOpsGuru
       :service_collection,
       :associated_resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a proactive insight. This object is returned by
@@ -2754,7 +2622,7 @@ module Aws::DevOpsGuru
       :resource_collection,
       :service_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute insight_feedback
@@ -2763,12 +2631,12 @@ module Aws::DevOpsGuru
     class PutFeedbackRequest < Struct.new(
       :insight_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutFeedbackResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a reactive anomaly. This object is returned by
@@ -2850,7 +2718,7 @@ module Aws::DevOpsGuru
       :causal_anomaly_id,
       :anomaly_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a reactive anomaly. This object is returned by
@@ -2933,7 +2801,7 @@ module Aws::DevOpsGuru
       :causal_anomaly_id,
       :anomaly_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a reactive insight. This object is returned by
@@ -2979,7 +2847,7 @@ module Aws::DevOpsGuru
       :ssm_ops_item_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a reactive insight. This object is returned by
@@ -3026,7 +2894,7 @@ module Aws::DevOpsGuru
       :service_collection,
       :associated_resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reactive insight. This object is returned by
@@ -3076,7 +2944,7 @@ module Aws::DevOpsGuru
       :resource_collection,
       :service_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Recommendation information to help you remediate detected anomalous behavior that
@@ -3113,7 +2981,7 @@ module Aws::DevOpsGuru
       :related_anomalies,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about an anomaly that is related to a recommendation. </p>
@@ -3133,7 +3001,7 @@ module Aws::DevOpsGuru
       :source_details,
       :anomaly_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a resource in which DevOps Guru detected anomalous behavior. </p>
@@ -3151,7 +3019,7 @@ module Aws::DevOpsGuru
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains an array of <code>RecommendationRelatedCloudWatchMetricsSourceDetail</code>
@@ -3163,7 +3031,7 @@ module Aws::DevOpsGuru
     class RecommendationRelatedAnomalySourceDetail < Struct.new(
       :cloud_watch_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about an Amazon CloudWatch metric that is analyzed by DevOps Guru. It is one of many
@@ -3178,7 +3046,7 @@ module Aws::DevOpsGuru
       :metric_name,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about an event that is related to a recommendation. </p>
@@ -3194,7 +3062,7 @@ module Aws::DevOpsGuru
       :name,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about an Amazon Web Services resource that emitted and event that is related to a
@@ -3211,7 +3079,7 @@ module Aws::DevOpsGuru
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3220,12 +3088,12 @@ module Aws::DevOpsGuru
     class RemoveNotificationChannelRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveNotificationChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A collection of Amazon Web Services resources supported by DevOps Guru.
@@ -3276,7 +3144,7 @@ module Aws::DevOpsGuru
       :cloud_formation,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a filter used to specify which Amazon Web Services resources are analyzed for
@@ -3327,13 +3195,7 @@ module Aws::DevOpsGuru
       :cloud_formation,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceCollectionType
-      AWS_CLOUD_FORMATION = 'AWS_CLOUD_FORMATION'
-      AWS_SERVICE = 'AWS_SERVICE'
-      AWS_TAGS = 'AWS_TAGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A requested resource could not be found</p>
@@ -3350,42 +3212,7 @@ module Aws::DevOpsGuru
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourcePermission
-      FULL_PERMISSION = 'FULL_PERMISSION'
-      MISSING_PERMISSION = 'MISSING_PERMISSION'
-    end
-
-    module ResourceTypeFilter
-      LOG_GROUPS = 'LOG_GROUPS'
-      CLOUDFRONT_DISTRIBUTION = 'CLOUDFRONT_DISTRIBUTION'
-      DYNAMODB_TABLE = 'DYNAMODB_TABLE'
-      EC2_NAT_GATEWAY = 'EC2_NAT_GATEWAY'
-      ECS_CLUSTER = 'ECS_CLUSTER'
-      ECS_SERVICE = 'ECS_SERVICE'
-      EKS_CLUSTER = 'EKS_CLUSTER'
-      ELASTIC_BEANSTALK_ENVIRONMENT = 'ELASTIC_BEANSTALK_ENVIRONMENT'
-      ELASTIC_LOAD_BALANCER_LOAD_BALANCER = 'ELASTIC_LOAD_BALANCER_LOAD_BALANCER'
-      ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER = 'ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER'
-      ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP = 'ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP'
-      ELASTICACHE_CACHE_CLUSTER = 'ELASTICACHE_CACHE_CLUSTER'
-      ELASTICSEARCH_DOMAIN = 'ELASTICSEARCH_DOMAIN'
-      KINESIS_STREAM = 'KINESIS_STREAM'
-      LAMBDA_FUNCTION = 'LAMBDA_FUNCTION'
-      OPEN_SEARCH_SERVICE_DOMAIN = 'OPEN_SEARCH_SERVICE_DOMAIN'
-      RDS_DB_INSTANCE = 'RDS_DB_INSTANCE'
-      RDS_DB_CLUSTER = 'RDS_DB_CLUSTER'
-      REDSHIFT_CLUSTER = 'REDSHIFT_CLUSTER'
-      ROUTE53_HOSTED_ZONE = 'ROUTE53_HOSTED_ZONE'
-      ROUTE53_HEALTH_CHECK = 'ROUTE53_HEALTH_CHECK'
-      S3_BUCKET = 'S3_BUCKET'
-      SAGEMAKER_ENDPOINT = 'SAGEMAKER_ENDPOINT'
-      SNS_TOPIC = 'SNS_TOPIC'
-      SQS_QUEUE = 'SQS_QUEUE'
-      STEP_FUNCTIONS_ACTIVITY = 'STEP_FUNCTIONS_ACTIVITY'
-      STEP_FUNCTIONS_STATE_MACHINE = 'STEP_FUNCTIONS_STATE_MACHINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies values used to filter responses when searching for insights. 
@@ -3413,7 +3240,7 @@ module Aws::DevOpsGuru
       :resource_collection,
       :service_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time_range
@@ -3443,7 +3270,7 @@ module Aws::DevOpsGuru
       :next_token,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_insights
@@ -3461,7 +3288,7 @@ module Aws::DevOpsGuru
       :reactive_insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filters you can use to specify which events are returned when <code>ListEvents</code>
@@ -3487,7 +3314,7 @@ module Aws::DevOpsGuru
       :resource_collection,
       :service_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -3521,7 +3348,7 @@ module Aws::DevOpsGuru
       :next_token,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proactive_insights
@@ -3541,12 +3368,7 @@ module Aws::DevOpsGuru
       :reactive_insights,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerSideEncryptionType
-      CUSTOMER_MANAGED_KEY = 'CUSTOMER_MANAGED_KEY'
-      AWS_OWNED_KMS_KEY = 'AWS_OWNED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of the names of Amazon Web Services services.</p>
@@ -3556,7 +3378,7 @@ module Aws::DevOpsGuru
     class ServiceCollection < Struct.new(
       :service_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the health of an Amazon Web Services service.</p>
@@ -3578,7 +3400,7 @@ module Aws::DevOpsGuru
       :insight,
       :analyzed_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the number of open proactive and reactive insights in an analyzed Amazon Web Services
@@ -3593,7 +3415,7 @@ module Aws::DevOpsGuru
       :open_proactive_insights,
       :open_reactive_insights,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:open_proactive_insights] = 0 unless options.key?(:open_proactive_insights)
@@ -3623,35 +3445,7 @@ module Aws::DevOpsGuru
       :logs_anomaly_detection,
       :kms_server_side_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceName
-      API_GATEWAY = 'API_GATEWAY'
-      APPLICATION_ELB = 'APPLICATION_ELB'
-      AUTO_SCALING_GROUP = 'AUTO_SCALING_GROUP'
-      CLOUD_FRONT = 'CLOUD_FRONT'
-      DYNAMO_DB = 'DYNAMO_DB'
-      EC2 = 'EC2'
-      ECS = 'ECS'
-      EKS = 'EKS'
-      ELASTIC_BEANSTALK = 'ELASTIC_BEANSTALK'
-      ELASTI_CACHE = 'ELASTI_CACHE'
-      ELB = 'ELB'
-      ES = 'ES'
-      KINESIS = 'KINESIS'
-      LAMBDA = 'LAMBDA'
-      NAT_GATEWAY = 'NAT_GATEWAY'
-      NETWORK_ELB = 'NETWORK_ELB'
-      RDS = 'RDS'
-      REDSHIFT = 'REDSHIFT'
-      ROUTE_53 = 'ROUTE_53'
-      S3 = 'S3'
-      SAGE_MAKER = 'SAGE_MAKER'
-      SNS = 'SNS'
-      SQS = 'SQS'
-      STEP_FUNCTIONS = 'STEP_FUNCTIONS'
-      SWF = 'SWF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains a value that exceeds a maximum quota.</p>
@@ -3660,7 +3454,7 @@ module Aws::DevOpsGuru
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the estimated monthly cost to analyze an
@@ -3699,7 +3493,7 @@ module Aws::DevOpsGuru
       :unit_cost,
       :cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -3723,7 +3517,7 @@ module Aws::DevOpsGuru
     class SnsChannelConfig < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_collection
@@ -3736,12 +3530,12 @@ module Aws::DevOpsGuru
       :resource_collection,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartCostEstimationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A time range used to specify when the behavior of an insight or anomaly started.
@@ -3756,7 +3550,7 @@ module Aws::DevOpsGuru
       :from_time,
       :to_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of Amazon Web Services tags.</p>
@@ -3822,7 +3616,7 @@ module Aws::DevOpsGuru
       :app_boundary_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of Amazon Web Services tags used to filter insights. This is used to return insights
@@ -3856,7 +3650,7 @@ module Aws::DevOpsGuru
       :app_boundary_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a collection of Amazon Web Services resources that are identified by an Amazon Web Services tag.
@@ -3894,7 +3688,7 @@ module Aws::DevOpsGuru
       :app_boundary_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the health of Amazon Web Services resources in your account that are specified by
@@ -3940,7 +3734,7 @@ module Aws::DevOpsGuru
       :insight,
       :analyzed_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to a request throttling.</p>
@@ -3962,7 +3756,7 @@ module Aws::DevOpsGuru
       :service_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -3981,7 +3775,7 @@ module Aws::DevOpsGuru
       :timestamp,
       :metric_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the names of Amazon Web Services CloudFormation stacks used to update a collection of stacks.
@@ -3993,7 +3787,7 @@ module Aws::DevOpsGuru
     class UpdateCloudFormationCollectionFilter < Struct.new(
       :stack_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_sources
@@ -4003,17 +3797,12 @@ module Aws::DevOpsGuru
     class UpdateEventSourcesConfigRequest < Struct.new(
       :event_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEventSourcesConfigResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateResourceCollectionAction
-      ADD = 'ADD'
-      REMOVE = 'REMOVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information used to update a collection of Amazon Web Services resources. </p>
@@ -4060,7 +3849,7 @@ module Aws::DevOpsGuru
       :cloud_formation,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -4074,12 +3863,12 @@ module Aws::DevOpsGuru
       :action,
       :resource_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceCollectionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about updating the integration status of an Amazon Web Services service, such as
@@ -4103,7 +3892,7 @@ module Aws::DevOpsGuru
       :logs_anomaly_detection,
       :kms_server_side_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_integration
@@ -4113,12 +3902,12 @@ module Aws::DevOpsGuru
     class UpdateServiceIntegrationRequest < Struct.new(
       :service_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateServiceIntegrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A new collection of Amazon Web Services resources that are defined by an Amazon Web Services tag or tag
@@ -4152,7 +3941,7 @@ module Aws::DevOpsGuru
       :app_boundary_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about data passed in to a field during a request that is not
@@ -4171,7 +3960,7 @@ module Aws::DevOpsGuru
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The field associated with the validation exception. </p>
@@ -4186,16 +3975,7 @@ module Aws::DevOpsGuru
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
-      INVALID_PARAMETER_COMBINATION = 'INVALID_PARAMETER_COMBINATION'
-      PARAMETER_INCONSISTENT_WITH_SERVICE_STATE = 'PARAMETER_INCONSISTENT_WITH_SERVICE_STATE'
+      include ::Smithy::Schema::Structure
     end
 
   end

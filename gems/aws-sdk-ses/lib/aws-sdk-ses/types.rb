@@ -13,7 +13,7 @@ module Aws::SES
     class AccountSendingPausedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action adds a header to the received
@@ -33,7 +33,7 @@ module Aws::SES
       :header_name,
       :header_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a resource could not be created because of a naming conflict.</p>
@@ -47,12 +47,7 @@ module Aws::SES
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BehaviorOnMXFailure
-      UseDefaultValue = 'UseDefaultValue'
-      RejectMessage = 'RejectMessage'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the body of the message. You can specify text, HTML, or both. If you use
@@ -71,7 +66,7 @@ module Aws::SES
       :text,
       :html,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action rejects the received email by returning a
@@ -105,16 +100,7 @@ module Aws::SES
       :message,
       :sender,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BounceType
-      DoesNotExist = 'DoesNotExist'
-      MessageTooLarge = 'MessageTooLarge'
-      ExceededQuota = 'ExceededQuota'
-      ContentRejected = 'ContentRejected'
-      Undefined = 'Undefined'
-      TemporaryFailure = 'TemporaryFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Recipient-related information to include in the Delivery Status Notification (DSN)
@@ -145,7 +131,7 @@ module Aws::SES
       :bounce_type,
       :recipient_dsn_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array that contains one or more Destinations, as well as the tags and replacement
@@ -179,7 +165,7 @@ module Aws::SES
       :replacement_tags,
       :replacement_template_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the response from the <code>SendBulkTemplatedEmail</code>
@@ -277,24 +263,7 @@ module Aws::SES
       :error,
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BulkEmailStatus
-      Success = 'Success'
-      MessageRejected = 'MessageRejected'
-      MailFromDomainNotVerified = 'MailFromDomainNotVerified'
-      ConfigurationSetDoesNotExist = 'ConfigurationSetDoesNotExist'
-      TemplateDoesNotExist = 'TemplateDoesNotExist'
-      AccountSuspended = 'AccountSuspended'
-      AccountThrottled = 'AccountThrottled'
-      AccountDailyQuotaExceeded = 'AccountDailyQuotaExceeded'
-      InvalidSendingPoolName = 'InvalidSendingPoolName'
-      AccountSendingPaused = 'AccountSendingPaused'
-      ConfigurationSetSendingPaused = 'ConfigurationSetSendingPaused'
-      InvalidParameterValue = 'InvalidParameterValue'
-      TransientFailure = 'TransientFailure'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the delete operation could not be completed.</p>
@@ -308,7 +277,7 @@ module Aws::SES
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create a receipt rule set by cloning an existing one. You use
@@ -337,13 +306,13 @@ module Aws::SES
       :rule_set_name,
       :original_rule_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CloneReceiptRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information associated with an Amazon CloudWatch event destination to which email
@@ -359,7 +328,7 @@ module Aws::SES
     class CloudWatchDestination < Struct.new(
       :dimension_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the dimension configuration to use when you publish email sending events to
@@ -406,7 +375,7 @@ module Aws::SES
       :dimension_value_source,
       :default_dimension_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the configuration set.</p>
@@ -429,7 +398,7 @@ module Aws::SES
     class ConfigurationSet < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the configuration set could not be created because of a naming
@@ -443,14 +412,7 @@ module Aws::SES
       :configuration_set_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationSetAttribute
-      EVENT_DESTINATIONS = 'eventDestinations'
-      TRACKING_OPTIONS = 'trackingOptions'
-      DELIVERY_OPTIONS = 'deliveryOptions'
-      REPUTATION_OPTIONS = 'reputationOptions'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the configuration set does not exist.</p>
@@ -463,7 +425,7 @@ module Aws::SES
       :configuration_set_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that email sending is disabled for the configuration set.</p>
@@ -477,7 +439,7 @@ module Aws::SES
       :configuration_set_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action parses the received message and
@@ -503,7 +465,7 @@ module Aws::SES
       :instance_arn,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents textual data, plus an optional character set specification.</p>
@@ -520,7 +482,7 @@ module Aws::SES
       :data,
       :charset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create a configuration set event destination. A configuration
@@ -540,13 +502,13 @@ module Aws::SES
       :configuration_set_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create a configuration set. Configuration sets enable you to
@@ -559,13 +521,13 @@ module Aws::SES
     class CreateConfigurationSetRequest < Struct.new(
       :configuration_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CreateConfigurationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create an open and click tracking option object in a
@@ -585,13 +547,13 @@ module Aws::SES
       :configuration_set_name,
       :tracking_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CreateConfigurationSetTrackingOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create a custom verification email template.</p>
@@ -627,7 +589,7 @@ module Aws::SES
       :success_redirection_url,
       :failure_redirection_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create a new IP address filter. You use IP address filters
@@ -640,13 +602,13 @@ module Aws::SES
     class CreateReceiptFilterRequest < Struct.new(
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CreateReceiptFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create a receipt rule. You use receipt rules to receive email
@@ -668,13 +630,13 @@ module Aws::SES
       :after,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CreateReceiptRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create an empty receipt rule set. You use receipt rule sets to
@@ -699,13 +661,13 @@ module Aws::SES
     class CreateReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class CreateReceiptRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to create an email template. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html">Amazon SES
@@ -717,19 +679,12 @@ module Aws::SES
     class CreateTemplateRequest < Struct.new(
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomMailFromStatus
-      Pending = 'Pending'
-      Success = 'Success'
-      Failed = 'Failed'
-      TemporaryFailure = 'TemporaryFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that custom verification email template provided content is invalid.</p>
@@ -738,7 +693,7 @@ module Aws::SES
     class CustomVerificationEmailInvalidContentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a custom verification email template.</p>
@@ -766,7 +721,7 @@ module Aws::SES
       :success_redirection_url,
       :failure_redirection_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a custom verification email template with the name you specified
@@ -781,7 +736,7 @@ module Aws::SES
       :custom_verification_email_template_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a custom verification email template with the name you specified does
@@ -795,7 +750,7 @@ module Aws::SES
       :custom_verification_email_template_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete a configuration set event destination. Configuration
@@ -813,13 +768,13 @@ module Aws::SES
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete a configuration set. Configuration sets enable you to
@@ -832,13 +787,13 @@ module Aws::SES
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteConfigurationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete open and click tracking options in a configuration set.
@@ -849,13 +804,13 @@ module Aws::SES
     class DeleteConfigurationSetTrackingOptionsRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteConfigurationSetTrackingOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete an existing custom verification email template.</p>
@@ -865,7 +820,7 @@ module Aws::SES
     class DeleteCustomVerificationEmailTemplateRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete a sending authorization policy for an identity. Sending
@@ -885,13 +840,13 @@ module Aws::SES
       :identity,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteIdentityPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete one of your Amazon SES identities (an email address or
@@ -902,13 +857,13 @@ module Aws::SES
     class DeleteIdentityRequest < Struct.new(
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteIdentityResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete an IP address filter. You use IP address filters when
@@ -920,13 +875,13 @@ module Aws::SES
     class DeleteReceiptFilterRequest < Struct.new(
       :filter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteReceiptFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete a receipt rule. You use receipt rules to receive email
@@ -942,13 +897,13 @@ module Aws::SES
       :rule_set_name,
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteReceiptRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete a receipt rule set and all of the receipt rules it
@@ -960,13 +915,13 @@ module Aws::SES
     class DeleteReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class DeleteReceiptRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete an email template. For more information, see the <a href="https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html">Amazon SES
@@ -977,12 +932,12 @@ module Aws::SES
     class DeleteTemplateRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to delete an email address from the list of email addresses you
@@ -993,7 +948,7 @@ module Aws::SES
     class DeleteVerifiedEmailAddressRequest < Struct.new(
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether messages that use the configuration set are required to use
@@ -1007,7 +962,7 @@ module Aws::SES
     class DeliveryOptions < Struct.new(
       :tls_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the metadata and receipt rules for the receipt rule set
@@ -1016,7 +971,7 @@ module Aws::SES
     #             Guide</a>.</p>
     class DescribeActiveReceiptRuleSetRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the metadata and receipt rules for the receipt rule set that is currently
@@ -1032,7 +987,7 @@ module Aws::SES
       :metadata,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the details of a configuration set. Configuration sets
@@ -1049,7 +1004,7 @@ module Aws::SES
       :configuration_set_name,
       :configuration_set_attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the details of a configuration set. Configuration sets enable you to
@@ -1080,7 +1035,7 @@ module Aws::SES
       :delivery_options,
       :reputation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the details of a receipt rule. You use receipt rules to
@@ -1096,7 +1051,7 @@ module Aws::SES
       :rule_set_name,
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the details of a receipt rule.</p>
@@ -1107,7 +1062,7 @@ module Aws::SES
     class DescribeReceiptRuleResponse < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the details of a receipt rule set. You use receipt rule
@@ -1119,7 +1074,7 @@ module Aws::SES
     class DescribeReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the details of the specified receipt rule set.</p>
@@ -1134,7 +1089,7 @@ module Aws::SES
       :metadata,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the destination of the message, consisting of To:, CC:, and BCC:
@@ -1163,21 +1118,7 @@ module Aws::SES
       :cc_addresses,
       :bcc_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DimensionValueSource
-      MESSAGE_TAG = 'messageTag'
-      EMAIL_HEADER = 'emailHeader'
-      LINK_TAG = 'linkTag'
-    end
-
-    module DsnAction
-      FAILED = 'failed'
-      DELAYED = 'delayed'
-      DELIVERED = 'delivered'
-      RELAYED = 'relayed'
-      EXPANDED = 'expanded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an event destination.</p>
@@ -1272,7 +1213,7 @@ module Aws::SES
       :cloud_watch_destination,
       :sns_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1295,7 +1236,7 @@ module Aws::SES
       :event_destination_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the event destination does not exist.</p>
@@ -1312,18 +1253,7 @@ module Aws::SES
       :event_destination_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      SEND = 'send'
-      REJECT = 'reject'
-      BOUNCE = 'bounce'
-      COMPLAINT = 'complaint'
-      DELIVERY = 'delivery'
-      OPEN = 'open'
-      CLICK = 'click'
-      RENDERING_FAILURE = 'renderingFailure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional X-headers to include in the Delivery Status Notification (DSN) when an
@@ -1342,7 +1272,7 @@ module Aws::SES
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the sender address specified for a custom verification email is not
@@ -1357,7 +1287,7 @@ module Aws::SES
       :from_email_address,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the email sending status for your Amazon SES account in the
@@ -1369,7 +1299,7 @@ module Aws::SES
     class GetAccountSendingEnabledResponse < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1385,7 +1315,7 @@ module Aws::SES
     class GetCustomVerificationEmailTemplateRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content of the custom verification email template.</p>
@@ -1417,7 +1347,7 @@ module Aws::SES
       :success_redirection_url,
       :failure_redirection_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request for the status of Amazon SES Easy DKIM signing for an identity. For
@@ -1431,7 +1361,7 @@ module Aws::SES
     class GetIdentityDkimAttributesRequest < Struct.new(
       :identities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the status of Amazon SES Easy DKIM signing for an identity. For domain
@@ -1444,7 +1374,7 @@ module Aws::SES
     class GetIdentityDkimAttributesResponse < Struct.new(
       :dkim_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the Amazon SES custom MAIL FROM attributes for a list of
@@ -1456,7 +1386,7 @@ module Aws::SES
     class GetIdentityMailFromDomainAttributesRequest < Struct.new(
       :identities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the custom MAIL FROM attributes for a list of identities.</p>
@@ -1466,7 +1396,7 @@ module Aws::SES
     class GetIdentityMailFromDomainAttributesResponse < Struct.new(
       :mail_from_domain_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the notification attributes for a list of identities
@@ -1481,7 +1411,7 @@ module Aws::SES
     class GetIdentityNotificationAttributesRequest < Struct.new(
       :identities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the notification attributes for a list of identities.</p>
@@ -1491,7 +1421,7 @@ module Aws::SES
     class GetIdentityNotificationAttributesResponse < Struct.new(
       :notification_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the requested sending authorization policies for an
@@ -1513,7 +1443,7 @@ module Aws::SES
       :identity,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the requested sending authorization policies.</p>
@@ -1523,7 +1453,7 @@ module Aws::SES
     class GetIdentityPoliciesResponse < Struct.new(
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return the Amazon SES verification status of a list of identities.
@@ -1535,7 +1465,7 @@ module Aws::SES
     class GetIdentityVerificationAttributesRequest < Struct.new(
       :identities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SES verification status of a list of identities. For domain identities, this
@@ -1546,7 +1476,7 @@ module Aws::SES
     class GetIdentityVerificationAttributesResponse < Struct.new(
       :verification_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents your Amazon SES daily sending quota, maximum send rate, and the number of emails
@@ -1571,7 +1501,7 @@ module Aws::SES
       :max_send_rate,
       :sent_last24_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max24_hour_send] = 0 unless options.key?(:max24_hour_send)
@@ -1589,7 +1519,7 @@ module Aws::SES
     class GetSendStatisticsResponse < Struct.new(
       :send_data_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -1598,7 +1528,7 @@ module Aws::SES
     class GetTemplateRequest < Struct.new(
       :template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template
@@ -1608,7 +1538,7 @@ module Aws::SES
     class GetTemplateResponse < Struct.new(
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the DKIM attributes of a verified email address or a domain.</p>
@@ -1635,7 +1565,7 @@ module Aws::SES
       :dkim_verification_status,
       :dkim_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dkim_enabled] = false unless options.key?(:dkim_enabled)
@@ -1670,7 +1600,7 @@ module Aws::SES
       :mail_from_domain_status,
       :behavior_on_mx_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the notification attributes of an identity, including whether an identity
@@ -1722,7 +1652,7 @@ module Aws::SES
       :headers_in_complaint_notifications_enabled,
       :headers_in_delivery_notifications_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:forwarding_enabled] = false unless options.key?(:forwarding_enabled)
@@ -1731,11 +1661,6 @@ module Aws::SES
         options[:headers_in_delivery_notifications_enabled] = false unless options.key?(:headers_in_delivery_notifications_enabled)
         super
       end
-    end
-
-    module IdentityType
-      EmailAddress = 'EmailAddress'
-      Domain = 'Domain'
     end
 
     # <p>Represents the verification attributes of a single identity.</p>
@@ -1751,7 +1676,7 @@ module Aws::SES
       :verification_status,
       :verification_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the Amazon CloudWatch destination is invalid. See the error message for
@@ -1769,7 +1694,7 @@ module Aws::SES
       :event_destination_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the configuration set is invalid. See the error message for
@@ -1779,7 +1704,7 @@ module Aws::SES
     class InvalidConfigurationSetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that provided delivery option is invalid.</p>
@@ -1788,7 +1713,7 @@ module Aws::SES
     class InvalidDeliveryOptionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the Amazon Kinesis Firehose destination is invalid. See the error
@@ -1806,7 +1731,7 @@ module Aws::SES
       :event_destination_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided Amazon Web Services Lambda function is invalid, or that Amazon SES could
@@ -1822,7 +1747,7 @@ module Aws::SES
       :function_arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided policy is invalid. Check the error stack for more
@@ -1832,7 +1757,7 @@ module Aws::SES
     class InvalidPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that one or more of the replacement values you provided is invalid. This
@@ -1845,7 +1770,7 @@ module Aws::SES
       :template_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided Amazon S3 bucket or Amazon Web Services KMS encryption key is invalid,
@@ -1861,7 +1786,7 @@ module Aws::SES
       :bucket,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the Amazon Simple Notification Service (Amazon SNS) destination is
@@ -1879,7 +1804,7 @@ module Aws::SES
       :event_destination_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES could not
@@ -1895,7 +1820,7 @@ module Aws::SES
       :topic,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the template that you specified could not be rendered. This issue may
@@ -1908,7 +1833,7 @@ module Aws::SES
       :template_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the custom domain to be used for open and click tracking redirects is
@@ -1927,12 +1852,7 @@ module Aws::SES
     class InvalidTrackingOptionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvocationType
-      Event = 'Event'
-      RequestResponse = 'RequestResponse'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event
@@ -1952,7 +1872,7 @@ module Aws::SES
       :iam_role_arn,
       :delivery_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action calls an Amazon Web Services Lambda function and,
@@ -1992,7 +1912,7 @@ module Aws::SES
       :function_arn,
       :invocation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a resource could not be created because of service limits. For a list
@@ -2003,7 +1923,7 @@ module Aws::SES
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to list the configuration sets associated with your
@@ -2021,7 +1941,7 @@ module Aws::SES
       :next_token,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of configuration sets associated with your Amazon Web Services account. Configuration sets
@@ -2040,7 +1960,7 @@ module Aws::SES
       :configuration_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to list the existing custom verification email templates for your
@@ -2062,7 +1982,7 @@ module Aws::SES
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A paginated list of custom verification email templates.</p>
@@ -2079,7 +1999,7 @@ module Aws::SES
       :custom_verification_email_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return a list of all identities (email addresses and domains)
@@ -2101,7 +2021,7 @@ module Aws::SES
       :next_token,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of all identities that you have attempted to verify under your Amazon Web Services account,
@@ -2116,7 +2036,7 @@ module Aws::SES
       :identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to return a list of sending authorization policies that are
@@ -2133,7 +2053,7 @@ module Aws::SES
     class ListIdentityPoliciesRequest < Struct.new(
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of names of sending authorization policies that apply to an identity.</p>
@@ -2143,7 +2063,7 @@ module Aws::SES
     class ListIdentityPoliciesResponse < Struct.new(
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to list the IP address filters that exist under your
@@ -2152,7 +2072,7 @@ module Aws::SES
     #             Guide</a>.</p>
     class ListReceiptFiltersRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of IP address filters that exist under your Amazon Web Services account.</p>
@@ -2163,7 +2083,7 @@ module Aws::SES
     class ListReceiptFiltersResponse < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to list the receipt rule sets that exist under your
@@ -2177,7 +2097,7 @@ module Aws::SES
     class ListReceiptRuleSetsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of receipt rule sets that exist under your Amazon Web Services account.</p>
@@ -2194,7 +2114,7 @@ module Aws::SES
       :rule_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2210,7 +2130,7 @@ module Aws::SES
       :next_token,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates_metadata
@@ -2226,7 +2146,7 @@ module Aws::SES
       :templates_metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of email addresses that you have verified with Amazon SES under your
@@ -2237,7 +2157,7 @@ module Aws::SES
     class ListVerifiedEmailAddressesResponse < Struct.new(
       :verified_email_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Indicates that the message could not be sent because Amazon SES could not read the MX
@@ -2249,7 +2169,7 @@ module Aws::SES
     class MailFromDomainNotVerifiedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the message to be sent, composed of a subject and a body.</p>
@@ -2264,7 +2184,7 @@ module Aws::SES
       :subject,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Message-related information to include in the Delivery Status Notification (DSN) when
@@ -2288,7 +2208,7 @@ module Aws::SES
       :arrival_date,
       :extension_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the action failed, and the message could not be sent. Check the error
@@ -2298,7 +2218,7 @@ module Aws::SES
     class MessageRejected < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and value of a tag that you can provide to <code>SendEmail</code> or
@@ -2334,7 +2254,7 @@ module Aws::SES
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that one or more of the replacement values for the specified template was
@@ -2348,13 +2268,7 @@ module Aws::SES
       :template_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationType
-      Bounce = 'Bounce'
-      Complaint = 'Complaint'
-      Delivery = 'Delivery'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the account has not been granted production access.</p>
@@ -2363,7 +2277,7 @@ module Aws::SES
     class ProductionAccessNotGrantedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to modify the delivery options for a configuration set.</p>
@@ -2378,14 +2292,14 @@ module Aws::SES
       :configuration_set_name,
       :delivery_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetDeliveryOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to add or update a sending authorization policy for an identity.
@@ -2413,13 +2327,13 @@ module Aws::SES
       :policy_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class PutIdentityPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the raw data of the message.</p>
@@ -2442,7 +2356,7 @@ module Aws::SES
     class RawMessage < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action that Amazon SES can take when it receives an email on behalf of one or more email
@@ -2488,7 +2402,7 @@ module Aws::SES
       :sns_action,
       :connect_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A receipt IP address filter enables you to specify whether to accept or reject mail
@@ -2519,12 +2433,7 @@ module Aws::SES
       :name,
       :ip_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReceiptFilterPolicy
-      Block = 'Block'
-      Allow = 'Allow'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A receipt IP address filter enables you to specify whether to accept or reject mail
@@ -2546,7 +2455,7 @@ module Aws::SES
       :policy,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Receipt rules enable you to specify which actions Amazon SES should take when it receives
@@ -2601,7 +2510,7 @@ module Aws::SES
       :actions,
       :scan_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2637,7 +2546,7 @@ module Aws::SES
       :name,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Recipient-related information to include in the Delivery Status Notification (DSN)
@@ -2689,7 +2598,7 @@ module Aws::SES
       :last_attempt_date,
       :extension_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to reorder the receipt rules within a receipt rule set. You use
@@ -2705,13 +2614,13 @@ module Aws::SES
       :rule_set_name,
       :rule_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class ReorderReceiptRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the reputation settings for a configuration set.</p>
@@ -2743,7 +2652,7 @@ module Aws::SES
       :reputation_metrics_enabled,
       :last_fresh_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sending_enabled] = false unless options.key?(:sending_enabled)
@@ -2762,7 +2671,7 @@ module Aws::SES
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided receipt rule set does not exist.</p>
@@ -2775,7 +2684,7 @@ module Aws::SES
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action saves the received message to an Amazon Simple Storage Service
@@ -2872,7 +2781,7 @@ module Aws::SES
       :kms_key_arn,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action publishes a notification to Amazon Simple Notification Service
@@ -2906,12 +2815,7 @@ module Aws::SES
       :topic_arn,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SNSActionEncoding
-      UTF8 = 'UTF-8'
-      Base64 = 'Base64'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the topic ARN associated with an Amazon Simple Notification Service (Amazon SNS) event destination.</p>
@@ -2927,7 +2831,7 @@ module Aws::SES
     class SNSDestination < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to send a bounce message to the sender of an email you received
@@ -2965,7 +2869,7 @@ module Aws::SES
       :bounced_recipient_info_list,
       :bounce_sender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique message ID.</p>
@@ -2975,7 +2879,7 @@ module Aws::SES
     class SendBounceResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to send a templated email to multiple destinations using Amazon SES.
@@ -3076,7 +2980,7 @@ module Aws::SES
       :default_template_data,
       :destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -3087,7 +2991,7 @@ module Aws::SES
     class SendBulkTemplatedEmailResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to send a custom verification email to a specified
@@ -3107,7 +3011,7 @@ module Aws::SES
       :template_name,
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response received when attempting to send the custom verification email.</p>
@@ -3118,7 +3022,7 @@ module Aws::SES
     class SendCustomVerificationEmailResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents sending statistics data. Each <code>SendDataPoint</code> contains
@@ -3145,7 +3049,7 @@ module Aws::SES
       :complaints,
       :rejects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:delivery_attempts] = 0 unless options.key?(:delivery_attempts)
@@ -3240,7 +3144,7 @@ module Aws::SES
       :tags,
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique message ID.</p>
@@ -3250,7 +3154,7 @@ module Aws::SES
     class SendEmailResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to send a single raw email using Amazon SES. For more information, see
@@ -3385,7 +3289,7 @@ module Aws::SES
       :tags,
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a unique message ID.</p>
@@ -3396,7 +3300,7 @@ module Aws::SES
     class SendRawEmailResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to send a templated email using Amazon SES. For more information, see
@@ -3494,7 +3398,7 @@ module Aws::SES
       :template_arn,
       :template_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -3504,7 +3408,7 @@ module Aws::SES
     class SendTemplatedEmailResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to set a receipt rule set as the active receipt rule set. You use
@@ -3517,13 +3421,13 @@ module Aws::SES
     class SetActiveReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetActiveReceiptRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to enable or disable Amazon SES Easy DKIM signing for an identity. For
@@ -3540,13 +3444,13 @@ module Aws::SES
       :identity,
       :dkim_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetIdentityDkimEnabledResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to enable or disable whether Amazon SES forwards you bounce and
@@ -3570,13 +3474,13 @@ module Aws::SES
       :identity,
       :forwarding_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetIdentityFeedbackForwardingEnabledResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to set whether Amazon SES includes the original email headers in the
@@ -3603,13 +3507,13 @@ module Aws::SES
       :notification_type,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetIdentityHeadersInNotificationsEnabledResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to enable or disable the Amazon SES custom MAIL FROM domain setup for
@@ -3641,13 +3545,13 @@ module Aws::SES
       :mail_from_domain,
       :behavior_on_mx_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetIdentityMailFromDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to specify the Amazon SNS topic to which Amazon SES publishes bounce,
@@ -3677,13 +3581,13 @@ module Aws::SES
       :notification_type,
       :sns_topic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetIdentityNotificationTopicResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to set the position of a receipt rule in a receipt rule set. You
@@ -3703,13 +3607,13 @@ module Aws::SES
       :rule_name,
       :after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class SetReceiptRulePositionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action terminates the evaluation of the receipt
@@ -3728,11 +3632,7 @@ module Aws::SES
       :scope,
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopScope
-      RULE_SET = 'RuleSet'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content of the email, composed of a subject line and either an HTML part or a
@@ -3758,7 +3658,7 @@ module Aws::SES
       :text_part,
       :html_part,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the Template object you specified does not exist in your Amazon SES
@@ -3771,7 +3671,7 @@ module Aws::SES
       :template_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an email template.</p>
@@ -3785,7 +3685,7 @@ module Aws::SES
       :name,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -3800,7 +3700,7 @@ module Aws::SES
       :template_name,
       :template_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rendered_template
@@ -3810,12 +3710,7 @@ module Aws::SES
     class TestRenderTemplateResponse < Struct.new(
       :rendered_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TlsPolicy
-      Require = 'Require'
-      Optional = 'Optional'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A domain that is used to redirect email recipients to an Amazon SES-operated domain. This
@@ -3830,7 +3725,7 @@ module Aws::SES
     class TrackingOptions < Struct.new(
       :custom_redirect_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the configuration set you specified already contains a TrackingOptions
@@ -3845,7 +3740,7 @@ module Aws::SES
       :configuration_set_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the TrackingOptions object you specified does not exist.</p>
@@ -3859,7 +3754,7 @@ module Aws::SES
       :configuration_set_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to enable or disable the email sending capabilities for your
@@ -3871,7 +3766,7 @@ module Aws::SES
     class UpdateAccountSendingEnabledRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to update the event destination of a configuration set.
@@ -3888,13 +3783,13 @@ module Aws::SES
       :configuration_set_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to modify the reputation metric publishing settings for a
@@ -3910,7 +3805,7 @@ module Aws::SES
       :configuration_set_name,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to enable or disable the email sending capabilities for a
@@ -3926,7 +3821,7 @@ module Aws::SES
       :configuration_set_name,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to update the tracking options for a configuration set. </p>
@@ -3944,13 +3839,13 @@ module Aws::SES
       :configuration_set_name,
       :tracking_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class UpdateConfigurationSetTrackingOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to update an existing custom verification email template.</p>
@@ -3986,7 +3881,7 @@ module Aws::SES
       :success_redirection_url,
       :failure_redirection_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to update a receipt rule. You use receipt rules to receive email
@@ -4002,13 +3897,13 @@ module Aws::SES
       :rule_set_name,
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class UpdateReceiptRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template
@@ -4018,20 +3913,12 @@ module Aws::SES
     class UpdateTemplateRequest < Struct.new(
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerificationStatus
-      Pending = 'Pending'
-      Success = 'Success'
-      Failed = 'Failed'
-      TemporaryFailure = 'TemporaryFailure'
-      NotStarted = 'NotStarted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to generate the CNAME records needed to set up Easy DKIM with
@@ -4042,7 +3929,7 @@ module Aws::SES
     class VerifyDomainDkimRequest < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns CNAME records that you must publish to the DNS server of your domain to set up
@@ -4060,7 +3947,7 @@ module Aws::SES
     class VerifyDomainDkimResponse < Struct.new(
       :dkim_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to begin Amazon SES domain verification and to generate the TXT
@@ -4073,7 +3960,7 @@ module Aws::SES
     class VerifyDomainIdentityRequest < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a TXT record that you must publish to the DNS server of your domain to
@@ -4091,7 +3978,7 @@ module Aws::SES
     class VerifyDomainIdentityResponse < Struct.new(
       :verification_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to begin email address verification with Amazon SES. For information
@@ -4103,7 +3990,7 @@ module Aws::SES
     class VerifyEmailAddressRequest < Struct.new(
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a request to begin email address verification with Amazon SES. For information
@@ -4115,13 +4002,13 @@ module Aws::SES
     class VerifyEmailIdentityRequest < Struct.new(
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element returned on a successful request.</p>
     class VerifyEmailIdentityResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When included in a receipt rule, this action calls Amazon WorkMail and, optionally,
@@ -4151,7 +4038,7 @@ module Aws::SES
       :topic_arn,
       :organization_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

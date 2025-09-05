@@ -18,7 +18,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :activity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -47,7 +47,7 @@ module Aws::SWF
       :started_event_id,
       :latest_cancel_requested_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -74,7 +74,7 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -104,7 +104,7 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -167,7 +167,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :heartbeat_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -186,7 +186,7 @@ module Aws::SWF
       :identity,
       :scheduled_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -216,20 +216,13 @@ module Aws::SWF
       :started_event_id,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
         super
       end
-    end
-
-    module ActivityTaskTimeoutType
-      START_TO_CLOSE = 'START_TO_CLOSE'
-      SCHEDULE_TO_START = 'SCHEDULE_TO_START'
-      SCHEDULE_TO_CLOSE = 'SCHEDULE_TO_CLOSE'
-      HEARTBEAT = 'HEARTBEAT'
     end
 
     # <p>Represents an activity type.</p>
@@ -249,7 +242,7 @@ module Aws::SWF
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings registered with the activity type.</p>
@@ -312,7 +305,7 @@ module Aws::SWF
       :default_task_schedule_to_start_timeout,
       :default_task_schedule_to_close_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an activity type.</p>
@@ -338,7 +331,7 @@ module Aws::SWF
       :creation_date,
       :deprecation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>CancelTimer</code> decision.</p>
@@ -369,12 +362,7 @@ module Aws::SWF
     class CancelTimerDecisionAttributes < Struct.new(
       :timer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CancelTimerFailedCause
-      TIMER_ID_UNKNOWN = 'TIMER_ID_UNKNOWN'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>CancelTimerFailed</code> event.</p>
@@ -397,7 +385,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -433,12 +421,7 @@ module Aws::SWF
     class CancelWorkflowExecutionDecisionAttributes < Struct.new(
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CancelWorkflowExecutionFailedCause
-      UNHANDLED_DECISION = 'UNHANDLED_DECISION'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>CancelWorkflowExecutionFailed</code> event.</p>
@@ -457,18 +440,12 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
         super
       end
-    end
-
-    module ChildPolicy
-      TERMINATE = 'TERMINATE'
-      REQUEST_CANCEL = 'REQUEST_CANCEL'
-      ABANDON = 'ABANDON'
     end
 
     # <p>Provide details of the <code>ChildWorkflowExecutionCanceled</code> event.</p>
@@ -500,7 +477,7 @@ module Aws::SWF
       :initiated_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -535,7 +512,7 @@ module Aws::SWF
       :initiated_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -577,7 +554,7 @@ module Aws::SWF
       :initiated_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -605,7 +582,7 @@ module Aws::SWF
       :workflow_type,
       :initiated_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -638,7 +615,7 @@ module Aws::SWF
       :initiated_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -675,22 +652,13 @@ module Aws::SWF
       :initiated_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
         super
       end
-    end
-
-    module CloseStatus
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
-      TERMINATED = 'TERMINATED'
-      CONTINUED_AS_NEW = 'CONTINUED_AS_NEW'
-      TIMED_OUT = 'TIMED_OUT'
     end
 
     # <p>Used to filter the closed workflow executions in visibility APIs by their close status.</p>
@@ -702,7 +670,7 @@ module Aws::SWF
     class CloseStatusFilter < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>CompleteWorkflowExecution</code> decision.</p>
@@ -732,12 +700,7 @@ module Aws::SWF
     class CompleteWorkflowExecutionDecisionAttributes < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompleteWorkflowExecutionFailedCause
-      UNHANDLED_DECISION = 'UNHANDLED_DECISION'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>CompleteWorkflowExecutionFailed</code> event.</p>
@@ -758,7 +721,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -882,19 +845,7 @@ module Aws::SWF
       :workflow_type_version,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContinueAsNewWorkflowExecutionFailedCause
-      UNHANDLED_DECISION = 'UNHANDLED_DECISION'
-      WORKFLOW_TYPE_DEPRECATED = 'WORKFLOW_TYPE_DEPRECATED'
-      WORKFLOW_TYPE_DOES_NOT_EXIST = 'WORKFLOW_TYPE_DOES_NOT_EXIST'
-      DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = 'DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED'
-      DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = 'DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED'
-      DEFAULT_TASK_LIST_UNDEFINED = 'DEFAULT_TASK_LIST_UNDEFINED'
-      DEFAULT_CHILD_POLICY_UNDEFINED = 'DEFAULT_CHILD_POLICY_UNDEFINED'
-      CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED = 'CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>ContinueAsNewWorkflowExecutionFailed</code> event.</p>
@@ -915,7 +866,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -993,7 +944,7 @@ module Aws::SWF
       :tag_filter,
       :close_status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the count of workflow executions returned from <a>CountOpenWorkflowExecutions</a> or
@@ -1009,7 +960,7 @@ module Aws::SWF
       :count,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1058,7 +1009,7 @@ module Aws::SWF
       :tag_filter,
       :execution_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the count of workflow executions returned from <a>CountOpenWorkflowExecutions</a> or
@@ -1074,7 +1025,7 @@ module Aws::SWF
       :count,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1093,7 +1044,7 @@ module Aws::SWF
       :domain,
       :task_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the count of tasks in a task list.</p>
@@ -1107,7 +1058,7 @@ module Aws::SWF
       :count,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1126,7 +1077,7 @@ module Aws::SWF
       :domain,
       :task_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the count of tasks in a task list.</p>
@@ -1140,7 +1091,7 @@ module Aws::SWF
       :count,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1478,7 +1429,7 @@ module Aws::SWF
       :start_child_workflow_execution_decision_attributes,
       :schedule_lambda_function_decision_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>DecisionTaskCompleted</code> event.</p>
@@ -1508,7 +1459,7 @@ module Aws::SWF
       :task_list,
       :task_list_schedule_to_start_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -1541,7 +1492,7 @@ module Aws::SWF
       :start_to_close_timeout,
       :schedule_to_start_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>DecisionTaskStarted</code> event.</p>
@@ -1557,7 +1508,7 @@ module Aws::SWF
       :identity,
       :scheduled_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -1584,34 +1535,13 @@ module Aws::SWF
       :scheduled_event_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
         super
       end
-    end
-
-    module DecisionTaskTimeoutType
-      START_TO_CLOSE = 'START_TO_CLOSE'
-      SCHEDULE_TO_START = 'SCHEDULE_TO_START'
-    end
-
-    module DecisionType
-      ScheduleActivityTask = 'ScheduleActivityTask'
-      RequestCancelActivityTask = 'RequestCancelActivityTask'
-      CompleteWorkflowExecution = 'CompleteWorkflowExecution'
-      FailWorkflowExecution = 'FailWorkflowExecution'
-      CancelWorkflowExecution = 'CancelWorkflowExecution'
-      ContinueAsNewWorkflowExecution = 'ContinueAsNewWorkflowExecution'
-      RecordMarker = 'RecordMarker'
-      StartTimer = 'StartTimer'
-      CancelTimer = 'CancelTimer'
-      SignalExternalWorkflowExecution = 'SignalExternalWorkflowExecution'
-      RequestCancelExternalWorkflowExecution = 'RequestCancelExternalWorkflowExecution'
-      StartChildWorkflowExecution = 'StartChildWorkflowExecution'
-      ScheduleLambdaFunction = 'ScheduleLambdaFunction'
     end
 
     # <p>The <code>StartWorkflowExecution</code> API action was called without the required
@@ -1630,7 +1560,7 @@ module Aws::SWF
     class DefaultUndefinedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1643,7 +1573,7 @@ module Aws::SWF
       :domain,
       :activity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1656,7 +1586,7 @@ module Aws::SWF
       :domain,
       :workflow_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1669,7 +1599,7 @@ module Aws::SWF
       :domain,
       :activity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1678,7 +1608,7 @@ module Aws::SWF
     class DeprecateDomainInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1691,7 +1621,7 @@ module Aws::SWF
       :domain,
       :workflow_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1706,7 +1636,7 @@ module Aws::SWF
       :domain,
       :activity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an activity type.</p>
@@ -1736,7 +1666,7 @@ module Aws::SWF
       :type_info,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1745,7 +1675,7 @@ module Aws::SWF
     class DescribeDomainInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of a domain.</p>
@@ -1761,7 +1691,7 @@ module Aws::SWF
       :domain_info,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1774,7 +1704,7 @@ module Aws::SWF
       :domain,
       :execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a workflow execution.</p>
@@ -1801,7 +1731,7 @@ module Aws::SWF
       :latest_activity_task_timestamp,
       :latest_execution_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1814,7 +1744,7 @@ module Aws::SWF
       :domain,
       :workflow_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a workflow type.</p>
@@ -1841,7 +1771,7 @@ module Aws::SWF
       :type_info,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the domain already exists. You may get this fault if you are registering a domain that is either already registered or deprecated, or if you undeprecate a domain that is currently registered.</p>
@@ -1851,7 +1781,7 @@ module Aws::SWF
     class DomainAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration settings of a domain.</p>
@@ -1861,7 +1791,7 @@ module Aws::SWF
     class DomainConfiguration < Struct.new(
       :workflow_execution_retention_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the specified domain has been deprecated.</p>
@@ -1871,7 +1801,7 @@ module Aws::SWF
     class DomainDeprecatedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains general information about a domain.</p>
@@ -1907,69 +1837,7 @@ module Aws::SWF
       :description,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      WorkflowExecutionStarted = 'WorkflowExecutionStarted'
-      WorkflowExecutionCancelRequested = 'WorkflowExecutionCancelRequested'
-      WorkflowExecutionCompleted = 'WorkflowExecutionCompleted'
-      CompleteWorkflowExecutionFailed = 'CompleteWorkflowExecutionFailed'
-      WorkflowExecutionFailed = 'WorkflowExecutionFailed'
-      FailWorkflowExecutionFailed = 'FailWorkflowExecutionFailed'
-      WorkflowExecutionTimedOut = 'WorkflowExecutionTimedOut'
-      WorkflowExecutionCanceled = 'WorkflowExecutionCanceled'
-      CancelWorkflowExecutionFailed = 'CancelWorkflowExecutionFailed'
-      WorkflowExecutionContinuedAsNew = 'WorkflowExecutionContinuedAsNew'
-      ContinueAsNewWorkflowExecutionFailed = 'ContinueAsNewWorkflowExecutionFailed'
-      WorkflowExecutionTerminated = 'WorkflowExecutionTerminated'
-      DecisionTaskScheduled = 'DecisionTaskScheduled'
-      DecisionTaskStarted = 'DecisionTaskStarted'
-      DecisionTaskCompleted = 'DecisionTaskCompleted'
-      DecisionTaskTimedOut = 'DecisionTaskTimedOut'
-      ActivityTaskScheduled = 'ActivityTaskScheduled'
-      ScheduleActivityTaskFailed = 'ScheduleActivityTaskFailed'
-      ActivityTaskStarted = 'ActivityTaskStarted'
-      ActivityTaskCompleted = 'ActivityTaskCompleted'
-      ActivityTaskFailed = 'ActivityTaskFailed'
-      ActivityTaskTimedOut = 'ActivityTaskTimedOut'
-      ActivityTaskCanceled = 'ActivityTaskCanceled'
-      ActivityTaskCancelRequested = 'ActivityTaskCancelRequested'
-      RequestCancelActivityTaskFailed = 'RequestCancelActivityTaskFailed'
-      WorkflowExecutionSignaled = 'WorkflowExecutionSignaled'
-      MarkerRecorded = 'MarkerRecorded'
-      RecordMarkerFailed = 'RecordMarkerFailed'
-      TimerStarted = 'TimerStarted'
-      StartTimerFailed = 'StartTimerFailed'
-      TimerFired = 'TimerFired'
-      TimerCanceled = 'TimerCanceled'
-      CancelTimerFailed = 'CancelTimerFailed'
-      StartChildWorkflowExecutionInitiated = 'StartChildWorkflowExecutionInitiated'
-      StartChildWorkflowExecutionFailed = 'StartChildWorkflowExecutionFailed'
-      ChildWorkflowExecutionStarted = 'ChildWorkflowExecutionStarted'
-      ChildWorkflowExecutionCompleted = 'ChildWorkflowExecutionCompleted'
-      ChildWorkflowExecutionFailed = 'ChildWorkflowExecutionFailed'
-      ChildWorkflowExecutionTimedOut = 'ChildWorkflowExecutionTimedOut'
-      ChildWorkflowExecutionCanceled = 'ChildWorkflowExecutionCanceled'
-      ChildWorkflowExecutionTerminated = 'ChildWorkflowExecutionTerminated'
-      SignalExternalWorkflowExecutionInitiated = 'SignalExternalWorkflowExecutionInitiated'
-      SignalExternalWorkflowExecutionFailed = 'SignalExternalWorkflowExecutionFailed'
-      ExternalWorkflowExecutionSignaled = 'ExternalWorkflowExecutionSignaled'
-      RequestCancelExternalWorkflowExecutionInitiated = 'RequestCancelExternalWorkflowExecutionInitiated'
-      RequestCancelExternalWorkflowExecutionFailed = 'RequestCancelExternalWorkflowExecutionFailed'
-      ExternalWorkflowExecutionCancelRequested = 'ExternalWorkflowExecutionCancelRequested'
-      LambdaFunctionScheduled = 'LambdaFunctionScheduled'
-      LambdaFunctionStarted = 'LambdaFunctionStarted'
-      LambdaFunctionCompleted = 'LambdaFunctionCompleted'
-      LambdaFunctionFailed = 'LambdaFunctionFailed'
-      LambdaFunctionTimedOut = 'LambdaFunctionTimedOut'
-      ScheduleLambdaFunctionFailed = 'ScheduleLambdaFunctionFailed'
-      StartLambdaFunctionFailed = 'StartLambdaFunctionFailed'
-    end
-
-    module ExecutionStatus
-      OPEN = 'OPEN'
-      CLOSED = 'CLOSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to filter the workflow executions in visibility APIs by various time-based rules. Each parameter, if
@@ -1986,7 +1854,7 @@ module Aws::SWF
       :oldest_date,
       :latest_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>ExternalWorkflowExecutionCancelRequested</code> event.</p>
@@ -2003,7 +1871,7 @@ module Aws::SWF
       :workflow_execution,
       :initiated_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -2024,7 +1892,7 @@ module Aws::SWF
       :workflow_execution,
       :initiated_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -2065,12 +1933,7 @@ module Aws::SWF
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailWorkflowExecutionFailedCause
-      UNHANDLED_DECISION = 'UNHANDLED_DECISION'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>FailWorkflowExecutionFailed</code> event.</p>
@@ -2091,7 +1954,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -2130,7 +1993,7 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Paginated representation of a workflow history for a workflow execution. This is the up to date, complete and authoritative record of the events related to all tasks and events in the life of the workflow execution.</p>
@@ -2147,7 +2010,7 @@ module Aws::SWF
       :events,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Event within a workflow execution. A history event can be one of these types:</p>
@@ -2652,7 +2515,7 @@ module Aws::SWF
       :schedule_lambda_function_failed_event_attributes,
       :start_lambda_function_failed_event_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:event_id] = 0 unless options.key?(:event_id)
@@ -2678,7 +2541,7 @@ module Aws::SWF
       :started_event_id,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -2709,7 +2572,7 @@ module Aws::SWF
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -2748,7 +2611,7 @@ module Aws::SWF
       :start_to_close_timeout,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -2765,7 +2628,7 @@ module Aws::SWF
     class LambdaFunctionStartedEventAttributes < Struct.new(
       :scheduled_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -2790,17 +2653,13 @@ module Aws::SWF
       :started_event_id,
       :timeout_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
         super
       end
-    end
-
-    module LambdaFunctionTimeoutType
-      START_TO_CLOSE = 'START_TO_CLOSE'
     end
 
     # <p>Returned by any operation if a system imposed limitation has been reached. To address this fault you should either clean up unused resources or increase the limit by contacting AWS.</p>
@@ -2810,7 +2669,7 @@ module Aws::SWF
     class LimitExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2848,7 +2707,7 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a paginated list of activity type information structures.</p>
@@ -2865,7 +2724,7 @@ module Aws::SWF
       :type_infos,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2961,7 +2820,7 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a paginated list of information about workflow executions.</p>
@@ -2978,7 +2837,7 @@ module Aws::SWF
       :execution_infos,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_page_token
@@ -3008,7 +2867,7 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a paginated collection of DomainInfo structures.</p>
@@ -3025,7 +2884,7 @@ module Aws::SWF
       :domain_infos,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3088,7 +2947,7 @@ module Aws::SWF
       :reverse_order,
       :execution_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a paginated list of information about workflow executions.</p>
@@ -3105,7 +2964,7 @@ module Aws::SWF
       :execution_infos,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3114,7 +2973,7 @@ module Aws::SWF
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3123,7 +2982,7 @@ module Aws::SWF
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3161,7 +3020,7 @@ module Aws::SWF
       :maximum_page_size,
       :reverse_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a paginated list of information structures about workflow types.</p>
@@ -3178,7 +3037,7 @@ module Aws::SWF
       :type_infos,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>MarkerRecorded</code> event.</p>
@@ -3198,7 +3057,7 @@ module Aws::SWF
       :details,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -3213,7 +3072,7 @@ module Aws::SWF
     class OperationNotPermittedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3236,7 +3095,7 @@ module Aws::SWF
       :task_list,
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unit of work sent to an activity worker.</p>
@@ -3266,7 +3125,7 @@ module Aws::SWF
       :activity_type,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
@@ -3327,7 +3186,7 @@ module Aws::SWF
       :reverse_order,
       :start_at_previous_started_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a decision task. Decision tasks are sent to deciders in order for them to make decisions.</p>
@@ -3364,7 +3223,7 @@ module Aws::SWF
       :next_page_token,
       :previous_started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
@@ -3389,7 +3248,7 @@ module Aws::SWF
       :task_token,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information about an activity task.</p>
@@ -3399,7 +3258,7 @@ module Aws::SWF
     class RecordActivityTaskHeartbeatOutput < Struct.new(
       :cancel_requested,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cancel_requested] = false unless options.key?(:cancel_requested)
@@ -3440,11 +3299,7 @@ module Aws::SWF
       :marker_name,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordMarkerFailedCause
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>RecordMarkerFailed</code> event.</p>
@@ -3469,7 +3324,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -3564,7 +3419,7 @@ module Aws::SWF
       :default_task_schedule_to_start_timeout,
       :default_task_schedule_to_close_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3599,7 +3454,7 @@ module Aws::SWF
       :workflow_execution_retention_period_in_days,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3705,12 +3560,7 @@ module Aws::SWF
       :default_child_policy,
       :default_lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationStatus
-      REGISTERED = 'REGISTERED'
-      DEPRECATED = 'DEPRECATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>RequestCancelActivityTask</code> decision.</p>
@@ -3741,12 +3591,7 @@ module Aws::SWF
     class RequestCancelActivityTaskDecisionAttributes < Struct.new(
       :activity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequestCancelActivityTaskFailedCause
-      ACTIVITY_ID_UNKNOWN = 'ACTIVITY_ID_UNKNOWN'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>RequestCancelActivityTaskFailed</code> event.</p>
@@ -3771,7 +3616,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -3815,13 +3660,7 @@ module Aws::SWF
       :run_id,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequestCancelExternalWorkflowExecutionFailedCause
-      UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = 'UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION'
-      REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = 'REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>RequestCancelExternalWorkflowExecutionFailed</code> event.</p>
@@ -3862,7 +3701,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -3893,7 +3732,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -3915,7 +3754,7 @@ module Aws::SWF
       :workflow_id,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags are key-value pairs that can be associated with Amazon SWF state machines and
@@ -3931,7 +3770,7 @@ module Aws::SWF
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_token
@@ -3950,7 +3789,7 @@ module Aws::SWF
       :task_token,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_token
@@ -3970,7 +3809,7 @@ module Aws::SWF
       :task_token,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_token
@@ -3993,7 +3832,7 @@ module Aws::SWF
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input data for a TaskCompleted response to a decision task.</p>
@@ -4028,7 +3867,7 @@ module Aws::SWF
       :task_list,
       :task_list_schedule_to_start_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>ScheduleActivityTask</code> decision.</p>
@@ -4150,21 +3989,7 @@ module Aws::SWF
       :start_to_close_timeout,
       :heartbeat_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleActivityTaskFailedCause
-      ACTIVITY_TYPE_DEPRECATED = 'ACTIVITY_TYPE_DEPRECATED'
-      ACTIVITY_TYPE_DOES_NOT_EXIST = 'ACTIVITY_TYPE_DOES_NOT_EXIST'
-      ACTIVITY_ID_ALREADY_IN_USE = 'ACTIVITY_ID_ALREADY_IN_USE'
-      OPEN_ACTIVITIES_LIMIT_EXCEEDED = 'OPEN_ACTIVITIES_LIMIT_EXCEEDED'
-      ACTIVITY_CREATION_RATE_EXCEEDED = 'ACTIVITY_CREATION_RATE_EXCEEDED'
-      DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED = 'DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED'
-      DEFAULT_TASK_LIST_UNDEFINED = 'DEFAULT_TASK_LIST_UNDEFINED'
-      DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED = 'DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED'
-      DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED = 'DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED'
-      DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED = 'DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>ScheduleActivityTaskFailed</code> event.</p>
@@ -4193,7 +4018,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -4228,14 +4053,7 @@ module Aws::SWF
       :input,
       :start_to_close_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleLambdaFunctionFailedCause
-      ID_ALREADY_IN_USE = 'ID_ALREADY_IN_USE'
-      OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED = 'OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED'
-      LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED = 'LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED'
-      LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION = 'LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>ScheduleLambdaFunctionFailed</code> event. It isn't
@@ -4267,7 +4085,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -4323,13 +4141,7 @@ module Aws::SWF
       :input,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SignalExternalWorkflowExecutionFailedCause
-      UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = 'UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION'
-      SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = 'SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>SignalExternalWorkflowExecutionFailed</code> event.</p>
@@ -4369,7 +4181,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -4407,7 +4219,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -4438,7 +4250,7 @@ module Aws::SWF
       :signal_name,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>StartChildWorkflowExecution</code> decision.</p>
@@ -4582,21 +4394,7 @@ module Aws::SWF
       :tag_list,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartChildWorkflowExecutionFailedCause
-      WORKFLOW_TYPE_DOES_NOT_EXIST = 'WORKFLOW_TYPE_DOES_NOT_EXIST'
-      WORKFLOW_TYPE_DEPRECATED = 'WORKFLOW_TYPE_DEPRECATED'
-      OPEN_CHILDREN_LIMIT_EXCEEDED = 'OPEN_CHILDREN_LIMIT_EXCEEDED'
-      OPEN_WORKFLOWS_LIMIT_EXCEEDED = 'OPEN_WORKFLOWS_LIMIT_EXCEEDED'
-      CHILD_CREATION_RATE_EXCEEDED = 'CHILD_CREATION_RATE_EXCEEDED'
-      WORKFLOW_ALREADY_RUNNING = 'WORKFLOW_ALREADY_RUNNING'
-      DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = 'DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED'
-      DEFAULT_TASK_LIST_UNDEFINED = 'DEFAULT_TASK_LIST_UNDEFINED'
-      DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = 'DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED'
-      DEFAULT_CHILD_POLICY_UNDEFINED = 'DEFAULT_CHILD_POLICY_UNDEFINED'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>StartChildWorkflowExecutionFailed</code> event.</p>
@@ -4639,7 +4437,7 @@ module Aws::SWF
       :decision_task_completed_event_id,
       :control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:initiated_event_id] = 0 unless options.key?(:initiated_event_id)
@@ -4726,16 +4524,12 @@ module Aws::SWF
       :tag_list,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
         super
       end
-    end
-
-    module StartLambdaFunctionFailedCause
-      ASSUME_ROLE_FAILED = 'ASSUME_ROLE_FAILED'
     end
 
     # <p>Provides the details of the <code>StartLambdaFunctionFailed</code> event. It isn't set
@@ -4761,7 +4555,7 @@ module Aws::SWF
       :cause,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scheduled_event_id] = 0 unless options.key?(:scheduled_event_id)
@@ -4811,14 +4605,7 @@ module Aws::SWF
       :control,
       :start_to_fire_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartTimerFailedCause
-      TIMER_ID_ALREADY_IN_USE = 'TIMER_ID_ALREADY_IN_USE'
-      OPEN_TIMERS_LIMIT_EXCEEDED = 'OPEN_TIMERS_LIMIT_EXCEEDED'
-      TIMER_CREATION_RATE_EXCEEDED = 'TIMER_CREATION_RATE_EXCEEDED'
-      OPERATION_NOT_PERMITTED = 'OPERATION_NOT_PERMITTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>StartTimerFailed</code> event.</p>
@@ -4843,7 +4630,7 @@ module Aws::SWF
       :cause,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -4984,7 +4771,7 @@ module Aws::SWF
       :child_policy,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the <code>runId</code> of a workflow execution.</p>
@@ -4995,7 +4782,7 @@ module Aws::SWF
     class StartWorkflowExecutionOutput < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to filter the workflow executions in visibility APIs based on a tag.</p>
@@ -5008,7 +4795,7 @@ module Aws::SWF
     class TagFilter < Struct.new(
       :tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5022,7 +4809,7 @@ module Aws::SWF
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a task list.</p>
@@ -5032,7 +4819,7 @@ module Aws::SWF
     class TaskList < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -5087,7 +4874,7 @@ module Aws::SWF
       :details,
       :child_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5111,7 +4898,7 @@ module Aws::SWF
       :started_event_id,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
@@ -5133,7 +4920,7 @@ module Aws::SWF
       :timer_id,
       :started_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:started_event_id] = 0 unless options.key?(:started_event_id)
@@ -5163,7 +4950,7 @@ module Aws::SWF
       :start_to_fire_timeout,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -5177,7 +4964,7 @@ module Aws::SWF
     class TooManyTagsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the type already exists in the specified domain. You may get this fault if you are registering a type that is either already registered or deprecated, or if you undeprecate a type that is currently registered.</p>
@@ -5187,7 +4974,7 @@ module Aws::SWF
     class TypeAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the specified activity or workflow type was already deprecated.</p>
@@ -5197,7 +4984,7 @@ module Aws::SWF
     class TypeDeprecatedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the resource type has not been deprecated.</p>
@@ -5206,7 +4993,7 @@ module Aws::SWF
     class TypeNotDeprecatedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -5219,7 +5006,7 @@ module Aws::SWF
       :domain,
       :activity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5228,7 +5015,7 @@ module Aws::SWF
     class UndeprecateDomainInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -5241,7 +5028,7 @@ module Aws::SWF
       :domain,
       :workflow_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the named resource cannot be found with in the scope of this operation (region or domain). This could happen if the named resource was never created or is no longer available for this operation.</p>
@@ -5251,7 +5038,7 @@ module Aws::SWF
     class UnknownResourceFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5264,7 +5051,7 @@ module Aws::SWF
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a workflow execution.</p>
@@ -5278,7 +5065,7 @@ module Aws::SWF
       :workflow_id,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned by <a>StartWorkflowExecution</a> when an open execution with the same workflowId is already running in
@@ -5289,11 +5076,7 @@ module Aws::SWF
     class WorkflowExecutionAlreadyStartedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowExecutionCancelRequestedCause
-      CHILD_POLICY_APPLIED = 'CHILD_POLICY_APPLIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>WorkflowExecutionCancelRequested</code> event.</p>
@@ -5314,7 +5097,7 @@ module Aws::SWF
       :external_initiated_event_id,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:external_initiated_event_id] = 0 unless options.key?(:external_initiated_event_id)
@@ -5335,7 +5118,7 @@ module Aws::SWF
       :details,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -5356,7 +5139,7 @@ module Aws::SWF
       :result,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -5413,7 +5196,7 @@ module Aws::SWF
       :child_policy,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>WorkflowExecutionContinuedAsNew</code> event.</p>
@@ -5487,7 +5270,7 @@ module Aws::SWF
       :workflow_type,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -5512,7 +5295,7 @@ module Aws::SWF
       :details,
       :decision_task_completed_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:decision_task_completed_event_id] = 0 unless options.key?(:decision_task_completed_event_id)
@@ -5527,7 +5310,7 @@ module Aws::SWF
     class WorkflowExecutionFilter < Struct.new(
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a workflow execution.</p>
@@ -5598,7 +5381,7 @@ module Aws::SWF
       :tag_list,
       :cancel_requested,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cancel_requested] = false unless options.key?(:cancel_requested)
@@ -5629,7 +5412,7 @@ module Aws::SWF
       :open_child_workflow_executions,
       :open_lambda_functions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:open_activity_tasks] = 0 unless options.key?(:open_activity_tasks)
@@ -5664,7 +5447,7 @@ module Aws::SWF
       :external_workflow_execution,
       :external_initiated_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:external_initiated_event_id] = 0 unless options.key?(:external_initiated_event_id)
@@ -5749,18 +5532,12 @@ module Aws::SWF
       :parent_initiated_event_id,
       :lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:parent_initiated_event_id] = 0 unless options.key?(:parent_initiated_event_id)
         super
       end
-    end
-
-    module WorkflowExecutionTerminatedCause
-      CHILD_POLICY_APPLIED = 'CHILD_POLICY_APPLIED'
-      EVENT_LIMIT_EXCEEDED = 'EVENT_LIMIT_EXCEEDED'
-      OPERATOR_INITIATED = 'OPERATOR_INITIATED'
     end
 
     # <p>Provides the details of the <code>WorkflowExecutionTerminated</code> event.</p>
@@ -5799,7 +5576,7 @@ module Aws::SWF
       :child_policy,
       :cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the details of the <code>WorkflowExecutionTimedOut</code> event.</p>
@@ -5830,11 +5607,7 @@ module Aws::SWF
       :timeout_type,
       :child_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowExecutionTimeoutType
-      START_TO_CLOSE = 'START_TO_CLOSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a workflow type.</p>
@@ -5856,7 +5629,7 @@ module Aws::SWF
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings of a workflow type.</p>
@@ -5936,7 +5709,7 @@ module Aws::SWF
       :default_child_policy,
       :default_lambda_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to filter workflow execution query results by type. Each parameter, if specified, defines a rule that must be satisfied by each returned result.</p>
@@ -5951,7 +5724,7 @@ module Aws::SWF
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a workflow type.</p>
@@ -5977,7 +5750,7 @@ module Aws::SWF
       :creation_date,
       :deprecation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

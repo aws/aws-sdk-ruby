@@ -19,7 +19,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure containing the estimated age range, in years, for a face.</p>
@@ -36,7 +36,7 @@ module Aws::Rekognition
       :low,
       :high,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Assets are the images that you use to train and evaluate a model version. 
@@ -49,7 +49,7 @@ module Aws::Rekognition
     class Asset < Struct.new(
       :ground_truth_manifest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -78,7 +78,7 @@ module Aws::Rekognition
       :user_match_threshold,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_faces
@@ -98,7 +98,7 @@ module Aws::Rekognition
       :unsuccessful_face_associations,
       :user_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides face metadata for the faces that are associated to a specific UserID.</p>
@@ -108,24 +108,7 @@ module Aws::Rekognition
     class AssociatedFace < Struct.new(
       :face_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Attribute
-      DEFAULT = 'DEFAULT'
-      ALL = 'ALL'
-      AGE_RANGE = 'AGE_RANGE'
-      BEARD = 'BEARD'
-      EMOTIONS = 'EMOTIONS'
-      EYE_DIRECTION = 'EYE_DIRECTION'
-      EYEGLASSES = 'EYEGLASSES'
-      EYES_OPEN = 'EYES_OPEN'
-      GENDER = 'GENDER'
-      MOUTH_OPEN = 'MOUTH_OPEN'
-      MUSTACHE = 'MUSTACHE'
-      FACE_OCCLUDED = 'FACE_OCCLUDED'
-      SMILE = 'SMILE'
-      SUNGLASSES = 'SUNGLASSES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata information about an audio stream. An array of <code>AudioMetadata</code> objects
@@ -148,7 +131,7 @@ module Aws::Rekognition
       :sample_rate,
       :number_of_channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An image that is picked from the Face Liveness video and returned for audit trail
@@ -190,7 +173,7 @@ module Aws::Rekognition
       :s3_object,
       :bounding_box,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether or not the face has a beard, and the confidence level in the
@@ -205,7 +188,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -241,14 +224,7 @@ module Aws::Rekognition
       :max_pixel_threshold,
       :min_coverage_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BodyPart
-      FACE = 'FACE'
-      HEAD = 'HEAD'
-      LEFT_HAND = 'LEFT_HAND'
-      RIGHT_HAND = 'RIGHT_HAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the bounding box around the label, face, text, object of interest, or
@@ -287,7 +263,7 @@ module Aws::Rekognition
       :left,
       :top,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a celebrity recognized by the <a>RecognizeCelebrities</a> operation.</p>
@@ -321,7 +297,7 @@ module Aws::Rekognition
       :match_confidence,
       :known_gender,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a recognized celebrity.</p>
@@ -355,7 +331,7 @@ module Aws::Rekognition
       :face,
       :known_gender,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a detected celebrity and the time the celebrity was detected in a stored video.
@@ -371,17 +347,12 @@ module Aws::Rekognition
       :timestamp,
       :celebrity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
         super
       end
-    end
-
-    module CelebrityRecognitionSortBy
-      ID = 'ID'
-      TIMESTAMP = 'TIMESTAMP'
     end
 
     # <p>Describes the type and version of the challenge being used for the Face Liveness session.</p>
@@ -395,7 +366,7 @@ module Aws::Rekognition
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An ordered list of preferred challenge type and versions.</p>
@@ -409,12 +380,7 @@ module Aws::Rekognition
       :type,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChallengeType
-      FACE_MOVEMENT_AND_LIGHT_CHALLENGE = 'FaceMovementAndLightChallenge'
-      FACE_MOVEMENT_CHALLENGE = 'FaceMovementChallenge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a face in a target image that matches the source image face
@@ -432,7 +398,7 @@ module Aws::Rekognition
       :similarity,
       :face,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_image
@@ -472,7 +438,7 @@ module Aws::Rekognition
       :similarity_threshold,
       :quality_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_image_face
@@ -517,7 +483,7 @@ module Aws::Rekognition
       :source_image_orientation_correction,
       :target_image_orientation_correction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides face metadata for target image faces that are analyzed by
@@ -555,7 +521,7 @@ module Aws::Rekognition
       :emotions,
       :smile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Type that describes the face Amazon Rekognition chose to compare with the faces in the target.
@@ -572,7 +538,7 @@ module Aws::Rekognition
       :bounding_box,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A User with the same Id already exists within the collection, or the update or deletion
@@ -589,7 +555,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -613,7 +579,7 @@ module Aws::Rekognition
       :labels,
       :min_confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -633,17 +599,7 @@ module Aws::Rekognition
       :labels,
       :min_confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentClassifier
-      FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = 'FreeOfPersonallyIdentifiableInformation'
-      FREE_OF_ADULT_CONTENT = 'FreeOfAdultContent'
-    end
-
-    module ContentModerationAggregateBy
-      TIMESTAMPS = 'TIMESTAMPS'
-      SEGMENTS = 'SEGMENTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an inappropriate, unwanted, or offensive content label detection in a stored video.</p>
@@ -678,17 +634,12 @@ module Aws::Rekognition
       :duration_millis,
       :content_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
         super
       end
-    end
-
-    module ContentModerationSortBy
-      NAME = 'NAME'
-      TIMESTAMP = 'TIMESTAMP'
     end
 
     # <p>Contains information regarding the confidence and name of a detected content type.</p>
@@ -702,7 +653,7 @@ module Aws::Rekognition
       :confidence,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_project_arn
@@ -756,7 +707,7 @@ module Aws::Rekognition
       :tags,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_arn
@@ -765,7 +716,7 @@ module Aws::Rekognition
     class CopyProjectVersionResponse < Struct.new(
       :project_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an item of Personal Protective Equipment covering a corresponding body part. For more 
@@ -780,7 +731,7 @@ module Aws::Rekognition
       :confidence,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -798,7 +749,7 @@ module Aws::Rekognition
       :collection_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -817,7 +768,7 @@ module Aws::Rekognition
       :collection_arn,
       :face_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_source
@@ -848,7 +799,7 @@ module Aws::Rekognition
       :project_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -859,7 +810,7 @@ module Aws::Rekognition
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -881,7 +832,7 @@ module Aws::Rekognition
       :settings,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A session settings object. It contains settings for the operation to be performed. It
@@ -907,7 +858,7 @@ module Aws::Rekognition
       :audit_images_limit,
       :challenge_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -920,7 +871,7 @@ module Aws::Rekognition
     class CreateFaceLivenessSessionResponse < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -943,7 +894,7 @@ module Aws::Rekognition
       :auto_update,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -953,7 +904,7 @@ module Aws::Rekognition
     class CreateProjectResponse < Struct.new(
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -1023,7 +974,7 @@ module Aws::Rekognition
       :version_description,
       :feature_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_arn
@@ -1034,7 +985,7 @@ module Aws::Rekognition
     class CreateProjectVersionResponse < Struct.new(
       :project_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input
@@ -1100,7 +1051,7 @@ module Aws::Rekognition
       :regions_of_interest,
       :data_sharing_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_processor_arn
@@ -1109,7 +1060,7 @@ module Aws::Rekognition
     class CreateStreamProcessorResponse < Struct.new(
       :stream_processor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -1128,12 +1079,12 @@ module Aws::Rekognition
       :user_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom label detected in an image by a call to <a>DetectCustomLabels</a>.</p>
@@ -1154,12 +1105,7 @@ module Aws::Rekognition
       :confidence,
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomizationFeature
-      CONTENT_MODERATION = 'CONTENT_MODERATION'
-      CUSTOM_LABELS = 'CUSTOM_LABELS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Feature specific configuration for the training job. Configuration provided for the job must match 
@@ -1171,7 +1117,7 @@ module Aws::Rekognition
     class CustomizationFeatureConfig < Struct.new(
       :content_moderation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for Content Moderation training.</p>
@@ -1181,7 +1127,7 @@ module Aws::Rekognition
     class CustomizationFeatureContentModerationConfig < Struct.new(
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1203,7 +1149,7 @@ module Aws::Rekognition
     class DatasetChanges < Struct.new(
       :ground_truth,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1251,7 +1197,7 @@ module Aws::Rekognition
       :status_message_code,
       :dataset_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1271,7 +1217,7 @@ module Aws::Rekognition
       :label_name,
       :label_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1291,7 +1237,7 @@ module Aws::Rekognition
       :entry_count,
       :bounding_box_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1338,7 +1284,7 @@ module Aws::Rekognition
       :status_message,
       :status_message_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1364,7 +1310,7 @@ module Aws::Rekognition
       :ground_truth_manifest,
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1397,28 +1343,7 @@ module Aws::Rekognition
       :total_labels,
       :error_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-    end
-
-    module DatasetStatusMessageCode
-      SUCCESS = 'SUCCESS'
-      SERVICE_ERROR = 'SERVICE_ERROR'
-      CLIENT_ERROR = 'CLIENT_ERROR'
-    end
-
-    module DatasetType
-      TRAIN = 'TRAIN'
-      TEST = 'TEST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -1427,7 +1352,7 @@ module Aws::Rekognition
     class DeleteCollectionRequest < Struct.new(
       :collection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -1436,7 +1361,7 @@ module Aws::Rekognition
     class DeleteCollectionResponse < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -1447,12 +1372,12 @@ module Aws::Rekognition
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDatasetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -1465,7 +1390,7 @@ module Aws::Rekognition
       :collection_id,
       :face_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deleted_faces
@@ -1478,7 +1403,7 @@ module Aws::Rekognition
       :deleted_faces,
       :unsuccessful_face_deletions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -1495,12 +1420,12 @@ module Aws::Rekognition
       :policy_name,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -1509,7 +1434,7 @@ module Aws::Rekognition
     class DeleteProjectRequest < Struct.new(
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1518,7 +1443,7 @@ module Aws::Rekognition
     class DeleteProjectResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_arn
@@ -1528,7 +1453,7 @@ module Aws::Rekognition
     class DeleteProjectVersionRequest < Struct.new(
       :project_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1537,7 +1462,7 @@ module Aws::Rekognition
     class DeleteProjectVersionResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1546,12 +1471,12 @@ module Aws::Rekognition
     class DeleteStreamProcessorRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStreamProcessorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -1570,12 +1495,12 @@ module Aws::Rekognition
       :user_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -1584,7 +1509,7 @@ module Aws::Rekognition
     class DescribeCollectionRequest < Struct.new(
       :collection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute face_count
@@ -1613,7 +1538,7 @@ module Aws::Rekognition
       :creation_timestamp,
       :user_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -1624,7 +1549,7 @@ module Aws::Rekognition
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_description
@@ -1635,7 +1560,7 @@ module Aws::Rekognition
     class DescribeDatasetResponse < Struct.new(
       :dataset_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -1665,7 +1590,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_descriptions
@@ -1681,7 +1606,7 @@ module Aws::Rekognition
       :project_version_descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1708,7 +1633,7 @@ module Aws::Rekognition
       :project_names,
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_descriptions
@@ -1723,7 +1648,7 @@ module Aws::Rekognition
       :project_descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1732,7 +1657,7 @@ module Aws::Rekognition
     class DescribeStreamProcessorRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1806,7 +1731,7 @@ module Aws::Rekognition
       :regions_of_interest,
       :data_sharing_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_arn
@@ -1856,7 +1781,7 @@ module Aws::Rekognition
       :max_results,
       :min_confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_labels
@@ -1865,7 +1790,7 @@ module Aws::Rekognition
     class DetectCustomLabelsResponse < Struct.new(
       :custom_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -1893,7 +1818,7 @@ module Aws::Rekognition
       :image,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute face_details
@@ -1914,12 +1839,7 @@ module Aws::Rekognition
       :face_details,
       :orientation_correction,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectLabelsFeatureName
-      GENERAL_LABELS = 'GENERAL_LABELS'
-      IMAGE_PROPERTIES = 'IMAGE_PROPERTIES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The background of the image with regard to image quality and dominant colors.</p>
@@ -1935,7 +1855,7 @@ module Aws::Rekognition
       :quality,
       :dominant_colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The foreground of the image with regard to image quality and dominant colors.</p>
@@ -1951,7 +1871,7 @@ module Aws::Rekognition
       :quality,
       :dominant_colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the quality and dominant colors of an input image. Quality and color
@@ -1980,7 +1900,7 @@ module Aws::Rekognition
       :foreground,
       :background,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the IMAGE_PROPERTIES feature type.</p>
@@ -1991,7 +1911,7 @@ module Aws::Rekognition
     class DetectLabelsImagePropertiesSettings < Struct.new(
       :max_dominant_colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_dominant_colors] = 0 unless options.key?(:max_dominant_colors)
@@ -2015,7 +1935,7 @@ module Aws::Rekognition
       :sharpness,
       :contrast,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -2056,7 +1976,7 @@ module Aws::Rekognition
       :features,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labels
@@ -2086,7 +2006,7 @@ module Aws::Rekognition
       :label_model_version,
       :image_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the DetectLabels request. Settings can include filters for both
@@ -2103,7 +2023,7 @@ module Aws::Rekognition
       :general_labels,
       :image_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -2133,7 +2053,7 @@ module Aws::Rekognition
       :human_loop_config,
       :project_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute moderation_labels
@@ -2163,7 +2083,7 @@ module Aws::Rekognition
       :project_version,
       :content_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -2177,7 +2097,7 @@ module Aws::Rekognition
       :image,
       :summarization_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protective_equipment_model_version
@@ -2195,7 +2115,7 @@ module Aws::Rekognition
       :persons,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of optional parameters that you can use to set the criteria that the text must meet
@@ -2213,7 +2133,7 @@ module Aws::Rekognition
       :word_filter,
       :regions_of_interest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -2231,7 +2151,7 @@ module Aws::Rekognition
       :image,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_detections
@@ -2244,7 +2164,7 @@ module Aws::Rekognition
       :text_detections,
       :text_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of parameters that allow you to filter out certain results from your returned results.</p>
@@ -2266,7 +2186,7 @@ module Aws::Rekognition
       :min_bounding_box_height,
       :min_bounding_box_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -2290,7 +2210,7 @@ module Aws::Rekognition
       :client_request_token,
       :face_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disassociated_faces
@@ -2311,7 +2231,7 @@ module Aws::Rekognition
       :unsuccessful_face_disassociations,
       :user_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides face metadata for the faces that are disassociated from a specific UserID.</p>
@@ -2321,7 +2241,7 @@ module Aws::Rekognition
     class DisassociatedFace < Struct.new(
       :face_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2335,7 +2255,7 @@ module Aws::Rekognition
     class DistributeDataset < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datasets
@@ -2346,12 +2266,12 @@ module Aws::Rekognition
     class DistributeDatasetEntriesRequest < Struct.new(
       :datasets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DistributeDatasetEntriesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the dominant colors in an image.</p>
@@ -2385,7 +2305,7 @@ module Aws::Rekognition
       :simplified_color,
       :pixel_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API returns a prediction of an emotion based on a person's facial expressions, along with 
@@ -2403,19 +2323,7 @@ module Aws::Rekognition
       :type,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EmotionName
-      HAPPY = 'HAPPY'
-      SAD = 'SAD'
-      ANGRY = 'ANGRY'
-      CONFUSED = 'CONFUSED'
-      DISGUSTED = 'DISGUSTED'
-      SURPRISED = 'SURPRISED'
-      CALM = 'CALM'
-      UNKNOWN = 'UNKNOWN'
-      FEAR = 'FEAR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an item of Personal Protective Equipment (PPE) detected by
@@ -2439,7 +2347,7 @@ module Aws::Rekognition
       :type,
       :covers_body_part,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The evaluation results for the training of a model.</p>
@@ -2457,7 +2365,7 @@ module Aws::Rekognition
       :f1_score,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the direction the eyes are gazing in (independent of the head pose) as
@@ -2476,7 +2384,7 @@ module Aws::Rekognition
       :pitch,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether or not the eyes on the face are open, and the confidence level in the
@@ -2491,7 +2399,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -2511,7 +2419,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -2553,12 +2461,7 @@ module Aws::Rekognition
       :index_faces_model_version,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FaceAttributes
-      DEFAULT = 'DEFAULT'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure containing attributes of the face that the algorithm detected.</p>
@@ -2677,7 +2580,7 @@ module Aws::Rekognition
       :face_occluded,
       :eye_direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a face detected in a video analysis request and the time the face was detected in the video. </p>
@@ -2692,7 +2595,7 @@ module Aws::Rekognition
       :timestamp,
       :face,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
@@ -2713,7 +2616,7 @@ module Aws::Rekognition
       :similarity,
       :face,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2738,7 +2641,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -2759,7 +2662,7 @@ module Aws::Rekognition
       :face,
       :face_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input face recognition parameters for an Amazon Rekognition stream processor. 
@@ -2776,12 +2679,7 @@ module Aws::Rekognition
       :collection_id,
       :face_match_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FaceSearchSortBy
-      INDEX = 'INDEX'
-      TIMESTAMP = 'TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The predicted gender of a detected face.
@@ -2808,12 +2706,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GenderType
-      Male = 'Male'
-      Female = 'Female'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains filters for the object labels returned by DetectLabels. Filters can be inclusive,
@@ -2837,7 +2730,7 @@ module Aws::Rekognition
       :label_category_inclusion_filters,
       :label_category_exclusion_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about where an object (<a>DetectCustomLabels</a>) or text (<a>DetectText</a>) is located on an image.</p>
@@ -2852,7 +2745,7 @@ module Aws::Rekognition
       :bounding_box,
       :polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2862,7 +2755,7 @@ module Aws::Rekognition
     class GetCelebrityInfoRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute urls
@@ -2879,7 +2772,7 @@ module Aws::Rekognition
       :name,
       :known_gender,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2905,7 +2798,7 @@ module Aws::Rekognition
       :next_token,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -2947,7 +2840,7 @@ module Aws::Rekognition
       :video,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2982,7 +2875,7 @@ module Aws::Rekognition
       :sort_by,
       :aggregate_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about a content moderation request, including the SortBy and AggregateBy
@@ -2997,7 +2890,7 @@ module Aws::Rekognition
       :sort_by,
       :aggregate_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3048,7 +2941,7 @@ module Aws::Rekognition
       :job_tag,
       :get_request_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3068,7 +2961,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3110,7 +3003,7 @@ module Aws::Rekognition
       :video,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3120,7 +3013,7 @@ module Aws::Rekognition
     class GetFaceLivenessSessionResultsRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3159,7 +3052,7 @@ module Aws::Rekognition
       :audit_images,
       :challenge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3184,7 +3077,7 @@ module Aws::Rekognition
       :next_token,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3231,7 +3124,7 @@ module Aws::Rekognition
       :video,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3264,7 +3157,7 @@ module Aws::Rekognition
       :sort_by,
       :aggregate_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about a label detection request, including the SortBy and AggregateBy
@@ -3279,7 +3172,7 @@ module Aws::Rekognition
       :sort_by,
       :aggregate_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3331,7 +3224,7 @@ module Aws::Rekognition
       :job_tag,
       :get_request_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3340,7 +3233,7 @@ module Aws::Rekognition
     class GetMediaAnalysisJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3393,7 +3286,7 @@ module Aws::Rekognition
       :results,
       :manifest_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3421,7 +3314,7 @@ module Aws::Rekognition
       :next_token,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3463,7 +3356,7 @@ module Aws::Rekognition
       :video,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3482,7 +3375,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3544,7 +3437,7 @@ module Aws::Rekognition
       :video,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3563,7 +3456,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -3610,7 +3503,7 @@ module Aws::Rekognition
       :video,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. 
@@ -3626,7 +3519,7 @@ module Aws::Rekognition
     class GroundTruthManifest < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the
@@ -3646,7 +3539,7 @@ module Aws::Rekognition
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets up the flow definition the image will be sent to if one of the conditions is met. You
@@ -3667,7 +3560,7 @@ module Aws::Rekognition
       :flow_definition_arn,
       :data_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to set attributes of the image. Currently, you can declare an image as free of
@@ -3678,7 +3571,7 @@ module Aws::Rekognition
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of in-progress human reviews you have has exceeded the number allowed.</p>
@@ -3706,7 +3599,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>ClientRequestToken</code> input parameter was reused with an operation, but at least one of the other input
@@ -3723,7 +3616,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the input image either as bytes or an S3 object.</p>
@@ -3756,7 +3649,7 @@ module Aws::Rekognition
       :bytes,
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies face image brightness and sharpness. </p>
@@ -3772,7 +3665,7 @@ module Aws::Rekognition
       :brightness,
       :sharpness,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input image size exceeds the allowed limit. If you are calling
@@ -3791,7 +3684,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -3855,7 +3748,7 @@ module Aws::Rekognition
       :max_faces,
       :quality_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute face_records
@@ -3903,7 +3796,7 @@ module Aws::Rekognition
       :face_model_version,
       :unindexed_faces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance of a label returned by Amazon Rekognition Image (<a>DetectLabels</a>) or by
@@ -3922,7 +3815,7 @@ module Aws::Rekognition
       :confidence,
       :dominant_colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Rekognition experienced a service issue. Try your call again.</p>
@@ -3938,7 +3831,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided image format is not supported. </p>
@@ -3954,7 +3847,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a provided manifest file is empty or larger than the allowed limit.</p>
@@ -3970,7 +3863,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Pagination token in the request is not valid.</p>
@@ -3986,7 +3879,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input parameter violated a constraint. Validate your parameter before calling the API
@@ -4003,7 +3896,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied revision id for the project policy is invalid.</p>
@@ -4019,7 +3912,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Rekognition is unable to access the S3 object specified in the request.</p>
@@ -4035,7 +3928,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Kinesis data stream Amazon Rekognition to which the analysis results of a Amazon Rekognition stream processor are streamed. For more information, see
@@ -4046,7 +3939,7 @@ module Aws::Rekognition
     class KinesisDataStream < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see
@@ -4057,7 +3950,7 @@ module Aws::Rekognition
     class KinesisVideoStream < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the starting point in a Kinesis stream to start processing. You can use the
@@ -4077,7 +3970,7 @@ module Aws::Rekognition
       :producer_timestamp,
       :fragment_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The known gender identity for the celebrity that matches the provided ID. The known
@@ -4088,15 +3981,7 @@ module Aws::Rekognition
     class KnownGender < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>A list of enum string of possible gender values that Celebrity returns.</p>
-    module KnownGenderType
-      Male = 'Male'
-      Female = 'Female'
-      Nonbinary = 'Nonbinary'
-      Unlisted = 'Unlisted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure containing details about the detected label, including the name, detected
@@ -4130,7 +4015,7 @@ module Aws::Rekognition
       :aliases,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A potential alias of for a given label.</p>
@@ -4140,7 +4025,7 @@ module Aws::Rekognition
     class LabelAlias < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The category that applies to a given label.</p>
@@ -4150,7 +4035,7 @@ module Aws::Rekognition
     class LabelCategory < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a label detected in a video analysis request and the time the label was detected in the video. </p>
@@ -4177,21 +4062,12 @@ module Aws::Rekognition
       :end_timestamp_millis,
       :duration_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
         super
       end
-    end
-
-    module LabelDetectionAggregateBy
-      TIMESTAMPS = 'TIMESTAMPS'
-      SEGMENTS = 'SEGMENTS'
-    end
-
-    module LabelDetectionFeatureName
-      GENERAL_LABELS = 'GENERAL_LABELS'
     end
 
     # <p>Contains the specified filters that should be applied to a list of returned GENERAL_LABELS.</p>
@@ -4203,12 +4079,7 @@ module Aws::Rekognition
     class LabelDetectionSettings < Struct.new(
       :general_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LabelDetectionSortBy
-      NAME = 'NAME'
-      TIMESTAMP = 'TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the location of the landmark on the face.</p>
@@ -4231,40 +4102,7 @@ module Aws::Rekognition
       :x,
       :y,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LandmarkType
-      eyeLeft = 'eyeLeft'
-      eyeRight = 'eyeRight'
-      nose = 'nose'
-      mouthLeft = 'mouthLeft'
-      mouthRight = 'mouthRight'
-      leftEyeBrowLeft = 'leftEyeBrowLeft'
-      leftEyeBrowRight = 'leftEyeBrowRight'
-      leftEyeBrowUp = 'leftEyeBrowUp'
-      rightEyeBrowLeft = 'rightEyeBrowLeft'
-      rightEyeBrowRight = 'rightEyeBrowRight'
-      rightEyeBrowUp = 'rightEyeBrowUp'
-      leftEyeLeft = 'leftEyeLeft'
-      leftEyeRight = 'leftEyeRight'
-      leftEyeUp = 'leftEyeUp'
-      leftEyeDown = 'leftEyeDown'
-      rightEyeLeft = 'rightEyeLeft'
-      rightEyeRight = 'rightEyeRight'
-      rightEyeUp = 'rightEyeUp'
-      rightEyeDown = 'rightEyeDown'
-      noseLeft = 'noseLeft'
-      noseRight = 'noseRight'
-      mouthUp = 'mouthUp'
-      mouthDown = 'mouthDown'
-      leftPupil = 'leftPupil'
-      rightPupil = 'rightPupil'
-      upperJawlineLeft = 'upperJawlineLeft'
-      midJawlineLeft = 'midJawlineLeft'
-      chinBottom = 'chinBottom'
-      midJawlineRight = 'midJawlineRight'
-      upperJawlineRight = 'upperJawlineRight'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Rekognition service limit was exceeded. For example, if you start too many jobs
@@ -4284,7 +4122,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4297,7 +4135,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_ids
@@ -4318,7 +4156,7 @@ module Aws::Rekognition
       :next_token,
       :face_model_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -4366,7 +4204,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_entries
@@ -4383,7 +4221,7 @@ module Aws::Rekognition
       :dataset_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -4406,7 +4244,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_label_descriptions
@@ -4423,7 +4261,7 @@ module Aws::Rekognition
       :dataset_label_descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -4450,7 +4288,7 @@ module Aws::Rekognition
       :user_id,
       :face_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute faces
@@ -4469,7 +4307,7 @@ module Aws::Rekognition
       :next_token,
       :face_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4483,7 +4321,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4496,7 +4334,7 @@ module Aws::Rekognition
       :next_token,
       :media_analysis_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -4517,7 +4355,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_policies
@@ -4531,7 +4369,7 @@ module Aws::Rekognition
       :project_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4545,7 +4383,7 @@ module Aws::Rekognition
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4559,7 +4397,7 @@ module Aws::Rekognition
       :next_token,
       :stream_processors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4569,7 +4407,7 @@ module Aws::Rekognition
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4578,7 +4416,7 @@ module Aws::Rekognition
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -4595,7 +4433,7 @@ module Aws::Rekognition
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -4609,7 +4447,7 @@ module Aws::Rekognition
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains settings that specify the location of an Amazon S3 bucket used to store the output of
@@ -4626,15 +4464,7 @@ module Aws::Rekognition
       :s3_bucket,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LivenessSessionStatus
-      CREATED = 'CREATED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the project policy document that you supplied to 
@@ -4651,7 +4481,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata for a UserID matched with a given face.</p>
@@ -4665,7 +4495,7 @@ module Aws::Rekognition
       :user_id,
       :user_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for Moderation Labels Detection.</p>
@@ -4682,7 +4512,7 @@ module Aws::Rekognition
       :min_confidence,
       :project_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains input information for a media analysis job.</p>
@@ -4697,7 +4527,7 @@ module Aws::Rekognition
     class MediaAnalysisInput < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Description for a media analysis job.</p>
@@ -4751,19 +4581,7 @@ module Aws::Rekognition
       :results,
       :manifest_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaAnalysisJobFailureCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      INVALID_S3_OBJECT = 'INVALID_S3_OBJECT'
-      INVALID_MANIFEST = 'INVALID_MANIFEST'
-      INVALID_OUTPUT_CONFIG = 'INVALID_OUTPUT_CONFIG'
-      INVALID_KMS_KEY = 'INVALID_KMS_KEY'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-      RESOURCE_NOT_READY = 'RESOURCE_NOT_READY'
-      THROTTLED = 'THROTTLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the error that resulted in failure of the job.</p>
@@ -4777,15 +4595,7 @@ module Aws::Rekognition
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaAnalysisJobStatus
-      CREATED = 'CREATED'
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary that provides statistics on input manifest and errors identified in the input manifest.</p>
@@ -4800,7 +4610,7 @@ module Aws::Rekognition
     class MediaAnalysisManifestSummary < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing information about the model versions of selected features in a given job.</p>
@@ -4810,7 +4620,7 @@ module Aws::Rekognition
     class MediaAnalysisModelVersions < Struct.new(
       :moderation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for a media analysis job. Configuration is operation-specific.</p>
@@ -4820,7 +4630,7 @@ module Aws::Rekognition
     class MediaAnalysisOperationsConfig < Struct.new(
       :detect_moderation_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output configuration provided in the job creation request.</p>
@@ -4835,7 +4645,7 @@ module Aws::Rekognition
       :s3_bucket,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results for a media analysis job created with StartMediaAnalysisJob.</p>
@@ -4854,7 +4664,7 @@ module Aws::Rekognition
       :s3_object,
       :model_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a single type of inappropriate, unwanted, or
@@ -4884,7 +4694,7 @@ module Aws::Rekognition
       :parent_name,
       :taxonomy_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether or not the mouth on the face is open, and the confidence level in the
@@ -4899,7 +4709,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -4919,7 +4729,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -4940,14 +4750,7 @@ module Aws::Rekognition
       :sns_topic_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrientationCorrection
-      ROTATE_0 = 'ROTATE_0'
-      ROTATE_90 = 'ROTATE_90'
-      ROTATE_180 = 'ROTATE_180'
-      ROTATE_270 = 'ROTATE_270'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket and folder location where training output is placed.</p>
@@ -4961,7 +4764,7 @@ module Aws::Rekognition
       :s3_bucket,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parent label for a label. A label can have 0, 1, or more parents. </p>
@@ -4971,7 +4774,7 @@ module Aws::Rekognition
     class Parent < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a person detected in a video analysis request.</p>
@@ -4989,7 +4792,7 @@ module Aws::Rekognition
       :bounding_box,
       :face,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:index] = 0 unless options.key?(:index)
@@ -5012,7 +4815,7 @@ module Aws::Rekognition
       :timestamp,
       :person,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
@@ -5040,17 +4843,12 @@ module Aws::Rekognition
       :person,
       :face_matches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
         super
       end
-    end
-
-    module PersonTrackingSortBy
-      INDEX = 'INDEX'
-      TIMESTAMP = 'TIMESTAMP'
     end
 
     # <p>The X and Y coordinates of a point on an image or video frame. The X and Y values are
@@ -5071,7 +4869,7 @@ module Aws::Rekognition
       :x,
       :y,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the pose of the face as determined by its pitch, roll, and yaw.</p>
@@ -5089,12 +4887,7 @@ module Aws::Rekognition
       :yaw,
       :pitch,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectAutoUpdate
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of an Amazon Rekognition Custom Labels project. For more information, see <a>DescribeProjects</a>.</p>
@@ -5126,7 +4919,7 @@ module Aws::Rekognition
       :feature,
       :auto_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a project policy in the response from <a>ListProjectPolicies</a>. </p>
@@ -5157,13 +4950,7 @@ module Aws::Rekognition
       :creation_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectStatus
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a version of a Amazon Rekognition project version.</p>
@@ -5249,24 +5036,7 @@ module Aws::Rekognition
       :base_model_version,
       :feature_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectVersionStatus
-      TRAINING_IN_PROGRESS = 'TRAINING_IN_PROGRESS'
-      TRAINING_COMPLETED = 'TRAINING_COMPLETED'
-      TRAINING_FAILED = 'TRAINING_FAILED'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      DELETING = 'DELETING'
-      COPYING_IN_PROGRESS = 'COPYING_IN_PROGRESS'
-      COPYING_COMPLETED = 'COPYING_COMPLETED'
-      COPYING_FAILED = 'COPYING_FAILED'
-      DEPRECATED = 'DEPRECATED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a body part detected by <a>DetectProtectiveEquipment</a> that contains PPE.
@@ -5287,7 +5057,7 @@ module Aws::Rekognition
       :confidence,
       :equipment_detections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns 
@@ -5312,7 +5082,7 @@ module Aws::Rekognition
       :confidence,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies summary attributes to return from a call to <a>DetectProtectiveEquipment</a>.
@@ -5343,7 +5113,7 @@ module Aws::Rekognition
       :min_confidence,
       :required_equipment_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for required items of personal protective equipment (PPE) detected on persons by a call
@@ -5380,13 +5150,7 @@ module Aws::Rekognition
       :persons_without_required_equipment,
       :persons_indeterminate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProtectiveEquipmentType
-      FACE_COVER = 'FACE_COVER'
-      HAND_COVER = 'HAND_COVER'
-      HEAD_COVER = 'HEAD_COVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeded your throughput limit. If you want to increase this
@@ -5403,7 +5167,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -5430,7 +5194,7 @@ module Aws::Rekognition
       :policy_revision_id,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_revision_id
@@ -5439,25 +5203,7 @@ module Aws::Rekognition
     class PutProjectPolicyResponse < Struct.new(
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QualityFilter
-      NONE = 'NONE'
-      AUTO = 'AUTO'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-    end
-
-    module Reason
-      EXCEEDS_MAX_FACES = 'EXCEEDS_MAX_FACES'
-      EXTREME_POSE = 'EXTREME_POSE'
-      LOW_BRIGHTNESS = 'LOW_BRIGHTNESS'
-      LOW_SHARPNESS = 'LOW_SHARPNESS'
-      LOW_CONFIDENCE = 'LOW_CONFIDENCE'
-      SMALL_BOUNDING_BOX = 'SMALL_BOUNDING_BOX'
-      LOW_FACE_QUALITY = 'LOW_FACE_QUALITY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -5470,7 +5216,7 @@ module Aws::Rekognition
     class RecognizeCelebritiesRequest < Struct.new(
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute celebrity_faces
@@ -5508,7 +5254,7 @@ module Aws::Rekognition
       :unrecognized_faces,
       :orientation_correction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a location within the frame that Rekognition checks for objects of interest such as text, labels, or faces. It uses a <code>BoundingBox</code>
@@ -5528,7 +5274,7 @@ module Aws::Rekognition
       :bounding_box,
       :polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the specified ID already exists.</p>
@@ -5544,7 +5290,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is already being used.</p>
@@ -5560,7 +5306,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request cannot be found.</p>
@@ -5576,7 +5322,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource isn't ready. For example,  
@@ -5594,7 +5340,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5617,7 +5363,7 @@ module Aws::Rekognition
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the S3 bucket name and object name.</p>
@@ -5640,7 +5386,7 @@ module Aws::Rekognition
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -5682,7 +5428,7 @@ module Aws::Rekognition
       :face_match_threshold,
       :quality_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute searched_face_bounding_box
@@ -5707,7 +5453,7 @@ module Aws::Rekognition
       :face_matches,
       :face_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -5731,7 +5477,7 @@ module Aws::Rekognition
       :max_faces,
       :face_match_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute searched_face_id
@@ -5750,7 +5496,7 @@ module Aws::Rekognition
       :face_matches,
       :face_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -5795,7 +5541,7 @@ module Aws::Rekognition
       :max_users,
       :quality_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_matches
@@ -5823,7 +5569,7 @@ module Aws::Rekognition
       :searched_face,
       :unsearched_faces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -5850,7 +5596,7 @@ module Aws::Rekognition
       :user_match_threshold,
       :max_users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_matches
@@ -5872,7 +5618,7 @@ module Aws::Rekognition
       :searched_face,
       :searched_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides face metadata such as FaceId, BoundingBox, Confidence of the input face used for
@@ -5883,7 +5629,7 @@ module Aws::Rekognition
     class SearchedFace < Struct.new(
       :face_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains data regarding the input face used for a search.</p>
@@ -5918,7 +5664,7 @@ module Aws::Rekognition
     class SearchedFaceDetails < Struct.new(
       :face_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about a User searched for within a collection.</p>
@@ -5928,7 +5674,7 @@ module Aws::Rekognition
     class SearchedUser < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A technical cue or shot detection segment detected in a video. An array
@@ -5998,18 +5744,13 @@ module Aws::Rekognition
       :end_frame_number,
       :duration_frames,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_timestamp_millis] = 0 unless options.key?(:start_timestamp_millis)
         options[:end_timestamp_millis] = 0 unless options.key?(:end_timestamp_millis)
         super
       end
-    end
-
-    module SegmentType
-      TECHNICAL_CUE = 'TECHNICAL_CUE'
-      SHOT = 'SHOT'
     end
 
     # <p>Information about the type of a segment requested in a call to <a>StartSegmentDetection</a>.
@@ -6024,7 +5765,7 @@ module Aws::Rekognition
       :type,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6042,7 +5783,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a given sessionId is not found.</p>
@@ -6058,7 +5799,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a shot detection segment detected in a video. For more information, 
@@ -6073,7 +5814,7 @@ module Aws::Rekognition
       :index,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether or not the face is smiling, and the confidence level in the
@@ -6088,7 +5829,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -6119,7 +5860,7 @@ module Aws::Rekognition
       :notification_channel,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6129,7 +5870,7 @@ module Aws::Rekognition
     class StartCelebrityRecognitionResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6163,7 +5904,7 @@ module Aws::Rekognition
       :notification_channel,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6173,7 +5914,7 @@ module Aws::Rekognition
     class StartContentModerationResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6207,7 +5948,7 @@ module Aws::Rekognition
       :face_attributes,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6217,7 +5958,7 @@ module Aws::Rekognition
     class StartFaceDetectionResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6250,7 +5991,7 @@ module Aws::Rekognition
       :notification_channel,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6259,7 +6000,7 @@ module Aws::Rekognition
     class StartFaceSearchResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6304,7 +6045,7 @@ module Aws::Rekognition
       :features,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6314,7 +6055,7 @@ module Aws::Rekognition
     class StartLabelDetectionResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -6348,7 +6089,7 @@ module Aws::Rekognition
       :output_config,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6357,7 +6098,7 @@ module Aws::Rekognition
     class StartMediaAnalysisJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6383,7 +6124,7 @@ module Aws::Rekognition
       :notification_channel,
       :job_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6393,7 +6134,7 @@ module Aws::Rekognition
     class StartPersonTrackingResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_arn
@@ -6415,7 +6156,7 @@ module Aws::Rekognition
       :min_inference_units,
       :max_inference_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -6424,7 +6165,7 @@ module Aws::Rekognition
     class StartProjectVersionResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters applied to the technical cue or shot detection segments. 
@@ -6440,7 +6181,7 @@ module Aws::Rekognition
       :technical_cue_filter,
       :shot_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6474,7 +6215,7 @@ module Aws::Rekognition
       :filters,
       :segment_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6484,7 +6225,7 @@ module Aws::Rekognition
     class StartSegmentDetectionResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters for the shot detection segments returned by <code>GetSegmentDetection</code>. 
@@ -6500,7 +6241,7 @@ module Aws::Rekognition
     class StartShotDetectionFilter < Struct.new(
       :min_segment_confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -6526,7 +6267,7 @@ module Aws::Rekognition
       :start_selector,
       :stop_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -6537,7 +6278,7 @@ module Aws::Rekognition
     class StartStreamProcessorResponse < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information,
@@ -6560,7 +6301,7 @@ module Aws::Rekognition
       :min_segment_confidence,
       :black_frame,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Set of optional parameters that let you set the criteria text must meet to be included in your response. 
@@ -6577,7 +6318,7 @@ module Aws::Rekognition
       :word_filter,
       :regions_of_interest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute video
@@ -6608,7 +6349,7 @@ module Aws::Rekognition
       :job_tag,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6617,7 +6358,7 @@ module Aws::Rekognition
     class StartTextDetectionResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_version_arn
@@ -6627,7 +6368,7 @@ module Aws::Rekognition
     class StopProjectVersionRequest < Struct.new(
       :project_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -6636,7 +6377,7 @@ module Aws::Rekognition
     class StopProjectVersionResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -6645,12 +6386,12 @@ module Aws::Rekognition
     class StopStreamProcessorRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopStreamProcessorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is a required parameter for label detection stream processors and should not be used
@@ -6663,7 +6404,7 @@ module Aws::Rekognition
     class StreamProcessingStartSelector < Struct.new(
       :kvs_stream_start_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6678,7 +6419,7 @@ module Aws::Rekognition
     class StreamProcessingStopSelector < Struct.new(
       :max_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that recognizes faces or labels in a streaming video. An Amazon Rekognition stream processor is created by a call to <a>CreateStreamProcessor</a>.  The request
@@ -6695,7 +6436,7 @@ module Aws::Rekognition
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6711,7 +6452,7 @@ module Aws::Rekognition
     class StreamProcessorDataSharingPreference < Struct.new(
       :opt_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:opt_in] = false unless options.key?(:opt_in)
@@ -6726,7 +6467,7 @@ module Aws::Rekognition
     class StreamProcessorInput < Struct.new(
       :kinesis_video_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the object detection results and completion status of a video analysis operation.</p>
@@ -6742,7 +6483,7 @@ module Aws::Rekognition
     class StreamProcessorNotificationChannel < Struct.new(
       :sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Kinesis Data Streams stream to which a Amazon Rekognition Video stream processor streams the results of a video analysis. For more
@@ -6759,12 +6500,7 @@ module Aws::Rekognition
       :kinesis_data_stream,
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamProcessorParameterToDelete
-      ConnectedHomeMinConfidence = 'ConnectedHomeMinConfidence'
-      RegionsOfInterest = 'RegionsOfInterest'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input parameters used in a streaming video analyzed by a Amazon Rekognition stream processor. 
@@ -6785,7 +6521,7 @@ module Aws::Rekognition
       :face_search,
       :connected_home,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6799,16 +6535,7 @@ module Aws::Rekognition
     class StreamProcessorSettingsForUpdate < Struct.new(
       :connected_home_for_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamProcessorStatus
-      STOPPED = 'STOPPED'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      STOPPING = 'STOPPING'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket that contains the training summary. The training summary includes
@@ -6827,7 +6554,7 @@ module Aws::Rekognition
     class Summary < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether or not the face is wearing sunglasses, and the confidence level in
@@ -6842,7 +6569,7 @@ module Aws::Rekognition
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = false unless options.key?(:value)
@@ -6861,12 +6588,12 @@ module Aws::Rekognition
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a technical cue segment. For more information, see <a>SegmentDetection</a>.</p>
@@ -6880,17 +6607,7 @@ module Aws::Rekognition
       :type,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TechnicalCueType
-      COLOR_BARS = 'ColorBars'
-      END_CREDITS = 'EndCredits'
-      BLACK_FRAMES = 'BlackFrames'
-      OPENING_CREDITS = 'OpeningCredits'
-      STUDIO_LOGO = 'StudioLogo'
-      SLATE = 'Slate'
-      CONTENT = 'Content'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set, Amazon Rekognition uses the
@@ -6906,7 +6623,7 @@ module Aws::Rekognition
       :assets,
       :auto_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_create] = false unless options.key?(:auto_create)
@@ -6931,7 +6648,7 @@ module Aws::Rekognition
       :output,
       :validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a word or line of text detected by <a>DetectText</a>.</p>
@@ -6975,7 +6692,7 @@ module Aws::Rekognition
       :confidence,
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about text detected in a video. Incudes the detected text, 
@@ -6991,17 +6708,12 @@ module Aws::Rekognition
       :timestamp,
       :text_detection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timestamp] = 0 unless options.key?(:timestamp)
         super
       end
-    end
-
-    module TextTypes
-      LINE = 'LINE'
-      WORD = 'WORD'
     end
 
     # <p>Amazon Rekognition is temporarily unable to process the request. Try your call again.</p>
@@ -7017,7 +6729,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset used for training.</p>
@@ -7028,7 +6740,7 @@ module Aws::Rekognition
     class TrainingData < Struct.new(
       :assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data 
@@ -7049,7 +6761,7 @@ module Aws::Rekognition
       :output,
       :validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A face that <a>IndexFaces</a> detected, but didn't index. Use the
@@ -7088,7 +6800,7 @@ module Aws::Rekognition
       :reasons,
       :face_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Face details inferred from the image but not used for search. The response attribute
@@ -7128,18 +6840,7 @@ module Aws::Rekognition
       :face_details,
       :reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnsearchedFaceReason
-      FACE_NOT_LARGEST = 'FACE_NOT_LARGEST'
-      EXCEEDS_MAX_FACES = 'EXCEEDS_MAX_FACES'
-      EXTREME_POSE = 'EXTREME_POSE'
-      LOW_BRIGHTNESS = 'LOW_BRIGHTNESS'
-      LOW_SHARPNESS = 'LOW_SHARPNESS'
-      LOW_CONFIDENCE = 'LOW_CONFIDENCE'
-      SMALL_BOUNDING_BOX = 'SMALL_BOUNDING_BOX'
-      LOW_FACE_QUALITY = 'LOW_FACE_QUALITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata like FaceId, UserID, and Reasons, for a face that was unsuccessfully
@@ -7163,13 +6864,7 @@ module Aws::Rekognition
       :confidence,
       :reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnsuccessfulFaceAssociationReason
-      FACE_NOT_FOUND = 'FACE_NOT_FOUND'
-      ASSOCIATED_TO_A_DIFFERENT_USER = 'ASSOCIATED_TO_A_DIFFERENT_USER'
-      LOW_MATCH_CONFIDENCE = 'LOW_MATCH_CONFIDENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata like FaceId, UserID, and Reasons, for a face that was unsuccessfully
@@ -7188,12 +6883,7 @@ module Aws::Rekognition
       :user_id,
       :reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnsuccessfulFaceDeletionReason
-      ASSOCIATED_TO_AN_EXISTING_USER = 'ASSOCIATED_TO_AN_EXISTING_USER'
-      FACE_NOT_FOUND = 'FACE_NOT_FOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata like FaceId, UserID, and Reasons, for a face that was unsuccessfully
@@ -7212,12 +6902,7 @@ module Aws::Rekognition
       :user_id,
       :reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnsuccessfulFaceDisassociationReason
-      FACE_NOT_FOUND = 'FACE_NOT_FOUND'
-      ASSOCIATED_TO_A_DIFFERENT_USER = 'ASSOCIATED_TO_A_DIFFERENT_USER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7231,12 +6916,12 @@ module Aws::Rekognition
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -7253,12 +6938,12 @@ module Aws::Rekognition
       :dataset_arn,
       :changes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDatasetEntriesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7294,12 +6979,12 @@ module Aws::Rekognition
       :data_sharing_preference_for_update,
       :parameters_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateStreamProcessorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata of the user stored in a collection.</p>
@@ -7314,7 +6999,7 @@ module Aws::Rekognition
       :user_id,
       :user_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides UserID metadata along with the confidence in the match of this UserID with the
@@ -7329,14 +7014,7 @@ module Aws::Rekognition
       :similarity,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserStatus
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p>
@@ -7355,7 +7033,7 @@ module Aws::Rekognition
     class ValidationData < Struct.new(
       :assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying the acceptable range of challenge versions.</p>
@@ -7369,7 +7047,7 @@ module Aws::Rekognition
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as <a>StartLabelDetection</a> use <code>Video</code> to
@@ -7380,18 +7058,7 @@ module Aws::Rekognition
     class Video < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoColorRange
-      FULL = 'FULL'
-      LIMITED = 'LIMITED'
-    end
-
-    module VideoJobStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in
@@ -7428,7 +7095,7 @@ module Aws::Rekognition
       :frame_width,
       :color_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file size or duration of the supplied media is too large. The maximum file size is 10GB.
@@ -7445,7 +7112,7 @@ module Aws::Rekognition
       :code,
       :logref,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -21,7 +21,7 @@ module Aws::Deadline
       :selections,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the maximum and minimum number of GPU accelerators required for a worker
@@ -36,14 +36,7 @@ module Aws::Deadline
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorName
-      T4 = 't4'
-      A10G = 'a10g'
-      L4 = 'l4'
-      L40S = 'l40s'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a specific GPU accelerator required for an Amazon Elastic Compute Cloud worker host.</p>
@@ -101,7 +94,7 @@ module Aws::Deadline
       :name,
       :runtime,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:runtime] = 'latest' unless options.key?(:runtime)
@@ -121,12 +114,7 @@ module Aws::Deadline
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorType
-      # GPU accelerator type.
-      GPU = 'gpu'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permission to perform the action.</p>
@@ -139,7 +127,7 @@ module Aws::Deadline
       :message,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of resources used.</p>
@@ -153,7 +141,7 @@ module Aws::Deadline
       :limit_id,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The assigned starting environment for a worker during session.</p>
@@ -163,7 +151,7 @@ module Aws::Deadline
     class AssignedEnvironmentEnterSessionActionDefinition < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The assigned environment when a worker exits a session.</p>
@@ -173,7 +161,7 @@ module Aws::Deadline
     class AssignedEnvironmentExitSessionActionDefinition < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The assigned session for the worker.</p>
@@ -195,7 +183,7 @@ module Aws::Deadline
       :session_actions,
       :log_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action for a session defined by the session action ID.</p>
@@ -209,7 +197,7 @@ module Aws::Deadline
       :session_action_id,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the assigned session action.</p>
@@ -232,7 +220,7 @@ module Aws::Deadline
       :sync_input_job_attachments,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EnvEnter < AssignedSessionActionDefinition; end
       class EnvExit < AssignedSessionActionDefinition; end
@@ -248,7 +236,7 @@ module Aws::Deadline
     class AssignedSyncInputJobAttachmentsSessionActionDefinition < Struct.new(
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specific task, step, and parameters to include.</p>
@@ -266,7 +254,7 @@ module Aws::Deadline
       :step_id,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -291,12 +279,12 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToFarmResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -325,12 +313,12 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToFleetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -363,12 +351,12 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -397,12 +385,12 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToQueueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -415,7 +403,7 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -425,7 +413,7 @@ module Aws::Deadline
     class AssumeFleetRoleForReadResponse < Struct.new(
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -442,7 +430,7 @@ module Aws::Deadline
       :fleet_id,
       :worker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -452,7 +440,7 @@ module Aws::Deadline
     class AssumeFleetRoleForWorkerResponse < Struct.new(
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -465,7 +453,7 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -475,7 +463,7 @@ module Aws::Deadline
     class AssumeQueueRoleForReadResponse < Struct.new(
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -488,7 +476,7 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -498,7 +486,7 @@ module Aws::Deadline
     class AssumeQueueRoleForUserResponse < Struct.new(
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -519,7 +507,7 @@ module Aws::Deadline
       :worker_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -529,7 +517,7 @@ module Aws::Deadline
     class AssumeQueueRoleForWorkerResponse < Struct.new(
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attachments for jobs.</p>
@@ -543,23 +531,12 @@ module Aws::Deadline
       :manifests,
       :file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:file_system] = 'COPIED' unless options.key?(:file_system)
         super
       end
-    end
-
-    module AutoScalingMode
-      NO_SCALING = 'NO_SCALING'
-      EVENT_BASED_AUTO_SCALING = 'EVENT_BASED_AUTO_SCALING'
-    end
-
-    module AutoScalingStatus
-      GROWING = 'GROWING'
-      STEADY = 'STEADY'
-      SHRINKING = 'SHRINKING'
     end
 
     # <p>The Identity and Access Management credentials.</p>
@@ -582,7 +559,7 @@ module Aws::Deadline
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -605,7 +582,7 @@ module Aws::Deadline
       :worker_id,
       :identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -618,7 +595,7 @@ module Aws::Deadline
       :entities,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The budget action to add.</p>
@@ -639,7 +616,7 @@ module Aws::Deadline
       :threshold_percentage,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The budget action to remove.</p>
@@ -653,12 +630,7 @@ module Aws::Deadline
       :type,
       :threshold_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BudgetActionType
-      STOP_SCHEDULING_AND_COMPLETE_TASKS = 'STOP_SCHEDULING_AND_COMPLETE_TASKS'
-      STOP_SCHEDULING_AND_CANCEL_TASKS = 'STOP_SCHEDULING_AND_CANCEL_TASKS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start and end time of the budget.</p>
@@ -669,15 +641,10 @@ module Aws::Deadline
       :fixed,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Fixed < BudgetSchedule; end
       class Unknown < BudgetSchedule; end
-    end
-
-    module BudgetStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
     end
 
     # <p>The budget summary.</p>
@@ -746,24 +713,7 @@ module Aws::Deadline
       :updated_by,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      EQUAL = 'EQUAL'
-      NOT_EQUAL = 'NOT_EQUAL'
-      GREATER_THAN_EQUAL_TO = 'GREATER_THAN_EQUAL_TO'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN_EQUAL_TO = 'LESS_THAN_EQUAL_TO'
-      LESS_THAN = 'LESS_THAN'
-    end
-
-    module CompletedStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      INTERRUPTED = 'INTERRUPTED'
-      CANCELED = 'CANCELED'
-      NEVER_ATTEMPTED = 'NEVER_ATTEMPTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request has conflicting operations. This can occur if you're trying to perform more
@@ -789,15 +739,7 @@ module Aws::Deadline
       :resource_type,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictExceptionReason
-      CONFLICT_EXCEPTION = 'CONFLICT_EXCEPTION'
-      CONCURRENT_MODIFICATION = 'CONCURRENT_MODIFICATION'
-      RESOURCE_ALREADY_EXISTS = 'RESOURCE_ALREADY_EXISTS'
-      RESOURCE_IN_USE = 'RESOURCE_IN_USE'
-      STATUS_CONFLICT = 'STATUS_CONFLICT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The consumed usage for the resource.</p>
@@ -807,7 +749,7 @@ module Aws::Deadline
     class ConsumedUsages < Struct.new(
       :approximate_dollar_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -829,7 +771,7 @@ module Aws::Deadline
       :queue_id,
       :target_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_type
@@ -838,12 +780,7 @@ module Aws::Deadline
     class CopyJobTemplateResponse < Struct.new(
       :template_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CpuArchitectureType
-      X86_64 = 'x86_64'
-      ARM64 = 'arm64'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -886,7 +823,7 @@ module Aws::Deadline
       :actions,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute budget_id
@@ -895,7 +832,7 @@ module Aws::Deadline
     class CreateBudgetResponse < Struct.new(
       :budget_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -926,7 +863,7 @@ module Aws::Deadline
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -935,7 +872,7 @@ module Aws::Deadline
     class CreateFarmResponse < Struct.new(
       :farm_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -995,7 +932,7 @@ module Aws::Deadline
       :tags,
       :host_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -1004,7 +941,7 @@ module Aws::Deadline
     class CreateFleetResponse < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1074,7 +1011,7 @@ module Aws::Deadline
       :max_worker_count,
       :source_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1083,12 +1020,7 @@ module Aws::Deadline
     class CreateJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CreateJobTargetTaskRunStatus
-      READY = 'READY'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1113,7 +1045,7 @@ module Aws::Deadline
       :security_group_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -1122,7 +1054,7 @@ module Aws::Deadline
     class CreateLicenseEndpointResponse < Struct.new(
       :license_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1164,7 +1096,7 @@ module Aws::Deadline
       :farm_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit_id
@@ -1174,7 +1106,7 @@ module Aws::Deadline
     class CreateLimitResponse < Struct.new(
       :limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1209,7 +1141,7 @@ module Aws::Deadline
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_id
@@ -1222,7 +1154,7 @@ module Aws::Deadline
       :monitor_id,
       :identity_center_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1253,7 +1185,7 @@ module Aws::Deadline
       :template_type,
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_environment_id
@@ -1262,7 +1194,7 @@ module Aws::Deadline
     class CreateQueueEnvironmentResponse < Struct.new(
       :queue_environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1279,12 +1211,12 @@ module Aws::Deadline
       :queue_id,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateQueueFleetAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1301,12 +1233,12 @@ module Aws::Deadline
       :queue_id,
       :limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateQueueLimitAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1362,7 +1294,7 @@ module Aws::Deadline
       :allowed_storage_profile_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_id
@@ -1371,7 +1303,7 @@ module Aws::Deadline
     class CreateQueueResponse < Struct.new(
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1399,7 +1331,7 @@ module Aws::Deadline
       :os_family,
       :file_system_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_profile_id
@@ -1408,7 +1340,7 @@ module Aws::Deadline
     class CreateStorageProfileResponse < Struct.new(
       :storage_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1433,7 +1365,7 @@ module Aws::Deadline
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute worker_id
@@ -1442,7 +1374,7 @@ module Aws::Deadline
     class CreateWorkerResponse < Struct.new(
       :worker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a customer managed fleet configuration.</p>
@@ -1471,13 +1403,7 @@ module Aws::Deadline
       :storage_profile_id,
       :tag_propagation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomerManagedFleetOperatingSystemFamily
-      WINDOWS = 'WINDOWS'
-      LINUX = 'LINUX'
-      MACOS = 'MACOS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The worker capabilities for a customer managed workflow.</p>
@@ -1519,7 +1445,7 @@ module Aws::Deadline
       :custom_amounts,
       :custom_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time stamp in date-time format.</p>
@@ -1537,18 +1463,7 @@ module Aws::Deadline
       :operator,
       :date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeadlinePrincipalType
-      USER = 'USER'
-      GROUP = 'GROUP'
-    end
-
-    module DefaultQueueBudgetAction
-      NONE = 'NONE'
-      STOP_SCHEDULING_AND_COMPLETE_TASKS = 'STOP_SCHEDULING_AND_COMPLETE_TASKS'
-      STOP_SCHEDULING_AND_CANCEL_TASKS = 'STOP_SCHEDULING_AND_CANCEL_TASKS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1561,12 +1476,12 @@ module Aws::Deadline
       :farm_id,
       :budget_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBudgetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1575,12 +1490,12 @@ module Aws::Deadline
     class DeleteFarmRequest < Struct.new(
       :farm_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFarmResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1597,12 +1512,12 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFleetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -1611,12 +1526,12 @@ module Aws::Deadline
     class DeleteLicenseEndpointRequest < Struct.new(
       :license_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLicenseEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1629,12 +1544,12 @@ module Aws::Deadline
       :farm_id,
       :limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLimitResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -1647,12 +1562,12 @@ module Aws::Deadline
       :license_endpoint_id,
       :product_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMeteredProductResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_id
@@ -1663,12 +1578,12 @@ module Aws::Deadline
     class DeleteMonitorRequest < Struct.new(
       :monitor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1685,12 +1600,12 @@ module Aws::Deadline
       :queue_id,
       :queue_environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1707,12 +1622,12 @@ module Aws::Deadline
       :queue_id,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueFleetAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1730,12 +1645,12 @@ module Aws::Deadline
       :queue_id,
       :limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueLimitAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1748,12 +1663,12 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1766,12 +1681,12 @@ module Aws::Deadline
       :farm_id,
       :storage_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStorageProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1788,17 +1703,12 @@ module Aws::Deadline
       :fleet_id,
       :worker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DependencyConsumerResolutionStatus
-      RESOLVED = 'RESOLVED'
-      UNRESOLVED = 'UNRESOLVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of dependencies for the consumer.</p>
@@ -1820,11 +1730,7 @@ module Aws::Deadline
       :consumers_resolved,
       :consumers_unresolved,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DesiredWorkerStatus
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1837,12 +1743,12 @@ module Aws::Deadline
       :farm_id,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromFarmResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1859,12 +1765,12 @@ module Aws::Deadline
       :fleet_id,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromFleetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1885,12 +1791,12 @@ module Aws::Deadline
       :job_id,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -1907,12 +1813,12 @@ module Aws::Deadline
       :queue_id,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromQueueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the EBS volume.</p>
@@ -1930,7 +1836,7 @@ module Aws::Deadline
       :iops,
       :throughput_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size_gi_b] = 250 unless options.key?(:size_gi_b)
@@ -1938,12 +1844,6 @@ module Aws::Deadline
         options[:throughput_mi_b] = 125 unless options.key?(:throughput_mi_b)
         super
       end
-    end
-
-    module Ec2MarketType
-      ON_DEMAND = 'on-demand'
-      SPOT = 'spot'
-      WAIT_AND_SAVE = 'wait-and-save'
     end
 
     # <p>The details of a specified environment.</p>
@@ -1965,7 +1865,7 @@ module Aws::Deadline
       :schema_version,
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error details for the environment.</p>
@@ -1987,7 +1887,7 @@ module Aws::Deadline
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IDs of the job and environment.</p>
@@ -2001,7 +1901,7 @@ module Aws::Deadline
       :job_id,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment ID to use to enter a session action.</p>
@@ -2011,7 +1911,7 @@ module Aws::Deadline
     class EnvironmentEnterSessionActionDefinition < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the environment a session action enters in.</p>
@@ -2021,7 +1921,7 @@ module Aws::Deadline
     class EnvironmentEnterSessionActionDefinitionSummary < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the environment a session action exits from.</p>
@@ -2031,7 +1931,7 @@ module Aws::Deadline
     class EnvironmentExitSessionActionDefinition < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the environment details for which a session action to exits.</p>
@@ -2041,12 +1941,7 @@ module Aws::Deadline
     class EnvironmentExitSessionActionDefinitionSummary < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentTemplateType
-      JSON = 'JSON'
-      YAML = 'YAML'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The member of a farm.</p>
@@ -2072,7 +1967,7 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of details for a farm.</p>
@@ -2109,7 +2004,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field sorting order and name of the field.</p>
@@ -2123,7 +2018,7 @@ module Aws::Deadline
       :sort_order,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the file system location for the resource.</p>
@@ -2142,12 +2037,7 @@ module Aws::Deadline
       :path,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileSystemLocationType
-      SHARED = 'SHARED'
-      LOCAL = 'LOCAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a fixed budget schedule.</p>
@@ -2161,7 +2051,7 @@ module Aws::Deadline
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fleet amount and attribute capabilities.</p>
@@ -2179,7 +2069,7 @@ module Aws::Deadline
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the fleet's capability name, minimum, and maximum.</p>
@@ -2193,7 +2083,7 @@ module Aws::Deadline
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amounts and attributes of fleets.</p>
@@ -2207,7 +2097,7 @@ module Aws::Deadline
       :amounts,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Fleet configuration details.</p>
@@ -2222,7 +2112,7 @@ module Aws::Deadline
       :service_managed_ec2,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CustomerManaged < FleetConfiguration; end
       class ServiceManagedEc2 < FleetConfiguration; end
@@ -2256,16 +2146,7 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetStatus
-      ACTIVE = 'ACTIVE'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a fleet.</p>
@@ -2334,7 +2215,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2347,7 +2228,7 @@ module Aws::Deadline
       :farm_id,
       :budget_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute budget_id
@@ -2425,7 +2306,7 @@ module Aws::Deadline
       :updated_at,
       :queue_stopped_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2434,7 +2315,7 @@ module Aws::Deadline
     class GetFarmRequest < Struct.new(
       :farm_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2477,7 +2358,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2490,7 +2371,7 @@ module Aws::Deadline
       :farm_id,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2580,7 +2461,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error for the job entity.</p>
@@ -2603,7 +2484,7 @@ module Aws::Deadline
       :environment_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class JobDetails < GetJobEntityError; end
       class JobAttachmentDetails < GetJobEntityError; end
@@ -2626,7 +2507,7 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2730,7 +2611,7 @@ module Aws::Deadline
       :max_worker_count,
       :source_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -2739,7 +2620,7 @@ module Aws::Deadline
     class GetLicenseEndpointRequest < Struct.new(
       :license_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -2772,7 +2653,7 @@ module Aws::Deadline
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2785,7 +2666,7 @@ module Aws::Deadline
       :farm_id,
       :limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -2847,7 +2728,7 @@ module Aws::Deadline
       :current_count,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_id
@@ -2857,7 +2738,7 @@ module Aws::Deadline
     class GetMonitorRequest < Struct.new(
       :monitor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_id
@@ -2912,7 +2793,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2929,7 +2810,7 @@ module Aws::Deadline
       :queue_id,
       :queue_environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_environment_id
@@ -2970,7 +2851,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -2987,7 +2868,7 @@ module Aws::Deadline
       :queue_id,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_id
@@ -3020,7 +2901,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3037,7 +2918,7 @@ module Aws::Deadline
       :queue_id,
       :limit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_at
@@ -3070,7 +2951,7 @@ module Aws::Deadline
       :limit_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3083,7 +2964,7 @@ module Aws::Deadline
       :farm_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_id
@@ -3173,7 +3054,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3194,7 +3075,7 @@ module Aws::Deadline
       :job_id,
       :session_action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_action_id
@@ -3249,7 +3130,7 @@ module Aws::Deadline
       :acquired_limits,
       :manifests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3270,7 +3151,7 @@ module Aws::Deadline
       :job_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3323,7 +3204,7 @@ module Aws::Deadline
       :host_properties,
       :worker_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3347,7 +3228,7 @@ module Aws::Deadline
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistics
@@ -3375,7 +3256,7 @@ module Aws::Deadline
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3396,7 +3277,7 @@ module Aws::Deadline
       :job_id,
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_id
@@ -3476,7 +3357,7 @@ module Aws::Deadline
       :parameter_space,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3493,7 +3374,7 @@ module Aws::Deadline
       :queue_id,
       :storage_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_profile_id
@@ -3517,7 +3398,7 @@ module Aws::Deadline
       :os_family,
       :file_system_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3530,7 +3411,7 @@ module Aws::Deadline
       :farm_id,
       :storage_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_profile_id
@@ -3570,7 +3451,7 @@ module Aws::Deadline
       :updated_by,
       :file_system_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3595,7 +3476,7 @@ module Aws::Deadline
       :step_id,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -3648,7 +3529,7 @@ module Aws::Deadline
       :updated_by,
       :latest_session_action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3665,7 +3546,7 @@ module Aws::Deadline
       :fleet_id,
       :worker_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -3710,7 +3591,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a script that runs as a worker is starting up that you can use to provide
@@ -3744,7 +3625,7 @@ module Aws::Deadline
       :script_body,
       :script_timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:script_timeout_seconds] = 300 unless options.key?(:script_timeout_seconds)
@@ -3763,7 +3644,7 @@ module Aws::Deadline
       :ip_addresses,
       :host_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The host property details.</p>
@@ -3785,7 +3666,7 @@ module Aws::Deadline
       :ec2_instance_arn,
       :ec2_instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deadline Cloud can't process your request right now. Try again later.</p>
@@ -3798,7 +3679,7 @@ module Aws::Deadline
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IP addresses for a host.</p>
@@ -3812,7 +3693,7 @@ module Aws::Deadline
       :ip_v4_addresses,
       :ip_v6_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job attachments.</p>
@@ -3826,7 +3707,7 @@ module Aws::Deadline
       :job_id,
       :attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error details for job attachments.</p>
@@ -3844,7 +3725,7 @@ module Aws::Deadline
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifier details for job attachments.</p>
@@ -3854,7 +3735,7 @@ module Aws::Deadline
     class JobAttachmentDetailsIdentifiers < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job attachment settings. These are the Amazon S3 bucket name and the Amazon S3 prefix.</p>
@@ -3868,12 +3749,7 @@ module Aws::Deadline
       :s3_bucket_name,
       :root_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobAttachmentsFileSystem
-      COPIED = 'COPIED'
-      VIRTUAL = 'VIRTUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job details for a specific job.</p>
@@ -3911,7 +3787,7 @@ module Aws::Deadline
       :schema_version,
       :path_mapping_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a job error.</p>
@@ -3929,7 +3805,7 @@ module Aws::Deadline
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifiers for a job.</p>
@@ -3939,7 +3815,7 @@ module Aws::Deadline
     class JobDetailsIdentifiers < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a job entity.</p>
@@ -3962,22 +3838,13 @@ module Aws::Deadline
       :environment_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class JobDetails < JobEntity; end
       class JobAttachmentDetails < JobEntity; end
       class StepDetails < JobEntity; end
       class EnvironmentDetails < JobEntity; end
       class Unknown < JobEntity; end
-    end
-
-    module JobEntityErrorCode
-      AccessDeniedException = 'AccessDeniedException'
-      InternalServerException = 'InternalServerException'
-      ValidationException = 'ValidationException'
-      ResourceNotFoundException = 'ResourceNotFoundException'
-      MaxPayloadSizeExceeded = 'MaxPayloadSizeExceeded'
-      ConflictException = 'ConflictException'
     end
 
     # <p>The details of a job entity identifier.</p>
@@ -4000,25 +3867,13 @@ module Aws::Deadline
       :environment_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class JobDetails < JobEntityIdentifiersUnion; end
       class JobAttachmentDetails < JobEntityIdentifiersUnion; end
       class StepDetails < JobEntityIdentifiersUnion; end
       class EnvironmentDetails < JobEntityIdentifiersUnion; end
       class Unknown < JobEntityIdentifiersUnion; end
-    end
-
-    module JobLifecycleStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      UPLOAD_IN_PROGRESS = 'UPLOAD_IN_PROGRESS'
-      UPLOAD_FAILED = 'UPLOAD_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      UPDATE_SUCCEEDED = 'UPDATE_SUCCEEDED'
-      ARCHIVED = 'ARCHIVED'
     end
 
     # <p>The details for a job member.</p>
@@ -4052,7 +3907,7 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of job parameters.</p>
@@ -4075,7 +3930,7 @@ module Aws::Deadline
       :path,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Int < JobParameter; end
       class Float < JobParameter; end
@@ -4100,7 +3955,7 @@ module Aws::Deadline
       :windows,
       :run_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a job search.</p>
@@ -4237,7 +4092,7 @@ module Aws::Deadline
       :max_worker_count,
       :source_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of job details.</p>
@@ -4366,28 +4221,7 @@ module Aws::Deadline
       :max_worker_count,
       :source_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobTargetTaskRunStatus
-      READY = 'READY'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELED = 'CANCELED'
-      SUSPENDED = 'SUSPENDED'
-      PENDING = 'PENDING'
-    end
-
-    module JobTemplateType
-      JSON = 'JSON'
-      YAML = 'YAML'
-    end
-
-    module LicenseEndpointStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      READY = 'READY'
-      NOT_READY = 'NOT_READY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a license endpoint.</p>
@@ -4409,7 +4243,7 @@ module Aws::Deadline
       :status_message,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a specific limit.</p>
@@ -4465,7 +4299,7 @@ module Aws::Deadline
       :limit_id,
       :current_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4478,7 +4312,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metered_products
@@ -4491,7 +4325,7 @@ module Aws::Deadline
       :metered_products,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4512,7 +4346,7 @@ module Aws::Deadline
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4525,7 +4359,7 @@ module Aws::Deadline
       :next_token,
       :budgets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4542,7 +4376,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -4555,7 +4389,7 @@ module Aws::Deadline
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4572,7 +4406,7 @@ module Aws::Deadline
       :principal_id,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4585,7 +4419,7 @@ module Aws::Deadline
       :next_token,
       :farms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4606,7 +4440,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -4619,7 +4453,7 @@ module Aws::Deadline
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4651,7 +4485,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleets
@@ -4664,7 +4498,7 @@ module Aws::Deadline
       :fleets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4689,7 +4523,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -4702,7 +4536,7 @@ module Aws::Deadline
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4727,7 +4561,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_parameter_definitions
@@ -4740,7 +4574,7 @@ module Aws::Deadline
       :job_parameter_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4765,7 +4599,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -4778,7 +4612,7 @@ module Aws::Deadline
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4791,7 +4625,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoints
@@ -4804,7 +4638,7 @@ module Aws::Deadline
       :license_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4821,7 +4655,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limits
@@ -4834,7 +4668,7 @@ module Aws::Deadline
       :limits,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -4851,7 +4685,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metered_products
@@ -4864,7 +4698,7 @@ module Aws::Deadline
       :metered_products,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4877,7 +4711,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4891,7 +4725,7 @@ module Aws::Deadline
       :next_token,
       :monitors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4912,7 +4746,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -4925,7 +4759,7 @@ module Aws::Deadline
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4950,7 +4784,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_fleet_associations
@@ -4963,7 +4797,7 @@ module Aws::Deadline
       :queue_fleet_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -4992,7 +4826,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_limit_associations
@@ -5006,7 +4840,7 @@ module Aws::Deadline
       :queue_limit_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5027,7 +4861,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -5040,7 +4874,7 @@ module Aws::Deadline
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5080,7 +4914,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queues
@@ -5093,7 +4927,7 @@ module Aws::Deadline
       :queues,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5126,7 +4960,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_actions
@@ -5139,7 +4973,7 @@ module Aws::Deadline
       :session_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5164,7 +4998,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sessions
@@ -5177,7 +5011,7 @@ module Aws::Deadline
       :sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5202,7 +5036,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sessions
@@ -5215,7 +5049,7 @@ module Aws::Deadline
       :sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5244,7 +5078,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumers
@@ -5257,7 +5091,7 @@ module Aws::Deadline
       :consumers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5286,7 +5120,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dependencies
@@ -5299,7 +5133,7 @@ module Aws::Deadline
       :dependencies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5324,7 +5158,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute steps
@@ -5337,7 +5171,7 @@ module Aws::Deadline
       :steps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5358,7 +5192,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_profiles
@@ -5371,7 +5205,7 @@ module Aws::Deadline
       :storage_profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5388,7 +5222,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_profiles
@@ -5401,7 +5235,7 @@ module Aws::Deadline
       :storage_profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5410,7 +5244,7 @@ module Aws::Deadline
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5419,7 +5253,7 @@ module Aws::Deadline
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5448,7 +5282,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -5461,7 +5295,7 @@ module Aws::Deadline
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -5482,7 +5316,7 @@ module Aws::Deadline
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5495,7 +5329,7 @@ module Aws::Deadline
       :next_token,
       :workers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Log configuration details.</p>
@@ -5517,12 +5351,7 @@ module Aws::Deadline
       :parameters,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogicalOperator
-      AND = 'AND'
-      OR = 'OR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the manifest that links a job's source information.</p>
@@ -5553,14 +5382,7 @@ module Aws::Deadline
       :input_manifest_path,
       :input_manifest_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipLevel
-      VIEWER = 'VIEWER'
-      CONTRIBUTOR = 'CONTRIBUTOR'
-      OWNER = 'OWNER'
-      MANAGER = 'MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range of memory in MiB.</p>
@@ -5574,7 +5396,7 @@ module Aws::Deadline
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a metered product.</p>
@@ -5596,7 +5418,7 @@ module Aws::Deadline
       :vendor,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a monitor in Deadline Cloud.</p>
@@ -5652,7 +5474,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a filtered search for parameters.</p>
@@ -5670,7 +5492,7 @@ module Aws::Deadline
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organizes parameters according to your specifications.</p>
@@ -5684,7 +5506,7 @@ module Aws::Deadline
       :sort_order,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a search for two or more step parameters.</p>
@@ -5698,12 +5520,7 @@ module Aws::Deadline
       :parameters,
       :combination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PathFormat
-      WINDOWS = 'windows'
-      POSIX = 'posix'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a source and destination path.</p>
@@ -5722,14 +5539,7 @@ module Aws::Deadline
       :source_path,
       :destination_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Period
-      HOURLY = 'HOURLY'
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The POSIX user.</p>
@@ -5743,7 +5553,7 @@ module Aws::Deadline
       :user,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_endpoint_id
@@ -5756,17 +5566,12 @@ module Aws::Deadline
       :license_endpoint_id,
       :product_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutMeteredProductResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueBlockedReason
-      NO_BUDGET_CONFIGURED = 'NO_BUDGET_CONFIGURED'
-      BUDGET_THRESHOLD_REACHED = 'BUDGET_THRESHOLD_REACHED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a queue environment.</p>
@@ -5784,14 +5589,7 @@ module Aws::Deadline
       :name,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueFleetAssociationStatus
-      ACTIVE = 'ACTIVE'
-      STOP_SCHEDULING_AND_COMPLETE_TASKS = 'STOP_SCHEDULING_AND_COMPLETE_TASKS'
-      STOP_SCHEDULING_AND_CANCEL_TASKS = 'STOP_SCHEDULING_AND_CANCEL_TASKS'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a queue-fleet association.</p>
@@ -5845,14 +5643,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueLimitAssociationStatus
-      ACTIVE = 'ACTIVE'
-      STOP_LIMIT_USAGE_AND_COMPLETE_TASKS = 'STOP_LIMIT_USAGE_AND_COMPLETE_TASKS'
-      STOP_LIMIT_USAGE_AND_CANCEL_TASKS = 'STOP_LIMIT_USAGE_AND_CANCEL_TASKS'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the association between a queue and a limit.</p>
@@ -5906,7 +5697,7 @@ module Aws::Deadline
       :limit_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a queue member.</p>
@@ -5936,13 +5727,7 @@ module Aws::Deadline
       :identity_store_id,
       :membership_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueStatus
-      IDLE = 'IDLE'
-      SCHEDULING = 'SCHEDULING'
-      SCHEDULING_BLOCKED = 'SCHEDULING_BLOCKED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a queue summary.</p>
@@ -5991,7 +5776,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource can't be found.</p>
@@ -6012,7 +5797,7 @@ module Aws::Deadline
       :resource_type,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a budget action.</p>
@@ -6033,12 +5818,7 @@ module Aws::Deadline
       :threshold_percentage,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RunAs
-      QUEUE_CONFIGURED_USER = 'QUEUE_CONFIGURED_USER'
-      WORKER_AGENT_USER = 'WORKER_AGENT_USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location information.</p>
@@ -6052,7 +5832,7 @@ module Aws::Deadline
       :bucket_name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of search filter to apply.</p>
@@ -6079,7 +5859,7 @@ module Aws::Deadline
       :group_filter,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DateTimeFilter < SearchFilterExpression; end
       class ParameterFilter < SearchFilterExpression; end
@@ -6103,7 +5883,7 @@ module Aws::Deadline
       :filters,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -6135,7 +5915,7 @@ module Aws::Deadline
       :item_offset,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -6152,7 +5932,7 @@ module Aws::Deadline
       :next_item_offset,
       :total_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resources to search.</p>
@@ -6171,7 +5951,7 @@ module Aws::Deadline
       :parameter_sort,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UserJobsFirst < SearchSortExpression; end
       class FieldSort < SearchSortExpression; end
@@ -6212,7 +5992,7 @@ module Aws::Deadline
       :item_offset,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute steps
@@ -6229,7 +6009,7 @@ module Aws::Deadline
       :next_item_offset,
       :total_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -6265,7 +6045,7 @@ module Aws::Deadline
       :item_offset,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -6282,7 +6062,7 @@ module Aws::Deadline
       :next_item_offset,
       :total_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Searches for a particular search term.</p>
@@ -6309,17 +6089,12 @@ module Aws::Deadline
       :search_term,
       :match_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:match_type] = 'FUZZY_MATCH' unless options.key?(:match_type)
         super
       end
-    end
-
-    module SearchTermMatchingType
-      FUZZY_MATCH = 'FUZZY_MATCH'
-      CONTAINS = 'CONTAINS'
     end
 
     # @!attribute farm_id
@@ -6351,7 +6126,7 @@ module Aws::Deadline
       :item_offset,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workers
@@ -6368,7 +6143,7 @@ module Aws::Deadline
       :next_item_offset,
       :total_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for a service managed Amazon EC2 fleet.</p>
@@ -6390,7 +6165,7 @@ module Aws::Deadline
       :vpc_configuration,
       :storage_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon EC2 instance capabilities.</p>
@@ -6437,7 +6212,7 @@ module Aws::Deadline
       :custom_amounts,
       :custom_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Amazon EC2 instance market options for a service managed fleet.</p>
@@ -6447,12 +6222,7 @@ module Aws::Deadline
     class ServiceManagedEc2InstanceMarketOptions < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceManagedFleetOperatingSystemFamily
-      WINDOWS = 'WINDOWS'
-      LINUX = 'LINUX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You exceeded your service quota. Service quotas, also referred to as limits, are the
@@ -6486,13 +6256,7 @@ module Aws::Deadline
       :resource_id,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceQuotaExceededExceptionReason
-      SERVICE_QUOTA_EXCEEDED_EXCEPTION = 'SERVICE_QUOTA_EXCEEDED_EXCEPTION'
-      KMS_KEY_LIMIT_EXCEEDED = 'KMS_KEY_LIMIT_EXCEEDED'
-      DEPENDENCY_LIMIT_EXCEEDED = 'DEPENDENCY_LIMIT_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the session action.</p>
@@ -6515,7 +6279,7 @@ module Aws::Deadline
       :sync_input_job_attachments,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EnvEnter < SessionActionDefinition; end
       class EnvExit < SessionActionDefinition; end
@@ -6544,27 +6308,13 @@ module Aws::Deadline
       :sync_input_job_attachments,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EnvEnter < SessionActionDefinitionSummary; end
       class EnvExit < SessionActionDefinitionSummary; end
       class TaskRun < SessionActionDefinitionSummary; end
       class SyncInputJobAttachments < SessionActionDefinitionSummary; end
       class Unknown < SessionActionDefinitionSummary; end
-    end
-
-    module SessionActionStatus
-      ASSIGNED = 'ASSIGNED'
-      RUNNING = 'RUNNING'
-      CANCELING = 'CANCELING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      INTERRUPTED = 'INTERRUPTED'
-      CANCELED = 'CANCELED'
-      NEVER_ATTEMPTED = 'NEVER_ATTEMPTED'
-      SCHEDULED = 'SCHEDULED'
-      RECLAIMING = 'RECLAIMING'
-      RECLAIMED = 'RECLAIMED'
     end
 
     # <p>The details of a session action.</p>
@@ -6603,19 +6353,7 @@ module Aws::Deadline
       :definition,
       :manifests,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionLifecycleStatus
-      STARTED = 'STARTED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_SUCCEEDED = 'UPDATE_SUCCEEDED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      ENDED = 'ENDED'
-    end
-
-    module SessionLifecycleTargetStatus
-      ENDED = 'ENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a session.</p>
@@ -6657,14 +6395,7 @@ module Aws::Deadline
       :updated_by,
       :target_lifecycle_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionsStatisticsAggregationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      TIMEOUT = 'TIMEOUT'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the fleet IDs or queue IDs to return statistics. You can specify only fleet
@@ -6682,16 +6413,11 @@ module Aws::Deadline
       :fleet_ids,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class QueueIds < SessionsStatisticsResources; end
       class FleetIds < SessionsStatisticsResources; end
       class Unknown < SessionsStatisticsResources; end
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
     end
 
     # @!attribute farm_id
@@ -6729,7 +6455,7 @@ module Aws::Deadline
       :group_by,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregation_id
@@ -6740,7 +6466,7 @@ module Aws::Deadline
     class StartSessionsStatisticsAggregationResponse < Struct.new(
       :aggregation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of statistics for a session.</p>
@@ -6799,7 +6525,7 @@ module Aws::Deadline
       :aggregation_start_time,
       :aggregation_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum, maximum, average, and sum.</p>
@@ -6821,7 +6547,7 @@ module Aws::Deadline
       :avg,
       :sum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details outlining the minimum and maximum capability of a step.</p>
@@ -6843,7 +6569,7 @@ module Aws::Deadline
       :max,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of step attributes.</p>
@@ -6861,7 +6587,7 @@ module Aws::Deadline
       :any_of,
       :all_of,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a step consumer.</p>
@@ -6875,7 +6601,7 @@ module Aws::Deadline
       :step_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of step dependency.</p>
@@ -6889,7 +6615,7 @@ module Aws::Deadline
       :step_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a step entity.</p>
@@ -6915,7 +6641,7 @@ module Aws::Deadline
       :template,
       :dependencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the step error.</p>
@@ -6937,7 +6663,7 @@ module Aws::Deadline
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of identifiers for a step.</p>
@@ -6951,14 +6677,7 @@ module Aws::Deadline
       :job_id,
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepLifecycleStatus
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      UPDATE_SUCCEEDED = 'UPDATE_SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a step parameter.</p>
@@ -6972,15 +6691,7 @@ module Aws::Deadline
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepParameterType
-      INT = 'INT'
-      FLOAT = 'FLOAT'
-      STRING = 'STRING'
-      PATH = 'PATH'
-      CHUNK_INT = 'CHUNK_INT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of required step capabilities.</p>
@@ -6994,7 +6705,7 @@ module Aws::Deadline
       :attributes,
       :amounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a step search.</p>
@@ -7110,7 +6821,7 @@ module Aws::Deadline
       :updated_by,
       :parameter_space,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a step.</p>
@@ -7218,22 +6929,7 @@ module Aws::Deadline
       :ended_at,
       :dependency_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepTargetTaskRunStatus
-      READY = 'READY'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELED = 'CANCELED'
-      SUSPENDED = 'SUSPENDED'
-      PENDING = 'PENDING'
-    end
-
-    module StorageProfileOperatingSystemFamily
-      WINDOWS = 'WINDOWS'
-      LINUX = 'LINUX'
-      MACOS = 'MACOS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a storage profile.</p>
@@ -7254,7 +6950,7 @@ module Aws::Deadline
       :display_name,
       :os_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Searches for a particular string.</p>
@@ -7272,7 +6968,7 @@ module Aws::Deadline
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job attachment in a session action to sync.</p>
@@ -7282,7 +6978,7 @@ module Aws::Deadline
     class SyncInputJobAttachmentsSessionActionDefinition < Struct.new(
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a synced job attachment.</p>
@@ -7292,12 +6988,7 @@ module Aws::Deadline
     class SyncInputJobAttachmentsSessionActionDefinitionSummary < Struct.new(
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagPropagationMode
-      NO_PROPAGATION = 'NO_PROPAGATION'
-      PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH = 'PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7310,12 +7001,12 @@ module Aws::Deadline
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data types for the task parameters.</p>
@@ -7343,7 +7034,7 @@ module Aws::Deadline
       :chunk_int,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Int < TaskParameterValue; end
       class Float < TaskParameterValue; end
@@ -7364,7 +7055,7 @@ module Aws::Deadline
       :output_manifest_path,
       :output_manifest_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The manifest properties for a task run, corresponding to the manifest properties in the job.</p>
@@ -7378,7 +7069,7 @@ module Aws::Deadline
       :output_manifest_path,
       :output_manifest_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task, step, and parameters for the task run in the session action.</p>
@@ -7396,7 +7087,7 @@ module Aws::Deadline
       :step_id,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a task run in a session action.</p>
@@ -7414,22 +7105,7 @@ module Aws::Deadline
       :step_id,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskRunStatus
-      PENDING = 'PENDING'
-      READY = 'READY'
-      ASSIGNED = 'ASSIGNED'
-      STARTING = 'STARTING'
-      SCHEDULED = 'SCHEDULED'
-      INTERRUPTING = 'INTERRUPTING'
-      RUNNING = 'RUNNING'
-      SUSPENDED = 'SUSPENDED'
-      CANCELED = 'CANCELED'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      NOT_COMPATIBLE = 'NOT_COMPATIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a task search.</p>
@@ -7483,7 +7159,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a task.</p>
@@ -7537,16 +7213,7 @@ module Aws::Deadline
       :updated_by,
       :latest_session_action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskTargetRunStatus
-      READY = 'READY'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELED = 'CANCELED'
-      SUSPENDED = 'SUSPENDED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeded a request rate quota.</p>
@@ -7571,7 +7238,7 @@ module Aws::Deadline
       :retry_after_seconds,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7584,12 +7251,12 @@ module Aws::Deadline
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7652,12 +7319,12 @@ module Aws::Deadline
       :actions_to_remove,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateBudgetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -7680,12 +7347,12 @@ module Aws::Deadline
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFarmResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7744,16 +7411,12 @@ module Aws::Deadline
       :configuration,
       :host_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFleetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateJobLifecycleStatus
-      ARCHIVED = 'ARCHIVED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7809,12 +7472,12 @@ module Aws::Deadline
       :queue_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -7852,12 +7515,12 @@ module Aws::Deadline
       :description,
       :max_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLimitResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_id
@@ -7881,12 +7544,12 @@ module Aws::Deadline
       :display_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMonitorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7919,12 +7582,12 @@ module Aws::Deadline
       :template_type,
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -7945,18 +7608,12 @@ module Aws::Deadline
       :fleet_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueFleetAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateQueueFleetAssociationStatus
-      ACTIVE = 'ACTIVE'
-      STOP_SCHEDULING_AND_COMPLETE_TASKS = 'STOP_SCHEDULING_AND_COMPLETE_TASKS'
-      STOP_SCHEDULING_AND_CANCEL_TASKS = 'STOP_SCHEDULING_AND_CANCEL_TASKS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -7979,18 +7636,12 @@ module Aws::Deadline
       :limit_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueLimitAssociationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateQueueLimitAssociationStatus
-      ACTIVE = 'ACTIVE'
-      STOP_LIMIT_USAGE_AND_COMPLETE_TASKS = 'STOP_LIMIT_USAGE_AND_COMPLETE_TASKS'
-      STOP_LIMIT_USAGE_AND_CANCEL_TASKS = 'STOP_LIMIT_USAGE_AND_CANCEL_TASKS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -8054,12 +7705,12 @@ module Aws::Deadline
       :allowed_storage_profile_ids_to_add,
       :allowed_storage_profile_ids_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateQueueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -8088,12 +7739,12 @@ module Aws::Deadline
       :job_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_task_run_status
@@ -8122,12 +7773,12 @@ module Aws::Deadline
       :job_id,
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateStepResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -8163,12 +7814,12 @@ module Aws::Deadline
       :file_system_locations_to_add,
       :file_system_locations_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateStorageProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -8201,12 +7852,12 @@ module Aws::Deadline
       :step_id,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -8235,7 +7886,7 @@ module Aws::Deadline
       :capabilities,
       :host_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log
@@ -8249,7 +7900,7 @@ module Aws::Deadline
       :log,
       :host_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute farm_id
@@ -8270,7 +7921,7 @@ module Aws::Deadline
       :worker_id,
       :updated_session_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assigned_sessions
@@ -8291,7 +7942,7 @@ module Aws::Deadline
       :desired_worker_status,
       :update_interval_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The updated session action information as it relates to completion and progress of the
@@ -8332,30 +7983,7 @@ module Aws::Deadline
       :progress_percent,
       :manifests,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdatedWorkerStatus
-      STARTED = 'STARTED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-    end
-
-    module UsageGroupByField
-      QUEUE_ID = 'QUEUE_ID'
-      FLEET_ID = 'FLEET_ID'
-      JOB_ID = 'JOB_ID'
-      USER_ID = 'USER_ID'
-      USAGE_TYPE = 'USAGE_TYPE'
-      INSTANCE_TYPE = 'INSTANCE_TYPE'
-      LICENSE_PRODUCT = 'LICENSE_PRODUCT'
-    end
-
-    module UsageStatistic
-      SUM = 'SUM'
-      MIN = 'MIN'
-      MAX = 'MAX'
-      AVG = 'AVG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The usage details of the allotted budget.</p>
@@ -8366,15 +7994,10 @@ module Aws::Deadline
       :queue_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class QueueId < UsageTrackingResource; end
       class Unknown < UsageTrackingResource; end
-    end
-
-    module UsageType
-      COMPUTE = 'COMPUTE'
-      LICENSE = 'LICENSE'
     end
 
     # <p>Allows setting a specific user's job to run first.</p>
@@ -8384,7 +8007,7 @@ module Aws::Deadline
     class UserJobsFirst < Struct.new(
       :user_identity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The allowable range of vCPU processing power for the fleet.</p>
@@ -8398,7 +8021,7 @@ module Aws::Deadline
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request isn't valid. This can occur if your request contains malformed JSON or
@@ -8420,7 +8043,7 @@ module Aws::Deadline
       :field_list,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a validation exception.</p>
@@ -8434,14 +8057,7 @@ module Aws::Deadline
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration options for a service managed fleet's VPC.</p>
@@ -8451,7 +8067,7 @@ module Aws::Deadline
     class VpcConfiguration < Struct.new(
       :resource_configuration_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Windows user details.</p>
@@ -8465,7 +8081,7 @@ module Aws::Deadline
       :user,
       :password_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the worker amount capability.</p>
@@ -8479,7 +8095,7 @@ module Aws::Deadline
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the worker attribute capability.</p>
@@ -8493,7 +8109,7 @@ module Aws::Deadline
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for worker capabilities.</p>
@@ -8507,7 +8123,7 @@ module Aws::Deadline
       :amounts,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a worker search.</p>
@@ -8545,7 +8161,7 @@ module Aws::Deadline
       :updated_by,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes the session for a particular worker.</p>
@@ -8579,18 +8195,7 @@ module Aws::Deadline
       :ended_at,
       :target_lifecycle_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkerStatus
-      CREATED = 'CREATED'
-      STARTED = 'STARTED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      NOT_RESPONDING = 'NOT_RESPONDING'
-      NOT_COMPATIBLE = 'NOT_COMPATIBLE'
-      RUNNING = 'RUNNING'
-      IDLE = 'IDLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of details for a worker.</p>
@@ -8636,7 +8241,7 @@ module Aws::Deadline
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

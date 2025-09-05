@@ -12,7 +12,7 @@ module Aws::InternetMonitor
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon CloudWatch Internet Monitor calculates measurements about the availability for your application's internet traffic between client locations and Amazon Web Services.
@@ -49,7 +49,7 @@ module Aws::InternetMonitor
       :percent_of_total_traffic_impacted,
       :percent_of_client_location_impacted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A bad request was received.</p>
@@ -58,7 +58,7 @@ module Aws::InternetMonitor
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The impacted location, such as a city, that Amazon Web Services clients access application resources from.</p>
@@ -100,7 +100,7 @@ module Aws::InternetMonitor
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource is in use.</p>
@@ -109,7 +109,7 @@ module Aws::InternetMonitor
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -166,7 +166,7 @@ module Aws::InternetMonitor
       :traffic_percentage_to_monitor,
       :health_events_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -179,7 +179,7 @@ module Aws::InternetMonitor
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -188,12 +188,12 @@ module Aws::InternetMonitor
     class DeleteMonitorInput < Struct.new(
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that you use with the results of a Amazon CloudWatch Internet Monitor query that you created and ran. The query sets up a 
@@ -225,7 +225,7 @@ module Aws::InternetMonitor
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -246,7 +246,7 @@ module Aws::InternetMonitor
       :event_id,
       :linked_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_arn
@@ -298,7 +298,7 @@ module Aws::InternetMonitor
       :impact_type,
       :health_score_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:health_score_threshold] = 0 unless options.key?(:health_score_threshold)
@@ -312,7 +312,7 @@ module Aws::InternetMonitor
     class GetInternetEventInput < Struct.new(
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -345,7 +345,7 @@ module Aws::InternetMonitor
       :event_type,
       :event_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -361,7 +361,7 @@ module Aws::InternetMonitor
       :monitor_name,
       :linked_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -428,7 +428,7 @@ module Aws::InternetMonitor
       :traffic_percentage_to_monitor,
       :health_events_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -450,7 +450,7 @@ module Aws::InternetMonitor
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fields
@@ -470,7 +470,7 @@ module Aws::InternetMonitor
       :data,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -484,7 +484,7 @@ module Aws::InternetMonitor
       :monitor_name,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -493,7 +493,7 @@ module Aws::InternetMonitor
     class GetQueryStatusOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a health event created in a monitor in Amazon CloudWatch Internet Monitor.</p>
@@ -545,7 +545,7 @@ module Aws::InternetMonitor
       :impact_type,
       :health_score_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:health_score_threshold] = 0 unless options.key?(:health_score_threshold)
@@ -583,7 +583,7 @@ module Aws::InternetMonitor
       :availability_local_health_events_config,
       :performance_local_health_events_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:availability_score_threshold] = 0 unless options.key?(:availability_score_threshold)
@@ -666,7 +666,7 @@ module Aws::InternetMonitor
       :internet_health,
       :ipv4_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal server error.</p>
@@ -675,7 +675,7 @@ module Aws::InternetMonitor
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
@@ -684,7 +684,7 @@ module Aws::InternetMonitor
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about an internet event in Amazon CloudWatch Internet Monitor. Internet events are issues that cause performance degradation
@@ -722,7 +722,7 @@ module Aws::InternetMonitor
       :event_type,
       :event_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Internet health includes measurements calculated by Amazon CloudWatch Internet Monitor about the performance and availability for your application on the internet. Amazon Web Services has
@@ -746,7 +746,7 @@ module Aws::InternetMonitor
       :availability,
       :performance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Publish internet measurements to an Amazon S3 bucket in addition to CloudWatch Logs.</p>
@@ -758,7 +758,7 @@ module Aws::InternetMonitor
     class InternetMeasurementsLogDelivery < Struct.new(
       :s3_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded a service quota.</p>
@@ -767,7 +767,7 @@ module Aws::InternetMonitor
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -803,7 +803,7 @@ module Aws::InternetMonitor
       :event_status,
       :linked_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute health_events
@@ -816,7 +816,7 @@ module Aws::InternetMonitor
       :health_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -845,7 +845,7 @@ module Aws::InternetMonitor
       :event_status,
       :event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute internet_events
@@ -858,7 +858,7 @@ module Aws::InternetMonitor
       :internet_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -885,7 +885,7 @@ module Aws::InternetMonitor
       :monitor_status,
       :include_linked_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitors
@@ -898,7 +898,7 @@ module Aws::InternetMonitor
       :monitors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -907,7 +907,7 @@ module Aws::InternetMonitor
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -916,7 +916,7 @@ module Aws::InternetMonitor
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type with the configuration information that determines the threshold and other conditions for when Internet Monitor creates a health event 
@@ -944,7 +944,7 @@ module Aws::InternetMonitor
       :health_score_threshold,
       :min_traffic_impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:health_score_threshold] = 0 unless options.key?(:health_score_threshold)
@@ -972,7 +972,7 @@ module Aws::InternetMonitor
       :status,
       :processing_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internet service provider (ISP) or network (ASN) in Amazon CloudWatch Internet Monitor.</p>
@@ -986,7 +986,7 @@ module Aws::InternetMonitor
       :as_name,
       :as_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the network impairment for a specific network measured by Amazon CloudWatch Internet Monitor.</p>
@@ -1004,7 +1004,7 @@ module Aws::InternetMonitor
       :as_path,
       :network_event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request specifies something that doesn't exist.</p>
@@ -1013,7 +1013,7 @@ module Aws::InternetMonitor
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon CloudWatch Internet Monitor calculates measurements about the performance for your application's internet traffic between client locations and Amazon Web Services. 
@@ -1057,7 +1057,7 @@ module Aws::InternetMonitor
       :percent_of_client_location_impacted,
       :round_trip_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a field to query for your application's Amazon CloudWatch Internet Monitor data. You create a data repository by running a query of a specific
@@ -1073,7 +1073,7 @@ module Aws::InternetMonitor
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request specifies a resource that doesn't exist.</p>
@@ -1082,7 +1082,7 @@ module Aws::InternetMonitor
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Round-trip time (RTT) is how long it takes for a request from the user to return a response to the user. Amazon CloudWatch Internet Monitor calculates RTT at different
@@ -1101,7 +1101,7 @@ module Aws::InternetMonitor
       :p90,
       :p95,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for publishing Amazon CloudWatch Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix 
@@ -1121,7 +1121,7 @@ module Aws::InternetMonitor
       :bucket_prefix,
       :log_delivery_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -1193,7 +1193,7 @@ module Aws::InternetMonitor
       :filter_parameters,
       :linked_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -1202,7 +1202,7 @@ module Aws::InternetMonitor
     class StartQueryOutput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -1215,12 +1215,12 @@ module Aws::InternetMonitor
       :monitor_name,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopQueryOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1233,12 +1233,12 @@ module Aws::InternetMonitor
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1247,7 +1247,7 @@ module Aws::InternetMonitor
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There were too many requests.</p>
@@ -1256,7 +1256,7 @@ module Aws::InternetMonitor
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1269,12 +1269,12 @@ module Aws::InternetMonitor
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -1332,7 +1332,7 @@ module Aws::InternetMonitor
       :traffic_percentage_to_monitor,
       :health_events_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -1345,7 +1345,7 @@ module Aws::InternetMonitor
       :monitor_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invalid request.</p>
@@ -1354,7 +1354,7 @@ module Aws::InternetMonitor
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

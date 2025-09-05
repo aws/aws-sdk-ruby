@@ -40,7 +40,7 @@ module Aws::FraudDetector
       :threshold,
       :atodr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -56,7 +56,7 @@ module Aws::FraudDetector
     class ATIModelPerformance < Struct.new(
       :asi,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -76,7 +76,7 @@ module Aws::FraudDetector
       :metric_data_points,
       :model_performance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating Amazon Fraud Detector does not have the needed permissions. This can occur if you submit a request, such as <code>PutExternalModel</code>, that specifies a role that is not in your account.</p>
@@ -85,7 +85,7 @@ module Aws::FraudDetector
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log odds metric details.</p>
@@ -106,7 +106,7 @@ module Aws::FraudDetector
       :variable_names,
       :aggregated_variables_importance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -141,7 +141,7 @@ module Aws::FraudDetector
       :relative_impact,
       :log_odds_impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the relative importance of the aggregated variables.</p>
@@ -156,7 +156,7 @@ module Aws::FraudDetector
     class AggregatedVariablesImportanceMetrics < Struct.new(
       :log_odds_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -200,16 +200,7 @@ module Aws::FraudDetector
       :updated_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AsyncJobStatus
-      IN_PROGRESS_INITIALIZING = 'IN_PROGRESS_INITIALIZING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      CANCEL_IN_PROGRESS = 'CANCEL_IN_PROGRESS'
-      CANCELED = 'CANCELED'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the error of the batch create variable API.</p>
@@ -227,7 +218,7 @@ module Aws::FraudDetector
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -245,7 +236,7 @@ module Aws::FraudDetector
       :variable_entries,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -254,7 +245,7 @@ module Aws::FraudDetector
     class BatchCreateVariableResult < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the error of the batch get variable API.</p>
@@ -272,7 +263,7 @@ module Aws::FraudDetector
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -286,7 +277,7 @@ module Aws::FraudDetector
     class BatchGetVariableRequest < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute variables
@@ -299,7 +290,7 @@ module Aws::FraudDetector
       :variables,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch import job details.</p>
@@ -357,7 +348,7 @@ module Aws::FraudDetector
       :failed_records_count,
       :total_records_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch prediction details.</p>
@@ -423,7 +414,7 @@ module Aws::FraudDetector
       :processed_records_count,
       :total_records_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -433,12 +424,12 @@ module Aws::FraudDetector
     class CancelBatchImportJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelBatchImportJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -447,12 +438,12 @@ module Aws::FraudDetector
     class CancelBatchPredictionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelBatchPredictionJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating there was a conflict during a delete operation.</p>
@@ -461,7 +452,7 @@ module Aws::FraudDetector
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -493,12 +484,12 @@ module Aws::FraudDetector
       :iam_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateBatchImportJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -538,12 +529,12 @@ module Aws::FraudDetector
       :iam_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateBatchPredictionJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -580,7 +571,7 @@ module Aws::FraudDetector
       :rule_execution_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -597,7 +588,7 @@ module Aws::FraudDetector
       :detector_version_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -633,12 +624,12 @@ module Aws::FraudDetector
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateListResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -663,12 +654,12 @@ module Aws::FraudDetector
       :event_type_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateModelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -701,7 +692,7 @@ module Aws::FraudDetector
       :ingested_events_detail,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -722,7 +713,7 @@ module Aws::FraudDetector
       :model_version_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -755,7 +746,7 @@ module Aws::FraudDetector
       :outcomes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -764,7 +755,7 @@ module Aws::FraudDetector
     class CreateRuleResult < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -800,26 +791,12 @@ module Aws::FraudDetector
       :variable_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateVariableResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSource
-      EVENT = 'EVENT'
-      MODEL_SCORE = 'MODEL_SCORE'
-      EXTERNAL_MODEL_SCORE = 'EXTERNAL_MODEL_SCORE'
-    end
-
-    module DataType
-      STRING = 'STRING'
-      INTEGER = 'INTEGER'
-      FLOAT = 'FLOAT'
-      BOOLEAN = 'BOOLEAN'
-      DATETIME = 'DATETIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model training data validation metrics.</p>
@@ -833,7 +810,7 @@ module Aws::FraudDetector
       :file_level_messages,
       :field_level_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -842,12 +819,12 @@ module Aws::FraudDetector
     class DeleteBatchImportJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBatchImportJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -856,12 +833,12 @@ module Aws::FraudDetector
     class DeleteBatchPredictionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBatchPredictionJobResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -870,12 +847,12 @@ module Aws::FraudDetector
     class DeleteDetectorRequest < Struct.new(
       :detector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDetectorResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -888,12 +865,12 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDetectorVersionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -902,12 +879,12 @@ module Aws::FraudDetector
     class DeleteEntityTypeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEntityTypeResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -924,12 +901,12 @@ module Aws::FraudDetector
       :event_type_name,
       :delete_audit_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEventResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -938,12 +915,12 @@ module Aws::FraudDetector
     class DeleteEventTypeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEventTypeResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_type_name
@@ -952,7 +929,7 @@ module Aws::FraudDetector
     class DeleteEventsByEventTypeRequest < Struct.new(
       :event_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_type_name
@@ -965,7 +942,7 @@ module Aws::FraudDetector
       :event_type_name,
       :events_deletion_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_endpoint
@@ -974,12 +951,12 @@ module Aws::FraudDetector
     class DeleteExternalModelRequest < Struct.new(
       :model_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteExternalModelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -988,12 +965,12 @@ module Aws::FraudDetector
     class DeleteLabelRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLabelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1004,12 +981,12 @@ module Aws::FraudDetector
     class DeleteListRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteListResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -1022,12 +999,12 @@ module Aws::FraudDetector
       :model_id,
       :model_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteModelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -1044,12 +1021,12 @@ module Aws::FraudDetector
       :model_type,
       :model_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteModelVersionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1058,12 +1035,12 @@ module Aws::FraudDetector
     class DeleteOutcomeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOutcomeResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -1072,12 +1049,12 @@ module Aws::FraudDetector
     class DeleteRuleRequest < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1086,12 +1063,12 @@ module Aws::FraudDetector
     class DeleteVariableRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVariableResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1108,7 +1085,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1129,7 +1106,7 @@ module Aws::FraudDetector
       :next_token,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -1154,7 +1131,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_version_details
@@ -1167,7 +1144,7 @@ module Aws::FraudDetector
       :model_version_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detector.</p>
@@ -1197,13 +1174,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetectorVersionStatus
-      DRAFT = 'DRAFT'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the detector version.</p>
@@ -1225,7 +1196,7 @@ module Aws::FraudDetector
       :description,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity details. </p>
@@ -1240,7 +1211,7 @@ module Aws::FraudDetector
       :entity_type,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity type details.</p>
@@ -1266,7 +1237,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1298,7 +1269,7 @@ module Aws::FraudDetector
       :input_variables,
       :output_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1330,7 +1301,7 @@ module Aws::FraudDetector
       :model_type,
       :evaluations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1380,7 +1351,7 @@ module Aws::FraudDetector
       :evaluated,
       :matched,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event details.</p>
@@ -1414,12 +1385,7 @@ module Aws::FraudDetector
       :label_timestamp,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventIngestion
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1431,7 +1397,7 @@ module Aws::FraudDetector
     class EventOrchestration < Struct.new(
       :event_bridge_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1475,7 +1441,7 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event type details.</p>
@@ -1526,7 +1492,7 @@ module Aws::FraudDetector
       :arn,
       :event_orchestration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1552,7 +1518,7 @@ module Aws::FraudDetector
       :value,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for the external events data used for model version training.</p>
@@ -1566,7 +1532,7 @@ module Aws::FraudDetector
       :data_location,
       :data_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker model.</p>
@@ -1608,7 +1574,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fraud prediction scores from Amazon SageMaker model.</p>
@@ -1622,7 +1588,7 @@ module Aws::FraudDetector
       :external_model,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker model.</p>
@@ -1636,7 +1602,7 @@ module Aws::FraudDetector
       :model_endpoint,
       :model_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message details.</p>
@@ -1662,7 +1628,7 @@ module Aws::FraudDetector
       :content,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message details.</p>
@@ -1680,7 +1646,7 @@ module Aws::FraudDetector
       :content,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1694,7 +1660,7 @@ module Aws::FraudDetector
     class FilterCondition < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1711,7 +1677,7 @@ module Aws::FraudDetector
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_imports
@@ -1724,7 +1690,7 @@ module Aws::FraudDetector
       :batch_imports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1741,7 +1707,7 @@ module Aws::FraudDetector
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_predictions
@@ -1754,7 +1720,7 @@ module Aws::FraudDetector
       :batch_predictions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_type_name
@@ -1763,7 +1729,7 @@ module Aws::FraudDetector
     class GetDeleteEventsByEventTypeStatusRequest < Struct.new(
       :event_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_type_name
@@ -1776,7 +1742,7 @@ module Aws::FraudDetector
       :event_type_name,
       :events_deletion_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1789,7 +1755,7 @@ module Aws::FraudDetector
       :detector_id,
       :detector_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1843,7 +1809,7 @@ module Aws::FraudDetector
       :rule_execution_mode,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -1860,7 +1826,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detectors
@@ -1873,7 +1839,7 @@ module Aws::FraudDetector
       :detectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1890,7 +1856,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_types
@@ -1903,7 +1869,7 @@ module Aws::FraudDetector
       :entity_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -1939,7 +1905,7 @@ module Aws::FraudDetector
       :detector_version_id,
       :prediction_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -2032,7 +1998,7 @@ module Aws::FraudDetector
       :evaluated_external_models,
       :prediction_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -2084,7 +2050,7 @@ module Aws::FraudDetector
       :event_variables,
       :external_model_endpoint_data_blobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_scores
@@ -2101,7 +2067,7 @@ module Aws::FraudDetector
       :rule_results,
       :external_model_outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -2114,7 +2080,7 @@ module Aws::FraudDetector
       :event_id,
       :event_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event
@@ -2123,7 +2089,7 @@ module Aws::FraudDetector
     class GetEventResult < Struct.new(
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2140,7 +2106,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_types
@@ -2153,7 +2119,7 @@ module Aws::FraudDetector
       :event_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_endpoint
@@ -2170,7 +2136,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute external_models
@@ -2183,7 +2149,7 @@ module Aws::FraudDetector
       :external_models,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key
@@ -2192,7 +2158,7 @@ module Aws::FraudDetector
     class GetKMSEncryptionKeyResult < Struct.new(
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2209,7 +2175,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labels
@@ -2222,7 +2188,7 @@ module Aws::FraudDetector
       :labels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2245,7 +2211,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elements
@@ -2262,7 +2228,7 @@ module Aws::FraudDetector
       :elements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2285,7 +2251,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lists
@@ -2302,7 +2268,7 @@ module Aws::FraudDetector
       :lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -2319,7 +2285,7 @@ module Aws::FraudDetector
       :model_type,
       :model_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -2411,7 +2377,7 @@ module Aws::FraudDetector
       :status,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -2432,7 +2398,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2445,7 +2411,7 @@ module Aws::FraudDetector
       :next_token,
       :models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2462,7 +2428,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outcomes
@@ -2475,7 +2441,7 @@ module Aws::FraudDetector
       :outcomes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -2500,7 +2466,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_details
@@ -2513,7 +2479,7 @@ module Aws::FraudDetector
       :rule_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2530,7 +2496,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute variables
@@ -2543,7 +2509,7 @@ module Aws::FraudDetector
       :variables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data about the stored events.</p>
@@ -2570,7 +2536,7 @@ module Aws::FraudDetector
       :most_recent_event,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the ingested event.</p>
@@ -2580,7 +2546,7 @@ module Aws::FraudDetector
     class IngestedEventsDetail < Struct.new(
       :ingested_events_time_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start and stop time of the ingested events.</p>
@@ -2594,7 +2560,7 @@ module Aws::FraudDetector
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating an internal server error.</p>
@@ -2603,7 +2569,7 @@ module Aws::FraudDetector
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KMS key details.</p>
@@ -2613,7 +2579,7 @@ module Aws::FraudDetector
     class KMSKey < Struct.new(
       :kms_encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The label details.</p>
@@ -2639,7 +2605,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The label schema.</p>
@@ -2669,11 +2635,7 @@ module Aws::FraudDetector
       :label_mapper,
       :unlabeled_events_treatment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Language
-      DETECTORPL = 'DETECTORPL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -2720,7 +2682,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_prediction_summaries
@@ -2737,7 +2699,7 @@ module Aws::FraudDetector
       :event_prediction_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2754,7 +2716,7 @@ module Aws::FraudDetector
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2767,13 +2729,7 @@ module Aws::FraudDetector
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListUpdateMode
-      REPLACE = 'REPLACE'
-      APPEND = 'APPEND'
-      REMOVE = 'REMOVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log odds metric details.</p>
@@ -2791,7 +2747,7 @@ module Aws::FraudDetector
       :variable_type,
       :variable_importance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Model performance metrics data points.</p>
@@ -2813,7 +2769,7 @@ module Aws::FraudDetector
       :tpr,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model.</p>
@@ -2847,7 +2803,7 @@ module Aws::FraudDetector
       :last_updated_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pre-formed Amazon SageMaker model input you can include if your detector version includes an imported Amazon SageMaker model endpoint with pass-through input configuration.</p>
@@ -2861,12 +2817,7 @@ module Aws::FraudDetector
       :byte_buffer,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelEndpointStatus
-      ASSOCIATED = 'ASSOCIATED'
-      DISSOCIATED = 'DISSOCIATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker model input configuration.</p>
@@ -2897,12 +2848,7 @@ module Aws::FraudDetector
       :json_input_template,
       :csv_input_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelInputDataFormat
-      CSV = 'TEXT_CSV'
-      JSON = 'APPLICATION_JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the Amazon Sagemaker model output configuration.</p>
@@ -2920,12 +2866,7 @@ module Aws::FraudDetector
       :json_key_to_variable_map,
       :csv_index_to_variable_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelOutputDataFormat
-      CSV = 'TEXT_CSV'
-      JSONLINES = 'APPLICATION_JSONLINES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fraud prediction scores.</p>
@@ -2939,17 +2880,7 @@ module Aws::FraudDetector
       :model_version,
       :scores,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelSource
-      SAGEMAKER = 'SAGEMAKER'
-    end
-
-    module ModelTypeEnum
-      ONLINE_FRAUD_INSIGHTS = 'ONLINE_FRAUD_INSIGHTS'
-      TRANSACTION_FRAUD_INSIGHTS = 'TRANSACTION_FRAUD_INSIGHTS'
-      ACCOUNT_TAKEOVER_INSIGHTS = 'ACCOUNT_TAKEOVER_INSIGHTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model version.</p>
@@ -2971,7 +2902,7 @@ module Aws::FraudDetector
       :model_version_number,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the model version.</p>
@@ -3031,7 +2962,7 @@ module Aws::FraudDetector
       :arn,
       :training_result_v2,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3057,13 +2988,7 @@ module Aws::FraudDetector
       :evaluation_score,
       :prediction_explanations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelVersionStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      TRAINING_CANCELLED = 'TRAINING_CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3095,7 +3020,7 @@ module Aws::FraudDetector
       :tpr,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3115,7 +3040,7 @@ module Aws::FraudDetector
       :auc,
       :uncertainty_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3135,7 +3060,7 @@ module Aws::FraudDetector
       :metric_data_points,
       :model_performance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The outcome.</p>
@@ -3161,7 +3086,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3184,7 +3109,7 @@ module Aws::FraudDetector
       :variable_impact_explanations,
       :aggregated_variables_impact_explanations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3204,7 +3129,7 @@ module Aws::FraudDetector
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3225,12 +3150,12 @@ module Aws::FraudDetector
       :event_type_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutDetectorResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3247,12 +3172,12 @@ module Aws::FraudDetector
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutEntityTypeResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3289,12 +3214,12 @@ module Aws::FraudDetector
       :tags,
       :event_orchestration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutEventTypeResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_endpoint
@@ -3327,12 +3252,12 @@ module Aws::FraudDetector
       :model_endpoint_status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutExternalModelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_encryption_key_arn
@@ -3342,12 +3267,12 @@ module Aws::FraudDetector
     class PutKMSEncryptionKeyRequest < Struct.new(
       :kms_encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutKMSEncryptionKeyResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3364,12 +3289,12 @@ module Aws::FraudDetector
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutLabelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3386,12 +3311,12 @@ module Aws::FraudDetector
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutOutcomeResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating the specified resource was not found.</p>
@@ -3400,7 +3325,7 @@ module Aws::FraudDetector
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating that the attached customer-owned (external) model threw an exception when Amazon Fraud Detector invoked the model.</p>
@@ -3409,7 +3334,7 @@ module Aws::FraudDetector
     class ResourceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule.</p>
@@ -3427,7 +3352,7 @@ module Aws::FraudDetector
       :rule_id,
       :rule_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the rule.</p>
@@ -3473,12 +3398,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleExecutionMode
-      ALL_MATCHED = 'ALL_MATCHED'
-      FIRST_MATCHED = 'FIRST_MATCHED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rule results.</p>
@@ -3492,7 +3412,7 @@ module Aws::FraudDetector
       :rule_id,
       :outcomes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -3525,12 +3445,12 @@ module Aws::FraudDetector
       :label_timestamp,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendEventResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3563,7 +3483,7 @@ module Aws::FraudDetector
       :tpr,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3583,7 +3503,7 @@ module Aws::FraudDetector
       :auc,
       :uncertainty_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3603,7 +3523,7 @@ module Aws::FraudDetector
       :metric_data_points,
       :model_performance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key and value pair. </p>
@@ -3617,7 +3537,7 @@ module Aws::FraudDetector
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3630,12 +3550,12 @@ module Aws::FraudDetector
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating a throttling error.</p>
@@ -3644,7 +3564,7 @@ module Aws::FraudDetector
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The training data schema.</p>
@@ -3658,12 +3578,7 @@ module Aws::FraudDetector
       :model_variables,
       :label_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingDataSourceEnum
-      EXTERNAL_EVENTS = 'EXTERNAL_EVENTS'
-      INGESTED_EVENTS = 'INGESTED_EVENTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The training metric details.</p>
@@ -3677,7 +3592,7 @@ module Aws::FraudDetector
       :auc,
       :metric_data_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3703,7 +3618,7 @@ module Aws::FraudDetector
       :tfi,
       :ati,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The training result details.</p>
@@ -3721,7 +3636,7 @@ module Aws::FraudDetector
       :training_metrics,
       :variable_importance_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3752,7 +3667,7 @@ module Aws::FraudDetector
       :variable_importance_metrics,
       :aggregated_variables_importance_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3773,14 +3688,7 @@ module Aws::FraudDetector
       :lower_bound_value,
       :upper_bound_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnlabeledEventsTreatment
-      IGNORE = 'IGNORE'
-      FRAUD = 'FRAUD'
-      LEGIT = 'LEGIT'
-      AUTO = 'AUTO'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3793,12 +3701,12 @@ module Aws::FraudDetector
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3815,12 +3723,12 @@ module Aws::FraudDetector
       :detector_version_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDetectorVersionMetadataResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3856,12 +3764,12 @@ module Aws::FraudDetector
       :model_versions,
       :rule_execution_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDetectorVersionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_id
@@ -3880,12 +3788,12 @@ module Aws::FraudDetector
       :detector_version_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDetectorVersionStatusResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -3906,12 +3814,12 @@ module Aws::FraudDetector
       :assigned_label,
       :label_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateEventLabelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3961,12 +3869,12 @@ module Aws::FraudDetector
       :update_mode,
       :variable_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateListResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -3983,12 +3891,12 @@ module Aws::FraudDetector
       :model_type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateModelResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -4017,7 +3925,7 @@ module Aws::FraudDetector
       :ingested_events_detail,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -4038,7 +3946,7 @@ module Aws::FraudDetector
       :model_version_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_id
@@ -4059,12 +3967,12 @@ module Aws::FraudDetector
       :model_version_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateModelVersionStatusResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -4077,12 +3985,12 @@ module Aws::FraudDetector
       :rule,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRuleMetadataResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -4111,7 +4019,7 @@ module Aws::FraudDetector
       :outcomes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -4120,7 +4028,7 @@ module Aws::FraudDetector
     class UpdateRuleVersionResult < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4141,12 +4049,12 @@ module Aws::FraudDetector
       :description,
       :variable_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateVariableResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception indicating a specified value is not allowed.</p>
@@ -4155,7 +4063,7 @@ module Aws::FraudDetector
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The variable.</p>
@@ -4199,7 +4107,7 @@ module Aws::FraudDetector
       :created_time,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A variable in the list of variables for the batch create variable request.</p>
@@ -4231,7 +4139,7 @@ module Aws::FraudDetector
       :description,
       :variable_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4265,7 +4173,7 @@ module Aws::FraudDetector
       :relative_impact,
       :log_odds_impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The variable importance metrics details.</p>
@@ -4275,7 +4183,7 @@ module Aws::FraudDetector
     class VariableImportanceMetrics < Struct.new(
       :log_odds_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

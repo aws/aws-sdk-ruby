@@ -6,11 +6,6 @@ module Aws::IotDeviceAdvisor
   # This module contains the types returned by client operations.
   module Types
 
-    module AuthenticationMethod
-      X509ClientCertificate = 'X509ClientCertificate'
-      SignatureVersion4 = 'SignatureVersion4'
-    end
-
     # <p>Sends a Conflict Exception.</p>
     # @!attribute message
     #   <p>Sends a Conflict Exception message.</p>
@@ -18,7 +13,7 @@ module Aws::IotDeviceAdvisor
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_configuration
@@ -37,7 +32,7 @@ module Aws::IotDeviceAdvisor
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -58,7 +53,7 @@ module Aws::IotDeviceAdvisor
       :suite_definition_name,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -67,12 +62,12 @@ module Aws::IotDeviceAdvisor
     class DeleteSuiteDefinitionRequest < Struct.new(
       :suite_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSuiteDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information of a test device. A thing ARN, certificate ARN 
@@ -91,7 +86,7 @@ module Aws::IotDeviceAdvisor
       :certificate_arn,
       :device_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_arn
@@ -112,7 +107,7 @@ module Aws::IotDeviceAdvisor
       :device_role_arn,
       :authentication_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint
@@ -121,7 +116,7 @@ module Aws::IotDeviceAdvisor
     class GetEndpointResponse < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -134,7 +129,7 @@ module Aws::IotDeviceAdvisor
       :suite_definition_id,
       :suite_definition_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -171,7 +166,7 @@ module Aws::IotDeviceAdvisor
       :last_modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -184,7 +179,7 @@ module Aws::IotDeviceAdvisor
       :suite_definition_id,
       :suite_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute qualification_report_download_url
@@ -193,7 +188,7 @@ module Aws::IotDeviceAdvisor
     class GetSuiteRunReportResponse < Struct.new(
       :qualification_report_download_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -206,7 +201,7 @@ module Aws::IotDeviceAdvisor
       :suite_definition_id,
       :suite_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -255,7 +250,7 @@ module Aws::IotDeviceAdvisor
       :error_reason,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Show Group Result.</p>
@@ -273,7 +268,7 @@ module Aws::IotDeviceAdvisor
       :group_name,
       :tests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends an Internal Failure exception.</p>
@@ -283,7 +278,7 @@ module Aws::IotDeviceAdvisor
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -296,7 +291,7 @@ module Aws::IotDeviceAdvisor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_information_list
@@ -310,7 +305,7 @@ module Aws::IotDeviceAdvisor
       :suite_definition_information_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -333,7 +328,7 @@ module Aws::IotDeviceAdvisor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_runs_list
@@ -347,7 +342,7 @@ module Aws::IotDeviceAdvisor
       :suite_runs_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -357,7 +352,7 @@ module Aws::IotDeviceAdvisor
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -366,14 +361,7 @@ module Aws::IotDeviceAdvisor
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Protocol
-      MqttV3_1_1 = 'MqttV3_1_1'
-      MqttV5 = 'MqttV5'
-      MqttV3_1_1_OverWebSocket = 'MqttV3_1_1_OverWebSocket'
-      MqttV5_OverWebSocket = 'MqttV5_OverWebSocket'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends a Resource Not Found exception.</p>
@@ -383,7 +371,7 @@ module Aws::IotDeviceAdvisor
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -404,7 +392,7 @@ module Aws::IotDeviceAdvisor
       :suite_run_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_run_id
@@ -425,19 +413,7 @@ module Aws::IotDeviceAdvisor
       :created_at,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      PASS = 'PASS'
-      FAIL = 'FAIL'
-      CANCELED = 'CANCELED'
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      PASS_WITH_WARNINGS = 'PASS_WITH_WARNINGS'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -450,12 +426,12 @@ module Aws::IotDeviceAdvisor
       :suite_definition_id,
       :suite_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopSuiteRunResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the suite definition configuration.</p>
@@ -500,7 +476,7 @@ module Aws::IotDeviceAdvisor
       :device_permission_role_arn,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the suite definition.</p>
@@ -534,7 +510,7 @@ module Aws::IotDeviceAdvisor
       :protocol,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets suite run configuration.</p>
@@ -553,7 +529,7 @@ module Aws::IotDeviceAdvisor
       :selected_test_list,
       :parallel_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the suite run.</p>
@@ -600,19 +576,7 @@ module Aws::IotDeviceAdvisor
       :passed,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SuiteRunStatus
-      PASS = 'PASS'
-      FAIL = 'FAIL'
-      CANCELED = 'CANCELED'
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      PASS_WITH_WARNINGS = 'PASS_WITH_WARNINGS'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -626,12 +590,12 @@ module Aws::IotDeviceAdvisor
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the test case run.</p>
@@ -714,7 +678,7 @@ module Aws::IotDeviceAdvisor
       :failure,
       :test_scenarios,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides test case scenario.</p>
@@ -785,24 +749,7 @@ module Aws::IotDeviceAdvisor
       :failure,
       :system_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestCaseScenarioStatus
-      PASS = 'PASS'
-      FAIL = 'FAIL'
-      CANCELED = 'CANCELED'
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      PASS_WITH_WARNINGS = 'PASS_WITH_WARNINGS'
-      ERROR = 'ERROR'
-    end
-
-    module TestCaseScenarioType
-      Advanced = 'Advanced'
-      Basic = 'Basic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Show each group result.</p>
@@ -812,7 +759,7 @@ module Aws::IotDeviceAdvisor
     class TestResult < Struct.new(
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -826,12 +773,12 @@ module Aws::IotDeviceAdvisor
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -844,7 +791,7 @@ module Aws::IotDeviceAdvisor
       :suite_definition_id,
       :suite_definition_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute suite_definition_id
@@ -873,7 +820,7 @@ module Aws::IotDeviceAdvisor
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends a validation exception.</p>
@@ -883,7 +830,7 @@ module Aws::IotDeviceAdvisor
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

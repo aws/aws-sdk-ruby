@@ -12,7 +12,7 @@ module Aws::CloudDirectory
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -34,12 +34,12 @@ module Aws::CloudDirectory
       :object_attribute_list,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddFacetToObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute published_schema_arn
@@ -54,7 +54,7 @@ module Aws::CloudDirectory
       :published_schema_arn,
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applied_schema_arn
@@ -69,7 +69,7 @@ module Aws::CloudDirectory
       :applied_schema_arn,
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -91,7 +91,7 @@ module Aws::CloudDirectory
       :child_reference,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attached_object_identifier
@@ -101,7 +101,7 @@ module Aws::CloudDirectory
     class AttachObjectResponse < Struct.new(
       :attached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -120,12 +120,12 @@ module Aws::CloudDirectory
       :policy_reference,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AttachPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -143,7 +143,7 @@ module Aws::CloudDirectory
       :index_reference,
       :target_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attached_object_identifier
@@ -152,7 +152,7 @@ module Aws::CloudDirectory
     class AttachToIndexResponse < Struct.new(
       :attached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -178,7 +178,7 @@ module Aws::CloudDirectory
       :typed_link_facet,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute typed_link_specifier
@@ -187,7 +187,7 @@ module Aws::CloudDirectory
     class AttachTypedLinkResponse < Struct.new(
       :typed_link_specifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A unique identifier for an attribute.</p>
@@ -206,7 +206,7 @@ module Aws::CloudDirectory
       :facet_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The combination of an attribute key and an attribute value.</p>
@@ -220,7 +220,7 @@ module Aws::CloudDirectory
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the attribute name and value for a typed link.</p>
@@ -234,7 +234,7 @@ module Aws::CloudDirectory
       :attribute_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a batch add facet to object operation.</p>
@@ -252,13 +252,13 @@ module Aws::CloudDirectory
       :object_attribute_list,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a batch add facet to object operation.</p>
     class BatchAddFacetToObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <a>AttachObject</a> operation.</p>
@@ -276,7 +276,7 @@ module Aws::CloudDirectory
       :child_reference,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output batch <a>AttachObject</a> response operation.</p>
@@ -286,7 +286,7 @@ module Aws::CloudDirectory
     class BatchAttachObjectResponse < Struct.new(
       :attached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attaches a policy object to a regular object inside a <a>BatchRead</a> operation. For more information, see <a>AttachPolicy</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -301,14 +301,14 @@ module Aws::CloudDirectory
       :policy_reference,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <a>AttachPolicy</a> response
     #       operation.</p>
     class BatchAttachPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attaches the specified object to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>AttachToIndex</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -322,7 +322,7 @@ module Aws::CloudDirectory
       :index_reference,
       :target_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>AttachToIndex</a> response operation.</p>
@@ -332,7 +332,7 @@ module Aws::CloudDirectory
     class BatchAttachToIndexResponse < Struct.new(
       :attached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attaches a typed link to a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>AttachTypedLink</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -354,7 +354,7 @@ module Aws::CloudDirectory
       :typed_link_facet,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>AttachTypedLink</a> response operation.</p>
@@ -364,7 +364,7 @@ module Aws::CloudDirectory
     class BatchAttachTypedLinkResponse < Struct.new(
       :typed_link_specifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates an index object inside of a <a>BatchRead</a> operation. For more information, see <a>CreateIndex</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -392,7 +392,7 @@ module Aws::CloudDirectory
       :link_name,
       :batch_reference_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_unique] = false unless options.key?(:is_unique)
@@ -407,7 +407,7 @@ module Aws::CloudDirectory
     class BatchCreateIndexResponse < Struct.new(
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>CreateObject</a> operation.</p>
@@ -435,7 +435,7 @@ module Aws::CloudDirectory
       :link_name,
       :batch_reference_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>CreateObject</a> response operation.</p>
@@ -445,7 +445,7 @@ module Aws::CloudDirectory
     class BatchCreateObjectResponse < Struct.new(
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DeleteObject</a> operation.</p>
@@ -455,13 +455,13 @@ module Aws::CloudDirectory
     class BatchDeleteObject < Struct.new(
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DeleteObject</a> response operation.</p>
     class BatchDeleteObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detaches the specified object from the specified index inside a <a>BatchRead</a> operation. For more information, see <a>DetachFromIndex</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -475,7 +475,7 @@ module Aws::CloudDirectory
       :index_reference,
       :target_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DetachFromIndex</a> response operation.</p>
@@ -485,7 +485,7 @@ module Aws::CloudDirectory
     class BatchDetachFromIndexResponse < Struct.new(
       :detached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DetachObject</a> operation.</p>
@@ -504,7 +504,7 @@ module Aws::CloudDirectory
       :link_name,
       :batch_reference_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DetachObject</a> response operation.</p>
@@ -514,7 +514,7 @@ module Aws::CloudDirectory
     class BatchDetachObjectResponse < Struct.new(
       :detached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detaches the specified policy from the specified directory inside a <a>BatchWrite</a> operation. For more information, see <a>DetachPolicy</a> and <a>BatchWriteRequest$Operations</a>.</p>
@@ -528,13 +528,13 @@ module Aws::CloudDirectory
       :policy_reference,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DetachPolicy</a> response operation.</p>
     class BatchDetachPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detaches a typed link from a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>DetachTypedLink</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -544,13 +544,13 @@ module Aws::CloudDirectory
     class BatchDetachTypedLink < Struct.new(
       :typed_link_specifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DetachTypedLink</a> response operation.</p>
     class BatchDetachTypedLinkResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves attributes that are associated with a typed link inside a <a>BatchRead</a> operation. For more information, see <a>GetLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -564,7 +564,7 @@ module Aws::CloudDirectory
       :typed_link_specifier,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>GetLinkAttributes</a> response operation.</p>
@@ -574,7 +574,7 @@ module Aws::CloudDirectory
     class BatchGetLinkAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves attributes within a facet that are associated with an object inside an <a>BatchRead</a> operation. For more information, see <a>GetObjectAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -592,7 +592,7 @@ module Aws::CloudDirectory
       :schema_facet,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>GetObjectAttributes</a> response operation.</p>
@@ -602,7 +602,7 @@ module Aws::CloudDirectory
     class BatchGetObjectAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves metadata about an object inside a <a>BatchRead</a> operation. For more information, see <a>GetObjectInformation</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -612,7 +612,7 @@ module Aws::CloudDirectory
     class BatchGetObjectInformation < Struct.new(
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>GetObjectInformation</a> response operation.</p>
@@ -626,7 +626,7 @@ module Aws::CloudDirectory
       :schema_facets,
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists indices attached to an object inside a <a>BatchRead</a> operation. For more information, see <a>ListAttachedIndices</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -644,7 +644,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListAttachedIndices</a> response operation.</p>
@@ -658,7 +658,7 @@ module Aws::CloudDirectory
       :index_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListIncomingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -687,7 +687,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListIncomingTypedLinks</a> response operation.</p>
@@ -701,7 +701,7 @@ module Aws::CloudDirectory
       :link_specifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists objects attached to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>ListIndex</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -723,7 +723,7 @@ module Aws::CloudDirectory
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListIndex</a> response operation.</p>
@@ -737,7 +737,7 @@ module Aws::CloudDirectory
       :index_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectAttributes</a> operation.</p>
@@ -761,7 +761,7 @@ module Aws::CloudDirectory
       :max_results,
       :facet_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectAttributes</a> response operation.</p>
@@ -776,7 +776,7 @@ module Aws::CloudDirectory
       :attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectChildren</a> operation.</p>
@@ -795,7 +795,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectChildren</a> response operation.</p>
@@ -810,7 +810,7 @@ module Aws::CloudDirectory
       :children,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectParentPaths</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -828,7 +828,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectParentPaths</a> response operation.</p>
@@ -843,7 +843,7 @@ module Aws::CloudDirectory
       :path_to_object_identifiers_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists parent objects that are associated with a given object in pagination
@@ -863,7 +863,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectParents</a> response operation.</p>
@@ -877,7 +877,7 @@ module Aws::CloudDirectory
       :parent_links,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns policies attached to an object in pagination fashion inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectPolicies</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -895,7 +895,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListObjectPolicies</a> response operation.</p>
@@ -910,7 +910,7 @@ module Aws::CloudDirectory
       :attached_policy_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListOutgoingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -939,7 +939,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListOutgoingTypedLinks</a> response operation.</p>
@@ -953,7 +953,7 @@ module Aws::CloudDirectory
       :typed_link_specifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached inside a <a>BatchRead</a> operation. For more information, see <a>ListPolicyAttachments</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -971,7 +971,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>ListPolicyAttachments</a> response operation.</p>
@@ -985,7 +985,7 @@ module Aws::CloudDirectory
       :object_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists all policies from the root of the Directory to the object specified inside a <a>BatchRead</a> operation. For more information, see <a>LookupPolicy</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -1003,7 +1003,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>LookupPolicy</a> response operation.</p>
@@ -1019,7 +1019,7 @@ module Aws::CloudDirectory
       :policy_to_path_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch read exception structure, which contains the exception type and
@@ -1034,23 +1034,7 @@ module Aws::CloudDirectory
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchReadExceptionType
-      ValidationException = 'ValidationException'
-      InvalidArnException = 'InvalidArnException'
-      ResourceNotFoundException = 'ResourceNotFoundException'
-      InvalidNextTokenException = 'InvalidNextTokenException'
-      AccessDeniedException = 'AccessDeniedException'
-      NotNodeException = 'NotNodeException'
-      FacetValidationException = 'FacetValidationException'
-      CannotListParentOfRootException = 'CannotListParentOfRootException'
-      NotIndexException = 'NotIndexException'
-      NotPolicyException = 'NotPolicyException'
-      DirectoryNotEnabledException = 'DirectoryNotEnabledException'
-      LimitExceededException = 'LimitExceededException'
-      InternalServiceException = 'InternalServiceException'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchRead</code> operation.</p>
@@ -1124,7 +1108,7 @@ module Aws::CloudDirectory
       :list_incoming_typed_links,
       :get_link_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchRead</code> response operation.</p>
@@ -1138,7 +1122,7 @@ module Aws::CloudDirectory
       :successful_response,
       :exception_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1157,7 +1141,7 @@ module Aws::CloudDirectory
       :operations,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute responses
@@ -1166,7 +1150,7 @@ module Aws::CloudDirectory
     class BatchReadResponse < Struct.new(
       :responses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchRead</code> success response operation.</p>
@@ -1239,7 +1223,7 @@ module Aws::CloudDirectory
       :get_link_attributes,
       :list_object_parents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A batch operation to remove a facet from an object.</p>
@@ -1253,13 +1237,13 @@ module Aws::CloudDirectory
       :schema_facet,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty result that represents success.</p>
     class BatchRemoveFacetFromObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a given typed link’s attributes inside a <a>BatchRead</a> operation. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>. For more information, see <a>UpdateLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>
@@ -1273,13 +1257,13 @@ module Aws::CloudDirectory
       :typed_link_specifier,
       :attribute_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>UpdateLinkAttributes</a> response operation.</p>
     class BatchUpdateLinkAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchUpdate</code> operation. </p>
@@ -1293,7 +1277,7 @@ module Aws::CloudDirectory
       :object_reference,
       :attribute_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchUpdate</code> response operation.</p>
@@ -1303,7 +1287,7 @@ module Aws::CloudDirectory
     class BatchUpdateObjectAttributesResponse < Struct.new(
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>BatchWrite</code> exception has occurred.</p>
@@ -1318,33 +1302,12 @@ module Aws::CloudDirectory
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:index] = 0 unless options.key?(:index)
         super
       end
-    end
-
-    module BatchWriteExceptionType
-      InternalServiceException = 'InternalServiceException'
-      ValidationException = 'ValidationException'
-      InvalidArnException = 'InvalidArnException'
-      LinkNameAlreadyInUseException = 'LinkNameAlreadyInUseException'
-      StillContainsLinksException = 'StillContainsLinksException'
-      FacetValidationException = 'FacetValidationException'
-      ObjectNotDetachedException = 'ObjectNotDetachedException'
-      ResourceNotFoundException = 'ResourceNotFoundException'
-      AccessDeniedException = 'AccessDeniedException'
-      InvalidAttachmentException = 'InvalidAttachmentException'
-      NotIndexException = 'NotIndexException'
-      NotNodeException = 'NotNodeException'
-      IndexedAttributeMissingException = 'IndexedAttributeMissingException'
-      ObjectAlreadyDetachedException = 'ObjectAlreadyDetachedException'
-      NotPolicyException = 'NotPolicyException'
-      DirectoryNotEnabledException = 'DirectoryNotEnabledException'
-      LimitExceededException = 'LimitExceededException'
-      UnsupportedIndexTypeException = 'UnsupportedIndexTypeException'
     end
 
     # <p>Represents the output of a <code>BatchWrite</code> operation. </p>
@@ -1411,7 +1374,7 @@ module Aws::CloudDirectory
       :detach_typed_link,
       :update_link_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchWrite</code> response operation.</p>
@@ -1478,7 +1441,7 @@ module Aws::CloudDirectory
       :detach_typed_link,
       :update_link_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1492,7 +1455,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute responses
@@ -1501,7 +1464,7 @@ module Aws::CloudDirectory
     class BatchWriteResponse < Struct.new(
       :responses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot list the parents of a <a>Directory</a> root.</p>
@@ -1510,12 +1473,7 @@ module Aws::CloudDirectory
     class CannotListParentOfRootException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConsistencyLevel
-      SERIALIZABLE = 'SERIALIZABLE'
-      EVENTUAL = 'EVENTUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1530,7 +1488,7 @@ module Aws::CloudDirectory
       :name,
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1554,7 +1512,7 @@ module Aws::CloudDirectory
       :object_identifier,
       :applied_schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1602,12 +1560,12 @@ module Aws::CloudDirectory
       :object_type,
       :facet_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateFacetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1634,7 +1592,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_identifier
@@ -1643,7 +1601,7 @@ module Aws::CloudDirectory
     class CreateIndexResponse < Struct.new(
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1670,7 +1628,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_identifier
@@ -1679,7 +1637,7 @@ module Aws::CloudDirectory
     class CreateObjectResponse < Struct.new(
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1689,7 +1647,7 @@ module Aws::CloudDirectory
     class CreateSchemaRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1699,7 +1657,7 @@ module Aws::CloudDirectory
     class CreateSchemaResponse < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1715,12 +1673,12 @@ module Aws::CloudDirectory
       :schema_arn,
       :facet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateTypedLinkFacetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1729,7 +1687,7 @@ module Aws::CloudDirectory
     class DeleteDirectoryRequest < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1738,7 +1696,7 @@ module Aws::CloudDirectory
     class DeleteDirectoryResponse < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1752,12 +1710,12 @@ module Aws::CloudDirectory
       :schema_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFacetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1771,12 +1729,12 @@ module Aws::CloudDirectory
       :directory_arn,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1786,7 +1744,7 @@ module Aws::CloudDirectory
     class DeleteSchemaRequest < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1796,7 +1754,7 @@ module Aws::CloudDirectory
     class DeleteSchemaResponse < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1810,12 +1768,12 @@ module Aws::CloudDirectory
       :schema_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTypedLinkFacetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1833,7 +1791,7 @@ module Aws::CloudDirectory
       :index_reference,
       :target_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detached_object_identifier
@@ -1842,7 +1800,7 @@ module Aws::CloudDirectory
     class DetachFromIndexResponse < Struct.new(
       :detached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1861,7 +1819,7 @@ module Aws::CloudDirectory
       :parent_reference,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detached_object_identifier
@@ -1870,7 +1828,7 @@ module Aws::CloudDirectory
     class DetachObjectResponse < Struct.new(
       :detached_object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1888,12 +1846,12 @@ module Aws::CloudDirectory
       :policy_reference,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DetachPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1907,7 +1865,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :typed_link_specifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Directory structure that includes the directory name and directory ARN.</p>
@@ -1930,7 +1888,7 @@ module Aws::CloudDirectory
       :state,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a <a>Directory</a> could not be created due to a naming
@@ -1940,7 +1898,7 @@ module Aws::CloudDirectory
     class DirectoryAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A directory that has been deleted and to which access has been attempted. Note: The
@@ -1950,7 +1908,7 @@ module Aws::CloudDirectory
     class DirectoryDeletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation can only operate on a disabled directory.</p>
@@ -1959,7 +1917,7 @@ module Aws::CloudDirectory
     class DirectoryNotDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Operations are only permitted on enabled directories.</p>
@@ -1968,13 +1926,7 @@ module Aws::CloudDirectory
     class DirectoryNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectoryState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1983,7 +1935,7 @@ module Aws::CloudDirectory
     class DisableDirectoryRequest < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -1992,7 +1944,7 @@ module Aws::CloudDirectory
     class DisableDirectoryResponse < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2001,7 +1953,7 @@ module Aws::CloudDirectory
     class EnableDirectoryRequest < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2010,7 +1962,7 @@ module Aws::CloudDirectory
     class EnableDirectoryResponse < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code>
@@ -2030,7 +1982,7 @@ module Aws::CloudDirectory
       :object_type,
       :facet_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A facet with the same name already exists.</p>
@@ -2039,7 +1991,7 @@ module Aws::CloudDirectory
     class FacetAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute that is associated with the <a>Facet</a>.</p>
@@ -2062,7 +2014,7 @@ module Aws::CloudDirectory
       :attribute_reference,
       :required_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A facet attribute definition. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html">Attribute References</a> for more information.</p>
@@ -2084,7 +2036,7 @@ module Aws::CloudDirectory
       :is_immutable,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_immutable] = false unless options.key?(:is_immutable)
@@ -2104,16 +2056,7 @@ module Aws::CloudDirectory
       :target_facet_name,
       :target_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FacetAttributeType
-      STRING = 'STRING'
-      BINARY = 'BINARY'
-      BOOLEAN = 'BOOLEAN'
-      NUMBER = 'NUMBER'
-      DATETIME = 'DATETIME'
-      VARIANT = 'VARIANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information used to update an attribute.</p>
@@ -2127,7 +2070,7 @@ module Aws::CloudDirectory
       :attribute,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when deleting a facet that contains an attribute that is a target to an
@@ -2137,7 +2080,7 @@ module Aws::CloudDirectory
     class FacetInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified <a>Facet</a> could not be found.</p>
@@ -2146,12 +2089,7 @@ module Aws::CloudDirectory
     class FacetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FacetStyle
-      STATIC = 'STATIC'
-      DYNAMIC = 'DYNAMIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a>Facet</a> that you provided was not well formed or could not be
@@ -2161,7 +2099,7 @@ module Aws::CloudDirectory
     class FacetValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2170,7 +2108,7 @@ module Aws::CloudDirectory
     class GetAppliedSchemaVersionRequest < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applied_schema_arn
@@ -2179,7 +2117,7 @@ module Aws::CloudDirectory
     class GetAppliedSchemaVersionResponse < Struct.new(
       :applied_schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2188,7 +2126,7 @@ module Aws::CloudDirectory
     class GetDirectoryRequest < Struct.new(
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory
@@ -2197,7 +2135,7 @@ module Aws::CloudDirectory
     class GetDirectoryResponse < Struct.new(
       :directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2211,7 +2149,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute facet
@@ -2220,7 +2158,7 @@ module Aws::CloudDirectory
     class GetFacetResponse < Struct.new(
       :facet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2241,7 +2179,7 @@ module Aws::CloudDirectory
       :attribute_names,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2250,7 +2188,7 @@ module Aws::CloudDirectory
     class GetLinkAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2275,7 +2213,7 @@ module Aws::CloudDirectory
       :schema_facet,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2284,7 +2222,7 @@ module Aws::CloudDirectory
     class GetObjectAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2301,7 +2239,7 @@ module Aws::CloudDirectory
       :object_reference,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_facets
@@ -2314,7 +2252,7 @@ module Aws::CloudDirectory
       :schema_facets,
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2323,7 +2261,7 @@ module Aws::CloudDirectory
     class GetSchemaAsJsonRequest < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2336,7 +2274,7 @@ module Aws::CloudDirectory
       :name,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2350,7 +2288,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_attribute_order
@@ -2364,7 +2302,7 @@ module Aws::CloudDirectory
     class GetTypedLinkFacetInformationResponse < Struct.new(
       :identity_attribute_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates a failure occurred while performing a check for backward compatibility between the specified schema and the schema that is currently applied to the directory.</p>
@@ -2373,7 +2311,7 @@ module Aws::CloudDirectory
     class IncompatibleSchemaException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an index and an attached object.</p>
@@ -2387,7 +2325,7 @@ module Aws::CloudDirectory
       :indexed_attributes,
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object has been attempted to be attached to an object that does not have the appropriate attribute value.</p>
@@ -2396,7 +2334,7 @@ module Aws::CloudDirectory
     class IndexedAttributeMissingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates a problem that must be resolved by Amazon Web Services. This might be a transient error in which case you can retry your request until it succeeds. Otherwise, go to the <a href="http://status.aws.amazon.com/">AWS Service Health Dashboard</a> site to see if there are any operational issues with the service.</p>
@@ -2405,7 +2343,7 @@ module Aws::CloudDirectory
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided ARN value is not valid.</p>
@@ -2414,7 +2352,7 @@ module Aws::CloudDirectory
     class InvalidArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an attempt to make an attachment was invalid. For example, attaching two nodes 
@@ -2424,7 +2362,7 @@ module Aws::CloudDirectory
     class InvalidAttachmentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attempt to modify a <a>Facet</a> resulted in an invalid schema
@@ -2434,7 +2372,7 @@ module Aws::CloudDirectory
     class InvalidFacetUpdateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the <code>NextToken</code> value is not valid.</p>
@@ -2443,7 +2381,7 @@ module Aws::CloudDirectory
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when any of the rule parameter keys or values are invalid.</p>
@@ -2452,7 +2390,7 @@ module Aws::CloudDirectory
     class InvalidRuleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the provided <code>SchemaDoc</code> value is not valid.</p>
@@ -2461,7 +2399,7 @@ module Aws::CloudDirectory
     class InvalidSchemaDocException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Can occur for multiple reasons such as when you tag a resource that doesn’t exist or if you specify a higher number of tags for a resource than the allowed limit. Allowed limit is 50 tags per resource.</p>
@@ -2470,7 +2408,7 @@ module Aws::CloudDirectory
     class InvalidTaggingRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that limits are exceeded. See <a href="https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html">Limits</a> for more information.</p>
@@ -2479,7 +2417,7 @@ module Aws::CloudDirectory
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to take on a typed link attribute value. Updates are only supported for attributes which don’t contribute to link identity.</p>
@@ -2493,7 +2431,7 @@ module Aws::CloudDirectory
       :attribute_action_type,
       :attribute_update_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains attribute update information.</p>
@@ -2507,7 +2445,7 @@ module Aws::CloudDirectory
       :attribute_key,
       :attribute_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a link could not be created due to a naming conflict. Choose a different
@@ -2517,7 +2455,7 @@ module Aws::CloudDirectory
     class LinkNameAlreadyInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2538,7 +2476,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arns
@@ -2551,7 +2489,7 @@ module Aws::CloudDirectory
       :schema_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2576,7 +2514,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_attachments
@@ -2589,7 +2527,7 @@ module Aws::CloudDirectory
       :index_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2602,7 +2540,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arns
@@ -2615,7 +2553,7 @@ module Aws::CloudDirectory
       :schema_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2633,7 +2571,7 @@ module Aws::CloudDirectory
       :max_results,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directories
@@ -2647,7 +2585,7 @@ module Aws::CloudDirectory
       :directories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2668,7 +2606,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2681,7 +2619,7 @@ module Aws::CloudDirectory
       :attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2698,7 +2636,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute facet_names
@@ -2711,7 +2649,7 @@ module Aws::CloudDirectory
       :facet_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2748,7 +2686,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_specifiers
@@ -2761,7 +2699,7 @@ module Aws::CloudDirectory
       :link_specifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2790,7 +2728,7 @@ module Aws::CloudDirectory
       :next_token,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_attachments
@@ -2803,7 +2741,7 @@ module Aws::CloudDirectory
       :index_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2820,7 +2758,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arns
@@ -2833,7 +2771,7 @@ module Aws::CloudDirectory
       :schema_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2866,7 +2804,7 @@ module Aws::CloudDirectory
       :consistency_level,
       :facet_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2880,7 +2818,7 @@ module Aws::CloudDirectory
       :attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2909,7 +2847,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute children
@@ -2923,7 +2861,7 @@ module Aws::CloudDirectory
       :children,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2945,7 +2883,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path_to_object_identifiers_list
@@ -2959,7 +2897,7 @@ module Aws::CloudDirectory
       :path_to_object_identifiers_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -2992,7 +2930,7 @@ module Aws::CloudDirectory
       :consistency_level,
       :include_all_links_to_each_parent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parents
@@ -3010,7 +2948,7 @@ module Aws::CloudDirectory
       :next_token,
       :parent_links,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3038,7 +2976,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attached_policy_ids
@@ -3052,7 +2990,7 @@ module Aws::CloudDirectory
       :attached_policy_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3089,7 +3027,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute typed_link_specifiers
@@ -3102,7 +3040,7 @@ module Aws::CloudDirectory
       :typed_link_specifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3130,7 +3068,7 @@ module Aws::CloudDirectory
       :max_results,
       :consistency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_identifiers
@@ -3143,7 +3081,7 @@ module Aws::CloudDirectory
       :object_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -3160,7 +3098,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arns
@@ -3173,7 +3111,7 @@ module Aws::CloudDirectory
       :schema_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3193,7 +3131,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3206,7 +3144,7 @@ module Aws::CloudDirectory
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -3228,7 +3166,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -3241,7 +3179,7 @@ module Aws::CloudDirectory
       :attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -3259,7 +3197,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute facet_names
@@ -3272,7 +3210,7 @@ module Aws::CloudDirectory
       :facet_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3295,7 +3233,7 @@ module Aws::CloudDirectory
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_to_path_list
@@ -3310,7 +3248,7 @@ module Aws::CloudDirectory
       :policy_to_path_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the requested operation can only operate on index objects.</p>
@@ -3319,7 +3257,7 @@ module Aws::CloudDirectory
     class NotIndexException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when any invalid operations are performed on an object that is not a node, such
@@ -3329,7 +3267,7 @@ module Aws::CloudDirectory
     class NotNodeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the requested operation can only operate on policy objects.</p>
@@ -3338,7 +3276,7 @@ module Aws::CloudDirectory
     class NotPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the object is not attached to the index.</p>
@@ -3347,7 +3285,7 @@ module Aws::CloudDirectory
     class ObjectAlreadyDetachedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to take on the object attribute.</p>
@@ -3361,7 +3299,7 @@ module Aws::CloudDirectory
       :object_attribute_action_type,
       :object_attribute_update_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of attributes.</p>
@@ -3375,7 +3313,7 @@ module Aws::CloudDirectory
       :attribute_key,
       :range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains attribute update information.</p>
@@ -3389,7 +3327,7 @@ module Aws::CloudDirectory
       :object_attribute_key,
       :object_attribute_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pair of ObjectIdentifier and LinkName.</p>
@@ -3403,7 +3341,7 @@ module Aws::CloudDirectory
       :object_identifier,
       :link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the requested operation cannot be completed because the object has not
@@ -3413,7 +3351,7 @@ module Aws::CloudDirectory
     class ObjectNotDetachedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference that identifies an object.</p>
@@ -3437,14 +3375,7 @@ module Aws::CloudDirectory
     class ObjectReference < Struct.new(
       :selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObjectType
-      NODE = 'NODE'
-      LEAF_NODE = 'LEAF_NODE'
-      POLICY = 'POLICY'
-      INDEX = 'INDEX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the path to the <code>ObjectIdentifiers</code> that is associated with the
@@ -3460,7 +3391,7 @@ module Aws::CloudDirectory
       :path,
       :object_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the <code>PolicyType</code>, <code>PolicyId</code>, and the <code>ObjectIdentifier</code> to which it is
@@ -3481,7 +3412,7 @@ module Aws::CloudDirectory
       :object_identifier,
       :policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used when a regular object exists in a <a>Directory</a> and you want to find
@@ -3497,7 +3428,7 @@ module Aws::CloudDirectory
       :path,
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute development_schema_arn
@@ -3520,7 +3451,7 @@ module Aws::CloudDirectory
       :minor_version,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute published_schema_arn
@@ -3529,7 +3460,7 @@ module Aws::CloudDirectory
     class PublishSchemaResponse < Struct.new(
       :published_schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -3542,7 +3473,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3551,15 +3482,7 @@ module Aws::CloudDirectory
     class PutSchemaFromJsonResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RangeMode
-      FIRST = 'FIRST'
-      LAST = 'LAST'
-      LAST_BEFORE_MISSING_VALUES = 'LAST_BEFORE_MISSING_VALUES'
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3576,17 +3499,12 @@ module Aws::CloudDirectory
       :schema_facet,
       :object_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveFacetFromObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequiredAttributeBehavior
-      REQUIRED_ALWAYS = 'REQUIRED_ALWAYS'
-      NOT_REQUIRED = 'NOT_REQUIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be found.</p>
@@ -3595,7 +3513,7 @@ module Aws::CloudDirectory
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a conflict with a previous successful write is detected. For example, if a write operation occurs on an object and then an attempt is made to read the object using “SERIALIZABLE” consistency, this exception may result. This generally occurs when the previous write did not have time to propagate to the host serving the current request. A retry (with appropriate backoff logic) is the recommended response to this exception.</p>
@@ -3604,7 +3522,7 @@ module Aws::CloudDirectory
     class RetryableConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an Amazon Resource Name (ARN) and parameters that are associated with the
@@ -3619,14 +3537,7 @@ module Aws::CloudDirectory
       :type,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleType
-      BINARY_LENGTH = 'BINARY_LENGTH'
-      NUMBER_COMPARISON = 'NUMBER_COMPARISON'
-      STRING_FROM_SET = 'STRING_FROM_SET'
-      STRING_LENGTH = 'STRING_LENGTH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a schema could not be created due to a naming conflict. Please select a
@@ -3636,7 +3547,7 @@ module Aws::CloudDirectory
     class SchemaAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a schema is already published.</p>
@@ -3645,7 +3556,7 @@ module Aws::CloudDirectory
     class SchemaAlreadyPublishedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A facet.</p>
@@ -3660,7 +3571,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :facet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object could not be deleted because links still exist. Remove the links and then
@@ -3670,7 +3581,7 @@ module Aws::CloudDirectory
     class StillContainsLinksException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag structure that contains a tag key and value.</p>
@@ -3684,7 +3595,7 @@ module Aws::CloudDirectory
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3698,12 +3609,12 @@ module Aws::CloudDirectory
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data for a typed attribute. You can set one, and only one, of the
@@ -3732,7 +3643,7 @@ module Aws::CloudDirectory
       :datetime_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < TypedAttributeValue; end
       class BinaryValue < TypedAttributeValue; end
@@ -3761,7 +3672,7 @@ module Aws::CloudDirectory
       :end_mode,
       :end_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A typed link attribute definition.</p>
@@ -3791,7 +3702,7 @@ module Aws::CloudDirectory
       :rules,
       :required_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_immutable] = false unless options.key?(:is_immutable)
@@ -3810,7 +3721,7 @@ module Aws::CloudDirectory
       :attribute_name,
       :range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the typed links structure and its attributes. To create a typed link facet, use
@@ -3829,7 +3740,7 @@ module Aws::CloudDirectory
       :attributes,
       :identity_attribute_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A typed link facet attribute update.</p>
@@ -3843,7 +3754,7 @@ module Aws::CloudDirectory
       :attribute,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the schema Amazon Resource Name (ARN) and facet name for the typed
@@ -3859,7 +3770,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :typed_link_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all the information that is used to uniquely identify a typed link. The
@@ -3885,7 +3796,7 @@ module Aws::CloudDirectory
       :target_object_reference,
       :identity_attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the requested index type is not supported.</p>
@@ -3894,7 +3805,7 @@ module Aws::CloudDirectory
     class UnsupportedIndexTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3908,17 +3819,12 @@ module Aws::CloudDirectory
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateActionType
-      CREATE_OR_UPDATE = 'CREATE_OR_UPDATE'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -3942,12 +3848,12 @@ module Aws::CloudDirectory
       :attribute_updates,
       :object_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateFacetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3964,12 +3870,12 @@ module Aws::CloudDirectory
       :typed_link_specifier,
       :attribute_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLinkAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_arn
@@ -3987,7 +3893,7 @@ module Aws::CloudDirectory
       :object_reference,
       :attribute_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_identifier
@@ -3996,7 +3902,7 @@ module Aws::CloudDirectory
     class UpdateObjectAttributesResponse < Struct.new(
       :object_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -4010,7 +3916,7 @@ module Aws::CloudDirectory
       :schema_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -4019,7 +3925,7 @@ module Aws::CloudDirectory
     class UpdateSchemaResponse < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -4046,12 +3952,12 @@ module Aws::CloudDirectory
       :attribute_updates,
       :identity_attribute_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTypedLinkFacetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute published_schema_arn
@@ -4068,7 +3974,7 @@ module Aws::CloudDirectory
       :directory_arn,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upgraded_schema_arn
@@ -4081,7 +3987,7 @@ module Aws::CloudDirectory
       :upgraded_schema_arn,
       :directory_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute development_schema_arn
@@ -4102,7 +4008,7 @@ module Aws::CloudDirectory
       :minor_version,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upgraded_schema_arn
@@ -4111,7 +4017,7 @@ module Aws::CloudDirectory
     class UpgradePublishedSchemaResponse < Struct.new(
       :upgraded_schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that your request is malformed in some manner. See the exception
@@ -4121,7 +4027,7 @@ module Aws::CloudDirectory
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

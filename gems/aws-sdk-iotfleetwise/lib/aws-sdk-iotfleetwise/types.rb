@@ -12,7 +12,7 @@ module Aws::IoTFleetWise
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A signal that represents a vehicle device such as the engine, heater, and door locks.
@@ -73,7 +73,7 @@ module Aws::IoTFleetWise
       :comment,
       :struct_fully_qualified_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -86,12 +86,12 @@ module Aws::IoTFleetWise
       :vehicle_name,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateVehicleFleetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A signal that represents static information about the vehicle, such as engine type or
@@ -145,7 +145,7 @@ module Aws::IoTFleetWise
       :deprecation_message,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicles
@@ -155,7 +155,7 @@ module Aws::IoTFleetWise
     class BatchCreateVehicleInput < Struct.new(
       :vehicles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicles
@@ -170,7 +170,7 @@ module Aws::IoTFleetWise
       :vehicles,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicles
@@ -180,7 +180,7 @@ module Aws::IoTFleetWise
     class BatchUpdateVehicleInput < Struct.new(
       :vehicles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicles
@@ -197,7 +197,7 @@ module Aws::IoTFleetWise
       :vehicles,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of signals that are defined in a hierarchical structure.</p>
@@ -220,14 +220,7 @@ module Aws::IoTFleetWise
       :deprecation_message,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CampaignStatus
-      CREATING = 'CREATING'
-      WAITING_FOR_APPROVAL = 'WAITING_FOR_APPROVAL'
-      RUNNING = 'RUNNING'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a campaign. </p>
@@ -290,7 +283,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations used to create a decoder manifest.</p>
@@ -310,7 +303,7 @@ module Aws::IoTFleetWise
       :can_dbc_files,
       :signals_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single controller area network (CAN) device interface.</p>
@@ -328,7 +321,7 @@ module Aws::IoTFleetWise
       :protocol_name,
       :protocol_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a single controller area network (CAN) signal and the messages it
@@ -377,7 +370,7 @@ module Aws::IoTFleetWise
       :name,
       :signal_value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:message_id] = 0 unless options.key?(:message_id)
@@ -400,7 +393,7 @@ module Aws::IoTFleetWise
       :log_type,
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies what data to collect and how often or when to collect it.</p>
@@ -417,16 +410,11 @@ module Aws::IoTFleetWise
       :condition_based_collection_scheme,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TimeBasedCollectionScheme < CollectionScheme; end
       class ConditionBasedCollectionScheme < CollectionScheme; end
       class Unknown < CollectionScheme; end
-    end
-
-    module Compression
-      OFF = 'OFF'
-      SNAPPY = 'SNAPPY'
     end
 
     # <p>Information about a collection scheme that uses a simple logical expression to
@@ -457,7 +445,7 @@ module Aws::IoTFleetWise
       :trigger_mode,
       :condition_language_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the condition under which a signal fetch occurs.</p>
@@ -471,7 +459,7 @@ module Aws::IoTFleetWise
       :condition_expression,
       :trigger_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has conflicting operations. This can occur if you're trying to perform
@@ -489,7 +477,7 @@ module Aws::IoTFleetWise
       :resource,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -613,7 +601,7 @@ module Aws::IoTFleetWise
       :data_partitions,
       :signals_to_fetch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -626,7 +614,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -662,7 +650,7 @@ module Aws::IoTFleetWise
       :default_for_unmapped_signals,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -675,7 +663,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -696,7 +684,7 @@ module Aws::IoTFleetWise
       :signal_catalog_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -709,7 +697,7 @@ module Aws::IoTFleetWise
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -734,7 +722,7 @@ module Aws::IoTFleetWise
       :signal_catalog_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -747,7 +735,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -769,7 +757,7 @@ module Aws::IoTFleetWise
       :nodes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -782,7 +770,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -825,7 +813,7 @@ module Aws::IoTFleetWise
       :metadata_extra_dimensions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -842,7 +830,7 @@ module Aws::IoTFleetWise
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP error resulting from creating a vehicle.</p>
@@ -860,7 +848,7 @@ module Aws::IoTFleetWise
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -901,7 +889,7 @@ module Aws::IoTFleetWise
       :tags,
       :state_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -918,7 +906,7 @@ module Aws::IoTFleetWise
       :arn,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the vehicle to create.</p>
@@ -956,7 +944,7 @@ module Aws::IoTFleetWise
       :tags,
       :state_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a created vehicle.</p>
@@ -974,7 +962,7 @@ module Aws::IoTFleetWise
       :arn,
       :thing_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom network interface as defined by the customer.</p>
@@ -987,7 +975,7 @@ module Aws::IoTFleetWise
     class CustomDecodingInterface < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about signals using a custom decoding protocol as defined by the customer.</p>
@@ -1000,7 +988,7 @@ module Aws::IoTFleetWise
     class CustomDecodingSignal < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a member of the complex data structure. The data type of the property can
@@ -1038,7 +1026,7 @@ module Aws::IoTFleetWise
       :comment,
       :struct_fully_qualified_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom structure represents a complex or higher-order data structure.</p>
@@ -1062,7 +1050,7 @@ module Aws::IoTFleetWise
       :deprecation_message,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination where the campaign sends data. You can send data to an MQTT topic,
@@ -1085,17 +1073,12 @@ module Aws::IoTFleetWise
       :mqtt_topic_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Config < DataDestinationConfig; end
       class TimestreamConfig < DataDestinationConfig; end
       class MqttTopicConfig < DataDestinationConfig; end
       class Unknown < DataDestinationConfig; end
-    end
-
-    module DataFormat
-      JSON = 'JSON'
-      PARQUET = 'PARQUET'
     end
 
     # <p>The configuration for signal data storage and upload options. You can only specify these
@@ -1119,7 +1102,7 @@ module Aws::IoTFleetWise
       :storage_options,
       :upload_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Size, time, and location options for the data partition.</p>
@@ -1155,7 +1138,7 @@ module Aws::IoTFleetWise
       :storage_location,
       :minimum_time_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The upload options for the data partition. If upload options are specified, you must
@@ -1174,7 +1157,7 @@ module Aws::IoTFleetWise
       :expression,
       :condition_language_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a created decoder manifest. You can use the  API operation to return this information about
@@ -1221,7 +1204,7 @@ module Aws::IoTFleetWise
       :last_modification_time,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request couldn't be completed because it contains signal decoders with one or more
@@ -1240,11 +1223,7 @@ module Aws::IoTFleetWise
       :invalid_network_interfaces,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DefaultForUnmappedSignalsType
-      CUSTOM_DECODING = 'CUSTOM_DECODING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1253,7 +1232,7 @@ module Aws::IoTFleetWise
     class DeleteCampaignInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1269,7 +1248,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1278,7 +1257,7 @@ module Aws::IoTFleetWise
     class DeleteDecoderManifestInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1291,7 +1270,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -1300,7 +1279,7 @@ module Aws::IoTFleetWise
     class DeleteFleetInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1313,7 +1292,7 @@ module Aws::IoTFleetWise
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1322,7 +1301,7 @@ module Aws::IoTFleetWise
     class DeleteModelManifestInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1335,7 +1314,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1344,7 +1323,7 @@ module Aws::IoTFleetWise
     class DeleteSignalCatalogInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1357,7 +1336,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1366,7 +1345,7 @@ module Aws::IoTFleetWise
     class DeleteStateTemplateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1383,7 +1362,7 @@ module Aws::IoTFleetWise
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -1392,7 +1371,7 @@ module Aws::IoTFleetWise
     class DeleteVehicleInput < Struct.new(
       :vehicle_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -1405,12 +1384,7 @@ module Aws::IoTFleetWise
       :vehicle_name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiagnosticsMode
-      OFF = 'OFF'
-      SEND_ACTIVE_DTCS = 'SEND_ACTIVE_DTCS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -1423,23 +1397,12 @@ module Aws::IoTFleetWise
       :vehicle_name,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateVehicleFleetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionStatus
-      PENDING = 'PENDING'
-      SUCCESS = 'SUCCESS'
-      FAILURE = 'FAILURE'
-    end
-
-    module EncryptionType
-      KMS_BASED_ENCRYPTION = 'KMS_BASED_ENCRYPTION'
-      FLEETWISE_DEFAULT_ENCRYPTION = 'FLEETWISE_DEFAULT_ENCRYPTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a fleet.</p>
@@ -1473,7 +1436,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1487,7 +1450,7 @@ module Aws::IoTFleetWise
       :vss_json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class VssJson < FormattedVss; end
       class Unknown < FormattedVss; end
@@ -1499,7 +1462,7 @@ module Aws::IoTFleetWise
     class GetCampaignInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1606,7 +1569,7 @@ module Aws::IoTFleetWise
       :data_partitions,
       :signals_to_fetch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1615,7 +1578,7 @@ module Aws::IoTFleetWise
     class GetDecoderManifestInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1657,12 +1620,12 @@ module Aws::IoTFleetWise
       :last_modification_time,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetEncryptionConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -1696,7 +1659,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -1705,7 +1668,7 @@ module Aws::IoTFleetWise
     class GetFleetInput < Struct.new(
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1736,12 +1699,12 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetLoggingOptionsInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_watch_log_delivery
@@ -1750,7 +1713,7 @@ module Aws::IoTFleetWise
     class GetLoggingOptionsOutput < Struct.new(
       :cloud_watch_log_delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1759,7 +1722,7 @@ module Aws::IoTFleetWise
     class GetModelManifestInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1795,12 +1758,12 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetRegisterAccountStatusInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_account_id
@@ -1849,7 +1812,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1858,7 +1821,7 @@ module Aws::IoTFleetWise
     class GetSignalCatalogInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1887,7 +1850,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1896,7 +1859,7 @@ module Aws::IoTFleetWise
     class GetStateTemplateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1945,7 +1908,7 @@ module Aws::IoTFleetWise
       :last_modification_time,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -1954,7 +1917,7 @@ module Aws::IoTFleetWise
     class GetVehicleInput < Struct.new(
       :vehicle_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -1994,7 +1957,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2017,7 +1980,7 @@ module Aws::IoTFleetWise
       :max_results,
       :vehicle_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaigns
@@ -2030,7 +1993,7 @@ module Aws::IoTFleetWise
       :campaigns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about registering an Identity and Access Management (IAM) resource so Amazon Web Services IoT FleetWise edge agent
@@ -2051,7 +2014,7 @@ module Aws::IoTFleetWise
       :registration_status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM resource that enables Amazon Web Services IoT FleetWise edge agent software to send data to
@@ -2066,7 +2029,7 @@ module Aws::IoTFleetWise
     class IamResources < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2079,7 +2042,7 @@ module Aws::IoTFleetWise
       :name,
       :network_file_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2092,7 +2055,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2114,7 +2077,7 @@ module Aws::IoTFleetWise
       :vss,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2127,7 +2090,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request couldn't be completed because the server temporarily failed.</p>
@@ -2140,7 +2103,7 @@ module Aws::IoTFleetWise
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -2159,7 +2122,7 @@ module Aws::IoTFleetWise
       :interface_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified node type doesn't match the expected node type for a node. You can
@@ -2177,7 +2140,7 @@ module Aws::IoTFleetWise
       :reason,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reason that a signal isn't valid.</p>
@@ -2191,7 +2154,7 @@ module Aws::IoTFleetWise
       :name,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reason that a signal decoder isn't valid.</p>
@@ -2209,7 +2172,7 @@ module Aws::IoTFleetWise
       :reason,
       :hint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request couldn't be completed because it contains signals that aren't
@@ -2223,7 +2186,7 @@ module Aws::IoTFleetWise
       :message,
       :invalid_signals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service quota was exceeded. </p>
@@ -2240,7 +2203,7 @@ module Aws::IoTFleetWise
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2265,7 +2228,7 @@ module Aws::IoTFleetWise
       :status,
       :list_response_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_summaries
@@ -2278,7 +2241,7 @@ module Aws::IoTFleetWise
       :campaign_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2296,7 +2259,7 @@ module Aws::IoTFleetWise
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interfaces
@@ -2309,7 +2272,7 @@ module Aws::IoTFleetWise
       :network_interfaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2327,7 +2290,7 @@ module Aws::IoTFleetWise
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signal_decoders
@@ -2340,7 +2303,7 @@ module Aws::IoTFleetWise
       :signal_decoders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_manifest_arn
@@ -2363,7 +2326,7 @@ module Aws::IoTFleetWise
       :max_results,
       :list_response_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -2376,7 +2339,7 @@ module Aws::IoTFleetWise
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -2394,7 +2357,7 @@ module Aws::IoTFleetWise
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleets
@@ -2407,7 +2370,7 @@ module Aws::IoTFleetWise
       :fleets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2425,7 +2388,7 @@ module Aws::IoTFleetWise
       :max_results,
       :list_response_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_summaries
@@ -2438,7 +2401,7 @@ module Aws::IoTFleetWise
       :fleet_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2456,7 +2419,7 @@ module Aws::IoTFleetWise
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -2469,7 +2432,7 @@ module Aws::IoTFleetWise
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signal_catalog_arn
@@ -2492,7 +2455,7 @@ module Aws::IoTFleetWise
       :max_results,
       :list_response_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -2505,11 +2468,7 @@ module Aws::IoTFleetWise
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListResponseScope
-      METADATA_ONLY = 'METADATA_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2531,7 +2490,7 @@ module Aws::IoTFleetWise
       :max_results,
       :signal_node_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -2544,7 +2503,7 @@ module Aws::IoTFleetWise
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2558,7 +2517,7 @@ module Aws::IoTFleetWise
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -2571,7 +2530,7 @@ module Aws::IoTFleetWise
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2588,7 +2547,7 @@ module Aws::IoTFleetWise
       :max_results,
       :list_response_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -2601,7 +2560,7 @@ module Aws::IoTFleetWise
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2610,7 +2569,7 @@ module Aws::IoTFleetWise
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2619,7 +2578,7 @@ module Aws::IoTFleetWise
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -2637,7 +2596,7 @@ module Aws::IoTFleetWise
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicles
@@ -2650,7 +2609,7 @@ module Aws::IoTFleetWise
       :vehicles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_manifest_arn
@@ -2698,7 +2657,7 @@ module Aws::IoTFleetWise
       :max_results,
       :list_response_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_summaries
@@ -2711,19 +2670,7 @@ module Aws::IoTFleetWise
       :vehicle_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogType
-      OFF = 'OFF'
-      ERROR = 'ERROR'
-    end
-
-    module ManifestStatus
-      ACTIVE = 'ACTIVE'
-      DRAFT = 'DRAFT'
-      INVALID = 'INVALID'
-      VALIDATING = 'VALIDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The decoding information for a specific message which support higher order data types.
@@ -2741,7 +2688,7 @@ module Aws::IoTFleetWise
       :topic_name,
       :structured_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a vehicle model (model manifest). You can use the  API operation to return this information about
@@ -2780,7 +2727,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The MQTT topic to which the Amazon Web Services IoT FleetWise campaign routes data. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Device communication 
@@ -2799,7 +2746,7 @@ module Aws::IoTFleetWise
       :mqtt_topic_arn,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifications for defining a vehicle network.</p>
@@ -2811,7 +2758,7 @@ module Aws::IoTFleetWise
       :can_dbc,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CanDbc < NetworkFileDefinition; end
       class Unknown < NetworkFileDefinition; end
@@ -2855,25 +2802,7 @@ module Aws::IoTFleetWise
       :vehicle_middleware,
       :custom_decoding_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkInterfaceFailureReason
-      DUPLICATE_INTERFACE = 'DUPLICATE_NETWORK_INTERFACE'
-      CONFLICTING_NETWORK_INTERFACE = 'CONFLICTING_NETWORK_INTERFACE'
-      NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS = 'NETWORK_INTERFACE_TO_ADD_ALREADY_EXISTS'
-      CAN_NETWORK_INTERFACE_INFO_IS_NULL = 'CAN_NETWORK_INTERFACE_INFO_IS_NULL'
-      OBD_NETWORK_INTERFACE_INFO_IS_NULL = 'OBD_NETWORK_INTERFACE_INFO_IS_NULL'
-      NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS = 'NETWORK_INTERFACE_TO_REMOVE_ASSOCIATED_WITH_SIGNALS'
-      VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL = 'VEHICLE_MIDDLEWARE_NETWORK_INTERFACE_INFO_IS_NULL'
-      CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL = 'CUSTOM_DECODING_SIGNAL_NETWORK_INTERFACE_INFO_IS_NULL'
-    end
-
-    module NetworkInterfaceType
-      CAN_INTERFACE = 'CAN_INTERFACE'
-      OBD_INTERFACE = 'OBD_INTERFACE'
-      VEHICLE_MIDDLEWARE = 'VEHICLE_MIDDLEWARE'
-      CUSTOM_DECODING_INTERFACE = 'CUSTOM_DECODING_INTERFACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A general abstraction of a signal. A node can be specified as an actuator, attribute,
@@ -2919,7 +2848,7 @@ module Aws::IoTFleetWise
       :property,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Branch < Node; end
       class Sensor < Node; end
@@ -2961,7 +2890,7 @@ module Aws::IoTFleetWise
       :total_structs,
       :total_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_nodes] = 0 unless options.key?(:total_nodes)
@@ -2973,43 +2902,6 @@ module Aws::IoTFleetWise
         options[:total_properties] = 0 unless options.key?(:total_properties)
         super
       end
-    end
-
-    module NodeDataEncoding
-      BINARY = 'BINARY'
-      TYPED = 'TYPED'
-    end
-
-    module NodeDataType
-      INT8 = 'INT8'
-      UINT8 = 'UINT8'
-      INT16 = 'INT16'
-      UINT16 = 'UINT16'
-      INT32 = 'INT32'
-      UINT32 = 'UINT32'
-      INT64 = 'INT64'
-      UINT64 = 'UINT64'
-      BOOLEAN = 'BOOLEAN'
-      FLOAT = 'FLOAT'
-      DOUBLE = 'DOUBLE'
-      STRING = 'STRING'
-      UNIX_TIMESTAMP = 'UNIX_TIMESTAMP'
-      INT8_ARRAY = 'INT8_ARRAY'
-      UINT8_ARRAY = 'UINT8_ARRAY'
-      INT16_ARRAY = 'INT16_ARRAY'
-      UINT16_ARRAY = 'UINT16_ARRAY'
-      INT32_ARRAY = 'INT32_ARRAY'
-      UINT32_ARRAY = 'UINT32_ARRAY'
-      INT64_ARRAY = 'INT64_ARRAY'
-      UINT64_ARRAY = 'UINT64_ARRAY'
-      BOOLEAN_ARRAY = 'BOOLEAN_ARRAY'
-      FLOAT_ARRAY = 'FLOAT_ARRAY'
-      DOUBLE_ARRAY = 'DOUBLE_ARRAY'
-      STRING_ARRAY = 'STRING_ARRAY'
-      UNIX_TIMESTAMP_ARRAY = 'UNIX_TIMESTAMP_ARRAY'
-      UNKNOWN = 'UNKNOWN'
-      STRUCT = 'STRUCT'
-      STRUCT_ARRAY = 'STRUCT_ARRAY'
     end
 
     # <p>A network interface that specifies the on-board diagnostic (OBD) II network
@@ -3044,7 +2936,7 @@ module Aws::IoTFleetWise
       :use_extended_ids,
       :has_transmission_ecu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:request_message_id] = 0 unless options.key?(:request_message_id)
@@ -3105,14 +2997,14 @@ module Aws::IoTFleetWise
       :is_signed,
       :signal_value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:service_mode] = 0 unless options.key?(:service_mode)
         options[:pid] = 0 unless options.key?(:pid)
         options[:start_byte] = 0 unless options.key?(:start_byte)
         options[:bit_right_shift] = 0 unless options.key?(:bit_right_shift)
-        options[:is_signed] =  unless options.key?(:is_signed)
+        options[:is_signed] = nil unless options.key?(:is_signed)
         super
       end
     end
@@ -3120,7 +3012,7 @@ module Aws::IoTFleetWise
     # <p>Vehicles associated with the state template will stream telemetry data when there is a change.</p>
     class OnChangeStateTemplateUpdateStrategy < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Vehicles associated with the state template will stream telemetry data during a specified time period.</p>
@@ -3130,7 +3022,7 @@ module Aws::IoTFleetWise
     class PeriodicStateTemplateUpdateStrategy < Struct.new(
       :state_template_update_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a primitive type node of the complex data structure.</p>
@@ -3142,7 +3034,7 @@ module Aws::IoTFleetWise
       :ros2_primitive_message_definition,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Ros2PrimitiveMessageDefinition < PrimitiveMessageDefinition; end
       class Unknown < PrimitiveMessageDefinition; end
@@ -3159,7 +3051,7 @@ module Aws::IoTFleetWise
       :kms_key_id,
       :encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -3178,7 +3070,7 @@ module Aws::IoTFleetWise
       :encryption_status,
       :encryption_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_watch_log_delivery
@@ -3187,12 +3079,12 @@ module Aws::IoTFleetWise
     class PutLoggingOptionsInput < Struct.new(
       :cloud_watch_log_delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutLoggingOptionsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a ROS 2 compliant primitive type message of the complex data
@@ -3218,25 +3110,7 @@ module Aws::IoTFleetWise
       :scaling,
       :upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ROS2PrimitiveType
-      BOOL = 'BOOL'
-      BYTE = 'BYTE'
-      CHAR = 'CHAR'
-      FLOAT32 = 'FLOAT32'
-      FLOAT64 = 'FLOAT64'
-      INT8 = 'INT8'
-      UINT8 = 'UINT8'
-      INT16 = 'INT16'
-      UINT16 = 'UINT16'
-      INT32 = 'INT32'
-      UINT32 = 'UINT32'
-      INT64 = 'INT64'
-      UINT64 = 'UINT64'
-      STRING = 'STRING'
-      WSTRING = 'WSTRING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute timestream_resources
@@ -3254,7 +3128,7 @@ module Aws::IoTFleetWise
       :timestream_resources,
       :iam_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute register_account_status
@@ -3283,13 +3157,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationStatus
-      REGISTRATION_PENDING = 'REGISTRATION_PENDING'
-      REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS'
-      REGISTRATION_FAILURE = 'REGISTRATION_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource wasn't found.</p>
@@ -3306,7 +3174,7 @@ module Aws::IoTFleetWise
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data. Amazon S3 is an object storage
@@ -3350,7 +3218,7 @@ module Aws::IoTFleetWise
       :storage_compression_format,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input component that reports the environmental condition of a vehicle.</p>
@@ -3403,7 +3271,7 @@ module Aws::IoTFleetWise
       :comment,
       :struct_fully_qualified_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a collection of standardized signals, which can be attributes,
@@ -3426,7 +3294,7 @@ module Aws::IoTFleetWise
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a signal decoder.</p>
@@ -3471,33 +3339,7 @@ module Aws::IoTFleetWise
       :message_signal,
       :custom_decoding_signal,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SignalDecoderFailureReason
-      DUPLICATE_SIGNAL = 'DUPLICATE_SIGNAL'
-      CONFLICTING_SIGNAL = 'CONFLICTING_SIGNAL'
-      SIGNAL_TO_ADD_ALREADY_EXISTS = 'SIGNAL_TO_ADD_ALREADY_EXISTS'
-      SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE = 'SIGNAL_NOT_ASSOCIATED_WITH_NETWORK_INTERFACE'
-      NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE = 'NETWORK_INTERFACE_TYPE_INCOMPATIBLE_WITH_SIGNAL_DECODER_TYPE'
-      SIGNAL_NOT_IN_MODEL = 'SIGNAL_NOT_IN_MODEL'
-      CAN_SIGNAL_INFO_IS_NULL = 'CAN_SIGNAL_INFO_IS_NULL'
-      OBD_SIGNAL_INFO_IS_NULL = 'OBD_SIGNAL_INFO_IS_NULL'
-      NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL = 'NO_DECODER_INFO_FOR_SIGNAL_IN_MODEL'
-      MESSAGE_SIGNAL_INFO_IS_NULL = 'MESSAGE_SIGNAL_INFO_IS_NULL'
-      SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE = 'SIGNAL_DECODER_TYPE_INCOMPATIBLE_WITH_MESSAGE_SIGNAL_TYPE'
-      STRUCT_SIZE_MISMATCH = 'STRUCT_SIZE_MISMATCH'
-      NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL = 'NO_SIGNAL_IN_CATALOG_FOR_DECODER_SIGNAL'
-      SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG = 'SIGNAL_DECODER_INCOMPATIBLE_WITH_SIGNAL_CATALOG'
-      EMPTY_MESSAGE_SIGNAL = 'EMPTY_MESSAGE_SIGNAL'
-      CUSTOM_DECODING_SIGNAL_INFO_IS_NULL = 'CUSTOM_DECODING_SIGNAL_INFO_IS_NULL'
-    end
-
-    module SignalDecoderType
-      CAN_SIGNAL = 'CAN_SIGNAL'
-      OBD_SIGNAL = 'OBD_SIGNAL'
-      MESSAGE_SIGNAL = 'MESSAGE_SIGNAL'
-      CUSTOM_DECODING_SIGNAL = 'CUSTOM_DECODING_SIGNAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the signal fetch operation.</p>
@@ -3515,7 +3357,7 @@ module Aws::IoTFleetWise
       :condition_based,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TimeBased < SignalFetchConfig; end
       class ConditionBased < SignalFetchConfig; end
@@ -3544,7 +3386,7 @@ module Aws::IoTFleetWise
       :condition_language_version,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a signal.</p>
@@ -3581,26 +3423,7 @@ module Aws::IoTFleetWise
       :minimum_sampling_interval_ms,
       :data_partition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SignalNodeType
-      SENSOR = 'SENSOR'
-      ACTUATOR = 'ACTUATOR'
-      ATTRIBUTE = 'ATTRIBUTE'
-      BRANCH = 'BRANCH'
-      CUSTOM_STRUCT = 'CUSTOM_STRUCT'
-      CUSTOM_PROPERTY = 'CUSTOM_PROPERTY'
-    end
-
-    module SignalValueType
-      INTEGER = 'INTEGER'
-      FLOATING_POINT = 'FLOATING_POINT'
-    end
-
-    module SpoolingMode
-      OFF = 'OFF'
-      TO_DISK = 'TO_DISK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state template associated with a vehicle. State templates contain state properties, which are signals that belong to a signal catalog that is synchronized between the Amazon Web Services IoT FleetWise Edge and the Amazon Web Services Cloud.</p>
@@ -3620,7 +3443,7 @@ module Aws::IoTFleetWise
       :identifier,
       :state_template_update_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a state template.</p>
@@ -3657,7 +3480,7 @@ module Aws::IoTFleetWise
       :last_modification_time,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The update strategy for the state template. Vehicles associated with the state template can stream telemetry data with either an <code>onChange</code> or <code>periodic</code> update strategy. </p>
@@ -3675,16 +3498,11 @@ module Aws::IoTFleetWise
       :on_change,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Periodic < StateTemplateUpdateStrategy; end
       class OnChange < StateTemplateUpdateStrategy; end
       class Unknown < StateTemplateUpdateStrategy; end
-    end
-
-    module StorageCompressionFormat
-      NONE = 'NONE'
-      GZIP = 'GZIP'
     end
 
     # <p>The maximum storage size for the data partition.</p>
@@ -3701,13 +3519,7 @@ module Aws::IoTFleetWise
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageMaximumSizeUnit
-      MB = 'MB'
-      GB = 'GB'
-      TB = 'TB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the minimum amount of time that data will be kept.</p>
@@ -3724,13 +3536,7 @@ module Aws::IoTFleetWise
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageMinimumTimeToLiveUnit
-      HOURS = 'HOURS'
-      DAYS = 'DAYS'
-      WEEKS = 'WEEKS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structured message for the message signal. It can be defined with either a
@@ -3752,7 +3558,7 @@ module Aws::IoTFleetWise
       :structured_message_definition,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PrimitiveMessageDefinition < StructuredMessage; end
       class StructuredMessageListDefinition < StructuredMessage; end
@@ -3773,7 +3579,7 @@ module Aws::IoTFleetWise
       :field_name,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a list type node of the complex data structure.</p>
@@ -3796,18 +3602,12 @@ module Aws::IoTFleetWise
       :list_type,
       :capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:capacity] = 0 unless options.key?(:capacity)
         super
       end
-    end
-
-    module StructuredMessageListType
-      FIXED_CAPACITY = 'FIXED_CAPACITY'
-      DYNAMIC_UNBOUNDED_CAPACITY = 'DYNAMIC_UNBOUNDED_CAPACITY'
-      DYNAMIC_BOUNDED_CAPACITY = 'DYNAMIC_BOUNDED_CAPACITY'
     end
 
     # <p>A set of key/value pairs that are used to manage the resource.</p>
@@ -3821,7 +3621,7 @@ module Aws::IoTFleetWise
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3834,12 +3634,12 @@ module Aws::IoTFleetWise
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request couldn't be completed due to throttling.</p>
@@ -3860,7 +3660,7 @@ module Aws::IoTFleetWise
       :service_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -3878,7 +3678,7 @@ module Aws::IoTFleetWise
     class TimeBasedCollectionScheme < Struct.new(
       :period_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to configure a frequency-based vehicle signal fetch.</p>
@@ -3888,7 +3688,7 @@ module Aws::IoTFleetWise
     class TimeBasedSignalFetchConfig < Struct.new(
       :execution_frequency_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The length of time between state template updates.</p>
@@ -3902,14 +3702,7 @@ module Aws::IoTFleetWise
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeUnit
-      MILLISECOND = 'MILLISECOND'
-      SECOND = 'SECOND'
-      MINUTE = 'MINUTE'
-      HOUR = 'HOUR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Timestream table where the Amazon Web Services IoT FleetWise campaign sends data. Timestream stores and organizes
@@ -3927,7 +3720,7 @@ module Aws::IoTFleetWise
       :timestream_table_arn,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the registered Amazon Timestream resources or errors, if any.</p>
@@ -3959,7 +3752,7 @@ module Aws::IoTFleetWise
       :registration_status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registered Amazon Timestream resources that Amazon Web Services IoT FleetWise edge agent software can transfer
@@ -3974,12 +3767,7 @@ module Aws::IoTFleetWise
       :timestream_database_name,
       :timestream_table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggerMode
-      ALWAYS = 'ALWAYS'
-      RISING_EDGE = 'RISING_EDGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3992,19 +3780,12 @@ module Aws::IoTFleetWise
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateCampaignAction
-      APPROVE = 'APPROVE'
-      SUSPEND = 'SUSPEND'
-      RESUME = 'RESUME'
-      UPDATE = 'UPDATE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4049,7 +3830,7 @@ module Aws::IoTFleetWise
       :data_extra_dimensions,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4087,7 +3868,7 @@ module Aws::IoTFleetWise
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4141,7 +3922,7 @@ module Aws::IoTFleetWise
       :status,
       :default_for_unmapped_signals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4154,7 +3935,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -4167,7 +3948,7 @@ module Aws::IoTFleetWise
       :fleet_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4180,12 +3961,7 @@ module Aws::IoTFleetWise
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateMode
-      OVERWRITE = 'Overwrite'
-      MERGE = 'Merge'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4214,7 +3990,7 @@ module Aws::IoTFleetWise
       :nodes_to_remove,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4227,7 +4003,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4253,7 +4029,7 @@ module Aws::IoTFleetWise
       :nodes_to_update,
       :nodes_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4266,7 +4042,7 @@ module Aws::IoTFleetWise
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -4305,7 +4081,7 @@ module Aws::IoTFleetWise
       :data_extra_dimensions,
       :metadata_extra_dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4322,7 +4098,7 @@ module Aws::IoTFleetWise
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP error resulting from updating the description for a vehicle.</p>
@@ -4340,7 +4116,7 @@ module Aws::IoTFleetWise
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:code] = 0 unless options.key?(:code)
@@ -4388,7 +4164,7 @@ module Aws::IoTFleetWise
       :state_templates_to_remove,
       :state_templates_to_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vehicle_name
@@ -4401,7 +4177,7 @@ module Aws::IoTFleetWise
       :vehicle_name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the vehicle to update.</p>
@@ -4449,7 +4225,7 @@ module Aws::IoTFleetWise
       :state_templates_to_remove,
       :state_templates_to_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the updated vehicle.</p>
@@ -4463,7 +4239,7 @@ module Aws::IoTFleetWise
       :vehicle_name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -4482,7 +4258,7 @@ module Aws::IoTFleetWise
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validation error due to mismatch between the expected data type, length, or pattern
@@ -4497,19 +4273,7 @@ module Aws::IoTFleetWise
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
-    end
-
-    module VehicleAssociationBehavior
-      CREATE_IOT_THING = 'CreateIotThing'
-      VALIDATE_IOT_THING_EXISTS = 'ValidateIotThingExists'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The vehicle middleware defined as a type of network interface. Examples of vehicle
@@ -4524,20 +4288,7 @@ module Aws::IoTFleetWise
       :name,
       :protocol_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VehicleMiddlewareProtocol
-      ROS_2 = 'ROS_2'
-    end
-
-    module VehicleState
-      CREATED = 'CREATED'
-      READY = 'READY'
-      HEALTHY = 'HEALTHY'
-      SUSPENDED = 'SUSPENDED'
-      DELETING = 'DELETING'
-      READY_FOR_CHECKIN = 'READY_FOR_CHECKIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a campaign associated with a vehicle.</p>
@@ -4581,7 +4332,7 @@ module Aws::IoTFleetWise
       :vehicle_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a vehicle.</p>
@@ -4619,7 +4370,7 @@ module Aws::IoTFleetWise
       :last_modification_time,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

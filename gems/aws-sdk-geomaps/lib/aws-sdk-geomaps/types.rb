@@ -13,7 +13,7 @@ module Aws::GeoMaps
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute font_stack
@@ -272,7 +272,7 @@ module Aws::GeoMaps
       :font_stack,
       :font_unicode_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -294,7 +294,7 @@ module Aws::GeoMaps
       :cache_control,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_name
@@ -333,7 +333,7 @@ module Aws::GeoMaps
       :color_scheme,
       :variant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -356,7 +356,7 @@ module Aws::GeoMaps
       :cache_control,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bounding_box
@@ -918,7 +918,7 @@ module Aws::GeoMaps
       :width,
       :zoom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -945,7 +945,7 @@ module Aws::GeoMaps
       :e_tag,
       :pricing_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute style
@@ -1037,7 +1037,7 @@ module Aws::GeoMaps
       :political_view,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -1060,7 +1060,7 @@ module Aws::GeoMaps
       :cache_control,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tileset
@@ -1088,7 +1088,7 @@ module Aws::GeoMaps
       :y,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blob
@@ -1115,7 +1115,7 @@ module Aws::GeoMaps
       :e_tag,
       :pricing_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or
@@ -1125,7 +1125,7 @@ module Aws::GeoMaps
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1134,7 +1134,7 @@ module Aws::GeoMaps
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -1151,7 +1151,7 @@ module Aws::GeoMaps
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the Amazon Location
@@ -1166,7 +1166,7 @@ module Aws::GeoMaps
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -21,16 +21,7 @@ module Aws::SageMaker
       :source_type,
       :source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionStatus
-      UNKNOWN = 'Unknown'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the properties of an <i>action</i>. An action represents an action or activity. Some examples are a workflow step and a model deployment. Generally, an action involves at least one input artifact or output artifact.</p>
@@ -64,12 +55,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActivationState
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -86,7 +72,7 @@ module Aws::SageMaker
       :destination_arn,
       :association_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -99,7 +85,7 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an instance group and the number of nodes to add to it.</p>
@@ -113,7 +99,7 @@ module Aws::SageMaker
       :instance_group_name,
       :increment_target_count_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -126,7 +112,7 @@ module Aws::SageMaker
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -135,7 +121,7 @@ module Aws::SageMaker
     class AddTagsOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about additional Elastic Network Interfaces (ENIs) associated with an instance.</p>
@@ -145,7 +131,7 @@ module Aws::SageMaker
     class AdditionalEnis < Struct.new(
       :efa_enis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure of additional Inference Specification. Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package</p>
@@ -179,7 +165,7 @@ module Aws::SageMaker
       :supported_content_types,
       :supported_response_mime_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data sources that are available to your model in addition to the one that you specify for <code>ModelDataSource</code> when you use the <code>CreateModel</code> action.</p>
@@ -193,7 +179,7 @@ module Aws::SageMaker
       :channel_name,
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data source used for training or inference that is in addition to the input dataset or model data.</p>
@@ -215,12 +201,7 @@ module Aws::SageMaker
       :compression_type,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdditionalS3DataSourceDataType
-      S3OBJECT = 'S3Object'
-      S3PREFIX = 'S3Prefix'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Edge Manager agent version.</p>
@@ -234,15 +215,7 @@ module Aws::SageMaker
       :version,
       :agent_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregationTransformationValue
-      Sum = 'sum'
-      Avg = 'avg'
-      First = 'first'
-      Min = 'min'
-      Max = 'max'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon CloudWatch alarm configured to monitor metrics on an endpoint.</p>
@@ -252,7 +225,7 @@ module Aws::SageMaker
     class Alarm < Struct.new(
       :alarm_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the alarm to monitor during the AMI update.</p>
@@ -262,12 +235,7 @@ module Aws::SageMaker
     class AlarmDetails < Struct.new(
       :alarm_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlgorithmSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the training algorithm to use in a <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> request.</p> <important> <p>SageMaker uses its own SageMaker account credentials to pull and access built-in algorithms so built-in algorithms are universally accessible across all Amazon Web Services accounts. As a result, built-in algorithms have standard, unrestricted access. You cannot restrict built-in algorithms using IAM roles. Use custom algorithms if you require specific access controls.</p> </important> <p>For more information about algorithms provided by SageMaker, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>. For information about using your own algorithms, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon SageMaker</a>. </p>
@@ -305,15 +273,7 @@ module Aws::SageMaker
       :container_arguments,
       :training_image_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlgorithmStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the validation and image scan statuses of the algorithm.</p>
@@ -327,7 +287,7 @@ module Aws::SageMaker
       :validation_statuses,
       :image_scan_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the overall status of an algorithm.</p>
@@ -345,7 +305,7 @@ module Aws::SageMaker
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an algorithm.</p>
@@ -371,7 +331,7 @@ module Aws::SageMaker
       :creation_time,
       :algorithm_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a training job and a batch transform job that SageMaker runs to validate your algorithm.</p> <p>The data provided in the validation profile is made available to your buyers on Amazon Web Services Marketplace.</p>
@@ -389,7 +349,7 @@ module Aws::SageMaker
       :training_job_definition,
       :transform_job_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configurations for one or more training jobs that SageMaker runs to test the algorithm.</p>
@@ -403,7 +363,7 @@ module Aws::SageMaker
       :validation_role,
       :validation_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that configure the Amazon Q experience within the domain.</p>
@@ -417,7 +377,7 @@ module Aws::SageMaker
       :status,
       :q_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures how labels are consolidated across human workers and processes output data.</p>
@@ -427,7 +387,7 @@ module Aws::SageMaker
     class AnnotationConsolidationConfig < Struct.new(
       :annotation_consolidation_lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon SageMaker AI app.</p>
@@ -465,7 +425,7 @@ module Aws::SageMaker
       :creation_time,
       :resource_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for running a SageMaker AI image as a KernelGateway app.</p>
@@ -499,178 +459,7 @@ module Aws::SageMaker
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppImageConfigSortKey
-      CreationTime = 'CreationTime'
-      LastModifiedTime = 'LastModifiedTime'
-      Name = 'Name'
-    end
-
-    module AppInstanceType
-      SYSTEM = 'system'
-      ML_T3_MICRO = 'ml.t3.micro'
-      ML_T3_SMALL = 'ml.t3.small'
-      ML_T3_MEDIUM = 'ml.t3.medium'
-      ML_T3_LARGE = 'ml.t3.large'
-      ML_T3_XLARGE = 'ml.t3.xlarge'
-      ML_T3_2XLARGE = 'ml.t3.2xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_8XLARGE = 'ml.m5.8xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_16XLARGE = 'ml.m5.16xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_M5D_LARGE = 'ml.m5d.large'
-      ML_M5D_XLARGE = 'ml.m5d.xlarge'
-      ML_M5D_2XLARGE = 'ml.m5d.2xlarge'
-      ML_M5D_4XLARGE = 'ml.m5d.4xlarge'
-      ML_M5D_8XLARGE = 'ml.m5d.8xlarge'
-      ML_M5D_12XLARGE = 'ml.m5d.12xlarge'
-      ML_M5D_16XLARGE = 'ml.m5d.16xlarge'
-      ML_M5D_24XLARGE = 'ml.m5d.24xlarge'
-      ML_C5_LARGE = 'ml.c5.large'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_12XLARGE = 'ml.c5.12xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_C5_24XLARGE = 'ml.c5.24xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_P3DN_24XLARGE = 'ml.p3dn.24xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_R5_LARGE = 'ml.r5.large'
-      ML_R5_XLARGE = 'ml.r5.xlarge'
-      ML_R5_2XLARGE = 'ml.r5.2xlarge'
-      ML_R5_4XLARGE = 'ml.r5.4xlarge'
-      ML_R5_8XLARGE = 'ml.r5.8xlarge'
-      ML_R5_12XLARGE = 'ml.r5.12xlarge'
-      ML_R5_16XLARGE = 'ml.r5.16xlarge'
-      ML_R5_24XLARGE = 'ml.r5.24xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
-      ML_G6E_XLARGE = 'ml.g6e.xlarge'
-      ML_G6E_2XLARGE = 'ml.g6e.2xlarge'
-      ML_G6E_4XLARGE = 'ml.g6e.4xlarge'
-      ML_G6E_8XLARGE = 'ml.g6e.8xlarge'
-      ML_G6E_12XLARGE = 'ml.g6e.12xlarge'
-      ML_G6E_16XLARGE = 'ml.g6e.16xlarge'
-      ML_G6E_24XLARGE = 'ml.g6e.24xlarge'
-      ML_G6E_48XLARGE = 'ml.g6e.48xlarge'
-      ML_GEOSPATIAL_INTERACTIVE = 'ml.geospatial.interactive'
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_P5EN_48XLARGE = 'ml.p5en.48xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_C6I_LARGE = 'ml.c6i.large'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_R6I_LARGE = 'ml.r6i.large'
-      ML_R6I_XLARGE = 'ml.r6i.xlarge'
-      ML_R6I_2XLARGE = 'ml.r6i.2xlarge'
-      ML_R6I_4XLARGE = 'ml.r6i.4xlarge'
-      ML_R6I_8XLARGE = 'ml.r6i.8xlarge'
-      ML_R6I_12XLARGE = 'ml.r6i.12xlarge'
-      ML_R6I_16XLARGE = 'ml.r6i.16xlarge'
-      ML_R6I_24XLARGE = 'ml.r6i.24xlarge'
-      ML_R6I_32XLARGE = 'ml.r6i.32xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
-      ML_M6ID_LARGE = 'ml.m6id.large'
-      ML_M6ID_XLARGE = 'ml.m6id.xlarge'
-      ML_M6ID_2XLARGE = 'ml.m6id.2xlarge'
-      ML_M6ID_4XLARGE = 'ml.m6id.4xlarge'
-      ML_M6ID_8XLARGE = 'ml.m6id.8xlarge'
-      ML_M6ID_12XLARGE = 'ml.m6id.12xlarge'
-      ML_M6ID_16XLARGE = 'ml.m6id.16xlarge'
-      ML_M6ID_24XLARGE = 'ml.m6id.24xlarge'
-      ML_M6ID_32XLARGE = 'ml.m6id.32xlarge'
-      ML_C6ID_LARGE = 'ml.c6id.large'
-      ML_C6ID_XLARGE = 'ml.c6id.xlarge'
-      ML_C6ID_2XLARGE = 'ml.c6id.2xlarge'
-      ML_C6ID_4XLARGE = 'ml.c6id.4xlarge'
-      ML_C6ID_8XLARGE = 'ml.c6id.8xlarge'
-      ML_C6ID_12XLARGE = 'ml.c6id.12xlarge'
-      ML_C6ID_16XLARGE = 'ml.c6id.16xlarge'
-      ML_C6ID_24XLARGE = 'ml.c6id.24xlarge'
-      ML_C6ID_32XLARGE = 'ml.c6id.32xlarge'
-      ML_R6ID_LARGE = 'ml.r6id.large'
-      ML_R6ID_XLARGE = 'ml.r6id.xlarge'
-      ML_R6ID_2XLARGE = 'ml.r6id.2xlarge'
-      ML_R6ID_4XLARGE = 'ml.r6id.4xlarge'
-      ML_R6ID_8XLARGE = 'ml.r6id.8xlarge'
-      ML_R6ID_12XLARGE = 'ml.r6id.12xlarge'
-      ML_R6ID_16XLARGE = 'ml.r6id.16xlarge'
-      ML_R6ID_24XLARGE = 'ml.r6id.24xlarge'
-      ML_R6ID_32XLARGE = 'ml.r6id.32xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio applications.</p>
@@ -680,21 +469,7 @@ module Aws::SageMaker
     class AppLifecycleManagement < Struct.new(
       :idle_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppNetworkAccessType
-      PublicInternetOnly = 'PublicInternetOnly'
-      VpcOnly = 'VpcOnly'
-    end
-
-    module AppSecurityGroupManagement
-      Service = 'Service'
-      Customer = 'Customer'
-    end
-
-    module AppSortKey
-      CreationTime = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration to run a processing job in a specified container image.</p>
@@ -712,27 +487,7 @@ module Aws::SageMaker
       :container_entrypoint,
       :container_arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppStatus
-      Deleted = 'Deleted'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-      InService = 'InService'
-      Pending = 'Pending'
-    end
-
-    module AppType
-      JupyterServer = 'JupyterServer'
-      KernelGateway = 'KernelGateway'
-      DetailedProfiler = 'DetailedProfiler'
-      TensorBoard = 'TensorBoard'
-      CodeEditor = 'CodeEditor'
-      JupyterLab = 'JupyterLab'
-      RStudioServerPro = 'RStudioServerPro'
-      RSessionGateway = 'RSessionGateway'
-      Canvas = 'Canvas'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure describing the source of an artifact.</p>
@@ -746,14 +501,7 @@ module Aws::SageMaker
       :source_uri,
       :source_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactSourceIdType
-      MD5_HASH = 'MD5Hash'
-      S3_ETAG = 'S3ETag'
-      S3_VERSION = 'S3Version'
-      CUSTOM = 'Custom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID and ID type of an artifact source.</p>
@@ -767,7 +515,7 @@ module Aws::SageMaker
       :source_id_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of the properties of an artifact. An artifact represents a URI addressable object or data. Some examples are a dataset and a model.</p>
@@ -797,12 +545,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssemblyType
-      NONE = 'None'
-      LINE = 'Line'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -815,7 +558,7 @@ module Aws::SageMaker
       :trial_component_name,
       :trial_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_arn
@@ -828,15 +571,7 @@ module Aws::SageMaker
       :trial_component_arn,
       :trial_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationEdgeType
-      CONTRIBUTED_TO = 'ContributedTo'
-      ASSOCIATED_WITH = 'AssociatedWith'
-      DERIVED_FROM = 'DerivedFrom'
-      PRODUCED = 'Produced'
-      SAME_AS = 'SameAs'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of the properties of an association. An association is an entity that links other lineage or experiment entities. An example would be an association between a training job and a model.</p>
@@ -878,7 +613,7 @@ module Aws::SageMaker
       :creation_time,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the behavior of the client used by SageMaker to interact with the model container during asynchronous inference.</p>
@@ -888,7 +623,7 @@ module Aws::SageMaker
     class AsyncInferenceClientConfig < Struct.new(
       :max_concurrent_invocations_per_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration for how an endpoint performs asynchronous inference.</p>
@@ -902,7 +637,7 @@ module Aws::SageMaker
       :client_config,
       :output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>
@@ -920,7 +655,7 @@ module Aws::SageMaker
       :error_topic,
       :include_inference_response_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for asynchronous inference invocation outputs.</p>
@@ -942,12 +677,7 @@ module Aws::SageMaker
       :notification_config,
       :s3_failure_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AsyncNotificationTopicTypes
-      SUCCESS_NOTIFICATION_TOPIC = 'SUCCESS_NOTIFICATION_TOPIC'
-      ERROR_NOTIFICATION_TOPIC = 'ERROR_NOTIFICATION_TOPIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for Athena Dataset Definition input.</p>
@@ -985,23 +715,7 @@ module Aws::SageMaker
       :output_format,
       :output_compression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The compression used for Athena query results.</p>
-    module AthenaResultCompressionType
-      GZIP = 'GZIP'
-      SNAPPY = 'SNAPPY'
-      ZLIB = 'ZLIB'
-    end
-
-    # <p>The data storage format for Athena query results.</p>
-    module AthenaResultFormat
-      PARQUET = 'PARQUET'
-      ORC = 'ORC'
-      AVRO = 'AVRO'
-      JSON = 'JSON'
-      TEXTFILE = 'TEXTFILE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1018,7 +732,7 @@ module Aws::SageMaker
       :node_id,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1047,12 +761,7 @@ module Aws::SageMaker
       :status,
       :device_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthMode
-      SSO = 'SSO'
-      IAM = 'IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a presigned URL and its associated local file path for downloading hub content artifacts.</p>
@@ -1066,25 +775,7 @@ module Aws::SageMaker
       :url,
       :local_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMLAlgorithm
-      XGBOOST = 'xgboost'
-      LINEAR_LEARNER = 'linear-learner'
-      MLP = 'mlp'
-      LIGHTGBM = 'lightgbm'
-      CATBOOST = 'catboost'
-      RANDOMFOREST = 'randomforest'
-      EXTRA_TREES = 'extra-trees'
-      NN_TORCH = 'nn-torch'
-      FASTAI = 'fastai'
-      CNN_QR = 'cnn-qr'
-      DEEPAR = 'deepar'
-      PROPHET = 'prophet'
-      NPTS = 'npts'
-      ARIMA = 'arima'
-      ETS = 'ets'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selection of algorithms trained on your dataset to generate the model candidates for an Autopilot job.</p>
@@ -1094,7 +785,7 @@ module Aws::SageMaker
     class AutoMLAlgorithmConfig < Struct.new(
       :auto_ml_algorithms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a candidate produced by an AutoML training job, including its status, steps, and other properties.</p>
@@ -1148,7 +839,7 @@ module Aws::SageMaker
       :candidate_properties,
       :inference_container_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores the configuration information for how a candidate is generated (optional).</p>
@@ -1162,7 +853,7 @@ module Aws::SageMaker
       :feature_specification_s3_uri,
       :algorithms_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the steps for a candidate and what step it is working on.</p>
@@ -1180,7 +871,7 @@ module Aws::SageMaker
       :candidate_step_arn,
       :candidate_step_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A channel is a named input source that training algorithms can consume. The validation dataset size is limited to less than 2 GB. The training dataset size must be less than 100 GB. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html"> Channel</a>.</p> <note> <p>A validation dataset must contain the same headers as the training dataset.</p> </note> <p/>
@@ -1210,12 +901,7 @@ module Aws::SageMaker
       :channel_type,
       :sample_weight_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMLChannelType
-      TRAINING = 'training'
-      VALIDATION = 'validation'
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>This data type is intended for use exclusively by SageMaker Canvas and cannot be used in other contexts at the moment.</p> </note> <p>Specifies the compute configuration for an AutoML job V2.</p>
@@ -1225,7 +911,7 @@ module Aws::SageMaker
     class AutoMLComputeConfig < Struct.new(
       :emr_serverless_compute_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of container definitions that describe the different containers that make up an AutoML candidate. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html"> ContainerDefinition</a>.</p>
@@ -1243,7 +929,7 @@ module Aws::SageMaker
       :model_data_url,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data source for the Autopilot job.</p>
@@ -1253,7 +939,7 @@ module Aws::SageMaker
     class AutoMLDataSource < Struct.new(
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies how to split the data into train and validation datasets.</p> <p>The validation and training datasets must contain the same headers. For jobs created by calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in size.</p>
@@ -1263,7 +949,7 @@ module Aws::SageMaker
     class AutoMLDataSplitConfig < Struct.new(
       :validation_fraction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The artifacts that are generated during an AutoML job.</p>
@@ -1277,7 +963,7 @@ module Aws::SageMaker
       :candidate_definition_notebook_location,
       :data_exploration_notebook_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A channel is a named input source that training algorithms can consume. This channel is used for AutoML jobs V2 (jobs created by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a>).</p>
@@ -1299,7 +985,7 @@ module Aws::SageMaker
       :compression_type,
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How long a job is allowed to run, or how many candidates a job is allowed to generate.</p>
@@ -1317,7 +1003,7 @@ module Aws::SageMaker
       :max_runtime_per_training_job_in_seconds,
       :max_auto_ml_job_runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings used for an AutoML job.</p>
@@ -1343,7 +1029,7 @@ module Aws::SageMaker
       :data_split_config,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a metric to minimize or maximize as the objective of an AutoML job.</p>
@@ -1353,42 +1039,7 @@ module Aws::SageMaker
     class AutoMLJobObjective < Struct.new(
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMLJobObjectiveType
-      MAXIMIZE = 'Maximize'
-      MINIMIZE = 'Minimize'
-    end
-
-    module AutoMLJobSecondaryStatus
-      STARTING = 'Starting'
-      MAX_CANDIDATES_REACHED = 'MaxCandidatesReached'
-      FAILED = 'Failed'
-      STOPPED = 'Stopped'
-      MAX_AUTO_ML_JOB_RUNTIME_REACHED = 'MaxAutoMLJobRuntimeReached'
-      STOPPING = 'Stopping'
-      CANDIDATE_DEFINITIONS_GENERATED = 'CandidateDefinitionsGenerated'
-      COMPLETED = 'Completed'
-      EXPLAINABILITY_ERROR = 'ExplainabilityError'
-      DEPLOYING_MODEL = 'DeployingModel'
-      MODEL_DEPLOYMENT_ERROR = 'ModelDeploymentError'
-      GENERATING_MODEL_INSIGHTS_REPORT = 'GeneratingModelInsightsReport'
-      MODEL_INSIGHTS_ERROR = 'ModelInsightsError'
-      ANALYZING_DATA = 'AnalyzingData'
-      FEATURE_ENGINEERING = 'FeatureEngineering'
-      MODEL_TUNING = 'ModelTuning'
-      GENERATING_EXPLAINABILITY_REPORT = 'GeneratingExplainabilityReport'
-      TRAINING_MODELS = 'TrainingModels'
-      PRE_TRAINING = 'PreTraining'
-    end
-
-    module AutoMLJobStatus
-      COMPLETED = 'Completed'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      STOPPED = 'Stopped'
-      STOPPING = 'Stopping'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for an AutoML job step.</p>
@@ -1398,7 +1049,7 @@ module Aws::SageMaker
     class AutoMLJobStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary about an AutoML job.</p>
@@ -1440,62 +1091,7 @@ module Aws::SageMaker
       :failure_reason,
       :partial_failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMLMetricEnum
-      ACCURACY = 'Accuracy'
-      MSE = 'MSE'
-      F1 = 'F1'
-      F1_MACRO = 'F1macro'
-      AUC = 'AUC'
-      RMSE = 'RMSE'
-      BALANCED_ACCURACY = 'BalancedAccuracy'
-      R2 = 'R2'
-      RECALL = 'Recall'
-      RECALL_MACRO = 'RecallMacro'
-      PRECISION = 'Precision'
-      PRECISION_MACRO = 'PrecisionMacro'
-      MAE = 'MAE'
-      MAPE = 'MAPE'
-      MASE = 'MASE'
-      WAPE = 'WAPE'
-      AVERAGE_WEIGHTED_QUANTILE_LOSS = 'AverageWeightedQuantileLoss'
-    end
-
-    module AutoMLMetricExtendedEnum
-      ACCURACY = 'Accuracy'
-      MSE = 'MSE'
-      F1 = 'F1'
-      F1_MACRO = 'F1macro'
-      AUC = 'AUC'
-      RMSE = 'RMSE'
-      MAE = 'MAE'
-      R2 = 'R2'
-      BALANCED_ACCURACY = 'BalancedAccuracy'
-      PRECISION = 'Precision'
-      PRECISION_MACRO = 'PrecisionMacro'
-      RECALL = 'Recall'
-      RECALL_MACRO = 'RecallMacro'
-      LogLoss = 'LogLoss'
-      INFERENCE_LATENCY = 'InferenceLatency'
-      MAPE = 'MAPE'
-      MASE = 'MASE'
-      WAPE = 'WAPE'
-      AVERAGE_WEIGHTED_QUANTILE_LOSS = 'AverageWeightedQuantileLoss'
-      ROUGE1 = 'Rouge1'
-      ROUGE2 = 'Rouge2'
-      ROUGEL = 'RougeL'
-      ROUGEL_SUM = 'RougeLSum'
-      PERPLEXITY = 'Perplexity'
-      VALIDATION_LOSS = 'ValidationLoss'
-      TRAINING_LOSS = 'TrainingLoss'
-    end
-
-    module AutoMLMode
-      AUTO = 'AUTO'
-      ENSEMBLING = 'ENSEMBLING'
-      HYPERPARAMETER_TUNING = 'HYPERPARAMETER_TUNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output data configuration.</p>
@@ -1509,7 +1105,7 @@ module Aws::SageMaker
       :kms_key_id,
       :s3_output_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reason for a partial failure of an AutoML job.</p>
@@ -1519,7 +1115,7 @@ module Aws::SageMaker
     class AutoMLPartialFailureReason < Struct.new(
       :partial_failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings specific to the problem type used to configure an AutoML job V2. There must be one and only one config of the following type.</p>
@@ -1546,7 +1142,7 @@ module Aws::SageMaker
       :text_generation_job_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ImageClassificationJobConfig < AutoMLProblemTypeConfig; end
       class TextClassificationJobConfig < AutoMLProblemTypeConfig; end
@@ -1554,14 +1150,6 @@ module Aws::SageMaker
       class TabularJobConfig < AutoMLProblemTypeConfig; end
       class TextGenerationJobConfig < AutoMLProblemTypeConfig; end
       class Unknown < AutoMLProblemTypeConfig; end
-    end
-
-    module AutoMLProblemTypeConfigName
-      IMAGE_CLASSIFICATION = 'ImageClassification'
-      TEXT_CLASSIFICATION = 'TextClassification'
-      TIMESERIES_FORECASTING = 'TimeSeriesForecasting'
-      TABULAR = 'Tabular'
-      TEXT_GENERATION = 'TextGeneration'
     end
 
     # <p>Stores resolved attributes specific to the problem type of an AutoML job V2.</p>
@@ -1576,16 +1164,11 @@ module Aws::SageMaker
       :text_generation_resolved_attributes,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TabularResolvedAttributes < AutoMLProblemTypeResolvedAttributes; end
       class TextGenerationResolvedAttributes < AutoMLProblemTypeResolvedAttributes; end
       class Unknown < AutoMLProblemTypeResolvedAttributes; end
-    end
-
-    module AutoMLProcessingUnit
-      CPU = 'CPU'
-      GPU = 'GPU'
     end
 
     # <p>The resolved attributes used to configure an AutoML job V2.</p>
@@ -1603,7 +1186,7 @@ module Aws::SageMaker
       :completion_criteria,
       :auto_ml_problem_type_resolved_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon S3 data source.</p>
@@ -1617,13 +1200,7 @@ module Aws::SageMaker
       :s3_data_type,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMLS3DataType
-      MANIFEST_FILE = 'ManifestFile'
-      S3_PREFIX = 'S3Prefix'
-      AUGMENTED_MANIFEST_FILE = 'AugmentedManifestFile'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Security options.</p>
@@ -1641,24 +1218,7 @@ module Aws::SageMaker
       :enable_inter_container_traffic_encryption,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoMLSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module AutoMLSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module AutoMountHomeEFS
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
-      DEFAULT_AS_DOMAIN = 'DefaultAsDomain'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and an example value of the hyperparameter that you want to use in Autotune. If Automatic model tuning (AMT) determines that your hyperparameter is eligible for Autotune, an optimal hyperparameter range is selected for you.</p>
@@ -1672,7 +1232,7 @@ module Aws::SageMaker
       :name,
       :value_hint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>
@@ -1682,7 +1242,7 @@ module Aws::SageMaker
     class AutoRollbackConfig < Struct.new(
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A flag to indicate if you want to use Autotune to automatically find optimal values for the following fields:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges">ParameterRanges</a>: The names and ranges of parameters that a hyperparameter tuning job can optimize.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html">ResourceLimits</a>: The maximum resources that can be used for a training job. These resources include the maximum number of training jobs, the maximum runtime of a tuning job, and the maximum number of training jobs to run at the same time.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType">TrainingJobEarlyStoppingType</a>: A flag that specifies whether or not to use early stopping for training jobs launched by a hyperparameter tuning job.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy">RetryStrategy</a>: The number of times to retry a training job.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html">Strategy</a>: Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training jobs that it launches.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html">ConvergenceDetected</a>: A flag to indicate that Automatic model tuning (AMT) has detected model convergence.</p> </li> </ul>
@@ -1692,16 +1252,7 @@ module Aws::SageMaker
     class Autotune < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutotuneMode
-      ENABLED = 'Enabled'
-    end
-
-    module AwsManagedHumanLoopRequestSource
-      REKOGNITION_DETECT_MODERATION_LABELS_IMAGE_V3 = 'AWS/Rekognition/DetectModerationLabels/Image/V3'
-      TEXTRACT_ANALYZE_DOCUMENT_FORMS_V1 = 'AWS/Textract/AnalyzeDocument/Forms/V1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an error that occurred during the node addition operation.</p>
@@ -1723,12 +1274,7 @@ module Aws::SageMaker
       :failed_count,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchAddClusterNodesErrorCode
-      INSTANCE_GROUP_NOT_FOUND = 'InstanceGroupNotFound'
-      INVALID_INSTANCE_GROUP_STATUS = 'InvalidInstanceGroupStatus'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1745,7 +1291,7 @@ module Aws::SageMaker
       :client_token,
       :nodes_to_add,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -1758,7 +1304,7 @@ module Aws::SageMaker
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration to control how SageMaker captures inference data for batch transform jobs.</p>
@@ -1776,7 +1322,7 @@ module Aws::SageMaker
       :kms_key_id,
       :generate_inference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an error that occurred when attempting to delete a node identified by its <code>NodeLogicalId</code>.</p>
@@ -1794,7 +1340,7 @@ module Aws::SageMaker
       :message,
       :node_logical_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an error encountered when deleting a node from a SageMaker HyperPod cluster.</p>
@@ -1812,13 +1358,7 @@ module Aws::SageMaker
       :message,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchDeleteClusterNodesErrorCode
-      NODE_ID_NOT_FOUND = 'NodeIdNotFound'
-      INVALID_NODE_STATUS = 'InvalidNodeStatus'
-      NODE_ID_IN_USE = 'NodeIdInUse'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -1835,7 +1375,7 @@ module Aws::SageMaker
       :node_ids,
       :node_logical_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed
@@ -1856,7 +1396,7 @@ module Aws::SageMaker
       :failed_node_logical_ids,
       :successful_node_logical_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error code and error description associated with the resource.</p>
@@ -1870,7 +1410,7 @@ module Aws::SageMaker
       :error_code,
       :error_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_arn_list
@@ -1879,7 +1419,7 @@ module Aws::SageMaker
     class BatchDescribeModelPackageInput < Struct.new(
       :model_package_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_summaries
@@ -1892,7 +1432,7 @@ module Aws::SageMaker
       :model_package_summaries,
       :batch_describe_model_package_error_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about the model package.</p>
@@ -1930,12 +1470,7 @@ module Aws::SageMaker
       :model_package_status,
       :model_approval_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchStrategy
-      MULTI_RECORD = 'MultiRecord'
-      SINGLE_RECORD = 'SingleRecord'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input object for the batch transform job.</p>
@@ -1989,7 +1524,7 @@ module Aws::SageMaker
       :end_time_offset,
       :exclude_features_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that keeps track of which training jobs launched by your hyperparameter tuning job are not improving model performance as evaluated against an objective function.</p>
@@ -1999,7 +1534,7 @@ module Aws::SageMaker
     class BestObjectiveNotImproving < Struct.new(
       :max_number_of_training_jobs_not_improving,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains bias metrics for a model.</p>
@@ -2017,7 +1552,7 @@ module Aws::SageMaker
       :pre_training_report,
       :post_training_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default.</p>
@@ -2035,12 +1570,7 @@ module Aws::SageMaker
       :termination_wait_in_seconds,
       :maximum_execution_timeout_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BooleanOperator
-      AND = 'And'
-      OR = 'Or'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on the cache hit of a pipeline execution step.</p>
@@ -2050,7 +1580,7 @@ module Aws::SageMaker
     class CacheHitResult < Struct.new(
       :source_pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about a callback step.</p>
@@ -2068,7 +1598,7 @@ module Aws::SageMaker
       :sqs_queue_url,
       :output_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of artifacts for an AutoML candidate job.</p>
@@ -2086,7 +1616,7 @@ module Aws::SageMaker
       :model_insights,
       :backtest_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores the configuration information for how model candidates are generated using an AutoML job V2.</p>
@@ -2096,7 +1626,7 @@ module Aws::SageMaker
     class CandidateGenerationConfig < Struct.new(
       :algorithms_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of an AutoML candidate job.</p>
@@ -2110,27 +1640,7 @@ module Aws::SageMaker
       :candidate_artifact_locations,
       :candidate_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CandidateSortBy
-      CreationTime = 'CreationTime'
-      Status = 'Status'
-      FinalObjectiveMetricValue = 'FinalObjectiveMetricValue'
-    end
-
-    module CandidateStatus
-      COMPLETED = 'Completed'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      STOPPED = 'Stopped'
-      STOPPING = 'Stopping'
-    end
-
-    module CandidateStepType
-      TRAINING = 'AWS::SageMaker::TrainingJob'
-      TRANSFORM = 'AWS::SageMaker::TransformJob'
-      PROCESSING = 'AWS::SageMaker::ProcessingJob'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SageMaker Canvas application settings.</p>
@@ -2168,7 +1678,7 @@ module Aws::SageMaker
       :generative_ai_settings,
       :emr_serverless_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Capacity Reservation used by an instance or instance group.</p>
@@ -2182,16 +1692,7 @@ module Aws::SageMaker
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationPreference
-      CAPACITY_RESERVATIONS_ONLY = 'capacity-reservations-only'
-    end
-
-    module CapacityReservationType
-      ODCR = 'ODCR'
-      CRG = 'CRG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy. You can specify your batches as either instance count or the overall percentage or your fleet.</p> <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>
@@ -2205,7 +1706,7 @@ module Aws::SageMaker
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.</p>
@@ -2219,12 +1720,7 @@ module Aws::SageMaker
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacitySizeType
-      INSTANCE_COUNT = 'INSTANCE_COUNT'
-      CAPACITY_PERCENT = 'CAPACITY_PERCENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration specifying how to treat different headers. If no headers are specified Amazon SageMaker AI will by default base64 encode when capturing the data.</p>
@@ -2238,13 +1734,7 @@ module Aws::SageMaker
       :csv_content_types,
       :json_content_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CaptureMode
-      INPUT = 'Input'
-      OUTPUT = 'Output'
-      INPUT_AND_OUTPUT = 'InputAndOutput'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies data Model Monitor will capture.</p>
@@ -2254,12 +1744,7 @@ module Aws::SageMaker
     class CaptureOption < Struct.new(
       :capture_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CaptureStatus
-      STARTED = 'Started'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Environment parameters you want to benchmark your load test against.</p>
@@ -2273,7 +1758,7 @@ module Aws::SageMaker
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of categorical hyperparameters to tune.</p>
@@ -2287,7 +1772,7 @@ module Aws::SageMaker
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the possible values for a categorical hyperparameter.</p>
@@ -2297,7 +1782,7 @@ module Aws::SageMaker
     class CategoricalParameterRangeSpecification < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The CloudFormation template provider configuration for creating infrastructure resources. </p>
@@ -2319,7 +1804,7 @@ module Aws::SageMaker
       :role_arn,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A key-value pair that represents a parameter for the CloudFormation stack. </p>
@@ -2333,7 +1818,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details about the CloudFormation stack. </p>
@@ -2351,7 +1836,7 @@ module Aws::SageMaker
       :id,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A key-value pair representing a parameter used in the CloudFormation stack. </p>
@@ -2365,7 +1850,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A key-value pair representing a parameter used in the CloudFormation stack. </p>
@@ -2379,7 +1864,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details about a CloudFormation template provider configuration and associated provisioning information. </p>
@@ -2405,7 +1890,7 @@ module Aws::SageMaker
       :parameters,
       :stack_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains configuration details for updating an existing CloudFormation template provider in the project. </p>
@@ -2423,7 +1908,7 @@ module Aws::SageMaker
       :template_url,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A channel is a named input source that training algorithms can consume. </p>
@@ -2457,7 +1942,7 @@ module Aws::SageMaker
       :input_mode,
       :shuffle_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a named input source, called a channel, to be used by an algorithm.</p>
@@ -2487,7 +1972,7 @@ module Aws::SageMaker
       :supported_compression_types,
       :supported_input_modes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the output location for managed spot training checkpoint data. </p>
@@ -2501,7 +1986,7 @@ module Aws::SageMaker
       :s3_uri,
       :local_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the metadata for the ClarifyCheck step. For more information, see the topic on <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check">ClarifyCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>. </p>
@@ -2539,7 +2024,7 @@ module Aws::SageMaker
       :skip_check,
       :register_new_baseline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters for the SageMaker Clarify explainer.</p>
@@ -2557,13 +2042,7 @@ module Aws::SageMaker
       :inference_config,
       :shap_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClarifyFeatureType
-      NUMERICAL = 'numerical'
-      CATEGORICAL = 'categorical'
-      TEXT = 'text'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inference configuration parameter for the model container.</p>
@@ -2613,7 +2092,7 @@ module Aws::SageMaker
       :feature_headers,
       :feature_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-feature-attribute-shap-baselines.html">SHAP baseline</a> (also called the background or reference dataset) of the Kernal SHAP algorithm.</p> <note> <ul> <li> <p>The number of records in the baseline data determines the size of the synthetic dataset, which has an impact on latency of explainability requests. For more information, see the <b>Synthetic data</b> of <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html">Configure and create an endpoint</a>.</p> </li> <li> <p> <code>ShapBaseline</code> and <code>ShapBaselineUri</code> are mutually exclusive parameters. One or the either is required to configure a SHAP baseline. </p> </li> </ul> </note>
@@ -2631,7 +2110,7 @@ module Aws::SageMaker
       :shap_baseline,
       :shap_baseline_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for SHAP analysis using SageMaker Clarify Explainer.</p>
@@ -2657,7 +2136,7 @@ module Aws::SageMaker
       :seed,
       :text_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter used to configure the SageMaker Clarify explainer to treat text features as text so that explanations are provided for individual units of text. Required only for natural language processing (NLP) explainability. </p>
@@ -2671,76 +2150,7 @@ module Aws::SageMaker
       :language,
       :granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClarifyTextGranularity
-      TOKEN = 'token'
-      SENTENCE = 'sentence'
-      PARAGRAPH = 'paragraph'
-    end
-
-    module ClarifyTextLanguage
-      AFRIKAANS = 'af'
-      ALBANIAN = 'sq'
-      ARABIC = 'ar'
-      ARMENIAN = 'hy'
-      BASQUE = 'eu'
-      BENGALI = 'bn'
-      BULGARIAN = 'bg'
-      CATALAN = 'ca'
-      CHINESE = 'zh'
-      CROATIAN = 'hr'
-      CZECH = 'cs'
-      DANISH = 'da'
-      DUTCH = 'nl'
-      ENGLISH = 'en'
-      ESTONIAN = 'et'
-      FINNISH = 'fi'
-      FRENCH = 'fr'
-      GERMAN = 'de'
-      GREEK = 'el'
-      GUJARATI = 'gu'
-      HEBREW = 'he'
-      HINDI = 'hi'
-      HUNGARIAN = 'hu'
-      ICELANDIC = 'is'
-      INDONESIAN = 'id'
-      IRISH = 'ga'
-      ITALIAN = 'it'
-      KANNADA = 'kn'
-      KYRGYZ = 'ky'
-      LATVIAN = 'lv'
-      LITHUANIAN = 'lt'
-      LUXEMBOURGISH = 'lb'
-      MACEDONIAN = 'mk'
-      MALAYALAM = 'ml'
-      MARATHI = 'mr'
-      NEPALI = 'ne'
-      NORWEGIAN_BOKMAL = 'nb'
-      PERSIAN = 'fa'
-      POLISH = 'pl'
-      PORTUGUESE = 'pt'
-      ROMANIAN = 'ro'
-      RUSSIAN = 'ru'
-      SANSKRIT = 'sa'
-      SERBIAN = 'sr'
-      SETSWANA = 'tn'
-      SINHALA = 'si'
-      SLOVAK = 'sk'
-      SLOVENIAN = 'sl'
-      SPANISH = 'es'
-      SWEDISH = 'sv'
-      TAGALOG = 'tl'
-      TAMIL = 'ta'
-      TATAR = 'tt'
-      TELUGU = 'te'
-      TURKISH = 'tr'
-      UKRAINIAN = 'uk'
-      URDU = 'ur'
-      YORUBA = 'yo'
-      LIGURIAN = 'lij'
-      MULTI_LANGUAGE = 'xx'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration for attaching an additional Amazon Elastic Block Store (EBS) volume to each instance of the SageMaker HyperPod cluster instance group. To learn more, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620">SageMaker HyperPod release notes: June 20, 2024</a>.</p>
@@ -2750,7 +2160,7 @@ module Aws::SageMaker
     class ClusterEbsVolumeConfig < Struct.new(
       :volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a specific event in a HyperPod cluster.</p>
@@ -2792,13 +2202,7 @@ module Aws::SageMaker
       :event_details,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterEventResourceType
-      CLUSTER = 'Cluster'
-      INSTANCE_GROUP = 'InstanceGroup'
-      INSTANCE = 'Instance'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an event in a HyperPod cluster.</p>
@@ -2836,7 +2240,7 @@ module Aws::SageMaker
       :event_time,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an instance group in a SageMaker HyperPod cluster.</p>
@@ -2906,7 +2310,7 @@ module Aws::SageMaker
       :current_image_id,
       :desired_image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specifications of an instance group that you need to define.</p>
@@ -2960,7 +2364,7 @@ module Aws::SageMaker
       :scheduled_update_config,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the placement details for the node in the SageMaker HyperPod cluster, including the Availability Zone and the unique identifier (ID) of the Availability Zone.</p>
@@ -2974,17 +2378,7 @@ module Aws::SageMaker
       :availability_zone,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterInstanceStatus
-      RUNNING = 'Running'
-      FAILURE = 'Failure'
-      PENDING = 'Pending'
-      SHUTTING_DOWN = 'ShuttingDown'
-      SYSTEM_UPDATING = 'SystemUpdating'
-      DEEP_HEALTH_CHECK_IN_PROGRESS = 'DeepHealthCheckInProgress'
-      NOT_FOUND = 'NotFound'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an instance in a SageMaker HyperPod cluster.</p>
@@ -2998,7 +2392,7 @@ module Aws::SageMaker
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration for attaching additional storage to the instances in the SageMaker HyperPod cluster instance group. To learn more, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-release-notes.html#sagemaker-hyperpod-release-notes-20240620">SageMaker HyperPod release notes: June 20, 2024</a>.</p>
@@ -3009,125 +2403,10 @@ module Aws::SageMaker
       :ebs_volume_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EbsVolumeConfig < ClusterInstanceStorageConfig; end
       class Unknown < ClusterInstanceStorageConfig; end
-    end
-
-    module ClusterInstanceType
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_C5_LARGE = 'ml.c5.large'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_12XLARGE = 'ml.c5.12xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_C5_24XLARGE = 'ml.c5.24xlarge'
-      ML_C5N_LARGE = 'ml.c5n.large'
-      ML_C5N_2XLARGE = 'ml.c5n.2xlarge'
-      ML_C5N_4XLARGE = 'ml.c5n.4xlarge'
-      ML_C5N_9XLARGE = 'ml.c5n.9xlarge'
-      ML_C5N_18XLARGE = 'ml.c5n.18xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_8XLARGE = 'ml.m5.8xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_16XLARGE = 'ml.m5.16xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_T3_MEDIUM = 'ml.t3.medium'
-      ML_T3_LARGE = 'ml.t3.large'
-      ML_T3_XLARGE = 'ml.t3.xlarge'
-      ML_T3_2XLARGE = 'ml.t3.2xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
-      ML_GR6_4XLARGE = 'ml.gr6.4xlarge'
-      ML_GR6_8XLARGE = 'ml.gr6.8xlarge'
-      ML_G6E_XLARGE = 'ml.g6e.xlarge'
-      ML_G6E_2XLARGE = 'ml.g6e.2xlarge'
-      ML_G6E_4XLARGE = 'ml.g6e.4xlarge'
-      ML_G6E_8XLARGE = 'ml.g6e.8xlarge'
-      ML_G6E_16XLARGE = 'ml.g6e.16xlarge'
-      ML_G6E_12XLARGE = 'ml.g6e.12xlarge'
-      ML_G6E_24XLARGE = 'ml.g6e.24xlarge'
-      ML_G6E_48XLARGE = 'ml.g6e.48xlarge'
-      ML_P5E_48XLARGE = 'ml.p5e.48xlarge'
-      ML_P5EN_48XLARGE = 'ml.p5en.48xlarge'
-      ML_P6_B200_48XLARGE = 'ml.p6-b200.48xlarge'
-      ML_TRN2_48XLARGE = 'ml.trn2.48xlarge'
-      ML_C6I_LARGE = 'ml.c6i.large'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_R6I_LARGE = 'ml.r6i.large'
-      ML_R6I_XLARGE = 'ml.r6i.xlarge'
-      ML_R6I_2XLARGE = 'ml.r6i.2xlarge'
-      ML_R6I_4XLARGE = 'ml.r6i.4xlarge'
-      ML_R6I_8XLARGE = 'ml.r6i.8xlarge'
-      ML_R6I_12XLARGE = 'ml.r6i.12xlarge'
-      ML_R6I_16XLARGE = 'ml.r6i.16xlarge'
-      ML_R6I_24XLARGE = 'ml.r6i.24xlarge'
-      ML_R6I_32XLARGE = 'ml.r6i.32xlarge'
-      ML_I3EN_LARGE = 'ml.i3en.large'
-      ML_I3EN_XLARGE = 'ml.i3en.xlarge'
-      ML_I3EN_2XLARGE = 'ml.i3en.2xlarge'
-      ML_I3EN_3XLARGE = 'ml.i3en.3xlarge'
-      ML_I3EN_6XLARGE = 'ml.i3en.6xlarge'
-      ML_I3EN_12XLARGE = 'ml.i3en.12xlarge'
-      ML_I3EN_24XLARGE = 'ml.i3en.24xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
     end
 
     # <p>The lifecycle configuration for a SageMaker HyperPod cluster.</p>
@@ -3141,7 +2420,7 @@ module Aws::SageMaker
       :source_s3_uri,
       :on_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata information about a HyperPod cluster showing information about the cluster level operations, such as creating, updating, and deleting.</p>
@@ -3159,7 +2438,7 @@ module Aws::SageMaker
       :eks_role_access_entries,
       :slr_access_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an instance (also called a <i>node</i> interchangeably) in a SageMaker HyperPod cluster.</p>
@@ -3237,16 +2516,7 @@ module Aws::SageMaker
       :desired_image_id,
       :ultra_server_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterNodeProvisioningMode
-      CONTINUOUS = 'Continuous'
-    end
-
-    module ClusterNodeRecovery
-      AUTOMATIC = 'Automatic'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of the properties of an instance (also called a <i>node</i> interchangeably) of a SageMaker HyperPod cluster.</p>
@@ -3284,7 +2554,7 @@ module Aws::SageMaker
       :instance_status,
       :ultra_server_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of orchestrator used for the SageMaker HyperPod cluster.</p>
@@ -3294,7 +2564,7 @@ module Aws::SageMaker
     class ClusterOrchestrator < Struct.new(
       :eks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>
@@ -3304,7 +2574,7 @@ module Aws::SageMaker
     class ClusterOrchestratorEksConfig < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance group details of the restricted instance group (RIG).</p>
@@ -3366,7 +2636,7 @@ module Aws::SageMaker
       :scheduled_update_config,
       :environment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specifications of a restricted instance group that you need to define.</p>
@@ -3416,7 +2686,7 @@ module Aws::SageMaker
       :scheduled_update_config,
       :environment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the cluster policy.</p>
@@ -3454,22 +2724,7 @@ module Aws::SageMaker
       :status,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterSortBy
-      CREATION_TIME = 'CREATION_TIME'
-      NAME = 'NAME'
-    end
-
-    module ClusterStatus
-      CREATING = 'Creating'
-      DELETING = 'Deleting'
-      FAILED = 'Failed'
-      INSERVICE = 'InService'
-      ROLLINGBACK = 'RollingBack'
-      SYSTEMUPDATING = 'SystemUpdating'
-      UPDATING = 'Updating'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of the properties of a SageMaker HyperPod cluster.</p>
@@ -3495,7 +2750,7 @@ module Aws::SageMaker
       :cluster_status,
       :training_plan_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the file system and kernels in a SageMaker image running as a Code Editor app. The <code>FileSystemConfig</code> object is not supported.</p>
@@ -3509,7 +2764,7 @@ module Aws::SageMaker
       :file_system_config,
       :container_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Code Editor application settings.</p> <p>For more information about Code Editor, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html">Get started with Code Editor in Amazon SageMaker</a>.</p>
@@ -3535,7 +2790,7 @@ module Aws::SageMaker
       :app_lifecycle_management,
       :built_in_lifecycle_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Git repository that SageMaker AI automatically displays to users for cloning in the JupyterServer application.</p>
@@ -3545,18 +2800,7 @@ module Aws::SageMaker
     class CodeRepository < Struct.new(
       :repository_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodeRepositorySortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      LAST_MODIFIED_TIME = 'LastModifiedTime'
-    end
-
-    module CodeRepositorySortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies summary information about a Git repository.</p>
@@ -3582,7 +2826,7 @@ module Aws::SageMaker
       :last_modified_time,
       :git_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this parameter to configure your Amazon Cognito workforce. A single Cognito workforce is created using and corresponds to a single <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html"> Amazon Cognito user pool</a>.</p>
@@ -3596,7 +2840,7 @@ module Aws::SageMaker
       :user_pool,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a Amazon Cognito user group. A user group can be used in on or more work teams.</p>
@@ -3614,7 +2858,7 @@ module Aws::SageMaker
       :user_group,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for your collection.</p>
@@ -3625,7 +2869,7 @@ module Aws::SageMaker
       :vector_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class VectorConfig < CollectionConfig; end
       class Unknown < CollectionConfig; end
@@ -3642,22 +2886,7 @@ module Aws::SageMaker
       :collection_name,
       :collection_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CollectionType
-      LIST = 'List'
-      SET = 'Set'
-      VECTOR = 'Vector'
-    end
-
-    module CompilationJobStatus
-      INPROGRESS = 'INPROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STARTING = 'STARTING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a model compilation job.</p>
@@ -3707,17 +2936,7 @@ module Aws::SageMaker
       :last_modified_time,
       :compilation_job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompleteOnConvergence
-      DISABLED = 'Disabled'
-      ENABLED = 'Enabled'
-    end
-
-    module CompressionType
-      NONE = 'None'
-      GZIP = 'Gzip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the compute allocation definition for an entity. This includes the resource sharing option and the setting to preempt low priority tasks.</p>
@@ -3735,7 +2954,7 @@ module Aws::SageMaker
       :resource_sharing_config,
       :preempt_team_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the resources used for the compute allocation definition.</p>
@@ -3761,7 +2980,7 @@ module Aws::SageMaker
       :v_cpu,
       :memory_in_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the compute allocation definition.</p>
@@ -3811,7 +3030,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target entity to allocate compute resources to.</p>
@@ -3825,12 +3044,7 @@ module Aws::SageMaker
       :team_name,
       :fair_share_weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionOutcome
-      TRUE = 'True'
-      FALSE = 'False'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a Condition step.</p>
@@ -3840,7 +3054,7 @@ module Aws::SageMaker
     class ConditionStepMetadata < Struct.new(
       :outcome,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict when you attempted to modify a SageMaker entity such as an <code>Experiment</code> or <code>Artifact</code>.</p>
@@ -3849,7 +3063,7 @@ module Aws::SageMaker
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration used to run the application image container.</p>
@@ -3867,7 +3081,7 @@ module Aws::SageMaker
       :container_entrypoint,
       :container_environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the container, as part of model definition.</p>
@@ -3917,17 +3131,7 @@ module Aws::SageMaker
       :inference_specification_name,
       :multi_model_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerMode
-      SINGLE_MODEL = 'SingleModel'
-      MULTI_MODEL = 'MultiModel'
-    end
-
-    module ContentClassifier
-      FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = 'FreeOfPersonallyIdentifiableInformation'
-      FREE_OF_ADULT_CONTENT = 'FreeOfAdultContent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure describing the source of a context.</p>
@@ -3945,7 +3149,7 @@ module Aws::SageMaker
       :source_type,
       :source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of the properties of a context. A context provides a logical grouping of other entities.</p>
@@ -3975,7 +3179,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of continuous hyperparameters to tune.</p>
@@ -3997,7 +3201,7 @@ module Aws::SageMaker
       :max_value,
       :scaling_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the possible values for a continuous hyperparameter.</p>
@@ -4011,7 +3215,7 @@ module Aws::SageMaker
       :min_value,
       :max_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A flag to indicating that automatic model tuning (AMT) has detected model convergence, defined as a lack of significant improvement (1% or less) against an objective metric.</p>
@@ -4021,7 +3225,7 @@ module Aws::SageMaker
     class ConvergenceDetected < Struct.new(
       :complete_on_convergence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -4058,7 +3262,7 @@ module Aws::SageMaker
       :metadata_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_arn
@@ -4067,7 +3271,7 @@ module Aws::SageMaker
     class CreateActionResponse < Struct.new(
       :action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_name
@@ -4100,7 +3304,7 @@ module Aws::SageMaker
       :certify_for_marketplace,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_arn
@@ -4109,7 +3313,7 @@ module Aws::SageMaker
     class CreateAlgorithmOutput < Struct.new(
       :algorithm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_name
@@ -4134,7 +3338,7 @@ module Aws::SageMaker
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_arn
@@ -4143,7 +3347,7 @@ module Aws::SageMaker
     class CreateAppImageConfigResponse < Struct.new(
       :app_image_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -4180,7 +3384,7 @@ module Aws::SageMaker
       :resource_spec,
       :recovery_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4189,7 +3393,7 @@ module Aws::SageMaker
     class CreateAppResponse < Struct.new(
       :app_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_name
@@ -4218,7 +3422,7 @@ module Aws::SageMaker
       :metadata_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_arn
@@ -4227,7 +3431,7 @@ module Aws::SageMaker
     class CreateArtifactResponse < Struct.new(
       :artifact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -4272,7 +3476,7 @@ module Aws::SageMaker
       :tags,
       :model_deploy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_arn
@@ -4281,7 +3485,7 @@ module Aws::SageMaker
     class CreateAutoMLJobResponse < Struct.new(
       :auto_ml_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -4330,7 +3534,7 @@ module Aws::SageMaker
       :data_split_config,
       :auto_ml_compute_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_arn
@@ -4339,7 +3543,7 @@ module Aws::SageMaker
     class CreateAutoMLJobV2Response < Struct.new(
       :auto_ml_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -4376,7 +3580,7 @@ module Aws::SageMaker
       :node_recovery,
       :node_provisioning_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -4385,7 +3589,7 @@ module Aws::SageMaker
     class CreateClusterResponse < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4410,7 +3614,7 @@ module Aws::SageMaker
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_arn
@@ -4423,7 +3627,7 @@ module Aws::SageMaker
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_name
@@ -4440,7 +3644,7 @@ module Aws::SageMaker
       :git_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_arn
@@ -4449,7 +3653,7 @@ module Aws::SageMaker
     class CreateCodeRepositoryOutput < Struct.new(
       :code_repository_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_name
@@ -4486,7 +3690,7 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_arn
@@ -4495,7 +3699,7 @@ module Aws::SageMaker
     class CreateCompilationJobResponse < Struct.new(
       :compilation_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4528,7 +3732,7 @@ module Aws::SageMaker
       :activation_state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_arn
@@ -4541,7 +3745,7 @@ module Aws::SageMaker
       :compute_quota_arn,
       :compute_quota_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_name
@@ -4570,7 +3774,7 @@ module Aws::SageMaker
       :properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_arn
@@ -4579,7 +3783,7 @@ module Aws::SageMaker
     class CreateContextResponse < Struct.new(
       :context_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -4624,7 +3828,7 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -4633,7 +3837,7 @@ module Aws::SageMaker
     class CreateDataQualityJobDefinitionResponse < Struct.new(
       :job_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -4662,7 +3866,7 @@ module Aws::SageMaker
       :tags,
       :enable_iot_role_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4721,7 +3925,7 @@ module Aws::SageMaker
       :tag_propagation,
       :default_space_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_arn
@@ -4738,7 +3942,7 @@ module Aws::SageMaker
       :domain_id,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -4763,7 +3967,7 @@ module Aws::SageMaker
       :stages,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_arn
@@ -4772,7 +3976,7 @@ module Aws::SageMaker
     class CreateEdgeDeploymentPlanResponse < Struct.new(
       :edge_deployment_plan_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -4785,7 +3989,7 @@ module Aws::SageMaker
       :edge_deployment_plan_name,
       :stages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_packaging_job_name
@@ -4822,7 +4026,7 @@ module Aws::SageMaker
       :resource_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_config_name
@@ -4871,7 +4075,7 @@ module Aws::SageMaker
       :vpc_config,
       :enable_network_isolation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_config_arn
@@ -4880,7 +4084,7 @@ module Aws::SageMaker
     class CreateEndpointConfigOutput < Struct.new(
       :endpoint_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -4901,7 +4105,7 @@ module Aws::SageMaker
       :deployment_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -4910,7 +4114,7 @@ module Aws::SageMaker
     class CreateEndpointOutput < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -4931,7 +4135,7 @@ module Aws::SageMaker
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_arn
@@ -4940,7 +4144,7 @@ module Aws::SageMaker
     class CreateExperimentResponse < Struct.new(
       :experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -4985,7 +4189,7 @@ module Aws::SageMaker
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_arn
@@ -4994,7 +4198,7 @@ module Aws::SageMaker
     class CreateFeatureGroupResponse < Struct.new(
       :feature_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_definition_name
@@ -5027,7 +4231,7 @@ module Aws::SageMaker
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_definition_arn
@@ -5036,7 +4240,7 @@ module Aws::SageMaker
     class CreateFlowDefinitionResponse < Struct.new(
       :flow_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -5069,7 +4273,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_url_configs
@@ -5082,7 +4286,7 @@ module Aws::SageMaker
       :authorized_url_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -5107,7 +4311,7 @@ module Aws::SageMaker
       :min_version,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -5120,7 +4324,7 @@ module Aws::SageMaker
       :hub_arn,
       :hub_content_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -5149,7 +4353,7 @@ module Aws::SageMaker
       :s3_storage_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -5158,7 +4362,7 @@ module Aws::SageMaker
     class CreateHubResponse < Struct.new(
       :hub_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_task_ui_name
@@ -5175,7 +4379,7 @@ module Aws::SageMaker
       :ui_template,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_task_ui_arn
@@ -5184,7 +4388,7 @@ module Aws::SageMaker
     class CreateHumanTaskUiResponse < Struct.new(
       :human_task_ui_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_name
@@ -5217,7 +4421,7 @@ module Aws::SageMaker
       :tags,
       :autotune,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_arn
@@ -5226,7 +4430,7 @@ module Aws::SageMaker
     class CreateHyperParameterTuningJobResponse < Struct.new(
       :hyper_parameter_tuning_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -5251,7 +4455,7 @@ module Aws::SageMaker
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_arn
@@ -5260,7 +4464,7 @@ module Aws::SageMaker
     class CreateImageResponse < Struct.new(
       :image_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute base_image
@@ -5309,7 +4513,7 @@ module Aws::SageMaker
       :horovod,
       :release_notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_version_arn
@@ -5318,7 +4522,7 @@ module Aws::SageMaker
     class CreateImageVersionResponse < Struct.new(
       :image_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_name
@@ -5347,7 +4551,7 @@ module Aws::SageMaker
       :runtime_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_arn
@@ -5356,7 +4560,7 @@ module Aws::SageMaker
     class CreateInferenceComponentOutput < Struct.new(
       :inference_component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5405,7 +4609,7 @@ module Aws::SageMaker
       :kms_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_experiment_arn
@@ -5414,7 +4618,7 @@ module Aws::SageMaker
     class CreateInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -5451,7 +4655,7 @@ module Aws::SageMaker
       :output_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -5460,7 +4664,7 @@ module Aws::SageMaker
     class CreateInferenceRecommendationsJobResponse < Struct.new(
       :job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_name
@@ -5505,7 +4709,7 @@ module Aws::SageMaker
       :human_task_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_arn
@@ -5514,7 +4718,7 @@ module Aws::SageMaker
     class CreateLabelingJobResponse < Struct.new(
       :labeling_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -5551,7 +4755,7 @@ module Aws::SageMaker
       :weekly_maintenance_window_start,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_arn
@@ -5560,7 +4764,7 @@ module Aws::SageMaker
     class CreateMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -5605,7 +4809,7 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -5614,7 +4818,7 @@ module Aws::SageMaker
     class CreateModelBiasJobDefinitionResponse < Struct.new(
       :job_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_name
@@ -5635,7 +4839,7 @@ module Aws::SageMaker
       :model_card_export_job_name,
       :output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_export_job_arn
@@ -5644,7 +4848,7 @@ module Aws::SageMaker
     class CreateModelCardExportJobResponse < Struct.new(
       :model_card_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_name
@@ -5669,7 +4873,7 @@ module Aws::SageMaker
       :model_card_status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_arn
@@ -5678,7 +4882,7 @@ module Aws::SageMaker
     class CreateModelCardResponse < Struct.new(
       :model_card_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -5723,7 +4927,7 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -5732,7 +4936,7 @@ module Aws::SageMaker
     class CreateModelExplainabilityJobDefinitionResponse < Struct.new(
       :job_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -5769,7 +4973,7 @@ module Aws::SageMaker
       :vpc_config,
       :enable_network_isolation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -5778,7 +4982,7 @@ module Aws::SageMaker
     class CreateModelOutput < Struct.new(
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -5795,7 +4999,7 @@ module Aws::SageMaker
       :model_package_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_arn
@@ -5804,7 +5008,7 @@ module Aws::SageMaker
     class CreateModelPackageGroupOutput < Struct.new(
       :model_package_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_name
@@ -5901,7 +5105,7 @@ module Aws::SageMaker
       :model_card,
       :model_life_cycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_arn
@@ -5910,7 +5114,7 @@ module Aws::SageMaker
     class CreateModelPackageOutput < Struct.new(
       :model_package_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -5955,7 +5159,7 @@ module Aws::SageMaker
       :stopping_condition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -5964,7 +5168,7 @@ module Aws::SageMaker
     class CreateModelQualityJobDefinitionResponse < Struct.new(
       :job_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -5981,7 +5185,7 @@ module Aws::SageMaker
       :monitoring_schedule_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_arn
@@ -5990,7 +5194,7 @@ module Aws::SageMaker
     class CreateMonitoringScheduleResponse < Struct.new(
       :monitoring_schedule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -6059,7 +5263,7 @@ module Aws::SageMaker
       :platform_identifier,
       :instance_metadata_service_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_lifecycle_config_name
@@ -6080,7 +5284,7 @@ module Aws::SageMaker
       :on_start,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_lifecycle_config_arn
@@ -6089,7 +5293,7 @@ module Aws::SageMaker
     class CreateNotebookInstanceLifecycleConfigOutput < Struct.new(
       :notebook_instance_lifecycle_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_arn
@@ -6098,7 +5302,7 @@ module Aws::SageMaker
     class CreateNotebookInstanceOutput < Struct.new(
       :notebook_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_name
@@ -6143,7 +5347,7 @@ module Aws::SageMaker
       :tags,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_arn
@@ -6152,7 +5356,7 @@ module Aws::SageMaker
     class CreateOptimizationJobResponse < Struct.new(
       :optimization_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -6169,7 +5373,7 @@ module Aws::SageMaker
       :expires_in_seconds,
       :session_expiration_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -6178,7 +5382,7 @@ module Aws::SageMaker
     class CreatePartnerAppPresignedUrlResponse < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -6227,7 +5431,7 @@ module Aws::SageMaker
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -6236,7 +5440,7 @@ module Aws::SageMaker
     class CreatePartnerAppResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -6277,7 +5481,7 @@ module Aws::SageMaker
       :tags,
       :parallelism_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -6286,7 +5490,7 @@ module Aws::SageMaker
     class CreatePipelineResponse < Struct.new(
       :pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6315,7 +5519,7 @@ module Aws::SageMaker
       :space_name,
       :landing_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_url
@@ -6324,7 +5528,7 @@ module Aws::SageMaker
     class CreatePresignedDomainUrlResponse < Struct.new(
       :authorized_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -6341,7 +5545,7 @@ module Aws::SageMaker
       :expires_in_seconds,
       :session_expiration_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_url
@@ -6350,7 +5554,7 @@ module Aws::SageMaker
     class CreatePresignedMlflowTrackingServerUrlResponse < Struct.new(
       :authorized_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -6363,7 +5567,7 @@ module Aws::SageMaker
       :notebook_instance_name,
       :session_expiration_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_url
@@ -6372,7 +5576,7 @@ module Aws::SageMaker
     class CreatePresignedNotebookInstanceUrlOutput < Struct.new(
       :authorized_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processing_inputs
@@ -6421,7 +5625,7 @@ module Aws::SageMaker
       :tags,
       :experiment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processing_job_arn
@@ -6430,7 +5634,7 @@ module Aws::SageMaker
     class CreateProcessingJobResponse < Struct.new(
       :processing_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -6455,7 +5659,7 @@ module Aws::SageMaker
       :tags,
       :template_providers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -6468,7 +5672,7 @@ module Aws::SageMaker
       :project_arn,
       :project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6501,7 +5705,7 @@ module Aws::SageMaker
       :space_sharing_settings,
       :space_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_arn
@@ -6510,7 +5714,7 @@ module Aws::SageMaker
     class CreateSpaceResponse < Struct.new(
       :space_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_lifecycle_config_name
@@ -6531,7 +5735,7 @@ module Aws::SageMaker
       :studio_lifecycle_config_app_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_lifecycle_config_arn
@@ -6540,7 +5744,7 @@ module Aws::SageMaker
     class CreateStudioLifecycleConfigResponse < Struct.new(
       :studio_lifecycle_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains configuration details for a template provider. Only one type of template provider can be specified. </p>
@@ -6550,7 +5754,7 @@ module Aws::SageMaker
     class CreateTemplateProvider < Struct.new(
       :cfn_template_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_name
@@ -6655,7 +5859,7 @@ module Aws::SageMaker
       :infra_check_config,
       :session_chaining_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_arn
@@ -6664,7 +5868,7 @@ module Aws::SageMaker
     class CreateTrainingJobResponse < Struct.new(
       :training_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_plan_name
@@ -6685,7 +5889,7 @@ module Aws::SageMaker
       :spare_instance_count_per_ultra_server,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_plan_arn
@@ -6694,7 +5898,7 @@ module Aws::SageMaker
     class CreateTrainingPlanResponse < Struct.new(
       :training_plan_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_job_name
@@ -6755,7 +5959,7 @@ module Aws::SageMaker
       :tags,
       :experiment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_job_arn
@@ -6764,7 +5968,7 @@ module Aws::SageMaker
     class CreateTransformJobResponse < Struct.new(
       :transform_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -6809,7 +6013,7 @@ module Aws::SageMaker
       :metadata_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_arn
@@ -6818,7 +6022,7 @@ module Aws::SageMaker
     class CreateTrialComponentResponse < Struct.new(
       :trial_component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_name
@@ -6843,7 +6047,7 @@ module Aws::SageMaker
       :metadata_properties,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_arn
@@ -6852,7 +6056,7 @@ module Aws::SageMaker
     class CreateTrialResponse < Struct.new(
       :trial_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6881,7 +6085,7 @@ module Aws::SageMaker
       :tags,
       :user_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_profile_arn
@@ -6890,7 +6094,7 @@ module Aws::SageMaker
     class CreateUserProfileResponse < Struct.new(
       :user_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cognito_config
@@ -6923,7 +6127,7 @@ module Aws::SageMaker
       :workforce_vpc_config,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforce_arn
@@ -6932,7 +6136,7 @@ module Aws::SageMaker
     class CreateWorkforceResponse < Struct.new(
       :workforce_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_name
@@ -6965,7 +6169,7 @@ module Aws::SageMaker
       :worker_access_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_arn
@@ -6974,12 +6178,7 @@ module Aws::SageMaker
     class CreateWorkteamResponse < Struct.new(
       :workteam_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CrossAccountFilterOption
-      SAME_ACCOUNT = 'SameAccount'
-      CROSS_ACCOUNT = 'CrossAccount'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file system, created by you, that you assign to a user profile or space for an Amazon SageMaker AI Domain. Permitted users can access this file system in Amazon SageMaker AI Studio.</p>
@@ -6998,7 +6197,7 @@ module Aws::SageMaker
       :s3_file_system,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EFSFileSystem < CustomFileSystem; end
       class FSxLustreFileSystem < CustomFileSystem; end
@@ -7022,7 +6221,7 @@ module Aws::SageMaker
       :s3_file_system_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EFSFileSystemConfig < CustomFileSystemConfig; end
       class FSxLustreFileSystemConfig < CustomFileSystemConfig; end
@@ -7045,7 +6244,7 @@ module Aws::SageMaker
       :image_version_number,
       :app_image_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the POSIX identity that is used for file system operations.</p>
@@ -7059,7 +6258,7 @@ module Aws::SageMaker
       :uid,
       :gid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A customized metric.</p>
@@ -7077,7 +6276,7 @@ module Aws::SageMaker
       :namespace,
       :statistic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration to control how SageMaker AI captures inference data.</p>
@@ -7107,7 +6306,7 @@ module Aws::SageMaker
       :capture_options,
       :capture_content_type_header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The currently active data capture configuration used by your Endpoint.</p>
@@ -7133,7 +6332,7 @@ module Aws::SageMaker
       :destination_s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The meta data of the Glue table which serves as data catalog for the <code>OfflineStore</code>. </p>
@@ -7151,12 +6350,7 @@ module Aws::SageMaker
       :catalog,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataDistributionType
-      FULLYREPLICATED = 'FullyReplicated'
-      SHARDEDBYS3KEY = 'ShardedByS3Key'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data structure used to specify the data to be used for inference in a batch transform job and to associate the data that is relevant to the prediction results in the output. The input filter provided allows you to exclude input data that is not needed for inference in a batch transform job. The output filter provided allows you to include input data relevant to interpreting the predictions in the output from the job. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html">Associate Prediction Results with their Corresponding Input Records</a>.</p>
@@ -7174,7 +6368,7 @@ module Aws::SageMaker
       :output_filter,
       :join_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the container that a data quality monitoring job runs.</p>
@@ -7204,7 +6398,7 @@ module Aws::SageMaker
       :post_analytics_processor_source_uri,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for monitoring constraints and monitoring statistics. These baseline resources are compared against the results of the current job from the series of jobs scheduled to collect data periodically.</p>
@@ -7222,7 +6416,7 @@ module Aws::SageMaker
       :constraints_resource,
       :statistics_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the data quality monitoring job. Currently endpoints are supported for input.</p>
@@ -7236,7 +6430,7 @@ module Aws::SageMaker
       :endpoint_input,
       :batch_transform_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the location of the channel data.</p>
@@ -7250,12 +6444,7 @@ module Aws::SageMaker
       :s3_data_source,
       :file_system_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceName
-      SalesforceGenie = 'SalesforceGenie'
-      Snowflake = 'Snowflake'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for Dataset Definition inputs. The Dataset Definition input must specify exactly one of either <code>AthenaDatasetDefinition</code> or <code>RedshiftDatasetDefinition</code> types.</p>
@@ -7281,7 +6470,7 @@ module Aws::SageMaker
       :data_distribution_type,
       :input_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the Amazon SageMaker Debugger hook parameters, metric and tensor collections, and storage paths. To learn more about how to configure the <code>DebugHookConfig</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>.</p>
@@ -7303,7 +6492,7 @@ module Aws::SageMaker
       :hook_parameters,
       :collection_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for SageMaker Debugger rules for debugging. To learn more about how to configure the <code>DebugRuleConfiguration</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>.</p>
@@ -7337,7 +6526,7 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :rule_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the status of the rule evaluation.</p>
@@ -7363,12 +6552,7 @@ module Aws::SageMaker
       :status_details,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeepHealthCheckType
-      INSTANCE_STRESS = 'InstanceStress'
-      INSTANCE_CONNECTIVITY = 'InstanceConnectivity'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of default EBS storage settings that apply to spaces created within a domain or user profile.</p>
@@ -7382,7 +6566,7 @@ module Aws::SageMaker
       :default_ebs_volume_size_in_gb,
       :maximum_ebs_volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default settings for shared spaces that users create in the domain.</p> <p>SageMaker applies these settings only to shared spaces. It doesn't apply them to private spaces.</p>
@@ -7420,7 +6604,7 @@ module Aws::SageMaker
       :custom_posix_user_config,
       :custom_file_system_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default storage settings for a space.</p>
@@ -7430,7 +6614,7 @@ module Aws::SageMaker
     class DefaultSpaceStorageSettings < Struct.new(
       :default_ebs_storage_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -7439,7 +6623,7 @@ module Aws::SageMaker
     class DeleteActionRequest < Struct.new(
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_arn
@@ -7448,7 +6632,7 @@ module Aws::SageMaker
     class DeleteActionResponse < Struct.new(
       :action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_name
@@ -7457,7 +6641,7 @@ module Aws::SageMaker
     class DeleteAlgorithmInput < Struct.new(
       :algorithm_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_name
@@ -7466,7 +6650,7 @@ module Aws::SageMaker
     class DeleteAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7491,7 +6675,7 @@ module Aws::SageMaker
       :app_type,
       :app_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_arn
@@ -7504,7 +6688,7 @@ module Aws::SageMaker
       :artifact_arn,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_arn
@@ -7513,7 +6697,7 @@ module Aws::SageMaker
     class DeleteArtifactResponse < Struct.new(
       :artifact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -7526,7 +6710,7 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -7539,7 +6723,7 @@ module Aws::SageMaker
       :source_arn,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -7548,7 +6732,7 @@ module Aws::SageMaker
     class DeleteClusterRequest < Struct.new(
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -7557,7 +6741,7 @@ module Aws::SageMaker
     class DeleteClusterResponse < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_id
@@ -7566,7 +6750,7 @@ module Aws::SageMaker
     class DeleteClusterSchedulerConfigRequest < Struct.new(
       :cluster_scheduler_config_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_name
@@ -7575,7 +6759,7 @@ module Aws::SageMaker
     class DeleteCodeRepositoryInput < Struct.new(
       :code_repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_name
@@ -7584,7 +6768,7 @@ module Aws::SageMaker
     class DeleteCompilationJobRequest < Struct.new(
       :compilation_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_id
@@ -7593,7 +6777,7 @@ module Aws::SageMaker
     class DeleteComputeQuotaRequest < Struct.new(
       :compute_quota_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_name
@@ -7602,7 +6786,7 @@ module Aws::SageMaker
     class DeleteContextRequest < Struct.new(
       :context_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_arn
@@ -7611,7 +6795,7 @@ module Aws::SageMaker
     class DeleteContextResponse < Struct.new(
       :context_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -7620,7 +6804,7 @@ module Aws::SageMaker
     class DeleteDataQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -7629,7 +6813,7 @@ module Aws::SageMaker
     class DeleteDeviceFleetRequest < Struct.new(
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7642,7 +6826,7 @@ module Aws::SageMaker
       :domain_id,
       :retention_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -7651,7 +6835,7 @@ module Aws::SageMaker
     class DeleteEdgeDeploymentPlanRequest < Struct.new(
       :edge_deployment_plan_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -7664,7 +6848,7 @@ module Aws::SageMaker
       :edge_deployment_plan_name,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_config_name
@@ -7673,7 +6857,7 @@ module Aws::SageMaker
     class DeleteEndpointConfigInput < Struct.new(
       :endpoint_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -7682,7 +6866,7 @@ module Aws::SageMaker
     class DeleteEndpointInput < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -7691,7 +6875,7 @@ module Aws::SageMaker
     class DeleteExperimentRequest < Struct.new(
       :experiment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_arn
@@ -7700,7 +6884,7 @@ module Aws::SageMaker
     class DeleteExperimentResponse < Struct.new(
       :experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -7709,7 +6893,7 @@ module Aws::SageMaker
     class DeleteFeatureGroupRequest < Struct.new(
       :feature_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_definition_name
@@ -7718,12 +6902,12 @@ module Aws::SageMaker
     class DeleteFlowDefinitionRequest < Struct.new(
       :flow_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFlowDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -7740,7 +6924,7 @@ module Aws::SageMaker
       :hub_content_type,
       :hub_content_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -7761,7 +6945,7 @@ module Aws::SageMaker
       :hub_content_name,
       :hub_content_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -7770,7 +6954,7 @@ module Aws::SageMaker
     class DeleteHubRequest < Struct.new(
       :hub_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_task_ui_name
@@ -7779,12 +6963,12 @@ module Aws::SageMaker
     class DeleteHumanTaskUiRequest < Struct.new(
       :human_task_ui_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteHumanTaskUiResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_name
@@ -7793,7 +6977,7 @@ module Aws::SageMaker
     class DeleteHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -7802,12 +6986,12 @@ module Aws::SageMaker
     class DeleteImageRequest < Struct.new(
       :image_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteImageResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -7824,12 +7008,12 @@ module Aws::SageMaker
       :version,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteImageVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_name
@@ -7838,7 +7022,7 @@ module Aws::SageMaker
     class DeleteInferenceComponentInput < Struct.new(
       :inference_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7847,7 +7031,7 @@ module Aws::SageMaker
     class DeleteInferenceExperimentRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_experiment_arn
@@ -7856,7 +7040,7 @@ module Aws::SageMaker
     class DeleteInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -7865,7 +7049,7 @@ module Aws::SageMaker
     class DeleteMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_arn
@@ -7874,7 +7058,7 @@ module Aws::SageMaker
     class DeleteMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -7883,7 +7067,7 @@ module Aws::SageMaker
     class DeleteModelBiasJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_name
@@ -7892,7 +7076,7 @@ module Aws::SageMaker
     class DeleteModelCardRequest < Struct.new(
       :model_card_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -7901,7 +7085,7 @@ module Aws::SageMaker
     class DeleteModelExplainabilityJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -7910,7 +7094,7 @@ module Aws::SageMaker
     class DeleteModelInput < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -7919,7 +7103,7 @@ module Aws::SageMaker
     class DeleteModelPackageGroupInput < Struct.new(
       :model_package_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -7928,7 +7112,7 @@ module Aws::SageMaker
     class DeleteModelPackageGroupPolicyInput < Struct.new(
       :model_package_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_name
@@ -7937,7 +7121,7 @@ module Aws::SageMaker
     class DeleteModelPackageInput < Struct.new(
       :model_package_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -7946,7 +7130,7 @@ module Aws::SageMaker
     class DeleteModelQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -7955,7 +7139,7 @@ module Aws::SageMaker
     class DeleteMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -7964,7 +7148,7 @@ module Aws::SageMaker
     class DeleteNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_lifecycle_config_name
@@ -7973,7 +7157,7 @@ module Aws::SageMaker
     class DeleteNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_name
@@ -7982,7 +7166,7 @@ module Aws::SageMaker
     class DeleteOptimizationJobRequest < Struct.new(
       :optimization_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -7995,7 +7179,7 @@ module Aws::SageMaker
       :arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -8004,7 +7188,7 @@ module Aws::SageMaker
     class DeletePartnerAppResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -8017,7 +7201,7 @@ module Aws::SageMaker
       :pipeline_name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -8026,7 +7210,7 @@ module Aws::SageMaker
     class DeletePipelineResponse < Struct.new(
       :pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -8035,7 +7219,7 @@ module Aws::SageMaker
     class DeleteProjectInput < Struct.new(
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -8048,7 +7232,7 @@ module Aws::SageMaker
       :domain_id,
       :space_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_lifecycle_config_name
@@ -8057,7 +7241,7 @@ module Aws::SageMaker
     class DeleteStudioLifecycleConfigRequest < Struct.new(
       :studio_lifecycle_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -8070,12 +7254,12 @@ module Aws::SageMaker
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -8084,7 +7268,7 @@ module Aws::SageMaker
     class DeleteTrialComponentRequest < Struct.new(
       :trial_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_arn
@@ -8093,7 +7277,7 @@ module Aws::SageMaker
     class DeleteTrialComponentResponse < Struct.new(
       :trial_component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_name
@@ -8102,7 +7286,7 @@ module Aws::SageMaker
     class DeleteTrialRequest < Struct.new(
       :trial_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_arn
@@ -8111,7 +7295,7 @@ module Aws::SageMaker
     class DeleteTrialResponse < Struct.new(
       :trial_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -8124,7 +7308,7 @@ module Aws::SageMaker
       :domain_id,
       :user_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforce_name
@@ -8133,12 +7317,12 @@ module Aws::SageMaker
     class DeleteWorkforceRequest < Struct.new(
       :workforce_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkforceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_name
@@ -8147,7 +7331,7 @@ module Aws::SageMaker
     class DeleteWorkteamRequest < Struct.new(
       :workteam_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -8156,7 +7340,7 @@ module Aws::SageMaker
     class DeleteWorkteamResponse < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the Amazon EC2 Container Registry path of the docker image of the model that is hosted in this <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ProductionVariant.html">ProductionVariant</a>.</p> <p>If you used the <code>registry/repository[:tag]</code> form to specify the image path of the primary container when you created the model hosted in this <code>ProductionVariant</code>, the path resolves to a path of the form <code>registry/repository[@digest]</code>. A digest is a hash value that identifies a specific version of an image. For information about Amazon ECR paths, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html">Pulling an Image</a> in the <i>Amazon ECR User Guide</i>.</p>
@@ -8174,7 +7358,7 @@ module Aws::SageMaker
       :resolved_image,
       :resolution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>
@@ -8192,7 +7376,7 @@ module Aws::SageMaker
       :rolling_update_policy,
       :auto_rollback_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration to use when updating the AMI versions.</p>
@@ -8210,7 +7394,7 @@ module Aws::SageMaker
       :wait_interval_in_seconds,
       :auto_rollback_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of recommended deployment configurations for the model. To get more advanced recommendations, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJob</a> to create an inference recommendation job.</p>
@@ -8224,7 +7408,7 @@ module Aws::SageMaker
       :recommendation_status,
       :real_time_inference_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a stage in an edge deployment plan.</p>
@@ -8242,7 +7426,7 @@ module Aws::SageMaker
       :device_selection_config,
       :deployment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information summarizing the deployment stage results.</p>
@@ -8264,7 +7448,7 @@ module Aws::SageMaker
       :deployment_config,
       :deployment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -8277,7 +7461,7 @@ module Aws::SageMaker
       :device_fleet_name,
       :device_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that SageMaker Neo automatically derived about the model.</p>
@@ -8287,7 +7471,7 @@ module Aws::SageMaker
     class DerivedInformation < Struct.new(
       :derived_data_input_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -8296,7 +7480,7 @@ module Aws::SageMaker
     class DescribeActionRequest < Struct.new(
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -8353,7 +7537,7 @@ module Aws::SageMaker
       :metadata_properties,
       :lineage_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_name
@@ -8362,7 +7546,7 @@ module Aws::SageMaker
     class DescribeAlgorithmInput < Struct.new(
       :algorithm_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_name
@@ -8411,7 +7595,7 @@ module Aws::SageMaker
       :product_id,
       :certify_for_marketplace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_name
@@ -8420,7 +7604,7 @@ module Aws::SageMaker
     class DescribeAppImageConfigRequest < Struct.new(
       :app_image_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_arn
@@ -8453,7 +7637,7 @@ module Aws::SageMaker
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -8478,7 +7662,7 @@ module Aws::SageMaker
       :app_type,
       :app_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -8543,7 +7727,7 @@ module Aws::SageMaker
       :resource_spec,
       :built_in_lifecycle_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_arn
@@ -8552,7 +7736,7 @@ module Aws::SageMaker
     class DescribeArtifactRequest < Struct.new(
       :artifact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_name
@@ -8601,7 +7785,7 @@ module Aws::SageMaker
       :metadata_properties,
       :lineage_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -8610,7 +7794,7 @@ module Aws::SageMaker
     class DescribeAutoMLJobRequest < Struct.new(
       :auto_ml_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -8699,7 +7883,7 @@ module Aws::SageMaker
       :model_deploy_config,
       :model_deploy_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -8708,7 +7892,7 @@ module Aws::SageMaker
     class DescribeAutoMLJobV2Request < Struct.new(
       :auto_ml_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -8805,7 +7989,7 @@ module Aws::SageMaker
       :security_config,
       :auto_ml_compute_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_id
@@ -8818,7 +8002,7 @@ module Aws::SageMaker
       :event_id,
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_details
@@ -8827,7 +8011,7 @@ module Aws::SageMaker
     class DescribeClusterEventResponse < Struct.new(
       :event_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -8844,7 +8028,7 @@ module Aws::SageMaker
       :node_id,
       :node_logical_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_details
@@ -8853,7 +8037,7 @@ module Aws::SageMaker
     class DescribeClusterNodeResponse < Struct.new(
       :node_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -8862,7 +8046,7 @@ module Aws::SageMaker
     class DescribeClusterRequest < Struct.new(
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -8911,7 +8095,7 @@ module Aws::SageMaker
       :node_recovery,
       :node_provisioning_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_id
@@ -8924,7 +8108,7 @@ module Aws::SageMaker
       :cluster_scheduler_config_id,
       :cluster_scheduler_config_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_arn
@@ -8981,7 +8165,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_name
@@ -8990,7 +8174,7 @@ module Aws::SageMaker
     class DescribeCodeRepositoryInput < Struct.new(
       :code_repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_name
@@ -9015,7 +8199,7 @@ module Aws::SageMaker
       :last_modified_time,
       :git_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_name
@@ -9024,7 +8208,7 @@ module Aws::SageMaker
     class DescribeCompilationJobRequest < Struct.new(
       :compilation_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_name
@@ -9101,7 +8285,7 @@ module Aws::SageMaker
       :vpc_config,
       :derived_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_id
@@ -9114,7 +8298,7 @@ module Aws::SageMaker
       :compute_quota_id,
       :compute_quota_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_arn
@@ -9179,7 +8363,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_name
@@ -9188,7 +8372,7 @@ module Aws::SageMaker
     class DescribeContextRequest < Struct.new(
       :context_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_name
@@ -9237,7 +8421,7 @@ module Aws::SageMaker
       :last_modified_by,
       :lineage_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -9246,7 +8430,7 @@ module Aws::SageMaker
     class DescribeDataQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -9295,7 +8479,7 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -9304,7 +8488,7 @@ module Aws::SageMaker
     class DescribeDeviceFleetRequest < Struct.new(
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -9341,7 +8525,7 @@ module Aws::SageMaker
       :role_arn,
       :iot_role_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9358,7 +8542,7 @@ module Aws::SageMaker
       :device_name,
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_arn
@@ -9407,7 +8591,7 @@ module Aws::SageMaker
       :next_token,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -9416,7 +8600,7 @@ module Aws::SageMaker
     class DescribeDomainRequest < Struct.new(
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_arn
@@ -9515,7 +8699,7 @@ module Aws::SageMaker
       :tag_propagation,
       :default_space_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -9532,7 +8716,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_arn
@@ -9581,7 +8765,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_packaging_job_name
@@ -9590,7 +8774,7 @@ module Aws::SageMaker
     class DescribeEdgePackagingJobRequest < Struct.new(
       :edge_packaging_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_packaging_job_arn
@@ -9655,7 +8839,7 @@ module Aws::SageMaker
       :model_signature,
       :preset_deployment_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_config_name
@@ -9664,7 +8848,7 @@ module Aws::SageMaker
     class DescribeEndpointConfigInput < Struct.new(
       :endpoint_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_config_name
@@ -9717,7 +8901,7 @@ module Aws::SageMaker
       :vpc_config,
       :enable_network_isolation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -9726,7 +8910,7 @@ module Aws::SageMaker
     class DescribeEndpointInput < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -9787,7 +8971,7 @@ module Aws::SageMaker
       :explainer_config,
       :shadow_production_variants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -9796,7 +8980,7 @@ module Aws::SageMaker
     class DescribeExperimentRequest < Struct.new(
       :experiment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -9837,7 +9021,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -9850,7 +9034,7 @@ module Aws::SageMaker
       :feature_group_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_arn
@@ -9927,7 +9111,7 @@ module Aws::SageMaker
       :next_token,
       :online_store_total_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -9940,7 +9124,7 @@ module Aws::SageMaker
       :feature_group_name,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_arn
@@ -9977,7 +9161,7 @@ module Aws::SageMaker
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_definition_name
@@ -9986,7 +9170,7 @@ module Aws::SageMaker
     class DescribeFlowDefinitionRequest < Struct.new(
       :flow_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_definition_arn
@@ -10031,7 +9215,7 @@ module Aws::SageMaker
       :role_arn,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -10052,7 +9236,7 @@ module Aws::SageMaker
       :hub_content_name,
       :hub_content_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_content_name
@@ -10137,7 +9321,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -10146,7 +9330,7 @@ module Aws::SageMaker
     class DescribeHubRequest < Struct.new(
       :hub_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -10191,7 +9375,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_task_ui_name
@@ -10200,7 +9384,7 @@ module Aws::SageMaker
     class DescribeHumanTaskUiRequest < Struct.new(
       :human_task_ui_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_task_ui_arn
@@ -10225,7 +9409,7 @@ module Aws::SageMaker
       :creation_time,
       :ui_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_name
@@ -10234,7 +9418,7 @@ module Aws::SageMaker
     class DescribeHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_name
@@ -10311,7 +9495,7 @@ module Aws::SageMaker
       :tuning_job_completion_details,
       :consumed_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -10320,7 +9504,7 @@ module Aws::SageMaker
     class DescribeImageRequest < Struct.new(
       :image_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -10361,7 +9545,7 @@ module Aws::SageMaker
       :last_modified_time,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -10378,7 +9562,7 @@ module Aws::SageMaker
       :version,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute base_image
@@ -10447,7 +9631,7 @@ module Aws::SageMaker
       :horovod,
       :release_notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_name
@@ -10456,7 +9640,7 @@ module Aws::SageMaker
     class DescribeInferenceComponentInput < Struct.new(
       :inference_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_name
@@ -10509,7 +9693,7 @@ module Aws::SageMaker
       :inference_component_status,
       :last_deployment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -10518,7 +9702,7 @@ module Aws::SageMaker
     class DescribeInferenceExperimentRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -10587,7 +9771,7 @@ module Aws::SageMaker
       :shadow_mode_config,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -10596,7 +9780,7 @@ module Aws::SageMaker
     class DescribeInferenceRecommendationsJobRequest < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -10657,7 +9841,7 @@ module Aws::SageMaker
       :inference_recommendations,
       :endpoint_performances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_name
@@ -10666,7 +9850,7 @@ module Aws::SageMaker
     class DescribeLabelingJobRequest < Struct.new(
       :labeling_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_status
@@ -10743,7 +9927,7 @@ module Aws::SageMaker
       :tags,
       :labeling_job_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lineage_group_name
@@ -10752,7 +9936,7 @@ module Aws::SageMaker
     class DescribeLineageGroupRequest < Struct.new(
       :lineage_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lineage_group_name
@@ -10789,7 +9973,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -10798,7 +9982,7 @@ module Aws::SageMaker
     class DescribeMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_arn
@@ -10867,7 +10051,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -10876,7 +10060,7 @@ module Aws::SageMaker
     class DescribeModelBiasJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -10925,7 +10109,7 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_export_job_arn
@@ -10934,7 +10118,7 @@ module Aws::SageMaker
     class DescribeModelCardExportJobRequest < Struct.new(
       :model_card_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_export_job_name
@@ -10979,7 +10163,7 @@ module Aws::SageMaker
       :failure_reason,
       :export_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_name
@@ -10992,7 +10176,7 @@ module Aws::SageMaker
       :model_card_name,
       :model_card_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_arn
@@ -11041,7 +10225,7 @@ module Aws::SageMaker
       :last_modified_by,
       :model_card_processing_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -11050,7 +10234,7 @@ module Aws::SageMaker
     class DescribeModelExplainabilityJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -11099,7 +10283,7 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -11108,7 +10292,7 @@ module Aws::SageMaker
     class DescribeModelInput < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -11153,7 +10337,7 @@ module Aws::SageMaker
       :enable_network_isolation,
       :deployment_recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -11162,7 +10346,7 @@ module Aws::SageMaker
     class DescribeModelPackageGroupInput < Struct.new(
       :model_package_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -11191,7 +10375,7 @@ module Aws::SageMaker
       :created_by,
       :model_package_group_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_name
@@ -11200,7 +10384,7 @@ module Aws::SageMaker
     class DescribeModelPackageInput < Struct.new(
       :model_package_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_name
@@ -11325,7 +10509,7 @@ module Aws::SageMaker
       :model_card,
       :model_life_cycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -11334,7 +10518,7 @@ module Aws::SageMaker
     class DescribeModelQualityJobDefinitionRequest < Struct.new(
       :job_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_arn
@@ -11383,7 +10567,7 @@ module Aws::SageMaker
       :role_arn,
       :stopping_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -11392,7 +10576,7 @@ module Aws::SageMaker
     class DescribeMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_arn
@@ -11437,7 +10621,7 @@ module Aws::SageMaker
       :endpoint_name,
       :last_monitoring_execution_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -11446,7 +10630,7 @@ module Aws::SageMaker
     class DescribeNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_lifecycle_config_name
@@ -11455,7 +10639,7 @@ module Aws::SageMaker
     class DescribeNotebookInstanceLifecycleConfigInput < Struct.new(
       :notebook_instance_lifecycle_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_lifecycle_config_arn
@@ -11484,7 +10668,7 @@ module Aws::SageMaker
       :last_modified_time,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_arn
@@ -11577,7 +10761,7 @@ module Aws::SageMaker
       :platform_identifier,
       :instance_metadata_service_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_name
@@ -11586,7 +10770,7 @@ module Aws::SageMaker
     class DescribeOptimizationJobRequest < Struct.new(
       :optimization_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_arn
@@ -11659,7 +10843,7 @@ module Aws::SageMaker
       :stopping_condition,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -11668,7 +10852,7 @@ module Aws::SageMaker
     class DescribePartnerAppRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -11737,7 +10921,7 @@ module Aws::SageMaker
       :enable_iam_session_based_identity,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -11746,7 +10930,7 @@ module Aws::SageMaker
     class DescribePipelineDefinitionForExecutionRequest < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_definition
@@ -11759,7 +10943,7 @@ module Aws::SageMaker
       :pipeline_definition,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -11768,7 +10952,7 @@ module Aws::SageMaker
     class DescribePipelineExecutionRequest < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -11829,7 +11013,7 @@ module Aws::SageMaker
       :selective_execution_config,
       :pipeline_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -11842,7 +11026,7 @@ module Aws::SageMaker
       :pipeline_name,
       :pipeline_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -11907,7 +11091,7 @@ module Aws::SageMaker
       :pipeline_version_display_name,
       :pipeline_version_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processing_job_name
@@ -11916,7 +11100,7 @@ module Aws::SageMaker
     class DescribeProcessingJobRequest < Struct.new(
       :processing_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processing_inputs
@@ -12005,7 +11189,7 @@ module Aws::SageMaker
       :auto_ml_job_arn,
       :training_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -12014,7 +11198,7 @@ module Aws::SageMaker
     class DescribeProjectInput < Struct.new(
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -12067,7 +11251,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_capacity_arn
@@ -12076,7 +11260,7 @@ module Aws::SageMaker
     class DescribeReservedCapacityRequest < Struct.new(
       :reserved_capacity_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_capacity_arn
@@ -12133,7 +11317,7 @@ module Aws::SageMaker
       :in_use_instance_count,
       :ultra_server_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12146,7 +11330,7 @@ module Aws::SageMaker
       :domain_id,
       :space_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12203,7 +11387,7 @@ module Aws::SageMaker
       :space_display_name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_lifecycle_config_name
@@ -12212,7 +11396,7 @@ module Aws::SageMaker
     class DescribeStudioLifecycleConfigRequest < Struct.new(
       :studio_lifecycle_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_lifecycle_config_arn
@@ -12241,7 +11425,7 @@ module Aws::SageMaker
       :studio_lifecycle_config_content,
       :studio_lifecycle_config_app_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_arn
@@ -12250,7 +11434,7 @@ module Aws::SageMaker
     class DescribeSubscribedWorkteamRequest < Struct.new(
       :workteam_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscribed_workteam
@@ -12259,7 +11443,7 @@ module Aws::SageMaker
     class DescribeSubscribedWorkteamResponse < Struct.new(
       :subscribed_workteam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_name
@@ -12268,7 +11452,7 @@ module Aws::SageMaker
     class DescribeTrainingJobRequest < Struct.new(
       :training_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_name
@@ -12445,7 +11629,7 @@ module Aws::SageMaker
       :remote_debug_config,
       :infra_check_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_plan_name
@@ -12454,7 +11638,7 @@ module Aws::SageMaker
     class DescribeTrainingPlanRequest < Struct.new(
       :training_plan_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_plan_arn
@@ -12531,7 +11715,7 @@ module Aws::SageMaker
       :target_resources,
       :reserved_capacity_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_job_name
@@ -12540,7 +11724,7 @@ module Aws::SageMaker
     class DescribeTransformJobRequest < Struct.new(
       :transform_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_job_name
@@ -12629,7 +11813,7 @@ module Aws::SageMaker
       :data_processing,
       :experiment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -12638,7 +11822,7 @@ module Aws::SageMaker
     class DescribeTrialComponentRequest < Struct.new(
       :trial_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -12715,7 +11899,7 @@ module Aws::SageMaker
       :lineage_group_arn,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_name
@@ -12724,7 +11908,7 @@ module Aws::SageMaker
     class DescribeTrialRequest < Struct.new(
       :trial_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_name
@@ -12769,7 +11953,7 @@ module Aws::SageMaker
       :last_modified_by,
       :metadata_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12782,7 +11966,7 @@ module Aws::SageMaker
       :domain_id,
       :user_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12831,7 +12015,7 @@ module Aws::SageMaker
       :single_sign_on_user_value,
       :user_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforce_name
@@ -12840,7 +12024,7 @@ module Aws::SageMaker
     class DescribeWorkforceRequest < Struct.new(
       :workforce_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforce
@@ -12849,7 +12033,7 @@ module Aws::SageMaker
     class DescribeWorkforceResponse < Struct.new(
       :workforce,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_name
@@ -12858,7 +12042,7 @@ module Aws::SageMaker
     class DescribeWorkteamRequest < Struct.new(
       :workteam_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam
@@ -12867,7 +12051,7 @@ module Aws::SageMaker
     class DescribeWorkteamResponse < Struct.new(
       :workteam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies weight and capacity values for a production variant.</p>
@@ -12889,7 +12073,7 @@ module Aws::SageMaker
       :desired_instance_count,
       :serverless_update_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -12906,7 +12090,7 @@ module Aws::SageMaker
       :node_id,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -12935,21 +12119,7 @@ module Aws::SageMaker
       :status,
       :device_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetailedAlgorithmStatus
-      NOT_STARTED = 'NotStarted'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-    end
-
-    module DetailedModelPackageStatus
-      NOT_STARTED = 'NotStarted'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information of a particular device.</p>
@@ -12967,16 +12137,7 @@ module Aws::SageMaker
       :description,
       :iot_thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceDeploymentStatus
-      ReadyToDeploy = 'READYTODEPLOY'
-      InProgress = 'INPROGRESS'
-      Deployed = 'DEPLOYED'
-      Failed = 'FAILED'
-      Stopping = 'STOPPING'
-      Stopped = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information summarizing device details and deployment status.</p>
@@ -13026,7 +12187,7 @@ module Aws::SageMaker
       :description,
       :deployment_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the device fleet.</p>
@@ -13048,7 +12209,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configurations of selected devices.</p>
@@ -13070,7 +12231,7 @@ module Aws::SageMaker
       :device_names,
       :device_name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of devices.</p>
@@ -13084,13 +12245,7 @@ module Aws::SageMaker
       :connected_device_count,
       :registered_device_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceSubsetType
-      Percentage = 'PERCENTAGE'
-      Selection = 'SELECTION'
-      NameContains = 'NAMECONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the device.</p>
@@ -13132,7 +12287,7 @@ module Aws::SageMaker
       :models,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model deployment settings for the SageMaker Canvas application.</p> <note> <p>In order to enable model deployment for Canvas, the SageMaker Domain's or user profile's Amazon Web Services IAM execution role must have the <code>AmazonSageMakerCanvasDirectDeployAccess</code> policy attached. You can also turn on model deployment permissions through the SageMaker Domain's or user profile's settings in the SageMaker console.</p> </note>
@@ -13142,28 +12297,17 @@ module Aws::SageMaker
     class DirectDeploySettings < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectInternetAccess
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
-    end
-
-    module Direction
-      BOTH = 'Both'
-      ASCENDANTS = 'Ascendants'
-      DESCENDANTS = 'Descendants'
+      include ::Smithy::Schema::Structure
     end
 
     class DisableSagemakerServicecatalogPortfolioInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableSagemakerServicecatalogPortfolioOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -13176,7 +12320,7 @@ module Aws::SageMaker
       :trial_component_name,
       :trial_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_arn
@@ -13189,7 +12333,7 @@ module Aws::SageMaker
       :trial_component_arn,
       :trial_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that configure the domain's Docker interaction.</p>
@@ -13203,7 +12347,7 @@ module Aws::SageMaker
       :enable_docker_access,
       :vpc_only_trusted_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain's details.</p>
@@ -13237,7 +12381,7 @@ module Aws::SageMaker
       :last_modified_time,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings are specified through the <code>CreateDomain</code> API call.</p>
@@ -13271,7 +12415,7 @@ module Aws::SageMaker
       :amazon_q_settings,
       :unified_studio_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of <code>Domain</code> configuration settings to update.</p>
@@ -13305,17 +12449,7 @@ module Aws::SageMaker
       :amazon_q_settings,
       :unified_studio_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatus
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-      InService = 'InService'
-      Pending = 'Pending'
-      Updating = 'Updating'
-      Update_Failed = 'Update_Failed'
-      Delete_Failed = 'Delete_Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the drift check baselines that can be used when the model monitor is set using the model package. </p>
@@ -13337,7 +12471,7 @@ module Aws::SageMaker
       :model_quality,
       :model_data_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the drift check bias baselines that can be used when the model monitor is set using the model package.</p>
@@ -13355,7 +12489,7 @@ module Aws::SageMaker
       :pre_training_constraints,
       :post_training_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the drift check explainability baselines that can be used when the model monitor is set using the model package. </p>
@@ -13369,7 +12503,7 @@ module Aws::SageMaker
       :constraints,
       :config_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the drift check data quality baselines that can be used when the model monitor is set using the model package. </p>
@@ -13383,7 +12517,7 @@ module Aws::SageMaker
       :statistics,
       :constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the drift check model quality baselines that can be used when the model monitor is set using the model package. </p>
@@ -13397,7 +12531,7 @@ module Aws::SageMaker
       :statistics,
       :constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with the recommended values for you to specify when creating an autoscaling policy.</p>
@@ -13423,7 +12557,7 @@ module Aws::SageMaker
       :scale_out_cooldown,
       :scaling_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A file system, created by you in Amazon EFS, that you assign to a user profile or space for an Amazon SageMaker AI Domain. Permitted users can access this file system in Amazon SageMaker AI Studio.</p>
@@ -13433,7 +12567,7 @@ module Aws::SageMaker
     class EFSFileSystem < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for assigning a custom Amazon EFS file system to a user profile or space for an Amazon SageMaker AI Domain.</p>
@@ -13447,7 +12581,7 @@ module Aws::SageMaker
       :file_system_id,
       :file_system_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations and outcomes of an Amazon EMR step execution.</p>
@@ -13469,7 +12603,7 @@ module Aws::SageMaker
       :step_name,
       :log_file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of EBS storage settings that apply to both private and shared spaces.</p>
@@ -13479,7 +12613,7 @@ module Aws::SageMaker
     class EbsStorageSettings < Struct.new(
       :ebs_volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 capacity reservations that are shared to an ML capacity reservation.</p>
@@ -13501,7 +12635,7 @@ module Aws::SageMaker
       :available_instance_count,
       :used_by_current_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A directed edge connecting two lineage entities.</p>
@@ -13519,7 +12653,7 @@ module Aws::SageMaker
       :destination_arn,
       :association_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configuration of a deployment.</p>
@@ -13529,7 +12663,7 @@ module Aws::SageMaker
     class EdgeDeploymentConfig < Struct.new(
       :failure_handling_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configuration of a model in a deployment.</p>
@@ -13543,7 +12677,7 @@ module Aws::SageMaker
       :model_handle,
       :edge_packaging_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information summarizing an edge deployment plan.</p>
@@ -13581,7 +12715,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information summarizing the deployment stage results.</p>
@@ -13611,7 +12745,7 @@ module Aws::SageMaker
       :edge_deployment_status_message,
       :edge_deployment_stage_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model on the edge device.</p>
@@ -13633,7 +12767,7 @@ module Aws::SageMaker
       :latest_sample_time,
       :latest_inference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of edge devices with this model.</p>
@@ -13663,7 +12797,7 @@ module Aws::SageMaker
       :active_device_count,
       :sampling_device_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of model on edge device.</p>
@@ -13677,7 +12811,7 @@ module Aws::SageMaker
       :model_name,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration.</p>
@@ -13699,16 +12833,7 @@ module Aws::SageMaker
       :preset_deployment_type,
       :preset_deployment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EdgePackagingJobStatus
-      Starting = 'STARTING'
-      InProgress = 'INPROGRESS'
-      Completed = 'COMPLETED'
-      Failed = 'FAILED'
-      Stopping = 'STOPPING'
-      Stopped = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of edge packaging job.</p>
@@ -13746,7 +12871,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of a SageMaker Edge Manager deployable resource.</p>
@@ -13768,16 +12893,7 @@ module Aws::SageMaker
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EdgePresetDeploymentStatus
-      Completed = 'COMPLETED'
-      Failed = 'FAILED'
-    end
-
-    module EdgePresetDeploymentType
-      GreengrassV2Component = 'GreengrassV2Component'
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>This data type is intended for use exclusively by SageMaker Canvas and cannot be used in other contexts at the moment.</p> </note> <p>Specifies the compute configuration for the EMR Serverless job.</p>
@@ -13787,7 +12903,7 @@ module Aws::SageMaker
     class EmrServerlessComputeConfig < Struct.new(
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for running Amazon EMR Serverless jobs in SageMaker Canvas.</p>
@@ -13801,7 +12917,7 @@ module Aws::SageMaker
       :execution_role_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications.</p>
@@ -13815,22 +12931,17 @@ module Aws::SageMaker
       :assumable_role_arns,
       :execution_role_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableSagemakerServicecatalogPortfolioInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableSagemakerServicecatalogPortfolioOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnabledOrDisabled
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A hosted endpoint for real-time inference.</p>
@@ -13884,12 +12995,7 @@ module Aws::SageMaker
       :tags,
       :shadow_production_variants,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointConfigSortKey
-      Name = 'Name'
-      CreationTime = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for an endpoint configuration step.</p>
@@ -13899,7 +13005,7 @@ module Aws::SageMaker
     class EndpointConfigStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for an endpoint configuration.</p>
@@ -13917,7 +13023,7 @@ module Aws::SageMaker
       :endpoint_config_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a customer endpoint that was compared in an Inference Recommender job.</p>
@@ -13927,7 +13033,7 @@ module Aws::SageMaker
     class EndpointInfo < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input object for the endpoint</p>
@@ -13977,7 +13083,7 @@ module Aws::SageMaker
       :end_time_offset,
       :exclude_features_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint configuration for the load test.</p>
@@ -13999,7 +13105,7 @@ module Aws::SageMaker
       :inference_specification_name,
       :environment_parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of the endpoint.</p>
@@ -14021,7 +13127,7 @@ module Aws::SageMaker
       :endpoint_status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint configuration made by Inference Recommender during a recommendation job.</p>
@@ -14047,7 +13153,7 @@ module Aws::SageMaker
       :initial_instance_count,
       :serverless_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The performance results from running an Inference Recommender job on an existing endpoint.</p>
@@ -14061,25 +13167,7 @@ module Aws::SageMaker
       :metrics,
       :endpoint_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointSortKey
-      Name = 'Name'
-      CreationTime = 'CreationTime'
-      Status = 'Status'
-    end
-
-    module EndpointStatus
-      OUT_OF_SERVICE = 'OutOfService'
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      SYSTEM_UPDATING = 'SystemUpdating'
-      ROLLING_BACK = 'RollingBack'
-      IN_SERVICE = 'InService'
-      DELETING = 'Deleting'
-      FAILED = 'Failed'
-      UPDATE_ROLLBACK_FAILED = 'UpdateRollbackFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for an endpoint step.</p>
@@ -14089,7 +13177,7 @@ module Aws::SageMaker
     class EndpointStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for an endpoint.</p>
@@ -14115,7 +13203,7 @@ module Aws::SageMaker
       :last_modified_time,
       :endpoint_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the restricted instance groups (RIG) environment.</p>
@@ -14125,7 +13213,7 @@ module Aws::SageMaker
     class EnvironmentConfig < Struct.new(
       :f_sx_lustre_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the restricted instance groups (RIG) environment.</p>
@@ -14139,7 +13227,7 @@ module Aws::SageMaker
       :f_sx_lustre_config,
       :s3_output_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of environment parameters suggested by the Amazon SageMaker Inference Recommender.</p>
@@ -14157,7 +13245,7 @@ module Aws::SageMaker
       :value_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the range of environment parameters</p>
@@ -14167,7 +13255,7 @@ module Aws::SageMaker
     class EnvironmentParameterRanges < Struct.new(
       :categorical_parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is an error field object that contains the error code and the reason for an operation failure.</p>
@@ -14181,7 +13269,7 @@ module Aws::SageMaker
       :code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a specific event, including event metadata.</p>
@@ -14191,7 +13279,7 @@ module Aws::SageMaker
     class EventDetails < Struct.new(
       :event_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata associated with a cluster event, which may include details about various resource types.</p>
@@ -14214,32 +13302,13 @@ module Aws::SageMaker
       :instance,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Cluster < EventMetadata; end
       class InstanceGroup < EventMetadata; end
       class InstanceGroupScaling < EventMetadata; end
       class Instance < EventMetadata; end
       class Unknown < EventMetadata; end
-    end
-
-    module EventSortBy
-      EVENT_TIME = 'EventTime'
-    end
-
-    module ExecutionRoleIdentityConfig
-      USER_PROFILE_NAME = 'USER_PROFILE_NAME'
-      DISABLED = 'DISABLED'
-    end
-
-    module ExecutionStatus
-      PENDING = 'Pending'
-      COMPLETED = 'Completed'
-      COMPLETED_WITH_VIOLATIONS = 'CompletedWithViolations'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
     end
 
     # <p>The properties of an experiment as returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API. For information about experiments, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateExperiment.html">CreateExperiment</a> API.</p>
@@ -14285,7 +13354,7 @@ module Aws::SageMaker
       :last_modified_by,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associates a SageMaker job as a trial component with an experiment and trial. Specified when you call the following APIs:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html">CreateProcessingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html">CreateTransformJob</a> </p> </li> </ul>
@@ -14307,7 +13376,7 @@ module Aws::SageMaker
       :trial_component_display_name,
       :run_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the experiment.</p>
@@ -14321,7 +13390,7 @@ module Aws::SageMaker
       :source_arn,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the properties of an experiment. To get the complete set of properties, call the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeExperiment.html">DescribeExperiment</a> API and provide the <code>ExperimentName</code>.</p>
@@ -14351,7 +13420,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains explainability metrics for a model.</p>
@@ -14361,7 +13430,7 @@ module Aws::SageMaker
     class Explainability < Struct.new(
       :report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter to activate explainers.</p>
@@ -14371,7 +13440,7 @@ module Aws::SageMaker
     class ExplainerConfig < Struct.new(
       :clarify_explainer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.</p>
@@ -14385,7 +13454,7 @@ module Aws::SageMaker
       :size_in_gi_b,
       :per_unit_storage_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom file system in Amazon FSx for Lustre.</p>
@@ -14395,7 +13464,7 @@ module Aws::SageMaker
     class FSxLustreFileSystem < Struct.new(
       :file_system_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for assigning a custom Amazon FSx for Lustre file system to a user profile or space for an Amazon SageMaker Domain.</p>
@@ -14409,7 +13478,7 @@ module Aws::SageMaker
       :file_system_id,
       :file_system_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the metadata for Fail step.</p>
@@ -14419,17 +13488,7 @@ module Aws::SageMaker
     class FailStepMetadata < Struct.new(
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureHandlingPolicy
-      RollbackOnFailure = 'ROLLBACK_ON_FAILURE'
-      DoNothing = 'DO_NOTHING'
-    end
-
-    module FairShare
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of features. You must include <code>FeatureName</code> and <code>FeatureType</code>. Valid feature <code>FeatureType</code>s are <code>Integral</code>, <code>Fractional</code> and <code>String</code>. </p>
@@ -14451,7 +13510,7 @@ module Aws::SageMaker
       :collection_type,
       :collection_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon SageMaker Feature Store stores features in a collection called Feature Group. A Feature Group can be visualized as a table which has rows, with a unique identifier for each row where each column in the table is a feature. In principle, a Feature Group is composed of features and values per features.</p>
@@ -14521,27 +13580,7 @@ module Aws::SageMaker
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureGroupSortBy
-      NAME = 'Name'
-      FEATURE_GROUP_STATUS = 'FeatureGroupStatus'
-      OFFLINE_STORE_STATUS = 'OfflineStoreStatus'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module FeatureGroupSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module FeatureGroupStatus
-      CREATING = 'Creating'
-      CREATED = 'Created'
-      CREATE_FAILED = 'CreateFailed'
-      DELETING = 'Deleting'
-      DELETE_FAILED = 'DeleteFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name, ARN, <code>CreationTime</code>, <code>FeatureGroup</code> values, <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a <code>FeatureGroup</code>.</p>
@@ -14567,7 +13606,7 @@ module Aws::SageMaker
       :feature_group_status,
       :offline_store_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for a feature. It can either be metadata that you specify, or metadata that is updated automatically.</p>
@@ -14605,7 +13644,7 @@ module Aws::SageMaker
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that you specify to describe the feature.</p>
@@ -14619,18 +13658,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureStatus
-      Enabled = 'ENABLED'
-      Disabled = 'DISABLED'
-    end
-
-    module FeatureType
-      INTEGRAL = 'Integral'
-      FRACTIONAL = 'Fractional'
-      STRING = 'String'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details regarding the file source.</p>
@@ -14648,12 +13676,7 @@ module Aws::SageMaker
       :content_digest,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileSystemAccessMode
-      RW = 'rw'
-      RO = 'ro'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Elastic File System storage configuration for a SageMaker AI image.</p>
@@ -14671,7 +13694,7 @@ module Aws::SageMaker
       :default_uid,
       :default_gid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a file system data source for a channel.</p>
@@ -14693,23 +13716,7 @@ module Aws::SageMaker
       :file_system_type,
       :directory_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileSystemType
-      EFS = 'EFS'
-      FSXLUSTRE = 'FSxLustre'
-    end
-
-    module FillingType
-      Frontfill = 'frontfill'
-      Middlefill = 'middlefill'
-      Backfill = 'backfill'
-      Futurefill = 'futurefill'
-      FrontfillValue = 'frontfill_value'
-      MiddlefillValue = 'middlefill_value'
-      BackfillValue = 'backfill_value'
-      FuturefillValue = 'futurefill_value'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conditional statement for a search expression that includes a resource property, a Boolean operator, and a value. Resources that match the statement are returned in the results from the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.</p> <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, SageMaker uses the equals operator.</p> <p>In search, there are several property types:</p> <dl> <dt>Metrics</dt> <dd> <p>To define a metric filter, enter a value using the form <code>"Metrics.&lt;name&gt;"</code>, where <code>&lt;name&gt;</code> is a metric name. For example, the following filter searches for training jobs with an <code>"accuracy"</code> metric greater than <code>"0.9"</code>:</p> <p> <code>{</code> </p> <p> <code>"Name": "Metrics.accuracy",</code> </p> <p> <code>"Operator": "GreaterThan",</code> </p> <p> <code>"Value": "0.9"</code> </p> <p> <code>}</code> </p> </dd> <dt>HyperParameters</dt> <dd> <p>To define a hyperparameter filter, enter a value with the form <code>"HyperParameters.&lt;name&gt;"</code>. Decimal hyperparameter values are treated as a decimal in a comparison if the specified <code>Value</code> is also a decimal value. If the specified <code>Value</code> is an integer, the decimal hyperparameter values are treated as integers. For example, the following filter is satisfied by training jobs with a <code>"learning_rate"</code> hyperparameter that is less than <code>"0.5"</code>:</p> <p> <code> {</code> </p> <p> <code> "Name": "HyperParameters.learning_rate",</code> </p> <p> <code> "Operator": "LessThan",</code> </p> <p> <code> "Value": "0.5"</code> </p> <p> <code> }</code> </p> </dd> <dt>Tags</dt> <dd> <p>To define a tag filter, enter a value with the form <code>Tags.&lt;key&gt;</code>.</p> </dd> </dl>
@@ -14727,7 +13734,7 @@ module Aws::SageMaker
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The best candidate result from an AutoML training job.</p>
@@ -14749,7 +13756,7 @@ module Aws::SageMaker
       :value,
       :standard_metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shows the latest objective metric emitted by a training job that was launched by a hyperparameter tuning job. You define the objective metric in the <code>HyperParameterTuningJobObjective</code> parameter of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html">HyperParameterTuningJobConfig</a>.</p>
@@ -14767,12 +13774,7 @@ module Aws::SageMaker
       :metric_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlatInvocations
-      CONTINUE = 'Continue'
-      STOP = 'Stop'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about where human output will be stored.</p>
@@ -14786,14 +13788,7 @@ module Aws::SageMaker
       :s3_output_path,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowDefinitionStatus
-      INITIALIZING = 'Initializing'
-      ACTIVE = 'Active'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about the flow definition.</p>
@@ -14819,19 +13814,7 @@ module Aws::SageMaker
       :creation_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Framework
-      TENSORFLOW = 'TENSORFLOW'
-      KERAS = 'KERAS'
-      MXNET = 'MXNET'
-      ONNX = 'ONNX'
-      PYTORCH = 'PYTORCH'
-      XGBOOST = 'XGBOOST'
-      TFLITE = 'TFLITE'
-      DARKNET = 'DARKNET'
-      SKLEARN = 'SKLEARN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The generative AI settings for the SageMaker Canvas application.</p> <p>Configure these settings for Canvas users starting chats with generative AI foundation models. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-fm-chat.html"> Use generative AI with foundation models</a>.</p>
@@ -14841,7 +13824,7 @@ module Aws::SageMaker
     class GenerativeAiSettings < Struct.new(
       :amazon_bedrock_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -14850,7 +13833,7 @@ module Aws::SageMaker
     class GetDeviceFleetReportRequest < Struct.new(
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_arn
@@ -14887,7 +13870,7 @@ module Aws::SageMaker
       :agent_versions,
       :model_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lineage_group_name
@@ -14896,7 +13879,7 @@ module Aws::SageMaker
     class GetLineageGroupPolicyRequest < Struct.new(
       :lineage_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lineage_group_arn
@@ -14909,7 +13892,7 @@ module Aws::SageMaker
       :lineage_group_arn,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -14918,7 +13901,7 @@ module Aws::SageMaker
     class GetModelPackageGroupPolicyInput < Struct.new(
       :model_package_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -14927,12 +13910,12 @@ module Aws::SageMaker
     class GetModelPackageGroupPolicyOutput < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetSagemakerServicecatalogPortfolioStatusInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -14941,7 +13924,7 @@ module Aws::SageMaker
     class GetSagemakerServicecatalogPortfolioStatusOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_recommendations_job_name
@@ -14966,7 +13949,7 @@ module Aws::SageMaker
       :target_cpu_utilization_per_core,
       :scaling_policy_objective,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_recommendations_job_name
@@ -14999,7 +13982,7 @@ module Aws::SageMaker
       :metric,
       :dynamic_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -15012,7 +13995,7 @@ module Aws::SageMaker
       :resource,
       :suggestion_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute property_name_suggestions
@@ -15021,7 +14004,7 @@ module Aws::SageMaker
     class GetSearchSuggestionsResponse < Struct.new(
       :property_name_suggestions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration details for a Git repository in your Amazon Web Services account.</p>
@@ -15039,7 +14022,7 @@ module Aws::SageMaker
       :branch,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration details for a Git repository when the repository is updated.</p>
@@ -15049,7 +14032,7 @@ module Aws::SageMaker
     class GitConfigForUpdate < Struct.new(
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SageMaker images that are hidden from the Studio user interface. You must specify the SageMaker image name and version aliases.</p>
@@ -15063,7 +14046,7 @@ module Aws::SageMaker
       :sage_maker_image_name,
       :version_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores the holiday featurization attributes applicable to each item of time-series datasets during the training of a forecasting model. This allows the model to identify patterns associated with specific holidays.</p>
@@ -15073,7 +14056,7 @@ module Aws::SageMaker
     class HolidayConfigAttributes < Struct.new(
       :country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a private hub model reference that points to a public SageMaker JumpStart model.</p> <p>For more information about private hubs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-curated-hubs.html">Private curated hubs for foundation model access control in JumpStart</a>.</p>
@@ -15083,7 +14066,7 @@ module Aws::SageMaker
     class HubAccessConfig < Struct.new(
       :hub_content_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Any dependencies related to hub content, such as scripts, model artifacts, datasets, or notebooks.</p>
@@ -15097,7 +14080,7 @@ module Aws::SageMaker
       :dependency_origin_path,
       :dependency_copy_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about hub content.</p>
@@ -15155,33 +14138,7 @@ module Aws::SageMaker
       :creation_time,
       :original_creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HubContentSortBy
-      HUB_CONTENT_NAME = 'HubContentName'
-      CREATION_TIME = 'CreationTime'
-      HUB_CONTENT_STATUS = 'HubContentStatus'
-    end
-
-    module HubContentStatus
-      AVAILABLE = 'Available'
-      IMPORTING = 'Importing'
-      DELETING = 'Deleting'
-      IMPORT_FAILED = 'ImportFailed'
-      DELETE_FAILED = 'DeleteFailed'
-    end
-
-    module HubContentSupportStatus
-      SUPPORTED = 'Supported'
-      DEPRECATED = 'Deprecated'
-      RESTRICTED = 'Restricted'
-    end
-
-    module HubContentType
-      MODEL = 'Model'
-      NOTEBOOK = 'Notebook'
-      MODEL_REFERENCE = 'ModelReference'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a hub.</p>
@@ -15219,7 +14176,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 storage configuration of a hub.</p>
@@ -15229,24 +14186,7 @@ module Aws::SageMaker
     class HubS3StorageConfig < Struct.new(
       :s3_output_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HubSortBy
-      HUB_NAME = 'HubName'
-      CREATION_TIME = 'CreationTime'
-      HUB_STATUS = 'HubStatus'
-      ACCOUNT_ID_OWNER = 'AccountIdOwner'
-    end
-
-    module HubStatus
-      IN_SERVICE = 'InService'
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      DELETING = 'Deleting'
-      CREATE_FAILED = 'CreateFailed'
-      UPDATE_FAILED = 'UpdateFailed'
-      DELETE_FAILED = 'DeleteFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines under what conditions SageMaker creates a human loop. Used within <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateFlowDefinition.html">CreateFlowDefinition</a>. See <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HumanLoopActivationConditionsConfig.html">HumanLoopActivationConditionsConfig</a> for the required format of activation conditions.</p>
@@ -15256,7 +14196,7 @@ module Aws::SageMaker
     class HumanLoopActivationConditionsConfig < Struct.new(
       :human_loop_activation_conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about how and under what conditions SageMaker creates a human loop. If <code>HumanLoopActivationConfig</code> is not given, then all requests go to humans.</p>
@@ -15266,7 +14206,7 @@ module Aws::SageMaker
     class HumanLoopActivationConfig < Struct.new(
       :human_loop_activation_conditions_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the work to be performed by human workers.</p>
@@ -15308,7 +14248,7 @@ module Aws::SageMaker
       :task_keywords,
       :public_workforce_task_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for configuring the source of human task requests.</p>
@@ -15318,7 +14258,7 @@ module Aws::SageMaker
     class HumanLoopRequestSource < Struct.new(
       :aws_managed_human_loop_request_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required for human workers to complete a labeling task.</p>
@@ -15372,12 +14312,7 @@ module Aws::SageMaker
       :annotation_consolidation_config,
       :public_workforce_task_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HumanTaskUiStatus
-      ACTIVE = 'Active'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for human task user interface information.</p>
@@ -15395,7 +14330,7 @@ module Aws::SageMaker
       :human_task_ui_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.</p>
@@ -15417,14 +14352,7 @@ module Aws::SageMaker
       :algorithm_name,
       :metric_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HyperParameterScalingType
-      AUTO = 'Auto'
-      LINEAR = 'Linear'
-      LOGARITHMIC = 'Logarithmic'
-      REVERSE_LOGARITHMIC = 'ReverseLogarithmic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a hyperparameter to be used by an algorithm.</p>
@@ -15458,7 +14386,7 @@ module Aws::SageMaker
       :is_required,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the training jobs launched by a hyperparameter tuning job.</p>
@@ -15536,7 +14464,7 @@ module Aws::SageMaker
       :retry_strategy,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the summary information about a training job.</p>
@@ -15590,11 +14518,7 @@ module Aws::SageMaker
       :final_hyper_parameter_tuning_job_objective_metric,
       :objective_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HyperParameterTuningAllocationStrategy
-      PRIORITIZED = 'Prioritized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for hyperparameter tuning resources for use in training jobs launched by the tuning job. These resources include compute instances and storage volumes. Specify one or more compute instance configurations and allocation strategies to select resources (optional).</p>
@@ -15612,7 +14536,7 @@ module Aws::SageMaker
       :instance_count,
       :volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains runtime information about both current and completed hyperparameter tuning jobs.</p>
@@ -15626,7 +14550,7 @@ module Aws::SageMaker
       :number_of_training_jobs_objective_not_improving,
       :convergence_detected_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures a hyperparameter tuning job.</p>
@@ -15664,7 +14588,7 @@ module Aws::SageMaker
       :tuning_job_completion_criteria,
       :random_seed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total resources consumed by your hyperparameter tuning job.</p>
@@ -15674,7 +14598,7 @@ module Aws::SageMaker
     class HyperParameterTuningJobConsumedResources < Struct.new(
       :runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the objective metric for a hyperparameter tuning job. Hyperparameter tuning uses the value of this metric to evaluate the training jobs it launches, and returns the training job that results in either the highest or lowest value for this metric, depending on the value you specify for the <code>Type</code> parameter. If you want to define a custom objective metric, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html">Define metrics and environment variables</a>.</p>
@@ -15688,12 +14612,7 @@ module Aws::SageMaker
       :type,
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HyperParameterTuningJobObjectiveType
-      MAXIMIZE = 'Maximize'
-      MINIMIZE = 'Minimize'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html">SearchRecord</a> API containing the properties of a hyperparameter tuning job.</p>
@@ -15771,23 +14690,7 @@ module Aws::SageMaker
       :consumed_resources,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HyperParameterTuningJobSortByOptions
-      Name = 'Name'
-      Status = 'Status'
-      CreationTime = 'CreationTime'
-    end
-
-    module HyperParameterTuningJobStatus
-      COMPLETED = 'Completed'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      STOPPED = 'Stopped'
-      STOPPING = 'Stopping'
-      DELETING = 'Deleting'
-      DELETE_FAILED = 'DeleteFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a training job launched by a hyperparameter tuning job. Choose <code>Bayesian</code> for Bayesian optimization, and <code>Random</code> for random search optimization. For more advanced use cases, use <code>Hyperband</code>, which evaluates objective metrics for training jobs after every epoch. For more information about strategies, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html">How Hyperparameter Tuning Works</a>.</p>
@@ -15797,15 +14700,7 @@ module Aws::SageMaker
     class HyperParameterTuningJobStrategyConfig < Struct.new(
       :hyperband_strategy_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. </p>
-    module HyperParameterTuningJobStrategyType
-      BAYESIAN = 'Bayesian'
-      RANDOM = 'Random'
-      HYPERBAND = 'Hyperband'
-      GRID = 'Grid'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a hyperparameter tuning job.</p>
@@ -15851,7 +14746,7 @@ module Aws::SageMaker
       :objective_status_counters,
       :resource_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for a hyperparameter tuning job that uses one or more previous hyperparameter tuning jobs as a starting point. The results of previous tuning jobs are used to inform which combinations of hyperparameters to search over in the new tuning job.</p> <p>All training jobs launched by the new hyperparameter tuning job are evaluated by using the objective metric, and the training job that performs the best is compared to the best training jobs from the parent tuning jobs. From these, the training job that performs the best as measured by the objective metric is returned as the overall best training job.</p> <note> <p>All training jobs launched by parent hyperparameter tuning jobs and the new hyperparameter tuning jobs count against the limit of training jobs for the tuning job.</p> </note>
@@ -15865,12 +14760,7 @@ module Aws::SageMaker
       :parent_hyper_parameter_tuning_jobs,
       :warm_start_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HyperParameterTuningJobWarmStartType
-      IDENTICAL_DATA_AND_ALGORITHM = 'IdenticalDataAndAlgorithm'
-      TRANSFER_LEARNING = 'TransferLearning'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of resources, including compute instances and storage volumes for use in training jobs launched by hyperparameter tuning jobs. <code>HyperParameterTuningResourceConfig</code> is similar to <code>ResourceConfig</code>, but has the additional <code>InstanceConfigs</code> and <code>AllocationStrategy</code> fields to allow for flexible instance management. Specify one or more instance types, count, and the allocation strategy for instance selection.</p> <note> <p> <code>HyperParameterTuningResourceConfig</code> supports the capabilities of <code>ResourceConfig</code> with the exception of <code>KeepAlivePeriodInSeconds</code>. Hyperparameter tuning jobs use warm pools by default, which reuse clusters between training jobs.</p> </note>
@@ -15900,7 +14790,7 @@ module Aws::SageMaker
       :allocation_strategy,
       :instance_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for <code>Hyperband</code>, a multi-fidelity based hyperparameter tuning strategy. <code>Hyperband</code> uses the final and intermediate results of a training job to dynamically allocate resources to utilized hyperparameter configurations while automatically stopping under-performing configurations. This parameter should be provided only if <code>Hyperband</code> is selected as the <code>StrategyConfig</code> under the <code>HyperParameterTuningJobConfig</code> API.</p>
@@ -15914,7 +14804,7 @@ module Aws::SageMaker
       :min_resource,
       :max_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM Identity details associated with the user. These details are associated with model package groups, model packages and project entities only.</p>
@@ -15932,7 +14822,7 @@ module Aws::SageMaker
       :principal_id,
       :source_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this parameter to specify a supported global condition key that is added to the IAM policy.</p>
@@ -15946,7 +14836,7 @@ module Aws::SageMaker
       :source_ip,
       :vpc_source_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker Canvas application setting where you configure OAuth for connecting to an external data source, such as Snowflake.</p>
@@ -15964,7 +14854,7 @@ module Aws::SageMaker
       :status,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings related to idle shutdown of Studio applications.</p>
@@ -15986,7 +14876,7 @@ module Aws::SageMaker
       :min_idle_timeout_in_minutes,
       :max_idle_timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A SageMaker AI image. A SageMaker AI image represents a set of container images that are derived from a common base container image. Each of these container images is represented by a SageMaker AI <code>ImageVersion</code>.</p>
@@ -16024,7 +14914,7 @@ module Aws::SageMaker
       :image_status,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of settings used by an AutoML job V2 for the image classification problem type.</p>
@@ -16034,7 +14924,7 @@ module Aws::SageMaker
     class ImageClassificationJobConfig < Struct.new(
       :completion_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).</p>
@@ -16048,28 +14938,7 @@ module Aws::SageMaker
       :repository_access_mode,
       :repository_auth_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageSortBy
-      CREATION_TIME = 'CREATION_TIME'
-      LAST_MODIFIED_TIME = 'LAST_MODIFIED_TIME'
-      IMAGE_NAME = 'IMAGE_NAME'
-    end
-
-    module ImageSortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
-    end
-
-    module ImageStatus
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A version of a SageMaker AI <code>Image</code>. A version represents an existing container image.</p>
@@ -16103,26 +14972,7 @@ module Aws::SageMaker
       :last_modified_time,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageVersionSortBy
-      CREATION_TIME = 'CREATION_TIME'
-      LAST_MODIFIED_TIME = 'LAST_MODIFIED_TIME'
-      VERSION = 'VERSION'
-    end
-
-    module ImageVersionSortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
-    end
-
-    module ImageVersionStatus
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_content_name
@@ -16175,7 +15025,7 @@ module Aws::SageMaker
       :hub_content_search_keywords,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -16188,7 +15038,7 @@ module Aws::SageMaker
       :hub_arn,
       :hub_content_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the type and size of the endpoint capacity to activate for a rolling deployment or a rollback strategy. You can specify your batches as either of the following:</p> <ul> <li> <p>A count of inference component copies </p> </li> <li> <p>The overall percentage or your fleet </p> </li> </ul> <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> parameter to 100%, then SageMaker AI uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>
@@ -16202,12 +15052,7 @@ module Aws::SageMaker
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceComponentCapacitySizeType
-      COPY_COUNT = 'COPY_COUNT'
-      CAPACITY_PERCENT = 'CAPACITY_PERCENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the compute resources to allocate to run a model, plus any adapter models, that you assign to an inference component. These resources include CPU cores, accelerators, and memory.</p>
@@ -16229,7 +15074,7 @@ module Aws::SageMaker
       :min_memory_required_in_mb,
       :max_memory_required_in_mb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a container that provides the runtime environment for a model that you deploy with an inference component.</p>
@@ -16247,7 +15092,7 @@ module Aws::SageMaker
       :artifact_url,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resources that are deployed with this inference component.</p>
@@ -16265,7 +15110,7 @@ module Aws::SageMaker
       :artifact_url,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configuration for an endpoint that hosts inference components. The configuration includes the desired deployment strategy and rollback settings.</p>
@@ -16279,7 +15124,7 @@ module Aws::SageMaker
       :rolling_update_policy,
       :auto_rollback_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a rolling deployment strategy for updating a SageMaker AI inference component.</p>
@@ -16301,7 +15146,7 @@ module Aws::SageMaker
       :maximum_execution_timeout_in_seconds,
       :rollback_maximum_batch_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Runtime settings for a model that is deployed with an inference component.</p>
@@ -16311,7 +15156,7 @@ module Aws::SageMaker
     class InferenceComponentRuntimeConfig < Struct.new(
       :copy_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the runtime settings for the model that is deployed with the inference component.</p>
@@ -16325,13 +15170,7 @@ module Aws::SageMaker
       :desired_copy_count,
       :current_copy_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceComponentSortKey
-      Name = 'Name'
-      CreationTime = 'CreationTime'
-      Status = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resources to deploy with this inference component, including the model, container, and compute resources.</p>
@@ -16357,7 +15196,7 @@ module Aws::SageMaker
       :compute_resource_requirements,
       :base_inference_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the resources that are deployed with this inference component.</p>
@@ -16383,7 +15222,7 @@ module Aws::SageMaker
       :compute_resource_requirements,
       :base_inference_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that take effect while the model container starts up.</p>
@@ -16397,15 +15236,7 @@ module Aws::SageMaker
       :model_data_download_timeout_in_seconds,
       :container_startup_health_check_timeout_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceComponentStatus
-      IN_SERVICE = 'InService'
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the properties of an inference component.</p>
@@ -16443,7 +15274,7 @@ module Aws::SageMaker
       :inference_component_status,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies details about how containers in a multi-container endpoint are run.</p>
@@ -16453,12 +15284,7 @@ module Aws::SageMaker
     class InferenceExecutionConfig < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceExecutionMode
-      SERIAL = 'Serial'
-      DIRECT = 'Direct'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location and configuration for storing inference request and response data.</p>
@@ -16476,7 +15302,7 @@ module Aws::SageMaker
       :kms_key,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start and end times of an inference experiment.</p> <p>The maximum duration that you can set for an inference experiment is 30 days.</p>
@@ -16490,23 +15316,7 @@ module Aws::SageMaker
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceExperimentStatus
-      CREATING = 'Creating'
-      CREATED = 'Created'
-      UPDATING = 'Updating'
-      RUNNING = 'Running'
-      STARTING = 'Starting'
-      STOPPING = 'Stopping'
-      COMPLETED = 'Completed'
-      CANCELLED = 'Cancelled'
-    end
-
-    module InferenceExperimentStopDesiredState
-      COMPLETED = 'Completed'
-      CANCELLED = 'Cancelled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of properties of an inference experiment.</p>
@@ -16552,11 +15362,7 @@ module Aws::SageMaker
       :last_modified_time,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceExperimentType
-      SHADOW_MODE = 'ShadowMode'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information specifying which hub contents have accessible deployment options.</p>
@@ -16566,7 +15372,7 @@ module Aws::SageMaker
     class InferenceHubAccessConfig < Struct.new(
       :hub_content_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metrics for an existing endpoint compared in an Inference Recommender job.</p>
@@ -16580,7 +15386,7 @@ module Aws::SageMaker
       :max_invocations,
       :model_latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of recommendations made by Amazon SageMaker Inference Recommender.</p>
@@ -16610,7 +15416,7 @@ module Aws::SageMaker
       :invocation_end_time,
       :invocation_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains a list of recommendation jobs.</p>
@@ -16668,7 +15474,7 @@ module Aws::SageMaker
       :sample_payload_url,
       :model_package_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A returned array object for the <code>Steps</code> response field in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListInferenceRecommendationsJobSteps.html">ListInferenceRecommendationsJobSteps</a> API command.</p>
@@ -16690,7 +15496,7 @@ module Aws::SageMaker
       :status,
       :inference_benchmark,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines how to perform inference generation after a training job is run.</p>
@@ -16716,7 +15522,7 @@ module Aws::SageMaker
       :supported_content_types,
       :supported_response_mime_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the infrastructure health check of a training job. A SageMaker-provided health check tests the health of instance hardware and cluster network connectivity.</p>
@@ -16726,7 +15532,7 @@ module Aws::SageMaker
     class InfraCheckConfig < Struct.new(
       :enable_infra_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the location of input model artifacts, the name and shape of the expected data inputs, and the framework in which the model was trained.</p>
@@ -16748,12 +15554,7 @@ module Aws::SageMaker
       :framework,
       :framework_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputMode
-      PIPE = 'Pipe'
-      FILE = 'File'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an instance group for heterogeneous cluster training. When requesting a training job using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> API, you can configure multiple instance groups .</p>
@@ -16771,7 +15572,7 @@ module Aws::SageMaker
       :instance_count,
       :instance_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata information about an instance group in a HyperPod cluster.</p>
@@ -16801,7 +15602,7 @@ module Aws::SageMaker
       :security_group_ids,
       :ami_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata information about scaling operations for an instance group.</p>
@@ -16819,17 +15620,7 @@ module Aws::SageMaker
       :target_count,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceGroupStatus
-      INSERVICE = 'InService'
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      FAILED = 'Failed'
-      DEGRADED = 'Degraded'
-      SYSTEMUPDATING = 'SystemUpdating'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata information about an instance in a HyperPod cluster.</p>
@@ -16859,7 +15650,7 @@ module Aws::SageMaker
       :lcs_execution_state,
       :node_logical_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the IMDS configuration of the notebook instance</p>
@@ -16869,7 +15660,7 @@ module Aws::SageMaker
     class InstanceMetadataServiceConfiguration < Struct.new(
       :minimum_instance_metadata_service_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for how instances are placed and allocated within UltraServers. This is only applicable for UltraServer capacity.</p>
@@ -16883,182 +15674,7 @@ module Aws::SageMaker
       :enable_multiple_jobs,
       :placement_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceType
-      ML_T2_MEDIUM = 'ml.t2.medium'
-      ML_T2_LARGE = 'ml.t2.large'
-      ML_T2_XLARGE = 'ml.t2.xlarge'
-      ML_T2_2XLARGE = 'ml.t2.2xlarge'
-      ML_T3_MEDIUM = 'ml.t3.medium'
-      ML_T3_LARGE = 'ml.t3.large'
-      ML_T3_XLARGE = 'ml.t3.xlarge'
-      ML_T3_2XLARGE = 'ml.t3.2xlarge'
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_M5D_LARGE = 'ml.m5d.large'
-      ML_M5D_XLARGE = 'ml.m5d.xlarge'
-      ML_M5D_2XLARGE = 'ml.m5d.2xlarge'
-      ML_M5D_4XLARGE = 'ml.m5d.4xlarge'
-      ML_M5D_8XLARGE = 'ml.m5d.8xlarge'
-      ML_M5D_12XLARGE = 'ml.m5d.12xlarge'
-      ML_M5D_16XLARGE = 'ml.m5d.16xlarge'
-      ML_M5D_24XLARGE = 'ml.m5d.24xlarge'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_C5D_XLARGE = 'ml.c5d.xlarge'
-      ML_C5D_2XLARGE = 'ml.c5d.2xlarge'
-      ML_C5D_4XLARGE = 'ml.c5d.4xlarge'
-      ML_C5D_9XLARGE = 'ml.c5d.9xlarge'
-      ML_C5D_18XLARGE = 'ml.c5d.18xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_P3DN_24XLARGE = 'ml.p3dn.24xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_R5_LARGE = 'ml.r5.large'
-      ML_R5_XLARGE = 'ml.r5.xlarge'
-      ML_R5_2XLARGE = 'ml.r5.2xlarge'
-      ML_R5_4XLARGE = 'ml.r5.4xlarge'
-      ML_R5_8XLARGE = 'ml.r5.8xlarge'
-      ML_R5_12XLARGE = 'ml.r5.12xlarge'
-      ML_R5_16XLARGE = 'ml.r5.16xlarge'
-      ML_R5_24XLARGE = 'ml.r5.24xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_INF1_XLARGE = 'ml.inf1.xlarge'
-      ML_INF1_2XLARGE = 'ml.inf1.2xlarge'
-      ML_INF1_6XLARGE = 'ml.inf1.6xlarge'
-      ML_INF1_24XLARGE = 'ml.inf1.24xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
-      ML_INF2_XLARGE = 'ml.inf2.xlarge'
-      ML_INF2_8XLARGE = 'ml.inf2.8xlarge'
-      ML_INF2_24XLARGE = 'ml.inf2.24xlarge'
-      ML_INF2_48XLARGE = 'ml.inf2.48xlarge'
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_C6I_LARGE = 'ml.c6i.large'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_R6I_LARGE = 'ml.r6i.large'
-      ML_R6I_XLARGE = 'ml.r6i.xlarge'
-      ML_R6I_2XLARGE = 'ml.r6i.2xlarge'
-      ML_R6I_4XLARGE = 'ml.r6i.4xlarge'
-      ML_R6I_8XLARGE = 'ml.r6i.8xlarge'
-      ML_R6I_12XLARGE = 'ml.r6i.12xlarge'
-      ML_R6I_16XLARGE = 'ml.r6i.16xlarge'
-      ML_R6I_24XLARGE = 'ml.r6i.24xlarge'
-      ML_R6I_32XLARGE = 'ml.r6i.32xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
-      ML_M6ID_LARGE = 'ml.m6id.large'
-      ML_M6ID_XLARGE = 'ml.m6id.xlarge'
-      ML_M6ID_2XLARGE = 'ml.m6id.2xlarge'
-      ML_M6ID_4XLARGE = 'ml.m6id.4xlarge'
-      ML_M6ID_8XLARGE = 'ml.m6id.8xlarge'
-      ML_M6ID_12XLARGE = 'ml.m6id.12xlarge'
-      ML_M6ID_16XLARGE = 'ml.m6id.16xlarge'
-      ML_M6ID_24XLARGE = 'ml.m6id.24xlarge'
-      ML_M6ID_32XLARGE = 'ml.m6id.32xlarge'
-      ML_C6ID_LARGE = 'ml.c6id.large'
-      ML_C6ID_XLARGE = 'ml.c6id.xlarge'
-      ML_C6ID_2XLARGE = 'ml.c6id.2xlarge'
-      ML_C6ID_4XLARGE = 'ml.c6id.4xlarge'
-      ML_C6ID_8XLARGE = 'ml.c6id.8xlarge'
-      ML_C6ID_12XLARGE = 'ml.c6id.12xlarge'
-      ML_C6ID_16XLARGE = 'ml.c6id.16xlarge'
-      ML_C6ID_24XLARGE = 'ml.c6id.24xlarge'
-      ML_C6ID_32XLARGE = 'ml.c6id.32xlarge'
-      ML_R6ID_LARGE = 'ml.r6id.large'
-      ML_R6ID_XLARGE = 'ml.r6id.xlarge'
-      ML_R6ID_2XLARGE = 'ml.r6id.2xlarge'
-      ML_R6ID_4XLARGE = 'ml.r6id.4xlarge'
-      ML_R6ID_8XLARGE = 'ml.r6id.8xlarge'
-      ML_R6ID_12XLARGE = 'ml.r6id.12xlarge'
-      ML_R6ID_16XLARGE = 'ml.r6id.16xlarge'
-      ML_R6ID_24XLARGE = 'ml.r6id.24xlarge'
-      ML_R6ID_32XLARGE = 'ml.r6id.32xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a hyperparameter of the integer type, specifies the range that a hyperparameter tuning job searches.</p>
@@ -17080,7 +15696,7 @@ module Aws::SageMaker
       :max_value,
       :scaling_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the possible values for an integer hyperparameter.</p>
@@ -17094,23 +15710,7 @@ module Aws::SageMaker
       :min_value,
       :max_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IsTrackingServerActive
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
-    end
-
-    module JobType
-      TRAINING = 'TRAINING'
-      INFERENCE = 'INFERENCE'
-      NOTEBOOK_KERNEL = 'NOTEBOOK_KERNEL'
-    end
-
-    module JoinSource
-      INPUT = 'Input'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the file system and kernels in a SageMaker AI image running as a JupyterLab app. The <code>FileSystemConfig</code> object is not supported.</p>
@@ -17124,7 +15724,7 @@ module Aws::SageMaker
       :file_system_config,
       :container_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for the JupyterLab application.</p>
@@ -17158,7 +15758,7 @@ module Aws::SageMaker
       :emr_settings,
       :built_in_lifecycle_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The JupyterServer app settings.</p>
@@ -17176,7 +15776,7 @@ module Aws::SageMaker
       :lifecycle_config_arns,
       :code_repositories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker Canvas application setting where you configure document querying.</p>
@@ -17186,7 +15786,7 @@ module Aws::SageMaker
     class KendraSettings < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KernelGateway app settings.</p>
@@ -17204,7 +15804,7 @@ module Aws::SageMaker
       :custom_images,
       :lifecycle_config_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the file system and kernels in a SageMaker AI image running as a KernelGateway app.</p>
@@ -17218,7 +15818,7 @@ module Aws::SageMaker
       :kernel_specs,
       :file_system_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specification of a Jupyter kernel.</p>
@@ -17232,7 +15832,7 @@ module Aws::SageMaker
       :name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a breakdown of the number of objects labeled.</p>
@@ -17258,7 +15858,7 @@ module Aws::SageMaker
       :failed_non_retryable_error,
       :unlabeled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides counts for human-labeled tasks in the labeling job.</p>
@@ -17276,7 +15876,7 @@ module Aws::SageMaker
       :pending_human,
       :total,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for auto-labeling of your data objects. A <code>LabelingJobAlgorithmsConfig</code> object must be supplied in order to use auto-labeling.</p>
@@ -17294,7 +15894,7 @@ module Aws::SageMaker
       :initial_active_learning_model_arn,
       :labeling_job_resource_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of the data specified by the customer. Use these to describe the data to be labeled.</p>
@@ -17304,7 +15904,7 @@ module Aws::SageMaker
     class LabelingJobDataAttributes < Struct.new(
       :content_classifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the location of input data.</p> <p>You must specify at least one of the following: <code>S3DataSource</code> or <code>SnsDataSource</code>.</p> <p>Use <code>SnsDataSource</code> to specify an SNS input topic for a streaming labeling job. If you do not specify and SNS input topic ARN, Ground Truth will create a one-time labeling job.</p> <p>Use <code>S3DataSource</code> to specify an input manifest file for both streaming and one-time labeling jobs. Adding an <code>S3DataSource</code> is optional if you use <code>SnsDataSource</code> to create a streaming labeling job.</p>
@@ -17318,7 +15918,7 @@ module Aws::SageMaker
       :s3_data_source,
       :sns_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for a work team.</p>
@@ -17348,7 +15948,7 @@ module Aws::SageMaker
       :label_counters,
       :number_of_human_workers_per_data_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input configuration information for a labeling job.</p>
@@ -17362,7 +15962,7 @@ module Aws::SageMaker
       :data_source,
       :data_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of the output produced by the labeling job. </p>
@@ -17376,7 +15976,7 @@ module Aws::SageMaker
       :output_dataset_s3_uri,
       :final_active_learning_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output configuration information for a labeling job.</p>
@@ -17394,7 +15994,7 @@ module Aws::SageMaker
       :kms_key_id,
       :sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure encryption on the storage volume attached to the ML compute instance used to run automated data labeling model training and inference. </p>
@@ -17408,7 +16008,7 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location of the input data objects.</p>
@@ -17418,7 +16018,7 @@ module Aws::SageMaker
     class LabelingJobS3DataSource < Struct.new(
       :manifest_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon SNS data source used for streaming labeling jobs.</p>
@@ -17428,16 +16028,7 @@ module Aws::SageMaker
     class LabelingJobSnsDataSource < Struct.new(
       :sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LabelingJobStatus
-      INITIALIZING = 'Initializing'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of conditions for stopping a labeling job. If any of the conditions are met, the job is automatically stopped. You can use these conditions to control the cost of data labeling.</p> <note> <p>Labeling jobs fail after 30 days with an appropriate client error message.</p> </note>
@@ -17451,7 +16042,7 @@ module Aws::SageMaker
       :max_human_labeled_object_count,
       :max_percentage_of_input_dataset_labeled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a labeling job.</p>
@@ -17505,7 +16096,7 @@ module Aws::SageMaker
       :labeling_job_output,
       :input_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a Lambda step.</p>
@@ -17519,7 +16110,7 @@ module Aws::SageMaker
       :arn,
       :output_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value that indicates whether the update was successful.</p>
@@ -17533,18 +16124,7 @@ module Aws::SageMaker
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LastUpdateStatusValue
-      SUCCESSFUL = 'Successful'
-      FAILED = 'Failed'
-      IN_PROGRESS = 'InProgress'
-    end
-
-    module LifecycleManagement
-      Enabled = 'ENABLED'
-      Disabled = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists a summary of the properties of a lineage group. A lineage group provides a group of shareable lineage entity resources.</p>
@@ -17570,14 +16150,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineageType
-      TRIAL_COMPONENT = 'TrialComponent'
-      ARTIFACT = 'Artifact'
-      CONTEXT = 'Context'
-      ACTION = 'Action'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_uri
@@ -17614,7 +16187,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_summaries
@@ -17627,7 +16200,7 @@ module Aws::SageMaker
       :action_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -17660,7 +16233,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_summary_list
@@ -17673,7 +16246,7 @@ module Aws::SageMaker
       :algorithm_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -17698,7 +16271,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sage_maker_image_version_aliases
@@ -17711,7 +16284,7 @@ module Aws::SageMaker
       :sage_maker_image_version_aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -17752,7 +16325,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -17765,7 +16338,7 @@ module Aws::SageMaker
       :next_token,
       :app_image_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -17798,7 +16371,7 @@ module Aws::SageMaker
       :user_profile_name_equals,
       :space_name_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps
@@ -17811,7 +16384,7 @@ module Aws::SageMaker
       :apps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_uri
@@ -17848,7 +16421,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_summaries
@@ -17861,7 +16434,7 @@ module Aws::SageMaker
       :artifact_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -17910,7 +16483,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_summaries
@@ -17923,7 +16496,7 @@ module Aws::SageMaker
       :association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -17968,7 +16541,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_summaries
@@ -17981,7 +16554,7 @@ module Aws::SageMaker
       :auto_ml_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -18014,7 +16587,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute candidates
@@ -18027,7 +16600,7 @@ module Aws::SageMaker
       :candidates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -18072,7 +16645,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18085,7 +16658,7 @@ module Aws::SageMaker
       :next_token,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -18126,7 +16699,7 @@ module Aws::SageMaker
       :sort_order,
       :include_node_logical_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18139,7 +16712,7 @@ module Aws::SageMaker
       :next_token,
       :cluster_node_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -18180,7 +16753,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_summaries
@@ -18193,7 +16766,7 @@ module Aws::SageMaker
       :cluster_scheduler_config_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -18230,7 +16803,7 @@ module Aws::SageMaker
       :sort_order,
       :training_plan_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18243,7 +16816,7 @@ module Aws::SageMaker
       :next_token,
       :cluster_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -18284,7 +16857,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_summary_list
@@ -18297,7 +16870,7 @@ module Aws::SageMaker
       :code_repository_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18342,7 +16915,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_summaries
@@ -18355,13 +16928,7 @@ module Aws::SageMaker
       :compilation_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListCompilationJobsSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -18402,7 +16969,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_summaries
@@ -18415,7 +16982,7 @@ module Aws::SageMaker
       :compute_quota_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_uri
@@ -18452,7 +17019,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_summaries
@@ -18465,7 +17032,7 @@ module Aws::SageMaker
       :context_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -18502,7 +17069,7 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_summaries
@@ -18515,7 +17082,7 @@ module Aws::SageMaker
       :job_definition_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18556,7 +17123,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_summaries
@@ -18569,13 +17136,7 @@ module Aws::SageMaker
       :device_fleet_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListDeviceFleetsSortBy
-      Name = 'NAME'
-      CreationTime = 'CREATION_TIME'
-      LastModifiedTime = 'LAST_MODIFIED_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18600,7 +17161,7 @@ module Aws::SageMaker
       :model_name,
       :device_fleet_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_summaries
@@ -18613,7 +17174,7 @@ module Aws::SageMaker
       :device_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18626,7 +17187,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domains
@@ -18639,7 +17200,7 @@ module Aws::SageMaker
       :domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18684,7 +17245,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_summaries
@@ -18697,14 +17258,7 @@ module Aws::SageMaker
       :edge_deployment_plan_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListEdgeDeploymentPlansSortBy
-      Name = 'NAME'
-      DeviceFleetName = 'DEVICE_FLEET_NAME'
-      CreationTime = 'CREATION_TIME'
-      LastModifiedTime = 'LAST_MODIFIED_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18753,7 +17307,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_packaging_job_summaries
@@ -18766,15 +17320,7 @@ module Aws::SageMaker
       :edge_packaging_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListEdgePackagingJobsSortBy
-      Name = 'NAME'
-      ModelName = 'MODEL_NAME'
-      CreationTime = 'CREATION_TIME'
-      LastModifiedTime = 'LAST_MODIFIED_TIME'
-      EdgePackagingJobStatus = 'STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -18807,7 +17353,7 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_configs
@@ -18820,7 +17366,7 @@ module Aws::SageMaker
       :endpoint_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -18865,7 +17411,7 @@ module Aws::SageMaker
       :last_modified_time_after,
       :status_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -18878,7 +17424,7 @@ module Aws::SageMaker
       :endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -18907,7 +17453,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_summaries
@@ -18920,7 +17466,7 @@ module Aws::SageMaker
       :experiment_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_contains
@@ -18961,7 +17507,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_summaries
@@ -18974,7 +17520,7 @@ module Aws::SageMaker
       :feature_group_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -18999,7 +17545,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_definition_summaries
@@ -19012,7 +17558,7 @@ module Aws::SageMaker
       :flow_definition_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -19061,7 +17607,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_content_summaries
@@ -19074,7 +17620,7 @@ module Aws::SageMaker
       :hub_content_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -19119,7 +17665,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_content_summaries
@@ -19132,7 +17678,7 @@ module Aws::SageMaker
       :hub_content_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_contains
@@ -19173,7 +17719,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_summaries
@@ -19186,7 +17732,7 @@ module Aws::SageMaker
       :hub_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -19211,7 +17757,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_task_ui_summaries
@@ -19224,7 +17770,7 @@ module Aws::SageMaker
       :human_task_ui_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -19269,7 +17815,7 @@ module Aws::SageMaker
       :last_modified_time_before,
       :status_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_summaries
@@ -19282,7 +17828,7 @@ module Aws::SageMaker
       :hyper_parameter_tuning_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -19323,7 +17869,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_versions
@@ -19336,7 +17882,7 @@ module Aws::SageMaker
       :image_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -19377,7 +17923,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute images
@@ -19390,7 +17936,7 @@ module Aws::SageMaker
       :images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -19443,7 +17989,7 @@ module Aws::SageMaker
       :endpoint_name_equals,
       :variant_name_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_components
@@ -19456,7 +18002,7 @@ module Aws::SageMaker
       :inference_components,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_contains
@@ -19505,7 +18051,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_experiments
@@ -19518,7 +18064,7 @@ module Aws::SageMaker
       :inference_experiments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -19543,7 +18089,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute steps
@@ -19556,7 +18102,7 @@ module Aws::SageMaker
       :steps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -19609,7 +18155,7 @@ module Aws::SageMaker
       :model_name_equals,
       :model_package_version_arn_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_recommendations_jobs
@@ -19622,13 +18168,7 @@ module Aws::SageMaker
       :inference_recommendations_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListInferenceRecommendationsJobsSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_arn
@@ -19665,7 +18205,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_summary_list
@@ -19678,11 +18218,7 @@ module Aws::SageMaker
       :labeling_job_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListLabelingJobsForWorkteamSortByOptions
-      CREATION_TIME = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -19727,7 +18263,7 @@ module Aws::SageMaker
       :sort_order,
       :status_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_summary_list
@@ -19740,7 +18276,7 @@ module Aws::SageMaker
       :labeling_job_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -19769,7 +18305,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lineage_group_summaries
@@ -19782,7 +18318,7 @@ module Aws::SageMaker
       :lineage_group_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -19819,7 +18355,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_summaries
@@ -19832,7 +18368,7 @@ module Aws::SageMaker
       :tracking_server_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -19869,7 +18405,7 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_summaries
@@ -19882,7 +18418,7 @@ module Aws::SageMaker
       :job_definition_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_name
@@ -19927,7 +18463,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_export_job_summaries
@@ -19940,7 +18476,7 @@ module Aws::SageMaker
       :model_card_export_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -19977,7 +18513,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_version_summary_list
@@ -19990,7 +18526,7 @@ module Aws::SageMaker
       :model_card_version_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -20027,7 +18563,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_summaries
@@ -20040,7 +18576,7 @@ module Aws::SageMaker
       :model_card_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -20077,7 +18613,7 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_summaries
@@ -20090,7 +18626,7 @@ module Aws::SageMaker
       :job_definition_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_expression
@@ -20107,7 +18643,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_metadata_summaries
@@ -20120,7 +18656,7 @@ module Aws::SageMaker
       :model_metadata_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -20157,7 +18693,7 @@ module Aws::SageMaker
       :sort_order,
       :cross_account_filter_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_summary_list
@@ -20170,7 +18706,7 @@ module Aws::SageMaker
       :model_package_group_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -20215,7 +18751,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_summary_list
@@ -20228,7 +18764,7 @@ module Aws::SageMaker
       :model_package_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -20265,7 +18801,7 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_summaries
@@ -20278,7 +18814,7 @@ module Aws::SageMaker
       :job_definition_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -20311,7 +18847,7 @@ module Aws::SageMaker
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute models
@@ -20324,7 +18860,7 @@ module Aws::SageMaker
       :models,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -20365,7 +18901,7 @@ module Aws::SageMaker
       :creation_time_after,
       :status_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_alert_history
@@ -20378,7 +18914,7 @@ module Aws::SageMaker
       :monitoring_alert_history,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -20395,7 +18931,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_alert_summaries
@@ -20408,7 +18944,7 @@ module Aws::SageMaker
       :monitoring_alert_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -20473,7 +19009,7 @@ module Aws::SageMaker
       :monitoring_job_definition_name,
       :monitoring_type_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_execution_summaries
@@ -20486,7 +19022,7 @@ module Aws::SageMaker
       :monitoring_execution_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -20543,7 +19079,7 @@ module Aws::SageMaker
       :monitoring_job_definition_name,
       :monitoring_type_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_summaries
@@ -20556,7 +19092,7 @@ module Aws::SageMaker
       :monitoring_schedule_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20597,7 +19133,7 @@ module Aws::SageMaker
       :last_modified_time_before,
       :last_modified_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20610,7 +19146,7 @@ module Aws::SageMaker
       :next_token,
       :notebook_instance_lifecycle_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20667,7 +19203,7 @@ module Aws::SageMaker
       :default_code_repository_contains,
       :additional_code_repository_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20680,7 +19216,7 @@ module Aws::SageMaker
       :next_token,
       :notebook_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20729,7 +19265,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_summaries
@@ -20742,13 +19278,7 @@ module Aws::SageMaker
       :optimization_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListOptimizationJobsSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -20761,7 +19291,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -20774,7 +19304,7 @@ module Aws::SageMaker
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -20795,7 +19325,7 @@ module Aws::SageMaker
       :max_results,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_steps
@@ -20808,7 +19338,7 @@ module Aws::SageMaker
       :pipeline_execution_steps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -20841,7 +19371,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_summaries
@@ -20854,7 +19384,7 @@ module Aws::SageMaker
       :pipeline_execution_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -20871,7 +19401,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_parameters
@@ -20884,7 +19414,7 @@ module Aws::SageMaker
       :pipeline_parameters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -20913,7 +19443,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_version_summaries
@@ -20926,7 +19456,7 @@ module Aws::SageMaker
       :pipeline_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name_prefix
@@ -20959,7 +19489,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_summaries
@@ -20972,7 +19502,7 @@ module Aws::SageMaker
       :pipeline_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -21017,7 +19547,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processing_job_summaries
@@ -21030,7 +19560,7 @@ module Aws::SageMaker
       :processing_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -21063,7 +19593,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_summary_list
@@ -21076,7 +19606,7 @@ module Aws::SageMaker
       :project_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_contains
@@ -21109,7 +19639,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_catalogs
@@ -21122,7 +19652,7 @@ module Aws::SageMaker
       :resource_catalogs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21151,7 +19681,7 @@ module Aws::SageMaker
       :domain_id_equals,
       :space_name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute spaces
@@ -21164,7 +19694,7 @@ module Aws::SageMaker
       :spaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21189,7 +19719,7 @@ module Aws::SageMaker
       :exclude_devices_deployed_in_other_stage,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_deployment_summaries
@@ -21202,7 +19732,7 @@ module Aws::SageMaker
       :device_deployment_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -21247,7 +19777,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21260,7 +19790,7 @@ module Aws::SageMaker
       :next_token,
       :studio_lifecycle_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_contains
@@ -21277,7 +19807,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscribed_workteams
@@ -21290,7 +19820,7 @@ module Aws::SageMaker
       :subscribed_workteams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -21307,7 +19837,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -21320,7 +19850,7 @@ module Aws::SageMaker
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_name
@@ -21349,7 +19879,7 @@ module Aws::SageMaker
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_summaries
@@ -21362,7 +19892,7 @@ module Aws::SageMaker
       :training_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21415,7 +19945,7 @@ module Aws::SageMaker
       :warm_pool_status_equals,
       :training_plan_arn_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_summaries
@@ -21428,7 +19958,7 @@ module Aws::SageMaker
       :training_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21461,7 +19991,7 @@ module Aws::SageMaker
       :sort_order,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21474,7 +20004,7 @@ module Aws::SageMaker
       :next_token,
       :training_plan_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -21519,7 +20049,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_job_summaries
@@ -21532,7 +20062,7 @@ module Aws::SageMaker
       :transform_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -21573,7 +20103,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_summaries
@@ -21586,7 +20116,7 @@ module Aws::SageMaker
       :trial_component_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -21623,7 +20153,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_summaries
@@ -21636,7 +20166,7 @@ module Aws::SageMaker
       :trial_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_capacity_arn
@@ -21653,7 +20183,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21666,7 +20196,7 @@ module Aws::SageMaker
       :next_token,
       :ultra_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21695,7 +20225,7 @@ module Aws::SageMaker
       :domain_id_equals,
       :user_profile_name_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_profiles
@@ -21708,7 +20238,7 @@ module Aws::SageMaker
       :user_profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -21733,7 +20263,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforces
@@ -21746,12 +20276,7 @@ module Aws::SageMaker
       :workforces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListWorkforcesSortByOptions
-      Name = 'Name'
-      CreateDate = 'CreateDate'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sort_by
@@ -21776,7 +20301,7 @@ module Aws::SageMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteams
@@ -21789,17 +20314,7 @@ module Aws::SageMaker
       :workteams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListWorkteamsSortByOptions
-      Name = 'Name'
-      CreateDate = 'CreateDate'
-    end
-
-    module ManagedInstanceScalingStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work team.</p>
@@ -21813,7 +20328,7 @@ module Aws::SageMaker
       :cognito_member_definition,
       :oidc_member_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata properties of the tracking entity, trial, or trial component.</p>
@@ -21835,7 +20350,7 @@ module Aws::SageMaker
       :generated_by,
       :project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name, value, and date and time of a metric that was emitted to Amazon CloudWatch.</p>
@@ -21853,7 +20368,7 @@ module Aws::SageMaker
       :value,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the metric for a candidate produced by an AutoML job.</p>
@@ -21875,7 +20390,7 @@ module Aws::SageMaker
       :value,
       :set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code>. You can view these logs to understand how your training job performs and check for any errors encountered during training. SageMaker hyperparameter tuning captures all defined metrics. Specify one of the defined metrics to use as an objective metric using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective">TuningObjective</a> parameter in the <code>HyperParameterTrainingJobDefinition</code> API to evaluate job performance during hyperparameter tuning.</p>
@@ -21889,13 +20404,7 @@ module Aws::SageMaker
       :name,
       :regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricSetSource
-      TRAIN = 'Train'
-      VALIDATION = 'Validation'
-      TEST = 'Test'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about a metric.</p>
@@ -21910,7 +20419,7 @@ module Aws::SageMaker
       :customized,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Predefined < MetricSpecification; end
       class Customized < MetricSpecification; end
@@ -21932,30 +20441,7 @@ module Aws::SageMaker
       :content_digest,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MlTools
-      DATA_WRANGLER = 'DataWrangler'
-      FEATURE_STORE = 'FeatureStore'
-      EMR_CLUSTERS = 'EmrClusters'
-      AUTO_ML = 'AutoMl'
-      EXPERIMENTS = 'Experiments'
-      TRAINING = 'Training'
-      MODEL_EVALUATION = 'ModelEvaluation'
-      PIPELINES = 'Pipelines'
-      MODELS = 'Models'
-      JUMP_START = 'JumpStart'
-      INFERENCE_RECOMMENDER = 'InferenceRecommender'
-      ENDPOINTS = 'Endpoints'
-      PROJECTS = 'Projects'
-      INFERENCE_OPTIMIZATION = 'InferenceOptimization'
-      PERFORMANCE_EVALUATION = 'PerformanceEvaluation'
-      LAKERA_GUARD = 'LakeraGuard'
-      COMET = 'Comet'
-      DEEPCHECKS_LLM_EVALUATION = 'DeepchecksLLMEvaluation'
-      FIDDLER = 'Fiddler'
-      HYPER_POD_CLUSTERS = 'HyperPodClusters'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a model as returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.</p>
@@ -22005,7 +20491,7 @@ module Aws::SageMaker
       :tags,
       :deployment_recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access configuration file to control access to the ML model. You can explicitly accept the model end-user license agreement (EULA) within the <code>ModelAccessConfig</code>.</p> <ul> <li> <p>If you are a Jumpstart user, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-choose.html#jumpstart-foundation-models-choose-eula">End-user license agreements</a> section for more details on accepting the EULA.</p> </li> <li> <p>If you are an AutoML user, see the <i>Optional Parameters</i> section of <i>Create an AutoML job to fine-tune text generation models using the API</i> for details on <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-create-experiment-finetune-llms.html#autopilot-llms-finetuning-api-optional-params">How to set the EULA acceptance when fine-tuning a model using the AutoML API</a>.</p> </li> </ul>
@@ -22015,13 +20501,7 @@ module Aws::SageMaker
     class ModelAccessConfig < Struct.new(
       :accept_eula,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelApprovalStatus
-      APPROVED = 'Approved'
-      REJECTED = 'Rejected'
-      PENDING_MANUAL_APPROVAL = 'PendingManualApproval'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the location that is configured for storing model artifacts. </p> <p>Model artifacts are outputs that result from training a model. They typically consist of trained parameters, a model definition that describes how to compute inferences, and other metadata. A SageMaker container stores your trained model artifacts in the <code>/opt/ml/model</code> directory. After training has completed, by default, these artifacts are uploaded to your Amazon S3 bucket as compressed files.</p>
@@ -22031,7 +20511,7 @@ module Aws::SageMaker
     class ModelArtifacts < Struct.new(
       :s3_model_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Docker container image configuration object for the model bias job.</p>
@@ -22049,7 +20529,7 @@ module Aws::SageMaker
       :config_uri,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a baseline model bias job.</p>
@@ -22063,7 +20543,7 @@ module Aws::SageMaker
       :baselining_job_name,
       :constraints_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inputs for the model bias job.</p>
@@ -22081,12 +20561,7 @@ module Aws::SageMaker
       :batch_transform_input,
       :ground_truth_s3_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCacheSetting
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon SageMaker Model Card.</p>
@@ -22148,7 +20623,7 @@ module Aws::SageMaker
       :risk_rating,
       :model_package_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The artifacts of the model card export job.</p>
@@ -22158,25 +20633,7 @@ module Aws::SageMaker
     class ModelCardExportArtifacts < Struct.new(
       :s3_export_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Attribute by which to sort returned export jobs.
-    module ModelCardExportJobSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module ModelCardExportJobSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module ModelCardExportJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the Amazon SageMaker Model Card export job.</p>
@@ -22210,7 +20667,7 @@ module Aws::SageMaker
       :created_at,
       :last_modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure the export output details for an Amazon SageMaker Model Card.</p>
@@ -22220,16 +20677,7 @@ module Aws::SageMaker
     class ModelCardExportOutputConfig < Struct.new(
       :s3_output_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCardProcessingStatus
-      DELETE_INPROGRESS = 'DeleteInProgress'
-      DELETE_PENDING = 'DeletePending'
-      CONTENT_DELETED = 'ContentDeleted'
-      EXPORTJOBS_DELETED = 'ExportJobsDeleted'
-      DELETE_COMPLETED = 'DeleteCompleted'
-      DELETE_FAILED = 'DeleteFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure the security settings to protect model card data.</p>
@@ -22239,24 +20687,7 @@ module Aws::SageMaker
     class ModelCardSecurityConfig < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCardSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module ModelCardSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module ModelCardStatus
-      DRAFT = 'Draft'
-      PENDINGREVIEW = 'PendingReview'
-      APPROVED = 'Approved'
-      ARCHIVED = 'Archived'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the model card.</p>
@@ -22282,11 +20713,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCardVersionSortBy
-      VERSION = 'Version'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a specific version of the model card.</p>
@@ -22316,7 +20743,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the timeout and maximum number of retries for processing a transform job invocation.</p>
@@ -22330,7 +20757,7 @@ module Aws::SageMaker
       :invocations_timeout_in_seconds,
       :invocations_max_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the model compilation technique that's applied by a model optimization job.</p>
@@ -22344,12 +20771,7 @@ module Aws::SageMaker
       :image,
       :override_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelCompressionType
-      None = 'None'
-      Gzip = 'Gzip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the model configuration. Includes the specification name and environment parameters.</p>
@@ -22367,7 +20789,7 @@ module Aws::SageMaker
       :environment_parameters,
       :compilation_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An endpoint that hosts a model displayed in the Amazon SageMaker Model Dashboard.</p>
@@ -22393,7 +20815,7 @@ module Aws::SageMaker
       :last_modified_time,
       :endpoint_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An alert action taken to light up an icon on the Amazon SageMaker Model Dashboard when an alert goes into <code>InAlert</code> status.</p>
@@ -22403,7 +20825,7 @@ module Aws::SageMaker
     class ModelDashboardIndicatorAction < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A model displayed in the Amazon SageMaker Model Dashboard.</p>
@@ -22429,7 +20851,7 @@ module Aws::SageMaker
       :monitoring_schedules,
       :model_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model card for a model displayed in the Amazon SageMaker Model Dashboard.</p>
@@ -22483,7 +20905,7 @@ module Aws::SageMaker
       :model_id,
       :risk_rating,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A monitoring schedule for a model displayed in the Amazon SageMaker Model Dashboard.</p>
@@ -22537,7 +20959,7 @@ module Aws::SageMaker
       :last_monitoring_execution_summary,
       :batch_transform_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data quality constraints and statistics for a model.</p>
@@ -22551,7 +20973,7 @@ module Aws::SageMaker
       :statistics,
       :constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location of ML model data to deploy. If specified, you must specify one and only one of the available data sources.</p>
@@ -22561,7 +20983,7 @@ module Aws::SageMaker
     class ModelDataSource < Struct.new(
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.</p>
@@ -22575,7 +20997,7 @@ module Aws::SageMaker
       :auto_generate_endpoint_name,
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the endpoint of the model deployment.</p>
@@ -22585,7 +21007,7 @@ module Aws::SageMaker
     class ModelDeployResult < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information to verify the integrity of stored model artifacts. </p>
@@ -22595,7 +21017,7 @@ module Aws::SageMaker
     class ModelDigests < Struct.new(
       :artifact_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Docker container image configuration object for the model explainability job.</p>
@@ -22613,7 +21035,7 @@ module Aws::SageMaker
       :config_uri,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a baseline model explainability job.</p>
@@ -22627,7 +21049,7 @@ module Aws::SageMaker
       :baselining_job_name,
       :constraints_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inputs for the model explainability job.</p>
@@ -22641,7 +21063,7 @@ module Aws::SageMaker
       :endpoint_input,
       :batch_transform_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the infrastructure that the model will be deployed to.</p>
@@ -22655,11 +21077,7 @@ module Aws::SageMaker
       :infrastructure_type,
       :real_time_inference_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelInfrastructureType
-      REAL_TIME_INFERENCE = 'RealTimeInference'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input object for the model.</p>
@@ -22669,7 +21087,7 @@ module Aws::SageMaker
     class ModelInput < Struct.new(
       :data_input_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model latency threshold.</p>
@@ -22683,7 +21101,7 @@ module Aws::SageMaker
       :percentile,
       :value_in_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A structure describing the current state of the model in its life cycle. </p>
@@ -22701,7 +21119,7 @@ module Aws::SageMaker
       :stage_status,
       :stage_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Part of the search expression. You can specify the name and value (domain, task, framework, framework version, task, and model).</p>
@@ -22715,14 +21133,7 @@ module Aws::SageMaker
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelMetadataFilterType
-      DOMAIN = 'Domain'
-      FRAMEWORK = 'Framework'
-      TASK = 'Task'
-      FRAMEWORKVERSION = 'FrameworkVersion'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more filters that searches for the specified resource or resources in a search. All resource objects that satisfy the expression's condition are included in the search results</p>
@@ -22732,7 +21143,7 @@ module Aws::SageMaker
     class ModelMetadataSearchExpression < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the model metadata.</p>
@@ -22758,7 +21169,7 @@ module Aws::SageMaker
       :model,
       :framework_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metrics captured from a model.</p>
@@ -22780,7 +21191,7 @@ module Aws::SageMaker
       :bias,
       :explainability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container for your trained model that can be deployed for SageMaker inference. This can include inference code, artifacts, and metadata. The model package type can be one of the following.</p> <ul> <li> <p>Versioned model: A part of a model package group in Model Registry.</p> </li> <li> <p>Unversioned model: Not part of a model package group and used in Amazon Web Services Marketplace.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModelPackage.html"> <code>CreateModelPackage</code> </a>.</p>
@@ -22910,7 +21321,7 @@ module Aws::SageMaker
       :drift_check_baselines,
       :skip_model_validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Docker container for the model package.</p>
@@ -22968,7 +21379,7 @@ module Aws::SageMaker
       :additional_s3_data_source,
       :model_data_e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of versioned models in the Model Registry.</p>
@@ -23002,21 +21413,7 @@ module Aws::SageMaker
       :model_package_group_status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelPackageGroupSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module ModelPackageGroupStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
-      DELETE_FAILED = 'DeleteFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a model group.</p>
@@ -23042,7 +21439,7 @@ module Aws::SageMaker
       :creation_time,
       :model_package_group_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is tied to a model package, it is a specific usage of a model card and its schema is simplified compared to the schema of <code>ModelCard</code>. The <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>, and <code>model_overview</code> is composed of the <code>model_creator</code> and <code>model_artifact</code> properties. For more information about the model package model card schema, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema">Model package model card schema</a>. For more information about the model card associated with the model package, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html">View the Details of a Model Version</a>.</p>
@@ -23056,7 +21453,7 @@ module Aws::SageMaker
       :model_card_content,
       :model_card_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional Key Management Service key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with highly sensitive data.</p>
@@ -23066,20 +21463,7 @@ module Aws::SageMaker
     class ModelPackageSecurityConfig < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelPackageSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module ModelPackageStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the validation and image scan statuses of the model package.</p>
@@ -23093,7 +21477,7 @@ module Aws::SageMaker
       :validation_statuses,
       :image_scan_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the overall status of a model package.</p>
@@ -23111,7 +21495,7 @@ module Aws::SageMaker
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a model package.</p>
@@ -23153,13 +21537,7 @@ module Aws::SageMaker
       :model_approval_status,
       :model_life_cycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelPackageType
-      VERSIONED = 'Versioned'
-      UNVERSIONED = 'Unversioned'
-      BOTH = 'Both'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains data, such as the inputs and targeted instance types that are used in the process of validating the model package.</p> <p>The data provided in the validation profile is made available to your buyers on Amazon Web Services Marketplace.</p>
@@ -23173,7 +21551,7 @@ module Aws::SageMaker
       :profile_name,
       :transform_job_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies batch transform jobs that SageMaker runs to validate your model package.</p>
@@ -23187,7 +21565,7 @@ module Aws::SageMaker
       :validation_role,
       :validation_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Model quality statistics and constraints.</p>
@@ -23201,7 +21579,7 @@ module Aws::SageMaker
       :statistics,
       :constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container image configuration object for the monitoring job.</p>
@@ -23235,7 +21613,7 @@ module Aws::SageMaker
       :problem_type,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for monitoring constraints and monitoring statistics. These baseline resources are compared against the results of the current job from the series of jobs scheduled to collect data periodically.</p>
@@ -23249,7 +21627,7 @@ module Aws::SageMaker
       :baselining_job_name,
       :constraints_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the model quality monitoring job. Currently endpoints are supported for input for model quality monitoring jobs.</p>
@@ -23267,7 +21645,7 @@ module Aws::SageMaker
       :batch_transform_input,
       :ground_truth_s3_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the model quantization technique that's applied by a model optimization job.</p>
@@ -23281,7 +21659,7 @@ module Aws::SageMaker
       :image,
       :override_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model registry settings for the SageMaker Canvas application.</p>
@@ -23295,7 +21673,7 @@ module Aws::SageMaker
       :status,
       :cross_account_model_register_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the model sharding technique that's applied by a model optimization job.</p>
@@ -23309,12 +21687,7 @@ module Aws::SageMaker
       :image,
       :override_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelSortKey
-      Name = 'Name'
-      CreationTime = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for Model steps.</p>
@@ -23324,7 +21697,7 @@ module Aws::SageMaker
     class ModelStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a model.</p>
@@ -23342,13 +21715,7 @@ module Aws::SageMaker
       :model_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelVariantAction
-      RETAIN = 'Retain'
-      REMOVE = 'Remove'
-      PROMOTE = 'Promote'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the deployment options of a model.</p>
@@ -23366,7 +21733,7 @@ module Aws::SageMaker
       :variant_name,
       :infrastructure_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the deployment configuration of a model.</p>
@@ -23388,15 +21755,7 @@ module Aws::SageMaker
       :infrastructure_config,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelVariantStatus
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      IN_SERVICE = 'InService'
-      DELETING = 'Deleting'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of alert actions taken in response to an alert going into <code>InAlert</code> status.</p>
@@ -23406,12 +21765,7 @@ module Aws::SageMaker
     class MonitoringAlertActions < Struct.new(
       :model_dashboard_indicator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringAlertHistorySortKey
-      CreationTime = 'CreationTime'
-      Status = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information of an alert's history.</p>
@@ -23433,12 +21787,7 @@ module Aws::SageMaker
       :creation_time,
       :alert_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringAlertStatus
-      IN_ALERT = 'InAlert'
-      OK = 'OK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a monitor alert.</p>
@@ -23472,7 +21821,7 @@ module Aws::SageMaker
       :evaluation_period,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container image configuration object for the monitoring job.</p>
@@ -23498,7 +21847,7 @@ module Aws::SageMaker
       :record_preprocessor_source_uri,
       :post_analytics_processor_source_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for monitoring constraints and monitoring statistics. These baseline resources are compared against the results of the current job from the series of jobs scheduled to collect data periodically.</p>
@@ -23516,7 +21865,7 @@ module Aws::SageMaker
       :constraints_resource,
       :statistics_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the cluster used to run model monitoring jobs.</p>
@@ -23538,7 +21887,7 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :volume_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The constraints resource for a monitoring job.</p>
@@ -23548,7 +21897,7 @@ module Aws::SageMaker
     class MonitoringConstraintsResource < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the CSV dataset format used when running a monitoring job.</p>
@@ -23558,7 +21907,7 @@ module Aws::SageMaker
     class MonitoringCsvDatasetFormat < Struct.new(
       :header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the dataset format used when running a monitoring job.</p>
@@ -23576,13 +21925,7 @@ module Aws::SageMaker
       :json,
       :parquet,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringExecutionSortKey
-      CREATION_TIME = 'CreationTime'
-      SCHEDULED_TIME = 'ScheduledTime'
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of information about the last monitoring job to run.</p>
@@ -23628,7 +21971,7 @@ module Aws::SageMaker
       :monitoring_job_definition_name,
       :monitoring_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ground truth labels for the dataset used for the monitoring job.</p>
@@ -23638,7 +21981,7 @@ module Aws::SageMaker
     class MonitoringGroundTruthS3Input < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inputs for a monitoring job.</p>
@@ -23652,7 +21995,7 @@ module Aws::SageMaker
       :endpoint_input,
       :batch_transform_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the monitoring job.</p>
@@ -23694,12 +22037,7 @@ module Aws::SageMaker
       :network_config,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringJobDefinitionSortKey
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a monitoring job.</p>
@@ -23721,7 +22059,7 @@ module Aws::SageMaker
       :creation_time,
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the JSON dataset format used when running a monitoring job.</p>
@@ -23731,7 +22069,7 @@ module Aws::SageMaker
     class MonitoringJsonDatasetFormat < Struct.new(
       :line,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The networking configuration for the monitoring job.</p>
@@ -23749,7 +22087,7 @@ module Aws::SageMaker
       :enable_network_isolation,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output object for a monitoring job.</p>
@@ -23759,7 +22097,7 @@ module Aws::SageMaker
     class MonitoringOutput < Struct.new(
       :s3_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration for monitoring jobs.</p>
@@ -23773,19 +22111,13 @@ module Aws::SageMaker
       :monitoring_outputs,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the Parquet dataset format used when running a monitoring job.</p>
     class MonitoringParquetDatasetFormat < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringProblemType
-      BINARY_CLASSIFICATION = 'BinaryClassification'
-      MULTICLASS_CLASSIFICATION = 'MulticlassClassification'
-      REGRESSION = 'Regression'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the resources to deploy for a monitoring job.</p>
@@ -23795,7 +22127,7 @@ module Aws::SageMaker
     class MonitoringResources < Struct.new(
       :cluster_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about where and how you want to store the results of a monitoring job.</p>
@@ -23813,7 +22145,7 @@ module Aws::SageMaker
       :local_path,
       :s3_upload_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A schedule for a model monitoring job. For information about model monitor, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html">Amazon SageMaker Model Monitor</a>.</p>
@@ -23863,7 +22195,7 @@ module Aws::SageMaker
       :last_monitoring_execution_summary,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the monitoring schedule and defines the monitoring job.</p>
@@ -23885,13 +22217,7 @@ module Aws::SageMaker
       :monitoring_job_definition_name,
       :monitoring_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringScheduleSortKey
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes the monitoring schedule.</p>
@@ -23929,7 +22255,7 @@ module Aws::SageMaker
       :monitoring_job_definition_name,
       :monitoring_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The statistics resource for a monitoring job.</p>
@@ -23939,7 +22265,7 @@ module Aws::SageMaker
     class MonitoringStatisticsResource < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time limit for how long the monitoring job is allowed to run before stopping.</p>
@@ -23949,14 +22275,7 @@ module Aws::SageMaker
     class MonitoringStoppingCondition < Struct.new(
       :max_runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringType
-      DATA_QUALITY = 'DataQuality'
-      MODEL_QUALITY = 'ModelQuality'
-      MODEL_BIAS = 'ModelBias'
-      MODEL_EXPLAINABILITY = 'ModelExplainability'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies additional configuration for hosting multi-model endpoints.</p>
@@ -23966,7 +22285,7 @@ module Aws::SageMaker
     class MultiModelConfig < Struct.new(
       :model_cache_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html">VpcConfig</a> configuration object that specifies the VPC that you want the compilation jobs to connect to. For more information on controlling access to your Amazon S3 buckets used for compilation job, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html">Give Amazon SageMaker AI Compilation Jobs Access to Resources in Your Amazon VPC</a>.</p>
@@ -23980,7 +22299,7 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of nested <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Filter.html">Filter</a> objects. A resource must satisfy the conditions of all filters to be included in the results returned from the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.</p> <p>For example, to filter on a training job's <code>InputDataConfig</code> property with a specific channel name and <code>S3Uri</code> prefix, define the following filters:</p> <ul> <li> <p> <code>'{Name:"InputDataConfig.ChannelName", "Operator":"Equals", "Value":"train"}',</code> </p> </li> <li> <p> <code>'{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains", "Value":"mybucket/catdata"}'</code> </p> </li> </ul>
@@ -23994,7 +22313,7 @@ module Aws::SageMaker
       :nested_property_name,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.</p>
@@ -24012,7 +22331,7 @@ module Aws::SageMaker
       :enable_network_isolation,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a node that was successfully added to the cluster.</p>
@@ -24030,32 +22349,7 @@ module Aws::SageMaker
       :instance_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeUnavailabilityType
-      INSTANCE_COUNT = 'INSTANCE_COUNT'
-      CAPACITY_PERCENTAGE = 'CAPACITY_PERCENTAGE'
-    end
-
-    module NotebookInstanceAcceleratorType
-      ML_EIA1_MEDIUM = 'ml.eia1.medium'
-      ML_EIA1_LARGE = 'ml.eia1.large'
-      ML_EIA1_XLARGE = 'ml.eia1.xlarge'
-      ML_EIA2_MEDIUM = 'ml.eia2.medium'
-      ML_EIA2_LARGE = 'ml.eia2.large'
-      ML_EIA2_XLARGE = 'ml.eia2.xlarge'
-    end
-
-    module NotebookInstanceLifecycleConfigSortKey
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      LAST_MODIFIED_TIME = 'LastModifiedTime'
-    end
-
-    module NotebookInstanceLifecycleConfigSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of a notebook instance lifecycle configuration.</p>
@@ -24077,7 +22371,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the notebook instance lifecycle configuration script.</p> <p>Each lifecycle configuration script has a limit of 16384 characters.</p> <p>The value of the <code>$PATH</code> environment variable that is available to both scripts is <code>/sbin:bin:/usr/sbin:/usr/bin</code>.</p> <p>View Amazon CloudWatch Logs for notebook instance lifecycle configurations in log group <code>/aws/sagemaker/NotebookInstances</code> in log stream <code>[notebook-instance-name]/[LifecycleConfigHook]</code>.</p> <p>Lifecycle configuration scripts cannot run for longer than 5 minutes. If a script runs for longer than 5 minutes, it fails and the notebook instance is not created or started.</p> <p>For information about notebook instance lifestyle configurations, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html">Step 2.1: (Optional) Customize a Notebook Instance</a>.</p>
@@ -24087,28 +22381,7 @@ module Aws::SageMaker
     class NotebookInstanceLifecycleHook < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotebookInstanceSortKey
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module NotebookInstanceSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module NotebookInstanceStatus
-      Pending = 'Pending'
-      InService = 'InService'
-      Stopping = 'Stopping'
-      Stopped = 'Stopped'
-      Failed = 'Failed'
-      Deleting = 'Deleting'
-      Updating = 'Updating'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for an SageMaker AI notebook instance.</p>
@@ -24154,12 +22427,7 @@ module Aws::SageMaker
       :default_code_repository,
       :additional_code_repositories,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotebookOutputOption
-      Allowed = 'Allowed'
-      Disabled = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures Amazon SNS notifications of available or expiring work items for work teams.</p>
@@ -24169,13 +22437,7 @@ module Aws::SageMaker
     class NotificationConfiguration < Struct.new(
       :notification_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObjectiveStatus
-      Succeeded = 'Succeeded'
-      Pending = 'Pending'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the number of training jobs that this hyperparameter tuning job launched, categorized by the status of their objective metric. The objective metric status shows whether the final objective metric for the training job has been evaluated by the tuning job and used in the hyperparameter tuning process.</p>
@@ -24193,7 +22455,7 @@ module Aws::SageMaker
       :pending,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an <code>OfflineStore</code>.</p> <p>Provide an <code>OfflineStoreConfig</code> in a request to <code>CreateFeatureGroup</code> to create an <code>OfflineStore</code>.</p> <p>To encrypt an <code>OfflineStore</code> using at rest data encryption, specify Amazon Web Services Key Management Service (KMS) key ID, or <code>KMSKeyId</code>, in <code>S3StorageConfig</code>.</p>
@@ -24215,7 +22477,7 @@ module Aws::SageMaker
       :data_catalog_config,
       :table_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of <code>OfflineStore</code>.</p>
@@ -24229,13 +22491,7 @@ module Aws::SageMaker
       :status,
       :blocked_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OfflineStoreStatusValue
-      ACTIVE = 'Active'
-      BLOCKED = 'Blocked'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this parameter to configure your OIDC Identity Provider (IdP).</p>
@@ -24281,7 +22537,7 @@ module Aws::SageMaker
       :scope,
       :authentication_request_extra_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your OIDC IdP workforce configuration.</p>
@@ -24323,7 +22579,7 @@ module Aws::SageMaker
       :scope,
       :authentication_request_extra_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of user groups that exist in your OIDC Identity Provider (IdP). One to ten groups can be used to create a single private work team. When you add a user group to the list of <code>Groups</code>, you can add that user group to one or more private work teams. If you add a user group to a private work team, all workers in that user group are added to the work team.</p>
@@ -24333,7 +22589,7 @@ module Aws::SageMaker
     class OidcMemberDefinition < Struct.new(
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID, or <code>KMSKeyId</code>, for at rest data encryption. You can turn <code>OnlineStore</code> on or off by specifying the <code>EnableOnlineStore</code> flag at General Assembly.</p> <p>The default value is <code>False</code>.</p>
@@ -24355,7 +22611,7 @@ module Aws::SageMaker
       :ttl_duration,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the feature group online store configuration.</p>
@@ -24365,7 +22621,7 @@ module Aws::SageMaker
     class OnlineStoreConfigUpdate < Struct.new(
       :ttl_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The security configuration for <code>OnlineStore</code>.</p>
@@ -24375,20 +22631,7 @@ module Aws::SageMaker
     class OnlineStoreSecurityConfig < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operator
-      EQUALS = 'Equals'
-      NOT_EQUALS = 'NotEquals'
-      GREATER_THAN = 'GreaterThan'
-      GREATER_THAN_OR_EQUAL_TO = 'GreaterThanOrEqualTo'
-      LESS_THAN = 'LessThan'
-      LESS_THAN_OR_EQUAL_TO = 'LessThanOrEqualTo'
-      CONTAINS = 'Contains'
-      EXISTS = 'Exists'
-      NOT_EXISTS = 'NotExists'
-      IN = 'In'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for an optimization technique that you apply with a model optimization job.</p>
@@ -24407,49 +22650,12 @@ module Aws::SageMaker
       :model_sharding_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ModelQuantizationConfig < OptimizationConfig; end
       class ModelCompilationConfig < OptimizationConfig; end
       class ModelShardingConfig < OptimizationConfig; end
       class Unknown < OptimizationConfig; end
-    end
-
-    module OptimizationJobDeploymentInstanceType
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
-      ML_G6E_XLARGE = 'ml.g6e.xlarge'
-      ML_G6E_2XLARGE = 'ml.g6e.2xlarge'
-      ML_G6E_4XLARGE = 'ml.g6e.4xlarge'
-      ML_G6E_8XLARGE = 'ml.g6e.8xlarge'
-      ML_G6E_12XLARGE = 'ml.g6e.12xlarge'
-      ML_G6E_16XLARGE = 'ml.g6e.16xlarge'
-      ML_G6E_24XLARGE = 'ml.g6e.24xlarge'
-      ML_G6E_48XLARGE = 'ml.g6e.48xlarge'
-      ML_INF2_XLARGE = 'ml.inf2.xlarge'
-      ML_INF2_8XLARGE = 'ml.inf2.8xlarge'
-      ML_INF2_24XLARGE = 'ml.inf2.24xlarge'
-      ML_INF2_48XLARGE = 'ml.inf2.48xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
     end
 
     # <p>The location of the source model to optimize with an optimization job.</p>
@@ -24459,7 +22665,7 @@ module Aws::SageMaker
     class OptimizationJobModelSource < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location of a source model to optimize with an optimization job.</p>
@@ -24473,7 +22679,7 @@ module Aws::SageMaker
       :s3_uri,
       :model_access_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for where to store the optimized model that you create with the optimization job.</p>
@@ -24487,16 +22693,7 @@ module Aws::SageMaker
       :kms_key_id,
       :s3_output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OptimizationJobStatus
-      INPROGRESS = 'INPROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STARTING = 'STARTING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes an optimization job by providing some of its key properties.</p>
@@ -24538,7 +22735,7 @@ module Aws::SageMaker
       :deployment_instance_type,
       :optimization_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access configuration settings for the source ML model for an optimization job, where you can accept the model end-user license agreement (EULA).</p>
@@ -24548,7 +22745,7 @@ module Aws::SageMaker
     class OptimizationModelAccessConfig < Struct.new(
       :accept_eula,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output values produced by an optimization job.</p>
@@ -24558,7 +22755,7 @@ module Aws::SageMaker
     class OptimizationOutput < Struct.new(
       :recommended_inference_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VPC in Amazon VPC that's accessible to an optimized that you create with an optimization job. You can control access to and from your resources by configuring a VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker Access to Resources in your Amazon VPC</a>. </p>
@@ -24572,17 +22769,7 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderKey
-      Ascending = 'Ascending'
-      Descending = 'Descending'
-    end
-
-    module OutputCompressionType
-      GZIP = 'GZIP'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the output location for the compiled model and the target device that the model runs on. <code>TargetDevice</code> and <code>TargetPlatform</code> are mutually exclusive, so you need to choose one between the two to specify your target device or platform. If you cannot find your device you want to use from the <code>TargetDevice</code> list, use <code>TargetPlatform</code> to describe the platform of your edge device and <code>CompilerOptions</code> if there are specific settings that are required or recommended to use for particular TargetPlatform.</p>
@@ -24608,7 +22795,7 @@ module Aws::SageMaker
       :compiler_options,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about how to store model training results (model artifacts).</p>
@@ -24626,7 +22813,7 @@ module Aws::SageMaker
       :s3_output_path,
       :compression_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An output parameter of a pipeline step.</p>
@@ -24640,7 +22827,7 @@ module Aws::SageMaker
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of ownership settings for a space.</p>
@@ -24650,7 +22837,7 @@ module Aws::SageMaker
     class OwnershipSettings < Struct.new(
       :owner_user_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies summary information about the ownership settings.</p>
@@ -24660,7 +22847,7 @@ module Aws::SageMaker
     class OwnershipSettingsSummary < Struct.new(
       :owner_user_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration that controls the parallelism of the pipeline. By default, the parallelism configuration specified applies to all executions of the pipeline unless overridden.</p>
@@ -24670,7 +22857,7 @@ module Aws::SageMaker
     class ParallelismConfiguration < Struct.new(
       :max_parallel_execution_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Assigns a value to a named Pipeline parameter.</p>
@@ -24684,7 +22871,7 @@ module Aws::SageMaker
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the possible values for categorical, continuous, and integer hyperparameters to be used by an algorithm.</p>
@@ -24702,7 +22889,7 @@ module Aws::SageMaker
       :continuous_parameter_range_specification,
       :categorical_parameter_range_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs with hyperparameter values within these ranges to find the combination of values that result in the training job with the best performance as measured by the objective metric of the hyperparameter tuning job.</p> <note> <p>The maximum number of items specified for <code>Array Members</code> refers to the maximum number of hyperparameters for each range and also the maximum for the hyperparameter tuning job itself. That is, the sum of the number of hyperparameters for all the ranges can't exceed the maximum number specified.</p> </note>
@@ -24724,14 +22911,7 @@ module Aws::SageMaker
       :categorical_parameter_ranges,
       :auto_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterType
-      INTEGER = 'Integer'
-      CONTINUOUS = 'Continuous'
-      CATEGORICAL = 'Categorical'
-      FREE_TEXT = 'FreeText'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trial that a trial component is associated with and the experiment the trial is part of. A component might not be associated with a trial. A component can be associated with multiple trials.</p>
@@ -24745,7 +22925,7 @@ module Aws::SageMaker
       :trial_name,
       :experiment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A previously completed or stopped hyperparameter tuning job to be used as a starting point for a new hyperparameter tuning job.</p>
@@ -24755,11 +22935,7 @@ module Aws::SageMaker
     class ParentHyperParameterTuningJob < Struct.new(
       :hyper_parameter_tuning_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartnerAppAuthType
-      IAM = 'IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for the SageMaker Partner AI App.</p>
@@ -24773,7 +22949,7 @@ module Aws::SageMaker
       :admin_users,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maintenance configuration settings for the SageMaker Partner AI App.</p>
@@ -24783,17 +22959,7 @@ module Aws::SageMaker
     class PartnerAppMaintenanceConfig < Struct.new(
       :maintenance_window_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartnerAppStatus
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      DELETING = 'Deleting'
-      AVAILABLE = 'Available'
-      FAILED = 'Failed'
-      UPDATE_FAILED = 'UpdateFailed'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subset of information related to a SageMaker Partner AI App. This information is used as part of the <code>ListPartnerApps</code> API response.</p>
@@ -24819,14 +22985,7 @@ module Aws::SageMaker
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartnerAppType
-      LAKERA_GUARD = 'lakera-guard'
-      COMET = 'comet'
-      DEEPCHECKS_LLM_EVALUATION = 'deepchecks-llm-evaluation'
-      FIDDLER = 'fiddler'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of an in-progress deployment when an endpoint is creating or updating with a new endpoint configuration.</p>
@@ -24848,7 +23007,7 @@ module Aws::SageMaker
       :start_time,
       :shadow_production_variants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The production variant summary for a deployment when an endpoint is creating or updating with the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html">CreateEndpoint</a> or <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html">UpdateEndpoint</a> operations. Describes the <code>VariantStatus </code>, weight and capacity for a production variant associated with an endpoint. </p>
@@ -24906,7 +23065,7 @@ module Aws::SageMaker
       :managed_instance_scaling,
       :routing_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the traffic pattern.</p>
@@ -24924,7 +23083,7 @@ module Aws::SageMaker
       :spawn_rate,
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A SageMaker Model Building Pipeline instance.</p>
@@ -24982,7 +23141,7 @@ module Aws::SageMaker
       :parallelism_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the pipeline definition stored in Amazon S3.</p>
@@ -25000,7 +23159,7 @@ module Aws::SageMaker
       :object_key,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An execution of a pipeline.</p>
@@ -25070,15 +23229,7 @@ module Aws::SageMaker
       :pipeline_version_id,
       :pipeline_version_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipelineExecutionStatus
-      EXECUTING = 'Executing'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      FAILED = 'Failed'
-      SUCCEEDED = 'Succeeded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An execution of a step in a pipeline.</p>
@@ -25128,7 +23279,7 @@ module Aws::SageMaker
       :attempt_count,
       :selective_execution_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a step execution.</p>
@@ -25198,7 +23349,7 @@ module Aws::SageMaker
       :endpoint,
       :endpoint_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pipeline execution summary.</p>
@@ -25228,7 +23379,7 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :pipeline_execution_failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the names of the experiment and trial created by a pipeline.</p>
@@ -25242,12 +23393,7 @@ module Aws::SageMaker
       :experiment_name,
       :trial_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipelineStatus
-      ACTIVE = 'Active'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a pipeline.</p>
@@ -25285,7 +23431,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_execution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of the pipeline.</p>
@@ -25335,7 +23481,7 @@ module Aws::SageMaker
       :last_executed_pipeline_execution_display_name,
       :last_executed_pipeline_execution_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the pipeline version.</p>
@@ -25365,7 +23511,7 @@ module Aws::SageMaker
       :pipeline_version_display_name,
       :last_execution_pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how instances should be placed on a specific UltraServer.</p>
@@ -25379,7 +23525,7 @@ module Aws::SageMaker
       :ultra_server_id,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specification for a predefined metric.</p>
@@ -25389,12 +23535,7 @@ module Aws::SageMaker
     class PredefinedMetricSpecification < Struct.new(
       :predefined_metric_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreemptTeamTasks
-      NEVER = 'Never'
-      LOWERPRIORITY = 'LowerPriority'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for accessing hub content through presigned URLs, including license agreement acceptance and URL validation settings.</p>
@@ -25408,7 +23549,7 @@ module Aws::SageMaker
       :accept_eula,
       :expected_s3_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Priority class configuration. When included in <code>PriorityClasses</code>, these class configurations define how tasks are queued.</p>
@@ -25422,13 +23563,7 @@ module Aws::SageMaker
       :name,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProblemType
-      BINARY_CLASSIFICATION = 'BinaryClassification'
-      MULTICLASS_CLASSIFICATION = 'MulticlassClassification'
-      REGRESSION = 'Regression'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the cluster used to run a processing job.</p>
@@ -25450,7 +23585,7 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :volume_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for processing job outputs in Amazon SageMaker Feature Store.</p>
@@ -25460,7 +23595,7 @@ module Aws::SageMaker
     class ProcessingFeatureStoreOutput < Struct.new(
       :feature_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inputs for a processing job. The processing input must specify exactly one of either <code>S3Input</code> or <code>DatasetDefinition</code> types.</p>
@@ -25482,130 +23617,7 @@ module Aws::SageMaker
       :s3_input,
       :dataset_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessingInstanceType
-      ML_T3_MEDIUM = 'ml.t3.medium'
-      ML_T3_LARGE = 'ml.t3.large'
-      ML_T3_XLARGE = 'ml.t3.xlarge'
-      ML_T3_2XLARGE = 'ml.t3.2xlarge'
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_R5_LARGE = 'ml.r5.large'
-      ML_R5_XLARGE = 'ml.r5.xlarge'
-      ML_R5_2XLARGE = 'ml.r5.2xlarge'
-      ML_R5_4XLARGE = 'ml.r5.4xlarge'
-      ML_R5_8XLARGE = 'ml.r5.8xlarge'
-      ML_R5_12XLARGE = 'ml.r5.12xlarge'
-      ML_R5_16XLARGE = 'ml.r5.16xlarge'
-      ML_R5_24XLARGE = 'ml.r5.24xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_R5D_LARGE = 'ml.r5d.large'
-      ML_R5D_XLARGE = 'ml.r5d.xlarge'
-      ML_R5D_2XLARGE = 'ml.r5d.2xlarge'
-      ML_R5D_4XLARGE = 'ml.r5d.4xlarge'
-      ML_R5D_8XLARGE = 'ml.r5d.8xlarge'
-      ML_R5D_12XLARGE = 'ml.r5d.12xlarge'
-      ML_R5D_16XLARGE = 'ml.r5d.16xlarge'
-      ML_R5D_24XLARGE = 'ml.r5d.24xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
-      ML_G6E_XLARGE = 'ml.g6e.xlarge'
-      ML_G6E_2XLARGE = 'ml.g6e.2xlarge'
-      ML_G6E_4XLARGE = 'ml.g6e.4xlarge'
-      ML_G6E_8XLARGE = 'ml.g6e.8xlarge'
-      ML_G6E_12XLARGE = 'ml.g6e.12xlarge'
-      ML_G6E_16XLARGE = 'ml.g6e.16xlarge'
-      ML_G6E_24XLARGE = 'ml.g6e.24xlarge'
-      ML_G6E_48XLARGE = 'ml.g6e.48xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon SageMaker processing job that is used to analyze data and evaluate models. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html">Process Data and Evaluate Models</a>.</p>
@@ -25699,15 +23711,7 @@ module Aws::SageMaker
       :training_job_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessingJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a processing job step.</p>
@@ -25717,7 +23721,7 @@ module Aws::SageMaker
     class ProcessingJobStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of information about a processing job.</p>
@@ -25755,7 +23759,7 @@ module Aws::SageMaker
       :failure_reason,
       :exit_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the results of a processing job. The processing output must specify exactly one of either <code>S3Output</code> or <code>FeatureStoreOutput</code> types.</p>
@@ -25777,7 +23781,7 @@ module Aws::SageMaker
       :feature_store_output,
       :app_managed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for uploading output from the processing container.</p>
@@ -25791,7 +23795,7 @@ module Aws::SageMaker
       :outputs,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the resources, ML compute instances, and ML storage volumes to deploy for a processing job. In distributed training, you specify more than one instance.</p>
@@ -25801,22 +23805,7 @@ module Aws::SageMaker
     class ProcessingResources < Struct.new(
       :cluster_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessingS3CompressionType
-      NONE = 'None'
-      GZIP = 'Gzip'
-    end
-
-    module ProcessingS3DataDistributionType
-      FULLYREPLICATED = 'FullyReplicated'
-      SHARDEDBYS3KEY = 'ShardedByS3Key'
-    end
-
-    module ProcessingS3DataType
-      MANIFEST_FILE = 'ManifestFile'
-      S3_PREFIX = 'S3Prefix'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for downloading input data from Amazon S3 into the processing container.</p>
@@ -25846,12 +23835,7 @@ module Aws::SageMaker
       :s3_data_distribution_type,
       :s3_compression_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessingS3InputMode
-      PIPE = 'Pipe'
-      FILE = 'File'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for uploading output data to Amazon S3 from the processing container.</p>
@@ -25869,12 +23853,7 @@ module Aws::SageMaker
       :local_path,
       :s3_upload_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProcessingS3UploadMode
-      CONTINUOUS = 'Continuous'
-      END_OF_JOB = 'EndOfJob'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures conditions under which the processing job should be stopped, such as how long the processing job has been running. After the condition is met, the processing job is stopped.</p>
@@ -25884,12 +23863,7 @@ module Aws::SageMaker
     class ProcessingStoppingCondition < Struct.new(
       :max_runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Processor
-      CPU = 'CPU'
-      GPU = 'GPU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Identifies a model that you want to host and the resources chosen to deploy for hosting it. If you are deploying multiple models, tell SageMaker how to distribute traffic among the models by specifying variant weights. For more information on production variants, check <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html"> Production variants</a>. </p>
@@ -25959,16 +23933,7 @@ module Aws::SageMaker
       :inference_ami_version,
       :capacity_reservation_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProductionVariantAcceleratorType
-      ML_EIA1_MEDIUM = 'ml.eia1.medium'
-      ML_EIA1_LARGE = 'ml.eia1.large'
-      ML_EIA1_XLARGE = 'ml.eia1.xlarge'
-      ML_EIA2_MEDIUM = 'ml.eia2.medium'
-      ML_EIA2_LARGE = 'ml.eia2.large'
-      ML_EIA2_XLARGE = 'ml.eia2.xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the capacity reservation for the compute instances that SageMaker AI reserves for an endpoint. </p>
@@ -25982,7 +23947,7 @@ module Aws::SageMaker
       :capacity_reservation_preference,
       :ml_reservation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an ML capacity reservation.</p>
@@ -26012,7 +23977,7 @@ module Aws::SageMaker
       :used_by_current_endpoint,
       :ec2_capacity_reservations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration for a core dump from the model container when the process crashes.</p>
@@ -26026,280 +23991,7 @@ module Aws::SageMaker
       :destination_s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProductionVariantInferenceAmiVersion
-      AL2_GPU_2 = 'al2-ami-sagemaker-inference-gpu-2'
-      AL2_GPU_2_1 = 'al2-ami-sagemaker-inference-gpu-2-1'
-      AL2_GPU_3_1 = 'al2-ami-sagemaker-inference-gpu-3-1'
-      AL2_NEURON_2 = 'al2-ami-sagemaker-inference-neuron-2'
-    end
-
-    module ProductionVariantInstanceType
-      ML_T2_MEDIUM = 'ml.t2.medium'
-      ML_T2_LARGE = 'ml.t2.large'
-      ML_T2_XLARGE = 'ml.t2.xlarge'
-      ML_T2_2XLARGE = 'ml.t2.2xlarge'
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_M5D_LARGE = 'ml.m5d.large'
-      ML_M5D_XLARGE = 'ml.m5d.xlarge'
-      ML_M5D_2XLARGE = 'ml.m5d.2xlarge'
-      ML_M5D_4XLARGE = 'ml.m5d.4xlarge'
-      ML_M5D_12XLARGE = 'ml.m5d.12xlarge'
-      ML_M5D_24XLARGE = 'ml.m5d.24xlarge'
-      ML_C4_LARGE = 'ml.c4.large'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_C5_LARGE = 'ml.c5.large'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_C5D_LARGE = 'ml.c5d.large'
-      ML_C5D_XLARGE = 'ml.c5d.xlarge'
-      ML_C5D_2XLARGE = 'ml.c5d.2xlarge'
-      ML_C5D_4XLARGE = 'ml.c5d.4xlarge'
-      ML_C5D_9XLARGE = 'ml.c5d.9xlarge'
-      ML_C5D_18XLARGE = 'ml.c5d.18xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_R5_LARGE = 'ml.r5.large'
-      ML_R5_XLARGE = 'ml.r5.xlarge'
-      ML_R5_2XLARGE = 'ml.r5.2xlarge'
-      ML_R5_4XLARGE = 'ml.r5.4xlarge'
-      ML_R5_12XLARGE = 'ml.r5.12xlarge'
-      ML_R5_24XLARGE = 'ml.r5.24xlarge'
-      ML_R5D_LARGE = 'ml.r5d.large'
-      ML_R5D_XLARGE = 'ml.r5d.xlarge'
-      ML_R5D_2XLARGE = 'ml.r5d.2xlarge'
-      ML_R5D_4XLARGE = 'ml.r5d.4xlarge'
-      ML_R5D_12XLARGE = 'ml.r5d.12xlarge'
-      ML_R5D_24XLARGE = 'ml.r5d.24xlarge'
-      ML_INF1_XLARGE = 'ml.inf1.xlarge'
-      ML_INF1_2XLARGE = 'ml.inf1.2xlarge'
-      ML_INF1_6XLARGE = 'ml.inf1.6xlarge'
-      ML_INF1_24XLARGE = 'ml.inf1.24xlarge'
-      ML_DL1_24XLARGE = 'ml.dl1.24xlarge'
-      ML_C6I_LARGE = 'ml.c6i.large'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_R6I_LARGE = 'ml.r6i.large'
-      ML_R6I_XLARGE = 'ml.r6i.xlarge'
-      ML_R6I_2XLARGE = 'ml.r6i.2xlarge'
-      ML_R6I_4XLARGE = 'ml.r6i.4xlarge'
-      ML_R6I_8XLARGE = 'ml.r6i.8xlarge'
-      ML_R6I_12XLARGE = 'ml.r6i.12xlarge'
-      ML_R6I_16XLARGE = 'ml.r6i.16xlarge'
-      ML_R6I_24XLARGE = 'ml.r6i.24xlarge'
-      ML_R6I_32XLARGE = 'ml.r6i.32xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
-      ML_R8G_MEDIUM = 'ml.r8g.medium'
-      ML_R8G_LARGE = 'ml.r8g.large'
-      ML_R8G_XLARGE = 'ml.r8g.xlarge'
-      ML_R8G_2XLARGE = 'ml.r8g.2xlarge'
-      ML_R8G_4XLARGE = 'ml.r8g.4xlarge'
-      ML_R8G_8XLARGE = 'ml.r8g.8xlarge'
-      ML_R8G_12XLARGE = 'ml.r8g.12xlarge'
-      ML_R8G_16XLARGE = 'ml.r8g.16xlarge'
-      ML_R8G_24XLARGE = 'ml.r8g.24xlarge'
-      ML_R8G_48XLARGE = 'ml.r8g.48xlarge'
-      ML_G6E_XLARGE = 'ml.g6e.xlarge'
-      ML_G6E_2XLARGE = 'ml.g6e.2xlarge'
-      ML_G6E_4XLARGE = 'ml.g6e.4xlarge'
-      ML_G6E_8XLARGE = 'ml.g6e.8xlarge'
-      ML_G6E_12XLARGE = 'ml.g6e.12xlarge'
-      ML_G6E_16XLARGE = 'ml.g6e.16xlarge'
-      ML_G6E_24XLARGE = 'ml.g6e.24xlarge'
-      ML_G6E_48XLARGE = 'ml.g6e.48xlarge'
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_C7G_LARGE = 'ml.c7g.large'
-      ML_C7G_XLARGE = 'ml.c7g.xlarge'
-      ML_C7G_2XLARGE = 'ml.c7g.2xlarge'
-      ML_C7G_4XLARGE = 'ml.c7g.4xlarge'
-      ML_C7G_8XLARGE = 'ml.c7g.8xlarge'
-      ML_C7G_12XLARGE = 'ml.c7g.12xlarge'
-      ML_C7G_16XLARGE = 'ml.c7g.16xlarge'
-      ML_M6G_LARGE = 'ml.m6g.large'
-      ML_M6G_XLARGE = 'ml.m6g.xlarge'
-      ML_M6G_2XLARGE = 'ml.m6g.2xlarge'
-      ML_M6G_4XLARGE = 'ml.m6g.4xlarge'
-      ML_M6G_8XLARGE = 'ml.m6g.8xlarge'
-      ML_M6G_12XLARGE = 'ml.m6g.12xlarge'
-      ML_M6G_16XLARGE = 'ml.m6g.16xlarge'
-      ML_M6GD_LARGE = 'ml.m6gd.large'
-      ML_M6GD_XLARGE = 'ml.m6gd.xlarge'
-      ML_M6GD_2XLARGE = 'ml.m6gd.2xlarge'
-      ML_M6GD_4XLARGE = 'ml.m6gd.4xlarge'
-      ML_M6GD_8XLARGE = 'ml.m6gd.8xlarge'
-      ML_M6GD_12XLARGE = 'ml.m6gd.12xlarge'
-      ML_M6GD_16XLARGE = 'ml.m6gd.16xlarge'
-      ML_C6G_LARGE = 'ml.c6g.large'
-      ML_C6G_XLARGE = 'ml.c6g.xlarge'
-      ML_C6G_2XLARGE = 'ml.c6g.2xlarge'
-      ML_C6G_4XLARGE = 'ml.c6g.4xlarge'
-      ML_C6G_8XLARGE = 'ml.c6g.8xlarge'
-      ML_C6G_12XLARGE = 'ml.c6g.12xlarge'
-      ML_C6G_16XLARGE = 'ml.c6g.16xlarge'
-      ML_C6GD_LARGE = 'ml.c6gd.large'
-      ML_C6GD_XLARGE = 'ml.c6gd.xlarge'
-      ML_C6GD_2XLARGE = 'ml.c6gd.2xlarge'
-      ML_C6GD_4XLARGE = 'ml.c6gd.4xlarge'
-      ML_C6GD_8XLARGE = 'ml.c6gd.8xlarge'
-      ML_C6GD_12XLARGE = 'ml.c6gd.12xlarge'
-      ML_C6GD_16XLARGE = 'ml.c6gd.16xlarge'
-      ML_C6GN_LARGE = 'ml.c6gn.large'
-      ML_C6GN_XLARGE = 'ml.c6gn.xlarge'
-      ML_C6GN_2XLARGE = 'ml.c6gn.2xlarge'
-      ML_C6GN_4XLARGE = 'ml.c6gn.4xlarge'
-      ML_C6GN_8XLARGE = 'ml.c6gn.8xlarge'
-      ML_C6GN_12XLARGE = 'ml.c6gn.12xlarge'
-      ML_C6GN_16XLARGE = 'ml.c6gn.16xlarge'
-      ML_R6G_LARGE = 'ml.r6g.large'
-      ML_R6G_XLARGE = 'ml.r6g.xlarge'
-      ML_R6G_2XLARGE = 'ml.r6g.2xlarge'
-      ML_R6G_4XLARGE = 'ml.r6g.4xlarge'
-      ML_R6G_8XLARGE = 'ml.r6g.8xlarge'
-      ML_R6G_12XLARGE = 'ml.r6g.12xlarge'
-      ML_R6G_16XLARGE = 'ml.r6g.16xlarge'
-      ML_R6GD_LARGE = 'ml.r6gd.large'
-      ML_R6GD_XLARGE = 'ml.r6gd.xlarge'
-      ML_R6GD_2XLARGE = 'ml.r6gd.2xlarge'
-      ML_R6GD_4XLARGE = 'ml.r6gd.4xlarge'
-      ML_R6GD_8XLARGE = 'ml.r6gd.8xlarge'
-      ML_R6GD_12XLARGE = 'ml.r6gd.12xlarge'
-      ML_R6GD_16XLARGE = 'ml.r6gd.16xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
-      ML_TRN2_48XLARGE = 'ml.trn2.48xlarge'
-      ML_INF2_XLARGE = 'ml.inf2.xlarge'
-      ML_INF2_8XLARGE = 'ml.inf2.8xlarge'
-      ML_INF2_24XLARGE = 'ml.inf2.24xlarge'
-      ML_INF2_48XLARGE = 'ml.inf2.48xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_P5E_48XLARGE = 'ml.p5e.48xlarge'
-      ML_P5EN_48XLARGE = 'ml.p5en.48xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
-      ML_C8G_MEDIUM = 'ml.c8g.medium'
-      ML_C8G_LARGE = 'ml.c8g.large'
-      ML_C8G_XLARGE = 'ml.c8g.xlarge'
-      ML_C8G_2XLARGE = 'ml.c8g.2xlarge'
-      ML_C8G_4XLARGE = 'ml.c8g.4xlarge'
-      ML_C8G_8XLARGE = 'ml.c8g.8xlarge'
-      ML_C8G_12XLARGE = 'ml.c8g.12xlarge'
-      ML_C8G_16XLARGE = 'ml.c8g.16xlarge'
-      ML_C8G_24XLARGE = 'ml.c8g.24xlarge'
-      ML_C8G_48XLARGE = 'ml.c8g.48xlarge'
-      ML_R7GD_MEDIUM = 'ml.r7gd.medium'
-      ML_R7GD_LARGE = 'ml.r7gd.large'
-      ML_R7GD_XLARGE = 'ml.r7gd.xlarge'
-      ML_R7GD_2XLARGE = 'ml.r7gd.2xlarge'
-      ML_R7GD_4XLARGE = 'ml.r7gd.4xlarge'
-      ML_R7GD_8XLARGE = 'ml.r7gd.8xlarge'
-      ML_R7GD_12XLARGE = 'ml.r7gd.12xlarge'
-      ML_R7GD_16XLARGE = 'ml.r7gd.16xlarge'
-      ML_M8G_MEDIUM = 'ml.m8g.medium'
-      ML_M8G_LARGE = 'ml.m8g.large'
-      ML_M8G_XLARGE = 'ml.m8g.xlarge'
-      ML_M8G_2XLARGE = 'ml.m8g.2xlarge'
-      ML_M8G_4XLARGE = 'ml.m8g.4xlarge'
-      ML_M8G_8XLARGE = 'ml.m8g.8xlarge'
-      ML_M8G_12XLARGE = 'ml.m8g.12xlarge'
-      ML_M8G_16XLARGE = 'ml.m8g.16xlarge'
-      ML_M8G_24XLARGE = 'ml.m8g.24xlarge'
-      ML_M8G_48XLARGE = 'ml.m8g.48xlarge'
-      ML_C6IN_LARGE = 'ml.c6in.large'
-      ML_C6IN_XLARGE = 'ml.c6in.xlarge'
-      ML_C6IN_2XLARGE = 'ml.c6in.2xlarge'
-      ML_C6IN_4XLARGE = 'ml.c6in.4xlarge'
-      ML_C6IN_8XLARGE = 'ml.c6in.8xlarge'
-      ML_C6IN_12XLARGE = 'ml.c6in.12xlarge'
-      ML_C6IN_16XLARGE = 'ml.c6in.16xlarge'
-      ML_C6IN_24XLARGE = 'ml.c6in.24xlarge'
-      ML_C6IN_32XLARGE = 'ml.c6in.32xlarge'
-      ML_P6_B200_48XLARGE = 'ml.p6-b200.48xlarge'
-      ML_P6E_GB200_36XLARGE = 'ml.p6e-gb200.36xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic. </p>
@@ -26317,7 +24009,7 @@ module Aws::SageMaker
       :min_instance_count,
       :max_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that control how the endpoint routes incoming traffic to the instances that the endpoint hosts.</p>
@@ -26327,7 +24019,7 @@ module Aws::SageMaker
     class ProductionVariantRoutingConfig < Struct.new(
       :routing_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the serverless configuration for an endpoint variant.</p>
@@ -26345,7 +24037,7 @@ module Aws::SageMaker
       :max_concurrency,
       :provisioned_concurrency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the serverless update concurrency configuration for an endpoint variant.</p>
@@ -26359,7 +24051,7 @@ module Aws::SageMaker
       :max_concurrency,
       :provisioned_concurrency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of the production variant.</p>
@@ -26377,7 +24069,7 @@ module Aws::SageMaker
       :status_message,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateEndpointWeightsAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. </p>
@@ -26431,7 +24123,7 @@ module Aws::SageMaker
       :routing_config,
       :capacity_reservation_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for Amazon SageMaker Debugger system monitoring, framework profiling, and storage paths.</p>
@@ -26453,7 +24145,7 @@ module Aws::SageMaker
       :profiling_parameters,
       :disable_profiler,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for updating the Amazon SageMaker Debugger profile parameters, system and framework metrics configurations, and storage paths.</p>
@@ -26475,7 +24167,7 @@ module Aws::SageMaker
       :profiling_parameters,
       :disable_profiler,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for profiling rules.</p>
@@ -26509,7 +24201,7 @@ module Aws::SageMaker
       :volume_size_in_gb,
       :rule_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the status of the rule evaluation.</p>
@@ -26535,12 +24227,7 @@ module Aws::SageMaker
       :status_details,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProfilingStatus
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a project as returned by the Search API.</p>
@@ -26598,30 +24285,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectSortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module ProjectSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module ProjectStatus
-      PENDING = 'Pending'
-      CREATE_IN_PROGRESS = 'CreateInProgress'
-      CREATE_COMPLETED = 'CreateCompleted'
-      CREATE_FAILED = 'CreateFailed'
-      DELETE_IN_PROGRESS = 'DeleteInProgress'
-      DELETE_FAILED = 'DeleteFailed'
-      DELETE_COMPLETED = 'DeleteCompleted'
-      UPDATE_IN_PROGRESS = 'UpdateInProgress'
-      UPDATE_COMPLETED = 'UpdateCompleted'
-      UPDATE_FAILED = 'UpdateFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a project.</p>
@@ -26651,7 +24315,7 @@ module Aws::SageMaker
       :creation_time,
       :project_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Part of the <code>SuggestionQuery</code> type. Specifies a hint for retrieving property names that begin with the specified text.</p>
@@ -26661,7 +24325,7 @@ module Aws::SageMaker
     class PropertyNameQuery < Struct.new(
       :property_name_hint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A property name returned from a <code>GetSearchSuggestions</code> call that specifies a value in the <code>PropertyNameQuery</code> field.</p>
@@ -26671,7 +24335,7 @@ module Aws::SageMaker
     class PropertyNameSuggestion < Struct.new(
       :property_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key value pair used when you provision a project as a service catalog product. For information, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>.</p>
@@ -26685,7 +24349,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the amount of money paid to an Amazon Mechanical Turk worker for each task performed. </p> <p>Use one of the following prices for bounding box tasks. Prices are in US dollars and should be based on the complexity of the task; the longer it takes in your initial testing, the more you should offer.</p> <ul> <li> <p>0.036</p> </li> <li> <p>0.048</p> </li> <li> <p>0.060</p> </li> <li> <p>0.072</p> </li> <li> <p>0.120</p> </li> <li> <p>0.240</p> </li> <li> <p>0.360</p> </li> <li> <p>0.480</p> </li> <li> <p>0.600</p> </li> <li> <p>0.720</p> </li> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for image classification, text classification, and custom tasks. Prices are in US dollars.</p> <ul> <li> <p>0.012</p> </li> <li> <p>0.024</p> </li> <li> <p>0.036</p> </li> <li> <p>0.048</p> </li> <li> <p>0.060</p> </li> <li> <p>0.072</p> </li> <li> <p>0.120</p> </li> <li> <p>0.240</p> </li> <li> <p>0.360</p> </li> <li> <p>0.480</p> </li> <li> <p>0.600</p> </li> <li> <p>0.720</p> </li> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for semantic segmentation tasks. Prices are in US dollars.</p> <ul> <li> <p>0.840</p> </li> <li> <p>0.960</p> </li> <li> <p>1.080</p> </li> <li> <p>1.200</p> </li> </ul> <p>Use one of the following prices for Textract AnalyzeDocument Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.</p> <ul> <li> <p>2.400 </p> </li> <li> <p>2.280 </p> </li> <li> <p>2.160 </p> </li> <li> <p>2.040 </p> </li> <li> <p>1.920 </p> </li> <li> <p>1.800 </p> </li> <li> <p>1.680 </p> </li> <li> <p>1.560 </p> </li> <li> <p>1.440 </p> </li> <li> <p>1.320 </p> </li> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul> <p>Use one of the following prices for Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US dollars.</p> <ul> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul> <p>Use one of the following prices for Amazon Augmented AI custom human review tasks. Prices are in US dollars.</p> <ul> <li> <p>1.200 </p> </li> <li> <p>1.080 </p> </li> <li> <p>0.960 </p> </li> <li> <p>0.840 </p> </li> <li> <p>0.720 </p> </li> <li> <p>0.600 </p> </li> <li> <p>0.480 </p> </li> <li> <p>0.360 </p> </li> <li> <p>0.240 </p> </li> <li> <p>0.120 </p> </li> <li> <p>0.072 </p> </li> <li> <p>0.060 </p> </li> <li> <p>0.048 </p> </li> <li> <p>0.036 </p> </li> <li> <p>0.024 </p> </li> <li> <p>0.012 </p> </li> </ul>
@@ -26695,7 +24359,7 @@ module Aws::SageMaker
     class PublicWorkforceTaskPrice < Struct.new(
       :amount_in_usd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_name
@@ -26708,7 +24372,7 @@ module Aws::SageMaker
       :model_package_group_name,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_group_arn
@@ -26717,7 +24381,7 @@ module Aws::SageMaker
     class PutModelPackageGroupPolicyOutput < Struct.new(
       :model_package_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the metadata for a Quality check step. For more information, see the topic on <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check">QualityCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>. </p>
@@ -26763,7 +24427,7 @@ module Aws::SageMaker
       :skip_check,
       :register_new_baseline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of filters to narrow the set of lineage entities connected to the <code>StartArn</code>(s) returned by the <code>QueryLineage</code> API action.</p>
@@ -26797,7 +24461,7 @@ module Aws::SageMaker
       :modified_after,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_arns
@@ -26830,7 +24494,7 @@ module Aws::SageMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vertices
@@ -26847,7 +24511,7 @@ module Aws::SageMaker
       :edges,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that apply to an <code>RSessionGateway</code> app.</p>
@@ -26861,12 +24525,7 @@ module Aws::SageMaker
       :default_resource_spec,
       :custom_images,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RStudioServerProAccessStatus
-      Enabled = 'ENABLED'
-      Disabled = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app.</p>
@@ -26880,7 +24539,7 @@ module Aws::SageMaker
       :access_status,
       :user_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>
@@ -26902,7 +24561,7 @@ module Aws::SageMaker
       :r_studio_package_manager_url,
       :default_resource_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that update the current configuration for the <code>RStudioServerPro</code> Domain-level app.</p>
@@ -26924,12 +24583,7 @@ module Aws::SageMaker
       :r_studio_connect_url,
       :r_studio_package_manager_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RStudioServerProUserGroup
-      Admin = 'R_STUDIO_ADMIN'
-      User = 'R_STUDIO_USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The infrastructure configuration for deploying the model to a real-time inference endpoint.</p>
@@ -26943,7 +24597,7 @@ module Aws::SageMaker
       :instance_type,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommended configuration to use for Real-Time Inference.</p>
@@ -26961,7 +24615,7 @@ module Aws::SageMaker
       :instance_type,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the output configuration for the compiled model.</p>
@@ -26971,7 +24625,7 @@ module Aws::SageMaker
     class RecommendationJobCompiledOutputConfig < Struct.new(
       :s3_output_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies mandatory fields for running an Inference Recommender job directly in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJob</a> API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use <code>ContainerConfig</code> if you want to specify these fields for the recommendation job but don't want to edit them in your model package.</p>
@@ -27017,7 +24671,7 @@ module Aws::SageMaker
       :data_input_config,
       :supported_response_mime_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a specific benchmark from an Inference Recommender job.</p>
@@ -27051,7 +24705,7 @@ module Aws::SageMaker
       :invocation_end_time,
       :invocation_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input configuration of the recommendation job.</p>
@@ -27097,7 +24751,7 @@ module Aws::SageMaker
       :endpoints,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the output configuration for the compiled model.</p>
@@ -27111,7 +24765,7 @@ module Aws::SageMaker
       :kms_key_id,
       :compiled_output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the payload for a recommendation job.</p>
@@ -27125,7 +24779,7 @@ module Aws::SageMaker
       :sample_payload_url,
       :supported_content_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the maximum number of jobs that can run in parallel and the maximum number of jobs that can run.</p>
@@ -27139,18 +24793,7 @@ module Aws::SageMaker
       :max_number_of_tests,
       :max_parallel_of_tests,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationJobStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies conditions for stopping a job. When a job reaches a stopping condition limit, SageMaker ends the job.</p>
@@ -27168,17 +24811,7 @@ module Aws::SageMaker
       :model_latency_thresholds,
       :flat_invocations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationJobSupportedEndpointType
-      REALTIME = 'RealTime'
-      SERVERLESS = 'Serverless'
-    end
-
-    module RecommendationJobType
-      DEFAULT = 'Default'
-      ADVANCED = 'Advanced'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inference Recommender provisions SageMaker endpoints with access to VPC in the inference recommendation job.</p>
@@ -27192,7 +24825,7 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metrics of recommendations.</p>
@@ -27226,23 +24859,7 @@ module Aws::SageMaker
       :memory_utilization,
       :model_setup_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      NOT_APPLICABLE = 'NOT_APPLICABLE'
-    end
-
-    module RecommendationStepType
-      BENCHMARK = 'BENCHMARK'
-    end
-
-    module RecordWrapper
-      NONE = 'None'
-      RECORDIO = 'RecordIO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for Redshift Dataset Definition input.</p>
@@ -27284,22 +24901,7 @@ module Aws::SageMaker
       :output_format,
       :output_compression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The compression used for Redshift query results.</p>
-    module RedshiftResultCompressionType
-      NONE = 'None'
-      GZIP = 'GZIP'
-      BZIP2 = 'BZIP2'
-      ZSTD = 'ZSTD'
-      SNAPPY = 'SNAPPY'
-    end
-
-    # <p>The data storage format for Redshift query results.</p>
-    module RedshiftResultFormat
-      PARQUET = 'PARQUET'
-      CSV = 'CSV'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -27316,7 +24918,7 @@ module Aws::SageMaker
       :devices,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a register model job step.</p>
@@ -27326,12 +24928,7 @@ module Aws::SageMaker
     class RegisterModelStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Relation
-      EQUAL_TO = 'EqualTo'
-      GREATER_THAN_OR_EQUAL_TO = 'GreaterThanOrEqualTo'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for remote debugging for the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html">CreateTrainingJob</a> API. To learn more about the remote debugging functionality of SageMaker, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html">Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging</a>.</p>
@@ -27341,7 +24938,7 @@ module Aws::SageMaker
     class RemoteDebugConfig < Struct.new(
       :enable_remote_debug,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for remote debugging for the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html">UpdateTrainingJob</a> API. To learn more about the remote debugging functionality of SageMaker, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html">Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging</a>.</p>
@@ -27351,7 +24948,7 @@ module Aws::SageMaker
     class RemoteDebugConfigForUpdate < Struct.new(
       :enable_remote_debug,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ui_template
@@ -27372,7 +24969,7 @@ module Aws::SageMaker
       :role_arn,
       :human_task_ui_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rendered_content
@@ -27385,7 +24982,7 @@ module Aws::SageMaker
       :rendered_content,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains input values for a task.</p>
@@ -27395,7 +24992,7 @@ module Aws::SageMaker
     class RenderableTask < Struct.new(
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of an error that occurred while rendering the template.</p>
@@ -27409,12 +25006,7 @@ module Aws::SageMaker
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepositoryAccessMode
-      PLATFORM = 'Platform'
-      VPC = 'Vpc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the <code>ImageConfig</code> object that you passed to a call to <code>CreateModel</code> and the private Docker registry where the model image is hosted requires authentication.</p>
@@ -27424,19 +25016,7 @@ module Aws::SageMaker
     class RepositoryAuthConfig < Struct.new(
       :repository_credentials_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedCapacityInstanceType
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_P5E_48XLARGE = 'ml.p5e.48xlarge'
-      ML_P5EN_48XLARGE = 'ml.p5en.48xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN2_48XLARGE = 'ml.trn2.48xlarge'
-      ML_P6_B200_48XLARGE = 'ml.p6-b200.48xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_P6E_GB200_36XLARGE = 'ml.p6e-gb200.36xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a reserved capacity offering for a training plan offering.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
@@ -27482,15 +25062,7 @@ module Aws::SageMaker
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedCapacityStatus
-      PENDING = 'Pending'
-      ACTIVE = 'Active'
-      SCHEDULED = 'Scheduled'
-      EXPIRED = 'Expired'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a reserved capacity for the training plan.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
@@ -27544,12 +25116,7 @@ module Aws::SageMaker
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedCapacityType
-      ULTRASERVER = 'UltraServer'
-      INSTANCE = 'Instance'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resolved attributes.</p>
@@ -27567,7 +25134,7 @@ module Aws::SageMaker
       :problem_type,
       :completion_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A resource catalog containing all of the resources of a specific resource type within a resource owner account. For an example on sharing the Amazon SageMaker Feature Store <code>DefaultFeatureGroupCatalog</code>, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/feature-store-cross-account-discoverability-share-sagemaker-catalog.html">Share Amazon SageMaker Catalog resource type</a> in the Amazon SageMaker Developer Guide. </p>
@@ -27589,16 +25156,7 @@ module Aws::SageMaker
       :description,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceCatalogSortBy
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module ResourceCatalogSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resources, including machine learning (ML) compute instances and ML storage volumes, to use for model training. </p>
@@ -27636,7 +25194,7 @@ module Aws::SageMaker
       :training_plan_arn,
       :instance_placement_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ResourceConfig</code> to update <code>KeepAlivePeriodInSeconds</code>. Other fields in the <code>ResourceConfig</code> cannot be updated.</p>
@@ -27646,7 +25204,7 @@ module Aws::SageMaker
     class ResourceConfigForUpdate < Struct.new(
       :keep_alive_period_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource being accessed is in use.</p>
@@ -27655,7 +25213,7 @@ module Aws::SageMaker
     class ResourceInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
@@ -27664,7 +25222,7 @@ module Aws::SageMaker
     class ResourceLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the maximum number of training jobs and parallel training jobs that a hyperparameter tuning job can launch.</p>
@@ -27682,7 +25240,7 @@ module Aws::SageMaker
       :max_parallel_training_jobs,
       :max_runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource being access is not found.</p>
@@ -27691,7 +25249,7 @@ module Aws::SageMaker
     class ResourceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource sharing configuration.</p>
@@ -27705,13 +25263,7 @@ module Aws::SageMaker
       :strategy,
       :borrow_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceSharingStrategy
-      LEND = 'Lend'
-      DONTLEND = 'DontLend'
-      LENDANDBORROW = 'LendAndBorrow'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the ARN's of a SageMaker AI image and SageMaker AI image version, and the instance type that the version runs on.</p> <note> <p>When both <code>SageMakerImageVersionArn</code> and <code>SageMakerImageArn</code> are passed, <code>SageMakerImageVersionArn</code> is used. Any updates to <code>SageMakerImageArn</code> will not take effect if <code>SageMakerImageVersionArn</code> already exists in the <code>ResourceSpec</code> because <code>SageMakerImageVersionArn</code> always takes precedence. To clear the value set for <code>SageMakerImageVersionArn</code>, pass <code>None</code> as the value.</p> </note>
@@ -27737,28 +25289,7 @@ module Aws::SageMaker
       :instance_type,
       :lifecycle_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      TRAINING_JOB = 'TrainingJob'
-      EXPERIMENT = 'Experiment'
-      EXPERIMENT_TRIAL = 'ExperimentTrial'
-      EXPERIMENT_TRIAL_COMPONENT = 'ExperimentTrialComponent'
-      ENDPOINT = 'Endpoint'
-      MODEL = 'Model'
-      MODEL_PACKAGE = 'ModelPackage'
-      MODEL_PACKAGE_GROUP = 'ModelPackageGroup'
-      PIPELINE = 'Pipeline'
-      PIPELINE_EXECUTION = 'PipelineExecution'
-      FEATURE_GROUP = 'FeatureGroup'
-      FEATURE_METADATA = 'FeatureMetadata'
-      IMAGE = 'Image'
-      IMAGE_VERSION = 'ImageVersion'
-      PROJECT = 'Project'
-      HYPER_PARAMETER_TUNING_JOB = 'HyperParameterTuningJob'
-      MODEL_CARD = 'ModelCard'
-      PIPELINE_VERSION = 'PipelineVersion'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retention policy for data stored on an Amazon Elastic File System volume.</p>
@@ -27768,12 +25299,7 @@ module Aws::SageMaker
     class RetentionPolicy < Struct.new(
       :home_efs_file_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetentionType
-      Retain = 'Retain'
-      Delete = 'Delete'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -27790,7 +25316,7 @@ module Aws::SageMaker
       :client_request_token,
       :parallelism_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -27799,7 +25325,7 @@ module Aws::SageMaker
     class RetryPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry strategy to use when a training job fails due to an <code>InternalServerError</code>. <code>RetryStrategy</code> is specified as part of the <code>CreateTrainingJob</code> and <code>CreateHyperParameterTuningJob</code> requests. You can add the <code>StoppingCondition</code> parameter to the request to limit the training time for the complete job.</p>
@@ -27809,7 +25335,7 @@ module Aws::SageMaker
     class RetryStrategy < Struct.new(
       :maximum_retry_attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations that SageMaker uses when updating the AMI versions.</p>
@@ -27823,7 +25349,7 @@ module Aws::SageMaker
       :maximum_batch_size,
       :rollback_maximum_batch_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>
@@ -27845,31 +25371,7 @@ module Aws::SageMaker
       :maximum_execution_timeout_in_seconds,
       :rollback_maximum_batch_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RootAccess
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
-    end
-
-    module RoutingStrategy
-      LEAST_OUTSTANDING_REQUESTS = 'LEAST_OUTSTANDING_REQUESTS'
-      RANDOM = 'RANDOM'
-    end
-
-    module RuleEvaluationStatus
-      IN_PROGRESS = 'InProgress'
-      NO_ISSUES_FOUND = 'NoIssuesFound'
-      ISSUES_FOUND = 'IssuesFound'
-      ERROR = 'Error'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-    end
-
-    module S3DataDistribution
-      FULLY_REPLICATED = 'FullyReplicated'
-      SHARDED_BY_S3_KEY = 'ShardedByS3Key'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 data source.</p> <p>Your input bucket must be in the same Amazon Web Services region as your training job.</p>
@@ -27903,14 +25405,7 @@ module Aws::SageMaker
       :model_access_config,
       :hub_access_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3DataType
-      MANIFEST_FILE = 'ManifestFile'
-      S3_PREFIX = 'S3Prefix'
-      AUGMENTED_MANIFEST_FILE = 'AugmentedManifestFile'
-      CONVERSE = 'Converse'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom file system in Amazon S3. This is only supported in Amazon SageMaker Unified Studio.</p>
@@ -27920,7 +25415,7 @@ module Aws::SageMaker
     class S3FileSystem < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the custom Amazon S3 file system.</p>
@@ -27934,7 +25429,7 @@ module Aws::SageMaker
       :mount_path,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the S3 location of ML model data to deploy.</p>
@@ -27972,12 +25467,7 @@ module Aws::SageMaker
       :e_tag,
       :manifest_etag,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3ModelDataType
-      S3Prefix = 'S3Prefix'
-      S3Object = 'S3Object'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines the access restrictions to Amazon S3 resources that are included in custom worker task templates using the Liquid filter, <code>grant_read_access</code>.</p> <p>To learn more about how custom templates are created, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html">Create custom worker task templates</a>.</p>
@@ -27987,7 +25477,7 @@ module Aws::SageMaker
     class S3Presign < Struct.new(
       :iam_policy_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Simple Storage (Amazon S3) location and security configuration for <code>OfflineStore</code>.</p>
@@ -28005,21 +25495,7 @@ module Aws::SageMaker
       :kms_key_id,
       :resolved_output_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SageMakerImageName
-      sagemaker_distribution = 'sagemaker_distribution'
-    end
-
-    module SageMakerResourceName
-      TRAINING_JOB = 'training-job'
-      HYPERPOD_CLUSTER = 'hyperpod-cluster'
-    end
-
-    module SagemakerServicecatalogStatus
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing a recommended scaling policy.</p>
@@ -28030,7 +25506,7 @@ module Aws::SageMaker
       :target_tracking,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TargetTracking < ScalingPolicy; end
       class Unknown < ScalingPolicy; end
@@ -28047,7 +25523,7 @@ module Aws::SageMaker
       :invocations_per_instance,
       :model_latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object where you specify the anticipated traffic pattern for an endpoint.</p>
@@ -28061,7 +25537,7 @@ module Aws::SageMaker
       :min_invocations_per_minute,
       :max_invocations_per_minute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details about the monitoring schedule.</p>
@@ -28079,14 +25555,7 @@ module Aws::SageMaker
       :data_analysis_start_time,
       :data_analysis_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleStatus
-      PENDING = 'Pending'
-      FAILED = 'Failed'
-      SCHEDULED = 'Scheduled'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration object of the schedule that SageMaker follows when updating the AMI.</p>
@@ -28100,7 +25569,7 @@ module Aws::SageMaker
       :schedule_expression,
       :deployment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cluster policy configuration. This policy is used for task prioritization and fair-share allocation. This helps prioritize critical workloads and distributes idle compute across entities.</p>
@@ -28114,22 +25583,7 @@ module Aws::SageMaker
       :priority_classes,
       :fair_share,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchedulerResourceStatus
-      CREATING = 'Creating'
-      CREATE_FAILED = 'CreateFailed'
-      CREATE_ROLLBACK_FAILED = 'CreateRollbackFailed'
-      CREATED = 'Created'
-      UPDATING = 'Updating'
-      UPDATE_FAILED = 'UpdateFailed'
-      UPDATE_ROLLBACK_FAILED = 'UpdateRollbackFailed'
-      UPDATED = 'Updated'
-      DELETING = 'Deleting'
-      DELETE_FAILED = 'DeleteFailed'
-      DELETE_ROLLBACK_FAILED = 'DeleteRollbackFailed'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A multi-expression that searches for the specified resource or resources in a search. All resource objects that satisfy the expression's condition are included in the search results. You must specify at least one subexpression, filter, or nested filter. A <code>SearchExpression</code> can contain up to twenty elements.</p> <p>A <code>SearchExpression</code> contains the following components:</p> <ul> <li> <p>A list of <code>Filter</code> objects. Each filter defines a simple Boolean expression comprised of a resource property name, Boolean operator, and value.</p> </li> <li> <p>A list of <code>NestedFilter</code> objects. Each nested filter defines a list of Boolean expressions using a list of resource properties. A nested filter is satisfied if a single object in the list satisfies all Boolean expressions.</p> </li> <li> <p>A list of <code>SearchExpression</code> objects. A search expression object can be nested in a list of search expression objects.</p> </li> <li> <p>A Boolean operator: <code>And</code> or <code>Or</code>.</p> </li> </ul>
@@ -28151,7 +25605,7 @@ module Aws::SageMaker
       :sub_expressions,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single resource returned as part of the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API response.</p>
@@ -28221,7 +25675,7 @@ module Aws::SageMaker
       :model_card,
       :model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -28258,7 +25712,7 @@ module Aws::SageMaker
       :cross_account_filter_option,
       :visibility_conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -28275,12 +25729,7 @@ module Aws::SageMaker
       :next_token,
       :total_hits,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_type
@@ -28317,7 +25766,7 @@ module Aws::SageMaker
       :duration_hours,
       :target_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_plan_offerings
@@ -28326,27 +25775,7 @@ module Aws::SageMaker
     class SearchTrainingPlanOfferingsResponse < Struct.new(
       :training_plan_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecondaryStatus
-      STARTING = 'Starting'
-      LAUNCHING_ML_INSTANCES = 'LaunchingMLInstances'
-      PREPARING_TRAINING_STACK = 'PreparingTrainingStack'
-      DOWNLOADING = 'Downloading'
-      DOWNLOADING_TRAINING_IMAGE = 'DownloadingTrainingImage'
-      TRAINING = 'Training'
-      UPLOADING = 'Uploading'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      MAX_RUNTIME_EXCEEDED = 'MaxRuntimeExceeded'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      INTERRUPTED = 'Interrupted'
-      MAX_WAIT_TIME_EXCEEDED = 'MaxWaitTimeExceeded'
-      UPDATING = 'Updating'
-      RESTARTING = 'Restarting'
-      PENDING = 'Pending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array element of <code>SecondaryStatusTransitions</code> for <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html">DescribeTrainingJob</a>. It provides additional details about a status that the training job has transitioned through. A training job can be in one of several states, for example, starting, downloading, training, or uploading. Within each state, there are a number of intermediate states. For example, within the starting state, SageMaker could be starting the training job or launching the ML instances. These transitional states are referred to as the job's secondary status. </p> <p/>
@@ -28368,7 +25797,7 @@ module Aws::SageMaker
       :end_time,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A step selected to run in selective execution mode.</p>
@@ -28378,7 +25807,7 @@ module Aws::SageMaker
     class SelectedStep < Struct.new(
       :step_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selective execution configuration applied to the pipeline run.</p>
@@ -28392,7 +25821,7 @@ module Aws::SageMaker
       :source_pipeline_execution_arn,
       :selected_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ARN from an execution of the current pipeline.</p>
@@ -28402,7 +25831,7 @@ module Aws::SageMaker
     class SelectiveExecutionResult < Struct.new(
       :source_pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute callback_token
@@ -28419,7 +25848,7 @@ module Aws::SageMaker
       :failure_reason,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -28428,7 +25857,7 @@ module Aws::SageMaker
     class SendPipelineExecutionStepFailureResponse < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute callback_token
@@ -28445,7 +25874,7 @@ module Aws::SageMaker
       :output_parameters,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -28454,7 +25883,7 @@ module Aws::SageMaker
     class SendPipelineExecutionStepSuccessResponse < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a provisioned service catalog product. For information about service catalog, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>.</p>
@@ -28468,7 +25897,7 @@ module Aws::SageMaker
       :provisioned_product_id,
       :provisioned_product_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>.</p>
@@ -28490,7 +25919,7 @@ module Aws::SageMaker
       :path_id,
       :provisioning_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href="https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">What is Amazon Web Services Service Catalog</a>. </p>
@@ -28504,7 +25933,7 @@ module Aws::SageMaker
       :provisioning_artifact_id,
       :provisioning_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about attribute-based access control (ABAC) for a training job. The session chaining configuration uses Amazon Security Token Service (STS) for your training job to request temporary, limited-privilege credentials to tenants. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-access-training-data.html#model-access-training-data-abac">Attribute-based access control (ABAC) for multi-tenancy training</a>.</p>
@@ -28514,7 +25943,7 @@ module Aws::SageMaker
     class SessionChainingConfig < Struct.new(
       :enable_session_tag_chaining,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration of <code>ShadowMode</code> inference experiment type, which specifies a production variant to take all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant it also specifies the percentage of requests that Amazon SageMaker replicates. </p>
@@ -28528,7 +25957,7 @@ module Aws::SageMaker
       :source_model_variant_name,
       :shadow_model_variants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and sampling percentage of a shadow variant.</p>
@@ -28542,7 +25971,7 @@ module Aws::SageMaker
       :shadow_model_variant_name,
       :sampling_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies options for sharing Amazon SageMaker AI Studio notebooks. These settings are specified as part of <code>DefaultUserSettings</code> when the <code>CreateDomain</code> API is called, and as part of <code>UserSettings</code> when the <code>CreateUserProfile</code> API is called. When <code>SharingSettings</code> is not specified, notebook sharing isn't allowed.</p>
@@ -28560,12 +25989,7 @@ module Aws::SageMaker
       :s3_output_path,
       :s3_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SharingType
-      Private = 'Private'
-      Shared = 'Shared'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for a shuffle option for input data in a channel. If you use <code>S3Prefix</code> for <code>S3DataType</code>, the results of the S3 key prefix matches are shuffled. If you use <code>ManifestFile</code>, the order of the S3 object references in the <code>ManifestFile</code> is shuffled. If you use <code>AugmentedManifestFile</code>, the order of the JSON lines in the <code>AugmentedManifestFile</code> is shuffled. The shuffling order is determined using the <code>Seed</code> value.</p> <p>For Pipe input mode, when <code>ShuffleConfig</code> is specified shuffling is done at the start of every epoch. With large datasets, this ensures that the order of the training data is different for each epoch, and it helps reduce bias and possible overfitting. In a multi-node training job when <code>ShuffleConfig</code> is combined with <code>S3DataDistributionType</code> of <code>ShardedByS3Key</code>, the data is shuffled across nodes so that the content sent to a particular node on the first epoch might be sent to a different node on the second epoch.</p>
@@ -28575,100 +25999,7 @@ module Aws::SageMaker
     class ShuffleConfig < Struct.new(
       :seed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SkipModelValidation
-      ALL = 'All'
-      NONE = 'None'
-    end
-
-    module SortActionsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortArtifactsBy
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortAssociationsBy
-      SOURCE_ARN = 'SourceArn'
-      DESTINATION_ARN = 'DestinationArn'
-      SOURCE_TYPE = 'SourceType'
-      DESTINATION_TYPE = 'DestinationType'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module SortClusterSchedulerConfigBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module SortContextsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortExperimentsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortInferenceExperimentsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module SortLineageGroupsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module SortPipelineExecutionsBy
-      CREATION_TIME = 'CreationTime'
-      PIPELINE_EXECUTION_ARN = 'PipelineExecutionArn'
-    end
-
-    module SortPipelinesBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortQuotaBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-      CLUSTER_ARN = 'ClusterArn'
-    end
-
-    module SortTrackingServerBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-      STATUS = 'Status'
-    end
-
-    module SortTrialComponentsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
-    end
-
-    module SortTrialsBy
-      NAME = 'Name'
-      CREATION_TIME = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your SageMaker account or an algorithm in Amazon Web Services Marketplace that you are subscribed to.</p>
@@ -28690,7 +26021,7 @@ module Aws::SageMaker
       :model_data_e_tag,
       :algorithm_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of algorithms that were used to create a model package.</p>
@@ -28700,7 +26031,7 @@ module Aws::SageMaker
     class SourceAlgorithmSpecification < Struct.new(
       :source_algorithms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of IP address ranges (<a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">CIDRs</a>). Used to create an allow list of IP addresses for a private workforce. Workers will only be able to log in to their worker portal from an IP address within this range. By default, a workforce isn't restricted to specific IP addresses.</p>
@@ -28710,7 +26041,7 @@ module Aws::SageMaker
     class SourceIpConfig < Struct.new(
       :cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio applications in a space.</p>
@@ -28720,7 +26051,7 @@ module Aws::SageMaker
     class SpaceAppLifecycleManagement < Struct.new(
       :idle_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application settings for a Code Editor space.</p>
@@ -28734,7 +26065,7 @@ module Aws::SageMaker
       :default_resource_spec,
       :app_lifecycle_management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The space's details.</p>
@@ -28776,7 +26107,7 @@ module Aws::SageMaker
       :ownership_settings_summary,
       :space_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings related to idle shutdown of Studio applications in a space.</p>
@@ -28786,7 +26117,7 @@ module Aws::SageMaker
     class SpaceIdleSettings < Struct.new(
       :idle_timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for the JupyterLab application within a space.</p>
@@ -28804,7 +26135,7 @@ module Aws::SageMaker
       :code_repositories,
       :app_lifecycle_management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of space settings.</p>
@@ -28846,7 +26177,7 @@ module Aws::SageMaker
       :custom_file_systems,
       :remote_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies summary information about the space settings.</p>
@@ -28864,7 +26195,7 @@ module Aws::SageMaker
       :remote_access,
       :space_storage_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of space sharing settings.</p>
@@ -28874,7 +26205,7 @@ module Aws::SageMaker
     class SpaceSharingSettings < Struct.new(
       :sharing_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies summary information about the space sharing settings.</p>
@@ -28884,22 +26215,7 @@ module Aws::SageMaker
     class SpaceSharingSettingsSummary < Struct.new(
       :sharing_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpaceSortKey
-      CreationTime = 'CreationTime'
-      LastModifiedTime = 'LastModifiedTime'
-    end
-
-    module SpaceStatus
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-      InService = 'InService'
-      Pending = 'Pending'
-      Updating = 'Updating'
-      Update_Failed = 'Update_Failed'
-      Delete_Failed = 'Delete_Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The storage settings for a space.</p>
@@ -28909,25 +26225,7 @@ module Aws::SageMaker
     class SpaceStorageSettings < Struct.new(
       :ebs_storage_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SplitType
-      NONE = 'None'
-      LINE = 'Line'
-      RECORDIO = 'RecordIO'
-      TFRECORD = 'TFRecord'
-    end
-
-    module StageStatus
-      Creating = 'CREATING'
-      ReadyToDeploy = 'READYTODEPLOY'
-      Starting = 'STARTING'
-      InProgress = 'INPROGRESS'
-      Deployed = 'DEPLOYED'
-      Failed = 'FAILED'
-      Stopping = 'STOPPING'
-      Stopped = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the stairs traffic pattern for an Inference Recommender load test. This pattern type consists of multiple steps where the number of users increases at each step.</p> <p>Specify either the stairs or phases traffic pattern.</p>
@@ -28945,7 +26243,7 @@ module Aws::SageMaker
       :number_of_steps,
       :users_per_step,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -28958,7 +26256,7 @@ module Aws::SageMaker
       :edge_deployment_plan_name,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -28967,7 +26265,7 @@ module Aws::SageMaker
     class StartInferenceExperimentRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_experiment_arn
@@ -28976,7 +26274,7 @@ module Aws::SageMaker
     class StartInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -28985,7 +26283,7 @@ module Aws::SageMaker
     class StartMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_arn
@@ -28994,7 +26292,7 @@ module Aws::SageMaker
     class StartMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -29003,7 +26301,7 @@ module Aws::SageMaker
     class StartMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -29012,7 +26310,7 @@ module Aws::SageMaker
     class StartNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -29049,7 +26347,7 @@ module Aws::SageMaker
       :selective_execution_config,
       :pipeline_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -29058,7 +26356,7 @@ module Aws::SageMaker
     class StartPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -29067,7 +26365,7 @@ module Aws::SageMaker
     class StartSessionRequest < Struct.new(
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -29084,24 +26382,7 @@ module Aws::SageMaker
       :stream_url,
       :token_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Statistic
-      AVERAGE = 'Average'
-      MINIMUM = 'Minimum'
-      MAXIMUM = 'Maximum'
-      SAMPLE_COUNT = 'SampleCount'
-      SUM = 'Sum'
-    end
-
-    module StepStatus
-      STARTING = 'Starting'
-      EXECUTING = 'Executing'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      FAILED = 'Failed'
-      SUCCEEDED = 'Succeeded'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_ml_job_name
@@ -29110,7 +26391,7 @@ module Aws::SageMaker
     class StopAutoMLJobRequest < Struct.new(
       :auto_ml_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compilation_job_name
@@ -29119,7 +26400,7 @@ module Aws::SageMaker
     class StopCompilationJobRequest < Struct.new(
       :compilation_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_deployment_plan_name
@@ -29132,7 +26413,7 @@ module Aws::SageMaker
       :edge_deployment_plan_name,
       :stage_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute edge_packaging_job_name
@@ -29141,7 +26422,7 @@ module Aws::SageMaker
     class StopEdgePackagingJobRequest < Struct.new(
       :edge_packaging_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hyper_parameter_tuning_job_name
@@ -29150,7 +26431,7 @@ module Aws::SageMaker
     class StopHyperParameterTuningJobRequest < Struct.new(
       :hyper_parameter_tuning_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -29175,7 +26456,7 @@ module Aws::SageMaker
       :desired_state,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_experiment_arn
@@ -29184,7 +26465,7 @@ module Aws::SageMaker
     class StopInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -29193,7 +26474,7 @@ module Aws::SageMaker
     class StopInferenceRecommendationsJobRequest < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labeling_job_name
@@ -29202,7 +26483,7 @@ module Aws::SageMaker
     class StopLabelingJobRequest < Struct.new(
       :labeling_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -29211,7 +26492,7 @@ module Aws::SageMaker
     class StopMlflowTrackingServerRequest < Struct.new(
       :tracking_server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_arn
@@ -29220,7 +26501,7 @@ module Aws::SageMaker
     class StopMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -29229,7 +26510,7 @@ module Aws::SageMaker
     class StopMonitoringScheduleRequest < Struct.new(
       :monitoring_schedule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -29238,7 +26519,7 @@ module Aws::SageMaker
     class StopNotebookInstanceInput < Struct.new(
       :notebook_instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute optimization_job_name
@@ -29247,7 +26528,7 @@ module Aws::SageMaker
     class StopOptimizationJobRequest < Struct.new(
       :optimization_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -29260,7 +26541,7 @@ module Aws::SageMaker
       :pipeline_execution_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -29269,7 +26550,7 @@ module Aws::SageMaker
     class StopPipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processing_job_name
@@ -29278,7 +26559,7 @@ module Aws::SageMaker
     class StopProcessingJobRequest < Struct.new(
       :processing_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_name
@@ -29287,7 +26568,7 @@ module Aws::SageMaker
     class StopTrainingJobRequest < Struct.new(
       :training_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_job_name
@@ -29296,7 +26577,7 @@ module Aws::SageMaker
     class StopTransformJobRequest < Struct.new(
       :transform_job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a limit to how long a job can run. When the job reaches the time limit, SageMaker ends the job. Use this API to cap costs.</p> <p>To stop a training job, SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so the results of training are not lost. </p> <p>The training algorithms provided by SageMaker automatically save the intermediate results of a model training job when possible. This attempt to save artifacts is only a best effort case as model might not be in a state from which it can be saved. For example, if training has just started, the model might not be ready to save. When saved, this intermediate data is a valid model artifact. You can use it to create a model with <code>CreateModel</code>.</p> <note> <p>The Neural Topic Model (NTM) currently does not support saving intermediate model artifacts. When training NTMs, make sure that the maximum runtime is sufficient for the training job to complete.</p> </note>
@@ -29314,19 +26595,7 @@ module Aws::SageMaker
       :max_wait_time_in_seconds,
       :max_pending_time_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageType
-      STANDARD = 'Standard'
-      IN_MEMORY = 'InMemory'
-    end
-
-    module StudioLifecycleConfigAppType
-      JupyterServer = 'JupyterServer'
-      KernelGateway = 'KernelGateway'
-      CodeEditor = 'CodeEditor'
-      JupyterLab = 'JupyterLab'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Amazon SageMaker AI Studio Lifecycle Configuration.</p>
@@ -29352,18 +26621,7 @@ module Aws::SageMaker
       :last_modified_time,
       :studio_lifecycle_config_app_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StudioLifecycleConfigSortKey
-      CreationTime = 'CreationTime'
-      LastModifiedTime = 'LastModifiedTime'
-      Name = 'Name'
-    end
-
-    module StudioWebPortal
-      Enabled = 'ENABLED'
-      Disabled = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.</p>
@@ -29385,7 +26643,7 @@ module Aws::SageMaker
       :hidden_instance_types,
       :hidden_sage_maker_image_version_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a work team of a vendor that does the labelling job.</p>
@@ -29411,7 +26669,7 @@ module Aws::SageMaker
       :marketplace_description,
       :listing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_GetSearchSuggestions.html">GetSearchSuggestions</a> request. Limits the property names that are included in the response.</p>
@@ -29421,13 +26679,7 @@ module Aws::SageMaker
     class SuggestionQuery < Struct.new(
       :property_name_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableFormat
-      DEFAULT = 'Default'
-      GLUE = 'Glue'
-      ICEBERG = 'Iceberg'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of settings used by an AutoML job V2 for the tabular problem type.</p>
@@ -29465,7 +26717,7 @@ module Aws::SageMaker
       :target_attribute_name,
       :sample_weight_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resolved attributes specific to the tabular problem type.</p>
@@ -29475,7 +26727,7 @@ module Aws::SageMaker
     class TabularResolvedAttributes < Struct.new(
       :problem_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag object that consists of a key and an optional value, used to manage metadata for SageMaker Amazon Web Services resources.</p> <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and endpoints. For more information on adding tags to SageMaker resources, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AddTags.html">AddTags</a>.</p> <p>For more information on adding metadata to your Amazon Web Services resources with tagging, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>. For advice on best practices for managing Amazon Web Services resources with tagging, see <a href="https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf">Tagging Best Practices: Implement an Effective Amazon Web Services Resource Tagging Strategy</a>.</p>
@@ -29489,52 +26741,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagPropagation
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module TargetDevice
-      LAMBDA = 'lambda'
-      ML_M4 = 'ml_m4'
-      ML_M5 = 'ml_m5'
-      ML_M6G = 'ml_m6g'
-      ML_C4 = 'ml_c4'
-      ML_C5 = 'ml_c5'
-      ML_C6G = 'ml_c6g'
-      ML_P2 = 'ml_p2'
-      ML_P3 = 'ml_p3'
-      ML_G4DN = 'ml_g4dn'
-      ML_INF1 = 'ml_inf1'
-      ML_INF2 = 'ml_inf2'
-      ML_TRN1 = 'ml_trn1'
-      ML_EIA2 = 'ml_eia2'
-      JETSON_TX1 = 'jetson_tx1'
-      JETSON_TX2 = 'jetson_tx2'
-      JETSON_NANO = 'jetson_nano'
-      JETSON_XAVIER = 'jetson_xavier'
-      RASP3B = 'rasp3b'
-      RASP4B = 'rasp4b'
-      IMX8QM = 'imx8qm'
-      DEEPLENS = 'deeplens'
-      RK3399 = 'rk3399'
-      RK3288 = 'rk3288'
-      AISAGE = 'aisage'
-      SBE_C = 'sbe_c'
-      QCS605 = 'qcs605'
-      QCS603 = 'qcs603'
-      SITARA_AM57X = 'sitara_am57x'
-      AMBA_CV2 = 'amba_cv2'
-      AMBA_CV22 = 'amba_cv22'
-      AMBA_CV25 = 'amba_cv25'
-      X86_WIN32 = 'x86_win32'
-      X86_WIN64 = 'x86_win64'
-      COREML = 'coreml'
-      JACINTO_TDA4VM = 'jacinto_tda4vm'
-      IMX8MPLUS = 'imx8mplus'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a target platform that you want your model to run on, such as OS, architecture, and accelerators. It is an alternative of <code>TargetDevice</code>.</p>
@@ -29552,27 +26759,7 @@ module Aws::SageMaker
       :arch,
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetPlatformAccelerator
-      INTEL_GRAPHICS = 'INTEL_GRAPHICS'
-      MALI = 'MALI'
-      NVIDIA = 'NVIDIA'
-      NNA = 'NNA'
-    end
-
-    module TargetPlatformArch
-      X86_64 = 'X86_64'
-      X86 = 'X86'
-      ARM64 = 'ARM64'
-      ARM_EABI = 'ARM_EABI'
-      ARM_EABIHF = 'ARM_EABIHF'
-    end
-
-    module TargetPlatformOs
-      ANDROID = 'ANDROID'
-      LINUX = 'LINUX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>When using the <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> API, this parameter is required when you are creating a policy with the policy type <code>TargetTrackingScaling</code>.</p>
@@ -29586,7 +26773,7 @@ module Aws::SageMaker
       :metric_specification,
       :target_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details about a template provider configuration and associated provisioning information. </p>
@@ -29596,7 +26783,7 @@ module Aws::SageMaker
     class TemplateProviderDetail < Struct.new(
       :cfn_template_provider_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TensorBoard app settings.</p>
@@ -29606,7 +26793,7 @@ module Aws::SageMaker
     class TensorBoardAppSettings < Struct.new(
       :default_resource_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of storage locations for the Amazon SageMaker Debugger TensorBoard output data.</p>
@@ -29620,7 +26807,7 @@ module Aws::SageMaker
       :local_path,
       :s3_output_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of settings used by an AutoML job V2 for the text classification problem type.</p>
@@ -29638,7 +26825,7 @@ module Aws::SageMaker
       :content_column,
       :target_label_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of settings used by an AutoML job V2 for the text generation problem type.</p> <note> <p>The text generation models that support fine-tuning in Autopilot are currently accessible exclusively in regions supported by Canvas. Refer to the documentation of Canvas for the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html">full list of its supported Regions</a>.</p> </note>
@@ -29660,7 +26847,7 @@ module Aws::SageMaker
       :text_generation_hyper_parameters,
       :model_access_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resolved attributes specific to the text generation problem type.</p>
@@ -29670,7 +26857,7 @@ module Aws::SageMaker
     class TextGenerationResolvedAttributes < Struct.new(
       :base_model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to set feature group throughput configuration. There are two modes: <code>ON_DEMAND</code> and <code>PROVISIONED</code>. With on-demand mode, you are charged for data reads and writes that your application performs on your feature group. You do not need to specify read and write throughput because Feature Store accommodates your workloads as they ramp up and down. You can switch a feature group to on-demand only once in a 24 hour period. With provisioned throughput mode, you specify the read and write capacity per second that you expect your application to require, and you are billed based on those limits. Exceeding provisioned throughput will result in your requests being throttled. </p> <p>Note: <code>PROVISIONED</code> throughput mode is supported only for feature groups that are offline-only, or use the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType"> <code>Standard</code> </a> tier online store. </p>
@@ -29688,7 +26875,7 @@ module Aws::SageMaker
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Active throughput configuration of the feature group. There are two modes: <code>ON_DEMAND</code> and <code>PROVISIONED</code>. With on-demand mode, you are charged for data reads and writes that your application performs on your feature group. You do not need to specify read and write throughput because Feature Store accommodates your workloads as they ramp up and down. You can switch a feature group to on-demand only once in a 24 hour period. With provisioned throughput mode, you specify the read and write capacity per second that you expect your application to require, and you are billed based on those limits. Exceeding provisioned throughput will result in your requests being throttled. </p> <p>Note: <code>PROVISIONED</code> throughput mode is supported only for feature groups that are offline-only, or use the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType"> <code>Standard</code> </a> tier online store. </p>
@@ -29706,7 +26893,7 @@ module Aws::SageMaker
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The new throughput configuration for the feature group. You can switch between on-demand and provisioned modes or update the read / write capacity of provisioned feature groups. You can switch a feature group to on-demand only once in a 24 hour period. </p>
@@ -29724,12 +26911,7 @@ module Aws::SageMaker
       :provisioned_read_capacity_units,
       :provisioned_write_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThroughputMode
-      ON_DEMAND = 'OnDemand'
-      PROVISIONED = 'Provisioned'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of components that defines the time-series.</p>
@@ -29751,7 +26933,7 @@ module Aws::SageMaker
       :item_identifier_attribute_name,
       :grouping_attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of settings used by an AutoML job V2 for the time-series forecasting problem type.</p>
@@ -29793,7 +26975,7 @@ module Aws::SageMaker
       :holiday_config,
       :candidate_generation_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Time series forecast settings for the SageMaker Canvas application.</p>
@@ -29807,7 +26989,7 @@ module Aws::SageMaker
       :status,
       :amazon_forecast_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Transformations allowed on the dataset. Supported transformations are <code>Filling</code> and <code>Aggregation</code>. <code>Filling</code> specifies how to add values to missing values in the dataset. <code>Aggregation</code> defines how to aggregate data that does not align with forecast frequency.</p>
@@ -29821,7 +27003,7 @@ module Aws::SageMaker
       :filling,
       :aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the total number of matching results and indicates how accurate that count is.</p> <p>The <code>Value</code> field provides the count, which may be exact or estimated. The <code>Relation</code> field indicates whether it's an exact figure or a lower bound. This helps understand the full scope of search results, especially when dealing with large result sets.</p>
@@ -29835,39 +27017,7 @@ module Aws::SageMaker
       :value,
       :relation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrackingServerMaintenanceStatus
-      MAINTENANCE_IN_PROGRESS = 'MaintenanceInProgress'
-      MAINTENANCE_COMPLETE = 'MaintenanceComplete'
-      MAINTENANCE_FAILED = 'MaintenanceFailed'
-    end
-
-    module TrackingServerSize
-      S = 'Small'
-      M = 'Medium'
-      L = 'Large'
-    end
-
-    module TrackingServerStatus
-      CREATING = 'Creating'
-      CREATED = 'Created'
-      CREATE_FAILED = 'CreateFailed'
-      UPDATING = 'Updating'
-      UPDATED = 'Updated'
-      UPDATE_FAILED = 'UpdateFailed'
-      DELETING = 'Deleting'
-      DELETE_FAILED = 'DeleteFailed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
-      STOP_FAILED = 'StopFailed'
-      STARTING = 'Starting'
-      STARTED = 'Started'
-      START_FAILED = 'StartFailed'
-      MAINTENANCE_IN_PROGRESS = 'MaintenanceInProgress'
-      MAINTENANCE_COMPLETE = 'MaintenanceComplete'
-      MAINTENANCE_FAILED = 'MaintenanceFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the tracking server to list.</p>
@@ -29901,7 +27051,7 @@ module Aws::SageMaker
       :is_active,
       :mlflow_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the traffic pattern of the load test.</p>
@@ -29919,7 +27069,7 @@ module Aws::SageMaker
       :phases,
       :stairs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the traffic routing strategy during an endpoint deployment to shift traffic from the old fleet to the new fleet.</p>
@@ -29941,18 +27091,7 @@ module Aws::SageMaker
       :canary_size,
       :linear_step_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficRoutingConfigType
-      ALL_AT_ONCE = 'ALL_AT_ONCE'
-      CANARY = 'CANARY'
-      LINEAR = 'LINEAR'
-    end
-
-    module TrafficType
-      PHASES = 'PHASES'
-      STAIRS = 'STAIRS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration to use an image from a private Docker registry for a training job.</p>
@@ -29966,154 +27105,7 @@ module Aws::SageMaker
       :training_repository_access_mode,
       :training_repository_auth_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The training input mode that the algorithm supports. For more information about input modes, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">Algorithms</a>.</p> <p> <b>Pipe mode</b> </p> <p>If an algorithm supports <code>Pipe</code> mode, Amazon SageMaker streams data directly from Amazon S3 to the container.</p> <p> <b>File mode</b> </p> <p>If an algorithm supports <code>File</code> mode, SageMaker downloads the training data from S3 to the provisioned ML storage volume, and mounts the directory to the Docker volume for the training container.</p> <p>You must provision the ML storage volume with sufficient capacity to accommodate the data downloaded from S3. In addition to the training data, the ML storage volume also stores the output model. The algorithm container uses the ML storage volume to also store intermediate information, if any.</p> <p>For distributed algorithms, training data is distributed uniformly. Your training duration is predictable if the input data objects sizes are approximately the same. SageMaker does not split the files any further for model training. If the object sizes are skewed, training won't be optimal as the data distribution is also skewed when one host in a training cluster is overloaded, thus becoming a bottleneck in training.</p> <p> <b>FastFile mode</b> </p> <p>If an algorithm supports <code>FastFile</code> mode, SageMaker streams data directly from S3 to the container with no code changes, and provides file system access to the data. Users can author their training script to interact with these files as if they were stored on disk.</p> <p> <code>FastFile</code> mode works best when the data is read sequentially. Augmented manifest files aren't supported. The startup time is lower when there are fewer files in the S3 bucket provided.</p>
-    module TrainingInputMode
-      PIPE = 'Pipe'
-      FILE = 'File'
-      FASTFILE = 'FastFile'
-    end
-
-    module TrainingInstanceType
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_P3DN_24XLARGE = 'ml.p3dn.24xlarge'
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_P5E_48XLARGE = 'ml.p5e.48xlarge'
-      ML_P5EN_48XLARGE = 'ml.p5en.48xlarge'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_C5N_XLARGE = 'ml.c5n.xlarge'
-      ML_C5N_2XLARGE = 'ml.c5n.2xlarge'
-      ML_C5N_4XLARGE = 'ml.c5n.4xlarge'
-      ML_C5N_9XLARGE = 'ml.c5n.9xlarge'
-      ML_C5N_18XLARGE = 'ml.c5n.18xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_G6_XLARGE = 'ml.g6.xlarge'
-      ML_G6_2XLARGE = 'ml.g6.2xlarge'
-      ML_G6_4XLARGE = 'ml.g6.4xlarge'
-      ML_G6_8XLARGE = 'ml.g6.8xlarge'
-      ML_G6_16XLARGE = 'ml.g6.16xlarge'
-      ML_G6_12XLARGE = 'ml.g6.12xlarge'
-      ML_G6_24XLARGE = 'ml.g6.24xlarge'
-      ML_G6_48XLARGE = 'ml.g6.48xlarge'
-      ML_G6E_XLARGE = 'ml.g6e.xlarge'
-      ML_G6E_2XLARGE = 'ml.g6e.2xlarge'
-      ML_G6E_4XLARGE = 'ml.g6e.4xlarge'
-      ML_G6E_8XLARGE = 'ml.g6e.8xlarge'
-      ML_G6E_16XLARGE = 'ml.g6e.16xlarge'
-      ML_G6E_12XLARGE = 'ml.g6e.12xlarge'
-      ML_G6E_24XLARGE = 'ml.g6e.24xlarge'
-      ML_G6E_48XLARGE = 'ml.g6e.48xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
-      ML_TRN2_48XLARGE = 'ml.trn2.48xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_R5D_LARGE = 'ml.r5d.large'
-      ML_R5D_XLARGE = 'ml.r5d.xlarge'
-      ML_R5D_2XLARGE = 'ml.r5d.2xlarge'
-      ML_R5D_4XLARGE = 'ml.r5d.4xlarge'
-      ML_R5D_8XLARGE = 'ml.r5d.8xlarge'
-      ML_R5D_12XLARGE = 'ml.r5d.12xlarge'
-      ML_R5D_16XLARGE = 'ml.r5d.16xlarge'
-      ML_R5D_24XLARGE = 'ml.r5d.24xlarge'
-      ML_T3_MEDIUM = 'ml.t3.medium'
-      ML_T3_LARGE = 'ml.t3.large'
-      ML_T3_XLARGE = 'ml.t3.xlarge'
-      ML_T3_2XLARGE = 'ml.t3.2xlarge'
-      ML_R5_LARGE = 'ml.r5.large'
-      ML_R5_XLARGE = 'ml.r5.xlarge'
-      ML_R5_2XLARGE = 'ml.r5.2xlarge'
-      ML_R5_4XLARGE = 'ml.r5.4xlarge'
-      ML_R5_8XLARGE = 'ml.r5.8xlarge'
-      ML_R5_12XLARGE = 'ml.r5.12xlarge'
-      ML_R5_16XLARGE = 'ml.r5.16xlarge'
-      ML_R5_24XLARGE = 'ml.r5.24xlarge'
-      ML_P6_B200_48XLARGE = 'ml.p6-b200.48xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
-      ML_P6E_GB200_36XLARGE = 'ml.p6e-gb200.36xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a training job.</p>
@@ -30271,7 +27263,7 @@ module Aws::SageMaker
       :retry_strategy,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the input needed to run a training job using the algorithm.</p>
@@ -30301,27 +27293,7 @@ module Aws::SageMaker
       :resource_config,
       :stopping_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingJobEarlyStoppingType
-      OFF = 'Off'
-      AUTO = 'Auto'
-    end
-
-    module TrainingJobSortByOptions
-      Name = 'Name'
-      CreationTime = 'CreationTime'
-      Status = 'Status'
-      FinalObjectiveMetricValue = 'FinalObjectiveMetricValue'
-    end
-
-    module TrainingJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The numbers of training jobs launched by a hyperparameter tuning job, categorized by status.</p>
@@ -30347,7 +27319,7 @@ module Aws::SageMaker
       :non_retryable_error,
       :stopped,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a training job step.</p>
@@ -30357,7 +27329,7 @@ module Aws::SageMaker
     class TrainingJobStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a training job.</p>
@@ -30399,7 +27371,7 @@ module Aws::SageMaker
       :warm_pool_status,
       :training_plan_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter to apply when listing or searching for training plans.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
@@ -30413,11 +27385,7 @@ module Aws::SageMaker
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingPlanFilterName
-      STATUS = 'Status'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a training plan offering.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
@@ -30459,26 +27427,7 @@ module Aws::SageMaker
       :currency_code,
       :reserved_capacity_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingPlanSortBy
-      NAME = 'TrainingPlanName'
-      START_TIME = 'StartTime'
-      STATUS = 'Status'
-    end
-
-    module TrainingPlanSortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
-    end
-
-    module TrainingPlanStatus
-      PENDING = 'Pending'
-      ACTIVE = 'Active'
-      SCHEDULED = 'Scheduled'
-      EXPIRED = 'Expired'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the training plan.</p> <p>For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see <code> <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a> </code>.</p>
@@ -30548,12 +27497,7 @@ module Aws::SageMaker
       :target_resources,
       :reserved_capacity_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingRepositoryAccessMode
-      PLATFORM = 'Platform'
-      VPC = 'Vpc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing authentication information for a private Docker registry.</p>
@@ -30563,7 +27507,7 @@ module Aws::SageMaker
     class TrainingRepositoryAuthConfig < Struct.new(
       :training_repository_credentials_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines how the algorithm is used for a training job.</p>
@@ -30605,7 +27549,7 @@ module Aws::SageMaker
       :supported_tuning_job_objective_metrics,
       :additional_s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the location of the channel data.</p>
@@ -30615,7 +27559,7 @@ module Aws::SageMaker
     class TransformDataSource < Struct.new(
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the input source of a transform job and the way the transform job consumes it.</p>
@@ -30637,110 +27581,7 @@ module Aws::SageMaker
       :compression_type,
       :split_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransformInstanceType
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_C6I_LARGE = 'ml.c6i.large'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_R6I_LARGE = 'ml.r6i.large'
-      ML_R6I_XLARGE = 'ml.r6i.xlarge'
-      ML_R6I_2XLARGE = 'ml.r6i.2xlarge'
-      ML_R6I_4XLARGE = 'ml.r6i.4xlarge'
-      ML_R6I_8XLARGE = 'ml.r6i.8xlarge'
-      ML_R6I_12XLARGE = 'ml.r6i.12xlarge'
-      ML_R6I_16XLARGE = 'ml.r6i.16xlarge'
-      ML_R6I_24XLARGE = 'ml.r6i.24xlarge'
-      ML_R6I_32XLARGE = 'ml.r6i.32xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_INF2_XLARGE = 'ml.inf2.xlarge'
-      ML_INF2_8XLARGE = 'ml.inf2.8xlarge'
-      ML_INF2_24XLARGE = 'ml.inf2.24xlarge'
-      ML_INF2_48XLARGE = 'ml.inf2.48xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A batch transform job. For information about SageMaker batch transform, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html">Use Batch Transform</a>.</p>
@@ -30834,7 +27675,7 @@ module Aws::SageMaker
       :experiment_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the input needed to run a transform job using the inference specification specified in the algorithm.</p>
@@ -30868,15 +27709,7 @@ module Aws::SageMaker
       :transform_output,
       :transform_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransformJobStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a transform job step.</p>
@@ -30886,7 +27719,7 @@ module Aws::SageMaker
     class TransformJobStepMetadata < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of a transform job. Multiple <code>TransformJobSummary</code> objects are returned as a list after in response to a <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTransformJobs.html">ListTransformJobs</a> call.</p>
@@ -30920,7 +27753,7 @@ module Aws::SageMaker
       :transform_job_status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the results of a transform job.</p>
@@ -30942,7 +27775,7 @@ module Aws::SageMaker
       :assemble_with,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resources, including ML instance types and ML instance count, to use for transform job.</p>
@@ -30964,7 +27797,7 @@ module Aws::SageMaker
       :volume_kms_key_id,
       :transform_ami_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 data source.</p>
@@ -30978,7 +27811,7 @@ module Aws::SageMaker
       :s3_data_type,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a trial as returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.</p>
@@ -31032,7 +27865,7 @@ module Aws::SageMaker
       :tags,
       :trial_component_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a trial component as returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.</p>
@@ -31122,7 +27955,7 @@ module Aws::SageMaker
       :parents,
       :run_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an input or output artifact of a trial component. You specify <code>TrialComponentArtifact</code> as part of the <code>InputArtifacts</code> and <code>OutputArtifacts</code> parameters in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrialComponent.html">CreateTrialComponent</a> request.</p> <p>Examples of input artifacts are datasets, algorithms, hyperparameters, source code, and instance types. Examples of output artifacts are metrics, snapshots, logs, and images.</p>
@@ -31136,7 +27969,7 @@ module Aws::SageMaker
       :media_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the metrics of a trial component.</p>
@@ -31178,7 +28011,7 @@ module Aws::SageMaker
       :avg,
       :std_dev,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a hyperparameter. Only one of <code>NumberValue</code> or <code>StringValue</code> can be specified.</p> <p>This object is specified in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrialComponent.html">CreateTrialComponent</a> request.</p>
@@ -31193,19 +28026,11 @@ module Aws::SageMaker
       :number_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < TrialComponentParameterValue; end
       class NumberValue < TrialComponentParameterValue; end
       class Unknown < TrialComponentParameterValue; end
-    end
-
-    module TrialComponentPrimaryStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-      STOPPING = 'Stopping'
-      STOPPED = 'Stopped'
     end
 
     # <p>A short summary of a trial component.</p>
@@ -31231,7 +28056,7 @@ module Aws::SageMaker
       :creation_time,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) and job type of the source of a trial component.</p>
@@ -31245,7 +28070,7 @@ module Aws::SageMaker
       :source_arn,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the source of a trial component. Either <code>ProcessingJob</code> or <code>TrainingJob</code> is returned.</p>
@@ -31267,7 +28092,7 @@ module Aws::SageMaker
       :processing_job,
       :transform_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the trial component.</p>
@@ -31281,7 +28106,7 @@ module Aws::SageMaker
       :primary_status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the properties of a trial component. To get all the properties, call the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrialComponent.html">DescribeTrialComponent</a> API and provide the <code>TrialComponentName</code>.</p>
@@ -31331,7 +28156,7 @@ module Aws::SageMaker
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the trial.</p>
@@ -31345,7 +28170,7 @@ module Aws::SageMaker
       :source_arn,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the properties of a trial. To get the complete set of properties, call the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html">DescribeTrial</a> API and provide the <code>TrialName</code>.</p>
@@ -31375,7 +28200,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Trusted Identity Propagation (TIP) settings for the SageMaker domain. These settings determine how user identities from IAM Identity Center are propagated through the domain to TIP enabled Amazon Web Services services.</p>
@@ -31385,7 +28210,7 @@ module Aws::SageMaker
     class TrustedIdentityPropagationSettings < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>
@@ -31399,15 +28224,7 @@ module Aws::SageMaker
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TtlDurationUnit
-      SECONDS = 'Seconds'
-      MINUTES = 'Minutes'
-      HOURS = 'Hours'
-      DAYS = 'Days'
-      WEEKS = 'Weeks'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job completion criteria.</p>
@@ -31425,7 +28242,7 @@ module Aws::SageMaker
       :best_objective_not_improving,
       :convergence_detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a tuning step.</p>
@@ -31435,7 +28252,7 @@ module Aws::SageMaker
     class TuningJobStepMetaData < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an amount of money in United States dollars.</p>
@@ -31453,7 +28270,7 @@ module Aws::SageMaker
       :cents,
       :tenth_fractions_of_a_cent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provided configuration information for the worker UI for a labeling job. Provide either <code>HumanTaskUiArn</code> or <code>UiTemplateS3Uri</code>.</p> <p>For named entity recognition, 3D point cloud and video frame labeling jobs, use <code>HumanTaskUiArn</code>.</p> <p>For all other Ground Truth built-in task types and custom task types, use <code>UiTemplateS3Uri</code> to specify the location of a worker task template in Amazon S3.</p>
@@ -31467,7 +28284,7 @@ module Aws::SageMaker
       :ui_template_s3_uri,
       :human_task_ui_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Liquid template for the worker user interface.</p>
@@ -31477,7 +28294,7 @@ module Aws::SageMaker
     class UiTemplate < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for user interface template information.</p>
@@ -31491,7 +28308,7 @@ module Aws::SageMaker
       :url,
       :content_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a high-performance compute server used for distributed training in SageMaker AI. An UltraServer consists of multiple instances within a shared NVLink interconnect domain.</p>
@@ -31541,13 +28358,7 @@ module Aws::SageMaker
       :unhealthy_instance_count,
       :health_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UltraServerHealthStatus
-      OK = 'OK'
-      IMPAIRED = 'Impaired'
-      INSUFFICIENT_DATA = 'Insufficient-Data'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the UltraServer object.</p>
@@ -31557,7 +28368,7 @@ module Aws::SageMaker
     class UltraServerInfo < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of UltraServer resources and their current status.</p>
@@ -31583,7 +28394,7 @@ module Aws::SageMaker
       :available_spare_instance_count,
       :unhealthy_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.</p>
@@ -31621,7 +28432,7 @@ module Aws::SageMaker
       :project_s3_path,
       :single_sign_on_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_name
@@ -31646,7 +28457,7 @@ module Aws::SageMaker
       :properties,
       :properties_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_arn
@@ -31655,7 +28466,7 @@ module Aws::SageMaker
     class UpdateActionResponse < Struct.new(
       :action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_name
@@ -31676,7 +28487,7 @@ module Aws::SageMaker
       :jupyter_lab_app_image_config,
       :code_editor_app_image_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_image_config_arn
@@ -31685,7 +28496,7 @@ module Aws::SageMaker
     class UpdateAppImageConfigResponse < Struct.new(
       :app_image_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_arn
@@ -31706,7 +28517,7 @@ module Aws::SageMaker
       :properties,
       :properties_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute artifact_arn
@@ -31715,7 +28526,7 @@ module Aws::SageMaker
     class UpdateArtifactResponse < Struct.new(
       :artifact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -31740,7 +28551,7 @@ module Aws::SageMaker
       :node_recovery,
       :instance_groups_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -31749,7 +28560,7 @@ module Aws::SageMaker
     class UpdateClusterResponse < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_id
@@ -31770,7 +28581,7 @@ module Aws::SageMaker
       :scheduler_config,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_scheduler_config_arn
@@ -31783,7 +28594,7 @@ module Aws::SageMaker
       :cluster_scheduler_config_arn,
       :cluster_scheduler_config_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that describes specifications of the instance groups to update.</p>
@@ -31793,7 +28604,7 @@ module Aws::SageMaker
     class UpdateClusterSoftwareInstanceGroupSpecification < Struct.new(
       :instance_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -31814,7 +28625,7 @@ module Aws::SageMaker
       :deployment_config,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -31823,7 +28634,7 @@ module Aws::SageMaker
     class UpdateClusterSoftwareResponse < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_name
@@ -31836,7 +28647,7 @@ module Aws::SageMaker
       :code_repository_name,
       :git_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_repository_arn
@@ -31845,7 +28656,7 @@ module Aws::SageMaker
     class UpdateCodeRepositoryOutput < Struct.new(
       :code_repository_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_id
@@ -31874,7 +28685,7 @@ module Aws::SageMaker
       :activation_state,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_quota_arn
@@ -31887,7 +28698,7 @@ module Aws::SageMaker
       :compute_quota_arn,
       :compute_quota_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_name
@@ -31908,7 +28719,7 @@ module Aws::SageMaker
       :properties,
       :properties_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute context_arn
@@ -31917,7 +28728,7 @@ module Aws::SageMaker
     class UpdateContextResponse < Struct.new(
       :context_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -31942,7 +28753,7 @@ module Aws::SageMaker
       :output_config,
       :enable_iot_role_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_fleet_name
@@ -31955,7 +28766,7 @@ module Aws::SageMaker
       :device_fleet_name,
       :devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -31992,7 +28803,7 @@ module Aws::SageMaker
       :app_network_access_type,
       :tag_propagation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_arn
@@ -32001,7 +28812,7 @@ module Aws::SageMaker
     class UpdateDomainResponse < Struct.new(
       :domain_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -32030,7 +28841,7 @@ module Aws::SageMaker
       :deployment_config,
       :retain_deployment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -32039,7 +28850,7 @@ module Aws::SageMaker
     class UpdateEndpointOutput < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -32052,7 +28863,7 @@ module Aws::SageMaker
       :endpoint_name,
       :desired_weights_and_capacities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -32061,7 +28872,7 @@ module Aws::SageMaker
     class UpdateEndpointWeightsAndCapacitiesOutput < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_name
@@ -32078,7 +28889,7 @@ module Aws::SageMaker
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute experiment_arn
@@ -32087,7 +28898,7 @@ module Aws::SageMaker
     class UpdateExperimentResponse < Struct.new(
       :experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -32108,7 +28919,7 @@ module Aws::SageMaker
       :online_store_config,
       :throughput_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_arn
@@ -32117,7 +28928,7 @@ module Aws::SageMaker
     class UpdateFeatureGroupResponse < Struct.new(
       :feature_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_group_name
@@ -32142,7 +28953,7 @@ module Aws::SageMaker
       :parameter_additions,
       :parameter_removals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -32163,7 +28974,7 @@ module Aws::SageMaker
       :hub_content_type,
       :min_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -32176,7 +28987,7 @@ module Aws::SageMaker
       :hub_arn,
       :hub_content_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -32217,7 +29028,7 @@ module Aws::SageMaker
       :hub_content_search_keywords,
       :support_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -32230,7 +29041,7 @@ module Aws::SageMaker
       :hub_arn,
       :hub_content_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_name
@@ -32251,7 +29062,7 @@ module Aws::SageMaker
       :hub_display_name,
       :hub_search_keywords,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hub_arn
@@ -32260,7 +29071,7 @@ module Aws::SageMaker
     class UpdateHubResponse < Struct.new(
       :hub_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delete_properties
@@ -32285,7 +29096,7 @@ module Aws::SageMaker
       :image_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_arn
@@ -32294,7 +29105,7 @@ module Aws::SageMaker
     class UpdateImageResponse < Struct.new(
       :image_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -32347,7 +29158,7 @@ module Aws::SageMaker
       :horovod,
       :release_notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_version_arn
@@ -32356,7 +29167,7 @@ module Aws::SageMaker
     class UpdateImageVersionResponse < Struct.new(
       :image_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_name
@@ -32377,7 +29188,7 @@ module Aws::SageMaker
       :runtime_config,
       :deployment_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_arn
@@ -32386,7 +29197,7 @@ module Aws::SageMaker
     class UpdateInferenceComponentOutput < Struct.new(
       :inference_component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_name
@@ -32399,7 +29210,7 @@ module Aws::SageMaker
       :inference_component_name,
       :desired_runtime_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_component_arn
@@ -32408,7 +29219,7 @@ module Aws::SageMaker
     class UpdateInferenceComponentRuntimeConfigOutput < Struct.new(
       :inference_component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -32437,7 +29248,7 @@ module Aws::SageMaker
       :data_storage_config,
       :shadow_mode_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_experiment_arn
@@ -32446,7 +29257,7 @@ module Aws::SageMaker
     class UpdateInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_name
@@ -32471,7 +29282,7 @@ module Aws::SageMaker
       :automatic_model_registration,
       :weekly_maintenance_window_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_server_arn
@@ -32480,7 +29291,7 @@ module Aws::SageMaker
     class UpdateMlflowTrackingServerResponse < Struct.new(
       :tracking_server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_name
@@ -32497,7 +29308,7 @@ module Aws::SageMaker
       :content,
       :model_card_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_card_arn
@@ -32506,7 +29317,7 @@ module Aws::SageMaker
     class UpdateModelCardResponse < Struct.new(
       :model_card_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_arn
@@ -32555,7 +29366,7 @@ module Aws::SageMaker
       :model_life_cycle,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_package_arn
@@ -32564,7 +29375,7 @@ module Aws::SageMaker
     class UpdateModelPackageOutput < Struct.new(
       :model_package_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -32585,7 +29396,7 @@ module Aws::SageMaker
       :datapoints_to_alert,
       :evaluation_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_arn
@@ -32598,7 +29409,7 @@ module Aws::SageMaker
       :monitoring_schedule_arn,
       :monitoring_alert_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_name
@@ -32611,7 +29422,7 @@ module Aws::SageMaker
       :monitoring_schedule_name,
       :monitoring_schedule_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitoring_schedule_arn
@@ -32620,7 +29431,7 @@ module Aws::SageMaker
     class UpdateMonitoringScheduleResponse < Struct.new(
       :monitoring_schedule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_name
@@ -32681,7 +29492,7 @@ module Aws::SageMaker
       :root_access,
       :instance_metadata_service_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_instance_lifecycle_config_name
@@ -32698,17 +29509,17 @@ module Aws::SageMaker
       :on_create,
       :on_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookInstanceLifecycleConfigOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookInstanceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -32741,7 +29552,7 @@ module Aws::SageMaker
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -32750,7 +29561,7 @@ module Aws::SageMaker
     class UpdatePartnerAppResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -32771,7 +29582,7 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :parallelism_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_execution_arn
@@ -32780,7 +29591,7 @@ module Aws::SageMaker
     class UpdatePipelineExecutionResponse < Struct.new(
       :pipeline_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -32813,7 +29624,7 @@ module Aws::SageMaker
       :role_arn,
       :parallelism_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -32826,7 +29637,7 @@ module Aws::SageMaker
       :pipeline_arn,
       :pipeline_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -32847,7 +29658,7 @@ module Aws::SageMaker
       :pipeline_version_display_name,
       :pipeline_version_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_arn
@@ -32860,7 +29671,7 @@ module Aws::SageMaker
       :pipeline_arn,
       :pipeline_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -32885,7 +29696,7 @@ module Aws::SageMaker
       :tags,
       :template_providers_to_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -32894,7 +29705,7 @@ module Aws::SageMaker
     class UpdateProjectOutput < Struct.new(
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -32915,7 +29726,7 @@ module Aws::SageMaker
       :space_settings,
       :space_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_arn
@@ -32924,7 +29735,7 @@ module Aws::SageMaker
     class UpdateSpaceResponse < Struct.new(
       :space_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains configuration details for updating an existing template provider in the project. </p>
@@ -32934,7 +29745,7 @@ module Aws::SageMaker
     class UpdateTemplateProvider < Struct.new(
       :cfn_template_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_name
@@ -32959,7 +29770,7 @@ module Aws::SageMaker
       :resource_config,
       :remote_debug_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_job_arn
@@ -32968,7 +29779,7 @@ module Aws::SageMaker
     class UpdateTrainingJobResponse < Struct.new(
       :training_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -33017,7 +29828,7 @@ module Aws::SageMaker
       :output_artifacts,
       :output_artifacts_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_arn
@@ -33026,7 +29837,7 @@ module Aws::SageMaker
     class UpdateTrialComponentResponse < Struct.new(
       :trial_component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_name
@@ -33039,7 +29850,7 @@ module Aws::SageMaker
       :trial_name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_arn
@@ -33048,7 +29859,7 @@ module Aws::SageMaker
     class UpdateTrialResponse < Struct.new(
       :trial_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -33065,7 +29876,7 @@ module Aws::SageMaker
       :user_profile_name,
       :user_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_profile_arn
@@ -33074,7 +29885,7 @@ module Aws::SageMaker
     class UpdateUserProfileResponse < Struct.new(
       :user_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforce_name
@@ -33099,7 +29910,7 @@ module Aws::SageMaker
       :workforce_vpc_config,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workforce
@@ -33108,7 +29919,7 @@ module Aws::SageMaker
     class UpdateWorkforceResponse < Struct.new(
       :workforce,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam_name
@@ -33133,7 +29944,7 @@ module Aws::SageMaker
       :notification_configuration,
       :worker_access_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workteam
@@ -33142,7 +29953,7 @@ module Aws::SageMaker
     class UpdateWorkteamResponse < Struct.new(
       :workteam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the user who created or modified a SageMaker resource.</p>
@@ -33164,7 +29975,7 @@ module Aws::SageMaker
       :domain_id,
       :iam_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user profile details.</p>
@@ -33190,22 +30001,7 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserProfileSortKey
-      CreationTime = 'CreationTime'
-      LastModifiedTime = 'LastModifiedTime'
-    end
-
-    module UserProfileStatus
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-      InService = 'InService'
-      Pending = 'Pending'
-      Updating = 'Updating'
-      Update_Failed = 'Update_Failed'
-      Delete_Failed = 'Delete_Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of settings that apply to users in a domain. These settings are specified when the <code>CreateUserProfile</code> API is called, and as <code>DefaultUserSettings</code> when the <code>CreateDomain</code> API is called.</p> <p> <code>SecurityGroups</code> is aggregated when specified in both calls. For all other settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code> take precedence over those specified in <code>CreateDomain</code>.</p>
@@ -33283,7 +30079,7 @@ module Aws::SageMaker
       :studio_web_portal_settings,
       :auto_mount_home_efs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a production variant property type for an Endpoint.</p> <p>If you are updating an endpoint with the <code>RetainAllVariantProperties</code> option of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html">UpdateEndpointInput</a> set to <code>true</code>, the <code>VariantProperty</code> objects listed in the <code>ExcludeRetainedVariantProperties</code> parameter of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html">UpdateEndpointInput</a> override the existing variant properties of the endpoint.</p>
@@ -33293,21 +30089,7 @@ module Aws::SageMaker
     class VariantProperty < Struct.new(
       :variant_property_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VariantPropertyType
-      DesiredInstanceCount = 'DesiredInstanceCount'
-      DesiredWeight = 'DesiredWeight'
-      DataCaptureConfig = 'DataCaptureConfig'
-    end
-
-    module VariantStatus
-      CREATING = 'Creating'
-      UPDATING = 'Updating'
-      DELETING = 'Deleting'
-      ACTIVATING_TRAFFIC = 'ActivatingTraffic'
-      BAKING = 'Baking'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for your vector collection type.</p>
@@ -33317,14 +30099,7 @@ module Aws::SageMaker
     class VectorConfig < Struct.new(
       :dimension,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VendorGuidance
-      NOT_PROVIDED = 'NOT_PROVIDED'
-      STABLE = 'STABLE'
-      TO_BE_ARCHIVED = 'TO_BE_ARCHIVED'
-      ARCHIVED = 'ARCHIVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lineage entity connected to the starting entity(ies).</p>
@@ -33342,7 +30117,7 @@ module Aws::SageMaker
       :type,
       :lineage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of key-value pairs used to filter your search results. If a search result contains a key from your list, it is included in the final search response if the value associated with the key in the result matches the value you specified. If the value doesn't match, the result is excluded from the search response. Any resources that don't have a key from the list that you've provided will also be included in the search response.</p>
@@ -33356,15 +30131,7 @@ module Aws::SageMaker
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeAttachmentStatus
-      ATTACHING = 'attaching'
-      ATTACHED = 'attached'
-      DETACHING = 'detaching'
-      DETACHED = 'detached'
-      BUSY = 'busy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html">Give SageMaker Access to Resources in your Amazon VPC</a>. </p>
@@ -33378,14 +30145,7 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WarmPoolResourceStatus
-      AVAILABLE = 'Available'
-      TERMINATED = 'Terminated'
-      REUSED = 'Reused'
-      INUSE = 'InUse'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status and billing information about the warm pool.</p>
@@ -33403,7 +30163,7 @@ module Aws::SageMaker
       :resource_retained_billable_time_in_seconds,
       :reused_by_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL.</p>
@@ -33413,7 +30173,7 @@ module Aws::SageMaker
     class WorkerAccessConfiguration < Struct.new(
       :s3_presign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each Amazon Web Services Region. By default, any workforce-related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html">Create a Private Workforce</a>.</p>
@@ -33467,20 +30227,7 @@ module Aws::SageMaker
       :failure_reason,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkforceIpAddressType
-      ipv4 = 'ipv4'
-      dualstack = 'dualstack'
-    end
-
-    module WorkforceStatus
-      INITIALIZING = 'Initializing'
-      UPDATING = 'Updating'
-      DELETING = 'Deleting'
-      FAILED = 'Failed'
-      ACTIVE = 'Active'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC object you use to create or update a workforce.</p>
@@ -33498,7 +30245,7 @@ module Aws::SageMaker
       :security_group_ids,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VpcConfig object that specifies the VPC that you want your workforce to connect to.</p>
@@ -33520,7 +30267,7 @@ module Aws::SageMaker
       :subnets,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The workspace settings for the SageMaker Canvas application.</p>
@@ -33534,7 +30281,7 @@ module Aws::SageMaker
       :s3_artifact_path,
       :s3_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a labeling work team.</p>
@@ -33584,7 +30331,7 @@ module Aws::SageMaker
       :notification_configuration,
       :worker_access_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -32,7 +32,7 @@ module Aws::KinesisAnalyticsV2
       :cloud_watch_logging_option,
       :conditional_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -55,7 +55,7 @@ module Aws::KinesisAnalyticsV2
       :cloud_watch_logging_option_descriptions,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -81,7 +81,7 @@ module Aws::KinesisAnalyticsV2
       :input_id,
       :input_processing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -104,7 +104,7 @@ module Aws::KinesisAnalyticsV2
       :input_id,
       :input_processing_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -123,7 +123,7 @@ module Aws::KinesisAnalyticsV2
       :current_application_version_id,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -143,7 +143,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_id,
       :input_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -166,7 +166,7 @@ module Aws::KinesisAnalyticsV2
       :current_application_version_id,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -188,7 +188,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_id,
       :output_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -212,7 +212,7 @@ module Aws::KinesisAnalyticsV2
       :current_application_version_id,
       :reference_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -234,7 +234,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_id,
       :reference_data_source_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -265,7 +265,7 @@ module Aws::KinesisAnalyticsV2
       :vpc_configuration,
       :conditional_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -287,7 +287,7 @@ module Aws::KinesisAnalyticsV2
       :vpc_configuration_description,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes code configuration for an application.</p>
@@ -301,7 +301,7 @@ module Aws::KinesisAnalyticsV2
       :code_content,
       :code_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes code configuration for an application.</p>
@@ -315,7 +315,7 @@ module Aws::KinesisAnalyticsV2
       :code_content_type,
       :code_content_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes code configuration updates for an application. This is supported for a Managed Service for Apache Flink application or a SQL-based Kinesis Data Analytics application.</p>
@@ -329,7 +329,7 @@ module Aws::KinesisAnalyticsV2
       :code_content_type_update,
       :code_content_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the creation parameters for a Managed Service for Apache Flink application.</p>
@@ -367,7 +367,7 @@ module Aws::KinesisAnalyticsV2
       :vpc_configurations,
       :zeppelin_application_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes details about the application code and starting parameters for a Managed Service for Apache Flink application.</p>
@@ -409,7 +409,7 @@ module Aws::KinesisAnalyticsV2
       :vpc_configuration_descriptions,
       :zeppelin_application_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to an application's configuration.</p>
@@ -449,7 +449,7 @@ module Aws::KinesisAnalyticsV2
       :vpc_configuration_updates,
       :zeppelin_application_configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the application, including the application Amazon Resource Name (ARN), status,
@@ -531,7 +531,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_rolled_back_to,
       :application_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the maintenance configuration for the application.</p>
@@ -545,7 +545,7 @@ module Aws::KinesisAnalyticsV2
       :application_maintenance_window_start_time,
       :application_maintenance_window_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the updated maintenance configuration for the application.</p>
@@ -555,12 +555,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationMaintenanceConfigurationUpdate < Struct.new(
       :application_maintenance_window_start_time_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationMode
-      STREAMING = 'STREAMING'
-      INTERACTIVE = 'INTERACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # Provides a description of the operation, such as the type and status of operation
@@ -586,7 +581,7 @@ module Aws::KinesisAnalyticsV2
       :end_time,
       :operation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Provides a description of the operation, such as the operation-type and status
@@ -616,7 +611,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_change_details,
       :operation_failure_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the method and snapshot to use when restarting an application using previously saved application state.</p>
@@ -632,13 +627,7 @@ module Aws::KinesisAnalyticsV2
       :application_restore_type,
       :snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationRestoreType
-      SKIP_RESTORE_FROM_SNAPSHOT = 'SKIP_RESTORE_FROM_SNAPSHOT'
-      RESTORE_FROM_LATEST_SNAPSHOT = 'RESTORE_FROM_LATEST_SNAPSHOT'
-      RESTORE_FROM_CUSTOM_SNAPSHOT = 'RESTORE_FROM_CUSTOM_SNAPSHOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
@@ -648,7 +637,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationSnapshotConfiguration < Struct.new(
       :snapshots_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
@@ -658,7 +647,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationSnapshotConfigurationDescription < Struct.new(
       :snapshots_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to whether snapshots are enabled for a Managed Service for Apache Flink application.</p>
@@ -668,21 +657,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationSnapshotConfigurationUpdate < Struct.new(
       :snapshots_enabled_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      DELETING = 'DELETING'
-      STARTING = 'STARTING'
-      STOPPING = 'STOPPING'
-      READY = 'READY'
-      RUNNING = 'RUNNING'
-      UPDATING = 'UPDATING'
-      AUTOSCALING = 'AUTOSCALING'
-      FORCE_STOPPING = 'FORCE_STOPPING'
-      ROLLING_BACK = 'ROLLING_BACK'
-      MAINTENANCE = 'MAINTENANCE'
-      ROLLED_BACK = 'ROLLED_BACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>
@@ -712,7 +687,7 @@ module Aws::KinesisAnalyticsV2
       :runtime_environment,
       :application_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Describes system rollback configuration for a Managed Service for Apache Flink application
@@ -722,7 +697,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationSystemRollbackConfiguration < Struct.new(
       :rollback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Describes system rollback configuration for a Managed Service for Apache Flink application
@@ -732,7 +707,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationSystemRollbackConfigurationDescription < Struct.new(
       :rollback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Describes system rollback configuration for a Managed Service for Apache Flink application
@@ -742,7 +717,7 @@ module Aws::KinesisAnalyticsV2
     class ApplicationSystemRollbackConfigurationUpdate < Struct.new(
       :rollback_enabled_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Contains information about the application version changes due to an operation
@@ -756,7 +731,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_updated_from,
       :application_version_updated_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the application version.</p>
@@ -770,12 +745,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_id,
       :application_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactType
-      UDF = 'UDF'
-      DEPENDENCY_JAR = 'DEPENDENCY_JAR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, provides additional mapping information when the record
@@ -800,7 +770,7 @@ module Aws::KinesisAnalyticsV2
       :record_row_delimiter,
       :record_column_delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Managed Service for Apache Flink Studio notebook.</p>
@@ -810,7 +780,7 @@ module Aws::KinesisAnalyticsV2
     class CatalogConfiguration < Struct.new(
       :glue_data_catalog_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters for the default Amazon Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Managed Service for Apache Flink Studio notebook.</p>
@@ -820,7 +790,7 @@ module Aws::KinesisAnalyticsV2
     class CatalogConfigurationDescription < Struct.new(
       :glue_data_catalog_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates to the configuration parameters for the default Amazon Glue database. You use this database for SQL queries that you write in a Managed Service for Apache Flink Studio notebook.</p>
@@ -830,7 +800,7 @@ module Aws::KinesisAnalyticsV2
     class CatalogConfigurationUpdate < Struct.new(
       :glue_data_catalog_configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an application's checkpointing configuration. Checkpointing is the process of persisting application state for fault 
@@ -896,7 +866,7 @@ module Aws::KinesisAnalyticsV2
       :checkpoint_interval,
       :min_pause_between_checkpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes checkpointing parameters for a Managed Service for Apache Flink application.</p>
@@ -953,7 +923,7 @@ module Aws::KinesisAnalyticsV2
       :checkpoint_interval,
       :min_pause_between_checkpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to the checkpointing parameters for a Managed Service for Apache Flink application.</p>
@@ -1013,7 +983,7 @@ module Aws::KinesisAnalyticsV2
       :checkpoint_interval_update,
       :min_pause_between_checkpoints_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of Amazon CloudWatch logging options, including the log stream
@@ -1024,7 +994,7 @@ module Aws::KinesisAnalyticsV2
     class CloudWatchLoggingOption < Struct.new(
       :log_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon CloudWatch logging option.</p>
@@ -1047,7 +1017,7 @@ module Aws::KinesisAnalyticsV2
       :log_stream_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon CloudWatch logging option updates.</p>
@@ -1062,7 +1032,7 @@ module Aws::KinesisAnalyticsV2
       :cloud_watch_logging_option_id,
       :log_stream_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies either the application code, or the location of the application code, for a
@@ -1081,7 +1051,7 @@ module Aws::KinesisAnalyticsV2
       :zip_file_content,
       :s3_content_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes details about the code of a Managed Service for Apache Flink application.</p>
@@ -1104,12 +1074,7 @@ module Aws::KinesisAnalyticsV2
       :code_size,
       :s3_application_code_location_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodeContentType
-      PLAINTEXT = 'PLAINTEXT'
-      ZIPFILE = 'ZIPFILE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update to the code of an application. Not supported for Apache Zeppelin.</p>
@@ -1127,7 +1092,7 @@ module Aws::KinesisAnalyticsV2
       :zip_file_content_update,
       :s3_content_location_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user-provided application code (query) is not valid. This can be a simple syntax
@@ -1137,7 +1102,7 @@ module Aws::KinesisAnalyticsV2
     class CodeValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception thrown as a result of concurrent modifications to an application. This error can
@@ -1148,12 +1113,7 @@ module Aws::KinesisAnalyticsV2
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationType
-      DEFAULT = 'DEFAULT'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1171,7 +1131,7 @@ module Aws::KinesisAnalyticsV2
       :url_type,
       :session_expiration_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorized_url
@@ -1180,7 +1140,7 @@ module Aws::KinesisAnalyticsV2
     class CreateApplicationPresignedUrlResponse < Struct.new(
       :authorized_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1225,7 +1185,7 @@ module Aws::KinesisAnalyticsV2
       :tags,
       :application_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_detail
@@ -1235,7 +1195,7 @@ module Aws::KinesisAnalyticsV2
     class CreateApplicationResponse < Struct.new(
       :application_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1248,12 +1208,12 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateApplicationSnapshotResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies dependency JARs, as well as JAR files that contain user-defined functions (UDF).</p>
@@ -1275,7 +1235,7 @@ module Aws::KinesisAnalyticsV2
       :s3_content_location,
       :maven_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a dependency JAR or a JAR of user-defined functions.</p>
@@ -1297,7 +1257,7 @@ module Aws::KinesisAnalyticsV2
       :s3_content_location_description,
       :maven_reference_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1326,7 +1286,7 @@ module Aws::KinesisAnalyticsV2
       :cloud_watch_logging_option_id,
       :conditional_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1349,7 +1309,7 @@ module Aws::KinesisAnalyticsV2
       :cloud_watch_logging_option_descriptions,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1371,7 +1331,7 @@ module Aws::KinesisAnalyticsV2
       :current_application_version_id,
       :input_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1384,7 +1344,7 @@ module Aws::KinesisAnalyticsV2
       :application_arn,
       :application_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1409,7 +1369,7 @@ module Aws::KinesisAnalyticsV2
       :current_application_version_id,
       :output_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1422,7 +1382,7 @@ module Aws::KinesisAnalyticsV2
       :application_arn,
       :application_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1445,7 +1405,7 @@ module Aws::KinesisAnalyticsV2
       :current_application_version_id,
       :reference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1458,7 +1418,7 @@ module Aws::KinesisAnalyticsV2
       :application_arn,
       :application_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1471,12 +1431,12 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :create_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1495,12 +1455,12 @@ module Aws::KinesisAnalyticsV2
       :snapshot_name,
       :snapshot_creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationSnapshotResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1528,7 +1488,7 @@ module Aws::KinesisAnalyticsV2
       :vpc_configuration_id,
       :conditional_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1545,7 +1505,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_id,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information required to deploy a Managed Service for Apache Flink Studio notebook as an application with durable state.</p>
@@ -1556,7 +1516,7 @@ module Aws::KinesisAnalyticsV2
     class DeployAsApplicationConfiguration < Struct.new(
       :s3_content_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.</p>
@@ -1566,7 +1526,7 @@ module Aws::KinesisAnalyticsV2
     class DeployAsApplicationConfigurationDescription < Struct.new(
       :s3_content_location_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates to the configuration information required to deploy an Amazon Data Analytics Studio notebook as an application with durable state.</p>
@@ -1576,7 +1536,7 @@ module Aws::KinesisAnalyticsV2
     class DeployAsApplicationConfigurationUpdate < Struct.new(
       :s3_content_location_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request for information about a specific operation performed on a Managed Service for Apache Flink application
@@ -1590,7 +1550,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Provides details of the operation corresponding to the operation-ID on a Managed Service for Apache Flink application
@@ -1600,7 +1560,7 @@ module Aws::KinesisAnalyticsV2
     class DescribeApplicationOperationResponse < Struct.new(
       :application_operation_info_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1613,7 +1573,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :include_additional_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_detail
@@ -1623,7 +1583,7 @@ module Aws::KinesisAnalyticsV2
     class DescribeApplicationResponse < Struct.new(
       :application_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1637,7 +1597,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_details
@@ -1646,7 +1606,7 @@ module Aws::KinesisAnalyticsV2
     class DescribeApplicationSnapshotResponse < Struct.new(
       :snapshot_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1659,7 +1619,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :application_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_version_detail
@@ -1669,7 +1629,7 @@ module Aws::KinesisAnalyticsV2
     class DescribeApplicationVersionResponse < Struct.new(
       :application_version_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data format when records are written to the destination in a SQL-based Kinesis Data Analytics application. </p>
@@ -1679,7 +1639,7 @@ module Aws::KinesisAnalyticsV2
     class DestinationSchema < Struct.new(
       :record_format_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1707,7 +1667,7 @@ module Aws::KinesisAnalyticsV2
       :s3_configuration,
       :input_processing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_schema
@@ -1732,7 +1692,7 @@ module Aws::KinesisAnalyticsV2
       :processed_input_records,
       :raw_input_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes execution properties for a Managed Service for Apache Flink application.</p>
@@ -1742,7 +1702,7 @@ module Aws::KinesisAnalyticsV2
     class EnvironmentProperties < Struct.new(
       :property_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the execution properties for an Apache Flink runtime.</p>
@@ -1752,7 +1712,7 @@ module Aws::KinesisAnalyticsV2
     class EnvironmentPropertyDescriptions < Struct.new(
       :property_group_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to the execution property groups for a Managed Service for Apache Flink application or a Studio notebook.</p>
@@ -1762,7 +1722,7 @@ module Aws::KinesisAnalyticsV2
     class EnvironmentPropertyUpdates < Struct.new(
       :property_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Provides a description of the operation failure error
@@ -1772,7 +1732,7 @@ module Aws::KinesisAnalyticsV2
     class ErrorInfo < Struct.new(
       :error_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration parameters for a Managed Service for Apache Flink application or a Studio notebook.</p>
@@ -1796,7 +1756,7 @@ module Aws::KinesisAnalyticsV2
       :monitoring_configuration,
       :parallelism_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration parameters for a Managed Service for Apache Flink application.</p>
@@ -1821,7 +1781,7 @@ module Aws::KinesisAnalyticsV2
       :parallelism_configuration_description,
       :job_plan_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to the configuration parameters for a Managed Service for Apache Flink application.</p>
@@ -1841,7 +1801,7 @@ module Aws::KinesisAnalyticsV2
       :monitoring_configuration_update,
       :parallelism_configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the starting parameters for a Managed Service for Apache Flink application.</p>
@@ -1863,7 +1823,7 @@ module Aws::KinesisAnalyticsV2
     class FlinkRunConfiguration < Struct.new(
       :allow_non_restored_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the Glue Data Catalog that you use for Apache Flink SQL queries and table API transforms that you write in an application.</p>
@@ -1873,7 +1833,7 @@ module Aws::KinesisAnalyticsV2
     class GlueDataCatalogConfiguration < Struct.new(
       :database_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the Glue Data Catalog that you use for Apache Flink SQL queries and table API transforms that you write in an application.</p>
@@ -1883,7 +1843,7 @@ module Aws::KinesisAnalyticsV2
     class GlueDataCatalogConfigurationDescription < Struct.new(
       :database_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates to the configuration of the Glue Data Catalog that you use for SQL queries that you write in a Managed Service for Apache Flink Studio notebook.</p>
@@ -1893,7 +1853,7 @@ module Aws::KinesisAnalyticsV2
     class GlueDataCatalogConfigurationUpdate < Struct.new(
       :database_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you configure the application input for a SQL-based Kinesis Data Analytics application, you specify the streaming source, the in-application stream 
@@ -1933,7 +1893,7 @@ module Aws::KinesisAnalyticsV2
       :input_parallelism,
       :input_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the application input configuration for a SQL-based Kinesis Data Analytics application. </p>
@@ -1978,7 +1938,7 @@ module Aws::KinesisAnalyticsV2
       :input_parallelism,
       :input_starting_position_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda function that is
@@ -1993,7 +1953,7 @@ module Aws::KinesisAnalyticsV2
     class InputLambdaProcessor < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, an object that contains the
@@ -2019,7 +1979,7 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, represents an update to the
@@ -2036,7 +1996,7 @@ module Aws::KinesisAnalyticsV2
     class InputLambdaProcessorUpdate < Struct.new(
       :resource_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the number of
@@ -2047,7 +2007,7 @@ module Aws::KinesisAnalyticsV2
     class InputParallelism < Struct.new(
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, provides updates to the
@@ -2058,7 +2018,7 @@ module Aws::KinesisAnalyticsV2
     class InputParallelismUpdate < Struct.new(
       :count_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes a processor that is
@@ -2071,7 +2031,7 @@ module Aws::KinesisAnalyticsV2
     class InputProcessingConfiguration < Struct.new(
       :input_lambda_processor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, provides the configuration
@@ -2083,7 +2043,7 @@ module Aws::KinesisAnalyticsV2
     class InputProcessingConfigurationDescription < Struct.new(
       :input_lambda_processor_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes updates to an <a>InputProcessingConfiguration</a>.</p>
@@ -2093,7 +2053,7 @@ module Aws::KinesisAnalyticsV2
     class InputProcessingConfigurationUpdate < Struct.new(
       :input_lambda_processor_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates for an SQL-based Kinesis Data Analytics application's input
@@ -2113,13 +2073,7 @@ module Aws::KinesisAnalyticsV2
       :record_encoding_update,
       :record_column_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputStartingPosition
-      NOW = 'NOW'
-      TRIM_HORIZON = 'TRIM_HORIZON'
-      LAST_STOPPED_POINT = 'LAST_STOPPED_POINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the point at which the application reads from 
@@ -2147,7 +2101,7 @@ module Aws::KinesisAnalyticsV2
     class InputStartingPositionConfiguration < Struct.new(
       :input_starting_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes updates to a
@@ -2186,7 +2140,7 @@ module Aws::KinesisAnalyticsV2
       :input_schema_update,
       :input_parallelism_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user-provided application configuration is not valid.</p>
@@ -2195,7 +2149,7 @@ module Aws::KinesisAnalyticsV2
     class InvalidApplicationConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified input parameter value is not valid.</p>
@@ -2204,7 +2158,7 @@ module Aws::KinesisAnalyticsV2
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request JSON is not valid for the operation.</p>
@@ -2213,7 +2167,7 @@ module Aws::KinesisAnalyticsV2
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, provides additional mapping
@@ -2224,7 +2178,7 @@ module Aws::KinesisAnalyticsV2
     class JSONMappingParameters < Struct.new(
       :record_row_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, identifies a Kinesis Data
@@ -2236,7 +2190,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisFirehoseInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Kinesis Data Firehose delivery stream that is configured as the streaming source 
@@ -2256,7 +2210,7 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, when updating application
@@ -2268,7 +2222,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisFirehoseInputUpdate < Struct.new(
       :resource_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, when configuring application
@@ -2280,7 +2234,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisFirehoseOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application's output, describes the Kinesis
@@ -2301,7 +2255,7 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, when updating an output
@@ -2313,7 +2267,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisFirehoseOutputUpdate < Struct.new(
       :resource_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Identifies a Kinesis data stream as the streaming source. You provide the
@@ -2324,7 +2278,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisStreamsInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the Kinesis data
@@ -2345,7 +2299,7 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update the input configuration for a SQL-based Kinesis Data Analytics application, provides information about a 
@@ -2357,7 +2311,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisStreamsInputUpdate < Struct.new(
       :resource_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you configure a SQL-based Kinesis Data Analytics application's output,
@@ -2369,7 +2323,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisStreamsOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For an SQL-based Kinesis Data Analytics application's output, describes the Kinesis
@@ -2390,7 +2344,7 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update a SQL-based Kinesis Data Analytics application's output
@@ -2403,7 +2357,7 @@ module Aws::KinesisAnalyticsV2
     class KinesisStreamsOutputUpdate < Struct.new(
       :resource_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you configure a SQL-based Kinesis Data Analytics application's output,
@@ -2419,7 +2373,7 @@ module Aws::KinesisAnalyticsV2
     class LambdaOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application's output, describes the Amazon
@@ -2440,7 +2394,7 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update an SQL-based Kinesis Data Analytics application's output
@@ -2456,7 +2410,7 @@ module Aws::KinesisAnalyticsV2
     class LambdaOutputUpdate < Struct.new(
       :resource_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of allowed resources has been exceeded.</p>
@@ -2465,7 +2419,7 @@ module Aws::KinesisAnalyticsV2
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request to list operations performed on an application
@@ -2491,7 +2445,7 @@ module Aws::KinesisAnalyticsV2
       :operation,
       :operation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response with the list of operations for an application
@@ -2505,7 +2459,7 @@ module Aws::KinesisAnalyticsV2
       :application_operation_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -2524,7 +2478,7 @@ module Aws::KinesisAnalyticsV2
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_summaries
@@ -2537,7 +2491,7 @@ module Aws::KinesisAnalyticsV2
       :snapshot_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -2555,7 +2509,7 @@ module Aws::KinesisAnalyticsV2
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_version_summaries
@@ -2571,7 +2525,7 @@ module Aws::KinesisAnalyticsV2
       :application_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -2587,7 +2541,7 @@ module Aws::KinesisAnalyticsV2
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_summaries
@@ -2603,7 +2557,7 @@ module Aws::KinesisAnalyticsV2
       :application_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2612,7 +2566,7 @@ module Aws::KinesisAnalyticsV2
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2621,14 +2575,7 @@ module Aws::KinesisAnalyticsV2
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogLevel
-      INFO = 'INFO'
-      WARN = 'WARN'
-      ERROR = 'ERROR'
-      DEBUG = 'DEBUG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you configure a SQL-based Kinesis Data Analytics application's input at the
@@ -2646,7 +2593,7 @@ module Aws::KinesisAnalyticsV2
       :json_mapping_parameters,
       :csv_mapping_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information required to specify a Maven reference. You can use Maven references to specify dependency JAR files.</p>
@@ -2664,14 +2611,7 @@ module Aws::KinesisAnalyticsV2
       :artifact_id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricsLevel
-      APPLICATION = 'APPLICATION'
-      TASK = 'TASK'
-      OPERATOR = 'OPERATOR'
-      PARALLELISM = 'PARALLELISM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration parameters for Amazon CloudWatch logging for an application. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html">Monitoring</a>.</p>
@@ -2692,7 +2632,7 @@ module Aws::KinesisAnalyticsV2
       :metrics_level,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration parameters for CloudWatch logging for an application.</p>
@@ -2710,7 +2650,7 @@ module Aws::KinesisAnalyticsV2
       :metrics_level,
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to configuration parameters for Amazon CloudWatch logging for an application.</p>
@@ -2731,7 +2671,7 @@ module Aws::KinesisAnalyticsV2
       :metrics_level_update,
       :log_level_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Provides a description of the operation failure
@@ -2745,15 +2685,7 @@ module Aws::KinesisAnalyticsV2
       :rollback_operation_id,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Status of the operation performed on an application
-    module OperationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      CANCELLED = 'CANCELLED'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes a SQL-based Kinesis Data Analytics application's output configuration,
@@ -2785,7 +2717,7 @@ module Aws::KinesisAnalyticsV2
       :lambda_output,
       :destination_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the application
@@ -2821,7 +2753,7 @@ module Aws::KinesisAnalyticsV2
       :lambda_output_description,
       :destination_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> For a SQL-based Kinesis Data Analytics application, describes updates to the
@@ -2856,7 +2788,7 @@ module Aws::KinesisAnalyticsV2
       :lambda_output_update,
       :destination_schema_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes parameters for how a Managed Service for Apache Flink application
@@ -2890,7 +2822,7 @@ module Aws::KinesisAnalyticsV2
       :parallelism_per_kpu,
       :auto_scaling_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes parameters for how a Managed Service for Apache Flink application
@@ -2926,7 +2858,7 @@ module Aws::KinesisAnalyticsV2
       :current_parallelism,
       :auto_scaling_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to parameters for how an application executes multiple tasks simultaneously.</p>
@@ -2954,7 +2886,7 @@ module Aws::KinesisAnalyticsV2
       :parallelism_per_kpu_update,
       :auto_scaling_enabled_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Property key-value pairs passed into an application.</p>
@@ -2968,7 +2900,7 @@ module Aws::KinesisAnalyticsV2
       :property_group_id,
       :property_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the mapping of each
@@ -2991,7 +2923,7 @@ module Aws::KinesisAnalyticsV2
       :mapping,
       :sql_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> For a SQL-based Kinesis Data Analytics application, describes the record format
@@ -3009,12 +2941,7 @@ module Aws::KinesisAnalyticsV2
       :record_format_type,
       :mapping_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordFormatType
-      JSON = 'JSON'
-      CSV = 'CSV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the reference data
@@ -3037,7 +2964,7 @@ module Aws::KinesisAnalyticsV2
       :s3_reference_data_source,
       :reference_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the reference data
@@ -3061,7 +2988,7 @@ module Aws::KinesisAnalyticsV2
       :s3_reference_data_source_description,
       :reference_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update a reference data source configuration for a
@@ -3089,7 +3016,7 @@ module Aws::KinesisAnalyticsV2
       :s3_reference_data_source_update,
       :reference_schema_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application is not available for this operation.</p>
@@ -3098,7 +3025,7 @@ module Aws::KinesisAnalyticsV2
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified application can't be found.</p>
@@ -3107,7 +3034,7 @@ module Aws::KinesisAnalyticsV2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Discovery failed to get a record from the streaming source because of the Kinesis
@@ -3117,7 +3044,7 @@ module Aws::KinesisAnalyticsV2
     class ResourceProvisionedThroughputExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -3131,7 +3058,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :current_application_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_detail
@@ -3145,7 +3072,7 @@ module Aws::KinesisAnalyticsV2
       :application_detail,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the starting parameters for an Managed Service for Apache Flink application.</p>
@@ -3164,7 +3091,7 @@ module Aws::KinesisAnalyticsV2
       :sql_run_configurations,
       :application_restore_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the starting properties for a Managed Service for Apache Flink application.</p>
@@ -3178,7 +3105,7 @@ module Aws::KinesisAnalyticsV2
       :application_restore_configuration_description,
       :flink_run_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the updates to the starting parameters for a Managed Service for Apache Flink application.</p>
@@ -3192,22 +3119,7 @@ module Aws::KinesisAnalyticsV2
       :flink_run_configuration,
       :application_restore_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuntimeEnvironment
-      SQL_1_0 = 'SQL-1_0'
-      FLINK_1_6 = 'FLINK-1_6'
-      FLINK_1_8 = 'FLINK-1_8'
-      ZEPPELIN_FLINK_1_0 = 'ZEPPELIN-FLINK-1_0'
-      FLINK_1_11 = 'FLINK-1_11'
-      FLINK_1_13 = 'FLINK-1_13'
-      ZEPPELIN_FLINK_2_0 = 'ZEPPELIN-FLINK-2_0'
-      FLINK_1_15 = 'FLINK-1_15'
-      ZEPPELIN_FLINK_3_0 = 'ZEPPELIN-FLINK-3_0'
-      FLINK_1_18 = 'FLINK-1_18'
-      FLINK_1_19 = 'FLINK-1_19'
-      FLINK_1_20 = 'FLINK-1_20'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the location of an application's code stored in an S3 bucket.</p>
@@ -3225,7 +3137,7 @@ module Aws::KinesisAnalyticsV2
       :file_key,
       :object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, provides a description of an
@@ -3241,7 +3153,7 @@ module Aws::KinesisAnalyticsV2
       :bucket_arn,
       :file_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket that holds the application information.</p>
@@ -3255,7 +3167,7 @@ module Aws::KinesisAnalyticsV2
       :bucket_arn,
       :base_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description of the S3 base location that holds the application.</p>
@@ -3269,7 +3181,7 @@ module Aws::KinesisAnalyticsV2
       :bucket_arn,
       :base_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information required to update the S3 base location that holds the application.</p>
@@ -3283,7 +3195,7 @@ module Aws::KinesisAnalyticsV2
       :bucket_arn_update,
       :base_path_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a Managed Service for Apache Flink application provides a
@@ -3304,7 +3216,7 @@ module Aws::KinesisAnalyticsV2
       :file_key,
       :object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update for the Amazon S3 code content location for an application.</p>
@@ -3322,7 +3234,7 @@ module Aws::KinesisAnalyticsV2
       :file_key_update,
       :object_version_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3
@@ -3339,7 +3251,7 @@ module Aws::KinesisAnalyticsV2
       :bucket_arn,
       :file_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, provides the bucket name and
@@ -3364,7 +3276,7 @@ module Aws::KinesisAnalyticsV2
       :file_key,
       :reference_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the Amazon S3 bucket
@@ -3379,7 +3291,7 @@ module Aws::KinesisAnalyticsV2
       :bucket_arn_update,
       :file_key_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service cannot complete the request.</p>
@@ -3388,7 +3300,7 @@ module Aws::KinesisAnalyticsV2
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a snapshot of application state.</p>
@@ -3414,14 +3326,7 @@ module Aws::KinesisAnalyticsV2
       :snapshot_creation_timestamp,
       :runtime_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotStatus
-      CREATING = 'CREATING'
-      READY = 'READY'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a SQL-based Kinesis Data Analytics application, describes the format of the
@@ -3441,7 +3346,7 @@ module Aws::KinesisAnalyticsV2
       :record_encoding,
       :record_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the inputs, outputs, and reference data sources for a SQL-based Kinesis Data Analytics application.</p>
@@ -3462,7 +3367,7 @@ module Aws::KinesisAnalyticsV2
       :outputs,
       :reference_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the inputs, outputs, and reference data sources for a SQL-based Kinesis Data Analytics application.</p>
@@ -3483,7 +3388,7 @@ module Aws::KinesisAnalyticsV2
       :output_descriptions,
       :reference_data_source_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to the input streams, destination streams, and reference data sources
@@ -3505,7 +3410,7 @@ module Aws::KinesisAnalyticsV2
       :output_updates,
       :reference_data_source_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the starting parameters for a SQL-based Kinesis Data Analytics application.</p>
@@ -3520,7 +3425,7 @@ module Aws::KinesisAnalyticsV2
       :input_id,
       :input_starting_position_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -3533,7 +3438,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :run_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -3542,7 +3447,7 @@ module Aws::KinesisAnalyticsV2
     class StartApplicationResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -3566,7 +3471,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -3575,7 +3480,7 @@ module Aws::KinesisAnalyticsV2
     class StopApplicationResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair (the value is optional) that you can define and assign to Amazon resources. 
@@ -3595,7 +3500,7 @@ module Aws::KinesisAnalyticsV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3608,12 +3513,12 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application created with too many tags, or too many tags added to an application. Note that the maximum 
@@ -3623,7 +3528,7 @@ module Aws::KinesisAnalyticsV2
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data format is not valid. Kinesis Data Analytics cannot detect the schema for
@@ -3641,7 +3546,7 @@ module Aws::KinesisAnalyticsV2
       :raw_input_records,
       :processed_input_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this 
@@ -3651,7 +3556,7 @@ module Aws::KinesisAnalyticsV2
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3664,12 +3569,12 @@ module Aws::KinesisAnalyticsV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -3682,7 +3587,7 @@ module Aws::KinesisAnalyticsV2
       :application_name,
       :application_maintenance_configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -3695,7 +3600,7 @@ module Aws::KinesisAnalyticsV2
       :application_arn,
       :application_maintenance_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -3750,7 +3655,7 @@ module Aws::KinesisAnalyticsV2
       :conditional_token,
       :runtime_environment_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_detail
@@ -3763,12 +3668,7 @@ module Aws::KinesisAnalyticsV2
       :application_detail,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UrlType
-      FLINK_DASHBOARD_URL = 'FLINK_DASHBOARD_URL'
-      ZEPPELIN_UI_URL = 'ZEPPELIN_UI_URL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters of a VPC used by the application.</p>
@@ -3784,7 +3684,7 @@ module Aws::KinesisAnalyticsV2
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters of a VPC used by the application.</p>
@@ -3808,7 +3708,7 @@ module Aws::KinesisAnalyticsV2
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to the VPC configuration used by the application.</p>
@@ -3829,7 +3729,7 @@ module Aws::KinesisAnalyticsV2
       :subnet_id_updates,
       :security_group_id_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a Managed Service for Apache Flink Studio notebook.</p>
@@ -3851,7 +3751,7 @@ module Aws::KinesisAnalyticsV2
       :deploy_as_application_configuration,
       :custom_artifacts_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a Managed Service for Apache Flink Studio notebook.</p>
@@ -3873,7 +3773,7 @@ module Aws::KinesisAnalyticsV2
       :deploy_as_application_configuration_description,
       :custom_artifacts_configuration_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates to the configuration of Managed Service for Apache Flink Studio notebook.</p>
@@ -3895,7 +3795,7 @@ module Aws::KinesisAnalyticsV2
       :deploy_as_application_configuration_update,
       :custom_artifacts_configuration_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration parameters for Amazon CloudWatch logging for a Managed Service for Apache Flink Studio notebook. For more information about CloudWatch logging, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html">Monitoring</a>.</p>
@@ -3905,7 +3805,7 @@ module Aws::KinesisAnalyticsV2
     class ZeppelinMonitoringConfiguration < Struct.new(
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The monitoring configuration for Apache Zeppelin within a Managed Service for Apache Flink Studio notebook.</p>
@@ -3915,7 +3815,7 @@ module Aws::KinesisAnalyticsV2
     class ZeppelinMonitoringConfigurationDescription < Struct.new(
       :log_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates to the monitoring configuration for Apache Zeppelin within a Managed Service for Apache Flink Studio notebook.</p>
@@ -3925,7 +3825,7 @@ module Aws::KinesisAnalyticsV2
     class ZeppelinMonitoringConfigurationUpdate < Struct.new(
       :log_level_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

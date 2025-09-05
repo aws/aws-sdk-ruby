@@ -13,7 +13,7 @@ module Aws::ResourceExplorer2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -24,7 +24,7 @@ module Aws::ResourceExplorer2
     class AssociateDefaultViewOperationInput < Struct.new(
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -34,7 +34,7 @@ module Aws::ResourceExplorer2
     class AssociateDefaultViewOperationOutput < Struct.new(
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of error messages for any views that Amazon Web Services Resource Explorer couldn't retrieve
@@ -49,7 +49,7 @@ module Aws::ResourceExplorer2
       :view_arn,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arns
@@ -58,7 +58,7 @@ module Aws::ResourceExplorer2
     class BatchGetViewOperationInput < Struct.new(
       :view_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute views
@@ -73,7 +73,7 @@ module Aws::ResourceExplorer2
       :views,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you attempted to create a view, then the request failed because either you specified parameters that didn’t match the
@@ -88,7 +88,7 @@ module Aws::ResourceExplorer2
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -104,7 +104,7 @@ module Aws::ResourceExplorer2
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -130,7 +130,7 @@ module Aws::ResourceExplorer2
       :state,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -179,7 +179,7 @@ module Aws::ResourceExplorer2
       :filters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -188,7 +188,7 @@ module Aws::ResourceExplorer2
     class CreateViewOperationOutput < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -197,7 +197,7 @@ module Aws::ResourceExplorer2
     class DeleteIndexOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -218,7 +218,7 @@ module Aws::ResourceExplorer2
       :state,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -227,7 +227,7 @@ module Aws::ResourceExplorer2
     class DeleteViewOperationInput < Struct.new(
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -236,7 +236,7 @@ module Aws::ResourceExplorer2
     class DeleteViewOperationOutput < Struct.new(
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute org_configuration
@@ -246,7 +246,7 @@ module Aws::ResourceExplorer2
     class GetAccountLevelServiceConfigurationOutput < Struct.new(
       :org_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -256,7 +256,7 @@ module Aws::ResourceExplorer2
     class GetDefaultViewOperationOutput < Struct.new(
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -301,7 +301,7 @@ module Aws::ResourceExplorer2
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_view_arn
@@ -310,7 +310,7 @@ module Aws::ResourceExplorer2
     class GetManagedViewInput < Struct.new(
       :managed_view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_view
@@ -319,7 +319,7 @@ module Aws::ResourceExplorer2
     class GetManagedViewOutput < Struct.new(
       :managed_view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -328,7 +328,7 @@ module Aws::ResourceExplorer2
     class GetViewOperationInput < Struct.new(
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -341,7 +341,7 @@ module Aws::ResourceExplorer2
       :view,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an additional property that describes a resource, that you can
@@ -361,7 +361,7 @@ module Aws::ResourceExplorer2
     class IncludedProperty < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An index is the data store used by Amazon Web Services Resource Explorer to hold information about your Amazon Web Services
@@ -401,7 +401,7 @@ module Aws::ResourceExplorer2
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because of internal service error. Try your request again
@@ -411,7 +411,7 @@ module Aws::ResourceExplorer2
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id_list
@@ -443,7 +443,7 @@ module Aws::ResourceExplorer2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute indexes
@@ -461,7 +461,7 @@ module Aws::ResourceExplorer2
       :indexes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -499,7 +499,7 @@ module Aws::ResourceExplorer2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute indexes
@@ -516,7 +516,7 @@ module Aws::ResourceExplorer2
       :indexes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -548,7 +548,7 @@ module Aws::ResourceExplorer2
       :next_token,
       :service_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -565,7 +565,7 @@ module Aws::ResourceExplorer2
       :next_token,
       :managed_views,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -621,7 +621,7 @@ module Aws::ResourceExplorer2
       :view_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -642,7 +642,7 @@ module Aws::ResourceExplorer2
       :next_token,
       :view_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -669,7 +669,7 @@ module Aws::ResourceExplorer2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_types
@@ -686,7 +686,7 @@ module Aws::ResourceExplorer2
       :resource_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -695,7 +695,7 @@ module Aws::ResourceExplorer2
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -705,7 +705,7 @@ module Aws::ResourceExplorer2
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -732,7 +732,7 @@ module Aws::ResourceExplorer2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute views
@@ -750,7 +750,7 @@ module Aws::ResourceExplorer2
       :views,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Web Services-managed view is how other Amazon Web Services services can access 
@@ -801,7 +801,7 @@ module Aws::ResourceExplorer2
       :resource_policy,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An index is the data store used by Amazon Web Services Resource Explorer to hold information about your Amazon Web Services
@@ -839,7 +839,7 @@ module Aws::ResourceExplorer2
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is a structure that contains the status of Amazon Web Services service access, and whether you have a valid service-linked role to enable 
@@ -854,7 +854,7 @@ module Aws::ResourceExplorer2
       :aws_service_access_status,
       :service_linked_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource in Amazon Web Services that Amazon Web Services Resource Explorer has discovered, and for which it has stored
@@ -892,7 +892,7 @@ module Aws::ResourceExplorer2
       :last_reported_at,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the number of results that match the query. At this time, Amazon Web Services Resource Explorer
@@ -924,7 +924,7 @@ module Aws::ResourceExplorer2
       :total_resources,
       :complete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified a resource that doesn't exist. Check the ID or ARN that you used to
@@ -934,7 +934,7 @@ module Aws::ResourceExplorer2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a property of a resource.</p>
@@ -954,7 +954,7 @@ module Aws::ResourceExplorer2
       :last_reported_at,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A search filter defines which resources can be part of a search query result
@@ -969,7 +969,7 @@ module Aws::ResourceExplorer2
     class SearchFilter < Struct.new(
       :filter_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_string
@@ -1018,7 +1018,7 @@ module Aws::ResourceExplorer2
       :view_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -1043,7 +1043,7 @@ module Aws::ResourceExplorer2
       :view_arn,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it exceeds a service quota.</p>
@@ -1060,7 +1060,7 @@ module Aws::ResourceExplorer2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a resource type supported by Amazon Web Services Resource Explorer.</p>
@@ -1075,7 +1075,7 @@ module Aws::ResourceExplorer2
       :service,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1090,12 +1090,12 @@ module Aws::ResourceExplorer2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because you exceeded a rate limit for this operation. For more
@@ -1106,7 +1106,7 @@ module Aws::ResourceExplorer2
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The principal making the request isn't permitted to perform the operation.</p>
@@ -1115,7 +1115,7 @@ module Aws::ResourceExplorer2
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1130,12 +1130,12 @@ module Aws::ResourceExplorer2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1150,7 +1150,7 @@ module Aws::ResourceExplorer2
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1172,7 +1172,7 @@ module Aws::ResourceExplorer2
       :state,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_arn
@@ -1204,7 +1204,7 @@ module Aws::ResourceExplorer2
       :included_properties,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -1213,7 +1213,7 @@ module Aws::ResourceExplorer2
     class UpdateViewOperationOutput < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You provided an invalid value for one of the operation's parameters. Check the syntax
@@ -1227,7 +1227,7 @@ module Aws::ResourceExplorer2
       :message,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a request field with a validation error.</p>
@@ -1241,7 +1241,7 @@ module Aws::ResourceExplorer2
       :name,
       :validation_issue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A view is a structure that defines a set of filters that provide a view into the
@@ -1282,7 +1282,7 @@ module Aws::ResourceExplorer2
       :included_properties,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

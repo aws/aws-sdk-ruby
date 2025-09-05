@@ -27,7 +27,7 @@ module Aws::ElasticLoadBalancing
       :emit_interval,
       :s3_bucket_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -41,7 +41,7 @@ module Aws::ElasticLoadBalancing
     class AccessPointNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for EnableAvailabilityZonesForLoadBalancer.</p>
@@ -55,7 +55,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of EnableAvailabilityZonesForLoadBalancer.</p>
@@ -65,7 +65,7 @@ module Aws::ElasticLoadBalancing
     class AddAvailabilityZonesOutput < Struct.new(
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for AddTags.</p>
@@ -79,13 +79,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_names,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AddTags.</p>
     class AddTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about additional load balancer attributes.</p>
@@ -108,7 +108,7 @@ module Aws::ElasticLoadBalancing
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy for application-controlled session stickiness.</p>
@@ -122,7 +122,7 @@ module Aws::ElasticLoadBalancing
       :policy_name,
       :cookie_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ApplySecurityGroupsToLoadBalancer.</p>
@@ -136,7 +136,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ApplySecurityGroupsToLoadBalancer.</p>
@@ -146,7 +146,7 @@ module Aws::ElasticLoadBalancing
     class ApplySecurityGroupsToLoadBalancerOutput < Struct.new(
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for AttachLoaBalancerToSubnets.</p>
@@ -160,7 +160,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AttachLoadBalancerToSubnets.</p>
@@ -170,7 +170,7 @@ module Aws::ElasticLoadBalancing
     class AttachLoadBalancerToSubnetsOutput < Struct.new(
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration of an EC2 instance.</p>
@@ -184,7 +184,7 @@ module Aws::ElasticLoadBalancing
       :instance_port,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified ARN does not refer to a valid SSL certificate in AWS Identity and Access Management (IAM) 
@@ -195,7 +195,7 @@ module Aws::ElasticLoadBalancing
     class CertificateNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ConfigureHealthCheck.</p>
@@ -209,7 +209,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ConfigureHealthCheck.</p>
@@ -219,7 +219,7 @@ module Aws::ElasticLoadBalancing
     class ConfigureHealthCheckOutput < Struct.new(
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <code>ConnectionDraining</code> attribute.</p>
@@ -233,7 +233,7 @@ module Aws::ElasticLoadBalancing
       :enabled,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -248,7 +248,7 @@ module Aws::ElasticLoadBalancing
     class ConnectionSettings < Struct.new(
       :idle_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateLoadBalancer.</p>
@@ -295,7 +295,7 @@ module Aws::ElasticLoadBalancing
       :scheme,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for CreateLoadBalancer.</p>
@@ -305,7 +305,7 @@ module Aws::ElasticLoadBalancing
     class CreateAccessPointOutput < Struct.new(
       :dns_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateAppCookieStickinessPolicy.</p>
@@ -323,13 +323,13 @@ module Aws::ElasticLoadBalancing
       :policy_name,
       :cookie_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for CreateAppCookieStickinessPolicy.</p>
     class CreateAppCookieStickinessPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateLBCookieStickinessPolicy.</p>
@@ -347,13 +347,13 @@ module Aws::ElasticLoadBalancing
       :policy_name,
       :cookie_expiration_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for CreateLBCookieStickinessPolicy.</p>
     class CreateLBCookieStickinessPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateLoadBalancerListeners.</p>
@@ -367,13 +367,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :listeners,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateLoadBalancerListener.</p>
     class CreateLoadBalancerListenerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateLoadBalancerPolicy.</p>
@@ -396,13 +396,13 @@ module Aws::ElasticLoadBalancing
       :policy_type_name,
       :policy_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateLoadBalancerPolicy.</p>
     class CreateLoadBalancerPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <code>CrossZoneLoadBalancing</code> attribute.</p>
@@ -412,7 +412,7 @@ module Aws::ElasticLoadBalancing
     class CrossZoneLoadBalancing < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -427,13 +427,13 @@ module Aws::ElasticLoadBalancing
     class DeleteAccessPointInput < Struct.new(
       :load_balancer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DeleteLoadBalancer.</p>
     class DeleteAccessPointOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteLoadBalancerListeners.</p>
@@ -447,13 +447,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :load_balancer_ports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DeleteLoadBalancerListeners.</p>
     class DeleteLoadBalancerListenerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteLoadBalancerPolicy.</p>
@@ -467,13 +467,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DeleteLoadBalancerPolicy.</p>
     class DeleteLoadBalancerPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request made by Elastic Load Balancing to another service exceeds the maximum request rate permitted for your account.</p>
@@ -482,7 +482,7 @@ module Aws::ElasticLoadBalancing
     class DependencyThrottleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeregisterInstancesFromLoadBalancer.</p>
@@ -496,7 +496,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DeregisterInstancesFromLoadBalancer.</p>
@@ -506,7 +506,7 @@ module Aws::ElasticLoadBalancing
     class DeregisterEndPointsOutput < Struct.new(
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeLoadBalancers.</p>
@@ -524,7 +524,7 @@ module Aws::ElasticLoadBalancing
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeLoadBalancers.</p>
@@ -538,7 +538,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_descriptions,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -551,7 +551,7 @@ module Aws::ElasticLoadBalancing
       :marker,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limits
@@ -564,7 +564,7 @@ module Aws::ElasticLoadBalancing
       :limits,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeInstanceHealth.</p>
@@ -578,7 +578,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for DescribeInstanceHealth.</p>
@@ -588,7 +588,7 @@ module Aws::ElasticLoadBalancing
     class DescribeEndPointStateOutput < Struct.new(
       :instance_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeLoadBalancerAttributes.</p>
@@ -598,7 +598,7 @@ module Aws::ElasticLoadBalancing
     class DescribeLoadBalancerAttributesInput < Struct.new(
       :load_balancer_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeLoadBalancerAttributes.</p>
@@ -608,7 +608,7 @@ module Aws::ElasticLoadBalancing
     class DescribeLoadBalancerAttributesOutput < Struct.new(
       :load_balancer_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeLoadBalancerPolicies.</p>
@@ -622,7 +622,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeLoadBalancerPolicies.</p>
@@ -632,7 +632,7 @@ module Aws::ElasticLoadBalancing
     class DescribeLoadBalancerPoliciesOutput < Struct.new(
       :policy_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeLoadBalancerPolicyTypes.</p>
@@ -642,7 +642,7 @@ module Aws::ElasticLoadBalancing
     class DescribeLoadBalancerPolicyTypesInput < Struct.new(
       :policy_type_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeLoadBalancerPolicyTypes.</p>
@@ -652,7 +652,7 @@ module Aws::ElasticLoadBalancing
     class DescribeLoadBalancerPolicyTypesOutput < Struct.new(
       :policy_type_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeTags.</p>
@@ -662,7 +662,7 @@ module Aws::ElasticLoadBalancing
     class DescribeTagsInput < Struct.new(
       :load_balancer_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for DescribeTags.</p>
@@ -672,7 +672,7 @@ module Aws::ElasticLoadBalancing
     class DescribeTagsOutput < Struct.new(
       :tag_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DetachLoadBalancerFromSubnets.</p>
@@ -686,7 +686,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DetachLoadBalancerFromSubnets.</p>
@@ -696,7 +696,7 @@ module Aws::ElasticLoadBalancing
     class DetachLoadBalancerFromSubnetsOutput < Struct.new(
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified load balancer name already exists for this account.</p>
@@ -705,7 +705,7 @@ module Aws::ElasticLoadBalancing
     class DuplicateAccessPointNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A listener already exists for the specified load balancer name and port, but with a different instance port, protocol, or SSL certificate.</p>
@@ -714,7 +714,7 @@ module Aws::ElasticLoadBalancing
     class DuplicateListenerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy with the specified name already exists for this load balancer.</p>
@@ -723,7 +723,7 @@ module Aws::ElasticLoadBalancing
     class DuplicatePolicyNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag key was specified more than once.</p>
@@ -732,7 +732,7 @@ module Aws::ElasticLoadBalancing
     class DuplicateTagKeysException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a health check.</p>
@@ -763,7 +763,7 @@ module Aws::ElasticLoadBalancing
       :unhealthy_threshold,
       :healthy_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID of an EC2 instance.</p>
@@ -773,7 +773,7 @@ module Aws::ElasticLoadBalancing
     class Instance < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the state of an EC2 instance.</p>
@@ -862,7 +862,7 @@ module Aws::ElasticLoadBalancing
       :reason_code,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested configuration change is not valid.</p>
@@ -871,7 +871,7 @@ module Aws::ElasticLoadBalancing
     class InvalidConfigurationRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified endpoint is not valid.</p>
@@ -880,7 +880,7 @@ module Aws::ElasticLoadBalancing
     class InvalidEndPointException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified value for the schema is not valid. You can only specify a scheme for load balancers in a VPC.</p>
@@ -889,7 +889,7 @@ module Aws::ElasticLoadBalancing
     class InvalidSchemeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified security groups do not exist.</p>
@@ -898,7 +898,7 @@ module Aws::ElasticLoadBalancing
     class InvalidSecurityGroupException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified VPC has no associated Internet gateway.</p>
@@ -907,7 +907,7 @@ module Aws::ElasticLoadBalancing
     class InvalidSubnetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy for duration-based session stickiness.</p>
@@ -921,7 +921,7 @@ module Aws::ElasticLoadBalancing
       :policy_name,
       :cookie_expiration_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Elastic Load Balancing resource limit for your AWS account.</p>
@@ -946,7 +946,7 @@ module Aws::ElasticLoadBalancing
       :name,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a listener.</p>
@@ -980,7 +980,7 @@ module Aws::ElasticLoadBalancing
       :instance_port,
       :ssl_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:load_balancer_port] = 0 unless options.key?(:load_balancer_port)
@@ -999,7 +999,7 @@ module Aws::ElasticLoadBalancing
       :listener,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The load balancer does not have a listener configured at the specified port.</p>
@@ -1008,7 +1008,7 @@ module Aws::ElasticLoadBalancing
     class ListenerNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified load balancer attribute does not exist.</p>
@@ -1017,7 +1017,7 @@ module Aws::ElasticLoadBalancing
     class LoadBalancerAttributeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes for a load balancer.</p>
@@ -1052,7 +1052,7 @@ module Aws::ElasticLoadBalancing
       :connection_settings,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a load balancer.</p>
@@ -1129,7 +1129,7 @@ module Aws::ElasticLoadBalancing
       :created_time,
       :scheme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ModifyLoadBalancerAttributes.</p>
@@ -1143,7 +1143,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :load_balancer_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ModifyLoadBalancerAttributes.</p>
@@ -1157,7 +1157,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :load_balancer_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not allowed.</p>
@@ -1166,7 +1166,7 @@ module Aws::ElasticLoadBalancing
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policies for a load balancer.</p>
@@ -1184,7 +1184,7 @@ module Aws::ElasticLoadBalancing
       :lb_cookie_stickiness_policies,
       :other_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy attribute.</p>
@@ -1198,7 +1198,7 @@ module Aws::ElasticLoadBalancing
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy attribute.</p>
@@ -1212,7 +1212,7 @@ module Aws::ElasticLoadBalancing
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy attribute type.</p>
@@ -1253,7 +1253,7 @@ module Aws::ElasticLoadBalancing
       :default_value,
       :cardinality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy.</p>
@@ -1271,7 +1271,7 @@ module Aws::ElasticLoadBalancing
       :policy_type_name,
       :policy_attribute_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified policies do not exist.</p>
@@ -1280,7 +1280,7 @@ module Aws::ElasticLoadBalancing
     class PolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy type.</p>
@@ -1298,7 +1298,7 @@ module Aws::ElasticLoadBalancing
       :description,
       :policy_attribute_type_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified policy types do not exist.</p>
@@ -1307,7 +1307,7 @@ module Aws::ElasticLoadBalancing
     class PolicyTypeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for RegisterInstancesWithLoadBalancer.</p>
@@ -1321,7 +1321,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RegisterInstancesWithLoadBalancer.</p>
@@ -1331,7 +1331,7 @@ module Aws::ElasticLoadBalancing
     class RegisterEndPointsOutput < Struct.new(
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DisableAvailabilityZonesForLoadBalancer.</p>
@@ -1345,7 +1345,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for DisableAvailabilityZonesForLoadBalancer.</p>
@@ -1355,7 +1355,7 @@ module Aws::ElasticLoadBalancing
     class RemoveAvailabilityZonesOutput < Struct.new(
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for RemoveTags.</p>
@@ -1369,13 +1369,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_names,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RemoveTags.</p>
     class RemoveTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for SetLoadBalancerListenerSSLCertificate.</p>
@@ -1393,13 +1393,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_port,
       :ssl_certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of SetLoadBalancerListenerSSLCertificate.</p>
     class SetLoadBalancerListenerSSLCertificateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for SetLoadBalancerPoliciesForBackendServer.</p>
@@ -1417,13 +1417,13 @@ module Aws::ElasticLoadBalancing
       :instance_port,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of SetLoadBalancerPoliciesForBackendServer.</p>
     class SetLoadBalancerPoliciesForBackendServerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for SetLoadBalancePoliciesOfListener.</p>
@@ -1441,13 +1441,13 @@ module Aws::ElasticLoadBalancing
       :load_balancer_port,
       :policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of SetLoadBalancePoliciesOfListener.</p>
     class SetLoadBalancerPoliciesOfListenerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a source security group.</p>
@@ -1461,7 +1461,7 @@ module Aws::ElasticLoadBalancing
       :owner_alias,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified subnets do not exist.</p>
@@ -1470,7 +1470,7 @@ module Aws::ElasticLoadBalancing
     class SubnetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a tag.</p>
@@ -1484,7 +1484,7 @@ module Aws::ElasticLoadBalancing
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags associated with a load balancer.</p>
@@ -1498,7 +1498,7 @@ module Aws::ElasticLoadBalancing
       :load_balancer_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key of a tag.</p>
@@ -1508,7 +1508,7 @@ module Aws::ElasticLoadBalancing
     class TagKeyOnly < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for the number of load balancers has been reached.</p>
@@ -1517,7 +1517,7 @@ module Aws::ElasticLoadBalancing
     class TooManyAccessPointsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for the number of policies for this load balancer has been reached.</p>
@@ -1526,7 +1526,7 @@ module Aws::ElasticLoadBalancing
     class TooManyPoliciesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for the number of tags that can be assigned to a load balancer has been reached.</p>
@@ -1535,7 +1535,7 @@ module Aws::ElasticLoadBalancing
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified protocol or signature version is not supported.</p>
@@ -1544,7 +1544,7 @@ module Aws::ElasticLoadBalancing
     class UnsupportedProtocolException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

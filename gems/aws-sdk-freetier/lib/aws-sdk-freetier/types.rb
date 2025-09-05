@@ -12,18 +12,7 @@ module Aws::FreeTier
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountPlanStatus
-      NOT_STARTED = 'NOT_STARTED'
-      ACTIVE = 'ACTIVE'
-      EXPIRED = 'EXPIRED'
-    end
-
-    module AccountPlanType
-      FREE = 'FREE'
-      PAID = 'PAID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The summary of the rewards granted as a result of activities completed. </p>
@@ -34,17 +23,10 @@ module Aws::FreeTier
       :credit,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Credit < ActivityReward; end
       class Unknown < ActivityReward; end
-    end
-
-    module ActivityStatus
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      EXPIRING = 'EXPIRING'
     end
 
     # <p> The summary of activities. </p>
@@ -66,21 +48,7 @@ module Aws::FreeTier
       :reward,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CurrencyCode
-      USD = 'USD'
-    end
-
-    module Dimension
-      SERVICE = 'SERVICE'
-      OPERATION = 'OPERATION'
-      USAGE_TYPE = 'USAGE_TYPE'
-      REGION = 'REGION'
-      FREE_TIER_TYPE = 'FREE_TIER_TYPE'
-      DESCRIPTION = 'DESCRIPTION'
-      USAGE_PERCENTAGE = 'USAGE_PERCENTAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the specifications for the filters to use for your request.</p>
@@ -98,7 +66,7 @@ module Aws::FreeTier
       :values,
       :match_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use <code>Expression</code> to filter in the <code>GetFreeTierUsage</code> API operation.</p> <p>You can use the following patterns:</p> <ul> <li> <p>Simple dimension values (<code>Dimensions</code> root operator)</p> </li> <li> <p>Complex expressions with logical operators (<code>AND</code>, <code>NOT</code>, and <code>OR</code> root operators).</p> </li> </ul> <p>For <i>simple dimension values</i>, you can set the dimension name, values, and match type for the filters that you plan to use.</p> <p> <b>Example for simple dimension values</b> </p> <p>You can filter to match exactly for <code>REGION==us-east-1 OR REGION==us-west-1</code>.</p> <p>The corresponding <code>Expression</code> appears like the following: <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ], "MatchOptions": ["EQUALS"] } }</code> </p> <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when you apply the filter.</p> <p>For <i>complex expressions with logical operators</i>, you can have nested expressions to use the logical operators and specify advanced filtering.</p> <p> <b>Example for complex expressions with logical operators</b> </p> <p>You can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (SERVICE CONTAINS AWSLambda)) AND (USAGE_TYPE !CONTAINS DataTransfer)</code>.</p> <p>The corresponding <code>Expression</code> appears like the following: <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ], "MatchOptions": ["EQUALS"] }}, {"Dimensions": { "Key": "SERVICE", "Values": ["AWSLambda"], "MatchOptions": ["CONTAINS"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"], "MatchOptions": ["CONTAINS"] }}} ] }</code> </p> <p>In the following <b>Contents</b>, you must specify exactly one of the following root operators.</p>
@@ -120,7 +88,7 @@ module Aws::FreeTier
       :not,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Consists of a Amazon Web Services Free Tier offer’s metadata and your data usage for the offer.</p>
@@ -166,7 +134,7 @@ module Aws::FreeTier
       :description,
       :free_tier_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:actual_usage_amount] = 0 unless options.key?(:actual_usage_amount)
@@ -186,7 +154,7 @@ module Aws::FreeTier
       :activity_id,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activity_id
@@ -231,12 +199,12 @@ module Aws::FreeTier
       :started_at,
       :completed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountPlanStateRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -261,7 +229,7 @@ module Aws::FreeTier
       :account_plan_remaining_credits,
       :account_plan_expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -278,7 +246,7 @@ module Aws::FreeTier
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute free_tier_usages
@@ -291,7 +259,7 @@ module Aws::FreeTier
       :free_tier_usages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred during the processing of your request.</p>
@@ -300,23 +268,7 @@ module Aws::FreeTier
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LanguageCode
-      EN_US = 'en-US'
-      EN_GB = 'en-GB'
-      ID_ID = 'id-ID'
-      DE_DE = 'de-DE'
-      ES_ES = 'es-ES'
-      FR_FR = 'fr-FR'
-      JA_JP = 'ja-JP'
-      IT_IT = 'it-IT'
-      PT_PT = 'pt-PT'
-      KO_KR = 'ko-KR'
-      ZH_CN = 'zh-CN'
-      ZH_TW = 'zh-TW'
-      TR_TR = 'tr-TR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_activity_statuses
@@ -337,7 +289,7 @@ module Aws::FreeTier
       :max_results,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activities
@@ -350,15 +302,7 @@ module Aws::FreeTier
       :activities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchOption
-      EQUALS = 'EQUALS'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The monetary amount of the credit. </p>
@@ -372,7 +316,7 @@ module Aws::FreeTier
       :amount,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:amount] = 0 unless options.key?(:amount)
@@ -386,7 +330,7 @@ module Aws::FreeTier
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -395,7 +339,7 @@ module Aws::FreeTier
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_plan_type
@@ -404,7 +348,7 @@ module Aws::FreeTier
     class UpgradeAccountPlanRequest < Struct.new(
       :account_plan_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -421,7 +365,7 @@ module Aws::FreeTier
       :account_plan_type,
       :account_plan_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -430,7 +374,7 @@ module Aws::FreeTier
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

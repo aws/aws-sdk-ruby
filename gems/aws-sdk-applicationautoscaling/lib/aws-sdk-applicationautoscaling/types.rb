@@ -6,12 +6,6 @@ module Aws::ApplicationAutoScaling
   # This module contains the types returned by client operations.
   module Types
 
-    module AdjustmentType
-      ChangeInCapacity = 'ChangeInCapacity'
-      PercentChangeInCapacity = 'PercentChangeInCapacity'
-      ExactCapacity = 'ExactCapacity'
-    end
-
     # <p>Represents a CloudWatch alarm associated with a scaling policy.</p>
     # @!attribute alarm_name
     #   <p>The name of the alarm.</p>
@@ -23,7 +17,7 @@ module Aws::ApplicationAutoScaling
       :alarm_name,
       :alarm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -45,7 +39,7 @@ module Aws::ApplicationAutoScaling
       :timestamps,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Concurrent updates caused an exception, for example, if you request an update to an
@@ -55,7 +49,7 @@ module Aws::ApplicationAutoScaling
     class ConcurrentUpdateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a CloudWatch metric of your choosing for a target tracking scaling policy to use
@@ -112,7 +106,7 @@ module Aws::ApplicationAutoScaling
       :unit,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -313,12 +307,12 @@ module Aws::ApplicationAutoScaling
       :resource_id,
       :scalable_dimension,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteScalingPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -519,12 +513,12 @@ module Aws::ApplicationAutoScaling
       :resource_id,
       :scalable_dimension,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduledActionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -722,12 +716,12 @@ module Aws::ApplicationAutoScaling
       :resource_id,
       :scalable_dimension,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterScalableTargetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -939,7 +933,7 @@ module Aws::ApplicationAutoScaling
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scalable_targets
@@ -953,7 +947,7 @@ module Aws::ApplicationAutoScaling
       :scalable_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -1172,7 +1166,7 @@ module Aws::ApplicationAutoScaling
       :next_token,
       :include_not_scaled_activities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scaling_activities
@@ -1186,7 +1180,7 @@ module Aws::ApplicationAutoScaling
       :scaling_activities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_names
@@ -1402,7 +1396,7 @@ module Aws::ApplicationAutoScaling
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scaling_policies
@@ -1416,7 +1410,7 @@ module Aws::ApplicationAutoScaling
       :scaling_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_action_names
@@ -1632,7 +1626,7 @@ module Aws::ApplicationAutoScaling
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_actions
@@ -1646,7 +1640,7 @@ module Aws::ApplicationAutoScaling
       :scheduled_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Failed access to resources caused an exception. This exception is thrown when Application Auto Scaling
@@ -1658,7 +1652,7 @@ module Aws::ApplicationAutoScaling
     class FailedResourceAccessException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -1700,7 +1694,7 @@ module Aws::ApplicationAutoScaling
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute load_forecast
@@ -1723,7 +1717,7 @@ module Aws::ApplicationAutoScaling
       :capacity_forecast,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an internal error.</p>
@@ -1732,7 +1726,7 @@ module Aws::ApplicationAutoScaling
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The next token supplied was invalid.</p>
@@ -1741,7 +1735,7 @@ module Aws::ApplicationAutoScaling
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A per-account resource limit is exceeded. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html">Application Auto Scaling service quotas</a>.</p>
@@ -1750,7 +1744,7 @@ module Aws::ApplicationAutoScaling
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1763,7 +1757,7 @@ module Aws::ApplicationAutoScaling
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1772,7 +1766,7 @@ module Aws::ApplicationAutoScaling
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1800,13 +1794,7 @@ module Aws::ApplicationAutoScaling
       :values,
       :metric_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricAggregationType
-      Average = 'Average'
-      Minimum = 'Minimum'
-      Maximum = 'Maximum'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the dimension names and values associated with a metric.</p>
@@ -1820,47 +1808,7 @@ module Aws::ApplicationAutoScaling
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricStatistic
-      Average = 'Average'
-      Minimum = 'Minimum'
-      Maximum = 'Maximum'
-      SampleCount = 'SampleCount'
-      Sum = 'Sum'
-    end
-
-    module MetricType
-      DynamoDBReadCapacityUtilization = 'DynamoDBReadCapacityUtilization'
-      DynamoDBWriteCapacityUtilization = 'DynamoDBWriteCapacityUtilization'
-      ALBRequestCountPerTarget = 'ALBRequestCountPerTarget'
-      RDSReaderAverageCPUUtilization = 'RDSReaderAverageCPUUtilization'
-      RDSReaderAverageDatabaseConnections = 'RDSReaderAverageDatabaseConnections'
-      EC2SpotFleetRequestAverageCPUUtilization = 'EC2SpotFleetRequestAverageCPUUtilization'
-      EC2SpotFleetRequestAverageNetworkIn = 'EC2SpotFleetRequestAverageNetworkIn'
-      EC2SpotFleetRequestAverageNetworkOut = 'EC2SpotFleetRequestAverageNetworkOut'
-      SageMakerVariantInvocationsPerInstance = 'SageMakerVariantInvocationsPerInstance'
-      ECSServiceAverageCPUUtilization = 'ECSServiceAverageCPUUtilization'
-      ECSServiceAverageMemoryUtilization = 'ECSServiceAverageMemoryUtilization'
-      AppStreamAverageCapacityUtilization = 'AppStreamAverageCapacityUtilization'
-      ComprehendInferenceUtilization = 'ComprehendInferenceUtilization'
-      LambdaProvisionedConcurrencyUtilization = 'LambdaProvisionedConcurrencyUtilization'
-      CassandraReadCapacityUtilization = 'CassandraReadCapacityUtilization'
-      CassandraWriteCapacityUtilization = 'CassandraWriteCapacityUtilization'
-      KafkaBrokerStorageUtilization = 'KafkaBrokerStorageUtilization'
-      ElastiCacheEngineCPUUtilization = 'ElastiCacheEngineCPUUtilization'
-      ElastiCacheDatabaseMemoryUsagePercentage = 'ElastiCacheDatabaseMemoryUsagePercentage'
-      ElastiCachePrimaryEngineCPUUtilization = 'ElastiCachePrimaryEngineCPUUtilization'
-      ElastiCacheReplicaEngineCPUUtilization = 'ElastiCacheReplicaEngineCPUUtilization'
-      ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage = 'ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage'
-      NeptuneReaderAverageCPUUtilization = 'NeptuneReaderAverageCPUUtilization'
-      SageMakerVariantProvisionedConcurrencyUtilization = 'SageMakerVariantProvisionedConcurrencyUtilization'
-      ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage = 'ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage'
-      SageMakerInferenceComponentInvocationsPerCopy = 'SageMakerInferenceComponentInvocationsPerCopy'
-      WorkSpacesAverageUserSessionsCapacityUtilization = 'WorkSpacesAverageUserSessionsCapacityUtilization'
-      SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution = 'SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution'
-      SageMakerVariantConcurrentRequestsPerModelHighResolution = 'SageMakerVariantConcurrentRequestsPerModelHighResolution'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the reason for an activity that isn't scaled (<i>not scaled
@@ -1903,7 +1851,7 @@ module Aws::ApplicationAutoScaling
       :min_capacity,
       :current_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified object could not be found. For any operation that depends on the existence
@@ -1916,13 +1864,7 @@ module Aws::ApplicationAutoScaling
     class ObjectNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyType
-      StepScaling = 'StepScaling'
-      TargetTrackingScaling = 'TargetTrackingScaling'
-      PredictiveScaling = 'PredictiveScaling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a predefined metric for a target tracking scaling policy to use with
@@ -1960,7 +1902,7 @@ module Aws::ApplicationAutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1974,12 +1916,7 @@ module Aws::ApplicationAutoScaling
     class PredictiveScalingCustomizedMetricSpecification < Struct.new(
       :metric_data_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredictiveScalingMaxCapacityBreachBehavior
-      HonorMaxCapacity = 'HonorMaxCapacity'
-      IncreaseMaxCapacity = 'IncreaseMaxCapacity'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2005,7 +1942,7 @@ module Aws::ApplicationAutoScaling
       :metric_name,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2066,7 +2003,7 @@ module Aws::ApplicationAutoScaling
       :label,
       :return_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2086,7 +2023,7 @@ module Aws::ApplicationAutoScaling
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2142,7 +2079,7 @@ module Aws::ApplicationAutoScaling
       :customized_load_metric_specification,
       :customized_capacity_metric_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2174,12 +2111,7 @@ module Aws::ApplicationAutoScaling
       :stat,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PredictiveScalingMode
-      ForecastOnly = 'ForecastOnly'
-      ForecastAndScale = 'ForecastAndScale'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2230,7 +2162,7 @@ module Aws::ApplicationAutoScaling
       :max_capacity_breach_behavior,
       :max_capacity_buffer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2301,7 +2233,7 @@ module Aws::ApplicationAutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2371,7 +2303,7 @@ module Aws::ApplicationAutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2443,7 +2375,7 @@ module Aws::ApplicationAutoScaling
       :predefined_metric_type,
       :resource_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -2681,7 +2613,7 @@ module Aws::ApplicationAutoScaling
       :target_tracking_scaling_policy_configuration,
       :predictive_scaling_policy_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -2694,7 +2626,7 @@ module Aws::ApplicationAutoScaling
       :policy_arn,
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -2943,12 +2875,12 @@ module Aws::ApplicationAutoScaling
       :end_time,
       :scalable_target_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutScheduledActionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_namespace
@@ -3248,7 +3180,7 @@ module Aws::ApplicationAutoScaling
       :suspended_state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scalable_target_arn
@@ -3257,7 +3189,7 @@ module Aws::ApplicationAutoScaling
     class RegisterScalableTargetResponse < Struct.new(
       :scalable_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -3270,34 +3202,7 @@ module Aws::ApplicationAutoScaling
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalableDimension
-      ECSServiceDesiredCount = 'ecs:service:DesiredCount'
-      EC2SpotFleetRequestTargetCapacity = 'ec2:spot-fleet-request:TargetCapacity'
-      EMRInstanceGroupInstanceCount = 'elasticmapreduce:instancegroup:InstanceCount'
-      AppstreamFleetDesiredCapacity = 'appstream:fleet:DesiredCapacity'
-      DynamoDBTableReadCapacityUnits = 'dynamodb:table:ReadCapacityUnits'
-      DynamoDBTableWriteCapacityUnits = 'dynamodb:table:WriteCapacityUnits'
-      DynamoDBIndexReadCapacityUnits = 'dynamodb:index:ReadCapacityUnits'
-      DynamoDBIndexWriteCapacityUnits = 'dynamodb:index:WriteCapacityUnits'
-      RDSClusterReadReplicaCount = 'rds:cluster:ReadReplicaCount'
-      SageMakerVariantDesiredInstanceCount = 'sagemaker:variant:DesiredInstanceCount'
-      CustomResourceScalableDimension = 'custom-resource:ResourceType:Property'
-      ComprehendDocClassifierEndpointInferenceUnits = 'comprehend:document-classifier-endpoint:DesiredInferenceUnits'
-      ComprehendEntityRecognizerEndpointInferenceUnits = 'comprehend:entity-recognizer-endpoint:DesiredInferenceUnits'
-      LambdaFunctionProvisionedConcurrency = 'lambda:function:ProvisionedConcurrency'
-      CassandraTableReadCapacityUnits = 'cassandra:table:ReadCapacityUnits'
-      CassandraTableWriteCapacityUnits = 'cassandra:table:WriteCapacityUnits'
-      KafkaBrokerStorageVolumeSize = 'kafka:broker-storage:VolumeSize'
-      ElastiCacheCacheClusterNodes = 'elasticache:cache-cluster:Nodes'
-      ElastiCacheReplicationGroupNodeGroups = 'elasticache:replication-group:NodeGroups'
-      ElastiCacheReplicationGroupReplicas = 'elasticache:replication-group:Replicas'
-      NeptuneClusterReadReplicaCount = 'neptune:cluster:ReadReplicaCount'
-      SageMakerVariantDesiredProvisionedConcurrency = 'sagemaker:variant:DesiredProvisionedConcurrency'
-      SageMakerInferenceComponentDesiredCopyCount = 'sagemaker:inference-component:DesiredCopyCount'
-      WorkSpacesWorkSpacesPoolDesiredUserSessions = 'workspaces:workspacespool:DesiredUserSessions'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a scalable target.</p>
@@ -3528,7 +3433,7 @@ module Aws::ApplicationAutoScaling
       :suspended_state,
       :scalable_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the minimum and maximum capacity for a scheduled action.</p>
@@ -3551,7 +3456,7 @@ module Aws::ApplicationAutoScaling
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a scaling activity.</p>
@@ -3786,16 +3691,7 @@ module Aws::ApplicationAutoScaling
       :details,
       :not_scaled_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalingActivityStatusCode
-      Pending = 'Pending'
-      InProgress = 'InProgress'
-      Successful = 'Successful'
-      Overridden = 'Overridden'
-      Unfulfilled = 'Unfulfilled'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a scaling policy to use with Application Auto Scaling.</p>
@@ -4039,7 +3935,7 @@ module Aws::ApplicationAutoScaling
       :alarms,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a scheduled action.</p>
@@ -4294,25 +4190,7 @@ module Aws::ApplicationAutoScaling
       :scalable_target_action,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceNamespace
-      ECS = 'ecs'
-      EMR = 'elasticmapreduce'
-      EC2 = 'ec2'
-      APPSTREAM = 'appstream'
-      DYNAMODB = 'dynamodb'
-      RDS = 'rds'
-      SAGEMAKER = 'sagemaker'
-      CUSTOM_RESOURCE = 'custom-resource'
-      COMPREHEND = 'comprehend'
-      LAMBDA = 'lambda'
-      CASSANDRA = 'cassandra'
-      KAFKA = 'kafka'
-      ELASTICACHE = 'elasticache'
-      NEPTUNE = 'neptune'
-      WORKSPACES = 'workspaces'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a step adjustment for a <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html">StepScalingPolicyConfiguration</a>. Describes an adjustment based on the difference
@@ -4376,7 +4254,7 @@ module Aws::ApplicationAutoScaling
       :metric_interval_upper_bound,
       :scaling_adjustment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a step scaling policy configuration to use with Application Auto Scaling.</p>
@@ -4420,7 +4298,7 @@ module Aws::ApplicationAutoScaling
       :cooldown,
       :metric_aggregation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the scaling activities for a scalable target are in a suspended state.
@@ -4445,7 +4323,7 @@ module Aws::ApplicationAutoScaling
       :dynamic_scaling_out_suspended,
       :scheduled_scaling_suspended,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4469,12 +4347,12 @@ module Aws::ApplicationAutoScaling
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a specific metric.</p>
@@ -4500,7 +4378,7 @@ module Aws::ApplicationAutoScaling
       :metric_name,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric data to return. Also defines whether this call is returning data for one
@@ -4551,7 +4429,7 @@ module Aws::ApplicationAutoScaling
       :metric_stat,
       :return_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the dimension of a metric.</p>
@@ -4565,7 +4443,7 @@ module Aws::ApplicationAutoScaling
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the CloudWatch metric to return, along with the statistic and
@@ -4592,7 +4470,7 @@ module Aws::ApplicationAutoScaling
       :stat,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a target tracking scaling policy configuration to use with Application Auto Scaling.</p>
@@ -4641,7 +4519,7 @@ module Aws::ApplicationAutoScaling
       :scale_in_cooldown,
       :disable_scale_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains too many tags. Try the request again with fewer tags.</p>
@@ -4654,7 +4532,7 @@ module Aws::ApplicationAutoScaling
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4671,12 +4549,12 @@ module Aws::ApplicationAutoScaling
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception was thrown for a validation issue. Review the available parameters for the
@@ -4686,7 +4564,7 @@ module Aws::ApplicationAutoScaling
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,7 +13,7 @@ module Aws::Billingconductor
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a linked account.</p>
@@ -35,7 +35,7 @@ module Aws::Billingconductor
       :account_name,
       :account_email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated billing family.</p>
@@ -50,7 +50,7 @@ module Aws::Billingconductor
       :linked_account_ids,
       :auto_associate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -66,7 +66,7 @@ module Aws::Billingconductor
       :arn,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -76,7 +76,7 @@ module Aws::Billingconductor
     class AssociateAccountsOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -93,7 +93,7 @@ module Aws::Billingconductor
       :arn,
       :pricing_rule_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -104,7 +104,7 @@ module Aws::Billingconductor
     class AssociatePricingRulesOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a resource association error.</p>
@@ -118,7 +118,7 @@ module Aws::Billingconductor
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource association result for a percentage custom line item.</p>
@@ -132,7 +132,7 @@ module Aws::Billingconductor
       :arn,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-value pair that represents the attribute by which the
@@ -149,7 +149,7 @@ module Aws::Billingconductor
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -170,7 +170,7 @@ module Aws::Billingconductor
       :resource_arns,
       :billing_period_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successfully_associated_resources
@@ -187,7 +187,7 @@ module Aws::Billingconductor
       :successfully_associated_resources,
       :failed_associated_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -208,7 +208,7 @@ module Aws::Billingconductor
       :resource_arns,
       :billing_period_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successfully_disassociated_resources
@@ -225,7 +225,7 @@ module Aws::Billingconductor
       :successfully_disassociated_resources,
       :failed_disassociated_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary report of actual Amazon Web Services charges and calculated Amazon Web Services charges, based on the associated pricing plan of a billing group.</p>
@@ -255,7 +255,7 @@ module Aws::Billingconductor
       :margin_percentage,
       :currency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A paginated call to retrieve a list of summary reports of actual Amazon Web Services charges and the
@@ -295,7 +295,7 @@ module Aws::Billingconductor
       :currency,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a billing group.</p>
@@ -346,7 +346,7 @@ module Aws::Billingconductor
       :status_reason,
       :account_grouping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -367,7 +367,7 @@ module Aws::Billingconductor
       :inclusive_start_billing_period,
       :exclusive_end_billing_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.</p>
@@ -377,7 +377,7 @@ module Aws::Billingconductor
     class ComputationPreference < Struct.new(
       :pricing_plan_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can cause an inconsistent state by updating or deleting a resource.
@@ -402,7 +402,7 @@ module Aws::Billingconductor
       :resource_type,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -444,7 +444,7 @@ module Aws::Billingconductor
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -453,7 +453,7 @@ module Aws::Billingconductor
     class CreateBillingGroupOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -499,7 +499,7 @@ module Aws::Billingconductor
       :charge_details,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -508,7 +508,7 @@ module Aws::Billingconductor
     class CreateCustomLineItemOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -522,7 +522,7 @@ module Aws::Billingconductor
     class CreateFreeTierConfig < Struct.new(
       :activated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -551,7 +551,7 @@ module Aws::Billingconductor
       :pricing_rule_arns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -560,7 +560,7 @@ module Aws::Billingconductor
     class CreatePricingPlanOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -636,7 +636,7 @@ module Aws::Billingconductor
       :usage_type,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -645,7 +645,7 @@ module Aws::Billingconductor
     class CreatePricingRuleOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -659,7 +659,7 @@ module Aws::Billingconductor
     class CreateTieringInput < Struct.new(
       :free_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The billing period range in which the custom line item request will be applied.</p>
@@ -673,7 +673,7 @@ module Aws::Billingconductor
       :inclusive_start_billing_period,
       :exclusive_end_billing_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The charge details of a custom line item. It should contain only one of <code>Flat</code> or <code>Percentage</code>.</p>
@@ -696,7 +696,7 @@ module Aws::Billingconductor
       :type,
       :line_item_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of the charge details that are associated with a flat custom line item.</p>
@@ -706,7 +706,7 @@ module Aws::Billingconductor
     class CustomLineItemFlatChargeDetails < Struct.new(
       :charge_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a custom line item.</p>
@@ -756,7 +756,7 @@ module Aws::Billingconductor
       :association_size,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:creation_time] = 0 unless options.key?(:creation_time)
@@ -778,7 +778,7 @@ module Aws::Billingconductor
       :percentage_value,
       :associated_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a custom line item version.</p>
@@ -846,7 +846,7 @@ module Aws::Billingconductor
       :start_time,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:creation_time] = 0 unless options.key?(:creation_time)
@@ -863,7 +863,7 @@ module Aws::Billingconductor
     class DeleteBillingGroupOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -872,7 +872,7 @@ module Aws::Billingconductor
     class DeleteBillingGroupOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -887,7 +887,7 @@ module Aws::Billingconductor
       :arn,
       :billing_period_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -896,7 +896,7 @@ module Aws::Billingconductor
     class DeleteCustomLineItemOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -905,7 +905,7 @@ module Aws::Billingconductor
     class DeletePricingPlanOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -914,7 +914,7 @@ module Aws::Billingconductor
     class DeletePricingPlanOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -923,7 +923,7 @@ module Aws::Billingconductor
     class DeletePricingRuleOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -932,7 +932,7 @@ module Aws::Billingconductor
     class DeletePricingRuleOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -947,7 +947,7 @@ module Aws::Billingconductor
       :arn,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -957,7 +957,7 @@ module Aws::Billingconductor
     class DisassociateAccountsOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -971,7 +971,7 @@ module Aws::Billingconductor
       :arn,
       :pricing_rule_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -981,7 +981,7 @@ module Aws::Billingconductor
     class DisassociatePricingRulesOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource disassociation result for a percentage custom line item.</p>
@@ -996,7 +996,7 @@ module Aws::Billingconductor
       :arn,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1010,7 +1010,7 @@ module Aws::Billingconductor
     class FreeTierConfig < Struct.new(
       :activated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1037,7 +1037,7 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_cost_report_results
@@ -1050,7 +1050,7 @@ module Aws::Billingconductor
       :billing_group_cost_report_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred while processing a request.
@@ -1065,7 +1065,7 @@ module Aws::Billingconductor
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1091,7 +1091,7 @@ module Aws::Billingconductor
       :match_option,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter on the account ID of the linked account, or any of the following:</p>
@@ -1122,7 +1122,7 @@ module Aws::Billingconductor
       :account_id,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1150,7 +1150,7 @@ module Aws::Billingconductor
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute linked_accounts
@@ -1165,7 +1165,7 @@ module Aws::Billingconductor
       :linked_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies if the billing group has the following
@@ -1177,7 +1177,7 @@ module Aws::Billingconductor
     class ListBillingGroupAccountGrouping < Struct.new(
       :auto_associate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter used to retrieve specific <code>BillingGroupCostReportElements</code>.</p>
@@ -1187,7 +1187,7 @@ module Aws::Billingconductor
     class ListBillingGroupCostReportsFilter < Struct.new(
       :billing_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1212,7 +1212,7 @@ module Aws::Billingconductor
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_group_cost_reports
@@ -1227,7 +1227,7 @@ module Aws::Billingconductor
       :billing_group_cost_reports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter that specifies the billing groups and pricing plans to retrieve billing group information.</p>
@@ -1252,7 +1252,7 @@ module Aws::Billingconductor
       :statuses,
       :auto_associate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1277,7 +1277,7 @@ module Aws::Billingconductor
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_groups
@@ -1292,7 +1292,7 @@ module Aws::Billingconductor
       :billing_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1322,7 +1322,7 @@ module Aws::Billingconductor
       :type,
       :line_item_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1336,7 +1336,7 @@ module Aws::Billingconductor
     class ListCustomLineItemFlatChargeDetails < Struct.new(
       :charge_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1350,7 +1350,7 @@ module Aws::Billingconductor
     class ListCustomLineItemPercentageChargeDetails < Struct.new(
       :percentage_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A billing period filter that specifies the custom line item versions to retrieve.</p>
@@ -1364,7 +1364,7 @@ module Aws::Billingconductor
       :start_billing_period,
       :end_billing_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that specifies the billing period range where the custom line item versions reside.</p>
@@ -1374,7 +1374,7 @@ module Aws::Billingconductor
     class ListCustomLineItemVersionsFilter < Struct.new(
       :billing_period_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1395,7 +1395,7 @@ module Aws::Billingconductor
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_line_item_versions
@@ -1408,7 +1408,7 @@ module Aws::Billingconductor
       :custom_line_item_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that specifies the custom line items and billing groups to retrieve FFLI information.</p>
@@ -1430,7 +1430,7 @@ module Aws::Billingconductor
       :arns,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1458,7 +1458,7 @@ module Aws::Billingconductor
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_line_items
@@ -1475,7 +1475,7 @@ module Aws::Billingconductor
       :custom_line_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1502,7 +1502,7 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1529,7 +1529,7 @@ module Aws::Billingconductor
       :pricing_plan_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to retrieve
@@ -1540,7 +1540,7 @@ module Aws::Billingconductor
     class ListPricingPlansFilter < Struct.new(
       :arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1564,7 +1564,7 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1585,7 +1585,7 @@ module Aws::Billingconductor
       :pricing_plans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1611,7 +1611,7 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1639,7 +1639,7 @@ module Aws::Billingconductor
       :pricing_rule_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The filter that specifies criteria that the pricing rules returned by the <code>ListPricingRules</code> API will adhere to.</p>
@@ -1649,7 +1649,7 @@ module Aws::Billingconductor
     class ListPricingRulesFilter < Struct.new(
       :arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1677,7 +1677,7 @@ module Aws::Billingconductor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1700,7 +1700,7 @@ module Aws::Billingconductor
       :pricing_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1714,7 +1714,7 @@ module Aws::Billingconductor
     class ListResourcesAssociatedToCustomLineItemFilter < Struct.new(
       :relationship,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute billing_period
@@ -1747,7 +1747,7 @@ module Aws::Billingconductor
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1770,7 +1770,7 @@ module Aws::Billingconductor
       :associated_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1794,7 +1794,7 @@ module Aws::Billingconductor
       :relationship,
       :end_billing_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1805,7 +1805,7 @@ module Aws::Billingconductor
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1816,7 +1816,7 @@ module Aws::Billingconductor
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of a pricing plan.</p>
@@ -1846,7 +1846,7 @@ module Aws::Billingconductor
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -1926,7 +1926,7 @@ module Aws::Billingconductor
       :usage_type,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:associated_pricing_plan_count] = 0 unless options.key?(:associated_pricing_plan_count)
@@ -1953,7 +1953,7 @@ module Aws::Billingconductor
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service limit to exceed.
@@ -1983,7 +1983,7 @@ module Aws::Billingconductor
       :limit_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2000,12 +2000,12 @@ module Aws::Billingconductor
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.
@@ -2020,7 +2020,7 @@ module Aws::Billingconductor
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -2039,7 +2039,7 @@ module Aws::Billingconductor
     class Tiering < Struct.new(
       :free_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2056,12 +2056,12 @@ module Aws::Billingconductor
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies if the billing group has the following
@@ -2073,7 +2073,7 @@ module Aws::Billingconductor
     class UpdateBillingGroupAccountGrouping < Struct.new(
       :auto_associate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2108,7 +2108,7 @@ module Aws::Billingconductor
       :description,
       :account_grouping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2169,7 +2169,7 @@ module Aws::Billingconductor
       :status_reason,
       :account_grouping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -2199,7 +2199,7 @@ module Aws::Billingconductor
       :percentage,
       :line_item_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2213,7 +2213,7 @@ module Aws::Billingconductor
     class UpdateCustomLineItemFlatChargeDetails < Struct.new(
       :charge_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2246,7 +2246,7 @@ module Aws::Billingconductor
       :charge_details,
       :billing_period_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2291,7 +2291,7 @@ module Aws::Billingconductor
       :last_modified_time,
       :association_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:last_modified_time] = 0 unless options.key?(:last_modified_time)
@@ -2311,7 +2311,7 @@ module Aws::Billingconductor
     class UpdateCustomLineItemPercentageChargeDetails < Struct.new(
       :percentage_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2325,7 +2325,7 @@ module Aws::Billingconductor
     class UpdateFreeTierConfig < Struct.new(
       :activated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2343,7 +2343,7 @@ module Aws::Billingconductor
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2374,7 +2374,7 @@ module Aws::Billingconductor
       :size,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -2419,7 +2419,7 @@ module Aws::Billingconductor
       :modifier_percentage,
       :tiering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2499,7 +2499,7 @@ module Aws::Billingconductor
       :usage_type,
       :operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:associated_pricing_plan_count] = 0 unless options.key?(:associated_pricing_plan_count)
@@ -2519,7 +2519,7 @@ module Aws::Billingconductor
     class UpdateTieringInput < Struct.new(
       :free_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input doesn't match with the constraints specified by Amazon Web Services.</p>
@@ -2538,7 +2538,7 @@ module Aws::Billingconductor
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field's information of a request that resulted in an exception.</p>
@@ -2552,7 +2552,7 @@ module Aws::Billingconductor
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

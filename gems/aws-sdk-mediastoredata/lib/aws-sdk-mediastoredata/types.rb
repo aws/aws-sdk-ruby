@@ -12,7 +12,7 @@ module Aws::MediaStoreData
     class ContainerNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -22,12 +22,12 @@ module Aws::MediaStoreData
     class DeleteObjectRequest < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteObjectResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -37,7 +37,7 @@ module Aws::MediaStoreData
     class DescribeObjectRequest < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute e_tag
@@ -64,7 +64,7 @@ module Aws::MediaStoreData
       :cache_control,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -95,7 +95,7 @@ module Aws::MediaStoreData
       :path,
       :range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -135,7 +135,7 @@ module Aws::MediaStoreData
       :last_modified,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:body] = Base64.strict_decode64('') unless options.key?(:body)
@@ -150,7 +150,7 @@ module Aws::MediaStoreData
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metadata entry for a folder or object.</p>
@@ -180,12 +180,7 @@ module Aws::MediaStoreData
       :content_type,
       :content_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ItemType
-      OBJECT = 'OBJECT'
-      FOLDER = 'FOLDER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -215,7 +210,7 @@ module Aws::MediaStoreData
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -232,7 +227,7 @@ module Aws::MediaStoreData
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Could not perform an operation on an object that does not exist.</p>
@@ -241,7 +236,7 @@ module Aws::MediaStoreData
     class ObjectNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -294,7 +289,7 @@ module Aws::MediaStoreData
       :storage_class,
       :upload_availability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_sha256
@@ -312,7 +307,7 @@ module Aws::MediaStoreData
       :e_tag,
       :storage_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested content range is not valid.</p>
@@ -321,16 +316,7 @@ module Aws::MediaStoreData
     class RequestedRangeNotSatisfiableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageClass
-      TEMPORAL = 'TEMPORAL'
-    end
-
-    module UploadAvailability
-      STANDARD = 'STANDARD'
-      STREAMING = 'STREAMING'
+      include ::Smithy::Schema::Structure
     end
 
   end

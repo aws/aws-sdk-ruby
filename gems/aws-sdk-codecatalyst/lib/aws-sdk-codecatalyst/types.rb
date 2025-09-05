@@ -12,7 +12,7 @@ module Aws::CodeCatalyst
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a specified personal access token (PAT).</p>
@@ -30,7 +30,7 @@ module Aws::CodeCatalyst
       :name,
       :expires_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because the requested operation would cause a conflict with the current state of a service resource associated with the request. 
@@ -40,7 +40,7 @@ module Aws::CodeCatalyst
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -53,7 +53,7 @@ module Aws::CodeCatalyst
       :name,
       :expires_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret
@@ -74,7 +74,7 @@ module Aws::CodeCatalyst
       :expires_time,
       :access_token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -131,7 +131,7 @@ module Aws::CodeCatalyst
       :persistent_storage,
       :vpc_connection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -152,7 +152,7 @@ module Aws::CodeCatalyst
       :id,
       :vpc_connection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -169,7 +169,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -190,7 +190,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -215,7 +215,7 @@ module Aws::CodeCatalyst
       :name,
       :head_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ref
@@ -236,7 +236,7 @@ module Aws::CodeCatalyst
       :last_updated_time,
       :head_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -257,7 +257,7 @@ module Aws::CodeCatalyst
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -278,7 +278,7 @@ module Aws::CodeCatalyst
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -287,12 +287,12 @@ module Aws::CodeCatalyst
     class DeleteAccessTokenRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessTokenResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -309,7 +309,7 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -326,7 +326,7 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -339,7 +339,7 @@ module Aws::CodeCatalyst
       :space_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -356,7 +356,7 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -373,7 +373,7 @@ module Aws::CodeCatalyst
       :project_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -390,7 +390,7 @@ module Aws::CodeCatalyst
       :project_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -399,7 +399,7 @@ module Aws::CodeCatalyst
     class DeleteSpaceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -412,7 +412,7 @@ module Aws::CodeCatalyst
       :name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about connection details for a Dev Environment.</p>
@@ -427,7 +427,7 @@ module Aws::CodeCatalyst
       :stream_url,
       :token_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the source repsitory for a Dev Environment. </p>
@@ -441,7 +441,7 @@ module Aws::CodeCatalyst
       :repository_name,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration of a Dev Environment session.</p>
@@ -455,7 +455,7 @@ module Aws::CodeCatalyst
       :session_type,
       :execute_command_session_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about active sessions for a Dev Environment.</p>
@@ -482,7 +482,7 @@ module Aws::CodeCatalyst
       :started_time,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Dev Environment. </p>
@@ -544,7 +544,7 @@ module Aws::CodeCatalyst
       :persistent_storage,
       :vpc_connection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inactivity_timeout_minutes] = 0 unless options.key?(:inactivity_timeout_minutes)
@@ -563,7 +563,7 @@ module Aws::CodeCatalyst
       :email,
       :verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an entry in an event log of Amazon CodeCatalyst activity.</p>
@@ -629,7 +629,7 @@ module Aws::CodeCatalyst
       :source_ip_address,
       :user_agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the payload of an event recording Amazon CodeCatalyst activity.</p>
@@ -643,7 +643,7 @@ module Aws::CodeCatalyst
       :content_type,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the commands that will be run on a Dev Environment when an SSH session begins.</p>
@@ -657,7 +657,7 @@ module Aws::CodeCatalyst
       :command,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a filter used to limit results of a query.</p>
@@ -675,7 +675,7 @@ module Aws::CodeCatalyst
       :values,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -692,7 +692,7 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -753,7 +753,7 @@ module Aws::CodeCatalyst
       :persistent_storage,
       :vpc_connection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inactivity_timeout_minutes] = 0 unless options.key?(:inactivity_timeout_minutes)
@@ -771,7 +771,7 @@ module Aws::CodeCatalyst
       :space_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -792,7 +792,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -809,7 +809,7 @@ module Aws::CodeCatalyst
       :project_name,
       :source_repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute https
@@ -818,7 +818,7 @@ module Aws::CodeCatalyst
     class GetSourceRepositoryCloneUrlsResponse < Struct.new(
       :https,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -835,7 +835,7 @@ module Aws::CodeCatalyst
       :project_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -864,7 +864,7 @@ module Aws::CodeCatalyst
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -873,7 +873,7 @@ module Aws::CodeCatalyst
     class GetSpaceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -894,7 +894,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -903,7 +903,7 @@ module Aws::CodeCatalyst
     class GetSubscriptionRequest < Struct.new(
       :space_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_type
@@ -926,7 +926,7 @@ module Aws::CodeCatalyst
       :pending_subscription_type,
       :pending_subscription_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -939,7 +939,7 @@ module Aws::CodeCatalyst
       :id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -964,7 +964,7 @@ module Aws::CodeCatalyst
       :primary_email,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -981,7 +981,7 @@ module Aws::CodeCatalyst
       :id,
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1033,7 +1033,7 @@ module Aws::CodeCatalyst
       :run_mode,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1050,7 +1050,7 @@ module Aws::CodeCatalyst
       :id,
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1093,7 +1093,7 @@ module Aws::CodeCatalyst
       :end_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an integrated development environment (IDE) used in a Dev Environment.</p>
@@ -1107,7 +1107,7 @@ module Aws::CodeCatalyst
       :runtime,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration of an integrated development environment (IDE) for a Dev Environment.</p>
@@ -1124,7 +1124,7 @@ module Aws::CodeCatalyst
       :runtime,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1137,7 +1137,7 @@ module Aws::CodeCatalyst
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1150,7 +1150,7 @@ module Aws::CodeCatalyst
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1175,7 +1175,7 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1188,7 +1188,7 @@ module Aws::CodeCatalyst
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1213,7 +1213,7 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1226,7 +1226,7 @@ module Aws::CodeCatalyst
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1255,7 +1255,7 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1268,7 +1268,7 @@ module Aws::CodeCatalyst
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1289,7 +1289,7 @@ module Aws::CodeCatalyst
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1302,7 +1302,7 @@ module Aws::CodeCatalyst
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a source repository returned in a list of source repositories.</p>
@@ -1328,7 +1328,7 @@ module Aws::CodeCatalyst
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1349,7 +1349,7 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1362,7 +1362,7 @@ module Aws::CodeCatalyst
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a branch of a source repository returned in a list of branches.</p>
@@ -1384,7 +1384,7 @@ module Aws::CodeCatalyst
       :last_updated_time,
       :head_commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1409,7 +1409,7 @@ module Aws::CodeCatalyst
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1422,7 +1422,7 @@ module Aws::CodeCatalyst
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1431,7 +1431,7 @@ module Aws::CodeCatalyst
     class ListSpacesRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1444,7 +1444,7 @@ module Aws::CodeCatalyst
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1473,7 +1473,7 @@ module Aws::CodeCatalyst
       :max_results,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1486,7 +1486,7 @@ module Aws::CodeCatalyst
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1511,7 +1511,7 @@ module Aws::CodeCatalyst
       :max_results,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1524,7 +1524,7 @@ module Aws::CodeCatalyst
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the persistent storage for a Dev Environment.</p>
@@ -1538,7 +1538,7 @@ module Aws::CodeCatalyst
     class PersistentStorage < Struct.new(
       :size_in_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration of persistent storage for a Dev Environment. </p>
@@ -1552,7 +1552,7 @@ module Aws::CodeCatalyst
     class PersistentStorageConfiguration < Struct.new(
       :size_in_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a project in a space.</p>
@@ -1566,7 +1566,7 @@ module Aws::CodeCatalyst
       :name,
       :project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>nformation about the filter used to narrow the results returned in a list of projects.</p>
@@ -1584,7 +1584,7 @@ module Aws::CodeCatalyst
       :values,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a project.</p>
@@ -1602,7 +1602,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository that will be cloned to a Dev Environment.</p>
@@ -1616,7 +1616,7 @@ module Aws::CodeCatalyst
       :repository_name,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because the specified resource was not found. Verify that the spelling is correct and that you have access to the resource.</p>
@@ -1625,7 +1625,7 @@ module Aws::CodeCatalyst
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because one or more resources has reached its limits for the tier the space belongs to. Either reduce
@@ -1635,7 +1635,7 @@ module Aws::CodeCatalyst
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an space.</p>
@@ -1658,7 +1658,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1687,7 +1687,7 @@ module Aws::CodeCatalyst
       :instance_type,
       :inactivity_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1708,7 +1708,7 @@ module Aws::CodeCatalyst
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1729,7 +1729,7 @@ module Aws::CodeCatalyst
       :id,
       :session_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_details
@@ -1754,7 +1754,7 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1776,7 +1776,7 @@ module Aws::CodeCatalyst
       :workflow_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1797,7 +1797,7 @@ module Aws::CodeCatalyst
       :id,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1814,7 +1814,7 @@ module Aws::CodeCatalyst
       :project_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1835,7 +1835,7 @@ module Aws::CodeCatalyst
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1856,7 +1856,7 @@ module Aws::CodeCatalyst
       :id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1877,7 +1877,7 @@ module Aws::CodeCatalyst
       :id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1886,7 +1886,7 @@ module Aws::CodeCatalyst
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -1931,7 +1931,7 @@ module Aws::CodeCatalyst
       :inactivity_timeout_minutes,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1969,7 +1969,7 @@ module Aws::CodeCatalyst
       :inactivity_timeout_minutes,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inactivity_timeout_minutes] = 0 unless options.key?(:inactivity_timeout_minutes)
@@ -1991,7 +1991,7 @@ module Aws::CodeCatalyst
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute space_name
@@ -2012,7 +2012,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2025,7 +2025,7 @@ module Aws::CodeCatalyst
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2042,7 +2042,7 @@ module Aws::CodeCatalyst
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a user whose activity is recorded in an event for a space.</p>
@@ -2064,7 +2064,7 @@ module Aws::CodeCatalyst
       :user_name,
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because an input failed to satisfy the constraints specified by the service. Check the spelling and input requirements, and then try again.</p>
@@ -2073,7 +2073,7 @@ module Aws::CodeCatalyst
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity
@@ -2082,7 +2082,7 @@ module Aws::CodeCatalyst
     class VerifySessionResponse < Struct.new(
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a workflow definition file.</p>
@@ -2092,7 +2092,7 @@ module Aws::CodeCatalyst
     class WorkflowDefinition < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a workflow definition.</p>
@@ -2102,19 +2102,19 @@ module Aws::CodeCatalyst
     class WorkflowDefinitionSummary < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information used to sort workflow runs in the returned list.</p>
     class WorkflowRunSortCriteria < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the status of a workflow run.</p>
     class WorkflowRunStatusReason < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a workflow run.</p>
@@ -2154,13 +2154,13 @@ module Aws::CodeCatalyst
       :end_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information used to sort workflows in the returned list.</p>
     class WorkflowSortCriteria < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a workflow.</p>
@@ -2204,7 +2204,7 @@ module Aws::CodeCatalyst
       :run_mode,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

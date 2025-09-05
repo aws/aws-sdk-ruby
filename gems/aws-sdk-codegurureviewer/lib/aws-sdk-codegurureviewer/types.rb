@@ -12,12 +12,7 @@ module Aws::CodeGuruReviewer
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisType
-      SECURITY = 'Security'
-      CODE_QUALITY = 'CodeQuality'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -63,7 +58,7 @@ module Aws::CodeGuruReviewer
       :tags,
       :kms_key_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_association
@@ -89,7 +84,7 @@ module Aws::CodeGuruReviewer
       :repository_association,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType">SourceCodeType</a> that
@@ -105,7 +100,7 @@ module Aws::CodeGuruReviewer
       :source_branch_name,
       :destination_branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Code artifacts are source code artifacts and build artifacts used in a repository
@@ -134,7 +129,7 @@ module Aws::CodeGuruReviewer
       :source_code_artifacts_object_key,
       :build_artifacts_object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services CodeCommit repository. The CodeCommit repository must be in
@@ -147,7 +142,7 @@ module Aws::CodeGuruReviewer
     class CodeCommitRepository < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a code review. A code review belongs to the associated repository that
@@ -244,7 +239,7 @@ module Aws::CodeGuruReviewer
       :analysis_types,
       :config_file_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the summary of the code review.</p>
@@ -320,7 +315,7 @@ module Aws::CodeGuruReviewer
       :metrics_summary,
       :source_code_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of a code review. There are two code review types:</p>
@@ -349,7 +344,7 @@ module Aws::CodeGuruReviewer
       :repository_analysis,
       :analysis_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType">SourceCodeType</a> that
@@ -372,13 +367,7 @@ module Aws::CodeGuruReviewer
       :destination_commit,
       :merge_base_commit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigFileState
-      PRESENT = 'Present'
-      ABSENT = 'Absent'
-      PRESENT_WITH_ERRORS = 'PresentWithErrors'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service
@@ -389,7 +378,7 @@ module Aws::CodeGuruReviewer
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -415,7 +404,7 @@ module Aws::CodeGuruReviewer
       :type,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_review
@@ -425,7 +414,7 @@ module Aws::CodeGuruReviewer
     class CreateCodeReviewResponse < Struct.new(
       :code_review,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_review_arn
@@ -435,7 +424,7 @@ module Aws::CodeGuruReviewer
     class DescribeCodeReviewRequest < Struct.new(
       :code_review_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_review
@@ -444,7 +433,7 @@ module Aws::CodeGuruReviewer
     class DescribeCodeReviewResponse < Struct.new(
       :code_review,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_review_arn
@@ -468,7 +457,7 @@ module Aws::CodeGuruReviewer
       :recommendation_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_feedback
@@ -477,7 +466,7 @@ module Aws::CodeGuruReviewer
     class DescribeRecommendationFeedbackResponse < Struct.new(
       :recommendation_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_arn
@@ -486,7 +475,7 @@ module Aws::CodeGuruReviewer
     class DescribeRepositoryAssociationRequest < Struct.new(
       :association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_association
@@ -512,7 +501,7 @@ module Aws::CodeGuruReviewer
       :repository_association,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_arn
@@ -521,7 +510,7 @@ module Aws::CodeGuruReviewer
     class DisassociateRepositoryRequest < Struct.new(
       :association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_association
@@ -547,12 +536,7 @@ module Aws::CodeGuruReviewer
       :repository_association,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionOption
-      AoCmk = 'AWS_OWNED_CMK'
-      CmCmk = 'CUSTOMER_MANAGED_CMK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an event. The event might be a push, pull request, scheduled request,
@@ -569,7 +553,7 @@ module Aws::CodeGuruReviewer
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an internal error and is unable to complete the request.</p>
@@ -578,14 +562,7 @@ module Aws::CodeGuruReviewer
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobState
-      COMPLETED = 'Completed'
-      PENDING = 'Pending'
-      FAILED = 'Failed'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains:</p>
@@ -612,7 +589,7 @@ module Aws::CodeGuruReviewer
       :kms_key_id,
       :encryption_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_types
@@ -667,7 +644,7 @@ module Aws::CodeGuruReviewer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_review_summaries
@@ -680,7 +657,7 @@ module Aws::CodeGuruReviewer
       :code_review_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -714,7 +691,7 @@ module Aws::CodeGuruReviewer
       :user_ids,
       :recommendation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_feedback_summaries
@@ -730,7 +707,7 @@ module Aws::CodeGuruReviewer
       :recommendation_feedback_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -748,7 +725,7 @@ module Aws::CodeGuruReviewer
       :max_results,
       :code_review_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_summaries
@@ -761,7 +738,7 @@ module Aws::CodeGuruReviewer
       :recommendation_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_types
@@ -842,7 +819,7 @@ module Aws::CodeGuruReviewer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_association_summaries
@@ -858,7 +835,7 @@ module Aws::CodeGuruReviewer
       :repository_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -867,7 +844,7 @@ module Aws::CodeGuruReviewer
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -889,7 +866,7 @@ module Aws::CodeGuruReviewer
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the statistics from the code review.</p>
@@ -915,7 +892,7 @@ module Aws::CodeGuruReviewer
       :suppressed_lines_of_code_count,
       :findings_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about metrics summaries.</p>
@@ -955,7 +932,7 @@ module Aws::CodeGuruReviewer
       :suppressed_lines_of_code_count,
       :findings_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request was not found.</p>
@@ -964,15 +941,7 @@ module Aws::CodeGuruReviewer
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProviderType
-      CODE_COMMIT = 'CodeCommit'
-      GIT_HUB = 'GitHub'
-      BITBUCKET = 'Bitbucket'
-      GIT_HUB_ENTERPRISE_SERVER = 'GitHubEnterpriseServer'
-      S3_BUCKET = 'S3Bucket'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_review_arn
@@ -992,31 +961,12 @@ module Aws::CodeGuruReviewer
       :recommendation_id,
       :reactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutRecommendationFeedbackResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Reaction
-      THUMBS_UP = 'ThumbsUp'
-      THUMBS_DOWN = 'ThumbsDown'
-    end
-
-    module RecommendationCategory
-      AWS_BEST_PRACTICES = 'AWSBestPractices'
-      AWS_CLOUDFORMATION_ISSUES = 'AWSCloudFormationIssues'
-      DUPLICATE_CODE = 'DuplicateCode'
-      CODE_MAINTENANCE_ISSUES = 'CodeMaintenanceIssues'
-      CONCURRENCY_ISSUES = 'ConcurrencyIssues'
-      INPUT_VALIDATIONS = 'InputValidations'
-      PYTHON_BEST_PRACTICES = 'PythonBestPractices'
-      JAVA_BEST_PRACTICES = 'JavaBestPractices'
-      RESOURCE_LEAKS = 'ResourceLeaks'
-      SECURITY_ISSUES = 'SecurityIssues'
-      CODE_INCONSISTENCIES = 'CodeInconsistencies'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the recommendation feedback.</p>
@@ -1053,7 +1003,7 @@ module Aws::CodeGuruReviewer
       :created_time_stamp,
       :last_updated_time_stamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about recommendation feedback summaries.</p>
@@ -1076,7 +1026,7 @@ module Aws::CodeGuruReviewer
       :reactions,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about recommendations.</p>
@@ -1118,7 +1068,7 @@ module Aws::CodeGuruReviewer
       :rule_metadata,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an associated Amazon Web Services CodeCommit repository or an associated repository
@@ -1143,7 +1093,7 @@ module Aws::CodeGuruReviewer
       :git_hub_enterprise_server,
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A code review type that analyzes all code under a specified branch in an associated
@@ -1159,7 +1109,7 @@ module Aws::CodeGuruReviewer
       :repository_head,
       :source_code_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html">DescribeRepositoryAssociation</a> operation returns a
@@ -1266,15 +1216,7 @@ module Aws::CodeGuruReviewer
       :kms_key_details,
       :s3_repository_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepositoryAssociationState
-      ASSOCIATED = 'Associated'
-      ASSOCIATING = 'Associating'
-      FAILED = 'Failed'
-      DISASSOCIATING = 'Disassociating'
-      DISASSOCIATED = 'Disassociated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html">ListRepositoryAssociations</a> operation returns a list of
@@ -1351,7 +1293,7 @@ module Aws::CodeGuruReviewer
       :provider_type,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType">SourceCodeType</a> that specifies the tip of a branch in an associated
@@ -1363,7 +1305,7 @@ module Aws::CodeGuruReviewer
     class RepositoryHeadSourceCodeType < Struct.new(
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that is associated with a code review. This applies to both pull request and
@@ -1392,7 +1334,7 @@ module Aws::CodeGuruReviewer
       :event_info,
       :vendor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The resource specified in the request was not found. </p>
@@ -1401,7 +1343,7 @@ module Aws::CodeGuruReviewer
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a short and long description. CodeGuru Reviewer uses rules to analyze code. A rule's recommendation is included in analysis results if code is detected that violates the rule.</p>
@@ -1427,7 +1369,7 @@ module Aws::CodeGuruReviewer
       :long_description,
       :rule_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an associated repository in an S3 bucket. The associated repository
@@ -1444,7 +1386,7 @@ module Aws::CodeGuruReviewer
       :name,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository in an S3 bucket.</p>
@@ -1458,7 +1400,7 @@ module Aws::CodeGuruReviewer
       :name,
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the name of an S3 bucket and a <code>CodeArtifacts</code> object that contains
@@ -1476,15 +1418,7 @@ module Aws::CodeGuruReviewer
       :bucket_name,
       :code_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Severity
-      INFO = 'Info'
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
-      CRITICAL = 'Critical'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the source code that is analyzed in a code review.</p>
@@ -1517,7 +1451,7 @@ module Aws::CodeGuruReviewer
       :s3_bucket_repository,
       :request_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1543,12 +1477,12 @@ module Aws::CodeGuruReviewer
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a third-party source repository connected to CodeGuru Reviewer.</p>
@@ -1568,7 +1502,7 @@ module Aws::CodeGuruReviewer
       :connection_arn,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1577,12 +1511,7 @@ module Aws::CodeGuruReviewer
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      PULL_REQUEST = 'PullRequest'
-      REPOSITORY_ANALYSIS = 'RepositoryAnalysis'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1595,12 +1524,12 @@ module Aws::CodeGuruReviewer
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the specified constraints.</p>
@@ -1609,13 +1538,7 @@ module Aws::CodeGuruReviewer
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VendorName
-      GITHUB = 'GitHub'
-      GITLAB = 'GitLab'
-      NATIVE_S3 = 'NativeS3'
+      include ::Smithy::Schema::Structure
     end
 
   end

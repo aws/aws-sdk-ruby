@@ -12,7 +12,7 @@ module Aws::MedicalImaging
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -21,7 +21,7 @@ module Aws::MedicalImaging
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Copy the destination image set.</p>
@@ -35,7 +35,7 @@ module Aws::MedicalImaging
       :image_set_id,
       :latest_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Copy the image set properties of the destination image set.</p>
@@ -69,7 +69,7 @@ module Aws::MedicalImaging
       :updated_at,
       :image_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Copy image set information.</p>
@@ -83,7 +83,7 @@ module Aws::MedicalImaging
       :source_image_set,
       :destination_image_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -108,7 +108,7 @@ module Aws::MedicalImaging
       :force,
       :promote_to_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -125,7 +125,7 @@ module Aws::MedicalImaging
       :source_image_set_properties,
       :destination_image_set_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Copy source image set information.</p>
@@ -139,7 +139,7 @@ module Aws::MedicalImaging
       :latest_version_id,
       :dicom_copies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Copy source image set properties.</p>
@@ -173,7 +173,7 @@ module Aws::MedicalImaging
       :updated_at,
       :image_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -194,7 +194,7 @@ module Aws::MedicalImaging
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -207,7 +207,7 @@ module Aws::MedicalImaging
       :datastore_id,
       :datastore_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of the import job.</p>
@@ -253,7 +253,7 @@ module Aws::MedicalImaging
       :output_s3_uri,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of import job.</p>
@@ -291,7 +291,7 @@ module Aws::MedicalImaging
       :submitted_at,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated structure to store DICOM study date and study time for search capabilities.</p>
@@ -305,7 +305,7 @@ module Aws::MedicalImaging
       :dicom_study_date,
       :dicom_study_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DICOM attributes returned as a part of a response. Each image set has these properties as part of a search result.</p>
@@ -375,7 +375,7 @@ module Aws::MedicalImaging
       :dicom_study_date,
       :dicom_study_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dicom_number_of_study_related_series] = 0 unless options.key?(:dicom_number_of_study_related_series)
@@ -395,7 +395,7 @@ module Aws::MedicalImaging
       :removable_attributes,
       :updatable_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties associated with the data store.</p>
@@ -429,15 +429,7 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatastoreStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of summaries of data stores.</p>
@@ -467,7 +459,7 @@ module Aws::MedicalImaging
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -476,7 +468,7 @@ module Aws::MedicalImaging
     class DeleteDatastoreRequest < Struct.new(
       :datastore_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -489,7 +481,7 @@ module Aws::MedicalImaging
       :datastore_id,
       :datastore_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -502,7 +494,7 @@ module Aws::MedicalImaging
       :datastore_id,
       :image_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -523,7 +515,7 @@ module Aws::MedicalImaging
       :image_set_state,
       :image_set_workflow_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -536,7 +528,7 @@ module Aws::MedicalImaging
       :datastore_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_properties
@@ -545,7 +537,7 @@ module Aws::MedicalImaging
     class GetDICOMImportJobResponse < Struct.new(
       :job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -554,7 +546,7 @@ module Aws::MedicalImaging
     class GetDatastoreRequest < Struct.new(
       :datastore_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_properties
@@ -563,7 +555,7 @@ module Aws::MedicalImaging
     class GetDatastoreResponse < Struct.new(
       :datastore_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -580,7 +572,7 @@ module Aws::MedicalImaging
       :image_set_id,
       :image_frame_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_frame_blob
@@ -593,7 +585,7 @@ module Aws::MedicalImaging
       :image_frame_blob,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -610,7 +602,7 @@ module Aws::MedicalImaging
       :image_set_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_set_metadata_blob
@@ -627,7 +619,7 @@ module Aws::MedicalImaging
       :content_type,
       :content_encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -644,7 +636,7 @@ module Aws::MedicalImaging
       :image_set_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -697,7 +689,7 @@ module Aws::MedicalImaging
       :overrides,
       :is_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the image frame (pixel data) identifier.</p>
@@ -707,7 +699,7 @@ module Aws::MedicalImaging
     class ImageFrameInformation < Struct.new(
       :image_frame_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image set properties.</p>
@@ -753,26 +745,7 @@ module Aws::MedicalImaging
       :overrides,
       :is_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageSetState
-      ACTIVE = 'ACTIVE'
-      LOCKED = 'LOCKED'
-      DELETED = 'DELETED'
-    end
-
-    module ImageSetWorkflowStatus
-      CREATED = 'CREATED'
-      COPIED = 'COPIED'
-      COPYING = 'COPYING'
-      COPYING_WITH_READ_ONLY_ACCESS = 'COPYING_WITH_READ_ONLY_ACCESS'
-      COPY_FAILED = 'COPY_FAILED'
-      UPDATING = 'UPDATING'
-      UPDATED = 'UPDATED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the image set metadata.</p>
@@ -802,7 +775,7 @@ module Aws::MedicalImaging
       :dicom_tags,
       :is_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred during processing of the request.</p>
@@ -811,14 +784,7 @@ module Aws::MedicalImaging
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      SUBMITTED = 'SUBMITTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -839,7 +805,7 @@ module Aws::MedicalImaging
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_summaries
@@ -852,7 +818,7 @@ module Aws::MedicalImaging
       :job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_status
@@ -869,7 +835,7 @@ module Aws::MedicalImaging
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_summaries
@@ -882,7 +848,7 @@ module Aws::MedicalImaging
       :datastore_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -903,7 +869,7 @@ module Aws::MedicalImaging
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_set_properties_list
@@ -916,7 +882,7 @@ module Aws::MedicalImaging
       :image_set_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -925,7 +891,7 @@ module Aws::MedicalImaging
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -934,7 +900,7 @@ module Aws::MedicalImaging
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains copiable <code>Attributes</code> structure and wraps information related to specific copy use cases. For example, when copying subsets.</p>
@@ -944,7 +910,7 @@ module Aws::MedicalImaging
     class MetadataCopies < Struct.new(
       :copiable_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains DICOMUpdates.</p>
@@ -959,16 +925,11 @@ module Aws::MedicalImaging
       :revert_to_version_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DICOMUpdates < MetadataUpdates; end
       class RevertToVersionId < MetadataUpdates; end
       class Unknown < MetadataUpdates; end
-    end
-
-    module Operator
-      EQUAL = 'EQUAL'
-      BETWEEN = 'BETWEEN'
     end
 
     # <p>Specifies the overrides used in image set modification calls to <code>CopyImageSet</code> and <code>UpdateImageSetMetadata</code>.</p>
@@ -978,7 +939,7 @@ module Aws::MedicalImaging
     class Overrides < Struct.new(
       :forced,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource which does not exist.</p>
@@ -987,7 +948,7 @@ module Aws::MedicalImaging
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search input attribute value.</p>
@@ -1030,7 +991,7 @@ module Aws::MedicalImaging
       :is_primary,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DICOMPatientId < SearchByAttributeValue; end
       class DICOMAccessionNumber < SearchByAttributeValue; end
@@ -1056,7 +1017,7 @@ module Aws::MedicalImaging
       :filters,
       :sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search filter.</p>
@@ -1070,7 +1031,7 @@ module Aws::MedicalImaging
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -1091,7 +1052,7 @@ module Aws::MedicalImaging
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_sets_metadata_summaries
@@ -1108,7 +1069,7 @@ module Aws::MedicalImaging
       :sort,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request caused a service quota to be exceeded.</p>
@@ -1117,7 +1078,7 @@ module Aws::MedicalImaging
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sort search results.</p>
@@ -1131,18 +1092,7 @@ module Aws::MedicalImaging
       :sort_order,
       :sort_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortField
-      updatedAt = 'updatedAt'
-      createdAt = 'createdAt'
-      DICOMStudyDateAndTime = 'DICOMStudyDateAndTime'
-    end
-
-    module SortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -1175,7 +1125,7 @@ module Aws::MedicalImaging
       :output_s3_uri,
       :input_owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -1196,7 +1146,7 @@ module Aws::MedicalImaging
       :job_status,
       :submitted_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1209,12 +1159,12 @@ module Aws::MedicalImaging
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to throttling.</p>
@@ -1223,7 +1173,7 @@ module Aws::MedicalImaging
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1236,12 +1186,12 @@ module Aws::MedicalImaging
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -1266,7 +1216,7 @@ module Aws::MedicalImaging
       :force,
       :update_image_set_metadata_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -1303,7 +1253,7 @@ module Aws::MedicalImaging
       :updated_at,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints set by the service.</p>
@@ -1312,7 +1262,7 @@ module Aws::MedicalImaging
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

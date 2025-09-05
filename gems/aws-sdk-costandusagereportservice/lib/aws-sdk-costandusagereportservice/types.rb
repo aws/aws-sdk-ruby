@@ -6,52 +6,6 @@ module Aws::CostandUsageReportService
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>The region of the S3 bucket that Amazon Web Services delivers the report into.</p>
-    module AWSRegion
-      CAPE_TOWN = 'af-south-1'
-      HONG_KONG = 'ap-east-1'
-      MUMBAI = 'ap-south-1'
-      HYDERABAD = 'ap-south-2'
-      SINGAPORE = 'ap-southeast-1'
-      SYDNEY = 'ap-southeast-2'
-      JAKARTA = 'ap-southeast-3'
-      TOKYO = 'ap-northeast-1'
-      SEOUL = 'ap-northeast-2'
-      OSAKA = 'ap-northeast-3'
-      CANADA_CENTRAL = 'ca-central-1'
-      FRANKFURT = 'eu-central-1'
-      ZURICH = 'eu-central-2'
-      IRELAND = 'eu-west-1'
-      LONDON = 'eu-west-2'
-      PARIS = 'eu-west-3'
-      STOCKHOLM = 'eu-north-1'
-      MILANO = 'eu-south-1'
-      SPAIN = 'eu-south-2'
-      UAE = 'me-central-1'
-      BAHRAIN = 'me-south-1'
-      SAO_PAULO = 'sa-east-1'
-      US_STANDARD = 'us-east-1'
-      OHIO = 'us-east-2'
-      NORTHERN_CALIFORNIA = 'us-west-1'
-      OREGON = 'us-west-2'
-      BEIJING = 'cn-north-1'
-      NINGXIA = 'cn-northwest-1'
-    end
-
-    # <p>The types of manifest that you want Amazon Web Services to create for this report.</p>
-    module AdditionalArtifact
-      REDSHIFT = 'REDSHIFT'
-      QUICKSIGHT = 'QUICKSIGHT'
-      ATHENA = 'ATHENA'
-    end
-
-    # <p>The compression format that Amazon Web Services uses for the report.</p>
-    module CompressionFormat
-      ZIP = 'ZIP'
-      GZIP = 'GZIP'
-      Parquet = 'Parquet'
-    end
-
     # <p>Deletes the specified report.</p>
     # @!attribute report_name
     #   <p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>
@@ -59,7 +13,7 @@ module Aws::CostandUsageReportService
     class DeleteReportDefinitionRequest < Struct.new(
       :report_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response.</p>
@@ -69,7 +23,7 @@ module Aws::CostandUsageReportService
     class DeleteReportDefinitionResponse < Struct.new(
       :response_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Requests a Amazon Web Services Cost and Usage Report list owned by the account.</p>
@@ -83,7 +37,7 @@ module Aws::CostandUsageReportService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response.</p>
@@ -97,7 +51,7 @@ module Aws::CostandUsageReportService
       :report_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A report with the specified name already exists in the account. Specify a different report name.</p>
@@ -107,7 +61,7 @@ module Aws::CostandUsageReportService
     class DuplicateReportNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error on the server occurred during the processing of your request. Try again later.</p>
@@ -117,13 +71,7 @@ module Aws::CostandUsageReportService
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LastStatus
-      SUCCESS = 'SUCCESS'
-      ERROR_PERMISSIONS = 'ERROR_PERMISSIONS'
-      ERROR_NO_BUCKET = 'ERROR_NO_BUCKET'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_name
@@ -132,7 +80,7 @@ module Aws::CostandUsageReportService
     class ListTagsForResourceRequest < Struct.new(
       :report_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -141,7 +89,7 @@ module Aws::CostandUsageReportService
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_name
@@ -158,12 +106,12 @@ module Aws::CostandUsageReportService
       :report_name,
       :report_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyReportDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a Cost and Usage Report.</p>
@@ -178,13 +126,13 @@ module Aws::CostandUsageReportService
       :report_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>
     class PutReportDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of Amazon Web Services Cost and Usage Report. You can specify the report name, 
@@ -251,13 +199,7 @@ module Aws::CostandUsageReportService
       :billing_view_arn,
       :report_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The format that Amazon Web Services saves the report in.</p>
-    module ReportFormat
-      CSV = 'textORcsv'
-      Parquet = 'Parquet'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This account already has five reports defined. To define a new report, you must delete an existing report.</p>
@@ -267,7 +209,7 @@ module Aws::CostandUsageReportService
     class ReportLimitReachedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A two element dictionary with a <code>lastDelivery</code> and <code>lastStatus</code> key
@@ -283,12 +225,7 @@ module Aws::CostandUsageReportService
       :last_delivery,
       :last_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportVersioning
-      CREATE_NEW_REPORT = 'CREATE_NEW_REPORT'
-      OVERWRITE_REPORT = 'OVERWRITE_REPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified report (<code>ReportName</code>) in the request doesn't exist.</p>
@@ -298,14 +235,7 @@ module Aws::CostandUsageReportService
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Whether or not Amazon Web Services includes resource IDs in the report. </p>
-    module SchemaElement
-      RESOURCES = 'RESOURCES'
-      SPLIT_COST_ALLOCATION_DATA = 'SPLIT_COST_ALLOCATION_DATA'
-      MANUAL_DISCOUNT_COMPATIBILITY = 'MANUAL_DISCOUNT_COMPATIBILITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag. A tag is a key-value pair. You can add up to 50 tags to a report
@@ -322,7 +252,7 @@ module Aws::CostandUsageReportService
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_name
@@ -335,19 +265,12 @@ module Aws::CostandUsageReportService
       :report_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The length of time covered by the report. </p>
-    module TimeUnit
-      HOURLY = 'HOURLY'
-      DAILY = 'DAILY'
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_name
@@ -361,12 +284,12 @@ module Aws::CostandUsageReportService
       :report_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -376,7 +299,7 @@ module Aws::CostandUsageReportService
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

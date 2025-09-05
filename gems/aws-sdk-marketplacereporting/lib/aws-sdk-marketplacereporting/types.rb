@@ -12,7 +12,7 @@ module Aws::MarketplaceReporting
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is malformed, or it contains an error such as an invalid parameter. Ensure the request has all required parameters.</p>
@@ -21,7 +21,7 @@ module Aws::MarketplaceReporting
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_identifier
@@ -36,7 +36,7 @@ module Aws::MarketplaceReporting
       :dashboard_identifier,
       :embedding_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute embed_url
@@ -55,7 +55,7 @@ module Aws::MarketplaceReporting
       :dashboard_identifier,
       :embedding_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed due to a server error.</p>
@@ -64,7 +64,7 @@ module Aws::MarketplaceReporting
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have permission to perform this action.</p>
@@ -73,7 +73,7 @@ module Aws::MarketplaceReporting
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

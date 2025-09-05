@@ -6,24 +6,6 @@ module Aws::AmplifyBackend
   # This module contains the types returned by client operations.
   module Types
 
-    module AdditionalConstraintsElement
-      REQUIRE_DIGIT = 'REQUIRE_DIGIT'
-      REQUIRE_LOWERCASE = 'REQUIRE_LOWERCASE'
-      REQUIRE_SYMBOL = 'REQUIRE_SYMBOL'
-      REQUIRE_UPPERCASE = 'REQUIRE_UPPERCASE'
-    end
-
-    module AuthResources
-      USER_POOL_ONLY = 'USER_POOL_ONLY'
-      IDENTITY_POOL_AND_USER_POOL = 'IDENTITY_POOL_AND_USER_POOL'
-    end
-
-    module AuthenticatedElement
-      READ = 'READ'
-      CREATE_AND_UPDATE = 'CREATE_AND_UPDATE'
-      DELETE = 'DELETE'
-    end
-
     # <p>The authentication settings for accessing provisioned data models in your Amplify project.</p>
     # @!attribute cognito_user_pool_id
     #   <p>The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.</p>
@@ -59,7 +41,7 @@ module Aws::AmplifyBackend
       :open_id_issue_url,
       :open_id_provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the auth types for your configured data models.</p>
@@ -73,7 +55,7 @@ module Aws::AmplifyBackend
       :mode,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the conflict resolution configuration for your data model configured in your Amplify project.</p>
@@ -83,7 +65,7 @@ module Aws::AmplifyBackend
     class BackendAPIConflictResolution < Struct.new(
       :resolution_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource config for the data model, configured as a part of the Amplify project.</p>
@@ -113,7 +95,7 @@ module Aws::AmplifyBackend
       :service,
       :transform_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes Apple social federation configurations for allowing your app users to sign in using OAuth.</p>
@@ -136,7 +118,7 @@ module Aws::AmplifyBackend
       :private_key,
       :team_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes third-party social federation configurations for allowing your app users to sign in using OAuth.</p>
@@ -151,7 +133,7 @@ module Aws::AmplifyBackend
       :client_id,
       :client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for this operation.</p>
@@ -189,7 +171,7 @@ module Aws::AmplifyBackend
       :status,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the read, write, and delete permissions users have against your storage S3 bucket.</p>
@@ -203,7 +185,7 @@ module Aws::AmplifyBackend
       :authenticated,
       :un_authenticated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error returned if a request is not formed properly.</p>
@@ -213,7 +195,7 @@ module Aws::AmplifyBackend
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for CloneBackend.</p>
@@ -231,7 +213,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :target_environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -260,7 +242,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for CreateBackendAPI.</p>
@@ -282,7 +264,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -311,7 +293,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>
@@ -329,7 +311,7 @@ module Aws::AmplifyBackend
       :email_settings,
       :sms_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes authorization configurations for the auth resources, configured as a part of your Amplify project.</p>
@@ -343,7 +325,7 @@ module Aws::AmplifyBackend
       :identity_pool_name,
       :unauthenticated_login,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>
@@ -357,7 +339,7 @@ module Aws::AmplifyBackend
       :mfa_mode,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates the OAuth configuration for your Amplify project.</p>
@@ -387,7 +369,7 @@ module Aws::AmplifyBackend
       :redirect_sign_out_ur_is,
       :social_provider_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The password policy configuration for the backend to your Amplify project.</p>
@@ -401,7 +383,7 @@ module Aws::AmplifyBackend
       :additional_constraints,
       :minimum_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for CreateBackendAuth.</p>
@@ -423,7 +405,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the resource configuration when creating an auth resource in your Amplify project.</p>
@@ -445,7 +427,7 @@ module Aws::AmplifyBackend
       :service,
       :user_pool_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -474,7 +456,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Cognito user pool configuration for the auth resource to be configured for your Amplify project.</p>
@@ -512,7 +494,7 @@ module Aws::AmplifyBackend
       :user_pool_name,
       :verification_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates an email or SMS verification message for the auth resource configured for your Amplify project.</p>
@@ -530,7 +512,7 @@ module Aws::AmplifyBackend
       :email_settings,
       :sms_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for CreateBackendConfig.</p>
@@ -544,7 +526,7 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_manager_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -565,7 +547,7 @@ module Aws::AmplifyBackend
       :job_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for CreateBackend.</p>
@@ -591,7 +573,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -620,7 +602,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for CreateBackendStorage.</p>
@@ -642,7 +624,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource configuration for creating backend storage.</p>
@@ -660,7 +642,7 @@ module Aws::AmplifyBackend
       :permissions,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -681,7 +663,7 @@ module Aws::AmplifyBackend
       :job_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -690,7 +672,7 @@ module Aws::AmplifyBackend
     class CreateTokenRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -711,7 +693,7 @@ module Aws::AmplifyBackend
       :session_id,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for DeleteBackendAPI.</p>
@@ -733,7 +715,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -762,7 +744,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for DeleteBackendAuth.</p>
@@ -780,7 +762,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -809,7 +791,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -822,7 +804,7 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -851,7 +833,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for DeleteBackendStorage.</p>
@@ -873,7 +855,7 @@ module Aws::AmplifyBackend
       :resource_name,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -894,7 +876,7 @@ module Aws::AmplifyBackend
       :job_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -907,7 +889,7 @@ module Aws::AmplifyBackend
       :app_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute is_success
@@ -916,13 +898,7 @@ module Aws::AmplifyBackend
     class DeleteTokenResponse < Struct.new(
       :is_success,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of verification message to send.</p>
-    module DeliveryMethod
-      EMAIL = 'EMAIL'
-      SMS = 'SMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the email sent when an app user forgets their password.</p>
@@ -937,7 +913,7 @@ module Aws::AmplifyBackend
       :email_message,
       :email_subject,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error returned if there's a temporary issue with the service.</p>
@@ -947,7 +923,7 @@ module Aws::AmplifyBackend
     class GatewayTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GenerateBackendAPIModels.</p>
@@ -965,7 +941,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -994,7 +970,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GetBackendAPIModels.</p>
@@ -1012,7 +988,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute models
@@ -1029,7 +1005,7 @@ module Aws::AmplifyBackend
       :status,
       :model_introspection_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GetBackendAPI.</p>
@@ -1051,7 +1027,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1076,7 +1052,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GetBackendAuth.</p>
@@ -1094,7 +1070,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1119,7 +1095,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1136,7 +1112,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1173,7 +1149,7 @@ module Aws::AmplifyBackend
       :status,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GetBackend.</p>
@@ -1187,7 +1163,7 @@ module Aws::AmplifyBackend
       :app_id,
       :backend_environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amplify_feature_flags
@@ -1220,7 +1196,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GetBackendStorage.</p>
@@ -1238,7 +1214,7 @@ module Aws::AmplifyBackend
       :backend_environment_name,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a backend storage resource.</p>
@@ -1260,7 +1236,7 @@ module Aws::AmplifyBackend
       :permissions,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1281,7 +1257,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1294,7 +1270,7 @@ module Aws::AmplifyBackend
       :app_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1315,7 +1291,7 @@ module Aws::AmplifyBackend
       :session_id,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for ImportBackendAuth.</p>
@@ -1345,7 +1321,7 @@ module Aws::AmplifyBackend
       :user_pool_id,
       :web_client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1374,7 +1350,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for ImportBackendStorage.</p>
@@ -1396,7 +1372,7 @@ module Aws::AmplifyBackend
       :bucket_name,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1417,7 +1393,7 @@ module Aws::AmplifyBackend
       :job_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for ListBackendJobs.</p>
@@ -1451,7 +1427,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -1464,7 +1440,7 @@ module Aws::AmplifyBackend
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for S3Buckets.</p>
@@ -1474,7 +1450,7 @@ module Aws::AmplifyBackend
     class ListS3BucketsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute buckets
@@ -1487,7 +1463,7 @@ module Aws::AmplifyBackend
       :buckets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request object for this operation.</p>
@@ -1509,25 +1485,7 @@ module Aws::AmplifyBackend
       :aws_user_pools_id,
       :aws_user_pools_web_client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MFAMode
-      ON = 'ON'
-      OFF = 'OFF'
-      OPTIONAL = 'OPTIONAL'
-    end
-
-    module MfaTypesElement
-      SMS = 'SMS'
-      TOTP = 'TOTP'
-    end
-
-    module Mode
-      API_KEY = 'API_KEY'
-      AWS_IAM = 'AWS_IAM'
-      AMAZON_COGNITO_USER_POOLS = 'AMAZON_COGNITO_USER_POOLS'
-      OPENID_CONNECT = 'OPENID_CONNECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error returned when a specific resource type is not found.</p>
@@ -1541,20 +1499,7 @@ module Aws::AmplifyBackend
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OAuthGrantType
-      CODE = 'CODE'
-      IMPLICIT = 'IMPLICIT'
-    end
-
-    module OAuthScopesElement
-      PHONE = 'PHONE'
-      EMAIL = 'EMAIL'
-      OPENID = 'OPENID'
-      PROFILE = 'PROFILE'
-      AWS_COGNITO_SIGNIN_USER_ADMIN = 'AWS_COGNITO_SIGNIN_USER_ADMIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for RemoveAllBackends.</p>
@@ -1568,7 +1513,7 @@ module Aws::AmplifyBackend
       :app_id,
       :clean_amplify_app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1593,7 +1538,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1602,7 +1547,7 @@ module Aws::AmplifyBackend
     class RemoveBackendConfigRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error
@@ -1611,40 +1556,13 @@ module Aws::AmplifyBackend
     class RemoveBackendConfigResponse < Struct.new(
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequiredSignUpAttributesElement
-      ADDRESS = 'ADDRESS'
-      BIRTHDATE = 'BIRTHDATE'
-      EMAIL = 'EMAIL'
-      FAMILY_NAME = 'FAMILY_NAME'
-      GENDER = 'GENDER'
-      GIVEN_NAME = 'GIVEN_NAME'
-      LOCALE = 'LOCALE'
-      MIDDLE_NAME = 'MIDDLE_NAME'
-      NAME = 'NAME'
-      NICKNAME = 'NICKNAME'
-      PHONE_NUMBER = 'PHONE_NUMBER'
-      PICTURE = 'PICTURE'
-      PREFERRED_USERNAME = 'PREFERRED_USERNAME'
-      PROFILE = 'PROFILE'
-      UPDATED_AT = 'UPDATED_AT'
-      WEBSITE = 'WEBSITE'
-      ZONE_INFO = 'ZONE_INFO'
-    end
-
-    module ResolutionStrategy
-      OPTIMISTIC_CONCURRENCY = 'OPTIMISTIC_CONCURRENCY'
-      LAMBDA = 'LAMBDA'
-      AUTOMERGE = 'AUTOMERGE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the resource configuration for the data model in your Amplify project.</p>
     class ResourceConfig < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata of the S3 bucket.</p>
@@ -1658,15 +1576,7 @@ module Aws::AmplifyBackend
       :creation_date,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Service
-      COGNITO = 'COGNITO'
-    end
-
-    module ServiceName
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings of your MFA configuration for the backend of your Amplify project.</p>
@@ -1680,14 +1590,7 @@ module Aws::AmplifyBackend
       :mfa_types,
       :sms_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SignInMethod
-      EMAIL = 'EMAIL'
-      EMAIL_AND_PHONE_NUMBER = 'EMAIL_AND_PHONE_NUMBER'
-      PHONE_NUMBER = 'PHONE_NUMBER'
-      USERNAME = 'USERNAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SMS settings for authentication.</p>
@@ -1698,7 +1601,7 @@ module Aws::AmplifyBackend
     class SmsSettings < Struct.new(
       :sms_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for using the social identity providers for access to your Amplify app.</p>
@@ -1720,12 +1623,7 @@ module Aws::AmplifyBackend
       :login_with_amazon,
       :sign_in_with_apple,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      LATEST = 'LATEST'
-      STALE = 'STALE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that is returned when a limit of a specific type has been exceeded.</p>
@@ -1739,13 +1637,7 @@ module Aws::AmplifyBackend
       :limit_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnAuthenticatedElement
-      READ = 'READ'
-      CREATE_AND_UPDATE = 'CREATE_AND_UPDATE'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for UpdateBackendAPI.</p>
@@ -1767,7 +1659,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1796,7 +1688,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>
@@ -1814,7 +1706,7 @@ module Aws::AmplifyBackend
       :email_settings,
       :sms_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>
@@ -1824,7 +1716,7 @@ module Aws::AmplifyBackend
     class UpdateBackendAuthIdentityPoolConfig < Struct.new(
       :unauthenticated_login,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the multi-factor authentication (MFA) configuration for the backend of your Amplify project.</p>
@@ -1838,7 +1730,7 @@ module Aws::AmplifyBackend
       :mfa_mode,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth configurations for authenticating users into your Amplify app.</p>
@@ -1868,7 +1760,7 @@ module Aws::AmplifyBackend
       :redirect_sign_out_ur_is,
       :social_provider_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.</p>
@@ -1882,7 +1774,7 @@ module Aws::AmplifyBackend
       :additional_constraints,
       :minimum_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for UpdateBackendAuth.</p>
@@ -1904,7 +1796,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the resource configuration when updating an authentication resource in your Amplify project.</p>
@@ -1926,7 +1818,7 @@ module Aws::AmplifyBackend
       :service,
       :user_pool_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1955,7 +1847,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>
@@ -1981,7 +1873,7 @@ module Aws::AmplifyBackend
       :password_policy,
       :verification_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the configuration of the email or SMS message for the auth resource configured for your Amplify project.</p>
@@ -1999,7 +1891,7 @@ module Aws::AmplifyBackend
       :email_settings,
       :sms_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for UpdateBackendConfig.</p>
@@ -2013,7 +1905,7 @@ module Aws::AmplifyBackend
       :app_id,
       :login_auth_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2034,7 +1926,7 @@ module Aws::AmplifyBackend
       :error,
       :login_auth_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for GetBackendJob.</p>
@@ -2060,7 +1952,7 @@ module Aws::AmplifyBackend
       :operation,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2097,7 +1989,7 @@ module Aws::AmplifyBackend
       :status,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body for UpdateBackendStorage.</p>
@@ -2119,7 +2011,7 @@ module Aws::AmplifyBackend
       :resource_config,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource configuration for updating backend storage.</p>
@@ -2133,7 +2025,7 @@ module Aws::AmplifyBackend
       :permissions,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2154,7 +2046,7 @@ module Aws::AmplifyBackend
       :job_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

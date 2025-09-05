@@ -29,7 +29,7 @@ module Aws::Glacier
       :vault_name,
       :upload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input values for <code>AbortVaultLock</code>.</p>
@@ -47,13 +47,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionCode
-      ArchiveRetrieval = 'ArchiveRetrieval'
-      InventoryRetrieval = 'InventoryRetrieval'
-      Select = 'Select'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input values for <code>AddTagsToVault</code>.</p>
@@ -76,7 +70,7 @@ module Aws::Glacier
       :vault_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the comma-separated value (CSV) file to select from.</p>
@@ -110,7 +104,7 @@ module Aws::Glacier
       :field_delimiter,
       :quote_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the comma-separated value (CSV) file that the job results
@@ -140,17 +134,7 @@ module Aws::Glacier
       :field_delimiter,
       :quote_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CannedACL
-      Private = 'private'
-      PublicRead = 'public-read'
-      PublicReadWrite = 'public-read-write'
-      AwsExecRead = 'aws-exec-read'
-      AuthenticatedRead = 'authenticated-read'
-      BucketOwnerRead = 'bucket-owner-read'
-      BucketOwnerFullControl = 'bucket-owner-full-control'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options to complete a multipart upload operation. This informs Amazon
@@ -187,7 +171,7 @@ module Aws::Glacier
       :archive_size,
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -208,7 +192,7 @@ module Aws::Glacier
       :checksum,
       :archive_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input values for <code>CompleteVaultLock</code>.</p>
@@ -230,7 +214,7 @@ module Aws::Glacier
       :vault_name,
       :lock_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options to create a vault.</p>
@@ -248,7 +232,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -258,7 +242,7 @@ module Aws::Glacier
     class CreateVaultOutput < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data retrieval policy.</p>
@@ -269,7 +253,7 @@ module Aws::Glacier
     class DataRetrievalPolicy < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data retrieval policy rule.</p>
@@ -287,7 +271,7 @@ module Aws::Glacier
       :strategy,
       :bytes_per_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for deleting an archive from an Amazon S3 Glacier vault.</p>
@@ -309,7 +293,7 @@ module Aws::Glacier
       :vault_name,
       :archive_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteVaultAccessPolicy input.</p>
@@ -327,7 +311,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for deleting a vault from Amazon S3 Glacier.</p>
@@ -345,7 +329,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for deleting a vault notification configuration from an Amazon
@@ -364,7 +348,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for retrieving a job description.</p>
@@ -386,7 +370,7 @@ module Aws::Glacier
       :vault_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the description of an Amazon S3 Glacier job.</p>
@@ -523,7 +507,7 @@ module Aws::Glacier
       :select_parameters,
       :output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:completed] = false unless options.key?(:completed)
@@ -547,7 +531,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -585,7 +569,7 @@ module Aws::Glacier
       :number_of_archives,
       :size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_archives] = 0 unless options.key?(:number_of_archives)
@@ -629,7 +613,7 @@ module Aws::Glacier
       :number_of_archives,
       :size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_archives] = 0 unless options.key?(:number_of_archives)
@@ -657,22 +641,7 @@ module Aws::Glacier
       :kms_key_id,
       :kms_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionType
-      KMS = 'aws:kms'
-      S3 = 'AES256'
-    end
-
-    module ExpressionType
-      SQL = 'SQL'
-    end
-
-    module FileHeaderInfo
-      Use = 'USE'
-      Ignore = 'IGNORE'
-      None = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for GetDataRetrievalPolicy.</p>
@@ -686,7 +655,7 @@ module Aws::Glacier
     class GetDataRetrievalPolicyInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to the <code>GetDataRetrievalPolicy</code>
@@ -697,7 +666,7 @@ module Aws::Glacier
     class GetDataRetrievalPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for downloading output of an Amazon S3 Glacier job.</p>
@@ -758,7 +727,7 @@ module Aws::Glacier
       :job_id,
       :range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -818,7 +787,7 @@ module Aws::Glacier
       :content_type,
       :archive_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:body] = Base64.strict_decode64('') unless options.key?(:body)
@@ -842,7 +811,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output for GetVaultAccessPolicy.</p>
@@ -852,7 +821,7 @@ module Aws::Glacier
     class GetVaultAccessPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input values for <code>GetVaultLock</code>.</p>
@@ -870,7 +839,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -896,7 +865,7 @@ module Aws::Glacier
       :expiration_date,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for retrieving the notification configuration set on an Amazon
@@ -915,7 +884,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -925,7 +894,7 @@ module Aws::Glacier
     class GetVaultNotificationsOutput < Struct.new(
       :vault_notification_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the description of an Amazon S3 Glacier job.</p>
@@ -1062,7 +1031,7 @@ module Aws::Glacier
       :select_parameters,
       :output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:completed] = false unless options.key?(:completed)
@@ -1081,7 +1050,7 @@ module Aws::Glacier
       :grantee,
       :permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the grantee.</p>
@@ -1107,7 +1076,7 @@ module Aws::Glacier
       :id,
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for initiating an Amazon S3 Glacier job.</p>
@@ -1129,7 +1098,7 @@ module Aws::Glacier
       :vault_name,
       :job_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1147,7 +1116,7 @@ module Aws::Glacier
       :job_id,
       :job_output_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for initiating a multipart upload to an Amazon S3 Glacier
@@ -1178,7 +1147,7 @@ module Aws::Glacier
       :archive_description,
       :part_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 Glacier response to your request.</p>
@@ -1193,7 +1162,7 @@ module Aws::Glacier
       :location,
       :upload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input values for <code>InitiateVaultLock</code>.</p>
@@ -1216,7 +1185,7 @@ module Aws::Glacier
       :vault_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1226,7 +1195,7 @@ module Aws::Glacier
     class InitiateVaultLockOutput < Struct.new(
       :lock_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the archive is serialized.</p>
@@ -1236,7 +1205,7 @@ module Aws::Glacier
     class InputSerialization < Struct.new(
       :csv,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if there is insufficient capacity to process this expedited request. This
@@ -1253,7 +1222,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if a parameter of the request is incorrectly specified.</p>
@@ -1271,7 +1240,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for a range inventory retrieval job.</p>
@@ -1307,7 +1276,7 @@ module Aws::Glacier
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for specifying a range inventory retrieval job.</p>
@@ -1337,7 +1306,7 @@ module Aws::Glacier
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for defining a job.</p>
@@ -1405,7 +1374,7 @@ module Aws::Glacier
       :select_parameters,
       :output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the request results in a vault or account limit being exceeded.</p>
@@ -1423,7 +1392,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for retrieving a job list for an Amazon S3 Glacier vault.</p>
@@ -1464,7 +1433,7 @@ module Aws::Glacier
       :statuscode,
       :completed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1483,7 +1452,7 @@ module Aws::Glacier
       :job_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for retrieving list of in-progress multipart uploads for an Amazon
@@ -1514,7 +1483,7 @@ module Aws::Glacier
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1530,7 +1499,7 @@ module Aws::Glacier
       :uploads_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options for retrieving a list of parts of an archive that have been uploaded
@@ -1566,7 +1535,7 @@ module Aws::Glacier
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1607,7 +1576,7 @@ module Aws::Glacier
       :parts,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:part_size_in_bytes] = 0 unless options.key?(:part_size_in_bytes)
@@ -1624,7 +1593,7 @@ module Aws::Glacier
     class ListProvisionedCapacityInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provisioned_capacity_list
@@ -1633,7 +1602,7 @@ module Aws::Glacier
     class ListProvisionedCapacityOutput < Struct.new(
       :provisioned_capacity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input value for <code>ListTagsForVaultInput</code>.</p>
@@ -1651,7 +1620,7 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1661,7 +1630,7 @@ module Aws::Glacier
     class ListTagsForVaultOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options to retrieve the vault list owned by the calling user's account. The
@@ -1687,7 +1656,7 @@ module Aws::Glacier
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -1702,7 +1671,7 @@ module Aws::Glacier
       :vault_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if a required header or parameter is missing from the request.</p>
@@ -1720,7 +1689,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the location where the select job results are stored.</p>
@@ -1730,7 +1699,7 @@ module Aws::Glacier
     class OutputLocation < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how the select output is serialized.</p>
@@ -1740,7 +1709,7 @@ module Aws::Glacier
     class OutputSerialization < Struct.new(
       :csv,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the part sizes of the multipart upload.</p>
@@ -1755,15 +1724,7 @@ module Aws::Glacier
       :range_in_bytes,
       :sha256_tree_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Permission
-      FULL_CONTROL = 'FULL_CONTROL'
-      WRITE = 'WRITE'
-      WRITE_ACP = 'WRITE_ACP'
-      READ = 'READ'
-      READ_ACP = 'READ_ACP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if a retrieval job would exceed the current data policy's retrieval rate
@@ -1782,7 +1743,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a provisioned capacity unit.</p>
@@ -1800,7 +1761,7 @@ module Aws::Glacier
       :start_date,
       :expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1812,7 +1773,7 @@ module Aws::Glacier
     class PurchaseProvisionedCapacityInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_id
@@ -1821,12 +1782,7 @@ module Aws::Glacier
     class PurchaseProvisionedCapacityOutput < Struct.new(
       :capacity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuoteFields
-      Always = 'ALWAYS'
-      AsNeeded = 'ASNEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input value for <code>RemoveTagsFromVaultInput</code>.</p>
@@ -1848,7 +1804,7 @@ module Aws::Glacier
       :vault_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if, when uploading an archive, Amazon S3 Glacier times out while receiving the
@@ -1868,7 +1824,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the specified resource (such as a vault, upload ID, or job ID) doesn't
@@ -1888,7 +1844,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the location in Amazon S3 where the select job results are stored.</p>
@@ -1926,7 +1882,7 @@ module Aws::Glacier
       :user_metadata,
       :storage_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the parameters used for a select.</p>
@@ -1948,7 +1904,7 @@ module Aws::Glacier
       :expression,
       :output_serialization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the service cannot complete the request.</p>
@@ -1966,7 +1922,7 @@ module Aws::Glacier
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SetDataRetrievalPolicy input.</p>
@@ -1984,7 +1940,7 @@ module Aws::Glacier
       :account_id,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SetVaultAccessPolicy input.</p>
@@ -2006,7 +1962,7 @@ module Aws::Glacier
       :vault_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options to configure notifications that will be sent when specific events
@@ -2029,25 +1985,7 @@ module Aws::Glacier
       :vault_name,
       :vault_notification_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatusCode
-      InProgress = 'InProgress'
-      Succeeded = 'Succeeded'
-      Failed = 'Failed'
-    end
-
-    module StorageClass
-      Standard = 'STANDARD'
-      ReducedRedundancy = 'REDUCED_REDUNDANCY'
-      StandardInfrequentAccess = 'STANDARD_IA'
-    end
-
-    module Type
-      AmazonCustomerByEmail = 'AmazonCustomerByEmail'
-      CanonicalUser = 'CanonicalUser'
-      Group = 'Group'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides options to add an archive to a vault.</p>
@@ -2077,7 +2015,7 @@ module Aws::Glacier
       :checksum,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -2098,7 +2036,7 @@ module Aws::Glacier
       :checksum,
       :archive_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of in-progress multipart uploads for a vault.</p>
@@ -2127,7 +2065,7 @@ module Aws::Glacier
       :part_size_in_bytes,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:part_size_in_bytes] = 0 unless options.key?(:part_size_in_bytes)
@@ -2170,7 +2108,7 @@ module Aws::Glacier
       :range,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon S3 Glacier response to your request.</p>
@@ -2180,7 +2118,7 @@ module Aws::Glacier
     class UploadMultipartPartOutput < Struct.new(
       :checksum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the vault access policy.</p>
@@ -2190,7 +2128,7 @@ module Aws::Glacier
     class VaultAccessPolicy < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the vault lock policy.</p>
@@ -2200,7 +2138,7 @@ module Aws::Glacier
     class VaultLockPolicy < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a vault's notification configuration.</p>
@@ -2216,7 +2154,7 @@ module Aws::Glacier
       :sns_topic,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

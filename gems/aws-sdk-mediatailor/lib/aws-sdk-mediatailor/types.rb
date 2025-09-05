@@ -17,13 +17,7 @@ module Aws::MediaTailor
       :access_type,
       :secrets_manager_access_token_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessType
-      S3_SIGV4 = 'S3_SIGV4'
-      SECRETS_MANAGER_ACCESS_TOKEN = 'SECRETS_MANAGER_ACCESS_TOKEN'
-      AUTODETECT_SIGV4 = 'AUTODETECT_SIGV4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Ad break configuration parameters.</p>
@@ -53,7 +47,7 @@ module Aws::MediaTailor
       :time_signal_message,
       :ad_break_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:offset_millis] = 0 unless options.key?(:offset_millis)
@@ -68,7 +62,7 @@ module Aws::MediaTailor
     class AdBreakOpportunity < Struct.new(
       :offset_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:offset_millis] = 0 unless options.key?(:offset_millis)
@@ -83,7 +77,7 @@ module Aws::MediaTailor
     class AdConditioningConfiguration < Struct.new(
       :streaming_media_file_conditioning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For HLS, when set to <code>true</code>, MediaTailor passes through <code>EXT-X-CUE-IN</code>, <code>EXT-X-CUE-OUT</code>, and <code>EXT-X-SPLICEPOINT-SCTE35</code> ad markers from the origin manifest to the MediaTailor personalized manifest.</p> <p>No logic is applied to these ad markers. For example, if <code>EXT-X-CUE-OUT</code> has a value of <code>60</code>, but no ads are filled for that ad break, MediaTailor will not set the value to <code>0</code>.</p>
@@ -93,61 +87,12 @@ module Aws::MediaTailor
     class AdMarkerPassthrough < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module AdMarkupType
-      DATERANGE = 'DATERANGE'
-      SCTE35_ENHANCED = 'SCTE35_ENHANCED'
-    end
-
-    module AdsInteractionExcludeEventType
-      AD_MARKER_FOUND = 'AD_MARKER_FOUND'
-      NON_AD_MARKER_FOUND = 'NON_AD_MARKER_FOUND'
-      MAKING_ADS_REQUEST = 'MAKING_ADS_REQUEST'
-      MODIFIED_TARGET_URL = 'MODIFIED_TARGET_URL'
-      VAST_REDIRECT = 'VAST_REDIRECT'
-      EMPTY_VAST_RESPONSE = 'EMPTY_VAST_RESPONSE'
-      EMPTY_VMAP_RESPONSE = 'EMPTY_VMAP_RESPONSE'
-      VAST_RESPONSE = 'VAST_RESPONSE'
-      REDIRECTED_VAST_RESPONSE = 'REDIRECTED_VAST_RESPONSE'
-      FILLED_AVAIL = 'FILLED_AVAIL'
-      FILLED_OVERLAY_AVAIL = 'FILLED_OVERLAY_AVAIL'
-      BEACON_FIRED = 'BEACON_FIRED'
-      WARNING_NO_ADVERTISEMENTS = 'WARNING_NO_ADVERTISEMENTS'
-      WARNING_VPAID_AD_DROPPED = 'WARNING_VPAID_AD_DROPPED'
-      WARNING_URL_VARIABLE_SUBSTITUTION_FAILED = 'WARNING_URL_VARIABLE_SUBSTITUTION_FAILED'
-      ERROR_UNKNOWN = 'ERROR_UNKNOWN'
-      ERROR_UNKNOWN_HOST = 'ERROR_UNKNOWN_HOST'
-      ERROR_DISALLOWED_HOST = 'ERROR_DISALLOWED_HOST'
-      ERROR_ADS_IO = 'ERROR_ADS_IO'
-      ERROR_ADS_TIMEOUT = 'ERROR_ADS_TIMEOUT'
-      ERROR_ADS_RESPONSE_PARSE = 'ERROR_ADS_RESPONSE_PARSE'
-      ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT = 'ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT'
-      ERROR_ADS_INVALID_RESPONSE = 'ERROR_ADS_INVALID_RESPONSE'
-      ERROR_VAST_REDIRECT_EMPTY_RESPONSE = 'ERROR_VAST_REDIRECT_EMPTY_RESPONSE'
-      ERROR_VAST_REDIRECT_MULTIPLE_VAST = 'ERROR_VAST_REDIRECT_MULTIPLE_VAST'
-      ERROR_VAST_REDIRECT_FAILED = 'ERROR_VAST_REDIRECT_FAILED'
-      ERROR_VAST_MISSING_MEDIAFILES = 'ERROR_VAST_MISSING_MEDIAFILES'
-      ERROR_VAST_MISSING_CREATIVES = 'ERROR_VAST_MISSING_CREATIVES'
-      ERROR_VAST_MISSING_OVERLAYS = 'ERROR_VAST_MISSING_OVERLAYS'
-      ERROR_VAST_MISSING_IMPRESSION = 'ERROR_VAST_MISSING_IMPRESSION'
-      ERROR_VAST_INVALID_VAST_AD_TAG_URI = 'ERROR_VAST_INVALID_VAST_AD_TAG_URI'
-      ERROR_VAST_MULTIPLE_TRACKING_EVENTS = 'ERROR_VAST_MULTIPLE_TRACKING_EVENTS'
-      ERROR_VAST_MULTIPLE_LINEAR = 'ERROR_VAST_MULTIPLE_LINEAR'
-      ERROR_VAST_INVALID_MEDIA_FILE = 'ERROR_VAST_INVALID_MEDIA_FILE'
-      ERROR_FIRING_BEACON_FAILED = 'ERROR_FIRING_BEACON_FAILED'
-      ERROR_PERSONALIZATION_DISABLED = 'ERROR_PERSONALIZATION_DISABLED'
-      VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET = 'VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET'
-      VOD_TIME_BASED_AVAIL_PLAN_SUCCESS = 'VOD_TIME_BASED_AVAIL_PLAN_SUCCESS'
-      VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS = 'VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS'
-      INTERSTITIAL_VOD_SUCCESS = 'INTERSTITIAL_VOD_SUCCESS'
-      INTERSTITIAL_VOD_FAILURE = 'INTERSTITIAL_VOD_FAILURE'
     end
 
     # <p>Settings for customizing what events are included in logs for interactions with the ad decision server (ADS).</p> <p>For more information about ADS logs, inlcuding descriptions of the event types, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html">MediaTailor ADS logs description and event types</a> in Elemental MediaTailor User Guide.</p>
@@ -161,11 +106,7 @@ module Aws::MediaTailor
       :publish_opt_in_event_types,
       :exclude_event_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdsInteractionPublishOptInEventType
-      RAW_ADS_RESPONSE = 'RAW_ADS_RESPONSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Alert configuration parameters.</p>
@@ -195,13 +136,7 @@ module Aws::MediaTailor
       :resource_arn,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlertCategory
-      SCHEDULING_ERROR = 'SCHEDULING_ERROR'
-      PLAYBACK_WARNING = 'PLAYBACK_WARNING'
-      INFO = 'INFO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A playlist of media (VOD and/or live) to be played instead of the default media on a particular program.</p>
@@ -235,7 +170,7 @@ module Aws::MediaTailor
       :ad_breaks,
       :duration_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An AudienceMedia object contains an Audience and a list of AlternateMedia.</p>
@@ -249,7 +184,7 @@ module Aws::MediaTailor
       :audience,
       :alternate_media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>MediaTailor only places (consumes) prefetched ads if the ad break meets the criteria defined by the dynamic variables. This gives you granular control over which ad break to place the prefetched ads into.</p> <p>As an example, let's say that you set <code>DynamicVariable</code> to <code>scte.event_id</code> and <code>Operator</code> to <code>EQUALS</code>, and your playback configuration has an ADS URL of <code>https://my.ads.server.com/path?&amp;podId=[scte.avail_num]&amp;event=[scte.event_id]&amp;duration=[session.avail_duration_secs]</code>. And the prefetch request to the ADS contains these values <code>https://my.ads.server.com/path?&amp;podId=3&amp;event=my-awesome-event&amp;duration=30</code>. MediaTailor will only insert the prefetched ads into the ad break if has a SCTE marker with an event id of <code>my-awesome-event</code>, since it must match the event id that MediaTailor uses to query the ADS.</p> <p>You can specify up to five <code>AvailMatchingCriteria</code>. If you specify multiple <code>AvailMatchingCriteria</code>, MediaTailor combines them to match using a logical <code>AND</code>. You can model logical <code>OR</code> combinations by creating multiple prefetch schedules.</p>
@@ -263,7 +198,7 @@ module Aws::MediaTailor
       :dynamic_variable,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for avail suppression, also known as ad suppression. For more information about ad suppression, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html">Ad Suppression</a>.</p>
@@ -281,7 +216,7 @@ module Aws::MediaTailor
       :value,
       :fill_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request contains unexpected data.</p>
@@ -290,7 +225,7 @@ module Aws::MediaTailor
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. To learn more about bumpers, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html">Bumpers</a>.</p>
@@ -304,7 +239,7 @@ module Aws::MediaTailor
       :end_url,
       :start_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management.</p>
@@ -318,7 +253,7 @@ module Aws::MediaTailor
       :ad_segment_url_prefix,
       :content_segment_url_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters for a channel. For information about MediaTailor channels, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html">Working with channels</a> in the <i>MediaTailor User Guide</i>.</p>
@@ -372,12 +307,7 @@ module Aws::MediaTailor
       :log_configuration,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChannelState
-      RUNNING = 'RUNNING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Clip range configuration for the VOD source associated with the program.</p>
@@ -391,7 +321,7 @@ module Aws::MediaTailor
       :end_offset_millis,
       :start_offset_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:end_offset_millis] = 0 unless options.key?(:end_offset_millis)
@@ -409,7 +339,7 @@ module Aws::MediaTailor
       :channel_name,
       :log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -422,7 +352,7 @@ module Aws::MediaTailor
       :channel_name,
       :log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures Amazon CloudWatch log settings for a playback configuration.</p>
@@ -448,7 +378,7 @@ module Aws::MediaTailor
       :ads_interaction_log,
       :manifest_service_interaction_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute percent_enabled
@@ -473,7 +403,7 @@ module Aws::MediaTailor
       :ads_interaction_log,
       :manifest_service_interaction_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percent_enabled] = 0 unless options.key?(:percent_enabled)
@@ -515,7 +445,7 @@ module Aws::MediaTailor
       :time_shift_configuration,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -571,7 +501,7 @@ module Aws::MediaTailor
       :time_shift_configuration,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute http_package_configurations
@@ -592,7 +522,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -625,7 +555,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumption
@@ -658,7 +588,7 @@ module Aws::MediaTailor
       :schedule_type,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -695,7 +625,7 @@ module Aws::MediaTailor
       :schedule_type,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_breaks
@@ -732,7 +662,7 @@ module Aws::MediaTailor
       :vod_source_name,
       :audience_media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_breaks
@@ -785,7 +715,7 @@ module Aws::MediaTailor
       :duration_millis,
       :audience_media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_configuration
@@ -814,7 +744,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_configuration
@@ -855,7 +785,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute http_package_configurations
@@ -876,7 +806,7 @@ module Aws::MediaTailor
       :tags,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -909,7 +839,7 @@ module Aws::MediaTailor
       :tags,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for DASH content.</p>
@@ -927,7 +857,7 @@ module Aws::MediaTailor
       :mpd_location,
       :origin_manifest_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for DASH PUT operations.</p>
@@ -941,7 +871,7 @@ module Aws::MediaTailor
       :mpd_location,
       :origin_manifest_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dash manifest configuration parameters.</p>
@@ -963,7 +893,7 @@ module Aws::MediaTailor
       :min_update_period_seconds,
       :suggested_presentation_delay_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optional configuration for a server that serves segments. Use this if you want the segment delivery server to be different from the source location server. For example, you can configure your source location server to be an origination server, such as MediaPackage, and the segment delivery server to be a content delivery network (CDN), such as CloudFront. If you don't specify a segment delivery server, then the source location server is used.</p>
@@ -973,7 +903,7 @@ module Aws::MediaTailor
     class DefaultSegmentDeliveryConfiguration < Struct.new(
       :base_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -982,12 +912,12 @@ module Aws::MediaTailor
     class DeleteChannelInput < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -996,12 +926,12 @@ module Aws::MediaTailor
     class DeleteChannelPolicyInput < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute live_source_name
@@ -1014,12 +944,12 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLiveSourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1028,12 +958,12 @@ module Aws::MediaTailor
     class DeletePlaybackConfigurationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePlaybackConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1046,12 +976,12 @@ module Aws::MediaTailor
       :name,
       :playback_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePrefetchScheduleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1064,12 +994,12 @@ module Aws::MediaTailor
       :channel_name,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProgramOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_location_name
@@ -1078,12 +1008,12 @@ module Aws::MediaTailor
     class DeleteSourceLocationInput < Struct.new(
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceLocationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_location_name
@@ -1096,12 +1026,12 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVodSourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1110,7 +1040,7 @@ module Aws::MediaTailor
     class DescribeChannelInput < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1170,7 +1100,7 @@ module Aws::MediaTailor
       :time_shift_configuration,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute live_source_name
@@ -1183,7 +1113,7 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1216,7 +1146,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1229,7 +1159,7 @@ module Aws::MediaTailor
       :channel_name,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_breaks
@@ -1282,7 +1212,7 @@ module Aws::MediaTailor
       :duration_millis,
       :audience_media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_location_name
@@ -1291,7 +1221,7 @@ module Aws::MediaTailor
     class DescribeSourceLocationInput < Struct.new(
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_configuration
@@ -1332,7 +1262,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_location_name
@@ -1345,7 +1275,7 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_break_opportunities
@@ -1382,12 +1312,7 @@ module Aws::MediaTailor
       :tags,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FillPolicy
-      FULL_AVAIL_ONLY = 'FULL_AVAIL_ONLY'
-      PARTIAL_AVAIL = 'PARTIAL_AVAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1396,7 +1321,7 @@ module Aws::MediaTailor
     class GetChannelPolicyInput < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1405,7 +1330,7 @@ module Aws::MediaTailor
     class GetChannelPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1430,7 +1355,7 @@ module Aws::MediaTailor
       :next_token,
       :audience,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1443,7 +1368,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1452,7 +1377,7 @@ module Aws::MediaTailor
     class GetPlaybackConfigurationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_decision_server_url
@@ -1541,7 +1466,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:insertion_mode] = 'STITCHED_ONLY' unless options.key?(:insertion_mode)
@@ -1559,7 +1484,7 @@ module Aws::MediaTailor
       :name,
       :playback_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1596,7 +1521,7 @@ module Aws::MediaTailor
       :recurring_prefetch_configuration,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for HLS content.</p>
@@ -1606,7 +1531,7 @@ module Aws::MediaTailor
     class HlsConfiguration < Struct.new(
       :manifest_endpoint_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>HLS playlist configuration parameters.</p>
@@ -1620,7 +1545,7 @@ module Aws::MediaTailor
       :manifest_window_seconds,
       :ad_markup_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HTTP configuration for the source location.</p>
@@ -1630,7 +1555,7 @@ module Aws::MediaTailor
     class HttpConfiguration < Struct.new(
       :base_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HTTP package configuration properties for the requested VOD source.</p>
@@ -1648,13 +1573,7 @@ module Aws::MediaTailor
       :source_group,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Insertion Mode controls whether players can use stitched or guided ad insertion.</p>
-    module InsertionMode
-      STITCHED_ONLY = 'STITCHED_ONLY'
-      PLAYER_SELECT = 'PLAYER_SELECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For <code>SCTE35_ENHANCED</code> output, defines a key and corresponding value. MediaTailor generates these pairs within the <code>EXT-X-ASSET</code>tag.</p>
@@ -1668,7 +1587,7 @@ module Aws::MediaTailor
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1685,7 +1604,7 @@ module Aws::MediaTailor
       :next_token,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1698,7 +1617,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1711,7 +1630,7 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1724,7 +1643,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1741,7 +1660,7 @@ module Aws::MediaTailor
       :next_token,
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1754,7 +1673,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1767,7 +1686,7 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1780,13 +1699,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListPrefetchScheduleType
-      SINGLE = 'SINGLE'
-      RECURRING = 'RECURRING'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1811,7 +1724,7 @@ module Aws::MediaTailor
       :schedule_type,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1824,7 +1737,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1837,7 +1750,7 @@ module Aws::MediaTailor
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1850,7 +1763,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1859,7 +1772,7 @@ module Aws::MediaTailor
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1868,7 +1781,7 @@ module Aws::MediaTailor
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1885,7 +1798,7 @@ module Aws::MediaTailor
       :next_token,
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1898,7 +1811,7 @@ module Aws::MediaTailor
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for pre-roll ad insertion.</p>
@@ -1912,7 +1825,7 @@ module Aws::MediaTailor
       :ad_decision_server_url,
       :max_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Live source configuration parameters.</p>
@@ -1946,7 +1859,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines where AWS Elemental MediaTailor sends logs for the playback configuration.</p>
@@ -1968,7 +1881,7 @@ module Aws::MediaTailor
       :ads_interaction_log,
       :manifest_service_interaction_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percent_enabled] = 0 unless options.key?(:percent_enabled)
@@ -1983,16 +1896,7 @@ module Aws::MediaTailor
     class LogConfigurationForChannel < Struct.new(
       :log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogType
-      AS_RUN = 'AS_RUN'
-    end
-
-    module LoggingStrategy
-      VENDED_LOGS = 'VENDED_LOGS'
-      LEGACY_CLOUDWATCH = 'LEGACY_CLOUDWATCH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.</p>
@@ -2002,42 +1906,7 @@ module Aws::MediaTailor
     class ManifestProcessingRules < Struct.new(
       :ad_marker_passthrough,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManifestServiceExcludeEventType
-      GENERATED_MANIFEST = 'GENERATED_MANIFEST'
-      ORIGIN_MANIFEST = 'ORIGIN_MANIFEST'
-      SESSION_INITIALIZED = 'SESSION_INITIALIZED'
-      TRACKING_RESPONSE = 'TRACKING_RESPONSE'
-      CONFIG_SYNTAX_ERROR = 'CONFIG_SYNTAX_ERROR'
-      CONFIG_SECURITY_ERROR = 'CONFIG_SECURITY_ERROR'
-      UNKNOWN_HOST = 'UNKNOWN_HOST'
-      TIMEOUT_ERROR = 'TIMEOUT_ERROR'
-      CONNECTION_ERROR = 'CONNECTION_ERROR'
-      IO_ERROR = 'IO_ERROR'
-      UNKNOWN_ERROR = 'UNKNOWN_ERROR'
-      HOST_DISALLOWED = 'HOST_DISALLOWED'
-      PARSING_ERROR = 'PARSING_ERROR'
-      MANIFEST_ERROR = 'MANIFEST_ERROR'
-      NO_MASTER_OR_MEDIA_PLAYLIST = 'NO_MASTER_OR_MEDIA_PLAYLIST'
-      NO_MASTER_PLAYLIST = 'NO_MASTER_PLAYLIST'
-      NO_MEDIA_PLAYLIST = 'NO_MEDIA_PLAYLIST'
-      INCOMPATIBLE_HLS_VERSION = 'INCOMPATIBLE_HLS_VERSION'
-      SCTE35_PARSING_ERROR = 'SCTE35_PARSING_ERROR'
-      INVALID_SINGLE_PERIOD_DASH_MANIFEST = 'INVALID_SINGLE_PERIOD_DASH_MANIFEST'
-      UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST = 'UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST'
-      LAST_PERIOD_MISSING_AUDIO = 'LAST_PERIOD_MISSING_AUDIO'
-      LAST_PERIOD_MISSING_AUDIO_WARNING = 'LAST_PERIOD_MISSING_AUDIO_WARNING'
-      ERROR_ORIGIN_PREFIX_INTERPOLATION = 'ERROR_ORIGIN_PREFIX_INTERPOLATION'
-      ERROR_ADS_INTERPOLATION = 'ERROR_ADS_INTERPOLATION'
-      ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION = 'ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION'
-      ERROR_CDN_AD_SEGMENT_INTERPOLATION = 'ERROR_CDN_AD_SEGMENT_INTERPOLATION'
-      ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION = 'ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION'
-      ERROR_SLATE_AD_URL_INTERPOLATION = 'ERROR_SLATE_AD_URL_INTERPOLATION'
-      ERROR_PROFILE_NAME_INTERPOLATION = 'ERROR_PROFILE_NAME_INTERPOLATION'
-      ERROR_BUMPER_START_INTERPOLATION = 'ERROR_BUMPER_START_INTERPOLATION'
-      ERROR_BUMPER_END_INTERPOLATION = 'ERROR_BUMPER_END_INTERPOLATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for customizing what events are included in logs for interactions with the origin server.</p> <p>For more information about manifest service logs, including descriptions of the event types, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/log-types.html">MediaTailor manifest logs description and event types</a> in Elemental MediaTailor User Guide.</p>
@@ -2047,27 +1916,7 @@ module Aws::MediaTailor
     class ManifestServiceInteractionLog < Struct.new(
       :exclude_event_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageType
-      SPLICE_INSERT = 'SPLICE_INSERT'
-      TIME_SIGNAL = 'TIME_SIGNAL'
-    end
-
-    module Mode
-      OFF = 'OFF'
-      BEHIND_LIVE_EDGE = 'BEHIND_LIVE_EDGE'
-      AFTER_LIVE_EDGE = 'AFTER_LIVE_EDGE'
-    end
-
-    module Operator
-      EQUALS = 'EQUALS'
-    end
-
-    module OriginManifestType
-      SINGLE_PERIOD = 'SINGLE_PERIOD'
-      MULTI_PERIOD = 'MULTI_PERIOD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A playback configuration. For information about MediaTailor configurations, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html">Working with configurations in AWS Elemental MediaTailor</a>.</p>
@@ -2157,17 +2006,12 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:insertion_mode] = 'STITCHED_ONLY' unless options.key?(:insertion_mode)
         super
       end
-    end
-
-    module PlaybackMode
-      LOOP = 'LOOP'
-      LINEAR = 'LINEAR'
     end
 
     # <p>For single prefetch, describes how and when that MediaTailor places prefetched ads into upcoming ad breaks.</p>
@@ -2185,7 +2029,7 @@ module Aws::MediaTailor
       :end_time,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains settings governing when MediaTailor prefetches ads, and which dynamic variables that MediaTailor includes in the request to the ad decision server.</p>
@@ -2211,7 +2055,7 @@ module Aws::MediaTailor
       :traffic_shaping_type,
       :traffic_shaping_retrieval_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A prefetch schedule allows you to tell MediaTailor to fetch and prepare certain ads before an ad break happens. For more information about ad prefetching, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html">Using ad prefetching</a> in the <i>MediaTailor User Guide</i>.</p>
@@ -2249,12 +2093,7 @@ module Aws::MediaTailor
       :recurring_prefetch_configuration,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrefetchScheduleType
-      SINGLE = 'SINGLE'
-      RECURRING = 'RECURRING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -2267,12 +2106,12 @@ module Aws::MediaTailor
       :channel_name,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutChannelPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_decision_server_url
@@ -2341,7 +2180,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_decision_server_url
@@ -2430,7 +2269,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:insertion_mode] = 'STITCHED_ONLY' unless options.key?(:insertion_mode)
@@ -2449,7 +2288,7 @@ module Aws::MediaTailor
       :retrieved_ad_expiration_seconds,
       :avail_matching_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that defines how MediaTailor performs recurring prefetch. </p>
@@ -2471,7 +2310,7 @@ module Aws::MediaTailor
       :recurring_consumption,
       :recurring_retrieval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>With recurring prefetch, MediaTailor automatically prefetches ads for every avail that occurs during the retrieval window. The following configurations describe the MediaTailor behavior when prefetching ads for a live event.</p>
@@ -2493,12 +2332,7 @@ module Aws::MediaTailor
       :traffic_shaping_type,
       :traffic_shaping_retrieval_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelativePosition
-      BEFORE_PROGRAM = 'BEFORE_PROGRAM'
-      AFTER_PROGRAM = 'AFTER_PROGRAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration for this channel.</p>
@@ -2520,7 +2354,7 @@ module Aws::MediaTailor
       :manifest_name,
       :source_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output item response.</p>
@@ -2546,7 +2380,7 @@ module Aws::MediaTailor
       :playback_url,
       :source_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schedule's ad break properties.</p>
@@ -2568,7 +2402,7 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Schedule configuration parameters. A channel must be stopped before changes can be made to the schedule.</p>
@@ -2582,7 +2416,7 @@ module Aws::MediaTailor
       :transition,
       :clip_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for a schedule.</p>
@@ -2632,13 +2466,7 @@ module Aws::MediaTailor
       :vod_source_name,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleEntryType
-      PROGRAM = 'PROGRAM'
-      FILLER_SLATE = 'FILLER_SLATE'
-      ALTERNATE_MEDIA = 'ALTERNATE_MEDIA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS Secrets Manager access token configuration parameters. For information about Secrets Manager access token authentication, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html">Working with AWS Secrets Manager access token authentication</a>.</p>
@@ -2656,7 +2484,7 @@ module Aws::MediaTailor
       :secret_arn,
       :secret_string_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The segment delivery configuration settings.</p>
@@ -2670,7 +2498,7 @@ module Aws::MediaTailor
       :base_url,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>segmentation_descriptor</code> message can contain advanced metadata fields, like content identifiers, to convey a wide range of information about the ad break. MediaTailor writes the ad metadata in the egress manifest as part of the <code>EXT-X-DATERANGE</code> or <code>EventStream</code> ad marker's SCTE-35 data.</p> <p> <code>segmentation_descriptor</code> messages must be sent with the <code>time_signal</code> message type.</p> <p>See the <code>segmentation_descriptor()</code> table of the 2022 SCTE-35 specification for more information.</p>
@@ -2708,7 +2536,7 @@ module Aws::MediaTailor
       :sub_segment_num,
       :sub_segments_expected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Slate VOD source configuration.</p>
@@ -2722,7 +2550,7 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source location is a container for sources. For more information about source locations, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html">Working with source locations</a> in the <i>MediaTailor User Guide</i>.</p>
@@ -2764,7 +2592,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Splice insert message configuration.</p>
@@ -2786,7 +2614,7 @@ module Aws::MediaTailor
       :splice_event_id,
       :unique_program_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -2795,12 +2623,12 @@ module Aws::MediaTailor
     class StartChannelInput < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartChannelOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -2809,17 +2637,12 @@ module Aws::MediaTailor
     class StopChannelInput < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopChannelOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamingMediaFileConditioning
-      TRANSCODE = 'TRANSCODE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2832,12 +2655,7 @@ module Aws::MediaTailor
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Tier
-      BASIC = 'BASIC'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration for time-shifted viewing. </p>
@@ -2847,7 +2665,7 @@ module Aws::MediaTailor
     class TimeShiftConfiguration < Struct.new(
       :max_time_delay_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SCTE-35 <code>time_signal</code> message can be sent with one or more <code>segmentation_descriptor</code> messages. A <code>time_signal</code> message can be sent only if a single <code>segmentation_descriptor</code> message is sent.</p> <p>The <code>time_signal</code> message contains only the <code>splice_time</code> field which is constructed using a given presentation timestamp. When sending a <code>time_signal</code> message, the <code>splice_command_type</code> field in the <code>splice_info_section</code> message is set to 6 (0x06).</p> <p>See the <code>time_signal()</code> table of the 2022 SCTE-35 specification for more information.</p>
@@ -2857,7 +2675,7 @@ module Aws::MediaTailor
     class TimeSignalMessage < Struct.new(
       :segmentation_descriptors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that tells Elemental MediaTailor how to spread out requests to the ad decision server (ADS). Instead of sending ADS requests for all sessions at the same time, MediaTailor spreads the requests across the amount of time specified in the retrieval window.</p>
@@ -2867,11 +2685,7 @@ module Aws::MediaTailor
     class TrafficShapingRetrievalWindow < Struct.new(
       :retrieval_window_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficShapingType
-      RETRIEVAL_WINDOW = 'RETRIEVAL_WINDOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Program transition configuration.</p>
@@ -2897,12 +2711,7 @@ module Aws::MediaTailor
       :scheduled_start_time_millis,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      DASH = 'DASH'
-      HLS = 'HLS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2915,7 +2724,7 @@ module Aws::MediaTailor
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -2940,7 +2749,7 @@ module Aws::MediaTailor
       :time_shift_configuration,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2996,7 +2805,7 @@ module Aws::MediaTailor
       :time_shift_configuration,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute http_package_configurations
@@ -3013,7 +2822,7 @@ module Aws::MediaTailor
       :live_source_name,
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3046,7 +2855,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_breaks
@@ -3071,7 +2880,7 @@ module Aws::MediaTailor
       :schedule_configuration,
       :audience_media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ad_breaks
@@ -3124,7 +2933,7 @@ module Aws::MediaTailor
       :scheduled_start_time,
       :audience_media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Schedule configuration parameters.</p>
@@ -3138,7 +2947,7 @@ module Aws::MediaTailor
       :transition,
       :clip_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Program transition configuration.</p>
@@ -3152,7 +2961,7 @@ module Aws::MediaTailor
       :scheduled_start_time_millis,
       :duration_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_configuration
@@ -3177,7 +2986,7 @@ module Aws::MediaTailor
       :segment_delivery_configurations,
       :source_location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_configuration
@@ -3218,7 +3027,7 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute http_package_configurations
@@ -3235,7 +3044,7 @@ module Aws::MediaTailor
       :source_location_name,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3268,7 +3077,7 @@ module Aws::MediaTailor
       :tags,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>VOD source configuration parameters.</p>
@@ -3302,7 +3111,7 @@ module Aws::MediaTailor
       :tags,
       :vod_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

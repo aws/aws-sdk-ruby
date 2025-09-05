@@ -38,28 +38,7 @@ module Aws::DataSync
       :status,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentStatus
-      ONLINE = 'ONLINE'
-      OFFLINE = 'OFFLINE'
-    end
-
-    module Atime
-      NONE = 'NONE'
-      BEST_EFFORT = 'BEST_EFFORT'
-    end
-
-    module AzureAccessTier
-      HOT = 'HOT'
-      COOL = 'COOL'
-      ARCHIVE = 'ARCHIVE'
-    end
-
-    module AzureBlobAuthenticationType
-      SAS = 'SAS'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shared access signature (SAS) configuration that allows DataSync to
@@ -77,11 +56,7 @@ module Aws::DataSync
     class AzureBlobSasConfiguration < Struct.new(
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AzureBlobType
-      BLOCK = 'BLOCK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CancelTaskExecutionRequest</p>
@@ -91,12 +66,12 @@ module Aws::DataSync
     class CancelTaskExecutionRequest < Struct.new(
       :task_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelTaskExecutionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration information for a DataSync-managed secret, such as an
@@ -119,7 +94,7 @@ module Aws::DataSync
       :secret_arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateAgentRequest</p>
@@ -159,7 +134,7 @@ module Aws::DataSync
       :subnet_arns,
       :security_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateAgentResponse</p>
@@ -170,7 +145,7 @@ module Aws::DataSync
     class CreateAgentResponse < Struct.new(
       :agent_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_url
@@ -261,7 +236,7 @@ module Aws::DataSync
       :cmk_secret_config,
       :custom_secret_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -270,7 +245,7 @@ module Aws::DataSync
     class CreateLocationAzureBlobResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationEfsRequest</p>
@@ -320,7 +295,7 @@ module Aws::DataSync
       :file_system_access_role_arn,
       :in_transit_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationEfs</p>
@@ -331,7 +306,7 @@ module Aws::DataSync
     class CreateLocationEfsResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fsx_filesystem_arn
@@ -365,7 +340,7 @@ module Aws::DataSync
       :subdirectory,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -375,7 +350,7 @@ module Aws::DataSync
     class CreateLocationFsxLustreResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocol
@@ -426,7 +401,7 @@ module Aws::DataSync
       :subdirectory,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -436,7 +411,7 @@ module Aws::DataSync
     class CreateLocationFsxOntapResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fsx_filesystem_arn
@@ -465,7 +440,7 @@ module Aws::DataSync
       :subdirectory,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -474,7 +449,7 @@ module Aws::DataSync
     class CreateLocationFsxOpenZfsResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subdirectory
@@ -536,7 +511,7 @@ module Aws::DataSync
       :domain,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -545,7 +520,7 @@ module Aws::DataSync
     class CreateLocationFsxWindowsResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subdirectory
@@ -636,7 +611,7 @@ module Aws::DataSync
       :agent_arns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -645,7 +620,7 @@ module Aws::DataSync
     class CreateLocationHdfsResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationNfsRequest</p>
@@ -677,7 +652,7 @@ module Aws::DataSync
       :mount_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationNfsResponse</p>
@@ -687,7 +662,7 @@ module Aws::DataSync
     class CreateLocationNfsResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationObjectStorageRequest</p>
@@ -807,7 +782,7 @@ module Aws::DataSync
       :cmk_secret_config,
       :custom_secret_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationObjectStorageResponse</p>
@@ -817,7 +792,7 @@ module Aws::DataSync
     class CreateLocationObjectStorageResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationS3Request</p>
@@ -891,7 +866,7 @@ module Aws::DataSync
       :agent_arns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationS3Response</p>
@@ -901,7 +876,7 @@ module Aws::DataSync
     class CreateLocationS3Response < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationSmbRequest</p>
@@ -998,7 +973,7 @@ module Aws::DataSync
       :kerberos_keytab,
       :kerberos_krb5_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateLocationSmbResponse</p>
@@ -1008,7 +983,7 @@ module Aws::DataSync
     class CreateLocationSmbResponse < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateTaskRequest</p>
@@ -1106,7 +1081,7 @@ module Aws::DataSync
       :task_report_config,
       :task_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateTaskResponse</p>
@@ -1116,7 +1091,7 @@ module Aws::DataSync
     class CreateTaskResponse < Struct.new(
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration information for a customer-managed Secrets Manager secret where
@@ -1139,7 +1114,7 @@ module Aws::DataSync
       :secret_arn,
       :secret_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteAgentRequest</p>
@@ -1150,12 +1125,12 @@ module Aws::DataSync
     class DeleteAgentRequest < Struct.new(
       :agent_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAgentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteLocation</p>
@@ -1165,12 +1140,12 @@ module Aws::DataSync
     class DeleteLocationRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLocationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteTask</p>
@@ -1180,12 +1155,12 @@ module Aws::DataSync
     class DeleteTaskRequest < Struct.new(
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeAgent</p>
@@ -1196,7 +1171,7 @@ module Aws::DataSync
     class DescribeAgentRequest < Struct.new(
       :agent_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeAgentResponse</p>
@@ -1248,7 +1223,7 @@ module Aws::DataSync
       :private_link_config,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1258,7 +1233,7 @@ module Aws::DataSync
     class DescribeLocationAzureBlobRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1315,7 +1290,7 @@ module Aws::DataSync
       :cmk_secret_config,
       :custom_secret_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationEfsRequest</p>
@@ -1326,7 +1301,7 @@ module Aws::DataSync
     class DescribeLocationEfsRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationEfsResponse</p>
@@ -1368,7 +1343,7 @@ module Aws::DataSync
       :file_system_access_role_arn,
       :in_transit_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1378,7 +1353,7 @@ module Aws::DataSync
     class DescribeLocationFsxLustreRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1401,7 +1376,7 @@ module Aws::DataSync
       :security_group_arns,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1411,7 +1386,7 @@ module Aws::DataSync
     class DescribeLocationFsxOntapRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -1448,7 +1423,7 @@ module Aws::DataSync
       :storage_virtual_machine_arn,
       :fsx_filesystem_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1457,7 +1432,7 @@ module Aws::DataSync
     class DescribeLocationFsxOpenZfsRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1486,7 +1461,7 @@ module Aws::DataSync
       :protocol,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1495,7 +1470,7 @@ module Aws::DataSync
     class DescribeLocationFsxWindowsRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1530,7 +1505,7 @@ module Aws::DataSync
       :user,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1539,7 +1514,7 @@ module Aws::DataSync
     class DescribeLocationHdfsRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -1596,7 +1571,7 @@ module Aws::DataSync
       :agent_arns,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationNfsRequest</p>
@@ -1607,7 +1582,7 @@ module Aws::DataSync
     class DescribeLocationNfsRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationNfsResponse</p>
@@ -1634,7 +1609,7 @@ module Aws::DataSync
       :mount_options,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationObjectStorageRequest</p>
@@ -1644,7 +1619,7 @@ module Aws::DataSync
     class DescribeLocationObjectStorageRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationObjectStorageResponse</p>
@@ -1704,7 +1679,7 @@ module Aws::DataSync
       :cmk_secret_config,
       :custom_secret_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationS3Request</p>
@@ -1714,7 +1689,7 @@ module Aws::DataSync
     class DescribeLocationS3Request < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationS3Response</p>
@@ -1753,7 +1728,7 @@ module Aws::DataSync
       :agent_arns,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationSmbRequest</p>
@@ -1764,7 +1739,7 @@ module Aws::DataSync
     class DescribeLocationSmbRequest < Struct.new(
       :location_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeLocationSmbResponse</p>
@@ -1818,7 +1793,7 @@ module Aws::DataSync
       :kerberos_principal,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTaskExecutionRequest</p>
@@ -1829,7 +1804,7 @@ module Aws::DataSync
     class DescribeTaskExecutionRequest < Struct.new(
       :task_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTaskExecutionResponse</p>
@@ -2036,7 +2011,7 @@ module Aws::DataSync
       :launch_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated_files_to_transfer] = 0 unless options.key?(:estimated_files_to_transfer)
@@ -2062,7 +2037,7 @@ module Aws::DataSync
     class DescribeTaskRequest < Struct.new(
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTaskResponse</p>
@@ -2164,7 +2139,7 @@ module Aws::DataSync
       :schedule_details,
       :task_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subnet and security groups that DataSync uses to connect to one of your
@@ -2193,18 +2168,7 @@ module Aws::DataSync
       :subnet_arn,
       :security_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EfsInTransitEncryption
-      NONE = 'NONE'
-      TLS1_2 = 'TLS1_2'
-    end
-
-    module EndpointType
-      PUBLIC = 'PUBLIC'
-      PRIVATE_LINK = 'PRIVATE_LINK'
-      FIPS = 'FIPS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies which files, folders, and objects to include or exclude when transferring files
@@ -2223,11 +2187,7 @@ module Aws::DataSync
       :filter_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterType
-      SIMPLE_PATTERN = 'SIMPLE_PATTERN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the data transfer protocol that DataSync uses to access your
@@ -2245,7 +2205,7 @@ module Aws::DataSync
       :nfs,
       :smb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Network File System (NFS) protocol configuration that DataSync
@@ -2257,7 +2217,7 @@ module Aws::DataSync
     class FsxProtocolNfs < Struct.new(
       :mount_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual machine
@@ -2289,7 +2249,7 @@ module Aws::DataSync
       :password,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the data transfer protocol that DataSync uses to access your
@@ -2312,7 +2272,7 @@ module Aws::DataSync
       :nfs,
       :smb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Server Message Block (SMB) protocol configuration that DataSync uses to access your Amazon FSx for NetApp ONTAP file system's storage virtual machine
@@ -2342,26 +2302,7 @@ module Aws::DataSync
       :password,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Gid
-      NONE = 'NONE'
-      INT_VALUE = 'INT_VALUE'
-      NAME = 'NAME'
-      BOTH = 'BOTH'
-    end
-
-    module HdfsAuthenticationType
-      SIMPLE = 'SIMPLE'
-      KERBEROS = 'KERBEROS'
-    end
-
-    module HdfsDataTransferProtection
-      DISABLED = 'DISABLED'
-      AUTHENTICATION = 'AUTHENTICATION'
-      INTEGRITY = 'INTEGRITY'
-      PRIVACY = 'PRIVACY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages the file
@@ -2380,14 +2321,7 @@ module Aws::DataSync
       :hostname,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HdfsRpcProtection
-      DISABLED = 'DISABLED'
-      AUTHENTICATION = 'AUTHENTICATION'
-      INTEGRITY = 'INTEGRITY'
-      PRIVACY = 'PRIVACY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when an error occurs in the DataSync
@@ -2400,7 +2334,7 @@ module Aws::DataSync
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the client submits a malformed request.</p>
@@ -2415,7 +2349,7 @@ module Aws::DataSync
       :error_code,
       :datasync_error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListAgentsRequest</p>
@@ -2431,7 +2365,7 @@ module Aws::DataSync
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListAgentsResponse</p>
@@ -2447,7 +2381,7 @@ module Aws::DataSync
       :agents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListLocationsRequest</p>
@@ -2469,7 +2403,7 @@ module Aws::DataSync
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListLocationsResponse</p>
@@ -2484,7 +2418,7 @@ module Aws::DataSync
       :locations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTagsForResourceRequest</p>
@@ -2504,7 +2438,7 @@ module Aws::DataSync
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTagsForResourceResponse</p>
@@ -2519,7 +2453,7 @@ module Aws::DataSync
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTaskExecutions</p>
@@ -2539,7 +2473,7 @@ module Aws::DataSync
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTaskExecutionsResponse</p>
@@ -2554,7 +2488,7 @@ module Aws::DataSync
       :task_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTasksRequest</p>
@@ -2576,7 +2510,7 @@ module Aws::DataSync
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTasksResponse</p>
@@ -2591,7 +2525,7 @@ module Aws::DataSync
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Narrow down the list of resources returned by <code>ListLocations</code>. For example, to
@@ -2617,13 +2551,7 @@ module Aws::DataSync
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocationFilterName
-      LocationUri = 'LocationUri'
-      LocationType = 'LocationType'
-      CreationTime = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single entry in a list of locations. <code>LocationListEntry</code>
@@ -2655,13 +2583,7 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogLevel
-      OFF = 'OFF'
-      BASIC = 'BASIC'
-      TRANSFER = 'TRANSFER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration information for a DataSync-managed secret, such as an
@@ -2673,11 +2595,7 @@ module Aws::DataSync
     class ManagedSecretConfig < Struct.new(
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManifestAction
-      TRANSFER = 'TRANSFER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures a manifest, which is a list of files or objects that you want DataSync to transfer. For more information and configuration examples, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html">Specifying what DataSync transfers by using a manifest</a>.</p>
@@ -2703,16 +2621,7 @@ module Aws::DataSync
       :format,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManifestFormat
-      CSV = 'CSV'
-    end
-
-    module Mtime
-      NONE = 'NONE'
-      PRESERVE = 'PRESERVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how DataSync can access a location using the NFS protocol.</p>
@@ -2749,29 +2658,7 @@ module Aws::DataSync
     class NfsMountOptions < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NfsVersion
-      AUTOMATIC = 'AUTOMATIC'
-      NFS3 = 'NFS3'
-      NFS4_0 = 'NFS4_0'
-      NFS4_1 = 'NFS4_1'
-    end
-
-    module ObjectStorageServerProtocol
-      HTTPS = 'HTTPS'
-      HTTP = 'HTTP'
-    end
-
-    module ObjectTags
-      PRESERVE = 'PRESERVE'
-      NONE = 'NONE'
-    end
-
-    module ObjectVersionIds
-      INCLUDE = 'INCLUDE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DataSync agents that can connect to your Network File System (NFS)
@@ -2784,20 +2671,7 @@ module Aws::DataSync
     class OnPremConfig < Struct.new(
       :agent_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operator
-      EQ = 'Equals'
-      NE = 'NotEquals'
-      IN = 'In'
-      LE = 'LessThanOrEqual'
-      LT = 'LessThan'
-      GE = 'GreaterThanOrEqual'
-      GT = 'GreaterThan'
-      CONTAINS = 'Contains'
-      NOT_CONTAINS = 'NotContains'
-      BEGINS_WITH = 'BeginsWith'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates how your transfer task is configured. These options include how DataSync handles files, objects, and their associated metadata during your transfer. You
@@ -3139,18 +3013,7 @@ module Aws::DataSync
       :security_descriptor_copy_flags,
       :object_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OverwriteMode
-      ALWAYS = 'ALWAYS'
-      NEVER = 'NEVER'
-    end
-
-    module PhaseStatus
-      PENDING = 'PENDING'
-      SUCCESS = 'SUCCESS'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The platform-related details about the DataSync agent, such as the version
@@ -3161,22 +3024,7 @@ module Aws::DataSync
     class Platform < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PosixPermissions
-      NONE = 'NONE'
-      PRESERVE = 'PRESERVE'
-    end
-
-    module PreserveDeletedFiles
-      PRESERVE = 'PRESERVE'
-      REMOVE = 'REMOVE'
-    end
-
-    module PreserveDevices
-      NONE = 'NONE'
-      PRESERVE = 'PRESERVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how your DataSync agent connects to Amazon Web Services using a
@@ -3201,7 +3049,7 @@ module Aws::DataSync
       :subnet_arns,
       :security_group_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)
@@ -3221,7 +3069,7 @@ module Aws::DataSync
       :rpc_protection,
       :data_transfer_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies where DataSync uploads your <a href="https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html">task report</a>.</p>
@@ -3232,7 +3080,7 @@ module Aws::DataSync
     class ReportDestination < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Amazon S3 bucket where DataSync uploads your <a href="https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html">task
@@ -3254,17 +3102,7 @@ module Aws::DataSync
       :s3_bucket_arn,
       :bucket_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportLevel
-      ERRORS_ONLY = 'ERRORS_ONLY'
-      SUCCESSES_AND_ERRORS = 'SUCCESSES_AND_ERRORS'
-    end
-
-    module ReportOutputType
-      SUMMARY_ONLY = 'SUMMARY_ONLY'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the level of detail for a particular aspect of your DataSync
@@ -3281,7 +3119,7 @@ module Aws::DataSync
     class ReportOverride < Struct.new(
       :report_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The level of detail included in each aspect of your DataSync
@@ -3306,7 +3144,7 @@ module Aws::DataSync
       :deleted,
       :skipped,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether DataSync created a complete <a href="https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html">task report</a> for your
@@ -3327,7 +3165,7 @@ module Aws::DataSync
       :error_code,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that DataSync uses to access your S3 bucket.</p>
@@ -3340,7 +3178,7 @@ module Aws::DataSync
     class S3Config < Struct.new(
       :bucket_access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the S3 bucket where you're hosting the manifest that you want DataSync to use. For more information and configuration examples, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html">Specifying what DataSync transfers by using a manifest</a>.</p>
@@ -3365,33 +3203,7 @@ module Aws::DataSync
       :s3_bucket_arn,
       :manifest_object_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3StorageClass
-      STANDARD = 'STANDARD'
-      STANDARD_IA = 'STANDARD_IA'
-      ONEZONE_IA = 'ONEZONE_IA'
-      INTELLIGENT_TIERING = 'INTELLIGENT_TIERING'
-      GLACIER = 'GLACIER'
-      DEEP_ARCHIVE = 'DEEP_ARCHIVE'
-      OUTPOSTS = 'OUTPOSTS'
-      GLACIER_INSTANT_RETRIEVAL = 'GLACIER_INSTANT_RETRIEVAL'
-    end
-
-    module ScheduleDisabledBy
-      USER = 'USER'
-      SERVICE = 'SERVICE'
-    end
-
-    module ScheduleStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module SmbAuthenticationType
-      NTLM = 'NTLM'
-      KERBEROS = 'KERBEROS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the version of the Server Message Block (SMB) protocol that DataSync uses to access an SMB file server.</p>
@@ -3436,21 +3248,7 @@ module Aws::DataSync
     class SmbMountOptions < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SmbSecurityDescriptorCopyFlags
-      NONE = 'NONE'
-      OWNER_DACL = 'OWNER_DACL'
-      OWNER_DACL_SACL = 'OWNER_DACL_SACL'
-    end
-
-    module SmbVersion
-      AUTOMATIC = 'AUTOMATIC'
-      SMB2 = 'SMB2'
-      SMB3 = 'SMB3'
-      SMB1 = 'SMB1'
-      SMB2_0 = 'SMB2_0'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the manifest that you want DataSync to use and where it's hosted.
@@ -3461,7 +3259,7 @@ module Aws::DataSync
     class SourceManifestConfig < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>StartTaskExecutionRequest</p>
@@ -3516,7 +3314,7 @@ module Aws::DataSync
       :task_report_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>StartTaskExecutionResponse</p>
@@ -3526,7 +3324,7 @@ module Aws::DataSync
     class StartTaskExecutionResponse < Struct.new(
       :task_execution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair representing a single tag that's been applied to an Amazon Web Services
@@ -3541,7 +3339,7 @@ module Aws::DataSync
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TagResourceRequest</p>
@@ -3555,12 +3353,12 @@ module Aws::DataSync
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of objects that DataSync fails to prepare, transfer, verify, and
@@ -3591,7 +3389,7 @@ module Aws::DataSync
       :verify,
       :delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:prepare] = 0 unless options.key?(:prepare)
@@ -3633,7 +3431,7 @@ module Aws::DataSync
       :at_source,
       :at_destination_for_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:at_source] = 0 unless options.key?(:at_source)
@@ -3660,7 +3458,7 @@ module Aws::DataSync
       :status,
       :task_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides detailed information about the result of your DataSync task
@@ -3726,18 +3524,7 @@ module Aws::DataSync
       :error_code,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskExecutionStatus
-      QUEUED = 'QUEUED'
-      CANCELLING = 'CANCELLING'
-      LAUNCHING = 'LAUNCHING'
-      PREPARING = 'PREPARING'
-      TRANSFERRING = 'TRANSFERRING'
-      VERIFYING = 'VERIFYING'
-      SUCCESS = 'SUCCESS'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can use API filters to narrow down the list of resources returned by
@@ -3763,12 +3550,7 @@ module Aws::DataSync
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskFilterName
-      LocationId = 'LocationId'
-      CreationTime = 'CreationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single entry in a list of tasks. <code>TaskListEntry</code> returns an
@@ -3794,17 +3576,7 @@ module Aws::DataSync
       :name,
       :task_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskMode
-      BASIC = 'BASIC'
-      ENHANCED = 'ENHANCED'
-    end
-
-    module TaskQueueing
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how you want to configure a task report, which provides detailed information
@@ -3866,7 +3638,7 @@ module Aws::DataSync
       :object_version_ids,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures your DataSync task to run on a <a href="https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html">schedule</a>
@@ -3900,7 +3672,7 @@ module Aws::DataSync
       :schedule_expression,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about your DataSync
@@ -3937,27 +3709,7 @@ module Aws::DataSync
       :disabled_reason,
       :disabled_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskStatus
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      UNAVAILABLE = 'UNAVAILABLE'
-    end
-
-    module TransferMode
-      CHANGED = 'CHANGED'
-      ALL = 'ALL'
-    end
-
-    module Uid
-      NONE = 'NONE'
-      INT_VALUE = 'INT_VALUE'
-      NAME = 'NAME'
-      BOTH = 'BOTH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UntagResourceRequest</p>
@@ -3972,12 +3724,12 @@ module Aws::DataSync
       :resource_arn,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateAgentRequest</p>
@@ -3991,12 +3743,12 @@ module Aws::DataSync
       :agent_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAgentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4056,12 +3808,12 @@ module Aws::DataSync
       :cmk_secret_config,
       :custom_secret_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationAzureBlobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4100,12 +3852,12 @@ module Aws::DataSync
       :file_system_access_role_arn,
       :in_transit_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationEfsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4124,12 +3876,12 @@ module Aws::DataSync
       :location_arn,
       :subdirectory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationFsxLustreResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4154,12 +3906,12 @@ module Aws::DataSync
       :protocol,
       :subdirectory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationFsxOntapResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4180,12 +3932,12 @@ module Aws::DataSync
       :protocol,
       :subdirectory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationFsxOpenZfsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4220,12 +3972,12 @@ module Aws::DataSync
       :user,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationFsxWindowsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4293,12 +4045,12 @@ module Aws::DataSync
       :kerberos_krb5_conf,
       :agent_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationHdfsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4329,12 +4081,12 @@ module Aws::DataSync
       :on_prem_config,
       :mount_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationNfsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4428,12 +4180,12 @@ module Aws::DataSync
       :cmk_secret_config,
       :custom_secret_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationObjectStorageResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4491,12 +4243,12 @@ module Aws::DataSync
       :s3_storage_class,
       :s3_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationS3Response < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute location_arn
@@ -4590,12 +4342,12 @@ module Aws::DataSync
       :kerberos_keytab,
       :kerberos_krb5_conf,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLocationSmbResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_execution_arn
@@ -4615,12 +4367,12 @@ module Aws::DataSync
       :task_execution_arn,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTaskExecutionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateTaskResponse</p>
@@ -4688,18 +4440,12 @@ module Aws::DataSync
       :manifest_config,
       :task_report_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifyMode
-      POINT_IN_TIME_CONSISTENT = 'POINT_IN_TIME_CONSISTENT'
-      ONLY_FILES_TRANSFERRED = 'ONLY_FILES_TRANSFERRED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
   end

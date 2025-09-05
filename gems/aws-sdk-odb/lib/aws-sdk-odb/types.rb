@@ -12,17 +12,12 @@ module Aws::Odb
     class AcceptMarketplaceRegistrationInput < Struct.new(
       :marketplace_registration_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AcceptMarketplaceRegistrationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Access
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have sufficient access to perform this action. Make sure you have the required permissions and try again.</p>
@@ -31,7 +26,7 @@ module Aws::Odb
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an Autonomous Virtual Machine (VM) within an Autonomous VM cluster.</p>
@@ -89,7 +84,7 @@ module Aws::Odb
       :ocid,
       :oci_resource_anchor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Autonomous VM cluster resource.</p>
@@ -291,7 +286,7 @@ module Aws::Odb
       :time_zone,
       :total_container_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource details of an Autonomous VM cluster.</p>
@@ -305,7 +300,7 @@ module Aws::Odb
       :cloud_autonomous_vm_cluster_id,
       :unallocated_adb_storage_in_t_bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an Autonomous VM cluster.</p>
@@ -507,7 +502,7 @@ module Aws::Odb
       :time_zone,
       :total_container_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Exadata infrastructure.</p>
@@ -665,7 +660,7 @@ module Aws::Odb
       :storage_server_type,
       :compute_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Exadata infrastructure.</p>
@@ -823,7 +818,7 @@ module Aws::Odb
       :storage_server_type,
       :compute_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about unallocated resources in the Cloud Exadata infrastructure.</p>
@@ -857,7 +852,7 @@ module Aws::Odb
       :memory_in_g_bs,
       :ocpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a VM cluster.</p>
@@ -1023,7 +1018,7 @@ module Aws::Odb
       :percent_progress,
       :compute_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a VM cluster.</p>
@@ -1189,12 +1184,7 @@ module Aws::Odb
       :percent_progress,
       :compute_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeModel
-      ECPU = 'ECPU'
-      OCPU = 'OCPU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a conflict with the current status of your resource. Fix any inconsistencies with your resource and try again.</p>
@@ -1211,7 +1201,7 @@ module Aws::Odb
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -1284,7 +1274,7 @@ module Aws::Odb
       :time_zone,
       :total_container_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1305,7 +1295,7 @@ module Aws::Odb
       :status_reason,
       :cloud_autonomous_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1358,7 +1348,7 @@ module Aws::Odb
       :database_server_type,
       :storage_server_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1379,7 +1369,7 @@ module Aws::Odb
       :status_reason,
       :cloud_exadata_infrastructure_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -1468,7 +1458,7 @@ module Aws::Odb
       :client_token,
       :scan_listener_port_tcp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1489,7 +1479,7 @@ module Aws::Odb
       :status_reason,
       :cloud_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1542,7 +1532,7 @@ module Aws::Odb
       :s3_policy_document,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1563,7 +1553,7 @@ module Aws::Odb
       :status_reason,
       :odb_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_network_id
@@ -1588,7 +1578,7 @@ module Aws::Odb
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -1609,7 +1599,7 @@ module Aws::Odb
       :status_reason,
       :odb_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A contact to receive notification from Oracle about maintenance updates for a specific Exadata infrastructure.</p>
@@ -1619,7 +1609,7 @@ module Aws::Odb
     class CustomerContact < Struct.new(
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the data collection options enabled for a VM cluster.</p>
@@ -1637,7 +1627,7 @@ module Aws::Odb
       :is_health_monitoring_enabled,
       :is_incident_logs_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An enumeration of days of the week used for scheduling maintenance windows.</p>
@@ -1647,17 +1637,7 @@ module Aws::Odb
     class DayOfWeek < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DayOfWeekName
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-      SUNDAY = 'SUNDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IORM configuration settings for the database.</p>
@@ -1675,7 +1655,7 @@ module Aws::Odb
       :flash_cache_limit,
       :share,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a DB node.</p>
@@ -1793,23 +1773,7 @@ module Aws::Odb
       :private_ip_address,
       :floating_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DbNodeMaintenanceType
-      VMDB_REBOOT_MIGRATION = 'VMDB_REBOOT_MIGRATION'
-    end
-
-    module DbNodeResourceStatus
-      AVAILABLE = 'AVAILABLE'
-      FAILED = 'FAILED'
-      PROVISIONING = 'PROVISIONING'
-      TERMINATED = 'TERMINATED'
-      TERMINATING = 'TERMINATING'
-      UPDATING = 'UPDATING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      STARTING = 'STARTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a DB node.</p>
@@ -1919,7 +1883,7 @@ module Aws::Odb
       :vnic2_id,
       :vnic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a database server.</p>
@@ -2005,7 +1969,7 @@ module Aws::Odb
       :autonomous_vm_cluster_ids,
       :autonomous_virtual_machine_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduling details for the quarterly maintenance window. Patching and system updates take place during the maintenance window.</p>
@@ -2027,14 +1991,7 @@ module Aws::Odb
       :time_patching_ended,
       :time_patching_started,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DbServerPatchingStatus
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      MAINTENANCE_IN_PROGRESS = 'MAINTENANCE_IN_PROGRESS'
-      SCHEDULED = 'SCHEDULED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a database server.</p>
@@ -2120,7 +2077,7 @@ module Aws::Odb
       :autonomous_vm_cluster_ids,
       :autonomous_virtual_machine_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a hardware system model (shape) that's available for an Exadata infrastructure. The shape determines resources, such as CPU cores, memory, and storage, to allocate to the Exadata infrastructure.</p>
@@ -2222,7 +2179,7 @@ module Aws::Odb
       :compute_model,
       :are_server_types_supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_autonomous_vm_cluster_id
@@ -2231,12 +2188,12 @@ module Aws::Odb
     class DeleteCloudAutonomousVmClusterInput < Struct.new(
       :cloud_autonomous_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCloudAutonomousVmClusterOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -2245,12 +2202,12 @@ module Aws::Odb
     class DeleteCloudExadataInfrastructureInput < Struct.new(
       :cloud_exadata_infrastructure_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCloudExadataInfrastructureOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster_id
@@ -2259,12 +2216,12 @@ module Aws::Odb
     class DeleteCloudVmClusterInput < Struct.new(
       :cloud_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCloudVmClusterOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_network_id
@@ -2277,12 +2234,12 @@ module Aws::Odb
       :odb_network_id,
       :delete_associated_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOdbNetworkOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_peering_connection_id
@@ -2291,17 +2248,12 @@ module Aws::Odb
     class DeleteOdbPeeringConnectionInput < Struct.new(
       :odb_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOdbPeeringConnectionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiskRedundancy
-      HIGH = 'HIGH'
-      NORMAL = 'NORMAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IORM settings of the Exadata DB system.</p>
@@ -2323,7 +2275,7 @@ module Aws::Odb
       :lifecycle_state,
       :objective,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_autonomous_vm_cluster_id
@@ -2332,7 +2284,7 @@ module Aws::Odb
     class GetCloudAutonomousVmClusterInput < Struct.new(
       :cloud_autonomous_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_autonomous_vm_cluster
@@ -2341,7 +2293,7 @@ module Aws::Odb
     class GetCloudAutonomousVmClusterOutput < Struct.new(
       :cloud_autonomous_vm_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -2350,7 +2302,7 @@ module Aws::Odb
     class GetCloudExadataInfrastructureInput < Struct.new(
       :cloud_exadata_infrastructure_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure
@@ -2359,7 +2311,7 @@ module Aws::Odb
     class GetCloudExadataInfrastructureOutput < Struct.new(
       :cloud_exadata_infrastructure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -2372,7 +2324,7 @@ module Aws::Odb
       :cloud_exadata_infrastructure_id,
       :db_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_unallocated_resources
@@ -2381,7 +2333,7 @@ module Aws::Odb
     class GetCloudExadataInfrastructureUnallocatedResourcesOutput < Struct.new(
       :cloud_exadata_infrastructure_unallocated_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster_id
@@ -2390,7 +2342,7 @@ module Aws::Odb
     class GetCloudVmClusterInput < Struct.new(
       :cloud_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster
@@ -2399,7 +2351,7 @@ module Aws::Odb
     class GetCloudVmClusterOutput < Struct.new(
       :cloud_vm_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster_id
@@ -2412,7 +2364,7 @@ module Aws::Odb
       :cloud_vm_cluster_id,
       :db_node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_node
@@ -2421,7 +2373,7 @@ module Aws::Odb
     class GetDbNodeOutput < Struct.new(
       :db_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -2434,7 +2386,7 @@ module Aws::Odb
       :cloud_exadata_infrastructure_id,
       :db_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_server
@@ -2443,12 +2395,12 @@ module Aws::Odb
     class GetDbServerOutput < Struct.new(
       :db_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetOciOnboardingStatusInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2465,7 +2417,7 @@ module Aws::Odb
       :existing_tenancy_activation_link,
       :new_tenancy_activation_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_network_id
@@ -2474,7 +2426,7 @@ module Aws::Odb
     class GetOdbNetworkInput < Struct.new(
       :odb_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_network
@@ -2483,7 +2435,7 @@ module Aws::Odb
     class GetOdbNetworkOutput < Struct.new(
       :odb_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_peering_connection_id
@@ -2492,7 +2444,7 @@ module Aws::Odb
     class GetOdbPeeringConnectionInput < Struct.new(
       :odb_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_peering_connection
@@ -2501,7 +2453,7 @@ module Aws::Odb
     class GetOdbPeeringConnectionOutput < Struct.new(
       :odb_peering_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a specific version of Oracle Grid Infrastructure (GI) software that can be installed on a VM cluster.</p>
@@ -2511,17 +2463,17 @@ module Aws::Odb
     class GiVersionSummary < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when there is an internal failure in the Oracle Database@Amazon Web Services service. Wait and try again.</p>
@@ -2534,20 +2486,7 @@ module Aws::Odb
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IormLifecycleState
-      BOOTSTRAPPING = 'BOOTSTRAPPING'
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-    end
-
-    module LicenseModel
-      BRING_YOUR_OWN_LICENSE = 'BRING_YOUR_OWN_LICENSE'
-      LICENSE_INCLUDED = 'LICENSE_INCLUDED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2564,7 +2503,7 @@ module Aws::Odb
       :next_token,
       :cloud_autonomous_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2577,7 +2516,7 @@ module Aws::Odb
       :next_token,
       :autonomous_virtual_machines,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2594,7 +2533,7 @@ module Aws::Odb
       :next_token,
       :cloud_exadata_infrastructure_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2607,7 +2546,7 @@ module Aws::Odb
       :next_token,
       :cloud_autonomous_vm_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2620,7 +2559,7 @@ module Aws::Odb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2633,7 +2572,7 @@ module Aws::Odb
       :next_token,
       :cloud_exadata_infrastructures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2650,7 +2589,7 @@ module Aws::Odb
       :next_token,
       :cloud_exadata_infrastructure_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2663,7 +2602,7 @@ module Aws::Odb
       :next_token,
       :cloud_vm_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2680,7 +2619,7 @@ module Aws::Odb
       :next_token,
       :cloud_vm_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2693,7 +2632,7 @@ module Aws::Odb
       :next_token,
       :db_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -2710,7 +2649,7 @@ module Aws::Odb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2723,7 +2662,7 @@ module Aws::Odb
       :next_token,
       :db_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2744,7 +2683,7 @@ module Aws::Odb
       :availability_zone,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2757,7 +2696,7 @@ module Aws::Odb
       :next_token,
       :db_system_shapes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2774,7 +2713,7 @@ module Aws::Odb
       :next_token,
       :shape,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2787,7 +2726,7 @@ module Aws::Odb
       :next_token,
       :gi_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2800,7 +2739,7 @@ module Aws::Odb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2813,7 +2752,7 @@ module Aws::Odb
       :next_token,
       :odb_networks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2830,7 +2769,7 @@ module Aws::Odb
       :next_token,
       :odb_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2843,7 +2782,7 @@ module Aws::Odb
       :next_token,
       :odb_peering_connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2864,7 +2803,7 @@ module Aws::Odb
       :gi_version,
       :shape,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2877,7 +2816,7 @@ module Aws::Odb
       :next_token,
       :system_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2886,7 +2825,7 @@ module Aws::Odb
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2895,7 +2834,7 @@ module Aws::Odb
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.</p>
@@ -2941,14 +2880,7 @@ module Aws::Odb
       :skip_ru,
       :weeks_of_month,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedResourceStatus
-      ENABLED = 'ENABLED'
-      ENABLING = 'ENABLING'
-      DISABLED = 'DISABLED'
-      DISABLING = 'DISABLING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for managed Amazon S3 backup access from the ODB network.</p>
@@ -2962,7 +2894,7 @@ module Aws::Odb
       :status,
       :ipv4_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The managed services configuration for the ODB network.</p>
@@ -2996,7 +2928,7 @@ module Aws::Odb
       :zero_etl_access,
       :s3_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An enumeration of months used for scheduling maintenance windows.</p>
@@ -3006,30 +2938,7 @@ module Aws::Odb
     class Month < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonthName
-      JANUARY = 'JANUARY'
-      FEBRUARY = 'FEBRUARY'
-      MARCH = 'MARCH'
-      APRIL = 'APRIL'
-      MAY = 'MAY'
-      JUNE = 'JUNE'
-      JULY = 'JULY'
-      AUGUST = 'AUGUST'
-      SEPTEMBER = 'SEPTEMBER'
-      OCTOBER = 'OCTOBER'
-      NOVEMBER = 'NOVEMBER'
-      DECEMBER = 'DECEMBER'
-    end
-
-    module Objective
-      AUTO = 'AUTO'
-      BALANCED = 'BALANCED'
-      BASIC = 'BASIC'
-      HIGH_THROUGHPUT = 'HIGH_THROUGHPUT'
-      LOW_LATENCY = 'LOW_LATENCY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DNS configuration to forward DNS resolver endpoints to your OCI Private Zone.</p>
@@ -3043,23 +2952,7 @@ module Aws::Odb
       :domain_name,
       :oci_dns_listener_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p/>
-    module OciOnboardingStatus
-      NOT_STARTED = 'NOT_STARTED'
-      PENDING_LINK_GENERATION = 'PENDING_LINK_GENERATION'
-      PENDING_CUSTOMER_ACTION = 'PENDING_CUSTOMER_ACTION'
-      PENDING_INITIALIZATION = 'PENDING_INITIALIZATION'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVE_IN_HOME_REGION = 'ACTIVE_IN_HOME_REGION'
-      ACTIVE = 'ACTIVE'
-      ACTIVE_LIMITED = 'ACTIVE_LIMITED'
-      FAILED = 'FAILED'
-      PUBLIC_OFFER_UNSUPPORTED = 'PUBLIC_OFFER_UNSUPPORTED'
-      SUSPENDED = 'SUSPENDED'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an ODB network.</p>
@@ -3149,7 +3042,7 @@ module Aws::Odb
       :percent_progress,
       :managed_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an ODB network.</p>
@@ -3239,7 +3132,7 @@ module Aws::Odb
       :percent_progress,
       :managed_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A peering connection between an ODB network and either another ODB network or a customer-owned VPC.</p>
@@ -3285,7 +3178,7 @@ module Aws::Odb
       :created_at,
       :percent_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an ODB peering connection.</p>
@@ -3331,17 +3224,7 @@ module Aws::Odb
       :created_at,
       :percent_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PatchingModeType
-      ROLLING = 'ROLLING'
-      NONROLLING = 'NONROLLING'
-    end
-
-    module PreferenceType
-      NO_PREFERENCE = 'NO_PREFERENCE'
-      CUSTOM_PREFERENCE = 'CUSTOM_PREFERENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster_id
@@ -3354,7 +3237,7 @@ module Aws::Odb
       :cloud_vm_cluster_id,
       :db_node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_node_id
@@ -3371,7 +3254,7 @@ module Aws::Odb
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation tried to access a resource that doesn't exist. Make sure you provided the correct resource and try again.</p>
@@ -3388,17 +3271,7 @@ module Aws::Odb
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceStatus
-      AVAILABLE = 'AVAILABLE'
-      FAILED = 'FAILED'
-      PROVISIONING = 'PROVISIONING'
-      TERMINATED = 'TERMINATED'
-      TERMINATING = 'TERMINATING'
-      UPDATING = 'UPDATING'
-      MAINTENANCE_IN_PROGRESS = 'MAINTENANCE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for Amazon S3 access from the ODB network.</p>
@@ -3420,7 +3293,7 @@ module Aws::Odb
       :domain_name,
       :s3_policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a service network endpoint.</p>
@@ -3434,7 +3307,7 @@ module Aws::Odb
       :vpc_endpoint_id,
       :vpc_endpoint_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the service quota.</p>
@@ -3455,14 +3328,7 @@ module Aws::Odb
       :resource_type,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShapeType
-      AMD = 'AMD'
-      INTEL = 'INTEL'
-      INTEL_FLEX_X9 = 'INTEL_FLEX_X9'
-      AMPERE_FLEX_A1 = 'AMPERE_FLEX_A1'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster_id
@@ -3475,7 +3341,7 @@ module Aws::Odb
       :cloud_vm_cluster_id,
       :db_node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_node_id
@@ -3492,7 +3358,7 @@ module Aws::Odb
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_vm_cluster_id
@@ -3505,7 +3371,7 @@ module Aws::Odb
       :cloud_vm_cluster_id,
       :db_node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_node_id
@@ -3522,7 +3388,7 @@ module Aws::Odb
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the compatible system versions that can be used with a specific Exadata shape and Grid Infrastructure (GI) version.</p>
@@ -3540,7 +3406,7 @@ module Aws::Odb
       :shape,
       :system_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3553,12 +3419,12 @@ module Aws::Odb
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -3571,7 +3437,7 @@ module Aws::Odb
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3584,12 +3450,12 @@ module Aws::Odb
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_exadata_infrastructure_id
@@ -3602,7 +3468,7 @@ module Aws::Odb
       :cloud_exadata_infrastructure_id,
       :maintenance_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -3623,7 +3489,7 @@ module Aws::Odb
       :status_reason,
       :cloud_exadata_infrastructure_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute odb_network_id
@@ -3656,7 +3522,7 @@ module Aws::Odb
       :zero_etl_access,
       :s3_policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -3677,7 +3543,7 @@ module Aws::Odb
       :status_reason,
       :odb_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed validation because it is missing required fields or has invalid inputs.</p>
@@ -3694,7 +3560,7 @@ module Aws::Odb
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the service in a specified field. Make sure you provided the correct input and try again.</p>
@@ -3708,18 +3574,7 @@ module Aws::Odb
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
-    end
-
-    module VpcEndpointType
-      SERVICENETWORK = 'SERVICENETWORK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for Zero-ETL access from the ODB network.</p>
@@ -3733,7 +3588,7 @@ module Aws::Odb
       :status,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

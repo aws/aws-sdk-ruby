@@ -12,7 +12,7 @@ module Aws::S3Vectors
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because a vector bucket name or a vector index name already exists. Vector bucket names must be unique within your Amazon Web Services account for each Amazon Web Services Region. Vector index names must be unique within your vector bucket. Choose a different vector bucket name or vector index name, and try again.</p>
@@ -21,7 +21,7 @@ module Aws::S3Vectors
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -54,12 +54,12 @@ module Aws::S3Vectors
       :distance_metric,
       :metadata_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateIndexOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -72,16 +72,12 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateVectorBucketOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataType
-      FLOAT32 = 'float32'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -98,12 +94,12 @@ module Aws::S3Vectors
       :index_name,
       :index_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -116,12 +112,12 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorBucketOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -134,12 +130,12 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorBucketPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -160,17 +156,12 @@ module Aws::S3Vectors
       :index_arn,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DistanceMetric
-      EUCLIDEAN = 'euclidean'
-      COSINE = 'cosine'
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The encryption configuration for a vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically <code>AES256</code>.</p>
@@ -184,7 +175,7 @@ module Aws::S3Vectors
       :sse_type,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sse_type] = 'AES256' unless options.key?(:sse_type)
@@ -206,7 +197,7 @@ module Aws::S3Vectors
       :index_name,
       :index_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index
@@ -215,7 +206,7 @@ module Aws::S3Vectors
     class GetIndexOutput < Struct.new(
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>GetVectors</code> operation.</p>
@@ -233,7 +224,7 @@ module Aws::S3Vectors
       :data,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -246,7 +237,7 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket
@@ -255,7 +246,7 @@ module Aws::S3Vectors
     class GetVectorBucketOutput < Struct.new(
       :vector_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -268,7 +259,7 @@ module Aws::S3Vectors
       :vector_bucket_name,
       :vector_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -277,7 +268,7 @@ module Aws::S3Vectors
     class GetVectorBucketPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -306,7 +297,7 @@ module Aws::S3Vectors
       :return_data,
       :return_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vectors
@@ -315,7 +306,7 @@ module Aws::S3Vectors
     class GetVectorsOutput < Struct.new(
       :vectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector index.</p>
@@ -353,7 +344,7 @@ module Aws::S3Vectors
       :distance_metric,
       :metadata_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector index.</p>
@@ -375,7 +366,7 @@ module Aws::S3Vectors
       :index_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed due to an internal server error.</p>
@@ -384,7 +375,7 @@ module Aws::S3Vectors
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon Web Services KMS key isn't enabled.</p>
@@ -393,7 +384,7 @@ module Aws::S3Vectors
     class KmsDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected for one of the following reasons: </p> <ul> <li> <p>The <code>KeyUsage</code> value of the KMS key is incompatible with the API operation.</p> </li> <li> <p>The encryption algorithm or signing algorithm specified for the operation is incompatible with the type of key material in the KMS key (<code>KeySpec</code>).</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html#API_Encrypt_Errors">InvalidKeyUsageException</a> in the <i>Amazon Web Services Key Management Service API Reference</i>.</p>
@@ -402,7 +393,7 @@ module Aws::S3Vectors
     class KmsInvalidKeyUsageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key state of the KMS key isn't compatible with the operation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html#API_Encrypt_Errors">KMSInvalidStateException</a> in the <i>Amazon Web Services Key Management Service API Reference</i>.</p>
@@ -411,7 +402,7 @@ module Aws::S3Vectors
     class KmsInvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KMS key can't be found.</p>
@@ -420,7 +411,7 @@ module Aws::S3Vectors
     class KmsNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -445,7 +436,7 @@ module Aws::S3Vectors
       :next_token,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -458,7 +449,7 @@ module Aws::S3Vectors
       :next_token,
       :indexes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector returned by the <code>ListVectors</code> operation.</p>
@@ -476,7 +467,7 @@ module Aws::S3Vectors
       :data,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -493,7 +484,7 @@ module Aws::S3Vectors
       :next_token,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -506,7 +497,7 @@ module Aws::S3Vectors
       :next_token,
       :vector_buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -547,7 +538,7 @@ module Aws::S3Vectors
       :return_data,
       :return_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -560,7 +551,7 @@ module Aws::S3Vectors
       :next_token,
       :vectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The metadata configuration for a vector index.</p>
@@ -570,7 +561,7 @@ module Aws::S3Vectors
     class MetadataConfiguration < Struct.new(
       :non_filterable_metadata_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified resource can't be found.</p>
@@ -579,7 +570,7 @@ module Aws::S3Vectors
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector to add to a vector index.</p>
@@ -597,7 +588,7 @@ module Aws::S3Vectors
       :data,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:metadata] = {} unless options.key?(:metadata)
@@ -619,12 +610,12 @@ module Aws::S3Vectors
       :vector_bucket_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutVectorBucketPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -645,12 +636,12 @@ module Aws::S3Vectors
       :index_arn,
       :vectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutVectorsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector in the approximate nearest neighbor search.</p>
@@ -672,7 +663,7 @@ module Aws::S3Vectors
       :metadata,
       :distance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_bucket_name
@@ -709,7 +700,7 @@ module Aws::S3Vectors
       :return_metadata,
       :return_distance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vectors
@@ -718,7 +709,7 @@ module Aws::S3Vectors
     class QueryVectorsOutput < Struct.new(
       :vectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeds a service quota. </p>
@@ -727,7 +718,7 @@ module Aws::S3Vectors
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unavailable. Wait briefly and retry your request. If it continues to fail, increase your waiting time between retries.</p>
@@ -736,12 +727,7 @@ module Aws::S3Vectors
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SseType
-      AES256 = 'AES256'
-      AWS_KMS = 'aws:kms'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -750,7 +736,7 @@ module Aws::S3Vectors
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested action isn't valid.</p>
@@ -763,7 +749,7 @@ module Aws::S3Vectors
       :message,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a validation exception.</p>
@@ -777,7 +763,7 @@ module Aws::S3Vectors
       :path,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The attributes of a vector bucket. </p>
@@ -799,7 +785,7 @@ module Aws::S3Vectors
       :creation_time,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>Summary information about a vector bucket.</p>
@@ -817,7 +803,7 @@ module Aws::S3Vectors
       :vector_bucket_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p>Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.</p> </note> <p>The vector data in different formats.</p>
@@ -828,7 +814,7 @@ module Aws::S3Vectors
       :float32,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Float32 < VectorData; end
       class Unknown < VectorData; end

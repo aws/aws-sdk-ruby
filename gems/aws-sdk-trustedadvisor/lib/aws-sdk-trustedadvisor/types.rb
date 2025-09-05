@@ -12,7 +12,7 @@ module Aws::TrustedAdvisor
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of an AccountRecommendationLifecycle for an Organization Recommendation</p>
@@ -56,7 +56,7 @@ module Aws::TrustedAdvisor
       :update_reason_code,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_resource_exclusions
@@ -65,7 +65,7 @@ module Aws::TrustedAdvisor
     class BatchUpdateRecommendationResourceExclusionRequest < Struct.new(
       :recommendation_resource_exclusions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_update_recommendation_resource_exclusion_errors
@@ -74,7 +74,7 @@ module Aws::TrustedAdvisor
     class BatchUpdateRecommendationResourceExclusionResponse < Struct.new(
       :batch_update_recommendation_resource_exclusion_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of an AWS Trusted Advisor Check</p>
@@ -112,7 +112,7 @@ module Aws::TrustedAdvisor
       :source,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception that the request was denied due to conflictions in state</p>
@@ -121,12 +121,7 @@ module Aws::TrustedAdvisor
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExclusionStatus
-      EXCLUDED = 'excluded'
-      INCLUDED = 'included'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_recommendation_identifier
@@ -135,7 +130,7 @@ module Aws::TrustedAdvisor
     class GetOrganizationRecommendationRequest < Struct.new(
       :organization_recommendation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_recommendation
@@ -144,7 +139,7 @@ module Aws::TrustedAdvisor
     class GetOrganizationRecommendationResponse < Struct.new(
       :organization_recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_identifier
@@ -153,7 +148,7 @@ module Aws::TrustedAdvisor
     class GetRecommendationRequest < Struct.new(
       :recommendation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation
@@ -162,7 +157,7 @@ module Aws::TrustedAdvisor
     class GetRecommendationResponse < Struct.new(
       :recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception to notify that an unexpected internal error occurred during processing of the request</p>
@@ -171,7 +166,7 @@ module Aws::TrustedAdvisor
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -202,7 +197,7 @@ module Aws::TrustedAdvisor
       :source,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -217,7 +212,7 @@ module Aws::TrustedAdvisor
       :next_token,
       :check_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -240,7 +235,7 @@ module Aws::TrustedAdvisor
       :organization_recommendation_identifier,
       :affected_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -255,7 +250,7 @@ module Aws::TrustedAdvisor
       :next_token,
       :account_recommendation_lifecycle_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -290,7 +285,7 @@ module Aws::TrustedAdvisor
       :organization_recommendation_identifier,
       :affected_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -305,7 +300,7 @@ module Aws::TrustedAdvisor
       :next_token,
       :organization_recommendation_resource_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -352,7 +347,7 @@ module Aws::TrustedAdvisor
       :after_last_updated_at,
       :before_last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -367,7 +362,7 @@ module Aws::TrustedAdvisor
       :next_token,
       :organization_recommendation_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -398,7 +393,7 @@ module Aws::TrustedAdvisor
       :region_code,
       :recommendation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -413,7 +408,7 @@ module Aws::TrustedAdvisor
       :next_token,
       :recommendation_resource_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -460,7 +455,7 @@ module Aws::TrustedAdvisor
       :after_last_updated_at,
       :before_last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -475,7 +470,7 @@ module Aws::TrustedAdvisor
       :next_token,
       :recommendation_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Recommendation for accounts within an Organization</p>
@@ -571,7 +566,7 @@ module Aws::TrustedAdvisor
       :update_reason_code,
       :resolved_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Organization Recommendation Resource Summary</p>
@@ -617,7 +612,7 @@ module Aws::TrustedAdvisor
       :account_id,
       :recommendation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exclusion_status] = 'included' unless options.key?(:exclusion_status)
@@ -684,7 +679,7 @@ module Aws::TrustedAdvisor
       :last_updated_at,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Recommendation for an Account</p>
@@ -780,7 +775,7 @@ module Aws::TrustedAdvisor
       :update_reason_code,
       :resolved_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cost optimizing aggregates for a Recommendation</p>
@@ -794,37 +789,7 @@ module Aws::TrustedAdvisor
       :estimated_monthly_savings,
       :estimated_percent_monthly_savings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationLanguage
-      ENGLISH = 'en'
-      JAPANESE = 'ja'
-      CHINESE = 'zh'
-      FRENCH = 'fr'
-      GERMAN = 'de'
-      KOREAN = 'ko'
-      TRADITIONAL_CHINESE = 'zh_TW'
-      ITALIAN = 'it'
-      SPANISH = 'es'
-      BRAZILIAN_PORTUGUESE = 'pt_BR'
-      BAHASA_INDONESIA = 'id'
-    end
-
-    module RecommendationLifecycleStage
-      IN_PROGRESS = 'in_progress'
-      PENDING_RESPONSE = 'pending_response'
-      DISMISSED = 'dismissed'
-      RESOLVED = 'resolved'
-    end
-
-    module RecommendationPillar
-      COST_OPTIMIZING = 'cost_optimizing'
-      PERFORMANCE = 'performance'
-      SECURITY = 'security'
-      SERVICE_LIMITS = 'service_limits'
-      FAULT_TOLERANCE = 'fault_tolerance'
-      OPERATIONAL_EXCELLENCE = 'operational_excellence'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Recommendation pillar aggregates</p>
@@ -834,7 +799,7 @@ module Aws::TrustedAdvisor
     class RecommendationPillarSpecificAggregates < Struct.new(
       :cost_optimizing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request entry for Recommendation Resource exclusion. Each entry is a combination of Recommendation Resource ARN and corresponding exclusion status</p>
@@ -848,7 +813,7 @@ module Aws::TrustedAdvisor
       :arn,
       :is_excluded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a Recommendation Resource</p>
@@ -890,7 +855,7 @@ module Aws::TrustedAdvisor
       :exclusion_status,
       :recommendation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exclusion_status] = 'included' unless options.key?(:exclusion_status)
@@ -914,29 +879,7 @@ module Aws::TrustedAdvisor
       :warning_count,
       :error_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationSource
-      AWS_CONFIG = 'aws_config'
-      COMPUTE_OPTIMIZER = 'compute_optimizer'
-      COST_EXPLORER = 'cost_explorer'
-      LSE = 'lse'
-      MANUAL = 'manual'
-      PSE = 'pse'
-      RDS = 'rds'
-      RESILIENCE = 'resilience'
-      RESILIENCE_HUB = 'resilience_hub'
-      SECURITY_HUB = 'security_hub'
-      STIR = 'stir'
-      TA_CHECK = 'ta_check'
-      WELL_ARCHITECTED = 'well_architected'
-    end
-
-    module RecommendationStatus
-      OK = 'ok'
-      WARNING = 'warning'
-      ERROR = 'error'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of Recommendation for an Account</p>
@@ -998,12 +941,7 @@ module Aws::TrustedAdvisor
       :last_updated_at,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationType
-      STANDARD = 'standard'
-      PRIORITY = 'priority'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception that the requested resource has not been found</p>
@@ -1012,13 +950,7 @@ module Aws::TrustedAdvisor
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceStatus
-      OK = 'ok'
-      WARNING = 'warning'
-      ERROR = 'error'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception to notify that requests are being throttled</p>
@@ -1027,7 +959,7 @@ module Aws::TrustedAdvisor
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_stage
@@ -1048,7 +980,7 @@ module Aws::TrustedAdvisor
       :update_reason_code,
       :organization_recommendation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_stage
@@ -1069,24 +1001,7 @@ module Aws::TrustedAdvisor
       :update_reason_code,
       :recommendation_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateRecommendationLifecycleStage
-      PENDING_RESPONSE = 'pending_response'
-      IN_PROGRESS = 'in_progress'
-      DISMISSED = 'dismissed'
-      RESOLVED = 'resolved'
-    end
-
-    module UpdateRecommendationLifecycleStageReasonCode
-      NON_CRITICAL_ACCOUNT = 'non_critical_account'
-      TEMPORARY_ACCOUNT = 'temporary_account'
-      VALID_BUSINESS_CASE = 'valid_business_case'
-      OTHER_METHODS_AVAILABLE = 'other_methods_available'
-      LOW_PRIORITY = 'low_priority'
-      NOT_APPLICABLE = 'not_applicable'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error entry for Recommendation Resource exclusion. Each entry is a combination of Recommendation Resource ARN, error code and error message</p>
@@ -1104,7 +1019,7 @@ module Aws::TrustedAdvisor
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception that the request failed to satisfy service constraints</p>
@@ -1113,7 +1028,7 @@ module Aws::TrustedAdvisor
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

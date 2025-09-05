@@ -13,7 +13,7 @@ module Aws::LakeFormation
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -30,7 +30,7 @@ module Aws::LakeFormation
       :resource,
       :lf_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -39,7 +39,7 @@ module Aws::LakeFormation
     class AddLFTagsToResourceResponse < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A new object to add to the governed table.</p>
@@ -62,7 +62,7 @@ module Aws::LakeFormation
       :size,
       :partition_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -73,7 +73,7 @@ module Aws::LakeFormation
     # <p>A structure that you pass to indicate you want all rows in a filter. </p>
     class AllRowsWildcard < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource to be created or added already exists.</p>
@@ -83,12 +83,7 @@ module Aws::LakeFormation
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_assertion
@@ -109,7 +104,7 @@ module Aws::LakeFormation
       :principal_arn,
       :duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_key_id
@@ -130,7 +125,7 @@ module Aws::LakeFormation
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to include auditing information on the privileged API. </p>
@@ -140,7 +135,7 @@ module Aws::LakeFormation
     class AuditContext < Struct.new(
       :additional_audit_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -153,7 +148,7 @@ module Aws::LakeFormation
       :catalog_id,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -162,7 +157,7 @@ module Aws::LakeFormation
     class BatchGrantPermissionsResponse < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of failures when performing a batch grant or batch revoke operation.</p>
@@ -176,7 +171,7 @@ module Aws::LakeFormation
       :request_entry,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A permission to a resource granted by batch operation to the principal.</p>
@@ -206,7 +201,7 @@ module Aws::LakeFormation
       :condition,
       :permissions_with_grant_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -219,7 +214,7 @@ module Aws::LakeFormation
       :catalog_id,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -228,7 +223,7 @@ module Aws::LakeFormation
     class BatchRevokePermissionsResponse < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_id
@@ -237,12 +232,12 @@ module Aws::LakeFormation
     class CancelTransactionRequest < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelTransactionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the catalog object.</p>
@@ -252,7 +247,7 @@ module Aws::LakeFormation
     class CatalogResource < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the name of a column resource and the LF-tags attached to it.</p>
@@ -266,7 +261,7 @@ module Aws::LakeFormation
       :name,
       :lf_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wildcard object, consisting of an optional list of excluded column names or indexes.</p>
@@ -276,7 +271,7 @@ module Aws::LakeFormation
     class ColumnWildcard < Struct.new(
       :excluded_column_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_id
@@ -285,7 +280,7 @@ module Aws::LakeFormation
     class CommitTransactionRequest < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_status
@@ -294,21 +289,7 @@ module Aws::LakeFormation
     class CommitTransactionResponse < Struct.new(
       :transaction_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      EQ = 'EQ'
-      NE = 'NE'
-      LE = 'LE'
-      LT = 'LT'
-      GE = 'GE'
-      GT = 'GT'
-      CONTAINS = 'CONTAINS'
-      NOT_CONTAINS = 'NOT_CONTAINS'
-      BEGINS_WITH = 'BEGINS_WITH'
-      IN = 'IN'
-      BETWEEN = 'BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two processes are trying to modify a resource simultaneously.</p>
@@ -318,7 +299,7 @@ module Aws::LakeFormation
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Lake Formation condition, which applies to permissions and opt-ins that contain an expression.</p>
@@ -328,7 +309,7 @@ module Aws::LakeFormation
     class Condition < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_data
@@ -337,12 +318,12 @@ module Aws::LakeFormation
     class CreateDataCellsFilterRequest < Struct.new(
       :table_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateDataCellsFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -363,12 +344,12 @@ module Aws::LakeFormation
       :catalog_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateLFTagExpressionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -385,12 +366,12 @@ module Aws::LakeFormation
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateLFTagResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -420,7 +401,7 @@ module Aws::LakeFormation
       :external_filtering,
       :share_recipients,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -429,7 +410,7 @@ module Aws::LakeFormation
     class CreateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal
@@ -447,12 +428,12 @@ module Aws::LakeFormation
       :resource,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateLakeFormationOptInResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes certain columns on certain rows.</p>
@@ -492,7 +473,7 @@ module Aws::LakeFormation
       :column_wildcard,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for a data cells filter resource. </p>
@@ -514,7 +495,7 @@ module Aws::LakeFormation
       :table_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lake Formation principal. Supported principals are IAM users
@@ -525,19 +506,7 @@ module Aws::LakeFormation
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLakeResourceType
-      CATALOG = 'CATALOG'
-      DATABASE = 'DATABASE'
-      TABLE = 'TABLE'
-      DATA_LOCATION = 'DATA_LOCATION'
-      LF_TAG = 'LF_TAG'
-      LF_TAG_POLICY = 'LF_TAG_POLICY'
-      LF_TAG_POLICY_DATABASE = 'LF_TAG_POLICY_DATABASE'
-      LF_TAG_POLICY_TABLE = 'LF_TAG_POLICY_TABLE'
-      LF_NAMED_TAG_EXPRESSION = 'LF_NAMED_TAG_EXPRESSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure representing a list of Lake Formation principals designated as data lake administrators and lists of principal permission entries for default create database and default create table permissions.</p>
@@ -593,7 +562,7 @@ module Aws::LakeFormation
       :external_data_filtering_allow_list,
       :authorized_session_tag_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for a data location object where permissions are granted or revoked. </p>
@@ -607,7 +576,7 @@ module Aws::LakeFormation
       :catalog_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the database object.</p>
@@ -621,7 +590,7 @@ module Aws::LakeFormation
       :catalog_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_catalog_id
@@ -642,12 +611,12 @@ module Aws::LakeFormation
       :table_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataCellsFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -660,12 +629,12 @@ module Aws::LakeFormation
       :name,
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLFTagExpressionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -678,12 +647,12 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLFTagResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -694,12 +663,12 @@ module Aws::LakeFormation
     class DeleteLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLakeFormationIdentityCenterConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal
@@ -717,12 +686,12 @@ module Aws::LakeFormation
       :resource,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLakeFormationOptInResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to delete from the governed table.</p>
@@ -740,7 +709,7 @@ module Aws::LakeFormation
       :e_tag,
       :partition_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -765,12 +734,12 @@ module Aws::LakeFormation
       :transaction_id,
       :objects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteObjectsOnCancelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -779,12 +748,12 @@ module Aws::LakeFormation
     class DeregisterResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -793,7 +762,7 @@ module Aws::LakeFormation
     class DescribeLakeFormationIdentityCenterConfigurationRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -825,7 +794,7 @@ module Aws::LakeFormation
       :share_recipients,
       :resource_share,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -834,7 +803,7 @@ module Aws::LakeFormation
     class DescribeResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_info
@@ -843,7 +812,7 @@ module Aws::LakeFormation
     class DescribeResourceResponse < Struct.new(
       :resource_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_id
@@ -852,7 +821,7 @@ module Aws::LakeFormation
     class DescribeTransactionRequest < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_description
@@ -861,7 +830,7 @@ module Aws::LakeFormation
     class DescribeTransactionResponse < Struct.new(
       :transaction_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p>
@@ -872,12 +841,7 @@ module Aws::LakeFormation
     class DetailsMap < Struct.new(
       :resource_share,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnableStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified entity does not exist.</p>
@@ -887,7 +851,7 @@ module Aws::LakeFormation
     class EntityNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error.</p>
@@ -901,7 +865,7 @@ module Aws::LakeFormation
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics related to the processing of a query statement.</p>
@@ -919,7 +883,7 @@ module Aws::LakeFormation
       :data_scanned_bytes,
       :work_units_executed_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:average_execution_time_millis] = 0 unless options.key?(:average_execution_time_millis)
@@ -936,7 +900,7 @@ module Aws::LakeFormation
     class ExpiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_id
@@ -945,12 +909,12 @@ module Aws::LakeFormation
     class ExtendTransactionRequest < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ExtendTransactionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for enabling external data filtering for third-party applications to
@@ -966,13 +930,7 @@ module Aws::LakeFormation
       :status,
       :authorized_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FieldNameString
-      RESOURCE_ARN = 'RESOURCE_ARN'
-      ROLE_ARN = 'ROLE_ARN'
-      LAST_MODIFIED = 'LAST_MODIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure describes the filtering of columns in a table based on a filter condition.</p>
@@ -990,7 +948,7 @@ module Aws::LakeFormation
       :comparison_operator,
       :string_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_catalog_id
@@ -1011,7 +969,7 @@ module Aws::LakeFormation
       :table_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_cells_filter
@@ -1020,12 +978,12 @@ module Aws::LakeFormation
     class GetDataCellsFilterResponse < Struct.new(
       :data_cells_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetDataLakePrincipalRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity
@@ -1034,7 +992,7 @@ module Aws::LakeFormation
     class GetDataLakePrincipalResponse < Struct.new(
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1043,7 +1001,7 @@ module Aws::LakeFormation
     class GetDataLakeSettingsRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_lake_settings
@@ -1052,7 +1010,7 @@ module Aws::LakeFormation
     class GetDataLakeSettingsResponse < Struct.new(
       :data_lake_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1073,7 +1031,7 @@ module Aws::LakeFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -1086,7 +1044,7 @@ module Aws::LakeFormation
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1099,7 +1057,7 @@ module Aws::LakeFormation
       :name,
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1120,7 +1078,7 @@ module Aws::LakeFormation
       :catalog_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1133,7 +1091,7 @@ module Aws::LakeFormation
       :catalog_id,
       :tag_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1150,7 +1108,7 @@ module Aws::LakeFormation
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -1159,7 +1117,7 @@ module Aws::LakeFormation
     class GetQueryStateRequest < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the output.</p>
@@ -1187,7 +1145,7 @@ module Aws::LakeFormation
       :error,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -1196,7 +1154,7 @@ module Aws::LakeFormation
     class GetQueryStatisticsRequest < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_statistics
@@ -1213,7 +1171,7 @@ module Aws::LakeFormation
       :planning_statistics,
       :query_submission_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1230,7 +1188,7 @@ module Aws::LakeFormation
       :resource,
       :show_assigned_lf_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lf_tag_on_database
@@ -1247,7 +1205,7 @@ module Aws::LakeFormation
       :lf_tags_on_table,
       :lf_tags_on_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1295,7 +1253,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute objects
@@ -1308,7 +1266,7 @@ module Aws::LakeFormation
       :objects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_arn
@@ -1337,7 +1295,7 @@ module Aws::LakeFormation
       :audit_context,
       :supported_permission_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_key_id
@@ -1358,7 +1316,7 @@ module Aws::LakeFormation
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_arn
@@ -1391,7 +1349,7 @@ module Aws::LakeFormation
       :s3_path,
       :query_session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_key_id
@@ -1416,7 +1374,7 @@ module Aws::LakeFormation
       :expiration,
       :vended_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -1433,7 +1391,7 @@ module Aws::LakeFormation
       :work_unit_id,
       :work_unit_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the output.</p>
@@ -1443,7 +1401,7 @@ module Aws::LakeFormation
     class GetWorkUnitResultsResponse < Struct.new(
       :result_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:result_stream] = Base64.strict_decode64('') unless options.key?(:result_stream)
@@ -1465,7 +1423,7 @@ module Aws::LakeFormation
       :page_size,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the output.</p>
@@ -1483,7 +1441,7 @@ module Aws::LakeFormation
       :query_id,
       :work_unit_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encryption operation failed.</p>
@@ -1493,7 +1451,7 @@ module Aws::LakeFormation
     class GlueEncryptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1523,12 +1481,12 @@ module Aws::LakeFormation
       :condition,
       :permissions_with_grant_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GrantPermissionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service error occurred.</p>
@@ -1538,7 +1496,7 @@ module Aws::LakeFormation
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input provided was not valid.</p>
@@ -1548,7 +1506,7 @@ module Aws::LakeFormation
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that allows an admin to grant user permissions on certain conditions. For example, granting a role access to all columns that do not have the LF-tag 'PII' in tables that have the LF-tag 'Prod'.</p>
@@ -1564,7 +1522,7 @@ module Aws::LakeFormation
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing an error related to a <code>TagResource</code> or <code>UnTagResource</code> operation.</p>
@@ -1578,7 +1536,7 @@ module Aws::LakeFormation
       :lf_tag,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure consists LF-Tag expression name and catalog ID.</p>
@@ -1600,7 +1558,7 @@ module Aws::LakeFormation
       :catalog_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a LF-Tag expression (keys and values).</p>
@@ -1614,7 +1572,7 @@ module Aws::LakeFormation
       :catalog_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing an LF-tag key and values for a resource.</p>
@@ -1632,7 +1590,7 @@ module Aws::LakeFormation
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing an LF-tag key-value pair.</p>
@@ -1650,7 +1608,7 @@ module Aws::LakeFormation
       :tag_key,
       :tag_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a list of LF-tag conditions or saved LF-Tag expressions that apply to a resource's LF-tag policy.</p>
@@ -1674,7 +1632,7 @@ module Aws::LakeFormation
       :expression,
       :expression_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expression] = [] unless options.key?(:expression)
@@ -1706,7 +1664,7 @@ module Aws::LakeFormation
       :last_modified,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table
@@ -1723,7 +1681,7 @@ module Aws::LakeFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_cells_filters
@@ -1736,7 +1694,7 @@ module Aws::LakeFormation
       :data_cells_filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1753,7 +1711,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lf_tag_expressions
@@ -1766,7 +1724,7 @@ module Aws::LakeFormation
       :lf_tag_expressions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1787,7 +1745,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lf_tags
@@ -1800,7 +1758,7 @@ module Aws::LakeFormation
       :lf_tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal
@@ -1822,7 +1780,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lake_formation_opt_ins_info_list
@@ -1835,7 +1793,7 @@ module Aws::LakeFormation
       :lake_formation_opt_ins_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1869,7 +1827,7 @@ module Aws::LakeFormation
       :max_results,
       :include_related,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal_resource_permissions
@@ -1882,7 +1840,7 @@ module Aws::LakeFormation
       :principal_resource_permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_condition_list
@@ -1899,7 +1857,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_info_list
@@ -1912,7 +1870,7 @@ module Aws::LakeFormation
       :resource_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1941,7 +1899,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_optimizer_list
@@ -1954,7 +1912,7 @@ module Aws::LakeFormation
       :storage_optimizer_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1975,7 +1933,7 @@ module Aws::LakeFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transactions
@@ -1988,7 +1946,7 @@ module Aws::LakeFormation
       :transactions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation timed out.</p>
@@ -1998,13 +1956,7 @@ module Aws::LakeFormation
     class OperationTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OptimizerType
-      COMPACTION = 'COMPACTION'
-      GARBAGE_COLLECTION = 'GARBAGE_COLLECTION'
-      GENERIC = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a list of partition values and table objects.</p>
@@ -2018,7 +1970,7 @@ module Aws::LakeFormation
       :partition_values,
       :objects,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of values defining partitions.</p>
@@ -2028,33 +1980,7 @@ module Aws::LakeFormation
     class PartitionValueList < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Permission
-      ALL = 'ALL'
-      SELECT = 'SELECT'
-      ALTER = 'ALTER'
-      DROP = 'DROP'
-      DELETE = 'DELETE'
-      INSERT = 'INSERT'
-      DESCRIBE = 'DESCRIBE'
-      CREATE_DATABASE = 'CREATE_DATABASE'
-      CREATE_TABLE = 'CREATE_TABLE'
-      DATA_LOCATION_ACCESS = 'DATA_LOCATION_ACCESS'
-      CREATE_LF_TAG = 'CREATE_LF_TAG'
-      ASSOCIATE = 'ASSOCIATE'
-      GRANT_WITH_LF_TAG_EXPRESSION = 'GRANT_WITH_LF_TAG_EXPRESSION'
-      CREATE_LF_TAG_EXPRESSION = 'CREATE_LF_TAG_EXPRESSION'
-      CREATE_CATALOG = 'CREATE_CATALOG'
-      SUPER_USER = 'SUPER_USER'
-    end
-
-    module PermissionType
-      COLUMN_PERMISSION = 'COLUMN_PERMISSION'
-      CELL_FILTER_PERMISSION = 'CELL_FILTER_PERMISSION'
-      NESTED_PERMISSION = 'NESTED_PERMISSION'
-      NESTED_CELL_PERMISSION = 'NESTED_CELL_PERMISSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The engine does not support filtering data based on the enforced permissions. For example, if you call the <code>GetTemporaryGlueTableCredentials</code> operation with <code>SupportedPermissionType</code> equal to <code>ColumnPermission</code>, but cell-level permissions exist on the table, this exception is thrown.</p>
@@ -2064,7 +1990,7 @@ module Aws::LakeFormation
     class PermissionTypeMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics related to the processing of a query statement.</p>
@@ -2086,7 +2012,7 @@ module Aws::LakeFormation
       :queue_time_millis,
       :work_units_generated_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated_data_to_scan_bytes] = 0 unless options.key?(:estimated_data_to_scan_bytes)
@@ -2108,7 +2034,7 @@ module Aws::LakeFormation
       :principal,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The permissions granted or revoked on a resource.</p>
@@ -2146,7 +2072,7 @@ module Aws::LakeFormation
       :last_updated,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2159,12 +2085,12 @@ module Aws::LakeFormation
       :catalog_id,
       :data_lake_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutDataLakeSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about the query plan.</p>
@@ -2190,7 +2116,7 @@ module Aws::LakeFormation
       :query_parameters,
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
@@ -2216,15 +2142,7 @@ module Aws::LakeFormation
       :query_authorization_id,
       :additional_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryStateString
-      PENDING = 'PENDING'
-      WORKUNITS_AVAILABLE = 'WORKUNITS_AVAILABLE'
-      ERROR = 'ERROR'
-      FINISHED = 'FINISHED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2256,12 +2174,12 @@ module Aws::LakeFormation
       :hybrid_access_enabled,
       :with_privileged_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2278,7 +2196,7 @@ module Aws::LakeFormation
       :resource,
       :lf_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failures
@@ -2287,7 +2205,7 @@ module Aws::LakeFormation
     class RemoveLFTagsFromResourceResponse < Struct.new(
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the resource.</p>
@@ -2329,7 +2247,7 @@ module Aws::LakeFormation
       :lf_tag_policy,
       :lf_tag_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about an Lake Formation resource.</p>
@@ -2361,7 +2279,7 @@ module Aws::LakeFormation
       :hybrid_access_enabled,
       :with_privileged_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error related to a resource which is not ready for a transaction.</p>
@@ -2371,7 +2289,7 @@ module Aws::LakeFormation
     class ResourceNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource numerical limit was exceeded.</p>
@@ -2381,17 +2299,7 @@ module Aws::LakeFormation
     class ResourceNumberLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceShareType
-      FOREIGN = 'FOREIGN'
-      ALL = 'ALL'
-    end
-
-    module ResourceType
-      DATABASE = 'DATABASE'
-      TABLE = 'TABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2421,12 +2329,12 @@ module Aws::LakeFormation
       :condition,
       :permissions_with_grant_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RevokePermissionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A PartiQL predicate.</p>
@@ -2440,7 +2348,7 @@ module Aws::LakeFormation
       :filter_expression,
       :all_rows_wildcard,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2461,7 +2369,7 @@ module Aws::LakeFormation
       :catalog_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2474,7 +2382,7 @@ module Aws::LakeFormation
       :next_token,
       :database_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2495,7 +2403,7 @@ module Aws::LakeFormation
       :catalog_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2508,7 +2416,7 @@ module Aws::LakeFormation
       :next_token,
       :table_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_planning_context
@@ -2521,7 +2429,7 @@ module Aws::LakeFormation
       :query_planning_context,
       :query_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the output.</p>
@@ -2531,7 +2439,7 @@ module Aws::LakeFormation
     class StartQueryPlanningResponse < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_type
@@ -2540,7 +2448,7 @@ module Aws::LakeFormation
     class StartTransactionRequest < Struct.new(
       :transaction_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_id
@@ -2549,7 +2457,7 @@ module Aws::LakeFormation
     class StartTransactionResponse < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error related to statistics not being ready.</p>
@@ -2559,7 +2467,7 @@ module Aws::LakeFormation
     class StatisticsNotReadyYetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure describing the configuration and details of a storage optimizer.</p>
@@ -2587,7 +2495,7 @@ module Aws::LakeFormation
       :warnings,
       :last_run_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the details of a governed table.</p>
@@ -2605,7 +2513,7 @@ module Aws::LakeFormation
       :e_tag,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
@@ -2633,13 +2541,13 @@ module Aws::LakeFormation
       :name,
       :table_wildcard,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wildcard object representing every table under a database.</p>
     class TableWildcard < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for a table with columns object. This object is only used when granting a SELECT permission.</p>
@@ -2666,7 +2574,7 @@ module Aws::LakeFormation
       :column_names,
       :column_wildcard,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure describing a database resource with LF-tags.</p>
@@ -2680,7 +2588,7 @@ module Aws::LakeFormation
       :database,
       :lf_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure describing a table resource with LF-tags.</p>
@@ -2702,7 +2610,7 @@ module Aws::LakeFormation
       :lf_tags_on_table,
       :lf_tags_on_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error where the query request was throttled.</p>
@@ -2712,7 +2620,7 @@ module Aws::LakeFormation
     class ThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error related to a transaction that was cancelled.</p>
@@ -2722,7 +2630,7 @@ module Aws::LakeFormation
     class TransactionCanceledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error related to a transaction commit that was in progress.</p>
@@ -2732,7 +2640,7 @@ module Aws::LakeFormation
     class TransactionCommitInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error where the specified transaction has already been committed and cannot be used for <code>UpdateTableObjects</code>.</p>
@@ -2742,7 +2650,7 @@ module Aws::LakeFormation
     class TransactionCommittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a transaction.</p>
@@ -2764,27 +2672,7 @@ module Aws::LakeFormation
       :transaction_start_time,
       :transaction_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransactionStatus
-      ACTIVE = 'ACTIVE'
-      COMMITTED = 'COMMITTED'
-      ABORTED = 'ABORTED'
-      COMMIT_IN_PROGRESS = 'COMMIT_IN_PROGRESS'
-    end
-
-    module TransactionStatusFilter
-      ALL = 'ALL'
-      COMPLETED = 'COMPLETED'
-      ACTIVE = 'ACTIVE'
-      COMMITTED = 'COMMITTED'
-      ABORTED = 'ABORTED'
-    end
-
-    module TransactionType
-      READ_AND_WRITE = 'READ_AND_WRITE'
-      READ_ONLY = 'READ_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_data
@@ -2793,12 +2681,12 @@ module Aws::LakeFormation
     class UpdateDataCellsFilterRequest < Struct.new(
       :table_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataCellsFilterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2819,12 +2707,12 @@ module Aws::LakeFormation
       :catalog_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLFTagExpressionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2845,12 +2733,12 @@ module Aws::LakeFormation
       :tag_values_to_delete,
       :tag_values_to_add,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLFTagResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2881,12 +2769,12 @@ module Aws::LakeFormation
       :application_status,
       :external_filtering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLakeFormationIdentityCenterConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -2909,12 +2797,12 @@ module Aws::LakeFormation
       :with_federation,
       :hybrid_access_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2939,12 +2827,12 @@ module Aws::LakeFormation
       :transaction_id,
       :write_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTableObjectsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -2965,7 +2853,7 @@ module Aws::LakeFormation
       :table_name,
       :storage_optimizer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -2974,7 +2862,7 @@ module Aws::LakeFormation
     class UpdateTableStorageOptimizerResponse < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines an Amazon S3 object to be deleted if a transaction cancels, provided that 
@@ -2989,7 +2877,7 @@ module Aws::LakeFormation
       :uri,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the valid range of work unit IDs for querying the execution service.</p>
@@ -3007,7 +2895,7 @@ module Aws::LakeFormation
       :work_unit_id_min,
       :work_unit_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:work_unit_id_max] = 0 unless options.key?(:work_unit_id_max)
@@ -3023,7 +2911,7 @@ module Aws::LakeFormation
     class WorkUnitsNotReadyYetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an object to add to or delete from a governed table.</p>
@@ -3037,7 +2925,7 @@ module Aws::LakeFormation
       :add_object,
       :delete_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

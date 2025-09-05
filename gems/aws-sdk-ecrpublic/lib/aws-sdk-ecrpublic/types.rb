@@ -20,7 +20,7 @@ module Aws::ECRPUBLIC
       :authorization_token,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -38,7 +38,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :layer_digests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layers
@@ -52,7 +52,7 @@ module Aws::ECRPUBLIC
       :layers,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -72,7 +72,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :image_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -85,7 +85,7 @@ module Aws::ECRPUBLIC
       :image_ids,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -109,7 +109,7 @@ module Aws::ECRPUBLIC
       :upload_id,
       :layer_digests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -130,7 +130,7 @@ module Aws::ECRPUBLIC
       :upload_id,
       :layer_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_name
@@ -153,7 +153,7 @@ module Aws::ECRPUBLIC
       :catalog_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -167,7 +167,7 @@ module Aws::ECRPUBLIC
       :repository,
       :catalog_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -182,7 +182,7 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -199,7 +199,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -218,7 +218,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -227,7 +227,7 @@ module Aws::ECRPUBLIC
     class DeleteRepositoryResponse < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -263,7 +263,7 @@ module Aws::ECRPUBLIC
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_tag_details
@@ -279,7 +279,7 @@ module Aws::ECRPUBLIC
       :image_tag_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -318,7 +318,7 @@ module Aws::ECRPUBLIC
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_details
@@ -335,7 +335,7 @@ module Aws::ECRPUBLIC
       :image_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -363,7 +363,7 @@ module Aws::ECRPUBLIC
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registries
@@ -380,7 +380,7 @@ module Aws::ECRPUBLIC
       :registries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -420,7 +420,7 @@ module Aws::ECRPUBLIC
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repositories
@@ -437,7 +437,7 @@ module Aws::ECRPUBLIC
       :repositories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified layer upload doesn't contain any layer parts.</p>
@@ -446,12 +446,12 @@ module Aws::ECRPUBLIC
     class EmptyUploadException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAuthorizationTokenRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorization_data
@@ -460,12 +460,12 @@ module Aws::ECRPUBLIC
     class GetAuthorizationTokenResponse < Struct.new(
       :authorization_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetRegistryCatalogDataRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_catalog_data
@@ -474,7 +474,7 @@ module Aws::ECRPUBLIC
     class GetRegistryCatalogDataResponse < Struct.new(
       :registry_catalog_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -488,7 +488,7 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_data
@@ -497,7 +497,7 @@ module Aws::ECRPUBLIC
     class GetRepositoryCatalogDataResponse < Struct.new(
       :catalog_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -511,7 +511,7 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -529,7 +529,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Amazon ECR image.</p>
@@ -555,7 +555,7 @@ module Aws::ECRPUBLIC
       :image_manifest,
       :image_manifest_media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified image has already been pushed, and there were no changes to the manifest
@@ -565,7 +565,7 @@ module Aws::ECRPUBLIC
     class ImageAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes an image that's returned by a <a>DescribeImages</a>
@@ -614,7 +614,7 @@ module Aws::ECRPUBLIC
       :image_manifest_media_type,
       :artifact_media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified image digest doesn't match the digest that Amazon ECR calculated for the
@@ -624,7 +624,7 @@ module Aws::ECRPUBLIC
     class ImageDigestDoesNotMatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Amazon ECR image failure.</p>
@@ -642,17 +642,7 @@ module Aws::ECRPUBLIC
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageFailureCode
-      InvalidImageDigest = 'InvalidImageDigest'
-      InvalidImageTag = 'InvalidImageTag'
-      ImageTagDoesNotMatchDigest = 'ImageTagDoesNotMatchDigest'
-      ImageNotFound = 'ImageNotFound'
-      MissingDigestAndTag = 'MissingDigestAndTag'
-      ImageReferencedByManifestList = 'ImageReferencedByManifestList'
-      KmsError = 'KmsError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with identifying information for an Amazon ECR image.</p>
@@ -666,7 +656,7 @@ module Aws::ECRPUBLIC
       :image_digest,
       :image_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image requested doesn't exist in the specified repository.</p>
@@ -675,7 +665,7 @@ module Aws::ECRPUBLIC
     class ImageNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified image is tagged with a tag that already exists. The repository is
@@ -685,7 +675,7 @@ module Aws::ECRPUBLIC
     class ImageTagAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the image tag details for an image.</p>
@@ -703,7 +693,7 @@ module Aws::ECRPUBLIC
       :created_at,
       :image_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -717,7 +707,7 @@ module Aws::ECRPUBLIC
       :registry_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute upload_id
@@ -730,7 +720,7 @@ module Aws::ECRPUBLIC
       :upload_id,
       :part_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The layer digest calculation performed by Amazon ECR when the image layer doesn't match the
@@ -740,7 +730,7 @@ module Aws::ECRPUBLIC
     class InvalidLayerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The layer part size isn't valid, or the first byte specified isn't consecutive to the
@@ -766,7 +756,7 @@ module Aws::ECRPUBLIC
       :last_valid_byte_received,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter is invalid. Review the available parameters for the API
@@ -776,7 +766,7 @@ module Aws::ECRPUBLIC
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid parameter has been specified. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>
@@ -785,7 +775,7 @@ module Aws::ECRPUBLIC
     class InvalidTagParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Amazon ECR image layer.</p>
@@ -809,7 +799,7 @@ module Aws::ECRPUBLIC
       :layer_size,
       :media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image layer already exists in the associated repository.</p>
@@ -818,12 +808,7 @@ module Aws::ECRPUBLIC
     class LayerAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayerAvailability
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Amazon ECR image layer failure.</p>
@@ -841,12 +826,7 @@ module Aws::ECRPUBLIC
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayerFailureCode
-      InvalidLayerDigest = 'InvalidLayerDigest'
-      MissingLayerDigest = 'MissingLayerDigest'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Layer parts must be at least 5 MiB in size.</p>
@@ -855,7 +835,7 @@ module Aws::ECRPUBLIC
     class LayerPartTooSmallException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified layers can't be found, or the specified layer isn't valid for this
@@ -865,7 +845,7 @@ module Aws::ECRPUBLIC
     class LayersNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation didn't succeed because it would have exceeded a service limit for your
@@ -876,7 +856,7 @@ module Aws::ECRPUBLIC
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -886,7 +866,7 @@ module Aws::ECRPUBLIC
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -895,7 +875,7 @@ module Aws::ECRPUBLIC
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -928,7 +908,7 @@ module Aws::ECRPUBLIC
       :image_tag,
       :image_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -937,7 +917,7 @@ module Aws::ECRPUBLIC
     class PutImageResponse < Struct.new(
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -951,7 +931,7 @@ module Aws::ECRPUBLIC
     class PutRegistryCatalogDataRequest < Struct.new(
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_catalog_data
@@ -960,7 +940,7 @@ module Aws::ECRPUBLIC
     class PutRegistryCatalogDataResponse < Struct.new(
       :registry_catalog_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -979,7 +959,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :catalog_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_data
@@ -988,7 +968,7 @@ module Aws::ECRPUBLIC
     class PutRepositoryCatalogDataResponse < Struct.new(
       :catalog_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the image tag details that are returned by a <a>DescribeImageTags</a> action.</p>
@@ -1023,7 +1003,7 @@ module Aws::ECRPUBLIC
       :image_manifest_media_type,
       :artifact_media_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The manifest list is referencing an image that doesn't exist.</p>
@@ -1032,7 +1012,7 @@ module Aws::ECRPUBLIC
     class ReferencedImagesNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a public registry.</p>
@@ -1062,7 +1042,7 @@ module Aws::ECRPUBLIC
       :verified,
       :aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the aliases for a public registry. A public registry is given an
@@ -1095,19 +1075,13 @@ module Aws::ECRPUBLIC
       :primary_registry_alias,
       :default_registry_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:primary_registry_alias] = false unless options.key?(:primary_registry_alias)
         options[:default_registry_alias] = false unless options.key?(:default_registry_alias)
         super
       end
-    end
-
-    module RegistryAliasStatus
-      ACTIVE = 'ACTIVE'
-      PENDING = 'PENDING'
-      REJECTED = 'REJECTED'
     end
 
     # <p>The metadata for a public registry.</p>
@@ -1121,7 +1095,7 @@ module Aws::ECRPUBLIC
     class RegistryCatalogData < Struct.new(
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registry doesn't exist.</p>
@@ -1130,7 +1104,7 @@ module Aws::ECRPUBLIC
     class RegistryNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a repository.</p>
@@ -1158,7 +1132,7 @@ module Aws::ECRPUBLIC
       :repository_uri,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository already exists in the specified registry.</p>
@@ -1167,7 +1141,7 @@ module Aws::ECRPUBLIC
     class RepositoryAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The catalog data for a repository. This data is publicly visible in the
@@ -1212,7 +1186,7 @@ module Aws::ECRPUBLIC
       :usage_text,
       :marketplace_certified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the catalog data for a repository. This data is publicly visible
@@ -1300,7 +1274,7 @@ module Aws::ECRPUBLIC
       :about_text,
       :usage_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The repository catalog data doesn't exist.</p>
@@ -1309,7 +1283,7 @@ module Aws::ECRPUBLIC
     class RepositoryCatalogDataNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository contains images. To delete a repository that contains images,
@@ -1319,7 +1293,7 @@ module Aws::ECRPUBLIC
     class RepositoryNotEmptyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository can't be found. Check the spelling of the specified repository
@@ -1329,7 +1303,7 @@ module Aws::ECRPUBLIC
     class RepositoryNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified repository and registry combination doesn't have an associated repository
@@ -1339,7 +1313,7 @@ module Aws::ECRPUBLIC
     class RepositoryPolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a server-side issue.</p>
@@ -1348,7 +1322,7 @@ module Aws::ECRPUBLIC
     class ServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1374,7 +1348,7 @@ module Aws::ECRPUBLIC
       :policy_text,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1391,7 +1365,7 @@ module Aws::ECRPUBLIC
       :repository_name,
       :policy_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata that you apply to a resource to help you categorize and organize them. Each
@@ -1408,7 +1382,7 @@ module Aws::ECRPUBLIC
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1423,12 +1397,12 @@ module Aws::ECRPUBLIC
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags on the repository is over the limit. The maximum number of tags that
@@ -1438,7 +1412,7 @@ module Aws::ECRPUBLIC
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action isn't supported in this Region.</p>
@@ -1447,7 +1421,7 @@ module Aws::ECRPUBLIC
     class UnsupportedCommandException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1461,12 +1435,12 @@ module Aws::ECRPUBLIC
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1497,7 +1471,7 @@ module Aws::ECRPUBLIC
       :part_last_byte,
       :layer_part_blob,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -1518,7 +1492,7 @@ module Aws::ECRPUBLIC
       :upload_id,
       :last_byte_received,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The upload can't be found, or the specified upload ID isn't valid for this
@@ -1528,7 +1502,7 @@ module Aws::ECRPUBLIC
     class UploadNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

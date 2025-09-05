@@ -13,7 +13,7 @@ module Aws::Resiliencehub
     class AcceptGroupingRecommendationEntry < Struct.new(
       :grouping_recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -30,7 +30,7 @@ module Aws::Resiliencehub
       :app_arn,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -47,7 +47,7 @@ module Aws::Resiliencehub
       :app_arn,
       :failed_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permissions to perform the requested operation. The user or role that is
@@ -58,7 +58,7 @@ module Aws::Resiliencehub
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -79,7 +79,7 @@ module Aws::Resiliencehub
       :app_arn,
       :resource_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -102,7 +102,7 @@ module Aws::Resiliencehub
       :app_version,
       :resource_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the Amazon CloudWatch alarm detected while running an assessment.</p>
@@ -118,7 +118,7 @@ module Aws::Resiliencehub
       :alarm_arn,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a recommendation for a CloudWatch alarm.</p>
@@ -167,15 +167,7 @@ module Aws::Resiliencehub
       :app_component_names,
       :recommendation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlarmType
-      METRIC = 'Metric'
-      COMPOSITE = 'Composite'
-      CANARY = 'Canary'
-      LOGS = 'Logs'
-      EVENT = 'Event'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an Resilience Hub application.</p>
@@ -274,7 +266,7 @@ module Aws::Resiliencehub
       :rpo_in_secs,
       :aws_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:resiliency_score] = 0 unless options.key?(:resiliency_score)
@@ -375,12 +367,7 @@ module Aws::Resiliencehub
       :drift_status,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppAssessmentScheduleType
-      DISABLED = 'Disabled'
-      DAILY = 'Daily'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an application assessment summary.</p>
@@ -451,21 +438,12 @@ module Aws::Resiliencehub
       :version_name,
       :drift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:resiliency_score] = 0 unless options.key?(:resiliency_score)
         super
       end
-    end
-
-    module AppComplianceStatusType
-      POLICY_BREACHED = 'PolicyBreached'
-      POLICY_MET = 'PolicyMet'
-      NOT_ASSESSED = 'NotAssessed'
-      CHANGES_DETECTED = 'ChangesDetected'
-      NOT_APPLICABLE = 'NotApplicable'
-      MISSING_POLICY = 'MissingPolicy'
     end
 
     # <p>Defines an Application Component.</p>
@@ -494,7 +472,7 @@ module Aws::Resiliencehub
       :id,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the compliance of an Application Component against the resiliency policy.</p>
@@ -524,13 +502,7 @@ module Aws::Resiliencehub
       :status,
       :resiliency_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppDriftStatusType
-      NOT_CHECKED = 'NotChecked'
-      NOT_DETECTED = 'NotDetected'
-      DETECTED = 'Detected'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of Resilience Hub application input sources.</p>
@@ -563,17 +535,12 @@ module Aws::Resiliencehub
       :resource_count,
       :eks_source_cluster_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:resource_count] = 0 unless options.key?(:resource_count)
         super
       end
-    end
-
-    module AppStatusType
-      ACTIVE = 'Active'
-      DELETING = 'Deleting'
     end
 
     # <p>Defines an application summary.</p>
@@ -639,7 +606,7 @@ module Aws::Resiliencehub
       :rpo_in_secs,
       :aws_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:resiliency_score] = 0 unless options.key?(:resiliency_score)
@@ -666,12 +633,7 @@ module Aws::Resiliencehub
       :creation_time,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentInvoker
-      USER = 'User'
-      SYSTEM = 'System'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates a specific risk identified in the Resilience Hub assessment and the corresponding recommendation provided to address that risk.</p>
@@ -709,14 +671,7 @@ module Aws::Resiliencehub
       :recommendation,
       :app_components,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssessmentStatus
-      PENDING = 'Pending'
-      INPROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      SUCCESS = 'Success'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the AI-generated summary for the Resilience Hub assessment, providing a concise overview that highlights the top risks and recommendations.</p>
@@ -740,7 +695,7 @@ module Aws::Resiliencehub
       :summary,
       :risk_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of operational recommendations that did not get included or excluded.</p>
@@ -757,7 +712,7 @@ module Aws::Resiliencehub
       :entry_id,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -775,7 +730,7 @@ module Aws::Resiliencehub
       :app_arn,
       :request_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -797,7 +752,7 @@ module Aws::Resiliencehub
       :successful_entries,
       :failed_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of operational recommendations that were successfully included or excluded.</p>
@@ -830,7 +785,7 @@ module Aws::Resiliencehub
       :app_component_id,
       :exclude_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the compliance drifts (recovery time objective (RTO) and recovery point
@@ -882,14 +837,7 @@ module Aws::Resiliencehub
       :actual_value,
       :diff_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComplianceStatus
-      POLICY_BREACHED = 'PolicyBreached'
-      POLICY_MET = 'PolicyMet'
-      NOT_APPLICABLE = 'NotApplicable'
-      MISSING_POLICY = 'MissingPolicy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines recommendations for an Resilience Hub Application Component, returned as an
@@ -909,7 +857,7 @@ module Aws::Resiliencehub
       :recommendation_status,
       :config_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the condition based on which you want to filter the metrics.</p>
@@ -927,16 +875,7 @@ module Aws::Resiliencehub
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionOperatorType
-      EQUALS = 'Equals'
-      NOT_EQUALS = 'NotEquals'
-      GREATER_THEN = 'GreaterThen'
-      GREATER_OR_EQUALS = 'GreaterOrEquals'
-      LESS_THEN = 'LessThen'
-      LESS_OR_EQUALS = 'LessOrEquals'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a recommendation configuration.</p>
@@ -984,16 +923,7 @@ module Aws::Resiliencehub
       :ha_architecture,
       :reference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigRecommendationOptimizationType
-      LEAST_COST = 'LeastCost'
-      LEAST_CHANGE = 'LeastChange'
-      BEST_AZ_RECOVERY = 'BestAZRecovery'
-      LEAST_ERRORS = 'LeastErrors'
-      BEST_ATTAINABLE = 'BestAttainable'
-      BEST_REGION_RECOVERY = 'BestRegionRecovery'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when a conflict with a previous successful write is detected. This generally occurs
@@ -1013,7 +943,7 @@ module Aws::Resiliencehub
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a cost object.</p>
@@ -1031,19 +961,12 @@ module Aws::Resiliencehub
       :currency,
       :frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:amount] = 0 unless options.key?(:amount)
         super
       end
-    end
-
-    module CostFrequency
-      HOURLY = 'Hourly'
-      DAILY = 'Daily'
-      MONTHLY = 'Monthly'
-      YEARLY = 'Yearly'
     end
 
     # @!attribute name
@@ -1096,7 +1019,7 @@ module Aws::Resiliencehub
       :event_subscriptions,
       :aws_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app
@@ -1106,7 +1029,7 @@ module Aws::Resiliencehub
     class CreateAppOutput < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1140,7 +1063,7 @@ module Aws::Resiliencehub
       :additional_info,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1161,7 +1084,7 @@ module Aws::Resiliencehub
       :app_version,
       :app_component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1211,7 +1134,7 @@ module Aws::Resiliencehub
       :additional_info,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1232,7 +1155,7 @@ module Aws::Resiliencehub
       :app_version,
       :physical_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_ids
@@ -1299,7 +1222,7 @@ module Aws::Resiliencehub
       :tags,
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_template
@@ -1309,7 +1232,7 @@ module Aws::Resiliencehub
     class CreateRecommendationTemplateOutput < Struct.new(
       :recommendation_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -1347,7 +1270,7 @@ module Aws::Resiliencehub
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1357,13 +1280,7 @@ module Aws::Resiliencehub
     class CreateResiliencyPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLocationConstraint
-      ANY_LOCATION = 'AnyLocation'
-      SAME_CONTINENT = 'SameContinent'
-      SAME_COUNTRY = 'SameCountry'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -1381,7 +1298,7 @@ module Aws::Resiliencehub
       :assessment_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -1398,7 +1315,7 @@ module Aws::Resiliencehub
       :assessment_arn,
       :assessment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1420,7 +1337,7 @@ module Aws::Resiliencehub
       :force_delete,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1456,7 +1373,7 @@ module Aws::Resiliencehub
       :client_token,
       :eks_source_cluster_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1473,7 +1390,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_input_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1486,7 +1403,7 @@ module Aws::Resiliencehub
     class DeleteAppOutput < Struct.new(
       :app_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1508,7 +1425,7 @@ module Aws::Resiliencehub
       :id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1529,7 +1446,7 @@ module Aws::Resiliencehub
       :app_version,
       :app_component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1567,7 +1484,7 @@ module Aws::Resiliencehub
       :aws_account_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1588,7 +1505,7 @@ module Aws::Resiliencehub
       :app_version,
       :physical_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_template_arn
@@ -1602,7 +1519,7 @@ module Aws::Resiliencehub
       :recommendation_template_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_template_arn
@@ -1615,7 +1532,7 @@ module Aws::Resiliencehub
       :recommendation_template_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1633,7 +1550,7 @@ module Aws::Resiliencehub
       :policy_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1646,7 +1563,7 @@ module Aws::Resiliencehub
     class DeleteResiliencyPolicyOutput < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -1659,7 +1576,7 @@ module Aws::Resiliencehub
     class DescribeAppAssessmentInput < Struct.new(
       :assessment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -1670,7 +1587,7 @@ module Aws::Resiliencehub
     class DescribeAppAssessmentOutput < Struct.new(
       :assessment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1683,7 +1600,7 @@ module Aws::Resiliencehub
     class DescribeAppInput < Struct.new(
       :app_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app
@@ -1693,7 +1610,7 @@ module Aws::Resiliencehub
     class DescribeAppOutput < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1714,7 +1631,7 @@ module Aws::Resiliencehub
       :app_version,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1735,7 +1652,7 @@ module Aws::Resiliencehub
       :app_version,
       :app_component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1752,7 +1669,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1776,7 +1693,7 @@ module Aws::Resiliencehub
       :app_version,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1813,7 +1730,7 @@ module Aws::Resiliencehub
       :aws_region,
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1834,7 +1751,7 @@ module Aws::Resiliencehub
       :app_version,
       :physical_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1855,7 +1772,7 @@ module Aws::Resiliencehub
       :app_version,
       :resolution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1884,7 +1801,7 @@ module Aws::Resiliencehub
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -1901,7 +1818,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2181,7 +2098,7 @@ module Aws::Resiliencehub
       :app_version,
       :app_template_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2194,7 +2111,7 @@ module Aws::Resiliencehub
     class DescribeDraftAppVersionResourcesImportStatusInput < Struct.new(
       :app_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2227,7 +2144,7 @@ module Aws::Resiliencehub
       :error_message,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics_export_id
@@ -2236,7 +2153,7 @@ module Aws::Resiliencehub
     class DescribeMetricsExportRequest < Struct.new(
       :metrics_export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics_export_id
@@ -2257,7 +2174,7 @@ module Aws::Resiliencehub
       :export_location,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -2270,7 +2187,7 @@ module Aws::Resiliencehub
     class DescribeResiliencyPolicyInput < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2281,7 +2198,7 @@ module Aws::Resiliencehub
     class DescribeResiliencyPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2298,7 +2215,7 @@ module Aws::Resiliencehub
       :app_arn,
       :grouping_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grouping_id
@@ -2315,13 +2232,7 @@ module Aws::Resiliencehub
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DifferenceType
-      NOT_EQUAL = 'NotEqual'
-      ADDED = 'Added'
-      REMOVED = 'Removed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the compliance against the resiliency policy for a disruption.</p>
@@ -2367,7 +2278,7 @@ module Aws::Resiliencehub
       :achievable_rpo_in_secs,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:achievable_rto_in_secs] = 0 unless options.key?(:achievable_rto_in_secs)
@@ -2376,24 +2287,6 @@ module Aws::Resiliencehub
         options[:achievable_rpo_in_secs] = 0 unless options.key?(:achievable_rpo_in_secs)
         super
       end
-    end
-
-    module DisruptionType
-      SOFTWARE = 'Software'
-      HARDWARE = 'Hardware'
-      AZ = 'AZ'
-      REGION = 'Region'
-    end
-
-    module DriftStatus
-      NOT_CHECKED = 'NotChecked'
-      NOT_DETECTED = 'NotDetected'
-      DETECTED = 'Detected'
-    end
-
-    module DriftType
-      APPLICATION_COMPLIANCE = 'ApplicationCompliance'
-      APP_COMPONENT_RESILIENCY_COMPLIANCE_STATUS = 'AppComponentResiliencyComplianceStatus'
     end
 
     # <p>The input source of the Amazon Elastic Kubernetes Service cluster.</p>
@@ -2411,7 +2304,7 @@ module Aws::Resiliencehub
       :eks_cluster_arn,
       :namespaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input source of the namespace that is located on your Amazon Elastic Kubernetes Service
@@ -2430,7 +2323,7 @@ module Aws::Resiliencehub
       :eks_cluster_arn,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the error that was encountered while importing a resource.</p>
@@ -2440,14 +2333,7 @@ module Aws::Resiliencehub
     class ErrorDetail < Struct.new(
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EstimatedCostTier
-      L1 = 'L1'
-      L2 = 'L2'
-      L3 = 'L3'
-      L4 = 'L4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates an event you would like to subscribe and get notification for. Currently,
@@ -2474,18 +2360,7 @@ module Aws::Resiliencehub
       :event_type,
       :sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      SCHEDULED_ASSESSMENT_FAILURE = 'ScheduledAssessmentFailure'
-      DRIFT_DETECTED = 'DriftDetected'
-    end
-
-    module ExcludeRecommendationReason
-      ALREADY_IMPLEMENTED = 'AlreadyImplemented'
-      NOT_RELEVANT = 'NotRelevant'
-      COMPLEXITY_OF_IMPLEMENTATION = 'ComplexityOfImplementation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the FIS experiment detected while running an assessment.</p>
@@ -2499,7 +2374,7 @@ module Aws::Resiliencehub
       :experiment_arn,
       :experiment_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the accepted grouping recommendation whose implementation failed.</p>
@@ -2513,7 +2388,7 @@ module Aws::Resiliencehub
       :grouping_recommendation_id,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a failure policy.</p>
@@ -2527,7 +2402,7 @@ module Aws::Resiliencehub
       :rto_in_secs,
       :rpo_in_secs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rto_in_secs] = 0 unless options.key?(:rto_in_secs)
@@ -2547,15 +2422,7 @@ module Aws::Resiliencehub
       :name,
       :aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FieldAggregationType
-      MIN = 'Min'
-      MAX = 'Max'
-      SUM = 'Sum'
-      AVG = 'Avg'
-      COUNT = 'Count'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new recommended Application Component (AppComponent).</p>
@@ -2573,7 +2440,7 @@ module Aws::Resiliencehub
       :app_component_type,
       :app_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a new grouping recommendation.</p>
@@ -2615,30 +2482,12 @@ module Aws::Resiliencehub
       :creation_time,
       :rejection_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
         super
       end
-    end
-
-    module GroupingRecommendationConfidenceLevel
-      HIGH = 'High'
-      MEDIUM = 'Medium'
-    end
-
-    module GroupingRecommendationRejectionReason
-      DISTINCT_BUSINESS_PURPOSE = 'DistinctBusinessPurpose'
-      SEPARATE_DATA_CONCERN = 'SeparateDataConcern'
-      DISTINCT_USER_GROUP_HANDLING = 'DistinctUserGroupHandling'
-      OTHER = 'Other'
-    end
-
-    module GroupingRecommendationStatusType
-      ACCEPTED = 'Accepted'
-      REJECTED = 'Rejected'
-      PENDING_DECISION = 'PendingDecision'
     end
 
     # <p>Indicates the resource that will be grouped in the recommended Application Component (AppComponent).</p>
@@ -2664,15 +2513,7 @@ module Aws::Resiliencehub
       :logical_resource_id,
       :source_app_component_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HaArchitecture
-      MULTI_SITE = 'MultiSite'
-      WARM_STANDBY = 'WarmStandby'
-      PILOT_LIGHT = 'PilotLight'
-      BACKUP_AND_RESTORE = 'BackupAndRestore'
-      NO_RECOVERY_PLAN = 'NoRecoveryPlan'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2702,7 +2543,7 @@ module Aws::Resiliencehub
       :import_strategy,
       :eks_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2735,7 +2576,7 @@ module Aws::Resiliencehub
       :terraform_sources,
       :eks_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when there is an internal failure in the Resilience Hub
@@ -2745,7 +2586,7 @@ module Aws::Resiliencehub
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -2767,7 +2608,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alarm_recommendations
@@ -2782,7 +2623,7 @@ module Aws::Resiliencehub
       :alarm_recommendations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -2803,7 +2644,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compliance_drifts
@@ -2817,7 +2658,7 @@ module Aws::Resiliencehub
       :compliance_drifts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -2840,7 +2681,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_drifts
@@ -2853,7 +2694,7 @@ module Aws::Resiliencehub
       :resource_drifts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -2897,7 +2738,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2912,7 +2753,7 @@ module Aws::Resiliencehub
       :next_token,
       :assessment_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2934,7 +2775,7 @@ module Aws::Resiliencehub
       :max_results,
       :assessment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_compliances
@@ -2949,7 +2790,7 @@ module Aws::Resiliencehub
       :component_compliances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -2971,7 +2812,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_recommendations
@@ -2986,7 +2827,7 @@ module Aws::Resiliencehub
       :component_recommendations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3011,7 +2852,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_input_sources
@@ -3024,7 +2865,7 @@ module Aws::Resiliencehub
       :app_input_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3049,7 +2890,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3074,7 +2915,7 @@ module Aws::Resiliencehub
       :app_components,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3100,7 +2941,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_mappings
@@ -3117,7 +2958,7 @@ module Aws::Resiliencehub
       :resource_mappings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3147,7 +2988,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute physical_resources
@@ -3164,7 +3005,7 @@ module Aws::Resiliencehub
       :resolution_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3194,7 +3035,7 @@ module Aws::Resiliencehub
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_versions
@@ -3207,7 +3048,7 @@ module Aws::Resiliencehub
       :app_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3257,7 +3098,7 @@ module Aws::Resiliencehub
       :reverse_order,
       :aws_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_summaries
@@ -3270,7 +3111,7 @@ module Aws::Resiliencehub
       :app_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3300,7 +3141,7 @@ module Aws::Resiliencehub
       :conditions,
       :sorts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rows
@@ -3313,7 +3154,7 @@ module Aws::Resiliencehub
       :rows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_arn
@@ -3352,7 +3193,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3365,7 +3206,7 @@ module Aws::Resiliencehub
       :next_token,
       :recommendation_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -3383,7 +3224,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resiliency_policies
@@ -3396,7 +3237,7 @@ module Aws::Resiliencehub
       :resiliency_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3417,7 +3258,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grouping_recommendations
@@ -3430,7 +3271,7 @@ module Aws::Resiliencehub
       :grouping_recommendations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3452,7 +3293,7 @@ module Aws::Resiliencehub
       :max_results,
       :assessment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3466,7 +3307,7 @@ module Aws::Resiliencehub
       :next_token,
       :sop_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3480,7 +3321,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resiliency_policies
@@ -3493,7 +3334,7 @@ module Aws::Resiliencehub
       :resiliency_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3503,7 +3344,7 @@ module Aws::Resiliencehub
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3513,7 +3354,7 @@ module Aws::Resiliencehub
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3535,7 +3376,7 @@ module Aws::Resiliencehub
       :max_results,
       :assessment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3548,7 +3389,7 @@ module Aws::Resiliencehub
       :next_token,
       :test_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3578,7 +3419,7 @@ module Aws::Resiliencehub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsupported_resources
@@ -3595,7 +3436,7 @@ module Aws::Resiliencehub
       :resolution_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a logical resource identifier.</p>
@@ -3624,14 +3465,7 @@ module Aws::Resiliencehub
       :terraform_source_name,
       :eks_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricsExportStatusType
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      SUCCESS = 'Success'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the roles and credentials that Resilience Hub would use while creating the
@@ -3685,17 +3519,7 @@ module Aws::Resiliencehub
       :invoker_role_name,
       :cross_account_role_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionModelType
-      LEGACY_IAM_USER = 'LegacyIAMUser'
-      ROLE_BASED = 'RoleBased'
-    end
-
-    module PhysicalIdentifierType
-      ARN = 'Arn'
-      NATIVE = 'Native'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a physical resource. A physical resource is a resource that exists in your
@@ -3745,7 +3569,7 @@ module Aws::Resiliencehub
       :source_type,
       :parent_resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a physical resource identifier.</p>
@@ -3903,7 +3727,7 @@ module Aws::Resiliencehub
       :aws_region,
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3920,7 +3744,7 @@ module Aws::Resiliencehub
       :app_arn,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -3945,7 +3769,7 @@ module Aws::Resiliencehub
       :identifier,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4221,7 +4045,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_template_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4238,14 +4062,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationComplianceStatus
-      BREACHED_UNATTAINABLE = 'BreachedUnattainable'
-      BREACHED_CAN_MEET = 'BreachedCanMeet'
-      MET_CAN_IMPROVE = 'MetCanImprove'
-      MISSING_POLICY = 'MissingPolicy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a disruption compliance recommendation.</p>
@@ -4273,7 +4090,7 @@ module Aws::Resiliencehub
       :expected_rpo_in_secs,
       :expected_rpo_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expected_rto_in_secs] = 0 unless options.key?(:expected_rto_in_secs)
@@ -4317,14 +4134,7 @@ module Aws::Resiliencehub
       :latest_discovered_experiment,
       :discovered_alarm,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationStatus
-      IMPLEMENTED = 'Implemented'
-      INACTIVE = 'Inactive'
-      NOT_IMPLEMENTED = 'NotImplemented'
-      EXCLUDED = 'Excluded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a recommendation template created with the <a>CreateRecommendationTemplate</a> action.</p>
@@ -4419,14 +4229,7 @@ module Aws::Resiliencehub
       :tags,
       :needs_replacements,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecommendationTemplateStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      SUCCESS = 'Success'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the rejected grouping recommendation.</p>
@@ -4440,7 +4243,7 @@ module Aws::Resiliencehub
       :grouping_recommendation_id,
       :rejection_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4457,7 +4260,7 @@ module Aws::Resiliencehub
       :app_arn,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4474,7 +4277,7 @@ module Aws::Resiliencehub
       :app_arn,
       :failed_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4516,7 +4319,7 @@ module Aws::Resiliencehub
       :terraform_source_names,
       :eks_source_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4533,13 +4336,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RenderRecommendationType
-      ALARM = 'Alarm'
-      SOP = 'Sop'
-      TEST = 'Test'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a resiliency policy.</p>
@@ -4597,16 +4394,7 @@ module Aws::Resiliencehub
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResiliencyPolicyTier
-      MISSION_CRITICAL = 'MissionCritical'
-      CRITICAL = 'Critical'
-      IMPORTANT = 'Important'
-      CORE_SERVICES = 'CoreServices'
-      NON_CRITICAL = 'NonCritical'
-      NOT_APPLICABLE = 'NotApplicable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overall resiliency score, returned as an object that includes the disruption score and
@@ -4628,19 +4416,12 @@ module Aws::Resiliencehub
       :disruption_score,
       :component_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
         super
       end
-    end
-
-    module ResiliencyScoreType
-      COMPLIANCE = 'Compliance'
-      TEST = 'Test'
-      ALARM = 'Alarm'
-      SOP = 'Sop'
     end
 
     # @!attribute app_arn
@@ -4657,7 +4438,7 @@ module Aws::Resiliencehub
       :app_arn,
       :app_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -4682,7 +4463,7 @@ module Aws::Resiliencehub
       :resolution_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the resources that have drifted in the current application version.</p>
@@ -4712,7 +4493,7 @@ module Aws::Resiliencehub
       :resource_identifier,
       :diff_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Defines application resource errors. </p>
@@ -4730,7 +4511,7 @@ module Aws::Resiliencehub
       :physical_resource_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A list of errors retrieving an application's resources. </p>
@@ -4745,7 +4526,7 @@ module Aws::Resiliencehub
       :resource_errors,
       :has_more_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a resource identifier for the drifted resource.</p>
@@ -4759,19 +4540,7 @@ module Aws::Resiliencehub
       :logical_resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceImportStatusType
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      SUCCESS = 'Success'
-    end
-
-    module ResourceImportStrategyType
-      ADD_ONLY = 'AddOnly'
-      REPLACE_ALL = 'ReplaceAll'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a resource mapping.</p>
@@ -4813,16 +4582,7 @@ module Aws::Resiliencehub
       :terraform_source_name,
       :eks_source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceMappingType
-      CFN_STACK = 'CfnStack'
-      RESOURCE = 'Resource'
-      APP_REGISTRY_APP = 'AppRegistryApp'
-      RESOURCE_GROUP = 'ResourceGroup'
-      TERRAFORM = 'Terraform'
-      EKS = 'EKS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when the specified resource could not be found.</p>
@@ -4839,26 +4599,7 @@ module Aws::Resiliencehub
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceResolutionStatusType
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      SUCCESS = 'Success'
-    end
-
-    module ResourceSourceType
-      APP_TEMPLATE = 'AppTemplate'
-      DISCOVERED = 'Discovered'
-    end
-
-    module ResourcesGroupingRecGenStatusType
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      SUCCESS = 'Success'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the Amazon S3 bucket.</p>
@@ -4872,7 +4613,7 @@ module Aws::Resiliencehub
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resiliency score of each scoring component. For more information about scoring component,
@@ -4907,7 +4648,7 @@ module Aws::Resiliencehub
       :outstanding_count,
       :excluded_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -4925,7 +4666,7 @@ module Aws::Resiliencehub
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a standard operating procedure (SOP) recommendation.</p>
@@ -4967,11 +4708,7 @@ module Aws::Resiliencehub
       :prerequisite,
       :recommendation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SopServiceType
-      SSM = 'SSM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the sorting order of the fields in the metrics.</p>
@@ -4985,7 +4722,7 @@ module Aws::Resiliencehub
       :field,
       :ascending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5016,7 +4753,7 @@ module Aws::Resiliencehub
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -5025,7 +4762,7 @@ module Aws::Resiliencehub
     class StartAppAssessmentOutput < Struct.new(
       :assessment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket_name
@@ -5039,7 +4776,7 @@ module Aws::Resiliencehub
       :bucket_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics_export_id
@@ -5052,7 +4789,7 @@ module Aws::Resiliencehub
       :metrics_export_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5065,7 +4802,7 @@ module Aws::Resiliencehub
     class StartResourceGroupingRecommendationTaskRequest < Struct.new(
       :app_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5090,7 +4827,7 @@ module Aws::Resiliencehub
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5103,17 +4840,12 @@ module Aws::Resiliencehub
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateFormat
-      CFN_YAML = 'CfnYaml'
-      CFN_JSON = 'CfnJson'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Terraform s3 state file you need to import. </p>
@@ -5123,7 +4855,7 @@ module Aws::Resiliencehub
     class TerraformSource < Struct.new(
       :s3_state_file_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a test recommendation.</p>
@@ -5182,20 +4914,7 @@ module Aws::Resiliencehub
       :depends_on_alarms,
       :recommendation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TestRisk
-      SMALL = 'Small'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
-    end
-
-    module TestType
-      SOFTWARE = 'Software'
-      HARDWARE = 'Hardware'
-      AZ = 'AZ'
-      REGION = 'Region'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when you have exceeded the limit on the number of requests per second.</p>
@@ -5208,7 +4927,7 @@ module Aws::Resiliencehub
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a resource that is not supported by Resilience Hub.</p>
@@ -5230,7 +4949,7 @@ module Aws::Resiliencehub
       :resource_type,
       :unsupported_resource_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5243,12 +4962,12 @@ module Aws::Resiliencehub
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5293,7 +5012,7 @@ module Aws::Resiliencehub
       :permission_model,
       :event_subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app
@@ -5303,7 +5022,7 @@ module Aws::Resiliencehub
     class UpdateAppOutput < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5332,7 +5051,7 @@ module Aws::Resiliencehub
       :type,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5353,7 +5072,7 @@ module Aws::Resiliencehub
       :app_version,
       :app_component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5377,7 +5096,7 @@ module Aws::Resiliencehub
       :app_arn,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5401,7 +5120,7 @@ module Aws::Resiliencehub
       :app_version,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5454,7 +5173,7 @@ module Aws::Resiliencehub
       :additional_info,
       :excluded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_arn
@@ -5475,7 +5194,7 @@ module Aws::Resiliencehub
       :app_version,
       :physical_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the operational recommendation item that needs a status update.</p>
@@ -5493,7 +5212,7 @@ module Aws::Resiliencehub
       :target_account_id,
       :target_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the operational recommendation item that is to be included or excluded.</p>
@@ -5527,7 +5246,7 @@ module Aws::Resiliencehub
       :app_component_id,
       :exclude_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -5561,7 +5280,7 @@ module Aws::Resiliencehub
       :tier,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -5571,7 +5290,7 @@ module Aws::Resiliencehub
     class UpdateResiliencyPolicyOutput < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when a request is not valid.</p>
@@ -5580,7 +5299,7 @@ module Aws::Resiliencehub
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

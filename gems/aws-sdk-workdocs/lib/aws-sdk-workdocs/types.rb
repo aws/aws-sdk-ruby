@@ -20,7 +20,7 @@ module Aws::WorkDocs
       :document_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -33,7 +33,7 @@ module Aws::WorkDocs
       :user_id,
       :authentication_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -42,7 +42,7 @@ module Aws::WorkDocs
     class ActivateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the activity information.</p>
@@ -91,48 +91,12 @@ module Aws::WorkDocs
       :original_parent,
       :comment_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_indirect_activity] = false unless options.key?(:is_indirect_activity)
         super
       end
-    end
-
-    module ActivityType
-      DOCUMENT_CHECKED_IN = 'DOCUMENT_CHECKED_IN'
-      DOCUMENT_CHECKED_OUT = 'DOCUMENT_CHECKED_OUT'
-      DOCUMENT_RENAMED = 'DOCUMENT_RENAMED'
-      DOCUMENT_VERSION_UPLOADED = 'DOCUMENT_VERSION_UPLOADED'
-      DOCUMENT_VERSION_DELETED = 'DOCUMENT_VERSION_DELETED'
-      DOCUMENT_VERSION_VIEWED = 'DOCUMENT_VERSION_VIEWED'
-      DOCUMENT_VERSION_DOWNLOADED = 'DOCUMENT_VERSION_DOWNLOADED'
-      DOCUMENT_RECYCLED = 'DOCUMENT_RECYCLED'
-      DOCUMENT_RESTORED = 'DOCUMENT_RESTORED'
-      DOCUMENT_REVERTED = 'DOCUMENT_REVERTED'
-      DOCUMENT_SHARED = 'DOCUMENT_SHARED'
-      DOCUMENT_UNSHARED = 'DOCUMENT_UNSHARED'
-      DOCUMENT_SHARE_PERMISSION_CHANGED = 'DOCUMENT_SHARE_PERMISSION_CHANGED'
-      DOCUMENT_SHAREABLE_LINK_CREATED = 'DOCUMENT_SHAREABLE_LINK_CREATED'
-      DOCUMENT_SHAREABLE_LINK_REMOVED = 'DOCUMENT_SHAREABLE_LINK_REMOVED'
-      DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED = 'DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED'
-      DOCUMENT_MOVED = 'DOCUMENT_MOVED'
-      DOCUMENT_COMMENT_ADDED = 'DOCUMENT_COMMENT_ADDED'
-      DOCUMENT_COMMENT_DELETED = 'DOCUMENT_COMMENT_DELETED'
-      DOCUMENT_ANNOTATION_ADDED = 'DOCUMENT_ANNOTATION_ADDED'
-      DOCUMENT_ANNOTATION_DELETED = 'DOCUMENT_ANNOTATION_DELETED'
-      FOLDER_CREATED = 'FOLDER_CREATED'
-      FOLDER_DELETED = 'FOLDER_DELETED'
-      FOLDER_RENAMED = 'FOLDER_RENAMED'
-      FOLDER_RECYCLED = 'FOLDER_RECYCLED'
-      FOLDER_RESTORED = 'FOLDER_RESTORED'
-      FOLDER_SHARED = 'FOLDER_SHARED'
-      FOLDER_UNSHARED = 'FOLDER_UNSHARED'
-      FOLDER_SHARE_PERMISSION_CHANGED = 'FOLDER_SHARE_PERMISSION_CHANGED'
-      FOLDER_SHAREABLE_LINK_CREATED = 'FOLDER_SHAREABLE_LINK_CREATED'
-      FOLDER_SHAREABLE_LINK_REMOVED = 'FOLDER_SHAREABLE_LINK_REMOVED'
-      FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED = 'FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED'
-      FOLDER_MOVED = 'FOLDER_MOVED'
     end
 
     # @!attribute authentication_token
@@ -153,7 +117,7 @@ module Aws::WorkDocs
       :principals,
       :notification_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_results
@@ -162,16 +126,7 @@ module Aws::WorkDocs
     class AddResourcePermissionsResponse < Struct.new(
       :share_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdditionalResponseFieldType
-      WEBURL = 'WEBURL'
-    end
-
-    module BooleanEnumType
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a comment.</p>
@@ -216,7 +171,7 @@ module Aws::WorkDocs
       :visibility,
       :recipient_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata of a comment.</p>
@@ -246,18 +201,7 @@ module Aws::WorkDocs
       :recipient_id,
       :contributor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommentStatusType
-      DRAFT = 'DRAFT'
-      PUBLISHED = 'PUBLISHED'
-      DELETED = 'DELETED'
-    end
-
-    module CommentVisibilityType
-      PUBLIC = 'PUBLIC'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource hierarchy is changing.</p>
@@ -266,7 +210,7 @@ module Aws::WorkDocs
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another operation is in progress on the resource that conflicts with the current operation.</p>
@@ -275,19 +219,7 @@ module Aws::WorkDocs
     class ConflictingOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentCategoryType
-      IMAGE = 'IMAGE'
-      DOCUMENT = 'DOCUMENT'
-      PDF = 'PDF'
-      SPREADSHEET = 'SPREADSHEET'
-      PRESENTATION = 'PRESENTATION'
-      AUDIO = 'AUDIO'
-      VIDEO = 'VIDEO'
-      SOURCE_CODE = 'SOURCE_CODE'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -327,7 +259,7 @@ module Aws::WorkDocs
       :visibility,
       :notify_collaborators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comment
@@ -336,7 +268,7 @@ module Aws::WorkDocs
     class CreateCommentResponse < Struct.new(
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -358,12 +290,12 @@ module Aws::WorkDocs
       :version_id,
       :custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateCustomMetadataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -380,7 +312,7 @@ module Aws::WorkDocs
       :name,
       :parent_folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -389,7 +321,7 @@ module Aws::WorkDocs
     class CreateFolderResponse < Struct.new(
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -406,12 +338,12 @@ module Aws::WorkDocs
       :labels,
       :authentication_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateLabelsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -434,7 +366,7 @@ module Aws::WorkDocs
       :protocol,
       :subscription_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription
@@ -443,7 +375,7 @@ module Aws::WorkDocs
     class CreateNotificationSubscriptionResponse < Struct.new(
       :subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -484,7 +416,7 @@ module Aws::WorkDocs
       :storage_rule,
       :authentication_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -493,7 +425,7 @@ module Aws::WorkDocs
     class CreateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit has been reached on the number of custom properties for the specified
@@ -503,7 +435,7 @@ module Aws::WorkDocs
     class CustomMetadataLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters results based on timestamp range (in epochs).</p>
@@ -517,7 +449,7 @@ module Aws::WorkDocs
       :start_value,
       :end_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -530,7 +462,7 @@ module Aws::WorkDocs
       :user_id,
       :authentication_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The last user in the organization is being deactivated.</p>
@@ -542,7 +474,7 @@ module Aws::WorkDocs
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -563,7 +495,7 @@ module Aws::WorkDocs
       :version_id,
       :comment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -590,12 +522,12 @@ module Aws::WorkDocs
       :keys,
       :delete_all,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomMetadataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -608,7 +540,7 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -629,7 +561,7 @@ module Aws::WorkDocs
       :version_id,
       :delete_prior_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -642,7 +574,7 @@ module Aws::WorkDocs
       :authentication_token,
       :folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -655,7 +587,7 @@ module Aws::WorkDocs
       :authentication_token,
       :folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -676,12 +608,12 @@ module Aws::WorkDocs
       :labels,
       :delete_all,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLabelsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_id
@@ -694,7 +626,7 @@ module Aws::WorkDocs
       :subscription_id,
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -708,7 +640,7 @@ module Aws::WorkDocs
       :authentication_token,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -762,7 +694,7 @@ module Aws::WorkDocs
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_activities
@@ -775,7 +707,7 @@ module Aws::WorkDocs
       :user_activities,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -801,7 +733,7 @@ module Aws::WorkDocs
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute comments
@@ -815,7 +747,7 @@ module Aws::WorkDocs
       :comments,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -847,7 +779,7 @@ module Aws::WorkDocs
       :include,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_versions
@@ -861,7 +793,7 @@ module Aws::WorkDocs
       :document_versions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -900,7 +832,7 @@ module Aws::WorkDocs
       :type,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute folders
@@ -918,7 +850,7 @@ module Aws::WorkDocs
       :documents,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -944,7 +876,7 @@ module Aws::WorkDocs
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -958,7 +890,7 @@ module Aws::WorkDocs
       :groups,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -976,7 +908,7 @@ module Aws::WorkDocs
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriptions
@@ -990,7 +922,7 @@ module Aws::WorkDocs
       :subscriptions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1016,7 +948,7 @@ module Aws::WorkDocs
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principals
@@ -1030,7 +962,7 @@ module Aws::WorkDocs
       :principals,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1048,7 +980,7 @@ module Aws::WorkDocs
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute folders
@@ -1061,7 +993,7 @@ module Aws::WorkDocs
       :folders,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1125,7 +1057,7 @@ module Aws::WorkDocs
       :limit,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -1144,7 +1076,7 @@ module Aws::WorkDocs
       :total_number_of_users,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the document is locked for comments and user tries to
@@ -1154,7 +1086,7 @@ module Aws::WorkDocs
     class DocumentLockedForCommentsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the document.</p>
@@ -1192,23 +1124,7 @@ module Aws::WorkDocs
       :resource_state,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentSourceType
-      ORIGINAL = 'ORIGINAL'
-      WITH_COMMENTS = 'WITH_COMMENTS'
-    end
-
-    module DocumentStatusType
-      INITIALIZED = 'INITIALIZED'
-      ACTIVE = 'ACTIVE'
-    end
-
-    module DocumentThumbnailType
-      SMALL = 'SMALL'
-      SMALL_HQ = 'SMALL_HQ'
-      LARGE = 'LARGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a version of a document.</p>
@@ -1266,11 +1182,7 @@ module Aws::WorkDocs
       :thumbnail,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentVersionStatus
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a valid checkout ID is not presented on document
@@ -1280,7 +1192,7 @@ module Aws::WorkDocs
     class DraftUploadOutOfSyncException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource already exists.</p>
@@ -1289,7 +1201,7 @@ module Aws::WorkDocs
     class EntityAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource does not exist.</p>
@@ -1302,7 +1214,7 @@ module Aws::WorkDocs
       :message,
       :entity_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Directory Service cannot reach an on-premises instance. Or a dependency
@@ -1313,7 +1225,7 @@ module Aws::WorkDocs
     class FailedDependencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters results based on entity metadata.</p>
@@ -1359,13 +1271,7 @@ module Aws::WorkDocs
       :created_range,
       :modified_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FolderContentType
-      ALL = 'ALL'
-      DOCUMENT = 'DOCUMENT'
-      FOLDER = 'FOLDER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a folder.</p>
@@ -1416,7 +1322,7 @@ module Aws::WorkDocs
       :size,
       :latest_version_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1425,7 +1331,7 @@ module Aws::WorkDocs
     class GetCurrentUserRequest < Struct.new(
       :authentication_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -1434,7 +1340,7 @@ module Aws::WorkDocs
     class GetCurrentUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1460,7 +1366,7 @@ module Aws::WorkDocs
       :fields,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -1469,7 +1375,7 @@ module Aws::WorkDocs
     class GetDocumentPathResponse < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1486,7 +1392,7 @@ module Aws::WorkDocs
       :document_id,
       :include_custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -1499,7 +1405,7 @@ module Aws::WorkDocs
       :metadata,
       :custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1525,7 +1431,7 @@ module Aws::WorkDocs
       :fields,
       :include_custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -1538,7 +1444,7 @@ module Aws::WorkDocs
       :metadata,
       :custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1564,7 +1470,7 @@ module Aws::WorkDocs
       :fields,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -1573,7 +1479,7 @@ module Aws::WorkDocs
     class GetFolderPathResponse < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1590,7 +1496,7 @@ module Aws::WorkDocs
       :folder_id,
       :include_custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -1603,7 +1509,7 @@ module Aws::WorkDocs
       :metadata,
       :custom_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1629,7 +1535,7 @@ module Aws::WorkDocs
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute folders
@@ -1646,7 +1552,7 @@ module Aws::WorkDocs
       :documents,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata of a user group.</p>
@@ -1660,7 +1566,7 @@ module Aws::WorkDocs
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user is undergoing transfer of ownership.</p>
@@ -1669,7 +1575,7 @@ module Aws::WorkDocs
     class IllegalUserStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1706,7 +1612,7 @@ module Aws::WorkDocs
       :document_size_in_bytes,
       :parent_folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata
@@ -1719,7 +1625,7 @@ module Aws::WorkDocs
       :metadata,
       :upload_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination marker or limit fields are not valid.</p>
@@ -1728,7 +1634,7 @@ module Aws::WorkDocs
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation is not allowed on the specified comment object.</p>
@@ -1737,7 +1643,7 @@ module Aws::WorkDocs
     class InvalidCommentOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is invalid.</p>
@@ -1746,7 +1652,7 @@ module Aws::WorkDocs
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The password is invalid.</p>
@@ -1755,41 +1661,7 @@ module Aws::WorkDocs
     class InvalidPasswordException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LanguageCodeType
-      AR = 'AR'
-      BG = 'BG'
-      BN = 'BN'
-      DA = 'DA'
-      DE = 'DE'
-      CS = 'CS'
-      EL = 'EL'
-      EN = 'EN'
-      ES = 'ES'
-      FA = 'FA'
-      FI = 'FI'
-      FR = 'FR'
-      HI = 'HI'
-      HU = 'HU'
-      ID = 'ID'
-      IT = 'IT'
-      JA = 'JA'
-      KO = 'KO'
-      LT = 'LT'
-      LV = 'LV'
-      NL = 'NL'
-      NO = 'NO'
-      PT = 'PT'
-      RO = 'RO'
-      RU = 'RU'
-      SV = 'SV'
-      SW = 'SW'
-      TH = 'TH'
-      TR = 'TR'
-      ZH = 'ZH'
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum of 100,000 files and folders under the parent folder has been exceeded.</p>
@@ -1798,21 +1670,7 @@ module Aws::WorkDocs
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocaleType
-      EN = 'en'
-      FR = 'fr'
-      KO = 'ko'
-      DE = 'de'
-      ES = 'es'
-      JA = 'ja'
-      RU = 'ru'
-      ZH_CN = 'zh_CN'
-      ZH_TW = 'zh_TW'
-      PT_BR = 'pt_BR'
-      DEFAULT = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter based on size (in bytes).</p>
@@ -1826,7 +1684,7 @@ module Aws::WorkDocs
       :start_value,
       :end_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Set of options which defines notification preferences of given action.</p>
@@ -1841,25 +1699,12 @@ module Aws::WorkDocs
       :send_email,
       :email_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:send_email] = false unless options.key?(:send_email)
         super
       end
-    end
-
-    module OrderByFieldType
-      RELEVANCE = 'RELEVANCE'
-      NAME = 'NAME'
-      SIZE = 'SIZE'
-      CREATED_TIMESTAMP = 'CREATED_TIMESTAMP'
-      MODIFIED_TIMESTAMP = 'MODIFIED_TIMESTAMP'
-    end
-
-    module OrderType
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
     end
 
     # <p>Describes the users or user groups.</p>
@@ -1873,7 +1718,7 @@ module Aws::WorkDocs
       :users,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the permissions.</p>
@@ -1887,7 +1732,7 @@ module Aws::WorkDocs
       :role,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource.</p>
@@ -1905,22 +1750,7 @@ module Aws::WorkDocs
       :type,
       :roles,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrincipalRoleType
-      VIEWER = 'VIEWER'
-      CONTRIBUTOR = 'CONTRIBUTOR'
-      OWNER = 'OWNER'
-      COOWNER = 'COOWNER'
-    end
-
-    module PrincipalType
-      USER = 'USER'
-      GROUP = 'GROUP'
-      INVITE = 'INVITE'
-      ANONYMOUS = 'ANONYMOUS'
-      ORGANIZATION = 'ORGANIZATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified document version is not in the INITIALIZED state.</p>
@@ -1929,7 +1759,7 @@ module Aws::WorkDocs
     class ProhibitedStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1942,7 +1772,7 @@ module Aws::WorkDocs
       :authentication_token,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -1963,7 +1793,7 @@ module Aws::WorkDocs
       :principal_id,
       :principal_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response is too large to return. The request must include a filter to reduce the size of the response.</p>
@@ -1972,7 +1802,7 @@ module Aws::WorkDocs
     class RequestedEntityTooLargeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is already checked out.</p>
@@ -1981,11 +1811,7 @@ module Aws::WorkDocs
     class ResourceAlreadyCheckedOutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceCollectionType
-      SHARED_WITH_ME = 'SHARED_WITH_ME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata of a resource.</p>
@@ -2020,7 +1846,7 @@ module Aws::WorkDocs
       :owner,
       :parent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the path information of a resource.</p>
@@ -2030,7 +1856,7 @@ module Aws::WorkDocs
     class ResourcePath < Struct.new(
       :components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resource path.</p>
@@ -2044,24 +1870,7 @@ module Aws::WorkDocs
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceSortType
-      DATE = 'DATE'
-      NAME = 'NAME'
-    end
-
-    module ResourceStateType
-      ACTIVE = 'ACTIVE'
-      RESTORING = 'RESTORING'
-      RECYCLING = 'RECYCLING'
-      RECYCLED = 'RECYCLED'
-    end
-
-    module ResourceType
-      FOLDER = 'FOLDER'
-      DOCUMENT = 'DOCUMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>
@@ -2091,14 +1900,7 @@ module Aws::WorkDocs
       :comment_metadata,
       :document_version_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResponseItemType
-      DOCUMENT = 'DOCUMENT'
-      FOLDER = 'FOLDER'
-      COMMENT = 'COMMENT'
-      DOCUMENT_VERSION = 'DOCUMENT_VERSION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -2111,24 +1913,7 @@ module Aws::WorkDocs
       :authentication_token,
       :document_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RolePermissionType
-      DIRECT = 'DIRECT'
-      INHERITED = 'INHERITED'
-    end
-
-    module RoleType
-      VIEWER = 'VIEWER'
-      CONTRIBUTOR = 'CONTRIBUTOR'
-      OWNER = 'OWNER'
-      COOWNER = 'COOWNER'
-    end
-
-    module SearchCollectionType
-      OWNED = 'OWNED'
-      SHARED_WITH_ME = 'SHARED_WITH_ME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter based on UserIds or GroupIds.</p>
@@ -2142,19 +1927,7 @@ module Aws::WorkDocs
       :id,
       :roles,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchQueryScopeType
-      NAME = 'NAME'
-      CONTENT = 'CONTENT'
-    end
-
-    module SearchResourceType
-      FOLDER = 'FOLDER'
-      DOCUMENT = 'DOCUMENT'
-      COMMENT = 'COMMENT'
-      DOCUMENT_VERSION = 'DOCUMENT_VERSION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -2196,7 +1969,7 @@ module Aws::WorkDocs
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2209,7 +1982,7 @@ module Aws::WorkDocs
       :items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the sort operation.</p>
@@ -2223,7 +1996,7 @@ module Aws::WorkDocs
       :field,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the dependencies is unavailable.</p>
@@ -2232,7 +2005,7 @@ module Aws::WorkDocs
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the recipient type and ID, if available.</p>
@@ -2250,7 +2023,7 @@ module Aws::WorkDocs
       :type,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the share results of a resource.</p>
@@ -2280,17 +2053,7 @@ module Aws::WorkDocs
       :share_id,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShareStatusType
-      SUCCESS = 'SUCCESS'
-      FAILURE = 'FAILURE'
-    end
-
-    module SortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The storage limit has been exceeded.</p>
@@ -2299,7 +2062,7 @@ module Aws::WorkDocs
     class StorageLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The storage limit will be exceeded.</p>
@@ -2308,7 +2071,7 @@ module Aws::WorkDocs
     class StorageLimitWillExceedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the storage for a user.</p>
@@ -2322,12 +2085,7 @@ module Aws::WorkDocs
       :storage_allocated_in_bytes,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageType
-      UNLIMITED = 'UNLIMITED'
-      QUOTA = 'QUOTA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a subscription.</p>
@@ -2345,16 +2103,7 @@ module Aws::WorkDocs
       :end_point,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriptionProtocolType
-      HTTPS = 'HTTPS'
-      SQS = 'SQS'
-    end
-
-    module SubscriptionType
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit has been reached on the number of labels for the specified
@@ -2364,7 +2113,7 @@ module Aws::WorkDocs
     class TooManyLabelsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of subscriptions for the WorkDocs
@@ -2374,7 +2123,7 @@ module Aws::WorkDocs
     class TooManySubscriptionsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is not permitted.</p>
@@ -2386,7 +2135,7 @@ module Aws::WorkDocs
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller does not have access to perform the action on the resource.</p>
@@ -2395,7 +2144,7 @@ module Aws::WorkDocs
     class UnauthorizedResourceAccessException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -2421,7 +2170,7 @@ module Aws::WorkDocs
       :parent_folder_id,
       :resource_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -2442,7 +2191,7 @@ module Aws::WorkDocs
       :version_id,
       :version_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -2468,7 +2217,7 @@ module Aws::WorkDocs
       :parent_folder_id,
       :resource_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_token
@@ -2509,7 +2258,7 @@ module Aws::WorkDocs
       :locale,
       :grant_poweruser_privileges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -2518,7 +2267,7 @@ module Aws::WorkDocs
     class UpdateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the upload.</p>
@@ -2532,7 +2281,7 @@ module Aws::WorkDocs
       :upload_url,
       :signed_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a user.</p>
@@ -2598,12 +2347,7 @@ module Aws::WorkDocs
       :locale,
       :storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserFilterType
-      ALL = 'ALL'
-      ACTIVE_PENDING = 'ACTIVE_PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata of the user.</p>
@@ -2629,21 +2373,7 @@ module Aws::WorkDocs
       :surname,
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserSortType
-      USER_NAME = 'USER_NAME'
-      FULL_NAME = 'FULL_NAME'
-      STORAGE_LIMIT = 'STORAGE_LIMIT'
-      USER_STATUS = 'USER_STATUS'
-      STORAGE_USED = 'STORAGE_USED'
-    end
-
-    module UserStatusType
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the storage for a user.</p>
@@ -2657,15 +2387,7 @@ module Aws::WorkDocs
       :storage_utilized_in_bytes,
       :storage_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserType
-      USER = 'USER'
-      ADMIN = 'ADMIN'
-      POWERUSER = 'POWERUSER'
-      MINIMALUSER = 'MINIMALUSER'
-      WORKSPACESUSER = 'WORKSPACESUSER'
+      include ::Smithy::Schema::Structure
     end
 
   end

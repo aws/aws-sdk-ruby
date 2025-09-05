@@ -12,7 +12,7 @@ module Aws::ElasticTranscoder
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file to be used as album art. There can be multiple artworks associated with an 
@@ -107,7 +107,7 @@ module Aws::ElasticTranscoder
       :album_art_format,
       :encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options associated with your audio codec.</p>
@@ -169,7 +169,7 @@ module Aws::ElasticTranscoder
       :bit_order,
       :signed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters required for transcoding audio.</p>
@@ -426,7 +426,7 @@ module Aws::ElasticTranscoder
       :audio_packing_mode,
       :codec_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CancelJobRequest</code> structure.</p>
@@ -438,14 +438,14 @@ module Aws::ElasticTranscoder
     class CancelJobRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response body contains a JSON object. If the job is successfully canceled, the value
     #             of <code>Success</code> is <code>true</code>.</p>
     class CancelJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The file format of the output captions. If you leave this value blank, Elastic Transcoder returns an error.</p>
@@ -533,7 +533,7 @@ module Aws::ElasticTranscoder
       :pattern,
       :encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source file for the input sidecar captions used during the transcoding process.</p>
@@ -574,7 +574,7 @@ module Aws::ElasticTranscoder
       :label,
       :encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The captions to be created, if any.</p>
@@ -619,7 +619,7 @@ module Aws::ElasticTranscoder
       :caption_sources,
       :caption_formats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for one clip in a composition. All jobs in a playlist must have the same clip settings.</p>
@@ -630,7 +630,7 @@ module Aws::ElasticTranscoder
     class Clip < Struct.new(
       :time_span,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreateJobOutput</code> structure.</p>
@@ -792,7 +792,7 @@ module Aws::ElasticTranscoder
       :captions,
       :encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the master playlist.</p>
@@ -869,7 +869,7 @@ module Aws::ElasticTranscoder
       :hls_content_protection,
       :play_ready_drm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreateJobRequest</code> structure.</p>
@@ -923,7 +923,7 @@ module Aws::ElasticTranscoder
       :playlists,
       :user_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CreateJobResponse structure.</p>
@@ -933,7 +933,7 @@ module Aws::ElasticTranscoder
     class CreateJobResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreatePipelineRequest</code> structure.</p>
@@ -1230,7 +1230,7 @@ module Aws::ElasticTranscoder
       :content_config,
       :thumbnail_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you create a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>
@@ -1247,7 +1247,7 @@ module Aws::ElasticTranscoder
       :pipeline,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreatePresetRequest</code> structure.</p>
@@ -1281,7 +1281,7 @@ module Aws::ElasticTranscoder
       :audio,
       :thumbnails,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreatePresetResponse</code> structure.</p>
@@ -1298,7 +1298,7 @@ module Aws::ElasticTranscoder
       :preset,
       :warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DeletePipelineRequest</code> structure.</p>
@@ -1308,13 +1308,13 @@ module Aws::ElasticTranscoder
     class DeletePipelineRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DeletePipelineResponse</code> structure.</p>
     class DeletePipelineResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DeletePresetRequest</code> structure.</p>
@@ -1324,13 +1324,13 @@ module Aws::ElasticTranscoder
     class DeletePresetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DeletePresetResponse</code> structure.</p>
     class DeletePresetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detected properties of the input file. Elastic Transcoder identifies these values from the input file.</p>
@@ -1356,7 +1356,7 @@ module Aws::ElasticTranscoder
       :file_size,
       :duration_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption settings, if any, that are used for decrypting your input files or 
@@ -1447,7 +1447,7 @@ module Aws::ElasticTranscoder
       :key_md5,
       :initialization_vector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HLS content protection settings, if any, that you want Elastic Transcoder to apply to your output files.</p>
@@ -1493,7 +1493,7 @@ module Aws::ElasticTranscoder
       :license_acquisition_url,
       :key_storage_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1501,7 +1501,7 @@ module Aws::ElasticTranscoder
     class IncompatibleVersionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The captions to be created, if any.</p>
@@ -1540,7 +1540,7 @@ module Aws::ElasticTranscoder
       :merge_policy,
       :caption_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Elastic Transcoder encountered an unexpected exception while trying to fulfill the request.</p>
@@ -1549,7 +1549,7 @@ module Aws::ElasticTranscoder
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A section of the response body that provides information about the job that is created.</p>
@@ -1653,7 +1653,7 @@ module Aws::ElasticTranscoder
       :user_metadata,
       :timing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The .jpg or .png file associated with an audio file.</p>
@@ -1691,7 +1691,7 @@ module Aws::ElasticTranscoder
       :merge_policy,
       :artwork,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the file that you're transcoding.</p>
@@ -1812,7 +1812,7 @@ module Aws::ElasticTranscoder
       :input_captions,
       :detected_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <important>
@@ -2064,7 +2064,7 @@ module Aws::ElasticTranscoder
       :encryption,
       :applied_color_space_conversion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Watermarks can be in .png or .jpg format. If you want to display a watermark that is not 
@@ -2091,7 +2091,7 @@ module Aws::ElasticTranscoder
       :input_key,
       :encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many operations for a given AWS account. For example, the number of pipelines 
@@ -2101,7 +2101,7 @@ module Aws::ElasticTranscoder
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ListJobsByPipelineRequest</code> structure.</p>
@@ -2122,7 +2122,7 @@ module Aws::ElasticTranscoder
       :ascending,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ListJobsByPipelineResponse</code> structure.</p>
@@ -2138,7 +2138,7 @@ module Aws::ElasticTranscoder
       :jobs,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ListJobsByStatusRequest</code> structure.</p>
@@ -2162,7 +2162,7 @@ module Aws::ElasticTranscoder
       :ascending,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2180,7 +2180,7 @@ module Aws::ElasticTranscoder
       :jobs,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ListPipelineRequest</code> structure.</p>
@@ -2197,7 +2197,7 @@ module Aws::ElasticTranscoder
       :ascending,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the pipelines associated with the current AWS account.</p>
@@ -2213,7 +2213,7 @@ module Aws::ElasticTranscoder
       :pipelines,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ListPresetsRequest</code> structure.</p>
@@ -2230,7 +2230,7 @@ module Aws::ElasticTranscoder
       :ascending,
       :page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ListPresetsResponse</code> structure.</p>
@@ -2246,7 +2246,7 @@ module Aws::ElasticTranscoder
       :presets,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify in order to report job status.</p>
@@ -2271,7 +2271,7 @@ module Aws::ElasticTranscoder
       :warning,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Permission</code> structure.</p>
@@ -2337,7 +2337,7 @@ module Aws::ElasticTranscoder
       :grantee,
       :access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline (queue) that is used to manage jobs.</p>
@@ -2598,7 +2598,7 @@ module Aws::ElasticTranscoder
       :content_config,
       :thumbnail_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>PipelineOutputConfig</code> structure.</p>
@@ -2650,7 +2650,7 @@ module Aws::ElasticTranscoder
       :storage_class,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The PlayReady DRM settings, if any, that you want Elastic Transcoder to apply to the output files associated with this playlist.</p>
@@ -2700,7 +2700,7 @@ module Aws::ElasticTranscoder
       :initialization_vector,
       :license_acquisition_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Use Only for Fragmented MP4 or MPEG-TS Outputs. If you specify a preset for which the value of Container
@@ -2785,7 +2785,7 @@ module Aws::ElasticTranscoder
       :status,
       :status_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Presets are templates that contain most of the settings for transcoding media files 
@@ -2835,7 +2835,7 @@ module Aws::ElasticTranscoder
       :thumbnails,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for the size, location, and opacity of graphics that you want Elastic Transcoder to 
@@ -3053,7 +3053,7 @@ module Aws::ElasticTranscoder
       :opacity,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ReadJobRequest</code> structure.</p>
@@ -3063,7 +3063,7 @@ module Aws::ElasticTranscoder
     class ReadJobRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ReadJobResponse</code> structure.</p>
@@ -3073,7 +3073,7 @@ module Aws::ElasticTranscoder
     class ReadJobResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ReadPipelineRequest</code> structure.</p>
@@ -3083,7 +3083,7 @@ module Aws::ElasticTranscoder
     class ReadPipelineRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ReadPipelineResponse</code> structure.</p>
@@ -3100,7 +3100,7 @@ module Aws::ElasticTranscoder
       :pipeline,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ReadPresetRequest</code> structure.</p>
@@ -3110,7 +3110,7 @@ module Aws::ElasticTranscoder
     class ReadPresetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ReadPresetResponse</code> structure.</p>
@@ -3120,7 +3120,7 @@ module Aws::ElasticTranscoder
     class ReadPresetResponse < Struct.new(
       :preset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you are attempting to change is in use. For example, you are attempting 
@@ -3130,7 +3130,7 @@ module Aws::ElasticTranscoder
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource does not exist or is not available. For example, the pipeline 
@@ -3140,7 +3140,7 @@ module Aws::ElasticTranscoder
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The <code>TestRoleRequest</code> structure. </p>
@@ -3163,7 +3163,7 @@ module Aws::ElasticTranscoder
       :output_bucket,
       :topics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>TestRoleResponse</code> structure.</p>
@@ -3180,7 +3180,7 @@ module Aws::ElasticTranscoder
       :success,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thumbnails for videos.</p>
@@ -3299,7 +3299,7 @@ module Aws::ElasticTranscoder
       :sizing_policy,
       :padding_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that determine when a clip begins and how long it lasts.</p>
@@ -3320,7 +3320,7 @@ module Aws::ElasticTranscoder
       :start_time,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the timing of a job.</p>
@@ -3338,7 +3338,7 @@ module Aws::ElasticTranscoder
       :start_time_millis,
       :finish_time_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>UpdatePipelineNotificationsRequest</code> structure.</p>
@@ -3381,7 +3381,7 @@ module Aws::ElasticTranscoder
       :id,
       :notifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>UpdatePipelineNotificationsResponse</code> structure.</p>
@@ -3392,7 +3392,7 @@ module Aws::ElasticTranscoder
     class UpdatePipelineNotificationsResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>UpdatePipelineRequest</code> structure.</p>
@@ -3656,7 +3656,7 @@ module Aws::ElasticTranscoder
       :content_config,
       :thumbnail_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update a pipeline, Elastic Transcoder returns the values that you specified in the request.</p>
@@ -3673,7 +3673,7 @@ module Aws::ElasticTranscoder
       :pipeline,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>UpdatePipelineStatusRequest</code> structure.</p>
@@ -3697,7 +3697,7 @@ module Aws::ElasticTranscoder
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update status for a pipeline,
@@ -3708,7 +3708,7 @@ module Aws::ElasticTranscoder
     class UpdatePipelineStatusResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more required parameter values were not provided in the request.</p>
@@ -3717,7 +3717,7 @@ module Aws::ElasticTranscoder
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>VideoParameters</code> structure.</p>
@@ -4277,7 +4277,7 @@ module Aws::ElasticTranscoder
       :padding_policy,
       :watermarks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region 
@@ -4297,7 +4297,7 @@ module Aws::ElasticTranscoder
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

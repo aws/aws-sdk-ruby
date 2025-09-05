@@ -14,7 +14,7 @@ module Aws::Detective
     class AcceptInvitationRequest < Struct.new(
       :graph_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request issuer does not have permission to access this resource or perform this
@@ -40,7 +40,7 @@ module Aws::Detective
       :sub_error_code,
       :sub_error_code_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Web Services account that is the administrator account of or a member of a
@@ -56,7 +56,7 @@ module Aws::Detective
       :account_id,
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Detective administrator account for an
@@ -78,7 +78,7 @@ module Aws::Detective
       :graph_arn,
       :delegation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -92,7 +92,7 @@ module Aws::Detective
       :graph_arn,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_datasources
@@ -105,7 +105,7 @@ module Aws::Detective
       :member_datasources,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arns
@@ -114,7 +114,7 @@ module Aws::Detective
     class BatchGetMembershipDatasourcesRequest < Struct.new(
       :graph_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_datasources
@@ -127,7 +127,7 @@ module Aws::Detective
       :membership_datasources,
       :unprocessed_graphs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request attempted an invalid action.</p>
@@ -136,7 +136,7 @@ module Aws::Detective
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -147,7 +147,7 @@ module Aws::Detective
     class CreateGraphRequest < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -156,7 +156,7 @@ module Aws::Detective
     class CreateGraphResponse < Struct.new(
       :graph_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -186,7 +186,7 @@ module Aws::Detective
       :disable_email_notification,
       :accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -204,13 +204,7 @@ module Aws::Detective
       :members,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasourcePackage
-      DETECTIVE_CORE = 'DETECTIVE_CORE'
-      EKS_AUDIT = 'EKS_AUDIT'
-      ASFF_SECURITYHUB_FINDING = 'ASFF_SECURITYHUB_FINDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the data source packages ingested by your behavior graph.</p>
@@ -224,13 +218,7 @@ module Aws::Detective
       :datasource_package_ingest_state,
       :last_ingest_state_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasourcePackageIngestState
-      STARTED = 'STARTED'
-      STOPPED = 'STOPPED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the usage of a data source package in the behavior graph.</p>
@@ -245,7 +233,7 @@ module Aws::Detective
       :volume_usage_in_bytes,
       :volume_usage_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details on the time range used to filter data.</p>
@@ -259,7 +247,7 @@ module Aws::Detective
       :start_inclusive,
       :end_inclusive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -268,7 +256,7 @@ module Aws::Detective
     class DeleteGraphRequest < Struct.new(
       :graph_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -282,7 +270,7 @@ module Aws::Detective
       :graph_arn,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -297,7 +285,7 @@ module Aws::Detective
       :account_ids,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -306,7 +294,7 @@ module Aws::Detective
     class DescribeOrganizationConfigurationRequest < Struct.new(
       :graph_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable
@@ -316,7 +304,7 @@ module Aws::Detective
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_enable] = false unless options.key?(:auto_enable)
@@ -332,7 +320,7 @@ module Aws::Detective
     class DisassociateMembershipRequest < Struct.new(
       :graph_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -341,24 +329,7 @@ module Aws::Detective
     class EnableOrganizationAdminAccountRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityType
-      IAM_ROLE = 'IAM_ROLE'
-      IAM_USER = 'IAM_USER'
-    end
-
-    module ErrorCode
-      InvalidGraphArn = 'INVALID_GRAPH_ARN'
-      InvalidRequestBody = 'INVALID_REQUEST_BODY'
-      InternalError = 'INTERNAL_ERROR'
-    end
-
-    module Field
-      SEVERITY = 'SEVERITY'
-      STATUS = 'STATUS'
-      CREATED_TIME = 'CREATED_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on the criteria used to define the filter for investigation results.</p>
@@ -384,7 +355,7 @@ module Aws::Detective
       :entity_arn,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on suspicious IP addresses identified as indicators of compromise. This indicator is derived from Amazon Web Services threat intelligence.</p>
@@ -398,7 +369,7 @@ module Aws::Detective
       :ip_address,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -411,7 +382,7 @@ module Aws::Detective
       :graph_arn,
       :investigation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -460,7 +431,7 @@ module Aws::Detective
       :severity,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -477,7 +448,7 @@ module Aws::Detective
       :graph_arn,
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_details
@@ -493,7 +464,7 @@ module Aws::Detective
       :member_details,
       :unprocessed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A behavior graph in Detective.</p>
@@ -508,7 +479,7 @@ module Aws::Detective
       :arn,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on unusual and impossible travel in an account.</p>
@@ -534,7 +505,7 @@ module Aws::Detective
       :ending_location,
       :hourly_time_delta,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detective investigations triages indicators of compromises such as a finding
@@ -552,7 +523,7 @@ module Aws::Detective
       :indicator_type,
       :indicator_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the indicators of compromise which are used to determine if a resource is involved in a security incident. An indicator of compromise (IOC) is an artifact observed in or on a network, system, or environment that can (with a high level of confidence) identify malicious activity or a security incident. For the list of indicators of compromise that are generated by Detective investigations, see <a href="https://docs.aws.amazon.com/detective/latest/userguide/detective-investigation-about.html">Detective investigations</a>.</p>
@@ -590,18 +561,7 @@ module Aws::Detective
       :related_finding_detail,
       :related_finding_group_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndicatorType
-      TTP_OBSERVED = 'TTP_OBSERVED'
-      IMPOSSIBLE_TRAVEL = 'IMPOSSIBLE_TRAVEL'
-      FLAGGED_IP_ADDRESS = 'FLAGGED_IP_ADDRESS'
-      NEW_GEOLOCATION = 'NEW_GEOLOCATION'
-      NEW_ASO = 'NEW_ASO'
-      NEW_USER_AGENT = 'NEW_USER_AGENT'
-      RELATED_FINDING = 'RELATED_FINDING'
-      RELATED_FINDING_GROUP = 'RELATED_FINDING_GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was valid but failed because of a problem with the service.</p>
@@ -610,7 +570,7 @@ module Aws::Detective
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the investigation related to a potential security event identified by Detective.</p>
@@ -645,12 +605,7 @@ module Aws::Detective
       :entity_arn,
       :entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvitationType
-      INVITATION = 'INVITATION'
-      ORGANIZATION = 'ORGANIZATION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -669,7 +624,7 @@ module Aws::Detective
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datasource_packages
@@ -684,7 +639,7 @@ module Aws::Detective
       :datasource_packages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -700,7 +655,7 @@ module Aws::Detective
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_list
@@ -714,7 +669,7 @@ module Aws::Detective
       :graph_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -740,7 +695,7 @@ module Aws::Detective
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -762,7 +717,7 @@ module Aws::Detective
       :next_token,
       :indicators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -788,7 +743,7 @@ module Aws::Detective
       :filter_criteria,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute investigation_details
@@ -802,7 +757,7 @@ module Aws::Detective
       :investigation_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -819,7 +774,7 @@ module Aws::Detective
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations
@@ -834,7 +789,7 @@ module Aws::Detective
       :invitations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -854,7 +809,7 @@ module Aws::Detective
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_details
@@ -874,7 +829,7 @@ module Aws::Detective
       :member_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -889,7 +844,7 @@ module Aws::Detective
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute administrators
@@ -903,7 +858,7 @@ module Aws::Detective
       :administrators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -912,7 +867,7 @@ module Aws::Detective
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -922,7 +877,7 @@ module Aws::Detective
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a member account in a behavior graph.</p>
@@ -1075,20 +1030,7 @@ module Aws::Detective
       :volume_usage_by_datasource_package,
       :datasource_package_ingest_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberDisabledReason
-      VOLUME_TOO_HIGH = 'VOLUME_TOO_HIGH'
-      VOLUME_UNKNOWN = 'VOLUME_UNKNOWN'
-    end
-
-    module MemberStatus
-      INVITED = 'INVITED'
-      VERIFICATION_IN_PROGRESS = 'VERIFICATION_IN_PROGRESS'
-      VERIFICATION_FAILED = 'VERIFICATION_FAILED'
-      ENABLED = 'ENABLED'
-      ACCEPTED_BUT_DISABLED = 'ACCEPTED_BUT_DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on data source packages for members of the behavior graph.</p>
@@ -1106,7 +1048,7 @@ module Aws::Detective
       :graph_arn,
       :datasource_package_ingest_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details new Autonomous System Organizations (ASOs) used either at the resource or account level. </p>
@@ -1120,7 +1062,7 @@ module Aws::Detective
       :aso,
       :is_new_for_entire_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_new_for_entire_account] = false unless options.key?(:is_new_for_entire_account)
@@ -1143,7 +1085,7 @@ module Aws::Detective
       :ip_address,
       :is_new_for_entire_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_new_for_entire_account] = false unless options.key?(:is_new_for_entire_account)
@@ -1162,16 +1104,12 @@ module Aws::Detective
       :user_agent,
       :is_new_for_entire_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_new_for_entire_account] = false unless options.key?(:is_new_for_entire_account)
         super
       end
-    end
-
-    module Reason
-      AWS_THREAT_INTELLIGENCE = 'AWS_THREAT_INTELLIGENCE'
     end
 
     # @!attribute graph_arn
@@ -1182,7 +1120,7 @@ module Aws::Detective
     class RejectInvitationRequest < Struct.new(
       :graph_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details related activities associated with a potential security event. Lists all distinct categories of evidence that are connected to the resource or the finding group.</p>
@@ -1200,7 +1138,7 @@ module Aws::Detective
       :type,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details multiple activities as they related to a potential security event. Detective uses graph analysis technique that infers relationships between findings and entities, and groups them together as a finding group.</p>
@@ -1210,7 +1148,7 @@ module Aws::Detective
     class RelatedFindingGroupDetail < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request refers to a nonexistent resource.</p>
@@ -1219,7 +1157,7 @@ module Aws::Detective
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request cannot be completed for one of the following reasons.</p>
@@ -1242,15 +1180,7 @@ module Aws::Detective
       :message,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Severity
-      INFORMATIONAL = 'INFORMATIONAL'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      CRITICAL = 'CRITICAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the criteria used for sorting investigations.</p>
@@ -1264,12 +1194,7 @@ module Aws::Detective
       :field,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -1291,7 +1216,7 @@ module Aws::Detective
       :scope_start_time,
       :scope_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute investigation_id
@@ -1300,7 +1225,7 @@ module Aws::Detective
     class StartInvestigationResponse < Struct.new(
       :investigation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -1315,18 +1240,7 @@ module Aws::Detective
       :graph_arn,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module State
-      ACTIVE = 'ACTIVE'
-      ARCHIVED = 'ARCHIVED'
-    end
-
-    module Status
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      SUCCESSFUL = 'SUCCESSFUL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string for filtering Detective investigations.</p>
@@ -1336,7 +1250,7 @@ module Aws::Detective
     class StringFilter < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details tactics, techniques, and procedures (TTPs) used in a potential security event. Tactics are based on <a href="https://attack.mitre.org/matrices/enterprise/">MITRE ATT&CK Matrix for
@@ -1371,7 +1285,7 @@ module Aws::Detective
       :api_success_count,
       :api_failure_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:api_success_count] = 0 unless options.key?(:api_success_count)
@@ -1392,12 +1306,12 @@ module Aws::Detective
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on when data collection began for a source package.</p>
@@ -1408,7 +1322,7 @@ module Aws::Detective
     class TimestampForCollection < Struct.new(
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be completed because too many other requests are occurring at the
@@ -1418,7 +1332,7 @@ module Aws::Detective
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A member account that was included in a request but for which the request could not be
@@ -1434,7 +1348,7 @@ module Aws::Detective
       :account_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Behavior graphs that could not be processed in the request.</p>
@@ -1449,7 +1363,7 @@ module Aws::Detective
       :graph_arn,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1463,12 +1377,12 @@ module Aws::Detective
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -1481,7 +1395,7 @@ module Aws::Detective
       :graph_arn,
       :datasource_packages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -1498,7 +1412,7 @@ module Aws::Detective
       :investigation_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_arn
@@ -1512,7 +1426,7 @@ module Aws::Detective
       :graph_arn,
       :auto_enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters are invalid.</p>
@@ -1529,7 +1443,7 @@ module Aws::Detective
       :error_code,
       :error_code_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

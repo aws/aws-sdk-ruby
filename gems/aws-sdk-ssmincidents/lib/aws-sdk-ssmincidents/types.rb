@@ -12,7 +12,7 @@ module Aws::SSMIncidents
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action that starts at the beginning of an incident. The response plan defines the
@@ -25,7 +25,7 @@ module Aws::SSMIncidents
       :ssm_automation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SsmAutomation < Action; end
       class Unknown < Action; end
@@ -43,7 +43,7 @@ module Aws::SSMIncidents
       :region_name,
       :sse_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use the AttributeValueList to filter by string or integer values.</p>
@@ -58,7 +58,7 @@ module Aws::SSMIncidents
       :integer_values,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValues < AttributeValueList; end
       class IntegerValues < AttributeValueList; end
@@ -74,7 +74,7 @@ module Aws::SSMIncidents
       :ssm_execution_arn,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SsmExecutionArn < AutomationExecution; end
       class Unknown < AutomationExecution; end
@@ -99,7 +99,7 @@ module Aws::SSMIncidents
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -113,7 +113,7 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :finding_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -126,7 +126,7 @@ module Aws::SSMIncidents
       :findings,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Chatbot chat channel used for collaboration during an incident.</p>
@@ -143,7 +143,7 @@ module Aws::SSMIncidents
       :chatbot_sns,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Empty < ChatChannel; end
       class ChatbotSns < ChatChannel; end
@@ -168,7 +168,7 @@ module Aws::SSMIncidents
       :end_time,
       :stack_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a CodeDeploy deployment that occurred around the time of an
@@ -193,7 +193,7 @@ module Aws::SSMIncidents
       :deployment_group_arn,
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conditional statement with which to compare a value, after a timestamp, before a
@@ -215,7 +215,7 @@ module Aws::SSMIncidents
       :equals,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Before < Condition; end
       class After < Condition; end
@@ -241,7 +241,7 @@ module Aws::SSMIncidents
       :resource_type,
       :retry_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions
@@ -260,7 +260,7 @@ module Aws::SSMIncidents
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -269,7 +269,7 @@ module Aws::SSMIncidents
     class CreateReplicationSetOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -311,7 +311,7 @@ module Aws::SSMIncidents
       :tags,
       :integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -320,7 +320,7 @@ module Aws::SSMIncidents
     class CreateResponsePlanOperationOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -359,7 +359,7 @@ module Aws::SSMIncidents
       :event_data,
       :event_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -372,7 +372,7 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -381,12 +381,12 @@ module Aws::SSMIncidents
     class DeleteIncidentRecordOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIncidentRecordOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the information about the Amazon Web Services Region you're deleting from your
@@ -397,7 +397,7 @@ module Aws::SSMIncidents
     class DeleteRegionAction < Struct.new(
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -406,12 +406,12 @@ module Aws::SSMIncidents
     class DeleteReplicationSetOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationSetOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -424,12 +424,12 @@ module Aws::SSMIncidents
       :resource_arn,
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -438,12 +438,12 @@ module Aws::SSMIncidents
     class DeleteResponsePlanOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResponsePlanOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -457,12 +457,12 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTimelineEventOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dynamic SSM parameter value.</p>
@@ -474,7 +474,7 @@ module Aws::SSMIncidents
       :variable,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Variable < DynamicSsmParameterValue; end
       class Unknown < DynamicSsmParameterValue; end
@@ -483,7 +483,7 @@ module Aws::SSMIncidents
     # <p>Used to remove the chat channel from an incident record or response plan.</p>
     class EmptyChatChannel < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An item referenced in a <code>TimelineEvent</code> that is involved in or somehow
@@ -500,7 +500,7 @@ module Aws::SSMIncidents
       :related_item_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Resource < EventReference; end
       class RelatedItemId < EventReference; end
@@ -535,7 +535,7 @@ module Aws::SSMIncidents
       :event_type,
       :event_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter the selection by using a condition.</p>
@@ -550,7 +550,7 @@ module Aws::SSMIncidents
       :key,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a specific CodeDeploy deployment or CloudFormation
@@ -575,7 +575,7 @@ module Aws::SSMIncidents
       :last_modified_time,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Extended textual information about the finding.</p>
@@ -591,7 +591,7 @@ module Aws::SSMIncidents
       :cloud_formation_stack_update,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CodeDeployDeployment < FindingDetails; end
       class CloudFormationStackUpdate < FindingDetails; end
@@ -609,7 +609,7 @@ module Aws::SSMIncidents
       :id,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -618,7 +618,7 @@ module Aws::SSMIncidents
     class GetIncidentRecordOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record
@@ -627,7 +627,7 @@ module Aws::SSMIncidents
     class GetIncidentRecordOperationOutput < Struct.new(
       :incident_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -636,7 +636,7 @@ module Aws::SSMIncidents
     class GetReplicationSetOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_set
@@ -645,7 +645,7 @@ module Aws::SSMIncidents
     class GetReplicationSetOperationOutput < Struct.new(
       :replication_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -664,7 +664,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policies
@@ -678,7 +678,7 @@ module Aws::SSMIncidents
       :resource_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -687,7 +687,7 @@ module Aws::SSMIncidents
     class GetResponsePlanOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -726,7 +726,7 @@ module Aws::SSMIncidents
       :actions,
       :integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -740,7 +740,7 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event
@@ -749,7 +749,7 @@ module Aws::SSMIncidents
     class GetTimelineEventOperationOutput < Struct.new(
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The record of the incident that's created when an incident occurs.</p>
@@ -839,7 +839,7 @@ module Aws::SSMIncidents
       :chat_channel,
       :notification_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about what created the incident record and when it was created.</p>
@@ -864,7 +864,7 @@ module Aws::SSMIncidents
       :resource_arn,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details describing an incident record.</p>
@@ -899,7 +899,7 @@ module Aws::SSMIncidents
       :resolved_time,
       :incident_record_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Basic details used in creating a response plan. The response plan is then used to create
@@ -969,7 +969,7 @@ module Aws::SSMIncidents
       :notification_targets,
       :incident_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about third-party services integrated into a response plan.</p>
@@ -981,7 +981,7 @@ module Aws::SSMIncidents
       :pager_duty_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PagerDutyConfiguration < Integration; end
       class Unknown < Integration; end
@@ -994,7 +994,7 @@ module Aws::SSMIncidents
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details and type of a related item.</p>
@@ -1008,7 +1008,7 @@ module Aws::SSMIncidents
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a related item.</p>
@@ -1032,7 +1032,7 @@ module Aws::SSMIncidents
       :pager_duty_incident_detail,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Arn < ItemValue; end
       class Url < ItemValue; end
@@ -1057,7 +1057,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute findings
@@ -1072,7 +1072,7 @@ module Aws::SSMIncidents
       :findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1127,7 +1127,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_summaries
@@ -1141,7 +1141,7 @@ module Aws::SSMIncidents
       :incident_record_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -1160,7 +1160,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute related_items
@@ -1174,7 +1174,7 @@ module Aws::SSMIncidents
       :related_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1188,7 +1188,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_set_arns
@@ -1202,7 +1202,7 @@ module Aws::SSMIncidents
       :replication_set_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1216,7 +1216,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_plan_summaries
@@ -1230,7 +1230,7 @@ module Aws::SSMIncidents
       :response_plan_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1239,7 +1239,7 @@ module Aws::SSMIncidents
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1248,7 +1248,7 @@ module Aws::SSMIncidents
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -1311,7 +1311,7 @@ module Aws::SSMIncidents
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_summaries
@@ -1325,7 +1325,7 @@ module Aws::SSMIncidents
       :event_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SNS targets that are notified when updates are made to an incident.</p>
@@ -1336,7 +1336,7 @@ module Aws::SSMIncidents
       :sns_topic_arn,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SnsTopicArn < NotificationTargetItem; end
       class Unknown < NotificationTargetItem; end
@@ -1358,7 +1358,7 @@ module Aws::SSMIncidents
       :secret_id,
       :pager_duty_incident_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the PagerDuty service where the response plan creates an incident.</p>
@@ -1369,7 +1369,7 @@ module Aws::SSMIncidents
     class PagerDutyIncidentConfiguration < Struct.new(
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the PagerDuty incident associated with an incident created by an Incident Manager
@@ -1390,7 +1390,7 @@ module Aws::SSMIncidents
       :auto_resolve,
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1403,7 +1403,7 @@ module Aws::SSMIncidents
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1412,7 +1412,7 @@ module Aws::SSMIncidents
     class PutResourcePolicyOperationOutput < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Amazon Web Services Region in your replication set.</p>
@@ -1434,7 +1434,7 @@ module Aws::SSMIncidents
       :status_message,
       :status_update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The mapping between a Amazon Web Services Region and the key that's used to encrypt the
@@ -1445,7 +1445,7 @@ module Aws::SSMIncidents
     class RegionMapInputValue < Struct.new(
       :sse_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resources that responders use to triage and mitigate the incident.</p>
@@ -1466,7 +1466,7 @@ module Aws::SSMIncidents
       :title,
       :generated_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the related item you're adding.</p>
@@ -1481,7 +1481,7 @@ module Aws::SSMIncidents
       :item_to_remove,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ItemToAdd < RelatedItemsUpdate; end
       class ItemToRemove < RelatedItemsUpdate; end
@@ -1527,7 +1527,7 @@ module Aws::SSMIncidents
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which doesn't exist. </p>
@@ -1544,7 +1544,7 @@ module Aws::SSMIncidents
       :resource_identifier,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource policy that allows Incident Manager to perform actions on resources on your
@@ -1563,7 +1563,7 @@ module Aws::SSMIncidents
       :policy_id,
       :ram_resource_share_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the response plan that are used when creating an incident.</p>
@@ -1581,7 +1581,7 @@ module Aws::SSMIncidents
       :name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would cause a service quota to be exceeded.</p>
@@ -1606,7 +1606,7 @@ module Aws::SSMIncidents
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Systems Manager automation document that will be used as a runbook
@@ -1640,7 +1640,7 @@ module Aws::SSMIncidents
       :parameters,
       :dynamic_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1698,7 +1698,7 @@ module Aws::SSMIncidents
       :trigger_details,
       :related_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incident_record_arn
@@ -1707,7 +1707,7 @@ module Aws::SSMIncidents
     class StartIncidentOperationOutput < Struct.new(
       :incident_record_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1720,12 +1720,12 @@ module Aws::SSMIncidents
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1742,7 +1742,7 @@ module Aws::SSMIncidents
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A significant event that happened during the incident. </p>
@@ -1777,7 +1777,7 @@ module Aws::SSMIncidents
       :event_data,
       :event_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about what caused the incident to be created in Incident Manager.</p>
@@ -1801,7 +1801,7 @@ module Aws::SSMIncidents
       :timestamp,
       :raw_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1814,12 +1814,12 @@ module Aws::SSMIncidents
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1837,12 +1837,12 @@ module Aws::SSMIncidents
       :deletion_protected,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDeletionProtectionOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1910,12 +1910,12 @@ module Aws::SSMIncidents
       :chat_channel,
       :notification_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateIncidentRecordOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1934,12 +1934,12 @@ module Aws::SSMIncidents
       :incident_record_arn,
       :related_items_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRelatedItemsOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details used when updating the replication set.</p>
@@ -1956,7 +1956,7 @@ module Aws::SSMIncidents
       :delete_region_action,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AddRegionAction < UpdateReplicationSetAction; end
       class DeleteRegionAction < UpdateReplicationSetAction; end
@@ -1978,12 +1978,12 @@ module Aws::SSMIncidents
       :actions,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateReplicationSetOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -2074,12 +2074,12 @@ module Aws::SSMIncidents
       :incident_template_tags,
       :integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResponsePlanOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -2124,12 +2124,12 @@ module Aws::SSMIncidents
       :event_data,
       :event_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTimelineEventOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services
@@ -2139,7 +2139,7 @@ module Aws::SSMIncidents
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

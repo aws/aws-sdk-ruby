@@ -18,7 +18,7 @@ module Aws::NetworkManager
       :zone,
       :subnet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -27,7 +27,7 @@ module Aws::NetworkManager
     class AcceptAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment
@@ -36,7 +36,7 @@ module Aws::NetworkManager
     class AcceptAttachmentResponse < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -45,7 +45,7 @@ module Aws::NetworkManager
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the current status of an account within an Amazon Web Services Organization, including service-linked roles (SLRs).</p>
@@ -59,7 +59,7 @@ module Aws::NetworkManager
       :account_id,
       :slr_deployment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -80,7 +80,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer_association
@@ -89,7 +89,7 @@ module Aws::NetworkManager
     class AssociateConnectPeerResponse < Struct.new(
       :connect_peer_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_gateway_arn
@@ -110,7 +110,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_gateway_association
@@ -119,7 +119,7 @@ module Aws::NetworkManager
     class AssociateCustomerGatewayResponse < Struct.new(
       :customer_gateway_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -136,7 +136,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_association
@@ -145,7 +145,7 @@ module Aws::NetworkManager
     class AssociateLinkResponse < Struct.new(
       :link_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -166,7 +166,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer_association
@@ -175,7 +175,7 @@ module Aws::NetworkManager
     class AssociateTransitGatewayConnectPeerResponse < Struct.new(
       :transit_gateway_connect_peer_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network attachment.</p>
@@ -253,7 +253,7 @@ module Aws::NetworkManager
       :updated_at,
       :last_modification_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error associated with an attachment request.</p>
@@ -275,41 +275,7 @@ module Aws::NetworkManager
       :resource_arn,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachmentErrorCode
-      VPC_NOT_FOUND = 'VPC_NOT_FOUND'
-      SUBNET_NOT_FOUND = 'SUBNET_NOT_FOUND'
-      SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE = 'SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE'
-      SUBNET_NO_FREE_ADDRESSES = 'SUBNET_NO_FREE_ADDRESSES'
-      SUBNET_UNSUPPORTED_AVAILABILITY_ZONE = 'SUBNET_UNSUPPORTED_AVAILABILITY_ZONE'
-      SUBNET_NO_IPV6_CIDRS = 'SUBNET_NO_IPV6_CIDRS'
-      VPN_CONNECTION_NOT_FOUND = 'VPN_CONNECTION_NOT_FOUND'
-      MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED = 'MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED'
-      DIRECT_CONNECT_GATEWAY_NOT_FOUND = 'DIRECT_CONNECT_GATEWAY_NOT_FOUND'
-      DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS = 'DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS'
-      DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF = 'DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF'
-    end
-
-    module AttachmentState
-      REJECTED = 'REJECTED'
-      PENDING_ATTACHMENT_ACCEPTANCE = 'PENDING_ATTACHMENT_ACCEPTANCE'
-      CREATING = 'CREATING'
-      FAILED = 'FAILED'
-      AVAILABLE = 'AVAILABLE'
-      UPDATING = 'UPDATING'
-      PENDING_NETWORK_UPDATE = 'PENDING_NETWORK_UPDATE'
-      PENDING_TAG_ACCEPTANCE = 'PENDING_TAG_ACCEPTANCE'
-      DELETING = 'DELETING'
-    end
-
-    module AttachmentType
-      CONNECT = 'CONNECT'
-      SITE_TO_SITE_VPN = 'SITE_TO_SITE_VPN'
-      VPC = 'VPC'
-      DIRECT_CONNECT_GATEWAY = 'DIRECT_CONNECT_GATEWAY'
-      TRANSIT_GATEWAY_ROUTE_TABLE = 'TRANSIT_GATEWAY_ROUTE_TABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes bandwidth information.</p>
@@ -323,7 +289,7 @@ module Aws::NetworkManager
       :upload_speed,
       :download_speed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the BGP options.</p>
@@ -333,42 +299,7 @@ module Aws::NetworkManager
     class BgpOptions < Struct.new(
       :peer_asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeAction
-      ADD = 'ADD'
-      MODIFY = 'MODIFY'
-      REMOVE = 'REMOVE'
-    end
-
-    module ChangeSetState
-      PENDING_GENERATION = 'PENDING_GENERATION'
-      FAILED_GENERATION = 'FAILED_GENERATION'
-      READY_TO_EXECUTE = 'READY_TO_EXECUTE'
-      EXECUTING = 'EXECUTING'
-      EXECUTION_SUCCEEDED = 'EXECUTION_SUCCEEDED'
-      OUT_OF_DATE = 'OUT_OF_DATE'
-    end
-
-    module ChangeStatus
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-    end
-
-    module ChangeType
-      CORE_NETWORK_SEGMENT = 'CORE_NETWORK_SEGMENT'
-      NETWORK_FUNCTION_GROUP = 'NETWORK_FUNCTION_GROUP'
-      CORE_NETWORK_EDGE = 'CORE_NETWORK_EDGE'
-      ATTACHMENT_MAPPING = 'ATTACHMENT_MAPPING'
-      ATTACHMENT_ROUTE_PROPAGATION = 'ATTACHMENT_ROUTE_PROPAGATION'
-      ATTACHMENT_ROUTE_STATIC = 'ATTACHMENT_ROUTE_STATIC'
-      CORE_NETWORK_CONFIGURATION = 'CORE_NETWORK_CONFIGURATION'
-      SEGMENTS_CONFIGURATION = 'SEGMENTS_CONFIGURATION'
-      SEGMENT_ACTIONS_CONFIGURATION = 'SEGMENT_ACTIONS_CONFIGURATION'
-      ATTACHMENT_POLICIES_CONFIGURATION = 'ATTACHMENT_POLICIES_CONFIGURATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict processing the request. Updating or deleting the resource can
@@ -386,7 +317,7 @@ module Aws::NetworkManager
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network Connect attachment.</p>
@@ -404,7 +335,7 @@ module Aws::NetworkManager
       :transport_attachment_id,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network Connect attachment options.</p>
@@ -414,7 +345,7 @@ module Aws::NetworkManager
     class ConnectAttachmentOptions < Struct.new(
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network Connect peer.</p>
@@ -460,7 +391,7 @@ module Aws::NetworkManager
       :subnet_arn,
       :last_modification_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network Connect peer association.</p>
@@ -486,14 +417,7 @@ module Aws::NetworkManager
       :link_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectPeerAssociationState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      deleted = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network BGP configuration.</p>
@@ -515,7 +439,7 @@ module Aws::NetworkManager
       :core_network_address,
       :peer_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network Connect peer configuration.</p>
@@ -541,7 +465,7 @@ module Aws::NetworkManager
       :protocol,
       :bgp_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error associated with a Connect peer request</p>
@@ -563,23 +487,7 @@ module Aws::NetworkManager
       :resource_arn,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectPeerErrorCode
-      EDGE_LOCATION_NO_FREE_IPS = 'EDGE_LOCATION_NO_FREE_IPS'
-      EDGE_LOCATION_PEER_DUPLICATE = 'EDGE_LOCATION_PEER_DUPLICATE'
-      SUBNET_NOT_FOUND = 'SUBNET_NOT_FOUND'
-      IP_OUTSIDE_SUBNET_CIDR_RANGE = 'IP_OUTSIDE_SUBNET_CIDR_RANGE'
-      INVALID_INSIDE_CIDR_BLOCK = 'INVALID_INSIDE_CIDR_BLOCK'
-      NO_ASSOCIATED_CIDR_BLOCK = 'NO_ASSOCIATED_CIDR_BLOCK'
-    end
-
-    module ConnectPeerState
-      CREATING = 'CREATING'
-      FAILED = 'FAILED'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary description of a Connect peer.</p>
@@ -617,7 +525,7 @@ module Aws::NetworkManager
       :tags,
       :subnet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a connection.</p>
@@ -667,7 +575,7 @@ module Aws::NetworkManager
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes connection health.</p>
@@ -685,24 +593,7 @@ module Aws::NetworkManager
       :status,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      updating = 'UPDATING'
-    end
-
-    module ConnectionStatus
-      UP = 'UP'
-      DOWN = 'DOWN'
-    end
-
-    module ConnectionType
-      BGP = 'BGP'
-      IPSEC = 'IPSEC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network.</p>
@@ -748,7 +639,7 @@ module Aws::NetworkManager
       :edges,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details describing a core network change.</p>
@@ -778,7 +669,7 @@ module Aws::NetworkManager
       :new_values,
       :identifier_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network change event. This can be a change to a segment, attachment, route, etc.</p>
@@ -808,7 +699,7 @@ module Aws::NetworkManager
       :status,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network change event.</p>
@@ -834,7 +725,7 @@ module Aws::NetworkManager
       :attachment_id,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network change.</p>
@@ -888,7 +779,7 @@ module Aws::NetworkManager
       :dns_support,
       :security_group_referencing_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vpn_ecmp_support] = false unless options.key?(:vpn_ecmp_support)
@@ -913,7 +804,7 @@ module Aws::NetworkManager
       :asn,
       :inside_cidr_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network function group.</p>
@@ -931,7 +822,7 @@ module Aws::NetworkManager
       :edge_locations,
       :segments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network </p>
@@ -949,7 +840,7 @@ module Aws::NetworkManager
       :network_function_group_name,
       :edge_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network policy. You can have only one LIVE Core Policy.</p>
@@ -987,12 +878,7 @@ module Aws::NetworkManager
       :policy_errors,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CoreNetworkPolicyAlias
-      LIVE = 'LIVE'
-      LATEST = 'LATEST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an error in a core network policy.</p>
@@ -1010,7 +896,7 @@ module Aws::NetworkManager
       :message,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network policy exception.</p>
@@ -1023,7 +909,7 @@ module Aws::NetworkManager
       :message,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network policy version.</p>
@@ -1053,7 +939,7 @@ module Aws::NetworkManager
       :created_at,
       :change_set_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a core network segment, which are dedicated routes. Only attachments within this segment can communicate with each other.</p>
@@ -1071,7 +957,7 @@ module Aws::NetworkManager
       :edge_locations,
       :shared_segments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details about a core network edge.</p>
@@ -1089,14 +975,7 @@ module Aws::NetworkManager
       :segment_name,
       :edge_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CoreNetworkState
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns summary information about a core network.</p>
@@ -1130,7 +1009,7 @@ module Aws::NetworkManager
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1159,7 +1038,7 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_attachment
@@ -1168,7 +1047,7 @@ module Aws::NetworkManager
     class CreateConnectAttachmentResponse < Struct.new(
       :connect_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_attachment_id
@@ -1205,7 +1084,7 @@ module Aws::NetworkManager
       :client_token,
       :subnet_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer
@@ -1214,7 +1093,7 @@ module Aws::NetworkManager
     class CreateConnectPeerResponse < Struct.new(
       :connect_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1248,7 +1127,7 @@ module Aws::NetworkManager
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -1257,7 +1136,7 @@ module Aws::NetworkManager
     class CreateConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1282,7 +1161,7 @@ module Aws::NetworkManager
       :policy_document,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network
@@ -1291,7 +1170,7 @@ module Aws::NetworkManager
     class CreateCoreNetworkResponse < Struct.new(
       :core_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1340,7 +1219,7 @@ module Aws::NetworkManager
       :site_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -1349,7 +1228,7 @@ module Aws::NetworkManager
     class CreateDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1374,7 +1253,7 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_attachment
@@ -1383,7 +1262,7 @@ module Aws::NetworkManager
     class CreateDirectConnectGatewayAttachmentResponse < Struct.new(
       :direct_connect_gateway_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -1397,7 +1276,7 @@ module Aws::NetworkManager
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network
@@ -1406,7 +1285,7 @@ module Aws::NetworkManager
     class CreateGlobalNetworkResponse < Struct.new(
       :global_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1442,7 +1321,7 @@ module Aws::NetworkManager
       :site_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link
@@ -1451,7 +1330,7 @@ module Aws::NetworkManager
     class CreateLinkResponse < Struct.new(
       :link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1487,7 +1366,7 @@ module Aws::NetworkManager
       :location,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -1496,7 +1375,7 @@ module Aws::NetworkManager
     class CreateSiteResponse < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1517,7 +1396,7 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_to_site_vpn_attachment
@@ -1526,7 +1405,7 @@ module Aws::NetworkManager
     class CreateSiteToSiteVpnAttachmentResponse < Struct.new(
       :site_to_site_vpn_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1547,7 +1426,7 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering
@@ -1556,7 +1435,7 @@ module Aws::NetworkManager
     class CreateTransitGatewayPeeringResponse < Struct.new(
       :transit_gateway_peering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute peering_id
@@ -1577,7 +1456,7 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_attachment
@@ -1586,7 +1465,7 @@ module Aws::NetworkManager
     class CreateTransitGatewayRouteTableAttachmentResponse < Struct.new(
       :transit_gateway_route_table_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1615,7 +1494,7 @@ module Aws::NetworkManager
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_attachment
@@ -1624,7 +1503,7 @@ module Aws::NetworkManager
     class CreateVpcAttachmentResponse < Struct.new(
       :vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between a customer gateway, a device, and a link.</p>
@@ -1650,14 +1529,7 @@ module Aws::NetworkManager
       :link_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomerGatewayAssociationState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      deleted = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -1666,7 +1538,7 @@ module Aws::NetworkManager
     class DeleteAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment
@@ -1675,7 +1547,7 @@ module Aws::NetworkManager
     class DeleteAttachmentResponse < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer_id
@@ -1684,7 +1556,7 @@ module Aws::NetworkManager
     class DeleteConnectPeerRequest < Struct.new(
       :connect_peer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer
@@ -1693,7 +1565,7 @@ module Aws::NetworkManager
     class DeleteConnectPeerResponse < Struct.new(
       :connect_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1706,7 +1578,7 @@ module Aws::NetworkManager
       :global_network_id,
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -1715,7 +1587,7 @@ module Aws::NetworkManager
     class DeleteConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1728,7 +1600,7 @@ module Aws::NetworkManager
       :core_network_id,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_policy
@@ -1737,7 +1609,7 @@ module Aws::NetworkManager
     class DeleteCoreNetworkPolicyVersionResponse < Struct.new(
       :core_network_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -1746,7 +1618,7 @@ module Aws::NetworkManager
     class DeleteCoreNetworkRequest < Struct.new(
       :core_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network
@@ -1755,7 +1627,7 @@ module Aws::NetworkManager
     class DeleteCoreNetworkResponse < Struct.new(
       :core_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1768,7 +1640,7 @@ module Aws::NetworkManager
       :global_network_id,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -1777,7 +1649,7 @@ module Aws::NetworkManager
     class DeleteDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1786,7 +1658,7 @@ module Aws::NetworkManager
     class DeleteGlobalNetworkRequest < Struct.new(
       :global_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network
@@ -1795,7 +1667,7 @@ module Aws::NetworkManager
     class DeleteGlobalNetworkResponse < Struct.new(
       :global_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1808,7 +1680,7 @@ module Aws::NetworkManager
       :global_network_id,
       :link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link
@@ -1817,7 +1689,7 @@ module Aws::NetworkManager
     class DeleteLinkResponse < Struct.new(
       :link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute peering_id
@@ -1826,7 +1698,7 @@ module Aws::NetworkManager
     class DeletePeeringRequest < Struct.new(
       :peering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute peering
@@ -1835,7 +1707,7 @@ module Aws::NetworkManager
     class DeletePeeringResponse < Struct.new(
       :peering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1844,12 +1716,12 @@ module Aws::NetworkManager
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1862,7 +1734,7 @@ module Aws::NetworkManager
       :global_network_id,
       :site_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -1871,7 +1743,7 @@ module Aws::NetworkManager
     class DeleteSiteResponse < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -1884,7 +1756,7 @@ module Aws::NetworkManager
       :global_network_id,
       :transit_gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_registration
@@ -1893,7 +1765,7 @@ module Aws::NetworkManager
     class DeregisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_ids
@@ -1910,7 +1782,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_networks
@@ -1923,7 +1795,7 @@ module Aws::NetworkManager
       :global_networks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a device.</p>
@@ -1985,14 +1857,7 @@ module Aws::NetworkManager
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      updating = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Direct Connect gateway attachment.</p>
@@ -2006,7 +1871,7 @@ module Aws::NetworkManager
       :attachment,
       :direct_connect_gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2019,7 +1884,7 @@ module Aws::NetworkManager
       :global_network_id,
       :connect_peer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer_association
@@ -2028,7 +1893,7 @@ module Aws::NetworkManager
     class DisassociateConnectPeerResponse < Struct.new(
       :connect_peer_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2041,7 +1906,7 @@ module Aws::NetworkManager
       :global_network_id,
       :customer_gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_gateway_association
@@ -2050,7 +1915,7 @@ module Aws::NetworkManager
     class DisassociateCustomerGatewayResponse < Struct.new(
       :customer_gateway_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2067,7 +1932,7 @@ module Aws::NetworkManager
       :device_id,
       :link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_association
@@ -2076,7 +1941,7 @@ module Aws::NetworkManager
     class DisassociateLinkResponse < Struct.new(
       :link_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2089,7 +1954,7 @@ module Aws::NetworkManager
       :global_network_id,
       :transit_gateway_connect_peer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer_association
@@ -2098,7 +1963,7 @@ module Aws::NetworkManager
     class DisassociateTransitGatewayConnectPeerResponse < Struct.new(
       :transit_gateway_connect_peer_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the edge that's used for the override. </p>
@@ -2112,7 +1977,7 @@ module Aws::NetworkManager
       :edge_sets,
       :use_edge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -2125,12 +1990,12 @@ module Aws::NetworkManager
       :core_network_id,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ExecuteCoreNetworkChangeSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -2139,7 +2004,7 @@ module Aws::NetworkManager
     class GetConnectAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_attachment
@@ -2148,7 +2013,7 @@ module Aws::NetworkManager
     class GetConnectAttachmentResponse < Struct.new(
       :connect_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2169,7 +2034,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer_associations
@@ -2182,7 +2047,7 @@ module Aws::NetworkManager
       :connect_peer_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer_id
@@ -2191,7 +2056,7 @@ module Aws::NetworkManager
     class GetConnectPeerRequest < Struct.new(
       :connect_peer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peer
@@ -2200,7 +2065,7 @@ module Aws::NetworkManager
     class GetConnectPeerResponse < Struct.new(
       :connect_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2225,7 +2090,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -2238,7 +2103,7 @@ module Aws::NetworkManager
       :connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -2259,7 +2124,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_change_events
@@ -2272,7 +2137,7 @@ module Aws::NetworkManager
       :core_network_change_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -2293,7 +2158,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_changes
@@ -2306,7 +2171,7 @@ module Aws::NetworkManager
       :core_network_changes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -2323,7 +2188,7 @@ module Aws::NetworkManager
       :policy_version_id,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_policy
@@ -2332,7 +2197,7 @@ module Aws::NetworkManager
     class GetCoreNetworkPolicyResponse < Struct.new(
       :core_network_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -2341,7 +2206,7 @@ module Aws::NetworkManager
     class GetCoreNetworkRequest < Struct.new(
       :core_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network
@@ -2350,7 +2215,7 @@ module Aws::NetworkManager
     class GetCoreNetworkResponse < Struct.new(
       :core_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2371,7 +2236,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_gateway_associations
@@ -2384,7 +2249,7 @@ module Aws::NetworkManager
       :customer_gateway_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2409,7 +2274,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute devices
@@ -2422,7 +2287,7 @@ module Aws::NetworkManager
       :devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -2431,7 +2296,7 @@ module Aws::NetworkManager
     class GetDirectConnectGatewayAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_attachment
@@ -2440,7 +2305,7 @@ module Aws::NetworkManager
     class GetDirectConnectGatewayAttachmentResponse < Struct.new(
       :direct_connect_gateway_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2465,7 +2330,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_associations
@@ -2478,7 +2343,7 @@ module Aws::NetworkManager
       :link_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2511,7 +2376,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute links
@@ -2524,7 +2389,7 @@ module Aws::NetworkManager
       :links,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2639,7 +2504,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_resource_counts
@@ -2652,7 +2517,7 @@ module Aws::NetworkManager
       :network_resource_counts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2787,7 +2652,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relationships
@@ -2800,7 +2665,7 @@ module Aws::NetworkManager
       :relationships,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2935,7 +2800,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_resources
@@ -2948,7 +2813,7 @@ module Aws::NetworkManager
       :network_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -2993,7 +2858,7 @@ module Aws::NetworkManager
       :types,
       :destination_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_table_arn
@@ -3018,7 +2883,7 @@ module Aws::NetworkManager
       :route_table_timestamp,
       :network_routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -3076,7 +2941,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_telemetry
@@ -3089,7 +2954,7 @@ module Aws::NetworkManager
       :network_telemetry,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3098,7 +2963,7 @@ module Aws::NetworkManager
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_document
@@ -3107,7 +2972,7 @@ module Aws::NetworkManager
     class GetResourcePolicyResponse < Struct.new(
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -3120,7 +2985,7 @@ module Aws::NetworkManager
       :global_network_id,
       :route_analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_analysis
@@ -3129,7 +2994,7 @@ module Aws::NetworkManager
     class GetRouteAnalysisResponse < Struct.new(
       :route_analysis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -3138,7 +3003,7 @@ module Aws::NetworkManager
     class GetSiteToSiteVpnAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_to_site_vpn_attachment
@@ -3147,7 +3012,7 @@ module Aws::NetworkManager
     class GetSiteToSiteVpnAttachmentResponse < Struct.new(
       :site_to_site_vpn_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -3168,7 +3033,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sites
@@ -3181,7 +3046,7 @@ module Aws::NetworkManager
       :sites,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -3202,7 +3067,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer_associations
@@ -3215,7 +3080,7 @@ module Aws::NetworkManager
       :transit_gateway_connect_peer_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute peering_id
@@ -3224,7 +3089,7 @@ module Aws::NetworkManager
     class GetTransitGatewayPeeringRequest < Struct.new(
       :peering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering
@@ -3233,7 +3098,7 @@ module Aws::NetworkManager
     class GetTransitGatewayPeeringResponse < Struct.new(
       :transit_gateway_peering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -3255,7 +3120,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_registrations
@@ -3268,7 +3133,7 @@ module Aws::NetworkManager
       :transit_gateway_registrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -3277,7 +3142,7 @@ module Aws::NetworkManager
     class GetTransitGatewayRouteTableAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_attachment
@@ -3286,7 +3151,7 @@ module Aws::NetworkManager
     class GetTransitGatewayRouteTableAttachmentResponse < Struct.new(
       :transit_gateway_route_table_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -3295,7 +3160,7 @@ module Aws::NetworkManager
     class GetVpcAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_attachment
@@ -3304,7 +3169,7 @@ module Aws::NetworkManager
     class GetVpcAttachmentResponse < Struct.new(
       :vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a global network. This is a single private network acting as a high-level container for your network objects, including an Amazon Web Services-managed Core Network.</p>
@@ -3334,14 +3199,7 @@ module Aws::NetworkManager
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlobalNetworkState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      updating = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed due to an internal error.</p>
@@ -3354,7 +3212,7 @@ module Aws::NetworkManager
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a link.</p>
@@ -3404,7 +3262,7 @@ module Aws::NetworkManager
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between a device and a link.</p>
@@ -3426,21 +3284,7 @@ module Aws::NetworkManager
       :link_id,
       :link_association_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LinkAssociationState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      deleted = 'DELETED'
-    end
-
-    module LinkState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      updating = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -3469,7 +3313,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachments
@@ -3482,7 +3326,7 @@ module Aws::NetworkManager
       :attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -3503,7 +3347,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connect_peers
@@ -3516,7 +3360,7 @@ module Aws::NetworkManager
       :connect_peers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -3533,7 +3377,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_policy_versions
@@ -3546,7 +3390,7 @@ module Aws::NetworkManager
       :core_network_policy_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3559,7 +3403,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_networks
@@ -3572,7 +3416,7 @@ module Aws::NetworkManager
       :core_networks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3585,7 +3429,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_status
@@ -3598,7 +3442,7 @@ module Aws::NetworkManager
       :organization_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -3627,7 +3471,7 @@ module Aws::NetworkManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute peerings
@@ -3640,7 +3484,7 @@ module Aws::NetworkManager
       :peerings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3649,7 +3493,7 @@ module Aws::NetworkManager
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -3658,7 +3502,7 @@ module Aws::NetworkManager
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a location.</p>
@@ -3677,7 +3521,7 @@ module Aws::NetworkManager
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network function group for service insertion.</p>
@@ -3687,7 +3531,7 @@ module Aws::NetworkManager
     class NetworkFunctionGroup < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network resource.</p>
@@ -3831,7 +3675,7 @@ module Aws::NetworkManager
       :tags,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource count.</p>
@@ -3845,7 +3689,7 @@ module Aws::NetworkManager
       :resource_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network resource.</p>
@@ -3875,7 +3719,7 @@ module Aws::NetworkManager
       :name_tag,
       :is_middlebox,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_middlebox] = false unless options.key?(:is_middlebox)
@@ -3906,7 +3750,7 @@ module Aws::NetworkManager
       :state,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination of a network route.</p>
@@ -3940,7 +3784,7 @@ module Aws::NetworkManager
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the telemetry information for a resource.</p>
@@ -3982,7 +3826,7 @@ module Aws::NetworkManager
       :address,
       :health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an Amazon Web Services Organization and the accounts within that organization.</p>
@@ -4004,7 +3848,7 @@ module Aws::NetworkManager
       :slr_deployment_status,
       :account_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path component.</p>
@@ -4022,7 +3866,7 @@ module Aws::NetworkManager
       :resource,
       :destination_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a peering connection.</p>
@@ -4072,7 +3916,7 @@ module Aws::NetworkManager
       :created_at,
       :last_modification_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error associated with a peering request.</p>
@@ -4099,27 +3943,7 @@ module Aws::NetworkManager
       :request_id,
       :missing_permissions_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PeeringErrorCode
-      TRANSIT_GATEWAY_NOT_FOUND = 'TRANSIT_GATEWAY_NOT_FOUND'
-      TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED = 'TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED'
-      MISSING_REQUIRED_PERMISSIONS = 'MISSING_PERMISSIONS'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      EDGE_LOCATION_PEER_DUPLICATE = 'EDGE_LOCATION_PEER_DUPLICATE'
-      INVALID_TRANSIT_GATEWAY_STATE = 'INVALID_TRANSIT_GATEWAY_STATE'
-    end
-
-    module PeeringState
-      CREATING = 'CREATING'
-      FAILED = 'FAILED'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-    end
-
-    module PeeringType
-      TRANSIT_GATEWAY = 'TRANSIT_GATEWAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes additional information about missing permissions. </p>
@@ -4129,7 +3953,7 @@ module Aws::NetworkManager
     class PermissionsErrorContext < Struct.new(
       :missing_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes proposed changes to a network function group. </p>
@@ -4147,7 +3971,7 @@ module Aws::NetworkManager
       :attachment_policy_rule_number,
       :network_function_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a proposed segment change. In some cases, the segment change must first be evaluated and accepted. </p>
@@ -4165,7 +3989,7 @@ module Aws::NetworkManager
       :attachment_policy_rule_number,
       :segment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -4190,7 +4014,7 @@ module Aws::NetworkManager
       :latest_version_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_policy
@@ -4199,7 +4023,7 @@ module Aws::NetworkManager
     class PutCoreNetworkPolicyResponse < Struct.new(
       :core_network_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_document
@@ -4212,12 +4036,12 @@ module Aws::NetworkManager
       :policy_document,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -4230,7 +4054,7 @@ module Aws::NetworkManager
       :global_network_id,
       :transit_gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_registration
@@ -4239,7 +4063,7 @@ module Aws::NetworkManager
     class RegisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -4248,7 +4072,7 @@ module Aws::NetworkManager
     class RejectAttachmentRequest < Struct.new(
       :attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment
@@ -4257,7 +4081,7 @@ module Aws::NetworkManager
     class RejectAttachmentResponse < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource relationship.</p>
@@ -4271,7 +4095,7 @@ module Aws::NetworkManager
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be found.</p>
@@ -4292,7 +4116,7 @@ module Aws::NetworkManager
       :resource_type,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -4305,7 +4129,7 @@ module Aws::NetworkManager
       :core_network_id,
       :policy_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_policy
@@ -4314,7 +4138,7 @@ module Aws::NetworkManager
     class RestoreCoreNetworkPolicyVersionResponse < Struct.new(
       :core_network_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route analysis.</p>
@@ -4365,7 +4189,7 @@ module Aws::NetworkManager
       :forward_path,
       :return_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_return_path] = false unless options.key?(:include_return_path)
@@ -4428,26 +4252,7 @@ module Aws::NetworkManager
       :reason_code,
       :reason_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteAnalysisCompletionReasonCode
-      TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND = 'TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND'
-      TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY = 'TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY'
-      CYCLIC_PATH_DETECTED = 'CYCLIC_PATH_DETECTED'
-      TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND = 'TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND'
-      ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND'
-      BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND = 'BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND'
-      INACTIVE_ROUTE_FOR_DESTINATION_FOUND = 'INACTIVE_ROUTE_FOR_DESTINATION_FOUND'
-      TRANSIT_GATEWAY_ATTACHMENT = 'TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH'
-      MAX_HOPS_EXCEEDED = 'MAX_HOPS_EXCEEDED'
-      POSSIBLE_MIDDLEBOX = 'POSSIBLE_MIDDLEBOX'
-      NO_DESTINATION_ARN_PROVIDED = 'NO_DESTINATION_ARN_PROVIDED'
-    end
-
-    module RouteAnalysisCompletionResultCode
-      CONNECTED = 'CONNECTED'
-      NOT_CONNECTED = 'NOT_CONNECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a source or a destination.</p>
@@ -4465,7 +4270,7 @@ module Aws::NetworkManager
       :transit_gateway_arn,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a source or a destination.</p>
@@ -4479,7 +4284,7 @@ module Aws::NetworkManager
       :transit_gateway_attachment_arn,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route analysis path.</p>
@@ -4493,18 +4298,7 @@ module Aws::NetworkManager
       :completion_status,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteAnalysisStatus
-      running = 'RUNNING'
-      completed = 'COMPLETED'
-      failed = 'FAILED'
-    end
-
-    module RouteState
-      ACTIVE = 'ACTIVE'
-      BLACKHOLE = 'BLACKHOLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route table.</p>
@@ -4522,28 +4316,7 @@ module Aws::NetworkManager
       :core_network_segment_edge,
       :core_network_network_function_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteTableType
-      TRANSIT_GATEWAY_ROUTE_TABLE = 'TRANSIT_GATEWAY_ROUTE_TABLE'
-      CORE_NETWORK_SEGMENT = 'CORE_NETWORK_SEGMENT'
-      NETWORK_FUNCTION_GROUP = 'NETWORK_FUNCTION_GROUP'
-    end
-
-    module RouteType
-      PROPAGATED = 'PROPAGATED'
-      STATIC = 'STATIC'
-    end
-
-    module SegmentActionServiceInsertion
-      SEND_VIA = 'send-via'
-      SEND_TO = 'send-to'
-    end
-
-    module SendViaMode
-      DUAL_HOP = 'dual-hop'
-      SINGLE_HOP = 'single-hop'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the action that the service insertion will take for any segments associated with it.</p>
@@ -4571,7 +4344,7 @@ module Aws::NetworkManager
       :when_sent_to,
       :via,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the segments associated with the service insertion action.</p>
@@ -4585,7 +4358,7 @@ module Aws::NetworkManager
       :send_via,
       :send_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service limit was exceeded.</p>
@@ -4611,7 +4384,7 @@ module Aws::NetworkManager
       :limit_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a site.</p>
@@ -4649,14 +4422,7 @@ module Aws::NetworkManager
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SiteState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      updating = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a site-to-site VPN attachment.</p>
@@ -4670,7 +4436,7 @@ module Aws::NetworkManager
       :attachment,
       :vpn_connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action
@@ -4679,7 +4445,7 @@ module Aws::NetworkManager
     class StartOrganizationServiceAccessUpdateRequest < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_status
@@ -4688,7 +4454,7 @@ module Aws::NetworkManager
     class StartOrganizationServiceAccessUpdateResponse < Struct.new(
       :organization_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -4714,7 +4480,7 @@ module Aws::NetworkManager
       :include_return_path,
       :use_middleboxes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_analysis
@@ -4723,7 +4489,7 @@ module Aws::NetworkManager
     class StartRouteAnalysisResponse < Struct.new(
       :route_analysis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag.</p>
@@ -4739,7 +4505,7 @@ module Aws::NetworkManager
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4752,12 +4518,12 @@ module Aws::NetworkManager
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -4770,7 +4536,7 @@ module Aws::NetworkManager
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway Connect peer association.</p>
@@ -4796,14 +4562,7 @@ module Aws::NetworkManager
       :link_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayConnectPeerAssociationState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      deleted = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway peering attachment.</p>
@@ -4821,7 +4580,7 @@ module Aws::NetworkManager
       :transit_gateway_arn,
       :transit_gateway_peering_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the registration of a transit gateway to a global network.</p>
@@ -4839,15 +4598,7 @@ module Aws::NetworkManager
       :transit_gateway_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayRegistrationState
-      pending = 'PENDING'
-      available = 'AVAILABLE'
-      deleting = 'DELETING'
-      deleted = 'DELETED'
-      failed = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a transit gateway registration.</p>
@@ -4861,7 +4612,7 @@ module Aws::NetworkManager
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway route table attachment.</p>
@@ -4879,12 +4630,7 @@ module Aws::NetworkManager
       :peering_id,
       :transit_gateway_route_table_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TunnelProtocol
-      GRE = 'GRE'
-      NO_ENCAP = 'NO_ENCAP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4897,12 +4643,12 @@ module Aws::NetworkManager
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -4928,7 +4674,7 @@ module Aws::NetworkManager
       :connected_link_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -4937,7 +4683,7 @@ module Aws::NetworkManager
     class UpdateConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network_id
@@ -4950,7 +4696,7 @@ module Aws::NetworkManager
       :core_network_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_network
@@ -4959,7 +4705,7 @@ module Aws::NetworkManager
     class UpdateCoreNetworkResponse < Struct.new(
       :core_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -5008,7 +4754,7 @@ module Aws::NetworkManager
       :location,
       :site_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -5017,7 +4763,7 @@ module Aws::NetworkManager
     class UpdateDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -5030,7 +4776,7 @@ module Aws::NetworkManager
       :attachment_id,
       :edge_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute direct_connect_gateway_attachment
@@ -5039,7 +4785,7 @@ module Aws::NetworkManager
     class UpdateDirectConnectGatewayAttachmentResponse < Struct.new(
       :direct_connect_gateway_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -5053,7 +4799,7 @@ module Aws::NetworkManager
       :global_network_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network
@@ -5062,7 +4808,7 @@ module Aws::NetworkManager
     class UpdateGlobalNetworkResponse < Struct.new(
       :global_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -5094,7 +4840,7 @@ module Aws::NetworkManager
       :bandwidth,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link
@@ -5103,7 +4849,7 @@ module Aws::NetworkManager
     class UpdateLinkResponse < Struct.new(
       :link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -5120,7 +4866,7 @@ module Aws::NetworkManager
       :resource_arn,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5133,7 +4879,7 @@ module Aws::NetworkManager
       :resource_arn,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_network_id
@@ -5169,7 +4915,7 @@ module Aws::NetworkManager
       :description,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -5178,7 +4924,7 @@ module Aws::NetworkManager
     class UpdateSiteResponse < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -5199,7 +4945,7 @@ module Aws::NetworkManager
       :remove_subnet_arns,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_attachment
@@ -5208,7 +4954,7 @@ module Aws::NetworkManager
     class UpdateVpcAttachmentResponse < Struct.new(
       :vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints.</p>
@@ -5225,7 +4971,7 @@ module Aws::NetworkManager
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a validation exception for a field.</p>
@@ -5239,14 +4985,7 @@ module Aws::NetworkManager
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UnknownOperation'
-      CANNOT_PARSE = 'CannotParse'
-      FIELD_VALIDATION_FAILED = 'FieldValidationFailed'
-      OTHER = 'Other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of network function groups and edge overrides for the service insertion
@@ -5261,7 +5000,7 @@ module Aws::NetworkManager
       :network_function_groups,
       :with_edge_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC attachment.</p>
@@ -5279,7 +5018,7 @@ module Aws::NetworkManager
       :subnet_arns,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the VPC options.</p>
@@ -5301,7 +5040,7 @@ module Aws::NetworkManager
       :dns_support,
       :security_group_referencing_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ipv6_support] = false unless options.key?(:ipv6_support)
@@ -5320,7 +5059,7 @@ module Aws::NetworkManager
     class WhenSentTo < Struct.new(
       :when_sent_to_segments_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

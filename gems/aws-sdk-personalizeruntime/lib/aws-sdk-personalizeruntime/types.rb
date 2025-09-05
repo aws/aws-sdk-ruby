@@ -39,7 +39,7 @@ module Aws::PersonalizeRuntime
       :filter_arn,
       :filter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute action_list
@@ -54,7 +54,7 @@ module Aws::PersonalizeRuntime
       :action_list,
       :recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_arn
@@ -109,7 +109,7 @@ module Aws::PersonalizeRuntime
       :filter_values,
       :metadata_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute personalized_ranking
@@ -122,7 +122,7 @@ module Aws::PersonalizeRuntime
       :personalized_ranking,
       :recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_arn
@@ -191,7 +191,7 @@ module Aws::PersonalizeRuntime
       :promotions,
       :metadata_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute item_list
@@ -205,7 +205,7 @@ module Aws::PersonalizeRuntime
       :item_list,
       :recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provide a valid value for the field or parameter.</p>
@@ -214,7 +214,7 @@ module Aws::PersonalizeRuntime
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that identifies an action.</p>
@@ -230,7 +230,7 @@ module Aws::PersonalizeRuntime
       :action_id,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that identifies an item.</p>
@@ -279,7 +279,7 @@ module Aws::PersonalizeRuntime
       :metadata,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a promotion. A promotion defines additional business rules that apply to a configurable subset of recommended items.</p>
@@ -311,7 +311,7 @@ module Aws::PersonalizeRuntime
       :filter_arn,
       :filter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -320,7 +320,7 @@ module Aws::PersonalizeRuntime
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

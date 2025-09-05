@@ -6,62 +6,6 @@ module Aws::SMS
   # This module contains the types returned by client operations.
   module Types
 
-    module AppLaunchConfigurationStatus
-      NotConfigured = 'NOT_CONFIGURED'
-      Configured = 'CONFIGURED'
-    end
-
-    module AppLaunchStatus
-      ReadyForConfiguration = 'READY_FOR_CONFIGURATION'
-      ConfigurationInProgress = 'CONFIGURATION_IN_PROGRESS'
-      ConfigurationInvalid = 'CONFIGURATION_INVALID'
-      ReadyForLaunch = 'READY_FOR_LAUNCH'
-      ValidationInProgress = 'VALIDATION_IN_PROGRESS'
-      LaunchPending = 'LAUNCH_PENDING'
-      LaunchInProgress = 'LAUNCH_IN_PROGRESS'
-      Launched = 'LAUNCHED'
-      PartiallyLaunched = 'PARTIALLY_LAUNCHED'
-      DeltaLaunchInProgress = 'DELTA_LAUNCH_IN_PROGRESS'
-      DeltaLaunchFailed = 'DELTA_LAUNCH_FAILED'
-      LaunchFailed = 'LAUNCH_FAILED'
-      TerminateInProgress = 'TERMINATE_IN_PROGRESS'
-      TerminateFailed = 'TERMINATE_FAILED'
-      Terminated = 'TERMINATED'
-    end
-
-    module AppReplicationConfigurationStatus
-      NotConfigured = 'NOT_CONFIGURED'
-      Configured = 'CONFIGURED'
-    end
-
-    module AppReplicationStatus
-      ReadyForConfiguration = 'READY_FOR_CONFIGURATION'
-      ConfigurationInProgress = 'CONFIGURATION_IN_PROGRESS'
-      ConfigurationInvalid = 'CONFIGURATION_INVALID'
-      ReadyForReplication = 'READY_FOR_REPLICATION'
-      ValidationInProgress = 'VALIDATION_IN_PROGRESS'
-      ReplicationPending = 'REPLICATION_PENDING'
-      ReplicationInProgress = 'REPLICATION_IN_PROGRESS'
-      Replicated = 'REPLICATED'
-      PartiallyReplicated = 'PARTIALLY_REPLICATED'
-      DeltaReplicationInProgress = 'DELTA_REPLICATION_IN_PROGRESS'
-      DeltaReplicated = 'DELTA_REPLICATED'
-      DeltaReplicationFailed = 'DELTA_REPLICATION_FAILED'
-      ReplicationFailed = 'REPLICATION_FAILED'
-      ReplicationStopping = 'REPLICATION_STOPPING'
-      ReplicationStopFailed = 'REPLICATION_STOP_FAILED'
-      ReplicationStopped = 'REPLICATION_STOPPED'
-    end
-
-    module AppStatus
-      Creating = 'CREATING'
-      Active = 'ACTIVE'
-      Updating = 'UPDATING'
-      Deleting = 'DELETING'
-      Deleted = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
     # <p>Information about the application.</p>
     # @!attribute app_id
     #   <p>The unique ID of the application.</p>
@@ -141,7 +85,7 @@ module Aws::SMS
       :total_server_groups,
       :total_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for validating an application.</p>
@@ -163,7 +107,7 @@ module Aws::SMS
       :app_validation_strategy,
       :ssm_validation_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output from validating an application.</p>
@@ -173,11 +117,7 @@ module Aws::SMS
     class AppValidationOutput < Struct.new(
       :ssm_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppValidationStrategy
-      SSM = 'SSM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a connector.</p>
@@ -223,20 +163,7 @@ module Aws::SMS
       :mac_address,
       :associated_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectorCapability
-      vSphere = 'VSPHERE'
-      scvmm = 'SCVMM'
-      hyperVManager = 'HYPERV-MANAGER'
-      snapshotBatching = 'SNAPSHOT_BATCHING'
-      smsOptimized = 'SMS_OPTIMIZED'
-    end
-
-    module ConnectorStatus
-      Healthy = 'HEALTHY'
-      Unhealthy = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -266,7 +193,7 @@ module Aws::SMS
       :server_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_summary
@@ -283,7 +210,7 @@ module Aws::SMS
       :server_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -347,7 +274,7 @@ module Aws::SMS
       :encrypted,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_id
@@ -356,7 +283,7 @@ module Aws::SMS
     class CreateReplicationJobResponse < Struct.new(
       :replication_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -365,12 +292,12 @@ module Aws::SMS
     class DeleteAppLaunchConfigurationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppLaunchConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -379,12 +306,12 @@ module Aws::SMS
     class DeleteAppReplicationConfigurationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppReplicationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -403,12 +330,12 @@ module Aws::SMS
       :force_stop_app_replication,
       :force_terminate_app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -417,12 +344,12 @@ module Aws::SMS
     class DeleteAppValidationConfigurationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppValidationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_id
@@ -431,22 +358,22 @@ module Aws::SMS
     class DeleteReplicationJobRequest < Struct.new(
       :replication_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServerCatalogRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServerCatalogResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -455,12 +382,12 @@ module Aws::SMS
     class DisassociateConnectorRequest < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateConnectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user has the required permissions, so the request would have succeeded, 
@@ -470,7 +397,7 @@ module Aws::SMS
     class DryRunOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -483,7 +410,7 @@ module Aws::SMS
       :app_id,
       :changeset_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_location
@@ -492,7 +419,7 @@ module Aws::SMS
     class GenerateChangeSetResponse < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -505,7 +432,7 @@ module Aws::SMS
       :app_id,
       :template_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_location
@@ -514,7 +441,7 @@ module Aws::SMS
     class GenerateTemplateResponse < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -523,7 +450,7 @@ module Aws::SMS
     class GetAppLaunchConfigurationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -545,7 +472,7 @@ module Aws::SMS
       :auto_launch,
       :server_group_launch_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -554,7 +481,7 @@ module Aws::SMS
     class GetAppReplicationConfigurationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_group_replication_configurations
@@ -563,7 +490,7 @@ module Aws::SMS
     class GetAppReplicationConfigurationResponse < Struct.new(
       :server_group_replication_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -572,7 +499,7 @@ module Aws::SMS
     class GetAppRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_summary
@@ -589,7 +516,7 @@ module Aws::SMS
       :server_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -598,7 +525,7 @@ module Aws::SMS
     class GetAppValidationConfigurationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_validation_configurations
@@ -611,7 +538,7 @@ module Aws::SMS
       :app_validation_configurations,
       :server_group_validation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -620,7 +547,7 @@ module Aws::SMS
     class GetAppValidationOutputRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute validation_output_list
@@ -629,7 +556,7 @@ module Aws::SMS
     class GetAppValidationOutputResponse < Struct.new(
       :validation_output_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -644,7 +571,7 @@ module Aws::SMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_list
@@ -658,7 +585,7 @@ module Aws::SMS
       :connector_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_id
@@ -677,7 +604,7 @@ module Aws::SMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_list
@@ -691,7 +618,7 @@ module Aws::SMS
       :replication_job_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_id
@@ -710,7 +637,7 @@ module Aws::SMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job
@@ -728,7 +655,7 @@ module Aws::SMS
       :replication_run_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -747,7 +674,7 @@ module Aws::SMS
       :max_results,
       :vm_server_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified_on
@@ -769,7 +696,7 @@ module Aws::SMS
       :server_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -780,22 +707,22 @@ module Aws::SMS
     class ImportAppCatalogRequest < Struct.new(
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ImportAppCatalogResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ImportServerCatalogRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ImportServerCatalogResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
@@ -804,7 +731,7 @@ module Aws::SMS
     class InternalError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified parameter is not valid.</p>
@@ -813,7 +740,7 @@ module Aws::SMS
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -822,12 +749,12 @@ module Aws::SMS
     class LaunchAppRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class LaunchAppResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the latest launch of an application.</p>
@@ -845,12 +772,7 @@ module Aws::SMS
       :stack_name,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LicenseType
-      AWS = 'AWS'
-      BYOL = 'BYOL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_ids
@@ -869,7 +791,7 @@ module Aws::SMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps
@@ -883,7 +805,7 @@ module Aws::SMS
       :apps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A required parameter is missing.</p>
@@ -892,7 +814,7 @@ module Aws::SMS
     class MissingRequiredParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are no connectors available.</p>
@@ -901,7 +823,7 @@ module Aws::SMS
     class NoConnectorsAvailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the status of validating an application.</p>
@@ -919,7 +841,7 @@ module Aws::SMS
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -932,12 +854,12 @@ module Aws::SMS
       :app_id,
       :notification_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class NotifyAppValidationOutputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not allowed.</p>
@@ -946,12 +868,7 @@ module Aws::SMS
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutputFormat
-      JSON = 'JSON'
-      YAML = 'YAML'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -973,12 +890,12 @@ module Aws::SMS
       :auto_launch,
       :server_group_launch_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAppLaunchConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -991,12 +908,12 @@ module Aws::SMS
       :app_id,
       :server_group_replication_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAppReplicationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1013,12 +930,12 @@ module Aws::SMS
       :app_validation_configurations,
       :server_group_validation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAppValidationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a replication job.</p>
@@ -1115,7 +1032,7 @@ module Aws::SMS
       :kms_key_id,
       :replication_run_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified replication job already exists.</p>
@@ -1124,7 +1041,7 @@ module Aws::SMS
     class ReplicationJobAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified replication job does not exist.</p>
@@ -1133,18 +1050,7 @@ module Aws::SMS
     class ReplicationJobNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationJobState
-      Pending = 'PENDING'
-      Active = 'ACTIVE'
-      Failed = 'FAILED'
-      Deleting = 'DELETING'
-      Deleted = 'DELETED'
-      Completed = 'COMPLETED'
-      PausedOnFailure = 'PAUSED_ON_FAILURE'
-      Failing = 'FAILING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a replication run.</p>
@@ -1212,7 +1118,7 @@ module Aws::SMS
       :encrypted,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the number of on-demand replication runs you can request in a
@@ -1222,7 +1128,7 @@ module Aws::SMS
     class ReplicationRunLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the current stage of a replication run.</p>
@@ -1236,22 +1142,7 @@ module Aws::SMS
       :stage,
       :stage_progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationRunState
-      Pending = 'PENDING'
-      Missed = 'MISSED'
-      Active = 'ACTIVE'
-      Failed = 'FAILED'
-      Completed = 'COMPLETED'
-      Deleting = 'DELETING'
-      Deleted = 'DELETED'
-    end
-
-    module ReplicationRunType
-      OnDemand = 'ON_DEMAND'
-      Automatic = 'AUTOMATIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Location of an Amazon S3 object.</p>
@@ -1265,7 +1156,7 @@ module Aws::SMS
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the location of validation output.</p>
@@ -1275,7 +1166,7 @@ module Aws::SMS
     class SSMOutput < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains validation parameters.</p>
@@ -1305,17 +1196,12 @@ module Aws::SMS
       :execution_timeout_seconds,
       :output_s3_bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_timeout_seconds] = 0 unless options.key?(:execution_timeout_seconds)
         super
       end
-    end
-
-    module ScriptType
-      SHELL_SCRIPT = 'SHELL_SCRIPT'
-      POWERSHELL_SCRIPT = 'POWERSHELL_SCRIPT'
     end
 
     # <p>Represents a server.</p>
@@ -1341,7 +1227,7 @@ module Aws::SMS
       :replication_job_id,
       :replication_job_terminated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified server cannot be replicated.</p>
@@ -1350,15 +1236,7 @@ module Aws::SMS
     class ServerCannotBeReplicatedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerCatalogStatus
-      NotImported = 'NOT_IMPORTED'
-      Importing = 'IMPORTING'
-      Available = 'AVAILABLE'
-      Deleted = 'DELETED'
-      Expired = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Logical grouping of servers.</p>
@@ -1376,7 +1254,7 @@ module Aws::SMS
       :name,
       :server_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch configuration for a server group.</p>
@@ -1395,7 +1273,7 @@ module Aws::SMS
       :launch_order,
       :server_launch_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Replication configuration for a server group.</p>
@@ -1410,7 +1288,7 @@ module Aws::SMS
       :server_group_id,
       :server_replication_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for validating an instance.</p>
@@ -1424,7 +1302,7 @@ module Aws::SMS
       :server_group_id,
       :server_validation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch configuration for a server.</p>
@@ -1478,7 +1356,7 @@ module Aws::SMS
       :configure_script,
       :configure_script_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Replication configuration of a server.</p>
@@ -1493,7 +1371,7 @@ module Aws::SMS
       :server,
       :server_replication_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The replication parameters for replicating a server.</p>
@@ -1544,11 +1422,7 @@ module Aws::SMS
       :encrypted,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerType
-      VirtualMachine = 'VIRTUAL_MACHINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for validating an instance.</p>
@@ -1574,7 +1448,7 @@ module Aws::SMS
       :server_validation_strategy,
       :user_data_validation_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains output from validating an instance.</p>
@@ -1584,11 +1458,7 @@ module Aws::SMS
     class ServerValidationOutput < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServerValidationStrategy
-      USERDATA = 'USERDATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the location of a validation script.</p>
@@ -1598,7 +1468,7 @@ module Aws::SMS
     class Source < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1607,12 +1477,12 @@ module Aws::SMS
     class StartAppReplicationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartAppReplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1625,12 +1495,12 @@ module Aws::SMS
       :app_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartOnDemandAppReplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_id
@@ -1643,7 +1513,7 @@ module Aws::SMS
       :replication_job_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_run_id
@@ -1652,7 +1522,7 @@ module Aws::SMS
     class StartOnDemandReplicationRunResponse < Struct.new(
       :replication_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1661,12 +1531,12 @@ module Aws::SMS
     class StopAppReplicationRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopAppReplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Key/value pair that can be assigned to an application.</p>
@@ -1680,13 +1550,13 @@ module Aws::SMS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is temporarily unavailable.</p>
     class TemporarilyUnavailableException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1695,12 +1565,12 @@ module Aws::SMS
     class TerminateAppRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TerminateAppResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You lack permissions needed to perform this operation. Check your IAM policies,
@@ -1710,7 +1580,7 @@ module Aws::SMS
     class UnauthorizedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1739,7 +1609,7 @@ module Aws::SMS
       :server_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_summary
@@ -1756,7 +1626,7 @@ module Aws::SMS
       :server_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_job_id
@@ -1817,12 +1687,12 @@ module Aws::SMS
       :encrypted,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateReplicationJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A script that runs on first launch of an Amazon EC2 instance. Used for configuring the
@@ -1833,7 +1703,7 @@ module Aws::SMS
     class UserData < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains validation parameters.</p>
@@ -1847,7 +1717,7 @@ module Aws::SMS
       :source,
       :script_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains validation output.</p>
@@ -1881,21 +1751,7 @@ module Aws::SMS
       :app_validation_output,
       :server_validation_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationStatus
-      ReadyForValidation = 'READY_FOR_VALIDATION'
-      Pending = 'PENDING'
-      InProgress = 'IN_PROGRESS'
-      Succeeded = 'SUCCEEDED'
-      Failed = 'FAILED'
-    end
-
-    module VmManagerType
-      vSphere = 'VSPHERE'
-      scvmm = 'SCVMM'
-      hyperVManager = 'HYPERV-MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a VM server.</p>
@@ -1921,7 +1777,7 @@ module Aws::SMS
       :vm_manager_type,
       :vm_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a VM server location.</p>
@@ -1935,7 +1791,7 @@ module Aws::SMS
       :vm_manager_id,
       :vm_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

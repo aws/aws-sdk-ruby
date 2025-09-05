@@ -24,7 +24,7 @@ module Aws::DataZone
       :prediction_choice,
       :edited_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -55,7 +55,7 @@ module Aws::DataZone
       :accept_choices,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -72,7 +72,7 @@ module Aws::DataZone
       :asset_id,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the rule and the threshold under which a prediction can be accepted.</p>
@@ -87,12 +87,7 @@ module Aws::DataZone
       :rule,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceptRuleBehavior
-      ALL = 'ALL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -114,7 +109,7 @@ module Aws::DataZone
       :decision_comment,
       :asset_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -177,7 +172,7 @@ module Aws::DataZone
       :existing_subscription_id,
       :metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accepted asset scope.</p>
@@ -191,7 +186,7 @@ module Aws::DataZone
       :asset_id,
       :filter_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -200,7 +195,7 @@ module Aws::DataZone
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account information within an account pool.</p>
@@ -218,7 +213,7 @@ module Aws::DataZone
       :supported_regions,
       :aws_account_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the account pool.</p>
@@ -252,7 +247,7 @@ module Aws::DataZone
       :created_by,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of accounts for the account pool. In the current release, it's either a
@@ -269,7 +264,7 @@ module Aws::DataZone
       :custom_account_pool_handler,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Accounts < AccountSource; end
       class CustomAccountPoolHandler < AccountSource; end
@@ -284,7 +279,7 @@ module Aws::DataZone
       :aws_console_link,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AwsConsoleLink < ActionParameters; end
       class Unknown < ActionParameters; end
@@ -313,12 +308,12 @@ module Aws::DataZone
       :owner,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddEntityOwnerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -352,12 +347,12 @@ module Aws::DataZone
       :detail,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddPolicyGrantOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -367,7 +362,7 @@ module Aws::DataZone
     class AddToProjectMemberPoolPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation list item.</p>
@@ -382,7 +377,7 @@ module Aws::DataZone
       :attribute,
       :display_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregation for an attribute.</p>
@@ -400,7 +395,7 @@ module Aws::DataZone
       :display_value,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation output item.</p>
@@ -420,19 +415,19 @@ module Aws::DataZone
       :count,
       :display_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The grant filter for all domain units.</p>
     class AllDomainUnitsGrantFilter < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The all users grant filter.</p>
     class AllUsersGrantFilter < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the asset filter.</p>
@@ -447,7 +442,7 @@ module Aws::DataZone
       :row_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ColumnConfiguration < AssetFilterConfiguration; end
       class RowConfiguration < AssetFilterConfiguration; end
@@ -497,7 +492,7 @@ module Aws::DataZone
       :created_at,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The listing of the asset in a data product.</p>
@@ -515,7 +510,7 @@ module Aws::DataZone
       :entity_revision,
       :entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Amazon DataZone inventory asset.</p>
@@ -577,7 +572,7 @@ module Aws::DataZone
       :owning_project_id,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The additional attributes of an inventory asset.</p>
@@ -600,7 +595,7 @@ module Aws::DataZone
       :latest_time_series_data_point_forms_output,
       :match_rationale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An asset published in an Amazon DataZone catalog.</p>
@@ -640,7 +635,7 @@ module Aws::DataZone
       :glossary_terms,
       :owning_project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an asset published in an Amazon DataZone catalog. </p>
@@ -654,7 +649,7 @@ module Aws::DataZone
       :listing_id,
       :listing_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an asset published in an Amazon DataZone catalog.</p>
@@ -712,7 +707,7 @@ module Aws::DataZone
       :owning_project_id,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional attributes of an inventory asset.</p>
@@ -731,7 +726,7 @@ module Aws::DataZone
       :match_rationale,
       :latest_time_series_data_point_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The revision of an inventory asset.</p>
@@ -757,7 +752,7 @@ module Aws::DataZone
       :created_by,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The asset scope.</p>
@@ -779,7 +774,7 @@ module Aws::DataZone
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name map for assets.</p>
@@ -793,7 +788,7 @@ module Aws::DataZone
       :asset_id,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the asset type.</p>
@@ -848,7 +843,7 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The asset type for the rule details.</p>
@@ -862,7 +857,7 @@ module Aws::DataZone
       :selection_mode,
       :specific_asset_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -879,12 +874,12 @@ module Aws::DataZone
       :environment_identifier,
       :environment_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateEnvironmentRoleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Athena properties of a connection.</p>
@@ -894,7 +889,7 @@ module Aws::DataZone
     class AthenaPropertiesInput < Struct.new(
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Athena properties of a connection.</p>
@@ -904,7 +899,7 @@ module Aws::DataZone
     class AthenaPropertiesOutput < Struct.new(
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Athena properties patch of a connection.</p>
@@ -914,12 +909,7 @@ module Aws::DataZone
     class AthenaPropertiesPatch < Struct.new(
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthType
-      IAM_IDC = 'IAM_IDC'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication configuration of a connection.</p>
@@ -937,7 +927,7 @@ module Aws::DataZone
       :secret_arn,
       :o_auth2_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication configuration of a connection.</p>
@@ -967,7 +957,7 @@ module Aws::DataZone
       :basic_authentication_credentials,
       :custom_authentication_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication configuration patch of a connection. </p>
@@ -981,13 +971,7 @@ module Aws::DataZone
       :secret_arn,
       :basic_authentication_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      BASIC = 'BASIC'
-      OAUTH2 = 'OAUTH2'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization code properties of a connection.</p>
@@ -1001,7 +985,7 @@ module Aws::DataZone
       :authorization_code,
       :redirect_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account ID of a project.</p>
@@ -1016,7 +1000,7 @@ module Aws::DataZone
       :aws_account_id_path,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AwsAccountId < AwsAccount; end
       class AwsAccountIdPath < AwsAccount; end
@@ -1030,7 +1014,7 @@ module Aws::DataZone
     class AwsConsoleLinkParameters < Struct.new(
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of a project.</p>
@@ -1052,7 +1036,7 @@ module Aws::DataZone
       :aws_region,
       :iam_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The basic authentication credentials of a connection.</p>
@@ -1067,7 +1051,7 @@ module Aws::DataZone
       :user_name,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the business name generation.</p>
@@ -1077,7 +1061,7 @@ module Aws::DataZone
     class BusinessNameGenerationConfiguration < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -1091,12 +1075,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelMetadataGenerationRunOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -1110,7 +1094,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1164,12 +1148,7 @@ module Aws::DataZone
       :subscription_request_id,
       :retain_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeAction
-      PUBLISH = 'PUBLISH'
-      UNPUBLISH = 'UNPUBLISH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Part of the provisioning properties of the environment blueprint.</p>
@@ -1180,7 +1159,7 @@ module Aws::DataZone
     class CloudFormationProperties < Struct.new(
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The column configuration of the asset filter.</p>
@@ -1190,13 +1169,7 @@ module Aws::DataZone
     class ColumnFilterConfiguration < Struct.new(
       :included_column_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeEnvironments
-      SPARK = 'SPARK'
-      ATHENA = 'ATHENA'
-      PYTHON = 'PYTHON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the parameters for the configurable environment action.</p>
@@ -1210,12 +1183,7 @@ module Aws::DataZone
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurableActionTypeAuthorization
-      IAM = 'IAM'
-      HTTPS = 'HTTPS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurable action of a Amazon DataZone environment.</p>
@@ -1233,7 +1201,7 @@ module Aws::DataZone
       :auth,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is a conflict while performing this action.</p>
@@ -1242,7 +1210,7 @@ module Aws::DataZone
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credentials of a connection.</p>
@@ -1265,7 +1233,7 @@ module Aws::DataZone
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a connection.</p>
@@ -1304,7 +1272,7 @@ module Aws::DataZone
       :s3_properties,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AthenaProperties < ConnectionPropertiesInput; end
       class GlueProperties < ConnectionPropertiesInput; end
@@ -1353,7 +1321,7 @@ module Aws::DataZone
       :s3_properties,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AthenaProperties < ConnectionPropertiesOutput; end
       class GlueProperties < ConnectionPropertiesOutput; end
@@ -1394,7 +1362,7 @@ module Aws::DataZone
       :s3_properties,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AthenaProperties < ConnectionPropertiesPatch; end
       class GlueProperties < ConnectionPropertiesPatch; end
@@ -1403,17 +1371,6 @@ module Aws::DataZone
       class SparkEmrProperties < ConnectionPropertiesPatch; end
       class S3Properties < ConnectionPropertiesPatch; end
       class Unknown < ConnectionPropertiesPatch; end
-    end
-
-    module ConnectionStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      READY = 'READY'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETED = 'DELETED'
     end
 
     # <p>The summary of a connection.</p>
@@ -1455,30 +1412,7 @@ module Aws::DataZone
       :props,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionType
-      ATHENA = 'ATHENA'
-      BIGQUERY = 'BIGQUERY'
-      DATABRICKS = 'DATABRICKS'
-      DOCUMENTDB = 'DOCUMENTDB'
-      DYNAMODB = 'DYNAMODB'
-      HYPERPOD = 'HYPERPOD'
-      IAM = 'IAM'
-      MYSQL = 'MYSQL'
-      OPENSEARCH = 'OPENSEARCH'
-      ORACLE = 'ORACLE'
-      POSTGRESQL = 'POSTGRESQL'
-      REDSHIFT = 'REDSHIFT'
-      S3 = 'S3'
-      SAPHANA = 'SAPHANA'
-      SNOWFLAKE = 'SNOWFLAKE'
-      SPARK = 'SPARK'
-      SQLSERVER = 'SQLSERVER'
-      TERADATA = 'TERADATA'
-      VERTICA = 'VERTICA'
-      WORKFLOWS_MWAA = 'WORKFLOWS_MWAA'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -1505,7 +1439,7 @@ module Aws::DataZone
       :resolution_strategy,
       :account_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1556,7 +1490,7 @@ module Aws::DataZone
       :updated_by,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -1586,7 +1520,7 @@ module Aws::DataZone
       :configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1636,7 +1570,7 @@ module Aws::DataZone
       :effective_column_names,
       :effective_row_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1689,7 +1623,7 @@ module Aws::DataZone
       :prediction_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1771,7 +1705,7 @@ module Aws::DataZone
       :latest_time_series_data_point_forms_output,
       :prediction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1814,7 +1748,7 @@ module Aws::DataZone
       :prediction_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1897,7 +1831,7 @@ module Aws::DataZone
       :latest_time_series_data_point_forms_output,
       :prediction_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -1923,7 +1857,7 @@ module Aws::DataZone
       :forms_input,
       :owning_project_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -1976,7 +1910,7 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -1986,7 +1920,7 @@ module Aws::DataZone
     class CreateAssetTypePolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_location
@@ -2020,7 +1954,7 @@ module Aws::DataZone
       :name,
       :props,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -2065,7 +1999,7 @@ module Aws::DataZone
       :props,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -2103,7 +2037,7 @@ module Aws::DataZone
       :items,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2164,7 +2098,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 'CREATED' unless options.key?(:status)
@@ -2207,7 +2141,7 @@ module Aws::DataZone
       :forms_input,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2268,7 +2202,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 'CREATED' unless options.key?(:status)
@@ -2344,7 +2278,7 @@ module Aws::DataZone
       :asset_forms_input,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2439,7 +2373,7 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2484,7 +2418,7 @@ module Aws::DataZone
       :service_role,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2544,7 +2478,7 @@ module Aws::DataZone
       :domain_version,
       :service_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -2570,7 +2504,7 @@ module Aws::DataZone
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2611,7 +2545,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -2621,7 +2555,7 @@ module Aws::DataZone
     class CreateDomainUnitPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -2647,7 +2581,7 @@ module Aws::DataZone
       :parameters,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2676,7 +2610,7 @@ module Aws::DataZone
       :parameters,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_identifier
@@ -2730,7 +2664,7 @@ module Aws::DataZone
       :deployment_order,
       :environment_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_id
@@ -2824,7 +2758,7 @@ module Aws::DataZone
       :environment_blueprint_id,
       :environment_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:environment_profile_id] = '' unless options.key?(:environment_profile_id)
@@ -2866,7 +2800,7 @@ module Aws::DataZone
       :aws_account_id,
       :aws_account_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2921,7 +2855,7 @@ module Aws::DataZone
       :project_id,
       :user_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -2931,7 +2865,7 @@ module Aws::DataZone
     class CreateEnvironmentProfilePolicyGrantDetail < Struct.new(
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -2960,7 +2894,7 @@ module Aws::DataZone
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -2995,7 +2929,7 @@ module Aws::DataZone
       :origin_domain_id,
       :origin_project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -3005,7 +2939,7 @@ module Aws::DataZone
     class CreateFormTypePolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3035,7 +2969,7 @@ module Aws::DataZone
       :status,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -3064,7 +2998,7 @@ module Aws::DataZone
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -3074,7 +3008,7 @@ module Aws::DataZone
     class CreateGlossaryPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3112,7 +3046,7 @@ module Aws::DataZone
       :term_relations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3149,7 +3083,7 @@ module Aws::DataZone
       :long_description,
       :term_relations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3167,7 +3101,7 @@ module Aws::DataZone
       :group_identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -3188,7 +3122,7 @@ module Aws::DataZone
       :status,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3218,7 +3152,7 @@ module Aws::DataZone
       :action,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listing_id
@@ -3235,7 +3169,7 @@ module Aws::DataZone
       :listing_revision,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether to create a project from project profile policy grant details.</p>
@@ -3251,7 +3185,7 @@ module Aws::DataZone
       :include_child_domain_units,
       :project_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3285,7 +3219,7 @@ module Aws::DataZone
       :project_profile_id,
       :user_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3306,12 +3240,12 @@ module Aws::DataZone
       :member,
       :designation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateProjectMembershipOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -3373,7 +3307,7 @@ module Aws::DataZone
       :user_parameters,
       :environment_deployment_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -3383,7 +3317,7 @@ module Aws::DataZone
     class CreateProjectPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3412,7 +3346,7 @@ module Aws::DataZone
       :environment_configurations,
       :domain_unit_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -3457,7 +3391,7 @@ module Aws::DataZone
       :last_updated_at,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3495,7 +3429,7 @@ module Aws::DataZone
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -3544,7 +3478,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3574,7 +3508,7 @@ module Aws::DataZone
       :asset_target_names,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3625,7 +3559,7 @@ module Aws::DataZone
       :assets,
       :subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3655,7 +3589,7 @@ module Aws::DataZone
       :client_token,
       :metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3716,7 +3650,7 @@ module Aws::DataZone
       :existing_subscription_id,
       :metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3762,7 +3696,7 @@ module Aws::DataZone
       :provider,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3827,7 +3761,7 @@ module Aws::DataZone
       :subscription_target_config,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -3849,7 +3783,7 @@ module Aws::DataZone
       :user_type,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -3874,7 +3808,7 @@ module Aws::DataZone
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom Amazon Web Services Lambda handler within an account pool.</p>
@@ -3891,7 +3825,7 @@ module Aws::DataZone
       :lambda_function_arn,
       :lambda_execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of user parameters of an environment blueprint.</p>
@@ -3921,18 +3855,7 @@ module Aws::DataZone
       :is_editable,
       :is_optional,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataAssetActivityStatus
-      FAILED = 'FAILED'
-      PUBLISHING_FAILED = 'PUBLISHING_FAILED'
-      SUCCEEDED_CREATED = 'SUCCEEDED_CREATED'
-      SUCCEEDED_UPDATED = 'SUCCEEDED_UPDATED'
-      SKIPPED_ALREADY_IMPORTED = 'SKIPPED_ALREADY_IMPORTED'
-      SKIPPED_ARCHIVED = 'SKIPPED_ARCHIVED'
-      SKIPPED_NO_ACCESS = 'SKIPPED_NO_ACCESS'
-      UNCHANGED = 'UNCHANGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data product.</p>
@@ -3954,7 +3877,7 @@ module Aws::DataZone
       :revision,
       :glossary_terms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The additional attributes of an Amazon DataZone data product.</p>
@@ -3964,11 +3887,7 @@ module Aws::DataZone
     class DataProductItemAdditionalAttributes < Struct.new(
       :match_rationale,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataProductItemType
-      ASSET = 'ASSET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data product listing.</p>
@@ -4002,7 +3921,7 @@ module Aws::DataZone
       :owning_project_id,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The asset of the data product listing.</p>
@@ -4060,7 +3979,7 @@ module Aws::DataZone
       :additional_attributes,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The additional attributes of the asset of the data product. </p>
@@ -4074,7 +3993,7 @@ module Aws::DataZone
       :forms,
       :match_rationale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data product.</p>
@@ -4124,7 +4043,7 @@ module Aws::DataZone
       :first_revision_created_by,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data product revision.</p>
@@ -4150,13 +4069,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataProductStatus
-      CREATED = 'CREATED'
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the data source.</p>
@@ -4175,7 +4088,7 @@ module Aws::DataZone
       :sage_maker_run_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GlueRunConfiguration < DataSourceConfigurationInput; end
       class RedshiftRunConfiguration < DataSourceConfigurationInput; end
@@ -4199,7 +4112,7 @@ module Aws::DataZone
       :sage_maker_run_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GlueRunConfiguration < DataSourceConfigurationOutput; end
       class RedshiftRunConfiguration < DataSourceConfigurationOutput; end
@@ -4221,17 +4134,7 @@ module Aws::DataZone
       :error_type,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceErrorType
-      ACCESS_DENIED_EXCEPTION = 'ACCESS_DENIED_EXCEPTION'
-      CONFLICT_EXCEPTION = 'CONFLICT_EXCEPTION'
-      INTERNAL_SERVER_EXCEPTION = 'INTERNAL_SERVER_EXCEPTION'
-      RESOURCE_NOT_FOUND_EXCEPTION = 'RESOURCE_NOT_FOUND_EXCEPTION'
-      SERVICE_QUOTA_EXCEEDED_EXCEPTION = 'SERVICE_QUOTA_EXCEEDED_EXCEPTION'
-      THROTTLING_EXCEPTION = 'THROTTLING_EXCEPTION'
-      VALIDATION_EXCEPTION = 'VALIDATION_EXCEPTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The activity details of the data source run.</p>
@@ -4282,7 +4185,7 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The run lineage summary of a data source.</p>
@@ -4292,15 +4195,7 @@ module Aws::DataZone
     class DataSourceRunLineageSummary < Struct.new(
       :import_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceRunStatus
-      REQUESTED = 'REQUESTED'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      PARTIALLY_SUCCEEDED = 'PARTIALLY_SUCCEEDED'
-      SUCCESS = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a data source run.</p>
@@ -4355,23 +4250,7 @@ module Aws::DataZone
       :stopped_at,
       :lineage_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceRunType
-      PRIORITIZED = 'PRIORITIZED'
-      SCHEDULED = 'SCHEDULED'
-    end
-
-    module DataSourceStatus
-      CREATING = 'CREATING'
-      FAILED_CREATION = 'FAILED_CREATION'
-      READY = 'READY'
-      UPDATING = 'UPDATING'
-      FAILED_UPDATE = 'FAILED_UPDATE'
-      RUNNING = 'RUNNING'
-      DELETING = 'DELETING'
-      FAILED_DELETION = 'FAILED_DELETION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the data source.</p>
@@ -4442,11 +4321,7 @@ module Aws::DataZone
       :updated_at,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataZoneEntityType
-      DOMAIN_UNIT = 'DOMAIN_UNIT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4459,12 +4334,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccountPoolOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4481,7 +4356,7 @@ module Aws::DataZone
       :asset_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4494,12 +4369,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4512,12 +4387,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssetTypeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4530,7 +4405,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -4539,7 +4414,7 @@ module Aws::DataZone
     class DeleteConnectionOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4552,12 +4427,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataProductOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4583,7 +4458,7 @@ module Aws::DataZone
       :client_token,
       :retain_permissions_on_revoke_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4682,7 +4557,7 @@ module Aws::DataZone
       :self_grant_status,
       :retain_permissions_on_revoke_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -4700,7 +4575,7 @@ module Aws::DataZone
       :client_token,
       :skip_deletion_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -4709,7 +4584,7 @@ module Aws::DataZone
     class DeleteDomainOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4722,12 +4597,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainUnitOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4744,7 +4619,7 @@ module Aws::DataZone
       :environment_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4757,12 +4632,12 @@ module Aws::DataZone
       :domain_identifier,
       :environment_blueprint_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentBlueprintConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4775,7 +4650,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4788,7 +4663,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4801,12 +4676,12 @@ module Aws::DataZone
       :domain_identifier,
       :form_type_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFormTypeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4819,12 +4694,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGlossaryOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4837,12 +4712,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGlossaryTermOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4855,12 +4730,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteListingOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4877,7 +4752,7 @@ module Aws::DataZone
       :identifier,
       :skip_deletion_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4894,17 +4769,17 @@ module Aws::DataZone
       :project_identifier,
       :member,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectMembershipOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4917,12 +4792,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProjectProfileOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4935,12 +4810,12 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -4953,7 +4828,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5005,7 +4880,7 @@ module Aws::DataZone
       :assets,
       :subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -5018,7 +4893,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -5035,7 +4910,7 @@ module Aws::DataZone
       :environment_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -5062,12 +4937,12 @@ module Aws::DataZone
       :form_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTimeSeriesDataPointsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the last deployment of the environment.</p>
@@ -5097,12 +4972,7 @@ module Aws::DataZone
       :messages,
       :is_deployment_complete,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentMode
-      ON_CREATE = 'ON_CREATE'
-      ON_DEMAND = 'ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment properties of the Amazon DataZone blueprint.</p>
@@ -5116,20 +4986,7 @@ module Aws::DataZone
       :start_timeout_minutes,
       :end_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
-      PENDING_DEPLOYMENT = 'PENDING_DEPLOYMENT'
-    end
-
-    module DeploymentType
-      CREATE = 'CREATE'
-      UPDATE = 'UPDATE'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a glossary term attached to the inventory asset.</p>
@@ -5143,7 +5000,7 @@ module Aws::DataZone
       :name,
       :short_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -5160,21 +5017,12 @@ module Aws::DataZone
       :environment_identifier,
       :environment_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateEnvironmentRoleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      CREATION_FAILED = 'CREATION_FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETION_FAILED = 'DELETION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a Amazon DataZone domain.</p>
@@ -5220,11 +5068,7 @@ module Aws::DataZone
       :last_updated_at,
       :domain_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainUnitDesignation
-      OWNER = 'OWNER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain unit filter of the project grant filter.</p>
@@ -5238,7 +5082,7 @@ module Aws::DataZone
       :domain_unit,
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_child_domain_units] = false unless options.key?(:include_child_domain_units)
@@ -5255,7 +5099,7 @@ module Aws::DataZone
       :all_domain_units_grant_filter,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AllDomainUnitsGrantFilter < DomainUnitGrantFilter; end
       class Unknown < DomainUnitGrantFilter; end
@@ -5268,7 +5112,7 @@ module Aws::DataZone
     class DomainUnitGroupProperties < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the domain unit owner.</p>
@@ -5283,7 +5127,7 @@ module Aws::DataZone
       :group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < DomainUnitOwnerProperties; end
       class Group < DomainUnitOwnerProperties; end
@@ -5305,7 +5149,7 @@ module Aws::DataZone
       :domain_unit_identifier,
       :domain_unit_grant_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the domain unit.</p>
@@ -5319,7 +5163,7 @@ module Aws::DataZone
       :name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target for the domain unit.</p>
@@ -5333,7 +5177,7 @@ module Aws::DataZone
       :domain_unit_id,
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the domain unit user.</p>
@@ -5343,27 +5187,7 @@ module Aws::DataZone
     class DomainUnitUserProperties < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainVersion
-      V1 = 'V1'
-      V2 = 'V2'
-    end
-
-    module EdgeDirection
-      UPSTREAM = 'UPSTREAM'
-      DOWNSTREAM = 'DOWNSTREAM'
-    end
-
-    module EnableSetting
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module EntityType
-      ASSET = 'ASSET'
-      DATA_PRODUCT = 'DATA_PRODUCT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the specified action configured for an environment. For example, the
@@ -5395,7 +5219,7 @@ module Aws::DataZone
       :parameters,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of an environment blueprint.</p>
@@ -5443,7 +5267,7 @@ module Aws::DataZone
       :updated_at,
       :provisioning_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an environment blueprint summary.</p>
@@ -5477,7 +5301,7 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an environment.</p>
@@ -5523,7 +5347,7 @@ module Aws::DataZone
       :aws_region,
       :deployment_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment configuration parameter.</p>
@@ -5541,7 +5365,7 @@ module Aws::DataZone
       :value,
       :is_editable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the environment configuration parameter.</p>
@@ -5559,7 +5383,7 @@ module Aws::DataZone
       :parameter_overrides,
       :resolved_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment configuration user parameters.</p>
@@ -5582,7 +5406,7 @@ module Aws::DataZone
       :environment_configuration_name,
       :environment_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The environment deployment details.</p>
@@ -5596,7 +5420,7 @@ module Aws::DataZone
       :overall_deployment_status,
       :environment_failure_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The failure reasons for the environment deployment.</p>
@@ -5610,7 +5434,7 @@ module Aws::DataZone
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter details of an evironment profile.</p>
@@ -5624,7 +5448,7 @@ module Aws::DataZone
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an environment profile.</p>
@@ -5674,7 +5498,7 @@ module Aws::DataZone
       :environment_blueprint_id,
       :project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the account/Region that is to be used during project creation for a particular
@@ -5693,23 +5517,7 @@ module Aws::DataZone
       :region_name,
       :source_account_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentStatus
-      ACTIVE = 'ACTIVE'
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
-      SUSPENDED = 'SUSPENDED'
-      DISABLED = 'DISABLED'
-      EXPIRED = 'EXPIRED'
-      DELETED = 'DELETED'
-      INACCESSIBLE = 'INACCESSIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an environment.</p>
@@ -5771,7 +5579,7 @@ module Aws::DataZone
       :status,
       :environment_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:environment_profile_id] = '' unless options.key?(:environment_profile_id)
@@ -5790,7 +5598,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event summary.</p>
@@ -5801,7 +5609,7 @@ module Aws::DataZone
       :open_lineage_run_event_summary,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OpenLineageRunEventSummary < EventSummary; end
       class Unknown < EventSummary; end
@@ -5815,7 +5623,7 @@ module Aws::DataZone
     class FailureCause < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A search filter in Amazon DataZone.</p>
@@ -5829,7 +5637,7 @@ module Aws::DataZone
       :attribute,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A search filter clause in Amazon DataZone.</p>
@@ -5848,7 +5656,7 @@ module Aws::DataZone
       :or,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Filter < FilterClause; end
       class And < FilterClause; end
@@ -5867,17 +5675,7 @@ module Aws::DataZone
       :type,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterExpressionType
-      INCLUDE = 'INCLUDE'
-      EXCLUDE = 'EXCLUDE'
-    end
-
-    module FilterStatus
-      VALID = 'VALID'
-      INVALID = 'INVALID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the form entry.</p>
@@ -5895,7 +5693,7 @@ module Aws::DataZone
       :type_revision,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the form entry.</p>
@@ -5913,7 +5711,7 @@ module Aws::DataZone
       :type_revision,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a metadata form.</p>
@@ -5936,7 +5734,7 @@ module Aws::DataZone
       :type_revision,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a metadata form.</p>
@@ -5958,7 +5756,7 @@ module Aws::DataZone
       :type_revision,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the metadata form type.</p>
@@ -6013,12 +5811,7 @@ module Aws::DataZone
       :description,
       :imports,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FormTypeStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6032,7 +5825,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6084,7 +5877,7 @@ module Aws::DataZone
       :updated_by,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6101,7 +5894,7 @@ module Aws::DataZone
       :asset_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6150,7 +5943,7 @@ module Aws::DataZone
       :effective_column_names,
       :effective_row_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6171,7 +5964,7 @@ module Aws::DataZone
       :identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6248,7 +6041,7 @@ module Aws::DataZone
       :read_only_forms_output,
       :latest_time_series_data_point_forms_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6265,7 +6058,7 @@ module Aws::DataZone
       :identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6318,7 +6111,7 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6335,7 +6128,7 @@ module Aws::DataZone
       :identifier,
       :with_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_credentials
@@ -6388,7 +6181,7 @@ module Aws::DataZone
       :props,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6405,7 +6198,7 @@ module Aws::DataZone
       :identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6466,7 +6259,7 @@ module Aws::DataZone
       :first_revision_created_at,
       :first_revision_created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 'CREATED' unless options.key?(:status)
@@ -6484,7 +6277,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6584,7 +6377,7 @@ module Aws::DataZone
       :updated_at,
       :self_grant_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6597,7 +6390,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6659,7 +6452,7 @@ module Aws::DataZone
       :started_at,
       :stopped_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -6668,7 +6461,7 @@ module Aws::DataZone
     class GetDomainInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6734,7 +6527,7 @@ module Aws::DataZone
       :domain_version,
       :service_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6747,7 +6540,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6792,7 +6585,7 @@ module Aws::DataZone
       :created_by,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6810,7 +6603,7 @@ module Aws::DataZone
       :environment_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6839,7 +6632,7 @@ module Aws::DataZone
       :parameters,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6852,7 +6645,7 @@ module Aws::DataZone
       :domain_identifier,
       :environment_blueprint_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -6897,7 +6690,7 @@ module Aws::DataZone
       :updated_at,
       :provisioning_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6910,7 +6703,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6955,7 +6748,7 @@ module Aws::DataZone
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -6969,7 +6762,7 @@ module Aws::DataZone
       :domain_identifier,
       :environment_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -6991,7 +6784,7 @@ module Aws::DataZone
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7004,7 +6797,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_id
@@ -7097,7 +6890,7 @@ module Aws::DataZone
       :environment_blueprint_id,
       :environment_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:environment_profile_id] = '' unless options.key?(:environment_profile_id)
@@ -7115,7 +6908,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -7168,7 +6961,7 @@ module Aws::DataZone
       :project_id,
       :user_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7185,7 +6978,7 @@ module Aws::DataZone
       :form_type_identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7239,7 +7032,7 @@ module Aws::DataZone
       :description,
       :imports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7252,7 +7045,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7297,7 +7090,7 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7310,7 +7103,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7363,7 +7156,7 @@ module Aws::DataZone
       :updated_at,
       :updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7376,7 +7169,7 @@ module Aws::DataZone
       :domain_identifier,
       :group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7397,7 +7190,7 @@ module Aws::DataZone
       :status,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7406,7 +7199,7 @@ module Aws::DataZone
     class GetIamPortalLoginUrlInput < Struct.new(
       :domain_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auth_code_url
@@ -7419,7 +7212,7 @@ module Aws::DataZone
       :auth_code_url,
       :user_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7432,7 +7225,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7485,7 +7278,7 @@ module Aws::DataZone
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7498,7 +7291,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7531,7 +7324,7 @@ module Aws::DataZone
       :event_time,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7552,7 +7345,7 @@ module Aws::DataZone
       :identifier,
       :event_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7617,7 +7410,7 @@ module Aws::DataZone
       :upstream_nodes,
       :downstream_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7634,7 +7427,7 @@ module Aws::DataZone
       :identifier,
       :listing_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7683,7 +7476,7 @@ module Aws::DataZone
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7697,7 +7490,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7736,7 +7529,7 @@ module Aws::DataZone
       :created_by,
       :owning_project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7749,7 +7542,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7811,7 +7604,7 @@ module Aws::DataZone
       :user_parameters,
       :environment_deployment_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7824,7 +7617,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -7869,7 +7662,7 @@ module Aws::DataZone
       :last_updated_at,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7886,7 +7679,7 @@ module Aws::DataZone
       :identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -7947,7 +7740,7 @@ module Aws::DataZone
       :created_by,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -7960,7 +7753,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8011,7 +7804,7 @@ module Aws::DataZone
       :assets,
       :subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -8024,7 +7817,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8073,7 +7866,7 @@ module Aws::DataZone
       :subscription_request_id,
       :retain_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -8087,7 +7880,7 @@ module Aws::DataZone
       :domain_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8148,7 +7941,7 @@ module Aws::DataZone
       :existing_subscription_id,
       :metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -8165,7 +7958,7 @@ module Aws::DataZone
       :environment_identifier,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8230,7 +8023,7 @@ module Aws::DataZone
       :subscription_target_config,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -8256,7 +8049,7 @@ module Aws::DataZone
       :identifier,
       :form_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -8282,7 +8075,7 @@ module Aws::DataZone
       :form_name,
       :form,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -8299,7 +8092,7 @@ module Aws::DataZone
       :user_identifier,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -8325,7 +8118,7 @@ module Aws::DataZone
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a business glossary.</p>
@@ -8375,7 +8168,7 @@ module Aws::DataZone
       :updated_by,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The additional attributes of an Amazon DataZone glossary.</p>
@@ -8385,12 +8178,7 @@ module Aws::DataZone
     class GlossaryItemAdditionalAttributes < Struct.new(
       :match_rationale,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlossaryStatus
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a business glossary term.</p>
@@ -8448,7 +8236,7 @@ module Aws::DataZone
       :updated_by,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The additional attributes of an Amazon DataZone glossary term.</p>
@@ -8458,12 +8246,7 @@ module Aws::DataZone
     class GlossaryTermItemAdditionalAttributes < Struct.new(
       :match_rationale,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlossaryTermStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Glue connection.</p>
@@ -8541,7 +8324,7 @@ module Aws::DataZone
       :connection_schema_version,
       :compatible_compute_environments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Glue connecton input.</p>
@@ -8597,7 +8380,7 @@ module Aws::DataZone
       :python_properties,
       :authentication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Glue connection patch.</p>
@@ -8615,23 +8398,7 @@ module Aws::DataZone
       :connection_properties,
       :authentication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlueConnectionType
-      SNOWFLAKE = 'SNOWFLAKE'
-      BIGQUERY = 'BIGQUERY'
-      DOCUMENTDB = 'DOCUMENTDB'
-      DYNAMODB = 'DYNAMODB'
-      MYSQL = 'MYSQL'
-      OPENSEARCH = 'OPENSEARCH'
-      ORACLE = 'ORACLE'
-      POSTGRESQL = 'POSTGRESQL'
-      REDSHIFT = 'REDSHIFT'
-      SAPHANA = 'SAPHANA'
-      SQLSERVER = 'SQLSERVER'
-      TERADATA = 'TERADATA'
-      VERTICA = 'VERTICA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GlueOAuth2 credentials of a connection.</p>
@@ -8654,7 +8421,7 @@ module Aws::DataZone
       :refresh_token,
       :jwt_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Glue properties of a connection.</p>
@@ -8664,7 +8431,7 @@ module Aws::DataZone
     class GluePropertiesInput < Struct.new(
       :glue_connection_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the Amazon Web Services Glue connection.</p>
@@ -8678,7 +8445,7 @@ module Aws::DataZone
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Glue properties patch of a connection.</p>
@@ -8688,7 +8455,7 @@ module Aws::DataZone
     class GluePropertiesPatch < Struct.new(
       :glue_connection_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Amazon Web Services Glue data source.</p>
@@ -8713,7 +8480,7 @@ module Aws::DataZone
       :auto_import_data_quality_result,
       :catalog_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Amazon Web Services Glue data source.</p>
@@ -8748,7 +8515,7 @@ module Aws::DataZone
       :auto_import_data_quality_result,
       :catalog_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the self granting status.</p>
@@ -8758,12 +8525,7 @@ module Aws::DataZone
     class GlueSelfGrantStatusOutput < Struct.new(
       :self_grant_status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GovernanceType
-      AWS_MANAGED = 'AWS_MANAGED'
-      USER_MANAGED = 'USER_MANAGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a listing for which a subscription is granted.</p>
@@ -8774,7 +8536,7 @@ module Aws::DataZone
       :listing,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Listing < GrantedEntity; end
       class Unknown < GrantedEntity; end
@@ -8788,7 +8550,7 @@ module Aws::DataZone
       :listing,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Listing < GrantedEntityInput; end
       class Unknown < GrantedEntityInput; end
@@ -8805,7 +8567,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the value is greater than or equal to an expression.</p>
@@ -8819,7 +8581,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a group in Amazon DataZone.</p>
@@ -8829,7 +8591,7 @@ module Aws::DataZone
     class GroupDetails < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The group principal to whom the policy is granted.</p>
@@ -8840,15 +8602,10 @@ module Aws::DataZone
       :group_identifier,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GroupIdentifier < GroupPolicyGrantPrincipal; end
       class Unknown < GroupPolicyGrantPrincipal; end
-    end
-
-    module GroupProfileStatus
-      ASSIGNED = 'ASSIGNED'
-      NOT_ASSIGNED = 'NOT_ASSIGNED'
     end
 
     # <p>The details of a group profile.</p>
@@ -8870,17 +8627,7 @@ module Aws::DataZone
       :status,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupSearchType
-      SSO_GROUP = 'SSO_GROUP'
-      DATAZONE_SSO_GROUP = 'DATAZONE_SSO_GROUP'
-    end
-
-    module HyperPodOrchestrator
-      EKS = 'EKS'
-      SLURM = 'SLURM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hyper pod properties of a Amazon Web Services Glue properties patch.</p>
@@ -8890,7 +8637,7 @@ module Aws::DataZone
     class HyperPodPropertiesInput < Struct.new(
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hyper pod properties of a Amazon Web Services Glue properties patch.</p>
@@ -8908,7 +8655,7 @@ module Aws::DataZone
       :cluster_arn,
       :orchestrator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM properties of a connection.</p>
@@ -8919,7 +8666,7 @@ module Aws::DataZone
     class IamPropertiesInput < Struct.new(
       :glue_lineage_sync_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM properties of a connection.</p>
@@ -8934,7 +8681,7 @@ module Aws::DataZone
       :environment_id,
       :glue_lineage_sync_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM properties patch of a connection.</p>
@@ -8945,7 +8692,7 @@ module Aws::DataZone
     class IamPropertiesPatch < Struct.new(
       :glue_lineage_sync_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an IAM user profile in Amazon DataZone.</p>
@@ -8955,7 +8702,7 @@ module Aws::DataZone
     class IamUserProfileDetails < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the import of the metadata form type.</p>
@@ -8969,7 +8716,7 @@ module Aws::DataZone
       :name,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether values are in the expression.</p>
@@ -8983,7 +8730,7 @@ module Aws::DataZone
       :column_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed because of an unknown error, exception or failure.</p>
@@ -8992,14 +8739,7 @@ module Aws::DataZone
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InventorySearchScope
-      ASSET = 'ASSET'
-      GLOSSARY = 'GLOSSARY'
-      GLOSSARY_TERM = 'GLOSSARY_TERM'
-      DATA_PRODUCT = 'DATA_PRODUCT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that the expression is not null.</p>
@@ -9009,7 +8749,7 @@ module Aws::DataZone
     class IsNotNullExpression < Struct.new(
       :column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that the expression is null.</p>
@@ -9019,7 +8759,7 @@ module Aws::DataZone
     class IsNullExpression < Struct.new(
       :column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a job run.</p>
@@ -9030,7 +8770,7 @@ module Aws::DataZone
       :lineage_run_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class LineageRunDetails < JobRunDetails; end
       class Unknown < JobRunDetails; end
@@ -9043,23 +8783,7 @@ module Aws::DataZone
     class JobRunError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobRunMode
-      SCHEDULED = 'SCHEDULED'
-      ON_DEMAND = 'ON_DEMAND'
-    end
-
-    module JobRunStatus
-      SCHEDULED = 'SCHEDULED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      PARTIALLY_SUCCEEDED = 'PARTIALLY_SUCCEEDED'
-      FAILED = 'FAILED'
-      ABORTED = 'ABORTED'
-      TIMED_OUT = 'TIMED_OUT'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job run summary.</p>
@@ -9109,11 +8833,7 @@ module Aws::DataZone
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobType
-      LINEAGE = 'LINEAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lake Formation configuration of the Data Lake blueprint.</p>
@@ -9129,7 +8849,7 @@ module Aws::DataZone
       :location_registration_role,
       :location_registration_exclude_s3_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a value is less than an expression.</p>
@@ -9143,7 +8863,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a value is less than or equal to an expression.</p>
@@ -9157,7 +8877,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a value is like the expression.</p>
@@ -9171,14 +8891,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineageEventProcessingStatus
-      REQUESTED = 'REQUESTED'
-      PROCESSING = 'PROCESSING'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data lineage event summary.</p>
@@ -9212,14 +8925,7 @@ module Aws::DataZone
       :created_by,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineageImportStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      PARTIALLY_SUCCEEDED = 'PARTIALLY_SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data lineage information.</p>
@@ -9237,7 +8943,7 @@ module Aws::DataZone
       :event_status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference details for the data lineage node.</p>
@@ -9251,7 +8957,7 @@ module Aws::DataZone
       :id,
       :event_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the data lineage node.</p>
@@ -9305,7 +9011,7 @@ module Aws::DataZone
       :source_identifier,
       :event_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a data lineage node type.</p>
@@ -9347,7 +9053,7 @@ module Aws::DataZone
       :revision,
       :forms_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data lineage run details.</p>
@@ -9357,7 +9063,7 @@ module Aws::DataZone
     class LineageRunDetails < Struct.new(
       :sql_query_run_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SQL query run details of a data lineage run.</p>
@@ -9384,7 +9090,7 @@ module Aws::DataZone
       :num_queries_failed,
       :error_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lineage sync schedule.</p>
@@ -9394,7 +9100,7 @@ module Aws::DataZone
     class LineageSyncSchedule < Struct.new(
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9430,7 +9136,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9447,7 +9153,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9476,7 +9182,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9493,7 +9199,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9527,7 +9233,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9545,7 +9251,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9575,7 +9281,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9593,7 +9299,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9641,7 +9347,7 @@ module Aws::DataZone
       :project_identifier,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9658,7 +9364,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9690,7 +9396,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9709,7 +9415,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9744,7 +9450,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9762,7 +9468,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9797,7 +9503,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9815,7 +9521,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9865,7 +9571,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9883,7 +9589,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -9912,7 +9618,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9929,7 +9635,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9955,7 +9661,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -9973,7 +9679,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10007,7 +9713,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owners
@@ -10025,7 +9731,7 @@ module Aws::DataZone
       :owners,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10055,7 +9761,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10073,7 +9779,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10101,7 +9807,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10120,7 +9826,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10154,7 +9860,7 @@ module Aws::DataZone
       :name,
       :managed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10172,7 +9878,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10222,7 +9928,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10241,7 +9947,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10300,7 +10006,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10318,7 +10024,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10354,7 +10060,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10371,7 +10077,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10411,7 +10117,7 @@ module Aws::DataZone
       :sort_order,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10428,7 +10134,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10478,7 +10184,7 @@ module Aws::DataZone
       :event_timestamp_lte,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -10495,7 +10201,7 @@ module Aws::DataZone
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10529,7 +10235,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10546,7 +10252,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10592,7 +10298,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notifications
@@ -10610,7 +10316,7 @@ module Aws::DataZone
       :notifications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10648,7 +10354,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_list
@@ -10666,7 +10372,7 @@ module Aws::DataZone
       :grant_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10705,7 +10411,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -10723,7 +10429,7 @@ module Aws::DataZone
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10759,7 +10465,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10776,7 +10482,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10814,7 +10520,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10832,7 +10538,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10888,7 +10594,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10905,7 +10611,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -10959,7 +10665,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -10977,7 +10683,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -11033,7 +10739,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -11052,7 +10758,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -11093,7 +10799,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -11112,7 +10818,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -11172,7 +10878,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -11190,7 +10896,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -11199,7 +10905,7 @@ module Aws::DataZone
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -11208,7 +10914,7 @@ module Aws::DataZone
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -11253,7 +10959,7 @@ module Aws::DataZone
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -11270,7 +10976,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a listing (aka asset published in a Amazon DataZone catalog).</p>
@@ -11285,7 +10991,7 @@ module Aws::DataZone
       :data_product_listing,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AssetListing < ListingItem; end
       class DataProductListing < ListingItem; end
@@ -11303,7 +11009,7 @@ module Aws::DataZone
       :id,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A revision to be made to an asset published in a Amazon DataZone catalog.</p>
@@ -11319,13 +11025,7 @@ module Aws::DataZone
       :identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListingStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the listing of the data product.</p>
@@ -11343,7 +11043,7 @@ module Aws::DataZone
       :listing_revision,
       :glossary_terms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of the data product summary.</p>
@@ -11361,24 +11061,7 @@ module Aws::DataZone
       :listing_revision,
       :glossary_terms,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedPolicyType
-      CREATE_DOMAIN_UNIT = 'CREATE_DOMAIN_UNIT'
-      OVERRIDE_DOMAIN_UNIT_OWNERS = 'OVERRIDE_DOMAIN_UNIT_OWNERS'
-      ADD_TO_PROJECT_MEMBER_POOL = 'ADD_TO_PROJECT_MEMBER_POOL'
-      OVERRIDE_PROJECT_OWNERS = 'OVERRIDE_PROJECT_OWNERS'
-      CREATE_GLOSSARY = 'CREATE_GLOSSARY'
-      CREATE_FORM_TYPE = 'CREATE_FORM_TYPE'
-      CREATE_ASSET_TYPE = 'CREATE_ASSET_TYPE'
-      CREATE_PROJECT = 'CREATE_PROJECT'
-      CREATE_ENVIRONMENT_PROFILE = 'CREATE_ENVIRONMENT_PROFILE'
-      DELEGATE_CREATE_ENVIRONMENT_PROFILE = 'DELEGATE_CREATE_ENVIRONMENT_PROFILE'
-      CREATE_ENVIRONMENT = 'CREATE_ENVIRONMENT'
-      CREATE_ENVIRONMENT_FROM_BLUEPRINT = 'CREATE_ENVIRONMENT_FROM_BLUEPRINT'
-      CREATE_PROJECT_FROM_PROJECT_PROFILE = 'CREATE_PROJECT_FROM_PROJECT_PROFILE'
-      USE_ASSET_TYPE = 'USE_ASSET_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The offset of a matched term.</p>
@@ -11392,7 +11075,7 @@ module Aws::DataZone
       :start_offset,
       :end_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rationale indicating why this item was matched by search. </p>
@@ -11403,7 +11086,7 @@ module Aws::DataZone
       :text_matches,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TextMatches < MatchRationaleItem; end
       class Unknown < MatchRationaleItem; end
@@ -11421,7 +11104,7 @@ module Aws::DataZone
       :group_identifier,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UserIdentifier < Member; end
       class GroupIdentifier < Member; end
@@ -11440,7 +11123,7 @@ module Aws::DataZone
       :group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < MemberDetails; end
       class Group < MemberDetails; end
@@ -11454,7 +11137,7 @@ module Aws::DataZone
     class MetadataFormEnforcementDetail < Struct.new(
       :required_metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference of a metadata form.</p>
@@ -11468,7 +11151,7 @@ module Aws::DataZone
       :type_identifier,
       :type_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the metadata form.</p>
@@ -11486,7 +11169,7 @@ module Aws::DataZone
       :type_name,
       :type_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata generation run.</p>
@@ -11526,15 +11209,7 @@ module Aws::DataZone
       :created_by,
       :owning_project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetadataGenerationRunStatus
-      SUBMITTED = 'SUBMITTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      CANCELED = 'CANCELED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The asset for which metadata was generated.</p>
@@ -11552,15 +11227,7 @@ module Aws::DataZone
       :identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetadataGenerationRunType
-      BUSINESS_DESCRIPTIONS = 'BUSINESS_DESCRIPTIONS'
-    end
-
-    module MetadataGenerationTargetType
-      ASSET = 'ASSET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The model of the API.</p>
@@ -11572,7 +11239,7 @@ module Aws::DataZone
       :smithy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Smithy < Model; end
       class Unknown < Model; end
@@ -11589,7 +11256,7 @@ module Aws::DataZone
       :name,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a value is not equal to the expression.</p>
@@ -11603,7 +11270,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a value is not in the expression.</p>
@@ -11617,7 +11284,7 @@ module Aws::DataZone
       :column_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that a value might be not like the expression.</p>
@@ -11631,7 +11298,7 @@ module Aws::DataZone
       :column_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a notification generated in Amazon DataZone.</p>
@@ -11681,7 +11348,7 @@ module Aws::DataZone
       :last_updated_timestamp,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the resource mentioned in a notification.</p>
@@ -11699,24 +11366,7 @@ module Aws::DataZone
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationResourceType
-      PROJECT = 'PROJECT'
-    end
-
-    module NotificationRole
-      PROJECT_OWNER = 'PROJECT_OWNER'
-      PROJECT_CONTRIBUTOR = 'PROJECT_CONTRIBUTOR'
-      PROJECT_VIEWER = 'PROJECT_VIEWER'
-      DOMAIN_OWNER = 'DOMAIN_OWNER'
-      PROJECT_SUBSCRIBER = 'PROJECT_SUBSCRIBER'
-    end
-
-    module NotificationType
-      TASK = 'TASK'
-      EVENT = 'EVENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth2Client application.</p>
@@ -11731,13 +11381,7 @@ module Aws::DataZone
       :user_managed_client_application_client_id,
       :a_ws_managed_client_application_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OAuth2GrantType
-      AUTHORIZATION_CODE = 'AUTHORIZATION_CODE'
-      CLIENT_CREDENTIALS = 'CLIENT_CREDENTIALS'
-      JWT_BEARER = 'JWT_BEARER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth2 properties.</p>
@@ -11767,7 +11411,7 @@ module Aws::DataZone
       :authorization_code_properties,
       :o_auth2_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The open lineage run event summary.</p>
@@ -11793,24 +11437,7 @@ module Aws::DataZone
       :inputs,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenLineageRunState
-      START = 'START'
-      RUNNING = 'RUNNING'
-      COMPLETE = 'COMPLETE'
-      ABORT = 'ABORT'
-      FAIL = 'FAIL'
-      OTHER = 'OTHER'
-    end
-
-    module OverallDeploymentStatus
-      PENDING_DEPLOYMENT = 'PENDING_DEPLOYMENT'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED_VALIDATION = 'FAILED_VALIDATION'
-      FAILED_DEPLOYMENT = 'FAILED_DEPLOYMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The grant details of the override domain unit owners policy.</p>
@@ -11820,7 +11447,7 @@ module Aws::DataZone
     class OverrideDomainUnitOwnersPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the override project owners policy grant.</p>
@@ -11830,7 +11457,7 @@ module Aws::DataZone
     class OverrideProjectOwnersPolicyGrantDetail < Struct.new(
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the domain unit owners group.</p>
@@ -11840,7 +11467,7 @@ module Aws::DataZone
     class OwnerGroupProperties < Struct.new(
       :group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the domain unit owners group.</p>
@@ -11850,7 +11477,7 @@ module Aws::DataZone
     class OwnerGroupPropertiesOutput < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a domain unit's owner.</p>
@@ -11865,7 +11492,7 @@ module Aws::DataZone
       :group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < OwnerProperties; end
       class Group < OwnerProperties; end
@@ -11884,7 +11511,7 @@ module Aws::DataZone
       :group,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < OwnerPropertiesOutput; end
       class Group < OwnerPropertiesOutput; end
@@ -11898,7 +11525,7 @@ module Aws::DataZone
     class OwnerUserProperties < Struct.new(
       :user_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the owner user.</p>
@@ -11908,7 +11535,7 @@ module Aws::DataZone
     class OwnerUserPropertiesOutput < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Physical connection requirements of a connection.</p>
@@ -11930,7 +11557,7 @@ module Aws::DataZone
       :security_group_id_list,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The physical endpoints of a connection.</p>
@@ -11964,7 +11591,7 @@ module Aws::DataZone
       :protocol,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy grant.</p>
@@ -12028,7 +11655,7 @@ module Aws::DataZone
       :use_asset_type,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CreateDomainUnit < PolicyGrantDetail; end
       class OverrideDomainUnitOwners < PolicyGrantDetail; end
@@ -12066,7 +11693,7 @@ module Aws::DataZone
       :created_at,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy grant principal.</p>
@@ -12089,7 +11716,7 @@ module Aws::DataZone
       :domain_unit,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class User < PolicyGrantPrincipal; end
       class Group < PolicyGrantPrincipal; end
@@ -12114,7 +11741,7 @@ module Aws::DataZone
       :event,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -12127,7 +11754,7 @@ module Aws::DataZone
       :id,
       :domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -12154,7 +11781,7 @@ module Aws::DataZone
       :forms,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12176,7 +11803,7 @@ module Aws::DataZone
       :entity_type,
       :forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the prediction.</p>
@@ -12186,7 +11813,7 @@ module Aws::DataZone
     class PredictionConfiguration < Struct.new(
       :business_name_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the error message that is returned if the operation cannot be successfully
@@ -12201,13 +11828,7 @@ module Aws::DataZone
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectDesignation
-      OWNER = 'OWNER'
-      CONTRIBUTOR = 'CONTRIBUTOR'
-      PROJECT_CATALOG_STEWARD = 'PROJECT_CATALOG_STEWARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The project grant filter.</p>
@@ -12218,7 +11839,7 @@ module Aws::DataZone
       :domain_unit_filter,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DomainUnitFilter < ProjectGrantFilter; end
       class Unknown < ProjectGrantFilter; end
@@ -12235,7 +11856,7 @@ module Aws::DataZone
       :member_details,
       :designation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The project policy grant principal.</p>
@@ -12253,7 +11874,7 @@ module Aws::DataZone
       :project_identifier,
       :project_grant_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a project profile.</p>
@@ -12295,15 +11916,7 @@ module Aws::DataZone
       :last_updated_at,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProjectStatus
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a Amazon DataZone project.</p>
@@ -12350,7 +11963,7 @@ module Aws::DataZone
       :updated_at,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies projects in which the rule is created.</p>
@@ -12364,17 +11977,7 @@ module Aws::DataZone
       :selection_mode,
       :specific_projects,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Protocol
-      ATHENA = 'ATHENA'
-      GLUE_INTERACTIVE_SESSION = 'GLUE_INTERACTIVE_SESSION'
-      HTTPS = 'HTTPS'
-      JDBC = 'JDBC'
-      LIVY = 'LIVY'
-      ODBC = 'ODBC'
-      PRISM = 'PRISM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provisioning configuration of the blueprint.</p>
@@ -12385,7 +11988,7 @@ module Aws::DataZone
       :lake_formation_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class LakeFormationConfiguration < ProvisioningConfiguration; end
       class Unknown < ProvisioningConfiguration; end
@@ -12400,7 +12003,7 @@ module Aws::DataZone
       :cloud_formation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CloudFormation < ProvisioningProperties; end
       class Unknown < ProvisioningProperties; end
@@ -12440,7 +12043,7 @@ module Aws::DataZone
       :regional_parameters,
       :provisioning_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12485,7 +12088,7 @@ module Aws::DataZone
       :updated_at,
       :provisioning_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommendation to be updated as part of the <code>UpdateDataSource</code>
@@ -12497,7 +12100,7 @@ module Aws::DataZone
     class RecommendationConfiguration < Struct.new(
       :enable_business_name_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Amazon Redshift cluster storage.</p>
@@ -12507,7 +12110,7 @@ module Aws::DataZone
     class RedshiftClusterStorage < Struct.new(
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the credentials required to access an Amazon Redshift cluster.</p>
@@ -12517,7 +12120,7 @@ module Aws::DataZone
     class RedshiftCredentialConfiguration < Struct.new(
       :secret_manager_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Redshift credentials of a connection.</p>
@@ -12533,7 +12136,7 @@ module Aws::DataZone
       :username_password,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SecretArn < RedshiftCredentials; end
       class UsernamePassword < RedshiftCredentials; end
@@ -12551,7 +12154,7 @@ module Aws::DataZone
       :enabled,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amaon Redshift lineage sync configuration.</p>
@@ -12569,7 +12172,7 @@ module Aws::DataZone
       :enabled,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Redshift properties.</p>
@@ -12599,7 +12202,7 @@ module Aws::DataZone
       :credentials,
       :lineage_sync,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Redshift properties.</p>
@@ -12641,7 +12244,7 @@ module Aws::DataZone
       :status,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Redshift properties patch.</p>
@@ -12671,7 +12274,7 @@ module Aws::DataZone
       :credentials,
       :lineage_sync,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Amazon Redshift data source.</p>
@@ -12696,7 +12299,7 @@ module Aws::DataZone
       :redshift_credential_configuration,
       :redshift_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Amazon Redshift data source.</p>
@@ -12731,7 +12334,7 @@ module Aws::DataZone
       :redshift_credential_configuration,
       :redshift_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the self granting status for an Amazon Redshift data source.</p>
@@ -12741,7 +12344,7 @@ module Aws::DataZone
     class RedshiftSelfGrantStatusOutput < Struct.new(
       :self_grant_status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Amazon Redshift Serverless workgroup storage.</p>
@@ -12751,7 +12354,7 @@ module Aws::DataZone
     class RedshiftServerlessStorage < Struct.new(
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Amazon Redshift storage as part of the configuration of an Amazon
@@ -12767,7 +12370,7 @@ module Aws::DataZone
       :redshift_serverless_source,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RedshiftClusterSource < RedshiftStorage; end
       class RedshiftServerlessSource < RedshiftStorage; end
@@ -12786,7 +12389,7 @@ module Aws::DataZone
       :workgroup_name,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ClusterName < RedshiftStorageProperties; end
       class WorkgroupName < RedshiftStorageProperties; end
@@ -12805,7 +12408,7 @@ module Aws::DataZone
       :region_name_path,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RegionName < Region; end
       class RegionNamePath < Region; end
@@ -12824,7 +12427,7 @@ module Aws::DataZone
       :prediction_target,
       :prediction_choices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -12855,7 +12458,7 @@ module Aws::DataZone
       :reject_choices,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -12872,7 +12475,7 @@ module Aws::DataZone
       :asset_id,
       :asset_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the rule and the threshold under which a prediction can be rejected.</p>
@@ -12887,12 +12490,7 @@ module Aws::DataZone
       :rule,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RejectRuleBehavior
-      ALL = 'ALL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -12910,7 +12508,7 @@ module Aws::DataZone
       :identifier,
       :decision_comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -12972,7 +12570,7 @@ module Aws::DataZone
       :existing_subscription_id,
       :metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The relational filter configuration for the data source.</p>
@@ -12993,7 +12591,7 @@ module Aws::DataZone
       :schema_name,
       :filter_expressions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -13019,12 +12617,12 @@ module Aws::DataZone
       :owner,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveEntityOwnerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -13054,16 +12652,12 @@ module Aws::DataZone
       :principal,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemovePolicyGrantOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolutionStrategy
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a provisioned resource of this Amazon DataZone environment.</p>
@@ -13085,7 +12679,7 @@ module Aws::DataZone
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource cannot be found.</p>
@@ -13094,7 +12688,7 @@ module Aws::DataZone
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -13111,7 +12705,7 @@ module Aws::DataZone
       :identifier,
       :retain_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -13160,7 +12754,7 @@ module Aws::DataZone
       :subscription_request_id,
       :retain_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The row filter.</p>
@@ -13179,7 +12773,7 @@ module Aws::DataZone
       :or,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Expression < RowFilter; end
       class And < RowFilter; end
@@ -13198,7 +12792,7 @@ module Aws::DataZone
       :row_filter,
       :sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sensitive] = true unless options.key?(:sensitive)
@@ -13258,7 +12852,7 @@ module Aws::DataZone
       :not_like,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EqualTo < RowFilterExpression; end
       class NotEqualTo < RowFilterExpression; end
@@ -13275,11 +12869,6 @@ module Aws::DataZone
       class Unknown < RowFilterExpression; end
     end
 
-    module RuleAction
-      CREATE_LISTING_CHANGE_SET = 'CREATE_LISTING_CHANGE_SET'
-      CREATE_SUBSCRIPTION_REQUEST = 'CREATE_SUBSCRIPTION_REQUEST'
-    end
-
     # <p>The details of a rule.</p>
     # @!attribute metadata_form_enforcement_detail
     #   <p>The enforcement detail of the metadata form.</p>
@@ -13288,7 +12877,7 @@ module Aws::DataZone
       :metadata_form_enforcement_detail,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class MetadataFormEnforcementDetail < RuleDetail; end
       class Unknown < RuleDetail; end
@@ -13309,12 +12898,7 @@ module Aws::DataZone
       :data_product,
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleScopeSelectionMode
-      ALL = 'ALL'
-      SPECIFIC = 'SPECIFIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the rule.</p>
@@ -13360,7 +12944,7 @@ module Aws::DataZone
       :updated_at,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target of the rule.</p>
@@ -13371,18 +12955,10 @@ module Aws::DataZone
       :domain_unit_target,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DomainUnitTarget < RuleTarget; end
       class Unknown < RuleTarget; end
-    end
-
-    module RuleTargetType
-      DOMAIN_UNIT = 'DOMAIN_UNIT'
-    end
-
-    module RuleType
-      METADATA_FORM_ENFORCEMENT = 'METADATA_FORM_ENFORCEMENT'
     end
 
     # <p>The asset statistics from the data source run.</p>
@@ -13408,7 +12984,7 @@ module Aws::DataZone
       :skipped,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 properties of a connection.</p>
@@ -13423,7 +12999,7 @@ module Aws::DataZone
       :s3_uri,
       :s3_access_grant_location_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 properties of a connection.</p>
@@ -13446,7 +13022,7 @@ module Aws::DataZone
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 properties patch of a connection.</p>
@@ -13461,7 +13037,7 @@ module Aws::DataZone
       :s3_uri,
       :s3_access_grant_location_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker run configuration.</p>
@@ -13471,7 +13047,7 @@ module Aws::DataZone
     class SageMakerRunConfigurationInput < Struct.new(
       :tracking_assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon SageMaker run configuration.</p>
@@ -13489,7 +13065,7 @@ module Aws::DataZone
       :region,
       :tracking_assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the schedule of the data source runs.</p>
@@ -13504,7 +13080,7 @@ module Aws::DataZone
       :timezone,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -13539,7 +13115,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -13557,7 +13133,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the search.</p>
@@ -13567,7 +13143,7 @@ module Aws::DataZone
     class SearchInItem < Struct.new(
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -13619,7 +13195,7 @@ module Aws::DataZone
       :sort,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the search results.</p>
@@ -13642,7 +13218,7 @@ module Aws::DataZone
       :data_product_item,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GlossaryItem < SearchInventoryResultItem; end
       class GlossaryTermItem < SearchInventoryResultItem; end
@@ -13699,7 +13275,7 @@ module Aws::DataZone
       :sort,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -13726,7 +13302,7 @@ module Aws::DataZone
       :total_match_count,
       :aggregates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -13747,13 +13323,7 @@ module Aws::DataZone
       :next_token,
       :total_match_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchOutputAdditionalAttribute
-      FORMS = 'FORMS'
-      TIME_SERIES_DATA_POINT_FORMS = 'TIME_SERIES_DATA_POINT_FORMS'
-      TEXT_MATCH_RATIONALE = 'TEXT_MATCH_RATIONALE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the results of the <code>SearchListings</code> action.</p>
@@ -13769,7 +13339,7 @@ module Aws::DataZone
       :data_product_listing,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AssetListing < SearchResultItem; end
       class DataProductListing < SearchResultItem; end
@@ -13787,7 +13357,7 @@ module Aws::DataZone
       :attribute,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -13838,7 +13408,7 @@ module Aws::DataZone
       :sort,
       :managed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -13860,7 +13430,7 @@ module Aws::DataZone
       :next_token,
       :total_match_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the results of the <code>SearchTypes</code> action.</p>
@@ -13879,7 +13449,7 @@ module Aws::DataZone
       :lineage_node_type_item,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AssetTypeItem < SearchTypesResultItem; end
       class FormTypeItem < SearchTypesResultItem; end
@@ -13919,7 +13489,7 @@ module Aws::DataZone
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -13937,17 +13507,7 @@ module Aws::DataZone
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SelfGrantStatus
-      GRANT_PENDING = 'GRANT_PENDING'
-      REVOKE_PENDING = 'REVOKE_PENDING'
-      GRANT_IN_PROGRESS = 'GRANT_IN_PROGRESS'
-      REVOKE_IN_PROGRESS = 'REVOKE_IN_PROGRESS'
-      GRANTED = 'GRANTED'
-      GRANT_FAILED = 'GRANT_FAILED'
-      REVOKE_FAILED = 'REVOKE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the self granting status.</p>
@@ -13969,7 +13529,7 @@ module Aws::DataZone
       :status,
       :failure_cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the self granting status for a data source.</p>
@@ -13984,7 +13544,7 @@ module Aws::DataZone
       :redshift_self_grant_status,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GlueSelfGrantStatus < SelfGrantStatusOutput; end
       class RedshiftSelfGrantStatus < SelfGrantStatusOutput; end
@@ -13997,7 +13557,7 @@ module Aws::DataZone
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The single sign-on details in Amazon DataZone.</p>
@@ -14015,29 +13575,7 @@ module Aws::DataZone
       :user_assignment,
       :idc_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortFieldAccountPool
-      NAME = 'NAME'
-    end
-
-    module SortFieldConnection
-      NAME = 'NAME'
-    end
-
-    module SortFieldProject
-      NAME = 'NAME'
-    end
-
-    module SortKey
-      CREATED_AT = 'CREATED_AT'
-      UPDATED_AT = 'UPDATED_AT'
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spark EMR properties.</p>
@@ -14071,7 +13609,7 @@ module Aws::DataZone
       :runtime_role,
       :trusted_certificates_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spark EMR properties.</p>
@@ -14121,7 +13659,7 @@ module Aws::DataZone
       :runtime_role,
       :trusted_certificates_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spark EMR properties patch.</p>
@@ -14155,7 +13693,7 @@ module Aws::DataZone
       :runtime_role,
       :trusted_certificates_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spark Amazon Web Services Glue args.</p>
@@ -14165,7 +13703,7 @@ module Aws::DataZone
     class SparkGlueArgs < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spark Amazon Web Services Glue properties. </p>
@@ -14205,7 +13743,7 @@ module Aws::DataZone
       :python_virtual_env,
       :worker_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spark Amazon Web Services Glue properties. </p>
@@ -14245,7 +13783,7 @@ module Aws::DataZone
       :python_virtual_env,
       :worker_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The single sign-on details of the user profile.</p>
@@ -14263,7 +13801,7 @@ module Aws::DataZone
       :first_name,
       :last_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -14281,7 +13819,7 @@ module Aws::DataZone
       :data_source_identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -14339,7 +13877,7 @@ module Aws::DataZone
       :started_at,
       :stopped_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -14367,7 +13905,7 @@ module Aws::DataZone
       :client_token,
       :owning_project_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -14402,12 +13940,7 @@ module Aws::DataZone
       :created_by,
       :owning_project_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the asset for which the subscription grant is created.</p>
@@ -14447,7 +13980,7 @@ module Aws::DataZone
       :failure_timestamp,
       :asset_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the published asset for which the subscription grant is created.</p>
@@ -14480,7 +14013,7 @@ module Aws::DataZone
       :glossary_terms,
       :asset_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the published asset for which the subscription grant is created.</p>
@@ -14518,7 +14051,7 @@ module Aws::DataZone
       :owner_project_id,
       :owner_project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The published asset for which the subscription grant is to be created.</p>
@@ -14529,7 +14062,7 @@ module Aws::DataZone
     class SubscribedListingInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The published asset for which the subscription grant is created.</p>
@@ -14544,7 +14077,7 @@ module Aws::DataZone
       :product_listing,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AssetListing < SubscribedListingItem; end
       class ProductListing < SubscribedListingItem; end
@@ -14559,7 +14092,7 @@ module Aws::DataZone
       :project,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Project < SubscribedPrincipal; end
       class Unknown < SubscribedPrincipal; end
@@ -14573,7 +14106,7 @@ module Aws::DataZone
       :project,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Project < SubscribedPrincipalInput; end
       class Unknown < SubscribedPrincipalInput; end
@@ -14606,7 +14139,7 @@ module Aws::DataZone
       :description,
       :asset_listings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The project that has the subscription grant.</p>
@@ -14620,7 +14153,7 @@ module Aws::DataZone
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The project that is to be given a subscription grant.</p>
@@ -14630,28 +14163,7 @@ module Aws::DataZone
     class SubscribedProjectInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriptionGrantOverallStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      GRANT_FAILED = 'GRANT_FAILED'
-      REVOKE_FAILED = 'REVOKE_FAILED'
-      GRANT_AND_REVOKE_FAILED = 'GRANT_AND_REVOKE_FAILED'
-      COMPLETED = 'COMPLETED'
-      INACCESSIBLE = 'INACCESSIBLE'
-    end
-
-    module SubscriptionGrantStatus
-      GRANT_PENDING = 'GRANT_PENDING'
-      REVOKE_PENDING = 'REVOKE_PENDING'
-      GRANT_IN_PROGRESS = 'GRANT_IN_PROGRESS'
-      REVOKE_IN_PROGRESS = 'REVOKE_IN_PROGRESS'
-      GRANTED = 'GRANTED'
-      REVOKED = 'REVOKED'
-      GRANT_FAILED = 'GRANT_FAILED'
-      REVOKE_FAILED = 'REVOKE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the subscription grant.</p>
@@ -14703,13 +14215,7 @@ module Aws::DataZone
       :assets,
       :subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriptionRequestStatus
-      PENDING = 'PENDING'
-      ACCEPTED = 'ACCEPTED'
-      REJECTED = 'REJECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the subscription request.</p>
@@ -14771,13 +14277,7 @@ module Aws::DataZone
       :existing_subscription_id,
       :metadata_forms_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriptionStatus
-      APPROVED = 'APPROVED'
-      REVOKED = 'REVOKED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the subscription.</p>
@@ -14827,7 +14327,7 @@ module Aws::DataZone
       :subscription_request_id,
       :retain_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the subscription target configuration.</p>
@@ -14841,7 +14341,7 @@ module Aws::DataZone
       :form_name,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the subscription target.</p>
@@ -14907,7 +14407,7 @@ module Aws::DataZone
       :subscription_target_config,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -14920,24 +14420,12 @@ module Aws::DataZone
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetEntityType
-      DOMAIN_UNIT = 'DOMAIN_UNIT'
-      ENVIRONMENT_BLUEPRINT_CONFIGURATION = 'ENVIRONMENT_BLUEPRINT_CONFIGURATION'
-      ENVIRONMENT_PROFILE = 'ENVIRONMENT_PROFILE'
-      ASSET_TYPE = 'ASSET_TYPE'
-    end
-
-    module TaskStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the term relations.</p>
@@ -14951,7 +14439,7 @@ module Aws::DataZone
       :is_a,
       :classifies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure indicating matched terms for an attribute.</p>
@@ -14969,7 +14457,7 @@ module Aws::DataZone
       :text,
       :match_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -14978,7 +14466,7 @@ module Aws::DataZone
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time series data points form.</p>
@@ -15004,7 +14492,7 @@ module Aws::DataZone
       :timestamp,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time series data points form.</p>
@@ -15034,7 +14522,7 @@ module Aws::DataZone
       :content,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the time series data points form.</p>
@@ -15064,79 +14552,7 @@ module Aws::DataZone
       :content_summary,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeSeriesEntityType
-      ASSET = 'ASSET'
-      LISTING = 'LISTING'
-    end
-
-    module Timezone
-      UTC = 'UTC'
-      AFRICA_JOHANNESBURG = 'AFRICA_JOHANNESBURG'
-      AMERICA_MONTREAL = 'AMERICA_MONTREAL'
-      AMERICA_SAO_PAULO = 'AMERICA_SAO_PAULO'
-      ASIA_BAHRAIN = 'ASIA_BAHRAIN'
-      ASIA_BANGKOK = 'ASIA_BANGKOK'
-      ASIA_CALCUTTA = 'ASIA_CALCUTTA'
-      ASIA_DUBAI = 'ASIA_DUBAI'
-      ASIA_HONG_KONG = 'ASIA_HONG_KONG'
-      ASIA_JAKARTA = 'ASIA_JAKARTA'
-      ASIA_KUALA_LUMPUR = 'ASIA_KUALA_LUMPUR'
-      ASIA_SEOUL = 'ASIA_SEOUL'
-      ASIA_SHANGHAI = 'ASIA_SHANGHAI'
-      ASIA_SINGAPORE = 'ASIA_SINGAPORE'
-      ASIA_TAIPEI = 'ASIA_TAIPEI'
-      ASIA_TOKYO = 'ASIA_TOKYO'
-      AUSTRALIA_MELBOURNE = 'AUSTRALIA_MELBOURNE'
-      AUSTRALIA_SYDNEY = 'AUSTRALIA_SYDNEY'
-      CANADA_CENTRAL = 'CANADA_CENTRAL'
-      CET = 'CET'
-      CST6CDT = 'CST6CDT'
-      ETC_GMT = 'ETC_GMT'
-      ETC_GMT0 = 'ETC_GMT0'
-      ETC_GMT_ADD_0 = 'ETC_GMT_ADD_0'
-      ETC_GMT_ADD_1 = 'ETC_GMT_ADD_1'
-      ETC_GMT_ADD_10 = 'ETC_GMT_ADD_10'
-      ETC_GMT_ADD_11 = 'ETC_GMT_ADD_11'
-      ETC_GMT_ADD_12 = 'ETC_GMT_ADD_12'
-      ETC_GMT_ADD_2 = 'ETC_GMT_ADD_2'
-      ETC_GMT_ADD_3 = 'ETC_GMT_ADD_3'
-      ETC_GMT_ADD_4 = 'ETC_GMT_ADD_4'
-      ETC_GMT_ADD_5 = 'ETC_GMT_ADD_5'
-      ETC_GMT_ADD_6 = 'ETC_GMT_ADD_6'
-      ETC_GMT_ADD_7 = 'ETC_GMT_ADD_7'
-      ETC_GMT_ADD_8 = 'ETC_GMT_ADD_8'
-      ETC_GMT_ADD_9 = 'ETC_GMT_ADD_9'
-      ETC_GMT_NEG_0 = 'ETC_GMT_NEG_0'
-      ETC_GMT_NEG_1 = 'ETC_GMT_NEG_1'
-      ETC_GMT_NEG_10 = 'ETC_GMT_NEG_10'
-      ETC_GMT_NEG_11 = 'ETC_GMT_NEG_11'
-      ETC_GMT_NEG_12 = 'ETC_GMT_NEG_12'
-      ETC_GMT_NEG_13 = 'ETC_GMT_NEG_13'
-      ETC_GMT_NEG_14 = 'ETC_GMT_NEG_14'
-      ETC_GMT_NEG_2 = 'ETC_GMT_NEG_2'
-      ETC_GMT_NEG_3 = 'ETC_GMT_NEG_3'
-      ETC_GMT_NEG_4 = 'ETC_GMT_NEG_4'
-      ETC_GMT_NEG_5 = 'ETC_GMT_NEG_5'
-      ETC_GMT_NEG_6 = 'ETC_GMT_NEG_6'
-      ETC_GMT_NEG_7 = 'ETC_GMT_NEG_7'
-      ETC_GMT_NEG_8 = 'ETC_GMT_NEG_8'
-      ETC_GMT_NEG_9 = 'ETC_GMT_NEG_9'
-      EUROPE_DUBLIN = 'EUROPE_DUBLIN'
-      EUROPE_LONDON = 'EUROPE_LONDON'
-      EUROPE_PARIS = 'EUROPE_PARIS'
-      EUROPE_STOCKHOLM = 'EUROPE_STOCKHOLM'
-      EUROPE_ZURICH = 'EUROPE_ZURICH'
-      ISRAEL = 'ISRAEL'
-      MEXICO_GENERAL = 'MEXICO_GENERAL'
-      MST7MDT = 'MST7MDT'
-      PACIFIC_AUCKLAND = 'PACIFIC_AUCKLAND'
-      US_CENTRAL = 'US_CENTRAL'
-      US_EASTERN = 'US_EASTERN'
-      US_MOUNTAIN = 'US_MOUNTAIN'
-      US_PACIFIC = 'US_PACIFIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The topic of the notification.</p>
@@ -15154,13 +14570,7 @@ module Aws::DataZone
       :resource,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TypesSearchScope
-      ASSET_TYPE = 'ASSET_TYPE'
-      FORM_TYPE = 'FORM_TYPE'
-      LINEAGE_NODE_TYPE = 'LINEAGE_NODE_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have permission to perform this action.</p>
@@ -15169,13 +14579,13 @@ module Aws::DataZone
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the policy of creating an environment.</p>
     class Unit < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -15188,12 +14598,12 @@ module Aws::DataZone
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15224,7 +14634,7 @@ module Aws::DataZone
       :resolution_strategy,
       :account_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -15275,7 +14685,7 @@ module Aws::DataZone
       :updated_by,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15304,7 +14714,7 @@ module Aws::DataZone
       :description,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -15353,7 +14763,7 @@ module Aws::DataZone
       :effective_column_names,
       :effective_row_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15378,7 +14788,7 @@ module Aws::DataZone
       :aws_location,
       :props,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -15423,7 +14833,7 @@ module Aws::DataZone
       :props,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15479,7 +14889,7 @@ module Aws::DataZone
       :recommendation,
       :retain_permissions_on_revoke_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -15584,7 +14994,7 @@ module Aws::DataZone
       :self_grant_status,
       :retain_permissions_on_revoke_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -15620,7 +15030,7 @@ module Aws::DataZone
       :name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -15658,7 +15068,7 @@ module Aws::DataZone
       :name,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15679,7 +15089,7 @@ module Aws::DataZone
       :description,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -15724,7 +15134,7 @@ module Aws::DataZone
       :created_by,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15753,7 +15163,7 @@ module Aws::DataZone
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -15782,7 +15192,7 @@ module Aws::DataZone
       :parameters,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -15818,7 +15228,7 @@ module Aws::DataZone
       :blueprint_version,
       :user_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_id
@@ -15919,7 +15329,7 @@ module Aws::DataZone
       :environment_blueprint_id,
       :environment_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:environment_profile_id] = '' unless options.key?(:environment_profile_id)
@@ -15963,7 +15373,7 @@ module Aws::DataZone
       :aws_account_id,
       :aws_account_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -16022,7 +15432,7 @@ module Aws::DataZone
       :project_id,
       :user_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16053,7 +15463,7 @@ module Aws::DataZone
       :status,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -16083,7 +15493,7 @@ module Aws::DataZone
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16124,7 +15534,7 @@ module Aws::DataZone
       :term_relations,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -16165,7 +15575,7 @@ module Aws::DataZone
       :long_description,
       :term_relations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16182,7 +15592,7 @@ module Aws::DataZone
       :group_identifier,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -16203,7 +15613,7 @@ module Aws::DataZone
       :status,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16246,7 +15656,7 @@ module Aws::DataZone
       :user_parameters,
       :project_profile_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -16308,7 +15718,7 @@ module Aws::DataZone
       :user_parameters,
       :environment_deployment_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16341,7 +15751,7 @@ module Aws::DataZone
       :environment_configurations,
       :domain_unit_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -16386,7 +15796,7 @@ module Aws::DataZone
       :last_updated_at,
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16419,7 +15829,7 @@ module Aws::DataZone
       :detail,
       :include_child_domain_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -16476,7 +15886,7 @@ module Aws::DataZone
       :created_by,
       :last_updated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16510,7 +15920,7 @@ module Aws::DataZone
       :failure_cause,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -16565,7 +15975,7 @@ module Aws::DataZone
       :assets,
       :subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16583,7 +15993,7 @@ module Aws::DataZone
       :identifier,
       :request_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -16645,7 +16055,7 @@ module Aws::DataZone
       :existing_subscription_id,
       :metadata_forms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16694,7 +16104,7 @@ module Aws::DataZone
       :manage_access_role,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -16769,7 +16179,7 @@ module Aws::DataZone
       :subscription_target_config,
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_identifier
@@ -16790,7 +16200,7 @@ module Aws::DataZone
       :type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_id
@@ -16815,7 +16225,7 @@ module Aws::DataZone
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the domain unit(s) whose projects can use this asset type while creating asset
@@ -16826,20 +16236,7 @@ module Aws::DataZone
     class UseAssetTypePolicyGrantDetail < Struct.new(
       :domain_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserAssignment
-      AUTOMATIC = 'AUTOMATIC'
-      MANUAL = 'MANUAL'
-    end
-
-    module UserDesignation
-      PROJECT_OWNER = 'PROJECT_OWNER'
-      PROJECT_CONTRIBUTOR = 'PROJECT_CONTRIBUTOR'
-      PROJECT_CATALOG_VIEWER = 'PROJECT_CATALOG_VIEWER'
-      PROJECT_CATALOG_CONSUMER = 'PROJECT_CATALOG_CONSUMER'
-      PROJECT_CATALOG_STEWARD = 'PROJECT_CATALOG_STEWARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user details of a project member.</p>
@@ -16849,7 +16246,7 @@ module Aws::DataZone
     class UserDetails < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user policy grant principal.</p>
@@ -16864,7 +16261,7 @@ module Aws::DataZone
       :all_users_grant_filter,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UserIdentifier < UserPolicyGrantPrincipal; end
       class AllUsersGrantFilter < UserPolicyGrantPrincipal; end
@@ -16883,18 +16280,11 @@ module Aws::DataZone
       :sso,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Iam < UserProfileDetails; end
       class Sso < UserProfileDetails; end
       class Unknown < UserProfileDetails; end
-    end
-
-    module UserProfileStatus
-      ASSIGNED = 'ASSIGNED'
-      NOT_ASSIGNED = 'NOT_ASSIGNED'
-      ACTIVATED = 'ACTIVATED'
-      DEACTIVATED = 'DEACTIVATED'
     end
 
     # <p>The details of the user profile.</p>
@@ -16920,25 +16310,7 @@ module Aws::DataZone
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserProfileType
-      IAM = 'IAM'
-      SSO = 'SSO'
-    end
-
-    module UserSearchType
-      SSO_USER = 'SSO_USER'
-      DATAZONE_USER = 'DATAZONE_USER'
-      DATAZONE_SSO_USER = 'DATAZONE_SSO_USER'
-      DATAZONE_IAM_USER = 'DATAZONE_IAM_USER'
-    end
-
-    module UserType
-      IAM_USER = 'IAM_USER'
-      IAM_ROLE = 'IAM_ROLE'
-      SSO_USER = 'SSO_USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The username and password of a connection.</p>
@@ -16953,7 +16325,7 @@ module Aws::DataZone
       :password,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the Amazon Web Services service.</p>
@@ -16962,7 +16334,7 @@ module Aws::DataZone
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

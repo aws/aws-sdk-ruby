@@ -6,40 +6,6 @@ module Aws::MediaLive
   # This module contains the types returned by client operations.
   module Types
 
-    # Aac Coding Mode
-    module AacCodingMode
-      AD_RECEIVER_MIX = 'AD_RECEIVER_MIX'
-      CODING_MODE_1_0 = 'CODING_MODE_1_0'
-      CODING_MODE_1_1 = 'CODING_MODE_1_1'
-      CODING_MODE_2_0 = 'CODING_MODE_2_0'
-      CODING_MODE_5_1 = 'CODING_MODE_5_1'
-    end
-
-    # Aac Input Type
-    module AacInputType
-      BROADCASTER_MIXED_AD = 'BROADCASTER_MIXED_AD'
-      NORMAL = 'NORMAL'
-    end
-
-    # Aac Profile
-    module AacProfile
-      HEV1 = 'HEV1'
-      HEV2 = 'HEV2'
-      LC = 'LC'
-    end
-
-    # Aac Rate Control Mode
-    module AacRateControlMode
-      CBR = 'CBR'
-      VBR = 'VBR'
-    end
-
-    # Aac Raw Format
-    module AacRawFormat
-      LATM_LOAS = 'LATM_LOAS'
-      NONE = 'NONE'
-    end
-
     # Aac Settings
     # @!attribute bitrate
     #   Average bitrate in bits/second. Valid values depend on rate control mode and profile.
@@ -81,65 +47,7 @@ module Aws::MediaLive
       :spec,
       :vbr_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Aac Spec
-    module AacSpec
-      MPEG2 = 'MPEG2'
-      MPEG4 = 'MPEG4'
-    end
-
-    # Aac Vbr Quality
-    module AacVbrQuality
-      HIGH = 'HIGH'
-      LOW = 'LOW'
-      MEDIUM_HIGH = 'MEDIUM_HIGH'
-      MEDIUM_LOW = 'MEDIUM_LOW'
-    end
-
-    # Ac3 Attenuation Control
-    module Ac3AttenuationControl
-      ATTENUATE_3_DB = 'ATTENUATE_3_DB'
-      NONE = 'NONE'
-    end
-
-    # Ac3 Bitstream Mode
-    module Ac3BitstreamMode
-      COMMENTARY = 'COMMENTARY'
-      COMPLETE_MAIN = 'COMPLETE_MAIN'
-      DIALOGUE = 'DIALOGUE'
-      EMERGENCY = 'EMERGENCY'
-      HEARING_IMPAIRED = 'HEARING_IMPAIRED'
-      MUSIC_AND_EFFECTS = 'MUSIC_AND_EFFECTS'
-      VISUALLY_IMPAIRED = 'VISUALLY_IMPAIRED'
-      VOICE_OVER = 'VOICE_OVER'
-    end
-
-    # Ac3 Coding Mode
-    module Ac3CodingMode
-      CODING_MODE_1_0 = 'CODING_MODE_1_0'
-      CODING_MODE_1_1 = 'CODING_MODE_1_1'
-      CODING_MODE_2_0 = 'CODING_MODE_2_0'
-      CODING_MODE_3_2_LFE = 'CODING_MODE_3_2_LFE'
-    end
-
-    # Ac3 Drc Profile
-    module Ac3DrcProfile
-      FILM_STANDARD = 'FILM_STANDARD'
-      NONE = 'NONE'
-    end
-
-    # Ac3 Lfe Filter
-    module Ac3LfeFilter
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Ac3 Metadata Control
-    module Ac3MetadataControl
-      FOLLOW_INPUT = 'FOLLOW_INPUT'
-      USE_CONFIGURED = 'USE_CONFIGURED'
+      include ::Smithy::Schema::Structure
     end
 
     # Ac3 Settings
@@ -177,12 +85,7 @@ module Aws::MediaLive
       :metadata_control,
       :attenuation_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The HTTP Accept header. Indicates the requested type fothe thumbnail.
-    module AcceptHeader
-      image_jpeg = 'image/jpeg'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for AcceptInputDeviceTransferRequest
@@ -192,19 +95,13 @@ module Aws::MediaLive
     class AcceptInputDeviceTransferRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for AcceptInputDeviceTransferResponse
     class AcceptInputDeviceTransferResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Accessibility Type
-    module AccessibilityType
-      DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES = 'DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES'
-      IMPLEMENTS_ACCESSIBILITY_FEATURES = 'IMPLEMENTS_ACCESSIBILITY_FEATURES'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for AccountConfiguration
@@ -214,21 +111,7 @@ module Aws::MediaLive
     class AccountConfiguration < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Afd Signaling
-    module AfdSignaling
-      AUTO = 'AUTO'
-      FIXED = 'FIXED'
-      NONE = 'NONE'
-    end
-
-    # Placeholder documentation for Algorithm
-    module Algorithm
-      AES128 = 'AES128'
-      AES192 = 'AES192'
-      AES256 = 'AES256'
+      include ::Smithy::Schema::Structure
     end
 
     # Ancillary Source Settings
@@ -238,7 +121,7 @@ module Aws::MediaLive
     class AncillarySourceSettings < Struct.new(
       :source_ancillary_channel_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Elemental anywhere settings
@@ -252,7 +135,7 @@ module Aws::MediaLive
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Archive Cdn Settings
@@ -262,7 +145,7 @@ module Aws::MediaLive
     class ArchiveCdnSettings < Struct.new(
       :archive_s3_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Archive Container Settings
@@ -276,7 +159,7 @@ module Aws::MediaLive
       :m2ts_settings,
       :raw_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Archive Group Settings
@@ -294,7 +177,7 @@ module Aws::MediaLive
       :destination,
       :rollover_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Archive Output Settings
@@ -312,7 +195,7 @@ module Aws::MediaLive
       :extension,
       :name_modifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Archive S3 Settings
@@ -322,19 +205,19 @@ module Aws::MediaLive
     class ArchiveS3Settings < Struct.new(
       :canned_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Arib Destination Settings
     class AribDestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Arib Source Settings
     class AribSourceSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Channel Mapping
@@ -348,7 +231,7 @@ module Aws::MediaLive
       :input_channel_levels,
       :output_channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Codec Settings
@@ -382,7 +265,7 @@ module Aws::MediaLive
       :pass_through_settings,
       :wav_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Description
@@ -443,19 +326,7 @@ module Aws::MediaLive
       :audio_dash_roles,
       :dvb_dash_accessibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Audio Description Audio Type Control
-    module AudioDescriptionAudioTypeControl
-      FOLLOW_INPUT = 'FOLLOW_INPUT'
-      USE_CONFIGURED = 'USE_CONFIGURED'
-    end
-
-    # Audio Description Language Code Control
-    module AudioDescriptionLanguageCodeControl
-      FOLLOW_INPUT = 'FOLLOW_INPUT'
-      USE_CONFIGURED = 'USE_CONFIGURED'
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Dolby EDecode
@@ -465,7 +336,7 @@ module Aws::MediaLive
     class AudioDolbyEDecode < Struct.new(
       :program_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Hls Rendition Selection
@@ -479,7 +350,7 @@ module Aws::MediaLive
       :group_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Language Selection
@@ -493,24 +364,7 @@ module Aws::MediaLive
       :language_code,
       :language_selection_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Audio Language Selection Policy
-    module AudioLanguageSelectionPolicy
-      LOOSE = 'LOOSE'
-      STRICT = 'STRICT'
-    end
-
-    # Audio Normalization Algorithm
-    module AudioNormalizationAlgorithm
-      ITU_1770_1 = 'ITU_1770_1'
-      ITU_1770_2 = 'ITU_1770_2'
-    end
-
-    # Audio Normalization Algorithm Control
-    module AudioNormalizationAlgorithmControl
-      CORRECT_AUDIO = 'CORRECT_AUDIO'
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Normalization Settings
@@ -528,13 +382,7 @@ module Aws::MediaLive
       :algorithm_control,
       :target_lkfs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Audio Only Hls Segment Type
-    module AudioOnlyHlsSegmentType
-      AAC = 'AAC'
-      FMP4 = 'FMP4'
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Only Hls Settings
@@ -570,15 +418,7 @@ module Aws::MediaLive
       :audio_track_type,
       :segment_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Audio Only Hls Track Type
-    module AudioOnlyHlsTrackType
-      ALTERNATE_AUDIO_AUTO_SELECT = 'ALTERNATE_AUDIO_AUTO_SELECT'
-      ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT = 'ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT'
-      ALTERNATE_AUDIO_NOT_AUTO_SELECT = 'ALTERNATE_AUDIO_NOT_AUTO_SELECT'
-      AUDIO_ONLY_VARIANT_STREAM = 'AUDIO_ONLY_VARIANT_STREAM'
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Pid Selection
@@ -588,7 +428,7 @@ module Aws::MediaLive
     class AudioPidSelection < Struct.new(
       :pid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Selector
@@ -602,7 +442,7 @@ module Aws::MediaLive
       :name,
       :selector_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Selector Settings
@@ -624,7 +464,7 @@ module Aws::MediaLive
       :audio_pid_selection,
       :audio_track_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for AudioSilenceFailoverSettings
@@ -638,7 +478,7 @@ module Aws::MediaLive
       :audio_selector_name,
       :audio_silence_threshold_msec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Track
@@ -648,7 +488,7 @@ module Aws::MediaLive
     class AudioTrack < Struct.new(
       :track,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Track Selection
@@ -662,15 +502,7 @@ module Aws::MediaLive
       :tracks,
       :dolby_e_decode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Audio Type
-    module AudioType
-      CLEAN_EFFECTS = 'CLEAN_EFFECTS'
-      HEARING_IMPAIRED = 'HEARING_IMPAIRED'
-      UNDEFINED = 'UNDEFINED'
-      VISUAL_IMPAIRED_COMMENTARY = 'VISUAL_IMPAIRED_COMMENTARY'
+      include ::Smithy::Schema::Structure
     end
 
     # Audio Watermark Settings
@@ -680,13 +512,7 @@ module Aws::MediaLive
     class AudioWatermarkSettings < Struct.new(
       :nielsen_watermarks_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Authentication Scheme
-    module AuthenticationScheme
-      AKAMAI = 'AKAMAI'
-      COMMON = 'COMMON'
+      include ::Smithy::Schema::Structure
     end
 
     # The settings for Automatic Input Failover.
@@ -708,7 +534,7 @@ module Aws::MediaLive
       :input_preference,
       :secondary_input_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Av1 Color Space Settings
@@ -730,51 +556,7 @@ module Aws::MediaLive
       :rec601_settings,
       :rec709_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Av1 Gop Size Units
-    module Av1GopSizeUnits
-      FRAMES = 'FRAMES'
-      SECONDS = 'SECONDS'
-    end
-
-    # Av1 Level
-    module Av1Level
-      AV1_LEVEL_2 = 'AV1_LEVEL_2'
-      AV1_LEVEL_2_1 = 'AV1_LEVEL_2_1'
-      AV1_LEVEL_3 = 'AV1_LEVEL_3'
-      AV1_LEVEL_3_1 = 'AV1_LEVEL_3_1'
-      AV1_LEVEL_4 = 'AV1_LEVEL_4'
-      AV1_LEVEL_4_1 = 'AV1_LEVEL_4_1'
-      AV1_LEVEL_5 = 'AV1_LEVEL_5'
-      AV1_LEVEL_5_1 = 'AV1_LEVEL_5_1'
-      AV1_LEVEL_5_2 = 'AV1_LEVEL_5_2'
-      AV1_LEVEL_5_3 = 'AV1_LEVEL_5_3'
-      AV1_LEVEL_6 = 'AV1_LEVEL_6'
-      AV1_LEVEL_6_1 = 'AV1_LEVEL_6_1'
-      AV1_LEVEL_6_2 = 'AV1_LEVEL_6_2'
-      AV1_LEVEL_6_3 = 'AV1_LEVEL_6_3'
-      AV1_LEVEL_AUTO = 'AV1_LEVEL_AUTO'
-    end
-
-    # Av1 Look Ahead Rate Control
-    module Av1LookAheadRateControl
-      HIGH = 'HIGH'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-    end
-
-    # Av1 Rate Control Mode
-    module Av1RateControlMode
-      CBR = 'CBR'
-      QVBR = 'QVBR'
-    end
-
-    # Av1 Scene Change Detect
-    module Av1SceneChangeDetect
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Av1 Settings
@@ -878,7 +660,7 @@ module Aws::MediaLive
       :bitrate,
       :rate_control_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Avail Blanking
@@ -892,13 +674,7 @@ module Aws::MediaLive
       :avail_blanking_image,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Avail Blanking State
-    module AvailBlankingState
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Avail Configuration
@@ -915,7 +691,7 @@ module Aws::MediaLive
       :avail_settings,
       :scte35_segmentation_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Avail Settings
@@ -933,7 +709,7 @@ module Aws::MediaLive
       :scte35_splice_insert,
       :scte35_time_signal_apos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for BadGatewayException
@@ -943,7 +719,7 @@ module Aws::MediaLive
     class BadGatewayException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for BadRequestException
@@ -953,7 +729,7 @@ module Aws::MediaLive
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Bandwidth Reduction Filter Settings
@@ -972,24 +748,7 @@ module Aws::MediaLive
       :post_filter_sharpening,
       :strength,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Bandwidth Reduction Filter Strength
-    module BandwidthReductionFilterStrength
-      AUTO = 'AUTO'
-      STRENGTH_1 = 'STRENGTH_1'
-      STRENGTH_2 = 'STRENGTH_2'
-      STRENGTH_3 = 'STRENGTH_3'
-      STRENGTH_4 = 'STRENGTH_4'
-    end
-
-    # Bandwidth Reduction Post Filter Sharpening
-    module BandwidthReductionPostFilterSharpening
-      DISABLED = 'DISABLED'
-      SHARPENING_1 = 'SHARPENING_1'
-      SHARPENING_2 = 'SHARPENING_2'
-      SHARPENING_3 = 'SHARPENING_3'
+      include ::Smithy::Schema::Structure
     end
 
     # A request to delete resources
@@ -1011,7 +770,7 @@ module Aws::MediaLive
       :input_security_group_ids,
       :multiplex_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for BatchDeleteResponse
@@ -1025,7 +784,7 @@ module Aws::MediaLive
       :failed,
       :successful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Details from a failed operation
@@ -1047,7 +806,7 @@ module Aws::MediaLive
       :id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A list of schedule actions to create (in a request) or that have been created (in a response).
@@ -1057,7 +816,7 @@ module Aws::MediaLive
     class BatchScheduleActionCreateRequest < Struct.new(
       :schedule_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # List of actions that have been created in the schedule.
@@ -1067,7 +826,7 @@ module Aws::MediaLive
     class BatchScheduleActionCreateResult < Struct.new(
       :schedule_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A list of schedule actions to delete.
@@ -1077,7 +836,7 @@ module Aws::MediaLive
     class BatchScheduleActionDeleteRequest < Struct.new(
       :action_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # List of actions that have been deleted from the schedule.
@@ -1087,7 +846,7 @@ module Aws::MediaLive
     class BatchScheduleActionDeleteResult < Struct.new(
       :schedule_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to start resources
@@ -1101,7 +860,7 @@ module Aws::MediaLive
       :channel_ids,
       :multiplex_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for BatchStartResponse
@@ -1115,7 +874,7 @@ module Aws::MediaLive
       :failed,
       :successful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to stop resources
@@ -1129,7 +888,7 @@ module Aws::MediaLive
       :channel_ids,
       :multiplex_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for BatchStopResponse
@@ -1143,7 +902,7 @@ module Aws::MediaLive
       :failed,
       :successful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Details from a successful operation
@@ -1161,7 +920,7 @@ module Aws::MediaLive
       :id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # List of actions to create and list of actions to delete.
@@ -1179,7 +938,7 @@ module Aws::MediaLive
       :creates,
       :deletes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for BatchUpdateScheduleResponse
@@ -1193,7 +952,7 @@ module Aws::MediaLive
       :creates,
       :deletes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Blackout Slate
@@ -1219,33 +978,7 @@ module Aws::MediaLive
       :network_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Blackout Slate Network End Blackout
-    module BlackoutSlateNetworkEndBlackout
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Blackout Slate State
-    module BlackoutSlateState
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Burn In Alignment
-    module BurnInAlignment
-      CENTERED = 'CENTERED'
-      LEFT = 'LEFT'
-      SMART = 'SMART'
-    end
-
-    # Burn In Background Color
-    module BurnInBackgroundColor
-      BLACK = 'BLACK'
-      NONE = 'NONE'
-      WHITE = 'WHITE'
+      include ::Smithy::Schema::Structure
     end
 
     # Burn In Destination Settings
@@ -1319,40 +1052,7 @@ module Aws::MediaLive
       :x_position,
       :y_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Burn In Font Color
-    module BurnInFontColor
-      BLACK = 'BLACK'
-      BLUE = 'BLUE'
-      GREEN = 'GREEN'
-      RED = 'RED'
-      WHITE = 'WHITE'
-      YELLOW = 'YELLOW'
-    end
-
-    # Burn In Outline Color
-    module BurnInOutlineColor
-      BLACK = 'BLACK'
-      BLUE = 'BLUE'
-      GREEN = 'GREEN'
-      RED = 'RED'
-      WHITE = 'WHITE'
-      YELLOW = 'YELLOW'
-    end
-
-    # Burn In Shadow Color
-    module BurnInShadowColor
-      BLACK = 'BLACK'
-      NONE = 'NONE'
-      WHITE = 'WHITE'
-    end
-
-    # Burn In Teletext Grid Control
-    module BurnInTeletextGridControl
-      FIXED = 'FIXED'
-      SCALED = 'SCALED'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CancelInputDeviceTransferRequest
@@ -1362,13 +1062,13 @@ module Aws::MediaLive
     class CancelInputDeviceTransferRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CancelInputDeviceTransferResponse
     class CancelInputDeviceTransferResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Caption Description
@@ -1406,7 +1106,7 @@ module Aws::MediaLive
       :caption_dash_roles,
       :dvb_dash_accessibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Caption Destination Settings
@@ -1464,7 +1164,7 @@ module Aws::MediaLive
       :ttml_destination_settings,
       :webvtt_destination_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Maps a caption channel to an ISO 693-2 language code (http://www.loc.gov/standards/iso639-2), with an optional description.
@@ -1482,7 +1182,7 @@ module Aws::MediaLive
       :language_code,
       :language_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Caption Rectangle
@@ -1513,7 +1213,7 @@ module Aws::MediaLive
       :top_offset,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Caption Selector
@@ -1531,7 +1231,7 @@ module Aws::MediaLive
       :name,
       :selector_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Caption Selector Settings
@@ -1565,15 +1265,7 @@ module Aws::MediaLive
       :scte27_source_settings,
       :teletext_source_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Maximum CDI input resolution; SD is 480i and 576i up to 30 frames-per-second (fps), HD is 720p up to 60 fps / 1080i up to 30 fps, FHD is 1080p up to 60 fps, UHD is 2160p up to 60 fps
-    module CdiInputResolution
-      SD = 'SD'
-      HD = 'HD'
-      FHD = 'FHD'
-      UHD = 'UHD'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CdiInputSpecification
@@ -1583,7 +1275,7 @@ module Aws::MediaLive
     class CdiInputSpecification < Struct.new(
       :resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for Channel
@@ -1671,13 +1363,7 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # A standard channel has two encoding pipelines and a single pipeline channel only has one.
-    module ChannelClass
-      STANDARD = 'STANDARD'
-      SINGLE_PIPELINE = 'SINGLE_PIPELINE'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ChannelEgressEndpoint
@@ -1687,7 +1373,7 @@ module Aws::MediaLive
     class ChannelEgressEndpoint < Struct.new(
       :source_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ChannelEngineVersionRequest
@@ -1697,7 +1383,7 @@ module Aws::MediaLive
     class ChannelEngineVersionRequest < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ChannelEngineVersionResponse
@@ -1711,39 +1397,7 @@ module Aws::MediaLive
       :expiration_date,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Property of RestartChannelPipelinesRequest
-    module ChannelPipelineIdToRestart
-      PIPELINE_0 = 'PIPELINE_0'
-      PIPELINE_1 = 'PIPELINE_1'
-    end
-
-    # Used in DescribeChannelPlacementGroupResult
-    module ChannelPlacementGroupState
-      UNASSIGNED = 'UNASSIGNED'
-      ASSIGNING = 'ASSIGNING'
-      ASSIGNED = 'ASSIGNED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETED = 'DELETED'
-      UNASSIGNING = 'UNASSIGNING'
-    end
-
-    # Placeholder documentation for ChannelState
-    module ChannelState
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      IDLE = 'IDLE'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      RECOVERING = 'RECOVERING'
-      STOPPING = 'STOPPING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ChannelSummary
@@ -1827,7 +1481,7 @@ module Aws::MediaLive
       :channel_engine_version,
       :used_channel_engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to claim an AWS Elemental device that you have purchased from a third-party vendor.
@@ -1837,21 +1491,13 @@ module Aws::MediaLive
     class ClaimDeviceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ClaimDeviceResponse
     class ClaimDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The comparison operator used to compare the specified statistic and the threshold.
-    module CloudWatchAlarmTemplateComparisonOperator
-      GreaterThanOrEqualToThreshold = 'GreaterThanOrEqualToThreshold'
-      GreaterThanThreshold = 'GreaterThanThreshold'
-      LessThanThreshold = 'LessThanThreshold'
-      LessThanOrEqualToThreshold = 'LessThanOrEqualToThreshold'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CloudWatchAlarmTemplateGroupSummary
@@ -1889,16 +1535,7 @@ module Aws::MediaLive
       :tags,
       :template_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The statistic to apply to the alarm's metric data.
-    module CloudWatchAlarmTemplateStatistic
-      SampleCount = 'SampleCount'
-      Average = 'Average'
-      Sum = 'Sum'
-      Minimum = 'Minimum'
-      Maximum = 'Maximum'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CloudWatchAlarmTemplateSummary
@@ -1972,28 +1609,7 @@ module Aws::MediaLive
       :threshold,
       :treat_missing_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The resource type this template should dynamically generate cloudwatch metric alarms for.
-    module CloudWatchAlarmTemplateTargetResourceType
-      CLOUDFRONT_DISTRIBUTION = 'CLOUDFRONT_DISTRIBUTION'
-      MEDIALIVE_MULTIPLEX = 'MEDIALIVE_MULTIPLEX'
-      MEDIALIVE_CHANNEL = 'MEDIALIVE_CHANNEL'
-      MEDIALIVE_INPUT_DEVICE = 'MEDIALIVE_INPUT_DEVICE'
-      MEDIAPACKAGE_CHANNEL = 'MEDIAPACKAGE_CHANNEL'
-      MEDIAPACKAGE_ORIGIN_ENDPOINT = 'MEDIAPACKAGE_ORIGIN_ENDPOINT'
-      MEDIACONNECT_FLOW = 'MEDIACONNECT_FLOW'
-      S3_BUCKET = 'S3_BUCKET'
-      MEDIATAILOR_PLAYBACK_CONFIGURATION = 'MEDIATAILOR_PLAYBACK_CONFIGURATION'
-    end
-
-    # Specifies how missing data points are treated when evaluating the alarm's condition.
-    module CloudWatchAlarmTemplateTreatMissingData
-      notBreaching = 'notBreaching'
-      breaching = 'breaching'
-      ignore = 'ignore'
-      missing = 'missing'
+      include ::Smithy::Schema::Structure
     end
 
     # Used in DescribeClusterResult, DescribeClusterSummary, UpdateClusterResult.
@@ -2007,7 +1623,7 @@ module Aws::MediaLive
       :default_route,
       :interface_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in a CreateClusterRequest.
@@ -2021,7 +1637,7 @@ module Aws::MediaLive
       :default_route,
       :interface_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ClusterNetworkSettingsUpdateRequest
@@ -2035,28 +1651,7 @@ module Aws::MediaLive
       :default_route,
       :interface_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in DescribeClusterSummary, DescribeClusterResult, UpdateClusterResult.
-    module ClusterState
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETED = 'DELETED'
-    end
-
-    # Used in CreateClusterSummary, DescribeClusterSummary, DescribeClusterResult, UpdateClusterResult.
-    module ClusterType
-      ON_PREMISES = 'ON_PREMISES'
-    end
-
-    # Cmaf Id3 Behavior
-    module CmafId3Behavior
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Add an array item for each language. Follow the order of the caption descriptions. For example, if the first caption description is for German, then the first array item must be for German, and its caption channel must be set to 1. The second array item must be 2, and so on.
@@ -2070,7 +1665,7 @@ module Aws::MediaLive
       :caption_channel,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Cmaf Ingest Group Settings
@@ -2140,7 +1735,7 @@ module Aws::MediaLive
       :timed_metadata_id3_period,
       :timed_metadata_passthrough,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Cmaf Ingest Output Settings
@@ -2150,38 +1745,7 @@ module Aws::MediaLive
     class CmafIngestOutputSettings < Struct.new(
       :name_modifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Cmaf Ingest Segment Length Units
-    module CmafIngestSegmentLengthUnits
-      MILLISECONDS = 'MILLISECONDS'
-      SECONDS = 'SECONDS'
-    end
-
-    # Cmaf KLVBehavior
-    module CmafKLVBehavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # Cmaf Nielsen Id3 Behavior
-    module CmafNielsenId3Behavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # Cmaf Timed Metadata Id3 Frame
-    module CmafTimedMetadataId3Frame
-      NONE = 'NONE'
-      PRIV = 'PRIV'
-      TDRL = 'TDRL'
-    end
-
-    # Cmaf Timed Metadata Passthrough
-    module CmafTimedMetadataPassthrough
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Property of ColorCorrectionSettings. Used for custom color space conversion. The object identifies one 3D LUT file and specifies the input/output color space combination that the file will be used for.
@@ -2199,7 +1763,7 @@ module Aws::MediaLive
       :output_color_space,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Property of encoderSettings. Controls color conversion when you are using 3D LUT files to perform color conversion on video.
@@ -2209,21 +1773,13 @@ module Aws::MediaLive
     class ColorCorrectionSettings < Struct.new(
       :global_color_corrections,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Property of colorCorrections. When you are using 3D LUT files to perform color conversion on video, these are the supported color spaces.
-    module ColorSpace
-      HDR10 = 'HDR10'
-      HLG_2020 = 'HLG_2020'
-      REC_601 = 'REC_601'
-      REC_709 = 'REC_709'
+      include ::Smithy::Schema::Structure
     end
 
     # Passthrough applies no color space conversion to the output
     class ColorSpacePassthroughSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ConflictException
@@ -2233,12 +1789,7 @@ module Aws::MediaLive
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Specifies the media type of the thumbnail.
-    module ContentType
-      image_jpeg = 'image/jpeg'
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a channel placement group.
@@ -2264,7 +1815,7 @@ module Aws::MediaLive
       :request_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateChannelPlacementGroupResponse
@@ -2298,7 +1849,7 @@ module Aws::MediaLive
       :nodes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a channel
@@ -2374,7 +1925,7 @@ module Aws::MediaLive
       :channel_engine_version,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateChannelResponse
@@ -2384,7 +1935,7 @@ module Aws::MediaLive
     class CreateChannelResponse < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateCloudWatchAlarmTemplateGroupRequest
@@ -2406,7 +1957,7 @@ module Aws::MediaLive
       :tags,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateCloudWatchAlarmTemplateGroupResponse
@@ -2440,7 +1991,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateCloudWatchAlarmTemplateRequest
@@ -2502,7 +2053,7 @@ module Aws::MediaLive
       :treat_missing_data,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateCloudWatchAlarmTemplateResponse
@@ -2576,7 +2127,7 @@ module Aws::MediaLive
       :threshold,
       :treat_missing_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Create as many Clusters as you want, but create at least one. Each Cluster groups together Nodes that you want to treat as a collection. Within the Cluster, you will set up some Nodes as active Nodes, and some as backup Nodes, for Node failover purposes. Each Node can belong to only one Cluster.
@@ -2606,7 +2157,7 @@ module Aws::MediaLive
       :request_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateClusterResponse
@@ -2644,7 +2195,7 @@ module Aws::MediaLive
       :network_settings,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateEventBridgeRuleTemplateGroupRequest
@@ -2666,7 +2217,7 @@ module Aws::MediaLive
       :tags,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateEventBridgeRuleTemplateGroupResponse
@@ -2700,7 +2251,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateEventBridgeRuleTemplateRequest
@@ -2734,7 +2285,7 @@ module Aws::MediaLive
       :tags,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateEventBridgeRuleTemplateResponse
@@ -2780,7 +2331,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The name of the input
@@ -2859,7 +2410,7 @@ module Aws::MediaLive
       :smpte2110_receiver_group_settings,
       :sdi_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateInputResponse
@@ -2869,7 +2420,7 @@ module Aws::MediaLive
     class CreateInputResponse < Struct.new(
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The IPv4 CIDRs to whitelist for this Input Security Group
@@ -2883,7 +2434,7 @@ module Aws::MediaLive
       :tags,
       :whitelist_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateInputSecurityGroupResponse
@@ -2893,7 +2444,7 @@ module Aws::MediaLive
     class CreateInputSecurityGroupResponse < Struct.new(
       :security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a program in a multiplex.
@@ -2916,7 +2467,7 @@ module Aws::MediaLive
       :program_name,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateMultiplexProgramResponse
@@ -2926,7 +2477,7 @@ module Aws::MediaLive
     class CreateMultiplexProgramResponse < Struct.new(
       :multiplex_program,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a multiplex.
@@ -2953,7 +2504,7 @@ module Aws::MediaLive
       :request_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateMultiplexResponse
@@ -2963,7 +2514,7 @@ module Aws::MediaLive
     class CreateMultiplexResponse < Struct.new(
       :multiplex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a Network.
@@ -2989,7 +2540,7 @@ module Aws::MediaLive
       :routes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateNetworkResponse
@@ -3023,7 +2574,7 @@ module Aws::MediaLive
       :routes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a new node registration script.
@@ -3053,7 +2604,7 @@ module Aws::MediaLive
       :request_id,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateNodeRegistrationScriptResponse
@@ -3063,7 +2614,7 @@ module Aws::MediaLive
     class CreateNodeRegistrationScriptResponse < Struct.new(
       :node_registration_script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a node
@@ -3093,7 +2644,7 @@ module Aws::MediaLive
       :role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateNodeResponse
@@ -3143,7 +2694,7 @@ module Aws::MediaLive
       :state,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a partner input
@@ -3162,7 +2713,7 @@ module Aws::MediaLive
       :request_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreatePartnerInputResponse
@@ -3172,7 +2723,7 @@ module Aws::MediaLive
     class CreatePartnerInputResponse < Struct.new(
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to create a SdiSource.
@@ -3198,7 +2749,7 @@ module Aws::MediaLive
       :tags,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateSdiSourceResponse
@@ -3208,7 +2759,7 @@ module Aws::MediaLive
     class CreateSdiSourceResponse < Struct.new(
       :sdi_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateSignalMapRequest
@@ -3242,7 +2793,7 @@ module Aws::MediaLive
       :tags,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateSignalMapResponse
@@ -3320,7 +2871,7 @@ module Aws::MediaLive
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for CreateTagsRequest
@@ -3334,37 +2885,7 @@ module Aws::MediaLive
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Dash Role Audio
-    module DashRoleAudio
-      ALTERNATE = 'ALTERNATE'
-      COMMENTARY = 'COMMENTARY'
-      DESCRIPTION = 'DESCRIPTION'
-      DUB = 'DUB'
-      EMERGENCY = 'EMERGENCY'
-      ENHANCED_AUDIO_INTELLIGIBILITY = 'ENHANCED-AUDIO-INTELLIGIBILITY'
-      KARAOKE = 'KARAOKE'
-      MAIN = 'MAIN'
-      SUPPLEMENTARY = 'SUPPLEMENTARY'
-    end
-
-    # Dash Role Caption
-    module DashRoleCaption
-      ALTERNATE = 'ALTERNATE'
-      CAPTION = 'CAPTION'
-      COMMENTARY = 'COMMENTARY'
-      DESCRIPTION = 'DESCRIPTION'
-      DUB = 'DUB'
-      EASYREADER = 'EASYREADER'
-      EMERGENCY = 'EMERGENCY'
-      FORCED_SUBTITLE = 'FORCED-SUBTITLE'
-      KARAOKE = 'KARAOKE'
-      MAIN = 'MAIN'
-      METADATA = 'METADATA'
-      SUBTITLE = 'SUBTITLE'
-      SUPPLEMENTARY = 'SUPPLEMENTARY'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteChannelPlacementGroupRequest
@@ -3378,7 +2899,7 @@ module Aws::MediaLive
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteChannelPlacementGroupResponse
@@ -3412,7 +2933,7 @@ module Aws::MediaLive
       :nodes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteChannelRequest
@@ -3422,7 +2943,7 @@ module Aws::MediaLive
     class DeleteChannelRequest < Struct.new(
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteChannelResponse
@@ -3510,7 +3031,7 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteCloudWatchAlarmTemplateGroupRequest
@@ -3520,7 +3041,7 @@ module Aws::MediaLive
     class DeleteCloudWatchAlarmTemplateGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteCloudWatchAlarmTemplateRequest
@@ -3530,7 +3051,7 @@ module Aws::MediaLive
     class DeleteCloudWatchAlarmTemplateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteClusterRequest
@@ -3540,7 +3061,7 @@ module Aws::MediaLive
     class DeleteClusterRequest < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteClusterResponse
@@ -3578,7 +3099,7 @@ module Aws::MediaLive
       :network_settings,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteEventBridgeRuleTemplateGroupRequest
@@ -3588,7 +3109,7 @@ module Aws::MediaLive
     class DeleteEventBridgeRuleTemplateGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteEventBridgeRuleTemplateRequest
@@ -3598,7 +3119,7 @@ module Aws::MediaLive
     class DeleteEventBridgeRuleTemplateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteInputRequest
@@ -3608,13 +3129,13 @@ module Aws::MediaLive
     class DeleteInputRequest < Struct.new(
       :input_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteInputResponse
     class DeleteInputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteInputSecurityGroupRequest
@@ -3624,13 +3145,13 @@ module Aws::MediaLive
     class DeleteInputSecurityGroupRequest < Struct.new(
       :input_security_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteInputSecurityGroupResponse
     class DeleteInputSecurityGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteMultiplexProgramRequest
@@ -3644,7 +3165,7 @@ module Aws::MediaLive
       :multiplex_id,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteMultiplexProgramResponse
@@ -3670,7 +3191,7 @@ module Aws::MediaLive
       :pipeline_details,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteMultiplexRequest
@@ -3680,7 +3201,7 @@ module Aws::MediaLive
     class DeleteMultiplexRequest < Struct.new(
       :multiplex_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteMultiplexResponse
@@ -3726,7 +3247,7 @@ module Aws::MediaLive
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteNetworkRequest
@@ -3736,7 +3257,7 @@ module Aws::MediaLive
     class DeleteNetworkRequest < Struct.new(
       :network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteNetworkResponse
@@ -3770,7 +3291,7 @@ module Aws::MediaLive
       :routes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteNodeRequest
@@ -3784,7 +3305,7 @@ module Aws::MediaLive
       :cluster_id,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteNodeResponse
@@ -3834,7 +3355,7 @@ module Aws::MediaLive
       :state,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteReservationRequest
@@ -3844,7 +3365,7 @@ module Aws::MediaLive
     class DeleteReservationRequest < Struct.new(
       :reservation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteReservationResponse
@@ -3926,7 +3447,7 @@ module Aws::MediaLive
       :tags,
       :usage_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteScheduleRequest
@@ -3936,13 +3457,13 @@ module Aws::MediaLive
     class DeleteScheduleRequest < Struct.new(
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteScheduleResponse
     class DeleteScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteSdiSourceRequest
@@ -3952,7 +3473,7 @@ module Aws::MediaLive
     class DeleteSdiSourceRequest < Struct.new(
       :sdi_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteSdiSourceResponse
@@ -3962,7 +3483,7 @@ module Aws::MediaLive
     class DeleteSdiSourceResponse < Struct.new(
       :sdi_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteSignalMapRequest
@@ -3972,7 +3493,7 @@ module Aws::MediaLive
     class DeleteSignalMapRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DeleteTagsRequest
@@ -3986,13 +3507,13 @@ module Aws::MediaLive
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeAccountConfigurationRequest
     class DescribeAccountConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeAccountConfigurationResponse
@@ -4002,7 +3523,7 @@ module Aws::MediaLive
     class DescribeAccountConfigurationResponse < Struct.new(
       :account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Elemental anywhere settings
@@ -4016,7 +3537,7 @@ module Aws::MediaLive
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeChannelPlacementGroupRequest
@@ -4030,7 +3551,7 @@ module Aws::MediaLive
       :channel_placement_group_id,
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeChannelPlacementGroupResponse
@@ -4064,7 +3585,7 @@ module Aws::MediaLive
       :nodes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Contains the response for ListChannelPlacementGroups
@@ -4098,7 +3619,7 @@ module Aws::MediaLive
       :nodes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeChannelRequest
@@ -4108,7 +3629,7 @@ module Aws::MediaLive
     class DescribeChannelRequest < Struct.new(
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeChannelResponse
@@ -4196,7 +3717,7 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeClusterRequest
@@ -4206,7 +3727,7 @@ module Aws::MediaLive
     class DescribeClusterRequest < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeClusterResponse
@@ -4244,7 +3765,7 @@ module Aws::MediaLive
       :network_settings,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in ListClustersResult.
@@ -4282,7 +3803,7 @@ module Aws::MediaLive
       :network_settings,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputDeviceRequest
@@ -4292,7 +3813,7 @@ module Aws::MediaLive
     class DescribeInputDeviceRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputDeviceResponse
@@ -4362,7 +3883,7 @@ module Aws::MediaLive
       :medialive_input_arns,
       :output_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputDeviceThumbnailRequest
@@ -4376,7 +3897,7 @@ module Aws::MediaLive
       :input_device_id,
       :accept,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputDeviceThumbnailResponse
@@ -4402,7 +3923,7 @@ module Aws::MediaLive
       :e_tag,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:body] = Base64.strict_decode64('') unless options.key?(:body)
@@ -4417,7 +3938,7 @@ module Aws::MediaLive
     class DescribeInputRequest < Struct.new(
       :input_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputResponse
@@ -4510,7 +4031,7 @@ module Aws::MediaLive
       :smpte2110_receiver_group_settings,
       :sdi_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputSecurityGroupRequest
@@ -4520,7 +4041,7 @@ module Aws::MediaLive
     class DescribeInputSecurityGroupRequest < Struct.new(
       :input_security_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeInputSecurityGroupResponse
@@ -4550,7 +4071,7 @@ module Aws::MediaLive
       :tags,
       :whitelist_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeMultiplexProgramRequest
@@ -4564,7 +4085,7 @@ module Aws::MediaLive
       :multiplex_id,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeMultiplexProgramResponse
@@ -4590,7 +4111,7 @@ module Aws::MediaLive
       :pipeline_details,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeMultiplexRequest
@@ -4600,7 +4121,7 @@ module Aws::MediaLive
     class DescribeMultiplexRequest < Struct.new(
       :multiplex_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeMultiplexResponse
@@ -4646,7 +4167,7 @@ module Aws::MediaLive
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeNetworkRequest
@@ -4656,7 +4177,7 @@ module Aws::MediaLive
     class DescribeNetworkRequest < Struct.new(
       :network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeNetworkResponse
@@ -4690,7 +4211,7 @@ module Aws::MediaLive
       :routes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in ListNetworksResult.
@@ -4724,7 +4245,7 @@ module Aws::MediaLive
       :routes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeNodeRequest
@@ -4738,7 +4259,7 @@ module Aws::MediaLive
       :cluster_id,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeNodeResponse
@@ -4788,7 +4309,7 @@ module Aws::MediaLive
       :state,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeNodeSummary
@@ -4842,7 +4363,7 @@ module Aws::MediaLive
       :state,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeOfferingRequest
@@ -4852,7 +4373,7 @@ module Aws::MediaLive
     class DescribeOfferingRequest < Struct.new(
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeOfferingResponse
@@ -4902,7 +4423,7 @@ module Aws::MediaLive
       :resource_specification,
       :usage_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeReservationRequest
@@ -4912,7 +4433,7 @@ module Aws::MediaLive
     class DescribeReservationRequest < Struct.new(
       :reservation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeReservationResponse
@@ -4994,7 +4515,7 @@ module Aws::MediaLive
       :tags,
       :usage_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeScheduleRequest
@@ -5012,7 +4533,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeScheduleResponse
@@ -5026,7 +4547,7 @@ module Aws::MediaLive
       :next_token,
       :schedule_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeSdiSourceRequest
@@ -5036,7 +4557,7 @@ module Aws::MediaLive
     class DescribeSdiSourceRequest < Struct.new(
       :sdi_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeSdiSourceResponse
@@ -5046,7 +4567,7 @@ module Aws::MediaLive
     class DescribeSdiSourceResponse < Struct.new(
       :sdi_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeThumbnailsRequest
@@ -5064,7 +4585,7 @@ module Aws::MediaLive
       :pipeline_id,
       :thumbnail_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for DescribeThumbnailsResponse
@@ -5074,50 +4595,13 @@ module Aws::MediaLive
     class DescribeThumbnailsResponse < Struct.new(
       :thumbnail_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.
-    module DeviceSettingsSyncState
-      SYNCED = 'SYNCED'
-      SYNCING = 'SYNCING'
-    end
-
-    # The status of software on the input device.
-    module DeviceUpdateStatus
-      UP_TO_DATE = 'UP_TO_DATE'
-      NOT_UP_TO_DATE = 'NOT_UP_TO_DATE'
-      UPDATING = 'UPDATING'
-    end
-
-    # Dolby EProgram Selection
-    module DolbyEProgramSelection
-      ALL_CHANNELS = 'ALL_CHANNELS'
-      PROGRAM_1 = 'PROGRAM_1'
-      PROGRAM_2 = 'PROGRAM_2'
-      PROGRAM_3 = 'PROGRAM_3'
-      PROGRAM_4 = 'PROGRAM_4'
-      PROGRAM_5 = 'PROGRAM_5'
-      PROGRAM_6 = 'PROGRAM_6'
-      PROGRAM_7 = 'PROGRAM_7'
-      PROGRAM_8 = 'PROGRAM_8'
+      include ::Smithy::Schema::Structure
     end
 
     # Dolby Vision81 Settings
     class DolbyVision81Settings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Dvb Dash Accessibility
-    module DvbDashAccessibility
-      DVBDASH_1_VISUALLY_IMPAIRED = 'DVBDASH_1_VISUALLY_IMPAIRED'
-      DVBDASH_2_HARD_OF_HEARING = 'DVBDASH_2_HARD_OF_HEARING'
-      DVBDASH_3_SUPPLEMENTAL_COMMENTARY = 'DVBDASH_3_SUPPLEMENTAL_COMMENTARY'
-      DVBDASH_4_DIRECTORS_COMMENTARY = 'DVBDASH_4_DIRECTORS_COMMENTARY'
-      DVBDASH_5_EDUCATIONAL_NOTES = 'DVBDASH_5_EDUCATIONAL_NOTES'
-      DVBDASH_6_MAIN_PROGRAM = 'DVBDASH_6_MAIN_PROGRAM'
-      DVBDASH_7_CLEAN_FEED = 'DVBDASH_7_CLEAN_FEED'
+      include ::Smithy::Schema::Structure
     end
 
     # DVB Network Information Table (NIT)
@@ -5135,15 +4619,7 @@ module Aws::MediaLive
       :network_name,
       :rep_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Dvb Sdt Output Sdt
-    module DvbSdtOutputSdt
-      SDT_FOLLOW = 'SDT_FOLLOW'
-      SDT_FOLLOW_IF_PRESENT = 'SDT_FOLLOW_IF_PRESENT'
-      SDT_MANUAL = 'SDT_MANUAL'
-      SDT_NONE = 'SDT_NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # DVB Service Description Table (SDT)
@@ -5165,41 +4641,7 @@ module Aws::MediaLive
       :service_name,
       :service_provider_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Dvb Sub Destination Alignment
-    module DvbSubDestinationAlignment
-      CENTERED = 'CENTERED'
-      LEFT = 'LEFT'
-      SMART = 'SMART'
-    end
-
-    # Dvb Sub Destination Background Color
-    module DvbSubDestinationBackgroundColor
-      BLACK = 'BLACK'
-      NONE = 'NONE'
-      WHITE = 'WHITE'
-    end
-
-    # Dvb Sub Destination Font Color
-    module DvbSubDestinationFontColor
-      BLACK = 'BLACK'
-      BLUE = 'BLUE'
-      GREEN = 'GREEN'
-      RED = 'RED'
-      WHITE = 'WHITE'
-      YELLOW = 'YELLOW'
-    end
-
-    # Dvb Sub Destination Outline Color
-    module DvbSubDestinationOutlineColor
-      BLACK = 'BLACK'
-      BLUE = 'BLUE'
-      GREEN = 'GREEN'
-      RED = 'RED'
-      WHITE = 'WHITE'
-      YELLOW = 'YELLOW'
+      include ::Smithy::Schema::Structure
     end
 
     # Dvb Sub Destination Settings
@@ -5273,30 +4715,7 @@ module Aws::MediaLive
       :x_position,
       :y_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Dvb Sub Destination Shadow Color
-    module DvbSubDestinationShadowColor
-      BLACK = 'BLACK'
-      NONE = 'NONE'
-      WHITE = 'WHITE'
-    end
-
-    # Dvb Sub Destination Teletext Grid Control
-    module DvbSubDestinationTeletextGridControl
-      FIXED = 'FIXED'
-      SCALED = 'SCALED'
-    end
-
-    # Dvb Sub Ocr Language
-    module DvbSubOcrLanguage
-      DEU = 'DEU'
-      ENG = 'ENG'
-      FRA = 'FRA'
-      NLD = 'NLD'
-      POR = 'POR'
-      SPA = 'SPA'
+      include ::Smithy::Schema::Structure
     end
 
     # Dvb Sub Source Settings
@@ -5311,7 +4730,7 @@ module Aws::MediaLive
       :ocr_language,
       :pid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # DVB Time and Date Table (SDT)
@@ -5321,34 +4740,7 @@ module Aws::MediaLive
     class DvbTdtSettings < Struct.new(
       :rep_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Eac3 Atmos Coding Mode
-    module Eac3AtmosCodingMode
-      CODING_MODE_5_1_4 = 'CODING_MODE_5_1_4'
-      CODING_MODE_7_1_4 = 'CODING_MODE_7_1_4'
-      CODING_MODE_9_1_6 = 'CODING_MODE_9_1_6'
-    end
-
-    # Eac3 Atmos Drc Line
-    module Eac3AtmosDrcLine
-      FILM_LIGHT = 'FILM_LIGHT'
-      FILM_STANDARD = 'FILM_STANDARD'
-      MUSIC_LIGHT = 'MUSIC_LIGHT'
-      MUSIC_STANDARD = 'MUSIC_STANDARD'
-      NONE = 'NONE'
-      SPEECH = 'SPEECH'
-    end
-
-    # Eac3 Atmos Drc Rf
-    module Eac3AtmosDrcRf
-      FILM_LIGHT = 'FILM_LIGHT'
-      FILM_STANDARD = 'FILM_STANDARD'
-      MUSIC_LIGHT = 'MUSIC_LIGHT'
-      MUSIC_STANDARD = 'MUSIC_STANDARD'
-      NONE = 'NONE'
-      SPEECH = 'SPEECH'
+      include ::Smithy::Schema::Structure
     end
 
     # Eac3 Atmos Settings
@@ -5382,85 +4774,7 @@ module Aws::MediaLive
       :height_trim,
       :surround_trim,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Eac3 Attenuation Control
-    module Eac3AttenuationControl
-      ATTENUATE_3_DB = 'ATTENUATE_3_DB'
-      NONE = 'NONE'
-    end
-
-    # Eac3 Bitstream Mode
-    module Eac3BitstreamMode
-      COMMENTARY = 'COMMENTARY'
-      COMPLETE_MAIN = 'COMPLETE_MAIN'
-      EMERGENCY = 'EMERGENCY'
-      HEARING_IMPAIRED = 'HEARING_IMPAIRED'
-      VISUALLY_IMPAIRED = 'VISUALLY_IMPAIRED'
-    end
-
-    # Eac3 Coding Mode
-    module Eac3CodingMode
-      CODING_MODE_1_0 = 'CODING_MODE_1_0'
-      CODING_MODE_2_0 = 'CODING_MODE_2_0'
-      CODING_MODE_3_2 = 'CODING_MODE_3_2'
-    end
-
-    # Eac3 Dc Filter
-    module Eac3DcFilter
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Eac3 Drc Line
-    module Eac3DrcLine
-      FILM_LIGHT = 'FILM_LIGHT'
-      FILM_STANDARD = 'FILM_STANDARD'
-      MUSIC_LIGHT = 'MUSIC_LIGHT'
-      MUSIC_STANDARD = 'MUSIC_STANDARD'
-      NONE = 'NONE'
-      SPEECH = 'SPEECH'
-    end
-
-    # Eac3 Drc Rf
-    module Eac3DrcRf
-      FILM_LIGHT = 'FILM_LIGHT'
-      FILM_STANDARD = 'FILM_STANDARD'
-      MUSIC_LIGHT = 'MUSIC_LIGHT'
-      MUSIC_STANDARD = 'MUSIC_STANDARD'
-      NONE = 'NONE'
-      SPEECH = 'SPEECH'
-    end
-
-    # Eac3 Lfe Control
-    module Eac3LfeControl
-      LFE = 'LFE'
-      NO_LFE = 'NO_LFE'
-    end
-
-    # Eac3 Lfe Filter
-    module Eac3LfeFilter
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Eac3 Metadata Control
-    module Eac3MetadataControl
-      FOLLOW_INPUT = 'FOLLOW_INPUT'
-      USE_CONFIGURED = 'USE_CONFIGURED'
-    end
-
-    # Eac3 Passthrough Control
-    module Eac3PassthroughControl
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      WHEN_POSSIBLE = 'WHEN_POSSIBLE'
-    end
-
-    # Eac3 Phase Control
-    module Eac3PhaseControl
-      NO_SHIFT = 'NO_SHIFT'
-      SHIFT_90_DEGREES = 'SHIFT_90_DEGREES'
+      include ::Smithy::Schema::Structure
     end
 
     # Eac3 Settings
@@ -5546,29 +4860,7 @@ module Aws::MediaLive
       :surround_ex_mode,
       :surround_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Eac3 Stereo Downmix
-    module Eac3StereoDownmix
-      DPL2 = 'DPL2'
-      LO_RO = 'LO_RO'
-      LT_RT = 'LT_RT'
-      NOT_INDICATED = 'NOT_INDICATED'
-    end
-
-    # Eac3 Surround Ex Mode
-    module Eac3SurroundExMode
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      NOT_INDICATED = 'NOT_INDICATED'
-    end
-
-    # Eac3 Surround Mode
-    module Eac3SurroundMode
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      NOT_INDICATED = 'NOT_INDICATED'
+      include ::Smithy::Schema::Structure
     end
 
     # Ebu Tt DDestination Settings
@@ -5598,43 +4890,19 @@ module Aws::MediaLive
       :default_font_size,
       :default_line_height,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Ebu Tt DDestination Style Control
-    module EbuTtDDestinationStyleControl
-      EXCLUDE = 'EXCLUDE'
-      INCLUDE = 'INCLUDE'
-    end
-
-    # Ebu Tt DFill Line Gap Control
-    module EbuTtDFillLineGapControl
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Embedded Convert608 To708
-    module EmbeddedConvert608To708
-      DISABLED = 'DISABLED'
-      UPCONVERT = 'UPCONVERT'
+      include ::Smithy::Schema::Structure
     end
 
     # Embedded Destination Settings
     class EmbeddedDestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Embedded Plus Scte20 Destination Settings
     class EmbeddedPlusScte20DestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Embedded Scte20 Detection
-    module EmbeddedScte20Detection
-      AUTO = 'AUTO'
-      OFF = 'OFF'
+      include ::Smithy::Schema::Structure
     end
 
     # Embedded Source Settings
@@ -5656,7 +4924,7 @@ module Aws::MediaLive
       :source608_channel_number,
       :source608_track_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Encoder Settings
@@ -5718,7 +4986,7 @@ module Aws::MediaLive
       :thumbnail_configuration,
       :color_correction_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Epoch Locking Settings
@@ -5732,7 +5000,7 @@ module Aws::MediaLive
       :custom_epoch,
       :jam_sync_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Esam
@@ -5762,24 +5030,7 @@ module Aws::MediaLive
       :username,
       :zone_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The type of event to match with the rule.
-    module EventBridgeRuleTemplateEventType
-      MEDIALIVE_MULTIPLEX_ALERT = 'MEDIALIVE_MULTIPLEX_ALERT'
-      MEDIALIVE_MULTIPLEX_STATE_CHANGE = 'MEDIALIVE_MULTIPLEX_STATE_CHANGE'
-      MEDIALIVE_CHANNEL_ALERT = 'MEDIALIVE_CHANNEL_ALERT'
-      MEDIALIVE_CHANNEL_INPUT_CHANGE = 'MEDIALIVE_CHANNEL_INPUT_CHANGE'
-      MEDIALIVE_CHANNEL_STATE_CHANGE = 'MEDIALIVE_CHANNEL_STATE_CHANGE'
-      MEDIAPACKAGE_INPUT_NOTIFICATION = 'MEDIAPACKAGE_INPUT_NOTIFICATION'
-      MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION = 'MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION'
-      MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION = 'MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION'
-      SIGNAL_MAP_ACTIVE_ALARM = 'SIGNAL_MAP_ACTIVE_ALARM'
-      MEDIACONNECT_ALERT = 'MEDIACONNECT_ALERT'
-      MEDIACONNECT_SOURCE_HEALTH = 'MEDIACONNECT_SOURCE_HEALTH'
-      MEDIACONNECT_OUTPUT_HEALTH = 'MEDIACONNECT_OUTPUT_HEALTH'
-      MEDIACONNECT_FLOW_STATUS_CHANGE = 'MEDIACONNECT_FLOW_STATUS_CHANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for EventBridgeRuleTemplateGroupSummary
@@ -5817,7 +5068,7 @@ module Aws::MediaLive
       :tags,
       :template_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for EventBridgeRuleTemplateSummary
@@ -5863,7 +5114,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The target to which to send matching events.
@@ -5873,7 +5124,7 @@ module Aws::MediaLive
     class EventBridgeRuleTemplateTarget < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Failover Condition settings. There can be multiple failover conditions inside AutomaticInputFailoverSettings.
@@ -5883,7 +5134,7 @@ module Aws::MediaLive
     class FailoverCondition < Struct.new(
       :failover_condition_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for one failover condition.
@@ -5901,7 +5152,7 @@ module Aws::MediaLive
       :input_loss_settings,
       :video_black_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Feature Activations
@@ -5917,25 +5168,7 @@ module Aws::MediaLive
       :input_prepare_schedule_actions,
       :output_static_image_overlay_schedule_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Feature Activations Input Prepare Schedule Actions
-    module FeatureActivationsInputPrepareScheduleActions
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Feature Activations Output Static Image Overlay Schedule Actions
-    module FeatureActivationsOutputStaticImageOverlayScheduleActions
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Fec Output Include Fec
-    module FecOutputIncludeFec
-      COLUMN = 'COLUMN'
-      COLUMN_AND_ROW = 'COLUMN_AND_ROW'
+      include ::Smithy::Schema::Structure
     end
 
     # Fec Output Settings
@@ -5953,22 +5186,7 @@ module Aws::MediaLive
       :include_fec,
       :row_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Fixed Afd
-    module FixedAfd
-      AFD_0000 = 'AFD_0000'
-      AFD_0010 = 'AFD_0010'
-      AFD_0011 = 'AFD_0011'
-      AFD_0100 = 'AFD_0100'
-      AFD_1000 = 'AFD_1000'
-      AFD_1001 = 'AFD_1001'
-      AFD_1010 = 'AFD_1010'
-      AFD_1011 = 'AFD_1011'
-      AFD_1101 = 'AFD_1101'
-      AFD_1110 = 'AFD_1110'
-      AFD_1111 = 'AFD_1111'
+      include ::Smithy::Schema::Structure
     end
 
     # Start time for the action.
@@ -5978,7 +5196,7 @@ module Aws::MediaLive
     class FixedModeScheduleActionStartSettings < Struct.new(
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Fmp4 Hls Settings
@@ -5996,19 +5214,7 @@ module Aws::MediaLive
       :nielsen_id3_behavior,
       :timed_metadata_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Fmp4 Nielsen Id3 Behavior
-    module Fmp4NielsenId3Behavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # Fmp4 Timed Metadata Behavior
-    module Fmp4TimedMetadataBehavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to specify if an action follows another.
@@ -6022,13 +5228,7 @@ module Aws::MediaLive
       :follow_point,
       :reference_action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Follow reference point.
-    module FollowPoint
-      END = 'END'
-      START = 'START'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ForbiddenException
@@ -6038,7 +5238,7 @@ module Aws::MediaLive
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Frame Capture Cdn Settings
@@ -6048,7 +5248,7 @@ module Aws::MediaLive
     class FrameCaptureCdnSettings < Struct.new(
       :frame_capture_s3_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Frame Capture Group Settings
@@ -6062,19 +5262,13 @@ module Aws::MediaLive
       :destination,
       :frame_capture_cdn_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Frame Capture Hls Settings
     class FrameCaptureHlsSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Frame Capture Interval Unit
-    module FrameCaptureIntervalUnit
-      MILLISECONDS = 'MILLISECONDS'
-      SECONDS = 'SECONDS'
+      include ::Smithy::Schema::Structure
     end
 
     # Frame Capture Output Settings
@@ -6084,7 +5278,7 @@ module Aws::MediaLive
     class FrameCaptureOutputSettings < Struct.new(
       :name_modifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Frame Capture S3 Settings
@@ -6094,7 +5288,7 @@ module Aws::MediaLive
     class FrameCaptureS3Settings < Struct.new(
       :canned_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Frame Capture Settings
@@ -6112,7 +5306,7 @@ module Aws::MediaLive
       :capture_interval_units,
       :timecode_burnin_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GatewayTimeoutException
@@ -6122,7 +5316,7 @@ module Aws::MediaLive
     class GatewayTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetCloudWatchAlarmTemplateGroupRequest
@@ -6132,7 +5326,7 @@ module Aws::MediaLive
     class GetCloudWatchAlarmTemplateGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetCloudWatchAlarmTemplateGroupResponse
@@ -6166,7 +5360,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetCloudWatchAlarmTemplateRequest
@@ -6176,7 +5370,7 @@ module Aws::MediaLive
     class GetCloudWatchAlarmTemplateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetCloudWatchAlarmTemplateResponse
@@ -6250,7 +5444,7 @@ module Aws::MediaLive
       :threshold,
       :treat_missing_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetEventBridgeRuleTemplateGroupRequest
@@ -6260,7 +5454,7 @@ module Aws::MediaLive
     class GetEventBridgeRuleTemplateGroupRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetEventBridgeRuleTemplateGroupResponse
@@ -6294,7 +5488,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetEventBridgeRuleTemplateRequest
@@ -6304,7 +5498,7 @@ module Aws::MediaLive
     class GetEventBridgeRuleTemplateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetEventBridgeRuleTemplateResponse
@@ -6350,7 +5544,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetSignalMapRequest
@@ -6360,7 +5554,7 @@ module Aws::MediaLive
     class GetSignalMapRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for GetSignalMapResponse
@@ -6438,7 +5632,7 @@ module Aws::MediaLive
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Global Configuration
@@ -6476,49 +5670,7 @@ module Aws::MediaLive
       :support_low_framerate_inputs,
       :output_locking_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Global Configuration Input End Action
-    module GlobalConfigurationInputEndAction
-      NONE = 'NONE'
-      SWITCH_AND_LOOP_INPUTS = 'SWITCH_AND_LOOP_INPUTS'
-    end
-
-    # Global Configuration Low Framerate Inputs
-    module GlobalConfigurationLowFramerateInputs
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Global Configuration Output Locking Mode
-    module GlobalConfigurationOutputLockingMode
-      EPOCH_LOCKING = 'EPOCH_LOCKING'
-      PIPELINE_LOCKING = 'PIPELINE_LOCKING'
-      DISABLED = 'DISABLED'
-    end
-
-    # Global Configuration Output Timing Source
-    module GlobalConfigurationOutputTimingSource
-      INPUT_CLOCK = 'INPUT_CLOCK'
-      SYSTEM_CLOCK = 'SYSTEM_CLOCK'
-    end
-
-    # H264 Adaptive Quantization
-    module H264AdaptiveQuantization
-      AUTO = 'AUTO'
-      HIGH = 'HIGH'
-      HIGHER = 'HIGHER'
-      LOW = 'LOW'
-      MAX = 'MAX'
-      MEDIUM = 'MEDIUM'
-      OFF = 'OFF'
-    end
-
-    # H264 Color Metadata
-    module H264ColorMetadata
-      IGNORE = 'IGNORE'
-      INSERT = 'INSERT'
+      include ::Smithy::Schema::Structure
     end
 
     # H264 Color Space Settings
@@ -6536,13 +5688,7 @@ module Aws::MediaLive
       :rec601_settings,
       :rec709_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # H264 Entropy Encoding
-    module H264EntropyEncoding
-      CABAC = 'CABAC'
-      CAVLC = 'CAVLC'
+      include ::Smithy::Schema::Structure
     end
 
     # H264 Filter Settings
@@ -6556,107 +5702,7 @@ module Aws::MediaLive
       :temporal_filter_settings,
       :bandwidth_reduction_filter_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # H264 Flicker Aq
-    module H264FlickerAq
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H264 Force Field Pictures
-    module H264ForceFieldPictures
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H264 Framerate Control
-    module H264FramerateControl
-      INITIALIZE_FROM_SOURCE = 'INITIALIZE_FROM_SOURCE'
-      SPECIFIED = 'SPECIFIED'
-    end
-
-    # H264 Gop BReference
-    module H264GopBReference
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H264 Gop Size Units
-    module H264GopSizeUnits
-      FRAMES = 'FRAMES'
-      SECONDS = 'SECONDS'
-    end
-
-    # H264 Level
-    module H264Level
-      H264_LEVEL_1 = 'H264_LEVEL_1'
-      H264_LEVEL_1_1 = 'H264_LEVEL_1_1'
-      H264_LEVEL_1_2 = 'H264_LEVEL_1_2'
-      H264_LEVEL_1_3 = 'H264_LEVEL_1_3'
-      H264_LEVEL_2 = 'H264_LEVEL_2'
-      H264_LEVEL_2_1 = 'H264_LEVEL_2_1'
-      H264_LEVEL_2_2 = 'H264_LEVEL_2_2'
-      H264_LEVEL_3 = 'H264_LEVEL_3'
-      H264_LEVEL_3_1 = 'H264_LEVEL_3_1'
-      H264_LEVEL_3_2 = 'H264_LEVEL_3_2'
-      H264_LEVEL_4 = 'H264_LEVEL_4'
-      H264_LEVEL_4_1 = 'H264_LEVEL_4_1'
-      H264_LEVEL_4_2 = 'H264_LEVEL_4_2'
-      H264_LEVEL_5 = 'H264_LEVEL_5'
-      H264_LEVEL_5_1 = 'H264_LEVEL_5_1'
-      H264_LEVEL_5_2 = 'H264_LEVEL_5_2'
-      H264_LEVEL_AUTO = 'H264_LEVEL_AUTO'
-    end
-
-    # H264 Look Ahead Rate Control
-    module H264LookAheadRateControl
-      HIGH = 'HIGH'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-    end
-
-    # H264 Par Control
-    module H264ParControl
-      INITIALIZE_FROM_SOURCE = 'INITIALIZE_FROM_SOURCE'
-      SPECIFIED = 'SPECIFIED'
-    end
-
-    # H264 Profile
-    module H264Profile
-      BASELINE = 'BASELINE'
-      HIGH = 'HIGH'
-      HIGH_10BIT = 'HIGH_10BIT'
-      HIGH_422 = 'HIGH_422'
-      HIGH_422_10BIT = 'HIGH_422_10BIT'
-      MAIN = 'MAIN'
-    end
-
-    # H264 Quality Level
-    module H264QualityLevel
-      ENHANCED_QUALITY = 'ENHANCED_QUALITY'
-      STANDARD_QUALITY = 'STANDARD_QUALITY'
-    end
-
-    # H264 Rate Control Mode
-    module H264RateControlMode
-      CBR = 'CBR'
-      MULTIPLEX = 'MULTIPLEX'
-      QVBR = 'QVBR'
-      VBR = 'VBR'
-    end
-
-    # H264 Scan Type
-    module H264ScanType
-      INTERLACED = 'INTERLACED'
-      PROGRESSIVE = 'PROGRESSIVE'
-    end
-
-    # H264 Scene Change Detect
-    module H264SceneChangeDetect
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # H264 Settings
@@ -6873,60 +5919,7 @@ module Aws::MediaLive
       :timecode_burnin_settings,
       :min_qp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # H264 Spatial Aq
-    module H264SpatialAq
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H264 Sub Gop Length
-    module H264SubGopLength
-      DYNAMIC = 'DYNAMIC'
-      FIXED = 'FIXED'
-    end
-
-    # H264 Syntax
-    module H264Syntax
-      DEFAULT = 'DEFAULT'
-      RP2027 = 'RP2027'
-    end
-
-    # H264 Temporal Aq
-    module H264TemporalAq
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H264 Timecode Insertion Behavior
-    module H264TimecodeInsertionBehavior
-      DISABLED = 'DISABLED'
-      PIC_TIMING_SEI = 'PIC_TIMING_SEI'
-    end
-
-    # H265 Adaptive Quantization
-    module H265AdaptiveQuantization
-      AUTO = 'AUTO'
-      HIGH = 'HIGH'
-      HIGHER = 'HIGHER'
-      LOW = 'LOW'
-      MAX = 'MAX'
-      MEDIUM = 'MEDIUM'
-      OFF = 'OFF'
-    end
-
-    # H265 Alternative Transfer Function
-    module H265AlternativeTransferFunction
-      INSERT = 'INSERT'
-      OMIT = 'OMIT'
-    end
-
-    # H265 Color Metadata
-    module H265ColorMetadata
-      IGNORE = 'IGNORE'
-      INSERT = 'INSERT'
+      include ::Smithy::Schema::Structure
     end
 
     # H265 Color Space Settings
@@ -6952,13 +5945,7 @@ module Aws::MediaLive
       :rec601_settings,
       :rec709_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # H265 Deblocking
-    module H265Deblocking
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # H265 Filter Settings
@@ -6972,81 +5959,7 @@ module Aws::MediaLive
       :temporal_filter_settings,
       :bandwidth_reduction_filter_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # H265 Flicker Aq
-    module H265FlickerAq
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H265 Gop Size Units
-    module H265GopSizeUnits
-      FRAMES = 'FRAMES'
-      SECONDS = 'SECONDS'
-    end
-
-    # H265 Level
-    module H265Level
-      H265_LEVEL_1 = 'H265_LEVEL_1'
-      H265_LEVEL_2 = 'H265_LEVEL_2'
-      H265_LEVEL_2_1 = 'H265_LEVEL_2_1'
-      H265_LEVEL_3 = 'H265_LEVEL_3'
-      H265_LEVEL_3_1 = 'H265_LEVEL_3_1'
-      H265_LEVEL_4 = 'H265_LEVEL_4'
-      H265_LEVEL_4_1 = 'H265_LEVEL_4_1'
-      H265_LEVEL_5 = 'H265_LEVEL_5'
-      H265_LEVEL_5_1 = 'H265_LEVEL_5_1'
-      H265_LEVEL_5_2 = 'H265_LEVEL_5_2'
-      H265_LEVEL_6 = 'H265_LEVEL_6'
-      H265_LEVEL_6_1 = 'H265_LEVEL_6_1'
-      H265_LEVEL_6_2 = 'H265_LEVEL_6_2'
-      H265_LEVEL_AUTO = 'H265_LEVEL_AUTO'
-    end
-
-    # H265 Look Ahead Rate Control
-    module H265LookAheadRateControl
-      HIGH = 'HIGH'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-    end
-
-    # H265 Mv Over Picture Boundaries
-    module H265MvOverPictureBoundaries
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H265 Mv Temporal Predictor
-    module H265MvTemporalPredictor
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # H265 Profile
-    module H265Profile
-      MAIN = 'MAIN'
-      MAIN_10BIT = 'MAIN_10BIT'
-    end
-
-    # H265 Rate Control Mode
-    module H265RateControlMode
-      CBR = 'CBR'
-      MULTIPLEX = 'MULTIPLEX'
-      QVBR = 'QVBR'
-    end
-
-    # H265 Scan Type
-    module H265ScanType
-      INTERLACED = 'INTERLACED'
-      PROGRESSIVE = 'PROGRESSIVE'
-    end
-
-    # H265 Scene Change Detect
-    module H265SceneChangeDetect
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # H265 Settings
@@ -7239,31 +6152,7 @@ module Aws::MediaLive
       :min_qp,
       :deblocking,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # H265 Tier
-    module H265Tier
-      HIGH = 'HIGH'
-      MAIN = 'MAIN'
-    end
-
-    # H265 Tile Padding
-    module H265TilePadding
-      NONE = 'NONE'
-      PADDED = 'PADDED'
-    end
-
-    # H265 Timecode Insertion Behavior
-    module H265TimecodeInsertionBehavior
-      DISABLED = 'DISABLED'
-      PIC_TIMING_SEI = 'PIC_TIMING_SEI'
-    end
-
-    # H265 Treeblock Size
-    module H265TreeblockSize
-      AUTO = 'AUTO'
-      TREE_SIZE_32X32 = 'TREE_SIZE_32X32'
+      include ::Smithy::Schema::Structure
     end
 
     # Hdr10 Settings
@@ -7281,20 +6170,7 @@ module Aws::MediaLive
       :max_cll,
       :max_fall,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Ad Markers
-    module HlsAdMarkers
-      ADOBE = 'ADOBE'
-      ELEMENTAL = 'ELEMENTAL'
-      ELEMENTAL_SCTE35 = 'ELEMENTAL_SCTE35'
-    end
-
-    # Hls Akamai Http Transfer Mode
-    module HlsAkamaiHttpTransferMode
-      CHUNKED = 'CHUNKED'
-      NON_CHUNKED = 'NON_CHUNKED'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Akamai Settings
@@ -7328,7 +6204,7 @@ module Aws::MediaLive
       :salt,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Basic Put Settings
@@ -7350,14 +6226,7 @@ module Aws::MediaLive
       :num_retries,
       :restart_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Caption Language Setting
-    module HlsCaptionLanguageSetting
-      INSERT = 'INSERT'
-      NONE = 'NONE'
-      OMIT = 'OMIT'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Cdn Settings
@@ -7383,37 +6252,7 @@ module Aws::MediaLive
       :hls_s3_settings,
       :hls_webdav_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Client Cache
-    module HlsClientCache
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Hls Codec Specification
-    module HlsCodecSpecification
-      RFC_4281 = 'RFC_4281'
-      RFC_6381 = 'RFC_6381'
-    end
-
-    # Hls Directory Structure
-    module HlsDirectoryStructure
-      SINGLE_DIRECTORY = 'SINGLE_DIRECTORY'
-      SUBDIRECTORY_PER_STREAM = 'SUBDIRECTORY_PER_STREAM'
-    end
-
-    # Hls Discontinuity Tags
-    module HlsDiscontinuityTags
-      INSERT = 'INSERT'
-      NEVER_INSERT = 'NEVER_INSERT'
-    end
-
-    # Hls Encryption Type
-    module HlsEncryptionType
-      AES128 = 'AES128'
-      SAMPLE_AES = 'SAMPLE_AES'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Group Settings
@@ -7626,13 +6465,7 @@ module Aws::MediaLive
       :timestamp_delta_milliseconds,
       :ts_file_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls H265 Packaging Type
-    module HlsH265PackagingType
-      HEV1 = 'HEV1'
-      HVC1 = 'HVC1'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to insert ID3 metadata in every segment, in HLS output groups.
@@ -7646,19 +6479,7 @@ module Aws::MediaLive
       :tag,
       :id3,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # State of HLS ID3 Segment Tagging
-    module HlsId3SegmentTaggingState
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Hls Incomplete Segment Behavior
-    module HlsIncompleteSegmentBehavior
-      AUTO = 'AUTO'
-      SUPPRESS = 'SUPPRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Input Settings
@@ -7684,31 +6505,7 @@ module Aws::MediaLive
       :retry_interval,
       :scte35_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Iv In Manifest
-    module HlsIvInManifest
-      EXCLUDE = 'EXCLUDE'
-      INCLUDE = 'INCLUDE'
-    end
-
-    # Hls Iv Source
-    module HlsIvSource
-      EXPLICIT = 'EXPLICIT'
-      FOLLOWS_SEGMENT_NUMBER = 'FOLLOWS_SEGMENT_NUMBER'
-    end
-
-    # Hls Manifest Compression
-    module HlsManifestCompression
-      GZIP = 'GZIP'
-      NONE = 'NONE'
-    end
-
-    # Hls Manifest Duration Format
-    module HlsManifestDurationFormat
-      FLOATING_POINT = 'FLOATING_POINT'
-      INTEGER = 'INTEGER'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Media Store Settings
@@ -7734,25 +6531,7 @@ module Aws::MediaLive
       :num_retries,
       :restart_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Media Store Storage Class
-    module HlsMediaStoreStorageClass
-      TEMPORAL = 'TEMPORAL'
-    end
-
-    # Hls Mode
-    module HlsMode
-      LIVE = 'LIVE'
-      VOD = 'VOD'
-    end
-
-    # Hls Output Selection
-    module HlsOutputSelection
-      MANIFESTS_AND_SEGMENTS = 'MANIFESTS_AND_SEGMENTS'
-      SEGMENTS_ONLY = 'SEGMENTS_ONLY'
-      VARIANT_MANIFESTS_AND_SEGMENTS = 'VARIANT_MANIFESTS_AND_SEGMENTS'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Output Settings
@@ -7775,25 +6554,7 @@ module Aws::MediaLive
       :name_modifier,
       :segment_modifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Program Date Time
-    module HlsProgramDateTime
-      EXCLUDE = 'EXCLUDE'
-      INCLUDE = 'INCLUDE'
-    end
-
-    # Hls Program Date Time Clock
-    module HlsProgramDateTimeClock
-      INITIALIZE_FROM_OUTPUT_TIMECODE = 'INITIALIZE_FROM_OUTPUT_TIMECODE'
-      SYSTEM_CLOCK = 'SYSTEM_CLOCK'
-    end
-
-    # Hls Redundant Manifest
-    module HlsRedundantManifest
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls S3 Settings
@@ -7803,19 +6564,7 @@ module Aws::MediaLive
     class HlsS3Settings < Struct.new(
       :canned_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Scte35 Source Type
-    module HlsScte35SourceType
-      MANIFEST = 'MANIFEST'
-      SEGMENTS = 'SEGMENTS'
-    end
-
-    # Hls Segmentation Mode
-    module HlsSegmentationMode
-      USE_INPUT_SEGMENTATION = 'USE_INPUT_SEGMENTATION'
-      USE_SEGMENT_DURATION = 'USE_SEGMENT_DURATION'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Settings
@@ -7837,20 +6586,7 @@ module Aws::MediaLive
       :frame_capture_hls_settings,
       :standard_hls_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Stream Inf Resolution
-    module HlsStreamInfResolution
-      EXCLUDE = 'EXCLUDE'
-      INCLUDE = 'INCLUDE'
-    end
-
-    # Hls Timed Metadata Id3 Frame
-    module HlsTimedMetadataId3Frame
-      NONE = 'NONE'
-      PRIV = 'PRIV'
-      TDRL = 'TDRL'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to insert ID3 metadata (as a one-time action) in HLS output groups.
@@ -7860,19 +6596,7 @@ module Aws::MediaLive
     class HlsTimedMetadataScheduleActionSettings < Struct.new(
       :id3,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Hls Ts File Mode
-    module HlsTsFileMode
-      SEGMENTED_FILES = 'SEGMENTED_FILES'
-      SINGLE_FILE = 'SINGLE_FILE'
-    end
-
-    # Hls Webdav Http Transfer Mode
-    module HlsWebdavHttpTransferMode
-      CHUNKED = 'CHUNKED'
-      NON_CHUNKED = 'NON_CHUNKED'
+      include ::Smithy::Schema::Structure
     end
 
     # Hls Webdav Settings
@@ -7898,19 +6622,13 @@ module Aws::MediaLive
       :num_retries,
       :restart_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Html Motion Graphics Settings
     class HtmlMotionGraphicsSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # When set to "standard", an I-Frame only playlist will be written out for each video output in the output group. This I-Frame only playlist will contain byte range offsets pointing to the I-frame(s) in each segment.
-    module IFrameOnlyPlaylistType
-      DISABLED = 'DISABLED'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to insert ID3 metadata in every segment, in applicable output groups.
@@ -7924,20 +6642,13 @@ module Aws::MediaLive
       :id3,
       :tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to configure an action so that it occurs as soon as possible.
     class ImmediateModeScheduleActionStartSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Include Filler Nal Units
-    module IncludeFillerNalUnits
-      AUTO = 'AUTO'
-      DROP = 'DROP'
-      INCLUDE = 'INCLUDE'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for Input
@@ -8030,7 +6741,7 @@ module Aws::MediaLive
       :smpte2110_receiver_group_settings,
       :sdi_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for InputAttachment
@@ -8056,7 +6767,7 @@ module Aws::MediaLive
       :input_settings,
       :logical_interface_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Input Channel Level
@@ -8070,13 +6781,7 @@ module Aws::MediaLive
       :gain,
       :input_channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # A standard input has two sources and a single pipeline input only has one.
-    module InputClass
-      STANDARD = 'STANDARD'
-      SINGLE_PIPELINE = 'SINGLE_PIPELINE'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.
@@ -8094,26 +6799,7 @@ module Aws::MediaLive
       :start_timecode,
       :stop_timecode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # codec in increasing order of complexity
-    module InputCodec
-      MPEG2 = 'MPEG2'
-      AVC = 'AVC'
-      HEVC = 'HEVC'
-    end
-
-    # Input Deblock Filter
-    module InputDeblockFilter
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Input Denoise Filter
-    module InputDenoiseFilter
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # The settings for a PUSH type input.
@@ -8146,7 +6832,7 @@ module Aws::MediaLive
       :network,
       :network_routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Endpoint settings for a PUSH type input.
@@ -8171,7 +6857,7 @@ module Aws::MediaLive
       :network_routes,
       :static_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A network route configuration.
@@ -8185,7 +6871,7 @@ module Aws::MediaLive
       :cidr,
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The properties for a VPC type input destination.
@@ -8199,19 +6885,7 @@ module Aws::MediaLive
       :availability_zone,
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The source at the input device that is currently active.
-    module InputDeviceActiveInput
-      HDMI = 'HDMI'
-      SDI = 'SDI'
-    end
-
-    # The codec to use on the video that the device produces.
-    module InputDeviceCodec
-      HEVC = 'HEVC'
-      AVC = 'AVC'
+      include ::Smithy::Schema::Structure
     end
 
     # One audio configuration that specifies the format for one audio pair that the device produces as output.
@@ -8225,19 +6899,7 @@ module Aws::MediaLive
       :id,
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Property of InputDeviceConfigurableAudioChannelPairConfig, which configures one audio channel that the device produces.
-    module InputDeviceConfigurableAudioChannelPairProfile
-      DISABLED = 'DISABLED'
-      VBR_AAC_HHE_16000 = 'VBR-AAC_HHE-16000'
-      VBR_AAC_HE_64000 = 'VBR-AAC_HE-64000'
-      VBR_AAC_LC_128000 = 'VBR-AAC_LC-128000'
-      CBR_AAC_HQ_192000 = 'CBR-AAC_HQ-192000'
-      CBR_AAC_HQ_256000 = 'CBR-AAC_HQ-256000'
-      CBR_AAC_HQ_384000 = 'CBR-AAC_HQ-384000'
-      CBR_AAC_HQ_512000 = 'CBR-AAC_HQ-512000'
+      include ::Smithy::Schema::Structure
     end
 
     # Configurable settings for the input device.
@@ -8271,20 +6933,7 @@ module Aws::MediaLive
       :audio_channel_pairs,
       :input_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The source to activate (use) from the input device.
-    module InputDeviceConfiguredInput
-      AUTO = 'AUTO'
-      HDMI = 'HDMI'
-      SDI = 'SDI'
-    end
-
-    # The state of the connection between the input device and AWS.
-    module InputDeviceConnectionState
-      DISCONNECTED = 'DISCONNECTED'
-      CONNECTED = 'CONNECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings that describe the active source from the input device, and the video characteristics of that source.
@@ -8326,13 +6975,7 @@ module Aws::MediaLive
       :width,
       :latency_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Specifies whether the input device has been configured (outside of MediaLive) to use a dynamic IP address assignment (DHCP) or a static IP address.
-    module InputDeviceIpScheme
-      STATIC = 'STATIC'
-      DHCP = 'DHCP'
+      include ::Smithy::Schema::Structure
     end
 
     # Parameters required to attach a MediaConnect flow to the device.
@@ -8354,7 +6997,7 @@ module Aws::MediaLive
       :secret_arn,
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about the MediaConnect flow attached to the device.
@@ -8376,7 +7019,7 @@ module Aws::MediaLive
       :secret_arn,
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The network settings for the input device.
@@ -8402,14 +7045,7 @@ module Aws::MediaLive
       :ip_scheme,
       :subnet_mask,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The output attachment type of the input device.
-    module InputDeviceOutputType
-      NONE = 'NONE'
-      MEDIALIVE_INPUT = 'MEDIALIVE_INPUT'
-      MEDIACONNECT_FLOW = 'MEDIACONNECT_FLOW'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for an input device.
@@ -8419,13 +7055,7 @@ module Aws::MediaLive
     class InputDeviceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The scan type of the video source.
-    module InputDeviceScanType
-      INTERLACED = 'INTERLACED'
-      PROGRESSIVE = 'PROGRESSIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for an input device.
@@ -8435,13 +7065,7 @@ module Aws::MediaLive
     class InputDeviceSettings < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The state of the input device.
-    module InputDeviceState
-      IDLE = 'IDLE'
-      STREAMING = 'STREAMING'
+      include ::Smithy::Schema::Structure
     end
 
     # Details of the input device.
@@ -8511,19 +7135,7 @@ module Aws::MediaLive
       :medialive_input_arns,
       :output_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The type of device transfer. INCOMING for an input device that is being transferred to you, OUTGOING for an input device that you are transferring to another AWS account.
-    module InputDeviceTransferType
-      OUTGOING = 'OUTGOING'
-      INCOMING = 'INCOMING'
-    end
-
-    # The type of the input device. For an AWS Elemental Link device that outputs resolutions up to 1080, choose "HD".
-    module InputDeviceType
-      HD = 'HD'
-      UHD = 'UHD'
+      include ::Smithy::Schema::Structure
     end
 
     # One audio configuration that specifies the format for one audio pair that the device produces as output.
@@ -8537,19 +7149,7 @@ module Aws::MediaLive
       :id,
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Property of InputDeviceUhdAudioChannelPairConfig, which describes one audio channel that the device is configured to produce.
-    module InputDeviceUhdAudioChannelPairProfile
-      DISABLED = 'DISABLED'
-      VBR_AAC_HHE_16000 = 'VBR-AAC_HHE-16000'
-      VBR_AAC_HE_64000 = 'VBR-AAC_HE-64000'
-      VBR_AAC_LC_128000 = 'VBR-AAC_LC-128000'
-      CBR_AAC_HQ_192000 = 'CBR-AAC_HQ-192000'
-      CBR_AAC_HQ_256000 = 'CBR-AAC_HQ-256000'
-      CBR_AAC_HQ_384000 = 'CBR-AAC_HQ-384000'
-      CBR_AAC_HQ_512000 = 'CBR-AAC_HQ-512000'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings that describe the active source from the input device, and the video characteristics of that source.
@@ -8607,14 +7207,7 @@ module Aws::MediaLive
       :audio_channel_pairs,
       :input_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Input Filter
-    module InputFilter
-      AUTO = 'AUTO'
-      DISABLED = 'DISABLED'
-      FORCED = 'FORCED'
+      include ::Smithy::Schema::Structure
     end
 
     # Input Location
@@ -8632,32 +7225,7 @@ module Aws::MediaLive
       :uri,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Input Loss Action For Hls Out
-    module InputLossActionForHlsOut
-      EMIT_OUTPUT = 'EMIT_OUTPUT'
-      PAUSE_OUTPUT = 'PAUSE_OUTPUT'
-    end
-
-    # Input Loss Action For Ms Smooth Out
-    module InputLossActionForMsSmoothOut
-      EMIT_OUTPUT = 'EMIT_OUTPUT'
-      PAUSE_OUTPUT = 'PAUSE_OUTPUT'
-    end
-
-    # Input Loss Action For Rtmp Out
-    module InputLossActionForRtmpOut
-      EMIT_OUTPUT = 'EMIT_OUTPUT'
-      PAUSE_OUTPUT = 'PAUSE_OUTPUT'
-    end
-
-    # Input Loss Action For Udp Out
-    module InputLossActionForUdpOut
-      DROP_PROGRAM = 'DROP_PROGRAM'
-      DROP_TS = 'DROP_TS'
-      EMIT_PROGRAM = 'EMIT_PROGRAM'
+      include ::Smithy::Schema::Structure
     end
 
     # Input Loss Behavior
@@ -8683,7 +7251,7 @@ module Aws::MediaLive
       :input_loss_image_type,
       :repeat_frame_msec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # MediaLive will perform a failover if content is not detected in this input for the specified period.
@@ -8693,35 +7261,7 @@ module Aws::MediaLive
     class InputLossFailoverSettings < Struct.new(
       :input_loss_threshold_msec,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Input Loss Image Type
-    module InputLossImageType
-      COLOR = 'COLOR'
-      SLATE = 'SLATE'
-    end
-
-    # Maximum input bitrate in megabits per second. Bitrates up to 50 Mbps are supported currently.
-    module InputMaximumBitrate
-      MAX_10_MBPS = 'MAX_10_MBPS'
-      MAX_20_MBPS = 'MAX_20_MBPS'
-      MAX_50_MBPS = 'MAX_50_MBPS'
-    end
-
-    # With the introduction of MediaLive Anywhere, a MediaLive input can now exist in two different places: AWS or
-    # inside an on-premises datacenter. By default all inputs will continue to be AWS inputs.
-    module InputNetworkLocation
-      AWS = 'AWS'
-      ON_PREMISES = 'ON_PREMISES'
-    end
-
-    # Input preference when deciding which input to make active when a previously failed input has recovered.
-    # If \"EQUAL_INPUT_PREFERENCE\", then the active input will stay active as long as it is healthy.
-    # If \"PRIMARY_INPUT_PREFERRED\", then always switch back to the primary input when it is healthy.
-    module InputPreference
-      EQUAL_INPUT_PREFERENCE = 'EQUAL_INPUT_PREFERENCE'
-      PRIMARY_INPUT_PREFERRED = 'PRIMARY_INPUT_PREFERRED'
+      include ::Smithy::Schema::Structure
     end
 
     # Action to prepare an input for a future immediate input switch.
@@ -8739,7 +7279,7 @@ module Aws::MediaLive
       :input_clipping_settings,
       :url_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A network route configuration.
@@ -8753,14 +7293,7 @@ module Aws::MediaLive
       :cidr,
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
-    module InputResolution
-      SD = 'SD'
-      HD = 'HD'
-      UHD = 'UHD'
+      include ::Smithy::Schema::Structure
     end
 
     # The location of the SDP file for one of the SMPTE 2110 streams in a receiver group.
@@ -8774,7 +7307,7 @@ module Aws::MediaLive
       :media_index,
       :sdp_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An Input Security Group
@@ -8804,15 +7337,7 @@ module Aws::MediaLive
       :tags,
       :whitelist_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Placeholder documentation for InputSecurityGroupState
-    module InputSecurityGroupState
-      IDLE = 'IDLE'
-      IN_USE = 'IN_USE'
-      UPDATING = 'UPDATING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # Live Event input parameters. There can be multiple inputs in a single Live Event.
@@ -8867,7 +7392,7 @@ module Aws::MediaLive
       :source_end_behavior,
       :video_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The settings for a PULL type input.
@@ -8886,13 +7411,7 @@ module Aws::MediaLive
       :url,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Input Source End Behavior
-    module InputSourceEndBehavior
-      CONTINUE = 'CONTINUE'
-      LOOP = 'LOOP'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for for a PULL type input.
@@ -8911,15 +7430,7 @@ module Aws::MediaLive
       :url,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # There are two types of input sources, static and dynamic. If an input source is dynamic you can
-    # change the source url of the input dynamically using an input switch action. Currently, two input types
-    # support a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.
-    module InputSourceType
-      STATIC = 'STATIC'
-      DYNAMIC = 'DYNAMIC'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for InputSpecification
@@ -8937,16 +7448,7 @@ module Aws::MediaLive
       :maximum_bitrate,
       :resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Placeholder documentation for InputState
-    module InputState
-      CREATING = 'CREATING'
-      DETACHED = 'DETACHED'
-      ATTACHED = 'ATTACHED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the "switch input" action: to switch from ingesting one input to ingesting another input.
@@ -8964,31 +7466,7 @@ module Aws::MediaLive
       :input_clipping_settings,
       :url_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Documentation update needed
-    module InputTimecodeSource
-      ZEROBASED = 'ZEROBASED'
-      EMBEDDED = 'EMBEDDED'
-    end
-
-    # The different types of inputs that AWS Elemental MediaLive supports.
-    module InputType
-      UDP_PUSH = 'UDP_PUSH'
-      RTP_PUSH = 'RTP_PUSH'
-      RTMP_PUSH = 'RTMP_PUSH'
-      RTMP_PULL = 'RTMP_PULL'
-      URL_PULL = 'URL_PULL'
-      MP4_FILE = 'MP4_FILE'
-      MEDIACONNECT = 'MEDIACONNECT'
-      INPUT_DEVICE = 'INPUT_DEVICE'
-      AWS_CDI = 'AWS_CDI'
-      TS_FILE = 'TS_FILE'
-      SRT_CALLER = 'SRT_CALLER'
-      MULTICAST = 'MULTICAST'
-      SMPTE_2110_RECEIVER_GROUP = 'SMPTE_2110_RECEIVER_GROUP'
-      SDI = 'SDI'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a private VPC Input.
@@ -9007,7 +7485,7 @@ module Aws::MediaLive
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Whitelist rule
@@ -9017,7 +7495,7 @@ module Aws::MediaLive
     class InputWhitelistRule < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An IPv4 CIDR to whitelist.
@@ -9027,7 +7505,7 @@ module Aws::MediaLive
     class InputWhitelistRuleCidr < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in ClusterNetworkSettings
@@ -9041,7 +7519,7 @@ module Aws::MediaLive
       :logical_interface_name,
       :network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in ClusterNetworkSettingsCreateRequest.
@@ -9055,7 +7533,7 @@ module Aws::MediaLive
       :logical_interface_name,
       :network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for InterfaceMappingUpdateRequest
@@ -9069,7 +7547,7 @@ module Aws::MediaLive
       :logical_interface_name,
       :network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for InternalServerErrorException
@@ -9079,7 +7557,7 @@ module Aws::MediaLive
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in DescribeNetworkResult, DescribeNetworkSummary, UpdateNetworkResult.
@@ -9089,7 +7567,7 @@ module Aws::MediaLive
     class IpPool < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in CreateNetworkRequest.
@@ -9099,7 +7577,7 @@ module Aws::MediaLive
     class IpPoolCreateRequest < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in UpdateNetworkRequest.
@@ -9109,7 +7587,7 @@ module Aws::MediaLive
     class IpPoolUpdateRequest < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Key Provider Settings
@@ -9119,13 +7597,7 @@ module Aws::MediaLive
     class KeyProviderSettings < Struct.new(
       :static_key_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # If you specify a StopTimecode in an input (in order to clip the file), you can specify if you want the clip to exclude (the default) or include the frame specified by the timecode.
-    module LastFrameClippingBehavior
-      EXCLUDE_LAST_FRAME = 'EXCLUDE_LAST_FRAME'
-      INCLUDE_LAST_FRAME = 'INCLUDE_LAST_FRAME'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListChannelPlacementGroupsRequest
@@ -9143,7 +7615,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListChannelPlacementGroupsResponse
@@ -9157,7 +7629,7 @@ module Aws::MediaLive
       :channel_placement_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListChannelsRequest
@@ -9171,7 +7643,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListChannelsResponse
@@ -9185,7 +7657,7 @@ module Aws::MediaLive
       :channels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListCloudWatchAlarmTemplateGroupsRequest
@@ -9207,7 +7679,7 @@ module Aws::MediaLive
       :scope,
       :signal_map_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListCloudWatchAlarmTemplateGroupsResponse
@@ -9221,7 +7693,7 @@ module Aws::MediaLive
       :cloud_watch_alarm_template_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListCloudWatchAlarmTemplatesRequest
@@ -9247,7 +7719,7 @@ module Aws::MediaLive
       :scope,
       :signal_map_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListCloudWatchAlarmTemplatesResponse
@@ -9261,7 +7733,7 @@ module Aws::MediaLive
       :cloud_watch_alarm_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListClustersRequest
@@ -9275,7 +7747,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListClustersResponse
@@ -9289,7 +7761,7 @@ module Aws::MediaLive
       :clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListEventBridgeRuleTemplateGroupsRequest
@@ -9307,7 +7779,7 @@ module Aws::MediaLive
       :next_token,
       :signal_map_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListEventBridgeRuleTemplateGroupsResponse
@@ -9321,7 +7793,7 @@ module Aws::MediaLive
       :event_bridge_rule_template_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListEventBridgeRuleTemplatesRequest
@@ -9343,7 +7815,7 @@ module Aws::MediaLive
       :next_token,
       :signal_map_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListEventBridgeRuleTemplatesResponse
@@ -9357,7 +7829,7 @@ module Aws::MediaLive
       :event_bridge_rule_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputDeviceTransfersRequest
@@ -9375,7 +7847,7 @@ module Aws::MediaLive
       :next_token,
       :transfer_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputDeviceTransfersResponse
@@ -9389,7 +7861,7 @@ module Aws::MediaLive
       :input_device_transfers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputDevicesRequest
@@ -9403,7 +7875,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputDevicesResponse
@@ -9417,7 +7889,7 @@ module Aws::MediaLive
       :input_devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputSecurityGroupsRequest
@@ -9431,7 +7903,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputSecurityGroupsResponse
@@ -9445,7 +7917,7 @@ module Aws::MediaLive
       :input_security_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputsRequest
@@ -9459,7 +7931,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListInputsResponse
@@ -9473,7 +7945,7 @@ module Aws::MediaLive
       :inputs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListMultiplexProgramsRequest
@@ -9491,7 +7963,7 @@ module Aws::MediaLive
       :multiplex_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListMultiplexProgramsResponse
@@ -9505,7 +7977,7 @@ module Aws::MediaLive
       :multiplex_programs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListMultiplexesRequest
@@ -9519,7 +7991,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListMultiplexesResponse
@@ -9533,7 +8005,7 @@ module Aws::MediaLive
       :multiplexes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListNetworksRequest
@@ -9547,7 +8019,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListNetworksResponse
@@ -9561,7 +8033,7 @@ module Aws::MediaLive
       :networks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListNodesRequest
@@ -9579,7 +8051,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListNodesResponse
@@ -9593,7 +8065,7 @@ module Aws::MediaLive
       :next_token,
       :nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListOfferingsRequest
@@ -9647,7 +8119,7 @@ module Aws::MediaLive
       :special_feature,
       :video_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListOfferingsResponse
@@ -9661,7 +8133,7 @@ module Aws::MediaLive
       :next_token,
       :offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListReservationsRequest
@@ -9707,7 +8179,7 @@ module Aws::MediaLive
       :special_feature,
       :video_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListReservationsResponse
@@ -9721,7 +8193,7 @@ module Aws::MediaLive
       :next_token,
       :reservations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListSdiSourcesRequest
@@ -9735,7 +8207,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListSdiSourcesResponse
@@ -9749,7 +8221,7 @@ module Aws::MediaLive
       :next_token,
       :sdi_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListSignalMapsRequest
@@ -9771,7 +8243,7 @@ module Aws::MediaLive
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListSignalMapsResponse
@@ -9785,7 +8257,7 @@ module Aws::MediaLive
       :next_token,
       :signal_maps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListTagsForResourceRequest
@@ -9795,7 +8267,7 @@ module Aws::MediaLive
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListTagsForResourceResponse
@@ -9805,13 +8277,13 @@ module Aws::MediaLive
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListVersionsRequest
     class ListVersionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ListVersionsResponse
@@ -9821,128 +8293,7 @@ module Aws::MediaLive
     class ListVersionsResponse < Struct.new(
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The log level the user wants for their channel.
-    module LogLevel
-      ERROR = 'ERROR'
-      WARNING = 'WARNING'
-      INFO = 'INFO'
-      DEBUG = 'DEBUG'
-      DISABLED = 'DISABLED'
-    end
-
-    # M2ts Absent Input Audio Behavior
-    module M2tsAbsentInputAudioBehavior
-      DROP = 'DROP'
-      ENCODE_SILENCE = 'ENCODE_SILENCE'
-    end
-
-    # M2ts Arib
-    module M2tsArib
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # M2ts Arib Captions Pid Control
-    module M2tsAribCaptionsPidControl
-      AUTO = 'AUTO'
-      USE_CONFIGURED = 'USE_CONFIGURED'
-    end
-
-    # M2ts Audio Buffer Model
-    module M2tsAudioBufferModel
-      ATSC = 'ATSC'
-      DVB = 'DVB'
-    end
-
-    # M2ts Audio Interval
-    module M2tsAudioInterval
-      VIDEO_AND_FIXED_INTERVALS = 'VIDEO_AND_FIXED_INTERVALS'
-      VIDEO_INTERVAL = 'VIDEO_INTERVAL'
-    end
-
-    # M2ts Audio Stream Type
-    module M2tsAudioStreamType
-      ATSC = 'ATSC'
-      DVB = 'DVB'
-    end
-
-    # M2ts Buffer Model
-    module M2tsBufferModel
-      MULTIPLEX = 'MULTIPLEX'
-      NONE = 'NONE'
-    end
-
-    # M2ts Cc Descriptor
-    module M2tsCcDescriptor
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # M2ts Ebif Control
-    module M2tsEbifControl
-      NONE = 'NONE'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M2ts Ebp Placement
-    module M2tsEbpPlacement
-      VIDEO_AND_AUDIO_PIDS = 'VIDEO_AND_AUDIO_PIDS'
-      VIDEO_PID = 'VIDEO_PID'
-    end
-
-    # M2ts Es Rate In Pes
-    module M2tsEsRateInPes
-      EXCLUDE = 'EXCLUDE'
-      INCLUDE = 'INCLUDE'
-    end
-
-    # M2ts Klv
-    module M2tsKlv
-      NONE = 'NONE'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M2ts Nielsen Id3 Behavior
-    module M2tsNielsenId3Behavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M2ts Pcr Control
-    module M2tsPcrControl
-      CONFIGURED_PCR_PERIOD = 'CONFIGURED_PCR_PERIOD'
-      PCR_EVERY_PES_PACKET = 'PCR_EVERY_PES_PACKET'
-    end
-
-    # M2ts Rate Mode
-    module M2tsRateMode
-      CBR = 'CBR'
-      VBR = 'VBR'
-    end
-
-    # M2ts Scte35 Control
-    module M2tsScte35Control
-      NONE = 'NONE'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M2ts Segmentation Markers
-    module M2tsSegmentationMarkers
-      EBP = 'EBP'
-      EBP_LEGACY = 'EBP_LEGACY'
-      NONE = 'NONE'
-      PSI_SEGSTART = 'PSI_SEGSTART'
-      RAI_ADAPT = 'RAI_ADAPT'
-      RAI_SEGSTART = 'RAI_SEGSTART'
-    end
-
-    # M2ts Segmentation Style
-    module M2tsSegmentationStyle
-      MAINTAIN_CADENCE = 'MAINTAIN_CADENCE'
-      RESET_CADENCE = 'RESET_CADENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # M2ts Settings
@@ -10144,37 +8495,7 @@ module Aws::MediaLive
       :video_pid,
       :scte35_preroll_pullup_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # M2ts Timed Metadata Behavior
-    module M2tsTimedMetadataBehavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M3u8 Klv Behavior
-    module M3u8KlvBehavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M3u8 Nielsen Id3 Behavior
-    module M3u8NielsenId3Behavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # M3u8 Pcr Control
-    module M3u8PcrControl
-      CONFIGURED_PCR_PERIOD = 'CONFIGURED_PCR_PERIOD'
-      PCR_EVERY_PES_PACKET = 'PCR_EVERY_PES_PACKET'
-    end
-
-    # M3u8 Scte35 Behavior
-    module M3u8Scte35Behavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings information for the .m3u8 container
@@ -10256,13 +8577,7 @@ module Aws::MediaLive
       :klv_behavior,
       :klv_data_pids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # M3u8 Timed Metadata Behavior
-    module M3u8TimedMetadataBehavior
-      NO_PASSTHROUGH = 'NO_PASSTHROUGH'
-      PASSTHROUGH = 'PASSTHROUGH'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for MaintenanceCreateSettings
@@ -10276,18 +8591,7 @@ module Aws::MediaLive
       :maintenance_day,
       :maintenance_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The currently selected maintenance day.
-    module MaintenanceDay
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-      SUNDAY = 'SUNDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for MaintenanceStatus
@@ -10309,7 +8613,7 @@ module Aws::MediaLive
       :maintenance_scheduled_date,
       :maintenance_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for MaintenanceUpdateSettings
@@ -10327,7 +8631,7 @@ module Aws::MediaLive
       :maintenance_scheduled_date,
       :maintenance_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The settings for a MediaConnect Flow.
@@ -10337,7 +8641,7 @@ module Aws::MediaLive
     class MediaConnectFlow < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The settings for a MediaConnect Flow.
@@ -10347,7 +8651,7 @@ module Aws::MediaLive
     class MediaConnectFlowRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Media Package Group Settings
@@ -10357,7 +8661,7 @@ module Aws::MediaLive
     class MediaPackageGroupSettings < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # MediaPackage Output Destination Settings
@@ -10375,13 +8679,13 @@ module Aws::MediaLive
       :channel_group,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Media Package Output Settings
     class MediaPackageOutputSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An AWS resource used in media workflows.
@@ -10399,7 +8703,7 @@ module Aws::MediaLive
       :name,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A direct source or destination neighbor to an AWS media resource.
@@ -10413,7 +8717,7 @@ module Aws::MediaLive
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Represents the latest monitor deployment of a signal map.
@@ -10431,7 +8735,7 @@ module Aws::MediaLive
       :error_message,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to specify the rendering of motion graphics into the video stream.
@@ -10453,7 +8757,7 @@ module Aws::MediaLive
       :url,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Motion Graphics Configuration
@@ -10467,19 +8771,13 @@ module Aws::MediaLive
       :motion_graphics_insertion,
       :motion_graphics_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to specify the ending of rendering motion graphics into the video stream.
     class MotionGraphicsDeactivateScheduleActionSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Motion Graphics Insertion
-    module MotionGraphicsInsertion
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Motion Graphics Settings
@@ -10489,13 +8787,7 @@ module Aws::MediaLive
     class MotionGraphicsSettings < Struct.new(
       :html_motion_graphics_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Mp2 Coding Mode
-    module Mp2CodingMode
-      CODING_MODE_1_0 = 'CODING_MODE_1_0'
-      CODING_MODE_2_0 = 'CODING_MODE_2_0'
+      include ::Smithy::Schema::Structure
     end
 
     # Mp2 Settings
@@ -10513,34 +8805,7 @@ module Aws::MediaLive
       :coding_mode,
       :sample_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Mpeg2 Adaptive Quantization
-    module Mpeg2AdaptiveQuantization
-      AUTO = 'AUTO'
-      HIGH = 'HIGH'
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      OFF = 'OFF'
-    end
-
-    # Mpeg2 Color Metadata
-    module Mpeg2ColorMetadata
-      IGNORE = 'IGNORE'
-      INSERT = 'INSERT'
-    end
-
-    # Mpeg2 Color Space
-    module Mpeg2ColorSpace
-      AUTO = 'AUTO'
-      PASSTHROUGH = 'PASSTHROUGH'
-    end
-
-    # Mpeg2 Display Ratio
-    module Mpeg2DisplayRatio
-      DISPLAYRATIO16X9 = 'DISPLAYRATIO16X9'
-      DISPLAYRATIO4X3 = 'DISPLAYRATIO4X3'
+      include ::Smithy::Schema::Structure
     end
 
     # Mpeg2 Filter Settings
@@ -10550,19 +8815,7 @@ module Aws::MediaLive
     class Mpeg2FilterSettings < Struct.new(
       :temporal_filter_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Mpeg2 Gop Size Units
-    module Mpeg2GopSizeUnits
-      FRAMES = 'FRAMES'
-      SECONDS = 'SECONDS'
-    end
-
-    # Mpeg2 Scan Type
-    module Mpeg2ScanType
-      INTERLACED = 'INTERLACED'
-      PROGRESSIVE = 'PROGRESSIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # Mpeg2 Settings
@@ -10649,19 +8902,7 @@ module Aws::MediaLive
       :timecode_insertion,
       :timecode_burnin_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Mpeg2 Sub Gop Length
-    module Mpeg2SubGopLength
-      DYNAMIC = 'DYNAMIC'
-      FIXED = 'FIXED'
-    end
-
-    # Mpeg2 Timecode Insertion Behavior
-    module Mpeg2TimecodeInsertionBehavior
-      DISABLED = 'DISABLED'
-      GOP_TIMECODE = 'GOP_TIMECODE'
+      include ::Smithy::Schema::Structure
     end
 
     # Ms Smooth Group Settings
@@ -10755,13 +8996,7 @@ module Aws::MediaLive
       :timestamp_offset,
       :timestamp_offset_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Ms Smooth H265 Packaging Type
-    module MsSmoothH265PackagingType
-      HEV1 = 'HEV1'
-      HVC1 = 'HVC1'
+      include ::Smithy::Schema::Structure
     end
 
     # Ms Smooth Output Settings
@@ -10776,7 +9011,7 @@ module Aws::MediaLive
       :h265_packaging_type,
       :name_modifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multicast-specific input settings.
@@ -10786,7 +9021,7 @@ module Aws::MediaLive
     class MulticastInputSettings < Struct.new(
       :source_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a Multicast input. Contains a list of multicast Urls and optional source ip addresses.
@@ -10796,7 +9031,7 @@ module Aws::MediaLive
     class MulticastSettings < Struct.new(
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a Multicast input. Contains a list of multicast Urls and optional source ip addresses.
@@ -10806,7 +9041,7 @@ module Aws::MediaLive
     class MulticastSettingsCreateRequest < Struct.new(
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a Multicast input. Contains a list of multicast Urls and optional source ip addresses.
@@ -10816,7 +9051,7 @@ module Aws::MediaLive
     class MulticastSettingsUpdateRequest < Struct.new(
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Pair of multicast url and source ip address (optional) that make up a multicast source.
@@ -10830,7 +9065,7 @@ module Aws::MediaLive
       :source_ip,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Pair of multicast url and source ip address (optional) that make up a multicast source.
@@ -10844,7 +9079,7 @@ module Aws::MediaLive
       :source_ip,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Pair of multicast url and source ip address (optional) that make up a multicast source.
@@ -10858,7 +9093,7 @@ module Aws::MediaLive
       :source_ip,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The multiplex object.
@@ -10904,7 +9139,7 @@ module Aws::MediaLive
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex Container Settings
@@ -10914,13 +9149,13 @@ module Aws::MediaLive
     class MultiplexContainerSettings < Struct.new(
       :multiplex_m2ts_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex Group Settings
     class MultiplexGroupSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex M2ts Settings
@@ -10982,7 +9217,7 @@ module Aws::MediaLive
       :scte35_control,
       :scte35_preroll_pullup_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex MediaConnect output destination settings.
@@ -10992,7 +9227,7 @@ module Aws::MediaLive
     class MultiplexMediaConnectOutputDestinationSettings < Struct.new(
       :entitlement_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex output destination settings
@@ -11002,7 +9237,7 @@ module Aws::MediaLive
     class MultiplexOutputDestination < Struct.new(
       :media_connect_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex Output Settings
@@ -11016,7 +9251,7 @@ module Aws::MediaLive
       :destination,
       :container_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The multiplex program object.
@@ -11042,7 +9277,7 @@ module Aws::MediaLive
       :pipeline_details,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex Program Input Destination Settings for outputting a Channel to a Multiplex
@@ -11057,7 +9292,7 @@ module Aws::MediaLive
       :multiplex_id,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Packet identifiers map for a given Multiplex program.
@@ -11131,7 +9366,7 @@ module Aws::MediaLive
       :ecm_pid,
       :smpte2038_pid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The current source for one of the pipelines in the multiplex.
@@ -11145,7 +9380,7 @@ module Aws::MediaLive
       :active_channel_pipeline,
       :pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Transport stream service descriptor configuration for the Multiplex program.
@@ -11159,7 +9394,7 @@ module Aws::MediaLive
       :provider_name,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Multiplex Program settings configuration.
@@ -11181,7 +9416,7 @@ module Aws::MediaLive
       :service_descriptor,
       :video_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for MultiplexProgramSummary
@@ -11195,7 +9430,7 @@ module Aws::MediaLive
       :channel_id,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Contains configuration for a Multiplex event
@@ -11217,7 +9452,7 @@ module Aws::MediaLive
       :transport_stream_id,
       :transport_stream_reserved_bitrate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Contains summary configuration for a Multiplex event.
@@ -11227,20 +9462,7 @@ module Aws::MediaLive
     class MultiplexSettingsSummary < Struct.new(
       :transport_stream_bitrate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # The current state of the multiplex.
-    module MultiplexState
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      IDLE = 'IDLE'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      RECOVERING = 'RECOVERING'
-      STOPPING = 'STOPPING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # Statmux rate control settings
@@ -11258,7 +9480,7 @@ module Aws::MediaLive
       :minimum_bitrate,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for MultiplexSummary
@@ -11300,7 +9522,7 @@ module Aws::MediaLive
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The video configuration for each program in a multiplex.
@@ -11316,13 +9538,7 @@ module Aws::MediaLive
       :constant_bitrate,
       :statmux_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Network Input Server Validation
-    module NetworkInputServerValidation
-      CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME = 'CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME'
-      CHECK_CRYPTOGRAPHY_ONLY = 'CHECK_CRYPTOGRAPHY_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection.
@@ -11340,26 +9556,7 @@ module Aws::MediaLive
       :server_validation,
       :multicast_input_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in NodeInterfaceMapping and NodeInterfaceMappingCreateRequest
-    module NetworkInterfaceMode
-      NAT = 'NAT'
-      BRIDGE = 'BRIDGE'
-    end
-
-    # Used in DescribeNetworkResult, DescribeNetworkSummary, UpdateNetworkResult.
-    module NetworkState
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      IDLE = 'IDLE'
-      IN_USE = 'IN_USE'
-      UPDATING = 'UPDATING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # Nielsen CBET
@@ -11377,7 +9574,7 @@ module Aws::MediaLive
       :cbet_stepaside,
       :csid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Nielsen Configuration
@@ -11391,7 +9588,7 @@ module Aws::MediaLive
       :distributor_id,
       :nielsen_pcm_to_id3_tagging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Nielsen Naes Ii Nw
@@ -11410,39 +9607,7 @@ module Aws::MediaLive
       :sid,
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # State of Nielsen PCM to ID3 tagging
-    module NielsenPcmToId3TaggingState
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Nielsen Watermark Timezones
-    module NielsenWatermarkTimezones
-      AMERICA_PUERTO_RICO = 'AMERICA_PUERTO_RICO'
-      US_ALASKA = 'US_ALASKA'
-      US_ARIZONA = 'US_ARIZONA'
-      US_CENTRAL = 'US_CENTRAL'
-      US_EASTERN = 'US_EASTERN'
-      US_HAWAII = 'US_HAWAII'
-      US_MOUNTAIN = 'US_MOUNTAIN'
-      US_PACIFIC = 'US_PACIFIC'
-      US_SAMOA = 'US_SAMOA'
-      UTC = 'UTC'
-    end
-
-    # Nielsen Watermarks Cbet Stepaside
-    module NielsenWatermarksCbetStepaside
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    # Nielsen Watermarks Distribution Types
-    module NielsenWatermarksDistributionTypes
-      FINAL_DISTRIBUTOR = 'FINAL_DISTRIBUTOR'
-      PROGRAM_CONTENT = 'PROGRAM_CONTENT'
+      include ::Smithy::Schema::Structure
     end
 
     # Nielsen Watermarks Settings
@@ -11462,13 +9627,7 @@ module Aws::MediaLive
       :nielsen_distribution_type,
       :nielsen_naes_ii_nw_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in DescribeNodeSummary.
-    module NodeConnectionState
-      CONNECTED = 'CONNECTED'
-      DISCONNECTED = 'DISCONNECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # A mapping that's used to pair a logical network interface name on a Node with the physical interface name exposed in the operating system.
@@ -11486,7 +9645,7 @@ module Aws::MediaLive
       :network_interface_mode,
       :physical_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in CreateNodeRequest.
@@ -11504,29 +9663,7 @@ module Aws::MediaLive
       :network_interface_mode,
       :physical_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in CreateNodeRequest, CreateNodeRegistrationScriptRequest, DescribeNodeResult, DescribeNodeSummary, UpdateNodeRequest.
-    module NodeRole
-      BACKUP = 'BACKUP'
-      ACTIVE = 'ACTIVE'
-    end
-
-    # Used in DescribeNodeSummary.
-    module NodeState
-      CREATED = 'CREATED'
-      REGISTERING = 'REGISTERING'
-      READY_TO_ACTIVATE = 'READY_TO_ACTIVATE'
-      REGISTRATION_FAILED = 'REGISTRATION_FAILED'
-      ACTIVATION_FAILED = 'ACTIVATION_FAILED'
-      ACTIVE = 'ACTIVE'
-      READY = 'READY'
-      IN_USE = 'IN_USE'
-      DEREGISTERING = 'DEREGISTERING'
-      DRAINING = 'DRAINING'
-      DEREGISTRATION_FAILED = 'DEREGISTRATION_FAILED'
-      DEREGISTERED = 'DEREGISTERED'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for NotFoundException
@@ -11536,7 +9673,7 @@ module Aws::MediaLive
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Reserved resources available for purchase
@@ -11586,17 +9723,7 @@ module Aws::MediaLive
       :resource_specification,
       :usage_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Units for duration, e.g. 'MONTHS'
-    module OfferingDurationUnits
-      MONTHS = 'MONTHS'
-    end
-
-    # Offering type, e.g. 'NO_UPFRONT'
-    module OfferingType
-      NO_UPFRONT = 'NO_UPFRONT'
+      include ::Smithy::Schema::Structure
     end
 
     # Output settings. There can be multiple outputs within a group.
@@ -11622,7 +9749,7 @@ module Aws::MediaLive
       :output_settings,
       :video_description_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for OutputDestination
@@ -11652,7 +9779,7 @@ module Aws::MediaLive
       :srt_settings,
       :logical_interface_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for OutputDestinationSettings
@@ -11674,7 +9801,7 @@ module Aws::MediaLive
       :url,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Output groups for this Live Event. Output groups contain information about where streams should be distributed.
@@ -11692,7 +9819,7 @@ module Aws::MediaLive
       :output_group_settings,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Output Group Settings
@@ -11738,7 +9865,7 @@ module Aws::MediaLive
       :cmaf_ingest_group_settings,
       :srt_group_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Reference to an OutputDestination ID defined in the channel
@@ -11748,7 +9875,7 @@ module Aws::MediaLive
     class OutputLocationRef < Struct.new(
       :destination_ref_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Output Locking Settings
@@ -11762,7 +9889,7 @@ module Aws::MediaLive
       :epoch_locking_settings,
       :pipeline_locking_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Output Settings
@@ -11808,13 +9935,13 @@ module Aws::MediaLive
       :cmaf_ingest_output_settings,
       :srt_output_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Pass Through Settings
     class PassThroughSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to set pause state of a channel.
@@ -11824,7 +9951,7 @@ module Aws::MediaLive
     class PauseStateScheduleActionSettings < Struct.new(
       :pipelines,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Runtime details of a pipeline when a channel is running.
@@ -11854,19 +9981,13 @@ module Aws::MediaLive
       :pipeline_id,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Pipeline ID
-    module PipelineId
-      PIPELINE_0 = 'PIPELINE_0'
-      PIPELINE_1 = 'PIPELINE_1'
+      include ::Smithy::Schema::Structure
     end
 
     # Pipeline Locking Settings
     class PipelineLockingSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for pausing a pipeline.
@@ -11876,18 +9997,7 @@ module Aws::MediaLive
     class PipelinePauseStateSettings < Struct.new(
       :pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Indicates which pipeline is preferred by the multiplex for program ingest.
-    # If set to \"PIPELINE_0\" or \"PIPELINE_1\" and an unhealthy ingest causes the multiplex to switch to the non-preferred pipeline,
-    # it will switch back once that ingest is healthy again. If set to \"CURRENTLY_ACTIVE\",
-    # it will not switch back to the other pipeline based on it recovering to a healthy state,
-    # it will only switch if the active pipeline becomes unhealthy.
-    module PreferredChannelPipeline
-      CURRENTLY_ACTIVE = 'CURRENTLY_ACTIVE'
-      PIPELINE_0 = 'PIPELINE_0'
-      PIPELINE_1 = 'PIPELINE_1'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for PurchaseOfferingRequest
@@ -11921,7 +10031,7 @@ module Aws::MediaLive
       :start,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for PurchaseOfferingResponse
@@ -11931,19 +10041,13 @@ module Aws::MediaLive
     class PurchaseOfferingResponse < Struct.new(
       :reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Raw Settings
     class RawSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Whether or not to force reboot the input device.
-    module RebootInputDeviceForce
-      NO = 'NO'
-      YES = 'YES'
+      include ::Smithy::Schema::Structure
     end
 
     # A request to reboot an AWS Elemental device.
@@ -11957,25 +10061,25 @@ module Aws::MediaLive
       :force,
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for RebootInputDeviceResponse
     class RebootInputDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Rec601 Settings
     class Rec601Settings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Rec709 Settings
     class Rec709Settings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for RejectInputDeviceTransferRequest
@@ -11985,13 +10089,13 @@ module Aws::MediaLive
     class RejectInputDeviceTransferRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for RejectInputDeviceTransferResponse
     class RejectInputDeviceTransferResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Remix Settings
@@ -12010,7 +10114,7 @@ module Aws::MediaLive
       :channels_in,
       :channels_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The Renewal settings for Reservations
@@ -12024,7 +10128,7 @@ module Aws::MediaLive
       :automatic_renewal,
       :renewal_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Reserved resources available to use
@@ -12106,45 +10210,7 @@ module Aws::MediaLive
       :tags,
       :usage_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Automatic Renewal Status for Reservation
-    module ReservationAutomaticRenewal
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      UNAVAILABLE = 'UNAVAILABLE'
-    end
-
-    # Codec, 'MPEG2', 'AVC', 'HEVC', 'AUDIO', 'LINK', or 'AV1'
-    module ReservationCodec
-      MPEG2 = 'MPEG2'
-      AVC = 'AVC'
-      HEVC = 'HEVC'
-      AUDIO = 'AUDIO'
-      LINK = 'LINK'
-      AV1 = 'AV1'
-    end
-
-    # Maximum bitrate in megabits per second
-    module ReservationMaximumBitrate
-      MAX_10_MBPS = 'MAX_10_MBPS'
-      MAX_20_MBPS = 'MAX_20_MBPS'
-      MAX_50_MBPS = 'MAX_50_MBPS'
-    end
-
-    # Maximum framerate in frames per second (Outputs only)
-    module ReservationMaximumFramerate
-      MAX_30_FPS = 'MAX_30_FPS'
-      MAX_60_FPS = 'MAX_60_FPS'
-    end
-
-    # Resolution based on lines of vertical resolution; SD is less than 720 lines, HD is 720 to 1080 lines, FHD is 1080 lines, UHD is greater than 1080 lines
-    module ReservationResolution
-      SD = 'SD'
-      HD = 'HD'
-      FHD = 'FHD'
-      UHD = 'UHD'
+      include ::Smithy::Schema::Structure
     end
 
     # Resource configuration (codec, resolution, bitrate, ...)
@@ -12182,38 +10248,7 @@ module Aws::MediaLive
       :special_feature,
       :video_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
-    module ReservationResourceType
-      INPUT = 'INPUT'
-      OUTPUT = 'OUTPUT'
-      MULTIPLEX = 'MULTIPLEX'
-      CHANNEL = 'CHANNEL'
-    end
-
-    # Special features, 'ADVANCED_AUDIO' 'AUDIO_NORMALIZATION' 'MGHD' or 'MGUHD'
-    module ReservationSpecialFeature
-      ADVANCED_AUDIO = 'ADVANCED_AUDIO'
-      AUDIO_NORMALIZATION = 'AUDIO_NORMALIZATION'
-      MGHD = 'MGHD'
-      MGUHD = 'MGUHD'
-    end
-
-    # Current reservation state
-    module ReservationState
-      ACTIVE = 'ACTIVE'
-      EXPIRED = 'EXPIRED'
-      CANCELED = 'CANCELED'
-      DELETED = 'DELETED'
-    end
-
-    # Video quality, e.g. 'STANDARD' (Outputs only)
-    module ReservationVideoQuality
-      STANDARD = 'STANDARD'
-      ENHANCED = 'ENHANCED'
-      PREMIUM = 'PREMIUM'
+      include ::Smithy::Schema::Structure
     end
 
     # Pipelines to restart.
@@ -12227,7 +10262,7 @@ module Aws::MediaLive
       :channel_id,
       :pipeline_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for RestartChannelPipelinesResponse
@@ -12319,7 +10354,7 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in DescribeNetworkResult, DescribeNetworkSummary, UpdateNetworkResult.
@@ -12333,7 +10368,7 @@ module Aws::MediaLive
       :cidr,
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in CreateNetworkRequest.
@@ -12347,7 +10382,7 @@ module Aws::MediaLive
       :cidr,
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in UpdateNetworkRequest.
@@ -12361,31 +10396,13 @@ module Aws::MediaLive
       :cidr,
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Rtmp Ad Markers
-    module RtmpAdMarkers
-      ON_CUE_POINT_SCTE35 = 'ON_CUE_POINT_SCTE35'
-    end
-
-    # Rtmp Cache Full Behavior
-    module RtmpCacheFullBehavior
-      DISCONNECT_IMMEDIATELY = 'DISCONNECT_IMMEDIATELY'
-      WAIT_FOR_SERVER = 'WAIT_FOR_SERVER'
-    end
-
-    # Rtmp Caption Data
-    module RtmpCaptionData
-      ALL = 'ALL'
-      FIELD1_608 = 'FIELD1_608'
-      FIELD1_AND_FIELD2_608 = 'FIELD1_AND_FIELD2_608'
+      include ::Smithy::Schema::Structure
     end
 
     # Rtmp Caption Info Destination Settings
     class RtmpCaptionInfoDestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Rtmp Group Settings
@@ -12426,13 +10443,7 @@ module Aws::MediaLive
       :restart_delay,
       :include_filler_nal_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Rtmp Output Certificate Mode
-    module RtmpOutputCertificateMode
-      SELF_SIGNED = 'SELF_SIGNED'
-      VERIFY_AUTHENTICITY = 'VERIFY_AUTHENTICITY'
+      include ::Smithy::Schema::Structure
     end
 
     # Rtmp Output Settings
@@ -12454,15 +10465,7 @@ module Aws::MediaLive
       :destination,
       :num_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # S3 Canned Acl
-    module S3CannedAcl
-      AUTHENTICATED_READ = 'AUTHENTICATED_READ'
-      BUCKET_OWNER_FULL_CONTROL = 'BUCKET_OWNER_FULL_CONTROL'
-      BUCKET_OWNER_READ = 'BUCKET_OWNER_READ'
-      PUBLIC_READ = 'PUBLIC_READ'
+      include ::Smithy::Schema::Structure
     end
 
     # Contains information on a single schedule action.
@@ -12480,7 +10483,7 @@ module Aws::MediaLive
       :schedule_action_settings,
       :schedule_action_start_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Holds the settings for a single schedule action.
@@ -12554,7 +10557,7 @@ module Aws::MediaLive
       :id3_segment_tagging_settings,
       :timed_metadata_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to specify when an action should occur. Only one of the options must be selected.
@@ -12572,19 +10575,13 @@ module Aws::MediaLive
       :follow_mode_schedule_action_start_settings,
       :immediate_mode_schedule_action_start_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte20 Convert608 To708
-    module Scte20Convert608To708
-      DISABLED = 'DISABLED'
-      UPCONVERT = 'UPCONVERT'
+      include ::Smithy::Schema::Structure
     end
 
     # Scte20 Plus Embedded Destination Settings
     class Scte20PlusEmbeddedDestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Scte20 Source Settings
@@ -12598,23 +10595,13 @@ module Aws::MediaLive
       :convert608_to708,
       :source608_channel_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Scte27 Destination Settings
     class Scte27DestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte27 Ocr Language
-    module Scte27OcrLanguage
-      DEU = 'DEU'
-      ENG = 'ENG'
-      FRA = 'FRA'
-      NLD = 'NLD'
-      POR = 'POR'
-      SPA = 'SPA'
+      include ::Smithy::Schema::Structure
     end
 
     # Scte27 Source Settings
@@ -12633,25 +10620,7 @@ module Aws::MediaLive
       :ocr_language,
       :pid,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte35 Apos No Regional Blackout Behavior
-    module Scte35AposNoRegionalBlackoutBehavior
-      FOLLOW = 'FOLLOW'
-      IGNORE = 'IGNORE'
-    end
-
-    # Scte35 Apos Web Delivery Allowed Behavior
-    module Scte35AposWebDeliveryAllowedBehavior
-      FOLLOW = 'FOLLOW'
-      IGNORE = 'IGNORE'
-    end
-
-    # Corresponds to the archive_allowed parameter. A value of ARCHIVE_NOT_ALLOWED corresponds to 0 (false) in the SCTE-35 specification. If you include one of the "restriction" flags then you must include all four of them.
-    module Scte35ArchiveAllowedFlag
-      ARCHIVE_NOT_ALLOWED = 'ARCHIVE_NOT_ALLOWED'
-      ARCHIVE_ALLOWED = 'ARCHIVE_ALLOWED'
+      include ::Smithy::Schema::Structure
     end
 
     # Corresponds to SCTE-35 delivery_not_restricted_flag parameter. To declare delivery restrictions, include this element and its four "restriction" flags. To declare that there are no restrictions, omit this element.
@@ -12673,7 +10642,7 @@ module Aws::MediaLive
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Holds one set of SCTE-35 Descriptor Settings.
@@ -12683,7 +10652,7 @@ module Aws::MediaLive
     class Scte35Descriptor < Struct.new(
       :scte35_descriptor_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # SCTE-35 Descriptor settings.
@@ -12693,21 +10662,7 @@ module Aws::MediaLive
     class Scte35DescriptorSettings < Struct.new(
       :segmentation_descriptor_scte35_descriptor_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Corresponds to the device_restrictions parameter in a segmentation_descriptor. If you include one of the "restriction" flags then you must include all four of them.
-    module Scte35DeviceRestrictions
-      NONE = 'NONE'
-      RESTRICT_GROUP0 = 'RESTRICT_GROUP0'
-      RESTRICT_GROUP1 = 'RESTRICT_GROUP1'
-      RESTRICT_GROUP2 = 'RESTRICT_GROUP2'
-    end
-
-    # Whether the SCTE-35 input should be the active input or a fixed input.
-    module Scte35InputMode
-      FIXED = 'FIXED'
-      FOLLOW_ACTIVE = 'FOLLOW_ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # Scte35Input Schedule Action Settings
@@ -12721,13 +10676,7 @@ module Aws::MediaLive
       :input_attachment_name_reference,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Corresponds to the no_regional_blackout_flag parameter. A value of REGIONAL_BLACKOUT corresponds to 0 (false) in the SCTE-35 specification. If you include one of the "restriction" flags then you must include all four of them.
-    module Scte35NoRegionalBlackoutFlag
-      REGIONAL_BLACKOUT = 'REGIONAL_BLACKOUT'
-      NO_REGIONAL_BLACKOUT = 'NO_REGIONAL_BLACKOUT'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a SCTE-35 return_to_network message.
@@ -12737,13 +10686,7 @@ module Aws::MediaLive
     class Scte35ReturnToNetworkScheduleActionSettings < Struct.new(
       :splice_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Corresponds to SCTE-35 segmentation_event_cancel_indicator. SEGMENTATION_EVENT_NOT_CANCELED corresponds to 0 in the SCTE-35 specification and indicates that this is an insertion request. SEGMENTATION_EVENT_CANCELED corresponds to 1 in the SCTE-35 specification and indicates that this is a cancelation request, in which case complete this field and the existing event ID to cancel.
-    module Scte35SegmentationCancelIndicator
-      SEGMENTATION_EVENT_NOT_CANCELED = 'SEGMENTATION_EVENT_NOT_CANCELED'
-      SEGMENTATION_EVENT_CANCELED = 'SEGMENTATION_EVENT_CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # Corresponds to SCTE-35 segmentation_descriptor.
@@ -12793,13 +10736,7 @@ module Aws::MediaLive
       :sub_segment_num,
       :sub_segments_expected,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte35 Segmentation Scope
-    module Scte35SegmentationScope
-      ALL_OUTPUT_GROUPS = 'ALL_OUTPUT_GROUPS'
-      SCTE35_ENABLED_OUTPUT_GROUPS = 'SCTE35_ENABLED_OUTPUT_GROUPS'
+      include ::Smithy::Schema::Structure
     end
 
     # Typical configuration that applies breaks on splice inserts in addition to time signal placement opportunities, breaks, and advertisements.
@@ -12817,13 +10754,7 @@ module Aws::MediaLive
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte35 Splice Insert No Regional Blackout Behavior
-    module Scte35SpliceInsertNoRegionalBlackoutBehavior
-      FOLLOW = 'FOLLOW'
-      IGNORE = 'IGNORE'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a SCTE-35 splice_insert message.
@@ -12837,13 +10768,7 @@ module Aws::MediaLive
       :duration,
       :splice_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte35 Splice Insert Web Delivery Allowed Behavior
-    module Scte35SpliceInsertWebDeliveryAllowedBehavior
-      FOLLOW = 'FOLLOW'
-      IGNORE = 'IGNORE'
+      include ::Smithy::Schema::Structure
     end
 
     # Atypical configuration that applies segment breaks only on SCTE-35 time signal placement opportunities and breaks.
@@ -12861,7 +10786,7 @@ module Aws::MediaLive
       :no_regional_blackout_flag,
       :web_delivery_allowed_flag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for a SCTE-35 time_signal.
@@ -12871,19 +10796,7 @@ module Aws::MediaLive
     class Scte35TimeSignalScheduleActionSettings < Struct.new(
       :scte35_descriptors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Scte35 Type
-    module Scte35Type
-      NONE = 'NONE'
-      SCTE_35_WITHOUT_SEGMENTATION = 'SCTE_35_WITHOUT_SEGMENTATION'
-    end
-
-    # Corresponds to the web_delivery_allowed_flag parameter. A value of WEB_DELIVERY_NOT_ALLOWED corresponds to 0 (false) in the SCTE-35 specification. If you include one of the "restriction" flags then you must include all four of them.
-    module Scte35WebDeliveryAllowedFlag
-      WEB_DELIVERY_NOT_ALLOWED = 'WEB_DELIVERY_NOT_ALLOWED'
-      WEB_DELIVERY_ALLOWED = 'WEB_DELIVERY_ALLOWED'
+      include ::Smithy::Schema::Structure
     end
 
     # Used in CreateSdiSourceResponse, DeleteSdiSourceResponse, DescribeSdiSourceResponse, ListSdiSourcesResponse, UpdateSdiSourceResponse
@@ -12917,7 +10830,7 @@ module Aws::MediaLive
       :state,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in DescribeNodeSummary, DescribeNodeResult.
@@ -12935,7 +10848,7 @@ module Aws::MediaLive
       :channel_number,
       :sdi_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Used in SdiSourceMappingsUpdateRequest. One SDI source mapping. It connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses. You must specify all three parameters in this object.
@@ -12953,20 +10866,7 @@ module Aws::MediaLive
       :channel_number,
       :sdi_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest.
-    module SdiSourceMode
-      QUADRANT = 'QUADRANT'
-      INTERLEAVE = 'INTERLEAVE'
-    end
-
-    # Used in SdiSource, DescribeNodeRequest, DescribeNodeResult
-    module SdiSourceState
-      IDLE = 'IDLE'
-      IN_USE = 'IN_USE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # Used in CreateSdiSourceResponse, DeleteSdiSourceResponse, DescribeSdiSourceResponse, ListSdiSourcesResponse, UpdateSdiSourceResponse
@@ -13000,40 +10900,7 @@ module Aws::MediaLive
       :state,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in SdiSource, CreateSdiSourceRequest, UpdateSdiSourceRequest.
-    module SdiSourceType
-      SINGLE = 'SINGLE'
-      QUAD = 'QUAD'
-    end
-
-    # A signal map's monitor deployment status.
-    module SignalMapMonitorDeploymentStatus
-      NOT_DEPLOYED = 'NOT_DEPLOYED'
-      DRY_RUN_DEPLOYMENT_COMPLETE = 'DRY_RUN_DEPLOYMENT_COMPLETE'
-      DRY_RUN_DEPLOYMENT_FAILED = 'DRY_RUN_DEPLOYMENT_FAILED'
-      DRY_RUN_DEPLOYMENT_IN_PROGRESS = 'DRY_RUN_DEPLOYMENT_IN_PROGRESS'
-      DEPLOYMENT_COMPLETE = 'DEPLOYMENT_COMPLETE'
-      DEPLOYMENT_FAILED = 'DEPLOYMENT_FAILED'
-      DEPLOYMENT_IN_PROGRESS = 'DEPLOYMENT_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-    end
-
-    # A signal map's current status which is dependent on its lifecycle actions or associated jobs.
-    module SignalMapStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_REVERTED = 'UPDATE_REVERTED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      READY = 'READY'
-      NOT_READY = 'NOT_READY'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for SignalMapSummary
@@ -13075,63 +10942,7 @@ module Aws::MediaLive
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Smooth Group Audio Only Timecode Control
-    module SmoothGroupAudioOnlyTimecodeControl
-      PASSTHROUGH = 'PASSTHROUGH'
-      USE_CONFIGURED_CLOCK = 'USE_CONFIGURED_CLOCK'
-    end
-
-    # Smooth Group Certificate Mode
-    module SmoothGroupCertificateMode
-      SELF_SIGNED = 'SELF_SIGNED'
-      VERIFY_AUTHENTICITY = 'VERIFY_AUTHENTICITY'
-    end
-
-    # Smooth Group Event Id Mode
-    module SmoothGroupEventIdMode
-      NO_EVENT_ID = 'NO_EVENT_ID'
-      USE_CONFIGURED = 'USE_CONFIGURED'
-      USE_TIMESTAMP = 'USE_TIMESTAMP'
-    end
-
-    # Smooth Group Event Stop Behavior
-    module SmoothGroupEventStopBehavior
-      NONE = 'NONE'
-      SEND_EOS = 'SEND_EOS'
-    end
-
-    # Smooth Group Segmentation Mode
-    module SmoothGroupSegmentationMode
-      USE_INPUT_SEGMENTATION = 'USE_INPUT_SEGMENTATION'
-      USE_SEGMENT_DURATION = 'USE_SEGMENT_DURATION'
-    end
-
-    # Smooth Group Sparse Track Type
-    module SmoothGroupSparseTrackType
-      NONE = 'NONE'
-      SCTE_35 = 'SCTE_35'
-      SCTE_35_WITHOUT_SEGMENTATION = 'SCTE_35_WITHOUT_SEGMENTATION'
-    end
-
-    # Smooth Group Stream Manifest Behavior
-    module SmoothGroupStreamManifestBehavior
-      DO_NOT_SEND = 'DO_NOT_SEND'
-      SEND = 'SEND'
-    end
-
-    # Smooth Group Timestamp Offset Mode
-    module SmoothGroupTimestampOffsetMode
-      USE_CONFIGURED_OFFSET = 'USE_CONFIGURED_OFFSET'
-      USE_EVENT_START_DATE = 'USE_EVENT_START_DATE'
-    end
-
-    # Smpte2038 Data Preference
-    module Smpte2038DataPreference
-      IGNORE = 'IGNORE'
-      PREFER = 'PREFER'
+      include ::Smithy::Schema::Structure
     end
 
     # A receiver group is a collection of video, audio, and ancillary streams that you want to group together and attach to one input.
@@ -13141,7 +10952,7 @@ module Aws::MediaLive
     class Smpte2110ReceiverGroup < Struct.new(
       :sdp_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Information about the SDP files that describe the SMPTE 2110 streams that go into one SMPTE 2110 receiver group.
@@ -13160,7 +10971,7 @@ module Aws::MediaLive
       :audio_sdps,
       :video_sdp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configures the sources for the SMPTE 2110 Receiver Group input.
@@ -13170,13 +10981,13 @@ module Aws::MediaLive
     class Smpte2110ReceiverGroupSettings < Struct.new(
       :smpte2110_receiver_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Smpte Tt Destination Settings
     class SmpteTtDestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The decryption settings for the SRT caller source. Present only if the source has decryption enabled.
@@ -13190,7 +11001,7 @@ module Aws::MediaLive
       :algorithm,
       :passphrase_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Complete these parameters only if the content is encrypted.
@@ -13204,7 +11015,7 @@ module Aws::MediaLive
       :algorithm,
       :passphrase_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The configuration for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender.
@@ -13230,7 +11041,7 @@ module Aws::MediaLive
       :srt_listener_port,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configures the connection for a source that uses SRT as the connection protocol. In terms of establishing the connection, MediaLive is always the caller and the upstream system is always the listener. In terms of transmission of the source content, MediaLive is always the receiver and the upstream system is always the sender.
@@ -13256,14 +11067,7 @@ module Aws::MediaLive
       :srt_listener_port,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Srt Encryption Type
-    module SrtEncryptionType
-      AES128 = 'AES128'
-      AES192 = 'AES192'
-      AES256 = 'AES256'
+      include ::Smithy::Schema::Structure
     end
 
     # Srt Group Settings
@@ -13273,7 +11077,7 @@ module Aws::MediaLive
     class SrtGroupSettings < Struct.new(
       :input_loss_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for SrtOutputDestinationSettings
@@ -13291,7 +11095,7 @@ module Aws::MediaLive
       :stream_id,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Srt Output Settings
@@ -13317,7 +11121,7 @@ module Aws::MediaLive
       :encryption_type,
       :latency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The configured sources for this SRT input.
@@ -13327,7 +11131,7 @@ module Aws::MediaLive
     class SrtSettings < Struct.new(
       :srt_caller_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Configures the sources for this SRT input. For a single-pipeline input, include one srtCallerSource in the array. For a standard-pipeline input, include two srtCallerSource.
@@ -13337,7 +11141,7 @@ module Aws::MediaLive
     class SrtSettingsRequest < Struct.new(
       :srt_caller_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Standard Hls Settings
@@ -13351,7 +11155,7 @@ module Aws::MediaLive
       :audio_rendition_sets,
       :m3u8_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartChannelRequest
@@ -13361,7 +11165,7 @@ module Aws::MediaLive
     class StartChannelRequest < Struct.new(
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartChannelResponse
@@ -13449,7 +11253,7 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartDeleteMonitorDeploymentRequest
@@ -13459,7 +11263,7 @@ module Aws::MediaLive
     class StartDeleteMonitorDeploymentRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartDeleteMonitorDeploymentResponse
@@ -13537,7 +11341,7 @@ module Aws::MediaLive
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartInputDeviceMaintenanceWindowRequest
@@ -13547,13 +11351,13 @@ module Aws::MediaLive
     class StartInputDeviceMaintenanceWindowRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartInputDeviceMaintenanceWindowResponse
     class StartInputDeviceMaintenanceWindowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartInputDeviceRequest
@@ -13563,13 +11367,13 @@ module Aws::MediaLive
     class StartInputDeviceRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartInputDeviceResponse
     class StartInputDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartMonitorDeploymentRequest
@@ -13583,7 +11387,7 @@ module Aws::MediaLive
       :dry_run,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartMonitorDeploymentResponse
@@ -13661,7 +11465,7 @@ module Aws::MediaLive
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartMultiplexRequest
@@ -13671,7 +11475,7 @@ module Aws::MediaLive
     class StartMultiplexRequest < Struct.new(
       :multiplex_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartMultiplexResponse
@@ -13717,7 +11521,7 @@ module Aws::MediaLive
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to identify the start of the clip.
@@ -13727,7 +11531,7 @@ module Aws::MediaLive
     class StartTimecode < Struct.new(
       :timecode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartUpdateSignalMapRequest
@@ -13761,7 +11565,7 @@ module Aws::MediaLive
       :identifier,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StartUpdateSignalMapResponse
@@ -13839,7 +11643,7 @@ module Aws::MediaLive
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to activate a static image.
@@ -13885,7 +11689,7 @@ module Aws::MediaLive
       :opacity,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to deactivate the image in a specific layer.
@@ -13899,7 +11703,7 @@ module Aws::MediaLive
       :fade_out,
       :layer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to activate a static image.
@@ -13949,7 +11753,7 @@ module Aws::MediaLive
       :output_names,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to deactivate the image in a specific layer.
@@ -13967,7 +11771,7 @@ module Aws::MediaLive
       :layer,
       :output_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Static Key Settings
@@ -13981,7 +11785,7 @@ module Aws::MediaLive
       :key_provider_server,
       :static_key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopChannelRequest
@@ -13991,7 +11795,7 @@ module Aws::MediaLive
     class StopChannelRequest < Struct.new(
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopChannelResponse
@@ -14079,7 +11883,7 @@ module Aws::MediaLive
       :anywhere_settings,
       :channel_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopInputDeviceRequest
@@ -14089,13 +11893,13 @@ module Aws::MediaLive
     class StopInputDeviceRequest < Struct.new(
       :input_device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopInputDeviceResponse
     class StopInputDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopMultiplexRequest
@@ -14105,7 +11909,7 @@ module Aws::MediaLive
     class StopMultiplexRequest < Struct.new(
       :multiplex_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for StopMultiplexResponse
@@ -14151,7 +11955,7 @@ module Aws::MediaLive
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Settings to identify the end of the clip.
@@ -14165,7 +11969,7 @@ module Aws::MediaLive
       :last_frame_clipping_behavior,
       :timecode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Represents the latest successful monitor deployment of a signal map.
@@ -14179,13 +11983,13 @@ module Aws::MediaLive
       :details_uri,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Teletext Destination Settings
     class TeletextDestinationSettings < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Teletext Source Settings
@@ -14199,14 +12003,7 @@ module Aws::MediaLive
       :output_rectangle,
       :page_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Temporal Filter Post Filter Sharpening
-    module TemporalFilterPostFilterSharpening
-      AUTO = 'AUTO'
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # Temporal Filter Settings
@@ -14222,28 +12019,7 @@ module Aws::MediaLive
       :post_filter_sharpening,
       :strength,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Temporal Filter Strength
-    module TemporalFilterStrength
-      AUTO = 'AUTO'
-      STRENGTH_1 = 'STRENGTH_1'
-      STRENGTH_2 = 'STRENGTH_2'
-      STRENGTH_3 = 'STRENGTH_3'
-      STRENGTH_4 = 'STRENGTH_4'
-      STRENGTH_5 = 'STRENGTH_5'
-      STRENGTH_6 = 'STRENGTH_6'
-      STRENGTH_7 = 'STRENGTH_7'
-      STRENGTH_8 = 'STRENGTH_8'
-      STRENGTH_9 = 'STRENGTH_9'
-      STRENGTH_10 = 'STRENGTH_10'
-      STRENGTH_11 = 'STRENGTH_11'
-      STRENGTH_12 = 'STRENGTH_12'
-      STRENGTH_13 = 'STRENGTH_13'
-      STRENGTH_14 = 'STRENGTH_14'
-      STRENGTH_15 = 'STRENGTH_15'
-      STRENGTH_16 = 'STRENGTH_16'
+      include ::Smithy::Schema::Structure
     end
 
     # Details of a single thumbnail
@@ -14265,7 +12041,7 @@ module Aws::MediaLive
       :thumbnail_type,
       :time_stamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thumbnail Configuration
@@ -14275,7 +12051,7 @@ module Aws::MediaLive
     class ThumbnailConfiguration < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thumbnail details for one pipeline of a running channel.
@@ -14289,40 +12065,7 @@ module Aws::MediaLive
       :pipeline_id,
       :thumbnails,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Thumbnail State
-    module ThumbnailState
-      AUTO = 'AUTO'
-      DISABLED = 'DISABLED'
-    end
-
-    # Thumbnail type.
-    module ThumbnailType
-      UNSPECIFIED = 'UNSPECIFIED'
-      CURRENT_ACTIVE = 'CURRENT_ACTIVE'
-    end
-
-    # Timecode Burnin Font Size
-    module TimecodeBurninFontSize
-      EXTRA_SMALL_10 = 'EXTRA_SMALL_10'
-      LARGE_48 = 'LARGE_48'
-      MEDIUM_32 = 'MEDIUM_32'
-      SMALL_16 = 'SMALL_16'
-    end
-
-    # Timecode Burnin Position
-    module TimecodeBurninPosition
-      BOTTOM_CENTER = 'BOTTOM_CENTER'
-      BOTTOM_LEFT = 'BOTTOM_LEFT'
-      BOTTOM_RIGHT = 'BOTTOM_RIGHT'
-      MIDDLE_CENTER = 'MIDDLE_CENTER'
-      MIDDLE_LEFT = 'MIDDLE_LEFT'
-      MIDDLE_RIGHT = 'MIDDLE_RIGHT'
-      TOP_CENTER = 'TOP_CENTER'
-      TOP_LEFT = 'TOP_LEFT'
-      TOP_RIGHT = 'TOP_RIGHT'
+      include ::Smithy::Schema::Structure
     end
 
     # Timecode Burnin Settings
@@ -14340,7 +12083,7 @@ module Aws::MediaLive
       :position,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Timecode Config
@@ -14357,14 +12100,7 @@ module Aws::MediaLive
       :source,
       :sync_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Timecode Config Source
-    module TimecodeConfigSource
-      EMBEDDED = 'EMBEDDED'
-      SYSTEMCLOCK = 'SYSTEMCLOCK'
-      ZEROBASED = 'ZEROBASED'
+      include ::Smithy::Schema::Structure
     end
 
     # Settings for the action to insert ID3 metadata (as a one-time action) in applicable output groups.
@@ -14374,7 +12110,7 @@ module Aws::MediaLive
     class TimedMetadataScheduleActionSettings < Struct.new(
       :id3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for TooManyRequestsException
@@ -14384,7 +12120,7 @@ module Aws::MediaLive
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to transfer an input device.
@@ -14406,13 +12142,13 @@ module Aws::MediaLive
       :target_region,
       :transfer_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for TransferInputDeviceResponse
     class TransferInputDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Details about the input device that is being transferred.
@@ -14434,7 +12170,7 @@ module Aws::MediaLive
       :target_customer_id,
       :transfer_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Ttml Destination Settings
@@ -14444,13 +12180,7 @@ module Aws::MediaLive
     class TtmlDestinationSettings < Struct.new(
       :style_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Ttml Destination Style Control
-    module TtmlDestinationStyleControl
-      PASSTHROUGH = 'PASSTHROUGH'
-      USE_CONFIGURED = 'USE_CONFIGURED'
+      include ::Smithy::Schema::Structure
     end
 
     # Udp Container Settings
@@ -14460,7 +12190,7 @@ module Aws::MediaLive
     class UdpContainerSettings < Struct.new(
       :m2ts_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Udp Group Settings
@@ -14478,7 +12208,7 @@ module Aws::MediaLive
       :timed_metadata_id3_frame,
       :timed_metadata_id3_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Udp Output Settings
@@ -14500,14 +12230,7 @@ module Aws::MediaLive
       :destination,
       :fec_output_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Udp Timed Metadata Id3 Frame
-    module UdpTimedMetadataId3Frame
-      NONE = 'NONE'
-      PRIV = 'PRIV'
-      TDRL = 'TDRL'
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UnprocessableEntityException
@@ -14521,7 +12244,7 @@ module Aws::MediaLive
       :message,
       :validation_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # List of account configuration parameters to update.
@@ -14531,7 +12254,7 @@ module Aws::MediaLive
     class UpdateAccountConfigurationRequest < Struct.new(
       :account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateAccountConfigurationResponse
@@ -14541,7 +12264,7 @@ module Aws::MediaLive
     class UpdateAccountConfigurationResponse < Struct.new(
       :account_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Channel class that the channel should be updated to.
@@ -14559,7 +12282,7 @@ module Aws::MediaLive
       :channel_id,
       :destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateChannelClassResponse
@@ -14569,7 +12292,7 @@ module Aws::MediaLive
     class UpdateChannelClassResponse < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update the channel placement group
@@ -14591,7 +12314,7 @@ module Aws::MediaLive
       :name,
       :nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateChannelPlacementGroupResponse
@@ -14625,7 +12348,7 @@ module Aws::MediaLive
       :nodes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update a channel.
@@ -14683,7 +12406,7 @@ module Aws::MediaLive
       :dry_run,
       :anywhere_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateChannelResponse
@@ -14693,7 +12416,7 @@ module Aws::MediaLive
     class UpdateChannelResponse < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateCloudWatchAlarmTemplateGroupRequest
@@ -14707,7 +12430,7 @@ module Aws::MediaLive
       :description,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateCloudWatchAlarmTemplateGroupResponse
@@ -14741,7 +12464,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateCloudWatchAlarmTemplateRequest
@@ -14799,7 +12522,7 @@ module Aws::MediaLive
       :threshold,
       :treat_missing_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateCloudWatchAlarmTemplateResponse
@@ -14873,7 +12596,7 @@ module Aws::MediaLive
       :threshold,
       :treat_missing_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update the cluster.
@@ -14891,7 +12614,7 @@ module Aws::MediaLive
       :name,
       :network_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateClusterResponse
@@ -14925,7 +12648,7 @@ module Aws::MediaLive
       :network_settings,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateEventBridgeRuleTemplateGroupRequest
@@ -14939,7 +12662,7 @@ module Aws::MediaLive
       :description,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateEventBridgeRuleTemplateGroupResponse
@@ -14973,7 +12696,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateEventBridgeRuleTemplateRequest
@@ -15003,7 +12726,7 @@ module Aws::MediaLive
       :identifier,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateEventBridgeRuleTemplateResponse
@@ -15049,7 +12772,7 @@ module Aws::MediaLive
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update an input device.
@@ -15075,7 +12798,7 @@ module Aws::MediaLive
       :uhd_device_settings,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateInputDeviceResponse
@@ -15145,7 +12868,7 @@ module Aws::MediaLive
       :medialive_input_arns,
       :output_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update an input.
@@ -15203,7 +12926,7 @@ module Aws::MediaLive
       :smpte2110_receiver_group_settings,
       :sdi_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateInputResponse
@@ -15213,7 +12936,7 @@ module Aws::MediaLive
     class UpdateInputResponse < Struct.new(
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
@@ -15234,7 +12957,7 @@ module Aws::MediaLive
       :tags,
       :whitelist_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateInputSecurityGroupResponse
@@ -15244,7 +12967,7 @@ module Aws::MediaLive
     class UpdateInputSecurityGroupResponse < Struct.new(
       :security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update a program in a multiplex.
@@ -15262,7 +12985,7 @@ module Aws::MediaLive
       :multiplex_program_settings,
       :program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateMultiplexProgramResponse
@@ -15272,7 +12995,7 @@ module Aws::MediaLive
     class UpdateMultiplexProgramResponse < Struct.new(
       :multiplex_program,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update a multiplex.
@@ -15294,7 +13017,7 @@ module Aws::MediaLive
       :name,
       :packet_identifiers_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateMultiplexResponse
@@ -15304,7 +13027,7 @@ module Aws::MediaLive
     class UpdateMultiplexResponse < Struct.new(
       :multiplex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update the network.
@@ -15326,7 +13049,7 @@ module Aws::MediaLive
       :network_id,
       :routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateNetworkResponse
@@ -15360,7 +13083,7 @@ module Aws::MediaLive
       :routes,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update the node.
@@ -15386,7 +13109,7 @@ module Aws::MediaLive
       :role,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateNodeResponse
@@ -15436,7 +13159,7 @@ module Aws::MediaLive
       :state,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update the state of a node.
@@ -15454,7 +13177,7 @@ module Aws::MediaLive
       :node_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateNodeStateResponse
@@ -15504,13 +13227,7 @@ module Aws::MediaLive
       :state,
       :sdi_source_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Used in UpdateNodeStateRequest.
-    module UpdateNodeStateShape
-      ACTIVE = 'ACTIVE'
-      DRAINING = 'DRAINING'
+      include ::Smithy::Schema::Structure
     end
 
     # Request to update a reservation
@@ -15528,7 +13245,7 @@ module Aws::MediaLive
       :renewal_settings,
       :reservation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateReservationResponse
@@ -15538,7 +13255,7 @@ module Aws::MediaLive
     class UpdateReservationResponse < Struct.new(
       :reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to update the SdiSource.
@@ -15560,7 +13277,7 @@ module Aws::MediaLive
       :sdi_source_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for UpdateSdiSourceResponse
@@ -15570,7 +13287,7 @@ module Aws::MediaLive
     class UpdateSdiSourceResponse < Struct.new(
       :sdi_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for ValidationError
@@ -15584,7 +13301,7 @@ module Aws::MediaLive
       :element_path,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Placeholder documentation for VideoBlackFailoverSettings
@@ -15598,7 +13315,7 @@ module Aws::MediaLive
       :black_detect_threshold,
       :video_black_threshold_msec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Video Codec Settings
@@ -15624,7 +13341,7 @@ module Aws::MediaLive
       :mpeg2_settings,
       :av1_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Video settings for this stream.
@@ -15661,20 +13378,7 @@ module Aws::MediaLive
       :sharpness,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Video Description Respond To Afd
-    module VideoDescriptionRespondToAfd
-      NONE = 'NONE'
-      PASSTHROUGH = 'PASSTHROUGH'
-      RESPOND = 'RESPOND'
-    end
-
-    # Video Description Scaling Behavior
-    module VideoDescriptionScalingBehavior
-      DEFAULT = 'DEFAULT'
-      STRETCH_TO_OUTPUT = 'STRETCH_TO_OUTPUT'
+      include ::Smithy::Schema::Structure
     end
 
     # Specifies a particular video stream within an input source. An input may have only a single video selector.
@@ -15696,16 +13400,7 @@ module Aws::MediaLive
       :color_space_usage,
       :selector_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Video Selector Color Space
-    module VideoSelectorColorSpace
-      FOLLOW = 'FOLLOW'
-      HDR10 = 'HDR10'
-      HLG_2020 = 'HLG_2020'
-      REC_601 = 'REC_601'
-      REC_709 = 'REC_709'
+      include ::Smithy::Schema::Structure
     end
 
     # Video Selector Color Space Settings
@@ -15715,13 +13410,7 @@ module Aws::MediaLive
     class VideoSelectorColorSpaceSettings < Struct.new(
       :hdr10_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Video Selector Color Space Usage
-    module VideoSelectorColorSpaceUsage
-      FALLBACK = 'FALLBACK'
-      FORCE = 'FORCE'
+      include ::Smithy::Schema::Structure
     end
 
     # Video Selector Pid
@@ -15731,7 +13420,7 @@ module Aws::MediaLive
     class VideoSelectorPid < Struct.new(
       :pid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Video Selector Program Id
@@ -15741,7 +13430,7 @@ module Aws::MediaLive
     class VideoSelectorProgramId < Struct.new(
       :program_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Video Selector Settings
@@ -15755,7 +13444,7 @@ module Aws::MediaLive
       :video_selector_pid,
       :video_selector_program_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The properties for a private VPC Output
@@ -15777,7 +13466,7 @@ module Aws::MediaLive
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The properties for a private VPC Output
@@ -15802,15 +13491,7 @@ module Aws::MediaLive
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Wav Coding Mode
-    module WavCodingMode
-      CODING_MODE_1_0 = 'CODING_MODE_1_0'
-      CODING_MODE_2_0 = 'CODING_MODE_2_0'
-      CODING_MODE_4_0 = 'CODING_MODE_4_0'
-      CODING_MODE_8_0 = 'CODING_MODE_8_0'
+      include ::Smithy::Schema::Structure
     end
 
     # Wav Settings
@@ -15828,7 +13509,7 @@ module Aws::MediaLive
       :coding_mode,
       :sample_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Webvtt Destination Settings
@@ -15838,13 +13519,7 @@ module Aws::MediaLive
     class WebvttDestinationSettings < Struct.new(
       :style_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Webvtt Destination Style Control
-    module WebvttDestinationStyleControl
-      NO_STYLE_DATA = 'NO_STYLE_DATA'
-      PASSTHROUGH = 'PASSTHROUGH'
+      include ::Smithy::Schema::Structure
     end
 
   end

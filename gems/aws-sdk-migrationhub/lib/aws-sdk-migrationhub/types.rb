@@ -12,7 +12,7 @@ module Aws::MigrationHub
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of an application discovered through Migration Hub import, the AWS Agentless
@@ -32,13 +32,7 @@ module Aws::MigrationHub
       :application_status,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -63,12 +57,12 @@ module Aws::MigrationHub
       :created_artifact,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateCreatedArtifactResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -92,12 +86,12 @@ module Aws::MigrationHub
       :discovered_resource,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateDiscoveredResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -127,12 +121,12 @@ module Aws::MigrationHub
       :source_resource,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateSourceResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream_name
@@ -148,12 +142,12 @@ module Aws::MigrationHub
       :progress_update_stream_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateProgressUpdateStreamResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
@@ -169,7 +163,7 @@ module Aws::MigrationHub
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream_name
@@ -185,12 +179,12 @@ module Aws::MigrationHub
       :progress_update_stream_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteProgressUpdateStreamResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -200,7 +194,7 @@ module Aws::MigrationHub
     class DescribeApplicationStateRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_status
@@ -213,7 +207,7 @@ module Aws::MigrationHub
       :application_status,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -228,7 +222,7 @@ module Aws::MigrationHub
       :progress_update_stream,
       :migration_task_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute migration_task
@@ -237,7 +231,7 @@ module Aws::MigrationHub
     class DescribeMigrationTaskResult < Struct.new(
       :migration_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -262,12 +256,12 @@ module Aws::MigrationHub
       :created_artifact_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateCreatedArtifactResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -292,12 +286,12 @@ module Aws::MigrationHub
       :configuration_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateDiscoveredResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -327,12 +321,12 @@ module Aws::MigrationHub
       :source_resource_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateSourceResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object representing the on-premises resource being migrated.</p>
@@ -348,7 +342,7 @@ module Aws::MigrationHub
       :configuration_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised to indicate a successfully authorized action when the
@@ -358,7 +352,7 @@ module Aws::MigrationHub
     class DryRunOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The home region is not set. Set the home region to continue.</p>
@@ -367,7 +361,7 @@ module Aws::MigrationHub
     class HomeRegionNotSetException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -387,12 +381,12 @@ module Aws::MigrationHub
       :migration_task_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ImportMigrationTaskResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when an internal, configuration, or dependency error is
@@ -402,7 +396,7 @@ module Aws::MigrationHub
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when the provided input violates a policy constraint or is entered in
@@ -412,7 +406,7 @@ module Aws::MigrationHub
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_ids
@@ -432,7 +426,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_state_list
@@ -447,7 +441,7 @@ module Aws::MigrationHub
       :application_state_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -472,7 +466,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -487,7 +481,7 @@ module Aws::MigrationHub
       :next_token,
       :created_artifact_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -512,7 +506,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -526,7 +520,7 @@ module Aws::MigrationHub
       :next_token,
       :discovered_resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -560,7 +554,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -578,7 +572,7 @@ module Aws::MigrationHub
       :next_token,
       :migration_task_update_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -597,7 +591,7 @@ module Aws::MigrationHub
       :max_results,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -613,7 +607,7 @@ module Aws::MigrationHub
       :next_token,
       :migration_task_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -628,7 +622,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream_summary_list
@@ -643,7 +637,7 @@ module Aws::MigrationHub
       :progress_update_stream_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -677,7 +671,7 @@ module Aws::MigrationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -695,7 +689,7 @@ module Aws::MigrationHub
       :next_token,
       :source_resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a migration task in a migration tool.</p>
@@ -724,7 +718,7 @@ module Aws::MigrationHub
       :update_date_time,
       :resource_attribute_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>MigrationTaskSummary includes <code>MigrationTaskName</code>,
@@ -759,7 +753,7 @@ module Aws::MigrationHub
       :status_detail,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A migration-task progress update.</p>
@@ -777,7 +771,7 @@ module Aws::MigrationHub
       :update_type,
       :migration_task_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -800,12 +794,12 @@ module Aws::MigrationHub
       :update_date_time,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class NotifyApplicationStateResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -839,12 +833,12 @@ module Aws::MigrationHub
       :next_update_seconds,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class NotifyMigrationTaskStateResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when there are problems accessing Application Discovery Service
@@ -855,7 +849,7 @@ module Aws::MigrationHub
     class PolicyErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the AWS resource used for access control that is implicitly linked to your
@@ -868,7 +862,7 @@ module Aws::MigrationHub
     class ProgressUpdateStreamSummary < Struct.new(
       :progress_update_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_update_stream
@@ -918,12 +912,12 @@ module Aws::MigrationHub
       :resource_attribute_list,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourceAttributesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attribute associated with a resource.</p>
@@ -971,20 +965,7 @@ module Aws::MigrationHub
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceAttributeType
-      IPV4_ADDRESS = 'IPV4_ADDRESS'
-      IPV6_ADDRESS = 'IPV6_ADDRESS'
-      MAC_ADDRESS = 'MAC_ADDRESS'
-      FQDN = 'FQDN'
-      VM_MANAGER_ID = 'VM_MANAGER_ID'
-      VM_MANAGED_OBJECT_REFERENCE = 'VM_MANAGED_OBJECT_REFERENCE'
-      VM_NAME = 'VM_NAME'
-      VM_PATH = 'VM_PATH'
-      BIOS_ID = 'BIOS_ID'
-      MOTHERBOARD_SERIAL_NUMBER = 'MOTHERBOARD_SERIAL_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when the request references a resource (Application Discovery Service
@@ -995,7 +976,7 @@ module Aws::MigrationHub
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised when there is an internal, configuration, or dependency error
@@ -1005,7 +986,7 @@ module Aws::MigrationHub
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A source resource can be a source server, a migration wave, an application, or any other
@@ -1026,14 +1007,7 @@ module Aws::MigrationHub
       :description,
       :status_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Task object encapsulating task information.</p>
@@ -1053,7 +1027,7 @@ module Aws::MigrationHub
       :status_detail,
       :progress_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1067,7 +1041,7 @@ module Aws::MigrationHub
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1082,11 +1056,7 @@ module Aws::MigrationHub
     class UnauthorizedOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateType
-      MigrationTaskStateUpdated = 'MIGRATION_TASK_STATE_UPDATED'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -38,7 +38,7 @@ module Aws::Savingsplans
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_id
@@ -47,12 +47,7 @@ module Aws::Savingsplans
     class CreateSavingsPlanResponse < Struct.new(
       :savings_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CurrencyCode
-      CNY = 'CNY'
-      USD = 'USD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_id
@@ -61,12 +56,12 @@ module Aws::Savingsplans
     class DeleteQueuedSavingsPlanRequest < Struct.new(
       :savings_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueuedSavingsPlanResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_id
@@ -88,7 +83,7 @@ module Aws::Savingsplans
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_id
@@ -106,7 +101,7 @@ module Aws::Savingsplans
       :search_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_offering_ids
@@ -153,7 +148,7 @@ module Aws::Savingsplans
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_results
@@ -167,7 +162,7 @@ module Aws::Savingsplans
       :search_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute offering_ids
@@ -226,7 +221,7 @@ module Aws::Savingsplans
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_results
@@ -240,7 +235,7 @@ module Aws::Savingsplans
       :search_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_arns
@@ -270,7 +265,7 @@ module Aws::Savingsplans
       :states,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plans
@@ -284,7 +279,7 @@ module Aws::Savingsplans
       :savings_plans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred.</p>
@@ -293,7 +288,7 @@ module Aws::Savingsplans
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -302,7 +297,7 @@ module Aws::Savingsplans
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -311,7 +306,7 @@ module Aws::Savingsplans
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan offering.</p>
@@ -341,7 +336,7 @@ module Aws::Savingsplans
       :currency,
       :plan_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration_seconds] = 0 unless options.key?(:duration_seconds)
@@ -355,7 +350,7 @@ module Aws::Savingsplans
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_id
@@ -369,7 +364,7 @@ module Aws::Savingsplans
       :savings_plan_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_plan_id
@@ -378,7 +373,7 @@ module Aws::Savingsplans
     class ReturnSavingsPlanResponse < Struct.new(
       :savings_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan.</p>
@@ -461,7 +456,7 @@ module Aws::Savingsplans
       :tags,
       :returnable_until,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:term_duration_in_seconds] = 0 unless options.key?(:term_duration_in_seconds)
@@ -480,7 +475,7 @@ module Aws::Savingsplans
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan offering.</p>
@@ -531,17 +526,12 @@ module Aws::Savingsplans
       :operation,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration_seconds] = 0 unless options.key?(:duration_seconds)
         super
       end
-    end
-
-    module SavingsPlanOfferingFilterAttribute
-      region = 'region'
-      instanceFamily = 'instanceFamily'
     end
 
     # <p>Information about a Savings Plan offering filter.</p>
@@ -555,7 +545,7 @@ module Aws::Savingsplans
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan offering property.</p>
@@ -569,12 +559,7 @@ module Aws::Savingsplans
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsPlanOfferingPropertyKey
-      REGION = 'region'
-      INSTANCE_FAMILY = 'instanceFamily'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan offering rate.</p>
@@ -613,7 +598,7 @@ module Aws::Savingsplans
       :operation,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan offering rate filter.</p>
@@ -627,7 +612,7 @@ module Aws::Savingsplans
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan offering rate property.</p>
@@ -641,20 +626,7 @@ module Aws::Savingsplans
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsPlanPaymentOption
-      ALL_UPFRONT = 'All Upfront'
-      PARTIAL_UPFRONT = 'Partial Upfront'
-      NO_UPFRONT = 'No Upfront'
-    end
-
-    module SavingsPlanProductType
-      EC2 = 'EC2'
-      FARGATE = 'Fargate'
-      LAMBDA = 'Lambda'
-      SAGEMAKER = 'SageMaker'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan rate.</p>
@@ -693,7 +665,7 @@ module Aws::Savingsplans
       :operation,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan rate filter.</p>
@@ -707,27 +679,7 @@ module Aws::Savingsplans
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsPlanRateFilterAttribute
-      REGION = 'region'
-      INSTANCE_FAMILY = 'instanceFamily'
-      INSTANCE_TYPE = 'instanceType'
-      PRODUCT_DESCRIPTION = 'productDescription'
-      TENANCY = 'tenancy'
-      PRODUCT_ID = 'productId'
-    end
-
-    module SavingsPlanRateFilterName
-      REGION = 'region'
-      INSTANCE_TYPE = 'instanceType'
-      PRODUCT_DESCRIPTION = 'productDescription'
-      TENANCY = 'tenancy'
-      PRODUCT_TYPE = 'productType'
-      SERVICE_CODE = 'serviceCode'
-      USAGE_TYPE = 'usageType'
-      OPERATION = 'operation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Savings Plan rate property.</p>
@@ -741,58 +693,7 @@ module Aws::Savingsplans
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsPlanRatePropertyKey
-      REGION = 'region'
-      INSTANCE_TYPE = 'instanceType'
-      INSTANCE_FAMILY = 'instanceFamily'
-      PRODUCT_DESCRIPTION = 'productDescription'
-      TENANCY = 'tenancy'
-    end
-
-    module SavingsPlanRateServiceCode
-      EC2 = 'AmazonEC2'
-      FARGATE = 'AmazonECS'
-      FARGATE_EKS = 'AmazonEKS'
-      LAMBDA = 'AWSLambda'
-      SAGEMAKER = 'AmazonSageMaker'
-    end
-
-    module SavingsPlanRateUnit
-      HOURS = 'Hrs'
-      LAMBDA_GB_SECOND = 'Lambda-GB-Second'
-      REQUEST = 'Request'
-    end
-
-    module SavingsPlanState
-      PAYMENT_PENDING = 'payment-pending'
-      PAYMENT_FAILED = 'payment-failed'
-      ACTIVE = 'active'
-      RETIRED = 'retired'
-      QUEUED = 'queued'
-      QUEUED_DELETED = 'queued-deleted'
-      PENDING_RETURN = 'pending-return'
-      RETURNED = 'returned'
-    end
-
-    module SavingsPlanType
-      COMPUTE = 'Compute'
-      EC2_INSTANCE = 'EC2Instance'
-      SAGEMAKER = 'SageMaker'
-    end
-
-    module SavingsPlansFilterName
-      REGION = 'region'
-      EC2_INSTANCE_FAMILY = 'ec2-instance-family'
-      COMMITMENT = 'commitment'
-      UPFRONT = 'upfront'
-      TERM = 'term'
-      SAVINGS_PLAN_TYPE = 'savings-plan-type'
-      PAYMENT_OPTION = 'payment-option'
-      START = 'start'
-      END = 'end'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service quota has been exceeded.</p>
@@ -801,7 +702,7 @@ module Aws::Savingsplans
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -814,12 +715,12 @@ module Aws::Savingsplans
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -832,12 +733,12 @@ module Aws::Savingsplans
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the input parameters is not valid.</p>
@@ -846,7 +747,7 @@ module Aws::Savingsplans
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

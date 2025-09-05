@@ -12,7 +12,7 @@ module Aws::RedshiftData
     class ActiveSessionsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of active statements exceeds the limit.</p>
@@ -21,7 +21,7 @@ module Aws::RedshiftData
     class ActiveStatementsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An SQL statement encountered an environmental error while running.</p>
@@ -34,7 +34,7 @@ module Aws::RedshiftData
       :message,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sqls
@@ -91,7 +91,7 @@ module Aws::RedshiftData
       :session_id,
       :result_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -133,7 +133,7 @@ module Aws::RedshiftData
       :workgroup_name,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -143,7 +143,7 @@ module Aws::RedshiftData
     class CancelStatementRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -152,7 +152,7 @@ module Aws::RedshiftData
     class CancelStatementResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties (metadata) of a column. </p>
@@ -210,7 +210,7 @@ module Aws::RedshiftData
       :length,
       :column_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_case_sensitive] = false unless options.key?(:is_case_sensitive)
@@ -230,7 +230,7 @@ module Aws::RedshiftData
     class DatabaseConnectionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -242,7 +242,7 @@ module Aws::RedshiftData
     class DescribeStatementRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -359,7 +359,7 @@ module Aws::RedshiftData
       :session_id,
       :result_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -416,7 +416,7 @@ module Aws::RedshiftData
       :max_results,
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_name
@@ -433,7 +433,7 @@ module Aws::RedshiftData
       :column_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SQL statement encountered an environmental error while running.</p>
@@ -447,7 +447,7 @@ module Aws::RedshiftData
       :message,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sql
@@ -504,7 +504,7 @@ module Aws::RedshiftData
       :session_id,
       :result_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -545,7 +545,7 @@ module Aws::RedshiftData
       :workgroup_name,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data value in a column. </p>
@@ -576,7 +576,7 @@ module Aws::RedshiftData
       :blob_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IsNull < Field; end
       class BooleanValue < Field; end
@@ -600,7 +600,7 @@ module Aws::RedshiftData
       :id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records
@@ -622,7 +622,7 @@ module Aws::RedshiftData
       :total_num_rows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_num_rows] = 0 unless options.key?(:total_num_rows)
@@ -643,7 +643,7 @@ module Aws::RedshiftData
       :id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records
@@ -669,7 +669,7 @@ module Aws::RedshiftData
       :result_format,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_num_rows] = 0 unless options.key?(:total_num_rows)
@@ -684,7 +684,7 @@ module Aws::RedshiftData
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -718,7 +718,7 @@ module Aws::RedshiftData
       :max_results,
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute databases
@@ -731,7 +731,7 @@ module Aws::RedshiftData
       :databases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -776,7 +776,7 @@ module Aws::RedshiftData
       :max_results,
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schemas
@@ -789,7 +789,7 @@ module Aws::RedshiftData
       :schemas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -857,7 +857,7 @@ module Aws::RedshiftData
       :cluster_identifier,
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statements
@@ -870,7 +870,7 @@ module Aws::RedshiftData
       :statements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -925,7 +925,7 @@ module Aws::RedshiftData
       :max_results,
       :workgroup_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tables
@@ -938,7 +938,7 @@ module Aws::RedshiftData
       :tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of the SQL statement.</p>
@@ -949,7 +949,7 @@ module Aws::RedshiftData
       :csv_records,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CSVRecords < QueryRecords; end
       class Unknown < QueryRecords; end
@@ -961,7 +961,7 @@ module Aws::RedshiftData
     class QueryTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Redshift Data API operation failed due to a missing resource. </p>
@@ -975,7 +975,7 @@ module Aws::RedshiftData
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter used in a SQL statement.</p>
@@ -992,7 +992,7 @@ module Aws::RedshiftData
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SQL statement to run.</p>
@@ -1048,7 +1048,7 @@ module Aws::RedshiftData
       :result_format,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an SQL statement.</p>
@@ -1104,7 +1104,7 @@ module Aws::RedshiftData
       :redshift_query_id,
       :has_result_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -1131,7 +1131,7 @@ module Aws::RedshiftData
       :type,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Redshift Data API operation failed due to invalid input. </p>
@@ -1141,7 +1141,7 @@ module Aws::RedshiftData
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

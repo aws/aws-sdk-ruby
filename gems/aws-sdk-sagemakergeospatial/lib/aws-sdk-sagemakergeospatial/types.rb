@@ -12,7 +12,7 @@ module Aws::SageMakerGeospatial
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The geographic extent of the Earth Observation job.</p>
@@ -23,7 +23,7 @@ module Aws::SageMakerGeospatial
       :area_of_interest_geometry,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AreaOfInterestGeometry < AreaOfInterest; end
       class Unknown < AreaOfInterest; end
@@ -41,7 +41,7 @@ module Aws::SageMakerGeospatial
       :multi_polygon_geometry,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PolygonGeometry < AreaOfInterestGeometry; end
       class MultiPolygonGeometry < AreaOfInterestGeometry; end
@@ -55,7 +55,7 @@ module Aws::SageMakerGeospatial
     class AssetValue < Struct.new(
       :href,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input structure for the BandMath operation type. 
@@ -72,13 +72,13 @@ module Aws::SageMakerGeospatial
       :predefined_indices,
       :custom_indices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input structure for CloudMasking operation type.</p>
     class CloudMaskingConfigInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input structure for Cloud Removal Operation type</p>
@@ -96,7 +96,7 @@ module Aws::SageMakerGeospatial
       :interpolation_value,
       :target_bands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -109,7 +109,7 @@ module Aws::SageMakerGeospatial
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input object defining the custom BandMath indices to compute.</p>
@@ -119,7 +119,7 @@ module Aws::SageMakerGeospatial
     class CustomIndicesInput < Struct.new(
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -128,12 +128,12 @@ module Aws::SageMakerGeospatial
     class DeleteEarthObservationJobInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEarthObservationJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -142,12 +142,12 @@ module Aws::SageMakerGeospatial
     class DeleteVectorEnrichmentJobInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteVectorEnrichmentJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the errors in an EarthObservationJob.</p>
@@ -161,7 +161,7 @@ module Aws::SageMakerGeospatial
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the EoCloudCover filter.</p>
@@ -175,7 +175,7 @@ module Aws::SageMakerGeospatial
       :lower_bound,
       :upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -200,7 +200,7 @@ module Aws::SageMakerGeospatial
       :output_config,
       :export_source_images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -229,7 +229,7 @@ module Aws::SageMakerGeospatial
       :output_config,
       :export_source_images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure for returning the export error details in a GetEarthObservationJob.</p>
@@ -244,7 +244,7 @@ module Aws::SageMakerGeospatial
       :export_results,
       :export_source_images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the errors in an export EarthObservationJob operation.</p>
@@ -258,7 +258,7 @@ module Aws::SageMakerGeospatial
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure containing the Amazon S3 path to export the Earth Observation job output.</p>
@@ -272,7 +272,7 @@ module Aws::SageMakerGeospatial
       :s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -294,7 +294,7 @@ module Aws::SageMakerGeospatial
       :execution_role_arn,
       :output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -320,7 +320,7 @@ module Aws::SageMakerGeospatial
       :export_status,
       :output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about the output file.</p>
@@ -330,7 +330,7 @@ module Aws::SageMakerGeospatial
     class ExportVectorEnrichmentJobOutputConfig < Struct.new(
       :s3_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the filters supported by a RasterDataCollection.</p>
@@ -352,7 +352,7 @@ module Aws::SageMakerGeospatial
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input configuration information for the geomosaic.</p>
@@ -366,7 +366,7 @@ module Aws::SageMakerGeospatial
       :algorithm_name,
       :target_bands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing a Geometry in 
@@ -381,7 +381,7 @@ module Aws::SageMakerGeospatial
       :type,
       :coordinates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -390,7 +390,7 @@ module Aws::SageMakerGeospatial
     class GetEarthObservationJobInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -451,7 +451,7 @@ module Aws::SageMakerGeospatial
       :export_error_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -460,7 +460,7 @@ module Aws::SageMakerGeospatial
     class GetRasterDataCollectionOperationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -497,7 +497,7 @@ module Aws::SageMakerGeospatial
       :image_source_bands,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute x
@@ -550,7 +550,7 @@ module Aws::SageMakerGeospatial
       :output_data_type,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute binary_file
@@ -559,7 +559,7 @@ module Aws::SageMakerGeospatial
     class GetTileOutput < Struct.new(
       :binary_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:binary_file] = Base64.strict_decode64('') unless options.key?(:binary_file)
@@ -573,7 +573,7 @@ module Aws::SageMakerGeospatial
     class GetVectorEnrichmentJobInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -634,7 +634,7 @@ module Aws::SageMakerGeospatial
       :export_error_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input configuration information.</p>
@@ -649,7 +649,7 @@ module Aws::SageMakerGeospatial
       :previous_earth_observation_job_arn,
       :raster_data_collection_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The InputConfig for an EarthObservationJob response.</p>
@@ -664,7 +664,7 @@ module Aws::SageMakerGeospatial
       :previous_earth_observation_job_arn,
       :raster_data_collection_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
@@ -677,7 +677,7 @@ module Aws::SageMakerGeospatial
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the items in the response for SearchRasterDataCollection.</p>
@@ -704,7 +704,7 @@ module Aws::SageMakerGeospatial
       :date_time,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for the JobConfig in an EarthObservationJob.</p>
@@ -747,7 +747,7 @@ module Aws::SageMakerGeospatial
       :land_cover_segmentation_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BandMathConfig < JobConfigInput; end
       class ResamplingConfig < JobConfigInput; end
@@ -764,7 +764,7 @@ module Aws::SageMakerGeospatial
     # <p>The input structure for Land Cover Operation type.</p>
     class LandCoverSegmentationConfigInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing Land Cloud Cover property for Landsat data collection.</p>
@@ -780,7 +780,7 @@ module Aws::SageMakerGeospatial
       :lower_bound,
       :upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about the output file.</p>
@@ -814,7 +814,7 @@ module Aws::SageMakerGeospatial
       :operation_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_equals
@@ -840,7 +840,7 @@ module Aws::SageMakerGeospatial
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute earth_observation_job_summaries
@@ -854,7 +854,7 @@ module Aws::SageMakerGeospatial
       :earth_observation_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -868,7 +868,7 @@ module Aws::SageMakerGeospatial
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute raster_data_collection_summaries
@@ -882,7 +882,7 @@ module Aws::SageMakerGeospatial
       :raster_data_collection_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -891,7 +891,7 @@ module Aws::SageMakerGeospatial
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -900,7 +900,7 @@ module Aws::SageMakerGeospatial
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about the output file.</p>
@@ -934,7 +934,7 @@ module Aws::SageMakerGeospatial
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_equals
@@ -960,7 +960,7 @@ module Aws::SageMakerGeospatial
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vector_enrichment_job_summaries
@@ -974,7 +974,7 @@ module Aws::SageMakerGeospatial
       :vector_enrichment_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for Map Matching operation type.</p>
@@ -996,7 +996,7 @@ module Aws::SageMakerGeospatial
       :x_attribute_name,
       :timestamp_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing Polygon Geometry based on the <a href="https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6">GeoJson spec</a>.</p>
@@ -1006,7 +1006,7 @@ module Aws::SageMakerGeospatial
     class MultiPolygonGeometryInput < Struct.new(
       :coordinates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an arithmetic operation to compute spectral index.</p>
@@ -1024,7 +1024,7 @@ module Aws::SageMakerGeospatial
       :equation,
       :output_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single EarthObservationJob output band.</p>
@@ -1038,7 +1038,7 @@ module Aws::SageMakerGeospatial
       :band_name,
       :output_data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response structure for an OutputConfig returned by an ExportEarthObservationJob.</p>
@@ -1048,7 +1048,7 @@ module Aws::SageMakerGeospatial
     class OutputConfigInput < Struct.new(
       :s3_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>OutputResolution Configuration indicating 
@@ -1060,7 +1060,7 @@ module Aws::SageMakerGeospatial
     class OutputResolutionResamplingInput < Struct.new(
       :user_defined,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure representing Output Resolution for Stacking Operation.</p>
@@ -1074,7 +1074,7 @@ module Aws::SageMakerGeospatial
       :predefined,
       :user_defined,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for specifying Platform. 
@@ -1090,7 +1090,7 @@ module Aws::SageMakerGeospatial
       :value,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing Polygon Geometry based on the <a href="https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6">GeoJson spec</a>.</p>
@@ -1100,7 +1100,7 @@ module Aws::SageMakerGeospatial
     class PolygonGeometryInput < Struct.new(
       :coordinates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties associated with the Item.</p>
@@ -1135,7 +1135,7 @@ module Aws::SageMakerGeospatial
       :platform,
       :landsat_cloud_cover_land,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single searchable property to search on.</p>
@@ -1167,7 +1167,7 @@ module Aws::SageMakerGeospatial
       :landsat_cloud_cover_land,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EoCloudCover < Property; end
       class ViewOffNadir < Property; end
@@ -1185,7 +1185,7 @@ module Aws::SageMakerGeospatial
     class PropertyFilter < Struct.new(
       :property,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of PropertyFilter objects.</p>
@@ -1199,7 +1199,7 @@ module Aws::SageMakerGeospatial
       :properties,
       :logical_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response object containing details for a specific RasterDataCollection.</p>
@@ -1233,7 +1233,7 @@ module Aws::SageMakerGeospatial
       :supported_filters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for Raster Data Collection Query containing the Area of Interest, TimeRange Filters, and Property Filters.</p>
@@ -1255,7 +1255,7 @@ module Aws::SageMakerGeospatial
       :area_of_interest,
       :property_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output structure contains the Raster Data Collection Query 
@@ -1282,7 +1282,7 @@ module Aws::SageMakerGeospatial
       :area_of_interest,
       :property_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is a RasterDataCollectionQueryInput containing AreaOfInterest, Time Range filter and Property filters.</p>
@@ -1304,7 +1304,7 @@ module Aws::SageMakerGeospatial
       :property_filters,
       :band_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing input for resampling operation.</p>
@@ -1323,7 +1323,7 @@ module Aws::SageMakerGeospatial
       :algorithm_name,
       :target_bands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource which does not exist.</p>
@@ -1336,7 +1336,7 @@ module Aws::SageMakerGeospatial
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for Reverse Geocoding operation type.</p>
@@ -1350,7 +1350,7 @@ module Aws::SageMakerGeospatial
       :y_attribute_name,
       :x_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1369,7 +1369,7 @@ module Aws::SageMakerGeospatial
       :raster_data_collection_query,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approximate_result_count
@@ -1387,7 +1387,7 @@ module Aws::SageMakerGeospatial
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the service quota.</p>
@@ -1400,7 +1400,7 @@ module Aws::SageMakerGeospatial
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for Stacking Operation.</p>
@@ -1416,7 +1416,7 @@ module Aws::SageMakerGeospatial
       :output_resolution,
       :target_bands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1449,7 +1449,7 @@ module Aws::SageMakerGeospatial
       :execution_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1494,7 +1494,7 @@ module Aws::SageMakerGeospatial
       :execution_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1527,7 +1527,7 @@ module Aws::SageMakerGeospatial
       :execution_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1576,7 +1576,7 @@ module Aws::SageMakerGeospatial
       :execution_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1585,12 +1585,12 @@ module Aws::SageMakerGeospatial
     class StopEarthObservationJobInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopEarthObservationJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1599,12 +1599,12 @@ module Aws::SageMakerGeospatial
     class StopVectorEnrichmentJobInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopVectorEnrichmentJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1617,12 +1617,12 @@ module Aws::SageMakerGeospatial
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the configuration for Temporal Statistics operation.</p>
@@ -1640,7 +1640,7 @@ module Aws::SageMakerGeospatial
       :statistics,
       :target_bands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1653,7 +1653,7 @@ module Aws::SageMakerGeospatial
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the time-range filter.</p>
@@ -1668,7 +1668,7 @@ module Aws::SageMakerGeospatial
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output structure of the time range filter.</p>
@@ -1683,7 +1683,7 @@ module Aws::SageMakerGeospatial
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1696,12 +1696,12 @@ module Aws::SageMakerGeospatial
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output resolution (in target georeferenced units) 
@@ -1716,7 +1716,7 @@ module Aws::SageMakerGeospatial
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -1729,7 +1729,7 @@ module Aws::SageMakerGeospatial
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.</p>
@@ -1744,7 +1744,7 @@ module Aws::SageMakerGeospatial
       :map_matching_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ReverseGeocodingConfig < VectorEnrichmentJobConfig; end
       class MapMatchingConfig < VectorEnrichmentJobConfig; end
@@ -1759,7 +1759,7 @@ module Aws::SageMakerGeospatial
       :s3_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Data < VectorEnrichmentJobDataSourceConfigInput; end
       class Unknown < VectorEnrichmentJobDataSourceConfigInput; end
@@ -1777,7 +1777,7 @@ module Aws::SageMakerGeospatial
       :error_type,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>VectorEnrichmentJob export error details in response from GetVectorEnrichmentJob.</p>
@@ -1791,7 +1791,7 @@ module Aws::SageMakerGeospatial
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for the InputConfig in a VectorEnrichmentJob.</p>
@@ -1805,7 +1805,7 @@ module Aws::SageMakerGeospatial
       :document_type,
       :data_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 data for the Vector Enrichment job.</p>
@@ -1819,7 +1819,7 @@ module Aws::SageMakerGeospatial
       :s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for specifying ViewOffNadir property filter. 
@@ -1837,7 +1837,7 @@ module Aws::SageMakerGeospatial
       :lower_bound,
       :upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for specifying ViewSunAzimuth property filter.  
@@ -1857,7 +1857,7 @@ module Aws::SageMakerGeospatial
       :lower_bound,
       :upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input structure for specifying ViewSunElevation angle property filter. </p>
@@ -1871,7 +1871,7 @@ module Aws::SageMakerGeospatial
       :lower_bound,
       :upper_bound,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing input configuration of ZonalStatistics operation.</p>
@@ -1913,7 +1913,7 @@ module Aws::SageMakerGeospatial
       :target_bands,
       :zone_s3_path_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

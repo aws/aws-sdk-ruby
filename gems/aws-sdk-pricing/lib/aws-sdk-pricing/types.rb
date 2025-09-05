@@ -12,7 +12,7 @@ module Aws::Pricing
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values of a given attribute, such as <code>Throughput Optimized HDD</code> or <code>Provisioned
@@ -24,7 +24,7 @@ module Aws::Pricing
     class AttributeValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -50,7 +50,7 @@ module Aws::Pricing
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute services
@@ -67,7 +67,7 @@ module Aws::Pricing
       :format_version,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination token expired. Try again without a pagination token.</p>
@@ -76,7 +76,7 @@ module Aws::Pricing
     class ExpiredNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The constraints that you want all returned products to match.</p>
@@ -128,15 +128,7 @@ module Aws::Pricing
       :field,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterType
-      TERM_MATCH = 'TERM_MATCH'
-      EQUALS = 'EQUALS'
-      CONTAINS = 'CONTAINS'
-      ANY_OF = 'ANY_OF'
-      NONE_OF = 'NONE_OF'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -158,7 +150,7 @@ module Aws::Pricing
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_values
@@ -173,7 +165,7 @@ module Aws::Pricing
       :attribute_values,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute price_list_arn
@@ -188,7 +180,7 @@ module Aws::Pricing
       :price_list_arn,
       :file_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -197,7 +189,7 @@ module Aws::Pricing
     class GetPriceListFileUrlResponse < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -225,7 +217,7 @@ module Aws::Pricing
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format_version
@@ -243,7 +235,7 @@ module Aws::Pricing
       :price_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error on the server occurred during the processing of your request. Try again later.</p>
@@ -252,7 +244,7 @@ module Aws::Pricing
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination token is invalid. Try again without a pagination token.</p>
@@ -261,7 +253,7 @@ module Aws::Pricing
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters had an invalid value.</p>
@@ -270,7 +262,7 @@ module Aws::Pricing
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -311,7 +303,7 @@ module Aws::Pricing
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute price_lists
@@ -324,7 +316,7 @@ module Aws::Pricing
       :price_lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource can't be found.</p>
@@ -333,7 +325,7 @@ module Aws::Pricing
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -372,7 +364,7 @@ module Aws::Pricing
       :currency_code,
       :file_formats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource can't be found.</p>
@@ -381,7 +373,7 @@ module Aws::Pricing
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for a service, such as the service code and available attribute names.</p>
@@ -395,7 +387,7 @@ module Aws::Pricing
       :service_code,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've made too many requests exceeding service quotas.
@@ -405,7 +397,7 @@ module Aws::Pricing
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

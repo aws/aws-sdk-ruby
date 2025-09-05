@@ -12,7 +12,7 @@ module Aws::WorkMailMessageFlow
     class GetRawMessageContentRequest < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_content
@@ -21,7 +21,7 @@ module Aws::WorkMailMessageFlow
     class GetRawMessageContentResponse < Struct.new(
       :message_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WorkMail could not access the updated email content. Possible reasons:</p>
@@ -46,7 +46,7 @@ module Aws::WorkMailMessageFlow
     class InvalidContentLocation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested email is not eligible for update. This is usually the case for a redirected email.</p>
@@ -55,7 +55,7 @@ module Aws::WorkMailMessageFlow
     class MessageFrozen < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested email could not be updated due to an error in the MIME content. Check the error message for more information about 
@@ -65,7 +65,7 @@ module Aws::WorkMailMessageFlow
     class MessageRejected < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message_id
@@ -78,12 +78,12 @@ module Aws::WorkMailMessageFlow
       :message_id,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutRawMessageContentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the MIME content of the updated email message as an S3 object. All MIME content must meet the following criteria:</p>
@@ -119,7 +119,7 @@ module Aws::WorkMailMessageFlow
     class RawMessageContent < Struct.new(
       :s3_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested email message is not found.</p>
@@ -128,7 +128,7 @@ module Aws::WorkMailMessageFlow
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon S3 object representing the updated message content, in MIME format.</p>
@@ -152,7 +152,7 @@ module Aws::WorkMailMessageFlow
       :key,
       :object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

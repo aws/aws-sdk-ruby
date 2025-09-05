@@ -12,7 +12,7 @@ module Aws::LicenseManager
     class AcceptGrantRequest < Struct.new(
       :grant_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -29,7 +29,7 @@ module Aws::LicenseManager
       :status,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Access to resource denied.</p>
@@ -38,22 +38,7 @@ module Aws::LicenseManager
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActivationOverrideBehavior
-      DISTRIBUTED_GRANTS_ONLY = 'DISTRIBUTED_GRANTS_ONLY'
-      ALL_GRANTS_PERMITTED_BY_ISSUER = 'ALL_GRANTS_PERMITTED_BY_ISSUER'
-    end
-
-    module AllowedOperation
-      CREATE_GRANT = 'CreateGrant'
-      CHECKOUT_LICENSE = 'CheckoutLicense'
-      CHECKOUT_BORROW_LICENSE = 'CheckoutBorrowLicense'
-      CHECK_IN_LICENSE = 'CheckInLicense'
-      EXTEND_CONSUMPTION_LICENSE = 'ExtendConsumptionLicense'
-      LIST_PURCHASED_LICENSES = 'ListPurchasedLicenses'
-      CREATE_TOKEN = 'CreateToken'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
@@ -63,7 +48,7 @@ module Aws::LicenseManager
     class AuthorizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes automated discovery.</p>
@@ -73,7 +58,7 @@ module Aws::LicenseManager
     class AutomatedDiscoveryInformation < Struct.new(
       :last_run_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a borrow configuration.</p>
@@ -87,7 +72,7 @@ module Aws::LicenseManager
       :allow_early_check_in,
       :max_time_to_live_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_consumption_token
@@ -100,12 +85,12 @@ module Aws::LicenseManager
       :license_consumption_token,
       :beneficiary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CheckInLicenseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -135,7 +120,7 @@ module Aws::LicenseManager
       :checkout_metadata,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -172,7 +157,7 @@ module Aws::LicenseManager
       :expiration,
       :checkout_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_sku
@@ -205,7 +190,7 @@ module Aws::LicenseManager
       :beneficiary,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute checkout_type
@@ -242,12 +227,7 @@ module Aws::LicenseManager
       :expiration,
       :license_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CheckoutType
-      PROVISIONAL = 'PROVISIONAL'
-      PERPETUAL = 'PERPETUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict processing the request. Try your request again.</p>
@@ -256,7 +236,7 @@ module Aws::LicenseManager
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about license consumption.</p>
@@ -270,7 +250,7 @@ module Aws::LicenseManager
       :resource_type,
       :consumed_licenses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a consumption configuration.</p>
@@ -288,7 +268,7 @@ module Aws::LicenseManager
       :provisional_configuration,
       :borrow_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -338,7 +318,7 @@ module Aws::LicenseManager
       :allowed_operations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -355,7 +335,7 @@ module Aws::LicenseManager
       :status,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -392,7 +372,7 @@ module Aws::LicenseManager
       :source_version,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -409,7 +389,7 @@ module Aws::LicenseManager
       :status,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -485,7 +465,7 @@ module Aws::LicenseManager
       :disassociate_when_not_found,
       :product_information_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -494,7 +474,7 @@ module Aws::LicenseManager
     class CreateLicenseConfigurationResponse < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -513,7 +493,7 @@ module Aws::LicenseManager
       :source_license_context,
       :destination_license_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_conversion_task_id
@@ -522,7 +502,7 @@ module Aws::LicenseManager
     class CreateLicenseConversionTaskForResourceResponse < Struct.new(
       :license_conversion_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_generator_name
@@ -563,7 +543,7 @@ module Aws::LicenseManager
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_manager_report_generator_arn
@@ -572,7 +552,7 @@ module Aws::LicenseManager
     class CreateLicenseManagerReportGeneratorResponse < Struct.new(
       :license_manager_report_generator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_name
@@ -628,7 +608,7 @@ module Aws::LicenseManager
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -645,7 +625,7 @@ module Aws::LicenseManager
       :status,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -700,7 +680,7 @@ module Aws::LicenseManager
       :client_token,
       :source_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -717,7 +697,7 @@ module Aws::LicenseManager
       :version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -745,7 +725,7 @@ module Aws::LicenseManager
       :token_properties,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_id
@@ -762,7 +742,7 @@ module Aws::LicenseManager
       :token_type,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a time range, in ISO8601-UTC format.</p>
@@ -776,7 +756,7 @@ module Aws::LicenseManager
       :begin,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -793,7 +773,7 @@ module Aws::LicenseManager
       :status_reason,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -810,7 +790,7 @@ module Aws::LicenseManager
       :status,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -819,12 +799,12 @@ module Aws::LicenseManager
     class DeleteLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLicenseConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_manager_report_generator_arn
@@ -833,12 +813,12 @@ module Aws::LicenseManager
     class DeleteLicenseManagerReportGeneratorRequest < Struct.new(
       :license_manager_report_generator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLicenseManagerReportGeneratorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -851,7 +831,7 @@ module Aws::LicenseManager
       :license_arn,
       :source_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -864,7 +844,7 @@ module Aws::LicenseManager
       :status,
       :deletion_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_id
@@ -873,16 +853,12 @@ module Aws::LicenseManager
     class DeleteTokenRequest < Struct.new(
       :token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTokenResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DigitalSignatureMethod
-      JWT_PS384 = 'JWT_PS384'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource entitled for use with a license.</p>
@@ -912,7 +888,7 @@ module Aws::LicenseManager
       :unit,
       :allow_check_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data associated with an entitlement resource.</p>
@@ -930,37 +906,7 @@ module Aws::LicenseManager
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntitlementDataUnit
-      COUNT = 'Count'
-      NONE = 'None'
-      SECONDS = 'Seconds'
-      MICROSECONDS = 'Microseconds'
-      MILLISECONDS = 'Milliseconds'
-      BYTES = 'Bytes'
-      KILOBYTES = 'Kilobytes'
-      MEGABYTES = 'Megabytes'
-      GIGABYTES = 'Gigabytes'
-      TERABYTES = 'Terabytes'
-      BITS = 'Bits'
-      KILOBITS = 'Kilobits'
-      MEGABITS = 'Megabits'
-      GIGABITS = 'Gigabits'
-      TERABITS = 'Terabits'
-      PERCENT = 'Percent'
-      BYTES_PER_SECOND = 'Bytes/Second'
-      KILOBYTES_PER_SECOND = 'Kilobytes/Second'
-      MEGABYTES_PER_SECOND = 'Megabytes/Second'
-      GIGABYTES_PER_SECOND = 'Gigabytes/Second'
-      TERABYTES_PER_SECOND = 'Terabytes/Second'
-      BITS_PER_SECOND = 'Bits/Second'
-      KILOBITS_PER_SECOND = 'Kilobits/Second'
-      MEGABITS_PER_SECOND = 'Megabits/Second'
-      GIGABITS_PER_SECOND = 'Gigabits/Second'
-      TERABITS_PER_SECOND = 'Terabits/Second'
-      COUNT_PER_SECOND = 'Count/Second'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entitlement is not allowed.</p>
@@ -969,37 +915,7 @@ module Aws::LicenseManager
     class EntitlementNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntitlementUnit
-      COUNT = 'Count'
-      NONE = 'None'
-      SECONDS = 'Seconds'
-      MICROSECONDS = 'Microseconds'
-      MILLISECONDS = 'Milliseconds'
-      BYTES = 'Bytes'
-      KILOBYTES = 'Kilobytes'
-      MEGABYTES = 'Megabytes'
-      GIGABYTES = 'Gigabytes'
-      TERABYTES = 'Terabytes'
-      BITS = 'Bits'
-      KILOBITS = 'Kilobits'
-      MEGABITS = 'Megabits'
-      GIGABITS = 'Gigabits'
-      TERABITS = 'Terabits'
-      PERCENT = 'Percent'
-      BYTES_PER_SECOND = 'Bytes/Second'
-      KILOBYTES_PER_SECOND = 'Kilobytes/Second'
-      MEGABYTES_PER_SECOND = 'Megabytes/Second'
-      GIGABYTES_PER_SECOND = 'Gigabytes/Second'
-      TERABYTES_PER_SECOND = 'Terabytes/Second'
-      BITS_PER_SECOND = 'Bits/Second'
-      KILOBITS_PER_SECOND = 'Kilobits/Second'
-      MEGABITS_PER_SECOND = 'Megabits/Second'
-      GIGABITS_PER_SECOND = 'Gigabits/Second'
-      TERABITS_PER_SECOND = 'Terabits/Second'
-      COUNT_PER_SECOND = 'Count/Second'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Usage associated with an entitlement resource.</p>
@@ -1021,7 +937,7 @@ module Aws::LicenseManager
       :max_count,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_consumption_token
@@ -1034,7 +950,7 @@ module Aws::LicenseManager
       :license_consumption_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_consumption_token
@@ -1047,7 +963,7 @@ module Aws::LicenseManager
       :license_consumption_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dependency required to run the API is missing.</p>
@@ -1059,7 +975,7 @@ module Aws::LicenseManager
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to return more specific results from a
@@ -1075,7 +991,7 @@ module Aws::LicenseManager
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request uses too many filters or too many filter values.</p>
@@ -1084,7 +1000,7 @@ module Aws::LicenseManager
     class FilterLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token
@@ -1097,7 +1013,7 @@ module Aws::LicenseManager
       :token,
       :token_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -1106,7 +1022,7 @@ module Aws::LicenseManager
     class GetAccessTokenResponse < Struct.new(
       :access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -1119,7 +1035,7 @@ module Aws::LicenseManager
       :grant_arn,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant
@@ -1128,7 +1044,7 @@ module Aws::LicenseManager
     class GetGrantResponse < Struct.new(
       :grant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -1137,7 +1053,7 @@ module Aws::LicenseManager
     class GetLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_id
@@ -1210,7 +1126,7 @@ module Aws::LicenseManager
       :automated_discovery_information,
       :disassociate_when_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_conversion_task_id
@@ -1219,7 +1135,7 @@ module Aws::LicenseManager
     class GetLicenseConversionTaskRequest < Struct.new(
       :license_conversion_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_conversion_task_id
@@ -1260,7 +1176,7 @@ module Aws::LicenseManager
       :license_conversion_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_manager_report_generator_arn
@@ -1269,7 +1185,7 @@ module Aws::LicenseManager
     class GetLicenseManagerReportGeneratorRequest < Struct.new(
       :license_manager_report_generator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_generator
@@ -1278,7 +1194,7 @@ module Aws::LicenseManager
     class GetLicenseManagerReportGeneratorResponse < Struct.new(
       :report_generator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -1291,7 +1207,7 @@ module Aws::LicenseManager
       :license_arn,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license
@@ -1300,7 +1216,7 @@ module Aws::LicenseManager
     class GetLicenseResponse < Struct.new(
       :license,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -1309,7 +1225,7 @@ module Aws::LicenseManager
     class GetLicenseUsageRequest < Struct.new(
       :license_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_usage
@@ -1318,12 +1234,12 @@ module Aws::LicenseManager
     class GetLicenseUsageResponse < Struct.new(
       :license_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetServiceSettingsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_bucket_arn
@@ -1351,7 +1267,7 @@ module Aws::LicenseManager
       :enable_cross_accounts_discovery,
       :license_manager_resource_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a grant.</p>
@@ -1401,19 +1317,7 @@ module Aws::LicenseManager
       :granted_operations,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GrantStatus
-      PENDING_WORKFLOW = 'PENDING_WORKFLOW'
-      PENDING_ACCEPT = 'PENDING_ACCEPT'
-      REJECTED = 'REJECTED'
-      ACTIVE = 'ACTIVE'
-      FAILED_WORKFLOW = 'FAILED_WORKFLOW'
-      DELETED = 'DELETED'
-      PENDING_DELETE = 'PENDING_DELETE'
-      DISABLED = 'DISABLED'
-      WORKFLOW_COMPLETED = 'WORKFLOW_COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a license that is granted to a grantee.</p>
@@ -1479,7 +1383,7 @@ module Aws::LicenseManager
       :version,
       :received_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameter values are not valid.</p>
@@ -1488,7 +1392,7 @@ module Aws::LicenseManager
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>License Manager cannot allocate a license to a resource because of its state. </p>
@@ -1499,7 +1403,7 @@ module Aws::LicenseManager
     class InvalidResourceStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An inventory filter.</p>
@@ -1517,14 +1421,7 @@ module Aws::LicenseManager
       :condition,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InventoryFilterCondition
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      BEGINS_WITH = 'BEGINS_WITH'
-      CONTAINS = 'CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the issuer of a license.</p>
@@ -1539,7 +1436,7 @@ module Aws::LicenseManager
       :name,
       :sign_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details associated with the issuer of a license.</p>
@@ -1558,7 +1455,7 @@ module Aws::LicenseManager
       :sign_key,
       :key_fingerprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Software license that is managed in License Manager.</p>
@@ -1620,7 +1517,7 @@ module Aws::LicenseManager
       :create_time,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A license configuration is an abstraction of a customer license agreement that can be
@@ -1694,7 +1591,7 @@ module Aws::LicenseManager
       :product_information_list,
       :automated_discovery_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association with a license configuration.</p>
@@ -1720,12 +1617,7 @@ module Aws::LicenseManager
       :association_time,
       :ami_association_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LicenseConfigurationStatus
-      AVAILABLE = 'AVAILABLE'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the usage of a resource associated with a license configuration.</p>
@@ -1755,7 +1647,7 @@ module Aws::LicenseManager
       :association_time,
       :consumed_licenses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a license type conversion task.</p>
@@ -1771,7 +1663,7 @@ module Aws::LicenseManager
       :usage_operation,
       :product_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a license type conversion task.</p>
@@ -1814,25 +1706,7 @@ module Aws::LicenseManager
       :license_conversion_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LicenseConversionTaskStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-    end
-
-    module LicenseCountingType
-      VCPU = 'vCPU'
-      INSTANCE = 'Instance'
-      CORE = 'Core'
-      SOCKET = 'Socket'
-    end
-
-    module LicenseDeletionStatus
-      PENDING_DELETE = 'PENDING_DELETE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the failure of a license operation.</p>
@@ -1870,7 +1744,7 @@ module Aws::LicenseManager
       :operation_requested_by,
       :metadata_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for associating a license configuration with a resource.</p>
@@ -1884,17 +1758,7 @@ module Aws::LicenseManager
       :license_configuration_arn,
       :ami_association_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LicenseStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING_AVAILABLE = 'PENDING_AVAILABLE'
-      DEACTIVATED = 'DEACTIVATED'
-      SUSPENDED = 'SUSPENDED'
-      EXPIRED = 'EXPIRED'
-      PENDING_DELETE = 'PENDING_DELETE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the entitlement usage associated with a license.</p>
@@ -1904,7 +1768,7 @@ module Aws::LicenseManager
     class LicenseUsage < Struct.new(
       :entitlement_usages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have enough licenses available to support a new resource launch.</p>
@@ -1913,7 +1777,7 @@ module Aws::LicenseManager
     class LicenseUsageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -1930,7 +1794,7 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_associations
@@ -1943,7 +1807,7 @@ module Aws::LicenseManager
       :license_configuration_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arns
@@ -1991,7 +1855,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grants
@@ -2004,7 +1868,7 @@ module Aws::LicenseManager
       :grants,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -2021,7 +1885,7 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_operation_failure_list
@@ -2034,7 +1898,7 @@ module Aws::LicenseManager
       :license_operation_failure_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arns
@@ -2071,7 +1935,7 @@ module Aws::LicenseManager
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configurations
@@ -2084,7 +1948,7 @@ module Aws::LicenseManager
       :license_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2103,7 +1967,7 @@ module Aws::LicenseManager
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_conversion_tasks
@@ -2116,7 +1980,7 @@ module Aws::LicenseManager
       :license_conversion_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2140,7 +2004,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_generators
@@ -2153,7 +2017,7 @@ module Aws::LicenseManager
       :report_generators,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2170,7 +2034,7 @@ module Aws::LicenseManager
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_specifications
@@ -2183,7 +2047,7 @@ module Aws::LicenseManager
       :license_specifications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -2200,7 +2064,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute licenses
@@ -2213,7 +2077,7 @@ module Aws::LicenseManager
       :licenses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arns
@@ -2256,7 +2120,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute licenses
@@ -2269,7 +2133,7 @@ module Aws::LicenseManager
       :licenses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arn
@@ -2302,7 +2166,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grants
@@ -2315,7 +2179,7 @@ module Aws::LicenseManager
       :grants,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arns
@@ -2363,7 +2227,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grants
@@ -2376,7 +2240,7 @@ module Aws::LicenseManager
       :grants,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2405,7 +2269,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute licenses
@@ -2418,7 +2282,7 @@ module Aws::LicenseManager
       :licenses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_arns
@@ -2466,7 +2330,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute licenses
@@ -2479,7 +2343,7 @@ module Aws::LicenseManager
       :licenses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2534,7 +2398,7 @@ module Aws::LicenseManager
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_inventory_list
@@ -2547,7 +2411,7 @@ module Aws::LicenseManager
       :resource_inventory_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2556,7 +2420,7 @@ module Aws::LicenseManager
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2565,7 +2429,7 @@ module Aws::LicenseManager
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_ids
@@ -2593,7 +2457,7 @@ module Aws::LicenseManager
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tokens
@@ -2606,7 +2470,7 @@ module Aws::LicenseManager
       :tokens,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -2643,7 +2507,7 @@ module Aws::LicenseManager
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_usage_list
@@ -2656,7 +2520,7 @@ module Aws::LicenseManager
       :license_configuration_usage_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a managed resource.</p>
@@ -2670,7 +2534,7 @@ module Aws::LicenseManager
       :resource_type,
       :association_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes key/value pairs.</p>
@@ -2684,7 +2548,7 @@ module Aws::LicenseManager
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are no entitlements found for this license, or the entitlement maximum count is reached.</p>
@@ -2693,7 +2557,7 @@ module Aws::LicenseManager
     class NoEntitlementsAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options you can specify when you create a new version of a grant, such as activation
@@ -2735,7 +2599,7 @@ module Aws::LicenseManager
     class Options < Struct.new(
       :activation_override_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for Organizations.</p>
@@ -2745,7 +2609,7 @@ module Aws::LicenseManager
     class OrganizationConfiguration < Struct.new(
       :enable_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_integration] = false unless options.key?(:enable_integration)
@@ -2764,11 +2628,7 @@ module Aws::LicenseManager
       :product_code_id,
       :product_code_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProductCodeType
-      MARKETPLACE = 'marketplace'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes product information for a license configuration.</p>
@@ -2852,7 +2712,7 @@ module Aws::LicenseManager
       :resource_type,
       :product_information_filter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes product information filters.</p>
@@ -2870,7 +2730,7 @@ module Aws::LicenseManager
       :product_information_filter_value,
       :product_information_filter_comparator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a provisional configuration.</p>
@@ -2880,7 +2740,7 @@ module Aws::LicenseManager
     class ProvisionalConfiguration < Struct.new(
       :max_time_to_live_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many requests have been submitted. Try again after a brief wait.</p>
@@ -2889,7 +2749,7 @@ module Aws::LicenseManager
     class RateLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata associated with received licenses and grants.</p>
@@ -2907,18 +2767,7 @@ module Aws::LicenseManager
       :received_status_reason,
       :allowed_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReceivedStatus
-      PENDING_WORKFLOW = 'PENDING_WORKFLOW'
-      PENDING_ACCEPT = 'PENDING_ACCEPT'
-      REJECTED = 'REJECTED'
-      ACTIVE = 'ACTIVE'
-      FAILED_WORKFLOW = 'FAILED_WORKFLOW'
-      DELETED = 'DELETED'
-      DISABLED = 'DISABLED'
-      WORKFLOW_COMPLETED = 'WORKFLOW_COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is not the correct Region for the resource. Try again.</p>
@@ -2930,7 +2779,7 @@ module Aws::LicenseManager
       :location,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -2939,7 +2788,7 @@ module Aws::LicenseManager
     class RejectGrantRequest < Struct.new(
       :grant_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grant_arn
@@ -2956,13 +2805,7 @@ module Aws::LicenseManager
       :status,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RenewType
-      NONE = 'None'
-      WEEKLY = 'Weekly'
-      MONTHLY = 'Monthly'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the license configuration that this generator reports on.</p>
@@ -2972,7 +2815,7 @@ module Aws::LicenseManager
     class ReportContext < Struct.new(
       :license_configuration_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about how frequently reports are generated.</p>
@@ -2987,13 +2830,7 @@ module Aws::LicenseManager
       :value,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportFrequencyType
-      DAY = 'DAY'
-      WEEK = 'WEEK'
-      MONTH = 'MONTH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describe the details of a report generator.</p>
@@ -3051,12 +2888,7 @@ module Aws::LicenseManager
       :create_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportType
-      LICENSE_CONFIGURATION_SUMMARY_REPORT = 'LicenseConfigurationSummaryReport'
-      LICENSE_CONFIGURATION_USAGE_REPORT = 'LicenseConfigurationUsageReport'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a resource.</p>
@@ -3086,7 +2918,7 @@ module Aws::LicenseManager
       :platform_version,
       :resource_owning_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your resource limits have been exceeded.</p>
@@ -3095,7 +2927,7 @@ module Aws::LicenseManager
     class ResourceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource cannot be found.</p>
@@ -3104,15 +2936,7 @@ module Aws::LicenseManager
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      EC2_INSTANCE = 'EC2_INSTANCE'
-      EC2_HOST = 'EC2_HOST'
-      EC2_AMI = 'EC2_AMI'
-      RDS = 'RDS'
-      SYSTEMS_MANAGER_MANAGED_INSTANCE = 'SYSTEMS_MANAGER_MANAGED_INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the S3 bucket that report generator reports are published to.</p>
@@ -3126,7 +2950,7 @@ module Aws::LicenseManager
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server experienced an internal error. Try again.</p>
@@ -3135,7 +2959,7 @@ module Aws::LicenseManager
     class ServerInternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the tags for a resource. For more information about tagging support in
@@ -3150,7 +2974,7 @@ module Aws::LicenseManager
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3186,12 +3010,12 @@ module Aws::LicenseManager
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a token.</p>
@@ -3225,11 +3049,7 @@ module Aws::LicenseManager
       :role_arns,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TokenType
-      REFRESH_TOKEN = 'REFRESH_TOKEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The digital signature method is unsupported. Try your request again.</p>
@@ -3238,7 +3058,7 @@ module Aws::LicenseManager
     class UnsupportedDigitalSignatureMethodException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3251,12 +3071,12 @@ module Aws::LicenseManager
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_configuration_arn
@@ -3298,12 +3118,12 @@ module Aws::LicenseManager
       :product_information_list,
       :disassociate_when_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLicenseConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_manager_report_generator_arn
@@ -3344,12 +3164,12 @@ module Aws::LicenseManager
       :client_token,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLicenseManagerReportGeneratorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3366,12 +3186,12 @@ module Aws::LicenseManager
       :add_license_specifications,
       :remove_license_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateLicenseSpecificationsForResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_bucket_arn
@@ -3392,12 +3212,12 @@ module Aws::LicenseManager
       :organization_configuration,
       :enable_cross_accounts_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateServiceSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided input is not valid. Try your request again.</p>
@@ -3406,7 +3226,7 @@ module Aws::LicenseManager
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

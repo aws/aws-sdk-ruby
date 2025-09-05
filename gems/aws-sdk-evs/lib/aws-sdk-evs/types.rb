@@ -21,20 +21,7 @@ module Aws::Evs
       :result,
       :impaired_since,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CheckResult
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module CheckType
-      KEY_REUSE = 'KEY_REUSE'
-      KEY_COVERAGE = 'KEY_COVERAGE'
-      REACHABILITY = 'REACHABILITY'
-      HOST_COUNT = 'HOST_COUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connectivity configuration for the environment. Amazon EVS requires that you specify two route server peer IDs. During environment creation, the route server endpoints peer with the NSX uplink VLAN for connectivity to the NSX overlay network.</p>
@@ -44,7 +31,7 @@ module Aws::Evs
     class ConnectivityInfo < Struct.new(
       :private_route_server_peerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -61,7 +48,7 @@ module Aws::Evs
       :environment_id,
       :host,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_summary
@@ -74,7 +61,7 @@ module Aws::Evs
       :environment_summary,
       :host,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -139,7 +126,7 @@ module Aws::Evs
       :vcf_hostnames,
       :site_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -148,7 +135,7 @@ module Aws::Evs
     class CreateEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -165,7 +152,7 @@ module Aws::Evs
       :environment_id,
       :host_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_summary
@@ -178,7 +165,7 @@ module Aws::Evs
       :environment_summary,
       :host,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -191,7 +178,7 @@ module Aws::Evs
       :client_token,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -200,7 +187,7 @@ module Aws::Evs
     class DeleteEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Amazon EVS environment.</p>
@@ -286,15 +273,7 @@ module Aws::Evs
       :service_access_security_groups,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      CREATE_FAILED = 'CREATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of environments with summarized environment details.</p>
@@ -332,7 +311,7 @@ module Aws::Evs
       :modified_at,
       :environment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -341,7 +320,7 @@ module Aws::Evs
     class GetEnvironmentRequest < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -350,7 +329,7 @@ module Aws::Evs
     class GetEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An ESXi host that runs on an Amazon EC2 bare metal instance. Four hosts are created in an Amazon EVS environment during environment creation. You can add hosts to an environment using the <code>CreateEnvironmentHost</code> operation. Amazon EVS supports 4-16 hosts per environment.</p>
@@ -404,7 +383,7 @@ module Aws::Evs
       :ec2_instance_id,
       :network_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a host.</p> <note> <p>You cannot use <code>dedicatedHostId</code> and <code>placementGroupId</code> together in the same <code>HostInfoForCreate</code>object. This results in a <code>ValidationException</code> response.</p> </note>
@@ -430,17 +409,7 @@ module Aws::Evs
       :placement_group_id,
       :dedicated_host_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an initial VLAN subnet for the Amazon EVS environment. Amazon EVS creates initial VLAN subnets when you first create the environment. Amazon EVS creates the following 10 VLAN subnets: host management VLAN, vMotion VLAN, vSAN VLAN, VTEP VLAN, Edge VTEP VLAN, Management VM VLAN, HCX uplink VLAN, NSX uplink VLAN, expansion VLAN 1, expansion VLAN 2.</p> <note> <p>For each Amazon EVS VLAN subnet, you must specify a non-overlapping CIDR block. Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size of /24.</p> </note>
@@ -450,7 +419,7 @@ module Aws::Evs
     class InitialVlanInfo < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The initial VLAN subnets for the environment. Amazon EVS VLAN subnets have a minimum CIDR block size of /28 and a maximum size of /24. Amazon EVS VLAN subnet CIDR blocks must not overlap with other subnets in the VPC.</p>
@@ -496,11 +465,7 @@ module Aws::Evs
       :expansion_vlan1,
       :expansion_vlan2,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceType
-      I4I_METAL = 'i4i.metal'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The license information that Amazon EVS requires to create an environment. Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.</p>
@@ -514,7 +479,7 @@ module Aws::Evs
       :solution_key,
       :vsan_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -531,7 +496,7 @@ module Aws::Evs
       :max_results,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -544,7 +509,7 @@ module Aws::Evs
       :next_token,
       :environment_hosts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -561,7 +526,7 @@ module Aws::Evs
       :max_results,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -574,7 +539,7 @@ module Aws::Evs
       :next_token,
       :environment_vlans,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -591,7 +556,7 @@ module Aws::Evs
       :max_results,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -604,7 +569,7 @@ module Aws::Evs
       :next_token,
       :environment_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -613,7 +578,7 @@ module Aws::Evs
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -622,7 +587,7 @@ module Aws::Evs
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An elastic network interface (ENI) that connects hosts to the VLAN subnets. Amazon EVS provisions two identically configured ENIs in the VMkernel management subnet during host creation. One ENI is active, and the other is in standby mode for automatic switchover during a failure scenario.</p>
@@ -632,7 +597,7 @@ module Aws::Evs
     class NetworkInterface < Struct.new(
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service resource associated with the request could not be found. The resource might not be specified correctly, or it may have a <code>state</code> of <code>DELETED</code>.</p>
@@ -650,7 +615,7 @@ module Aws::Evs
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A managed secret that contains the credentials for installing vCenter Server, NSX, and SDDC Manager. During environment creation, the Amazon EVS control plane uses Amazon Web Services Secrets Manager to create, encrypt, validate, and store secrets. If you choose to delete your environment, Amazon EVS also deletes the secrets that are associated with your environment. Amazon EVS does not provide managed rotation of secrets. We recommend that you rotate secrets regularly to ensure that secrets are not long-lived.</p>
@@ -660,7 +625,7 @@ module Aws::Evs
     class Secret < Struct.new(
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The security groups that allow traffic between the Amazon EVS control plane and your VPC for Amazon EVS service access. If a security group is not specified, Amazon EVS uses the default security group in your account for service access.</p>
@@ -670,7 +635,7 @@ module Aws::Evs
     class ServiceAccessSecurityGroups < Struct.new(
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of one or more Amazon EVS resources exceeds the maximum allowed. For a list of Amazon EVS quotas, see <a href="https://docs.aws.amazon.com/evs/latest/userguide/service-quotas-evs.html">Amazon EVS endpoints and quotas</a> in the <i>Amazon EVS User Guide</i>. Delete some resources or request an increase in your service quota. To request an increase, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">Amazon Web Services Service Quotas</a> in the <i>Amazon Web Services General Reference Guide</i>. </p>
@@ -680,7 +645,7 @@ module Aws::Evs
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p> <code>TagPolicyException</code> is deprecated. See <a href="https://docs.aws.amazon.com/evs/latest/APIReference/API_ValidationException.html"> <code>ValidationException</code> </a> instead.</p> </note> <p>The request doesn't comply with IAM tag policy. Correct your request and then retry it.</p>
@@ -690,7 +655,7 @@ module Aws::Evs
     class TagPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -703,12 +668,12 @@ module Aws::Evs
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreateEnvironmentHost</code> operation couldn't be performed because the service is throttling requests. This exception is thrown when the <code>CreateEnvironmentHost</code> request exceeds concurrency of 1 transaction per second (TPS).</p>
@@ -722,7 +687,7 @@ module Aws::Evs
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note> <p> <code>TooManyTagsException</code> is deprecated. See <a href="https://docs.aws.amazon.com/evs/latest/APIReference/API_ServiceQuotaExceededException.html"> <code>ServiceQuotaExceededException</code> </a> instead.</p> </note> <p>A service resource associated with the request has more than 200 tags.</p>
@@ -732,7 +697,7 @@ module Aws::Evs
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -745,12 +710,12 @@ module Aws::Evs
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the specified constraints. You will see this exception if invalid inputs are provided for any of the Amazon EVS environment operations, or if a list operation is performed on an environment resource that is still initializing.</p>
@@ -768,7 +733,7 @@ module Aws::Evs
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an exception.</p>
@@ -782,14 +747,7 @@ module Aws::Evs
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX, SDDC Manager, and Cloud Builder. Each hostname must be unique, and resolve to a domain name that you've registered in your DNS service of choice. Hostnames cannot be changed.</p> <p>VMware VCF requires the deployment of two NSX Edge nodes, and three NSX Manager virtual machines.</p>
@@ -831,11 +789,7 @@ module Aws::Evs
       :sddc_manager,
       :cloud_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VcfVersion
-      VCF_5_2_1 = 'VCF-5.2.1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VLANs that Amazon EVS creates during environment creation.</p>
@@ -877,15 +831,7 @@ module Aws::Evs
       :vlan_state,
       :state_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VlanState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      CREATE_FAILED = 'CREATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
   end

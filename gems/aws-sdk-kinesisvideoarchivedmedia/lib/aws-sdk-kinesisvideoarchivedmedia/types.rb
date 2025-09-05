@@ -12,7 +12,7 @@ module Aws::KinesisVideoArchivedMedia
     class ClientLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the timestamp range and timestamp origin of a range of fragments.</p>
@@ -32,12 +32,7 @@ module Aws::KinesisVideoArchivedMedia
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClipFragmentSelectorType
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range of timestamps for which to return fragments.</p>
@@ -63,22 +58,7 @@ module Aws::KinesisVideoArchivedMedia
       :start_timestamp,
       :end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerFormat
-      FRAGMENTED_MP4 = 'FRAGMENTED_MP4'
-      MPEG_TS = 'MPEG_TS'
-    end
-
-    module DASHDisplayFragmentNumber
-      ALWAYS = 'ALWAYS'
-      NEVER = 'NEVER'
-    end
-
-    module DASHDisplayFragmentTimestamp
-      ALWAYS = 'ALWAYS'
-      NEVER = 'NEVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the range of timestamps for the requested media, and the source of the
@@ -115,18 +95,7 @@ module Aws::KinesisVideoArchivedMedia
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DASHFragmentSelectorType
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
-    end
-
-    module DASHPlaybackMode
-      LIVE = 'LIVE'
-      LIVE_REPLAY = 'LIVE_REPLAY'
-      ON_DEMAND = 'ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start and end of the timestamp range for the requested media.</p>
@@ -166,16 +135,7 @@ module Aws::KinesisVideoArchivedMedia
       :start_timestamp,
       :end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      JPEG = 'JPEG'
-      PNG = 'PNG'
-    end
-
-    module FormatConfigKey
-      JPEGQuality = 'JPEGQuality'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a segment of video or other time-delimited data.</p>
@@ -203,7 +163,7 @@ module Aws::KinesisVideoArchivedMedia
       :server_timestamp,
       :fragment_length_in_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fragment_size_in_bytes] = 0 unless options.key?(:fragment_size_in_bytes)
@@ -242,12 +202,7 @@ module Aws::KinesisVideoArchivedMedia
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FragmentSelectorType
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -266,7 +221,7 @@ module Aws::KinesisVideoArchivedMedia
       :stream_arn,
       :clip_fragment_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -282,7 +237,7 @@ module Aws::KinesisVideoArchivedMedia
       :content_type,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:payload] = Base64.strict_decode64('') unless options.key?(:payload)
@@ -434,7 +389,7 @@ module Aws::KinesisVideoArchivedMedia
       :expires,
       :max_manifest_fragment_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dash_streaming_session_url
@@ -444,7 +399,7 @@ module Aws::KinesisVideoArchivedMedia
     class GetDASHStreamingSessionURLOutput < Struct.new(
       :dash_streaming_session_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -631,7 +586,7 @@ module Aws::KinesisVideoArchivedMedia
       :expires,
       :max_media_playlist_fragment_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hls_streaming_session_url
@@ -641,7 +596,7 @@ module Aws::KinesisVideoArchivedMedia
     class GetHLSStreamingSessionURLOutput < Struct.new(
       :hls_streaming_session_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -704,7 +659,7 @@ module Aws::KinesisVideoArchivedMedia
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute images
@@ -718,7 +673,7 @@ module Aws::KinesisVideoArchivedMedia
       :images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -736,7 +691,7 @@ module Aws::KinesisVideoArchivedMedia
       :stream_arn,
       :fragments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -781,23 +736,12 @@ module Aws::KinesisVideoArchivedMedia
       :content_type,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:payload] = Base64.strict_decode64('') unless options.key?(:payload)
         super
       end
-    end
-
-    module HLSDiscontinuityMode
-      ALWAYS = 'ALWAYS'
-      NEVER = 'NEVER'
-      ON_DISCONTINUITY = 'ON_DISCONTINUITY'
-    end
-
-    module HLSDisplayFragmentTimestamp
-      ALWAYS = 'ALWAYS'
-      NEVER = 'NEVER'
     end
 
     # <p>Contains the range of timestamps for the requested media, and the source of the
@@ -834,18 +778,7 @@ module Aws::KinesisVideoArchivedMedia
       :fragment_selector_type,
       :timestamp_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HLSFragmentSelectorType
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
-    end
-
-    module HLSPlaybackMode
-      LIVE = 'LIVE'
-      LIVE_REPLAY = 'LIVE_REPLAY'
-      ON_DEMAND = 'ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start and end of the timestamp range for the requested media.</p>
@@ -882,7 +815,7 @@ module Aws::KinesisVideoArchivedMedia
       :start_timestamp,
       :end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the <code>Timestamp</code>, <code>Error</code>, and <code>ImageContent</code>.</p>
@@ -912,17 +845,7 @@ module Aws::KinesisVideoArchivedMedia
       :error,
       :image_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageError
-      NO_MEDIA = 'NO_MEDIA'
-      MEDIA_ERROR = 'MEDIA_ERROR'
-    end
-
-    module ImageSelectorType
-      PRODUCER_TIMESTAMP = 'PRODUCER_TIMESTAMP'
-      SERVER_TIMESTAMP = 'SERVER_TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified parameter exceeds its restrictions, is not supported, or can't be
@@ -932,7 +855,7 @@ module Aws::KinesisVideoArchivedMedia
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The codec private data in at least one of the tracks of the video stream is not valid
@@ -942,7 +865,7 @@ module Aws::KinesisVideoArchivedMedia
     class InvalidCodecPrivateDataException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more frames in the requested clip could not be parsed based on the specified
@@ -952,7 +875,7 @@ module Aws::KinesisVideoArchivedMedia
     class InvalidMediaFrameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_name
@@ -984,7 +907,7 @@ module Aws::KinesisVideoArchivedMedia
       :next_token,
       :fragment_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fragments
@@ -1000,7 +923,7 @@ module Aws::KinesisVideoArchivedMedia
       :fragments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No codec private data was found in at least one of tracks of the video stream.</p>
@@ -1009,7 +932,7 @@ module Aws::KinesisVideoArchivedMedia
     class MissingCodecPrivateDataException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1020,7 +943,7 @@ module Aws::KinesisVideoArchivedMedia
     class NoDataRetentionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status Code: 403, The caller is not authorized to perform an operation on the given
@@ -1030,7 +953,7 @@ module Aws::KinesisVideoArchivedMedia
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1048,7 +971,7 @@ module Aws::KinesisVideoArchivedMedia
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range of timestamps for which to return fragments.</p>
@@ -1063,7 +986,7 @@ module Aws::KinesisVideoArchivedMedia
       :start_timestamp,
       :end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio) could
@@ -1075,7 +998,7 @@ module Aws::KinesisVideoArchivedMedia
     class UnsupportedStreamMediaTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

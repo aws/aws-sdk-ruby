@@ -46,7 +46,7 @@ module Aws::MarketplaceEntitlementService
       :value,
       :expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EntitlementValue represents the amount of capacity that the customer is entitled to
@@ -73,13 +73,7 @@ module Aws::MarketplaceEntitlementService
       :boolean_value,
       :string_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GetEntitlementFilterName
-      CUSTOMER_IDENTIFIER = 'CUSTOMER_IDENTIFIER'
-      DIMENSION = 'DIMENSION'
-      CUSTOMER_AWS_ACCOUNT_ID = 'CUSTOMER_AWS_ACCOUNT_ID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GetEntitlementsRequest contains parameters for the GetEntitlements
@@ -111,7 +105,7 @@ module Aws::MarketplaceEntitlementService
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GetEntitlementsRequest contains results from the GetEntitlements operation.</p>
@@ -129,7 +123,7 @@ module Aws::MarketplaceEntitlementService
       :entitlements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred. Retry your request. If the problem persists, post a
@@ -139,7 +133,7 @@ module Aws::MarketplaceEntitlementService
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters in your request was invalid.</p>
@@ -148,7 +142,7 @@ module Aws::MarketplaceEntitlementService
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The calls to the GetEntitlements API are throttled.</p>
@@ -157,7 +151,7 @@ module Aws::MarketplaceEntitlementService
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::Tnb
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_lcm_op_occ_id
@@ -21,7 +21,7 @@ module Aws::Tnb
     class CancelSolNetworkOperationInput < Struct.new(
       :ns_lcm_op_occ_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -30,7 +30,7 @@ module Aws::Tnb
     class CreateSolFunctionPackageInput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -59,7 +59,7 @@ module Aws::Tnb
       :usage_state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -80,7 +80,7 @@ module Aws::Tnb
       :ns_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -105,7 +105,7 @@ module Aws::Tnb
       :ns_instance_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -114,7 +114,7 @@ module Aws::Tnb
     class CreateSolNetworkPackageInput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -143,7 +143,7 @@ module Aws::Tnb
       :nsd_usage_state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -152,7 +152,7 @@ module Aws::Tnb
     class DeleteSolFunctionPackageInput < Struct.new(
       :vnf_pkg_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_instance_id
@@ -161,7 +161,7 @@ module Aws::Tnb
     class DeleteSolNetworkInstanceInput < Struct.new(
       :ns_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -170,11 +170,7 @@ module Aws::Tnb
     class DeleteSolNetworkPackageInput < Struct.new(
       :nsd_info_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescriptorContentType
-      TEXT_PLAIN = 'text/plain'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides error information.</p>
@@ -188,7 +184,7 @@ module Aws::Tnb
       :cause,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for function package artifacts.</p>
@@ -199,7 +195,7 @@ module Aws::Tnb
     class FunctionArtifactMeta < Struct.new(
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_instance_id
@@ -208,7 +204,7 @@ module Aws::Tnb
     class GetSolFunctionInstanceInput < Struct.new(
       :vnf_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of a network function instance.</p>
@@ -223,7 +219,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -278,7 +274,7 @@ module Aws::Tnb
       :metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -291,7 +287,7 @@ module Aws::Tnb
       :vnf_pkg_id,
       :accept,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -304,7 +300,7 @@ module Aws::Tnb
       :content_type,
       :package_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -318,7 +314,7 @@ module Aws::Tnb
       :vnf_pkg_id,
       :accept,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -331,7 +327,7 @@ module Aws::Tnb
       :content_type,
       :vnfd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -340,7 +336,7 @@ module Aws::Tnb
     class GetSolFunctionPackageInput < Struct.new(
       :vnf_pkg_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to the function package.</p>
@@ -359,7 +355,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -409,7 +405,7 @@ module Aws::Tnb
       :metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a network function.</p>
@@ -420,7 +416,7 @@ module Aws::Tnb
     class GetSolInstantiatedVnfInfo < Struct.new(
       :vnf_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_instance_id
@@ -429,7 +425,7 @@ module Aws::Tnb
     class GetSolNetworkInstanceInput < Struct.new(
       :ns_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of a network instance.</p>
@@ -444,7 +440,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -491,7 +487,7 @@ module Aws::Tnb
       :metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_lcm_op_occ_id
@@ -500,7 +496,7 @@ module Aws::Tnb
     class GetSolNetworkOperationInput < Struct.new(
       :ns_lcm_op_occ_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to a network operation occurrence.</p>
@@ -532,7 +528,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -578,7 +574,7 @@ module Aws::Tnb
       :tasks,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the details of a network operation.</p>
@@ -609,7 +605,7 @@ module Aws::Tnb
       :task_start_time,
       :task_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -622,7 +618,7 @@ module Aws::Tnb
       :nsd_info_id,
       :accept,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -635,7 +631,7 @@ module Aws::Tnb
       :content_type,
       :nsd_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -644,7 +640,7 @@ module Aws::Tnb
     class GetSolNetworkPackageDescriptorInput < Struct.new(
       :nsd_info_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -657,7 +653,7 @@ module Aws::Tnb
       :content_type,
       :nsd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -666,7 +662,7 @@ module Aws::Tnb
     class GetSolNetworkPackageInput < Struct.new(
       :nsd_info_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata associated with a network package.</p>
@@ -686,7 +682,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -737,7 +733,7 @@ module Aws::Tnb
       :metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the network function.</p>
@@ -752,7 +748,7 @@ module Aws::Tnb
       :vnf_state,
       :vnfc_resource_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of resource associated with a network function.</p>
@@ -763,7 +759,7 @@ module Aws::Tnb
     class GetSolVnfcResourceInfo < Struct.new(
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of a network function.</p>
@@ -782,7 +778,7 @@ module Aws::Tnb
       :cluster,
       :helm_chart,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to the configuration properties used during instantiation of the network instance.</p>
@@ -796,7 +792,7 @@ module Aws::Tnb
       :nsd_info_id,
       :additional_params_for_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_instance_id
@@ -819,7 +815,7 @@ module Aws::Tnb
       :additional_params_for_ns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_lcm_op_occ_id
@@ -832,7 +828,7 @@ module Aws::Tnb
       :ns_lcm_op_occ_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error occurred. Problem on the server.</p>
@@ -841,7 +837,7 @@ module Aws::Tnb
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lifecycle management operation details on the network instance.</p>
@@ -852,13 +848,7 @@ module Aws::Tnb
     class LcmOperationInfo < Struct.new(
       :ns_lcm_op_occ_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LcmOperationType
-      INSTANTIATE = 'INSTANTIATE'
-      UPDATE = 'UPDATE'
-      TERMINATE = 'TERMINATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists information about a network function instance.</p>
@@ -898,7 +888,7 @@ module Aws::Tnb
       :instantiated_vnf_info,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists network function instance metadata.</p>
@@ -913,7 +903,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -926,7 +916,7 @@ module Aws::Tnb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -939,7 +929,7 @@ module Aws::Tnb
       :next_token,
       :function_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a function package.</p>
@@ -986,7 +976,7 @@ module Aws::Tnb
       :vnfd_version,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for the function package metadata.</p>
@@ -1001,7 +991,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1014,7 +1004,7 @@ module Aws::Tnb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1027,7 +1017,7 @@ module Aws::Tnb
       :next_token,
       :function_packages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Info about the specific network instance.</p>
@@ -1066,7 +1056,7 @@ module Aws::Tnb
       :ns_state,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata details for a network instance.</p>
@@ -1081,7 +1071,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1094,7 +1084,7 @@ module Aws::Tnb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1107,7 +1097,7 @@ module Aws::Tnb
       :next_token,
       :network_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information parameters for a network operation.</p>
@@ -1145,7 +1135,7 @@ module Aws::Tnb
       :error,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_instance_id
@@ -1162,7 +1152,7 @@ module Aws::Tnb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to a network operation.</p>
@@ -1187,7 +1177,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1200,7 +1190,7 @@ module Aws::Tnb
       :next_token,
       :network_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a network package.</p>
@@ -1256,7 +1246,7 @@ module Aws::Tnb
       :vnf_pkg_ids,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to a network package.</p>
@@ -1271,7 +1261,7 @@ module Aws::Tnb
       :created_at,
       :last_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1284,7 +1274,7 @@ module Aws::Tnb
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1297,7 +1287,7 @@ module Aws::Tnb
       :next_token,
       :network_packages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1306,7 +1296,7 @@ module Aws::Tnb
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1315,7 +1305,7 @@ module Aws::Tnb
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to the configuration properties used during update of a specific
@@ -1330,7 +1320,7 @@ module Aws::Tnb
       :vnf_instance_id,
       :vnf_configurable_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for network package artifacts.</p>
@@ -1341,60 +1331,7 @@ module Aws::Tnb
     class NetworkArtifactMeta < Struct.new(
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NsLcmOperationState
-      PROCESSING = 'PROCESSING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
-    end
-
-    module NsState
-      INSTANTIATED = 'INSTANTIATED'
-      NOT_INSTANTIATED = 'NOT_INSTANTIATED'
-      UPDATED = 'UPDATED'
-      IMPAIRED = 'IMPAIRED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      STOPPED = 'STOPPED'
-      DELETED = 'DELETED'
-      INSTANTIATE_IN_PROGRESS = 'INSTANTIATE_IN_PROGRESS'
-      INTENT_TO_UPDATE_IN_PROGRESS = 'INTENT_TO_UPDATE_IN_PROGRESS'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      TERMINATE_IN_PROGRESS = 'TERMINATE_IN_PROGRESS'
-    end
-
-    module NsdOnboardingState
-      CREATED = 'CREATED'
-      ONBOARDED = 'ONBOARDED'
-      ERROR = 'ERROR'
-    end
-
-    module NsdOperationalState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module NsdUsageState
-      IN_USE = 'IN_USE'
-      NOT_IN_USE = 'NOT_IN_USE'
-    end
-
-    module OnboardingState
-      CREATED = 'CREATED'
-      ONBOARDED = 'ONBOARDED'
-      ERROR = 'ERROR'
-    end
-
-    module OperationalState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module PackageContentType
-      APPLICATION_ZIP = 'application/zip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details related to problems with AWS TNB resources.</p>
@@ -1408,7 +1345,7 @@ module Aws::Tnb
       :detail,
       :title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -1425,7 +1362,7 @@ module Aws::Tnb
       :content_type,
       :file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update metadata in a function package.</p>
@@ -1437,7 +1374,7 @@ module Aws::Tnb
     class PutSolFunctionPackageContentMetadata < Struct.new(
       :vnfd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1466,7 +1403,7 @@ module Aws::Tnb
       :vnfd_version,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -1483,7 +1420,7 @@ module Aws::Tnb
       :content_type,
       :file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update metadata in a network package.</p>
@@ -1495,7 +1432,7 @@ module Aws::Tnb
     class PutSolNetworkPackageContentMetadata < Struct.new(
       :nsd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1528,7 +1465,7 @@ module Aws::Tnb
       :vnf_pkg_ids,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource that doesn't exist.</p>
@@ -1537,7 +1474,7 @@ module Aws::Tnb
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Service quotas have been exceeded.</p>
@@ -1546,7 +1483,7 @@ module Aws::Tnb
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1559,22 +1496,12 @@ module Aws::Tnb
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskStatus
-      SCHEDULED = 'SCHEDULED'
-      STARTED = 'STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      ERROR = 'ERROR'
-      SKIPPED = 'SKIPPED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_instance_id
@@ -1587,7 +1514,7 @@ module Aws::Tnb
       :ns_instance_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_lcm_op_occ_id
@@ -1600,7 +1527,7 @@ module Aws::Tnb
       :ns_lcm_op_occ_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception caused by throttling.</p>
@@ -1609,7 +1536,7 @@ module Aws::Tnb
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Overrides of the TOSCA node.</p>
@@ -1623,7 +1550,7 @@ module Aws::Tnb
       :name,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1636,12 +1563,12 @@ module Aws::Tnb
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata related to the configuration properties used during update of a network instance.</p>
@@ -1655,7 +1582,7 @@ module Aws::Tnb
       :nsd_info_id,
       :additional_params_for_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -1668,7 +1595,7 @@ module Aws::Tnb
       :vnf_pkg_id,
       :operational_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operational_state
@@ -1677,7 +1604,7 @@ module Aws::Tnb
     class UpdateSolFunctionPackageOutput < Struct.new(
       :operational_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_instance_id
@@ -1716,7 +1643,7 @@ module Aws::Tnb
       :update_ns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ns_lcm_op_occ_id
@@ -1729,7 +1656,7 @@ module Aws::Tnb
       :ns_lcm_op_occ_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information parameters and/or the configurable properties for a network function.</p>
@@ -1746,7 +1673,7 @@ module Aws::Tnb
       :vnf_instance_id,
       :vnf_configurable_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -1759,7 +1686,7 @@ module Aws::Tnb
       :nsd_info_id,
       :nsd_operational_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_operational_state
@@ -1768,7 +1695,7 @@ module Aws::Tnb
     class UpdateSolNetworkPackageOutput < Struct.new(
       :nsd_operational_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information parameters and/or the configurable properties for a network descriptor used for update.</p>
@@ -1782,17 +1709,7 @@ module Aws::Tnb
       :nsd_info_id,
       :additional_params_for_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateSolNetworkType
-      MODIFY_VNF_INFORMATION = 'MODIFY_VNF_INFORMATION'
-      UPDATE_NS = 'UPDATE_NS'
-    end
-
-    module UsageState
-      IN_USE = 'IN_USE'
-      NOT_IN_USE = 'NOT_IN_USE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vnf_pkg_id
@@ -1809,7 +1726,7 @@ module Aws::Tnb
       :content_type,
       :file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validates function package content metadata.</p>
@@ -1821,7 +1738,7 @@ module Aws::Tnb
     class ValidateSolFunctionPackageContentMetadata < Struct.new(
       :vnfd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1850,7 +1767,7 @@ module Aws::Tnb
       :vnfd_version,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nsd_info_id
@@ -1867,7 +1784,7 @@ module Aws::Tnb
       :content_type,
       :file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validates network package content metadata.</p>
@@ -1879,7 +1796,7 @@ module Aws::Tnb
     class ValidateSolNetworkPackageContentMetadata < Struct.new(
       :nsd,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1912,7 +1829,7 @@ module Aws::Tnb
       :vnf_pkg_ids,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to process the request because the client provided input failed to satisfy
@@ -1922,17 +1839,7 @@ module Aws::Tnb
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VnfInstantiationState
-      INSTANTIATED = 'INSTANTIATED'
-      NOT_INSTANTIATED = 'NOT_INSTANTIATED'
-    end
-
-    module VnfOperationalState
-      STARTED = 'STARTED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
   end

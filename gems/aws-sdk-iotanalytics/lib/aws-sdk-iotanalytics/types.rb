@@ -26,7 +26,7 @@ module Aws::IoTAnalytics
       :attributes,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains informations about errors.</p>
@@ -45,7 +45,7 @@ module Aws::IoTAnalytics
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -85,7 +85,7 @@ module Aws::IoTAnalytics
       :channel_name,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_put_message_error_entries
@@ -94,7 +94,7 @@ module Aws::IoTAnalytics
     class BatchPutMessageResponse < Struct.new(
       :batch_put_message_error_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -108,12 +108,12 @@ module Aws::IoTAnalytics
       :pipeline_name,
       :reprocessing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelPipelineReprocessingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages
@@ -157,7 +157,7 @@ module Aws::IoTAnalytics
       :last_update_time,
       :last_message_arrival_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The activity that determines the source of the messages to be processed.</p>
@@ -175,7 +175,7 @@ module Aws::IoTAnalytics
       :channel_name,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one or more sets of channel messages.</p>
@@ -190,7 +190,7 @@ module Aws::IoTAnalytics
     class ChannelMessages < Struct.new(
       :s3_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics information about the channel.</p>
@@ -200,13 +200,7 @@ module Aws::IoTAnalytics
     class ChannelStatistics < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChannelStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Where channel data is stored. You may choose one of <code>serviceManagedS3</code>,
@@ -225,7 +219,7 @@ module Aws::IoTAnalytics
       :service_managed_s3,
       :customer_managed_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Where channel data is stored.</p>
@@ -239,7 +233,7 @@ module Aws::IoTAnalytics
       :service_managed_s3,
       :customer_managed_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a channel.</p>
@@ -271,7 +265,7 @@ module Aws::IoTAnalytics
       :last_update_time,
       :last_message_arrival_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a column that stores your data.</p>
@@ -286,12 +280,7 @@ module Aws::IoTAnalytics
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeType
-      ACU_1 = 'ACU_1'
-      ACU_2 = 'ACU_2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to run the <code>containerAction</code> to produce dataset
@@ -320,7 +309,7 @@ module Aws::IoTAnalytics
       :resource_configuration,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -345,7 +334,7 @@ module Aws::IoTAnalytics
       :retention_period,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -362,7 +351,7 @@ module Aws::IoTAnalytics
       :channel_arn,
       :retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -376,7 +365,7 @@ module Aws::IoTAnalytics
       :dataset_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_id
@@ -385,7 +374,7 @@ module Aws::IoTAnalytics
     class CreateDatasetContentResponse < Struct.new(
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -434,7 +423,7 @@ module Aws::IoTAnalytics
       :tags,
       :late_data_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -451,7 +440,7 @@ module Aws::IoTAnalytics
       :dataset_arn,
       :retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -483,7 +472,7 @@ module Aws::IoTAnalytics
       :file_format_configuration,
       :datastore_partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -500,7 +489,7 @@ module Aws::IoTAnalytics
       :datastore_arn,
       :retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -527,7 +516,7 @@ module Aws::IoTAnalytics
       :pipeline_activities,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -540,7 +529,7 @@ module Aws::IoTAnalytics
       :pipeline_name,
       :pipeline_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store channel data in an S3 bucket that you manage. If customer-managed storage is
@@ -563,7 +552,7 @@ module Aws::IoTAnalytics
       :key_prefix,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store channel data in an S3 bucket that you manage.</p>
@@ -584,7 +573,7 @@ module Aws::IoTAnalytics
       :key_prefix,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>S3-customer-managed; When you choose customer-managed storage, the <code>retentionPeriod</code> parameter is ignored. You can't change the choice of Amazon S3 storage after your data store is created.  </p>
@@ -602,7 +591,7 @@ module Aws::IoTAnalytics
       :key_prefix,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the data store that you manage.</p>
@@ -620,7 +609,7 @@ module Aws::IoTAnalytics
       :key_prefix,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a dataset.</p>
@@ -678,7 +667,7 @@ module Aws::IoTAnalytics
       :versioning_configuration,
       :late_data_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>DatasetAction</code> object that specifies how dataset contents are automatically
@@ -700,7 +689,7 @@ module Aws::IoTAnalytics
       :query_action,
       :container_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the action that automatically creates the dataset's contents.</p>
@@ -714,12 +703,7 @@ module Aws::IoTAnalytics
       :action_name,
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetActionType
-      QUERY = 'QUERY'
-      CONTAINER = 'CONTAINER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination to which dataset contents are delivered.</p>
@@ -733,7 +717,7 @@ module Aws::IoTAnalytics
       :iot_events_destination_configuration,
       :s3_destination_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When dataset contents are created, they are delivered to destination specified
@@ -748,13 +732,7 @@ module Aws::IoTAnalytics
       :entry_name,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetContentState
-      CREATING = 'CREATING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the dataset contents and the reason they are in this state.</p>
@@ -769,7 +747,7 @@ module Aws::IoTAnalytics
       :state,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about dataset contents.</p>
@@ -795,7 +773,7 @@ module Aws::IoTAnalytics
       :schedule_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset whose latest contents are used as input to the notebook or application.</p>
@@ -806,7 +784,7 @@ module Aws::IoTAnalytics
     class DatasetContentVersionValue < Struct.new(
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference to a dataset entry.</p>
@@ -820,13 +798,7 @@ module Aws::IoTAnalytics
       :entry_name,
       :data_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a dataset.</p>
@@ -858,7 +830,7 @@ module Aws::IoTAnalytics
       :triggers,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>DatasetTrigger</code> that specifies when the dataset is automatically
@@ -874,7 +846,7 @@ module Aws::IoTAnalytics
       :schedule,
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a data store.</p>
@@ -939,7 +911,7 @@ module Aws::IoTAnalytics
       :file_format_configuration,
       :datastore_partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The datastore activity that specifies where to store the processed data.</p>
@@ -953,7 +925,7 @@ module Aws::IoTAnalytics
       :name,
       :datastore_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created.   </p>
@@ -963,7 +935,7 @@ module Aws::IoTAnalytics
     class DatastoreIotSiteWiseMultiLayerStorage < Struct.new(
       :customer_managed_s3_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about the data store that you manage, which stores data used by IoT SiteWise. </p>
@@ -973,7 +945,7 @@ module Aws::IoTAnalytics
     class DatastoreIotSiteWiseMultiLayerStorageSummary < Struct.new(
       :customer_managed_s3_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A single dimension to partition a data store. The dimension must be an
@@ -988,7 +960,7 @@ module Aws::IoTAnalytics
       :attribute_partition,
       :timestamp_partition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about the partition dimensions in a data store. </p>
@@ -998,7 +970,7 @@ module Aws::IoTAnalytics
     class DatastorePartitions < Struct.new(
       :partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistical information about the data store.</p>
@@ -1008,13 +980,7 @@ module Aws::IoTAnalytics
     class DatastoreStatistics < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatastoreStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Where data in a data store is stored.. You can choose <code>serviceManagedS3</code> storage, <code>customerManagedS3</code> storage, or <code>iotSiteWiseMultiLayerStorage</code> storage. The default is <code>serviceManagedS3</code>. You can't change the choice of Amazon S3 storage after your data store is created. </p>
@@ -1033,7 +999,7 @@ module Aws::IoTAnalytics
       :iot_site_wise_multi_layer_storage,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ServiceManagedS3 < DatastoreStorage; end
       class CustomerManagedS3 < DatastoreStorage; end
@@ -1056,7 +1022,7 @@ module Aws::IoTAnalytics
       :customer_managed_s3,
       :iot_site_wise_multi_layer_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a data store.</p>
@@ -1096,7 +1062,7 @@ module Aws::IoTAnalytics
       :file_format_type,
       :datastore_partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1105,7 +1071,7 @@ module Aws::IoTAnalytics
     class DeleteChannelRequest < Struct.new(
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -1120,7 +1086,7 @@ module Aws::IoTAnalytics
       :dataset_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -1129,7 +1095,7 @@ module Aws::IoTAnalytics
     class DeleteDatasetRequest < Struct.new(
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -1138,7 +1104,7 @@ module Aws::IoTAnalytics
     class DeleteDatastoreRequest < Struct.new(
       :datastore_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -1147,7 +1113,7 @@ module Aws::IoTAnalytics
     class DeletePipelineRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to limit data to that which has arrived since the last execution of the
@@ -1170,7 +1136,7 @@ module Aws::IoTAnalytics
       :offset_seconds,
       :time_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration information of a delta time session
@@ -1193,7 +1159,7 @@ module Aws::IoTAnalytics
     class DeltaTimeSessionWindowConfiguration < Struct.new(
       :timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -1207,7 +1173,7 @@ module Aws::IoTAnalytics
       :channel_name,
       :include_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -1221,7 +1187,7 @@ module Aws::IoTAnalytics
       :channel,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -1230,7 +1196,7 @@ module Aws::IoTAnalytics
     class DescribeDatasetRequest < Struct.new(
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset
@@ -1239,7 +1205,7 @@ module Aws::IoTAnalytics
     class DescribeDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -1254,7 +1220,7 @@ module Aws::IoTAnalytics
       :datastore_name,
       :include_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore
@@ -1268,12 +1234,12 @@ module Aws::IoTAnalytics
       :datastore,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeLoggingOptionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_options
@@ -1282,7 +1248,7 @@ module Aws::IoTAnalytics
     class DescribeLoggingOptionsResponse < Struct.new(
       :logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -1291,7 +1257,7 @@ module Aws::IoTAnalytics
     class DescribePipelineRequest < Struct.new(
       :pipeline_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline
@@ -1300,7 +1266,7 @@ module Aws::IoTAnalytics
     class DescribePipelineResponse < Struct.new(
       :pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activity that adds data from the IoT device registry to your message.</p>
@@ -1326,7 +1292,7 @@ module Aws::IoTAnalytics
       :role_arn,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activity that adds information from the IoT Device Shadow service to a
@@ -1353,7 +1319,7 @@ module Aws::IoTAnalytics
       :role_arn,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The estimated size of the resource.</p>
@@ -1367,7 +1333,7 @@ module Aws::IoTAnalytics
       :estimated_size_in_bytes,
       :estimated_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of file formats.  IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p>
@@ -1383,12 +1349,7 @@ module Aws::IoTAnalytics
       :json_configuration,
       :parquet_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileFormatType
-      JSON = 'JSON'
-      PARQUET = 'PARQUET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activity that filters a message based on its attributes.</p>
@@ -1407,7 +1368,7 @@ module Aws::IoTAnalytics
       :filter,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -1422,7 +1383,7 @@ module Aws::IoTAnalytics
       :dataset_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -1439,7 +1400,7 @@ module Aws::IoTAnalytics
       :timestamp,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for coordination with Glue, a fully managed extract, transform
@@ -1457,7 +1418,7 @@ module Aws::IoTAnalytics
       :table_name,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal failure.</p>
@@ -1466,7 +1427,7 @@ module Aws::IoTAnalytics
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was not valid.</p>
@@ -1475,7 +1436,7 @@ module Aws::IoTAnalytics
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for delivery of dataset contents to IoT Events.</p>
@@ -1490,7 +1451,7 @@ module Aws::IoTAnalytics
       :input_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created.   </p>
@@ -1504,7 +1465,7 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about the data store that you manage, which stores data used by IoT SiteWise. </p>
@@ -1518,13 +1479,13 @@ module Aws::IoTAnalytics
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of the JSON format.</p>
     class JsonConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activity that runs a Lambda function to modify the message.</p>
@@ -1548,7 +1509,7 @@ module Aws::IoTAnalytics
       :batch_size,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the name and configuration information of a late data
@@ -1563,7 +1524,7 @@ module Aws::IoTAnalytics
       :rule_name,
       :rule_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information needed to configure a delta time session window.</p>
@@ -1573,7 +1534,7 @@ module Aws::IoTAnalytics
     class LateDataRuleConfiguration < Struct.new(
       :delta_time_session_window_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The command caused an internal limit to be exceeded.</p>
@@ -1582,7 +1543,7 @@ module Aws::IoTAnalytics
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1596,7 +1557,7 @@ module Aws::IoTAnalytics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_summaries
@@ -1610,7 +1571,7 @@ module Aws::IoTAnalytics
       :channel_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -1639,7 +1600,7 @@ module Aws::IoTAnalytics
       :scheduled_on_or_after,
       :scheduled_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_content_summaries
@@ -1653,7 +1614,7 @@ module Aws::IoTAnalytics
       :dataset_content_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1667,7 +1628,7 @@ module Aws::IoTAnalytics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_summaries
@@ -1681,7 +1642,7 @@ module Aws::IoTAnalytics
       :dataset_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1695,7 +1656,7 @@ module Aws::IoTAnalytics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_summaries
@@ -1709,7 +1670,7 @@ module Aws::IoTAnalytics
       :datastore_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1723,7 +1684,7 @@ module Aws::IoTAnalytics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_summaries
@@ -1737,7 +1698,7 @@ module Aws::IoTAnalytics
       :pipeline_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1746,7 +1707,7 @@ module Aws::IoTAnalytics
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1755,11 +1716,7 @@ module Aws::IoTAnalytics
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LoggingLevel
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about logging options.</p>
@@ -1777,7 +1734,7 @@ module Aws::IoTAnalytics
       :level,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -1805,7 +1762,7 @@ module Aws::IoTAnalytics
       :math,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a message.</p>
@@ -1822,7 +1779,7 @@ module Aws::IoTAnalytics
       :message_id,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of the variable as a structure that specifies an output file URI.</p>
@@ -1833,7 +1790,7 @@ module Aws::IoTAnalytics
     class OutputFileUriValue < Struct.new(
       :file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information of the Parquet format.</p>
@@ -1843,7 +1800,7 @@ module Aws::IoTAnalytics
     class ParquetConfiguration < Struct.new(
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A partition dimension defined by an attribute. </p>
@@ -1853,7 +1810,7 @@ module Aws::IoTAnalytics
     class Partition < Struct.new(
       :attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a pipeline.</p>
@@ -1883,7 +1840,7 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activity that performs a transformation on a message.</p>
@@ -1931,7 +1888,7 @@ module Aws::IoTAnalytics
       :device_registry_enrich,
       :device_shadow_enrich,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a pipeline.</p>
@@ -1953,7 +1910,7 @@ module Aws::IoTAnalytics
       :creation_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_options
@@ -1962,7 +1919,7 @@ module Aws::IoTAnalytics
     class PutLoggingOptionsRequest < Struct.new(
       :logging_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information that is used to filter message data, to segregate it according to the
@@ -1974,7 +1931,7 @@ module Aws::IoTAnalytics
     class QueryFilter < Struct.new(
       :delta_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activity that removes attributes from a message.</p>
@@ -1992,14 +1949,7 @@ module Aws::IoTAnalytics
       :attributes,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReprocessingStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about pipeline reprocessing.</p>
@@ -2017,7 +1967,7 @@ module Aws::IoTAnalytics
       :status,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the same name already exists.</p>
@@ -2034,7 +1984,7 @@ module Aws::IoTAnalytics
       :resource_id,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the resource used to execute the <code>containerAction</code>.</p>
@@ -2051,7 +2001,7 @@ module Aws::IoTAnalytics
       :compute_type,
       :volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the specified name could not be found.</p>
@@ -2060,7 +2010,7 @@ module Aws::IoTAnalytics
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How long, in days, message data is kept.</p>
@@ -2075,7 +2025,7 @@ module Aws::IoTAnalytics
       :unlimited,
       :number_of_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:unlimited] = false unless options.key?(:unlimited)
@@ -2097,7 +2047,7 @@ module Aws::IoTAnalytics
       :pipeline_activity,
       :payloads,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute payloads
@@ -2112,7 +2062,7 @@ module Aws::IoTAnalytics
       :payloads,
       :log_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for delivery of dataset contents to Amazon Simple Storage Service (Amazon S3).</p>
@@ -2161,7 +2111,7 @@ module Aws::IoTAnalytics
       :glue_configuration,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -2183,7 +2133,7 @@ module Aws::IoTAnalytics
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute payloads
@@ -2193,7 +2143,7 @@ module Aws::IoTAnalytics
     class SampleChannelDataResponse < Struct.new(
       :payloads,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schedule for when to trigger an update.</p>
@@ -2205,7 +2155,7 @@ module Aws::IoTAnalytics
     class Schedule < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information needed to define a schema.</p>
@@ -2217,7 +2167,7 @@ module Aws::IoTAnalytics
     class SchemaDefinition < Struct.new(
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to create a new message using only the specified attributes from the original
@@ -2236,32 +2186,32 @@ module Aws::IoTAnalytics
       :attributes,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice
     #       of S3 storage after the data store is created.</p>
     class ServiceManagedChannelS3Storage < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store channel data in an S3 bucket managed by IoT Analytics.</p>
     class ServiceManagedChannelS3StorageSummary < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created.  </p>
     class ServiceManagedDatastoreS3Storage < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the data store that is managed by IoT Analytics.</p>
     class ServiceManagedDatastoreS3StorageSummary < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is temporarily unavailable.</p>
@@ -2270,7 +2220,7 @@ module Aws::IoTAnalytics
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SQL query to modify the message.</p>
@@ -2284,7 +2234,7 @@ module Aws::IoTAnalytics
       :sql_query,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -2311,7 +2261,7 @@ module Aws::IoTAnalytics
       :end_time,
       :channel_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reprocessing_id
@@ -2320,7 +2270,7 @@ module Aws::IoTAnalytics
     class StartPipelineReprocessingResponse < Struct.new(
       :reprocessing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of key-value pairs that are used to manage the resource.</p>
@@ -2334,7 +2284,7 @@ module Aws::IoTAnalytics
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2347,12 +2297,12 @@ module Aws::IoTAnalytics
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -2361,7 +2311,7 @@ module Aws::IoTAnalytics
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A partition dimension defined by a timestamp attribute. </p>
@@ -2376,7 +2326,7 @@ module Aws::IoTAnalytics
       :attribute_name,
       :timestamp_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the dataset whose content generation triggers the new dataset content
@@ -2388,7 +2338,7 @@ module Aws::IoTAnalytics
     class TriggeringDataset < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2401,12 +2351,12 @@ module Aws::IoTAnalytics
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_name
@@ -2427,7 +2377,7 @@ module Aws::IoTAnalytics
       :channel_storage,
       :retention_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -2466,7 +2416,7 @@ module Aws::IoTAnalytics
       :versioning_configuration,
       :late_data_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -2490,7 +2440,7 @@ module Aws::IoTAnalytics
       :datastore_storage,
       :file_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pipeline_name
@@ -2513,7 +2463,7 @@ module Aws::IoTAnalytics
       :pipeline_name,
       :pipeline_activities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance of a variable to be passed to the <code>containerAction</code> execution. Each
@@ -2541,10 +2491,10 @@ module Aws::IoTAnalytics
       :dataset_content_version_value,
       :output_file_uri_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:double_value] =  unless options.key?(:double_value)
+        options[:double_value] = nil unless options.key?(:double_value)
         super
       end
     end
@@ -2561,7 +2511,7 @@ module Aws::IoTAnalytics
       :unlimited,
       :max_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:unlimited] = false unless options.key?(:unlimited)

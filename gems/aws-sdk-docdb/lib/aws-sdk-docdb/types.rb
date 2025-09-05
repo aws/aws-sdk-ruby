@@ -37,7 +37,7 @@ module Aws::DocDB
       :subscription_name,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -46,7 +46,7 @@ module Aws::DocDB
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>AddTagsToResource</a>.
@@ -62,12 +62,7 @@ module Aws::DocDB
       :resource_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplyMethod
-      immediate = 'immediate'
-      pending_reboot = 'pending-reboot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ApplyPendingMaintenanceAction</a>.
@@ -110,7 +105,7 @@ module Aws::DocDB
       :apply_action,
       :opt_in_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_pending_maintenance_actions
@@ -120,7 +115,7 @@ module Aws::DocDB
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CIDR IP or Amazon EC2 security group isn't authorized for the specified security group.</p>
@@ -130,7 +125,7 @@ module Aws::DocDB
     class AuthorizationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Availability Zone.</p>
@@ -140,7 +135,7 @@ module Aws::DocDB
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A certificate authority (CA) certificate for an Amazon Web Services account.</p>
@@ -180,7 +175,7 @@ module Aws::DocDB
       :valid_till,
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the details of the DB instance’s server certificate.</p>
@@ -199,7 +194,7 @@ module Aws::DocDB
       :ca_identifier,
       :valid_till,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificates
@@ -212,7 +207,7 @@ module Aws::DocDB
       :certificates,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -222,7 +217,7 @@ module Aws::DocDB
     class CertificateNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration setting for the log types to be enabled for export to Amazon
@@ -240,7 +235,7 @@ module Aws::DocDB
       :enable_log_types,
       :disable_log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the secret managed by Amazon DocumentDB in Amazon Web Services Secrets Manager for the master user password.</p>
@@ -276,7 +271,7 @@ module Aws::DocDB
       :secret_status,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CopyDBClusterParameterGroup</a>.
@@ -330,7 +325,7 @@ module Aws::DocDB
       :target_db_cluster_parameter_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group
@@ -339,7 +334,7 @@ module Aws::DocDB
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CopyDBClusterSnapshot</a>.
@@ -447,7 +442,7 @@ module Aws::DocDB
       :copy_tags,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -456,7 +451,7 @@ module Aws::DocDB
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CreateDBCluster</a>.
@@ -674,7 +669,7 @@ module Aws::DocDB
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of <a>CreateDBClusterParameterGroup</a>.</p>
@@ -706,7 +701,7 @@ module Aws::DocDB
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group
@@ -715,7 +710,7 @@ module Aws::DocDB
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -724,7 +719,7 @@ module Aws::DocDB
     class CreateDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of <a>CreateDBClusterSnapshot</a>.</p>
@@ -768,7 +763,7 @@ module Aws::DocDB
       :db_cluster_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -777,7 +772,7 @@ module Aws::DocDB
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CreateDBInstance</a>.</p>
@@ -882,7 +877,7 @@ module Aws::DocDB
       :performance_insights_kms_key_id,
       :ca_certificate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -891,7 +886,7 @@ module Aws::DocDB
     class CreateDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CreateDBSubnetGroup</a>.</p>
@@ -917,7 +912,7 @@ module Aws::DocDB
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group
@@ -926,7 +921,7 @@ module Aws::DocDB
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CreateEventSubscription</a>.</p>
@@ -989,7 +984,7 @@ module Aws::DocDB
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -998,7 +993,7 @@ module Aws::DocDB
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>CreateGlobalCluster</a>.</p>
@@ -1032,7 +1027,7 @@ module Aws::DocDB
       :database_name,
       :storage_encrypted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -1041,7 +1036,7 @@ module Aws::DocDB
     class CreateGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a cluster. </p>
@@ -1208,7 +1203,7 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :master_user_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a cluster with the given identifier.</p>
@@ -1217,7 +1212,7 @@ module Aws::DocDB
     class DBClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an instance that is part of a cluster.</p>
@@ -1242,7 +1237,7 @@ module Aws::DocDB
       :db_cluster_parameter_group_status,
       :promotion_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeDBClusters</a>.</p>
@@ -1258,7 +1253,7 @@ module Aws::DocDB
       :marker,
       :db_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1268,7 +1263,7 @@ module Aws::DocDB
     class DBClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a cluster parameter group. </p>
@@ -1292,7 +1287,7 @@ module Aws::DocDB
       :description,
       :db_cluster_parameter_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1302,7 +1297,7 @@ module Aws::DocDB
     class DBClusterParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DBClusterParameterGroups</a>.</p>
@@ -1318,7 +1313,7 @@ module Aws::DocDB
       :marker,
       :db_cluster_parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster can't be created because you have reached the maximum allowed quota of clusters.</p>
@@ -1327,7 +1322,7 @@ module Aws::DocDB
     class DBClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Identity and Access Management (IAM) role that is associated with a
@@ -1357,7 +1352,7 @@ module Aws::DocDB
       :role_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a cluster snapshot. </p>
@@ -1447,7 +1442,7 @@ module Aws::DocDB
       :source_db_cluster_snapshot_arn,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a cluster snapshot with the given identifier.</p>
@@ -1456,7 +1451,7 @@ module Aws::DocDB
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and values of a manual cluster snapshot attribute.</p>
@@ -1473,7 +1468,7 @@ module Aws::DocDB
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the attributes that are associated with a cluster
@@ -1488,7 +1483,7 @@ module Aws::DocDB
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeDBClusterSnapshots</a>.</p>
@@ -1504,7 +1499,7 @@ module Aws::DocDB
       :marker,
       :db_cluster_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1514,7 +1509,7 @@ module Aws::DocDB
     class DBClusterSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Detailed information about an engine version. </p>
@@ -1574,7 +1569,7 @@ module Aws::DocDB
       :supports_certificate_rotation_without_restart,
       :serverless_v2_features_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeDBEngineVersions</a>.</p>
@@ -1590,7 +1585,7 @@ module Aws::DocDB
       :marker,
       :db_engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an instance. </p>
@@ -1727,7 +1722,7 @@ module Aws::DocDB
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a instance with the given identifier.</p>
@@ -1736,7 +1731,7 @@ module Aws::DocDB
     class DBInstanceAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeDBInstances</a>.</p>
@@ -1752,7 +1747,7 @@ module Aws::DocDB
       :marker,
       :db_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1762,7 +1757,7 @@ module Aws::DocDB
     class DBInstanceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of status information for an instance.</p>
@@ -1788,7 +1783,7 @@ module Aws::DocDB
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter group with the same name already exists.</p>
@@ -1797,7 +1792,7 @@ module Aws::DocDB
     class DBParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1807,7 +1802,7 @@ module Aws::DocDB
     class DBParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request would cause you to exceed the allowed number of parameter groups.</p>
@@ -1816,7 +1811,7 @@ module Aws::DocDB
     class DBParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1826,7 +1821,7 @@ module Aws::DocDB
     class DBSecurityGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1836,7 +1831,7 @@ module Aws::DocDB
     class DBSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1846,7 +1841,7 @@ module Aws::DocDB
     class DBSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a subnet group. </p>
@@ -1876,7 +1871,7 @@ module Aws::DocDB
       :subnets,
       :db_subnet_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1886,7 +1881,7 @@ module Aws::DocDB
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subnets in the subnet group should cover at least two Availability Zones unless there is only one Availability Zone.</p>
@@ -1895,7 +1890,7 @@ module Aws::DocDB
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeDBSubnetGroups</a>.</p>
@@ -1911,7 +1906,7 @@ module Aws::DocDB
       :marker,
       :db_subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1921,7 +1916,7 @@ module Aws::DocDB
     class DBSubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause you to exceed the allowed number of subnet groups.</p>
@@ -1930,7 +1925,7 @@ module Aws::DocDB
     class DBSubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause you to exceed the allowed number of subnets in a subnet group.</p>
@@ -1939,7 +1934,7 @@ module Aws::DocDB
     class DBSubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The upgrade failed because a resource that the depends on can't be
@@ -1949,7 +1944,7 @@ module Aws::DocDB
     class DBUpgradeDependencyFailureFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteDBCluster</a>.</p>
@@ -1993,7 +1988,7 @@ module Aws::DocDB
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteDBClusterParameterGroup</a>.</p>
@@ -2015,7 +2010,7 @@ module Aws::DocDB
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -2024,7 +2019,7 @@ module Aws::DocDB
     class DeleteDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteDBClusterSnapshot</a>.</p>
@@ -2035,7 +2030,7 @@ module Aws::DocDB
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -2044,7 +2039,7 @@ module Aws::DocDB
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteDBInstance</a>.</p>
@@ -2061,7 +2056,7 @@ module Aws::DocDB
     class DeleteDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -2070,7 +2065,7 @@ module Aws::DocDB
     class DeleteDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>
@@ -2087,7 +2082,7 @@ module Aws::DocDB
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteEventSubscription</a>.</p>
@@ -2097,7 +2092,7 @@ module Aws::DocDB
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -2106,7 +2101,7 @@ module Aws::DocDB
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DeleteGlobalCluster</a>.</p>
@@ -2116,7 +2111,7 @@ module Aws::DocDB
     class DeleteGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -2125,7 +2120,7 @@ module Aws::DocDB
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_identifier
@@ -2162,7 +2157,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBClusterParameterGroups</a>.</p>
@@ -2197,7 +2192,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBClusterParameters</a>.</p>
@@ -2236,7 +2231,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DBClusterParameterGroup</a>.</p>
@@ -2252,7 +2247,7 @@ module Aws::DocDB
       :parameters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBClusterSnapshotAttributes</a>.</p>
@@ -2262,7 +2257,7 @@ module Aws::DocDB
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_attributes_result
@@ -2272,7 +2267,7 @@ module Aws::DocDB
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBClusterSnapshots</a>.</p>
@@ -2354,7 +2349,7 @@ module Aws::DocDB
       :include_shared,
       :include_public,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBClusters</a>.</p>
@@ -2395,7 +2390,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBEngineVersions</a>.</p>
@@ -2453,7 +2448,7 @@ module Aws::DocDB
       :list_supported_character_sets,
       :list_supported_timezones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBInstances</a>.</p>
@@ -2499,7 +2494,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeDBSubnetGroups</a>.</p>
@@ -2527,7 +2522,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeEngineDefaultClusterParameters</a>.</p>
@@ -2556,7 +2551,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_defaults
@@ -2566,7 +2561,7 @@ module Aws::DocDB
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeEventCategories</a>.</p>
@@ -2582,7 +2577,7 @@ module Aws::DocDB
       :source_type,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>
@@ -2611,7 +2606,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeEvents</a>.</p>
@@ -2689,7 +2684,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -2711,7 +2706,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribeOrderableDBInstanceOptions</a>.</p>
@@ -2759,7 +2754,7 @@ module Aws::DocDB
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>DescribePendingMaintenanceActions</a>.</p>
@@ -2803,7 +2798,7 @@ module Aws::DocDB
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network information for accessing a cluster or instance. Client programs must
@@ -2822,7 +2817,7 @@ module Aws::DocDB
       :port,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the
@@ -2843,7 +2838,7 @@ module Aws::DocDB
       :marker,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an event.</p>
@@ -2873,7 +2868,7 @@ module Aws::DocDB
       :date,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An event source type, accompanied by one or more event category names.</p>
@@ -2887,7 +2882,7 @@ module Aws::DocDB
       :source_type,
       :event_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeEventCategories</a>.</p>
@@ -2897,7 +2892,7 @@ module Aws::DocDB
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an event to which you have subscribed.</p>
@@ -2953,7 +2948,7 @@ module Aws::DocDB
       :enabled,
       :event_subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of event subscriptions. </p>
@@ -2962,7 +2957,7 @@ module Aws::DocDB
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>
@@ -2978,7 +2973,7 @@ module Aws::DocDB
       :marker,
       :event_subscriptions_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeEvents</a>.</p>
@@ -2994,7 +2989,7 @@ module Aws::DocDB
       :marker,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>FailoverDBCluster</a>.</p>
@@ -3016,7 +3011,7 @@ module Aws::DocDB
       :db_cluster_identifier,
       :target_db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -3025,7 +3020,7 @@ module Aws::DocDB
     class FailoverDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -3084,7 +3079,7 @@ module Aws::DocDB
       :allow_data_loss,
       :switchover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -3093,7 +3088,7 @@ module Aws::DocDB
     class FailoverGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A named set of filter values, used to return a more specific list of results. You can
@@ -3109,7 +3104,7 @@ module Aws::DocDB
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data type representing an Amazon DocumentDB global cluster.</p>
@@ -3156,7 +3151,7 @@ module Aws::DocDB
       :deletion_protection,
       :global_cluster_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global cluster identifier (unique name) to create a new global cluster. </p>
@@ -3165,7 +3160,7 @@ module Aws::DocDB
     class GlobalClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data structure with information about any primary and secondary clusters associated with an Amazon DocumentDB global clusters. </p>
@@ -3183,7 +3178,7 @@ module Aws::DocDB
       :readers,
       :is_writer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global cluster.</p>
@@ -3192,7 +3187,7 @@ module Aws::DocDB
     class GlobalClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of global  clusters for this account is already at the maximum allowed.</p>
@@ -3201,7 +3196,7 @@ module Aws::DocDB
     class GlobalClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3214,7 +3209,7 @@ module Aws::DocDB
       :marker,
       :global_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause you to exceed the allowed number of instances.</p>
@@ -3223,7 +3218,7 @@ module Aws::DocDB
     class InstanceQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster doesn't have enough capacity for the current operation.</p>
@@ -3232,7 +3227,7 @@ module Aws::DocDB
     class InsufficientDBClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified instance class isn't available in the specified Availability Zone.</p>
@@ -3241,7 +3236,7 @@ module Aws::DocDB
     class InsufficientDBInstanceCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is not enough storage available for the current action. You might be able to resolve this error by updating your subnet group to use different Availability Zones that have more storage available. </p>
@@ -3250,7 +3245,7 @@ module Aws::DocDB
     class InsufficientStorageClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided value isn't a valid cluster snapshot state.</p>
@@ -3259,7 +3254,7 @@ module Aws::DocDB
     class InvalidDBClusterSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster isn't in a valid state.</p>
@@ -3268,7 +3263,7 @@ module Aws::DocDB
     class InvalidDBClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified instance isn't in the <i>available</i> state.
@@ -3278,7 +3273,7 @@ module Aws::DocDB
     class InvalidDBInstanceStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter group is in use, or it is in a state that is not valid. If you are trying to delete the parameter group, you can't delete it when the parameter group is in this state.</p>
@@ -3287,7 +3282,7 @@ module Aws::DocDB
     class InvalidDBParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the security group doesn't allow deletion.</p>
@@ -3296,7 +3291,7 @@ module Aws::DocDB
     class InvalidDBSecurityGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the snapshot doesn't allow deletion.</p>
@@ -3305,7 +3300,7 @@ module Aws::DocDB
     class InvalidDBSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subnet group can't be deleted because it's in use.</p>
@@ -3314,7 +3309,7 @@ module Aws::DocDB
     class InvalidDBSubnetGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The subnet isn't in the <i>available</i> state. </p>
@@ -3323,7 +3318,7 @@ module Aws::DocDB
     class InvalidDBSubnetStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Someone else might be modifying a subscription. Wait a few seconds, and try
@@ -3333,7 +3328,7 @@ module Aws::DocDB
     class InvalidEventSubscriptionStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation can't be performed while the cluster is in this state.</p>
@@ -3342,7 +3337,7 @@ module Aws::DocDB
     class InvalidGlobalClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You cannot restore from a virtual private cloud (VPC) backup to a non-VPC DB
@@ -3352,7 +3347,7 @@ module Aws::DocDB
     class InvalidRestoreFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet is not valid, or multiple subnets were requested that are not all
@@ -3362,7 +3357,7 @@ module Aws::DocDB
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subnet group doesn't cover all Availability Zones after it is created
@@ -3372,7 +3367,7 @@ module Aws::DocDB
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred when accessing an KMS key.</p>
@@ -3381,7 +3376,7 @@ module Aws::DocDB
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ListTagsForResource</a>.</p>
@@ -3396,7 +3391,7 @@ module Aws::DocDB
       :resource_name,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyDBCluster</a>.</p>
@@ -3595,7 +3590,7 @@ module Aws::DocDB
       :master_user_secret_kms_key_id,
       :rotate_master_user_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyDBClusterParameterGroup</a>.</p>
@@ -3609,7 +3604,7 @@ module Aws::DocDB
       :db_cluster_parameter_group_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name of a cluster parameter group.</p>
@@ -3634,7 +3629,7 @@ module Aws::DocDB
     class ModifyDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -3643,7 +3638,7 @@ module Aws::DocDB
     class ModifyDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyDBClusterSnapshotAttribute</a>.</p>
@@ -3669,7 +3664,7 @@ module Aws::DocDB
       :values_to_add,
       :values_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_attributes_result
@@ -3679,7 +3674,7 @@ module Aws::DocDB
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyDBInstance</a>.</p>
@@ -3798,7 +3793,7 @@ module Aws::DocDB
       :performance_insights_kms_key_id,
       :certificate_rotation_restart,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -3807,7 +3802,7 @@ module Aws::DocDB
     class ModifyDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyDBSubnetGroup</a>.</p>
@@ -3828,7 +3823,7 @@ module Aws::DocDB
       :db_subnet_group_description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group
@@ -3837,7 +3832,7 @@ module Aws::DocDB
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyEventSubscription</a>.</p>
@@ -3867,7 +3862,7 @@ module Aws::DocDB
       :event_categories,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -3876,7 +3871,7 @@ module Aws::DocDB
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ModifyGlobalCluster</a>.</p>
@@ -3909,7 +3904,7 @@ module Aws::DocDB
       :new_global_cluster_identifier,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -3918,7 +3913,7 @@ module Aws::DocDB
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that are available for an instance.</p>
@@ -3952,7 +3947,7 @@ module Aws::DocDB
       :vpc,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribeOrderableDBInstanceOptions</a>.</p>
@@ -3968,7 +3963,7 @@ module Aws::DocDB
       :orderable_db_instance_options,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an individual parameter.</p>
@@ -4016,7 +4011,7 @@ module Aws::DocDB
       :minimum_engine_version,
       :apply_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the log types whose configuration is still pending. These log types are in
@@ -4033,7 +4028,7 @@ module Aws::DocDB
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a pending maintenance action for a resource.</p>
@@ -4069,7 +4064,7 @@ module Aws::DocDB
       :current_apply_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>DescribePendingMaintenanceActions</a>.</p>
@@ -4085,7 +4080,7 @@ module Aws::DocDB
       :pending_maintenance_actions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> One or more modified settings for an instance. These modified settings have been
@@ -4158,7 +4153,7 @@ module Aws::DocDB
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>RebootDBInstance</a>.</p>
@@ -4180,7 +4175,7 @@ module Aws::DocDB
       :db_instance_identifier,
       :force_failover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -4189,7 +4184,7 @@ module Aws::DocDB
     class RebootDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>RemoveFromGlobalCluster</a>.</p>
@@ -4203,7 +4198,7 @@ module Aws::DocDB
       :global_cluster_identifier,
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -4212,7 +4207,7 @@ module Aws::DocDB
     class RemoveFromGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>
@@ -4228,7 +4223,7 @@ module Aws::DocDB
       :subscription_name,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -4237,7 +4232,7 @@ module Aws::DocDB
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>RemoveTagsFromResource</a>.</p>
@@ -4252,7 +4247,7 @@ module Aws::DocDB
       :resource_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>ResetDBClusterParameterGroup</a>.</p>
@@ -4275,7 +4270,7 @@ module Aws::DocDB
       :reset_all_parameters,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name of a cluster parameter group.</p>
@@ -4300,7 +4295,7 @@ module Aws::DocDB
     class ResetDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource ID was not found.</p>
@@ -4309,7 +4304,7 @@ module Aws::DocDB
     class ResourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>ApplyPendingMaintenanceAction</a>.
@@ -4326,7 +4321,7 @@ module Aws::DocDB
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>RestoreDBClusterFromSnapshot</a>.</p>
@@ -4451,7 +4446,7 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -4460,7 +4455,7 @@ module Aws::DocDB
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input to <a>RestoreDBClusterToPointInTime</a>.</p>
@@ -4604,7 +4599,7 @@ module Aws::DocDB
       :serverless_v2_scaling_configuration,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -4613,7 +4608,7 @@ module Aws::DocDB
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon SNS has responded that there is a problem with the specified topic. </p>
@@ -4622,7 +4617,7 @@ module Aws::DocDB
     class SNSInvalidTopicFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have permission to publish to the SNS topic Amazon Resource Name (ARN). </p>
@@ -4631,7 +4626,7 @@ module Aws::DocDB
     class SNSNoAuthorizationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SNS topic Amazon Resource Name (ARN) does not exist. </p>
@@ -4640,7 +4635,7 @@ module Aws::DocDB
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies any Amazon DocumentDB Serverless properties or limits that differ between Amazon DocumentDB engine versions. 
@@ -4658,7 +4653,7 @@ module Aws::DocDB
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets the scaling configuration of an Amazon DocumentDB Serverless cluster.</p>
@@ -4674,7 +4669,7 @@ module Aws::DocDB
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves the scaling configuration for an Amazon DocumentDB Serverless cluster.</p>
@@ -4690,7 +4685,7 @@ module Aws::DocDB
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of accounts that you can share a manual DB
@@ -4700,7 +4695,7 @@ module Aws::DocDB
     class SharedSnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause you to exceed the allowed number of snapshots.</p>
@@ -4709,7 +4704,7 @@ module Aws::DocDB
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested source could not be found. </p>
@@ -4718,16 +4713,7 @@ module Aws::DocDB
     class SourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      db_instance = 'db-instance'
-      db_parameter_group = 'db-parameter-group'
-      db_security_group = 'db-security-group'
-      db_snapshot = 'db-snapshot'
-      db_cluster = 'db-cluster'
-      db_cluster_snapshot = 'db-cluster-snapshot'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -4738,7 +4724,7 @@ module Aws::DocDB
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -4747,7 +4733,7 @@ module Aws::DocDB
     class StartDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -4758,7 +4744,7 @@ module Aws::DocDB
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -4767,7 +4753,7 @@ module Aws::DocDB
     class StopDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause you to exceed the allowed amount of storage available across
@@ -4777,7 +4763,7 @@ module Aws::DocDB
     class StorageQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Storage of the specified <code>StorageType</code> can't be associated with the DB
@@ -4787,7 +4773,7 @@ module Aws::DocDB
     class StorageTypeNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Detailed information about a subnet. </p>
@@ -4805,7 +4791,7 @@ module Aws::DocDB
       :subnet_availability_zone,
       :subnet_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subnet is already in use in the Availability Zone.</p>
@@ -4814,7 +4800,7 @@ module Aws::DocDB
     class SubnetAlreadyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided subscription name already exists. </p>
@@ -4823,7 +4809,7 @@ module Aws::DocDB
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided category does not exist. </p>
@@ -4832,7 +4818,7 @@ module Aws::DocDB
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subscription name does not exist. </p>
@@ -4841,7 +4827,7 @@ module Aws::DocDB
     class SubscriptionNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -4880,7 +4866,7 @@ module Aws::DocDB
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -4889,7 +4875,7 @@ module Aws::DocDB
     class SwitchoverGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to an Amazon DocumentDB resource consisting of a key-value pair.</p>
@@ -4903,7 +4889,7 @@ module Aws::DocDB
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of <a>ListTagsForResource</a>.</p>
@@ -4913,7 +4899,7 @@ module Aws::DocDB
     class TagListMessage < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of the database engine that an instance can be upgraded to.</p>
@@ -4940,7 +4926,7 @@ module Aws::DocDB
       :auto_upgrade,
       :is_major_version_upgrade,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used as a response element for queries on virtual private cloud (VPC) security group
@@ -4955,7 +4941,7 @@ module Aws::DocDB
       :vpc_security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

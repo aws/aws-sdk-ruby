@@ -12,12 +12,7 @@ module Aws::ElastiCache
     class APICallRateForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AZMode
-      SINGLE_AZ = 'single-az'
-      CROSS_AZ = 'cross-az'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an AddTagsToResource operation.</p>
@@ -38,7 +33,7 @@ module Aws::ElastiCache
       :resource_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output from the <code>AddTagsToResource</code>,
@@ -50,7 +45,7 @@ module Aws::ElastiCache
     class AddTagsToResourceOutput < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the allowed node types you can use to modify your cluster or replication
@@ -72,18 +67,7 @@ module Aws::ElastiCache
       :scale_up_modifications,
       :scale_down_modifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthTokenUpdateStatus
-      SETTING = 'SETTING'
-      ROTATING = 'ROTATING'
-    end
-
-    module AuthTokenUpdateStrategyType
-      SET = 'SET'
-      ROTATE = 'ROTATE'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the user requires a password to authenticate.</p>
@@ -97,7 +81,7 @@ module Aws::ElastiCache
       :type,
       :password_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the authentication mode to use.</p>
@@ -113,13 +97,7 @@ module Aws::ElastiCache
       :type,
       :passwords,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      PASSWORD = 'password'
-      NO_PASSWORD = 'no-password'
-      IAM = 'iam'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon EC2 security group is already authorized for the specified cache
@@ -129,7 +107,7 @@ module Aws::ElastiCache
     class AuthorizationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon EC2 security group is not authorized for the specified cache
@@ -139,7 +117,7 @@ module Aws::ElastiCache
     class AuthorizationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an AuthorizeCacheSecurityGroupIngress operation.</p>
@@ -160,7 +138,7 @@ module Aws::ElastiCache
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_security_group
@@ -186,14 +164,7 @@ module Aws::ElastiCache
     class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomaticFailoverStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      ENABLING = 'enabling'
-      DISABLING = 'disabling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Availability Zone in which the cluster is launched.</p>
@@ -203,7 +174,7 @@ module Aws::ElastiCache
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_ids
@@ -220,7 +191,7 @@ module Aws::ElastiCache
       :cache_cluster_ids,
       :service_update_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_update_actions
@@ -233,7 +204,7 @@ module Aws::ElastiCache
       :processed_update_actions,
       :unprocessed_update_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_ids
@@ -250,7 +221,7 @@ module Aws::ElastiCache
       :cache_cluster_ids,
       :service_update_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute processed_update_actions
@@ -263,7 +234,7 @@ module Aws::ElastiCache
       :processed_update_actions,
       :unprocessed_update_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all of the attributes of a specific cluster.</p>
@@ -692,7 +663,7 @@ module Aws::ElastiCache
       :ip_discovery,
       :transit_encryption_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a cluster with the given identifier.</p>
@@ -701,7 +672,7 @@ module Aws::ElastiCache
     class CacheClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeCacheClusters</code> operation.</p>
@@ -716,7 +687,7 @@ module Aws::ElastiCache
       :marker,
       :cache_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cluster ID does not refer to an existing cluster.</p>
@@ -725,7 +696,7 @@ module Aws::ElastiCache
     class CacheClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides all of the details about a particular cache engine version.</p>
@@ -756,7 +727,7 @@ module Aws::ElastiCache
       :cache_engine_description,
       :cache_engine_version_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <a>DescribeCacheEngineVersions</a>
@@ -772,7 +743,7 @@ module Aws::ElastiCache
       :marker,
       :cache_engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an individual cache node within a cluster. Each cache node runs its own
@@ -1010,7 +981,7 @@ module Aws::ElastiCache
       :customer_availability_zone,
       :customer_outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter that has a different value for each cache node type it is applied to. For
@@ -1059,7 +1030,7 @@ module Aws::ElastiCache
       :cache_node_type_specific_values,
       :change_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value that applies only to a certain cache node type.</p>
@@ -1073,7 +1044,7 @@ module Aws::ElastiCache
       :cache_node_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the service update on the cache node</p>
@@ -1112,7 +1083,7 @@ module Aws::ElastiCache
       :node_update_initiated_date,
       :node_update_status_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateCacheParameterGroup</code> operation.</p>
@@ -1144,7 +1115,7 @@ module Aws::ElastiCache
       :is_global,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cache parameter group with the requested name already exists.</p>
@@ -1153,7 +1124,7 @@ module Aws::ElastiCache
     class CacheParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache parameter group name does not refer to an existing cache parameter
@@ -1163,7 +1134,7 @@ module Aws::ElastiCache
     class CacheParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the maximum number of cache
@@ -1173,7 +1144,7 @@ module Aws::ElastiCache
     class CacheParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the cache parameter group.</p>
@@ -1192,7 +1163,7 @@ module Aws::ElastiCache
       :parameter_apply_status,
       :cache_node_ids_to_reboot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeCacheParameterGroups</code> operation.</p>
@@ -1207,7 +1178,7 @@ module Aws::ElastiCache
       :marker,
       :cache_parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following operations:</p>
@@ -1251,7 +1222,7 @@ module Aws::ElastiCache
       :ec2_security_groups,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cache security group with the specified name already exists.</p>
@@ -1260,7 +1231,7 @@ module Aws::ElastiCache
     class CacheSecurityGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a cluster's status within a particular cache security group.</p>
@@ -1276,7 +1247,7 @@ module Aws::ElastiCache
       :cache_security_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeCacheSecurityGroups</code> operation.</p>
@@ -1291,7 +1262,7 @@ module Aws::ElastiCache
       :marker,
       :cache_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache security group name does not refer to an existing cache security
@@ -1301,7 +1272,7 @@ module Aws::ElastiCache
     class CacheSecurityGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of cache
@@ -1311,7 +1282,7 @@ module Aws::ElastiCache
     class CacheSecurityGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following operations:</p>
@@ -1355,7 +1326,7 @@ module Aws::ElastiCache
       :arn,
       :supported_network_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache subnet group name is already in use by an existing cache subnet
@@ -1365,7 +1336,7 @@ module Aws::ElastiCache
     class CacheSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache subnet group is currently in use.</p>
@@ -1374,7 +1345,7 @@ module Aws::ElastiCache
     class CacheSubnetGroupInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeCacheSubnetGroups</code> operation.</p>
@@ -1389,7 +1360,7 @@ module Aws::ElastiCache
       :marker,
       :cache_subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache subnet group name does not refer to an existing cache subnet
@@ -1399,7 +1370,7 @@ module Aws::ElastiCache
     class CacheSubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of cache
@@ -1409,7 +1380,7 @@ module Aws::ElastiCache
     class CacheSubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of subnets
@@ -1419,7 +1390,7 @@ module Aws::ElastiCache
     class CacheSubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The usage limits for storage and ElastiCache Processing Units for the cache.</p>
@@ -1435,12 +1406,7 @@ module Aws::ElastiCache
       :data_storage,
       :ecpu_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeType
-      immediate = 'immediate'
-      requires_reboot = 'requires-reboot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the CloudWatch Logs destination.</p>
@@ -1450,13 +1416,7 @@ module Aws::ElastiCache
     class CloudWatchLogsDestinationDetails < Struct.new(
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterMode
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      COMPATIBLE = 'compatible'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of clusters
@@ -1466,7 +1426,7 @@ module Aws::ElastiCache
     class ClusterQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_id
@@ -1481,7 +1441,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -1490,7 +1450,7 @@ module Aws::ElastiCache
     class CompleteMigrationResponse < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Node group (shard) configuration options when adding or removing replicas. Each
@@ -1541,7 +1501,7 @@ module Aws::ElastiCache
       :preferred_availability_zones,
       :preferred_outpost_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_serverless_cache_snapshot_name
@@ -1562,7 +1522,7 @@ module Aws::ElastiCache
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot
@@ -1571,7 +1531,7 @@ module Aws::ElastiCache
     class CopyServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CopySnapshotMessage</code> operation.</p>
@@ -1606,7 +1566,7 @@ module Aws::ElastiCache
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -1616,7 +1576,7 @@ module Aws::ElastiCache
     class CopySnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a CreateCacheCluster operation.</p>
@@ -2073,7 +2033,7 @@ module Aws::ElastiCache
       :network_type,
       :ip_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_cluster
@@ -2082,7 +2042,7 @@ module Aws::ElastiCache
     class CreateCacheClusterResult < Struct.new(
       :cache_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateCacheParameterGroup</code> operation.</p>
@@ -2109,7 +2069,7 @@ module Aws::ElastiCache
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_parameter_group
@@ -2118,7 +2078,7 @@ module Aws::ElastiCache
     class CreateCacheParameterGroupResult < Struct.new(
       :cache_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateCacheSecurityGroup</code> operation.</p>
@@ -2142,7 +2102,7 @@ module Aws::ElastiCache
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_security_group
@@ -2168,7 +2128,7 @@ module Aws::ElastiCache
     class CreateCacheSecurityGroupResult < Struct.new(
       :cache_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateCacheSubnetGroup</code> operation.</p>
@@ -2194,7 +2154,7 @@ module Aws::ElastiCache
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_subnet_group
@@ -2215,7 +2175,7 @@ module Aws::ElastiCache
     class CreateCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id_suffix
@@ -2240,7 +2200,7 @@ module Aws::ElastiCache
       :global_replication_group_description,
       :primary_replication_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -2258,7 +2218,7 @@ module Aws::ElastiCache
     class CreateGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>
@@ -2844,7 +2804,7 @@ module Aws::ElastiCache
       :cluster_mode,
       :serverless_cache_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -2853,7 +2813,7 @@ module Aws::ElastiCache
     class CreateReplicationGroupResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_name
@@ -2918,7 +2878,7 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :daily_snapshot_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache
@@ -2927,7 +2887,7 @@ module Aws::ElastiCache
     class CreateServerlessCacheResponse < Struct.new(
       :serverless_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot_name
@@ -2949,7 +2909,7 @@ module Aws::ElastiCache
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot
@@ -2958,7 +2918,7 @@ module Aws::ElastiCache
     class CreateServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateSnapshot</code> operation.</p>
@@ -2987,7 +2947,7 @@ module Aws::ElastiCache
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -2997,7 +2957,7 @@ module Aws::ElastiCache
     class CreateSnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -3019,7 +2979,7 @@ module Aws::ElastiCache
       :user_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -3061,7 +3021,7 @@ module Aws::ElastiCache
       :serverless_caches,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -3099,7 +3059,7 @@ module Aws::ElastiCache
       :tags,
       :authentication_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -3140,7 +3100,7 @@ module Aws::ElastiCache
       :authentication,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint from which data should be migrated.</p>
@@ -3154,7 +3114,7 @@ module Aws::ElastiCache
       :address,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data storage limit.</p>
@@ -3172,16 +3132,7 @@ module Aws::ElastiCache
       :minimum,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataStorageUnit
-      GB = 'GB'
-    end
-
-    module DataTieringStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -3216,7 +3167,7 @@ module Aws::ElastiCache
       :global_node_groups_to_retain,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -3234,7 +3185,7 @@ module Aws::ElastiCache
     class DecreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_id
@@ -3285,7 +3236,7 @@ module Aws::ElastiCache
       :replicas_to_remove,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -3294,7 +3245,7 @@ module Aws::ElastiCache
     class DecreaseReplicaCountResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default user assigned to the user group.</p>
@@ -3303,7 +3254,7 @@ module Aws::ElastiCache
     class DefaultUserAssociatedToUserGroupFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You must add default user to a user group.</p>
@@ -3312,7 +3263,7 @@ module Aws::ElastiCache
     class DefaultUserRequired < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteCacheCluster</code> operation.</p>
@@ -3329,7 +3280,7 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :final_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_cluster
@@ -3338,7 +3289,7 @@ module Aws::ElastiCache
     class DeleteCacheClusterResult < Struct.new(
       :cache_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteCacheParameterGroup</code> operation.</p>
@@ -3352,7 +3303,7 @@ module Aws::ElastiCache
     class DeleteCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteCacheSecurityGroup</code> operation.</p>
@@ -3365,7 +3316,7 @@ module Aws::ElastiCache
     class DeleteCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteCacheSubnetGroup</code> operation.</p>
@@ -3376,7 +3327,7 @@ module Aws::ElastiCache
     class DeleteCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -3389,7 +3340,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :retain_primary_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -3407,7 +3358,7 @@ module Aws::ElastiCache
     class DeleteGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteReplicationGroup</code> operation.</p>
@@ -3430,7 +3381,7 @@ module Aws::ElastiCache
       :retain_primary_cluster,
       :final_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -3439,7 +3390,7 @@ module Aws::ElastiCache
     class DeleteReplicationGroupResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_name
@@ -3453,7 +3404,7 @@ module Aws::ElastiCache
       :serverless_cache_name,
       :final_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache
@@ -3462,7 +3413,7 @@ module Aws::ElastiCache
     class DeleteServerlessCacheResponse < Struct.new(
       :serverless_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot_name
@@ -3471,7 +3422,7 @@ module Aws::ElastiCache
     class DeleteServerlessCacheSnapshotRequest < Struct.new(
       :serverless_cache_snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot
@@ -3480,7 +3431,7 @@ module Aws::ElastiCache
     class DeleteServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteSnapshot</code> operation.</p>
@@ -3490,7 +3441,7 @@ module Aws::ElastiCache
     class DeleteSnapshotMessage < Struct.new(
       :snapshot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot
@@ -3500,7 +3451,7 @@ module Aws::ElastiCache
     class DeleteSnapshotResult < Struct.new(
       :snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -3509,7 +3460,7 @@ module Aws::ElastiCache
     class DeleteUserGroupMessage < Struct.new(
       :user_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -3551,7 +3502,7 @@ module Aws::ElastiCache
       :serverless_caches,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -3560,7 +3511,7 @@ module Aws::ElastiCache
     class DeleteUserMessage < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -3601,7 +3552,7 @@ module Aws::ElastiCache
       :authentication,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeCacheClusters</code> operation.</p>
@@ -3637,7 +3588,7 @@ module Aws::ElastiCache
       :show_cache_node_info,
       :show_cache_clusters_not_in_replication_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeCacheEngineVersions</code> operation.</p>
@@ -3695,7 +3646,7 @@ module Aws::ElastiCache
       :marker,
       :default_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeCacheParameterGroups</code> operation.</p>
@@ -3719,7 +3670,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeCacheParameters</code> operation.</p>
@@ -3750,7 +3701,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeCacheParameters</code> operation.</p>
@@ -3769,7 +3720,7 @@ module Aws::ElastiCache
       :parameters,
       :cache_node_type_specific_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeCacheSecurityGroups</code> operation.</p>
@@ -3793,7 +3744,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeCacheSubnetGroups</code> operation.</p>
@@ -3817,7 +3768,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeEngineDefaultParameters</code>
@@ -3847,7 +3798,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_defaults
@@ -3857,7 +3808,7 @@ module Aws::ElastiCache
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeEvents</code> operation.</p>
@@ -3905,7 +3856,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -3930,7 +3881,7 @@ module Aws::ElastiCache
       :marker,
       :show_member_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3945,7 +3896,7 @@ module Aws::ElastiCache
       :marker,
       :global_replication_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeReplicationGroups</code> operation.</p>
@@ -3972,7 +3923,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeReservedCacheNodes</code> operation.</p>
@@ -4221,7 +4172,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeReservedCacheNodesOfferings</code>
@@ -4468,7 +4419,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_name
@@ -4499,7 +4450,7 @@ module Aws::ElastiCache
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4514,7 +4465,7 @@ module Aws::ElastiCache
       :next_token,
       :serverless_cache_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_name
@@ -4536,7 +4487,7 @@ module Aws::ElastiCache
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4551,7 +4502,7 @@ module Aws::ElastiCache
       :next_token,
       :serverless_caches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_update_name
@@ -4574,7 +4525,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeSnapshots</code> operation.</p>
@@ -4591,7 +4542,7 @@ module Aws::ElastiCache
       :marker,
       :snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeSnapshotsMessage</code> operation.</p>
@@ -4638,7 +4589,7 @@ module Aws::ElastiCache
       :max_records,
       :show_node_group_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_update_name
@@ -4686,7 +4637,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -4707,7 +4658,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_groups
@@ -4722,7 +4673,7 @@ module Aws::ElastiCache
       :user_groups,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -4751,7 +4702,7 @@ module Aws::ElastiCache
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -4766,7 +4717,7 @@ module Aws::ElastiCache
       :users,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose
@@ -4781,12 +4732,7 @@ module Aws::ElastiCache
       :cloud_watch_logs_details,
       :kinesis_firehose_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DestinationType
-      CloudWatchLogs = 'cloudwatch-logs'
-      KinesisFirehose = 'kinesis-firehose'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -4804,7 +4750,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :replication_group_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -4822,7 +4768,7 @@ module Aws::ElastiCache
     class DisassociateGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user with this username already exists.</p>
@@ -4831,7 +4777,7 @@ module Aws::ElastiCache
     class DuplicateUserNameFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides ownership and status information for an Amazon EC2 security group.</p>
@@ -4849,7 +4795,7 @@ module Aws::ElastiCache
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second.</p>
@@ -4863,7 +4809,7 @@ module Aws::ElastiCache
       :maximum,
       :minimum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the information required for client programs to connect to a cache
@@ -4878,7 +4824,7 @@ module Aws::ElastiCache
       :address,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeEngineDefaultParameters</code>
@@ -4908,7 +4854,7 @@ module Aws::ElastiCache
       :parameters,
       :cache_node_type_specific_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single occurrence of something interesting within the system. Some
@@ -4934,7 +4880,7 @@ module Aws::ElastiCache
       :message,
       :date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeEvents</code> operation.</p>
@@ -4949,7 +4895,7 @@ module Aws::ElastiCache
       :marker,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot_name
@@ -4963,7 +4909,7 @@ module Aws::ElastiCache
       :serverless_cache_snapshot_name,
       :s3_bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_snapshot
@@ -4972,7 +4918,7 @@ module Aws::ElastiCache
     class ExportServerlessCacheSnapshotResponse < Struct.new(
       :serverless_cache_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -4989,7 +4935,7 @@ module Aws::ElastiCache
       :primary_region,
       :primary_replication_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -5007,7 +4953,7 @@ module Aws::ElastiCache
     class FailoverGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to streamline results of a search based on the property being filtered.</p>
@@ -5021,7 +4967,7 @@ module Aws::ElastiCache
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the slot configuration and global identifier for a slice group.</p>
@@ -5035,7 +4981,7 @@ module Aws::ElastiCache
       :global_node_group_id,
       :slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Consists of a primary cluster that accepts writes and an associated secondary cluster
@@ -5117,7 +5063,7 @@ module Aws::ElastiCache
       :at_rest_encryption_enabled,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Global datastore name already exists.</p>
@@ -5126,7 +5072,7 @@ module Aws::ElastiCache
     class GlobalReplicationGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the Global datastore and role of this replication group in the Global
@@ -5142,7 +5088,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :global_replication_group_member_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A member of a Global datastore. It contains the Replication Group Id, the Amazon
@@ -5169,7 +5115,7 @@ module Aws::ElastiCache
       :automatic_failover,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Global datastore does not exist</p>
@@ -5178,7 +5124,7 @@ module Aws::ElastiCache
     class GlobalReplicationGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -5201,7 +5147,7 @@ module Aws::ElastiCache
       :regional_configurations,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -5219,7 +5165,7 @@ module Aws::ElastiCache
     class IncreaseNodeGroupsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_id
@@ -5246,7 +5192,7 @@ module Aws::ElastiCache
       :replica_configuration,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -5255,13 +5201,7 @@ module Aws::ElastiCache
     class IncreaseReplicaCountResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputAuthenticationType
-      PASSWORD = 'password'
-      NO_PASSWORD = 'no-password-required'
-      IAM = 'iam'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache node type is not available in the specified Availability Zone. For
@@ -5271,7 +5211,7 @@ module Aws::ElastiCache
     class InsufficientCacheClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested Amazon Resource Name (ARN) does not refer to an existing
@@ -5281,7 +5221,7 @@ module Aws::ElastiCache
     class InvalidARNFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cluster is not in the <code>available</code> state.</p>
@@ -5290,7 +5230,7 @@ module Aws::ElastiCache
     class InvalidCacheClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current state of the cache parameter group does not allow the requested operation
@@ -5300,7 +5240,7 @@ module Aws::ElastiCache
     class InvalidCacheParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current state of the cache security group does not allow deletion.</p>
@@ -5309,7 +5249,7 @@ module Aws::ElastiCache
     class InvalidCacheSecurityGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You must enter valid credentials.</p>
@@ -5318,7 +5258,7 @@ module Aws::ElastiCache
     class InvalidCredentialsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Global datastore is not available or in primary-only state.</p>
@@ -5327,7 +5267,7 @@ module Aws::ElastiCache
     class InvalidGlobalReplicationGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KMS key supplied is not valid.</p>
@@ -5336,7 +5276,7 @@ module Aws::ElastiCache
     class InvalidKMSKeyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two or more incompatible parameters were specified.</p>
@@ -5346,7 +5286,7 @@ module Aws::ElastiCache
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for a parameter is invalid.</p>
@@ -5356,7 +5296,7 @@ module Aws::ElastiCache
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested replication group is not in the <code>available</code> state.</p>
@@ -5365,7 +5305,7 @@ module Aws::ElastiCache
     class InvalidReplicationGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the serverless cache snapshot was not received. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
@@ -5374,7 +5314,7 @@ module Aws::ElastiCache
     class InvalidServerlessCacheSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account for these credentials is not currently active.</p>
@@ -5383,7 +5323,7 @@ module Aws::ElastiCache
     class InvalidServerlessCacheStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current state of the snapshot does not allow the requested operation to
@@ -5393,7 +5333,7 @@ module Aws::ElastiCache
     class InvalidSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid subnet identifier was specified.</p>
@@ -5402,7 +5342,7 @@ module Aws::ElastiCache
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user group is not in an active state.</p>
@@ -5411,7 +5351,7 @@ module Aws::ElastiCache
     class InvalidUserGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user is not in active state.</p>
@@ -5420,7 +5360,7 @@ module Aws::ElastiCache
     class InvalidUserStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC network is in an invalid state.</p>
@@ -5429,12 +5369,7 @@ module Aws::ElastiCache
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpDiscovery
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the Kinesis Data Firehose destination.</p>
@@ -5444,7 +5379,7 @@ module Aws::ElastiCache
     class KinesisFirehoseDestinationDetails < Struct.new(
       :delivery_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters for the <code>ListAllowedNodeTypeModifications</code>
@@ -5472,7 +5407,7 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :replication_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters for the <code>ListTagsForResource</code> operation.</p>
@@ -5487,7 +5422,7 @@ module Aws::ElastiCache
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output from the <code>AddTagsToResource</code>,
@@ -5499,7 +5434,7 @@ module Aws::ElastiCache
     class ListTagsForResourceOutput < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the destination, format and type of the logs. </p>
@@ -5535,7 +5470,7 @@ module Aws::ElastiCache
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the destination, format and type of the logs. </p>
@@ -5564,25 +5499,7 @@ module Aws::ElastiCache
       :log_format,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDeliveryConfigurationStatus
-      ACTIVE = 'active'
-      ENABLING = 'enabling'
-      MODIFYING = 'modifying'
-      DISABLING = 'disabling'
-      ERROR = 'error'
-    end
-
-    module LogFormat
-      TEXT = 'text'
-      JSON = 'json'
-    end
-
-    module LogType
-      SLOW_LOG = 'slow-log'
-      ENGINE_LOG = 'engine-log'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ModifyCacheCluster</code> operation.</p>
@@ -5952,7 +5869,7 @@ module Aws::ElastiCache
       :ip_discovery,
       :scale_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_cluster
@@ -5961,7 +5878,7 @@ module Aws::ElastiCache
     class ModifyCacheClusterResult < Struct.new(
       :cache_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ModifyCacheParameterGroup</code> operation.</p>
@@ -5977,7 +5894,7 @@ module Aws::ElastiCache
       :cache_parameter_group_name,
       :parameter_name_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following operations:</p>
@@ -5999,7 +5916,7 @@ module Aws::ElastiCache
     class ModifyCacheParameterGroupOutput < Struct.new(
       :cache_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ModifyCacheSubnetGroup</code> operation.</p>
@@ -6021,7 +5938,7 @@ module Aws::ElastiCache
       :cache_subnet_group_description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_subnet_group
@@ -6042,7 +5959,7 @@ module Aws::ElastiCache
     class ModifyCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -6085,7 +6002,7 @@ module Aws::ElastiCache
       :global_replication_group_description,
       :automatic_failover_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -6103,7 +6020,7 @@ module Aws::ElastiCache
     class ModifyGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ModifyReplicationGroups</code> operation.</p>
@@ -6373,7 +6290,7 @@ module Aws::ElastiCache
       :transit_encryption_mode,
       :cluster_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -6382,7 +6299,7 @@ module Aws::ElastiCache
     class ModifyReplicationGroupResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input for a <code>ModifyReplicationGroupShardConfiguration</code>
@@ -6433,7 +6350,7 @@ module Aws::ElastiCache
       :node_groups_to_remove,
       :node_groups_to_retain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -6442,7 +6359,7 @@ module Aws::ElastiCache
     class ModifyReplicationGroupShardConfigurationResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache_name
@@ -6497,7 +6414,7 @@ module Aws::ElastiCache
       :engine,
       :major_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serverless_cache
@@ -6506,7 +6423,7 @@ module Aws::ElastiCache
     class ModifyServerlessCacheResponse < Struct.new(
       :serverless_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -6527,7 +6444,7 @@ module Aws::ElastiCache
       :user_ids_to_remove,
       :engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -6569,7 +6486,7 @@ module Aws::ElastiCache
       :serverless_caches,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -6602,7 +6519,7 @@ module Aws::ElastiCache
       :authentication_mode,
       :engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -6643,18 +6560,7 @@ module Aws::ElastiCache
       :authentication,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MultiAZStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-    end
-
-    module NetworkType
-      IPV4 = 'ipv4'
-      IPV6 = 'ipv6'
-      DUAL_STACK = 'dual_stack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation was not performed because no changes were required.</p>
@@ -6663,7 +6569,7 @@ module Aws::ElastiCache
     class NoOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of cache nodes in a replication group. One node in the node
@@ -6699,7 +6605,7 @@ module Aws::ElastiCache
       :slots,
       :node_group_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Node group (shard) configuration options. Each node group (shard) configuration has
@@ -6742,7 +6648,7 @@ module Aws::ElastiCache
       :primary_outpost_arn,
       :replica_outpost_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single node within a node group (shard).</p>
@@ -6776,7 +6682,7 @@ module Aws::ElastiCache
       :preferred_outpost_arn,
       :current_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the service update on the node group member </p>
@@ -6819,7 +6725,7 @@ module Aws::ElastiCache
       :node_update_initiated_date,
       :node_update_status_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The node group specified by the <code>NodeGroupId</code> parameter could not be found.
@@ -6830,7 +6736,7 @@ module Aws::ElastiCache
     class NodeGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the service update on the node group </p>
@@ -6844,7 +6750,7 @@ module Aws::ElastiCache
       :node_group_id,
       :node_group_member_update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the maximum allowed number of
@@ -6854,7 +6760,7 @@ module Aws::ElastiCache
     class NodeGroupsPerReplicationGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of cache
@@ -6864,7 +6770,7 @@ module Aws::ElastiCache
     class NodeQuotaForClusterExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the allowed number of cache
@@ -6874,7 +6780,7 @@ module Aws::ElastiCache
     class NodeQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an individual cache node in a snapshot of a cluster.</p>
@@ -6909,21 +6815,7 @@ module Aws::ElastiCache
       :cache_node_create_time,
       :snapshot_create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeUpdateInitiatedBy
-      SYSTEM = 'system'
-      CUSTOMER = 'customer'
-    end
-
-    module NodeUpdateStatus
-      NOT_APPLIED = 'not-applied'
-      WAITING_TO_START = 'waiting-to-start'
-      IN_PROGRESS = 'in-progress'
-      STOPPING = 'stopping'
-      STOPPED = 'stopped'
-      COMPLETE = 'complete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a notification topic and its status. Notification topics are used for
@@ -6939,12 +6831,7 @@ module Aws::ElastiCache
       :topic_arn,
       :topic_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutpostMode
-      SINGLE_OUTPOST = 'single-outpost'
-      CROSS_OUTPOST = 'cross-outpost'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an individual setting that controls some aspect of ElastiCache
@@ -6992,7 +6879,7 @@ module Aws::ElastiCache
       :minimum_engine_version,
       :change_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a name-value pair that is used to update the value of a parameter.</p>
@@ -7006,12 +6893,7 @@ module Aws::ElastiCache
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PendingAutomaticFailoverStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log delivery configurations being modified </p>
@@ -7035,7 +6917,7 @@ module Aws::ElastiCache
       :destination_details,
       :log_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of settings that are applied to the cluster in the future, or that are
@@ -7082,7 +6964,7 @@ module Aws::ElastiCache
       :transit_encryption_mode,
       :scale_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update action that has been processed for the corresponding apply/stop request</p>
@@ -7104,7 +6986,7 @@ module Aws::ElastiCache
       :service_update_name,
       :update_action_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PurchaseReservedCacheNodesOffering</code>
@@ -7138,7 +7020,7 @@ module Aws::ElastiCache
       :cache_node_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_cache_node
@@ -7148,7 +7030,7 @@ module Aws::ElastiCache
     class PurchaseReservedCacheNodesOfferingResult < Struct.new(
       :reserved_cache_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group_id
@@ -7161,7 +7043,7 @@ module Aws::ElastiCache
       :global_replication_group_id,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_replication_group
@@ -7179,7 +7061,7 @@ module Aws::ElastiCache
     class RebalanceSlotsInGlobalReplicationGroupResult < Struct.new(
       :global_replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>RebootCacheCluster</code> operation.</p>
@@ -7194,7 +7076,7 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :cache_node_ids_to_reboot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_cluster
@@ -7203,7 +7085,7 @@ module Aws::ElastiCache
     class RebootCacheClusterResult < Struct.new(
       :cache_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the specific price and frequency of a recurring charges for a reserved cache
@@ -7218,7 +7100,7 @@ module Aws::ElastiCache
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the replication groups </p>
@@ -7237,7 +7119,7 @@ module Aws::ElastiCache
       :replication_group_region,
       :resharding_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>RemoveTagsFromResource</code> operation.</p>
@@ -7256,7 +7138,7 @@ module Aws::ElastiCache
       :resource_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output from the <code>AddTagsToResource</code>,
@@ -7268,7 +7150,7 @@ module Aws::ElastiCache
     class RemoveTagsFromResourceOutput < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all of the attributes of a specific Valkey or Redis OSS replication group.</p>
@@ -7464,7 +7346,7 @@ module Aws::ElastiCache
       :cluster_mode,
       :engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified replication group already exists.</p>
@@ -7473,7 +7355,7 @@ module Aws::ElastiCache
     class ReplicationGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The targeted replication group is not available. </p>
@@ -7482,7 +7364,7 @@ module Aws::ElastiCache
     class ReplicationGroupAlreadyUnderMigrationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeReplicationGroups</code> operation.</p>
@@ -7497,7 +7379,7 @@ module Aws::ElastiCache
       :marker,
       :replication_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified replication group does not exist.</p>
@@ -7506,7 +7388,7 @@ module Aws::ElastiCache
     class ReplicationGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The designated replication group is not available for data migration.</p>
@@ -7515,7 +7397,7 @@ module Aws::ElastiCache
     class ReplicationGroupNotUnderMigrationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings to be applied to the Valkey or Redis OSS replication group, either immediately or
@@ -7565,7 +7447,7 @@ module Aws::ElastiCache
       :transit_encryption_mode,
       :cluster_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PurchaseReservedCacheNodesOffering</code>
@@ -7821,7 +7703,7 @@ module Aws::ElastiCache
       :recurring_charges,
       :reservation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a reservation with the given identifier.</p>
@@ -7830,7 +7712,7 @@ module Aws::ElastiCache
     class ReservedCacheNodeAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeReservedCacheNodes</code> operation.</p>
@@ -7845,7 +7727,7 @@ module Aws::ElastiCache
       :marker,
       :reserved_cache_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested reserved cache node was not found.</p>
@@ -7854,7 +7736,7 @@ module Aws::ElastiCache
     class ReservedCacheNodeNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the user's cache node
@@ -7864,7 +7746,7 @@ module Aws::ElastiCache
     class ReservedCacheNodeQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes all of the attributes of a reserved cache node offering.</p>
@@ -8096,7 +7978,7 @@ module Aws::ElastiCache
       :offering_type,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeReservedCacheNodesOfferings</code>
@@ -8112,7 +7994,7 @@ module Aws::ElastiCache
       :marker,
       :reserved_cache_nodes_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested cache node offering does not exist.</p>
@@ -8121,7 +8003,7 @@ module Aws::ElastiCache
     class ReservedCacheNodesOfferingNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ResetCacheParameterGroup</code> operation.</p>
@@ -8147,7 +8029,7 @@ module Aws::ElastiCache
       :reset_all_parameters,
       :parameter_name_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of one of the following operations:</p>
@@ -8169,7 +8051,7 @@ module Aws::ElastiCache
     class ResetCacheParameterGroupOutput < Struct.new(
       :cache_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>PreferredAvailabilityZones</code> objects that specifies the
@@ -8185,7 +8067,7 @@ module Aws::ElastiCache
       :node_group_id,
       :preferred_availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an online resharding operation.</p>
@@ -8195,7 +8077,7 @@ module Aws::ElastiCache
     class ReshardingStatus < Struct.new(
       :slot_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>RevokeCacheSecurityGroupIngress</code>
@@ -8216,7 +8098,7 @@ module Aws::ElastiCache
       :ec2_security_group_name,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_security_group
@@ -8242,7 +8124,7 @@ module Aws::ElastiCache
     class RevokeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for horizontal or vertical scaling operations on Memcached clusters.</p>
@@ -8256,7 +8138,7 @@ module Aws::ElastiCache
       :scale_percentage,
       :scale_interval_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single cache security group and its status.</p>
@@ -8272,7 +8154,7 @@ module Aws::ElastiCache
       :security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource representing a serverless cache.</p>
@@ -8351,7 +8233,7 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :daily_snapshot_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A serverless cache with this name already exists.</p>
@@ -8360,7 +8242,7 @@ module Aws::ElastiCache
     class ServerlessCacheAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for a specific serverless cache.</p>
@@ -8378,7 +8260,7 @@ module Aws::ElastiCache
       :engine,
       :major_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The serverless cache was not found or does not exist.</p>
@@ -8387,7 +8269,7 @@ module Aws::ElastiCache
     class ServerlessCacheNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of serverless caches exceeds the customer quota.</p>
@@ -8396,7 +8278,7 @@ module Aws::ElastiCache
     class ServerlessCacheQuotaForCustomerExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource representing a serverless cache snapshot. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
@@ -8439,7 +8321,7 @@ module Aws::ElastiCache
       :bytes_used_for_cache,
       :serverless_cache_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A serverless cache snapshot with this name already exists. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
@@ -8448,7 +8330,7 @@ module Aws::ElastiCache
     class ServerlessCacheSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This serverless cache snapshot could not be found or does not exist. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
@@ -8457,7 +8339,7 @@ module Aws::ElastiCache
     class ServerlessCacheSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of serverless cache snapshots exceeds the customer snapshot quota. Available for Valkey, Redis OSS and Serverless Memcached only.</p>
@@ -8466,7 +8348,7 @@ module Aws::ElastiCache
     class ServerlessCacheSnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified service linked role (SLR) was not found.</p>
@@ -8475,7 +8357,7 @@ module Aws::ElastiCache
     class ServiceLinkedRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An update that you can apply to your Valkey or Redis OSS clusters.</p>
@@ -8532,7 +8414,7 @@ module Aws::ElastiCache
       :auto_update_after_recommended_apply_by_date,
       :estimated_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service update doesn't exist</p>
@@ -8541,24 +8423,7 @@ module Aws::ElastiCache
     class ServiceUpdateNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceUpdateSeverity
-      CRITICAL = 'critical'
-      IMPORTANT = 'important'
-      MEDIUM = 'medium'
-      LOW = 'low'
-    end
-
-    module ServiceUpdateStatus
-      AVAILABLE = 'available'
-      CANCELLED = 'cancelled'
-      EXPIRED = 'expired'
-    end
-
-    module ServiceUpdateType
-      SECURITY_UPDATE = 'security-update'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -8573,13 +8438,7 @@ module Aws::ElastiCache
       :marker,
       :service_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SlaMet
-      YES = 'yes'
-      NO = 'no'
-      NA = 'n/a'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the progress of an online resharding operation.</p>
@@ -8589,7 +8448,7 @@ module Aws::ElastiCache
     class SlotMigration < Struct.new(
       :progress_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a copy of an entire Valkey or Redis OSS cluster as of the time when the snapshot was
@@ -8969,7 +8828,7 @@ module Aws::ElastiCache
       :arn,
       :data_tiering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You already have a snapshot with the given name.</p>
@@ -8978,7 +8837,7 @@ module Aws::ElastiCache
     class SnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted one of the following operations:</p>
@@ -8998,7 +8857,7 @@ module Aws::ElastiCache
     class SnapshotFeatureNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested snapshot name does not refer to an existing snapshot.</p>
@@ -9007,7 +8866,7 @@ module Aws::ElastiCache
     class SnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would exceed the maximum number of
@@ -9017,19 +8876,7 @@ module Aws::ElastiCache
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      cache_cluster = 'cache-cluster'
-      cache_parameter_group = 'cache-parameter-group'
-      cache_security_group = 'cache-security-group'
-      cache_subnet_group = 'cache-subnet-group'
-      replication_group = 'replication-group'
-      serverless_cache = 'serverless-cache'
-      serverless_cache_snapshot = 'serverless-cache-snapshot'
-      user = 'user'
-      user_group = 'user-group'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_id
@@ -9043,7 +8890,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :customer_node_endpoint_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -9052,7 +8899,7 @@ module Aws::ElastiCache
     class StartMigrationResponse < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the subnet associated with a cluster. This parameter refers to subnets
@@ -9077,7 +8924,7 @@ module Aws::ElastiCache
       :subnet_outpost,
       :supported_network_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet is being used by another cache subnet group.</p>
@@ -9086,7 +8933,7 @@ module Aws::ElastiCache
     class SubnetInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one subnet ID does not match the other subnet IDs. This mismatch typically
@@ -9098,7 +8945,7 @@ module Aws::ElastiCache
     class SubnetNotAllowedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID of the outpost subnet.</p>
@@ -9108,7 +8955,7 @@ module Aws::ElastiCache
     class SubnetOutpost < Struct.new(
       :subnet_outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag that can be added to an ElastiCache cluster or replication group. Tags are
@@ -9126,7 +8973,7 @@ module Aws::ElastiCache
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested tag was not found on this resource.</p>
@@ -9135,7 +8982,7 @@ module Aws::ElastiCache
     class TagNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be processed because it would cause the resource to have more than
@@ -9146,7 +8993,7 @@ module Aws::ElastiCache
     class TagQuotaPerResourceExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_id
@@ -9162,7 +9009,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :node_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>TestFailover</code> action is not available.</p>
@@ -9171,7 +9018,7 @@ module Aws::ElastiCache
     class TestFailoverNotAvailableFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -9180,7 +9027,7 @@ module Aws::ElastiCache
     class TestFailoverResult < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group_id
@@ -9194,7 +9041,7 @@ module Aws::ElastiCache
       :replication_group_id,
       :customer_node_endpoint_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_group
@@ -9203,7 +9050,7 @@ module Aws::ElastiCache
     class TestMigrationResponse < Struct.new(
       :replication_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters update actions from the service updates that are in available status during
@@ -9218,12 +9065,7 @@ module Aws::ElastiCache
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitEncryptionMode
-      PREFERRED = 'preferred'
-      REQUIRED = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update action that has failed to be processed for the corresponding apply/stop
@@ -9250,7 +9092,7 @@ module Aws::ElastiCache
       :error_type,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the service update for a specific replication group</p>
@@ -9328,19 +9170,7 @@ module Aws::ElastiCache
       :estimated_update_time,
       :engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateActionStatus
-      NOT_APPLIED = 'not-applied'
-      WAITING_TO_START = 'waiting-to-start'
-      IN_PROGRESS = 'in-progress'
-      STOPPING = 'stopping'
-      STOPPED = 'stopped'
-      COMPLETE = 'complete'
-      SCHEDULING = 'scheduling'
-      SCHEDULED = 'scheduled'
-      NOT_APPLICABLE = 'not-applicable'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -9355,7 +9185,7 @@ module Aws::ElastiCache
       :marker,
       :update_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -9396,7 +9226,7 @@ module Aws::ElastiCache
       :authentication,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user with this ID already exists.</p>
@@ -9405,7 +9235,7 @@ module Aws::ElastiCache
     class UserAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_group_id
@@ -9447,7 +9277,7 @@ module Aws::ElastiCache
       :serverless_caches,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user group with this ID already exists.</p>
@@ -9456,7 +9286,7 @@ module Aws::ElastiCache
     class UserGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user group was not found or does not exist</p>
@@ -9465,7 +9295,7 @@ module Aws::ElastiCache
     class UserGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the updates being applied to the user group.</p>
@@ -9479,7 +9309,7 @@ module Aws::ElastiCache
       :user_ids_to_remove,
       :user_ids_to_add,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of users exceeds the user group limit.</p>
@@ -9488,7 +9318,7 @@ module Aws::ElastiCache
     class UserGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the user group update.</p>
@@ -9502,7 +9332,7 @@ module Aws::ElastiCache
       :user_group_ids_to_add,
       :user_group_ids_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user does not exist or could not be found.</p>
@@ -9511,7 +9341,7 @@ module Aws::ElastiCache
     class UserNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota of users has been exceeded.</p>
@@ -9520,7 +9350,7 @@ module Aws::ElastiCache
     class UserQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

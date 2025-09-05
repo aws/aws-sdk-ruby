@@ -12,12 +12,7 @@ module Aws::QApps
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Action
-      READ = 'read'
-      WRITE = 'write'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the Q App, specifying the cards and flow.</p>
@@ -35,7 +30,7 @@ module Aws::QApps
       :cards,
       :can_edit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for defining an Q App.</p>
@@ -49,20 +44,7 @@ module Aws::QApps
       :cards,
       :initial_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppRequiredCapability
-      FILE_UPLOAD = 'FileUpload'
-      CREATOR_MODE = 'CreatorMode'
-      RETRIEVAL_MODE = 'RetrievalMode'
-      PLUGIN_MODE = 'PluginMode'
-    end
-
-    module AppStatus
-      PUBLISHED = 'PUBLISHED'
-      DRAFT = 'DRAFT'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -75,7 +57,7 @@ module Aws::QApps
       :instance_id,
       :library_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -88,7 +70,7 @@ module Aws::QApps
       :instance_id,
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter criteria used on responses based on document attributes or metadata
@@ -147,7 +129,7 @@ module Aws::QApps
       :less_than,
       :less_than_or_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -160,7 +142,7 @@ module Aws::QApps
       :instance_id,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The category object to be created.</p>
@@ -180,7 +162,7 @@ module Aws::QApps
       :title,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -193,7 +175,7 @@ module Aws::QApps
       :instance_id,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -206,7 +188,7 @@ module Aws::QApps
       :instance_id,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A card representing a component or step in an Amazon Q App's flow.</p>
@@ -233,7 +215,7 @@ module Aws::QApps
       :form_input,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TextInput < Card; end
       class QQuery < Card; end
@@ -267,7 +249,7 @@ module Aws::QApps
       :form_input,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TextInput < CardInput; end
       class QQuery < CardInput; end
@@ -275,11 +257,6 @@ module Aws::QApps
       class FileUpload < CardInput; end
       class FormInput < CardInput; end
       class Unknown < CardInput; end
-    end
-
-    module CardOutputSource
-      APPROVED_SOURCES = 'approved-sources'
-      LLM = 'llm'
     end
 
     # <p>The current status and value of a card in an active Amazon Q App session.</p>
@@ -297,15 +274,7 @@ module Aws::QApps
       :current_value,
       :submissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CardType
-      TEXT_INPUT = 'text-input'
-      Q_QUERY = 'q-query'
-      FILE_UPLOAD = 'file-upload'
-      Q_PLUGIN = 'q-plugin'
-      FORM_INPUT = 'form-input'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value or result associated with a card in a Amazon Q App session.</p>
@@ -324,7 +293,7 @@ module Aws::QApps
       :value,
       :submission_mutation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A category used to classify and filter library items for Amazon Q Apps.</p>
@@ -346,7 +315,7 @@ module Aws::QApps
       :color,
       :app_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A label that web experience users associate with a library item. Web experience users use
@@ -366,7 +335,7 @@ module Aws::QApps
       :title,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation could not be completed due to a conflict with the current state of
@@ -384,7 +353,7 @@ module Aws::QApps
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation could not be completed because the content exceeds the maximum
@@ -402,7 +371,7 @@ module Aws::QApps
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A message in a conversation, used as input for generating an Amazon Q App definition.</p>
@@ -416,7 +385,7 @@ module Aws::QApps
       :body,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -437,7 +406,7 @@ module Aws::QApps
       :app_version,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute library_item_id
@@ -474,7 +443,7 @@ module Aws::QApps
       :rating_count,
       :is_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -509,7 +478,7 @@ module Aws::QApps
       :scope,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_id
@@ -531,7 +500,7 @@ module Aws::QApps
       :presigned_url_fields,
       :presigned_url_expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -556,7 +525,7 @@ module Aws::QApps
       :app_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -610,7 +579,7 @@ module Aws::QApps
       :updated_by,
       :required_capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -623,7 +592,7 @@ module Aws::QApps
       :instance_id,
       :library_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -636,7 +605,7 @@ module Aws::QApps
       :instance_id,
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -649,7 +618,7 @@ module Aws::QApps
       :instance_id,
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -667,7 +636,7 @@ module Aws::QApps
       :app_id,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -680,7 +649,7 @@ module Aws::QApps
       :instance_id,
       :library_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -693,7 +662,7 @@ module Aws::QApps
       :instance_id,
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document attribute or metadata field.</p>
@@ -707,7 +676,7 @@ module Aws::QApps
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a document attribute. You can only provide one value for a document
@@ -735,25 +704,13 @@ module Aws::QApps
       :date_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < DocumentAttributeValue; end
       class StringListValue < DocumentAttributeValue; end
       class LongValue < DocumentAttributeValue; end
       class DateValue < DocumentAttributeValue; end
       class Unknown < DocumentAttributeValue; end
-    end
-
-    module DocumentScope
-      APPLICATION = 'APPLICATION'
-      SESSION = 'SESSION'
-    end
-
-    module ExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      WAITING = 'WAITING'
-      COMPLETED = 'COMPLETED'
-      ERROR = 'ERROR'
     end
 
     # @!attribute instance_id
@@ -766,7 +723,7 @@ module Aws::QApps
       :instance_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute csv_file_link
@@ -783,7 +740,7 @@ module Aws::QApps
       :expires_at,
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A card in an Amazon Q App that allows the user to upload a file.</p>
@@ -817,7 +774,7 @@ module Aws::QApps
       :file_id,
       :allow_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a file upload card. It can optionally receive a <code>filename</code> and
@@ -849,7 +806,7 @@ module Aws::QApps
       :file_id,
       :allow_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 'file-upload' unless options.key?(:type)
@@ -888,7 +845,7 @@ module Aws::QApps
       :metadata,
       :compute_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a form input card for an Amazon Q App.</p>
@@ -918,7 +875,7 @@ module Aws::QApps
       :metadata,
       :compute_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 'form-input' unless options.key?(:type)
@@ -933,7 +890,7 @@ module Aws::QApps
     class FormInputCardMetadata < Struct.new(
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -950,7 +907,7 @@ module Aws::QApps
       :library_item_id,
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute library_item_id
@@ -1007,7 +964,7 @@ module Aws::QApps
       :user_count,
       :is_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1024,7 +981,7 @@ module Aws::QApps
       :app_id,
       :app_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1082,7 +1039,7 @@ module Aws::QApps
       :required_capabilities,
       :app_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1095,7 +1052,7 @@ module Aws::QApps
       :instance_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1108,7 +1065,7 @@ module Aws::QApps
       :instance_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1133,7 +1090,7 @@ module Aws::QApps
       :sharing_configuration,
       :session_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1171,7 +1128,7 @@ module Aws::QApps
       :card_status,
       :user_is_host,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1206,7 +1163,7 @@ module Aws::QApps
       :scope,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_id
@@ -1215,12 +1172,7 @@ module Aws::QApps
     class ImportDocumentOutput < Struct.new(
       :file_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputCardComputeMode
-      APPEND = 'append'
-      REPLACE = 'replace'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service error occurred while processing the request.</p>
@@ -1233,7 +1185,7 @@ module Aws::QApps
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A library item is a snapshot of an Amazon Q App that can be published so the users in their
@@ -1292,12 +1244,7 @@ module Aws::QApps
       :user_count,
       :is_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LibraryItemStatus
-      PUBLISHED = 'PUBLISHED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1306,7 +1253,7 @@ module Aws::QApps
     class ListCategoriesInput < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute categories
@@ -1315,7 +1262,7 @@ module Aws::QApps
     class ListCategoriesOutput < Struct.new(
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1336,7 +1283,7 @@ module Aws::QApps
       :next_token,
       :category_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute library_items
@@ -1349,7 +1296,7 @@ module Aws::QApps
       :library_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1362,7 +1309,7 @@ module Aws::QApps
       :instance_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1383,7 +1330,7 @@ module Aws::QApps
       :session_data,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1400,7 +1347,7 @@ module Aws::QApps
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps
@@ -1413,7 +1360,7 @@ module Aws::QApps
       :apps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1422,7 +1369,7 @@ module Aws::QApps
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1431,7 +1378,7 @@ module Aws::QApps
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The permission to grant or revoke for a Amazon Q App.</p>
@@ -1445,7 +1392,7 @@ module Aws::QApps
       :action,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The permission granted to the Amazon Q App.</p>
@@ -1459,26 +1406,7 @@ module Aws::QApps
       :action,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PluginType
-      SERVICE_NOW = 'SERVICE_NOW'
-      SALESFORCE = 'SALESFORCE'
-      JIRA = 'JIRA'
-      ZENDESK = 'ZENDESK'
-      CUSTOM = 'CUSTOM'
-      ASANA = 'ASANA'
-      ATLASSIAN_CONFLUENCE = 'ATLASSIAN_CONFLUENCE'
-      GOOGLE_CALENDAR = 'GOOGLE_CALENDAR'
-      JIRA_CLOUD = 'JIRA_CLOUD'
-      MICROSOFT_EXCHANGE = 'MICROSOFT_EXCHANGE'
-      MICROSOFT_TEAMS = 'MICROSOFT_TEAMS'
-      PAGERDUTY_ADVANCE = 'PAGERDUTY_ADVANCE'
-      SALESFORCE_CRM = 'SALESFORCE_CRM'
-      SERVICENOW_NOW_PLATFORM = 'SERVICENOW_NOW_PLATFORM'
-      SMARTSHEET = 'SMARTSHEET'
-      ZENDESK_SUITE = 'ZENDESK_SUITE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of an Amazon Q App generated based on input such as a conversation or problem
@@ -1497,7 +1425,7 @@ module Aws::QApps
       :description,
       :app_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1511,7 +1439,7 @@ module Aws::QApps
       :instance_id,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input options for generating an Q App definition.</p>
@@ -1526,7 +1454,7 @@ module Aws::QApps
       :problem_statement,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Conversation < PredictQAppInputOptions; end
       class ProblemStatement < PredictQAppInputOptions; end
@@ -1543,7 +1471,7 @@ module Aws::QApps
       :app,
       :problem_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The principal for which the permission applies.</p>
@@ -1561,7 +1489,7 @@ module Aws::QApps
       :user_type,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response collected for a Amazon Q App session. This container represents a single
@@ -1588,7 +1516,7 @@ module Aws::QApps
       :submission_id,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A card in an Q App that integrates with a third-party plugin or service.</p>
@@ -1626,7 +1554,7 @@ module Aws::QApps
       :plugin_id,
       :action_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input shape for defining a plugin card in an Amazon Q App.</p>
@@ -1656,7 +1584,7 @@ module Aws::QApps
       :plugin_id,
       :action_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 'q-plugin' unless options.key?(:type)
@@ -1700,7 +1628,7 @@ module Aws::QApps
       :attribute_filter,
       :memory_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input shape for defining a query card in an Amazon Q App.</p>
@@ -1730,7 +1658,7 @@ module Aws::QApps
       :output_source,
       :attribute_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 'q-query' unless options.key?(:type)
@@ -1753,12 +1681,7 @@ module Aws::QApps
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Sender
-      USER = 'USER'
-      SYSTEM = 'SYSTEM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation could not be completed because it would exceed the service's quota
@@ -1784,7 +1707,7 @@ module Aws::QApps
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sharing configuration of an Amazon Q App data collection session.</p>
@@ -1803,7 +1726,7 @@ module Aws::QApps
       :accept_responses,
       :reveal_cards,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1832,7 +1755,7 @@ module Aws::QApps
       :session_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1845,7 +1768,7 @@ module Aws::QApps
       :session_id,
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1858,7 +1781,7 @@ module Aws::QApps
       :instance_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A record created when a user submits a form card.</p>
@@ -1876,7 +1799,7 @@ module Aws::QApps
       :submission_id,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an action performed on a submission.</p>
@@ -1890,13 +1813,7 @@ module Aws::QApps
       :submission_id,
       :mutation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubmissionMutationKind
-      edit = 'edit'
-      delete = 'delete'
-      add = 'add'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1909,12 +1826,12 @@ module Aws::QApps
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A card in an Amazon Q App that allows the user to input text.</p>
@@ -1944,7 +1861,7 @@ module Aws::QApps
       :placeholder,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input shape for defining a text input card in an Amazon Q App.</p>
@@ -1970,7 +1887,7 @@ module Aws::QApps
       :placeholder,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 'text-input' unless options.key?(:type)
@@ -1997,7 +1914,7 @@ module Aws::QApps
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is not authenticated or authorized to perform the requested operation.</p>
@@ -2006,7 +1923,7 @@ module Aws::QApps
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2019,12 +1936,12 @@ module Aws::QApps
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2045,7 +1962,7 @@ module Aws::QApps
       :status,
       :categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2062,7 +1979,7 @@ module Aws::QApps
       :library_item_id,
       :is_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute library_item_id
@@ -2119,7 +2036,7 @@ module Aws::QApps
       :user_count,
       :is_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2144,7 +2061,7 @@ module Aws::QApps
       :description,
       :app_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2197,7 +2114,7 @@ module Aws::QApps
       :updated_by,
       :required_capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2218,7 +2135,7 @@ module Aws::QApps
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2236,7 +2153,7 @@ module Aws::QApps
       :app_id,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2253,7 +2170,7 @@ module Aws::QApps
       :session_id,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2274,7 +2191,7 @@ module Aws::QApps
       :session_name,
       :sharing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -2295,7 +2212,7 @@ module Aws::QApps
       :session_name,
       :sharing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -2308,7 +2225,7 @@ module Aws::QApps
       :session_id,
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user of an Amazon Q App.</p>
@@ -2318,7 +2235,7 @@ module Aws::QApps
     class User < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Q App associated with a user, either owned by the user or favorited.</p>
@@ -2356,17 +2273,12 @@ module Aws::QApps
       :status,
       :is_verified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_verified] = false unless options.key?(:is_verified)
         super
       end
-    end
-
-    module UserType
-      OWNER = 'owner'
-      USER = 'user'
     end
 
     # <p>The input failed to satisfy the constraints specified by the service.</p>
@@ -2375,7 +2287,7 @@ module Aws::QApps
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

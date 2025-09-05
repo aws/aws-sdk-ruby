@@ -16,7 +16,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error occurs when you don't have permission to perform the requested action.</p> <p>You don’t have access to this action or resource. Review IAM policies or contact your AWS administrator for assistance.</p>
@@ -25,7 +25,7 @@ module Aws::PartnerCentralSelling
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the <code>Customer</code>'s account details associated with the <code>Opportunity</code>.</p>
@@ -59,7 +59,7 @@ module Aws::PartnerCentralSelling
       :address,
       :duns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the account details of the partner who received the Engagement Invitation, including the AWS account ID and company name.</p>
@@ -73,7 +73,7 @@ module Aws::PartnerCentralSelling
       :alias,
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains an <code>Account</code>'s subset of fields.</p>
@@ -99,7 +99,7 @@ module Aws::PartnerCentralSelling
       :website_url,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the end <code>Customer</code>'s address details associated with the <code>Opportunity</code>.</p>
@@ -125,7 +125,7 @@ module Aws::PartnerCentralSelling
       :country_code,
       :street_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains an <code>Address</code> object's subset of fields.</p>
@@ -147,7 +147,7 @@ module Aws::PartnerCentralSelling
       :state_or_region,
       :country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -164,7 +164,7 @@ module Aws::PartnerCentralSelling
       :identifier,
       :assignee,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the contact details of the individual assigned to manage the opportunity within the partner organization. This helps to ensure that there is a point of contact for the opportunity's progress.</p>
@@ -186,7 +186,7 @@ module Aws::PartnerCentralSelling
       :last_name,
       :business_title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -207,72 +207,7 @@ module Aws::PartnerCentralSelling
       :related_entity_type,
       :related_entity_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AwsClosedLostReason
-      ADMINISTRATIVE = 'Administrative'
-      BUSINESS_ASSOCIATE_AGREEMENT = 'Business Associate Agreement'
-      COMPANY_ACQUIRED_DISSOLVED = 'Company Acquired/Dissolved'
-      COMPETITIVE_OFFERING = 'Competitive Offering'
-      CUSTOMER_DATA_REQUIREMENT = 'Customer Data Requirement'
-      CUSTOMER_DEFICIENCY = 'Customer Deficiency'
-      CUSTOMER_EXPERIENCE = 'Customer Experience'
-      DELAY_CANCELLATION_OF_PROJECT = 'Delay / Cancellation of Project'
-      DUPLICATE = 'Duplicate'
-      DUPLICATE_OPPORTUNITY = 'Duplicate Opportunity'
-      EXECUTIVE_BLOCKER = 'Executive Blocker'
-      FAILED_VETTING = 'Failed Vetting'
-      FEATURE_LIMITATION = 'Feature Limitation'
-      FINANCIAL_COMMERCIAL = 'Financial/Commercial'
-      INSUFFICIENT_AMAZON_VALUE = 'Insufficient Amazon Value'
-      INSUFFICIENT_AWS_VALUE = 'Insufficient AWS Value'
-      INTERNATIONAL_CONSTRAINTS = 'International Constraints'
-      LEGAL_TAX_REGULATORY = 'Legal / Tax / Regulatory'
-      LEGAL_TERMS_AND_CONDITIONS = 'Legal Terms and Conditions'
-      LOST_TO_COMPETITOR = 'Lost to Competitor'
-      LOST_TO_COMPETITOR_GOOGLE = 'Lost to Competitor - Google'
-      LOST_TO_COMPETITOR_MICROSOFT = 'Lost to Competitor - Microsoft'
-      LOST_TO_COMPETITOR_OTHER = 'Lost to Competitor - Other'
-      LOST_TO_COMPETITOR_RACKSPACE = 'Lost to Competitor - Rackspace'
-      LOST_TO_COMPETITOR_SOFTLAYER = 'Lost to Competitor - SoftLayer'
-      LOST_TO_COMPETITOR_VMWARE = 'Lost to Competitor - VMWare'
-      NO_CUSTOMER_REFERENCE = 'No Customer Reference'
-      NO_INTEGRATION_RESOURCES = 'No Integration Resources'
-      NO_OPPORTUNITY = 'No Opportunity'
-      NO_PERCEIVED_VALUE_OF_MP = 'No Perceived Value of MP'
-      NO_RESPONSE = 'No Response'
-      NOT_COMMITTED_TO_AWS = 'Not Committed to AWS'
-      NO_UPDATE = 'No Update'
-      ON_PREMISES_DEPLOYMENT = 'On Premises Deployment'
-      OTHER = 'Other'
-      OTHER_DETAILS_IN_DESCRIPTION = 'Other (Details in Description)'
-      PARTNER_GAP = 'Partner Gap'
-      PAST_DUE = 'Past Due'
-      PEOPLE_RELATIONSHIP_GOVERNANCE = 'People/Relationship/Governance'
-      PLATFORM_TECHNOLOGY_LIMITATION = 'Platform Technology Limitation'
-      PREFERENCE_FOR_COMPETITOR = 'Preference for Competitor'
-      PRICE = 'Price'
-      PRODUCT_TECHNOLOGY = 'Product/Technology'
-      PRODUCT_NOT_ON_AWS = 'Product Not on AWS'
-      SECURITY_COMPLIANCE = 'Security / Compliance'
-      SELF_SERVICE = 'Self-Service'
-      TECHNICAL_LIMITATIONS = 'Technical Limitations'
-      TERM_SHEET_IMPASSE = 'Term Sheet Impasse'
-    end
-
-    module AwsFundingUsed
-      YES = 'Yes'
-      NO = 'No'
-    end
-
-    module AwsMemberBusinessTitle
-      AWS_SALES_REP = 'AWSSalesRep'
-      AWS_ACCOUNT_OWNER = 'AWSAccountOwner'
-      WWPSPDM = 'WWPSPDM'
-      PDM = 'PDM'
-      PSM = 'PSM'
-      ISVSM = 'ISVSM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the customer associated with the AWS opportunity. This field captures key details about the customer that are necessary for managing the opportunity.</p>
@@ -282,7 +217,7 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityCustomer < Struct.new(
       :contacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains insights provided by AWS for the opportunity, offering recommendations and analysis that can help the partner optimize their engagement and strategy.</p>
@@ -296,7 +231,7 @@ module Aws::PartnerCentralSelling
       :next_best_actions,
       :engagement_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tracks the lifecycle of the AWS opportunity, including stages such as qualification, validation, and closure. This field helps partners understand the current status and progression of the opportunity.</p>
@@ -322,7 +257,7 @@ module Aws::PartnerCentralSelling
       :next_steps,
       :next_steps_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Captures details about the project associated with the opportunity, including objectives, scope, and customer requirements.</p>
@@ -332,7 +267,7 @@ module Aws::PartnerCentralSelling
     class AwsOpportunityProject < Struct.new(
       :expected_customer_spend,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents other entities related to the AWS opportunity, such as AWS products, partner solutions, and marketplace offers. These associations help build a complete picture of the solution being sold.</p>
@@ -346,34 +281,7 @@ module Aws::PartnerCentralSelling
       :aws_products,
       :solutions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AwsOpportunityStage
-      NOT_STARTED = 'Not Started'
-      IN_PROGRESS = 'In Progress'
-      PROSPECT = 'Prospect'
-      ENGAGED = 'Engaged'
-      IDENTIFIED = 'Identified'
-      QUALIFY = 'Qualify'
-      RESEARCH = 'Research'
-      SELLER_ENGAGED = 'Seller Engaged'
-      EVALUATING = 'Evaluating'
-      SELLER_REGISTERED = 'Seller Registered'
-      TERM_SHEET_NEGOTIATION = 'Term Sheet Negotiation'
-      CONTRACT_NEGOTIATION = 'Contract Negotiation'
-      ONBOARDING = 'Onboarding'
-      BUILDING_INTEGRATION = 'Building Integration'
-      QUALIFIED = 'Qualified'
-      ON_HOLD = 'On-hold'
-      TECHNICAL_VALIDATION = 'Technical Validation'
-      BUSINESS_VALIDATION = 'Business Validation'
-      COMMITTED = 'Committed'
-      LAUNCHED = 'Launched'
-      DEFERRED_TO_PARTNER = 'Deferred to Partner'
-      CLOSED_LOST = 'Closed Lost'
-      COMPLETED = 'Completed'
-      CLOSED_INCOMPLETE = 'Closed Incomplete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the level of AWS involvement in the opportunity. This field helps track AWS participation throughout the engagement, such as providing technical support, deal assistance, and sales support.</p>
@@ -387,7 +295,7 @@ module Aws::PartnerCentralSelling
       :involvement_type,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an Amazon Web Services team member for the engagement. This structure includes details such as name, email, and business title.</p>
@@ -409,59 +317,7 @@ module Aws::PartnerCentralSelling
       :last_name,
       :business_title,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Channel
-      AWS_MARKETING_CENTRAL = 'AWS Marketing Central'
-      CONTENT_SYNDICATION = 'Content Syndication'
-      DISPLAY = 'Display'
-      EMAIL = 'Email'
-      LIVE_EVENT = 'Live Event'
-      OUT_OF_HOME = 'Out Of Home (OOH)'
-      PRINT = 'Print'
-      SEARCH = 'Search'
-      SOCIAL = 'Social'
-      TELEMARKETING = 'Telemarketing'
-      TV = 'TV'
-      VIDEO = 'Video'
-      VIRTUAL_EVENT = 'Virtual Event'
-    end
-
-    module ClosedLostReason
-      CUSTOMER_DEFICIENCY = 'Customer Deficiency'
-      DELAY_CANCELLATION_OF_PROJECT = 'Delay / Cancellation of Project'
-      LEGAL_TAX_REGULATORY = 'Legal / Tax / Regulatory'
-      LOST_TO_COMPETITOR_GOOGLE = 'Lost to Competitor - Google'
-      LOST_TO_COMPETITOR_MICROSOFT = 'Lost to Competitor - Microsoft'
-      LOST_TO_COMPETITOR_SOFTLAYER = 'Lost to Competitor - SoftLayer'
-      LOST_TO_COMPETITOR_VMWARE = 'Lost to Competitor - VMWare'
-      LOST_TO_COMPETITOR_OTHER = 'Lost to Competitor - Other'
-      NO_OPPORTUNITY = 'No Opportunity'
-      ON_PREMISES_DEPLOYMENT = 'On Premises Deployment'
-      PARTNER_GAP = 'Partner Gap'
-      PRICE = 'Price'
-      SECURITY_COMPLIANCE = 'Security / Compliance'
-      TECHNICAL_LIMITATIONS = 'Technical Limitations'
-      CUSTOMER_EXPERIENCE = 'Customer Experience'
-      OTHER = 'Other'
-      PEOPLERELATIONSHIPGOVERNANCE = 'People/Relationship/Governance'
-      PRODUCTTECHNOLOGY = 'Product/Technology'
-      FINANCIALCOMMERCIAL = 'Financial/Commercial'
-    end
-
-    module CompetitorName
-      ORACLE_CLOUD = 'Oracle Cloud'
-      ON_PREM = 'On-Prem'
-      CO_LOCATION = 'Co-location'
-      AKAMAI = 'Akamai'
-      ALICLOUD = 'AliCloud'
-      GOOGLE_CLOUD_PLATFORM = 'Google Cloud Platform'
-      IBM_SOFTLAYER = 'IBM Softlayer'
-      MICROSOFT_AZURE = 'Microsoft Azure'
-      OTHER_COST_OPTIMIZATION = 'Other- Cost Optimization'
-      NO_COMPETITION = 'No Competition'
-      OTHER = '*Other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error occurs when the request can’t be processed due to a conflict with the target resource's current state, which could result from updating or deleting the resource.</p> <p>Suggested action: Fetch the latest state of the resource, verify the state, and retry the request.</p>
@@ -470,7 +326,7 @@ module Aws::PartnerCentralSelling
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a <code>Customer Partner</code>'s contact details.</p>
@@ -496,260 +352,7 @@ module Aws::PartnerCentralSelling
       :business_title,
       :phone,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module CountryCode
-      US = 'US'
-      AF = 'AF'
-      AX = 'AX'
-      AL = 'AL'
-      DZ = 'DZ'
-      AS = 'AS'
-      AD = 'AD'
-      AO = 'AO'
-      AI = 'AI'
-      AQ = 'AQ'
-      AG = 'AG'
-      AR = 'AR'
-      AM = 'AM'
-      AW = 'AW'
-      AU = 'AU'
-      AT = 'AT'
-      AZ = 'AZ'
-      BS = 'BS'
-      BH = 'BH'
-      BD = 'BD'
-      BB = 'BB'
-      BY = 'BY'
-      BE = 'BE'
-      BZ = 'BZ'
-      BJ = 'BJ'
-      BM = 'BM'
-      BT = 'BT'
-      BO = 'BO'
-      BQ = 'BQ'
-      BA = 'BA'
-      BW = 'BW'
-      BV = 'BV'
-      BR = 'BR'
-      IO = 'IO'
-      BN = 'BN'
-      BG = 'BG'
-      BF = 'BF'
-      BI = 'BI'
-      KH = 'KH'
-      CM = 'CM'
-      CA = 'CA'
-      CV = 'CV'
-      KY = 'KY'
-      CF = 'CF'
-      TD = 'TD'
-      CL = 'CL'
-      CN = 'CN'
-      CX = 'CX'
-      CC = 'CC'
-      CO = 'CO'
-      KM = 'KM'
-      CG = 'CG'
-      CK = 'CK'
-      CR = 'CR'
-      CI = 'CI'
-      HR = 'HR'
-      CU = 'CU'
-      CW = 'CW'
-      CY = 'CY'
-      CZ = 'CZ'
-      CD = 'CD'
-      DK = 'DK'
-      DJ = 'DJ'
-      DM = 'DM'
-      DO = 'DO'
-      EC = 'EC'
-      EG = 'EG'
-      SV = 'SV'
-      GQ = 'GQ'
-      ER = 'ER'
-      EE = 'EE'
-      ET = 'ET'
-      FK = 'FK'
-      FO = 'FO'
-      FJ = 'FJ'
-      FI = 'FI'
-      FR = 'FR'
-      GF = 'GF'
-      PF = 'PF'
-      TF = 'TF'
-      GA = 'GA'
-      GM = 'GM'
-      GE = 'GE'
-      DE = 'DE'
-      GH = 'GH'
-      GI = 'GI'
-      GR = 'GR'
-      GL = 'GL'
-      GD = 'GD'
-      GP = 'GP'
-      GU = 'GU'
-      GT = 'GT'
-      GG = 'GG'
-      GN = 'GN'
-      GW = 'GW'
-      GY = 'GY'
-      HT = 'HT'
-      HM = 'HM'
-      VA = 'VA'
-      HN = 'HN'
-      HK = 'HK'
-      HU = 'HU'
-      IS = 'IS'
-      IN = 'IN'
-      ID = 'ID'
-      IR = 'IR'
-      IQ = 'IQ'
-      IE = 'IE'
-      IM = 'IM'
-      IL = 'IL'
-      IT = 'IT'
-      JM = 'JM'
-      JP = 'JP'
-      JE = 'JE'
-      JO = 'JO'
-      KZ = 'KZ'
-      KE = 'KE'
-      KI = 'KI'
-      KR = 'KR'
-      KW = 'KW'
-      KG = 'KG'
-      LA = 'LA'
-      LV = 'LV'
-      LB = 'LB'
-      LS = 'LS'
-      LR = 'LR'
-      LY = 'LY'
-      LI = 'LI'
-      LT = 'LT'
-      LU = 'LU'
-      MO = 'MO'
-      MK = 'MK'
-      MG = 'MG'
-      MW = 'MW'
-      MY = 'MY'
-      MV = 'MV'
-      ML = 'ML'
-      MT = 'MT'
-      MH = 'MH'
-      MQ = 'MQ'
-      MR = 'MR'
-      MU = 'MU'
-      YT = 'YT'
-      MX = 'MX'
-      FM = 'FM'
-      MD = 'MD'
-      MC = 'MC'
-      MN = 'MN'
-      ME = 'ME'
-      MS = 'MS'
-      MA = 'MA'
-      MZ = 'MZ'
-      MM = 'MM'
-      NA = 'NA'
-      NR = 'NR'
-      NP = 'NP'
-      NL = 'NL'
-      AN = 'AN'
-      NC = 'NC'
-      NZ = 'NZ'
-      NI = 'NI'
-      NE = 'NE'
-      NG = 'NG'
-      NU = 'NU'
-      NF = 'NF'
-      MP = 'MP'
-      NO = 'NO'
-      OM = 'OM'
-      PK = 'PK'
-      PW = 'PW'
-      PS = 'PS'
-      PA = 'PA'
-      PG = 'PG'
-      PY = 'PY'
-      PE = 'PE'
-      PH = 'PH'
-      PN = 'PN'
-      PL = 'PL'
-      PT = 'PT'
-      PR = 'PR'
-      QA = 'QA'
-      RE = 'RE'
-      RO = 'RO'
-      RU = 'RU'
-      RW = 'RW'
-      BL = 'BL'
-      SH = 'SH'
-      KN = 'KN'
-      LC = 'LC'
-      MF = 'MF'
-      PM = 'PM'
-      VC = 'VC'
-      WS = 'WS'
-      SM = 'SM'
-      ST = 'ST'
-      SA = 'SA'
-      SN = 'SN'
-      RS = 'RS'
-      SC = 'SC'
-      SL = 'SL'
-      SG = 'SG'
-      SX = 'SX'
-      SK = 'SK'
-      SI = 'SI'
-      SB = 'SB'
-      SO = 'SO'
-      ZA = 'ZA'
-      GS = 'GS'
-      SS = 'SS'
-      ES = 'ES'
-      LK = 'LK'
-      SD = 'SD'
-      SR = 'SR'
-      SJ = 'SJ'
-      SZ = 'SZ'
-      SE = 'SE'
-      CH = 'CH'
-      SY = 'SY'
-      TW = 'TW'
-      TJ = 'TJ'
-      TZ = 'TZ'
-      TH = 'TH'
-      TL = 'TL'
-      TG = 'TG'
-      TK = 'TK'
-      TO = 'TO'
-      TT = 'TT'
-      TN = 'TN'
-      TR = 'TR'
-      TM = 'TM'
-      TC = 'TC'
-      TV = 'TV'
-      UG = 'UG'
-      UA = 'UA'
-      AE = 'AE'
-      GB = 'GB'
-      UM = 'UM'
-      UY = 'UY'
-      UZ = 'UZ'
-      VU = 'VU'
-      VE = 'VE'
-      VN = 'VN'
-      VG = 'VG'
-      VI = 'VI'
-      WF = 'WF'
-      EH = 'EH'
-      YE = 'YE'
-      ZM = 'ZM'
-      ZW = 'ZW'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -770,7 +373,7 @@ module Aws::PartnerCentralSelling
       :engagement_identifier,
       :invitation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -783,7 +386,7 @@ module Aws::PartnerCentralSelling
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -808,7 +411,7 @@ module Aws::PartnerCentralSelling
       :description,
       :contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -821,7 +424,7 @@ module Aws::PartnerCentralSelling
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -882,7 +485,7 @@ module Aws::PartnerCentralSelling
       :opportunity_team,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -899,7 +502,7 @@ module Aws::PartnerCentralSelling
       :partner_opportunity_identifier,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -932,7 +535,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -945,7 +548,7 @@ module Aws::PartnerCentralSelling
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -974,7 +577,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -987,179 +590,7 @@ module Aws::PartnerCentralSelling
       :arn,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module CurrencyCode
-      USD = 'USD'
-      EUR = 'EUR'
-      GBP = 'GBP'
-      AUD = 'AUD'
-      CAD = 'CAD'
-      CNY = 'CNY'
-      NZD = 'NZD'
-      INR = 'INR'
-      JPY = 'JPY'
-      CHF = 'CHF'
-      SEK = 'SEK'
-      AED = 'AED'
-      AFN = 'AFN'
-      ALL = 'ALL'
-      AMD = 'AMD'
-      ANG = 'ANG'
-      AOA = 'AOA'
-      ARS = 'ARS'
-      AWG = 'AWG'
-      AZN = 'AZN'
-      BAM = 'BAM'
-      BBD = 'BBD'
-      BDT = 'BDT'
-      BGN = 'BGN'
-      BHD = 'BHD'
-      BIF = 'BIF'
-      BMD = 'BMD'
-      BND = 'BND'
-      BOB = 'BOB'
-      BOV = 'BOV'
-      BRL = 'BRL'
-      BSD = 'BSD'
-      BTN = 'BTN'
-      BWP = 'BWP'
-      BYN = 'BYN'
-      BZD = 'BZD'
-      CDF = 'CDF'
-      CHE = 'CHE'
-      CHW = 'CHW'
-      CLF = 'CLF'
-      CLP = 'CLP'
-      COP = 'COP'
-      COU = 'COU'
-      CRC = 'CRC'
-      CUC = 'CUC'
-      CUP = 'CUP'
-      CVE = 'CVE'
-      CZK = 'CZK'
-      DJF = 'DJF'
-      DKK = 'DKK'
-      DOP = 'DOP'
-      DZD = 'DZD'
-      EGP = 'EGP'
-      ERN = 'ERN'
-      ETB = 'ETB'
-      FJD = 'FJD'
-      FKP = 'FKP'
-      GEL = 'GEL'
-      GHS = 'GHS'
-      GIP = 'GIP'
-      GMD = 'GMD'
-      GNF = 'GNF'
-      GTQ = 'GTQ'
-      GYD = 'GYD'
-      HKD = 'HKD'
-      HNL = 'HNL'
-      HRK = 'HRK'
-      HTG = 'HTG'
-      HUF = 'HUF'
-      IDR = 'IDR'
-      ILS = 'ILS'
-      IQD = 'IQD'
-      IRR = 'IRR'
-      ISK = 'ISK'
-      JMD = 'JMD'
-      JOD = 'JOD'
-      KES = 'KES'
-      KGS = 'KGS'
-      KHR = 'KHR'
-      KMF = 'KMF'
-      KPW = 'KPW'
-      KRW = 'KRW'
-      KWD = 'KWD'
-      KYD = 'KYD'
-      KZT = 'KZT'
-      LAK = 'LAK'
-      LBP = 'LBP'
-      LKR = 'LKR'
-      LRD = 'LRD'
-      LSL = 'LSL'
-      LYD = 'LYD'
-      MAD = 'MAD'
-      MDL = 'MDL'
-      MGA = 'MGA'
-      MKD = 'MKD'
-      MMK = 'MMK'
-      MNT = 'MNT'
-      MOP = 'MOP'
-      MRU = 'MRU'
-      MUR = 'MUR'
-      MVR = 'MVR'
-      MWK = 'MWK'
-      MXN = 'MXN'
-      MXV = 'MXV'
-      MYR = 'MYR'
-      MZN = 'MZN'
-      NAD = 'NAD'
-      NGN = 'NGN'
-      NIO = 'NIO'
-      NOK = 'NOK'
-      NPR = 'NPR'
-      OMR = 'OMR'
-      PAB = 'PAB'
-      PEN = 'PEN'
-      PGK = 'PGK'
-      PHP = 'PHP'
-      PKR = 'PKR'
-      PLN = 'PLN'
-      PYG = 'PYG'
-      QAR = 'QAR'
-      RON = 'RON'
-      RSD = 'RSD'
-      RUB = 'RUB'
-      RWF = 'RWF'
-      SAR = 'SAR'
-      SBD = 'SBD'
-      SCR = 'SCR'
-      SDG = 'SDG'
-      SGD = 'SGD'
-      SHP = 'SHP'
-      SLL = 'SLL'
-      SOS = 'SOS'
-      SRD = 'SRD'
-      SSP = 'SSP'
-      STN = 'STN'
-      SVC = 'SVC'
-      SYP = 'SYP'
-      SZL = 'SZL'
-      THB = 'THB'
-      TJS = 'TJS'
-      TMT = 'TMT'
-      TND = 'TND'
-      TOP = 'TOP'
-      TRY = 'TRY'
-      TTD = 'TTD'
-      TWD = 'TWD'
-      TZS = 'TZS'
-      UAH = 'UAH'
-      UGX = 'UGX'
-      USN = 'USN'
-      UYI = 'UYI'
-      UYU = 'UYU'
-      UZS = 'UZS'
-      VEF = 'VEF'
-      VND = 'VND'
-      VUV = 'VUV'
-      WST = 'WST'
-      XAF = 'XAF'
-      XCD = 'XCD'
-      XDR = 'XDR'
-      XOF = 'XOF'
-      XPF = 'XPF'
-      XSU = 'XSU'
-      XUA = 'XUA'
-      YER = 'YER'
-      ZAR = 'ZAR'
-      ZMW = 'ZMW'
-      ZWL = 'ZWL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the customer's <code>Account</code> and <code>Contact</code>.</p>
@@ -1173,7 +604,7 @@ module Aws::PartnerCentralSelling
       :account,
       :contacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CustomerProjects structure in Engagements offers a flexible framework for managing customer-project relationships. It supports multiple customers per Engagement and multiple projects per customer, while also allowing for customers without projects and projects without specific customers. </p> <p>All Engagement members have full visibility of customers and their associated projects, enabling the capture of relevant context even when project details are not fully defined. This structure also facilitates targeted invitations, allowing partners to focus on specific customers and their business problems when sending Engagement invitations. </p>
@@ -1187,7 +618,7 @@ module Aws::PartnerCentralSelling
       :customer,
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a <code>Customer</code> object's subset of fields.</p>
@@ -1197,7 +628,7 @@ module Aws::PartnerCentralSelling
     class CustomerSummary < Struct.new(
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1210,16 +641,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeliveryModel
-      SAAS_OR_PAAS = 'SaaS or PaaS'
-      BYOL_OR_AMI = 'BYOL or AMI'
-      MANAGED_SERVICES = 'Managed Services'
-      PROFESSIONAL_SERVICES = 'Professional Services'
-      RESELL = 'Resell'
-      OTHER = 'Other'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1240,7 +662,7 @@ module Aws::PartnerCentralSelling
       :related_entity_type,
       :related_entity_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides detailed context information for an Engagement. This structure allows for specifying the type of context and its associated payload. </p>
@@ -1254,7 +676,7 @@ module Aws::PartnerCentralSelling
       :type,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the payload of an Engagement context. The structure of this payload varies based on the context type specified in the EngagementContextDetails. </p>
@@ -1265,14 +687,10 @@ module Aws::PartnerCentralSelling
       :customer_project,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CustomerProject < EngagementContextPayload; end
       class Unknown < EngagementContextPayload; end
-    end
-
-    module EngagementContextType
-      CUSTOMER_PROJECT = 'CustomerProject'
     end
 
     # <p>Contains details about the customer associated with the Engagement Invitation, including company information and industry.</p>
@@ -1294,7 +712,7 @@ module Aws::PartnerCentralSelling
       :website_url,
       :country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides comprehensive details about a customer project associated with an Engagement. This may include information such as project goals, timelines, and specific customer requirements. </p>
@@ -1312,11 +730,7 @@ module Aws::PartnerCentralSelling
       :business_problem,
       :target_completion_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EngagementInvitationPayloadType
-      OPPORTUNITY_INVITATION = 'OpportunityInvitation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summarized view of the Engagement Invitation, including details like the identifier, status, and sender. This summary helps partners track and manage AWS originated opportunities.</p>
@@ -1374,7 +788,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :participant_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Engagement members are the participants in an Engagement, which is likely a collaborative project or business opportunity within the AWS partner network. Members can be different partner organizations or AWS accounts that are working together on a specific engagement. </p> <p>Each member is represented by their AWS Account ID, Company Name, and associated details. Members have a status within the Engagement (PENDING, ACCEPTED, REJECTED, or WITHDRAWN), indicating their current state of participation. Only existing members of an Engagement can view the list of other members. This implies a level of privacy and access control within the Engagement structure. </p>
@@ -1392,7 +806,7 @@ module Aws::PartnerCentralSelling
       :website_url,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EngagementMemberSummary provides a snapshot of essential information about participants in an AWS Partner Central Engagement. This compact data structure encapsulates key details of each member, facilitating efficient collaboration and management within the Engagement. </p>
@@ -1406,7 +820,7 @@ module Aws::PartnerCentralSelling
       :company_name,
       :website_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This provide a streamlined view of the relationships between engagements and resources. These summaries offer a crucial link between collaborative engagements and the specific resources involved, such as opportunities.These summaries are particularly valuable for partners navigating complex engagements with multiple resources. They enable quick insights into resource distribution across engagements, support efficient resource management, and help maintain a clear overview of collaborative activities. </p>
@@ -1432,13 +846,7 @@ module Aws::PartnerCentralSelling
       :resource_id,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EngagementScore
-      HIGH = 'High'
-      MEDIUM = 'Medium'
-      LOW = 'Low'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the sorting parameters for listing Engagements.</p>
@@ -1452,11 +860,7 @@ module Aws::PartnerCentralSelling
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EngagementSortName
-      CreatedDate = 'CreatedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains an <code>Engagement</code>'s subset of fields. </p>
@@ -1486,7 +890,7 @@ module Aws::PartnerCentralSelling
       :created_by,
       :member_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides an estimate of the revenue that the partner is expected to generate from the opportunity. This information helps partners assess the financial value of the project.</p>
@@ -1512,7 +916,7 @@ module Aws::PartnerCentralSelling
       :target_company,
       :estimation_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1525,7 +929,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :related_opportunity_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1578,7 +982,7 @@ module Aws::PartnerCentralSelling
       :customer,
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1591,7 +995,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1664,7 +1068,7 @@ module Aws::PartnerCentralSelling
       :engagement_description,
       :existing_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1677,7 +1081,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1714,7 +1118,7 @@ module Aws::PartnerCentralSelling
       :member_count,
       :contexts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1727,7 +1131,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1796,7 +1200,7 @@ module Aws::PartnerCentralSelling
       :life_cycle,
       :opportunity_team,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1809,7 +1213,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1862,7 +1266,7 @@ module Aws::PartnerCentralSelling
       :last_successful_execution_date,
       :last_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1891,7 +1295,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_identifier,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1936,7 +1340,7 @@ module Aws::PartnerCentralSelling
       :revision,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1945,7 +1349,7 @@ module Aws::PartnerCentralSelling
     class GetSellingSystemSettingsRequest < Struct.new(
       :catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -1958,38 +1362,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Industry
-      AEROSPACE_SATELLITE = 'Aerospace'
-      AGRICULTURE = 'Agriculture'
-      AUTOMOTIVE = 'Automotive'
-      COMPUTERS_ELECTRONICS = 'Computers and Electronics'
-      CONSUMER_GOODS = 'Consumer Goods'
-      EDUCATION = 'Education'
-      ENERGY_OIL_GAS = 'Energy - Oil and Gas'
-      ENERGY_POWER_UTILITIES = 'Energy - Power and Utilities'
-      FINANCIAL_SERVICES = 'Financial Services'
-      GAMING = 'Gaming'
-      GOVERNMENT = 'Government'
-      HEALTHCARE = 'Healthcare'
-      HOSPITALITY = 'Hospitality'
-      LIFE_SCIENCES = 'Life Sciences'
-      MANUFACTURING = 'Manufacturing'
-      MARKETING_ADVERTISING = 'Marketing and Advertising'
-      MEDIA_ENTERTAINMENT = 'Media and Entertainment'
-      MINING = 'Mining'
-      NON_PROFIT_ORGANIZATION = 'Non-Profit Organization'
-      PROFESSIONAL_SERVICES = 'Professional Services'
-      REALESTATE_CONSTRUCTION = 'Real Estate and Construction'
-      RETAIL = 'Retail'
-      SOFTWARE_INTERNET = 'Software and Internet'
-      TELECOMMUNICATIONS = 'Telecommunications'
-      TRANSPORTATION_LOGISTICS = 'Transportation and Logistics'
-      TRAVEL = 'Travel'
-      WHOLESALE_DISTRIBUTION = 'Wholesale and Distribution'
-      OTHER = 'Other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error occurs when the specified resource can’t be found or doesn't exist. Resource ID and type might be incorrect.</p> <p>Suggested action: This is usually a transient error. Retry after the provided retry delay or a short interval. If the problem persists, contact AWS support.</p>
@@ -1998,7 +1371,7 @@ module Aws::PartnerCentralSelling
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Invitation structure represents an invitation exchanged between partners and AWS. It includes a message, receiver information, and a payload providing context for the invitation. </p>
@@ -2016,22 +1389,7 @@ module Aws::PartnerCentralSelling
       :receiver,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvitationStatus
-      ACCEPTED = 'ACCEPTED'
-      PENDING = 'PENDING'
-      REJECTED = 'REJECTED'
-      EXPIRED = 'EXPIRED'
-    end
-
-    module InvolvementTypeChangeReason
-      EXPANSION_OPPORTUNITY = 'Expansion Opportunity'
-      CHANGE_IN_DEAL_INFORMATION = 'Change in Deal Information'
-      CUSTOMER_REQUESTED = 'Customer Requested'
-      TECHNICAL_COMPLEXITY = 'Technical Complexity'
-      RISK_MITIGATION = 'Risk Mitigation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a filter to retrieve opportunities based on the last modified date. This filter is useful for tracking changes or updates to opportunities over time.</p>
@@ -2045,7 +1403,7 @@ module Aws::PartnerCentralSelling
       :after_last_modified_date,
       :before_last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the <code>Opportunity</code> lifecycle's details.</p>
@@ -2083,7 +1441,7 @@ module Aws::PartnerCentralSelling
       :review_status_reason,
       :next_steps_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides the lifecycle view of an opportunity resource shared through a snapshot. </p>
@@ -2105,7 +1463,7 @@ module Aws::PartnerCentralSelling
       :stage,
       :next_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a <code>LifeCycle</code> object's subset of fields.</p>
@@ -2139,7 +1497,7 @@ module Aws::PartnerCentralSelling
       :review_comments,
       :review_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies a subset of fields associated with tasks related to accepting an engagement invitation. </p>
@@ -2181,7 +1539,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_job_id,
       :engagement_invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2218,7 +1576,7 @@ module Aws::PartnerCentralSelling
       :engagement_invitation_identifier,
       :task_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_summaries
@@ -2231,7 +1589,7 @@ module Aws::PartnerCentralSelling
       :task_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of a task related to creating an engagement from an opportunity. This structure contains key information about the task's status, associated identifiers, and any failure details. </p>
@@ -2277,7 +1635,7 @@ module Aws::PartnerCentralSelling
       :engagement_id,
       :engagement_invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2314,7 +1672,7 @@ module Aws::PartnerCentralSelling
       :opportunity_identifier,
       :engagement_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_summaries
@@ -2327,7 +1685,7 @@ module Aws::PartnerCentralSelling
       :task_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2368,7 +1726,7 @@ module Aws::PartnerCentralSelling
       :engagement_identifier,
       :sender_aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engagement_invitation_summaries
@@ -2381,7 +1739,7 @@ module Aws::PartnerCentralSelling
       :engagement_invitation_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2402,7 +1760,7 @@ module Aws::PartnerCentralSelling
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engagement_member_list
@@ -2415,7 +1773,7 @@ module Aws::PartnerCentralSelling
       :engagement_member_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2448,7 +1806,7 @@ module Aws::PartnerCentralSelling
       :resource_identifier,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engagement_resource_association_summaries
@@ -2461,7 +1819,7 @@ module Aws::PartnerCentralSelling
       :engagement_resource_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2494,7 +1852,7 @@ module Aws::PartnerCentralSelling
       :next_token,
       :engagement_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engagement_summary_list
@@ -2507,7 +1865,7 @@ module Aws::PartnerCentralSelling
       :engagement_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2548,7 +1906,7 @@ module Aws::PartnerCentralSelling
       :life_cycle_review_status,
       :customer_company_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute opportunity_summaries
@@ -2561,7 +1919,7 @@ module Aws::PartnerCentralSelling
       :opportunity_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2590,7 +1948,7 @@ module Aws::PartnerCentralSelling
       :status,
       :sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_snapshot_job_summaries
@@ -2603,7 +1961,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2640,7 +1998,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_identifier,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_snapshot_summaries
@@ -2653,7 +2011,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -2686,7 +2044,7 @@ module Aws::PartnerCentralSelling
       :identifier,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_summaries
@@ -2699,7 +2057,7 @@ module Aws::PartnerCentralSelling
       :solution_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2708,7 +2066,7 @@ module Aws::PartnerCentralSelling
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2717,7 +2075,7 @@ module Aws::PartnerCentralSelling
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Defines the sorting parameters for listing tasks. This structure allows for specifying the field to sort by and the order of sorting. </p>
@@ -2731,11 +2089,7 @@ module Aws::PartnerCentralSelling
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListTasksSortName
-      START_TIME = 'StartTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains marketing details for the <code>Opportunity</code>.</p>
@@ -2761,12 +2115,7 @@ module Aws::PartnerCentralSelling
       :channels,
       :aws_funding_used,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketingSource
-      MARKETING_ACTIVITY = 'Marketing Activity'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies payments details.</p>
@@ -2780,12 +2129,7 @@ module Aws::PartnerCentralSelling
       :amount,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NationalSecurity
-      YES = 'Yes'
-      NO = 'No'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Read-only; shows the last 50 values and change dates for the <code>NextSteps</code> field.</p>
@@ -2799,7 +2143,7 @@ module Aws::PartnerCentralSelling
       :value,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines sorting options for retrieving Engagement Invitations. Sorting can be done based on various criteria like the invitation date or status.</p>
@@ -2813,11 +2157,7 @@ module Aws::PartnerCentralSelling
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpportunityEngagementInvitationSortName
-      INVITATION_DATE = 'InvitationDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data payload of an Engagement Invitation for a specific opportunity. This contains detailed information that partners use to evaluate the engagement.</p>
@@ -2839,12 +2179,7 @@ module Aws::PartnerCentralSelling
       :customer,
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpportunityOrigin
-      AWS_REFERRAL = 'AWS Referral'
-      PARTNER_REFERRAL = 'Partner Referral'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that configures response sorting.</p>
@@ -2858,13 +2193,7 @@ module Aws::PartnerCentralSelling
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpportunitySortName
-      LAST_MODIFIEDDATE = 'LastModifiedDate'
-      IDENTIFIER = 'Identifier'
-      CUSTOMER_COMPANY_NAME = 'CustomerCompanyName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains an <code>Opportunity</code>'s subset of fields.</p>
@@ -2910,7 +2239,7 @@ module Aws::PartnerCentralSelling
       :customer,
       :project,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a comprehensive view of an opportunity summary, including lifecycle information, team details, opportunity type, primary needs from AWS, and associated project information. </p>
@@ -2944,18 +2273,7 @@ module Aws::PartnerCentralSelling
       :project,
       :related_entity_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpportunityType
-      NET_NEW_BUSINESS = 'Net New Business'
-      FLAT_RENEWAL = 'Flat Renewal'
-      EXPANSION = 'Expansion'
-    end
-
-    module ParticipantType
-      SENDER = 'SENDER'
-      RECEIVER = 'RECEIVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the data payload associated with the Engagement Invitation. This payload includes essential details related to the AWS opportunity and is used by partners to evaluate whether to accept or reject the engagement.</p>
@@ -2966,25 +2284,10 @@ module Aws::PartnerCentralSelling
       :opportunity_invitation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OpportunityInvitation < Payload; end
       class Unknown < Payload; end
-    end
-
-    module PaymentFrequency
-      MONTHLY = 'Monthly'
-    end
-
-    module PrimaryNeedFromAws
-      CO_SELL_ARCHITECTURAL_VALIDATION = 'Co-Sell - Architectural Validation'
-      CO_SELL_BUSINESS_PRESENTATION = 'Co-Sell - Business Presentation'
-      CO_SELL_COMPETITIVE_INFORMATION = 'Co-Sell - Competitive Information'
-      CO_SELL_PRICING_ASSISTANCE = 'Co-Sell - Pricing Assistance'
-      CO_SELL_TECHNICAL_CONSULTATION = 'Co-Sell - Technical Consultation'
-      CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION = 'Co-Sell - Total Cost of Ownership Evaluation'
-      CO_SELL_DEAL_SUPPORT = 'Co-Sell - Deal Support'
-      CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX = 'Co-Sell - Support for Public Tender / RFx'
     end
 
     # <p>Tracks the history of next steps associated with the opportunity. This field captures the actions planned for the future and their timeline.</p>
@@ -2998,7 +2301,7 @@ module Aws::PartnerCentralSelling
       :value,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the <code>Opportunity</code>'s project details.</p>
@@ -3052,7 +2355,7 @@ module Aws::PartnerCentralSelling
       :other_solution_description,
       :additional_comments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the project associated with the Engagement Invitation, including the business problem and expected outcomes.</p>
@@ -3074,7 +2377,7 @@ module Aws::PartnerCentralSelling
       :target_completion_date,
       :expected_customer_spend,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a <code>Project</code> object's subset of fields.</p>
@@ -3088,7 +2391,7 @@ module Aws::PartnerCentralSelling
       :delivery_models,
       :expected_customer_spend,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides the project view of an opportunity resource shared through a snapshot. </p>
@@ -3114,7 +2417,7 @@ module Aws::PartnerCentralSelling
       :sales_activities,
       :other_solution_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3127,7 +2430,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_role_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3140,29 +2443,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReasonCode
-      INVITATION_ACCESS_DENIED = 'InvitationAccessDenied'
-      INVITATION_VALIDATION_FAILED = 'InvitationValidationFailed'
-      ENGAGEMENT_ACCESS_DENIED = 'EngagementAccessDenied'
-      OPPORTUNITY_ACCESS_DENIED = 'OpportunityAccessDenied'
-      RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED = 'ResourceSnapshotJobAccessDenied'
-      RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED = 'ResourceSnapshotJobValidationFailed'
-      RESOURCE_SNAPSHOT_JOB_CONFLICT = 'ResourceSnapshotJobConflict'
-      ENGAGEMENT_VALIDATION_FAILED = 'EngagementValidationFailed'
-      ENGAGEMENT_CONFLICT = 'EngagementConflict'
-      OPPORTUNITY_SUBMISSION_FAILED = 'OpportunitySubmissionFailed'
-      ENGAGEMENT_INVITATION_CONFLICT = 'EngagementInvitationConflict'
-      INTERNAL_ERROR = 'InternalError'
-      OPPORTUNITY_VALIDATION_FAILED = 'OpportunityValidationFailed'
-      OPPORTUNITY_CONFLICT = 'OpportunityConflict'
-      RESOURCE_SNAPSHOT_ACCESS_DENIED = 'ResourceSnapshotAccessDenied'
-      RESOURCE_SNAPSHOT_VALIDATION_FAILED = 'ResourceSnapshotValidationFailed'
-      RESOURCE_SNAPSHOT_CONFLICT = 'ResourceSnapshotConflict'
-      SERVICE_QUOTA_EXCEEDED = 'ServiceQuotaExceeded'
-      REQUEST_THROTTLED = 'RequestThrottled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the entity that received the Engagement Invitation, including account and company details. This field is essential for tracking the partner who is being invited to collaborate.</p>
@@ -3173,22 +2454,10 @@ module Aws::PartnerCentralSelling
       :account,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Account < Receiver; end
       class Unknown < Receiver; end
-    end
-
-    module ReceiverResponsibility
-      DISTRIBUTOR = 'Distributor'
-      RESELLER = 'Reseller'
-      HARDWARE_PARTNER = 'Hardware Partner'
-      MANAGED_SERVICE_PROVIDER = 'Managed Service Provider'
-      SOFTWARE_PARTNER = 'Software Partner'
-      SERVICES_PARTNER = 'Services Partner'
-      TRAINING_PARTNER = 'Training Partner'
-      CO_SELL_FACILITATOR = 'Co-Sell Facilitator'
-      FACILITATOR = 'Facilitator'
     end
 
     # @!attribute catalog
@@ -3205,7 +2474,7 @@ module Aws::PartnerCentralSelling
       :identifier,
       :rejection_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This field provides the associations' information for other entities with the opportunity. These entities include identifiers for <code>AWSProducts</code>, <code>Partner Solutions</code>, and <code>AWSMarketplaceOffers</code>.</p>
@@ -3223,13 +2492,7 @@ module Aws::PartnerCentralSelling
       :solutions,
       :aws_products,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelatedEntityType
-      SOLUTIONS = 'Solutions'
-      AWS_PRODUCTS = 'AwsProducts'
-      AWS_MARKETPLACE_OFFERS = 'AwsMarketplaceOffers'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error occurs when the specified resource can't be found. The resource might not exist, or isn't visible with the current credentials.</p> <p>Suggested action: Verify that the resource ID is correct and the resource is in the expected AWS region. Check IAM permissions for accessing the resource.</p>
@@ -3238,12 +2501,7 @@ module Aws::PartnerCentralSelling
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceSnapshotJobStatus
-      RUNNING = 'Running'
-      STOPPED = 'Stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An object that contains a <code>Resource Snapshot Job</code>'s subset of fields. </p>
@@ -3265,7 +2523,7 @@ module Aws::PartnerCentralSelling
       :engagement_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the payload of a resource snapshot. This structure is designed to accommodate different types of resource snapshots, currently supporting opportunity summaries. </p>
@@ -3276,7 +2534,7 @@ module Aws::PartnerCentralSelling
       :opportunity_summary,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OpportunitySummary < ResourceSnapshotPayload; end
       class Unknown < ResourceSnapshotPayload; end
@@ -3309,42 +2567,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_name,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      OPPORTUNITY = 'Opportunity'
-    end
-
-    module RevenueModel
-      CONTRACT = 'Contract'
-      PAY_AS_YOU_GO = 'Pay-as-you-go'
-      SUBSCRIPTION = 'Subscription'
-    end
-
-    module ReviewStatus
-      PENDING_SUBMISSION = 'Pending Submission'
-      SUBMITTED = 'Submitted'
-      IN_REVIEW = 'In review'
-      APPROVED = 'Approved'
-      REJECTED = 'Rejected'
-      ACTION_REQUIRED = 'Action Required'
-    end
-
-    module SalesActivity
-      INITIALIZED_DISCUSSIONS_WITH_CUSTOMER = 'Initialized discussions with customer'
-      CUSTOMER_HAS_SHOWN_INTEREST = 'Customer has shown interest in solution'
-      CONDUCTED_POC_DEMO = 'Conducted POC / Demo'
-      IN_EVALUATION_PLANNING_STAGE = 'In evaluation / planning stage'
-      AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM = 'Agreed on solution to Business Problem'
-      COMPLETED_ACTION_PLAN = 'Completed Action Plan'
-      FINALIZED_DEPLOYMENT_NEEDS = 'Finalized Deployment Need'
-      SOW_SIGNED = 'SOW Signed'
-    end
-
-    module SalesInvolvementType
-      FOR_VISIBILITY_ONLY = 'For Visibility Only'
-      CO_SELL = 'Co-Sell'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the details of the sender-provided contact person for the <code>EngagementInvitation</code>.</p>
@@ -3370,7 +2593,7 @@ module Aws::PartnerCentralSelling
       :business_title,
       :phone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error occurs when the request would cause a service quota to be exceeded. Service quotas represent the maximum allowed use of a specific resource, and this error indicates that the request would surpass that limit.</p> <p>Suggested action: Review the <a href="https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html">Quotas</a> for the resource, and either reduce usage or request a quota increase.</p>
@@ -3379,7 +2602,7 @@ module Aws::PartnerCentralSelling
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a customer's procurement terms details. Required only for partners in eligible programs.</p>
@@ -3401,7 +2624,7 @@ module Aws::PartnerCentralSelling
       :effective_date,
       :expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies minimal information for the solution offered to solve the customer's business problem.</p>
@@ -3435,7 +2658,7 @@ module Aws::PartnerCentralSelling
       :category,
       :created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the solutions' response sorting that enables partners to order solutions based on specified attributes.</p>
@@ -3449,25 +2672,7 @@ module Aws::PartnerCentralSelling
       :sort_order,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SolutionSortName
-      IDENTIFIER = 'Identifier'
-      NAME = 'Name'
-      STATUS = 'Status'
-      CATEGORY = 'Category'
-      CREATEDDATE = 'CreatedDate'
-    end
-
-    module SolutionStatus
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
-      DRAFT = 'Draft'
-    end
-
-    module SortBy
-      CREATED_DATE = 'CreatedDate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Defines the sorting parameters for listing resource snapshot jobs. This structure allows you to specify the field to sort by and the order of sorting. </p>
@@ -3481,22 +2686,7 @@ module Aws::PartnerCentralSelling
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
-    end
-
-    module Stage
-      PROSPECT = 'Prospect'
-      QUALIFIED = 'Qualified'
-      TECHNICAL_VALIDATION = 'Technical Validation'
-      BUSINESS_VALIDATION = 'Business Validation'
-      COMMITTED = 'Committed'
-      LAUNCHED = 'Launched'
-      CLOSED_LOST = 'Closed Lost'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3517,7 +2707,7 @@ module Aws::PartnerCentralSelling
       :identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -3558,7 +2748,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_job_id,
       :engagement_invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3583,7 +2773,7 @@ module Aws::PartnerCentralSelling
       :aws_submission,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -3628,7 +2818,7 @@ module Aws::PartnerCentralSelling
       :engagement_id,
       :engagement_invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3641,7 +2831,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3654,7 +2844,7 @@ module Aws::PartnerCentralSelling
       :catalog,
       :resource_snapshot_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3675,7 +2865,7 @@ module Aws::PartnerCentralSelling
       :involvement_type,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-value pair assigned to a specified resource.</p>
@@ -3689,7 +2879,7 @@ module Aws::PartnerCentralSelling
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3702,18 +2892,12 @@ module Aws::PartnerCentralSelling
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error occurs when there are too many requests sent. Review the provided quotas and adapt your usage to avoid throttling.</p> <p>This error occurs when there are too many requests sent. Review the provided <a href="https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html">Quotas</a> and retry after the provided delay.</p>
@@ -3722,7 +2906,7 @@ module Aws::PartnerCentralSelling
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3735,12 +2919,12 @@ module Aws::PartnerCentralSelling
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -3793,7 +2977,7 @@ module Aws::PartnerCentralSelling
       :identifier,
       :life_cycle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3806,7 +2990,7 @@ module Aws::PartnerCentralSelling
       :id,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the service or business validation rules.</p> <p>Suggested action: Review the error message, including the failed fields and reasons, to correct the request payload.</p>
@@ -3823,7 +3007,7 @@ module Aws::PartnerCentralSelling
       :reason,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates an invalid value for a field.</p> <ul> <li> <p> <i>REQUIRED_FIELD_MISSING:</i> The request is missing a required field.</p> <p>Fix: Verify your request payload includes all required fields.</p> </li> <li> <p> <i>INVALID_ENUM_VALUE:</i> The enum field value isn't an accepted values.</p> <p>Fix: Check the documentation for the list of valid enum values, and update your request with a valid value.</p> </li> <li> <p> <i>INVALID_STRING_FORMAT:</i> The string format is invalid.</p> <p>Fix: Confirm that the string is in the expected format (For example: email address, date).</p> </li> <li> <p> <i>INVALID_VALUE:</i> The value isn't valid.</p> <p>Fix: Confirm that the value meets the expected criteria and is within the allowable range or set.</p> </li> <li> <p> <i>TOO_MANY_VALUES:</i> There are too many values in a field that expects fewer entries.</p> <p>Fix: Reduce the number of values to match the expected limit.</p> </li> <li> <p> <i>ACTION_NOT_PERMITTED:</i> The action isn't permitted due to current state or permissions.</p> <p>Fix: Verify that the action is appropriate for the current state, and that you have the necessary permissions to perform it.</p> </li> <li> <p> <i>DUPLICATE_KEY_VALUE:</i> The value in a field duplicates a value that must be unique.</p> <p>Fix: Verify that the value is unique and doesn't duplicate an existing value in the system.</p> </li> </ul>
@@ -3841,29 +3025,7 @@ module Aws::PartnerCentralSelling
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionErrorCode
-      REQUIRED_FIELD_MISSING = 'REQUIRED_FIELD_MISSING'
-      INVALID_ENUM_VALUE = 'INVALID_ENUM_VALUE'
-      INVALID_STRING_FORMAT = 'INVALID_STRING_FORMAT'
-      INVALID_VALUE = 'INVALID_VALUE'
-      TOO_MANY_VALUES = 'TOO_MANY_VALUES'
-      INVALID_RESOURCE_STATE = 'INVALID_RESOURCE_STATE'
-      DUPLICATE_KEY_VALUE = 'DUPLICATE_KEY_VALUE'
-      VALUE_OUT_OF_RANGE = 'VALUE_OUT_OF_RANGE'
-      ACTION_NOT_PERMITTED = 'ACTION_NOT_PERMITTED'
-    end
-
-    module ValidationExceptionReason
-      REQUEST_VALIDATION_FAILED = 'REQUEST_VALIDATION_FAILED'
-      BUSINESS_VALIDATION_FAILED = 'BUSINESS_VALIDATION_FAILED'
-    end
-
-    module Visibility
-      FULL = 'Full'
-      LIMITED = 'Limited'
+      include ::Smithy::Schema::Structure
     end
 
   end

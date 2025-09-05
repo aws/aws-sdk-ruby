@@ -13,7 +13,7 @@ module Aws::ServiceQuotas
     class AWSServiceAccessNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient permission to perform this action.</p>
@@ -22,23 +22,17 @@ module Aws::ServiceQuotas
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppliedLevelEnum
-      ACCOUNT = 'ACCOUNT'
-      RESOURCE = 'RESOURCE'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateServiceQuotaTemplateRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateServiceQuotaTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -47,12 +41,12 @@ module Aws::ServiceQuotas
     class CreateSupportCaseRequest < Struct.new(
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateSupportCaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -72,12 +66,12 @@ module Aws::ServiceQuotas
       :quota_code,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't perform this action because a dependency does not have access.</p>
@@ -86,24 +80,17 @@ module Aws::ServiceQuotas
     class DependencyAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceQuotaTemplateRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceQuotaTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      DEPENDENCY_ACCESS_DENIED_ERROR = 'DEPENDENCY_ACCESS_DENIED_ERROR'
-      DEPENDENCY_THROTTLING_ERROR = 'DEPENDENCY_THROTTLING_ERROR'
-      DEPENDENCY_SERVICE_ERROR = 'DEPENDENCY_SERVICE_ERROR'
-      SERVICE_QUOTA_NOT_AVAILABLE_ERROR = 'SERVICE_QUOTA_NOT_AVAILABLE_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that explains why an action did not succeed.</p>
@@ -140,7 +127,7 @@ module Aws::ServiceQuotas
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -156,7 +143,7 @@ module Aws::ServiceQuotas
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quota
@@ -165,12 +152,12 @@ module Aws::ServiceQuotas
     class GetAWSDefaultServiceQuotaResponse < Struct.new(
       :quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAssociationForServiceQuotaTemplateRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_quota_template_association_status
@@ -181,7 +168,7 @@ module Aws::ServiceQuotas
     class GetAssociationForServiceQuotaTemplateResponse < Struct.new(
       :service_quota_template_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -190,7 +177,7 @@ module Aws::ServiceQuotas
     class GetRequestedServiceQuotaChangeRequest < Struct.new(
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requested_quota
@@ -199,7 +186,7 @@ module Aws::ServiceQuotas
     class GetRequestedServiceQuotaChangeResponse < Struct.new(
       :requested_quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -219,7 +206,7 @@ module Aws::ServiceQuotas
       :quota_code,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_quota_increase_request_in_template
@@ -228,7 +215,7 @@ module Aws::ServiceQuotas
     class GetServiceQuotaIncreaseRequestFromTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -248,7 +235,7 @@ module Aws::ServiceQuotas
       :quota_code,
       :context_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quota
@@ -257,7 +244,7 @@ module Aws::ServiceQuotas
     class GetServiceQuotaResponse < Struct.new(
       :quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invalid input was provided.</p>
@@ -266,7 +253,7 @@ module Aws::ServiceQuotas
     class IllegalArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invalid input was provided.</p>
@@ -275,7 +262,7 @@ module Aws::ServiceQuotas
     class InvalidPaginationTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is in an invalid state.</p>
@@ -284,7 +271,7 @@ module Aws::ServiceQuotas
     class InvalidResourceStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -316,7 +303,7 @@ module Aws::ServiceQuotas
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -332,7 +319,7 @@ module Aws::ServiceQuotas
       :next_token,
       :quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -379,7 +366,7 @@ module Aws::ServiceQuotas
       :max_results,
       :quota_requested_at_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -395,7 +382,7 @@ module Aws::ServiceQuotas
       :next_token,
       :requested_quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -436,7 +423,7 @@ module Aws::ServiceQuotas
       :max_results,
       :quota_requested_at_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -452,7 +439,7 @@ module Aws::ServiceQuotas
       :next_token,
       :requested_quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -488,7 +475,7 @@ module Aws::ServiceQuotas
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_quota_increase_request_in_template_list
@@ -504,7 +491,7 @@ module Aws::ServiceQuotas
       :service_quota_increase_request_in_template_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -546,7 +533,7 @@ module Aws::ServiceQuotas
       :quota_code,
       :quota_applied_at_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -562,7 +549,7 @@ module Aws::ServiceQuotas
       :next_token,
       :quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -589,7 +576,7 @@ module Aws::ServiceQuotas
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -605,7 +592,7 @@ module Aws::ServiceQuotas
       :next_token,
       :services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -616,7 +603,7 @@ module Aws::ServiceQuotas
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -625,7 +612,7 @@ module Aws::ServiceQuotas
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the CloudWatch metric that reflects quota usage.</p>
@@ -648,7 +635,7 @@ module Aws::ServiceQuotas
       :metric_dimensions,
       :metric_statistic_recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services account making this call is not a member of an organization.</p>
@@ -657,7 +644,7 @@ module Aws::ServiceQuotas
     class NoAvailableOrganizationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -666,7 +653,7 @@ module Aws::ServiceQuotas
     class NoSuchResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The organization that your Amazon Web Services account belongs to is not in All Features
@@ -676,17 +663,7 @@ module Aws::ServiceQuotas
     class OrganizationNotInAllFeaturesModeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PeriodUnit
-      MICROSECOND = 'MICROSECOND'
-      MILLISECOND = 'MILLISECOND'
-      SECOND = 'SECOND'
-      MINUTE = 'MINUTE'
-      HOUR = 'HOUR'
-      DAY = 'DAY'
-      WEEK = 'WEEK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quota_code
@@ -710,7 +687,7 @@ module Aws::ServiceQuotas
       :aws_region,
       :desired_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_quota_increase_request_in_template
@@ -719,7 +696,7 @@ module Aws::ServiceQuotas
     class PutServiceQuotaIncreaseRequestIntoTemplateResponse < Struct.new(
       :service_quota_increase_request_in_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the context for a resource-level quota. For resource-level quotas, such as <code>Instances per OpenSearch Service Domain</code>, you can apply the quota value at the resource-level for each OpenSearch Service Domain in your Amazon Web Services account. Together the attributes of this structure help you understand how the quota is implemented by Amazon Web Services and how you can manage it. For quotas such as <code>Amazon OpenSearch Service Domains</code> which can be managed at the account-level for each Amazon Web Services Region, the <code>QuotaContext</code> field is absent. See the attribute descriptions below to further understand how to use them.</p>
@@ -737,12 +714,7 @@ module Aws::ServiceQuotas
       :context_scope_type,
       :context_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuotaContextScope
-      RESOURCE = 'RESOURCE'
-      ACCOUNT = 'ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded your service quota. To perform the requested action, remove some of
@@ -752,7 +724,7 @@ module Aws::ServiceQuotas
     class QuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the quota period.</p>
@@ -766,7 +738,7 @@ module Aws::ServiceQuotas
       :period_value,
       :period_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_code
@@ -798,7 +770,7 @@ module Aws::ServiceQuotas
       :context_id,
       :support_case_allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requested_quota
@@ -807,17 +779,7 @@ module Aws::ServiceQuotas
     class RequestServiceQuotaIncreaseResponse < Struct.new(
       :requested_quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequestStatus
-      PENDING = 'PENDING'
-      CASE_OPENED = 'CASE_OPENED'
-      APPROVED = 'APPROVED'
-      DENIED = 'DENIED'
-      CASE_CLOSED = 'CASE_CLOSED'
-      NOT_APPROVED = 'NOT_APPROVED'
-      INVALID_REQUEST = 'INVALID_REQUEST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a quota increase request.</p>
@@ -926,7 +888,7 @@ module Aws::ServiceQuotas
       :quota_requested_at_level,
       :quota_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:global_quota] = false unless options.key?(:global_quota)
@@ -940,7 +902,7 @@ module Aws::ServiceQuotas
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Something went wrong.</p>
@@ -949,7 +911,7 @@ module Aws::ServiceQuotas
     class ServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services service.</p>
@@ -964,7 +926,7 @@ module Aws::ServiceQuotas
       :service_code,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a quota.</p>
@@ -1033,7 +995,7 @@ module Aws::ServiceQuotas
       :quota_context,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:adjustable] = false unless options.key?(:adjustable)
@@ -1080,17 +1042,12 @@ module Aws::ServiceQuotas
       :unit,
       :global_quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:global_quota] = false unless options.key?(:global_quota)
         super
       end
-    end
-
-    module ServiceQuotaTemplateAssociationStatus
-      ASSOCIATED = 'ASSOCIATED'
-      DISASSOCIATED = 'DISASSOCIATED'
     end
 
     # <p>The quota request template is not associated with your organization.</p>
@@ -1099,7 +1056,7 @@ module Aws::ServiceQuotas
     class ServiceQuotaTemplateNotInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex data type that contains a tag key and tag value.</p>
@@ -1117,7 +1074,7 @@ module Aws::ServiceQuotas
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified tag is a reserved word and cannot be used.</p>
@@ -1126,7 +1083,7 @@ module Aws::ServiceQuotas
     class TagPolicyViolationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1140,12 +1097,12 @@ module Aws::ServiceQuotas
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Service Quotas template is not available in this Amazon Web Services Region.</p>
@@ -1154,7 +1111,7 @@ module Aws::ServiceQuotas
     class TemplatesNotAvailableInRegionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Due to throttling, the request was denied. Slow down the rate of request calls, or
@@ -1164,7 +1121,7 @@ module Aws::ServiceQuotas
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded the number of tags allowed for a resource. For more information, see
@@ -1175,7 +1132,7 @@ module Aws::ServiceQuotas
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1190,12 +1147,12 @@ module Aws::ServiceQuotas
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

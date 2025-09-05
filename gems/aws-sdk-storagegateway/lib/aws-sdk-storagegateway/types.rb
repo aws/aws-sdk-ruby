@@ -125,7 +125,7 @@ module Aws::StorageGateway
       :medium_changer_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It
@@ -143,18 +143,7 @@ module Aws::StorageGateway
     class ActivateGatewayOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActiveDirectoryStatus
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      DETACHED = 'DETACHED'
-      JOINED = 'JOINED'
-      JOINING = 'JOINING'
-      NETWORK_ERROR = 'NETWORK_ERROR'
-      TIMEOUT = 'TIMEOUT'
-      UNKNOWN_ERROR = 'UNKNOWN_ERROR'
-      INSUFFICIENT_PERMISSIONS = 'INSUFFICIENT_PERMISSIONS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -170,7 +159,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :disk_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -180,7 +169,7 @@ module Aws::StorageGateway
     class AddCacheOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AddTagsToResourceInput</p>
@@ -201,7 +190,7 @@ module Aws::StorageGateway
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AddTagsToResourceOutput</p>
@@ -211,7 +200,7 @@ module Aws::StorageGateway
     class AddTagsToResourceOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -227,7 +216,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :disk_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -237,7 +226,7 @@ module Aws::StorageGateway
     class AddUploadBufferOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -261,7 +250,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :disk_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway for which working
@@ -273,7 +262,7 @@ module Aws::StorageGateway
     class AddWorkingStorageOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tape_arn
@@ -301,7 +290,7 @@ module Aws::StorageGateway
       :pool_id,
       :bypass_governance_retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tape_arn
@@ -311,7 +300,7 @@ module Aws::StorageGateway
     class AssignTapePoolOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -363,7 +352,7 @@ module Aws::StorageGateway
       :cache_attributes,
       :endpoint_network_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_arn
@@ -372,7 +361,7 @@ module Aws::StorageGateway
     class AssociateFileSystemOutput < Struct.new(
       :file_system_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AttachVolumeInput</p>
@@ -410,7 +399,7 @@ module Aws::StorageGateway
       :network_interface_id,
       :disk_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AttachVolumeOutput</p>
@@ -425,7 +414,7 @@ module Aws::StorageGateway
       :volume_arn,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the gateway's automatic tape creation policies, including the
@@ -443,7 +432,7 @@ module Aws::StorageGateway
       :automatic_tape_creation_rules,
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An automatic tape creation policy consists of automatic tape creation rules where each
@@ -485,23 +474,12 @@ module Aws::StorageGateway
       :minimum_num_tapes,
       :worm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:worm] = false unless options.key?(:worm)
         super
       end
-    end
-
-    module AutomaticUpdatePolicy
-      ALL_VERSIONS = 'ALL_VERSIONS'
-      EMERGENCY_VERSIONS_ONLY = 'EMERGENCY_VERSIONS_ONLY'
-    end
-
-    module AvailabilityMonitorTestStatus
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      PENDING = 'PENDING'
     end
 
     # <p>Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule
@@ -559,7 +537,7 @@ module Aws::StorageGateway
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The refresh cache information for the file share or FSx file systems.</p>
@@ -573,7 +551,7 @@ module Aws::StorageGateway
     class CacheAttributes < Struct.new(
       :cache_stale_timeout_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of filter parameters and associated values that determine which files are
@@ -609,12 +587,7 @@ module Aws::StorageGateway
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CacheReportFilterName
-      UploadState = 'UploadState'
-      UploadFailureReason = 'UploadFailureReason'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all informational fields associated with a cache report. Includes name, ARN,
@@ -673,15 +646,7 @@ module Aws::StorageGateway
       :report_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CacheReportStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      CANCELED = 'CANCELED'
-      FAILED = 'FAILED'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an iSCSI cached volume.</p>
@@ -768,7 +733,7 @@ module Aws::StorageGateway
       :kms_key,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:volume_size_in_bytes] = 0 unless options.key?(:volume_size_in_bytes)
@@ -789,7 +754,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CancelArchivalOutput</p>
@@ -800,7 +765,7 @@ module Aws::StorageGateway
     class CancelArchivalOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_arn
@@ -809,7 +774,7 @@ module Aws::StorageGateway
     class CancelCacheReportInput < Struct.new(
       :cache_report_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_arn
@@ -818,7 +783,7 @@ module Aws::StorageGateway
     class CancelCacheReportOutput < Struct.new(
       :cache_report_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CancelRetrievalInput</p>
@@ -834,7 +799,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CancelRetrievalOutput</p>
@@ -845,12 +810,7 @@ module Aws::StorageGateway
     class CancelRetrievalOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CaseSensitivity
-      ClientSpecified = 'ClientSpecified'
-      CaseSensitive = 'CaseSensitive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes Challenge-Handshake Authentication Protocol (CHAP) information that supports
@@ -876,7 +836,7 @@ module Aws::StorageGateway
       :initiator_name,
       :secret_to_authenticate_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -950,7 +910,7 @@ module Aws::StorageGateway
       :kms_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_arn
@@ -964,7 +924,7 @@ module Aws::StorageGateway
       :volume_arn,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateNFSFileShareInput</p>
@@ -1199,7 +1159,7 @@ module Aws::StorageGateway
       :bucket_region,
       :audit_destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateNFSFileShareOutput</p>
@@ -1209,7 +1169,7 @@ module Aws::StorageGateway
     class CreateNFSFileShareOutput < Struct.new(
       :file_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateSMBFileShareInput</p>
@@ -1481,7 +1441,7 @@ module Aws::StorageGateway
       :bucket_region,
       :oplocks_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateSMBFileShareOutput</p>
@@ -1491,7 +1451,7 @@ module Aws::StorageGateway
     class CreateSMBFileShareOutput < Struct.new(
       :file_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_arn
@@ -1519,7 +1479,7 @@ module Aws::StorageGateway
       :snapshot_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -1537,7 +1497,7 @@ module Aws::StorageGateway
       :volume_arn,
       :volume_recovery_point_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -1578,7 +1538,7 @@ module Aws::StorageGateway
       :snapshot_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -1594,7 +1554,7 @@ module Aws::StorageGateway
       :volume_arn,
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -1693,7 +1653,7 @@ module Aws::StorageGateway
       :kms_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -1712,7 +1672,7 @@ module Aws::StorageGateway
       :volume_size_in_bytes,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:volume_size_in_bytes] = 0 unless options.key?(:volume_size_in_bytes)
@@ -1755,7 +1715,7 @@ module Aws::StorageGateway
       :retention_lock_time_in_days,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -1766,7 +1726,7 @@ module Aws::StorageGateway
     class CreateTapePoolOutput < Struct.new(
       :pool_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateTapeWithBarcodeInput</p>
@@ -1829,7 +1789,7 @@ module Aws::StorageGateway
       :worm,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateTapeOutput</p>
@@ -1840,7 +1800,7 @@ module Aws::StorageGateway
     class CreateTapeWithBarcodeOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateTapesInput</p>
@@ -1917,7 +1877,7 @@ module Aws::StorageGateway
       :worm,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CreateTapeOutput</p>
@@ -1928,7 +1888,7 @@ module Aws::StorageGateway
     class CreateTapesOutput < Struct.new(
       :tape_ar_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -1938,7 +1898,7 @@ module Aws::StorageGateway
     class DeleteAutomaticTapeCreationPolicyInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -1948,7 +1908,7 @@ module Aws::StorageGateway
     class DeleteAutomaticTapeCreationPolicyOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -1973,7 +1933,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :bandwidth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway whose bandwidth
@@ -1985,7 +1945,7 @@ module Aws::StorageGateway
     class DeleteBandwidthRateLimitOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_arn
@@ -1994,7 +1954,7 @@ module Aws::StorageGateway
     class DeleteCacheReportInput < Struct.new(
       :cache_report_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_arn
@@ -2003,7 +1963,7 @@ module Aws::StorageGateway
     class DeleteCacheReportOutput < Struct.new(
       :cache_report_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -2030,7 +1990,7 @@ module Aws::StorageGateway
       :target_arn,
       :initiator_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -2044,7 +2004,7 @@ module Aws::StorageGateway
       :target_arn,
       :initiator_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteFileShareInput</p>
@@ -2063,7 +2023,7 @@ module Aws::StorageGateway
       :file_share_arn,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteFileShareOutput</p>
@@ -2073,7 +2033,7 @@ module Aws::StorageGateway
     class DeleteFileShareOutput < Struct.new(
       :file_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the ID of the gateway to delete.</p>
@@ -2084,7 +2044,7 @@ module Aws::StorageGateway
     class DeleteGatewayInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the ID of the deleted gateway.</p>
@@ -2095,7 +2055,7 @@ module Aws::StorageGateway
     class DeleteGatewayOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_arn
@@ -2104,7 +2064,7 @@ module Aws::StorageGateway
     class DeleteSnapshotScheduleInput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_arn
@@ -2113,7 +2073,7 @@ module Aws::StorageGateway
     class DeleteSnapshotScheduleOutput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteTapeArchiveInput</p>
@@ -2131,7 +2091,7 @@ module Aws::StorageGateway
       :tape_arn,
       :bypass_governance_retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteTapeArchiveOutput</p>
@@ -2142,7 +2102,7 @@ module Aws::StorageGateway
     class DeleteTapeArchiveOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteTapeInput</p>
@@ -2165,7 +2125,7 @@ module Aws::StorageGateway
       :tape_arn,
       :bypass_governance_retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DeleteTapeOutput</p>
@@ -2175,7 +2135,7 @@ module Aws::StorageGateway
     class DeleteTapeOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -2184,7 +2144,7 @@ module Aws::StorageGateway
     class DeleteTapePoolInput < Struct.new(
       :pool_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_arn
@@ -2193,7 +2153,7 @@ module Aws::StorageGateway
     class DeleteTapePoolOutput < Struct.new(
       :pool_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the <a>DeleteVolumeInput$VolumeARN</a> to
@@ -2205,7 +2165,7 @@ module Aws::StorageGateway
     class DeleteVolumeInput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the storage volume that was
@@ -2217,7 +2177,7 @@ module Aws::StorageGateway
     class DeleteVolumeOutput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2227,7 +2187,7 @@ module Aws::StorageGateway
     class DescribeAvailabilityMonitorTestInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2247,7 +2207,7 @@ module Aws::StorageGateway
       :status,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>
@@ -2258,7 +2218,7 @@ module Aws::StorageGateway
     class DescribeBandwidthRateLimitInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -2279,7 +2239,7 @@ module Aws::StorageGateway
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2289,7 +2249,7 @@ module Aws::StorageGateway
     class DescribeBandwidthRateLimitScheduleInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2303,7 +2263,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2313,7 +2273,7 @@ module Aws::StorageGateway
     class DescribeCacheInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2354,7 +2314,7 @@ module Aws::StorageGateway
       :cache_hit_percentage,
       :cache_miss_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_allocated_in_bytes] = 0 unless options.key?(:cache_allocated_in_bytes)
@@ -2372,7 +2332,7 @@ module Aws::StorageGateway
     class DescribeCacheReportInput < Struct.new(
       :cache_report_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_info
@@ -2382,7 +2342,7 @@ module Aws::StorageGateway
     class DescribeCacheReportOutput < Struct.new(
       :cache_report_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_ar_ns
@@ -2392,7 +2352,7 @@ module Aws::StorageGateway
     class DescribeCachediSCSIVolumesInput < Struct.new(
       :volume_ar_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -2402,7 +2362,7 @@ module Aws::StorageGateway
     class DescribeCachediSCSIVolumesOutput < Struct.new(
       :cachedi_scsi_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the iSCSI volume
@@ -2414,7 +2374,7 @@ module Aws::StorageGateway
     class DescribeChapCredentialsInput < Struct.new(
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -2451,7 +2411,7 @@ module Aws::StorageGateway
     class DescribeChapCredentialsOutput < Struct.new(
       :chap_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_arn_list
@@ -2461,7 +2421,7 @@ module Aws::StorageGateway
     class DescribeFileSystemAssociationsInput < Struct.new(
       :file_system_association_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_info_list
@@ -2472,7 +2432,7 @@ module Aws::StorageGateway
     class DescribeFileSystemAssociationsOutput < Struct.new(
       :file_system_association_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the ID of the gateway.</p>
@@ -2483,7 +2443,7 @@ module Aws::StorageGateway
     class DescribeGatewayInformationInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -2605,7 +2565,7 @@ module Aws::StorageGateway
       :host_environment_id,
       :software_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>
@@ -2616,7 +2576,7 @@ module Aws::StorageGateway
     class DescribeMaintenanceStartTimeInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -2701,7 +2661,7 @@ module Aws::StorageGateway
       :timezone,
       :software_update_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeNFSFileSharesInput</p>
@@ -2712,7 +2672,7 @@ module Aws::StorageGateway
     class DescribeNFSFileSharesInput < Struct.new(
       :file_share_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeNFSFileSharesOutput</p>
@@ -2722,7 +2682,7 @@ module Aws::StorageGateway
     class DescribeNFSFileSharesOutput < Struct.new(
       :nfs_file_share_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeSMBFileSharesInput</p>
@@ -2733,7 +2693,7 @@ module Aws::StorageGateway
     class DescribeSMBFileSharesInput < Struct.new(
       :file_share_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeSMBFileSharesOutput</p>
@@ -2743,7 +2703,7 @@ module Aws::StorageGateway
     class DescribeSMBFileSharesOutput < Struct.new(
       :smb_file_share_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2753,7 +2713,7 @@ module Aws::StorageGateway
     class DescribeSMBSettingsInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -2866,7 +2826,7 @@ module Aws::StorageGateway
       :file_shares_visible,
       :smb_local_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the <a>DescribeSnapshotScheduleInput$VolumeARN</a>
@@ -2878,7 +2838,7 @@ module Aws::StorageGateway
     class DescribeSnapshotScheduleInput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_arn
@@ -2911,7 +2871,7 @@ module Aws::StorageGateway
       :timezone,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing a list of <a>DescribeStorediSCSIVolumesInput$VolumeARNs</a>.</p>
@@ -2922,7 +2882,7 @@ module Aws::StorageGateway
     class DescribeStorediSCSIVolumesInput < Struct.new(
       :volume_ar_ns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storedi_scsi_volumes
@@ -3013,7 +2973,7 @@ module Aws::StorageGateway
     class DescribeStorediSCSIVolumesOutput < Struct.new(
       :storedi_scsi_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTapeArchivesInput</p>
@@ -3034,7 +2994,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTapeArchivesOutput</p>
@@ -3054,7 +3014,7 @@ module Aws::StorageGateway
       :tape_archives,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTapeRecoveryPointsInput</p>
@@ -3075,7 +3035,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTapeRecoveryPointsOutput</p>
@@ -3098,7 +3058,7 @@ module Aws::StorageGateway
       :tape_recovery_point_infos,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTapesInput</p>
@@ -3129,7 +3089,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeTapesOutput</p>
@@ -3146,7 +3106,7 @@ module Aws::StorageGateway
       :tapes,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -3156,7 +3116,7 @@ module Aws::StorageGateway
     class DescribeUploadBufferInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -3181,7 +3141,7 @@ module Aws::StorageGateway
       :upload_buffer_used_in_bytes,
       :upload_buffer_allocated_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:upload_buffer_used_in_bytes] = 0 unless options.key?(:upload_buffer_used_in_bytes)
@@ -3217,7 +3177,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DescribeVTLDevicesOutput</p>
@@ -3240,7 +3200,7 @@ module Aws::StorageGateway
       :vtl_devices,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>
@@ -3251,7 +3211,7 @@ module Aws::StorageGateway
     class DescribeWorkingStorageInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -3279,7 +3239,7 @@ module Aws::StorageGateway
       :working_storage_used_in_bytes,
       :working_storage_allocated_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:working_storage_used_in_bytes] = 0 unless options.key?(:working_storage_used_in_bytes)
@@ -3304,7 +3264,7 @@ module Aws::StorageGateway
       :volume_arn,
       :force_detach,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AttachVolumeOutput</p>
@@ -3314,7 +3274,7 @@ module Aws::StorageGateway
     class DetachVolumeOutput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists iSCSI information about a VTL device.</p>
@@ -3337,7 +3297,7 @@ module Aws::StorageGateway
       :network_interface_port,
       :chap_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:network_interface_port] = 0 unless options.key?(:network_interface_port)
@@ -3354,7 +3314,7 @@ module Aws::StorageGateway
     class DisableGatewayInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DisableGatewayOutput</p>
@@ -3364,7 +3324,7 @@ module Aws::StorageGateway
     class DisableGatewayOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_arn
@@ -3380,7 +3340,7 @@ module Aws::StorageGateway
       :file_system_association_arn,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_arn
@@ -3389,7 +3349,7 @@ module Aws::StorageGateway
     class DisassociateFileSystemOutput < Struct.new(
       :file_system_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a gateway's local disk.</p>
@@ -3432,18 +3392,12 @@ module Aws::StorageGateway
       :disk_allocation_resource,
       :disk_attribute_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disk_size_in_bytes] = 0 unless options.key?(:disk_size_in_bytes)
         super
       end
-    end
-
-    module EncryptionType
-      SseS3 = 'SseS3'
-      SseKms = 'SseKms'
-      DsseKms = 'DsseKms'
     end
 
     # <p>Specifies network configuration information for the gateway associated with the Amazon FSx file system.</p>
@@ -3458,72 +3412,7 @@ module Aws::StorageGateway
     class EndpointNetworkConfiguration < Struct.new(
       :ip_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      ActivationKeyExpired = 'ActivationKeyExpired'
-      ActivationKeyInvalid = 'ActivationKeyInvalid'
-      ActivationKeyNotFound = 'ActivationKeyNotFound'
-      GatewayInternalError = 'GatewayInternalError'
-      GatewayNotConnected = 'GatewayNotConnected'
-      GatewayNotFound = 'GatewayNotFound'
-      GatewayProxyNetworkConnectionBusy = 'GatewayProxyNetworkConnectionBusy'
-      AuthenticationFailure = 'AuthenticationFailure'
-      BandwidthThrottleScheduleNotFound = 'BandwidthThrottleScheduleNotFound'
-      Blocked = 'Blocked'
-      CannotExportSnapshot = 'CannotExportSnapshot'
-      ChapCredentialNotFound = 'ChapCredentialNotFound'
-      DiskAlreadyAllocated = 'DiskAlreadyAllocated'
-      DiskDoesNotExist = 'DiskDoesNotExist'
-      DiskSizeGreaterThanVolumeMaxSize = 'DiskSizeGreaterThanVolumeMaxSize'
-      DiskSizeLessThanVolumeSize = 'DiskSizeLessThanVolumeSize'
-      DiskSizeNotGigAligned = 'DiskSizeNotGigAligned'
-      DuplicateCertificateInfo = 'DuplicateCertificateInfo'
-      DuplicateSchedule = 'DuplicateSchedule'
-      EndpointNotFound = 'EndpointNotFound'
-      IAMNotSupported = 'IAMNotSupported'
-      InitiatorInvalid = 'InitiatorInvalid'
-      InitiatorNotFound = 'InitiatorNotFound'
-      InternalError = 'InternalError'
-      InvalidGateway = 'InvalidGateway'
-      InvalidEndpoint = 'InvalidEndpoint'
-      InvalidParameters = 'InvalidParameters'
-      InvalidSchedule = 'InvalidSchedule'
-      LocalStorageLimitExceeded = 'LocalStorageLimitExceeded'
-      LunAlreadyAllocated_ = 'LunAlreadyAllocated '
-      LunInvalid = 'LunInvalid'
-      JoinDomainInProgress = 'JoinDomainInProgress'
-      MaximumContentLengthExceeded = 'MaximumContentLengthExceeded'
-      MaximumTapeCartridgeCountExceeded = 'MaximumTapeCartridgeCountExceeded'
-      MaximumVolumeCountExceeded = 'MaximumVolumeCountExceeded'
-      NetworkConfigurationChanged = 'NetworkConfigurationChanged'
-      NoDisksAvailable = 'NoDisksAvailable'
-      NotImplemented = 'NotImplemented'
-      NotSupported = 'NotSupported'
-      OperationAborted = 'OperationAborted'
-      OutdatedGateway = 'OutdatedGateway'
-      ParametersNotImplemented = 'ParametersNotImplemented'
-      RegionInvalid = 'RegionInvalid'
-      RequestTimeout = 'RequestTimeout'
-      ServiceUnavailable = 'ServiceUnavailable'
-      SnapshotDeleted = 'SnapshotDeleted'
-      SnapshotIdInvalid = 'SnapshotIdInvalid'
-      SnapshotInProgress = 'SnapshotInProgress'
-      SnapshotNotFound = 'SnapshotNotFound'
-      SnapshotScheduleNotFound = 'SnapshotScheduleNotFound'
-      StagingAreaFull = 'StagingAreaFull'
-      StorageFailure = 'StorageFailure'
-      TapeCartridgeNotFound = 'TapeCartridgeNotFound'
-      TargetAlreadyExists = 'TargetAlreadyExists'
-      TargetInvalid = 'TargetInvalid'
-      TargetNotFound = 'TargetNotFound'
-      UnauthorizedOperation = 'UnauthorizedOperation'
-      VolumeAlreadyExists = 'VolumeAlreadyExists'
-      VolumeIdInvalid = 'VolumeIdInvalid'
-      VolumeInUse = 'VolumeInUse'
-      VolumeNotFound = 'VolumeNotFound'
-      VolumeNotReady = 'VolumeNotReady'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_share_arn
@@ -3558,7 +3447,7 @@ module Aws::StorageGateway
       :file_share_arn,
       :force_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_id
@@ -3568,7 +3457,7 @@ module Aws::StorageGateway
     class EvictFilesFailingUploadOutput < Struct.new(
       :notification_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a file share. Only supported S3 File Gateway.</p>
@@ -3598,13 +3487,7 @@ module Aws::StorageGateway
       :file_share_status,
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of the file share.</p>
-    module FileShareType
-      NFS = 'NFS'
-      SMB = 'SMB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the object returned by <code>DescribeFileSystemAssociations</code> that
@@ -3659,7 +3542,7 @@ module Aws::StorageGateway
       :endpoint_network_configuration,
       :file_system_association_status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information on file system association status.</p>
@@ -3669,7 +3552,7 @@ module Aws::StorageGateway
     class FileSystemAssociationStatusDetail < Struct.new(
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the summary returned by <code>ListFileSystemAssociation</code>, which is a summary
@@ -3696,13 +3579,7 @@ module Aws::StorageGateway
       :file_system_association_status,
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GatewayCapacity
-      Small = 'Small'
-      Medium = 'Medium'
-      Large = 'Large'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a gateway object.</p>
@@ -3768,16 +3645,7 @@ module Aws::StorageGateway
       :deprecation_date,
       :software_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostEnvironment
-      VMWARE = 'VMWARE'
-      HYPER_V = 'HYPER-V'
-      EC2 = 'EC2'
-      KVM = 'KVM'
-      OTHER = 'OTHER'
-      SNOWBALL = 'SNOWBALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error has occurred during the request. For more information, see the
@@ -3793,7 +3661,7 @@ module Aws::StorageGateway
       :message,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception occurred because an invalid gateway request was issued to the service. For
@@ -3809,7 +3677,7 @@ module Aws::StorageGateway
       :message,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>JoinDomainInput</p>
@@ -3858,7 +3726,7 @@ module Aws::StorageGateway
       :user_name,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>JoinDomainOutput</p>
@@ -3919,7 +3787,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :active_directory_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -3929,7 +3797,7 @@ module Aws::StorageGateway
     class ListAutomaticTapeCreationPoliciesInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automatic_tape_creation_policy_infos
@@ -3940,7 +3808,7 @@ module Aws::StorageGateway
     class ListAutomaticTapeCreationPoliciesOutput < Struct.new(
       :automatic_tape_creation_policy_infos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3951,7 +3819,7 @@ module Aws::StorageGateway
     class ListCacheReportsInput < Struct.new(
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_list
@@ -3967,7 +3835,7 @@ module Aws::StorageGateway
       :cache_report_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListFileShareInput</p>
@@ -3989,7 +3857,7 @@ module Aws::StorageGateway
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListFileShareOutput</p>
@@ -4010,7 +3878,7 @@ module Aws::StorageGateway
       :next_marker,
       :file_share_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -4031,7 +3899,7 @@ module Aws::StorageGateway
       :limit,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -4052,7 +3920,7 @@ module Aws::StorageGateway
       :next_marker,
       :file_system_association_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing zero or more of the following fields:</p>
@@ -4080,7 +3948,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateways
@@ -4094,7 +3962,7 @@ module Aws::StorageGateway
       :gateways,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway.</p>
@@ -4105,7 +3973,7 @@ module Aws::StorageGateway
     class ListLocalDisksInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -4126,7 +3994,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTagsForResourceInput</p>
@@ -4146,7 +4014,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListTagsForResourceOutput</p>
@@ -4165,7 +4033,7 @@ module Aws::StorageGateway
       :marker,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_ar_ns
@@ -4184,7 +4052,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_infos
@@ -4201,7 +4069,7 @@ module Aws::StorageGateway
       :pool_infos,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object that contains one or more of the following fields:</p>
@@ -4238,7 +4106,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -4268,7 +4136,7 @@ module Aws::StorageGateway
       :tape_infos,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListVolumeInitiatorsInput</p>
@@ -4279,7 +4147,7 @@ module Aws::StorageGateway
     class ListVolumeInitiatorsInput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ListVolumeInitiatorsOutput</p>
@@ -4290,7 +4158,7 @@ module Aws::StorageGateway
     class ListVolumeInitiatorsOutput < Struct.new(
       :initiators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -4300,7 +4168,7 @@ module Aws::StorageGateway
     class ListVolumeRecoveryPointsInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -4314,7 +4182,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :volume_recovery_point_infos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object that contains one or more of the following fields:</p>
@@ -4347,7 +4215,7 @@ module Aws::StorageGateway
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -4381,7 +4249,7 @@ module Aws::StorageGateway
       :marker,
       :volume_infos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes Network File System (NFS) file share default values. Files and folders stored
@@ -4412,7 +4280,7 @@ module Aws::StorageGateway
       :group_id,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Unix file permissions and ownership information assigned, by default, to native S3
@@ -4658,7 +4526,7 @@ module Aws::StorageGateway
       :bucket_region,
       :audit_destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:kms_encrypted] = false unless options.key?(:kms_encrypted)
@@ -4688,7 +4556,7 @@ module Aws::StorageGateway
       :mac_address,
       :ipv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_share_arn
@@ -4697,7 +4565,7 @@ module Aws::StorageGateway
     class NotifyWhenUploadedInput < Struct.new(
       :file_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_share_arn
@@ -4711,20 +4579,7 @@ module Aws::StorageGateway
       :file_share_arn,
       :notification_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>A value that sets the access control list (ACL) permission for objects in the S3 bucket
-    #          that an S3 File Gateway puts objects into. The default value is
-    #          <code>private</code>.</p>
-    module ObjectACL
-      private = 'private'
-      public_read = 'public-read'
-      public_read_write = 'public-read-write'
-      authenticated_read = 'authenticated-read'
-      bucket_owner_read = 'bucket-owner-read'
-      bucket_owner_full_control = 'bucket-owner-full-control'
-      aws_exec_read = 'aws-exec-read'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom tape pool.</p>
@@ -4764,12 +4619,7 @@ module Aws::StorageGateway
       :retention_lock_time_in_days,
       :pool_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PoolStatus
-      ACTIVE = 'ACTIVE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RefreshCacheInput</p>
@@ -4799,7 +4649,7 @@ module Aws::StorageGateway
       :folder_list,
       :recursive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RefreshCacheOutput</p>
@@ -4814,7 +4664,7 @@ module Aws::StorageGateway
       :file_share_arn,
       :notification_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RemoveTagsFromResourceInput</p>
@@ -4829,7 +4679,7 @@ module Aws::StorageGateway
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RemoveTagsFromResourceOutput</p>
@@ -4839,7 +4689,7 @@ module Aws::StorageGateway
     class RemoveTagsFromResourceOutput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -4849,7 +4699,7 @@ module Aws::StorageGateway
     class ResetCacheInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -4859,13 +4709,7 @@ module Aws::StorageGateway
     class ResetCacheOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetentionLockType
-      COMPLIANCE = 'COMPLIANCE'
-      GOVERNANCE = 'GOVERNANCE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RetrieveTapeArchiveInput</p>
@@ -4884,7 +4728,7 @@ module Aws::StorageGateway
       :tape_arn,
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RetrieveTapeArchiveOutput</p>
@@ -4894,7 +4738,7 @@ module Aws::StorageGateway
     class RetrieveTapeArchiveOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RetrieveTapeRecoveryPointInput</p>
@@ -4910,7 +4754,7 @@ module Aws::StorageGateway
       :tape_arn,
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>RetrieveTapeRecoveryPointOutput</p>
@@ -4921,7 +4765,7 @@ module Aws::StorageGateway
     class RetrieveTapeRecoveryPointOutput < Struct.new(
       :tape_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Windows file permissions and ownership information assigned, by default, to native
@@ -5197,7 +5041,7 @@ module Aws::StorageGateway
       :bucket_region,
       :oplocks_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:kms_encrypted] = false unless options.key?(:kms_encrypted)
@@ -5217,14 +5061,7 @@ module Aws::StorageGateway
     class SMBLocalGroups < Struct.new(
       :gateway_admins,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SMBSecurityStrategy
-      ClientSpecified = 'ClientSpecified'
-      MandatorySigning = 'MandatorySigning'
-      MandatoryEncryption = 'MandatoryEncryption'
-      MandatoryEncryptionNoAes128 = 'MandatoryEncryptionNoAes128'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error has occurred because the service is unavailable. For more
@@ -5240,7 +5077,7 @@ module Aws::StorageGateway
       :message,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SetLocalConsolePasswordInput</p>
@@ -5255,7 +5092,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :local_console_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5265,7 +5102,7 @@ module Aws::StorageGateway
     class SetLocalConsolePasswordOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SetSMBGuestPasswordInput</p>
@@ -5280,7 +5117,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5290,7 +5127,7 @@ module Aws::StorageGateway
     class SetSMBGuestPasswordOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway to shut
@@ -5302,7 +5139,7 @@ module Aws::StorageGateway
     class ShutdownGatewayInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway that was shut
@@ -5314,7 +5151,7 @@ module Aws::StorageGateway
     class ShutdownGatewayOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of variables indicating the software update preferences for the gateway.</p>
@@ -5332,7 +5169,7 @@ module Aws::StorageGateway
     class SoftwareUpdatePreferences < Struct.new(
       :automatic_update_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5342,7 +5179,7 @@ module Aws::StorageGateway
     class StartAvailabilityMonitorTestInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5352,7 +5189,7 @@ module Aws::StorageGateway
     class StartAvailabilityMonitorTestOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_share_arn
@@ -5407,7 +5244,7 @@ module Aws::StorageGateway
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cache_report_arn
@@ -5417,7 +5254,7 @@ module Aws::StorageGateway
     class StartCacheReportOutput < Struct.new(
       :cache_report_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway to start.</p>
@@ -5428,7 +5265,7 @@ module Aws::StorageGateway
     class StartGatewayInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
@@ -5440,7 +5277,7 @@ module Aws::StorageGateway
     class StartGatewayOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional information about an error that was returned by the service. See the
@@ -5456,7 +5293,7 @@ module Aws::StorageGateway
       :error_code,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an iSCSI stored volume.</p>
@@ -5549,7 +5386,7 @@ module Aws::StorageGateway
       :kms_key,
       :target_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:volume_size_in_bytes] = 0 unless options.key?(:volume_size_in_bytes)
@@ -5571,7 +5408,7 @@ module Aws::StorageGateway
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a virtual tape object.</p>
@@ -5641,7 +5478,7 @@ module Aws::StorageGateway
       :retention_start_date,
       :pool_entry_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:worm] = false unless options.key?(:worm)
@@ -5719,7 +5556,7 @@ module Aws::StorageGateway
       :retention_start_date,
       :pool_entry_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:worm] = false unless options.key?(:worm)
@@ -5767,7 +5604,7 @@ module Aws::StorageGateway
       :retention_start_date,
       :pool_entry_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a recovery point.</p>
@@ -5792,12 +5629,7 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :tape_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TapeStorageClass
-      DEEP_ARCHIVE = 'DEEP_ARCHIVE'
-      GLACIER = 'GLACIER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automatic_tape_creation_rules
@@ -5812,7 +5644,7 @@ module Aws::StorageGateway
       :automatic_tape_creation_rules,
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5822,7 +5654,7 @@ module Aws::StorageGateway
     class UpdateAutomaticTapeCreationPolicyOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -5853,7 +5685,7 @@ module Aws::StorageGateway
       :average_upload_rate_limit_in_bits_per_sec,
       :average_download_rate_limit_in_bits_per_sec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway whose throttle
@@ -5865,7 +5697,7 @@ module Aws::StorageGateway
     class UpdateBandwidthRateLimitOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5880,7 +5712,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :bandwidth_rate_limit_intervals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -5890,7 +5722,7 @@ module Aws::StorageGateway
     class UpdateBandwidthRateLimitScheduleOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -5944,7 +5776,7 @@ module Aws::StorageGateway
       :initiator_name,
       :secret_to_authenticate_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -5960,7 +5792,7 @@ module Aws::StorageGateway
       :target_arn,
       :initiator_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_arn
@@ -5988,7 +5820,7 @@ module Aws::StorageGateway
       :audit_destination_arn,
       :cache_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_system_association_arn
@@ -5997,7 +5829,7 @@ module Aws::StorageGateway
     class UpdateFileSystemAssociationOutput < Struct.new(
       :file_system_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6029,7 +5861,7 @@ module Aws::StorageGateway
       :cloud_watch_log_group_arn,
       :gateway_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
@@ -6045,7 +5877,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :gateway_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway to update.</p>
@@ -6056,7 +5888,7 @@ module Aws::StorageGateway
     class UpdateGatewaySoftwareNowInput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway that was
@@ -6068,7 +5900,7 @@ module Aws::StorageGateway
     class UpdateGatewaySoftwareNowOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the following fields:</p>
@@ -6142,7 +5974,7 @@ module Aws::StorageGateway
       :day_of_month,
       :software_update_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the gateway whose maintenance
@@ -6154,7 +5986,7 @@ module Aws::StorageGateway
     class UpdateMaintenanceStartTimeOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateNFSFileShareInput</p>
@@ -6324,7 +6156,7 @@ module Aws::StorageGateway
       :notification_policy,
       :audit_destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateNFSFileShareOutput</p>
@@ -6334,7 +6166,7 @@ module Aws::StorageGateway
     class UpdateNFSFileShareOutput < Struct.new(
       :file_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateSMBFileShareInput</p>
@@ -6532,7 +6364,7 @@ module Aws::StorageGateway
       :notification_policy,
       :oplocks_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateSMBFileShareOutput</p>
@@ -6542,7 +6374,7 @@ module Aws::StorageGateway
     class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6556,7 +6388,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :file_shares_visible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6566,7 +6398,7 @@ module Aws::StorageGateway
     class UpdateSMBFileShareVisibilityOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6581,7 +6413,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :smb_local_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6591,7 +6423,7 @@ module Aws::StorageGateway
     class UpdateSMBLocalGroupsOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6625,7 +6457,7 @@ module Aws::StorageGateway
       :gateway_arn,
       :smb_security_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -6635,7 +6467,7 @@ module Aws::StorageGateway
     class UpdateSMBSecurityStrategyOutput < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing one or more of the following fields:</p>
@@ -6693,7 +6525,7 @@ module Aws::StorageGateway
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON object containing the Amazon Resource Name (ARN) of the updated storage
@@ -6705,7 +6537,7 @@ module Aws::StorageGateway
     class UpdateSnapshotScheduleOutput < Struct.new(
       :volume_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vtl_device_arn
@@ -6721,7 +6553,7 @@ module Aws::StorageGateway
       :vtl_device_arn,
       :device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>UpdateVTLDeviceTypeOutput</p>
@@ -6731,7 +6563,7 @@ module Aws::StorageGateway
     class UpdateVTLDeviceTypeOutput < Struct.new(
       :vtl_device_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a device object associated with a tape gateway.</p>
@@ -6758,7 +6590,7 @@ module Aws::StorageGateway
       :vtl_device_product_identifier,
       :devicei_scsi_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a storage volume object.</p>
@@ -6804,7 +6636,7 @@ module Aws::StorageGateway
       :volume_size_in_bytes,
       :volume_attachment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:volume_size_in_bytes] = 0 unless options.key?(:volume_size_in_bytes)
@@ -6835,7 +6667,7 @@ module Aws::StorageGateway
       :volume_usage_in_bytes,
       :volume_recovery_point_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:volume_size_in_bytes] = 0 unless options.key?(:volume_size_in_bytes)
@@ -6867,7 +6699,7 @@ module Aws::StorageGateway
       :lun_number,
       :chap_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:network_interface_port] = 0 unless options.key?(:network_interface_port)

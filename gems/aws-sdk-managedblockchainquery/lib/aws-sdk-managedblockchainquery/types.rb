@@ -13,7 +13,7 @@ module Aws::ManagedBlockchainQuery
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is the container for the unique public address on the blockchain.</p>
@@ -23,7 +23,7 @@ module Aws::ManagedBlockchainQuery
     class AddressIdentifierFilter < Struct.new(
       :transaction_event_to_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This container contains information about an contract.</p>
@@ -42,7 +42,7 @@ module Aws::ManagedBlockchainQuery
       :token_standard,
       :deployer_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error generated from a failed <code>BatchGetTokenBalance</code> request.</p>
@@ -76,7 +76,7 @@ module Aws::ManagedBlockchainQuery
       :error_message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute get_token_balance_inputs
@@ -85,7 +85,7 @@ module Aws::ManagedBlockchainQuery
     class BatchGetTokenBalanceInput < Struct.new(
       :get_token_balance_inputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the input for getting a token balance.</p>
@@ -107,7 +107,7 @@ module Aws::ManagedBlockchainQuery
       :owner_identifier,
       :at_blockchain_instant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_balances
@@ -120,7 +120,7 @@ module Aws::ManagedBlockchainQuery
       :token_balances,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the properties of a token balance output.</p>
@@ -150,7 +150,7 @@ module Aws::ManagedBlockchainQuery
       :at_blockchain_instant,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for time.</p>
@@ -164,7 +164,7 @@ module Aws::ManagedBlockchainQuery
     class BlockchainInstant < Struct.new(
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the <code>ConfirmationStatusFilter</code> that filters for the <a href="https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality">
@@ -179,7 +179,7 @@ module Aws::ManagedBlockchainQuery
     class ConfirmationStatusFilter < Struct.new(
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contract or wallet address by which to filter the request.</p>
@@ -197,7 +197,7 @@ module Aws::ManagedBlockchainQuery
       :token_standard,
       :deployer_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the blockchain address and network information about a contract.</p>
@@ -211,7 +211,7 @@ module Aws::ManagedBlockchainQuery
       :network,
       :contract_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of the contract.</p>
@@ -229,7 +229,7 @@ module Aws::ManagedBlockchainQuery
       :symbol,
       :decimals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contract_identifier
@@ -238,7 +238,7 @@ module Aws::ManagedBlockchainQuery
     class GetAssetContractInput < Struct.new(
       :contract_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contract_identifier
@@ -259,7 +259,7 @@ module Aws::ManagedBlockchainQuery
       :deployer_address,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_identifier
@@ -281,7 +281,7 @@ module Aws::ManagedBlockchainQuery
       :owner_identifier,
       :at_blockchain_instant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_identifier
@@ -310,7 +310,7 @@ module Aws::ManagedBlockchainQuery
       :at_blockchain_instant,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_hash
@@ -331,7 +331,7 @@ module Aws::ManagedBlockchainQuery
       :transaction_id,
       :network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction
@@ -340,7 +340,7 @@ module Aws::ManagedBlockchainQuery
     class GetTransactionOutput < Struct.new(
       :transaction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an internal error in the service.</p>
@@ -354,7 +354,7 @@ module Aws::ManagedBlockchainQuery
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contract_filter
@@ -380,7 +380,7 @@ module Aws::ManagedBlockchainQuery
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contracts
@@ -393,7 +393,7 @@ module Aws::ManagedBlockchainQuery
       :contracts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network
@@ -443,7 +443,7 @@ module Aws::ManagedBlockchainQuery
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -456,7 +456,7 @@ module Aws::ManagedBlockchainQuery
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists all the transaction events for an address on the blockchain.</p>
@@ -476,7 +476,7 @@ module Aws::ManagedBlockchainQuery
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_filter
@@ -514,7 +514,7 @@ module Aws::ManagedBlockchainQuery
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_balances
@@ -528,7 +528,7 @@ module Aws::ManagedBlockchainQuery
       :token_balances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transaction_hash
@@ -566,7 +566,7 @@ module Aws::ManagedBlockchainQuery
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -580,7 +580,7 @@ module Aws::ManagedBlockchainQuery
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -629,7 +629,7 @@ module Aws::ManagedBlockchainQuery
       :max_results,
       :confirmation_status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transactions
@@ -642,7 +642,7 @@ module Aws::ManagedBlockchainQuery
       :transactions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for determining how the list transaction result will 
@@ -660,7 +660,7 @@ module Aws::ManagedBlockchainQuery
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the owner information to filter by.</p>
@@ -670,7 +670,7 @@ module Aws::ManagedBlockchainQuery
     class OwnerFilter < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the owner identifier.</p>
@@ -680,7 +680,7 @@ module Aws::ManagedBlockchainQuery
     class OwnerIdentifier < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource was not found.</p>
@@ -698,7 +698,7 @@ module Aws::ManagedBlockchainQuery
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service quota has been exceeded for this resource.</p>
@@ -724,7 +724,7 @@ module Aws::ManagedBlockchainQuery
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request or operation couldn't be performed because a service is throttling 
@@ -749,7 +749,7 @@ module Aws::ManagedBlockchainQuery
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This container is used to specify a time frame.</p>
@@ -763,7 +763,7 @@ module Aws::ManagedBlockchainQuery
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The balance of the token.</p>
@@ -793,7 +793,7 @@ module Aws::ManagedBlockchainQuery
       :at_blockchain_instant,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container of the token filter like the contract address 
@@ -817,7 +817,7 @@ module Aws::ManagedBlockchainQuery
       :contract_address,
       :token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the identifier for the token including the unique token ID and its blockchain network.</p>
@@ -844,7 +844,7 @@ module Aws::ManagedBlockchainQuery
       :contract_address,
       :token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are two possible types of transactions used for this data type:</p>
@@ -945,7 +945,7 @@ module Aws::ManagedBlockchainQuery
       :confirmation_status,
       :execution_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container for the properties of a transaction event.</p>
@@ -1027,7 +1027,7 @@ module Aws::ManagedBlockchainQuery
       :blockchain_instant,
       :confirmation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container of the transaction output.</p>
@@ -1053,7 +1053,7 @@ module Aws::ManagedBlockchainQuery
       :transaction_timestamp,
       :confirmation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource passed is invalid.</p>
@@ -1071,7 +1071,7 @@ module Aws::ManagedBlockchainQuery
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource passed is invalid.</p>
@@ -1085,7 +1085,7 @@ module Aws::ManagedBlockchainQuery
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This container specifies filtering attributes related to <code>BITCOIN_VOUT</code> event types</p>
@@ -1095,7 +1095,7 @@ module Aws::ManagedBlockchainQuery
     class VoutFilter < Struct.new(
       :vout_spent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

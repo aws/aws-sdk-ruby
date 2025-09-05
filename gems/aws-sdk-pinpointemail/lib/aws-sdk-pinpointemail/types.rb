@@ -13,7 +13,7 @@ module Aws::PinpointEmail
     class AccountSuspendedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in your request already exists.</p>
@@ -22,7 +22,7 @@ module Aws::PinpointEmail
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input you provided is invalid.</p>
@@ -31,20 +31,7 @@ module Aws::PinpointEmail
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The action that you want Amazon Pinpoint to take if it can't read the required MX record for a
-    #             custom MAIL FROM domain. When you set this value to <code>UseDefaultValue</code>, Amazon Pinpoint
-    #             uses <i>amazonses.com</i> as the MAIL FROM domain. When you set this value
-    #             to <code>RejectMessage</code>, Amazon Pinpoint returns a <code>MailFromDomainNotVerified</code>
-    #             error, and doesn't attempt to deliver the email.</p>
-    #         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the
-    #                 <code>Pending</code>, <code>Failed</code>, and <code>TemporaryFailure</code>
-    #             states.</p>
-    module BehaviorOnMxFailure
-      USE_DEFAULT_VALUE = 'USE_DEFAULT_VALUE'
-      REJECT_MESSAGE = 'REJECT_MESSAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a blacklisting event that impacts one of the
@@ -64,7 +51,7 @@ module Aws::PinpointEmail
       :listing_time,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the body of the email message.</p>
@@ -82,7 +69,7 @@ module Aws::PinpointEmail
       :text,
       :html,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines an Amazon CloudWatch destination for email events. You can use Amazon CloudWatch to
@@ -94,7 +81,7 @@ module Aws::PinpointEmail
     class CloudWatchDestination < Struct.new(
       :dimension_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the dimension configuration to use when you send Amazon Pinpoint email
@@ -138,7 +125,7 @@ module Aws::PinpointEmail
       :dimension_value_source,
       :default_dimension_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is being modified by another operation or thread.</p>
@@ -147,7 +134,7 @@ module Aws::PinpointEmail
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the content of the email, and optionally a character set
@@ -165,7 +152,7 @@ module Aws::PinpointEmail
       :data,
       :charset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to add an event destination to a configuration set.</p>
@@ -183,14 +170,14 @@ module Aws::PinpointEmail
       :event_destination_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to create a configuration set.</p>
@@ -225,14 +212,14 @@ module Aws::PinpointEmail
       :sending_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateConfigurationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to create a new dedicated IP pool.</p>
@@ -247,14 +234,14 @@ module Aws::PinpointEmail
       :pool_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class CreateDedicatedIpPoolResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will
@@ -284,7 +271,7 @@ module Aws::PinpointEmail
       :content,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the predictive inbox placement test that you created.</p>
@@ -301,7 +288,7 @@ module Aws::PinpointEmail
       :report_id,
       :deliverability_test_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to begin the verification process for an email identity (an email address or
@@ -317,7 +304,7 @@ module Aws::PinpointEmail
       :email_identity,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the email identity is a domain, this object contains tokens that you can use to
@@ -342,7 +329,7 @@ module Aws::PinpointEmail
       :verified_for_sending_status,
       :dkim_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:verified_for_sending_status] = false unless options.key?(:verified_for_sending_status)
@@ -368,7 +355,7 @@ module Aws::PinpointEmail
       :volume_statistics,
       :domain_isp_placements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a dedicated IP address that is associated with your Amazon Pinpoint
@@ -406,7 +393,7 @@ module Aws::PinpointEmail
       :warmup_percentage,
       :pool_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete an event destination from a configuration set.</p>
@@ -421,14 +408,14 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :event_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a configuration set.</p>
@@ -438,14 +425,14 @@ module Aws::PinpointEmail
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteConfigurationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a dedicated IP pool.</p>
@@ -455,14 +442,14 @@ module Aws::PinpointEmail
     class DeleteDedicatedIpPoolRequest < Struct.new(
       :pool_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteDedicatedIpPoolResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete an existing email identity. When you delete an identity, you lose
@@ -475,23 +462,14 @@ module Aws::PinpointEmail
     class DeleteEmailIdentityRequest < Struct.new(
       :email_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class DeleteEmailIdentityResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The current status of your Deliverability dashboard subscription. If this value is
-    #                 <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end
-    #             of the current calendar month.</p>
-    module DeliverabilityDashboardAccountStatus
-      ACTIVE = 'ACTIVE'
-      PENDING_EXPIRATION = 'PENDING_EXPIRATION'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains metadata related to a predictive inbox placement test.</p>
@@ -524,17 +502,7 @@ module Aws::PinpointEmail
       :create_date,
       :deliverability_test_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of a predictive inbox placement test. If the status is <code>IN_PROGRESS</code>, then the predictive inbox placement test is
-    #             currently running. Predictive inbox placement tests are usually complete within 24 hours of creating the test.
-    #             If the status is <code>COMPLETE</code>, then the test is finished, and you can use the
-    #                 <code>GetDeliverabilityTestReport</code> operation to view the results of the
-    #             test.</p>
-    module DeliverabilityTestStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to associate a configuration set with a dedicated IP pool.</p>
@@ -552,7 +520,7 @@ module Aws::PinpointEmail
       :tls_policy,
       :sending_pool_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the recipients for an email.</p>
@@ -573,18 +541,7 @@ module Aws::PinpointEmail
       :cc_addresses,
       :bcc_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The location where Amazon Pinpoint finds the value of a dimension to publish to Amazon CloudWatch. If you
-    #             want Amazon Pinpoint to use the message tags that you specify using an X-SES-MESSAGE-TAGS header
-    #             or a parameter to the SendEmail/SendRawEmail API, choose <code>messageTag</code>. If you
-    #             want Amazon Pinpoint to use your own email headers, choose <code>emailHeader</code>. If you want
-    #             Amazon Pinpoint to use link tags, choose <code>linkTags</code>.</p>
-    module DimensionValueSource
-      MESSAGE_TAG = 'MESSAGE_TAG'
-      EMAIL_HEADER = 'EMAIL_HEADER'
-      LINK_TAG = 'LINK_TAG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the DKIM configuration for an email
@@ -639,51 +596,12 @@ module Aws::PinpointEmail
       :status,
       :tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:signing_enabled] = false unless options.key?(:signing_enabled)
         super
       end
-    end
-
-    # <p>The DKIM authentication status of the identity. The status can be one of the
-    #             following:</p>
-    #         <ul>
-    #             <li>
-    #                 <p>
-    #                   <code>PENDING</code> – The DKIM verification process was initiated, and
-    #                     Amazon Pinpoint is still waiting for the required CNAME records to appear in the DNS
-    #                     configuration for the domain.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>SUCCESS</code> – The DKIM authentication process completed
-    #                     successfully.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>FAILED</code> – The DKIM authentication process failed. This can
-    #                     happen when Amazon Pinpoint fails to find the required CNAME records in the DNS
-    #                     configuration of the domain.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>TEMPORARY_FAILURE</code> – A temporary issue is preventing Amazon Pinpoint
-    #                     from determining the DKIM authentication status of the domain.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>NOT_STARTED</code> – The DKIM verification process hasn't been
-    #                     initiated for the domain.</p>
-    #             </li>
-    #          </ul>
-    module DkimStatus
-      PENDING = 'PENDING'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      TEMPORARY_FAILURE = 'TEMPORARY_FAILURE'
-      NOT_STARTED = 'NOT_STARTED'
     end
 
     # <p>An object that contains the deliverability data for a specific campaign. This data is
@@ -763,7 +681,7 @@ module Aws::PinpointEmail
       :projected_volume,
       :esps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the Deliverability dashboard subscription for a
@@ -787,7 +705,7 @@ module Aws::PinpointEmail
       :subscription_start_date,
       :inbox_placement_tracking_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains inbox placement data for email sent from one of your email
@@ -818,7 +736,7 @@ module Aws::PinpointEmail
       :inbox_percentage,
       :spam_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the entire content of the email, including the message headers
@@ -868,7 +786,7 @@ module Aws::PinpointEmail
       :raw,
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In Amazon Pinpoint, <i>events</i> include message sends, deliveries, opens,
@@ -915,7 +833,7 @@ module Aws::PinpointEmail
       :sns_destination,
       :pinpoint_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -963,7 +881,7 @@ module Aws::PinpointEmail
       :sns_destination,
       :pinpoint_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -971,24 +889,11 @@ module Aws::PinpointEmail
       end
     end
 
-    # <p>An email sending event type. For example, email sends, opens, and bounces are all
-    #             email events.</p>
-    module EventType
-      SEND = 'SEND'
-      REJECT = 'REJECT'
-      BOUNCE = 'BOUNCE'
-      COMPLAINT = 'COMPLAINT'
-      DELIVERY = 'DELIVERY'
-      OPEN = 'OPEN'
-      CLICK = 'CLICK'
-      RENDERING_FAILURE = 'RENDERING_FAILURE'
-    end
-
     # <p>A request to obtain information about the email-sending capabilities of your Amazon Pinpoint
     #             account.</p>
     class GetAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of details about the email-sending capabilities of your Amazon Pinpoint account in the
@@ -1048,7 +953,7 @@ module Aws::PinpointEmail
       :enforcement_status,
       :production_access_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sending_enabled] = false unless options.key?(:sending_enabled)
@@ -1068,7 +973,7 @@ module Aws::PinpointEmail
     class GetBlacklistReportsRequest < Struct.new(
       :blacklist_item_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about blacklist events.</p>
@@ -1079,7 +984,7 @@ module Aws::PinpointEmail
     class GetBlacklistReportsResponse < Struct.new(
       :blacklist_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain information about the event destinations for a configuration
@@ -1090,7 +995,7 @@ module Aws::PinpointEmail
     class GetConfigurationSetEventDestinationsRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an event destination for a configuration set.</p>
@@ -1101,7 +1006,7 @@ module Aws::PinpointEmail
     class GetConfigurationSetEventDestinationsResponse < Struct.new(
       :event_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain information about a configuration set.</p>
@@ -1112,7 +1017,7 @@ module Aws::PinpointEmail
     class GetConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a configuration set.</p>
@@ -1147,7 +1052,7 @@ module Aws::PinpointEmail
       :sending_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain more information about a dedicated IP address.</p>
@@ -1158,7 +1063,7 @@ module Aws::PinpointEmail
     class GetDedicatedIpRequest < Struct.new(
       :ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a dedicated IP address.</p>
@@ -1168,7 +1073,7 @@ module Aws::PinpointEmail
     class GetDedicatedIpResponse < Struct.new(
       :dedicated_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain more information about dedicated IP pools.</p>
@@ -1190,7 +1095,7 @@ module Aws::PinpointEmail
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the dedicated IP addresses that are associated with your Amazon Pinpoint
@@ -1208,7 +1113,7 @@ module Aws::PinpointEmail
       :dedicated_ips,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account.
@@ -1220,7 +1125,7 @@ module Aws::PinpointEmail
     #             features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>
     class GetDeliverabilityDashboardOptionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.</p>
@@ -1256,7 +1161,7 @@ module Aws::PinpointEmail
       :active_subscribed_domains,
       :pending_expiration_subscribed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dashboard_enabled] = false unless options.key?(:dashboard_enabled)
@@ -1271,7 +1176,7 @@ module Aws::PinpointEmail
     class GetDeliverabilityTestReportRequest < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of the predictive inbox placement test.</p>
@@ -1302,7 +1207,7 @@ module Aws::PinpointEmail
       :message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieve all the deliverability data for a specific campaign. This data is available
@@ -1318,7 +1223,7 @@ module Aws::PinpointEmail
     class GetDomainDeliverabilityCampaignRequest < Struct.new(
       :campaign_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains all the deliverability data for a specific campaign. This data
@@ -1331,7 +1236,7 @@ module Aws::PinpointEmail
     class GetDomainDeliverabilityCampaignResponse < Struct.new(
       :domain_deliverability_campaign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain deliverability metrics for a domain.</p>
@@ -1352,7 +1257,7 @@ module Aws::PinpointEmail
       :start_date,
       :end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that includes statistics that are related to the domain that you
@@ -1371,7 +1276,7 @@ module Aws::PinpointEmail
       :overall_volume,
       :daily_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to return details about an email identity.</p>
@@ -1381,7 +1286,7 @@ module Aws::PinpointEmail
     class GetEmailIdentityRequest < Struct.new(
       :email_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an email identity.</p>
@@ -1425,7 +1330,7 @@ module Aws::PinpointEmail
       :mail_from_attributes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:feedback_forwarding_status] = false unless options.key?(:feedback_forwarding_status)
@@ -1467,29 +1372,12 @@ module Aws::PinpointEmail
       :identity_name,
       :sending_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sending_enabled] = false unless options.key?(:sending_enabled)
         super
       end
-    end
-
-    # <p>The email identity type. The identity type can be one of the following:</p>
-    #         <ul>
-    #             <li>
-    #                 <p>
-    #                   <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>DOMAIN</code> – The identity is a domain.</p>
-    #             </li>
-    #          </ul>
-    module IdentityType
-      EMAIL_ADDRESS = 'EMAIL_ADDRESS'
-      DOMAIN = 'DOMAIN'
-      MANAGED_DOMAIN = 'MANAGED_DOMAIN'
     end
 
     # <p>An object that contains information about the inbox placement data settings for a
@@ -1507,7 +1395,7 @@ module Aws::PinpointEmail
       :global,
       :tracked_isps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:global] = false unless options.key?(:global)
@@ -1527,7 +1415,7 @@ module Aws::PinpointEmail
       :isp_name,
       :placement_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines an Amazon Kinesis Data Firehose destination for email events. You can use Amazon Kinesis Data Firehose to
@@ -1544,7 +1432,7 @@ module Aws::PinpointEmail
       :iam_role_arn,
       :delivery_stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are too many instances of the specified resource type.</p>
@@ -1553,7 +1441,7 @@ module Aws::PinpointEmail
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current
@@ -1572,7 +1460,7 @@ module Aws::PinpointEmail
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of configuration sets in your Amazon Pinpoint account in the current AWS Region.</p>
@@ -1590,7 +1478,7 @@ module Aws::PinpointEmail
       :configuration_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to obtain a list of dedicated IP pools.</p>
@@ -1608,7 +1496,7 @@ module Aws::PinpointEmail
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of dedicated IP pools.</p>
@@ -1625,7 +1513,7 @@ module Aws::PinpointEmail
       :dedicated_ip_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to list all of the predictive inbox placement tests that you've performed.</p>
@@ -1645,7 +1533,7 @@ module Aws::PinpointEmail
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the predictive inbox placement test reports that are available for your account, regardless of
@@ -1662,7 +1550,7 @@ module Aws::PinpointEmail
       :deliverability_test_reports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieve deliverability data for all the campaigns that used a specific domain to send
@@ -1700,7 +1588,7 @@ module Aws::PinpointEmail
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of objects that provide deliverability data for all the campaigns that used a
@@ -1720,7 +1608,7 @@ module Aws::PinpointEmail
       :domain_deliverability_campaigns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to list all of the email identities associated with your Amazon Pinpoint account. This
@@ -1741,7 +1629,7 @@ module Aws::PinpointEmail
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of all of the identities that you've attempted to verify for use with Amazon Pinpoint,
@@ -1760,7 +1648,7 @@ module Aws::PinpointEmail
       :email_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1770,7 +1658,7 @@ module Aws::PinpointEmail
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1781,7 +1669,7 @@ module Aws::PinpointEmail
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of attributes that are associated with a MAIL FROM domain.</p>
@@ -1828,7 +1716,7 @@ module Aws::PinpointEmail
       :mail_from_domain_status,
       :behavior_on_mx_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message can't be sent because the sending domain isn't verified.</p>
@@ -1837,37 +1725,7 @@ module Aws::PinpointEmail
     class MailFromDomainNotVerifiedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of the MAIL FROM domain. This status can have the following values:</p>
-    #         <ul>
-    #             <li>
-    #                 <p>
-    #                   <code>PENDING</code> – Amazon Pinpoint hasn't started searching for the MX record
-    #                     yet.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>SUCCESS</code> – Amazon Pinpoint detected the required MX record for the
-    #                     MAIL FROM domain.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>FAILED</code> – Amazon Pinpoint can't find the required MX record, or the
-    #                     record no longer exists.</p>
-    #             </li>
-    #             <li>
-    #                 <p>
-    #                   <code>TEMPORARY_FAILURE</code> – A temporary issue occurred, which
-    #                     prevented Amazon Pinpoint from determining the status of the MAIL FROM domain.</p>
-    #             </li>
-    #          </ul>
-    module MailFromDomainStatus
-      PENDING = 'PENDING'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      TEMPORARY_FAILURE = 'TEMPORARY_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the email message that you're sending. The <code>Message</code> object
@@ -1885,7 +1743,7 @@ module Aws::PinpointEmail
       :subject,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message can't be sent because it contains invalid content.</p>
@@ -1894,7 +1752,7 @@ module Aws::PinpointEmail
     class MessageRejected < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and value of a tag that you apply to an email. You can use message
@@ -1930,7 +1788,7 @@ module Aws::PinpointEmail
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you attempted to access doesn't exist.</p>
@@ -1939,7 +1797,7 @@ module Aws::PinpointEmail
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about email that was sent from the selected
@@ -1961,7 +1819,7 @@ module Aws::PinpointEmail
       :read_rate_percent,
       :domain_isp_placements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines a Amazon Pinpoint destination for email events. You can use Amazon Pinpoint events
@@ -1974,7 +1832,7 @@ module Aws::PinpointEmail
     class PinpointDestination < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains inbox placement data for an email provider.</p>
@@ -2004,7 +1862,7 @@ module Aws::PinpointEmail
       :spf_percentage,
       :dkim_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to enable or disable the automatic IP address warm-up feature.</p>
@@ -2017,14 +1875,14 @@ module Aws::PinpointEmail
     class PutAccountDedicatedIpWarmupAttributesRequest < Struct.new(
       :auto_warmup_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountDedicatedIpWarmupAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to change the ability of your account to send email.</p>
@@ -2039,14 +1897,14 @@ module Aws::PinpointEmail
     class PutAccountSendingAttributesRequest < Struct.new(
       :sending_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutAccountSendingAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to associate a configuration set with a dedicated IP pool.</p>
@@ -2069,14 +1927,14 @@ module Aws::PinpointEmail
       :tls_policy,
       :sending_pool_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetDeliveryOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to enable or disable tracking of reputation metrics for a configuration
@@ -2094,14 +1952,14 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :reputation_metrics_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetReputationOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to enable or disable the ability of Amazon Pinpoint to send emails that use a specific
@@ -2118,14 +1976,14 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :sending_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetSendingOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to add a custom domain for tracking open and click events to a configuration
@@ -2141,14 +1999,14 @@ module Aws::PinpointEmail
       :configuration_set_name,
       :custom_redirect_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutConfigurationSetTrackingOptionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to move a dedicated IP address to a dedicated IP pool.</p>
@@ -2164,14 +2022,14 @@ module Aws::PinpointEmail
       :ip,
       :destination_pool_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpInPoolResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to change the warm-up attributes for a dedicated IP address. This operation
@@ -2187,14 +2045,14 @@ module Aws::PinpointEmail
       :ip,
       :warmup_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutDedicatedIpWarmupAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the
@@ -2216,14 +2074,14 @@ module Aws::PinpointEmail
       :dashboard_enabled,
       :subscribed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response that indicates whether the Deliverability dashboard is enabled for your Amazon Pinpoint
     #             account.</p>
     class PutDeliverabilityDashboardOptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to enable or disable DKIM signing of email that you send from an email
@@ -2241,14 +2099,14 @@ module Aws::PinpointEmail
       :email_identity,
       :signing_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityDkimAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to set the attributes that control how bounce and complaint events are
@@ -2272,14 +2130,14 @@ module Aws::PinpointEmail
       :email_identity,
       :email_forwarding_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityFeedbackAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to configure the custom MAIL FROM domain for a verified identity.</p>
@@ -2318,14 +2176,14 @@ module Aws::PinpointEmail
       :mail_from_domain,
       :behavior_on_mx_failure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class PutEmailIdentityMailFromAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The raw email message.</p>
@@ -2363,7 +2221,7 @@ module Aws::PinpointEmail
     class RawMessage < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enable or disable collection of reputation metrics for emails that you send using this
@@ -2382,7 +2240,7 @@ module Aws::PinpointEmail
       :reputation_metrics_enabled,
       :last_fresh_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:reputation_metrics_enabled] = false unless options.key?(:reputation_metrics_enabled)
@@ -2427,7 +2285,7 @@ module Aws::PinpointEmail
       :email_tags,
       :configuration_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A unique message ID that you receive when Amazon Pinpoint accepts an email for sending.</p>
@@ -2444,7 +2302,7 @@ module Aws::PinpointEmail
     class SendEmailResponse < Struct.new(
       :message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the per-day and per-second sending limits
@@ -2468,7 +2326,7 @@ module Aws::PinpointEmail
       :max_send_rate,
       :sent_last24_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max24_hour_send] = 0 unless options.key?(:max24_hour_send)
@@ -2487,7 +2345,7 @@ module Aws::PinpointEmail
     class SendingOptions < Struct.new(
       :sending_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sending_enabled] = false unless options.key?(:sending_enabled)
@@ -2502,7 +2360,7 @@ module Aws::PinpointEmail
     class SendingPausedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to
@@ -2515,7 +2373,7 @@ module Aws::PinpointEmail
     class SnsDestination < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the tags that are associated with a resource.
@@ -2565,7 +2423,7 @@ module Aws::PinpointEmail
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2582,12 +2440,12 @@ module Aws::PinpointEmail
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -2600,16 +2458,7 @@ module Aws::PinpointEmail
       :template_arn,
       :template_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies whether messages that use the configuration set are required to use
-    #             Transport Layer Security (TLS). If the value is <code>Require</code>, messages are only
-    #             delivered if a TLS connection can be established. If the value is <code>Optional</code>,
-    #             messages can be delivered in plain text if a TLS connection can't be established.</p>
-    module TlsPolicy
-      REQUIRE = 'REQUIRE'
-      OPTIONAL = 'OPTIONAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many requests have been made to the operation.</p>
@@ -2618,7 +2467,7 @@ module Aws::PinpointEmail
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the tracking options for a configuration set. When you use
@@ -2634,7 +2483,7 @@ module Aws::PinpointEmail
     class TrackingOptions < Struct.new(
       :custom_redirect_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2654,12 +2503,12 @@ module Aws::PinpointEmail
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to change the settings for an event destination for a configuration
@@ -2679,14 +2528,14 @@ module Aws::PinpointEmail
       :event_destination_name,
       :event_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An HTTP 200 response if the request succeeds, or an error message if the request
     #             fails.</p>
     class UpdateConfigurationSetEventDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about the amount of email that was delivered to
@@ -2712,13 +2561,7 @@ module Aws::PinpointEmail
       :projected_inbox,
       :projected_spam,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The warmup status of a dedicated IP.</p>
-    module WarmupStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      DONE = 'DONE'
+      include ::Smithy::Schema::Structure
     end
 
   end

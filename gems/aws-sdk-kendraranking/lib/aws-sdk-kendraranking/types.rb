@@ -14,7 +14,7 @@ module Aws::KendraRanking
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets additional capacity units configured for your 
@@ -32,7 +32,7 @@ module Aws::KendraRanking
     class CapacityUnitsConfiguration < Struct.new(
       :rescore_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict occurred with the request. Please fix any 
@@ -42,7 +42,7 @@ module Aws::KendraRanking
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -80,7 +80,7 @@ module Aws::KendraRanking
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -94,7 +94,7 @@ module Aws::KendraRanking
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -104,7 +104,7 @@ module Aws::KendraRanking
     class DeleteRescoreExecutionPlanRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -114,7 +114,7 @@ module Aws::KendraRanking
     class DescribeRescoreExecutionPlanRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -168,7 +168,7 @@ module Aws::KendraRanking
       :status,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a document from a search service such 
@@ -214,7 +214,7 @@ module Aws::KendraRanking
       :tokenized_body,
       :original_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An issue occurred with the internal server used for 
@@ -227,7 +227,7 @@ module Aws::KendraRanking
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -243,7 +243,7 @@ module Aws::KendraRanking
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_items
@@ -258,7 +258,7 @@ module Aws::KendraRanking
       :summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request information for listing tags associated with 
@@ -272,7 +272,7 @@ module Aws::KendraRanking
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an 
@@ -284,15 +284,7 @@ module Aws::KendraRanking
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RescoreExecutionPlanStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for a rescore execution plan. A rescore 
@@ -324,7 +316,7 @@ module Aws::KendraRanking
       :updated_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rescore_execution_plan_id
@@ -344,7 +336,7 @@ module Aws::KendraRanking
       :search_query,
       :documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rescore_id
@@ -361,7 +353,7 @@ module Aws::KendraRanking
       :rescore_id,
       :result_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A result item for a document with a new relevancy score.</p>
@@ -376,7 +368,7 @@ module Aws::KendraRanking
       :document_id,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you want to use doesn't exist. Please 
@@ -387,7 +379,7 @@ module Aws::KendraRanking
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you want to use is unavailable. Please 
@@ -398,7 +390,7 @@ module Aws::KendraRanking
     class ResourceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the set limits for your 
@@ -411,7 +403,7 @@ module Aws::KendraRanking
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that identifies or categorizes a rescore 
@@ -433,7 +425,7 @@ module Aws::KendraRanking
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request information for tagging a rescore execution 
@@ -453,14 +445,14 @@ module Aws::KendraRanking
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an 
     #             HTTP 200 response with an empty HTTP body.</p>
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. 
@@ -470,7 +462,7 @@ module Aws::KendraRanking
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request information to remove a tag from a rescore 
@@ -490,14 +482,14 @@ module Aws::KendraRanking
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the action is successful, the service sends back an 
     #             HTTP 200 response with an empty HTTP body.</p>
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -524,7 +516,7 @@ module Aws::KendraRanking
       :description,
       :capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints set by 
@@ -535,7 +527,7 @@ module Aws::KendraRanking
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

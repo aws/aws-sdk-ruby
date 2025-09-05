@@ -6,13 +6,6 @@ module Aws::CloudFormation
   # This module contains the types returned by client operations.
   module Types
 
-    module AccountFilterType
-      NONE = 'NONE'
-      INTERSECTION = 'INTERSECTION'
-      DIFFERENCE = 'DIFFERENCE'
-      UNION = 'UNION'
-    end
-
     # <p>Structure that contains the results of the account gate function which CloudFormation invokes,
     #    if present, before proceeding with a stack set operation in an account and Region.</p>
     #          <p>For each account and Region, CloudFormation lets you specify a Lambda function that encapsulates
@@ -69,13 +62,7 @@ module Aws::CloudFormation
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountGateStatus
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AccountLimit data type.</p>
@@ -105,17 +92,17 @@ module Aws::CloudFormation
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ActivateOrganizationsAccessInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ActivateOrganizationsAccessOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -195,7 +182,7 @@ module Aws::CloudFormation
       :version_bump,
       :major_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -205,7 +192,7 @@ module Aws::CloudFormation
     class ActivateTypeOutput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource with the name requested already exists.</p>
@@ -214,13 +201,7 @@ module Aws::CloudFormation
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeChangeType
-      Add = 'Add'
-      Remove = 'Remove'
-      Modify = 'Modify'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>[Service-managed permissions] Describes whether StackSets automatically deploys to Organizations accounts that are added to a target organization or organizational unit
@@ -240,7 +221,7 @@ module Aws::CloudFormation
       :enabled,
       :retain_stacks_on_account_removal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information concerning an error generated during the setting of configuration data
@@ -259,7 +240,7 @@ module Aws::CloudFormation
       :error_message,
       :type_configuration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_configuration_identifiers
@@ -268,7 +249,7 @@ module Aws::CloudFormation
     class BatchDescribeTypeConfigurationsInput < Struct.new(
       :type_configuration_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -288,7 +269,7 @@ module Aws::CloudFormation
       :unprocessed_type_configurations,
       :type_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred during a CloudFormation registry operation.</p>
@@ -298,12 +279,7 @@ module Aws::CloudFormation
     class CFNRegistryException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CallAs
-      SELF = 'SELF'
-      DELEGATED_ADMIN = 'DELEGATED_ADMIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>CancelUpdateStack</a> action.</p>
@@ -332,20 +308,7 @@ module Aws::CloudFormation
       :stack_name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Capability
-      CAPABILITY_IAM = 'CAPABILITY_IAM'
-      CAPABILITY_NAMED_IAM = 'CAPABILITY_NAMED_IAM'
-      CAPABILITY_AUTO_EXPAND = 'CAPABILITY_AUTO_EXPAND'
-    end
-
-    module Category
-      REGISTERED = 'REGISTERED'
-      ACTIVATED = 'ACTIVATED'
-      THIRD_PARTY = 'THIRD_PARTY'
-      AWS_TYPES = 'AWS_TYPES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Change</code> structure describes the changes CloudFormation will perform if you
@@ -372,15 +335,7 @@ module Aws::CloudFormation
       :hook_invocation_count,
       :resource_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeAction
-      Add = 'Add'
-      Modify = 'Modify'
-      Remove = 'Remove'
-      Import = 'Import'
-      Dynamic = 'Dynamic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the resource, the hook, and the hook version to be invoked.</p>
@@ -462,7 +417,7 @@ module Aws::CloudFormation
       :type_configuration_version_id,
       :target_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies <code>RESOURCE</code> type target details for activated Hooks.</p>
@@ -480,7 +435,7 @@ module Aws::CloudFormation
       :resource_type,
       :resource_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies target details for an activated hook.</p>
@@ -494,13 +449,7 @@ module Aws::CloudFormation
       :target_type,
       :resource_target_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeSetHooksStatus
-      PLANNING = 'PLANNING'
-      PLANNED = 'PLANNED'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified change set name or ID doesn't exit. To view valid change sets for a stack, use the
@@ -510,18 +459,7 @@ module Aws::CloudFormation
     class ChangeSetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeSetStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ChangeSetSummary</code> structure describes a change set, its status, and the
@@ -585,30 +523,7 @@ module Aws::CloudFormation
       :root_change_set_id,
       :import_existing_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeSetType
-      CREATE = 'CREATE'
-      UPDATE = 'UPDATE'
-      IMPORT = 'IMPORT'
-    end
-
-    module ChangeSource
-      ResourceReference = 'ResourceReference'
-      ParameterReference = 'ParameterReference'
-      ResourceAttribute = 'ResourceAttribute'
-      DirectModification = 'DirectModification'
-      Automatic = 'Automatic'
-    end
-
-    module ChangeType
-      Resource = 'Resource'
-    end
-
-    module ConcurrencyMode
-      STRICT_FAILURE_TOLERANCE = 'STRICT_FAILURE_TOLERANCE'
-      SOFT_FAILURE_TOLERANCE = 'SOFT_FAILURE_TOLERANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No more than 5 generated templates can be in an <code>InProgress</code> or <code>Pending</code> status at one
@@ -619,7 +534,7 @@ module Aws::CloudFormation
     class ConcurrentResourcesLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>ContinueUpdateRollback</a> action.</p>
@@ -685,13 +600,13 @@ module Aws::CloudFormation
       :resources_to_skip,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>ContinueUpdateRollback</a> operation.</p>
     class ContinueUpdateRollbackOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>CreateChangeSet</a> action.</p>
@@ -964,7 +879,7 @@ module Aws::CloudFormation
       :on_stack_failure,
       :import_existing_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>CreateChangeSet</a> action.</p>
@@ -978,7 +893,7 @@ module Aws::CloudFormation
       :id,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -1004,7 +919,7 @@ module Aws::CloudFormation
       :stack_name,
       :template_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generated_template_id
@@ -1013,7 +928,7 @@ module Aws::CloudFormation
     class CreateGeneratedTemplateOutput < Struct.new(
       :generated_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>CreateStack</a> action.</p>
@@ -1278,7 +1193,7 @@ module Aws::CloudFormation
       :enable_termination_protection,
       :retain_except_on_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -1375,7 +1290,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -1384,7 +1299,7 @@ module Aws::CloudFormation
     class CreateStackInstancesOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>CreateStack</a> action.</p>
@@ -1394,7 +1309,7 @@ module Aws::CloudFormation
     class CreateStackOutput < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -1416,7 +1331,7 @@ module Aws::CloudFormation
       :resource_mappings,
       :stack_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_refactor_id
@@ -1425,7 +1340,7 @@ module Aws::CloudFormation
     class CreateStackRefactorOutput < Struct.new(
       :stack_refactor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -1645,7 +1560,7 @@ module Aws::CloudFormation
       :client_request_token,
       :managed_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_id
@@ -1654,7 +1569,7 @@ module Aws::CloudFormation
     class CreateStackSetOutput < Struct.new(
       :stack_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource exists, but has been changed.</p>
@@ -1663,17 +1578,17 @@ module Aws::CloudFormation
     class CreatedButModifiedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeactivateOrganizationsAccessInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeactivateOrganizationsAccessOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -1697,12 +1612,12 @@ module Aws::CloudFormation
       :type,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeactivateTypeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DeleteChangeSet</a> action.</p>
@@ -1717,13 +1632,13 @@ module Aws::CloudFormation
       :change_set_name,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DeleteChangeSet</a> action.</p>
     class DeleteChangeSetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generated_template_name
@@ -1732,7 +1647,7 @@ module Aws::CloudFormation
     class DeleteGeneratedTemplateInput < Struct.new(
       :generated_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>DeleteStack</a> action.</p>
@@ -1792,7 +1707,7 @@ module Aws::CloudFormation
       :client_request_token,
       :deletion_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -1862,7 +1777,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -1871,7 +1786,7 @@ module Aws::CloudFormation
     class DeleteStackInstancesOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -1901,17 +1816,12 @@ module Aws::CloudFormation
       :stack_set_name,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStackSetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionMode
-      STANDARD = 'STANDARD'
-      FORCE_DELETE_STACK = 'FORCE_DELETE_STACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>[Service-managed permissions] The Organizations accounts to which StackSets deploys.
@@ -1972,12 +1882,7 @@ module Aws::CloudFormation
       :organizational_unit_ids,
       :account_filter_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeprecatedStatus
-      LIVE = 'LIVE'
-      DEPRECATED = 'DEPRECATED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2005,12 +1910,12 @@ module Aws::CloudFormation
       :type_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterTypeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DescribeAccountLimits</a> action.</p>
@@ -2020,7 +1925,7 @@ module Aws::CloudFormation
     class DescribeAccountLimitsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DescribeAccountLimits</a> action.</p>
@@ -2036,7 +1941,7 @@ module Aws::CloudFormation
       :account_limits,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_set_name
@@ -2060,7 +1965,7 @@ module Aws::CloudFormation
       :next_token,
       :logical_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_set_id
@@ -2093,7 +1998,7 @@ module Aws::CloudFormation
       :stack_id,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>DescribeChangeSet</a> action.</p>
@@ -2118,7 +2023,7 @@ module Aws::CloudFormation
       :next_token,
       :include_property_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>DescribeChangeSet</a> action.</p>
@@ -2249,7 +2154,7 @@ module Aws::CloudFormation
       :on_stack_failure,
       :import_existing_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generated_template_name
@@ -2258,7 +2163,7 @@ module Aws::CloudFormation
     class DescribeGeneratedTemplateInput < Struct.new(
       :generated_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generated_template_id
@@ -2350,7 +2255,7 @@ module Aws::CloudFormation
       :template_configuration,
       :total_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute call_as
@@ -2374,7 +2279,7 @@ module Aws::CloudFormation
     class DescribeOrganizationsAccessInput < Struct.new(
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2383,7 +2288,7 @@ module Aws::CloudFormation
     class DescribeOrganizationsAccessOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute publisher_id
@@ -2395,7 +2300,7 @@ module Aws::CloudFormation
     class DescribePublisherInput < Struct.new(
       :publisher_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute publisher_id
@@ -2418,7 +2323,7 @@ module Aws::CloudFormation
       :identity_provider,
       :publisher_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_scan_id
@@ -2427,7 +2332,7 @@ module Aws::CloudFormation
     class DescribeResourceScanInput < Struct.new(
       :resource_scan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_scan_id
@@ -2520,7 +2425,7 @@ module Aws::CloudFormation
       :resources_read,
       :scan_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_drift_detection_id
@@ -2532,7 +2437,7 @@ module Aws::CloudFormation
     class DescribeStackDriftDetectionStatusInput < Struct.new(
       :stack_drift_detection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2613,7 +2518,7 @@ module Aws::CloudFormation
       :drifted_stack_resource_count,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>DescribeStackEvents</a> action.</p>
@@ -2636,7 +2541,7 @@ module Aws::CloudFormation
       :stack_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>DescribeStackEvents</a> action.</p>
@@ -2651,7 +2556,7 @@ module Aws::CloudFormation
       :stack_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -2689,7 +2594,7 @@ module Aws::CloudFormation
       :stack_instance_region,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_instance
@@ -2698,7 +2603,7 @@ module Aws::CloudFormation
     class DescribeStackInstanceOutput < Struct.new(
       :stack_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_refactor_id
@@ -2707,7 +2612,7 @@ module Aws::CloudFormation
     class DescribeStackRefactorInput < Struct.new(
       :stack_refactor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -2740,7 +2645,7 @@ module Aws::CloudFormation
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -2790,7 +2695,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_resource_drifts
@@ -2813,7 +2718,7 @@ module Aws::CloudFormation
       :stack_resource_drifts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>DescribeStackResource</a> action.</p>
@@ -2836,7 +2741,7 @@ module Aws::CloudFormation
       :stack_name,
       :logical_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>DescribeStackResource</a> action.</p>
@@ -2847,7 +2752,7 @@ module Aws::CloudFormation
     class DescribeStackResourceOutput < Struct.new(
       :stack_resource_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>DescribeStackResources</a> action.</p>
@@ -2883,7 +2788,7 @@ module Aws::CloudFormation
       :logical_resource_id,
       :physical_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>DescribeStackResources</a> action.</p>
@@ -2893,7 +2798,7 @@ module Aws::CloudFormation
     class DescribeStackResourcesOutput < Struct.new(
       :stack_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -2922,7 +2827,7 @@ module Aws::CloudFormation
       :stack_set_name,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -2955,7 +2860,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_operation
@@ -2964,7 +2869,7 @@ module Aws::CloudFormation
     class DescribeStackSetOperationOutput < Struct.new(
       :stack_set_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set
@@ -2973,7 +2878,7 @@ module Aws::CloudFormation
     class DescribeStackSetOutput < Struct.new(
       :stack_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>DescribeStacks</a> action.</p>
@@ -3009,7 +2914,7 @@ module Aws::CloudFormation
       :stack_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>DescribeStacks</a> action.</p>
@@ -3024,7 +2929,7 @@ module Aws::CloudFormation
       :stacks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -3064,7 +2969,7 @@ module Aws::CloudFormation
       :publisher_id,
       :public_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3324,7 +3229,7 @@ module Aws::CloudFormation
       :is_activated,
       :auto_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_token
@@ -3335,7 +3240,7 @@ module Aws::CloudFormation
     class DescribeTypeRegistrationInput < Struct.new(
       :registration_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_status
@@ -3361,12 +3266,7 @@ module Aws::CloudFormation
       :type_arn,
       :type_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetailedStatus
-      CONFIGURATION_COMPLETE = 'CONFIGURATION_COMPLETE'
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -3379,7 +3279,7 @@ module Aws::CloudFormation
       :stack_name,
       :logical_resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_drift_detection_id
@@ -3391,7 +3291,7 @@ module Aws::CloudFormation
     class DetectStackDriftOutput < Struct.new(
       :stack_drift_detection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -3404,7 +3304,7 @@ module Aws::CloudFormation
       :stack_name,
       :logical_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_resource_drift
@@ -3415,7 +3315,7 @@ module Aws::CloudFormation
     class DetectStackResourceDriftOutput < Struct.new(
       :stack_resource_drift,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -3455,7 +3355,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -3466,13 +3366,7 @@ module Aws::CloudFormation
     class DetectStackSetDriftOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DifferenceType
-      ADD = 'ADD'
-      REMOVE = 'REMOVE'
-      NOT_EQUAL = 'NOT_EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for an <a>EstimateTemplateCost</a> action.</p>
@@ -3497,7 +3391,7 @@ module Aws::CloudFormation
       :template_url,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>EstimateTemplateCost</a> action.</p>
@@ -3508,12 +3402,7 @@ module Aws::CloudFormation
     class EstimateTemplateCostOutput < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationType
-      Static = 'Static'
-      Dynamic = 'Dynamic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>ExecuteChangeSet</a> action.</p>
@@ -3565,13 +3454,13 @@ module Aws::CloudFormation
       :disable_rollback,
       :retain_except_on_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>ExecuteChangeSet</a> action.</p>
     class ExecuteChangeSetOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_refactor_id
@@ -3580,16 +3469,7 @@ module Aws::CloudFormation
     class ExecuteStackRefactorInput < Struct.new(
       :stack_refactor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionStatus
-      UNAVAILABLE = 'UNAVAILABLE'
-      AVAILABLE = 'AVAILABLE'
-      EXECUTE_IN_PROGRESS = 'EXECUTE_IN_PROGRESS'
-      EXECUTE_COMPLETE = 'EXECUTE_COMPLETE'
-      EXECUTE_FAILED = 'EXECUTE_FAILED'
-      OBSOLETE = 'OBSOLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Export</code> structure describes the exported output values for a stack.</p>
@@ -3610,12 +3490,7 @@ module Aws::CloudFormation
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeneratedTemplateDeletionPolicy
-      DELETE = 'DELETE'
-      RETAIN = 'RETAIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The generated template was not found.</p>
@@ -3624,30 +3499,7 @@ module Aws::CloudFormation
     class GeneratedTemplateNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeneratedTemplateResourceStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETE = 'COMPLETE'
-    end
-
-    module GeneratedTemplateStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      UPDATE_PENDING = 'UPDATE_PENDING'
-      DELETE_PENDING = 'DELETE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETE = 'COMPLETE'
-    end
-
-    module GeneratedTemplateUpdateReplacePolicy
-      DELETE = 'DELETE'
-      RETAIN = 'RETAIN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format
@@ -3676,7 +3528,7 @@ module Aws::CloudFormation
       :format,
       :generated_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -3724,7 +3576,7 @@ module Aws::CloudFormation
       :status,
       :template_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>GetStackPolicy</a> action.</p>
@@ -3735,7 +3587,7 @@ module Aws::CloudFormation
     class GetStackPolicyInput < Struct.new(
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>GetStackPolicy</a> action.</p>
@@ -3746,7 +3598,7 @@ module Aws::CloudFormation
     class GetStackPolicyOutput < Struct.new(
       :stack_policy_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for a <a>GetTemplate</a> action.</p>
@@ -3780,7 +3632,7 @@ module Aws::CloudFormation
       :change_set_name,
       :template_stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for <a>GetTemplate</a> action.</p>
@@ -3798,7 +3650,7 @@ module Aws::CloudFormation
       :template_body,
       :stages_available,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>GetTemplateSummary</a> action.</p>
@@ -3861,7 +3713,7 @@ module Aws::CloudFormation
       :call_as,
       :template_summary_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>GetTemplateSummary</a> action.</p>
@@ -3920,38 +3772,7 @@ module Aws::CloudFormation
       :resource_identifier_summaries,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HandlerErrorCode
-      NotUpdatable = 'NotUpdatable'
-      InvalidRequest = 'InvalidRequest'
-      AccessDenied = 'AccessDenied'
-      InvalidCredentials = 'InvalidCredentials'
-      AlreadyExists = 'AlreadyExists'
-      NotFound = 'NotFound'
-      ResourceConflict = 'ResourceConflict'
-      Throttling = 'Throttling'
-      ServiceLimitExceeded = 'ServiceLimitExceeded'
-      ServiceTimeout = 'NotStabilized'
-      GeneralServiceException = 'GeneralServiceException'
-      ServiceInternalError = 'ServiceInternalError'
-      NetworkFailure = 'NetworkFailure'
-      InternalFailure = 'InternalFailure'
-      InvalidTypeConfiguration = 'InvalidTypeConfiguration'
-      HandlerInternalFailure = 'HandlerInternalFailure'
-      NonCompliant = 'NonCompliant'
-      Unknown = 'Unknown'
-      UnsupportedTarget = 'UnsupportedTarget'
-    end
-
-    module HookFailureMode
-      FAIL = 'FAIL'
-      WARN = 'WARN'
-    end
-
-    module HookInvocationPoint
-      PRE_PROVISION = 'PRE_PROVISION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified target doesn't have any requested Hook invocations.</p>
@@ -3960,7 +3781,7 @@ module Aws::CloudFormation
     class HookResultNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Hook invocation, its status, and the reason for its status.</p>
@@ -4008,24 +3829,7 @@ module Aws::CloudFormation
       :status,
       :hook_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HookStatus
-      HOOK_IN_PROGRESS = 'HOOK_IN_PROGRESS'
-      HOOK_COMPLETE_SUCCEEDED = 'HOOK_COMPLETE_SUCCEEDED'
-      HOOK_COMPLETE_FAILED = 'HOOK_COMPLETE_FAILED'
-      HOOK_FAILED = 'HOOK_FAILED'
-    end
-
-    module HookTargetType
-      RESOURCE = 'RESOURCE'
-    end
-
-    module IdentityProvider
-      AWS_Marketplace = 'AWS_Marketplace'
-      GitHub = 'GitHub'
-      Bitbucket = 'Bitbucket'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -4074,7 +3878,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -4083,7 +3887,7 @@ module Aws::CloudFormation
     class ImportStacksToStackSetOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template contains resources with capabilities that weren't specified in the Capabilities parameter.</p>
@@ -4092,7 +3896,7 @@ module Aws::CloudFormation
     class InsufficientCapabilitiesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified change set can't be used to update the stack. For example, the change set status might be
@@ -4102,7 +3906,7 @@ module Aws::CloudFormation
     class InvalidChangeSetStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified operation isn't valid.</p>
@@ -4111,7 +3915,7 @@ module Aws::CloudFormation
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. CloudFormation doesn't
@@ -4121,7 +3925,7 @@ module Aws::CloudFormation
     class InvalidStateTransitionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for the resource has already been reached.</p>
@@ -4132,7 +3936,7 @@ module Aws::CloudFormation
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>ListChangeSets</a> action.</p>
@@ -4148,7 +3952,7 @@ module Aws::CloudFormation
       :stack_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the <a>ListChangeSets</a> action.</p>
@@ -4164,7 +3968,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4174,7 +3978,7 @@ module Aws::CloudFormation
     class ListExportsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exports
@@ -4188,7 +3992,7 @@ module Aws::CloudFormation
       :exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4204,7 +4008,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -4220,7 +4024,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_type
@@ -4241,7 +4045,7 @@ module Aws::CloudFormation
       :target_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_type
@@ -4268,14 +4072,7 @@ module Aws::CloudFormation
       :hook_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListHookResultsTargetType
-      CHANGE_SET = 'CHANGE_SET'
-      STACK = 'STACK'
-      RESOURCE = 'RESOURCE'
-      CLOUD_CONTROL = 'CLOUD_CONTROL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_name
@@ -4290,7 +4087,7 @@ module Aws::CloudFormation
       :export_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute imports
@@ -4304,7 +4101,7 @@ module Aws::CloudFormation
       :imports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_scan_id
@@ -4329,7 +4126,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute related_resources
@@ -4347,7 +4144,7 @@ module Aws::CloudFormation
       :related_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_scan_id
@@ -4385,7 +4182,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -4402,7 +4199,7 @@ module Aws::CloudFormation
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4422,7 +4219,7 @@ module Aws::CloudFormation
       :max_results,
       :scan_type_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_scan_summaries
@@ -4438,7 +4235,7 @@ module Aws::CloudFormation
       :resource_scan_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -4519,7 +4316,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -4537,7 +4334,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -4593,7 +4390,7 @@ module Aws::CloudFormation
       :stack_instance_region,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -4610,7 +4407,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_refactor_id
@@ -4633,7 +4430,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_refactor_actions
@@ -4649,7 +4446,7 @@ module Aws::CloudFormation
       :stack_refactor_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_status_filter
@@ -4673,7 +4470,7 @@ module Aws::CloudFormation
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_refactor_summaries
@@ -4721,7 +4518,7 @@ module Aws::CloudFormation
       :stack_refactor_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>ListStackResource</a> action.</p>
@@ -4745,7 +4542,7 @@ module Aws::CloudFormation
       :stack_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for a <a>ListStackResources</a> action.</p>
@@ -4760,7 +4557,7 @@ module Aws::CloudFormation
       :stack_resource_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -4800,7 +4597,7 @@ module Aws::CloudFormation
       :max_results,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -4816,7 +4613,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -4869,7 +4666,7 @@ module Aws::CloudFormation
       :call_as,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -4887,7 +4684,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -4932,7 +4729,7 @@ module Aws::CloudFormation
       :max_results,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -4949,7 +4746,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4993,7 +4790,7 @@ module Aws::CloudFormation
       :status,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summaries
@@ -5010,7 +4807,7 @@ module Aws::CloudFormation
       :summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>ListStacks</a> action.</p>
@@ -5026,7 +4823,7 @@ module Aws::CloudFormation
       :next_token,
       :stack_status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for <a>ListStacks</a> action.</p>
@@ -5042,7 +4839,7 @@ module Aws::CloudFormation
       :stack_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5085,7 +4882,7 @@ module Aws::CloudFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_token_list
@@ -5103,7 +4900,7 @@ module Aws::CloudFormation
       :registration_token_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5166,7 +4963,7 @@ module Aws::CloudFormation
       :deprecated_status,
       :publisher_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_version_summaries
@@ -5183,7 +4980,7 @@ module Aws::CloudFormation
       :type_version_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute visibility
@@ -5285,7 +5082,7 @@ module Aws::CloudFormation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_summaries
@@ -5302,7 +5099,7 @@ module Aws::CloudFormation
       :type_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains logging configuration information for an extension.</p>
@@ -5318,7 +5115,7 @@ module Aws::CloudFormation
       :log_role_arn,
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether StackSets performs non-conflicting operations concurrently and queues
@@ -5339,7 +5136,7 @@ module Aws::CloudFormation
     class ManagedExecution < Struct.new(
       :active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the module from which the resource was created, if the resource
@@ -5373,7 +5170,7 @@ module Aws::CloudFormation
       :type_hierarchy,
       :logical_id_hierarchy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified name is already in use.</p>
@@ -5382,19 +5179,7 @@ module Aws::CloudFormation
     class NameAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OnFailure
-      DO_NOTHING = 'DO_NOTHING'
-      ROLLBACK = 'ROLLBACK'
-      DELETE = 'DELETE'
-    end
-
-    module OnStackFailure
-      DO_NOTHING = 'DO_NOTHING'
-      ROLLBACK = 'ROLLBACK'
-      DELETE = 'DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified operation ID already exists.</p>
@@ -5403,7 +5188,7 @@ module Aws::CloudFormation
     class OperationIdAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another operation is currently in progress for this stack set. Only one operation can be performed for a stack
@@ -5413,7 +5198,7 @@ module Aws::CloudFormation
     class OperationInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified ID refers to an operation that doesn't exist.</p>
@@ -5422,7 +5207,7 @@ module Aws::CloudFormation
     class OperationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status that operation results are filtered by.</p>
@@ -5436,18 +5221,7 @@ module Aws::CloudFormation
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationResultFilterName
-      OPERATION_RESULT_STATUS = 'OPERATION_RESULT_STATUS'
-    end
-
-    module OperationStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error reserved for use by the <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html">CloudFormation CLI</a>. CloudFormation doesn't
@@ -5457,13 +5231,7 @@ module Aws::CloudFormation
     class OperationStatusCheckFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      DISABLED_PERMANENTLY = 'DISABLED_PERMANENTLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Output data type.</p>
@@ -5485,7 +5253,7 @@ module Aws::CloudFormation
       :description,
       :export_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Parameter data type.</p>
@@ -5512,7 +5280,7 @@ module Aws::CloudFormation
       :use_previous_value,
       :resolved_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of criteria that CloudFormation uses to validate parameter values. Although other
@@ -5524,7 +5292,7 @@ module Aws::CloudFormation
     class ParameterConstraints < Struct.new(
       :allowed_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ParameterDeclaration data type.</p>
@@ -5555,12 +5323,7 @@ module Aws::CloudFormation
       :description,
       :parameter_constraints,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionModels
-      SERVICE_MANAGED = 'SERVICE_MANAGED'
-      SELF_MANAGED = 'SELF_MANAGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Context information that enables CloudFormation to uniquely identify a resource. CloudFormation uses
@@ -5577,16 +5340,7 @@ module Aws::CloudFormation
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyAction
-      Delete = 'Delete'
-      Retain = 'Retain'
-      Snapshot = 'Snapshot'
-      ReplaceAndDelete = 'ReplaceAndDelete'
-      ReplaceAndRetain = 'ReplaceAndRetain'
-      ReplaceAndSnapshot = 'ReplaceAndSnapshot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a resource property whose actual value differs from its expected value, as
@@ -5630,13 +5384,7 @@ module Aws::CloudFormation
       :actual_value,
       :difference_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProvisioningType
-      NON_PROVISIONABLE = 'NON_PROVISIONABLE'
-      IMMUTABLE = 'IMMUTABLE'
-      FULLY_MUTABLE = 'FULLY_MUTABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5674,7 +5422,7 @@ module Aws::CloudFormation
       :type_name,
       :public_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_type_arn
@@ -5683,12 +5431,7 @@ module Aws::CloudFormation
     class PublishTypeOutput < Struct.new(
       :public_type_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PublisherStatus
-      VERIFIED = 'VERIFIED'
-      UNVERIFIED = 'UNVERIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bearer_token
@@ -5728,17 +5471,12 @@ module Aws::CloudFormation
       :resource_model,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RecordHandlerProgressOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegionConcurrencyType
-      SEQUENTIAL = 'SEQUENTIAL'
-      PARALLEL = 'PARALLEL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accept_terms_and_conditions
@@ -5757,7 +5495,7 @@ module Aws::CloudFormation
       :accept_terms_and_conditions,
       :connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute publisher_id
@@ -5766,7 +5504,7 @@ module Aws::CloudFormation
     class RegisterPublisherOutput < Struct.new(
       :publisher_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5871,7 +5609,7 @@ module Aws::CloudFormation
       :execution_role_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_token
@@ -5882,25 +5620,7 @@ module Aws::CloudFormation
     class RegisterTypeOutput < Struct.new(
       :registration_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationStatus
-      COMPLETE = 'COMPLETE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-    end
-
-    module RegistryType
-      RESOURCE = 'RESOURCE'
-      MODULE = 'MODULE'
-      HOOK = 'HOOK'
-    end
-
-    module Replacement
-      True = 'True'
-      False = 'False'
-      Conditional = 'Conditional'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For extensions that are modules, a public third-party extension that must be activated in
@@ -5932,23 +5652,7 @@ module Aws::CloudFormation
       :publisher_id,
       :supported_major_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequiresRecreation
-      Never = 'Never'
-      Conditionally = 'Conditionally'
-      Always = 'Always'
-    end
-
-    module ResourceAttribute
-      Properties = 'Properties'
-      Metadata = 'Metadata'
-      CreationPolicy = 'CreationPolicy'
-      UpdatePolicy = 'UpdatePolicy'
-      DeletionPolicy = 'DeletionPolicy'
-      UpdateReplacePolicy = 'UpdateReplacePolicy'
-      Tags = 'Tags'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ResourceChange</code> structure describes the resource and the action that
@@ -6052,7 +5756,7 @@ module Aws::CloudFormation
       :before_context,
       :after_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For a resource with <code>Modify</code> as the action, the <code>ResourceChange</code>
@@ -6125,7 +5829,7 @@ module Aws::CloudFormation
       :change_source,
       :causing_entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource included in a generated template. This data type is used with the
@@ -6154,7 +5858,7 @@ module Aws::CloudFormation
       :logical_resource_id,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a resource in a generated template</p>
@@ -6227,7 +5931,7 @@ module Aws::CloudFormation
       :resource_status_reason,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the target resources of a specific type in your import template (for example,
@@ -6251,7 +5955,7 @@ module Aws::CloudFormation
       :logical_resource_ids,
       :resource_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the resource in a stack template.</p>
@@ -6265,7 +5969,7 @@ module Aws::CloudFormation
       :stack_name,
       :logical_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the current source of the resource and the destination of where it will be moved
@@ -6282,7 +5986,7 @@ module Aws::CloudFormation
       :source,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource scan is currently in progress. Only one can be run at a time for an account in a Region.</p>
@@ -6291,7 +5995,7 @@ module Aws::CloudFormation
     class ResourceScanInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on resource scans has been exceeded. Reasons include:</p>
@@ -6312,7 +6016,7 @@ module Aws::CloudFormation
     class ResourceScanLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource scan was not found.</p>
@@ -6321,14 +6025,7 @@ module Aws::CloudFormation
     class ResourceScanNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceScanStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETE = 'COMPLETE'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the resource scan. This is returned by the <code>ListResourceScan</code> API
@@ -6398,43 +6095,7 @@ module Aws::CloudFormation
       :percentage_completed,
       :scan_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceSignalStatus
-      SUCCESS = 'SUCCESS'
-      FAILURE = 'FAILURE'
-    end
-
-    module ResourceStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_SKIPPED = 'DELETE_SKIPPED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      IMPORT_FAILED = 'IMPORT_FAILED'
-      IMPORT_COMPLETE = 'IMPORT_COMPLETE'
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
-      IMPORT_ROLLBACK_IN_PROGRESS = 'IMPORT_ROLLBACK_IN_PROGRESS'
-      IMPORT_ROLLBACK_FAILED = 'IMPORT_ROLLBACK_FAILED'
-      IMPORT_ROLLBACK_COMPLETE = 'IMPORT_ROLLBACK_COMPLETE'
-      EXPORT_FAILED = 'EXPORT_FAILED'
-      EXPORT_COMPLETE = 'EXPORT_COMPLETE'
-      EXPORT_IN_PROGRESS = 'EXPORT_IN_PROGRESS'
-      EXPORT_ROLLBACK_IN_PROGRESS = 'EXPORT_ROLLBACK_IN_PROGRESS'
-      EXPORT_ROLLBACK_FAILED = 'EXPORT_ROLLBACK_FAILED'
-      EXPORT_ROLLBACK_COMPLETE = 'EXPORT_ROLLBACK_COMPLETE'
-      UPDATE_ROLLBACK_IN_PROGRESS = 'UPDATE_ROLLBACK_IN_PROGRESS'
-      UPDATE_ROLLBACK_COMPLETE = 'UPDATE_ROLLBACK_COMPLETE'
-      UPDATE_ROLLBACK_FAILED = 'UPDATE_ROLLBACK_FAILED'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_COMPLETE = 'ROLLBACK_COMPLETE'
-      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field that CloudFormation will change, such as the name of a resource's property, and
@@ -6491,7 +6152,7 @@ module Aws::CloudFormation
       :after_value,
       :attribute_change_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the target resource of an import operation.</p>
@@ -6514,7 +6175,7 @@ module Aws::CloudFormation
       :logical_resource_id,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure that contains the rollback triggers for CloudFormation to monitor during stack creation
@@ -6563,7 +6224,7 @@ module Aws::CloudFormation
       :rollback_triggers,
       :monitoring_time_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -6589,7 +6250,7 @@ module Aws::CloudFormation
       :client_request_token,
       :retain_except_on_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -6598,7 +6259,7 @@ module Aws::CloudFormation
     class RollbackStackOutput < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rollback trigger CloudFormation monitors during creation and updating of stacks. If any of the
@@ -6616,7 +6277,7 @@ module Aws::CloudFormation
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that is used to specify which resource types to scan.</p>
@@ -6633,12 +6294,7 @@ module Aws::CloudFormation
     class ScanFilter < Struct.new(
       :types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanType
-      FULL = 'FULL'
-      PARTIAL = 'PARTIAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A scanned resource returned by <code>ListResourceScanResources</code> or
@@ -6666,7 +6322,7 @@ module Aws::CloudFormation
       :resource_identifier,
       :managed_by_stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a scanned resource. This is used with the
@@ -6689,7 +6345,7 @@ module Aws::CloudFormation
       :resource_type,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>SetStackPolicy</a> action.</p>
@@ -6714,7 +6370,7 @@ module Aws::CloudFormation
       :stack_policy_body,
       :stack_policy_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_arn
@@ -6754,7 +6410,7 @@ module Aws::CloudFormation
       :type_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_arn
@@ -6766,7 +6422,7 @@ module Aws::CloudFormation
     class SetTypeConfigurationOutput < Struct.new(
       :configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -6795,12 +6451,12 @@ module Aws::CloudFormation
       :type_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SetTypeDefaultVersionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <a>SignalResource</a> action.</p>
@@ -6828,7 +6484,7 @@ module Aws::CloudFormation
       :unique_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Stack data type.</p>
@@ -6979,7 +6635,7 @@ module Aws::CloudFormation
       :deletion_mode,
       :detailed_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the stack and the template used by the stack.</p>
@@ -6997,13 +6653,7 @@ module Aws::CloudFormation
       :template_body,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackDriftDetectionStatus
-      DETECTION_IN_PROGRESS = 'DETECTION_IN_PROGRESS'
-      DETECTION_FAILED = 'DETECTION_FAILED'
-      DETECTION_COMPLETE = 'DETECTION_COMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about whether the stack's actual configuration differs, or has
@@ -7043,7 +6693,7 @@ module Aws::CloudFormation
       :stack_drift_status,
       :last_check_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about whether the stack's actual configuration differs, or has
@@ -7083,14 +6733,7 @@ module Aws::CloudFormation
       :stack_drift_status,
       :last_check_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackDriftStatus
-      DRIFTED = 'DRIFTED'
-      IN_SYNC = 'IN_SYNC'
-      UNKNOWN = 'UNKNOWN'
-      NOT_CHECKED = 'NOT_CHECKED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The StackEvent data type.</p>
@@ -7202,7 +6845,7 @@ module Aws::CloudFormation
       :hook_failure_mode,
       :detailed_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudFormation stack, in a specific account and Region, that's part of a stack set operation.
@@ -7324,7 +6967,7 @@ module Aws::CloudFormation
       :last_drift_check_timestamp,
       :last_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed status of the stack instance.</p>
@@ -7383,18 +7026,7 @@ module Aws::CloudFormation
     class StackInstanceComprehensiveStatus < Struct.new(
       :detailed_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackInstanceDetailedStatus
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
-      INOPERABLE = 'INOPERABLE'
-      SKIPPED_SUSPENDED_ACCOUNT = 'SKIPPED_SUSPENDED_ACCOUNT'
-      FAILED_IMPORT = 'FAILED_IMPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter to apply to stack instances</p>
@@ -7408,13 +7040,7 @@ module Aws::CloudFormation
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackInstanceFilterName
-      DETAILED_STATUS = 'DETAILED_STATUS'
-      LAST_OPERATION_ID = 'LAST_OPERATION_ID'
-      DRIFT_STATUS = 'DRIFT_STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified stack instance doesn't exist.</p>
@@ -7423,7 +7049,7 @@ module Aws::CloudFormation
     class StackInstanceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure containing summary information about resource drifts for a stack
@@ -7490,13 +7116,7 @@ module Aws::CloudFormation
       :stack_resource_drift_status,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackInstanceStatus
-      CURRENT = 'CURRENT'
-      OUTDATED = 'OUTDATED'
-      INOPERABLE = 'INOPERABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains summary information about a stack instance.</p>
@@ -7608,7 +7228,7 @@ module Aws::CloudFormation
       :last_drift_check_timestamp,
       :last_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified stack ARN doesn't exist or stack doesn't exist corresponding to the ARN in input.</p>
@@ -7617,7 +7237,7 @@ module Aws::CloudFormation
     class StackNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the stack and the action that CloudFormation will perform on it if you execute the
@@ -7689,34 +7309,7 @@ module Aws::CloudFormation
       :untag_resources,
       :resource_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackRefactorActionEntity
-      RESOURCE = 'RESOURCE'
-      STACK = 'STACK'
-    end
-
-    module StackRefactorActionType
-      MOVE = 'MOVE'
-      CREATE = 'CREATE'
-    end
-
-    module StackRefactorDetection
-      AUTO = 'AUTO'
-      MANUAL = 'MANUAL'
-    end
-
-    module StackRefactorExecutionStatus
-      UNAVAILABLE = 'UNAVAILABLE'
-      AVAILABLE = 'AVAILABLE'
-      OBSOLETE = 'OBSOLETE'
-      EXECUTE_IN_PROGRESS = 'EXECUTE_IN_PROGRESS'
-      EXECUTE_COMPLETE = 'EXECUTE_COMPLETE'
-      EXECUTE_FAILED = 'EXECUTE_FAILED'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_COMPLETE = 'ROLLBACK_COMPLETE'
-      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified stack refactor can't be found.</p>
@@ -7725,16 +7318,7 @@ module Aws::CloudFormation
     class StackRefactorNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackRefactorStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a stack refactor operation.</p>
@@ -7764,7 +7348,7 @@ module Aws::CloudFormation
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The StackResource data type.</p>
@@ -7820,7 +7404,7 @@ module Aws::CloudFormation
       :drift_information,
       :module_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about the specified stack resource.</p>
@@ -7882,7 +7466,7 @@ module Aws::CloudFormation
       :drift_information,
       :module_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the drift information for a resource that has been checked for drift. This includes
@@ -7983,7 +7567,7 @@ module Aws::CloudFormation
       :module_info,
       :drift_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about whether the resource's actual configuration differs, or has
@@ -8023,7 +7607,7 @@ module Aws::CloudFormation
       :stack_resource_drift_status,
       :last_check_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes information about whether the resource's actual configuration differs, or has
@@ -8065,15 +7649,7 @@ module Aws::CloudFormation
       :stack_resource_drift_status,
       :last_check_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackResourceDriftStatus
-      IN_SYNC = 'IN_SYNC'
-      MODIFIED = 'MODIFIED'
-      DELETED = 'DELETED'
-      NOT_CHECKED = 'NOT_CHECKED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains high-level information about the specified stack resource.</p>
@@ -8117,7 +7693,7 @@ module Aws::CloudFormation
       :drift_information,
       :module_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a stack set. A stack set enables you to
@@ -8225,7 +7801,7 @@ module Aws::CloudFormation
       :managed_execution,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the targets for the stack set. Returned by the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html">ListStackSetAutoDeploymentTargets</a> API operation.</p>
@@ -8240,7 +7816,7 @@ module Aws::CloudFormation
       :organizational_unit_id,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the drift status of the stack set.</p>
@@ -8350,21 +7926,7 @@ module Aws::CloudFormation
       :in_progress_stack_instances_count,
       :failed_stack_instances_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackSetDriftDetectionStatus
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      PARTIAL_SUCCESS = 'PARTIAL_SUCCESS'
-      IN_PROGRESS = 'IN_PROGRESS'
-      STOPPED = 'STOPPED'
-    end
-
-    module StackSetDriftStatus
-      DRIFTED = 'DRIFTED'
-      IN_SYNC = 'IN_SYNC'
-      NOT_CHECKED = 'NOT_CHECKED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't yet delete this stack set, because it still contains one or more stack instances. Delete all stack
@@ -8374,7 +7936,7 @@ module Aws::CloudFormation
     class StackSetNotEmptyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified stack set doesn't exist.</p>
@@ -8383,7 +7945,7 @@ module Aws::CloudFormation
     class StackSetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains information about a stack set operation.</p>
@@ -8502,14 +8064,7 @@ module Aws::CloudFormation
       :status_reason,
       :status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackSetOperationAction
-      CREATE = 'CREATE'
-      UPDATE = 'UPDATE'
-      DELETE = 'DELETE'
-      DETECT_DRIFT = 'DETECT_DRIFT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user-specified preferences for how CloudFormation performs a stack set operation.</p>
@@ -8601,15 +8156,7 @@ module Aws::CloudFormation
       :max_concurrent_percentage,
       :concurrency_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackSetOperationResultStatus
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains information about a specified operation's results for a given
@@ -8672,16 +8219,7 @@ module Aws::CloudFormation
       :account_gate_result,
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackSetOperationStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      QUEUED = 'QUEUED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the StackSet operation.</p>
@@ -8691,7 +8229,7 @@ module Aws::CloudFormation
     class StackSetOperationStatusDetails < Struct.new(
       :failed_stack_instances_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structures that contain summary information about the specified operation.</p>
@@ -8775,12 +8313,7 @@ module Aws::CloudFormation
       :status_details,
       :operation_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackSetStatus
-      ACTIVE = 'ACTIVE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structures that contain summary information about the specified stack set.</p>
@@ -8862,33 +8395,7 @@ module Aws::CloudFormation
       :last_drift_check_timestamp,
       :managed_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
-      ROLLBACK_COMPLETE = 'ROLLBACK_COMPLETE'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_COMPLETE_CLEANUP_IN_PROGRESS = 'UPDATE_COMPLETE_CLEANUP_IN_PROGRESS'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      UPDATE_ROLLBACK_IN_PROGRESS = 'UPDATE_ROLLBACK_IN_PROGRESS'
-      UPDATE_ROLLBACK_FAILED = 'UPDATE_ROLLBACK_FAILED'
-      UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS = 'UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS'
-      UPDATE_ROLLBACK_COMPLETE = 'UPDATE_ROLLBACK_COMPLETE'
-      REVIEW_IN_PROGRESS = 'REVIEW_IN_PROGRESS'
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
-      IMPORT_COMPLETE = 'IMPORT_COMPLETE'
-      IMPORT_ROLLBACK_IN_PROGRESS = 'IMPORT_ROLLBACK_IN_PROGRESS'
-      IMPORT_ROLLBACK_FAILED = 'IMPORT_ROLLBACK_FAILED'
-      IMPORT_ROLLBACK_COMPLETE = 'IMPORT_ROLLBACK_COMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The StackSummary Data Type</p>
@@ -8947,7 +8454,7 @@ module Aws::CloudFormation
       :root_id,
       :drift_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another operation has been performed on this stack set since the specified operation was performed.</p>
@@ -8956,7 +8463,7 @@ module Aws::CloudFormation
     class StaleRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -8971,7 +8478,7 @@ module Aws::CloudFormation
       :client_request_token,
       :scan_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_scan_id
@@ -8984,7 +8491,7 @@ module Aws::CloudFormation
     class StartResourceScanOutput < Struct.new(
       :resource_scan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -9017,12 +8524,12 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopStackSetOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Tag type enables you to specify a key-value pair that can be used to store information
@@ -9042,7 +8549,7 @@ module Aws::CloudFormation
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of a generated template.</p>
@@ -9083,12 +8590,7 @@ module Aws::CloudFormation
       :deletion_policy,
       :update_replace_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateFormat
-      JSON = 'JSON'
-      YAML = 'YAML'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TemplateParameter data type.</p>
@@ -9111,7 +8613,7 @@ module Aws::CloudFormation
       :no_echo,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the progress of the template generation.</p>
@@ -9133,12 +8635,7 @@ module Aws::CloudFormation
       :resources_processing,
       :resources_pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateStage
-      Original = 'Original'
-      Processed = 'Processed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a generated template.</p>
@@ -9212,7 +8709,7 @@ module Aws::CloudFormation
       :last_updated_time,
       :number_of_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for the <code>GetTemplateSummary</code> API action.</p>
@@ -9224,7 +8721,7 @@ module Aws::CloudFormation
     class TemplateSummaryConfig < Struct.new(
       :treat_unrecognized_resource_types_as_warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -9277,7 +8774,7 @@ module Aws::CloudFormation
       :version_id,
       :log_delivery_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_version_arn
@@ -9286,13 +8783,7 @@ module Aws::CloudFormation
     class TestTypeOutput < Struct.new(
       :type_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThirdPartyType
-      RESOURCE = 'RESOURCE'
-      MODULE = 'MODULE'
-      HOOK = 'HOOK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A client request token already exists.</p>
@@ -9301,7 +8792,7 @@ module Aws::CloudFormation
     class TokenAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information concerning the specification of a CloudFormation extension in a given
@@ -9348,7 +8839,7 @@ module Aws::CloudFormation
       :type_name,
       :is_default_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifying information for the configuration of a CloudFormation extension.</p>
@@ -9378,7 +8869,7 @@ module Aws::CloudFormation
       :type,
       :type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified extension configuration can't be found.</p>
@@ -9388,7 +8879,7 @@ module Aws::CloudFormation
     class TypeConfigurationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter criteria to use in determining which extensions to return.</p>
@@ -9437,7 +8928,7 @@ module Aws::CloudFormation
       :publisher_id,
       :type_name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified extension doesn't exist in the CloudFormation registry.</p>
@@ -9447,7 +8938,7 @@ module Aws::CloudFormation
     class TypeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about the specified CloudFormation extension.</p>
@@ -9544,14 +9035,7 @@ module Aws::CloudFormation
       :publisher_name,
       :is_activated,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TypeTestsStatus
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      NOT_TESTED = 'NOT_TESTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a specific version of a CloudFormation extension.</p>
@@ -9600,7 +9084,7 @@ module Aws::CloudFormation
       :description,
       :public_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generated_template_name
@@ -9633,7 +9117,7 @@ module Aws::CloudFormation
       :refresh_all_resources,
       :template_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generated_template_id
@@ -9646,7 +9130,7 @@ module Aws::CloudFormation
     class UpdateGeneratedTemplateOutput < Struct.new(
       :generated_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for an <a>UpdateStack</a> action.</p>
@@ -9914,7 +9398,7 @@ module Aws::CloudFormation
       :client_request_token,
       :retain_except_on_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -10017,7 +9501,7 @@ module Aws::CloudFormation
       :operation_id,
       :call_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -10026,7 +9510,7 @@ module Aws::CloudFormation
     class UpdateStackInstancesOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for an <a>UpdateStack</a> action.</p>
@@ -10036,7 +9520,7 @@ module Aws::CloudFormation
     class UpdateStackOutput < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_set_name
@@ -10334,7 +9818,7 @@ module Aws::CloudFormation
       :call_as,
       :managed_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -10343,7 +9827,7 @@ module Aws::CloudFormation
     class UpdateStackSetOutput < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable_termination_protection
@@ -10357,7 +9841,7 @@ module Aws::CloudFormation
       :enable_termination_protection,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -10366,7 +9850,7 @@ module Aws::CloudFormation
     class UpdateTerminationProtectionOutput < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for <a>ValidateTemplate</a> action.</p>
@@ -10387,7 +9871,7 @@ module Aws::CloudFormation
       :template_body,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for <a>ValidateTemplate</a> action.</p>
@@ -10418,17 +9902,7 @@ module Aws::CloudFormation
       :capabilities_reason,
       :declared_transforms,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VersionBump
-      MAJOR = 'MAJOR'
-      MINOR = 'MINOR'
-    end
-
-    module Visibility
-      PUBLIC = 'PUBLIC'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The warnings generated for a specific resource for this generated template.</p>
@@ -10470,7 +9944,7 @@ module Aws::CloudFormation
       :type,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific property that is impacted by a warning.</p>
@@ -10489,14 +9963,7 @@ module Aws::CloudFormation
       :required,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WarningType
-      MUTUALLY_EXCLUSIVE_PROPERTIES = 'MUTUALLY_EXCLUSIVE_PROPERTIES'
-      UNSUPPORTED_PROPERTIES = 'UNSUPPORTED_PROPERTIES'
-      MUTUALLY_EXCLUSIVE_TYPES = 'MUTUALLY_EXCLUSIVE_TYPES'
-      EXCLUDED_PROPERTIES = 'EXCLUDED_PROPERTIES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains any warnings returned by the <code>GetTemplateSummary</code> API action.</p>
@@ -10509,7 +9976,7 @@ module Aws::CloudFormation
     class Warnings < Struct.new(
       :unrecognized_resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

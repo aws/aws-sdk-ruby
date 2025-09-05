@@ -15,7 +15,7 @@ module Aws::Drs
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS account.</p>
@@ -25,7 +25,7 @@ module Aws::Drs
     class Account < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network_id
@@ -38,7 +38,7 @@ module Aws::Drs
       :source_network_id,
       :cfn_stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -47,7 +47,7 @@ module Aws::Drs
     class AssociateSourceNetworkStackResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a server's CPU.</p>
@@ -61,7 +61,7 @@ module Aws::Drs
       :cores,
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cores] = 0 unless options.key?(:cores)
@@ -86,7 +86,7 @@ module Aws::Drs
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of a conversion job</p>
@@ -116,7 +116,7 @@ module Aws::Drs
       :volume_to_volume_size,
       :volume_to_product_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_arn
@@ -129,7 +129,7 @@ module Aws::Drs
       :source_server_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server
@@ -138,7 +138,7 @@ module Aws::Drs
     class CreateExtendedSourceServerOutput < Struct.new(
       :source_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -179,7 +179,7 @@ module Aws::Drs
       :post_launch_enabled,
       :launch_into_source_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template
@@ -188,7 +188,7 @@ module Aws::Drs
     class CreateLaunchConfigurationTemplateOutput < Struct.new(
       :launch_configuration_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute staging_area_subnet_id
@@ -253,7 +253,7 @@ module Aws::Drs
       :tags,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_id
@@ -326,7 +326,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -352,7 +352,7 @@ module Aws::Drs
       :origin_region,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network_id
@@ -361,7 +361,7 @@ module Aws::Drs
     class CreateSourceNetworkResponse < Struct.new(
       :source_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error in data replication.</p>
@@ -375,7 +375,7 @@ module Aws::Drs
       :error,
       :raw_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about Data Replication</p>
@@ -413,7 +413,7 @@ module Aws::Drs
       :staging_availability_zone,
       :staging_outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A disk that should be replicated.</p>
@@ -443,7 +443,7 @@ module Aws::Drs
       :backlogged_storage_bytes,
       :volume_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_storage_bytes] = 0 unless options.key?(:total_storage_bytes)
@@ -469,7 +469,7 @@ module Aws::Drs
       :next_attempt_date_time,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data replication initiation step.</p>
@@ -483,7 +483,7 @@ module Aws::Drs
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -492,12 +492,12 @@ module Aws::Drs
     class DeleteJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -510,12 +510,12 @@ module Aws::Drs
       :resource_id,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchActionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -524,12 +524,12 @@ module Aws::Drs
     class DeleteLaunchConfigurationTemplateInput < Struct.new(
       :launch_configuration_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLaunchConfigurationTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -538,7 +538,7 @@ module Aws::Drs
     class DeleteRecoveryInstanceInput < Struct.new(
       :recovery_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_id
@@ -547,12 +547,12 @@ module Aws::Drs
     class DeleteReplicationConfigurationTemplateInput < Struct.new(
       :replication_configuration_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteReplicationConfigurationTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network_id
@@ -561,12 +561,12 @@ module Aws::Drs
     class DeleteSourceNetworkRequest < Struct.new(
       :source_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceNetworkResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -575,12 +575,12 @@ module Aws::Drs
     class DeleteSourceServerInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSourceServerOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -597,7 +597,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -610,7 +610,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -627,7 +627,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -640,7 +640,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of filters by which to return Jobs.</p>
@@ -658,7 +658,7 @@ module Aws::Drs
       :from_date,
       :to_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_i_ds
@@ -675,7 +675,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -688,7 +688,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -705,7 +705,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -718,7 +718,7 @@ module Aws::Drs
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of filters by which to return Recovery Instances.</p>
@@ -732,7 +732,7 @@ module Aws::Drs
       :recovery_instance_i_ds,
       :source_server_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -757,7 +757,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -770,7 +770,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of filters by which to return Recovery Snapshots.</p>
@@ -784,7 +784,7 @@ module Aws::Drs
       :from_date_time,
       :to_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_i_ds
@@ -801,7 +801,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -814,7 +814,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -831,7 +831,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of filters by which to return Source Networks.</p>
@@ -849,7 +849,7 @@ module Aws::Drs
       :origin_account_id,
       :origin_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -862,7 +862,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -879,7 +879,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -892,7 +892,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of filters by which to return Source Servers.</p>
@@ -910,7 +910,7 @@ module Aws::Drs
       :hardware_id,
       :staging_account_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -919,7 +919,7 @@ module Aws::Drs
     class DisconnectRecoveryInstanceInput < Struct.new(
       :recovery_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -928,7 +928,7 @@ module Aws::Drs
     class DisconnectSourceServerInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -989,7 +989,7 @@ module Aws::Drs
       :source_network_id,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a data storage device on a server.</p>
@@ -1003,7 +1003,7 @@ module Aws::Drs
       :device_name,
       :bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bytes] = 0 unless options.key?(:bytes)
@@ -1019,7 +1019,7 @@ module Aws::Drs
       :source_network_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SourceNetworkData < EventResourceData; end
       class Unknown < EventResourceData; end
@@ -1031,7 +1031,7 @@ module Aws::Drs
     class ExportSourceNetworkCfnTemplateRequest < Struct.new(
       :source_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_destination_url
@@ -1040,7 +1040,7 @@ module Aws::Drs
     class ExportSourceNetworkCfnTemplateResponse < Struct.new(
       :s3_destination_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -1049,7 +1049,7 @@ module Aws::Drs
     class GetFailbackReplicationConfigurationInput < Struct.new(
       :recovery_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -1070,7 +1070,7 @@ module Aws::Drs
       :bandwidth_throttling,
       :use_private_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -1084,7 +1084,7 @@ module Aws::Drs
     class GetLaunchConfigurationInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1129,7 +1129,7 @@ module Aws::Drs
       :post_launch_enabled,
       :launch_into_instance_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1138,7 +1138,7 @@ module Aws::Drs
     class GetReplicationConfigurationInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -1211,7 +1211,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -1238,17 +1238,17 @@ module Aws::Drs
       :vm_ware_uuid,
       :aws_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class InitializeServiceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
@@ -1261,7 +1261,7 @@ module Aws::Drs
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1312,7 +1312,7 @@ module Aws::Drs
       :tags,
       :participating_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A log outputted by a Job.</p>
@@ -1330,7 +1330,7 @@ module Aws::Drs
       :event,
       :event_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata associated with a Job log.</p>
@@ -1360,7 +1360,7 @@ module Aws::Drs
       :conversion_properties,
       :event_resource_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch action.</p>
@@ -1410,7 +1410,7 @@ module Aws::Drs
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch action parameter.</p>
@@ -1424,7 +1424,7 @@ module Aws::Drs
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch action run.</p>
@@ -1446,7 +1446,7 @@ module Aws::Drs
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource launch actions filter.</p>
@@ -1456,7 +1456,7 @@ module Aws::Drs
     class LaunchActionsRequestFilters < Struct.new(
       :action_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch actions status.</p>
@@ -1470,7 +1470,7 @@ module Aws::Drs
       :ssm_agent_discovery_datetime,
       :runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Account level Launch Configuration Template.</p>
@@ -1520,7 +1520,7 @@ module Aws::Drs
       :post_launch_enabled,
       :launch_into_source_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch into existing instance.</p>
@@ -1530,7 +1530,7 @@ module Aws::Drs
     class LaunchIntoInstanceProperties < Struct.new(
       :launch_into_ec2_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of a machine's license.</p>
@@ -1540,7 +1540,7 @@ module Aws::Drs
     class Licensing < Struct.new(
       :os_byol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the Source Server Lifecycle.</p>
@@ -1566,7 +1566,7 @@ module Aws::Drs
       :last_seen_by_service_date_time,
       :last_launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information regarding the last launch of a Source Server.</p>
@@ -1580,7 +1580,7 @@ module Aws::Drs
       :initiated,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information regarding the initiation of the last launch of a Source Server.</p>
@@ -1598,7 +1598,7 @@ module Aws::Drs
       :job_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute staging_account_id
@@ -1615,7 +1615,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1628,7 +1628,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1649,7 +1649,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1662,7 +1662,7 @@ module Aws::Drs
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1675,7 +1675,7 @@ module Aws::Drs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accounts
@@ -1688,7 +1688,7 @@ module Aws::Drs
       :accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1697,7 +1697,7 @@ module Aws::Drs
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1706,7 +1706,7 @@ module Aws::Drs
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network interface.</p>
@@ -1724,7 +1724,7 @@ module Aws::Drs
       :ips,
       :is_primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Operating System.</p>
@@ -1734,7 +1734,7 @@ module Aws::Drs
     class OS < Struct.new(
       :full_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule in the Point in Time (PIT) policy representing when to take snapshots and how long to retain them for.</p>
@@ -1760,7 +1760,7 @@ module Aws::Drs
       :retention_duration,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rule_id] = 0 unless options.key?(:rule_id)
@@ -1779,7 +1779,7 @@ module Aws::Drs
       :participating_resource_id,
       :launch_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ID of a resource participating in an asynchronous Job.</p>
@@ -1790,7 +1790,7 @@ module Aws::Drs
       :source_network_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SourceNetworkID < ParticipatingResourceID; end
       class Unknown < ParticipatingResourceID; end
@@ -1815,7 +1815,7 @@ module Aws::Drs
       :launch_status,
       :launch_actions_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of a product code associated with a volume.</p>
@@ -1829,7 +1829,7 @@ module Aws::Drs
       :product_code_id,
       :product_code_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1878,7 +1878,7 @@ module Aws::Drs
       :parameters,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1931,7 +1931,7 @@ module Aws::Drs
       :description,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Recovery Instance is a replica of a Source Server running on EC2.</p>
@@ -2001,7 +2001,7 @@ module Aws::Drs
       :agent_version,
       :source_outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error in data replication.</p>
@@ -2015,7 +2015,7 @@ module Aws::Drs
       :error,
       :raw_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about Data Replication</p>
@@ -2053,7 +2053,7 @@ module Aws::Drs
       :staging_availability_zone,
       :staging_outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A disk that should be replicated.</p>
@@ -2079,7 +2079,7 @@ module Aws::Drs
       :rescanned_storage_bytes,
       :backlogged_storage_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_storage_bytes] = 0 unless options.key?(:total_storage_bytes)
@@ -2101,7 +2101,7 @@ module Aws::Drs
       :start_date_time,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data replication initiation step.</p>
@@ -2115,7 +2115,7 @@ module Aws::Drs
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a block storage device on the Recovery Instance.</p>
@@ -2133,7 +2133,7 @@ module Aws::Drs
       :bytes,
       :ebs_volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bytes] = 0 unless options.key?(:bytes)
@@ -2184,7 +2184,7 @@ module Aws::Drs
       :elapsed_replication_duration,
       :failback_launch_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of the Recovery Instance machine.</p>
@@ -2218,7 +2218,7 @@ module Aws::Drs
       :ram_bytes,
       :os,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ram_bytes] = 0 unless options.key?(:ram_bytes)
@@ -2241,7 +2241,7 @@ module Aws::Drs
       :job_id,
       :last_recovery_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A snapshot of a Source Server used during recovery.</p>
@@ -2267,7 +2267,7 @@ module Aws::Drs
       :timestamp,
       :ebs_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a disk of the Source Server to be replicated.</p>
@@ -2297,7 +2297,7 @@ module Aws::Drs
       :throughput,
       :optimized_staging_disk_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:iops] = 0 unless options.key?(:iops)
@@ -2376,7 +2376,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -2401,7 +2401,7 @@ module Aws::Drs
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -2412,7 +2412,7 @@ module Aws::Drs
     class RetryDataReplicationInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -2473,7 +2473,7 @@ module Aws::Drs
       :source_network_id,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -2482,7 +2482,7 @@ module Aws::Drs
     class ReverseReplicationInput < Struct.new(
       :recovery_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reversed_direction_source_server_arn
@@ -2491,7 +2491,7 @@ module Aws::Drs
     class ReverseReplicationOutput < Struct.new(
       :reversed_direction_source_server_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be completed because its exceeded the service quota.</p>
@@ -2519,7 +2519,7 @@ module Aws::Drs
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of the cloud environment where this Source Server originated from.</p>
@@ -2541,7 +2541,7 @@ module Aws::Drs
       :origin_availability_zone,
       :source_outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ARN of the Source Network.</p>
@@ -2595,7 +2595,7 @@ module Aws::Drs
       :last_recovery,
       :launched_vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of Source Network related to a job event.</p>
@@ -2617,7 +2617,7 @@ module Aws::Drs
       :target_vpc,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of the Source Server machine.</p>
@@ -2659,7 +2659,7 @@ module Aws::Drs
       :os,
       :supports_nitro_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ram_bytes] = 0 unless options.key?(:ram_bytes)
@@ -2725,7 +2725,7 @@ module Aws::Drs
       :source_network_id,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Staging information related to source server.</p>
@@ -2750,7 +2750,7 @@ module Aws::Drs
       :staging_source_server_arn,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Source server in staging account that extended source server connected to.</p>
@@ -2768,7 +2768,7 @@ module Aws::Drs
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_i_ds
@@ -2781,7 +2781,7 @@ module Aws::Drs
       :recovery_instance_i_ds,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -2790,7 +2790,7 @@ module Aws::Drs
     class StartFailbackLaunchOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_servers
@@ -2807,7 +2807,7 @@ module Aws::Drs
       :is_drill,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -2816,7 +2816,7 @@ module Aws::Drs
     class StartRecoveryOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the Source Server to recover.</p>
@@ -2830,7 +2830,7 @@ module Aws::Drs
       :source_server_id,
       :recovery_snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -2839,7 +2839,7 @@ module Aws::Drs
     class StartReplicationInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server
@@ -2848,7 +2848,7 @@ module Aws::Drs
     class StartReplicationOutput < Struct.new(
       :source_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_networks
@@ -2865,7 +2865,7 @@ module Aws::Drs
       :deploy_as_new,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the Source Network to recover.</p>
@@ -2879,7 +2879,7 @@ module Aws::Drs
       :source_network_id,
       :cfn_stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -2888,7 +2888,7 @@ module Aws::Drs
     class StartSourceNetworkRecoveryResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network_id
@@ -2897,7 +2897,7 @@ module Aws::Drs
     class StartSourceNetworkReplicationRequest < Struct.new(
       :source_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network
@@ -2906,7 +2906,7 @@ module Aws::Drs
     class StartSourceNetworkReplicationResponse < Struct.new(
       :source_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -2915,7 +2915,7 @@ module Aws::Drs
     class StopFailbackInput < Struct.new(
       :recovery_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -2924,7 +2924,7 @@ module Aws::Drs
     class StopReplicationInput < Struct.new(
       :source_server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server
@@ -2933,7 +2933,7 @@ module Aws::Drs
     class StopReplicationOutput < Struct.new(
       :source_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network_id
@@ -2942,7 +2942,7 @@ module Aws::Drs
     class StopSourceNetworkReplicationRequest < Struct.new(
       :source_network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_network
@@ -2951,7 +2951,7 @@ module Aws::Drs
     class StopSourceNetworkReplicationResponse < Struct.new(
       :source_network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2964,7 +2964,7 @@ module Aws::Drs
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_i_ds
@@ -2973,7 +2973,7 @@ module Aws::Drs
     class TerminateRecoveryInstancesInput < Struct.new(
       :recovery_instance_i_ds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -2982,7 +2982,7 @@ module Aws::Drs
     class TerminateRecoveryInstancesOutput < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -3003,7 +3003,7 @@ module Aws::Drs
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account performing the request has not been initialized.</p>
@@ -3015,7 +3015,7 @@ module Aws::Drs
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3028,7 +3028,7 @@ module Aws::Drs
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recovery_instance_id
@@ -3049,7 +3049,7 @@ module Aws::Drs
       :bandwidth_throttling,
       :use_private_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3090,7 +3090,7 @@ module Aws::Drs
       :post_launch_enabled,
       :launch_into_instance_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3135,7 +3135,7 @@ module Aws::Drs
       :post_launch_enabled,
       :launch_into_instance_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template_id
@@ -3176,7 +3176,7 @@ module Aws::Drs
       :post_launch_enabled,
       :launch_into_source_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_configuration_template
@@ -3185,7 +3185,7 @@ module Aws::Drs
     class UpdateLaunchConfigurationTemplateOutput < Struct.new(
       :launch_configuration_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3258,7 +3258,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_server_id
@@ -3331,7 +3331,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -3405,7 +3405,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replication_configuration_template_id
@@ -3478,7 +3478,7 @@ module Aws::Drs
       :pit_policy,
       :auto_replicate_new_disks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:bandwidth_throttling] = 0 unless options.key?(:bandwidth_throttling)
@@ -3503,7 +3503,7 @@ module Aws::Drs
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validate exception field.</p>
@@ -3517,7 +3517,7 @@ module Aws::Drs
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

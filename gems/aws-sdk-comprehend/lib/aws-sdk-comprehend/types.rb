@@ -6,11 +6,6 @@ module Aws::Comprehend
   # This module contains the types returned by client operations.
   module Types
 
-    module AugmentedManifestsDocumentTypeFormat
-      PLAIN_TEXT_DOCUMENT = 'PLAIN_TEXT_DOCUMENT'
-      SEMI_STRUCTURED_DOCUMENT = 'SEMI_STRUCTURED_DOCUMENT'
-    end
-
     # <p>An augmented manifest file that provides training data for your custom model. An augmented
     #       manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p>
     # @!attribute s3_uri
@@ -67,7 +62,7 @@ module Aws::Comprehend
       :source_documents_s3_uri,
       :document_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of calling the  operation.
@@ -84,7 +79,7 @@ module Aws::Comprehend
       :index,
       :languages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_list
@@ -94,7 +89,7 @@ module Aws::Comprehend
     class BatchDetectDominantLanguageRequest < Struct.new(
       :text_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -114,7 +109,7 @@ module Aws::Comprehend
       :result_list,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of calling the  operation. The
@@ -131,7 +126,7 @@ module Aws::Comprehend
       :index,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_list
@@ -146,7 +141,7 @@ module Aws::Comprehend
       :text_list,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -166,7 +161,7 @@ module Aws::Comprehend
       :result_list,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of calling the  operation. The
@@ -183,7 +178,7 @@ module Aws::Comprehend
       :index,
       :key_phrases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_list
@@ -198,7 +193,7 @@ module Aws::Comprehend
       :text_list,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -218,7 +213,7 @@ module Aws::Comprehend
       :result_list,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of calling the  operation. The
@@ -239,7 +234,7 @@ module Aws::Comprehend
       :sentiment,
       :sentiment_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_list
@@ -254,7 +249,7 @@ module Aws::Comprehend
       :text_list,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -274,7 +269,7 @@ module Aws::Comprehend
       :result_list,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of calling the  operation. The
@@ -289,7 +284,7 @@ module Aws::Comprehend
       :index,
       :syntax_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_list
@@ -305,7 +300,7 @@ module Aws::Comprehend
       :text_list,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -325,7 +320,7 @@ module Aws::Comprehend
       :result_list,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Analysis results for one of the documents in the batch.</p>
@@ -339,7 +334,7 @@ module Aws::Comprehend
       :index,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_list
@@ -353,7 +348,7 @@ module Aws::Comprehend
       :text_list,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -369,7 +364,7 @@ module Aws::Comprehend
       :result_list,
       :error_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error that occurred while processing a document in a batch. The operation
@@ -389,7 +384,7 @@ module Aws::Comprehend
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of documents in the request exceeds the limit of 25. Try your request again
@@ -399,7 +394,7 @@ module Aws::Comprehend
     class BatchSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about each word or line of text in the input document.</p>
@@ -441,7 +436,7 @@ module Aws::Comprehend
       :geometry,
       :relationships,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference to a block. </p>
@@ -463,12 +458,7 @@ module Aws::Comprehend
       :end_offset,
       :child_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlockType
-      LINE = 'LINE'
-      WORD = 'WORD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The bounding box around the detected page
@@ -495,7 +485,7 @@ module Aws::Comprehend
       :top,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Nested block contained within a block.</p>
@@ -513,7 +503,7 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result metrics for the test data associated with an documentation
@@ -572,7 +562,7 @@ module Aws::Comprehend
       :micro_f1_score,
       :hamming_loss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a document classifier.</p>
@@ -598,7 +588,7 @@ module Aws::Comprehend
       :number_of_test_documents,
       :evaluation_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -635,7 +625,7 @@ module Aws::Comprehend
       :bytes,
       :document_reader_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -680,7 +670,7 @@ module Aws::Comprehend
       :errors,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Concurrent modification of the tags associated with an Amazon Comprehend resource is not
@@ -690,7 +680,7 @@ module Aws::Comprehend
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -703,7 +693,7 @@ module Aws::Comprehend
       :text,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute labels
@@ -713,7 +703,7 @@ module Aws::Comprehend
     class ContainsPiiEntitiesResponse < Struct.new(
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -749,7 +739,7 @@ module Aws::Comprehend
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -758,7 +748,7 @@ module Aws::Comprehend
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_name
@@ -869,7 +859,7 @@ module Aws::Comprehend
       :model_kms_key_id,
       :model_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_arn
@@ -878,7 +868,7 @@ module Aws::Comprehend
     class CreateDocumentClassifierResponse < Struct.new(
       :document_classifier_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -922,7 +912,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -936,7 +926,7 @@ module Aws::Comprehend
       :endpoint_arn,
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recognizer_name
@@ -1040,7 +1030,7 @@ module Aws::Comprehend
       :model_kms_key_id,
       :model_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_arn
@@ -1049,7 +1039,7 @@ module Aws::Comprehend
     class CreateEntityRecognizerResponse < Struct.new(
       :entity_recognizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_name
@@ -1095,7 +1085,7 @@ module Aws::Comprehend
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -1108,7 +1098,7 @@ module Aws::Comprehend
       :flywheel_arn,
       :active_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data security configuration.</p>
@@ -1144,7 +1134,7 @@ module Aws::Comprehend
       :data_lake_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An augmented manifest file that provides training data for your custom model.
@@ -1183,12 +1173,7 @@ module Aws::Comprehend
       :source_documents_s3_uri,
       :document_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetDataFormat
-      COMPREHEND_CSV = 'COMPREHEND_CSV'
-      AUGMENTED_MANIFEST = 'AUGMENTED_MANIFEST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the dataset input data configuration for a document classifier model.</p>
@@ -1216,7 +1201,7 @@ module Aws::Comprehend
       :s3_uri,
       :label_delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the annotations associated with a entity recognizer.</p>
@@ -1228,7 +1213,7 @@ module Aws::Comprehend
     class DatasetEntityRecognizerAnnotations < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the documents submitted with a dataset for an entity recognizer model.</p>
@@ -1247,7 +1232,7 @@ module Aws::Comprehend
       :s3_uri,
       :input_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the dataset entity list for an entity recognizer model.</p>
@@ -1259,7 +1244,7 @@ module Aws::Comprehend
     class DatasetEntityRecognizerEntityList < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the format and location of the input data. You must provide either the
@@ -1279,7 +1264,7 @@ module Aws::Comprehend
       :documents,
       :entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter the datasets based on creation time or dataset status.</p>
@@ -1301,7 +1286,7 @@ module Aws::Comprehend
       :creation_time_after,
       :creation_time_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the format and location of the input data for the dataset.</p>
@@ -1331,7 +1316,7 @@ module Aws::Comprehend
       :document_classifier_input_data_config,
       :entity_recognizer_input_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties associated with the dataset.</p>
@@ -1378,18 +1363,7 @@ module Aws::Comprehend
       :creation_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetStatus
-      CREATING = 'CREATING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-    end
-
-    module DatasetType
-      TRAIN = 'TRAIN'
-      TEST = 'TEST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_arn
@@ -1398,12 +1372,12 @@ module Aws::Comprehend
     class DeleteDocumentClassifierRequest < Struct.new(
       :document_classifier_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDocumentClassifierResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -1412,12 +1386,12 @@ module Aws::Comprehend
     class DeleteEndpointRequest < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_arn
@@ -1426,12 +1400,12 @@ module Aws::Comprehend
     class DeleteEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEntityRecognizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -1440,12 +1414,12 @@ module Aws::Comprehend
     class DeleteFlywheelRequest < Struct.new(
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFlywheelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1458,12 +1432,12 @@ module Aws::Comprehend
       :resource_arn,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -1472,7 +1446,7 @@ module Aws::Comprehend
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_properties
@@ -1481,7 +1455,7 @@ module Aws::Comprehend
     class DescribeDatasetResponse < Struct.new(
       :dataset_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1491,7 +1465,7 @@ module Aws::Comprehend
     class DescribeDocumentClassificationJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classification_job_properties
@@ -1501,7 +1475,7 @@ module Aws::Comprehend
     class DescribeDocumentClassificationJobResponse < Struct.new(
       :document_classification_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_arn
@@ -1511,7 +1485,7 @@ module Aws::Comprehend
     class DescribeDocumentClassifierRequest < Struct.new(
       :document_classifier_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_properties
@@ -1520,7 +1494,7 @@ module Aws::Comprehend
     class DescribeDocumentClassifierResponse < Struct.new(
       :document_classifier_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1530,7 +1504,7 @@ module Aws::Comprehend
     class DescribeDominantLanguageDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dominant_language_detection_job_properties
@@ -1540,7 +1514,7 @@ module Aws::Comprehend
     class DescribeDominantLanguageDetectionJobResponse < Struct.new(
       :dominant_language_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -1549,7 +1523,7 @@ module Aws::Comprehend
     class DescribeEndpointRequest < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_properties
@@ -1558,7 +1532,7 @@ module Aws::Comprehend
     class DescribeEndpointResponse < Struct.new(
       :endpoint_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1568,7 +1542,7 @@ module Aws::Comprehend
     class DescribeEntitiesDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities_detection_job_properties
@@ -1577,7 +1551,7 @@ module Aws::Comprehend
     class DescribeEntitiesDetectionJobResponse < Struct.new(
       :entities_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_arn
@@ -1586,7 +1560,7 @@ module Aws::Comprehend
     class DescribeEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_properties
@@ -1595,7 +1569,7 @@ module Aws::Comprehend
     class DescribeEntityRecognizerResponse < Struct.new(
       :entity_recognizer_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1604,7 +1578,7 @@ module Aws::Comprehend
     class DescribeEventsDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events_detection_job_properties
@@ -1613,7 +1587,7 @@ module Aws::Comprehend
     class DescribeEventsDetectionJobResponse < Struct.new(
       :events_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -1626,7 +1600,7 @@ module Aws::Comprehend
       :flywheel_arn,
       :flywheel_iteration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_iteration_properties
@@ -1635,7 +1609,7 @@ module Aws::Comprehend
     class DescribeFlywheelIterationResponse < Struct.new(
       :flywheel_iteration_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -1644,7 +1618,7 @@ module Aws::Comprehend
     class DescribeFlywheelRequest < Struct.new(
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_properties
@@ -1653,7 +1627,7 @@ module Aws::Comprehend
     class DescribeFlywheelResponse < Struct.new(
       :flywheel_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1664,7 +1638,7 @@ module Aws::Comprehend
     class DescribeKeyPhrasesDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_phrases_detection_job_properties
@@ -1674,7 +1648,7 @@ module Aws::Comprehend
     class DescribeKeyPhrasesDetectionJobResponse < Struct.new(
       :key_phrases_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1684,7 +1658,7 @@ module Aws::Comprehend
     class DescribePiiEntitiesDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pii_entities_detection_job_properties
@@ -1693,7 +1667,7 @@ module Aws::Comprehend
     class DescribePiiEntitiesDetectionJobResponse < Struct.new(
       :pii_entities_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1702,7 +1676,7 @@ module Aws::Comprehend
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -1724,7 +1698,7 @@ module Aws::Comprehend
       :last_modified_time,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1734,7 +1708,7 @@ module Aws::Comprehend
     class DescribeSentimentDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sentiment_detection_job_properties
@@ -1743,7 +1717,7 @@ module Aws::Comprehend
     class DescribeSentimentDetectionJobResponse < Struct.new(
       :sentiment_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1754,7 +1728,7 @@ module Aws::Comprehend
     class DescribeTargetedSentimentDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targeted_sentiment_detection_job_properties
@@ -1763,7 +1737,7 @@ module Aws::Comprehend
     class DescribeTargetedSentimentDetectionJobResponse < Struct.new(
       :targeted_sentiment_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1772,7 +1746,7 @@ module Aws::Comprehend
     class DescribeTopicsDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topics_detection_job_properties
@@ -1781,7 +1755,7 @@ module Aws::Comprehend
     class DescribeTopicsDetectionJobResponse < Struct.new(
       :topics_detection_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1790,7 +1764,7 @@ module Aws::Comprehend
     class DetectDominantLanguageRequest < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -1806,7 +1780,7 @@ module Aws::Comprehend
     class DetectDominantLanguageResponse < Struct.new(
       :languages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1857,7 +1831,7 @@ module Aws::Comprehend
       :bytes,
       :document_reader_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -1897,7 +1871,7 @@ module Aws::Comprehend
       :blocks,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1912,7 +1886,7 @@ module Aws::Comprehend
       :text,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -1925,7 +1899,7 @@ module Aws::Comprehend
     class DetectKeyPhrasesResponse < Struct.new(
       :key_phrases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1939,7 +1913,7 @@ module Aws::Comprehend
       :text,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1950,7 +1924,7 @@ module Aws::Comprehend
     class DetectPiiEntitiesResponse < Struct.new(
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1964,7 +1938,7 @@ module Aws::Comprehend
       :text,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -1980,7 +1954,7 @@ module Aws::Comprehend
       :sentiment,
       :sentiment_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -1995,7 +1969,7 @@ module Aws::Comprehend
       :text,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -2009,7 +1983,7 @@ module Aws::Comprehend
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text
@@ -2022,7 +1996,7 @@ module Aws::Comprehend
       :text,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -2032,7 +2006,7 @@ module Aws::Comprehend
     class DetectTargetedSentimentResponse < Struct.new(
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute text_segments
@@ -2046,7 +2020,7 @@ module Aws::Comprehend
       :text_segments,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result_list
@@ -2059,7 +2033,7 @@ module Aws::Comprehend
     class DetectToxicContentResponse < Struct.new(
       :result_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the class that categorizes the document being analyzed</p>
@@ -2078,7 +2052,7 @@ module Aws::Comprehend
       :score,
       :page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration required for a document classification model.</p>
@@ -2092,7 +2066,7 @@ module Aws::Comprehend
       :mode,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of document classification jobs. For more
@@ -2120,7 +2094,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a document classification job.</p>
@@ -2210,17 +2184,7 @@ module Aws::Comprehend
       :vpc_config,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentClassifierDataFormat
-      COMPREHEND_CSV = 'COMPREHEND_CSV'
-      AUGMENTED_MANIFEST = 'AUGMENTED_MANIFEST'
-    end
-
-    module DocumentClassifierDocumentTypeFormat
-      PLAIN_TEXT_DOCUMENT = 'PLAIN_TEXT_DOCUMENT'
-      SEMI_STRUCTURED_DOCUMENT = 'SEMI_STRUCTURED_DOCUMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the training documents. This parameter is required in a request to create a semi-structured document classification model.</p>
@@ -2235,7 +2199,7 @@ module Aws::Comprehend
       :s3_uri,
       :test_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of document classifiers. You can only specify
@@ -2263,7 +2227,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input properties for training a document classifier. </p>
@@ -2364,12 +2328,7 @@ module Aws::Comprehend
       :documents,
       :document_reader_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentClassifierMode
-      MULTI_CLASS = 'MULTI_CLASS'
-      MULTI_LABEL = 'MULTI_LABEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provide the location for output data from a custom classifier job. This field is mandatory 
@@ -2417,7 +2376,7 @@ module Aws::Comprehend
       :kms_key_id,
       :flywheel_stats_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a document classifier.</p>
@@ -2542,7 +2501,7 @@ module Aws::Comprehend
       :source_model_arn,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information about a document classifier and its versions.</p>
@@ -2568,7 +2527,7 @@ module Aws::Comprehend
       :latest_version_name,
       :latest_version_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one of the label or labels that categorize the document being analyzed.</p>
@@ -2587,7 +2546,7 @@ module Aws::Comprehend
       :score,
       :page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the document, discovered during text extraction.</p>
@@ -2601,23 +2560,7 @@ module Aws::Comprehend
       :pages,
       :extracted_characters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentReadAction
-      TEXTRACT_DETECT_DOCUMENT_TEXT = 'TEXTRACT_DETECT_DOCUMENT_TEXT'
-      TEXTRACT_ANALYZE_DOCUMENT = 'TEXTRACT_ANALYZE_DOCUMENT'
-    end
-
-    # <p>TABLES or FORMS</p>
-    module DocumentReadFeatureTypes
-      TABLES = 'TABLES'
-      FORMS = 'FORMS'
-    end
-
-    module DocumentReadMode
-      SERVICE_DEFAULT = 'SERVICE_DEFAULT'
-      FORCE_DOCUMENT_READ_ACTION = 'FORCE_DOCUMENT_READ_ACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration parameters to override the default actions for extracting text from PDF documents and image files. </p>
@@ -2693,17 +2636,7 @@ module Aws::Comprehend
       :document_read_mode,
       :feature_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentType
-      NATIVE_PDF = 'NATIVE_PDF'
-      SCANNED_PDF = 'SCANNED_PDF'
-      MS_WORD = 'MS_WORD'
-      IMAGE = 'IMAGE'
-      PLAIN_TEXT = 'PLAIN_TEXT'
-      TEXTRACT_DETECT_DOCUMENT_TEXT_JSON = 'TEXTRACT_DETECT_DOCUMENT_TEXT_JSON'
-      TEXTRACT_ANALYZE_DOCUMENT_JSON = 'TEXTRACT_ANALYZE_DOCUMENT_JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Document type for each page in the document.</p>
@@ -2717,7 +2650,7 @@ module Aws::Comprehend
       :page,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the code for the dominant language in the input text and the level of
@@ -2735,7 +2668,7 @@ module Aws::Comprehend
       :language_code,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of dominant language detection jobs. For more
@@ -2764,7 +2697,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a dominant language detection job.</p>
@@ -2847,7 +2780,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter used to determine which endpoints are returned. You can filter jobs on their
@@ -2872,7 +2805,7 @@ module Aws::Comprehend
       :creation_time_before,
       :creation_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies information about the specified endpoint.
@@ -2935,15 +2868,7 @@ module Aws::Comprehend
       :desired_data_access_role_arn,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointStatus
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      IN_SERVICE = 'IN_SERVICE'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of dominant language detection jobs. For more
@@ -2971,7 +2896,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an entities detection job.</p>
@@ -3065,7 +2990,7 @@ module Aws::Comprehend
       :vpc_config,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an entity. </p>
@@ -3104,7 +3029,7 @@ module Aws::Comprehend
       :end_offset,
       :block_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies one of the label or labels that categorize the personally identifiable
@@ -3120,7 +3045,7 @@ module Aws::Comprehend
       :name,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration required for an entity recognition model.</p>
@@ -3130,7 +3055,7 @@ module Aws::Comprehend
     class EntityRecognitionConfig < Struct.new(
       :entity_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the annotations associated with a entity recognizer.</p>
@@ -3146,12 +3071,7 @@ module Aws::Comprehend
       :s3_uri,
       :test_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityRecognizerDataFormat
-      COMPREHEND_CSV = 'COMPREHEND_CSV'
-      AUGMENTED_MANIFEST = 'AUGMENTED_MANIFEST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the training documents submitted with an entity recognizer.</p>
@@ -3177,7 +3097,7 @@ module Aws::Comprehend
       :test_s3_uri,
       :input_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the entity list submitted with an entity recognizer.</p>
@@ -3188,7 +3108,7 @@ module Aws::Comprehend
     class EntityRecognizerEntityList < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the accuracy of an entity recognizer. </p>
@@ -3214,7 +3134,7 @@ module Aws::Comprehend
       :recall,
       :f1_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of entity recognizers. You can only specify one
@@ -3242,7 +3162,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the format and location of the input data.</p>
@@ -3308,7 +3228,7 @@ module Aws::Comprehend
       :entity_list,
       :augmented_manifests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an entity recognizer.</p>
@@ -3333,7 +3253,7 @@ module Aws::Comprehend
       :evaluation_metrics,
       :entity_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Individual item from the list of entity types in the metadata of an entity
@@ -3354,7 +3274,7 @@ module Aws::Comprehend
       :evaluation_metrics,
       :number_of_train_mentions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output data configuration.</p>
@@ -3364,7 +3284,7 @@ module Aws::Comprehend
     class EntityRecognizerOutputDataConfig < Struct.new(
       :flywheel_stats_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information about an entity recognizer.</p>
@@ -3472,7 +3392,7 @@ module Aws::Comprehend
       :flywheel_arn,
       :output_data_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the information about an entity recognizer and its versions.</p>
@@ -3498,19 +3418,7 @@ module Aws::Comprehend
       :latest_version_name,
       :latest_version_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityType
-      PERSON = 'PERSON'
-      LOCATION = 'LOCATION'
-      ORGANIZATION = 'ORGANIZATION'
-      COMMERCIAL_ITEM = 'COMMERCIAL_ITEM'
-      EVENT = 'EVENT'
-      DATE = 'DATE'
-      QUANTITY = 'QUANTITY'
-      TITLE = 'TITLE'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the accuracy of an entity recognizer for a specific entity
@@ -3535,7 +3443,7 @@ module Aws::Comprehend
       :recall,
       :f1_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a
@@ -3550,7 +3458,7 @@ module Aws::Comprehend
     class EntityTypesListItem < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Text extraction encountered one or more page-level errors in the input document.</p>
@@ -3590,7 +3498,7 @@ module Aws::Comprehend
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of event detection jobs.</p>
@@ -3617,7 +3525,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an events detection job.</p>
@@ -3683,7 +3591,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :target_event_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Array of the number of characters extracted from each page.</p>
@@ -3697,7 +3605,7 @@ module Aws::Comprehend
       :page,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter the flywheels based on creation time or flywheel status.</p>
@@ -3715,7 +3623,7 @@ module Aws::Comprehend
       :creation_time_after,
       :creation_time_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter the flywheel iterations based on creation time.</p>
@@ -3729,7 +3637,7 @@ module Aws::Comprehend
       :creation_time_after,
       :creation_time_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration properties of a flywheel iteration.</p>
@@ -3779,16 +3687,7 @@ module Aws::Comprehend
       :trained_model_metrics,
       :evaluation_manifest_s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlywheelIterationStatus
-      TRAINING = 'TRAINING'
-      EVALUATING = 'EVALUATING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STOP_REQUESTED = 'STOP_REQUESTED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The evaluation metrics associated with the evaluated model.</p>
@@ -3810,7 +3709,7 @@ module Aws::Comprehend
       :average_recall,
       :average_accuracy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The flywheel properties.</p>
@@ -3865,15 +3764,7 @@ module Aws::Comprehend
       :last_modified_time,
       :latest_flywheel_iteration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlywheelStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Flywheel summary information.</p>
@@ -3915,7 +3806,7 @@ module Aws::Comprehend
       :last_modified_time,
       :latest_flywheel_iteration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of items on a document page.</p>
@@ -3931,7 +3822,7 @@ module Aws::Comprehend
       :bounding_box,
       :polygon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_model_arn
@@ -3981,7 +3872,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -3990,7 +3881,7 @@ module Aws::Comprehend
     class ImportModelResponse < Struct.new(
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input properties for an inference job. The document reader config field applies
@@ -4029,12 +3920,7 @@ module Aws::Comprehend
       :input_format,
       :document_reader_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputFormat
-      ONE_DOC_PER_FILE = 'ONE_DOC_PER_FILE'
-      ONE_DOC_PER_LINE = 'ONE_DOC_PER_LINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. Retry your request.</p>
@@ -4043,7 +3929,7 @@ module Aws::Comprehend
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter specified for the operation is invalid. Specify a different
@@ -4053,7 +3939,7 @@ module Aws::Comprehend
     class InvalidFilterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional detail about why the request failed.</p>
@@ -4086,14 +3972,7 @@ module Aws::Comprehend
     class InvalidRequestDetail < Struct.new(
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvalidRequestDetailReason
-      DOCUMENT_SIZE_EXCEEDED = 'DOCUMENT_SIZE_EXCEEDED'
-      UNSUPPORTED_DOC_TYPE = 'UNSUPPORTED_DOC_TYPE'
-      PAGE_LIMIT_EXCEEDED = 'PAGE_LIMIT_EXCEEDED'
-      TEXTRACT_ACCESS_DENIED = 'TEXTRACT_ACCESS_DENIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is invalid.</p>
@@ -4109,11 +3988,7 @@ module Aws::Comprehend
       :reason,
       :detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvalidRequestReason
-      INVALID_DOCUMENT = 'INVALID_DOCUMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified job was not found. Check the job ID and try again.</p>
@@ -4122,16 +3997,7 @@ module Aws::Comprehend
     class JobNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      SUBMITTED = 'SUBMITTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STOP_REQUESTED = 'STOP_REQUESTED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a key noun phrase.</p>
@@ -4156,7 +4022,7 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of dominant language detection jobs. For more
@@ -4184,7 +4050,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a key phrases detection job.</p>
@@ -4270,7 +4136,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KMS customer managed key (CMK) entered cannot be validated. Verify the key and
@@ -4280,22 +4146,7 @@ module Aws::Comprehend
     class KmsKeyValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LanguageCode
-      EN = 'en'
-      ES = 'es'
-      FR = 'fr'
-      DE = 'de'
-      IT = 'it'
-      PT = 'pt'
-      AR = 'ar'
-      HI = 'hi'
-      JA = 'ja'
-      KO = 'ko'
-      ZH = 'zh'
-      ZH_TW = 'zh-TW'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -4316,7 +4167,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_properties_list
@@ -4329,7 +4180,7 @@ module Aws::Comprehend
       :dataset_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4347,7 +4198,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classification_job_properties_list
@@ -4360,7 +4211,7 @@ module Aws::Comprehend
       :document_classification_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4373,7 +4224,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_summaries_list
@@ -4386,7 +4237,7 @@ module Aws::Comprehend
       :document_classifier_summaries_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4404,7 +4255,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_properties_list
@@ -4417,7 +4268,7 @@ module Aws::Comprehend
       :document_classifier_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4435,7 +4286,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dominant_language_detection_job_properties_list
@@ -4448,7 +4299,7 @@ module Aws::Comprehend
       :dominant_language_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4467,7 +4318,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_properties_list
@@ -4481,7 +4332,7 @@ module Aws::Comprehend
       :endpoint_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4499,7 +4350,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities_detection_job_properties_list
@@ -4512,7 +4363,7 @@ module Aws::Comprehend
       :entities_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4525,7 +4376,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_summaries_list
@@ -4538,7 +4389,7 @@ module Aws::Comprehend
       :entity_recognizer_summaries_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4557,7 +4408,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_properties_list
@@ -4570,7 +4421,7 @@ module Aws::Comprehend
       :entity_recognizer_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4588,7 +4439,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events_detection_job_properties_list
@@ -4601,7 +4452,7 @@ module Aws::Comprehend
       :events_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -4622,7 +4473,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_iteration_properties_list
@@ -4635,7 +4486,7 @@ module Aws::Comprehend
       :flywheel_iteration_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4654,7 +4505,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_summary_list
@@ -4668,7 +4519,7 @@ module Aws::Comprehend
       :flywheel_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4686,7 +4537,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_phrases_detection_job_properties_list
@@ -4699,7 +4550,7 @@ module Aws::Comprehend
       :key_phrases_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4717,7 +4568,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pii_entities_detection_job_properties_list
@@ -4730,7 +4581,7 @@ module Aws::Comprehend
       :pii_entities_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4748,7 +4599,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sentiment_detection_job_properties_list
@@ -4761,7 +4612,7 @@ module Aws::Comprehend
       :sentiment_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4771,7 +4622,7 @@ module Aws::Comprehend
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4788,7 +4639,7 @@ module Aws::Comprehend
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4806,7 +4657,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targeted_sentiment_detection_job_properties_list
@@ -4819,7 +4670,7 @@ module Aws::Comprehend
       :targeted_sentiment_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -4837,7 +4688,7 @@ module Aws::Comprehend
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topics_detection_job_properties_list
@@ -4850,7 +4701,7 @@ module Aws::Comprehend
       :topics_detection_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the sentiment and sentiment score for one mention of an entity.</p>
@@ -4866,23 +4717,7 @@ module Aws::Comprehend
       :sentiment,
       :sentiment_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelStatus
-      SUBMITTED = 'SUBMITTED'
-      TRAINING = 'TRAINING'
-      DELETING = 'DELETING'
-      STOP_REQUESTED = 'STOP_REQUESTED'
-      STOPPED = 'STOPPED'
-      IN_ERROR = 'IN_ERROR'
-      TRAINED = 'TRAINED'
-      TRAINED_WITH_WARNING = 'TRAINED_WITH_WARNING'
-    end
-
-    module ModelType
-      DOCUMENT_CLASSIFIER = 'DOCUMENT_CLASSIFIER'
-      ENTITY_RECOGNIZER = 'ENTITY_RECOGNIZER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration parameters for the output of inference jobs.</p>
@@ -4931,20 +4766,7 @@ module Aws::Comprehend
       :s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PageBasedErrorCode
-      TEXTRACT_BAD_PAGE = 'TEXTRACT_BAD_PAGE'
-      TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED = 'TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED'
-      PAGE_CHARACTERS_EXCEEDED = 'PAGE_CHARACTERS_EXCEEDED'
-      PAGE_SIZE_EXCEEDED = 'PAGE_SIZE_EXCEEDED'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-    end
-
-    module PageBasedWarningCode
-      INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL = 'INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL'
-      INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL = 'INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the part of speech represented by the token and gives the confidence that
@@ -4963,28 +4785,7 @@ module Aws::Comprehend
       :tag,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartOfSpeechTagType
-      ADJ = 'ADJ'
-      ADP = 'ADP'
-      ADV = 'ADV'
-      AUX = 'AUX'
-      CONJ = 'CONJ'
-      CCONJ = 'CCONJ'
-      DET = 'DET'
-      INTJ = 'INTJ'
-      NOUN = 'NOUN'
-      NUM = 'NUM'
-      O = 'O'
-      PART = 'PART'
-      PRON = 'PRON'
-      PROPN = 'PROPN'
-      PUNCT = 'PUNCT'
-      SCONJ = 'SCONJ'
-      SYM = 'SYM'
-      VERB = 'VERB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of PII entity detection jobs.</p>
@@ -5011,7 +4812,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a PII entities detection job.</p>
@@ -5085,17 +4886,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PiiEntitiesDetectionMaskMode
-      MASK = 'MASK'
-      REPLACE_WITH_PII_ENTITY_TYPE = 'REPLACE_WITH_PII_ENTITY_TYPE'
-    end
-
-    module PiiEntitiesDetectionMode
-      ONLY_REDACTION = 'ONLY_REDACTION'
-      ONLY_OFFSETS = 'ONLY_OFFSETS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a PII entity.</p>
@@ -5120,47 +4911,7 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PiiEntityType
-      BANK_ACCOUNT_NUMBER = 'BANK_ACCOUNT_NUMBER'
-      BANK_ROUTING = 'BANK_ROUTING'
-      CREDIT_DEBIT_NUMBER = 'CREDIT_DEBIT_NUMBER'
-      CREDIT_DEBIT_CVV = 'CREDIT_DEBIT_CVV'
-      CREDIT_DEBIT_EXPIRY = 'CREDIT_DEBIT_EXPIRY'
-      PIN = 'PIN'
-      EMAIL = 'EMAIL'
-      ADDRESS = 'ADDRESS'
-      NAME = 'NAME'
-      PHONE = 'PHONE'
-      SSN = 'SSN'
-      DATE_TIME = 'DATE_TIME'
-      PASSPORT_NUMBER = 'PASSPORT_NUMBER'
-      DRIVER_ID = 'DRIVER_ID'
-      URL = 'URL'
-      AGE = 'AGE'
-      USERNAME = 'USERNAME'
-      PASSWORD = 'PASSWORD'
-      AWS_ACCESS_KEY = 'AWS_ACCESS_KEY'
-      AWS_SECRET_KEY = 'AWS_SECRET_KEY'
-      IP_ADDRESS = 'IP_ADDRESS'
-      MAC_ADDRESS = 'MAC_ADDRESS'
-      ALL = 'ALL'
-      LICENSE_PLATE = 'LICENSE_PLATE'
-      VEHICLE_IDENTIFICATION_NUMBER = 'VEHICLE_IDENTIFICATION_NUMBER'
-      UK_NATIONAL_INSURANCE_NUMBER = 'UK_NATIONAL_INSURANCE_NUMBER'
-      CA_SOCIAL_INSURANCE_NUMBER = 'CA_SOCIAL_INSURANCE_NUMBER'
-      US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = 'US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER'
-      UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = 'UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER'
-      IN_PERMANENT_ACCOUNT_NUMBER = 'IN_PERMANENT_ACCOUNT_NUMBER'
-      IN_NREGA = 'IN_NREGA'
-      INTERNATIONAL_BANK_ACCOUNT_NUMBER = 'INTERNATIONAL_BANK_ACCOUNT_NUMBER'
-      SWIFT_CODE = 'SWIFT_CODE'
-      UK_NATIONAL_HEALTH_SERVICE_NUMBER = 'UK_NATIONAL_HEALTH_SERVICE_NUMBER'
-      CA_HEALTH_NUMBER = 'CA_HEALTH_NUMBER'
-      IN_AADHAAR = 'IN_AADHAAR'
-      IN_VOTER_NUMBER = 'IN_VOTER_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration parameters for the output of PII entity detection jobs.</p>
@@ -5180,7 +4931,7 @@ module Aws::Comprehend
       :s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The X and Y coordinates of a point on a document page.</p>
@@ -5195,7 +4946,7 @@ module Aws::Comprehend
       :x,
       :y,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5225,7 +4976,7 @@ module Aws::Comprehend
       :resource_policy,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_revision_id
@@ -5235,7 +4986,7 @@ module Aws::Comprehend
     class PutResourcePolicyResponse < Struct.new(
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration parameters for PII entity redaction.</p>
@@ -5255,11 +5006,7 @@ module Aws::Comprehend
       :mask_mode,
       :mask_character,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationshipType
-      CHILD = 'CHILD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of child blocks for the current block.</p>
@@ -5273,7 +5020,7 @@ module Aws::Comprehend
       :ids,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource name is already in use. Use a different name and try your request
@@ -5283,7 +5030,7 @@ module Aws::Comprehend
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of resources per account has been exceeded. Review the resources, and
@@ -5293,7 +5040,7 @@ module Aws::Comprehend
     class ResourceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource ARN was not found. Check the ARN and try your request again.</p>
@@ -5302,7 +5049,7 @@ module Aws::Comprehend
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is not available. Check the resource and try your request
@@ -5312,7 +5059,7 @@ module Aws::Comprehend
     class ResourceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of dominant language detection jobs. For more
@@ -5340,7 +5087,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a sentiment detection job.</p>
@@ -5426,7 +5173,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the level of confidence that Amazon Comprehend has in the accuracy of its
@@ -5453,19 +5200,7 @@ module Aws::Comprehend
       :neutral,
       :mixed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SentimentType
-      POSITIVE = 'POSITIVE'
-      NEGATIVE = 'NEGATIVE'
-      NEUTRAL = 'NEUTRAL'
-      MIXED = 'MIXED'
-    end
-
-    module Split
-      TRAIN = 'TRAIN'
-      TEST = 'TEST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -5531,7 +5266,7 @@ module Aws::Comprehend
       :tags,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5584,7 +5319,7 @@ module Aws::Comprehend
       :job_status,
       :document_classifier_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -5640,7 +5375,7 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5681,7 +5416,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -5754,7 +5489,7 @@ module Aws::Comprehend
       :tags,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5806,7 +5541,7 @@ module Aws::Comprehend
       :job_status,
       :entity_recognizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -5847,7 +5582,7 @@ module Aws::Comprehend
       :target_event_types,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -5874,7 +5609,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -5888,7 +5623,7 @@ module Aws::Comprehend
       :flywheel_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -5901,7 +5636,7 @@ module Aws::Comprehend
       :flywheel_arn,
       :flywheel_iteration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -5963,7 +5698,7 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6004,7 +5739,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -6054,7 +5789,7 @@ module Aws::Comprehend
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6080,7 +5815,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -6141,7 +5876,7 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6182,7 +5917,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -6243,7 +5978,7 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6285,7 +6020,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_data_config
@@ -6347,7 +6082,7 @@ module Aws::Comprehend
       :vpc_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6390,7 +6125,7 @@ module Aws::Comprehend
       :job_arn,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6399,7 +6134,7 @@ module Aws::Comprehend
     class StopDominantLanguageDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6414,7 +6149,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6423,7 +6158,7 @@ module Aws::Comprehend
     class StopEntitiesDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6438,7 +6173,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6447,7 +6182,7 @@ module Aws::Comprehend
     class StopEventsDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6460,7 +6195,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6469,7 +6204,7 @@ module Aws::Comprehend
     class StopKeyPhrasesDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6484,7 +6219,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6493,7 +6228,7 @@ module Aws::Comprehend
     class StopPiiEntitiesDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6506,7 +6241,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6515,7 +6250,7 @@ module Aws::Comprehend
     class StopSentimentDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6530,7 +6265,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6539,7 +6274,7 @@ module Aws::Comprehend
     class StopTargetedSentimentDetectionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6554,7 +6289,7 @@ module Aws::Comprehend
       :job_id,
       :job_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_classifier_arn
@@ -6564,12 +6299,12 @@ module Aws::Comprehend
     class StopTrainingDocumentClassifierRequest < Struct.new(
       :document_classifier_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopTrainingDocumentClassifierResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_recognizer_arn
@@ -6579,21 +6314,12 @@ module Aws::Comprehend
     class StopTrainingEntityRecognizerRequest < Struct.new(
       :entity_recognizer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopTrainingEntityRecognizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SyntaxLanguageCode
-      EN = 'en'
-      ES = 'es'
-      FR = 'fr'
-      DE = 'de'
-      IT = 'it'
-      PT = 'pt'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a work in the input text that was recognized and assigned a part of speech.
@@ -6625,7 +6351,7 @@ module Aws::Comprehend
       :end_offset,
       :part_of_speech,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For
@@ -6647,7 +6373,7 @@ module Aws::Comprehend
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6662,12 +6388,12 @@ module Aws::Comprehend
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering a list of dominant language detection jobs. For more
@@ -6695,7 +6421,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a targeted sentiment detection job.</p>
@@ -6781,7 +6507,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about one of the entities found by targeted sentiment analysis.</p>
@@ -6798,27 +6524,7 @@ module Aws::Comprehend
       :descriptive_mention_index,
       :mentions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetedSentimentEntityType
-      PERSON = 'PERSON'
-      LOCATION = 'LOCATION'
-      ORGANIZATION = 'ORGANIZATION'
-      FACILITY = 'FACILITY'
-      BRAND = 'BRAND'
-      COMMERCIAL_ITEM = 'COMMERCIAL_ITEM'
-      MOVIE = 'MOVIE'
-      MUSIC = 'MUSIC'
-      BOOK = 'BOOK'
-      SOFTWARE = 'SOFTWARE'
-      GAME = 'GAME'
-      PERSONAL_TITLE = 'PERSONAL_TITLE'
-      EVENT = 'EVENT'
-      DATE = 'DATE'
-      QUANTITY = 'QUANTITY'
-      ATTRIBUTE = 'ATTRIBUTE'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about one mention of an entity. The mention information includes the location of the mention
@@ -6854,7 +6560,7 @@ module Aws::Comprehend
       :begin_offset,
       :end_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration about the model associated with a flywheel.</p>
@@ -6872,7 +6578,7 @@ module Aws::Comprehend
       :document_classification_config,
       :entity_recognition_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the of text strings. Each string has a size limit of 1KB.</p>
@@ -6882,7 +6588,7 @@ module Aws::Comprehend
     class TextSegment < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size of the input text exceeds the limit. Use a smaller document.</p>
@@ -6891,7 +6597,7 @@ module Aws::Comprehend
     class TextSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeds the limit. Resubmit your request later.</p>
@@ -6900,7 +6606,7 @@ module Aws::Comprehend
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains more tag keys than can be associated with a resource (50 tag keys per
@@ -6910,7 +6616,7 @@ module Aws::Comprehend
     class TooManyTagKeysException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains more tags than can be associated with a resource (50 tags per
@@ -6921,7 +6627,7 @@ module Aws::Comprehend
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information for filtering topic detection jobs. For more information, see
@@ -6949,7 +6655,7 @@ module Aws::Comprehend
       :submit_time_before,
       :submit_time_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a topic detection job.</p>
@@ -7036,7 +6742,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Toxic content analysis result for one string. For more information about toxicity detection, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html">Toxicity detection</a> in the <i>Amazon Comprehend Developer Guide</i>
@@ -7052,17 +6758,7 @@ module Aws::Comprehend
       :name,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ToxicContentType
-      GRAPHIC = 'GRAPHIC'
-      HARASSMENT_OR_ABUSE = 'HARASSMENT_OR_ABUSE'
-      HATE_SPEECH = 'HATE_SPEECH'
-      INSULT = 'INSULT'
-      PROFANITY = 'PROFANITY'
-      SEXUAL = 'SEXUAL'
-      VIOLENCE_OR_THREAT = 'VIOLENCE_OR_THREAT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Toxicity analysis result for one string. For more information about toxicity detection, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/toxicity-detection.html">Toxicity detection</a> in the <i>Amazon Comprehend Developer Guide</i>.</p>
@@ -7076,7 +6772,7 @@ module Aws::Comprehend
       :labels,
       :toxicity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Comprehend can't process the language of the input text. For a list of supported languages,
@@ -7087,7 +6783,7 @@ module Aws::Comprehend
     class UnsupportedLanguageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7104,12 +6800,12 @@ module Aws::Comprehend
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data security configuration.</p>
@@ -7141,7 +6837,7 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_arn
@@ -7168,7 +6864,7 @@ module Aws::Comprehend
       :desired_data_access_role_arn,
       :flywheel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute desired_model_arn
@@ -7177,7 +6873,7 @@ module Aws::Comprehend
     class UpdateEndpointResponse < Struct.new(
       :desired_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_arn
@@ -7199,7 +6895,7 @@ module Aws::Comprehend
       :data_access_role_arn,
       :data_security_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flywheel_properties
@@ -7208,7 +6904,7 @@ module Aws::Comprehend
     class UpdateFlywheelResponse < Struct.new(
       :flywheel_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
@@ -7232,7 +6928,7 @@ module Aws::Comprehend
       :security_group_ids,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system identified one of the following warnings while processing the input document:</p>
@@ -7258,7 +6954,7 @@ module Aws::Comprehend
       :warn_code,
       :warn_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

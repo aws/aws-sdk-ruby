@@ -27,7 +27,7 @@ module Aws::SNS
       :aws_account_id,
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the user has been denied access to the requested resource.</p>
@@ -36,7 +36,7 @@ module Aws::SNS
     class AuthorizationErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two or more batch entries in the request have the same <code>Id</code>.</p>
@@ -45,7 +45,7 @@ module Aws::SNS
     class BatchEntryIdsNotDistinctException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The length of all the batch messages put together is more than the limit.</p>
@@ -54,7 +54,7 @@ module Aws::SNS
     class BatchRequestTooLongException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gives a detailed description of failed messages in the batch.</p>
@@ -76,7 +76,7 @@ module Aws::SNS
       :message,
       :sender_fault,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sender_fault] = false unless options.key?(:sender_fault)
@@ -91,7 +91,7 @@ module Aws::SNS
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the <code>CheckIfPhoneNumberIsOptedOut</code> action.</p>
@@ -113,7 +113,7 @@ module Aws::SNS
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
       :is_opted_out,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_opted_out] = false unless options.key?(:is_opted_out)
@@ -128,7 +128,7 @@ module Aws::SNS
     class ConcurrentAccessException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for ConfirmSubscription action.</p>
@@ -149,7 +149,7 @@ module Aws::SNS
       :token,
       :authenticate_on_unsubscribe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for ConfirmSubscriptions action.</p>
@@ -159,7 +159,7 @@ module Aws::SNS
     class ConfirmSubscriptionResponse < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response from CreateEndpoint action.</p>
@@ -169,7 +169,7 @@ module Aws::SNS
     class CreateEndpointResponse < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for CreatePlatformApplication action.</p>
@@ -192,7 +192,7 @@ module Aws::SNS
       :platform,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response from CreatePlatformApplication action.</p>
@@ -203,7 +203,7 @@ module Aws::SNS
     class CreatePlatformApplicationResponse < Struct.new(
       :platform_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for CreatePlatformEndpoint action.</p>
@@ -234,7 +234,7 @@ module Aws::SNS
       :custom_user_data,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -249,12 +249,12 @@ module Aws::SNS
       :phone_number,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateSMSSandboxPhoneNumberResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for CreateTopic action.</p>
@@ -507,7 +507,7 @@ module Aws::SNS
       :tags,
       :data_protection_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response from CreateTopic action.</p>
@@ -517,7 +517,7 @@ module Aws::SNS
     class CreateTopicResponse < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>DeleteEndpoint</code> action.</p>
@@ -528,7 +528,7 @@ module Aws::SNS
     class DeleteEndpointInput < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>DeletePlatformApplication</code> action.</p>
@@ -539,7 +539,7 @@ module Aws::SNS
     class DeletePlatformApplicationInput < Struct.new(
       :platform_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -548,12 +548,12 @@ module Aws::SNS
     class DeleteSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSMSSandboxPhoneNumberResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_arn
@@ -562,7 +562,7 @@ module Aws::SNS
     class DeleteTopicInput < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch request doesn't contain any entries.</p>
@@ -571,7 +571,7 @@ module Aws::SNS
     class EmptyBatchRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint for mobile app and device.</p>
@@ -585,7 +585,7 @@ module Aws::SNS
       :endpoint_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception error indicating endpoint disabled.</p>
@@ -595,7 +595,7 @@ module Aws::SNS
     class EndpointDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the number of filter polices in your Amazon Web Services account exceeds the limit. To
@@ -606,7 +606,7 @@ module Aws::SNS
     class FilterPolicyLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -617,7 +617,7 @@ module Aws::SNS
     class GetDataProtectionPolicyInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_protection_policy
@@ -626,7 +626,7 @@ module Aws::SNS
     class GetDataProtectionPolicyResponse < Struct.new(
       :data_protection_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>GetEndpointAttributes</code> action.</p>
@@ -637,7 +637,7 @@ module Aws::SNS
     class GetEndpointAttributesInput < Struct.new(
       :endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response from <code>GetEndpointAttributes</code> of the
@@ -673,7 +673,7 @@ module Aws::SNS
     class GetEndpointAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>GetPlatformApplicationAttributes</code> action.</p>
@@ -684,7 +684,7 @@ module Aws::SNS
     class GetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for <code>GetPlatformApplicationAttributes</code> action.</p>
@@ -746,7 +746,7 @@ module Aws::SNS
     class GetPlatformApplicationAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <code>GetSMSAttributes</code> request.</p>
@@ -759,7 +759,7 @@ module Aws::SNS
     class GetSMSAttributesInput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the <code>GetSMSAttributes</code> request.</p>
@@ -769,12 +769,12 @@ module Aws::SNS
     class GetSMSAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetSMSSandboxAccountStatusInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute is_in_sandbox
@@ -783,7 +783,7 @@ module Aws::SNS
     class GetSMSSandboxAccountStatusResult < Struct.new(
       :is_in_sandbox,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_in_sandbox] = false unless options.key?(:is_in_sandbox)
@@ -798,7 +798,7 @@ module Aws::SNS
     class GetSubscriptionAttributesInput < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for GetSubscriptionAttributes action.</p>
@@ -901,7 +901,7 @@ module Aws::SNS
     class GetSubscriptionAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for GetTopicAttributes action.</p>
@@ -911,7 +911,7 @@ module Aws::SNS
     class GetTopicAttributesInput < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for GetTopicAttributes action.</p>
@@ -1049,7 +1049,7 @@ module Aws::SNS
     class GetTopicAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates an internal service error.</p>
@@ -1058,7 +1058,7 @@ module Aws::SNS
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Id</code> of a batch entry in a batch request doesn't abide by the specification. </p>
@@ -1067,7 +1067,7 @@ module Aws::SNS
     class InvalidBatchEntryIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a request parameter does not comply with the associated
@@ -1077,7 +1077,7 @@ module Aws::SNS
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a request parameter does not comply with the associated constraints.</p>
@@ -1087,7 +1087,7 @@ module Aws::SNS
     class InvalidParameterValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credential signature isn't valid. You must use an HTTPS endpoint and sign your
@@ -1097,7 +1097,7 @@ module Aws::SNS
     class InvalidSecurityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the specified state is not a valid state for an event source.</p>
@@ -1106,7 +1106,7 @@ module Aws::SNS
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ciphertext references a key that doesn't exist or that you don't have access
@@ -1116,7 +1116,7 @@ module Aws::SNS
     class KMSAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified Amazon Web Services KMS key isn't
@@ -1126,7 +1126,7 @@ module Aws::SNS
     class KMSDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the state of the specified resource isn't valid for
@@ -1137,7 +1137,7 @@ module Aws::SNS
     class KMSInvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified entity or resource can't be
@@ -1147,7 +1147,7 @@ module Aws::SNS
     class KMSNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services access key ID needs a subscription for the service.</p>
@@ -1156,7 +1156,7 @@ module Aws::SNS
     class KMSOptInRequired < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. For more information about
@@ -1168,24 +1168,7 @@ module Aws::SNS
     class KMSThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Supported language code for sending OTP message
-    module LanguageCodeString
-      en_US = 'en-US'
-      en_GB = 'en-GB'
-      es_419 = 'es-419'
-      es_ES = 'es-ES'
-      de_DE = 'de-DE'
-      fr_CA = 'fr-CA'
-      fr_FR = 'fr-FR'
-      it_IT = 'it-IT'
-      jp_JP = 'ja-JP'
-      pt_BR = 'pt-BR'
-      kr_KR = 'kr-KR'
-      zh_CN = 'zh-CN'
-      zh_TW = 'zh-TW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>ListEndpointsByPlatformApplication</code> action.</p>
@@ -1204,7 +1187,7 @@ module Aws::SNS
       :platform_application_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for <code>ListEndpointsByPlatformApplication</code> action.</p>
@@ -1221,7 +1204,7 @@ module Aws::SNS
       :endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1234,7 +1217,7 @@ module Aws::SNS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1249,7 +1232,7 @@ module Aws::SNS
       :next_token,
       :phone_numbers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the <code>ListPhoneNumbersOptedOut</code> action.</p>
@@ -1261,7 +1244,7 @@ module Aws::SNS
     class ListPhoneNumbersOptedOutInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the <code>ListPhoneNumbersOptedOut</code> action.</p>
@@ -1278,7 +1261,7 @@ module Aws::SNS
       :phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>ListPlatformApplications</code> action.</p>
@@ -1291,7 +1274,7 @@ module Aws::SNS
     class ListPlatformApplicationsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for <code>ListPlatformApplications</code> action.</p>
@@ -1309,7 +1292,7 @@ module Aws::SNS
       :platform_applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1323,7 +1306,7 @@ module Aws::SNS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_numbers
@@ -1338,7 +1321,7 @@ module Aws::SNS
       :phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for ListSubscriptionsByTopic action.</p>
@@ -1352,7 +1335,7 @@ module Aws::SNS
       :topic_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for ListSubscriptionsByTopic action.</p>
@@ -1367,7 +1350,7 @@ module Aws::SNS
       :subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for ListSubscriptions action.</p>
@@ -1377,7 +1360,7 @@ module Aws::SNS
     class ListSubscriptionsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for ListSubscriptions action</p>
@@ -1392,7 +1375,7 @@ module Aws::SNS
       :subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1401,7 +1384,7 @@ module Aws::SNS
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1410,7 +1393,7 @@ module Aws::SNS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1419,7 +1402,7 @@ module Aws::SNS
     class ListTopicsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for ListTopics action.</p>
@@ -1434,7 +1417,7 @@ module Aws::SNS
       :topics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user-specified message attribute value. For string data types, the value attribute
@@ -1465,7 +1448,7 @@ module Aws::SNS
       :string_value,
       :binary_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the requested resource does not exist.</p>
@@ -1474,14 +1457,7 @@ module Aws::SNS
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Enum listing out all supported number capabilities.
-    module NumberCapability
-      SMS = 'SMS'
-      MMS = 'MMS'
-      VOICE = 'VOICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for the OptInPhoneNumber action.</p>
@@ -1491,13 +1467,13 @@ module Aws::SNS
     class OptInPhoneNumberInput < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the OptInPhoneNumber action.</p>
     class OptInPhoneNumberResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the specified phone number opted out of receiving SMS messages from
@@ -1507,7 +1483,7 @@ module Aws::SNS
     class OptedOutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of phone numbers and their metadata.</p>
@@ -1537,7 +1513,7 @@ module Aws::SNS
       :route_type,
       :number_capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Platform application object.</p>
@@ -1551,7 +1527,7 @@ module Aws::SNS
       :platform_application_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception error indicating platform application disabled.</p>
@@ -1561,7 +1537,7 @@ module Aws::SNS
     class PlatformApplicationDisabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_arn
@@ -1575,7 +1551,7 @@ module Aws::SNS
       :topic_arn,
       :publish_batch_request_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a single Amazon SNS message along with an <code>Id</code> that
@@ -1720,7 +1696,7 @@ module Aws::SNS
       :message_deduplication_id,
       :message_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -1733,7 +1709,7 @@ module Aws::SNS
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encloses data related to a successful message in a batch request for topic.</p>
@@ -1754,7 +1730,7 @@ module Aws::SNS
       :message_id,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Publish action.</p>
@@ -1961,7 +1937,7 @@ module Aws::SNS
       :message_deduplication_id,
       :message_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for Publish action.</p>
@@ -1980,7 +1956,7 @@ module Aws::SNS
       :message_id,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1998,7 +1974,7 @@ module Aws::SNS
       :resource_arn,
       :data_protection_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for RemovePermission action.</p>
@@ -2012,7 +1988,7 @@ module Aws::SNS
       :topic_arn,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the request parameter has exceeded the maximum number of concurrent message replays.</p>
@@ -2021,7 +1997,7 @@ module Aws::SNS
     class ReplayLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Can’t perform the action on the specified resource. Make sure that the resource
@@ -2031,17 +2007,7 @@ module Aws::SNS
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Enum listing out all supported route types. The following enum values are supported.
-    #         1. Transactional : Non-marketing traffic
-    #         2. Promotional : Marketing
-    #         3. Premium : Premium routes for OTP delivery to the carriers
-    module RouteType
-      Transactional = 'Transactional'
-      Promotional = 'Promotional'
-      Premium = 'Premium'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A verified or pending destination phone number in the SMS sandbox.</p>
@@ -2063,16 +2029,7 @@ module Aws::SNS
       :phone_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Enum listing out all supported destination phone number verification statuses. The following enum values are
-    #         supported.
-    #         1. PENDING : The destination phone number is pending verification.
-    #         2. VERIFIED : The destination phone number is verified.
-    module SMSSandboxPhoneNumberVerificationStatus
-      Pending = 'Pending'
-      Verified = 'Verified'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>SetEndpointAttributes</code> action.</p>
@@ -2108,7 +2065,7 @@ module Aws::SNS
       :endpoint_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for <code>SetPlatformApplicationAttributes</code> action.</p>
@@ -2236,7 +2193,7 @@ module Aws::SNS
       :platform_application_arn,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the SetSMSAttributes action.</p>
@@ -2331,13 +2288,13 @@ module Aws::SNS
     class SetSMSAttributesInput < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the SetSMSAttributes action.</p>
     class SetSMSAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for SetSubscriptionAttributes action.</p>
@@ -2419,7 +2376,7 @@ module Aws::SNS
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for SetTopicAttributes action.</p>
@@ -2661,7 +2618,7 @@ module Aws::SNS
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag has been added to a resource with the same ARN as a deleted resource. Wait a
@@ -2671,7 +2628,7 @@ module Aws::SNS
     class StaleTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Subscribe action.</p>
@@ -2891,7 +2848,7 @@ module Aws::SNS
       :attributes,
       :return_subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response for Subscribe action.</p>
@@ -2904,7 +2861,7 @@ module Aws::SNS
     class SubscribeResponse < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper type for the attributes of an Amazon SNS subscription.</p>
@@ -2930,7 +2887,7 @@ module Aws::SNS
       :endpoint,
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the customer already owns the maximum allowed number of
@@ -2940,7 +2897,7 @@ module Aws::SNS
     class SubscriptionLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of tags to be added to the specified topic.</p>
@@ -2954,7 +2911,7 @@ module Aws::SNS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Can't add more than 50 tags to a topic.</p>
@@ -2963,7 +2920,7 @@ module Aws::SNS
     class TagLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request doesn't comply with the IAM tag policy. Correct your request and then
@@ -2973,7 +2930,7 @@ module Aws::SNS
     class TagPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2987,12 +2944,12 @@ module Aws::SNS
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the rate at which requests have been submitted for this action exceeds the limit for your Amazon Web Services account.</p>
@@ -3002,7 +2959,7 @@ module Aws::SNS
     class ThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The batch request contains more entries than permissible (more than 10).</p>
@@ -3011,7 +2968,7 @@ module Aws::SNS
     class TooManyEntriesInBatchRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper type for the topic's Amazon Resource Name (ARN). To retrieve a topic's
@@ -3022,7 +2979,7 @@ module Aws::SNS
     class Topic < Struct.new(
       :topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the customer already owns the maximum allowed number of topics.</p>
@@ -3031,7 +2988,7 @@ module Aws::SNS
     class TopicLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Unsubscribe action.</p>
@@ -3041,7 +2998,7 @@ module Aws::SNS
     class UnsubscribeInput < Struct.new(
       :subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3054,12 +3011,12 @@ module Aws::SNS
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a request parameter does not comply with the associated
@@ -3069,7 +3026,7 @@ module Aws::SNS
     class UserErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a parameter in the request is invalid.</p>
@@ -3078,7 +3035,7 @@ module Aws::SNS
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the one-time password (OTP) used for verification is invalid.</p>
@@ -3091,7 +3048,7 @@ module Aws::SNS
       :message,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -3105,13 +3062,13 @@ module Aws::SNS
       :phone_number,
       :one_time_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination phone number's verification status.</p>
     class VerifySMSSandboxPhoneNumberResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -8,6 +8,7 @@ gem 'aws-sdk-core', path: 'gems/aws-sdk-core'
 gem 'aws-sigv4'
 gem 'base64'
 gem 'logger'
+gem 'pry'
 
 # Fetches smithy-ruby gems from GitHub assuming the same branch name as the current branch, defaulting to decaf.
 smithy_ruby_git = 'https://github.com/smithy-lang/smithy-ruby/'

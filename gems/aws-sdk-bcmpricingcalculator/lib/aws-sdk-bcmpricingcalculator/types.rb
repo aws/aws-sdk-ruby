@@ -12,7 +12,7 @@ module Aws::BCMPricingCalculator
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an action to add a Reserved Instance to a bill scenario. </p>
@@ -26,7 +26,7 @@ module Aws::BCMPricingCalculator
       :reserved_instances_offering_id,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an action to add a Savings Plan to a bill scenario. </p>
@@ -40,7 +40,7 @@ module Aws::BCMPricingCalculator
       :savings_plan_offering_id,
       :commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an entry object in the batch operation to create bill scenario commitment modifications. </p>
@@ -62,7 +62,7 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :commitment_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred during a batch create operation for bill scenario commitment modifications. </p>
@@ -80,13 +80,7 @@ module Aws::BCMPricingCalculator
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchCreateBillScenarioCommitmentModificationErrorCode
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-      INVALID_ACCOUNT = 'INVALID_ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a successfully created item in a batch operation for bill scenario commitment modifications. </p>
@@ -112,7 +106,7 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :commitment_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -129,7 +123,7 @@ module Aws::BCMPricingCalculator
       :commitment_modifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -142,7 +136,7 @@ module Aws::BCMPricingCalculator
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an entry in a batch operation to create bill scenario usage modifications. </p>
@@ -184,7 +178,7 @@ module Aws::BCMPricingCalculator
       :amounts,
       :historical_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred during a batch create operation for bill scenario usage modifications. </p>
@@ -202,14 +196,7 @@ module Aws::BCMPricingCalculator
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchCreateBillScenarioUsageModificationErrorCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      NOT_FOUND = 'NOT_FOUND'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a successfully created item in a batch operation for bill scenario usage modifications. </p>
@@ -259,7 +246,7 @@ module Aws::BCMPricingCalculator
       :historical_usage,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -276,7 +263,7 @@ module Aws::BCMPricingCalculator
       :usage_modifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -289,14 +276,7 @@ module Aws::BCMPricingCalculator
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchCreateWorkloadEstimateUsageCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      NOT_FOUND = 'NOT_FOUND'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an entry in a batch operation to create workload estimate usage. </p>
@@ -334,7 +314,7 @@ module Aws::BCMPricingCalculator
       :amount,
       :historical_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred during a batch create operation for workload estimate usage. </p>
@@ -352,7 +332,7 @@ module Aws::BCMPricingCalculator
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a successfully created item in a batch operation for workload estimate usage. </p>
@@ -410,7 +390,7 @@ module Aws::BCMPricingCalculator
       :historical_usage,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_estimate_id
@@ -427,7 +407,7 @@ module Aws::BCMPricingCalculator
       :usage,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -440,7 +420,7 @@ module Aws::BCMPricingCalculator
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred when deleting a commitment in a Bill Scenario. </p>
@@ -458,13 +438,7 @@ module Aws::BCMPricingCalculator
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchDeleteBillScenarioCommitmentModificationErrorCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -477,7 +451,7 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -486,7 +460,7 @@ module Aws::BCMPricingCalculator
     class BatchDeleteBillScenarioCommitmentModificationResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred when deleting usage in a Bill Scenario. </p>
@@ -504,13 +478,7 @@ module Aws::BCMPricingCalculator
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchDeleteBillScenarioUsageModificationErrorCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -523,7 +491,7 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -532,7 +500,7 @@ module Aws::BCMPricingCalculator
     class BatchDeleteBillScenarioUsageModificationResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred when deleting usage in a workload estimate. </p>
@@ -550,7 +518,7 @@ module Aws::BCMPricingCalculator
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_estimate_id
@@ -563,7 +531,7 @@ module Aws::BCMPricingCalculator
       :workload_estimate_id,
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -572,7 +540,7 @@ module Aws::BCMPricingCalculator
     class BatchDeleteWorkloadEstimateUsageResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an entry in a batch operation to update bill scenario commitment modifications. </p>
@@ -586,7 +554,7 @@ module Aws::BCMPricingCalculator
       :id,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred when updating a commitment in a Bill Scenario. </p>
@@ -604,14 +572,7 @@ module Aws::BCMPricingCalculator
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchUpdateBillScenarioCommitmentModificationErrorCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      NOT_FOUND = 'NOT_FOUND'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -624,7 +585,7 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :commitment_modifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -637,7 +598,7 @@ module Aws::BCMPricingCalculator
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an entry in a batch operation to update bill scenario usage modifications. </p>
@@ -655,7 +616,7 @@ module Aws::BCMPricingCalculator
       :group,
       :amounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred when updating usage in a Bill Scenario. </p>
@@ -673,14 +634,7 @@ module Aws::BCMPricingCalculator
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchUpdateBillScenarioUsageModificationErrorCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      NOT_FOUND = 'NOT_FOUND'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -693,7 +647,7 @@ module Aws::BCMPricingCalculator
       :bill_scenario_id,
       :usage_modifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -706,7 +660,7 @@ module Aws::BCMPricingCalculator
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an entry in a batch operation to update workload estimate usage. </p>
@@ -724,7 +678,7 @@ module Aws::BCMPricingCalculator
       :group,
       :amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an error that occurred when updating usage in a workload estimate. </p>
@@ -742,7 +696,7 @@ module Aws::BCMPricingCalculator
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_estimate_id
@@ -755,7 +709,7 @@ module Aws::BCMPricingCalculator
       :workload_estimate_id,
       :usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -768,7 +722,7 @@ module Aws::BCMPricingCalculator
       :items,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of commitment-related information for a bill estimate. </p>
@@ -810,7 +764,7 @@ module Aws::BCMPricingCalculator
       :upfront_payment,
       :monthly_payment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of cost-related information for a bill estimate. </p>
@@ -824,7 +778,7 @@ module Aws::BCMPricingCalculator
       :total_cost_difference,
       :service_cost_differences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Summarizes an input commitment modification for a bill estimate. </p>
@@ -846,7 +800,7 @@ module Aws::BCMPricingCalculator
       :usage_account_id,
       :commitment_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Summarizes an input usage modification for a bill estimate. </p>
@@ -892,7 +846,7 @@ module Aws::BCMPricingCalculator
       :quantities,
       :historical_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of a line item in a bill estimate. </p>
@@ -958,13 +912,7 @@ module Aws::BCMPricingCalculator
       :historical_cost,
       :savings_plan_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BillEstimateStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of a bill estimate. </p>
@@ -994,7 +942,7 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a time interval for a bill or estimate. </p>
@@ -1008,7 +956,7 @@ module Aws::BCMPricingCalculator
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an action to modify commitments in a bill scenario. </p>
@@ -1031,7 +979,7 @@ module Aws::BCMPricingCalculator
       :negate_savings_plan_action,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AddReservedInstanceAction < BillScenarioCommitmentModificationAction; end
       class AddSavingsPlanAction < BillScenarioCommitmentModificationAction; end
@@ -1059,14 +1007,7 @@ module Aws::BCMPricingCalculator
       :group,
       :commitment_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BillScenarioStatus
-      READY = 'READY'
-      LOCKED = 'LOCKED'
-      FAILED = 'FAILED'
-      STALE = 'STALE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of a bill scenario. </p>
@@ -1100,7 +1041,7 @@ module Aws::BCMPricingCalculator
       :expires_at,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a usage modification item in a bill scenario. </p>
@@ -1146,7 +1087,7 @@ module Aws::BCMPricingCalculator
       :quantities,
       :historical_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request could not be processed because of conflict in the current state of the resource. </p>
@@ -1163,7 +1104,7 @@ module Aws::BCMPricingCalculator
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a monetary amount with associated currency. </p>
@@ -1177,7 +1118,7 @@ module Aws::BCMPricingCalculator
       :amount,
       :currency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the difference between historical and estimated costs. </p>
@@ -1191,7 +1132,7 @@ module Aws::BCMPricingCalculator
       :historical_cost,
       :estimated_cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -1212,7 +1153,7 @@ module Aws::BCMPricingCalculator
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1249,7 +1190,7 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1266,7 +1207,7 @@ module Aws::BCMPricingCalculator
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1299,7 +1240,7 @@ module Aws::BCMPricingCalculator
       :expires_at,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1320,7 +1261,7 @@ module Aws::BCMPricingCalculator
       :rate_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Mixin for common fields returned by CRUD APIs
@@ -1366,11 +1307,7 @@ module Aws::BCMPricingCalculator
       :cost_currency,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CurrencyCode
-      USD = 'USD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The requested data is currently unavailable. </p>
@@ -1379,7 +1316,7 @@ module Aws::BCMPricingCalculator
     class DataUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1388,12 +1325,12 @@ module Aws::BCMPricingCalculator
     class DeleteBillEstimateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBillEstimateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1402,12 +1339,12 @@ module Aws::BCMPricingCalculator
     class DeleteBillScenarioRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteBillScenarioResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1416,12 +1353,12 @@ module Aws::BCMPricingCalculator
     class DeleteWorkloadEstimateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkloadEstimateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a complex filtering expression for cost and usage data. </p>
@@ -1451,7 +1388,7 @@ module Aws::BCMPricingCalculator
       :dimensions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a filter used within an expression. </p>
@@ -1469,7 +1406,7 @@ module Aws::BCMPricingCalculator
       :match_options,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a time-based filter. </p>
@@ -1483,7 +1420,7 @@ module Aws::BCMPricingCalculator
       :after_timestamp,
       :before_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1492,7 +1429,7 @@ module Aws::BCMPricingCalculator
     class GetBillEstimateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1529,7 +1466,7 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1538,7 +1475,7 @@ module Aws::BCMPricingCalculator
     class GetBillScenarioRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1571,12 +1508,12 @@ module Aws::BCMPricingCalculator
       :expires_at,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetPreferencesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute management_account_rate_type_selections
@@ -1593,7 +1530,7 @@ module Aws::BCMPricingCalculator
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1602,7 +1539,7 @@ module Aws::BCMPricingCalculator
     class GetWorkloadEstimateRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Mixin for common fields returned by CRUD APIs
@@ -1648,7 +1585,7 @@ module Aws::BCMPricingCalculator
       :cost_currency,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents historical usage data for a specific entity. </p>
@@ -1682,7 +1619,7 @@ module Aws::BCMPricingCalculator
       :bill_interval,
       :filter_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An internal error has occurred. Retry your request, but if the problem persists, contact Amazon Web Services support. </p>
@@ -1695,7 +1632,7 @@ module Aws::BCMPricingCalculator
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_estimate_id
@@ -1712,7 +1649,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1725,7 +1662,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_estimate_id
@@ -1742,7 +1679,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1755,7 +1692,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_estimate_id
@@ -1776,7 +1713,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1789,7 +1726,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a filter for listing bill estimate line items. </p>
@@ -1807,16 +1744,7 @@ module Aws::BCMPricingCalculator
       :values,
       :match_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListBillEstimateLineItemsFilterName
-      USAGE_ACCOUNT_ID = 'USAGE_ACCOUNT_ID'
-      SERVICE_CODE = 'SERVICE_CODE'
-      USAGE_TYPE = 'USAGE_TYPE'
-      OPERATION = 'OPERATION'
-      LOCATION = 'LOCATION'
-      LINE_ITEM_TYPE = 'LINE_ITEM_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_estimate_id
@@ -1837,7 +1765,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1850,7 +1778,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a filter for listing bill estimates. </p>
@@ -1868,12 +1796,7 @@ module Aws::BCMPricingCalculator
       :values,
       :match_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListBillEstimatesFilterName
-      STATUS = 'STATUS'
-      NAME = 'NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1898,7 +1821,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1911,7 +1834,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -1928,7 +1851,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1941,7 +1864,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bill_scenario_id
@@ -1962,7 +1885,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1975,7 +1898,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a filter for listing bill scenarios. </p>
@@ -1993,12 +1916,7 @@ module Aws::BCMPricingCalculator
       :values,
       :match_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListBillScenariosFilterName
-      STATUS = 'STATUS'
-      NAME = 'NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2023,7 +1941,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2036,7 +1954,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2045,7 +1963,7 @@ module Aws::BCMPricingCalculator
     class ListTagsForResourceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2054,7 +1972,7 @@ module Aws::BCMPricingCalculator
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a filter for listing usage data. </p>
@@ -2072,21 +1990,7 @@ module Aws::BCMPricingCalculator
       :values,
       :match_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListUsageFilterName
-      USAGE_ACCOUNT_ID = 'USAGE_ACCOUNT_ID'
-      SERVICE_CODE = 'SERVICE_CODE'
-      USAGE_TYPE = 'USAGE_TYPE'
-      OPERATION = 'OPERATION'
-      LOCATION = 'LOCATION'
-      USAGE_GROUP = 'USAGE_GROUP'
-      HISTORICAL_USAGE_ACCOUNT_ID = 'HISTORICAL_USAGE_ACCOUNT_ID'
-      HISTORICAL_SERVICE_CODE = 'HISTORICAL_SERVICE_CODE'
-      HISTORICAL_USAGE_TYPE = 'HISTORICAL_USAGE_TYPE'
-      HISTORICAL_OPERATION = 'HISTORICAL_OPERATION'
-      HISTORICAL_LOCATION = 'HISTORICAL_LOCATION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_estimate_id
@@ -2107,7 +2011,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2120,7 +2024,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a filter for listing workload estimates. </p>
@@ -2138,12 +2042,7 @@ module Aws::BCMPricingCalculator
       :values,
       :match_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListWorkloadEstimatesFilterName
-      STATUS = 'STATUS'
-      NAME = 'NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_at_filter
@@ -2168,7 +2067,7 @@ module Aws::BCMPricingCalculator
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2181,13 +2080,7 @@ module Aws::BCMPricingCalculator
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchOption
-      EQUALS = 'EQUALS'
-      STARTS_WITH = 'STARTS_WITH'
-      CONTAINS = 'CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an action to remove a Reserved Instance from a bill scenario. </p> <p> This is the ID of an existing Reserved Instance in your account. </p>
@@ -2197,7 +2090,7 @@ module Aws::BCMPricingCalculator
     class NegateReservedInstanceAction < Struct.new(
       :reserved_instances_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents an action to remove a Savings Plan from a bill scenario. </p> <p> This is the ID of an existing Savings Plan in your account. </p>
@@ -2207,18 +2100,7 @@ module Aws::BCMPricingCalculator
     class NegateSavingsPlanAction < Struct.new(
       :savings_plan_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PurchaseAgreementType
-      SAVINGS_PLANS = 'SAVINGS_PLANS'
-      RESERVED_INSTANCE = 'RESERVED_INSTANCE'
-    end
-
-    module RateType
-      BEFORE_DISCOUNTS = 'BEFORE_DISCOUNTS'
-      AFTER_DISCOUNTS = 'AFTER_DISCOUNTS'
-      AFTER_DISCOUNTS_AND_COMMITMENTS = 'AFTER_DISCOUNTS_AND_COMMITMENTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified resource was not found. </p>
@@ -2235,7 +2117,7 @@ module Aws::BCMPricingCalculator
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request would cause you to exceed your service quota. </p>
@@ -2260,7 +2142,7 @@ module Aws::BCMPricingCalculator
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2273,12 +2155,12 @@ module Aws::BCMPricingCalculator
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request was denied due to request throttling. </p>
@@ -2299,7 +2181,7 @@ module Aws::BCMPricingCalculator
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2312,12 +2194,12 @@ module Aws::BCMPricingCalculator
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2334,7 +2216,7 @@ module Aws::BCMPricingCalculator
       :name,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2371,7 +2253,7 @@ module Aws::BCMPricingCalculator
       :created_at,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2388,7 +2270,7 @@ module Aws::BCMPricingCalculator
       :name,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2421,7 +2303,7 @@ module Aws::BCMPricingCalculator
       :expires_at,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute management_account_rate_type_selections
@@ -2438,7 +2320,7 @@ module Aws::BCMPricingCalculator
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute management_account_rate_type_selections
@@ -2455,7 +2337,7 @@ module Aws::BCMPricingCalculator
       :member_account_rate_type_selections,
       :standalone_account_rate_type_selections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -2472,7 +2354,7 @@ module Aws::BCMPricingCalculator
       :name,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Mixin for common fields returned by CRUD APIs
@@ -2518,7 +2400,7 @@ module Aws::BCMPricingCalculator
       :cost_currency,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a usage amount for a specific time period. </p>
@@ -2532,7 +2414,7 @@ module Aws::BCMPricingCalculator
       :start_hour,
       :amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a usage quantity with associated unit and time period. </p>
@@ -2550,7 +2432,7 @@ module Aws::BCMPricingCalculator
       :unit,
       :amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the result of a usage quantity calculation. </p>
@@ -2564,7 +2446,7 @@ module Aws::BCMPricingCalculator
       :amount,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input provided fails to satisfy the constraints specified by an Amazon Web Services service. </p>
@@ -2581,7 +2463,7 @@ module Aws::BCMPricingCalculator
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a field that failed validation in a request. </p>
@@ -2595,35 +2477,7 @@ module Aws::BCMPricingCalculator
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      INVALID_REQUEST_FROM_MEMBER = 'invalidRequestFromMember'
-      DISALLOWED_RATE = 'disallowedRate'
-      OTHER = 'other'
-    end
-
-    module WorkloadEstimateCostStatus
-      VALID = 'VALID'
-      INVALID = 'INVALID'
-      STALE = 'STALE'
-    end
-
-    module WorkloadEstimateRateType
-      BEFORE_DISCOUNTS = 'BEFORE_DISCOUNTS'
-      AFTER_DISCOUNTS = 'AFTER_DISCOUNTS'
-      AFTER_DISCOUNTS_AND_COMMITMENTS = 'AFTER_DISCOUNTS_AND_COMMITMENTS'
-    end
-
-    module WorkloadEstimateStatus
-      UPDATING = 'UPDATING'
-      VALID = 'VALID'
-      INVALID = 'INVALID'
-      ACTION_NEEDED = 'ACTION_NEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides a summary of a workload estimate. </p>
@@ -2669,14 +2523,7 @@ module Aws::BCMPricingCalculator
       :cost_currency,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkloadEstimateUpdateUsageErrorCode
-      BAD_REQUEST = 'BAD_REQUEST'
-      NOT_FOUND = 'NOT_FOUND'
-      CONFLICT = 'CONFLICT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a usage item in a workload estimate. </p>
@@ -2730,7 +2577,7 @@ module Aws::BCMPricingCalculator
       :status,
       :historical_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents a usage quantity for a workload estimate. </p>
@@ -2744,7 +2591,7 @@ module Aws::BCMPricingCalculator
       :unit,
       :amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

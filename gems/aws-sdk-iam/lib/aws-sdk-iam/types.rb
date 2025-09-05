@@ -6,11 +6,6 @@ module Aws::IAM
   # This module contains the types returned by client operations.
   module Types
 
-    module AccessAdvisorUsageGranularityType
-      SERVICE_LEVEL = 'SERVICE_LEVEL'
-      ACTION_LEVEL = 'ACTION_LEVEL'
-    end
-
     # <p>An object that contains details about when a principal in the reported Organizations entity
     #          last attempted to access an Amazon Web Services service. A principal can be an IAM user, an IAM role,
     #          or the Amazon Web Services account root user within the reported Organizations entity.</p>
@@ -58,7 +53,7 @@ module Aws::IAM
       :last_authenticated_time,
       :total_authenticated_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Web Services access key.</p>
@@ -92,7 +87,7 @@ module Aws::IAM
       :secret_access_key,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the last time an Amazon Web Services access key was used since IAM began
@@ -155,7 +150,7 @@ module Aws::IAM
       :service_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon Web Services access key, without its secret key.</p>
@@ -180,7 +175,7 @@ module Aws::IAM
       :status,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the account making the request is not the management
@@ -191,7 +186,7 @@ module Aws::IAM
     class AccountNotManagementOrDelegatedAdministratorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -206,7 +201,7 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_name
@@ -223,7 +218,7 @@ module Aws::IAM
       :instance_profile_name,
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -240,7 +235,7 @@ module Aws::IAM
       :group_name,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -256,7 +251,7 @@ module Aws::IAM
       :group_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -272,7 +267,7 @@ module Aws::IAM
       :role_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -288,7 +283,7 @@ module Aws::IAM
       :user_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an attached permissions boundary.</p>
@@ -308,7 +303,7 @@ module Aws::IAM
       :permissions_boundary_type,
       :permissions_boundary_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an attached policy.</p>
@@ -328,7 +323,7 @@ module Aws::IAM
       :policy_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the account making the request is not the management
@@ -338,7 +333,7 @@ module Aws::IAM
     class CallerIsNotManagementAccountException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute old_password
@@ -359,7 +354,7 @@ module Aws::IAM
       :old_password,
       :new_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because multiple requests to change this object were submitted
@@ -369,7 +364,7 @@ module Aws::IAM
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a condition context key. It includes the name of the key and
@@ -396,22 +391,7 @@ module Aws::IAM
       :context_key_values,
       :context_key_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContextKeyTypeEnum
-      STRING = 'string'
-      STRING_LIST = 'stringList'
-      NUMERIC = 'numeric'
-      NUMERIC_LIST = 'numericList'
-      BOOLEAN = 'boolean'
-      BOOLEAN_LIST = 'booleanList'
-      IP = 'ip'
-      IP_LIST = 'ipList'
-      BINARY = 'binary'
-      BINARY_LIST = 'binaryList'
-      DATE = 'date'
-      DATE_LIST = 'dateList'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -422,7 +402,7 @@ module Aws::IAM
     class CreateAccessKeyRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html">CreateAccessKey</a> request.
@@ -433,7 +413,7 @@ module Aws::IAM
     class CreateAccessKeyResponse < Struct.new(
       :access_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_alias
@@ -445,7 +425,7 @@ module Aws::IAM
     class CreateAccountAliasRequest < Struct.new(
       :account_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -467,7 +447,7 @@ module Aws::IAM
       :path,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateGroup.html">CreateGroup</a> request. </p>
@@ -477,7 +457,7 @@ module Aws::IAM
     class CreateGroupResponse < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_name
@@ -508,7 +488,7 @@ module Aws::IAM
       :path,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateInstanceProfile.html">CreateInstanceProfile</a>
@@ -519,7 +499,7 @@ module Aws::IAM
     class CreateInstanceProfileResponse < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -550,7 +530,7 @@ module Aws::IAM
       :password,
       :password_reset_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateLoginProfile.html">CreateLoginProfile</a>
@@ -561,7 +541,7 @@ module Aws::IAM
     class CreateLoginProfileResponse < Struct.new(
       :login_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -622,7 +602,7 @@ module Aws::IAM
       :thumbprint_list,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html">CreateOpenIDConnectProvider</a> request. </p>
@@ -639,7 +619,7 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -711,7 +691,7 @@ module Aws::IAM
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html">CreatePolicy</a> request. </p>
@@ -721,7 +701,7 @@ module Aws::IAM
     class CreatePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -767,7 +747,7 @@ module Aws::IAM
       :policy_document,
       :set_as_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicyVersion.html">CreatePolicyVersion</a>
@@ -778,7 +758,7 @@ module Aws::IAM
     class CreatePolicyVersionResponse < Struct.new(
       :policy_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -870,7 +850,7 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> request. </p>
@@ -880,7 +860,7 @@ module Aws::IAM
     class CreateRoleResponse < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_metadata_document
@@ -922,7 +902,7 @@ module Aws::IAM
       :assertion_encryption_mode,
       :add_private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateSAMLProvider.html">CreateSAMLProvider</a>
@@ -939,7 +919,7 @@ module Aws::IAM
       :saml_provider_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_service_name
@@ -971,7 +951,7 @@ module Aws::IAM
       :description,
       :custom_suffix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role
@@ -981,7 +961,7 @@ module Aws::IAM
     class CreateServiceLinkedRoleResponse < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1006,7 +986,7 @@ module Aws::IAM
       :service_name,
       :credential_age_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_specific_credential
@@ -1020,7 +1000,7 @@ module Aws::IAM
     class CreateServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -1064,7 +1044,7 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateUser.html">CreateUser</a> request. </p>
@@ -1074,7 +1054,7 @@ module Aws::IAM
     class CreateUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -1106,7 +1086,7 @@ module Aws::IAM
       :virtual_mfa_device_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateVirtualMFADevice.html">CreateVirtualMFADevice</a>
@@ -1117,7 +1097,7 @@ module Aws::IAM
     class CreateVirtualMFADeviceResponse < Struct.new(
       :virtual_mfa_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the most recent credential report has expired. To
@@ -1129,7 +1109,7 @@ module Aws::IAM
     class CredentialReportExpiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the credential report does not exist. To generate a
@@ -1139,7 +1119,7 @@ module Aws::IAM
     class CredentialReportNotPresentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the credential report is still being generated.</p>
@@ -1148,7 +1128,7 @@ module Aws::IAM
     class CredentialReportNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1170,7 +1150,7 @@ module Aws::IAM
       :user_name,
       :serial_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1188,7 +1168,7 @@ module Aws::IAM
       :user_name,
       :access_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_alias
@@ -1200,7 +1180,7 @@ module Aws::IAM
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to delete a resource that has attached
@@ -1210,7 +1190,7 @@ module Aws::IAM
     class DeleteConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -1228,7 +1208,7 @@ module Aws::IAM
       :group_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -1239,7 +1219,7 @@ module Aws::IAM
     class DeleteGroupRequest < Struct.new(
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_name
@@ -1250,7 +1230,7 @@ module Aws::IAM
     class DeleteInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1264,7 +1244,7 @@ module Aws::IAM
     class DeleteLoginProfileRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -1274,7 +1254,7 @@ module Aws::IAM
     class DeleteOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1284,7 +1264,7 @@ module Aws::IAM
     class DeletePolicyRequest < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -1304,7 +1284,7 @@ module Aws::IAM
       :policy_arn,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -1314,7 +1294,7 @@ module Aws::IAM
     class DeleteRolePermissionsBoundaryRequest < Struct.new(
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -1332,7 +1312,7 @@ module Aws::IAM
       :role_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -1343,7 +1323,7 @@ module Aws::IAM
     class DeleteRoleRequest < Struct.new(
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_provider_arn
@@ -1352,7 +1332,7 @@ module Aws::IAM
     class DeleteSAMLProviderRequest < Struct.new(
       :saml_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1369,7 +1349,7 @@ module Aws::IAM
       :user_name,
       :ssh_public_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_certificate_name
@@ -1380,7 +1360,7 @@ module Aws::IAM
     class DeleteServerCertificateRequest < Struct.new(
       :server_certificate_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -1389,7 +1369,7 @@ module Aws::IAM
     class DeleteServiceLinkedRoleRequest < Struct.new(
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_task_id
@@ -1400,7 +1380,7 @@ module Aws::IAM
     class DeleteServiceLinkedRoleResponse < Struct.new(
       :deletion_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1420,7 +1400,7 @@ module Aws::IAM
       :user_name,
       :service_specific_credential_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1437,7 +1417,7 @@ module Aws::IAM
       :user_name,
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1447,7 +1427,7 @@ module Aws::IAM
     class DeleteUserPermissionsBoundaryRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1465,7 +1445,7 @@ module Aws::IAM
       :user_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1476,7 +1456,7 @@ module Aws::IAM
     class DeleteUserRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_number
@@ -1489,7 +1469,7 @@ module Aws::IAM
     class DeleteVirtualMFADeviceRequest < Struct.new(
       :serial_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reason that the service-linked role deletion failed.</p>
@@ -1509,14 +1489,7 @@ module Aws::IAM
       :reason,
       :role_usage_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionTaskStatusType
-      SUCCEEDED = 'SUCCEEDED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      NOT_STARTED = 'NOT_STARTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -1532,7 +1505,7 @@ module Aws::IAM
       :group_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -1548,7 +1521,7 @@ module Aws::IAM
       :role_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1564,12 +1537,12 @@ module Aws::IAM
       :user_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationsRootCredentialsManagementRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1583,12 +1556,12 @@ module Aws::IAM
       :organization_id,
       :enabled_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableOrganizationsRootSessionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1602,7 +1575,7 @@ module Aws::IAM
       :organization_id,
       :enabled_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the same certificate is associated with an IAM user in
@@ -1612,7 +1585,7 @@ module Aws::IAM
     class DuplicateCertificateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the SSH public key is already associated with the
@@ -1622,7 +1595,7 @@ module Aws::IAM
     class DuplicateSSHPublicKeyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1667,12 +1640,12 @@ module Aws::IAM
       :authentication_code1,
       :authentication_code2,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationsRootCredentialsManagementRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1685,12 +1658,12 @@ module Aws::IAM
       :organization_id,
       :enabled_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableOrganizationsRootSessionsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1703,7 +1676,7 @@ module Aws::IAM
       :organization_id,
       :enabled_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create a resource that already
@@ -1713,7 +1686,7 @@ module Aws::IAM
     class EntityAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about when the IAM entities (users or roles) were last
@@ -1734,7 +1707,7 @@ module Aws::IAM
       :entity_info,
       :last_authenticated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the specified entity (user or role).</p>
@@ -1765,7 +1738,7 @@ module Aws::IAM
       :id,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it referenced an entity that is temporarily unmodifiable,
@@ -1777,15 +1750,7 @@ module Aws::IAM
     class EntityTemporarilyUnmodifiableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityType
-      User = 'User'
-      Role = 'Role'
-      Group = 'Group'
-      LocalManagedPolicy = 'LocalManagedPolicy'
-      AWSManagedPolicy = 'AWSManagedPolicy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the reason that the operation failed.</p>
@@ -1800,7 +1765,7 @@ module Aws::IAM
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a simulation.</p>
@@ -1871,12 +1836,7 @@ module Aws::IAM
       :eval_decision_details,
       :resource_specific_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureType
-      ROOT_CREDENTIALS_MANAGEMENT = 'RootCredentialsManagement'
-      ROOT_SESSIONS = 'RootSessions'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GenerateCredentialReport.html">GenerateCredentialReport</a> request. </p>
@@ -1890,7 +1850,7 @@ module Aws::IAM
       :state,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_path
@@ -1911,7 +1871,7 @@ module Aws::IAM
       :entity_path,
       :organizations_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1920,7 +1880,7 @@ module Aws::IAM
     class GenerateOrganizationsAccessReportResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1939,7 +1899,7 @@ module Aws::IAM
       :arn,
       :granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1951,7 +1911,7 @@ module Aws::IAM
     class GenerateServiceLastAccessedDetailsResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_key_id
@@ -1962,7 +1922,7 @@ module Aws::IAM
     class GetAccessKeyLastUsedRequest < Struct.new(
       :access_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccessKeyLastUsed.html">GetAccessKeyLastUsed</a>
@@ -1979,7 +1939,7 @@ module Aws::IAM
       :user_name,
       :access_key_last_used,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -2010,7 +1970,7 @@ module Aws::IAM
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountAuthorizationDetails.html">GetAccountAuthorizationDetails</a> request. </p>
@@ -2047,7 +2007,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -2062,7 +2022,7 @@ module Aws::IAM
     class GetAccountPasswordPolicyResponse < Struct.new(
       :password_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html">GetAccountSummary</a> request.
@@ -2074,7 +2034,7 @@ module Aws::IAM
     class GetAccountSummaryResponse < Struct.new(
       :summary_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html">GetContextKeysForPrincipalPolicy</a> or <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html">GetContextKeysForCustomPolicy</a> request. </p>
@@ -2084,7 +2044,7 @@ module Aws::IAM
     class GetContextKeysForCustomPolicyOutput < Struct.new(
       :context_key_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_input_list
@@ -2111,7 +2071,7 @@ module Aws::IAM
     class GetContextKeysForCustomPolicyRequest < Struct.new(
       :policy_input_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html">GetContextKeysForPrincipalPolicy</a> or <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForCustomPolicy.html">GetContextKeysForCustomPolicy</a> request. </p>
@@ -2121,7 +2081,7 @@ module Aws::IAM
     class GetContextKeysForPrincipalPolicyOutput < Struct.new(
       :context_key_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_source_arn
@@ -2158,7 +2118,7 @@ module Aws::IAM
       :policy_source_arn,
       :policy_input_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetCredentialReport.html">GetCredentialReport</a>
@@ -2177,7 +2137,7 @@ module Aws::IAM
       :report_format,
       :generated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -2194,7 +2154,7 @@ module Aws::IAM
       :group_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroupPolicy.html">GetGroupPolicy</a> request.
@@ -2216,7 +2176,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -2245,7 +2205,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetGroup.html">GetGroup</a> request. </p>
@@ -2274,7 +2234,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -2290,7 +2250,7 @@ module Aws::IAM
     class GetInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetInstanceProfile.html">GetInstanceProfile</a>
@@ -2301,7 +2261,7 @@ module Aws::IAM
     class GetInstanceProfileResponse < Struct.new(
       :instance_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2315,7 +2275,7 @@ module Aws::IAM
     class GetLoginProfileRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetLoginProfile.html">GetLoginProfile</a> request.
@@ -2327,7 +2287,7 @@ module Aws::IAM
     class GetLoginProfileResponse < Struct.new(
       :login_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_number
@@ -2341,7 +2301,7 @@ module Aws::IAM
       :serial_number,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2365,7 +2325,7 @@ module Aws::IAM
       :enable_date,
       :certifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -2376,7 +2336,7 @@ module Aws::IAM
     class GetOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetOpenIDConnectProvider.html">GetOpenIDConnectProvider</a> request. </p>
@@ -2408,7 +2368,7 @@ module Aws::IAM
       :create_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2441,7 +2401,7 @@ module Aws::IAM
       :marker,
       :sort_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -2497,7 +2457,7 @@ module Aws::IAM
       :marker,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -2513,7 +2473,7 @@ module Aws::IAM
     class GetPolicyRequest < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicy.html">GetPolicy</a> request. </p>
@@ -2523,7 +2483,7 @@ module Aws::IAM
     class GetPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -2541,7 +2501,7 @@ module Aws::IAM
       :policy_arn,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetPolicyVersion.html">GetPolicyVersion</a> request.
@@ -2552,7 +2512,7 @@ module Aws::IAM
     class GetPolicyVersionResponse < Struct.new(
       :policy_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -2569,7 +2529,7 @@ module Aws::IAM
       :role_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRolePolicy.html">GetRolePolicy</a> request. </p>
@@ -2590,7 +2550,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -2601,7 +2561,7 @@ module Aws::IAM
     class GetRoleRequest < Struct.new(
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetRole.html">GetRole</a> request. </p>
@@ -2611,7 +2571,7 @@ module Aws::IAM
     class GetRoleResponse < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_provider_arn
@@ -2622,7 +2582,7 @@ module Aws::IAM
     class GetSAMLProviderRequest < Struct.new(
       :saml_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSAMLProvider.html">GetSAMLProvider</a> request.
@@ -2659,7 +2619,7 @@ module Aws::IAM
       :assertion_encryption_mode,
       :private_key_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2682,7 +2642,7 @@ module Aws::IAM
       :ssh_public_key_id,
       :encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetSSHPublicKey.html">GetSSHPublicKey</a>
@@ -2693,7 +2653,7 @@ module Aws::IAM
     class GetSSHPublicKeyResponse < Struct.new(
       :ssh_public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_certificate_name
@@ -2704,7 +2664,7 @@ module Aws::IAM
     class GetServerCertificateRequest < Struct.new(
       :server_certificate_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetServerCertificate.html">GetServerCertificate</a>
@@ -2715,7 +2675,7 @@ module Aws::IAM
     class GetServerCertificateResponse < Struct.new(
       :server_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2745,7 +2705,7 @@ module Aws::IAM
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -2796,7 +2756,7 @@ module Aws::IAM
       :marker,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -2840,7 +2800,7 @@ module Aws::IAM
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -2886,7 +2846,7 @@ module Aws::IAM
       :marker,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -2901,7 +2861,7 @@ module Aws::IAM
     class GetServiceLinkedRoleDeletionStatusRequest < Struct.new(
       :deletion_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2914,7 +2874,7 @@ module Aws::IAM
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2931,7 +2891,7 @@ module Aws::IAM
       :user_name,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUserPolicy.html">GetUserPolicy</a> request. </p>
@@ -2952,7 +2912,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2964,7 +2924,7 @@ module Aws::IAM
     class GetUserRequest < Struct.new(
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetUser.html">GetUser</a> request. </p>
@@ -2989,7 +2949,7 @@ module Aws::IAM
     class GetUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM group entity.</p>
@@ -3039,7 +2999,7 @@ module Aws::IAM
       :arn,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM group, including all of the group's policies.</p>
@@ -3080,7 +3040,7 @@ module Aws::IAM
       :group_policy_list,
       :attached_managed_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an instance profile.</p>
@@ -3142,7 +3102,7 @@ module Aws::IAM
       :roles,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the authentication code was not recognized. The error
@@ -3152,7 +3112,7 @@ module Aws::IAM
     class InvalidAuthenticationCodeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the certificate is invalid.</p>
@@ -3161,7 +3121,7 @@ module Aws::IAM
     class InvalidCertificateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because an invalid or out-of-range value was supplied for an
@@ -3171,7 +3131,7 @@ module Aws::IAM
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the public key is malformed or otherwise invalid.</p>
@@ -3180,7 +3140,7 @@ module Aws::IAM
     class InvalidPublicKeyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the type of user for the transaction was
@@ -3190,7 +3150,7 @@ module Aws::IAM
     class InvalidUserTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the public key certificate and the private key do not
@@ -3200,7 +3160,7 @@ module Aws::IAM
     class KeyPairMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it attempted to create resources beyond the current
@@ -3210,7 +3170,7 @@ module Aws::IAM
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -3239,7 +3199,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html">ListAccessKeys</a> request.
@@ -3265,7 +3225,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3293,7 +3253,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccountAliases.html">ListAccountAliases</a>
@@ -3320,7 +3280,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3363,7 +3323,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedGroupPolicies.html">ListAttachedGroupPolicies</a> request. </p>
@@ -3388,7 +3348,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3431,7 +3391,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedRolePolicies.html">ListAttachedRolePolicies</a> request. </p>
@@ -3456,7 +3416,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3499,7 +3459,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAttachedUserPolicies.html">ListAttachedUserPolicies</a> request. </p>
@@ -3524,7 +3484,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3584,7 +3544,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListEntitiesForPolicy.html">ListEntitiesForPolicy</a>
@@ -3618,7 +3578,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3652,7 +3612,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupPolicies.html">ListGroupPolicies</a> request.
@@ -3680,7 +3640,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3714,7 +3674,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroupsForUser.html">ListGroupsForUser</a> request.
@@ -3740,7 +3700,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3779,7 +3739,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroups.html">ListGroups</a> request. </p>
@@ -3804,7 +3764,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3838,7 +3798,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3862,7 +3822,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3896,7 +3856,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListInstanceProfilesForRole.html">ListInstanceProfilesForRole</a> request. </p>
@@ -3921,7 +3881,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -3960,7 +3920,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListInstanceProfiles.html">ListInstanceProfiles</a>
@@ -3986,7 +3946,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4021,7 +3981,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4045,7 +4005,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4079,7 +4039,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADevices.html">ListMFADevices</a> request.
@@ -4105,7 +4065,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4140,7 +4100,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4165,7 +4125,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4175,7 +4135,7 @@ module Aws::IAM
 
     class ListOpenIDConnectProvidersRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListOpenIDConnectProviders.html">ListOpenIDConnectProviders</a> request. </p>
@@ -4185,12 +4145,12 @@ module Aws::IAM
     class ListOpenIDConnectProvidersResponse < Struct.new(
       :open_id_connect_provider_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ListOrganizationsFeaturesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4203,7 +4163,7 @@ module Aws::IAM
       :organization_id,
       :enabled_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the permissions policies that are attached to the specified
@@ -4226,7 +4186,7 @@ module Aws::IAM
       :service_namespace,
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -4253,7 +4213,7 @@ module Aws::IAM
       :arn,
       :service_namespaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policies_granting_service_access
@@ -4278,7 +4238,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4340,7 +4300,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicies.html">ListPolicies</a> request. </p>
@@ -4365,7 +4325,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4399,7 +4359,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4424,7 +4384,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4458,7 +4418,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicyVersions.html">ListPolicyVersions</a>
@@ -4486,7 +4446,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4520,7 +4480,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRolePolicies.html">ListRolePolicies</a> request.
@@ -4546,7 +4506,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4580,7 +4540,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4604,7 +4564,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4643,7 +4603,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRoles.html">ListRoles</a> request. </p>
@@ -4668,7 +4628,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4703,7 +4663,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4728,7 +4688,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4738,7 +4698,7 @@ module Aws::IAM
 
     class ListSAMLProvidersRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSAMLProviders.html">ListSAMLProviders</a> request.
@@ -4750,7 +4710,7 @@ module Aws::IAM
     class ListSAMLProvidersResponse < Struct.new(
       :saml_provider_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -4781,7 +4741,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSSHPublicKeys.html">ListSSHPublicKeys</a>
@@ -4807,7 +4767,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4841,7 +4801,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4866,7 +4826,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4905,7 +4865,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListServerCertificates.html">ListServerCertificates</a>
@@ -4931,7 +4891,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4972,7 +4932,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_specific_credentials
@@ -4993,7 +4953,7 @@ module Aws::IAM
       :marker,
       :is_truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5027,7 +4987,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListSigningCertificates.html">ListSigningCertificates</a> request. </p>
@@ -5052,7 +5012,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5086,7 +5046,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUserPolicies.html">ListUserPolicies</a> request.
@@ -5112,7 +5072,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5146,7 +5106,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5170,7 +5130,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5209,7 +5169,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUsers.html">ListUsers</a> request. </p>
@@ -5234,7 +5194,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5269,7 +5229,7 @@ module Aws::IAM
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListVirtualMFADevices.html">ListVirtualMFADevices</a>
@@ -5296,7 +5256,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5321,7 +5281,7 @@ module Aws::IAM
       :create_date,
       :password_reset_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:password_reset_required] = false unless options.key?(:password_reset_required)
@@ -5347,7 +5307,7 @@ module Aws::IAM
       :serial_number,
       :enable_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the certificate was malformed or expired. The error
@@ -5357,7 +5317,7 @@ module Aws::IAM
     class MalformedCertificateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the policy document was malformed. The error message
@@ -5367,7 +5327,7 @@ module Aws::IAM
     class MalformedPolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a managed policy, including the policy's ARN, versions, and
@@ -5444,7 +5404,7 @@ module Aws::IAM
       :update_date,
       :policy_version_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_attachable] = false unless options.key?(:is_attachable)
@@ -5459,7 +5419,7 @@ module Aws::IAM
     class NoSuchEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.</p>
@@ -5471,7 +5431,7 @@ module Aws::IAM
     class OpenIDConnectProviderListEntry < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because IAM cannot connect to the OpenID Connect identity provider
@@ -5481,7 +5441,7 @@ module Aws::IAM
     class OpenIdIdpCommunicationErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because no organization is associated with your account.</p>
@@ -5490,7 +5450,7 @@ module Aws::IAM
     class OrganizationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because your organization does not have All features enabled. For
@@ -5501,7 +5461,7 @@ module Aws::IAM
     class OrganizationNotInAllFeaturesModeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the effect that Organizations has on a policy simulation.</p>
@@ -5512,7 +5472,7 @@ module Aws::IAM
     class OrganizationsDecisionDetail < Struct.new(
       :allowed_by_organizations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allowed_by_organizations] = false unless options.key?(:allowed_by_organizations)
@@ -5580,7 +5540,7 @@ module Aws::IAM
       :password_reuse_prevention,
       :hard_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:require_symbols] = false unless options.key?(:require_symbols)
@@ -5600,11 +5560,7 @@ module Aws::IAM
     class PasswordPolicyViolationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionsBoundaryAttachmentType
-      Policy = 'PermissionsBoundaryPolicy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the effect that a permissions boundary has on a policy
@@ -5622,7 +5578,7 @@ module Aws::IAM
     class PermissionsBoundaryDecisionDetail < Struct.new(
       :allowed_by_permissions_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allowed_by_permissions_boundary] = false unless options.key?(:allowed_by_permissions_boundary)
@@ -5703,7 +5659,7 @@ module Aws::IAM
       :update_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_attachable] = false unless options.key?(:is_attachable)
@@ -5723,13 +5679,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyEvaluationDecisionType
-      ALLOWED = 'allowed'
-      EXPLICIT_DENY = 'explicitDeny'
-      IMPLICIT_DENY = 'implicitDeny'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because a provided policy could not be successfully evaluated. An
@@ -5739,7 +5689,7 @@ module Aws::IAM
     class PolicyEvaluationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the permissions policies that are attached to the specified
@@ -5778,7 +5728,7 @@ module Aws::IAM
       :entity_type,
       :entity_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a group that a managed policy is attached to.</p>
@@ -5797,7 +5747,7 @@ module Aws::IAM
       :group_name,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because Amazon Web Services service role policies can only be attached to the
@@ -5807,7 +5757,7 @@ module Aws::IAM
     class PolicyNotAttachableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a role that a managed policy is attached to.</p>
@@ -5826,26 +5776,7 @@ module Aws::IAM
       :role_name,
       :role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicySourceType
-      USER = 'user'
-      GROUP = 'group'
-      ROLE = 'role'
-      AWS_MANAGED = 'aws-managed'
-      USER_MANAGED = 'user-managed'
-      RESOURCE = 'resource'
-      NONE = 'none'
-    end
-
-    # <p>The policy usage type that indicates whether the policy is used as a permissions policy
-    #          or as the permissions boundary for an entity.</p>
-    #          <p>For more information about permissions boundaries, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html">Permissions boundaries for IAM
-    #             identities </a> in the <i>IAM User Guide</i>.</p>
-    module PolicyUsageType
-      PermissionsPolicy = 'PermissionsPolicy'
-      PermissionsBoundary = 'PermissionsBoundary'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a user that a managed policy is attached to.</p>
@@ -5864,7 +5795,7 @@ module Aws::IAM
       :user_name,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a version of a managed policy.</p>
@@ -5902,7 +5833,7 @@ module Aws::IAM
       :is_default_version,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -5925,7 +5856,7 @@ module Aws::IAM
       :line,
       :column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:line] = 0 unless options.key?(:line)
@@ -5971,7 +5902,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -5993,7 +5924,7 @@ module Aws::IAM
       :role_name,
       :permissions_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -6033,7 +5964,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -6055,7 +5986,7 @@ module Aws::IAM
       :user_name,
       :permissions_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -6095,7 +6026,7 @@ module Aws::IAM
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -6111,7 +6042,7 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_name
@@ -6128,7 +6059,7 @@ module Aws::IAM
       :instance_profile_name,
       :role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -6145,11 +6076,7 @@ module Aws::IAM
       :group_name,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportFormatType
-      text_csv = 'text/csv'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because the maximum number of concurrent requests for this account are
@@ -6159,13 +6086,7 @@ module Aws::IAM
     class ReportGenerationLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportStateType
-      STARTED = 'STARTED'
-      INPROGRESS = 'INPROGRESS'
-      COMPLETE = 'COMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -6184,7 +6105,7 @@ module Aws::IAM
       :user_name,
       :service_specific_credential_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_specific_credential
@@ -6198,7 +6119,7 @@ module Aws::IAM
     class ResetServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of the simulation of a single API operation call on a single
@@ -6245,7 +6166,7 @@ module Aws::IAM
       :eval_decision_details,
       :permissions_boundary_decision_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -6272,7 +6193,7 @@ module Aws::IAM
       :authentication_code1,
       :authentication_code2,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM role. This structure is returned as a response
@@ -6340,7 +6261,7 @@ module Aws::IAM
       :tags,
       :role_last_used,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM role, including all of the role's policies.</p>
@@ -6411,7 +6332,7 @@ module Aws::IAM
       :tags,
       :role_last_used,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the last time that an IAM role was used. This includes the
@@ -6435,7 +6356,7 @@ module Aws::IAM
       :last_used_date,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains details about how a service-linked role is used, if that
@@ -6451,7 +6372,7 @@ module Aws::IAM
       :region,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the private keys for the SAML provider.</p>
@@ -6468,7 +6389,7 @@ module Aws::IAM
       :key_id,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of SAML providers for this account.</p>
@@ -6486,7 +6407,7 @@ module Aws::IAM
       :valid_until,
       :create_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an SSH public key.</p>
@@ -6521,7 +6442,7 @@ module Aws::IAM
       :status,
       :upload_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an SSH public key, without the key's body or
@@ -6549,7 +6470,7 @@ module Aws::IAM
       :status,
       :upload_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a server certificate.</p>
@@ -6575,7 +6496,7 @@ module Aws::IAM
       :certificate_chain,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a server certificate without its certificate body,
@@ -6611,7 +6532,7 @@ module Aws::IAM
       :upload_date,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because trusted access is not enabled for IAM in Organizations. For details, see IAM and Organizations in the <i>Organizations User Guide</i>.</p>
@@ -6620,7 +6541,7 @@ module Aws::IAM
     class ServiceAccessNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or
@@ -6630,7 +6551,7 @@ module Aws::IAM
     class ServiceFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the most recent attempt to access the service.</p>
@@ -6688,7 +6609,7 @@ module Aws::IAM
       :total_authenticated_entities,
       :tracked_actions_last_accessed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified service does not support service-specific credentials.</p>
@@ -6697,7 +6618,7 @@ module Aws::IAM
     class ServiceNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a service-specific credential.</p>
@@ -6752,7 +6673,7 @@ module Aws::IAM
       :user_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:service_user_name] = '' unless options.key?(:service_user_name)
@@ -6800,7 +6721,7 @@ module Aws::IAM
       :service_specific_credential_id,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:service_user_name] = '' unless options.key?(:service_user_name)
@@ -6822,7 +6743,7 @@ module Aws::IAM
       :policy_arn,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_endpoint_token_version
@@ -6837,7 +6758,7 @@ module Aws::IAM
     class SetSecurityTokenServicePreferencesRequest < Struct.new(
       :global_endpoint_token_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an X.509 signing certificate.</p>
@@ -6865,7 +6786,7 @@ module Aws::IAM
       :status,
       :upload_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html">SimulatePrincipalPolicy</a> or <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html">SimulateCustomPolicy</a>
@@ -6891,7 +6812,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -7099,7 +7020,7 @@ module Aws::IAM
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html">SimulatePrincipalPolicy</a> or <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulateCustomPolicy.html">SimulateCustomPolicy</a>
@@ -7125,7 +7046,7 @@ module Aws::IAM
       :is_truncated,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -7343,7 +7264,7 @@ module Aws::IAM
       :max_items,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a reference to a <code>Statement</code> element in a policy document that
@@ -7370,7 +7291,7 @@ module Aws::IAM
       :start_position,
       :end_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents user-provided metadata that can be associated with an IAM
@@ -7392,7 +7313,7 @@ module Aws::IAM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_name
@@ -7408,7 +7329,7 @@ module Aws::IAM
       :instance_profile_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_number
@@ -7425,7 +7346,7 @@ module Aws::IAM
       :serial_number,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -7441,7 +7362,7 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7457,7 +7378,7 @@ module Aws::IAM
       :policy_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -7472,7 +7393,7 @@ module Aws::IAM
       :role_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_provider_arn
@@ -7488,7 +7409,7 @@ module Aws::IAM
       :saml_provider_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_certificate_name
@@ -7504,7 +7425,7 @@ module Aws::IAM
       :server_certificate_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -7519,7 +7440,7 @@ module Aws::IAM
       :user_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the most recent attempt to access an action within the
@@ -7553,7 +7474,7 @@ module Aws::IAM
       :last_accessed_time,
       :last_accessed_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because service-linked roles are protected Amazon Web Services resources. Only
@@ -7565,7 +7486,7 @@ module Aws::IAM
     class UnmodifiableEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the public key encoding format is unsupported or
@@ -7575,7 +7496,7 @@ module Aws::IAM
     class UnrecognizedPublicKeyEncodingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_profile_name
@@ -7591,7 +7512,7 @@ module Aws::IAM
       :instance_profile_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_number
@@ -7608,7 +7529,7 @@ module Aws::IAM
       :serial_number,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -7624,7 +7545,7 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_arn
@@ -7641,7 +7562,7 @@ module Aws::IAM
       :policy_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -7657,7 +7578,7 @@ module Aws::IAM
       :role_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_provider_arn
@@ -7674,7 +7595,7 @@ module Aws::IAM
       :saml_provider_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_certificate_name
@@ -7690,7 +7611,7 @@ module Aws::IAM
       :server_certificate_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -7706,7 +7627,7 @@ module Aws::IAM
       :user_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -7729,7 +7650,7 @@ module Aws::IAM
       :access_key_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute minimum_password_length
@@ -7816,7 +7737,7 @@ module Aws::IAM
       :password_reuse_prevention,
       :hard_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -7850,7 +7771,7 @@ module Aws::IAM
       :role_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -7877,7 +7798,7 @@ module Aws::IAM
       :new_path,
       :new_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -7915,7 +7836,7 @@ module Aws::IAM
       :password,
       :password_reset_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute open_id_connect_provider_arn
@@ -7932,7 +7853,7 @@ module Aws::IAM
       :open_id_connect_provider_arn,
       :thumbprint_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -7945,7 +7866,7 @@ module Aws::IAM
       :role_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role
@@ -7954,7 +7875,7 @@ module Aws::IAM
     class UpdateRoleDescriptionResponse < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_name
@@ -7987,12 +7908,12 @@ module Aws::IAM
       :description,
       :max_session_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRoleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute saml_metadata_document
@@ -8024,7 +7945,7 @@ module Aws::IAM
       :add_private_key,
       :remove_private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateSAMLProvider.html">UpdateSAMLProvider</a>
@@ -8035,7 +7956,7 @@ module Aws::IAM
     class UpdateSAMLProviderResponse < Struct.new(
       :saml_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -8058,7 +7979,7 @@ module Aws::IAM
       :ssh_public_key_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_certificate_name
@@ -8085,7 +8006,7 @@ module Aws::IAM
       :new_path,
       :new_server_certificate_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -8108,7 +8029,7 @@ module Aws::IAM
       :service_specific_credential_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -8131,7 +8052,7 @@ module Aws::IAM
       :certificate_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -8160,7 +8081,7 @@ module Aws::IAM
       :new_path,
       :new_user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -8193,7 +8114,7 @@ module Aws::IAM
       :user_name,
       :ssh_public_key_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSSHPublicKey.html">UploadSSHPublicKey</a>
@@ -8204,7 +8125,7 @@ module Aws::IAM
     class UploadSSHPublicKeyResponse < Struct.new(
       :ssh_public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -8303,7 +8224,7 @@ module Aws::IAM
       :certificate_chain,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadServerCertificate.html">UploadServerCertificate</a> request. </p>
@@ -8320,7 +8241,7 @@ module Aws::IAM
       :server_certificate_metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -8351,7 +8272,7 @@ module Aws::IAM
       :user_name,
       :certificate_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a successful <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_UploadSigningCertificate.html">UploadSigningCertificate</a> request. </p>
@@ -8361,7 +8282,7 @@ module Aws::IAM
     class UploadSigningCertificateResponse < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM user entity.</p>
@@ -8446,7 +8367,7 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an IAM user, including all the user's policies and all the
@@ -8503,7 +8424,7 @@ module Aws::IAM
       :permissions_boundary,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a virtual MFA device.</p>
@@ -8539,94 +8460,7 @@ module Aws::IAM
       :enable_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssertionEncryptionModeType
-      Required = 'Required'
-      Allowed = 'Allowed'
-    end
-
-    module AssignmentStatusType
-      Assigned = 'Assigned'
-      Unassigned = 'Unassigned'
-      Any = 'Any'
-    end
-
-    module EncodingType
-      SSH = 'SSH'
-      PEM = 'PEM'
-    end
-
-    module GlobalEndpointTokenVersion
-      v1Token = 'v1Token'
-      v2Token = 'v2Token'
-    end
-
-    module JobStatusType
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-    end
-
-    module PolicyOwnerEntityType
-      USER = 'USER'
-      ROLE = 'ROLE'
-      GROUP = 'GROUP'
-    end
-
-    module PolicyScopeType
-      All = 'All'
-      AWS = 'AWS'
-      Local = 'Local'
-    end
-
-    module PolicyType
-      INLINE = 'INLINE'
-      MANAGED = 'MANAGED'
-    end
-
-    module SortKeyType
-      SERVICE_NAMESPACE_ASCENDING = 'SERVICE_NAMESPACE_ASCENDING'
-      SERVICE_NAMESPACE_DESCENDING = 'SERVICE_NAMESPACE_DESCENDING'
-      LAST_AUTHENTICATED_TIME_ASCENDING = 'LAST_AUTHENTICATED_TIME_ASCENDING'
-      LAST_AUTHENTICATED_TIME_DESCENDING = 'LAST_AUTHENTICATED_TIME_DESCENDING'
-    end
-
-    module StatusType
-      Active = 'Active'
-      Inactive = 'Inactive'
-      Expired = 'Expired'
-    end
-
-    module SummaryKeyType
-      Users = 'Users'
-      UsersQuota = 'UsersQuota'
-      Groups = 'Groups'
-      GroupsQuota = 'GroupsQuota'
-      ServerCertificates = 'ServerCertificates'
-      ServerCertificatesQuota = 'ServerCertificatesQuota'
-      UserPolicySizeQuota = 'UserPolicySizeQuota'
-      GroupPolicySizeQuota = 'GroupPolicySizeQuota'
-      GroupsPerUserQuota = 'GroupsPerUserQuota'
-      SigningCertificatesPerUserQuota = 'SigningCertificatesPerUserQuota'
-      AccessKeysPerUserQuota = 'AccessKeysPerUserQuota'
-      MFADevices = 'MFADevices'
-      MFADevicesInUse = 'MFADevicesInUse'
-      AccountMFAEnabled = 'AccountMFAEnabled'
-      AccountAccessKeysPresent = 'AccountAccessKeysPresent'
-      AccountPasswordPresent = 'AccountPasswordPresent'
-      AccountSigningCertificatesPresent = 'AccountSigningCertificatesPresent'
-      AttachedPoliciesPerGroupQuota = 'AttachedPoliciesPerGroupQuota'
-      AttachedPoliciesPerRoleQuota = 'AttachedPoliciesPerRoleQuota'
-      AttachedPoliciesPerUserQuota = 'AttachedPoliciesPerUserQuota'
-      Policies = 'Policies'
-      PoliciesQuota = 'PoliciesQuota'
-      PolicySizeQuota = 'PolicySizeQuota'
-      PolicyVersionsInUse = 'PolicyVersionsInUse'
-      PolicyVersionsInUseQuota = 'PolicyVersionsInUseQuota'
-      VersionsPerPolicyQuota = 'VersionsPerPolicyQuota'
-      GlobalEndpointTokenVersion = 'GlobalEndpointTokenVersion'
+      include ::Smithy::Schema::Structure
     end
 
   end

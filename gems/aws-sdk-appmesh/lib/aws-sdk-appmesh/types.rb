@@ -14,7 +14,7 @@ module Aws::AppMesh
       :file,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < AccessLog; end
       class Unknown < AccessLog; end
@@ -37,7 +37,7 @@ module Aws::AppMesh
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the Cloud Map service discovery information for
@@ -67,7 +67,7 @@ module Aws::AppMesh
       :attributes,
       :ip_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the backends that a virtual node is expected to send outbound
@@ -79,7 +79,7 @@ module Aws::AppMesh
       :virtual_service,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class VirtualService < Backend; end
       class Unknown < Backend; end
@@ -92,7 +92,7 @@ module Aws::AppMesh
     class BackendDefaults < Struct.new(
       :client_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request syntax was malformed. Check your request syntax and try again.</p>
@@ -101,7 +101,7 @@ module Aws::AppMesh
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a client policy.</p>
@@ -111,7 +111,7 @@ module Aws::AppMesh
     class ClientPolicy < Struct.new(
       :tls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>
@@ -133,10 +133,10 @@ module Aws::AppMesh
       :certificate,
       :validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:enforce] =  unless options.key?(:enforce)
+        options[:enforce] = nil unless options.key?(:enforce)
         super
       end
     end
@@ -156,7 +156,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < ClientTlsCertificate; end
       class Sds < ClientTlsCertificate; end
@@ -170,7 +170,7 @@ module Aws::AppMesh
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route_name
@@ -211,7 +211,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route
@@ -220,7 +220,7 @@ module Aws::AppMesh
     class CreateGatewayRouteOperationOutput < Struct.new(
       :gateway_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -245,7 +245,7 @@ module Aws::AppMesh
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh
@@ -254,7 +254,7 @@ module Aws::AppMesh
     class CreateMeshOperationOutput < Struct.new(
       :mesh,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_name
@@ -294,7 +294,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -303,7 +303,7 @@ module Aws::AppMesh
     class CreateRouteOperationOutput < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway_name
@@ -338,7 +338,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway
@@ -347,7 +347,7 @@ module Aws::AppMesh
     class CreateVirtualGatewayOperationOutput < Struct.new(
       :virtual_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node_name
@@ -382,7 +382,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node
@@ -391,7 +391,7 @@ module Aws::AppMesh
     class CreateVirtualNodeOperationOutput < Struct.new(
       :virtual_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router_name
@@ -426,7 +426,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router
@@ -435,7 +435,7 @@ module Aws::AppMesh
     class CreateVirtualRouterOperationOutput < Struct.new(
       :virtual_router,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service_name
@@ -470,7 +470,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service
@@ -479,7 +479,7 @@ module Aws::AppMesh
     class CreateVirtualServiceOperationOutput < Struct.new(
       :virtual_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route_name
@@ -501,7 +501,7 @@ module Aws::AppMesh
       :virtual_gateway_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route
@@ -510,7 +510,7 @@ module Aws::AppMesh
     class DeleteGatewayRouteOperationOutput < Struct.new(
       :gateway_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -519,7 +519,7 @@ module Aws::AppMesh
     class DeleteMeshOperationInput < Struct.new(
       :mesh_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh
@@ -528,7 +528,7 @@ module Aws::AppMesh
     class DeleteMeshOperationOutput < Struct.new(
       :mesh,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_name
@@ -550,7 +550,7 @@ module Aws::AppMesh
       :virtual_router_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -559,7 +559,7 @@ module Aws::AppMesh
     class DeleteRouteOperationOutput < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway_name
@@ -577,7 +577,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway
@@ -586,7 +586,7 @@ module Aws::AppMesh
     class DeleteVirtualGatewayOperationOutput < Struct.new(
       :virtual_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes a virtual node input.</p>
@@ -605,7 +605,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node
@@ -614,7 +614,7 @@ module Aws::AppMesh
     class DeleteVirtualNodeOperationOutput < Struct.new(
       :virtual_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router_name
@@ -632,7 +632,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router
@@ -641,7 +641,7 @@ module Aws::AppMesh
     class DeleteVirtualRouterOperationOutput < Struct.new(
       :virtual_router,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service_name
@@ -659,7 +659,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service
@@ -668,7 +668,7 @@ module Aws::AppMesh
     class DeleteVirtualServiceOperationOutput < Struct.new(
       :virtual_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route_name
@@ -690,7 +690,7 @@ module Aws::AppMesh
       :virtual_gateway_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route
@@ -699,7 +699,7 @@ module Aws::AppMesh
     class DescribeGatewayRouteOperationOutput < Struct.new(
       :gateway_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -713,7 +713,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh
@@ -722,7 +722,7 @@ module Aws::AppMesh
     class DescribeMeshOperationOutput < Struct.new(
       :mesh,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_name
@@ -744,7 +744,7 @@ module Aws::AppMesh
       :mesh_owner,
       :virtual_router_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -753,7 +753,7 @@ module Aws::AppMesh
     class DescribeRouteOperationOutput < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway_name
@@ -771,7 +771,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway
@@ -780,7 +780,7 @@ module Aws::AppMesh
     class DescribeVirtualGatewayOperationOutput < Struct.new(
       :virtual_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node_name
@@ -798,7 +798,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node
@@ -807,7 +807,7 @@ module Aws::AppMesh
     class DescribeVirtualNodeOperationOutput < Struct.new(
       :virtual_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router_name
@@ -825,7 +825,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router
@@ -834,7 +834,7 @@ module Aws::AppMesh
     class DescribeVirtualRouterOperationOutput < Struct.new(
       :virtual_router,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service_name
@@ -852,7 +852,7 @@ module Aws::AppMesh
       :mesh_name,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service
@@ -861,7 +861,7 @@ module Aws::AppMesh
     class DescribeVirtualServiceOperationOutput < Struct.new(
       :virtual_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the DNS service discovery information for your virtual
@@ -882,7 +882,7 @@ module Aws::AppMesh
       :response_type,
       :ip_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a duration of time.</p>
@@ -896,7 +896,7 @@ module Aws::AppMesh
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the egress filter rules for a service mesh.</p>
@@ -910,7 +910,7 @@ module Aws::AppMesh
     class EgressFilter < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an access log file.</p>
@@ -933,7 +933,7 @@ module Aws::AppMesh
       :path,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permissions to perform this action.</p>
@@ -942,7 +942,7 @@ module Aws::AppMesh
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a gateway route returned by a describe operation.</p>
@@ -972,7 +972,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the gateway route host name to match.</p>
@@ -986,7 +986,7 @@ module Aws::AppMesh
       :exact,
       :suffix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the gateway route host name to rewrite.</p>
@@ -996,7 +996,7 @@ module Aws::AppMesh
     class GatewayRouteHostnameRewrite < Struct.new(
       :default_target_hostname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a gateway route returned by a list operation.</p>
@@ -1040,7 +1040,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a gateway route specification. Specify one gateway route
@@ -1063,7 +1063,7 @@ module Aws::AppMesh
       :http2_route,
       :grpc_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the current status of a gateway route.</p>
@@ -1073,7 +1073,7 @@ module Aws::AppMesh
     class GatewayRouteStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a gateway route target.</p>
@@ -1087,7 +1087,7 @@ module Aws::AppMesh
       :virtual_service,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the virtual service that traffic is routed to.</p>
@@ -1097,7 +1097,7 @@ module Aws::AppMesh
     class GatewayRouteVirtualService < Struct.new(
       :virtual_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a gRPC gateway route.</p>
@@ -1111,7 +1111,7 @@ module Aws::AppMesh
       :match,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the action to take if a match is determined.</p>
@@ -1125,7 +1125,7 @@ module Aws::AppMesh
       :target,
       :rewrite,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the criteria for determining a request match.</p>
@@ -1147,7 +1147,7 @@ module Aws::AppMesh
       :metadata,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the metadata of the gateway route.</p>
@@ -1166,7 +1166,7 @@ module Aws::AppMesh
       :invert,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the gateway route to rewrite.</p>
@@ -1176,7 +1176,7 @@ module Aws::AppMesh
     class GrpcGatewayRouteRewrite < Struct.new(
       :hostname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the method header to be matched.</p>
@@ -1203,7 +1203,7 @@ module Aws::AppMesh
       :suffix,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Exact < GrpcMetadataMatchMethod; end
       class Regex < GrpcMetadataMatchMethod; end
@@ -1259,7 +1259,7 @@ module Aws::AppMesh
       :tcp_retry_events,
       :grpc_retry_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a gRPC route type.</p>
@@ -1281,7 +1281,7 @@ module Aws::AppMesh
       :retry_policy,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the action to take if a match is determined.</p>
@@ -1291,7 +1291,7 @@ module Aws::AppMesh
     class GrpcRouteAction < Struct.new(
       :weighted_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the criteria for determining a request match.</p>
@@ -1314,7 +1314,7 @@ module Aws::AppMesh
       :metadata,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the match metadata for the route.</p>
@@ -1332,7 +1332,7 @@ module Aws::AppMesh
       :invert,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the match method. Specify one of the match values.</p>
@@ -1359,7 +1359,7 @@ module Aws::AppMesh
       :suffix,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Exact < GrpcRouteMetadataMatchMethod; end
       class Regex < GrpcRouteMetadataMatchMethod; end
@@ -1382,7 +1382,7 @@ module Aws::AppMesh
       :per_request,
       :idle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the method and value to match with the header value sent in a
@@ -1410,7 +1410,7 @@ module Aws::AppMesh
       :suffix,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Exact < HeaderMatchMethod; end
       class Regex < HeaderMatchMethod; end
@@ -1458,7 +1458,7 @@ module Aws::AppMesh
       :healthy_threshold,
       :unhealthy_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an HTTP gateway route.</p>
@@ -1472,7 +1472,7 @@ module Aws::AppMesh
       :match,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the action to take if a match is determined.</p>
@@ -1486,7 +1486,7 @@ module Aws::AppMesh
       :target,
       :rewrite,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the HTTP header in the gateway route.</p>
@@ -1506,7 +1506,7 @@ module Aws::AppMesh
       :invert,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the criteria for determining a request match.</p>
@@ -1545,7 +1545,7 @@ module Aws::AppMesh
       :headers,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the path to rewrite.</p>
@@ -1555,7 +1555,7 @@ module Aws::AppMesh
     class HttpGatewayRoutePathRewrite < Struct.new(
       :exact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the beginning characters of the route to rewrite.</p>
@@ -1569,7 +1569,7 @@ module Aws::AppMesh
       :default_prefix,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the gateway route to rewrite.</p>
@@ -1587,7 +1587,7 @@ module Aws::AppMesh
       :path,
       :hostname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the path to match in the request.</p>
@@ -1601,7 +1601,7 @@ module Aws::AppMesh
       :exact,
       :regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the query parameter in the request.</p>
@@ -1615,7 +1615,7 @@ module Aws::AppMesh
       :name,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. 
@@ -1660,7 +1660,7 @@ module Aws::AppMesh
       :http_retry_events,
       :tcp_retry_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an HTTP or HTTP/2 route type.</p>
@@ -1682,7 +1682,7 @@ module Aws::AppMesh
       :retry_policy,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the action to take if a match is determined.</p>
@@ -1692,7 +1692,7 @@ module Aws::AppMesh
     class HttpRouteAction < Struct.new(
       :weighted_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the HTTP header in the request.</p>
@@ -1710,7 +1710,7 @@ module Aws::AppMesh
       :invert,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the requirements for a route to match HTTP requests for a
@@ -1751,7 +1751,7 @@ module Aws::AppMesh
       :headers,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents types of timeouts. </p>
@@ -1767,7 +1767,7 @@ module Aws::AppMesh
       :per_request,
       :idle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or
@@ -1777,7 +1777,7 @@ module Aws::AppMesh
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the key value pairs for the JSON.</p>
@@ -1791,7 +1791,7 @@ module Aws::AppMesh
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded a service limit for your account. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/service-quotas.html">Service
@@ -1801,7 +1801,7 @@ module Aws::AppMesh
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -1837,7 +1837,7 @@ module Aws::AppMesh
       :limit,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_routes
@@ -1854,7 +1854,7 @@ module Aws::AppMesh
       :gateway_routes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1881,7 +1881,7 @@ module Aws::AppMesh
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute meshes
@@ -1897,7 +1897,7 @@ module Aws::AppMesh
       :meshes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -1933,7 +1933,7 @@ module Aws::AppMesh
       :limit,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routes
@@ -1949,7 +1949,7 @@ module Aws::AppMesh
       :routes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1976,7 +1976,7 @@ module Aws::AppMesh
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1992,7 +1992,7 @@ module Aws::AppMesh
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -2024,7 +2024,7 @@ module Aws::AppMesh
       :limit,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateways
@@ -2040,7 +2040,7 @@ module Aws::AppMesh
       :virtual_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -2072,7 +2072,7 @@ module Aws::AppMesh
       :limit,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_nodes
@@ -2088,7 +2088,7 @@ module Aws::AppMesh
       :virtual_nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -2120,7 +2120,7 @@ module Aws::AppMesh
       :limit,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_routers
@@ -2136,7 +2136,7 @@ module Aws::AppMesh
       :virtual_routers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -2168,7 +2168,7 @@ module Aws::AppMesh
       :limit,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_services
@@ -2184,7 +2184,7 @@ module Aws::AppMesh
       :virtual_services,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a listener for a virtual node.</p>
@@ -2214,7 +2214,7 @@ module Aws::AppMesh
       :outlier_detection,
       :connection_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents timeouts for different protocols.</p>
@@ -2237,7 +2237,7 @@ module Aws::AppMesh
       :grpc,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Tcp < ListenerTimeout; end
       class Http < ListenerTimeout; end
@@ -2278,7 +2278,7 @@ module Aws::AppMesh
       :certificate,
       :validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Certificate Manager certificate.</p>
@@ -2288,7 +2288,7 @@ module Aws::AppMesh
     class ListenerTlsAcmCertificate < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a listener's Transport Layer Security (TLS) certificate.</p>
@@ -2308,7 +2308,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Acm < ListenerTlsCertificate; end
       class File < ListenerTlsCertificate; end
@@ -2329,7 +2329,7 @@ module Aws::AppMesh
       :certificate_chain,
       :private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the listener's Secret Discovery Service certificate. The proxy
@@ -2344,7 +2344,7 @@ module Aws::AppMesh
     class ListenerTlsSdsCertificate < Struct.new(
       :secret_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a listener's Transport Layer Security (TLS) validation context.</p>
@@ -2360,7 +2360,7 @@ module Aws::AppMesh
       :trust,
       :subject_alternative_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a listener's Transport Layer Security (TLS) validation context trust.</p>
@@ -2376,7 +2376,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < ListenerTlsValidationContextTrust; end
       class Sds < ListenerTlsValidationContextTrust; end
@@ -2390,7 +2390,7 @@ module Aws::AppMesh
     class Logging < Struct.new(
       :access_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the format for the logs.</p>
@@ -2405,7 +2405,7 @@ module Aws::AppMesh
       :json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < LoggingFormat; end
       class Json < LoggingFormat; end
@@ -2423,7 +2423,7 @@ module Aws::AppMesh
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a service mesh returned by a describe operation.</p>
@@ -2445,7 +2445,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a service mesh returned by a list operation.</p>
@@ -2481,7 +2481,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the service discovery information for a service mesh.</p>
@@ -2491,7 +2491,7 @@ module Aws::AppMesh
     class MeshServiceDiscovery < Struct.new(
       :ip_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the specification of a service mesh.</p>
@@ -2505,7 +2505,7 @@ module Aws::AppMesh
       :egress_filter,
       :service_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the status of a service mesh.</p>
@@ -2515,7 +2515,7 @@ module Aws::AppMesh
     class MeshStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist. Check your request syntax and try again.</p>
@@ -2524,7 +2524,7 @@ module Aws::AppMesh
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the outlier detection for a virtual node's listener.</p>
@@ -2547,7 +2547,7 @@ module Aws::AppMesh
       :base_ejection_duration,
       :max_ejection_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a port mapping.</p>
@@ -2561,7 +2561,7 @@ module Aws::AppMesh
       :port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the query parameter to match.</p>
@@ -2571,7 +2571,7 @@ module Aws::AppMesh
     class QueryParameterMatch < Struct.new(
       :exact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete the specified resource because it's in use or required by another
@@ -2581,7 +2581,7 @@ module Aws::AppMesh
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents metadata for a resource.</p>
@@ -2617,7 +2617,7 @@ module Aws::AppMesh
       :mesh_owner,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a route returned by a describe operation.</p>
@@ -2647,7 +2647,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a route returned by a list operation.</p>
@@ -2691,7 +2691,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a route specification. Specify one route type.</p>
@@ -2718,7 +2718,7 @@ module Aws::AppMesh
       :http2_route,
       :grpc_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the current status of a route.</p>
@@ -2728,7 +2728,7 @@ module Aws::AppMesh
     class RouteStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the service discovery information for a virtual node.</p>
@@ -2743,7 +2743,7 @@ module Aws::AppMesh
       :aws_cloud_map,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Dns < ServiceDiscovery; end
       class AwsCloudMap < ServiceDiscovery; end
@@ -2756,7 +2756,7 @@ module Aws::AppMesh
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the methods by which a subject alternative name on a peer
@@ -2767,7 +2767,7 @@ module Aws::AppMesh
     class SubjectAlternativeNameMatchers < Struct.new(
       :exact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the subject alternative names secured by the
@@ -2778,7 +2778,7 @@ module Aws::AppMesh
     class SubjectAlternativeNames < Struct.new(
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional metadata that you apply to a resource to assist with categorization and
@@ -2797,7 +2797,7 @@ module Aws::AppMesh
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2812,12 +2812,12 @@ module Aws::AppMesh
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a TCP route type.</p>
@@ -2835,7 +2835,7 @@ module Aws::AppMesh
       :timeout,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the action to take if a match is determined.</p>
@@ -2845,7 +2845,7 @@ module Aws::AppMesh
     class TcpRouteAction < Struct.new(
       :weighted_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the TCP route to match.</p>
@@ -2855,7 +2855,7 @@ module Aws::AppMesh
     class TcpRouteMatch < Struct.new(
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents types of timeouts. </p>
@@ -2865,7 +2865,7 @@ module Aws::AppMesh
     class TcpTimeout < Struct.new(
       :idle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents how the proxy will validate its peer during Transport Layer Security (TLS)
@@ -2887,7 +2887,7 @@ module Aws::AppMesh
       :trust,
       :subject_alternative_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager
@@ -2898,7 +2898,7 @@ module Aws::AppMesh
     class TlsValidationContextAcmTrust < Struct.new(
       :certificate_authority_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>
@@ -2909,7 +2909,7 @@ module Aws::AppMesh
     class TlsValidationContextFileTrust < Struct.new(
       :certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The
@@ -2923,7 +2923,7 @@ module Aws::AppMesh
     class TlsValidationContextSdsTrust < Struct.new(
       :secret_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>
@@ -2943,7 +2943,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Acm < TlsValidationContextTrust; end
       class File < TlsValidationContextTrust; end
@@ -2959,7 +2959,7 @@ module Aws::AppMesh
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the maximum allowed number of tags allowed per resource. The current
@@ -2970,7 +2970,7 @@ module Aws::AppMesh
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2983,12 +2983,12 @@ module Aws::AppMesh
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route_name
@@ -3019,7 +3019,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_route
@@ -3028,7 +3028,7 @@ module Aws::AppMesh
     class UpdateGatewayRouteOperationOutput < Struct.new(
       :gateway_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh_name
@@ -3046,7 +3046,7 @@ module Aws::AppMesh
       :spec,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mesh
@@ -3055,7 +3055,7 @@ module Aws::AppMesh
     class UpdateMeshOperationOutput < Struct.new(
       :mesh,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_name
@@ -3086,7 +3086,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -3095,7 +3095,7 @@ module Aws::AppMesh
     class UpdateRouteOperationOutput < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway_name
@@ -3123,7 +3123,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_gateway
@@ -3132,7 +3132,7 @@ module Aws::AppMesh
     class UpdateVirtualGatewayOperationOutput < Struct.new(
       :virtual_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node_name
@@ -3159,7 +3159,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_node
@@ -3168,7 +3168,7 @@ module Aws::AppMesh
     class UpdateVirtualNodeOperationOutput < Struct.new(
       :virtual_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router_name
@@ -3195,7 +3195,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_router
@@ -3204,7 +3204,7 @@ module Aws::AppMesh
     class UpdateVirtualRouterOperationOutput < Struct.new(
       :virtual_router,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service_name
@@ -3232,7 +3232,7 @@ module Aws::AppMesh
       :client_token,
       :mesh_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_service
@@ -3241,7 +3241,7 @@ module Aws::AppMesh
     class UpdateVirtualServiceOperationOutput < Struct.new(
       :virtual_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The access log configuration for a virtual gateway.</p>
@@ -3252,7 +3252,7 @@ module Aws::AppMesh
       :file,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < VirtualGatewayAccessLog; end
       class Unknown < VirtualGatewayAccessLog; end
@@ -3265,7 +3265,7 @@ module Aws::AppMesh
     class VirtualGatewayBackendDefaults < Struct.new(
       :client_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a client policy.</p>
@@ -3275,7 +3275,7 @@ module Aws::AppMesh
     class VirtualGatewayClientPolicy < Struct.new(
       :tls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) client policy.</p>
@@ -3299,10 +3299,10 @@ module Aws::AppMesh
       :certificate,
       :validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:enforce] =  unless options.key?(:enforce)
+        options[:enforce] = nil unless options.key?(:enforce)
         super
       end
     end
@@ -3323,7 +3323,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < VirtualGatewayClientTlsCertificate; end
       class Sds < VirtualGatewayClientTlsCertificate; end
@@ -3350,7 +3350,7 @@ module Aws::AppMesh
       :grpc,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Http < VirtualGatewayConnectionPool; end
       class Http2 < VirtualGatewayConnectionPool; end
@@ -3381,7 +3381,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an access log file.</p>
@@ -3400,7 +3400,7 @@ module Aws::AppMesh
       :path,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -3411,7 +3411,7 @@ module Aws::AppMesh
     class VirtualGatewayGrpcConnectionPool < Struct.new(
       :max_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the health check policy for a virtual gateway's
@@ -3453,7 +3453,7 @@ module Aws::AppMesh
       :healthy_threshold,
       :unhealthy_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -3464,7 +3464,7 @@ module Aws::AppMesh
     class VirtualGatewayHttp2ConnectionPool < Struct.new(
       :max_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -3480,10 +3480,10 @@ module Aws::AppMesh
       :max_connections,
       :max_pending_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_pending_requests] =  unless options.key?(:max_pending_requests)
+        options[:max_pending_requests] = nil unless options.key?(:max_pending_requests)
         super
       end
     end
@@ -3507,7 +3507,7 @@ module Aws::AppMesh
       :tls,
       :connection_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the Transport Layer Security (TLS) properties for a listener.</p>
@@ -3543,7 +3543,7 @@ module Aws::AppMesh
       :validation,
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Certificate Manager certificate.</p>
@@ -3553,7 +3553,7 @@ module Aws::AppMesh
     class VirtualGatewayListenerTlsAcmCertificate < Struct.new(
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a listener's Transport Layer Security (TLS) certificate.</p>
@@ -3573,7 +3573,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Acm < VirtualGatewayListenerTlsCertificate; end
       class File < VirtualGatewayListenerTlsCertificate; end
@@ -3594,7 +3594,7 @@ module Aws::AppMesh
       :certificate_chain,
       :private_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the virtual gateway's listener's Secret Discovery Service
@@ -3609,7 +3609,7 @@ module Aws::AppMesh
     class VirtualGatewayListenerTlsSdsCertificate < Struct.new(
       :secret_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation
@@ -3626,7 +3626,7 @@ module Aws::AppMesh
       :trust,
       :subject_alternative_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context
@@ -3643,7 +3643,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class File < VirtualGatewayListenerTlsValidationContextTrust; end
       class Sds < VirtualGatewayListenerTlsValidationContextTrust; end
@@ -3657,7 +3657,7 @@ module Aws::AppMesh
     class VirtualGatewayLogging < Struct.new(
       :access_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a port mapping.</p>
@@ -3671,7 +3671,7 @@ module Aws::AppMesh
       :port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual gateway returned by a list operation.</p>
@@ -3711,7 +3711,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the specification of a service mesh resource.</p>
@@ -3730,7 +3730,7 @@ module Aws::AppMesh
       :listeners,
       :logging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the status of the mesh resource.</p>
@@ -3740,7 +3740,7 @@ module Aws::AppMesh
     class VirtualGatewayStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context.</p>
@@ -3756,7 +3756,7 @@ module Aws::AppMesh
       :trust,
       :subject_alternative_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager
@@ -3767,7 +3767,7 @@ module Aws::AppMesh
     class VirtualGatewayTlsValidationContextAcmTrust < Struct.new(
       :certificate_authority_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>
@@ -3778,7 +3778,7 @@ module Aws::AppMesh
     class VirtualGatewayTlsValidationContextFileTrust < Struct.new(
       :certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service
@@ -3793,7 +3793,7 @@ module Aws::AppMesh
     class VirtualGatewayTlsValidationContextSdsTrust < Struct.new(
       :secret_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a Transport Layer Security (TLS) validation context trust.</p>
@@ -3813,7 +3813,7 @@ module Aws::AppMesh
       :sds,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Acm < VirtualGatewayTlsValidationContextTrust; end
       class File < VirtualGatewayTlsValidationContextTrust; end
@@ -3846,7 +3846,7 @@ module Aws::AppMesh
       :grpc,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Tcp < VirtualNodeConnectionPool; end
       class Http < VirtualNodeConnectionPool; end
@@ -3878,7 +3878,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -3889,7 +3889,7 @@ module Aws::AppMesh
     class VirtualNodeGrpcConnectionPool < Struct.new(
       :max_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -3900,7 +3900,7 @@ module Aws::AppMesh
     class VirtualNodeHttp2ConnectionPool < Struct.new(
       :max_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -3916,10 +3916,10 @@ module Aws::AppMesh
       :max_connections,
       :max_pending_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_pending_requests] =  unless options.key?(:max_pending_requests)
+        options[:max_pending_requests] = nil unless options.key?(:max_pending_requests)
         super
       end
     end
@@ -3961,7 +3961,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual node service provider.</p>
@@ -3971,7 +3971,7 @@ module Aws::AppMesh
     class VirtualNodeServiceProvider < Struct.new(
       :virtual_node_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the specification of a virtual node.</p>
@@ -4000,7 +4000,7 @@ module Aws::AppMesh
       :backend_defaults,
       :logging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the current status of the virtual node.</p>
@@ -4010,7 +4010,7 @@ module Aws::AppMesh
     class VirtualNodeStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a type of connection pool.</p>
@@ -4021,7 +4021,7 @@ module Aws::AppMesh
     class VirtualNodeTcpConnectionPool < Struct.new(
       :max_connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual router returned by a describe operation.</p>
@@ -4047,7 +4047,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual router listener.</p>
@@ -4057,7 +4057,7 @@ module Aws::AppMesh
     class VirtualRouterListener < Struct.new(
       :port_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual router returned by a list operation.</p>
@@ -4097,7 +4097,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual node service provider.</p>
@@ -4107,7 +4107,7 @@ module Aws::AppMesh
     class VirtualRouterServiceProvider < Struct.new(
       :virtual_router_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the specification of a virtual router.</p>
@@ -4118,7 +4118,7 @@ module Aws::AppMesh
     class VirtualRouterSpec < Struct.new(
       :listeners,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the status of a virtual router. </p>
@@ -4128,7 +4128,7 @@ module Aws::AppMesh
     class VirtualRouterStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual service backend for a virtual node.</p>
@@ -4142,7 +4142,7 @@ module Aws::AppMesh
       :virtual_service_name,
       :client_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a virtual service returned by a describe operation.</p>
@@ -4168,7 +4168,7 @@ module Aws::AppMesh
       :metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the provider for a virtual service.</p>
@@ -4183,7 +4183,7 @@ module Aws::AppMesh
       :virtual_router,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class VirtualNode < VirtualServiceProvider; end
       class VirtualRouter < VirtualServiceProvider; end
@@ -4227,7 +4227,7 @@ module Aws::AppMesh
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the specification of a virtual service.</p>
@@ -4238,7 +4238,7 @@ module Aws::AppMesh
     class VirtualServiceSpec < Struct.new(
       :provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the status of a virtual service.</p>
@@ -4248,7 +4248,7 @@ module Aws::AppMesh
     class VirtualServiceStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a target and its relative weight. Traffic is distributed
@@ -4269,7 +4269,7 @@ module Aws::AppMesh
       :weight,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)

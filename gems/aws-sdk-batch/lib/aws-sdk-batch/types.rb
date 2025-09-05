@@ -6,11 +6,6 @@ module Aws::Batch
   # This module contains the types returned by client operations.
   module Types
 
-    module ArrayJobDependency
-      N_TO_N = 'N_TO_N'
-      SEQUENTIAL = 'SEQUENTIAL'
-    end
-
     # <p>An object that represents an Batch array job.</p>
     # @!attribute size
     #   <p>The size of the array job.</p>
@@ -18,7 +13,7 @@ module Aws::Batch
     class ArrayProperties < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the array properties of a job.</p>
@@ -38,7 +33,7 @@ module Aws::Batch
       :size,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the array properties of a job.</p>
@@ -53,12 +48,7 @@ module Aws::Batch
       :size,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssignPublicIp
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details of a container that's part of a job attempt.</p>
@@ -92,7 +82,7 @@ module Aws::Batch
       :log_stream_name,
       :network_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a job attempt.</p>
@@ -123,7 +113,7 @@ module Aws::Batch
       :status_reason,
       :task_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details of a task.</p>
@@ -141,7 +131,7 @@ module Aws::Batch
       :task_arn,
       :containers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details of a container that's part of a job attempt.</p>
@@ -170,46 +160,7 @@ module Aws::Batch
       :log_stream_name,
       :network_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CEState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module CEStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      VALID = 'VALID'
-      INVALID = 'INVALID'
-    end
-
-    module CEType
-      MANAGED = 'MANAGED'
-      UNMANAGED = 'UNMANAGED'
-    end
-
-    module CRAllocationStrategy
-      BEST_FIT = 'BEST_FIT'
-      BEST_FIT_PROGRESSIVE = 'BEST_FIT_PROGRESSIVE'
-      SPOT_CAPACITY_OPTIMIZED = 'SPOT_CAPACITY_OPTIMIZED'
-      SPOT_PRICE_CAPACITY_OPTIMIZED = 'SPOT_PRICE_CAPACITY_OPTIMIZED'
-    end
-
-    module CRType
-      EC2 = 'EC2'
-      SPOT = 'SPOT'
-      FARGATE = 'FARGATE'
-      FARGATE_SPOT = 'FARGATE_SPOT'
-    end
-
-    module CRUpdateAllocationStrategy
-      BEST_FIT_PROGRESSIVE = 'BEST_FIT_PROGRESSIVE'
-      SPOT_CAPACITY_OPTIMIZED = 'SPOT_CAPACITY_OPTIMIZED'
-      SPOT_PRICE_CAPACITY_OPTIMIZED = 'SPOT_PRICE_CAPACITY_OPTIMIZED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>CancelJob</code>.</p>
@@ -226,12 +177,12 @@ module Aws::Batch
       :job_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the capacity limit for a service environment. This structure specifies the maximum amount of resources that can be used by service jobs in the environment.</p>
@@ -249,7 +200,7 @@ module Aws::Batch
       :max_capacity,
       :capacity_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
@@ -260,7 +211,7 @@ module Aws::Batch
     class ClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Batch compute environment.</p>
@@ -360,7 +311,7 @@ module Aws::Batch
       :uuid,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The order that compute environments are tried in for job placement within a queue. Compute
@@ -387,7 +338,7 @@ module Aws::Batch
       :order,
       :compute_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Batch compute resource. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute environments</a> in
@@ -644,7 +595,7 @@ module Aws::Batch
       :launch_template,
       :ec2_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the attributes of a compute environment that can be updated. For
@@ -942,7 +893,7 @@ module Aws::Batch
       :type,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of consumable resources required by a job.</p>
@@ -952,7 +903,7 @@ module Aws::Batch
     class ConsumableResourceProperties < Struct.new(
       :consumable_resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a consumable resource required to run a job.</p>
@@ -966,7 +917,7 @@ module Aws::Batch
       :consumable_resource,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Current information about a consumable resource.</p>
@@ -1005,7 +956,7 @@ module Aws::Batch
       :in_use_quantity,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details of a container that's part of a job.</p>
@@ -1212,7 +1163,7 @@ module Aws::Batch
       :repository_credentials,
       :enable_execute_command,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that should be sent to a container.</p>
@@ -1282,7 +1233,7 @@ module Aws::Batch
       :environment,
       :resource_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container properties are used for Amazon ECS based job definitions. These properties to describe the 
@@ -1516,7 +1467,7 @@ module Aws::Batch
       :runtime_platform,
       :repository_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents summary details of a container within a job.</p>
@@ -1531,7 +1482,7 @@ module Aws::Batch
       :exit_code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>CreateComputeEnvironment</code>.</p>
@@ -1628,7 +1579,7 @@ module Aws::Batch
       :eks_configuration,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_environment_name
@@ -1642,7 +1593,7 @@ module Aws::Batch
       :compute_environment_name,
       :compute_environment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource_name
@@ -1676,7 +1627,7 @@ module Aws::Batch
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource_name
@@ -1689,7 +1640,7 @@ module Aws::Batch
       :consumable_resource_name,
       :consumable_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>CreateJobQueue</code>.</p>
@@ -1759,7 +1710,7 @@ module Aws::Batch
       :tags,
       :job_state_time_limit_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_queue_name
@@ -1772,7 +1723,7 @@ module Aws::Batch
       :job_queue_name,
       :job_queue_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>CreateSchedulingPolicy</code>.</p>
@@ -1794,7 +1745,7 @@ module Aws::Batch
       :fairshare_policy,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1811,7 +1762,7 @@ module Aws::Batch
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environment_name
@@ -1836,7 +1787,7 @@ module Aws::Batch
       :capacity_limits,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environment_name
@@ -1849,7 +1800,7 @@ module Aws::Batch
       :service_environment_name,
       :service_environment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DeleteComputeEnvironment</code>.</p>
@@ -1859,12 +1810,12 @@ module Aws::Batch
     class DeleteComputeEnvironmentRequest < Struct.new(
       :compute_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteComputeEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource
@@ -1873,12 +1824,12 @@ module Aws::Batch
     class DeleteConsumableResourceRequest < Struct.new(
       :consumable_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConsumableResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DeleteJobQueue</code>.</p>
@@ -1888,12 +1839,12 @@ module Aws::Batch
     class DeleteJobQueueRequest < Struct.new(
       :job_queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteJobQueueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DeleteSchedulingPolicy</code>.</p>
@@ -1903,12 +1854,12 @@ module Aws::Batch
     class DeleteSchedulingPolicyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSchedulingPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environment
@@ -1917,12 +1868,12 @@ module Aws::Batch
     class DeleteServiceEnvironmentRequest < Struct.new(
       :service_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition
@@ -1932,12 +1883,12 @@ module Aws::Batch
     class DeregisterJobDefinitionRequest < Struct.new(
       :job_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterJobDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DescribeComputeEnvironments</code>.</p>
@@ -1971,7 +1922,7 @@ module Aws::Batch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_environments
@@ -1988,7 +1939,7 @@ module Aws::Batch
       :compute_environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource
@@ -1997,7 +1948,7 @@ module Aws::Batch
     class DescribeConsumableResourceRequest < Struct.new(
       :consumable_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource_name
@@ -2048,7 +1999,7 @@ module Aws::Batch
       :created_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DescribeJobDefinitions</code>.</p>
@@ -2093,7 +2044,7 @@ module Aws::Batch
       :status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definitions
@@ -2110,7 +2061,7 @@ module Aws::Batch
       :job_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DescribeJobQueues</code>.</p>
@@ -2143,7 +2094,7 @@ module Aws::Batch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_queues
@@ -2159,7 +2110,7 @@ module Aws::Batch
       :job_queues,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DescribeJobs</code>.</p>
@@ -2169,7 +2120,7 @@ module Aws::Batch
     class DescribeJobsRequest < Struct.new(
       :jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -2178,7 +2129,7 @@ module Aws::Batch
     class DescribeJobsResponse < Struct.new(
       :jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>DescribeSchedulingPolicies</code>.</p>
@@ -2188,7 +2139,7 @@ module Aws::Batch
     class DescribeSchedulingPoliciesRequest < Struct.new(
       :arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduling_policies
@@ -2197,7 +2148,7 @@ module Aws::Batch
     class DescribeSchedulingPoliciesResponse < Struct.new(
       :scheduling_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environments
@@ -2218,7 +2169,7 @@ module Aws::Batch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environments
@@ -2231,7 +2182,7 @@ module Aws::Batch
       :service_environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2240,7 +2191,7 @@ module Aws::Batch
     class DescribeServiceJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attempts
@@ -2321,7 +2272,7 @@ module Aws::Batch
       :tags,
       :timeout_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a container instance host device.</p>
@@ -2346,13 +2297,7 @@ module Aws::Batch
       :container_path,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceCgroupPermission
-      READ = 'READ'
-      WRITE = 'WRITE'
-      MKNOD = 'MKNOD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization configuration details for the Amazon EFS file system.</p>
@@ -2377,17 +2322,7 @@ module Aws::Batch
       :access_point_id,
       :iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EFSAuthorizationConfigIAM
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module EFSTransitEncryption
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is used when you're using an Amazon Elastic File System file system for job storage. For more
@@ -2429,7 +2364,7 @@ module Aws::Batch
       :transit_encryption_port,
       :authorization_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information used to select Amazon Machine Images (AMIs) for instances in the
@@ -2542,7 +2477,7 @@ module Aws::Batch
       :image_id_override,
       :image_kubernetes_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the properties for the Amazon ECS resources of a job.</p>
@@ -2555,7 +2490,7 @@ module Aws::Batch
     class EcsProperties < Struct.new(
       :task_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the details for the Amazon ECS resources of a job.</p>
@@ -2565,7 +2500,7 @@ module Aws::Batch
     class EcsPropertiesDetail < Struct.new(
       :task_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains overrides for the Amazon ECS task definition of a job.</p>
@@ -2578,7 +2513,7 @@ module Aws::Batch
     class EcsPropertiesOverride < Struct.new(
       :task_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a task definition that describes the container and volume definitions of an
@@ -2647,7 +2582,7 @@ module Aws::Batch
       :volumes,
       :enable_execute_command,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for a task definition that describes the container and volume definitions of
@@ -2734,7 +2669,7 @@ module Aws::Batch
       :volumes,
       :enable_execute_command,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details for an attempt for a job attempt that an Amazon EKS
@@ -2759,7 +2694,7 @@ module Aws::Batch
       :exit_code,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details of a job attempt for a job attempt by an Amazon EKS
@@ -2806,7 +2741,7 @@ module Aws::Batch
       :stopped_at,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for the Amazon EKS cluster that supports the Batch compute environment. The
@@ -2827,7 +2762,7 @@ module Aws::Batch
       :eks_cluster_arn,
       :kubernetes_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>EKS container properties are used in job definitions for Amazon EKS based job definitions to
@@ -2906,7 +2841,7 @@ module Aws::Batch
       :volume_mounts,
       :security_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for container properties that are returned by <code>DescribeJobs</code> for jobs
@@ -2985,7 +2920,7 @@ module Aws::Batch
       :volume_mounts,
       :security_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An environment variable.</p>
@@ -2999,7 +2934,7 @@ module Aws::Batch
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object representing any Kubernetes overrides to a job definition that's used in a <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_SubmitJob.html">SubmitJob</a> API
@@ -3045,7 +2980,7 @@ module Aws::Batch
       :env,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type and amount of resources to assign to a container. The supported resources include
@@ -3130,7 +3065,7 @@ module Aws::Batch
       :limits,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The security context for a job. For more information, see <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">Configure a
@@ -3184,7 +3119,7 @@ module Aws::Batch
       :read_only_root_filesystem,
       :run_as_non_root,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The volume mounts for a container for an Amazon EKS job. For more information about volumes and
@@ -3209,7 +3144,7 @@ module Aws::Batch
       :sub_path,
       :read_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of a Kubernetes <code>emptyDir</code> volume. An
@@ -3244,7 +3179,7 @@ module Aws::Batch
       :medium,
       :size_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of a Kubernetes <code>hostPath</code> volume. A <code>hostPath</code>
@@ -3256,7 +3191,7 @@ module Aws::Batch
     class EksHostPath < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes and uniquely identifies Kubernetes resources. For example, the compute environment that
@@ -3325,7 +3260,7 @@ module Aws::Batch
       :annotations,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>persistentVolumeClaim</code> volume is used to mount a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">PersistentVolume</a>
@@ -3346,7 +3281,7 @@ module Aws::Batch
       :claim_name,
       :read_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for the pod.</p>
@@ -3420,7 +3355,7 @@ module Aws::Batch
       :metadata,
       :share_process_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the pod.</p>
@@ -3496,7 +3431,7 @@ module Aws::Batch
       :metadata,
       :share_process_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains overrides for the Kubernetes pod properties of a job.</p>
@@ -3518,7 +3453,7 @@ module Aws::Batch
       :init_containers,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the properties for the Kubernetes resources of a job.</p>
@@ -3528,7 +3463,7 @@ module Aws::Batch
     class EksProperties < Struct.new(
       :pod_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the details for the Kubernetes resources of a job.</p>
@@ -3538,7 +3473,7 @@ module Aws::Batch
     class EksPropertiesDetail < Struct.new(
       :pod_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains overrides for the Kubernetes resources of a job.</p>
@@ -3548,7 +3483,7 @@ module Aws::Batch
     class EksPropertiesOverride < Struct.new(
       :pod_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration of a Kubernetes <code>secret</code> volume. For more information, see
@@ -3565,7 +3500,7 @@ module Aws::Batch
       :secret_name,
       :optional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon EKS volume for a job definition.</p>
@@ -3600,7 +3535,7 @@ module Aws::Batch
       :secret,
       :persistent_volume_claim,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of ephemeral storage to allocate for the task. This parameter is used to expand
@@ -3613,7 +3548,7 @@ module Aws::Batch
     class EphemeralStorage < Struct.new(
       :size_in_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an array of up to 5 conditions to be met, and an action to take
@@ -3650,7 +3585,7 @@ module Aws::Batch
       :on_exit_code,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fair-share scheduling policy details.</p>
@@ -3691,7 +3626,7 @@ module Aws::Batch
       :compute_reservation,
       :share_distribution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The platform configuration for jobs that are running on Fargate resources. Jobs that run
@@ -3706,7 +3641,7 @@ module Aws::Batch
     class FargatePlatformConfiguration < Struct.new(
       :platform_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The FireLens configuration for the container. This is used to specify and configure a
@@ -3728,12 +3663,7 @@ module Aws::Batch
       :type,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirelensConfigurationType
-      FLUENTD = 'fluentd'
-      FLUENTBIT = 'fluentbit'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of the first 100 <code>RUNNABLE</code> jobs associated to a single job queue.</p>
@@ -3747,7 +3677,7 @@ module Aws::Batch
       :jobs,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents summary details for the first 100 <code>RUNNABLE</code> jobs in a job queue.</p>
@@ -3761,7 +3691,7 @@ module Aws::Batch
       :job_arn,
       :earliest_time_at_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_queue
@@ -3770,7 +3700,7 @@ module Aws::Batch
     class GetJobQueueSnapshotRequest < Struct.new(
       :job_queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute front_of_queue
@@ -3779,7 +3709,7 @@ module Aws::Batch
     class GetJobQueueSnapshotResponse < Struct.new(
       :front_of_queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determine whether your data volume persists on the host container instance and where it's
@@ -3801,7 +3731,7 @@ module Aws::Batch
     class Host < Struct.new(
       :source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>References a Kubernetes secret resource. This name of the secret must start and end with an
@@ -3814,21 +3744,7 @@ module Aws::Batch
     class ImagePullSecret < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JQState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module JQStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      VALID = 'VALID'
-      INVALID = 'INVALID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Batch job definition.</p>
@@ -3939,12 +3855,7 @@ module Aws::Batch
       :container_orchestration_type,
       :consumable_resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobDefinitionType
-      Container = 'container'
-      Multinode = 'multinode'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Batch job dependency.</p>
@@ -3958,7 +3869,7 @@ module Aws::Batch
       :job_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents an Batch job.</p>
@@ -4134,7 +4045,7 @@ module Aws::Batch
       :is_terminated,
       :consumable_resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details for an Batch job queue.</p>
@@ -4218,14 +4129,7 @@ module Aws::Batch
       :tags,
       :job_state_time_limit_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobQueueType
-      EKS = 'EKS'
-      ECS = 'ECS'
-      ECS_FARGATE = 'ECS_FARGATE'
-      SAGEMAKER_TRAINING = 'SAGEMAKER_TRAINING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an action that Batch will take after the job has remained at the head of the queue in the specified state for longer than the specified time.</p>
@@ -4249,26 +4153,7 @@ module Aws::Batch
       :max_time_seconds,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStateTimeLimitActionsAction
-      CANCEL = 'CANCEL'
-      TERMINATE = 'TERMINATE'
-    end
-
-    module JobStateTimeLimitActionsState
-      RUNNABLE = 'RUNNABLE'
-    end
-
-    module JobStatus
-      SUBMITTED = 'SUBMITTED'
-      PENDING = 'PENDING'
-      RUNNABLE = 'RUNNABLE'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents summary details of a job.</p>
@@ -4334,7 +4219,7 @@ module Aws::Batch
       :node_properties,
       :job_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a job timeout configuration.</p>
@@ -4349,7 +4234,7 @@ module Aws::Batch
     class JobTimeout < Struct.new(
       :attempt_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair object.</p>
@@ -4365,7 +4250,7 @@ module Aws::Batch
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that's used to return a more specific list of results from a
@@ -4380,7 +4265,7 @@ module Aws::Batch
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the latest attempt of a service job. A Service job can transition from <code>SCHEDULED</code> back to <code>RUNNABLE</code> state when they encounter capacity constraints.</p>
@@ -4390,7 +4275,7 @@ module Aws::Batch
     class LatestServiceJobAttempt < Struct.new(
       :service_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a launch template that's associated with a compute resource. You
@@ -4450,7 +4335,7 @@ module Aws::Batch
       :overrides,
       :userdata_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a launch template to use in place of the default launch template. You must specify either the launch template ID or launch template name in the request, but not
@@ -4533,7 +4418,7 @@ module Aws::Batch
       :target_instance_types,
       :userdata_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Linux-specific modifications that are applied to the container, such as details for device
@@ -4636,7 +4521,7 @@ module Aws::Batch
       :max_swap,
       :swappiness,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4678,7 +4563,7 @@ module Aws::Batch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resources
@@ -4694,7 +4579,7 @@ module Aws::Batch
       :consumable_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource
@@ -4747,7 +4632,7 @@ module Aws::Batch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -4763,7 +4648,7 @@ module Aws::Batch
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Current information about a consumable resource required by a job.</p>
@@ -4851,7 +4736,7 @@ module Aws::Batch
       :created_at,
       :consumable_resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>ListJobs</code>.</p>
@@ -4956,7 +4841,7 @@ module Aws::Batch
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_summary_list
@@ -4972,7 +4857,7 @@ module Aws::Batch
       :job_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>ListSchedulingPolicies</code>.</p>
@@ -5001,7 +4886,7 @@ module Aws::Batch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduling_policies
@@ -5018,7 +4903,7 @@ module Aws::Batch
       :scheduling_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_queue
@@ -5060,7 +4945,7 @@ module Aws::Batch
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_summary_list
@@ -5073,7 +4958,7 @@ module Aws::Batch
       :job_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>ListTagsForResource</code>.</p>
@@ -5084,7 +4969,7 @@ module Aws::Batch
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5093,7 +4978,7 @@ module Aws::Batch
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Log configuration options to send to a custom log driver for the container.</p>
@@ -5185,18 +5070,7 @@ module Aws::Batch
       :options,
       :secret_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDriver
-      JSON_FILE = 'json-file'
-      SYSLOG = 'syslog'
-      JOURNALD = 'journald'
-      GELF = 'gelf'
-      FLUENTD = 'fluentd'
-      AWSLOGS = 'awslogs'
-      SPLUNK = 'splunk'
-      AWSFIRELENS = 'awsfirelens'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a Docker volume mount point that's used in a job's container properties. This
@@ -5218,7 +5092,7 @@ module Aws::Batch
       :read_only,
       :source_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network configuration for jobs that are running on Fargate resources. Jobs that are
@@ -5233,7 +5107,7 @@ module Aws::Batch
     class NetworkConfiguration < Struct.new(
       :assign_public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the elastic network interface for a multi-node parallel job
@@ -5252,7 +5126,7 @@ module Aws::Batch
       :ipv6_address,
       :private_ipv4_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the details of a multi-node parallel job node.</p>
@@ -5267,7 +5141,7 @@ module Aws::Batch
       :node_index,
       :is_main_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents any node overrides to a job definition that's used in a <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_SubmitJob.html">SubmitJob</a> API
@@ -5302,7 +5176,7 @@ module Aws::Batch
       :num_nodes,
       :node_property_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the node properties of a multi-node parallel job.</p>
@@ -5325,7 +5199,7 @@ module Aws::Batch
       :main_node,
       :node_range_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the properties of a node that's associated with a multi-node
@@ -5345,7 +5219,7 @@ module Aws::Batch
       :num_nodes,
       :node_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that represents any node overrides to a job definition that's used in a <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_SubmitJob.html">SubmitJob</a> API
@@ -5382,7 +5256,7 @@ module Aws::Batch
       :eks_properties_override,
       :consumable_resource_properties_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is an object that represents the properties of the node range for a multi-node parallel
@@ -5425,17 +5299,7 @@ module Aws::Batch
       :eks_properties,
       :consumable_resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrchestrationType
-      ECS = 'ECS'
-      EKS = 'EKS'
-    end
-
-    module PlatformCapability
-      EC2 = 'EC2'
-      FARGATE = 'FARGATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>RegisterJobDefinition</code>.</p>
@@ -5558,7 +5422,7 @@ module Aws::Batch
       :ecs_properties,
       :consumable_resource_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_definition_name
@@ -5575,7 +5439,7 @@ module Aws::Batch
       :job_definition_arn,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The repository credentials for private registry authentication.</p>
@@ -5586,7 +5450,7 @@ module Aws::Batch
     class RepositoryCredentials < Struct.new(
       :credentials_parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type and amount of a resource to assign to a container. The supported resources include
@@ -5761,18 +5625,7 @@ module Aws::Batch
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      GPU = 'GPU'
-      VCPU = 'VCPU'
-      MEMORY = 'MEMORY'
-    end
-
-    module RetryAction
-      RETRY = 'RETRY'
-      EXIT = 'EXIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry strategy that's associated with a job. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html">Automated job retries</a> in the
@@ -5791,7 +5644,7 @@ module Aws::Batch
       :attempts,
       :evaluate_on_exit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An object that represents the compute environment architecture for Batch jobs on
@@ -5838,7 +5691,7 @@ module Aws::Batch
       :operating_system_family,
       :cpu_architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a scheduling policy.</p>
@@ -5864,7 +5717,7 @@ module Aws::Batch
       :fairshare_policy,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the details of a scheduling policy that's returned in a
@@ -5875,7 +5728,7 @@ module Aws::Batch
     class SchedulingPolicyListingDetail < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the secret to expose to your container. Secrets can be exposed to
@@ -5908,7 +5761,7 @@ module Aws::Batch
       :name,
       :value_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a server issue.</p>
@@ -5917,7 +5770,7 @@ module Aws::Batch
     class ServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about a service environment, including its configuration, state, and capacity limits.</p>
@@ -5951,7 +5804,7 @@ module Aws::Batch
       :capacity_limits,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the order of a service environment for a job queue. This determines the priority order when multiple service environments are associated with the same job queue.</p>
@@ -5965,25 +5818,7 @@ module Aws::Batch
       :order,
       :service_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceEnvironmentState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module ServiceEnvironmentStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      VALID = 'VALID'
-      INVALID = 'INVALID'
-    end
-
-    module ServiceEnvironmentType
-      SAGEMAKER_TRAINING = 'SAGEMAKER_TRAINING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an attempt to run a service job.</p>
@@ -6005,7 +5840,7 @@ module Aws::Batch
       :stopped_at,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies conditions for when to exit or retry a service job based on the exit status or status reason.</p>
@@ -6019,12 +5854,7 @@ module Aws::Batch
       :action,
       :on_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceJobRetryAction
-      RETRY = 'RETRY'
-      EXIT = 'EXIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry strategy for service jobs. This defines how many times to retry a failed service job and under what conditions. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/service-job-retries.html">Service job retry strategies</a> in the <i>Batch User Guide</i>.</p>
@@ -6038,18 +5868,7 @@ module Aws::Batch
       :attempts,
       :evaluate_on_exit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceJobStatus
-      SUBMITTED = 'SUBMITTED'
-      PENDING = 'PENDING'
-      RUNNABLE = 'RUNNABLE'
-      SCHEDULED = 'SCHEDULED'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a service job.</p>
@@ -6099,7 +5918,7 @@ module Aws::Batch
       :started_at,
       :stopped_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The timeout configuration for service jobs. </p>
@@ -6109,11 +5928,7 @@ module Aws::Batch
     class ServiceJobTimeout < Struct.new(
       :attempt_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceJobType
-      SAGEMAKER_TRAINING = 'SAGEMAKER_TRAINING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Batch unique identifier.</p>
@@ -6127,11 +5942,7 @@ module Aws::Batch
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceResourceIdName
-      SAGEMAKER_TRAINING_JOB_ARN = 'TrainingJobArn'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the weights for the share identifiers for the fair-share policy. Share
@@ -6157,7 +5968,7 @@ module Aws::Batch
       :share_identifier,
       :weight_factor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>SubmitJob</code>.</p>
@@ -6285,7 +6096,7 @@ module Aws::Batch
       :ecs_properties_override,
       :consumable_resource_properties_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -6302,7 +6113,7 @@ module Aws::Batch
       :job_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -6349,7 +6160,7 @@ module Aws::Batch
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_arn
@@ -6366,7 +6177,7 @@ module Aws::Batch
       :job_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>TagResource</code>.</p>
@@ -6383,12 +6194,12 @@ module Aws::Batch
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of containers that this task depends on.</p>
@@ -6424,7 +6235,7 @@ module Aws::Batch
       :container_name,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the container in this task attempt.</p>
@@ -6667,7 +6478,7 @@ module Aws::Batch
       :log_stream_name,
       :network_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that should be sent to a container.</p>
@@ -6704,7 +6515,7 @@ module Aws::Batch
       :name,
       :resource_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container properties are used for Amazon ECS-based job definitions. These properties to describe
@@ -6928,7 +6739,7 @@ module Aws::Batch
       :ulimits,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains overrides for the task definition of a job.</p>
@@ -6938,7 +6749,7 @@ module Aws::Batch
     class TaskPropertiesOverride < Struct.new(
       :containers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>TerminateJob</code>.</p>
@@ -6955,12 +6766,12 @@ module Aws::Batch
       :job_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TerminateJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -6973,12 +6784,12 @@ module Aws::Batch
       :job_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TerminateServiceJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container path, mount options, and size of the <code>tmpfs</code> mount.</p>
@@ -7010,7 +6821,7 @@ module Aws::Batch
       :size,
       :mount_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ulimit</code> settings to pass to the container. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Ulimit.html">Ulimit</a>.</p>
@@ -7035,7 +6846,7 @@ module Aws::Batch
       :name,
       :soft_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>UntagResource</code>.</p>
@@ -7050,12 +6861,12 @@ module Aws::Batch
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>UpdateComputeEnvironment</code>.</p>
@@ -7135,7 +6946,7 @@ module Aws::Batch
       :update_policy,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_environment_name
@@ -7149,7 +6960,7 @@ module Aws::Batch
       :compute_environment_name,
       :compute_environment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource
@@ -7199,7 +7010,7 @@ module Aws::Batch
       :quantity,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute consumable_resource_name
@@ -7216,7 +7027,7 @@ module Aws::Batch
       :consumable_resource_arn,
       :total_quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>UpdateJobQueue</code>.</p>
@@ -7273,7 +7084,7 @@ module Aws::Batch
       :service_environment_order,
       :job_state_time_limit_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_queue_name
@@ -7286,7 +7097,7 @@ module Aws::Batch
       :job_queue_name,
       :job_queue_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the infrastructure update policy for the Amazon EC2 compute environment. For more information
@@ -7304,7 +7115,7 @@ module Aws::Batch
       :terminate_jobs_on_update,
       :job_execution_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for <code>UpdateSchedulingPolicy</code>.</p>
@@ -7318,12 +7129,12 @@ module Aws::Batch
       :arn,
       :fairshare_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSchedulingPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environment
@@ -7340,7 +7151,7 @@ module Aws::Batch
       :state,
       :capacity_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_environment_name
@@ -7353,12 +7164,7 @@ module Aws::Batch
       :service_environment_name,
       :service_environment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserdataType
-      EKS_BOOTSTRAP_SH = 'EKS_BOOTSTRAP_SH'
-      EKS_NODEADM = 'EKS_NODEADM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data volume that's used in a job's container properties.</p>
@@ -7387,7 +7193,7 @@ module Aws::Batch
       :name,
       :efs_volume_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

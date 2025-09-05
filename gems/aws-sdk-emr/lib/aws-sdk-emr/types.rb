@@ -6,13 +6,6 @@ module Aws::EMR
   # This module contains the types returned by client operations.
   module Types
 
-    module ActionOnFailure
-      TERMINATE_JOB_FLOW = 'TERMINATE_JOB_FLOW'
-      TERMINATE_CLUSTER = 'TERMINATE_CLUSTER'
-      CANCEL_AND_WAIT = 'CANCEL_AND_WAIT'
-      CONTINUE = 'CONTINUE'
-    end
-
     # @!attribute cluster_id
     #   <p>The unique identifier of the cluster.</p>
     #   @return [String]
@@ -23,7 +16,7 @@ module Aws::EMR
       :cluster_id,
       :instance_fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -40,7 +33,7 @@ module Aws::EMR
       :instance_fleet_id,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to an AddInstanceGroups call.</p>
@@ -54,7 +47,7 @@ module Aws::EMR
       :instance_groups,
       :job_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output from an AddInstanceGroups call.</p>
@@ -72,7 +65,7 @@ module Aws::EMR
       :instance_group_ids,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input argument to the <a>AddJobFlowSteps</a> operation. </p>
@@ -96,7 +89,7 @@ module Aws::EMR
       :steps,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output for the <a>AddJobFlowSteps</a> operation. </p>
@@ -106,7 +99,7 @@ module Aws::EMR
     class AddJobFlowStepsOutput < Struct.new(
       :step_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input identifies an Amazon EMR resource and a list of tags to
@@ -124,19 +117,13 @@ module Aws::EMR
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output indicates the result of adding tags to a resource.</p>
     class AddTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdjustmentType
-      CHANGE_IN_CAPACITY = 'CHANGE_IN_CAPACITY'
-      PERCENT_CHANGE_IN_CAPACITY = 'PERCENT_CHANGE_IN_CAPACITY'
-      EXACT_CAPACITY = 'EXACT_CAPACITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>With Amazon EMR release version 4.0 and later, the only accepted parameter is
@@ -166,12 +153,7 @@ module Aws::EMR
       :args,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthMode
-      SSO = 'SSO'
-      IAM = 'IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An automatic scaling policy for a core instance group or task instance group in an
@@ -190,7 +172,7 @@ module Aws::EMR
       :constraints,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An automatic scaling policy for a core instance group or task instance group in an
@@ -213,16 +195,7 @@ module Aws::EMR
       :constraints,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoScalingPolicyState
-      PENDING = 'PENDING'
-      ATTACHING = 'ATTACHING'
-      ATTACHED = 'ATTACHED'
-      DETACHING = 'DETACHING'
-      DETACHED = 'DETACHED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reason for an <a>AutoScalingPolicyStatus</a> change.</p>
@@ -240,13 +213,7 @@ module Aws::EMR
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoScalingPolicyStateChangeReasonCode
-      USER_REQUEST = 'USER_REQUEST'
-      PROVISION_FAILURE = 'PROVISION_FAILURE'
-      CLEANUP_FAILURE = 'CLEANUP_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an automatic scaling policy.
@@ -261,7 +228,7 @@ module Aws::EMR
       :state,
       :state_change_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An auto-termination policy for an Amazon EMR cluster. An auto-termination policy
@@ -276,7 +243,7 @@ module Aws::EMR
     class AutoTerminationPolicy < Struct.new(
       :idle_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for Amazon EMR block public access. When
@@ -315,7 +282,7 @@ module Aws::EMR
       :configurations,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties that describe the Amazon Web Services principal that created the
@@ -333,7 +300,7 @@ module Aws::EMR
       :creation_date_time,
       :created_by_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of a bootstrap action.</p>
@@ -347,7 +314,7 @@ module Aws::EMR
       :name,
       :script_bootstrap_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reports the configuration of a bootstrap action in a cluster (job flow).</p>
@@ -357,7 +324,7 @@ module Aws::EMR
     class BootstrapActionDetail < Struct.new(
       :bootstrap_action_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specification of the status of a CancelSteps request. Available only in Amazon EMR version 4.8.0 and later, excluding version 5.0.0.</p>
@@ -375,7 +342,7 @@ module Aws::EMR
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input argument to the <a>CancelSteps</a> operation.</p>
@@ -395,7 +362,7 @@ module Aws::EMR
       :step_ids,
       :step_cancellation_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output for the <a>CancelSteps</a> operation. </p>
@@ -406,12 +373,7 @@ module Aws::EMR
     class CancelStepsOutput < Struct.new(
       :cancel_steps_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CancelStepsRequestStatus
-      SUBMITTED = 'SUBMITTED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a CloudWatch metric alarm, which determines when an automatic scaling
@@ -465,7 +427,7 @@ module Aws::EMR
       :unit,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed description of the cluster.</p>
@@ -667,17 +629,7 @@ module Aws::EMR
       :ebs_root_volume_throughput,
       :extended_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterState
-      STARTING = 'STARTING'
-      BOOTSTRAPPING = 'BOOTSTRAPPING'
-      RUNNING = 'RUNNING'
-      WAITING = 'WAITING'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      TERMINATED_WITH_ERRORS = 'TERMINATED_WITH_ERRORS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reason that the cluster changed to its current state.</p>
@@ -691,18 +643,7 @@ module Aws::EMR
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-      INSTANCE_FAILURE = 'INSTANCE_FAILURE'
-      INSTANCE_FLEET_TIMEOUT = 'INSTANCE_FLEET_TIMEOUT'
-      BOOTSTRAP_FAILURE = 'BOOTSTRAP_FAILURE'
-      USER_REQUEST = 'USER_REQUEST'
-      STEP_FAILURE = 'STEP_FAILURE'
-      ALL_STEPS_COMPLETED = 'ALL_STEPS_COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed status of the cluster.</p>
@@ -727,7 +668,7 @@ module Aws::EMR
       :timeline,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary description of the cluster.</p>
@@ -761,7 +702,7 @@ module Aws::EMR
       :cluster_arn,
       :outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the timeline of the cluster's lifecycle.</p>
@@ -779,7 +720,7 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity describing an executable that runs on a cluster.</p>
@@ -797,14 +738,7 @@ module Aws::EMR
       :script_path,
       :args,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Amazon EC2 unit limits for a managed scaling policy. The managed scaling
@@ -844,13 +778,7 @@ module Aws::EMR
       :maximum_on_demand_capacity_units,
       :maximum_core_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeLimitsUnitType
-      InstanceFleetUnits = 'InstanceFleetUnits'
-      Instances = 'Instances'
-      VCPU = 'VCPU'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -875,7 +803,7 @@ module Aws::EMR
       :configurations,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_resource_arn
@@ -900,7 +828,7 @@ module Aws::EMR
       :x_referer,
       :profiler_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute persistent_app_ui_id
@@ -914,7 +842,7 @@ module Aws::EMR
       :persistent_app_ui_id,
       :runtime_role_enabled_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -930,7 +858,7 @@ module Aws::EMR
       :name,
       :security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -943,7 +871,7 @@ module Aws::EMR
       :name,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1043,7 +971,7 @@ module Aws::EMR
       :idc_instance_arn,
       :encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -1056,7 +984,7 @@ module Aws::EMR
       :studio_id,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -1091,7 +1019,7 @@ module Aws::EMR
       :identity_type,
       :session_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credentials that you can use to connect to cluster endpoints. Credentials consist of
@@ -1103,7 +1031,7 @@ module Aws::EMR
       :username_password,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UsernamePassword < Credentials; end
       class Unknown < Credentials; end
@@ -1115,12 +1043,12 @@ module Aws::EMR
     class DeleteSecurityConfigurationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -1129,7 +1057,7 @@ module Aws::EMR
     class DeleteStudioInput < Struct.new(
       :studio_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -1155,7 +1083,7 @@ module Aws::EMR
       :identity_name,
       :identity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which cluster to describe.</p>
@@ -1165,7 +1093,7 @@ module Aws::EMR
     class DescribeClusterInput < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output contains the description of the cluster.</p>
@@ -1175,7 +1103,7 @@ module Aws::EMR
     class DescribeClusterOutput < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input for the <a>DescribeJobFlows</a> operation. </p>
@@ -1197,7 +1125,7 @@ module Aws::EMR
       :job_flow_ids,
       :job_flow_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output for the <a>DescribeJobFlows</a> operation. </p>
@@ -1207,7 +1135,7 @@ module Aws::EMR
     class DescribeJobFlowsOutput < Struct.new(
       :job_flows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_execution_id
@@ -1216,7 +1144,7 @@ module Aws::EMR
     class DescribeNotebookExecutionInput < Struct.new(
       :notebook_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_execution
@@ -1225,7 +1153,7 @@ module Aws::EMR
     class DescribeNotebookExecutionOutput < Struct.new(
       :notebook_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute persistent_app_ui_id
@@ -1234,7 +1162,7 @@ module Aws::EMR
     class DescribePersistentAppUIInput < Struct.new(
       :persistent_app_ui_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute persistent_app_ui
@@ -1243,7 +1171,7 @@ module Aws::EMR
     class DescribePersistentAppUIOutput < Struct.new(
       :persistent_app_ui,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute release_label
@@ -1260,7 +1188,7 @@ module Aws::EMR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute release_label
@@ -1287,7 +1215,7 @@ module Aws::EMR
       :next_token,
       :available_os_releases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1296,7 +1224,7 @@ module Aws::EMR
     class DescribeSecurityConfigurationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1313,7 +1241,7 @@ module Aws::EMR
       :security_configuration,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which step to describe.</p>
@@ -1327,7 +1255,7 @@ module Aws::EMR
       :cluster_id,
       :step_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output contains the description of the cluster step.</p>
@@ -1337,7 +1265,7 @@ module Aws::EMR
     class DescribeStepOutput < Struct.new(
       :step,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -1346,7 +1274,7 @@ module Aws::EMR
     class DescribeStudioInput < Struct.new(
       :studio_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio
@@ -1355,7 +1283,7 @@ module Aws::EMR
     class DescribeStudioOutput < Struct.new(
       :studio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EMR container configuration.</p>
@@ -1365,7 +1293,7 @@ module Aws::EMR
     class EMRContainersConfig < Struct.new(
       :job_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of requested EBS block device associated with the instance group.</p>
@@ -1381,7 +1309,7 @@ module Aws::EMR
       :volume_specification,
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of requested EBS block device associated with the instance group with
@@ -1399,7 +1327,7 @@ module Aws::EMR
       :volume_specification,
       :volumes_per_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon EBS configuration of a cluster instance.</p>
@@ -1415,7 +1343,7 @@ module Aws::EMR
       :ebs_block_device_configs,
       :ebs_optimized,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>EBS block device that's attached to an Amazon EC2 instance.</p>
@@ -1429,7 +1357,7 @@ module Aws::EMR
       :device,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the Amazon EC2 instances in a cluster grouped by
@@ -1505,7 +1433,7 @@ module Aws::EMR
       :additional_master_security_groups,
       :additional_slave_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tuple that provides information about an error that caused a cluster to
@@ -1525,7 +1453,7 @@ module Aws::EMR
       :error_data,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the execution engine (cluster) to run the notebook and perform the notebook
@@ -1553,11 +1481,7 @@ module Aws::EMR
       :master_instance_security_group_id,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionEngineType
-      EMR = 'EMR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the step failure. The service attempts to detect the root cause for many
@@ -1580,7 +1504,7 @@ module Aws::EMR
       :message,
       :log_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -1590,7 +1514,7 @@ module Aws::EMR
     class GetAutoTerminationPolicyInput < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_termination_policy
@@ -1600,12 +1524,12 @@ module Aws::EMR
     class GetAutoTerminationPolicyOutput < Struct.new(
       :auto_termination_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetBlockPublicAccessConfigurationInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute block_public_access_configuration
@@ -1637,7 +1561,7 @@ module Aws::EMR
       :block_public_access_configuration,
       :block_public_access_configuration_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -1653,7 +1577,7 @@ module Aws::EMR
       :cluster_id,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute credentials
@@ -1668,7 +1592,7 @@ module Aws::EMR
       :credentials,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -1678,7 +1602,7 @@ module Aws::EMR
     class GetManagedScalingPolicyInput < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_scaling_policy
@@ -1688,7 +1612,7 @@ module Aws::EMR
     class GetManagedScalingPolicyOutput < Struct.new(
       :managed_scaling_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -1714,7 +1638,7 @@ module Aws::EMR
       :dry_run,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute presigned_url_ready
@@ -1727,7 +1651,7 @@ module Aws::EMR
       :presigned_url_ready,
       :presigned_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute persistent_app_ui_id
@@ -1752,7 +1676,7 @@ module Aws::EMR
       :auth_proxy_call,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute presigned_url_ready
@@ -1765,7 +1689,7 @@ module Aws::EMR
       :presigned_url_ready,
       :presigned_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -1791,7 +1715,7 @@ module Aws::EMR
       :identity_name,
       :identity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_mapping
@@ -1801,7 +1725,7 @@ module Aws::EMR
     class GetStudioSessionMappingOutput < Struct.new(
       :session_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job flow step consisting of a JAR file whose main function will be executed. The main
@@ -1828,7 +1752,7 @@ module Aws::EMR
       :main_class,
       :args,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster step consisting of a JAR file whose main function will be executed. The main
@@ -1855,17 +1779,7 @@ module Aws::EMR
       :main_class,
       :args,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdcUserAssignment
-      REQUIRED = 'REQUIRED'
-      OPTIONAL = 'OPTIONAL'
-    end
-
-    module IdentityType
-      USER = 'USER'
-      GROUP = 'GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an Amazon EC2 instance provisioned as part of cluster.</p>
@@ -1921,12 +1835,7 @@ module Aws::EMR
       :instance_type,
       :ebs_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceCollectionType
-      INSTANCE_FLEET = 'INSTANCE_FLEET'
-      INSTANCE_GROUP = 'INSTANCE_GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance fleet, which is a group of Amazon EC2 instances that host
@@ -2027,7 +1936,7 @@ module Aws::EMR
       :resize_specifications,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that defines an instance fleet.</p>
@@ -2103,7 +2012,7 @@ module Aws::EMR
       :resize_specifications,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration parameters for an instance fleet modification request.</p>
@@ -2140,7 +2049,7 @@ module Aws::EMR
       :instance_type_configs,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The launch specification for On-Demand and Spot Instances in the fleet.</p>
@@ -2166,7 +2075,7 @@ module Aws::EMR
       :spot_specification,
       :on_demand_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resize specification for On-Demand and Spot Instances in the fleet.</p>
@@ -2182,17 +2091,7 @@ module Aws::EMR
       :spot_resize_specification,
       :on_demand_resize_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceFleetState
-      PROVISIONING = 'PROVISIONING'
-      BOOTSTRAPPING = 'BOOTSTRAPPING'
-      RUNNING = 'RUNNING'
-      RESIZING = 'RESIZING'
-      SUSPENDED = 'SUSPENDED'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides status change reason details for the instance fleet.</p>
@@ -2210,14 +2109,7 @@ module Aws::EMR
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceFleetStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-      INSTANCE_FAILURE = 'INSTANCE_FAILURE'
-      CLUSTER_TERMINATED = 'CLUSTER_TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the instance fleet.</p>
@@ -2276,7 +2168,7 @@ module Aws::EMR
       :state_change_reason,
       :timeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides historical timestamps for the instance fleet, including the time of creation,
@@ -2299,13 +2191,7 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceFleetType
-      MASTER = 'MASTER'
-      CORE = 'CORE'
-      TASK = 'TASK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This entity represents an instance group, which is a group of instances that have common
@@ -2399,7 +2285,7 @@ module Aws::EMR
       :auto_scaling_policy,
       :custom_ami_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration defining a new instance group.</p>
@@ -2456,7 +2342,7 @@ module Aws::EMR
       :auto_scaling_policy,
       :custom_ami_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an instance group.</p>
@@ -2525,7 +2411,7 @@ module Aws::EMR
       :end_date_time,
       :custom_ami_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Modify the size or configurations of an instance group.</p>
@@ -2556,21 +2442,7 @@ module Aws::EMR
       :reconfiguration_type,
       :configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceGroupState
-      PROVISIONING = 'PROVISIONING'
-      BOOTSTRAPPING = 'BOOTSTRAPPING'
-      RUNNING = 'RUNNING'
-      RECONFIGURING = 'RECONFIGURING'
-      RESIZING = 'RESIZING'
-      SUSPENDED = 'SUSPENDED'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      ARRESTED = 'ARRESTED'
-      SHUTTING_DOWN = 'SHUTTING_DOWN'
-      ENDED = 'ENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status change reason details for the instance group.</p>
@@ -2584,14 +2456,7 @@ module Aws::EMR
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceGroupStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-      INSTANCE_FAILURE = 'INSTANCE_FAILURE'
-      CLUSTER_TERMINATED = 'CLUSTER_TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the instance group status.</p>
@@ -2609,7 +2474,7 @@ module Aws::EMR
       :state_change_reason,
       :timeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The timeline of the instance group lifecycle.</p>
@@ -2627,13 +2492,7 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceGroupType
-      MASTER = 'MASTER'
-      CORE = 'CORE'
-      TASK = 'TASK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Custom policy for requesting termination protection or termination of specific instances
@@ -2653,21 +2512,7 @@ module Aws::EMR
       :instances_to_protect,
       :instance_termination_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceRoleType
-      MASTER = 'MASTER'
-      CORE = 'CORE'
-      TASK = 'TASK'
-    end
-
-    module InstanceState
-      AWAITING_FULFILLMENT = 'AWAITING_FULFILLMENT'
-      PROVISIONING = 'PROVISIONING'
-      BOOTSTRAPPING = 'BOOTSTRAPPING'
-      RUNNING = 'RUNNING'
-      TERMINATED = 'TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the status change reason for the instance.</p>
@@ -2681,15 +2526,7 @@ module Aws::EMR
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-      INSTANCE_FAILURE = 'INSTANCE_FAILURE'
-      BOOTSTRAP_FAILURE = 'BOOTSTRAP_FAILURE'
-      CLUSTER_TERMINATED = 'CLUSTER_TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance status details.</p>
@@ -2707,7 +2544,7 @@ module Aws::EMR
       :state_change_reason,
       :timeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The timeline of the instance lifecycle.</p>
@@ -2725,7 +2562,7 @@ module Aws::EMR
       :ready_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance type configuration for each instance type in an instance fleet, which
@@ -2786,7 +2623,7 @@ module Aws::EMR
       :custom_ami_id,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration specification for each instance type in an instance fleet.</p>
@@ -2842,14 +2679,14 @@ module Aws::EMR
       :custom_ami_id,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an error occurred while processing the request and that the request was
     #          not completed.</p>
     class InternalServerError < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when there is an internal failure in the Amazon EMR
@@ -2860,7 +2697,7 @@ module Aws::EMR
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when there is something wrong with user input.</p>
@@ -2874,7 +2711,7 @@ module Aws::EMR
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of a cluster (job flow).</p>
@@ -2965,19 +2802,7 @@ module Aws::EMR
       :auto_scaling_role,
       :scale_down_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of instance.</p>
-    module JobFlowExecutionState
-      STARTING = 'STARTING'
-      BOOTSTRAPPING = 'BOOTSTRAPPING'
-      RUNNING = 'RUNNING'
-      WAITING = 'WAITING'
-      SHUTTING_DOWN = 'SHUTTING_DOWN'
-      TERMINATED = 'TERMINATED'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of the cluster (job flow).</p>
@@ -3007,7 +2832,7 @@ module Aws::EMR
       :end_date_time,
       :last_state_change_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the Amazon EC2 instance on which the cluster (job flow) runs. A
@@ -3121,7 +2946,7 @@ module Aws::EMR
       :additional_master_security_groups,
       :additional_slave_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify the type of Amazon EC2 instances that the cluster (job flow) runs
@@ -3196,7 +3021,7 @@ module Aws::EMR
       :unhealthy_node_replacement,
       :hadoop_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a
@@ -3229,7 +3054,7 @@ module Aws::EMR
       :ad_domain_join_user,
       :ad_domain_join_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair.</p>
@@ -3243,7 +3068,7 @@ module Aws::EMR
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which bootstrap actions to retrieve.</p>
@@ -3257,7 +3082,7 @@ module Aws::EMR
       :cluster_id,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output contains the bootstrap actions detail.</p>
@@ -3271,7 +3096,7 @@ module Aws::EMR
       :bootstrap_actions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines how the ListClusters action filters the list of clusters that it
@@ -3295,7 +3120,7 @@ module Aws::EMR
       :cluster_states,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains a ClusterSummaryList with the cluster details; for example, the cluster
@@ -3310,7 +3135,7 @@ module Aws::EMR
       :clusters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -3323,7 +3148,7 @@ module Aws::EMR
       :cluster_id,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_fleets
@@ -3336,7 +3161,7 @@ module Aws::EMR
       :instance_fleets,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which instance groups to retrieve.</p>
@@ -3350,7 +3175,7 @@ module Aws::EMR
       :cluster_id,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which instance groups to retrieve.</p>
@@ -3364,7 +3189,7 @@ module Aws::EMR
       :instance_groups,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which instances to list.</p>
@@ -3399,7 +3224,7 @@ module Aws::EMR
       :instance_states,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output contains the list of instances.</p>
@@ -3413,7 +3238,7 @@ module Aws::EMR
       :instances,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute editor_id
@@ -3497,7 +3322,7 @@ module Aws::EMR
       :marker,
       :execution_engine_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_executions
@@ -3511,7 +3336,7 @@ module Aws::EMR
       :notebook_executions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3536,7 +3361,7 @@ module Aws::EMR
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute release_labels
@@ -3550,7 +3375,7 @@ module Aws::EMR
       :release_labels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3559,7 +3384,7 @@ module Aws::EMR
     class ListSecurityConfigurationsInput < Struct.new(
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_configurations
@@ -3574,7 +3399,7 @@ module Aws::EMR
       :security_configurations,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input determines which steps to list.</p>
@@ -3601,7 +3426,7 @@ module Aws::EMR
       :step_ids,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output contains the list of steps returned in reverse order. This means that the
@@ -3619,7 +3444,7 @@ module Aws::EMR
       :steps,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -3637,7 +3462,7 @@ module Aws::EMR
       :identity_type,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_mappings
@@ -3652,7 +3477,7 @@ module Aws::EMR
       :session_mappings,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -3661,7 +3486,7 @@ module Aws::EMR
     class ListStudiosInput < Struct.new(
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studios
@@ -3674,7 +3499,7 @@ module Aws::EMR
       :studios,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute release_label
@@ -3693,7 +3518,7 @@ module Aws::EMR
       :release_label,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute supported_instance_types
@@ -3707,7 +3532,7 @@ module Aws::EMR
       :supported_instance_types,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Managed scaling policy for an Amazon EMR cluster. The policy specifies the
@@ -3732,12 +3557,7 @@ module Aws::EMR
       :utilization_performance_index,
       :scaling_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketType
-      ON_DEMAND = 'ON_DEMAND'
-      SPOT = 'SPOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudWatch dimension, which is specified using a <code>Key</code> (known as a
@@ -3755,7 +3575,7 @@ module Aws::EMR
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -3775,7 +3595,7 @@ module Aws::EMR
       :step_concurrency_level,
       :extended_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_concurrency_level
@@ -3788,7 +3608,7 @@ module Aws::EMR
       :step_concurrency_level,
       :extended_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -3801,7 +3621,7 @@ module Aws::EMR
       :cluster_id,
       :instance_fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Change the size of some instance groups.</p>
@@ -3815,7 +3635,7 @@ module Aws::EMR
       :cluster_id,
       :instance_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notebook execution. An execution is a specific instance that an Amazon EMR
@@ -3948,20 +3768,7 @@ module Aws::EMR
       :output_notebook_format,
       :environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotebookExecutionStatus
-      START_PENDING = 'START_PENDING'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      FINISHING = 'FINISHING'
-      FINISHED = 'FINISHED'
-      FAILING = 'FAILING'
-      FAILED = 'FAILED'
-      STOP_PENDING = 'STOP_PENDING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for a notebook execution. The details include information such as the unique ID
@@ -4051,7 +3858,7 @@ module Aws::EMR
       :notebook_s3_location,
       :execution_engine_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location that stores the notebook execution input.</p>
@@ -4066,7 +3873,7 @@ module Aws::EMR
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location that stores the notebook execution input.</p>
@@ -4081,7 +3888,7 @@ module Aws::EMR
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Linux release specified for a cluster in the RunJobFlow request.</p>
@@ -4095,16 +3902,7 @@ module Aws::EMR
     class OSRelease < Struct.new(
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OnClusterAppUIType
-      SparkHistoryServer = 'SparkHistoryServer'
-      YarnTimelineService = 'YarnTimelineService'
-      TezUI = 'TezUI'
-      ApplicationMaster = 'ApplicationMaster'
-      JobHistoryServer = 'JobHistoryServer'
-      ResourceManager = 'ResourceManager'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand
@@ -4146,21 +3944,7 @@ module Aws::EMR
       :capacity_reservation_preference,
       :capacity_reservation_resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OnDemandCapacityReservationPreference
-      OPEN = 'open'
-      NONE = 'none'
-    end
-
-    module OnDemandCapacityReservationUsageStrategy
-      USE_CAPACITY_RESERVATIONS_FIRST = 'use-capacity-reservations-first'
-    end
-
-    module OnDemandProvisioningAllocationStrategy
-      LOWEST_PRICE = 'lowest-price'
-      PRIORITIZED = 'prioritized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The launch specification for On-Demand Instances in the instance fleet, which
@@ -4185,7 +3969,7 @@ module Aws::EMR
       :allocation_strategy,
       :capacity_reservation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resize specification for On-Demand Instances in the instance fleet, which contains
@@ -4210,11 +3994,7 @@ module Aws::EMR
       :allocation_strategy,
       :capacity_reservation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutputNotebookFormat
-      HTML = 'HTML'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location that stores the notebook execution output.</p>
@@ -4229,7 +4009,7 @@ module Aws::EMR
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location that stores the notebook execution output.</p>
@@ -4244,7 +4024,7 @@ module Aws::EMR
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Holds persistent application user interface information. Applications installed on the Amazon EMR cluster publish user interfaces as 
@@ -4284,13 +4064,7 @@ module Aws::EMR
       :last_state_change_reason,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PersistentAppUIType
-      SHS = 'SHS'
-      TEZ = 'TEZ'
-      YTS = 'YTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Placement group configuration for an Amazon EMR cluster. The configuration
@@ -4312,14 +4086,7 @@ module Aws::EMR
       :instance_role,
       :placement_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementGroupStrategy
-      SPREAD = 'SPREAD'
-      PARTITION = 'PARTITION'
-      CLUSTER = 'CLUSTER'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon EC2 Availability Zone configuration of the cluster (job flow).</p>
@@ -4342,7 +4109,7 @@ module Aws::EMR
       :availability_zone,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of port ranges that are permitted to allow inbound traffic from all public IP
@@ -4358,13 +4125,7 @@ module Aws::EMR
       :min_range,
       :max_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProfilerType
-      SHS = 'SHS'
-      TEZUI = 'TEZUI'
-      YTS = 'YTS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4383,7 +4144,7 @@ module Aws::EMR
       :instance_group_id,
       :auto_scaling_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4405,7 +4166,7 @@ module Aws::EMR
       :auto_scaling_policy,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4419,12 +4180,12 @@ module Aws::EMR
       :cluster_id,
       :auto_termination_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAutoTerminationPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute block_public_access_configuration
@@ -4448,12 +4209,12 @@ module Aws::EMR
     class PutBlockPublicAccessConfigurationInput < Struct.new(
       :block_public_access_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutBlockPublicAccessConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4467,17 +4228,12 @@ module Aws::EMR
       :cluster_id,
       :managed_scaling_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutManagedScalingPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReconfigurationType
-      OVERWRITE = 'OVERWRITE'
-      MERGE = 'MERGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The release label filters by application or version prefix.</p>
@@ -4491,7 +4247,7 @@ module Aws::EMR
       :prefix,
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4505,12 +4261,12 @@ module Aws::EMR
       :cluster_id,
       :instance_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveAutoScalingPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4520,12 +4276,12 @@ module Aws::EMR
     class RemoveAutoTerminationPolicyInput < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveAutoTerminationPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -4535,12 +4291,12 @@ module Aws::EMR
     class RemoveManagedScalingPolicyInput < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveManagedScalingPolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This input identifies an Amazon EMR resource and a list of tags to
@@ -4556,18 +4312,13 @@ module Aws::EMR
       :resource_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This output indicates the result of removing tags from the resource.</p>
     class RemoveTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepoUpgradeOnBoot
-      SECURITY = 'SECURITY'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Input to the <a>RunJobFlow</a> operation. </p>
@@ -4819,7 +4570,7 @@ module Aws::EMR
       :ebs_root_volume_throughput,
       :extended_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result of the <a>RunJobFlow</a> operation. </p>
@@ -4833,12 +4584,7 @@ module Aws::EMR
       :job_flow_id,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScaleDownBehavior
-      TERMINATE_AT_INSTANCE_HOUR = 'TERMINATE_AT_INSTANCE_HOUR'
-      TERMINATE_AT_TASK_COMPLETION = 'TERMINATE_AT_TASK_COMPLETION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of adjustment the automatic scaling activity makes when triggered, and the
@@ -4855,7 +4601,7 @@ module Aws::EMR
       :market,
       :simple_scaling_policy_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The upper and lower Amazon EC2 instance limits for an automatic scaling policy.
@@ -4875,7 +4621,7 @@ module Aws::EMR
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A scale-in or scale-out rule that defines scaling activity, including the CloudWatch
@@ -4902,12 +4648,7 @@ module Aws::EMR
       :action,
       :trigger,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalingStrategy
-      DEFAULT = 'DEFAULT'
-      ADVANCED = 'ADVANCED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditions that trigger an automatic scaling activity.</p>
@@ -4918,7 +4659,7 @@ module Aws::EMR
     class ScalingTrigger < Struct.new(
       :cloud_watch_alarm_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the script to run during a bootstrap action.</p>
@@ -4932,7 +4673,7 @@ module Aws::EMR
       :path,
       :args,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The creation date and time, and name, of a security configuration.</p>
@@ -4946,7 +4687,7 @@ module Aws::EMR
       :name,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an Amazon EMR Studio session mapping including creation time, user
@@ -4984,7 +4725,7 @@ module Aws::EMR
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an Amazon EMR Studio session mapping. The details do not include the
@@ -5019,7 +4760,7 @@ module Aws::EMR
       :session_policy_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_flow_ids
@@ -5034,7 +4775,7 @@ module Aws::EMR
       :job_flow_ids,
       :keep_job_flow_alive_when_no_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input argument to the <a>TerminationProtection</a> operation. </p>
@@ -5050,7 +4791,7 @@ module Aws::EMR
       :job_flow_ids,
       :termination_protected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_flow_ids
@@ -5065,7 +4806,7 @@ module Aws::EMR
       :job_flow_ids,
       :unhealthy_node_replacement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the SetVisibleToAllUsers action.</p>
@@ -5084,7 +4825,7 @@ module Aws::EMR
       :job_flow_ids,
       :visible_to_all_users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Policy for customizing shrink operations. Allows configuration of decommissioning
@@ -5101,7 +4842,7 @@ module Aws::EMR
       :decommission_timeout,
       :instance_resize_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An automatic scaling configuration, which describes how the policy adds or removes
@@ -5139,7 +4880,7 @@ module Aws::EMR
       :scaling_adjustment,
       :cool_down,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The returned release label application names or versions.</p>
@@ -5153,15 +4894,7 @@ module Aws::EMR
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotProvisioningAllocationStrategy
-      CAPACITY_OPTIMIZED = 'capacity-optimized'
-      PRICE_CAPACITY_OPTIMIZED = 'price-capacity-optimized'
-      LOWEST_PRICE = 'lowest-price'
-      DIVERSIFIED = 'diversified'
-      CAPACITY_OPTIMIZED_PRIORITIZED = 'capacity-optimized-prioritized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The launch specification for Spot Instances in the instance fleet, which determines the
@@ -5220,12 +4953,7 @@ module Aws::EMR
       :block_duration_minutes,
       :allocation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotProvisioningTimeoutAction
-      SWITCH_TO_ON_DEMAND = 'SWITCH_TO_ON_DEMAND'
-      TERMINATE_CLUSTER = 'TERMINATE_CLUSTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resize specification for Spot Instances in the instance fleet, which contains the
@@ -5247,7 +4975,7 @@ module Aws::EMR
       :timeout_duration_minutes,
       :allocation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute editor_id
@@ -5313,7 +5041,7 @@ module Aws::EMR
       :output_notebook_format,
       :environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_execution_id
@@ -5322,15 +5050,7 @@ module Aws::EMR
     class StartNotebookExecutionOutput < Struct.new(
       :notebook_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Statistic
-      SAMPLE_COUNT = 'SAMPLE_COUNT'
-      AVERAGE = 'AVERAGE'
-      SUM = 'SUM'
-      MINIMUM = 'MINIMUM'
-      MAXIMUM = 'MAXIMUM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This represents a step in a cluster.</p>
@@ -5379,12 +5099,7 @@ module Aws::EMR
       :status,
       :execution_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepCancellationOption
-      SEND_INTERRUPT = 'SEND_INTERRUPT'
-      TERMINATE_PROCESS = 'TERMINATE_PROCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specification for a cluster (job flow) step.</p>
@@ -5434,7 +5149,7 @@ module Aws::EMR
       :action_on_failure,
       :hadoop_jar_step,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Combines the execution state and configuration of a step.</p>
@@ -5448,17 +5163,7 @@ module Aws::EMR
       :step_config,
       :execution_status_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepExecutionState
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      CONTINUE = 'CONTINUE'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
-      INTERRUPTED = 'INTERRUPTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The execution state of a step.</p>
@@ -5484,17 +5189,7 @@ module Aws::EMR
       :end_date_time,
       :last_state_change_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepState
-      PENDING = 'PENDING'
-      CANCEL_PENDING = 'CANCEL_PENDING'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
-      INTERRUPTED = 'INTERRUPTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the step state change reason.</p>
@@ -5509,11 +5204,7 @@ module Aws::EMR
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepStateChangeReasonCode
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The execution status details of the cluster step.</p>
@@ -5536,7 +5227,7 @@ module Aws::EMR
       :failure_details,
       :timeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the cluster step.</p>
@@ -5564,7 +5255,7 @@ module Aws::EMR
       :action_on_failure,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The timeline of the cluster step lifecycle.</p>
@@ -5582,7 +5273,7 @@ module Aws::EMR
       :start_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_execution_id
@@ -5591,7 +5282,7 @@ module Aws::EMR
     class StopNotebookExecutionInput < Struct.new(
       :notebook_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an Amazon EMR Studio including ID, creation time, name, and so
@@ -5695,7 +5386,7 @@ module Aws::EMR
       :idc_user_assignment,
       :encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To fetch additional details such as subnets, IAM roles, 
@@ -5730,7 +5421,7 @@ module Aws::EMR
       :auth_mode,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance type that the specified Amazon EMR release supports.</p>
@@ -5791,7 +5482,7 @@ module Aws::EMR
       :ebs_storage_only,
       :architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of supported product configurations that allow user-supplied arguments. Amazon EMR accepts these arguments and forwards them to the corresponding installation
@@ -5806,7 +5497,7 @@ module Aws::EMR
       :name,
       :args,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as
@@ -5824,7 +5515,7 @@ module Aws::EMR
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Input to the <a>TerminateJobFlows</a> operation. </p>
@@ -5834,37 +5525,7 @@ module Aws::EMR
     class TerminateJobFlowsInput < Struct.new(
       :job_flow_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Unit
-      NONE = 'NONE'
-      SECONDS = 'SECONDS'
-      MICRO_SECONDS = 'MICRO_SECONDS'
-      MILLI_SECONDS = 'MILLI_SECONDS'
-      BYTES = 'BYTES'
-      KILO_BYTES = 'KILO_BYTES'
-      MEGA_BYTES = 'MEGA_BYTES'
-      GIGA_BYTES = 'GIGA_BYTES'
-      TERA_BYTES = 'TERA_BYTES'
-      BITS = 'BITS'
-      KILO_BITS = 'KILO_BITS'
-      MEGA_BITS = 'MEGA_BITS'
-      GIGA_BITS = 'GIGA_BITS'
-      TERA_BITS = 'TERA_BITS'
-      PERCENT = 'PERCENT'
-      COUNT = 'COUNT'
-      BYTES_PER_SECOND = 'BYTES_PER_SECOND'
-      KILO_BYTES_PER_SECOND = 'KILO_BYTES_PER_SECOND'
-      MEGA_BYTES_PER_SECOND = 'MEGA_BYTES_PER_SECOND'
-      GIGA_BYTES_PER_SECOND = 'GIGA_BYTES_PER_SECOND'
-      TERA_BYTES_PER_SECOND = 'TERA_BYTES_PER_SECOND'
-      BITS_PER_SECOND = 'BITS_PER_SECOND'
-      KILO_BITS_PER_SECOND = 'KILO_BITS_PER_SECOND'
-      MEGA_BITS_PER_SECOND = 'MEGA_BITS_PER_SECOND'
-      GIGA_BITS_PER_SECOND = 'GIGA_BITS_PER_SECOND'
-      TERA_BITS_PER_SECOND = 'TERA_BITS_PER_SECOND'
-      COUNT_PER_SECOND = 'COUNT_PER_SECOND'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -5896,7 +5557,7 @@ module Aws::EMR
       :default_s3_location,
       :encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute studio_id
@@ -5927,7 +5588,7 @@ module Aws::EMR
       :identity_type,
       :session_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The username and password that you use to connect to cluster endpoints.</p>
@@ -5944,7 +5605,7 @@ module Aws::EMR
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)
@@ -5971,7 +5632,7 @@ module Aws::EMR
       :size_in_gb,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

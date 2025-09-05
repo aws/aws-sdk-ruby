@@ -13,7 +13,7 @@ module Aws::BackupSearch
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This filters by recovery points within the CreatedAfter and CreatedBefore timestamps.</p>
@@ -27,7 +27,7 @@ module Aws::BackupSearch
       :created_after,
       :created_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when a conflict with a previous successful operation is detected. This generally occurs when the previous operation did not have time to propagate to the host serving the current request.</p> <p>A retry (with appropriate backoff logic) is the recommended response to this exception.</p>
@@ -45,7 +45,7 @@ module Aws::BackupSearch
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains information results retrieved from a search job that may not have completed.</p>
@@ -63,7 +63,7 @@ module Aws::BackupSearch
       :items_scanned_count,
       :items_matched_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains arrays of objects, which may include CreationTimes time condition objects, FilePaths string objects, LastModificationTimes time condition objects, </p>
@@ -85,7 +85,7 @@ module Aws::BackupSearch
       :creation_times,
       :last_modification_times,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are the items returned in the results of a search of Amazon EBS backup metadata.</p>
@@ -123,13 +123,7 @@ module Aws::BackupSearch
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportJobStatus
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is the summary of an export job.</p>
@@ -163,7 +157,7 @@ module Aws::BackupSearch
       :status_message,
       :search_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains the export specification object.</p>
@@ -174,7 +168,7 @@ module Aws::BackupSearch
       :s3_export_specification,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3ExportSpecification < ExportSpecification; end
       class Unknown < ExportSpecification; end
@@ -186,7 +180,7 @@ module Aws::BackupSearch
     class GetSearchJobInput < Struct.new(
       :search_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -239,7 +233,7 @@ module Aws::BackupSearch
       :search_job_identifier,
       :search_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_identifier
@@ -248,7 +242,7 @@ module Aws::BackupSearch
     class GetSearchResultExportJobInput < Struct.new(
       :export_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_identifier
@@ -285,7 +279,7 @@ module Aws::BackupSearch
       :export_specification,
       :search_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred. Retry your request.</p>
@@ -299,7 +293,7 @@ module Aws::BackupSearch
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Item Filters represent all input item properties specified when the search was created.</p> <p>Contains either EBSItemFilters or S3ItemFilters</p>
@@ -313,7 +307,7 @@ module Aws::BackupSearch
       :s3_item_filters,
       :ebs_item_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_job_identifier
@@ -330,7 +324,7 @@ module Aws::BackupSearch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -343,7 +337,7 @@ module Aws::BackupSearch
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_job_identifier
@@ -360,7 +354,7 @@ module Aws::BackupSearch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -373,7 +367,7 @@ module Aws::BackupSearch
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute by_status
@@ -390,7 +384,7 @@ module Aws::BackupSearch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_jobs
@@ -403,7 +397,7 @@ module Aws::BackupSearch
       :search_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -424,7 +418,7 @@ module Aws::BackupSearch
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_jobs
@@ -437,7 +431,7 @@ module Aws::BackupSearch
       :export_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -446,7 +440,7 @@ module Aws::BackupSearch
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -455,7 +449,7 @@ module Aws::BackupSearch
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The long condition contains a <code>Value</code> and can optionally contain an <code>Operator</code>.</p>
@@ -469,19 +463,12 @@ module Aws::BackupSearch
       :value,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:operator] = 'EQUALS_TO' unless options.key?(:operator)
         super
       end
-    end
-
-    module LongConditionOperator
-      EQUALS_TO = 'EQUALS_TO'
-      NOT_EQUALS_TO = 'NOT_EQUALS_TO'
-      LESS_THAN_EQUAL_TO = 'LESS_THAN_EQUAL_TO'
-      GREATER_THAN_EQUAL_TO = 'GREATER_THAN_EQUAL_TO'
     end
 
     # <p>The resource was not found for this request.</p> <p>Confirm the resource information, such as the ARN or type is correct and exists, then retry the request.</p>
@@ -499,12 +486,7 @@ module Aws::BackupSearch
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      S3 = 'S3'
-      EBS = 'EBS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is an object representing the item returned in the results of a search for a specific resource type.</p>
@@ -519,7 +501,7 @@ module Aws::BackupSearch
       :ebs_result_item,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3ResultItem < ResultItem; end
       class EBSResultItem < ResultItem; end
@@ -537,7 +519,7 @@ module Aws::BackupSearch
       :destination_bucket,
       :destination_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains arrays of objects, which may include ObjectKeys, Sizes, CreationTimes, VersionIds, and/or Etags.</p>
@@ -563,7 +545,7 @@ module Aws::BackupSearch
       :version_ids,
       :e_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These are the items returned in the results of a search of Amazon S3 backup metadata.</p>
@@ -601,7 +583,7 @@ module Aws::BackupSearch
       :e_tag,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains the information about recovery points returned in results of a search job.</p>
@@ -635,15 +617,7 @@ module Aws::BackupSearch
       :index_creation_time,
       :backup_creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchJobState
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is information pertaining to a search job.</p>
@@ -681,7 +655,7 @@ module Aws::BackupSearch
       :search_scope_summary,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search scope is all backup properties input into a search.</p>
@@ -707,7 +681,7 @@ module Aws::BackupSearch
       :backup_resource_arns,
       :backup_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the specified search job scope, including: </p> <ul> <li> <p>TotalBackupsToScanCount, the number of recovery points returned by the search.</p> </li> <li> <p>TotalItemsToScanCount, the number of items returned by the search.</p> </li> </ul>
@@ -721,7 +695,7 @@ module Aws::BackupSearch
       :total_recovery_points_to_scan_count,
       :total_items_to_scan_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request denied due to exceeding the quota limits permitted.</p>
@@ -747,7 +721,7 @@ module Aws::BackupSearch
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -776,7 +750,7 @@ module Aws::BackupSearch
       :search_scope,
       :item_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_job_arn
@@ -793,7 +767,7 @@ module Aws::BackupSearch
       :creation_time,
       :search_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_job_identifier
@@ -818,7 +792,7 @@ module Aws::BackupSearch
       :tags,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_arn
@@ -831,7 +805,7 @@ module Aws::BackupSearch
       :export_job_arn,
       :export_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute search_job_identifier
@@ -840,12 +814,12 @@ module Aws::BackupSearch
     class StopSearchJobInput < Struct.new(
       :search_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopSearchJobOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This contains the value of the string and can contain one or more operators.</p>
@@ -859,23 +833,12 @@ module Aws::BackupSearch
       :value,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:operator] = 'EQUALS_TO' unless options.key?(:operator)
         super
       end
-    end
-
-    module StringConditionOperator
-      EQUALS_TO = 'EQUALS_TO'
-      NOT_EQUALS_TO = 'NOT_EQUALS_TO'
-      CONTAINS = 'CONTAINS'
-      DOES_NOT_CONTAIN = 'DOES_NOT_CONTAIN'
-      BEGINS_WITH = 'BEGINS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      DOES_NOT_BEGIN_WITH = 'DOES_NOT_BEGIN_WITH'
-      DOES_NOT_END_WITH = 'DOES_NOT_END_WITH'
     end
 
     # @!attribute resource_arn
@@ -888,12 +851,12 @@ module Aws::BackupSearch
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -915,7 +878,7 @@ module Aws::BackupSearch
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time condition denotes a creation time, last modification time, or other time.</p>
@@ -929,19 +892,12 @@ module Aws::BackupSearch
       :value,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:operator] = 'EQUALS_TO' unless options.key?(:operator)
         super
       end
-    end
-
-    module TimeConditionOperator
-      EQUALS_TO = 'EQUALS_TO'
-      NOT_EQUALS_TO = 'NOT_EQUALS_TO'
-      LESS_THAN_EQUAL_TO = 'LESS_THAN_EQUAL_TO'
-      GREATER_THAN_EQUAL_TO = 'GREATER_THAN_EQUAL_TO'
     end
 
     # @!attribute resource_arn
@@ -954,12 +910,12 @@ module Aws::BackupSearch
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by a service.</p>
@@ -969,7 +925,7 @@ module Aws::BackupSearch
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

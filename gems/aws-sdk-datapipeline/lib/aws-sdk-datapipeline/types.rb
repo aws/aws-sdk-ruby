@@ -21,13 +21,13 @@ module Aws::DataPipeline
       :parameter_values,
       :start_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ActivatePipeline.</p>
     class ActivatePipelineOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for AddTags.</p>
@@ -41,13 +41,13 @@ module Aws::DataPipeline
       :pipeline_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AddTags.</p>
     class AddTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreatePipeline.</p>
@@ -79,7 +79,7 @@ module Aws::DataPipeline
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreatePipeline.</p>
@@ -89,7 +89,7 @@ module Aws::DataPipeline
     class CreatePipelineOutput < Struct.new(
       :pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeactivatePipeline.</p>
@@ -106,13 +106,13 @@ module Aws::DataPipeline
       :pipeline_id,
       :cancel_active,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DeactivatePipeline.</p>
     class DeactivatePipelineOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeletePipeline.</p>
@@ -122,7 +122,7 @@ module Aws::DataPipeline
     class DeletePipelineInput < Struct.new(
       :pipeline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeObjects.</p>
@@ -146,7 +146,7 @@ module Aws::DataPipeline
       :evaluate_expressions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeObjects.</p>
@@ -165,7 +165,7 @@ module Aws::DataPipeline
       :marker,
       :has_more_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_more_results] = false unless options.key?(:has_more_results)
@@ -181,7 +181,7 @@ module Aws::DataPipeline
     class DescribePipelinesInput < Struct.new(
       :pipeline_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribePipelines.</p>
@@ -191,7 +191,7 @@ module Aws::DataPipeline
     class DescribePipelinesOutput < Struct.new(
       :pipeline_description_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for EvaluateExpression.</p>
@@ -209,7 +209,7 @@ module Aws::DataPipeline
       :object_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of EvaluateExpression.</p>
@@ -219,7 +219,7 @@ module Aws::DataPipeline
     class EvaluateExpressionOutput < Struct.new(
       :evaluated_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.</p>
@@ -237,7 +237,7 @@ module Aws::DataPipeline
       :string_value,
       :ref_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for GetPipelineDefinition.</p>
@@ -253,7 +253,7 @@ module Aws::DataPipeline
       :pipeline_id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of GetPipelineDefinition.</p>
@@ -271,7 +271,7 @@ module Aws::DataPipeline
       :parameter_objects,
       :parameter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. 
@@ -287,7 +287,7 @@ module Aws::DataPipeline
       :document,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service error occurred.</p>
@@ -297,7 +297,7 @@ module Aws::DataPipeline
     class InternalServiceError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven't exceeded any of the service limits for your account.</p>
@@ -307,7 +307,7 @@ module Aws::DataPipeline
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ListPipelines.</p>
@@ -319,7 +319,7 @@ module Aws::DataPipeline
     class ListPipelinesInput < Struct.new(
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ListPipelines.</p>
@@ -339,7 +339,7 @@ module Aws::DataPipeline
       :marker,
       :has_more_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_more_results] = false unless options.key?(:has_more_results)
@@ -386,15 +386,7 @@ module Aws::DataPipeline
       :type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperatorType
-      Equal = 'EQ'
-      ReferenceEqual = 'REF_EQ'
-      LessThanOrEqual = 'LE'
-      GreaterThanOrEqual = 'GE'
-      Between = 'BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes allowed or specified with a parameter object.</p>
@@ -408,7 +400,7 @@ module Aws::DataPipeline
       :key,
       :string_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a parameter object.</p>
@@ -422,7 +414,7 @@ module Aws::DataPipeline
       :id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value or list of parameter values. </p>
@@ -436,7 +428,7 @@ module Aws::DataPipeline
       :id,
       :string_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified pipeline has been deleted.</p>
@@ -446,7 +438,7 @@ module Aws::DataPipeline
     class PipelineDeletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains pipeline metadata.</p>
@@ -473,7 +465,7 @@ module Aws::DataPipeline
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and identifier of a pipeline.</p>
@@ -487,7 +479,7 @@ module Aws::DataPipeline
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified pipeline was not found. Verify that you used the correct user and account identifiers.</p>
@@ -497,7 +489,7 @@ module Aws::DataPipeline
     class PipelineNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.</p>
@@ -515,7 +507,7 @@ module Aws::DataPipeline
       :name,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for PollForTask.</p>
@@ -535,7 +527,7 @@ module Aws::DataPipeline
       :hostname,
       :instance_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of PollForTask.</p>
@@ -547,7 +539,7 @@ module Aws::DataPipeline
     class PollForTaskOutput < Struct.new(
       :task_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for PutPipelineDefinition.</p>
@@ -569,7 +561,7 @@ module Aws::DataPipeline
       :parameter_objects,
       :parameter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of PutPipelineDefinition.</p>
@@ -588,7 +580,7 @@ module Aws::DataPipeline
       :validation_warnings,
       :errored,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:errored] = false unless options.key?(:errored)
@@ -603,7 +595,7 @@ module Aws::DataPipeline
     class Query < Struct.new(
       :selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for QueryObjects.</p>
@@ -634,7 +626,7 @@ module Aws::DataPipeline
       :marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of QueryObjects.</p>
@@ -653,7 +645,7 @@ module Aws::DataPipeline
       :marker,
       :has_more_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_more_results] = false unless options.key?(:has_more_results)
@@ -672,13 +664,13 @@ module Aws::DataPipeline
       :pipeline_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RemoveTags.</p>
     class RemoveTagsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ReportTaskProgress.</p>
@@ -692,7 +684,7 @@ module Aws::DataPipeline
       :task_id,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ReportTaskProgress.</p>
@@ -702,7 +694,7 @@ module Aws::DataPipeline
     class ReportTaskProgressOutput < Struct.new(
       :canceled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:canceled] = false unless options.key?(:canceled)
@@ -729,7 +721,7 @@ module Aws::DataPipeline
       :worker_group,
       :hostname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ReportTaskRunnerHeartbeat.</p>
@@ -739,7 +731,7 @@ module Aws::DataPipeline
     class ReportTaskRunnerHeartbeatOutput < Struct.new(
       :terminate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:terminate] = false unless options.key?(:terminate)
@@ -758,7 +750,7 @@ module Aws::DataPipeline
       :field_name,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for SetStatus.</p>
@@ -777,7 +769,7 @@ module Aws::DataPipeline
       :object_ids,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for SetTaskStatus.</p>
@@ -806,13 +798,13 @@ module Aws::DataPipeline
       :error_message,
       :error_stack_trace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of SetTaskStatus.</p>
     class SetTaskStatusOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline.  
@@ -829,7 +821,7 @@ module Aws::DataPipeline
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified task was not found. </p>
@@ -839,7 +831,7 @@ module Aws::DataPipeline
     class TaskNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a pipeline task that is assigned to a task runner.</p>
@@ -861,13 +853,7 @@ module Aws::DataPipeline
       :attempt_id,
       :objects,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskStatus
-      FINISHED = 'FINISHED'
-      FAILED = 'FAILED'
-      FALSE = 'FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ValidatePipelineDefinition.</p>
@@ -889,7 +875,7 @@ module Aws::DataPipeline
       :parameter_objects,
       :parameter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ValidatePipelineDefinition.</p>
@@ -907,7 +893,7 @@ module Aws::DataPipeline
       :validation_warnings,
       :errored,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:errored] = false unless options.key?(:errored)
@@ -926,7 +912,7 @@ module Aws::DataPipeline
       :id,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a validation warning. Validation warnings do not prevent pipeline activation. The set of validation warnings that can be returned are defined by AWS Data Pipeline.</p>
@@ -940,7 +926,7 @@ module Aws::DataPipeline
       :id,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

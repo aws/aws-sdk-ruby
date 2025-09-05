@@ -12,7 +12,7 @@ module Aws::LicenseManagerUserSubscriptions
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Active Directory identity provider.</p>
@@ -33,7 +33,7 @@ module Aws::LicenseManagerUserSubscriptions
       :active_directory_settings,
       :active_directory_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains network access and credential details that are needed for 
@@ -58,7 +58,7 @@ module Aws::LicenseManagerUserSubscriptions
       :domain_credentials_provider,
       :domain_network_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -83,7 +83,7 @@ module Aws::LicenseManagerUserSubscriptions
       :domain,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_user_summary
@@ -92,7 +92,7 @@ module Aws::LicenseManagerUserSubscriptions
     class AssociateUserResponse < Struct.new(
       :instance_user_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request couldn't be completed because it conflicted with the current state of the
@@ -102,7 +102,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_arn
@@ -124,7 +124,7 @@ module Aws::LicenseManagerUserSubscriptions
       :license_server_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_arn
@@ -137,7 +137,7 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider_arn,
       :license_server_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the credential provider for user 
@@ -150,7 +150,7 @@ module Aws::LicenseManagerUserSubscriptions
       :secrets_manager_credentials_provider,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SecretsManagerCredentialsProvider < CredentialsProvider; end
       class Unknown < CredentialsProvider; end
@@ -167,7 +167,7 @@ module Aws::LicenseManagerUserSubscriptions
       :license_server_endpoint_arn,
       :server_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_server_endpoint
@@ -176,7 +176,7 @@ module Aws::LicenseManagerUserSubscriptions
     class DeleteLicenseServerEndpointResponse < Struct.new(
       :license_server_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -196,7 +196,7 @@ module Aws::LicenseManagerUserSubscriptions
       :product,
       :identity_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_summary
@@ -205,7 +205,7 @@ module Aws::LicenseManagerUserSubscriptions
     class DeregisterIdentityProviderResponse < Struct.new(
       :identity_provider_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -230,7 +230,7 @@ module Aws::LicenseManagerUserSubscriptions
       :instance_user_arn,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_user_summary
@@ -239,7 +239,7 @@ module Aws::LicenseManagerUserSubscriptions
     class DisassociateUserResponse < Struct.new(
       :instance_user_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains network settings for the Active Directory domain.</p>
@@ -249,7 +249,7 @@ module Aws::LicenseManagerUserSubscriptions
     class DomainNetworkSettings < Struct.new(
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to return more specific results from a describe
@@ -269,7 +269,7 @@ module Aws::LicenseManagerUserSubscriptions
       :operation,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Refers to an identity provider.</p>
@@ -281,7 +281,7 @@ module Aws::LicenseManagerUserSubscriptions
       :active_directory_identity_provider,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ActiveDirectoryIdentityProvider < IdentityProvider; end
       class Unknown < IdentityProvider; end
@@ -317,7 +317,7 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider_arn,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 instance providing user-based subscriptions.</p>
@@ -343,7 +343,7 @@ module Aws::LicenseManagerUserSubscriptions
       :last_status_check_date,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes users of an EC2 instance providing user-based subscriptions.</p>
@@ -386,7 +386,7 @@ module Aws::LicenseManagerUserSubscriptions
       :association_date,
       :disassociation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception occurred with the service.</p>
@@ -395,7 +395,7 @@ module Aws::LicenseManagerUserSubscriptions
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Remote Desktop Services (RDS) license server.</p>
@@ -415,7 +415,7 @@ module Aws::LicenseManagerUserSubscriptions
       :health_status,
       :ipv4_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a network endpoint for a Remote Desktop Services (RDS) 
@@ -463,7 +463,7 @@ module Aws::LicenseManagerUserSubscriptions
       :license_servers,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings to configure your license server.</p>
@@ -478,7 +478,7 @@ module Aws::LicenseManagerUserSubscriptions
       :server_type,
       :server_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -504,7 +504,7 @@ module Aws::LicenseManagerUserSubscriptions
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_summaries
@@ -520,7 +520,7 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -546,7 +546,7 @@ module Aws::LicenseManagerUserSubscriptions
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_summaries
@@ -563,7 +563,7 @@ module Aws::LicenseManagerUserSubscriptions
       :instance_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -586,7 +586,7 @@ module Aws::LicenseManagerUserSubscriptions
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute license_server_endpoints
@@ -603,7 +603,7 @@ module Aws::LicenseManagerUserSubscriptions
       :license_server_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product
@@ -643,7 +643,7 @@ module Aws::LicenseManagerUserSubscriptions
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_user_summaries
@@ -658,7 +658,7 @@ module Aws::LicenseManagerUserSubscriptions
       :product_user_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -667,7 +667,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -676,7 +676,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -713,7 +713,7 @@ module Aws::LicenseManagerUserSubscriptions
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_user_summaries
@@ -728,7 +728,7 @@ module Aws::LicenseManagerUserSubscriptions
       :instance_user_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the user-based subscription products for a specific user.</p>
@@ -770,7 +770,7 @@ module Aws::LicenseManagerUserSubscriptions
       :subscription_start_date,
       :subscription_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Server settings that are specific to a Remote Desktop Services (RDS) license server.</p>
@@ -781,7 +781,7 @@ module Aws::LicenseManagerUserSubscriptions
     class RdsSalSettings < Struct.new(
       :rds_sal_credentials_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -806,7 +806,7 @@ module Aws::LicenseManagerUserSubscriptions
       :settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_summary
@@ -815,7 +815,7 @@ module Aws::LicenseManagerUserSubscriptions
     class RegisterIdentityProviderResponse < Struct.new(
       :identity_provider_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource couldn't be found.</p>
@@ -824,7 +824,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a credentials secret that's stored in Secrets Manager.</p>
@@ -834,7 +834,7 @@ module Aws::LicenseManagerUserSubscriptions
     class SecretsManagerCredentialsProvider < Struct.new(
       :secret_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A network endpoint through which you can access one or more servers.</p>
@@ -844,7 +844,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ServerEndpoint < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains settings for a specific server.</p>
@@ -856,7 +856,7 @@ module Aws::LicenseManagerUserSubscriptions
       :rds_sal_settings,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RdsSalSettings < ServerSettings; end
       class Unknown < ServerSettings; end
@@ -868,7 +868,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registered identity provider’s product related configuration settings such as the
@@ -886,7 +886,7 @@ module Aws::LicenseManagerUserSubscriptions
       :subnets,
       :security_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -915,7 +915,7 @@ module Aws::LicenseManagerUserSubscriptions
       :domain,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_user_summary
@@ -924,7 +924,7 @@ module Aws::LicenseManagerUserSubscriptions
     class StartProductSubscriptionResponse < Struct.new(
       :product_user_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -953,7 +953,7 @@ module Aws::LicenseManagerUserSubscriptions
       :product_user_arn,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_user_summary
@@ -962,7 +962,7 @@ module Aws::LicenseManagerUserSubscriptions
     class StopProductSubscriptionResponse < Struct.new(
       :product_user_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -975,12 +975,12 @@ module Aws::LicenseManagerUserSubscriptions
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because of request throttling. Retry the request.</p>
@@ -989,7 +989,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1002,12 +1002,12 @@ module Aws::LicenseManagerUserSubscriptions
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider
@@ -1043,7 +1043,7 @@ module Aws::LicenseManagerUserSubscriptions
       :identity_provider_arn,
       :update_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_summary
@@ -1052,7 +1052,7 @@ module Aws::LicenseManagerUserSubscriptions
     class UpdateIdentityProviderSettingsResponse < Struct.new(
       :identity_provider_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the registered identity provider’s product related configuration settings such as
@@ -1073,7 +1073,7 @@ module Aws::LicenseManagerUserSubscriptions
       :remove_subnets,
       :security_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter is not valid.</p>
@@ -1082,7 +1082,7 @@ module Aws::LicenseManagerUserSubscriptions
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

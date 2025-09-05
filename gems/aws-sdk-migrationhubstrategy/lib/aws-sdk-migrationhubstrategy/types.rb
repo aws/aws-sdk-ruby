@@ -13,7 +13,7 @@ module Aws::MigrationHubStrategy
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A combination of existing analysis statuses.</p>
@@ -28,7 +28,7 @@ module Aws::MigrationHubStrategy
       :src_code_or_db_analysis_status,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RuntimeAnalysisStatus < AnalysisStatusUnion; end
       class SrcCodeOrDbAnalysisStatus < AnalysisStatusUnion; end
@@ -54,7 +54,7 @@ module Aws::MigrationHubStrategy
       :source,
       :vm_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The combination of the existing analyzers.</p>
@@ -73,7 +73,7 @@ module Aws::MigrationHubStrategy
       :source_code_analyzer_name,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BinaryAnalyzerName < AnalyzerNameUnion; end
       class RunTimeAnalyzerName < AnalyzerNameUnion; end
@@ -100,7 +100,7 @@ module Aws::MigrationHubStrategy
       :antipattern_report_status,
       :antipattern_report_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the summary of anti-patterns and their severity. </p>
@@ -114,7 +114,7 @@ module Aws::MigrationHubStrategy
       :severity,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error in the analysis of the application unit.</p>
@@ -124,7 +124,7 @@ module Aws::MigrationHubStrategy
     class AppUnitError < Struct.new(
       :app_unit_error_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains detailed information about an application component. </p>
@@ -225,7 +225,7 @@ module Aws::MigrationHubStrategy
       :app_unit_error,
       :result_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the analysis status of the application component.</p>
@@ -240,7 +240,7 @@ module Aws::MigrationHubStrategy
       :src_code_or_db_analysis_status,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about a strategy recommendation for an application component.
@@ -259,7 +259,7 @@ module Aws::MigrationHubStrategy
       :status,
       :is_preferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the summary of application components. </p>
@@ -273,7 +273,7 @@ module Aws::MigrationHubStrategy
       :app_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Application preferences that you specify. </p>
@@ -283,7 +283,7 @@ module Aws::MigrationHubStrategy
     class ApplicationPreferences < Struct.new(
       :management_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the summary of the assessment results. </p>
@@ -333,7 +333,7 @@ module Aws::MigrationHubStrategy
       :list_application_component_status_summary,
       :list_server_status_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the criteria of assessment.</p>
@@ -351,7 +351,7 @@ module Aws::MigrationHubStrategy
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing details about applications as defined in Application Discovery Service. </p>
@@ -365,7 +365,7 @@ module Aws::MigrationHubStrategy
       :name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing the choice of application destination that you specify. </p>
@@ -375,7 +375,7 @@ module Aws::MigrationHubStrategy
     class AwsManagedResources < Struct.new(
       :target_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Business goals that you specify. </p>
@@ -398,7 +398,7 @@ module Aws::MigrationHubStrategy
       :modernize_infrastructure_with_cloud_native_technologies,
       :license_cost_reduction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Process data collector that runs in the environment that you specify. </p>
@@ -437,7 +437,7 @@ module Aws::MigrationHubStrategy
       :last_activity_time_stamp,
       :configuration_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of the collector configuration.</p>
@@ -463,7 +463,7 @@ module Aws::MigrationHubStrategy
       :pipeline_info_list,
       :remote_source_code_analysis_server_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Exception to indicate that there is an ongoing task when a new task is created. Return
@@ -473,7 +473,7 @@ module Aws::MigrationHubStrategy
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Detailed information about an assessment. </p>
@@ -511,7 +511,7 @@ module Aws::MigrationHubStrategy
       :completion_time,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configuration information used for assessing databases. </p>
@@ -522,7 +522,7 @@ module Aws::MigrationHubStrategy
     class DatabaseConfigDetail < Struct.new(
       :secret_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Preferences for migrating a database to AWS. </p>
@@ -543,7 +543,7 @@ module Aws::MigrationHubStrategy
       :no_preference,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Heterogeneous < DatabaseMigrationPreference; end
       class Homogeneous < DatabaseMigrationPreference; end
@@ -563,7 +563,7 @@ module Aws::MigrationHubStrategy
       :database_management_preference,
       :database_migration_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dependency encountered an error.</p>
@@ -572,7 +572,7 @@ module Aws::MigrationHubStrategy
     class DependencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_id
@@ -581,7 +581,7 @@ module Aws::MigrationHubStrategy
     class GetApplicationComponentDetailsInput < Struct.new(
       :application_component_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_detail
@@ -603,7 +603,7 @@ module Aws::MigrationHubStrategy
       :more_application_resource,
       :associated_server_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_id
@@ -612,7 +612,7 @@ module Aws::MigrationHubStrategy
     class GetApplicationComponentStrategiesInput < Struct.new(
       :application_component_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_strategies
@@ -621,7 +621,7 @@ module Aws::MigrationHubStrategy
     class GetApplicationComponentStrategiesOutput < Struct.new(
       :application_component_strategies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -630,7 +630,7 @@ module Aws::MigrationHubStrategy
     class GetAssessmentInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -647,7 +647,7 @@ module Aws::MigrationHubStrategy
       :data_collection_details,
       :assessment_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -656,7 +656,7 @@ module Aws::MigrationHubStrategy
     class GetImportFileTaskInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -706,12 +706,12 @@ module Aws::MigrationHubStrategy
       :number_of_records_failed,
       :import_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetLatestAssessmentIdInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -720,12 +720,12 @@ module Aws::MigrationHubStrategy
     class GetLatestAssessmentIdOutput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetPortfolioPreferencesInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prioritize_business_goals
@@ -746,12 +746,12 @@ module Aws::MigrationHubStrategy
       :database_preferences,
       :application_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetPortfolioSummaryInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_summary
@@ -761,7 +761,7 @@ module Aws::MigrationHubStrategy
     class GetPortfolioSummaryOutput < Struct.new(
       :assessment_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -770,7 +770,7 @@ module Aws::MigrationHubStrategy
     class GetRecommendationReportDetailsInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -783,7 +783,7 @@ module Aws::MigrationHubStrategy
       :id,
       :recommendation_report_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -802,7 +802,7 @@ module Aws::MigrationHubStrategy
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -820,7 +820,7 @@ module Aws::MigrationHubStrategy
       :server_detail,
       :associated_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -829,7 +829,7 @@ module Aws::MigrationHubStrategy
     class GetServerStrategiesInput < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_strategies
@@ -838,7 +838,7 @@ module Aws::MigrationHubStrategy
     class GetServerStrategiesOutput < Struct.new(
       :server_strategies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The object containing information about distinct imports or groups for Strategy Recommendations. </p>
@@ -852,7 +852,7 @@ module Aws::MigrationHubStrategy
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The object containing details about heterogeneous database preferences. </p>
@@ -862,7 +862,7 @@ module Aws::MigrationHubStrategy
     class Heterogeneous < Struct.new(
       :target_database_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The object containing details about homogeneous database preferences. </p>
@@ -872,7 +872,7 @@ module Aws::MigrationHubStrategy
     class Homogeneous < Struct.new(
       :target_database_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IP address based configurations.</p>
@@ -890,7 +890,7 @@ module Aws::MigrationHubStrategy
       :auth_type,
       :os_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the import file tasks you request. </p>
@@ -941,7 +941,7 @@ module Aws::MigrationHubStrategy
       :number_of_records_failed,
       :import_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The server experienced an internal error. Try again. </p>
@@ -950,7 +950,7 @@ module Aws::MigrationHubStrategy
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Represents input for ListAnalyzableServers operation.
@@ -968,7 +968,7 @@ module Aws::MigrationHubStrategy
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Represents output for ListAnalyzableServers operation.
@@ -982,7 +982,7 @@ module Aws::MigrationHubStrategy
       :analyzable_servers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_criteria
@@ -1017,7 +1017,7 @@ module Aws::MigrationHubStrategy
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_infos
@@ -1031,7 +1031,7 @@ module Aws::MigrationHubStrategy
       :application_component_infos,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1046,7 +1046,7 @@ module Aws::MigrationHubStrategy
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collectors
@@ -1059,7 +1059,7 @@ module Aws::MigrationHubStrategy
       :collectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1074,7 +1074,7 @@ module Aws::MigrationHubStrategy
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_infos
@@ -1087,7 +1087,7 @@ module Aws::MigrationHubStrategy
       :task_infos,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_criteria
@@ -1122,7 +1122,7 @@ module Aws::MigrationHubStrategy
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_infos
@@ -1135,7 +1135,7 @@ module Aws::MigrationHubStrategy
       :server_infos,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Preferences for migrating an application to AWS. </p>
@@ -1154,7 +1154,7 @@ module Aws::MigrationHubStrategy
       :no_preference,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AwsManagedResources < ManagementPreference; end
       class SelfManageResources < ManagementPreference; end
@@ -1182,7 +1182,7 @@ module Aws::MigrationHubStrategy
       :mac_address,
       :net_mask,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The object containing details about database migration preferences, when you have no
@@ -1193,7 +1193,7 @@ module Aws::MigrationHubStrategy
     class NoDatabaseMigrationPreference < Struct.new(
       :target_database_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing the choice of application destination that you specify. </p>
@@ -1203,7 +1203,7 @@ module Aws::MigrationHubStrategy
     class NoManagementPreference < Struct.new(
       :target_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the operating system. </p>
@@ -1217,7 +1217,7 @@ module Aws::MigrationHubStrategy
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information of the pipeline.</p>
@@ -1231,7 +1231,7 @@ module Aws::MigrationHubStrategy
       :pipeline_type,
       :pipeline_configuration_time_stamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Rank of business goals based on priority. </p>
@@ -1241,7 +1241,7 @@ module Aws::MigrationHubStrategy
     class PrioritizeBusinessGoals < Struct.new(
       :business_goals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prioritize_business_goals
@@ -1262,12 +1262,12 @@ module Aws::MigrationHubStrategy
       :database_preferences,
       :application_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutPortfolioPreferencesOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains detailed information about a recommendation report. </p>
@@ -1297,7 +1297,7 @@ module Aws::MigrationHubStrategy
       :s3_bucket,
       :s3_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains a recommendation set. </p>
@@ -1315,7 +1315,7 @@ module Aws::MigrationHubStrategy
       :target_destination,
       :strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the server configured for source code analysis.</p>
@@ -1325,7 +1325,7 @@ module Aws::MigrationHubStrategy
     class RemoteSourceCodeAnalysisServerInfo < Struct.new(
       :remote_source_code_analysis_server_configuration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified ID in the request is not found. </p>
@@ -1334,7 +1334,7 @@ module Aws::MigrationHubStrategy
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error in server analysis.</p>
@@ -1356,7 +1356,7 @@ module Aws::MigrationHubStrategy
       :status_message,
       :antipattern_report_result_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the S3 bucket name and the Amazon S3 key name. </p>
@@ -1370,7 +1370,7 @@ module Aws::MigrationHubStrategy
       :s3_bucket,
       :s3key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Self-managed resources. </p>
@@ -1380,7 +1380,7 @@ module Aws::MigrationHubStrategy
     class SelfManageResources < Struct.new(
       :target_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Detailed information about a server. </p>
@@ -1443,7 +1443,7 @@ module Aws::MigrationHubStrategy
       :last_analyzed_timestamp,
       :server_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error in server analysis.</p>
@@ -1453,7 +1453,7 @@ module Aws::MigrationHubStrategy
     class ServerError < Struct.new(
       :server_error_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status summary of the server analysis.</p>
@@ -1468,7 +1468,7 @@ module Aws::MigrationHubStrategy
       :run_time_assessment_status,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about a strategy recommendation for a server. </p>
@@ -1491,7 +1491,7 @@ module Aws::MigrationHubStrategy
       :number_of_application_components,
       :is_preferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing details about the servers imported by Application Discovery Service </p>
@@ -1505,7 +1505,7 @@ module Aws::MigrationHubStrategy
       :server_os_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Exception to indicate that the service-linked role (SLR) is locked. </p>
@@ -1514,7 +1514,7 @@ module Aws::MigrationHubStrategy
     class ServiceLinkedRoleLockClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The AWS account has reached its quota of imports. Contact AWS Support to increase the
@@ -1524,7 +1524,7 @@ module Aws::MigrationHubStrategy
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing source code information that is linked to an application component.
@@ -1547,7 +1547,7 @@ module Aws::MigrationHubStrategy
       :location,
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing source code information that is linked to an application component.
@@ -1570,7 +1570,7 @@ module Aws::MigrationHubStrategy
       :version_control_type,
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3bucket_for_analysis_data
@@ -1593,7 +1593,7 @@ module Aws::MigrationHubStrategy
       :assessment_targets,
       :assessment_data_source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1602,7 +1602,7 @@ module Aws::MigrationHubStrategy
     class StartAssessmentOutput < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1635,7 +1635,7 @@ module Aws::MigrationHubStrategy
       :group_id,
       :s3bucket_for_report_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1644,7 +1644,7 @@ module Aws::MigrationHubStrategy
     class StartImportFileTaskOutput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output_format
@@ -1658,7 +1658,7 @@ module Aws::MigrationHubStrategy
       :output_format,
       :group_id_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1667,7 +1667,7 @@ module Aws::MigrationHubStrategy
     class StartRecommendationReportGenerationOutput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1676,12 +1676,12 @@ module Aws::MigrationHubStrategy
     class StopAssessmentInput < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopAssessmentOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about all the available strategy options for migrating and modernizing an
@@ -1706,7 +1706,7 @@ module Aws::MigrationHubStrategy
       :target_destination,
       :is_preferred,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Object containing the summary of the strategy recommendations. </p>
@@ -1720,7 +1720,7 @@ module Aws::MigrationHubStrategy
       :strategy,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the server that hosts application components. </p>
@@ -1742,7 +1742,7 @@ module Aws::MigrationHubStrategy
       :network_info_list,
       :cpu_architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request was denied due to request throttling. </p>
@@ -1751,7 +1751,7 @@ module Aws::MigrationHubStrategy
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information of the transformation tool that can be used to migrate and modernize the
@@ -1770,7 +1770,7 @@ module Aws::MigrationHubStrategy
       :description,
       :tranformation_tool_installation_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_component_id
@@ -1806,12 +1806,12 @@ module Aws::MigrationHubStrategy
       :configure_only,
       :app_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationComponentConfigOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -1824,12 +1824,12 @@ module Aws::MigrationHubStrategy
       :server_id,
       :strategy_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateServerConfigOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request body isn't valid. </p>
@@ -1838,7 +1838,7 @@ module Aws::MigrationHubStrategy
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the server in vCenter.</p>
@@ -1852,7 +1852,7 @@ module Aws::MigrationHubStrategy
       :vcenter_configuration_time_stamp,
       :os_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the version control configuration.</p>
@@ -1866,7 +1866,7 @@ module Aws::MigrationHubStrategy
       :version_control_type,
       :version_control_configuration_time_stamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

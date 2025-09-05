@@ -12,20 +12,7 @@ module Aws::TimestreamInfluxDB
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterDeploymentType
-      MULTI_NODE_READ_REPLICAS = 'MULTI_NODE_READ_REPLICAS'
-    end
-
-    module ClusterStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      AVAILABLE = 'AVAILABLE'
-      FAILED = 'FAILED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request conflicts with an existing resource in Timestream for InfluxDB.</p>
@@ -42,7 +29,7 @@ module Aws::TimestreamInfluxDB
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -136,7 +123,7 @@ module Aws::TimestreamInfluxDB
       :log_delivery_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_id
@@ -149,7 +136,7 @@ module Aws::TimestreamInfluxDB
       :db_cluster_id,
       :db_cluster_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -240,7 +227,7 @@ module Aws::TimestreamInfluxDB
       :port,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -329,7 +316,7 @@ module Aws::TimestreamInfluxDB
       :db_cluster_id,
       :instance_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -350,7 +337,7 @@ module Aws::TimestreamInfluxDB
       :parameters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -375,7 +362,7 @@ module Aws::TimestreamInfluxDB
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a summary of a Timestream for InfluxDB cluster.</p>
@@ -429,7 +416,7 @@ module Aws::TimestreamInfluxDB
       :db_storage_type,
       :allocated_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of a DB instance belonging to a DB cluster.</p>
@@ -483,7 +470,7 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :instance_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of a DB instance.</p>
@@ -534,19 +521,7 @@ module Aws::TimestreamInfluxDB
       :allocated_storage,
       :deployment_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DbInstanceType
-      DB_INFLUX_MEDIUM = 'db.influx.medium'
-      DB_INFLUX_LARGE = 'db.influx.large'
-      DB_INFLUX_XLARGE = 'db.influx.xlarge'
-      DB_INFLUX_2XLARGE = 'db.influx.2xlarge'
-      DB_INFLUX_4XLARGE = 'db.influx.4xlarge'
-      DB_INFLUX_8XLARGE = 'db.influx.8xlarge'
-      DB_INFLUX_12XLARGE = 'db.influx.12xlarge'
-      DB_INFLUX_16XLARGE = 'db.influx.16xlarge'
-      DB_INFLUX_24XLARGE = 'db.influx.24xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of a DB parameter group.</p>
@@ -568,13 +543,7 @@ module Aws::TimestreamInfluxDB
       :arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DbStorageType
-      INFLUX_IO_INCLUDED_T1 = 'InfluxIOIncludedT1'
-      INFLUX_IO_INCLUDED_T2 = 'InfluxIOIncludedT2'
-      INFLUX_IO_INCLUDED_T3 = 'InfluxIOIncludedT3'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_id
@@ -583,7 +552,7 @@ module Aws::TimestreamInfluxDB
     class DeleteDbClusterInput < Struct.new(
       :db_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_status
@@ -592,7 +561,7 @@ module Aws::TimestreamInfluxDB
     class DeleteDbClusterOutput < Struct.new(
       :db_cluster_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -601,7 +570,7 @@ module Aws::TimestreamInfluxDB
     class DeleteDbInstanceInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -690,12 +659,7 @@ module Aws::TimestreamInfluxDB
       :db_cluster_id,
       :instance_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentType
-      SINGLE_AZ = 'SINGLE_AZ'
-      WITH_MULTIAZ_STANDBY = 'WITH_MULTIAZ_STANDBY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Duration for InfluxDB parameters in Timestream for InfluxDB.</p>
@@ -709,19 +673,7 @@ module Aws::TimestreamInfluxDB
       :duration_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DurationType
-      HOURS = 'hours'
-      MINUTES = 'minutes'
-      SECONDS = 'seconds'
-      MILLISECONDS = 'milliseconds'
-    end
-
-    module FailoverMode
-      AUTOMATIC = 'AUTOMATIC'
-      NO_FAILOVER = 'NO_FAILOVER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_id
@@ -730,7 +682,7 @@ module Aws::TimestreamInfluxDB
     class GetDbClusterInput < Struct.new(
       :db_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -811,7 +763,7 @@ module Aws::TimestreamInfluxDB
       :vpc_security_group_ids,
       :failover_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -820,7 +772,7 @@ module Aws::TimestreamInfluxDB
     class GetDbInstanceInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -909,7 +861,7 @@ module Aws::TimestreamInfluxDB
       :db_cluster_id,
       :instance_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -918,7 +870,7 @@ module Aws::TimestreamInfluxDB
     class GetDbParameterGroupInput < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -943,7 +895,7 @@ module Aws::TimestreamInfluxDB
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.</p>
@@ -1118,13 +1070,7 @@ module Aws::TimestreamInfluxDB
       :storage_wal_max_write_delay,
       :ui_disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMode
-      PRIMARY = 'PRIMARY'
-      STANDBY = 'STANDBY'
-      REPLICA = 'REPLICA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
@@ -1133,7 +1079,7 @@ module Aws::TimestreamInfluxDB
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1146,7 +1092,7 @@ module Aws::TimestreamInfluxDB
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1160,7 +1106,7 @@ module Aws::TimestreamInfluxDB
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_id
@@ -1177,7 +1123,7 @@ module Aws::TimestreamInfluxDB
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1191,7 +1137,7 @@ module Aws::TimestreamInfluxDB
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1204,7 +1150,7 @@ module Aws::TimestreamInfluxDB
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1218,7 +1164,7 @@ module Aws::TimestreamInfluxDB
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1231,7 +1177,7 @@ module Aws::TimestreamInfluxDB
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1245,7 +1191,7 @@ module Aws::TimestreamInfluxDB
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1254,7 +1200,7 @@ module Aws::TimestreamInfluxDB
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1263,7 +1209,7 @@ module Aws::TimestreamInfluxDB
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>
@@ -1273,18 +1219,7 @@ module Aws::TimestreamInfluxDB
     class LogDeliveryConfiguration < Struct.new(
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogLevel
-      DEBUG = 'debug'
-      INFO = 'info'
-      ERROR = 'error'
-    end
-
-    module NetworkType
-      IPV4 = 'IPV4'
-      DUAL = 'DUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters that comprise the parameter group.</p>
@@ -1295,7 +1230,7 @@ module Aws::TimestreamInfluxDB
       :influx_d_bv2,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class InfluxDBv2 < Parameters; end
       class Unknown < Parameters; end
@@ -1315,7 +1250,7 @@ module Aws::TimestreamInfluxDB
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for S3 bucket log delivery.</p>
@@ -1329,7 +1264,7 @@ module Aws::TimestreamInfluxDB
       :bucket_name,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the service quota.</p>
@@ -1338,19 +1273,7 @@ module Aws::TimestreamInfluxDB
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      MODIFYING = 'MODIFYING'
-      UPDATING = 'UPDATING'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
-      UPDATING_DEPLOYMENT_TYPE = 'UPDATING_DEPLOYMENT_TYPE'
-      UPDATING_INSTANCE_TYPE = 'UPDATING_INSTANCE_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1363,7 +1286,7 @@ module Aws::TimestreamInfluxDB
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1376,12 +1299,7 @@ module Aws::TimestreamInfluxDB
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TracingType
-      LOG = 'log'
-      JAEGER = 'jaeger'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1394,7 +1312,7 @@ module Aws::TimestreamInfluxDB
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_id
@@ -1423,7 +1341,7 @@ module Aws::TimestreamInfluxDB
       :db_instance_type,
       :failover_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_status
@@ -1432,7 +1350,7 @@ module Aws::TimestreamInfluxDB
     class UpdateDbClusterOutput < Struct.new(
       :db_cluster_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1473,7 +1391,7 @@ module Aws::TimestreamInfluxDB
       :db_storage_type,
       :allocated_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1563,7 +1481,7 @@ module Aws::TimestreamInfluxDB
       :db_cluster_id,
       :instance_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by Timestream for InfluxDB.</p>
@@ -1576,12 +1494,7 @@ module Aws::TimestreamInfluxDB
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
   end

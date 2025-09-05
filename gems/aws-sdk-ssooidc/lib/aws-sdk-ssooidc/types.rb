@@ -18,7 +18,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a request to authorize a client with an access user session token is
@@ -35,7 +35,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains Amazon Web Services-specific parameter extensions for the token endpoint
@@ -48,7 +48,7 @@ module Aws::SSOOIDC
     class AwsAdditionalDetails < Struct.new(
       :identity_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_id
@@ -110,7 +110,7 @@ module Aws::SSOOIDC
       :redirect_uri,
       :code_verifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -145,7 +145,7 @@ module Aws::SSOOIDC
       :refresh_token,
       :id_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expires_in] = 0 unless options.key?(:expires_in)
@@ -238,7 +238,7 @@ module Aws::SSOOIDC
       :requested_token_type,
       :code_verifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -289,7 +289,7 @@ module Aws::SSOOIDC
       :scope,
       :aws_additional_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expires_in] = 0 unless options.key?(:expires_in)
@@ -309,7 +309,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an error from the service occurred while trying to process a
@@ -325,7 +325,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the <code>clientId</code> or <code>clientSecret</code> in the request is
@@ -343,7 +343,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the client information sent in the request during registration is
@@ -360,7 +360,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a request contains an invalid grant. This can occur if a client makes a
@@ -376,7 +376,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that one or more redirect URI in the request is not supported for this
@@ -393,7 +393,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that something is wrong with the input to the request. For example, a required
@@ -410,7 +410,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a token provided as input to the request was issued by and is only usable
@@ -435,7 +435,7 @@ module Aws::SSOOIDC
       :endpoint,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the scope provided in the request is invalid.</p>
@@ -450,7 +450,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_name
@@ -497,7 +497,7 @@ module Aws::SSOOIDC
       :issuer_url,
       :entitled_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_id
@@ -530,7 +530,7 @@ module Aws::SSOOIDC
       :authorization_endpoint,
       :token_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_id_issued_at] = 0 unless options.key?(:client_id_issued_at)
@@ -552,7 +552,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_id
@@ -573,7 +573,7 @@ module Aws::SSOOIDC
       :client_secret,
       :start_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_code
@@ -606,7 +606,7 @@ module Aws::SSOOIDC
       :expires_in,
       :interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expires_in] = 0 unless options.key?(:expires_in)
@@ -629,7 +629,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the grant type in the request is not supported by the service.</p>
@@ -645,7 +645,7 @@ module Aws::SSOOIDC
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -19,7 +19,7 @@ module Aws::ServiceCatalogAppRegistry
     class AppRegistryConfiguration < Struct.new(
       :tag_query_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related
@@ -60,7 +60,7 @@ module Aws::ServiceCatalogAppRegistry
       :tags,
       :application_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a Amazon Web Services Service Catalog AppRegistry application.</p>
@@ -90,7 +90,7 @@ module Aws::ServiceCatalogAppRegistry
       :creation_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -122,13 +122,7 @@ module Aws::ServiceCatalogAppRegistry
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationTagStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILURE = 'FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -149,7 +143,7 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -162,7 +156,7 @@ module Aws::ServiceCatalogAppRegistry
       :application_arn,
       :attribute_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -188,7 +182,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -207,12 +201,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_arn,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationOption
-      APPLY_APPLICATION_TAG = 'APPLY_APPLICATION_TAG'
-      SKIP_APPLICATION_TAG = 'SKIP_APPLICATION_TAG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>
@@ -246,7 +235,7 @@ module Aws::ServiceCatalogAppRegistry
       :last_update_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -279,7 +268,7 @@ module Aws::ServiceCatalogAppRegistry
       :name,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.</p>
@@ -313,7 +302,7 @@ module Aws::ServiceCatalogAppRegistry
       :last_update_time,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict when processing the request (for example, a resource with the given
@@ -323,7 +312,7 @@ module Aws::ServiceCatalogAppRegistry
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -347,7 +336,7 @@ module Aws::ServiceCatalogAppRegistry
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -356,7 +345,7 @@ module Aws::ServiceCatalogAppRegistry
     class CreateApplicationResponse < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -384,7 +373,7 @@ module Aws::ServiceCatalogAppRegistry
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_group
@@ -393,7 +382,7 @@ module Aws::ServiceCatalogAppRegistry
     class CreateAttributeGroupResponse < Struct.new(
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -405,7 +394,7 @@ module Aws::ServiceCatalogAppRegistry
     class DeleteApplicationRequest < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -414,7 +403,7 @@ module Aws::ServiceCatalogAppRegistry
     class DeleteApplicationResponse < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_group
@@ -428,7 +417,7 @@ module Aws::ServiceCatalogAppRegistry
     class DeleteAttributeGroupRequest < Struct.new(
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_group
@@ -437,7 +426,7 @@ module Aws::ServiceCatalogAppRegistry
     class DeleteAttributeGroupResponse < Struct.new(
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -458,7 +447,7 @@ module Aws::ServiceCatalogAppRegistry
       :application,
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -471,7 +460,7 @@ module Aws::ServiceCatalogAppRegistry
       :application_arn,
       :attribute_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -488,7 +477,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_type,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -501,7 +490,7 @@ module Aws::ServiceCatalogAppRegistry
       :application_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -513,7 +502,7 @@ module Aws::ServiceCatalogAppRegistry
     class GetApplicationRequest < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -567,7 +556,7 @@ module Aws::ServiceCatalogAppRegistry
       :integrations,
       :application_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:associated_resource_count] = 0 unless options.key?(:associated_resource_count)
@@ -611,7 +600,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_tag_status,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -632,7 +621,7 @@ module Aws::ServiceCatalogAppRegistry
       :options,
       :application_tag_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_group
@@ -646,7 +635,7 @@ module Aws::ServiceCatalogAppRegistry
     class GetAttributeGroupRequest < Struct.new(
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -687,7 +676,7 @@ module Aws::ServiceCatalogAppRegistry
       :tags,
       :created_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -699,7 +688,7 @@ module Aws::ServiceCatalogAppRegistry
     class GetConfigurationResponse < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The information about the service integration.</p>
@@ -713,7 +702,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_group,
       :application_tag_resource_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is experiencing internal problems.</p>
@@ -722,7 +711,7 @@ module Aws::ServiceCatalogAppRegistry
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -735,7 +724,7 @@ module Aws::ServiceCatalogAppRegistry
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -748,7 +737,7 @@ module Aws::ServiceCatalogAppRegistry
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -765,7 +754,7 @@ module Aws::ServiceCatalogAppRegistry
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_groups
@@ -778,7 +767,7 @@ module Aws::ServiceCatalogAppRegistry
       :attribute_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -798,7 +787,7 @@ module Aws::ServiceCatalogAppRegistry
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -811,7 +800,7 @@ module Aws::ServiceCatalogAppRegistry
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -828,7 +817,7 @@ module Aws::ServiceCatalogAppRegistry
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_groups_details
@@ -841,7 +830,7 @@ module Aws::ServiceCatalogAppRegistry
       :attribute_groups_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -854,7 +843,7 @@ module Aws::ServiceCatalogAppRegistry
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_groups
@@ -867,7 +856,7 @@ module Aws::ServiceCatalogAppRegistry
       :attribute_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -876,7 +865,7 @@ module Aws::ServiceCatalogAppRegistry
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -885,7 +874,7 @@ module Aws::ServiceCatalogAppRegistry
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -897,7 +886,7 @@ module Aws::ServiceCatalogAppRegistry
     class PutConfigurationRequest < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The information about the resource.</p>
@@ -920,7 +909,7 @@ module Aws::ServiceCatalogAppRegistry
       :association_time,
       :integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -935,7 +924,7 @@ module Aws::ServiceCatalogAppRegistry
     class ResourceDetails < Struct.new(
       :tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the resource group integration.</p>
@@ -965,16 +954,7 @@ module Aws::ServiceCatalogAppRegistry
       :arn,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceGroupState
-      CREATING = 'CREATING'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATING = 'UPDATING'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the resource.</p>
@@ -1009,7 +989,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_details,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service integration information about the resource.</p>
@@ -1019,14 +999,7 @@ module Aws::ServiceCatalogAppRegistry
     class ResourceIntegrations < Struct.new(
       :resource_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceItemStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -1035,12 +1008,7 @@ module Aws::ServiceCatalogAppRegistry
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      CFN_STACK = 'CFN_STACK'
-      RESOURCE_TAG_VALUE = 'RESOURCE_TAG_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1072,7 +1040,7 @@ module Aws::ServiceCatalogAppRegistry
       :status,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1084,12 +1052,7 @@ module Aws::ServiceCatalogAppRegistry
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SyncAction
-      START_SYNC = 'START_SYNC'
-      NO_ACTION = 'NO_ACTION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -1102,7 +1065,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_type,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -1119,7 +1082,7 @@ module Aws::ServiceCatalogAppRegistry
       :resource_arn,
       :action_taken,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1140,7 +1103,7 @@ module Aws::ServiceCatalogAppRegistry
     class TagQueryConfiguration < Struct.new(
       :tag_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1153,12 +1116,12 @@ module Aws::ServiceCatalogAppRegistry
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1176,7 +1139,7 @@ module Aws::ServiceCatalogAppRegistry
       :message,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1189,12 +1152,12 @@ module Aws::ServiceCatalogAppRegistry
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -1218,7 +1181,7 @@ module Aws::ServiceCatalogAppRegistry
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -1227,7 +1190,7 @@ module Aws::ServiceCatalogAppRegistry
     class UpdateApplicationResponse < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_group
@@ -1256,7 +1219,7 @@ module Aws::ServiceCatalogAppRegistry
       :description,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute_group
@@ -1265,7 +1228,7 @@ module Aws::ServiceCatalogAppRegistry
     class UpdateAttributeGroupResponse < Struct.new(
       :attribute_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has invalid or missing parameters.</p>
@@ -1274,7 +1237,7 @@ module Aws::ServiceCatalogAppRegistry
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

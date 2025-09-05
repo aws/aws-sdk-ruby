@@ -19,7 +19,7 @@ module Aws::Chatbot
       :user_authorization_required,
       :training_data_collection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -32,12 +32,12 @@ module Aws::Chatbot
       :resource,
       :chat_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateToConfigurationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A listing of an association with a channel configuration.</p>
@@ -47,7 +47,7 @@ module Aws::Chatbot
     class AssociationListing < Struct.new(
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An AWS Chatbot configuration for Amazon Chime.</p>
@@ -94,7 +94,7 @@ module Aws::Chatbot
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Microsoft Teams team that is authorized with AWS Chatbot.</p>
@@ -123,7 +123,7 @@ module Aws::Chatbot
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an issue processing your request.</p>
@@ -132,7 +132,7 @@ module Aws::Chatbot
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -141,7 +141,7 @@ module Aws::Chatbot
     class CreateChimeWebhookConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook_description
@@ -178,7 +178,7 @@ module Aws::Chatbot
       :logging_level,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook_configuration
@@ -187,7 +187,7 @@ module Aws::Chatbot
     class CreateChimeWebhookConfigurationResult < Struct.new(
       :webhook_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute definition
@@ -217,7 +217,7 @@ module Aws::Chatbot
       :client_token,
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_action_arn
@@ -226,7 +226,7 @@ module Aws::Chatbot
     class CreateCustomActionResult < Struct.new(
       :custom_action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -235,7 +235,7 @@ module Aws::Chatbot
     class CreateSlackChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slack_team_id
@@ -285,7 +285,7 @@ module Aws::Chatbot
       :user_authorization_required,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_configuration
@@ -294,7 +294,7 @@ module Aws::Chatbot
     class CreateSlackChannelConfigurationResult < Struct.new(
       :channel_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -303,7 +303,7 @@ module Aws::Chatbot
     class CreateTeamsChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_id
@@ -361,7 +361,7 @@ module Aws::Chatbot
       :user_authorization_required,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_configuration
@@ -370,7 +370,7 @@ module Aws::Chatbot
     class CreateTeamsChannelConfigurationResult < Struct.new(
       :channel_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a parameterized command that can be invoked as an alias or as a notification button in the chat client.</p>
@@ -396,7 +396,7 @@ module Aws::Chatbot
       :attachments,
       :action_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines when a custom action button should be attached to a notification.</p>
@@ -418,7 +418,7 @@ module Aws::Chatbot
       :criteria,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A criteria for when a button should be shown based on values in the notification</p>
@@ -436,12 +436,7 @@ module Aws::Chatbot
       :variable_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomActionAttachmentCriteriaOperator
-      HAS_VALUE = 'HAS_VALUE'
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the command to run when invoked as an alias or as an action button.</p>
@@ -451,7 +446,7 @@ module Aws::Chatbot
     class CustomActionDefinition < Struct.new(
       :command_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -460,7 +455,7 @@ module Aws::Chatbot
     class DeleteChimeWebhookConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -469,12 +464,12 @@ module Aws::Chatbot
     class DeleteChimeWebhookConfigurationRequest < Struct.new(
       :chat_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChimeWebhookConfigurationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_action_arn
@@ -483,12 +478,12 @@ module Aws::Chatbot
     class DeleteCustomActionRequest < Struct.new(
       :custom_action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCustomActionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -497,7 +492,7 @@ module Aws::Chatbot
     class DeleteMicrosoftTeamsUserIdentityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -510,12 +505,12 @@ module Aws::Chatbot
       :chat_configuration_arn,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMicrosoftTeamsUserIdentityResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -524,7 +519,7 @@ module Aws::Chatbot
     class DeleteSlackChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -533,12 +528,12 @@ module Aws::Chatbot
     class DeleteSlackChannelConfigurationRequest < Struct.new(
       :chat_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackChannelConfigurationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -547,7 +542,7 @@ module Aws::Chatbot
     class DeleteSlackUserIdentityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -564,12 +559,12 @@ module Aws::Chatbot
       :slack_team_id,
       :slack_user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackUserIdentityResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an issue deleting your Slack workspace.</p>
@@ -578,7 +573,7 @@ module Aws::Chatbot
     class DeleteSlackWorkspaceAuthorizationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slack_team_id
@@ -587,12 +582,12 @@ module Aws::Chatbot
     class DeleteSlackWorkspaceAuthorizationRequest < Struct.new(
       :slack_team_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSlackWorkspaceAuthorizationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -601,7 +596,7 @@ module Aws::Chatbot
     class DeleteTeamsChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -610,12 +605,12 @@ module Aws::Chatbot
     class DeleteTeamsChannelConfigurationRequest < Struct.new(
       :chat_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTeamsChannelConfigurationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -624,7 +619,7 @@ module Aws::Chatbot
     class DeleteTeamsConfiguredTeamException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute team_id
@@ -635,12 +630,12 @@ module Aws::Chatbot
     class DeleteTeamsConfiguredTeamRequest < Struct.new(
       :team_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTeamsConfiguredTeamResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -649,7 +644,7 @@ module Aws::Chatbot
     class DescribeChimeWebhookConfigurationsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -668,7 +663,7 @@ module Aws::Chatbot
       :next_token,
       :chat_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -682,7 +677,7 @@ module Aws::Chatbot
       :next_token,
       :webhook_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -691,7 +686,7 @@ module Aws::Chatbot
     class DescribeSlackChannelConfigurationsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -710,7 +705,7 @@ module Aws::Chatbot
       :next_token,
       :chat_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -724,7 +719,7 @@ module Aws::Chatbot
       :next_token,
       :slack_channel_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -733,7 +728,7 @@ module Aws::Chatbot
     class DescribeSlackUserIdentitiesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -752,7 +747,7 @@ module Aws::Chatbot
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slack_user_identities
@@ -766,7 +761,7 @@ module Aws::Chatbot
       :slack_user_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -775,7 +770,7 @@ module Aws::Chatbot
     class DescribeSlackWorkspacesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -790,7 +785,7 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slack_workspaces
@@ -804,7 +799,7 @@ module Aws::Chatbot
       :slack_workspaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -817,12 +812,12 @@ module Aws::Chatbot
       :resource,
       :chat_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFromConfigurationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -831,12 +826,12 @@ module Aws::Chatbot
     class GetAccountPreferencesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountPreferencesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_preferences
@@ -845,7 +840,7 @@ module Aws::Chatbot
     class GetAccountPreferencesResult < Struct.new(
       :account_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_action_arn
@@ -854,7 +849,7 @@ module Aws::Chatbot
     class GetCustomActionRequest < Struct.new(
       :custom_action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_action
@@ -863,7 +858,7 @@ module Aws::Chatbot
     class GetCustomActionResult < Struct.new(
       :custom_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -872,7 +867,7 @@ module Aws::Chatbot
     class GetTeamsChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -881,7 +876,7 @@ module Aws::Chatbot
     class GetTeamsChannelConfigurationRequest < Struct.new(
       :chat_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_configuration
@@ -890,7 +885,7 @@ module Aws::Chatbot
     class GetTeamsChannelConfigurationResult < Struct.new(
       :channel_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error during processing of request.</p>
@@ -899,7 +894,7 @@ module Aws::Chatbot
     class InternalServiceError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request input doesn't meet the constraints required by AWS Chatbot.</p>
@@ -908,7 +903,7 @@ module Aws::Chatbot
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request input doesn't meet the constraints required by AWS Chatbot.</p>
@@ -917,7 +912,7 @@ module Aws::Chatbot
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded a service limit for AWS Chatbot.</p>
@@ -926,7 +921,7 @@ module Aws::Chatbot
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration
@@ -943,7 +938,7 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -956,7 +951,7 @@ module Aws::Chatbot
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -969,7 +964,7 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_actions
@@ -982,7 +977,7 @@ module Aws::Chatbot
       :custom_actions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -991,7 +986,7 @@ module Aws::Chatbot
     class ListMicrosoftTeamsConfiguredTeamsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1004,7 +999,7 @@ module Aws::Chatbot
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_teams
@@ -1017,7 +1012,7 @@ module Aws::Chatbot
       :configured_teams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1026,7 +1021,7 @@ module Aws::Chatbot
     class ListMicrosoftTeamsUserIdentitiesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -1045,7 +1040,7 @@ module Aws::Chatbot
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute teams_user_identities
@@ -1059,7 +1054,7 @@ module Aws::Chatbot
       :teams_user_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1068,7 +1063,7 @@ module Aws::Chatbot
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1077,7 +1072,7 @@ module Aws::Chatbot
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1086,7 +1081,7 @@ module Aws::Chatbot
     class ListTeamsChannelConfigurationsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1105,7 +1100,7 @@ module Aws::Chatbot
       :next_token,
       :team_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1118,7 +1113,7 @@ module Aws::Chatbot
       :next_token,
       :team_channel_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We were unable to find the resource for your request</p>
@@ -1127,7 +1122,7 @@ module Aws::Chatbot
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1136,7 +1131,7 @@ module Aws::Chatbot
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An AWS Chatbot configuration for Slack.</p>
@@ -1204,7 +1199,7 @@ module Aws::Chatbot
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifes a user level permission for a channel configuration. </p>
@@ -1232,7 +1227,7 @@ module Aws::Chatbot
       :slack_user_id,
       :aws_user_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Slack workspace. </p>
@@ -1255,7 +1250,7 @@ module Aws::Chatbot
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p>
@@ -1273,7 +1268,7 @@ module Aws::Chatbot
       :tag_key,
       :tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1286,12 +1281,12 @@ module Aws::Chatbot
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An AWS Chatbot configuration for Microsoft Teams.</p>
@@ -1363,7 +1358,7 @@ module Aws::Chatbot
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifes a user level permission for a channel configuration.</p>
@@ -1401,7 +1396,7 @@ module Aws::Chatbot
       :teams_channel_id,
       :teams_tenant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied list of tags contains too many tags.</p>
@@ -1410,7 +1405,7 @@ module Aws::Chatbot
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it doesn't have valid credentials for the target resource.</p>
@@ -1419,7 +1414,7 @@ module Aws::Chatbot
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1432,12 +1427,12 @@ module Aws::Chatbot
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1446,7 +1441,7 @@ module Aws::Chatbot
     class UpdateAccountPreferencesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_authorization_required
@@ -1461,7 +1456,7 @@ module Aws::Chatbot
       :user_authorization_required,
       :training_data_collection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_preferences
@@ -1470,7 +1465,7 @@ module Aws::Chatbot
     class UpdateAccountPreferencesResult < Struct.new(
       :account_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1479,7 +1474,7 @@ module Aws::Chatbot
     class UpdateChimeWebhookConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -1512,7 +1507,7 @@ module Aws::Chatbot
       :iam_role_arn,
       :logging_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute webhook_configuration
@@ -1521,7 +1516,7 @@ module Aws::Chatbot
     class UpdateChimeWebhookConfigurationResult < Struct.new(
       :webhook_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_action_arn
@@ -1542,7 +1537,7 @@ module Aws::Chatbot
       :alias_name,
       :attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_action_arn
@@ -1551,7 +1546,7 @@ module Aws::Chatbot
     class UpdateCustomActionResult < Struct.new(
       :custom_action_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1560,7 +1555,7 @@ module Aws::Chatbot
     class UpdateSlackChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -1602,7 +1597,7 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_configuration
@@ -1611,7 +1606,7 @@ module Aws::Chatbot
     class UpdateSlackChannelConfigurationResult < Struct.new(
       :channel_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can’t process your request right now because of a server issue. Try again later.</p>
@@ -1620,7 +1615,7 @@ module Aws::Chatbot
     class UpdateTeamsChannelConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute chat_configuration_arn
@@ -1660,7 +1655,7 @@ module Aws::Chatbot
       :guardrail_policy_arns,
       :user_authorization_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_configuration
@@ -1669,7 +1664,7 @@ module Aws::Chatbot
     class UpdateTeamsChannelConfigurationResult < Struct.new(
       :channel_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

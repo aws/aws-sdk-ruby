@@ -24,7 +24,7 @@ module Aws::Athena
     class AclConfiguration < Struct.new(
       :s3_acl_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the application runtime IDs and their supported DPU sizes.</p>
@@ -39,7 +39,7 @@ module Aws::Athena
       :application_runtime_id,
       :supported_dpu_sizes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Athena query error. The
@@ -75,16 +75,12 @@ module Aws::Athena
       :retryable,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retryable] = false unless options.key?(:retryable)
         super
       end
-    end
-
-    module AuthenticationType
-      DIRECTORY_IDENTITY = 'DIRECTORY_IDENTITY'
     end
 
     # <p>Contains an array of named query IDs.</p>
@@ -94,7 +90,7 @@ module Aws::Athena
     class BatchGetNamedQueryInput < Struct.new(
       :named_query_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_queries
@@ -107,7 +103,7 @@ module Aws::Athena
       :named_queries,
       :unprocessed_named_query_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prepared_statement_names
@@ -120,7 +116,7 @@ module Aws::Athena
       :prepared_statement_names,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prepared_statements
@@ -134,7 +130,7 @@ module Aws::Athena
       :prepared_statements,
       :unprocessed_prepared_statement_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an array of query execution IDs.</p>
@@ -144,7 +140,7 @@ module Aws::Athena
     class BatchGetQueryExecutionInput < Struct.new(
       :query_execution_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_executions
@@ -157,7 +153,7 @@ module Aws::Athena
       :query_executions,
       :unprocessed_query_execution_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information for the calculation.</p>
@@ -167,18 +163,7 @@ module Aws::Athena
     class CalculationConfiguration < Struct.new(
       :code_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CalculationExecutionState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      CANCELING = 'CANCELING'
-      CANCELED = 'CANCELED'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an application-specific calculation result.</p>
@@ -201,7 +186,7 @@ module Aws::Athena
       :result_s3_uri,
       :result_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains statistics for a notebook calculation.</p>
@@ -215,7 +200,7 @@ module Aws::Athena
       :dpu_execution_in_millis,
       :progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the status of a notebook calculation.</p>
@@ -256,7 +241,7 @@ module Aws::Athena
       :state,
       :state_change_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for a notebook calculation.</p>
@@ -274,7 +259,7 @@ module Aws::Athena
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -283,12 +268,12 @@ module Aws::Athena
     class CancelCapacityReservationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelCapacityReservationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the submission time of a single allocation request for a capacity reservation
@@ -311,13 +296,7 @@ module Aws::Athena
       :request_time,
       :request_completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityAllocationStatus
-      PENDING = 'PENDING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping between one or more workgroups and a capacity reservation.</p>
@@ -327,7 +306,7 @@ module Aws::Athena
     class CapacityAssignment < Struct.new(
       :work_group_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Assigns Athena workgroups (and hence their queries) to capacity
@@ -345,7 +324,7 @@ module Aws::Athena
       :capacity_reservation_name,
       :capacity_assignments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reservation for a specified number of data processing units (DPUs). When a
@@ -382,16 +361,7 @@ module Aws::Athena
       :last_successful_allocation_time,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
-      UPDATE_PENDING = 'UPDATE_PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata for a column in a table.</p>
@@ -409,7 +379,7 @@ module Aws::Athena
       :type,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the columns in a query execution result.</p>
@@ -457,7 +427,7 @@ module Aws::Athena
       :nullable,
       :case_sensitive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:precision] = 0 unless options.key?(:precision)
@@ -465,35 +435,6 @@ module Aws::Athena
         options[:case_sensitive] = false unless options.key?(:case_sensitive)
         super
       end
-    end
-
-    module ColumnNullable
-      NOT_NULL = 'NOT_NULL'
-      NULLABLE = 'NULLABLE'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module ConnectionType
-      DYNAMODB = 'DYNAMODB'
-      MYSQL = 'MYSQL'
-      POSTGRESQL = 'POSTGRESQL'
-      REDSHIFT = 'REDSHIFT'
-      ORACLE = 'ORACLE'
-      SYNAPSE = 'SYNAPSE'
-      SQLSERVER = 'SQLSERVER'
-      DB2 = 'DB2'
-      OPENSEARCH = 'OPENSEARCH'
-      BIGQUERY = 'BIGQUERY'
-      GOOGLECLOUDSTORAGE = 'GOOGLECLOUDSTORAGE'
-      HBASE = 'HBASE'
-      DOCUMENTDB = 'DOCUMENTDB'
-      CMDB = 'CMDB'
-      TPCDS = 'TPCDS'
-      TIMESTREAM = 'TIMESTREAM'
-      SAPHANA = 'SAPHANA'
-      SNOWFLAKE = 'SNOWFLAKE'
-      DATALAKEGEN2 = 'DATALAKEGEN2'
-      DB2AS400 = 'DB2AS400'
     end
 
     # @!attribute target_dpus
@@ -510,12 +451,12 @@ module Aws::Athena
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateCapacityReservationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -659,7 +600,7 @@ module Aws::Athena
       :parameters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_catalog
@@ -672,7 +613,7 @@ module Aws::Athena
     class CreateDataCatalogOutput < Struct.new(
       :data_catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -710,7 +651,7 @@ module Aws::Athena
       :client_request_token,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_query_id
@@ -719,7 +660,7 @@ module Aws::Athena
     class CreateNamedQueryOutput < Struct.new(
       :named_query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -744,7 +685,7 @@ module Aws::Athena
       :name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -753,7 +694,7 @@ module Aws::Athena
     class CreateNotebookOutput < Struct.new(
       :notebook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement_name
@@ -774,12 +715,12 @@ module Aws::Athena
       :query_statement,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreatePreparedStatementOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -788,7 +729,7 @@ module Aws::Athena
     class CreatePresignedNotebookUrlRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_url
@@ -806,7 +747,7 @@ module Aws::Athena
       :auth_token,
       :auth_token_expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -834,12 +775,12 @@ module Aws::Athena
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateWorkGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the customer managed KMS key that is used to encrypt the user's data stores
@@ -851,7 +792,7 @@ module Aws::Athena
     class CustomerContentEncryptionConfiguration < Struct.new(
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a data catalog in an Amazon Web Services account.</p>
@@ -1041,19 +982,7 @@ module Aws::Athena
       :connection_type,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataCatalogStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      CREATE_FAILED_CLEANUP_IN_PROGRESS = 'CREATE_FAILED_CLEANUP_IN_PROGRESS'
-      CREATE_FAILED_CLEANUP_COMPLETE = 'CREATE_FAILED_CLEANUP_COMPLETE'
-      CREATE_FAILED_CLEANUP_FAILED = 'CREATE_FAILED_CLEANUP_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information for the data catalog, which includes its name and type.</p>
@@ -1142,14 +1071,7 @@ module Aws::Athena
       :connection_type,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataCatalogType
-      LAMBDA = 'LAMBDA'
-      GLUE = 'GLUE'
-      HIVE = 'HIVE'
-      FEDERATED = 'FEDERATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata information for a database in a data catalog.</p>
@@ -1167,7 +1089,7 @@ module Aws::Athena
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A piece of data (a field in the table).</p>
@@ -1177,7 +1099,7 @@ module Aws::Athena
     class Datum < Struct.new(
       :var_char_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1186,12 +1108,12 @@ module Aws::Athena
     class DeleteCapacityReservationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCapacityReservationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1207,7 +1129,7 @@ module Aws::Athena
       :name,
       :delete_catalog_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_catalog
@@ -1220,7 +1142,7 @@ module Aws::Athena
     class DeleteDataCatalogOutput < Struct.new(
       :data_catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_query_id
@@ -1229,12 +1151,12 @@ module Aws::Athena
     class DeleteNamedQueryInput < Struct.new(
       :named_query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNamedQueryOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -1243,12 +1165,12 @@ module Aws::Athena
     class DeleteNotebookInput < Struct.new(
       :notebook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNotebookOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement_name
@@ -1261,12 +1183,12 @@ module Aws::Athena
       :statement_name,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePreparedStatementOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -1280,12 +1202,12 @@ module Aws::Athena
       :work_group,
       :recursive_delete_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If query and calculation results are encrypted in Amazon S3, indicates the
@@ -1307,13 +1229,7 @@ module Aws::Athena
       :encryption_option,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionOption
-      SSE_S3 = 'SSE_S3'
-      SSE_KMS = 'SSE_KMS'
-      CSE_KMS = 'CSE_KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains data processing unit (DPU) configuration settings and parameter mappings for
@@ -1349,7 +1265,7 @@ module Aws::Athena
       :additional_configs,
       :spark_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Athena engine version for running queries, or the PySpark engine
@@ -1370,22 +1286,7 @@ module Aws::Athena
       :selected_engine_version,
       :effective_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutorState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      REGISTERED = 'REGISTERED'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      FAILED = 'FAILED'
-    end
-
-    module ExecutorType
-      COORDINATOR = 'COORDINATOR'
-      GATEWAY = 'GATEWAY'
-      WORKER = 'WORKER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about an executor.</p>
@@ -1431,7 +1332,7 @@ module Aws::Athena
       :executor_state,
       :executor_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -1440,7 +1341,7 @@ module Aws::Athena
     class ExportNotebookInput < Struct.new(
       :notebook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_metadata
@@ -1454,7 +1355,7 @@ module Aws::Athena
       :notebook_metadata,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string for searching notebook names.</p>
@@ -1464,7 +1365,7 @@ module Aws::Athena
     class FilterDefinition < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculation_execution_id
@@ -1473,7 +1374,7 @@ module Aws::Athena
     class GetCalculationExecutionCodeRequest < Struct.new(
       :calculation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code_block
@@ -1482,7 +1383,7 @@ module Aws::Athena
     class GetCalculationExecutionCodeResponse < Struct.new(
       :code_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculation_execution_id
@@ -1491,7 +1392,7 @@ module Aws::Athena
     class GetCalculationExecutionRequest < Struct.new(
       :calculation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculation_execution_id
@@ -1526,7 +1427,7 @@ module Aws::Athena
       :statistics,
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculation_execution_id
@@ -1535,7 +1436,7 @@ module Aws::Athena
     class GetCalculationExecutionStatusRequest < Struct.new(
       :calculation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1548,7 +1449,7 @@ module Aws::Athena
       :status,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_name
@@ -1558,7 +1459,7 @@ module Aws::Athena
     class GetCapacityAssignmentConfigurationInput < Struct.new(
       :capacity_reservation_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_assignment_configuration
@@ -1568,7 +1469,7 @@ module Aws::Athena
     class GetCapacityAssignmentConfigurationOutput < Struct.new(
       :capacity_assignment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1577,7 +1478,7 @@ module Aws::Athena
     class GetCapacityReservationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation
@@ -1586,7 +1487,7 @@ module Aws::Athena
     class GetCapacityReservationOutput < Struct.new(
       :capacity_reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1599,7 +1500,7 @@ module Aws::Athena
       :name,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_catalog
@@ -1608,7 +1509,7 @@ module Aws::Athena
     class GetDataCatalogOutput < Struct.new(
       :data_catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_name
@@ -1626,7 +1527,7 @@ module Aws::Athena
       :database_name,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database
@@ -1635,7 +1536,7 @@ module Aws::Athena
     class GetDatabaseOutput < Struct.new(
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_query_id
@@ -1645,7 +1546,7 @@ module Aws::Athena
     class GetNamedQueryInput < Struct.new(
       :named_query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_query
@@ -1654,7 +1555,7 @@ module Aws::Athena
     class GetNamedQueryOutput < Struct.new(
       :named_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -1663,7 +1564,7 @@ module Aws::Athena
     class GetNotebookMetadataInput < Struct.new(
       :notebook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_metadata
@@ -1672,7 +1573,7 @@ module Aws::Athena
     class GetNotebookMetadataOutput < Struct.new(
       :notebook_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement_name
@@ -1685,7 +1586,7 @@ module Aws::Athena
       :statement_name,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prepared_statement
@@ -1694,7 +1595,7 @@ module Aws::Athena
     class GetPreparedStatementOutput < Struct.new(
       :prepared_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution_id
@@ -1703,7 +1604,7 @@ module Aws::Athena
     class GetQueryExecutionInput < Struct.new(
       :query_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution
@@ -1712,7 +1613,7 @@ module Aws::Athena
     class GetQueryExecutionOutput < Struct.new(
       :query_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution_id
@@ -1739,7 +1640,7 @@ module Aws::Athena
       :max_results,
       :query_result_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_count
@@ -1759,7 +1660,7 @@ module Aws::Athena
       :result_set,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution_id
@@ -1768,7 +1669,7 @@ module Aws::Athena
     class GetQueryRuntimeStatisticsInput < Struct.new(
       :query_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_runtime_statistics
@@ -1777,7 +1678,7 @@ module Aws::Athena
     class GetQueryRuntimeStatisticsOutput < Struct.new(
       :query_runtime_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1786,7 +1687,7 @@ module Aws::Athena
     class GetSessionRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1828,7 +1729,7 @@ module Aws::Athena
       :status,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1837,7 +1738,7 @@ module Aws::Athena
     class GetSessionStatusRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1850,7 +1751,7 @@ module Aws::Athena
       :session_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_name
@@ -1873,7 +1774,7 @@ module Aws::Athena
       :table_name,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_metadata
@@ -1882,7 +1783,7 @@ module Aws::Athena
     class GetTableMetadataOutput < Struct.new(
       :table_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -1891,7 +1792,7 @@ module Aws::Athena
     class GetWorkGroupInput < Struct.new(
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -1900,7 +1801,7 @@ module Aws::Athena
     class GetWorkGroupOutput < Struct.new(
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether the workgroup is IAM Identity Center supported.</p>
@@ -1914,7 +1815,7 @@ module Aws::Athena
       :enable_identity_center,
       :identity_center_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -1953,7 +1854,7 @@ module Aws::Athena
       :notebook_s3_location_uri,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -1962,7 +1863,7 @@ module Aws::Athena
     class ImportNotebookOutput < Struct.new(
       :notebook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates a platform issue, which may be due to a transient condition or
@@ -1972,7 +1873,7 @@ module Aws::Athena
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that something is wrong with the input to the request. For example, a
@@ -1987,7 +1888,7 @@ module Aws::Athena
       :athena_error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2001,7 +1902,7 @@ module Aws::Athena
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_dpu_sizes
@@ -2016,7 +1917,7 @@ module Aws::Athena
       :application_dpu_sizes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -2058,7 +1959,7 @@ module Aws::Athena
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2073,7 +1974,7 @@ module Aws::Athena
       :next_token,
       :calculations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2087,7 +1988,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2102,7 +2003,7 @@ module Aws::Athena
       :next_token,
       :capacity_reservations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2121,7 +2022,7 @@ module Aws::Athena
       :max_results,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_catalogs_summary
@@ -2136,7 +2037,7 @@ module Aws::Athena
       :data_catalogs_summary,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_name
@@ -2160,7 +2061,7 @@ module Aws::Athena
       :max_results,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_list
@@ -2175,7 +2076,7 @@ module Aws::Athena
       :database_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2190,7 +2091,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_versions
@@ -2205,7 +2106,7 @@ module Aws::Athena
       :engine_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -2241,7 +2142,7 @@ module Aws::Athena
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -2260,7 +2161,7 @@ module Aws::Athena
       :next_token,
       :executors_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2281,7 +2182,7 @@ module Aws::Athena
       :max_results,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_query_ids
@@ -2296,7 +2197,7 @@ module Aws::Athena
       :named_query_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -2318,7 +2219,7 @@ module Aws::Athena
       :max_results,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2333,7 +2234,7 @@ module Aws::Athena
       :next_token,
       :notebook_metadata_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -2352,7 +2253,7 @@ module Aws::Athena
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_sessions_list
@@ -2367,7 +2268,7 @@ module Aws::Athena
       :notebook_sessions_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -2386,7 +2287,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prepared_statements
@@ -2401,7 +2302,7 @@ module Aws::Athena
       :prepared_statements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2422,7 +2323,7 @@ module Aws::Athena
       :max_results,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution_ids
@@ -2435,7 +2336,7 @@ module Aws::Athena
       :query_execution_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -2477,7 +2378,7 @@ module Aws::Athena
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2492,7 +2393,7 @@ module Aws::Athena
       :next_token,
       :sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_name
@@ -2525,7 +2426,7 @@ module Aws::Athena
       :max_results,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_metadata_list
@@ -2540,7 +2441,7 @@ module Aws::Athena
       :table_metadata_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2560,7 +2461,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2573,7 +2474,7 @@ module Aws::Athena
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2588,7 +2489,7 @@ module Aws::Athena
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_groups
@@ -2604,7 +2505,7 @@ module Aws::Athena
       :work_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2626,7 +2527,7 @@ module Aws::Athena
       :enabled,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2654,7 +2555,7 @@ module Aws::Athena
       :encryption_configuration,
       :remove_encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you encrypt query and calculation results in Athena owned storage, this field
@@ -2666,7 +2567,7 @@ module Aws::Athena
     class ManagedQueryResultsEncryptionConfiguration < Struct.new(
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception that Athena received when it called a custom metastore.
@@ -2680,7 +2581,7 @@ module Aws::Athena
     class MetadataException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A query, where <code>QueryString</code> contains the SQL statements that make up the
@@ -2711,7 +2612,7 @@ module Aws::Athena
       :named_query_id,
       :work_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata for notebook, including the notebook name, ID, workgroup, and time
@@ -2742,7 +2643,7 @@ module Aws::Athena
       :type,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the notebook session ID and notebook session creation time.</p>
@@ -2756,11 +2657,7 @@ module Aws::Athena
       :session_id,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotebookType
-      IPYNB = 'IPYNB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A prepared SQL statement for use with Athena.</p>
@@ -2786,7 +2683,7 @@ module Aws::Athena
       :description,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and last modified time of the prepared statement.</p>
@@ -2800,7 +2697,7 @@ module Aws::Athena
       :statement_name,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_name
@@ -2814,12 +2711,12 @@ module Aws::Athena
       :capacity_reservation_name,
       :capacity_assignments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutCapacityAssignmentConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a single instance of a query execution.</p>
@@ -2896,7 +2793,7 @@ module Aws::Athena
       :substatement_type,
       :query_results_s3_access_grants_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The database and data catalog context in which the query execution occurs.</p>
@@ -2911,15 +2808,7 @@ module Aws::Athena
       :database,
       :catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryExecutionState
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of data scanned during the query execution and the amount of time that it
@@ -2976,7 +2865,7 @@ module Aws::Athena
       :service_processing_time_in_millis,
       :result_reuse_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The completion date, current state, submission time, and state change reason (if
@@ -3014,12 +2903,7 @@ module Aws::Athena
       :completion_date_time,
       :athena_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryResultType
-      DATA_MANIFEST = 'DATA_MANIFEST'
-      DATA_ROWS = 'DATA_ROWS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether Amazon S3 access grants are enabled for query
@@ -3041,7 +2925,7 @@ module Aws::Athena
       :create_user_level_prefix,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query execution timeline, statistics on input and output rows and bytes, and the
@@ -3063,7 +2947,7 @@ module Aws::Athena
       :rows,
       :output_stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics such as input rows and bytes read by the query, rows and bytes output by
@@ -3086,7 +2970,7 @@ module Aws::Athena
       :output_bytes,
       :output_rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Timeline statistics such as query queue time, planning time, execution time, service
@@ -3124,7 +3008,7 @@ module Aws::Athena
       :service_processing_time_in_millis,
       :total_execution_time_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stage statistics such as input and output rows and bytes, execution time and stage
@@ -3167,7 +3051,7 @@ module Aws::Athena
       :query_stage_plan,
       :sub_stages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stage plan information such as name, identifier, sub plans, and remote sources.</p>
@@ -3191,7 +3075,7 @@ module Aws::Athena
       :children,
       :remote_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource, such as a workgroup, was not found.</p>
@@ -3204,7 +3088,7 @@ module Aws::Athena
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location in Amazon S3 where query and calculation results are stored and
@@ -3256,7 +3140,7 @@ module Aws::Athena
       :expected_bucket_owner,
       :acl_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the updates in the query results, such as output location and
@@ -3334,7 +3218,7 @@ module Aws::Athena
       :acl_configuration,
       :remove_acl_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whether previous query results are reused, and if so, their maximum
@@ -3350,7 +3234,7 @@ module Aws::Athena
       :enabled,
       :max_age_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -3366,7 +3250,7 @@ module Aws::Athena
     class ResultReuseConfiguration < Struct.new(
       :result_reuse_by_age_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about whether the result of a previous query was reused.</p>
@@ -3377,7 +3261,7 @@ module Aws::Athena
     class ResultReuseInformation < Struct.new(
       :reused_previous_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:reused_previous_result] = false unless options.key?(:reused_previous_result)
@@ -3398,7 +3282,7 @@ module Aws::Athena
       :rows,
       :result_set_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata that describes the column structure and data types of a table of query
@@ -3409,7 +3293,7 @@ module Aws::Athena
     class ResultSetMetadata < Struct.new(
       :column_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rows that make up a query result table.</p>
@@ -3419,11 +3303,7 @@ module Aws::Athena
     class Row < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3AclOption
-      BUCKET_OWNER_FULL_CONTROL = 'BUCKET_OWNER_FULL_CONTROL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified session already exists.</p>
@@ -3432,7 +3312,7 @@ module Aws::Athena
     class SessionAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains session configuration information.</p>
@@ -3458,18 +3338,7 @@ module Aws::Athena
       :idle_timeout_seconds,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      IDLE = 'IDLE'
-      BUSY = 'BUSY'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      DEGRADED = 'DEGRADED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains statistics for a session.</p>
@@ -3479,7 +3348,7 @@ module Aws::Athena
     class SessionStatistics < Struct.new(
       :dpu_execution_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the status of a session.</p>
@@ -3530,7 +3399,7 @@ module Aws::Athena
       :state,
       :state_change_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a session.</p>
@@ -3557,7 +3426,7 @@ module Aws::Athena
       :notebook_version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3595,7 +3464,7 @@ module Aws::Athena
       :code_block,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculation_execution_id
@@ -3625,7 +3494,7 @@ module Aws::Athena
       :calculation_execution_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_string
@@ -3674,7 +3543,7 @@ module Aws::Athena
       :execution_parameters,
       :result_reuse_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution_id
@@ -3683,7 +3552,7 @@ module Aws::Athena
     class StartQueryExecutionOutput < Struct.new(
       :query_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -3726,7 +3595,7 @@ module Aws::Athena
       :session_idle_timeout_in_minutes,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3758,13 +3627,7 @@ module Aws::Athena
       :session_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatementType
-      DDL = 'DDL'
-      DML = 'DML'
-      UTILITY = 'UTILITY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculation_execution_id
@@ -3773,7 +3636,7 @@ module Aws::Athena
     class StopCalculationExecutionRequest < Struct.new(
       :calculation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -3799,7 +3662,7 @@ module Aws::Athena
     class StopCalculationExecutionResponse < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_execution_id
@@ -3808,12 +3671,12 @@ module Aws::Athena
     class StopQueryExecutionInput < Struct.new(
       :query_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopQueryExecutionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata for a table.</p>
@@ -3848,7 +3711,7 @@ module Aws::Athena
       :partition_keys,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A label that you assign to a resource. Athena resources include
@@ -3876,7 +3739,7 @@ module Aws::Athena
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3890,12 +3753,12 @@ module Aws::Athena
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3904,7 +3767,7 @@ module Aws::Athena
     class TerminateSessionRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -3932,13 +3795,7 @@ module Aws::Athena
     class TerminateSessionResponse < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The reason for the query throttling, for example, when it exceeds the concurrent query
-    #             limit.</p>
-    module ThrottleReason
-      CONCURRENT_QUERY_LIMIT_EXCEEDED = 'CONCURRENT_QUERY_LIMIT_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the request was throttled.</p>
@@ -3952,7 +3809,7 @@ module Aws::Athena
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a named query ID that could not be processed.</p>
@@ -3972,7 +3829,7 @@ module Aws::Athena
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of a prepared statement that could not be returned.</p>
@@ -4008,7 +3865,7 @@ module Aws::Athena
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a query execution that failed to process.</p>
@@ -4028,7 +3885,7 @@ module Aws::Athena
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4042,12 +3899,12 @@ module Aws::Athena
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_dpus
@@ -4060,12 +3917,12 @@ module Aws::Athena
       :target_dpus,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCapacityReservationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4129,12 +3986,12 @@ module Aws::Athena
       :description,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDataCatalogOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute named_query_id
@@ -4155,12 +4012,12 @@ module Aws::Athena
       :description,
       :query_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNamedQueryOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -4193,7 +4050,7 @@ module Aws::Athena
       :session_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notebook_id
@@ -4217,17 +4074,17 @@ module Aws::Athena
       :client_request_token,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookMetadataOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotebookOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement_name
@@ -4248,12 +4105,12 @@ module Aws::Athena
       :query_statement,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePreparedStatementOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute work_group
@@ -4274,12 +4131,12 @@ module Aws::Athena
       :configuration_updates,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWorkGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workgroup, which contains a name, description, creation time, state, and other
@@ -4323,7 +4180,7 @@ module Aws::Athena
       :creation_time,
       :identity_center_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the workgroup, which includes the location in Amazon S3
@@ -4415,7 +4272,7 @@ module Aws::Athena
       :identity_center_configuration,
       :query_results_s3_access_grants_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information that will be updated for this workgroup, which includes
@@ -4507,12 +4364,7 @@ module Aws::Athena
       :enable_minimum_encryption_configuration,
       :query_results_s3_access_grants_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkGroupState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information for the workgroup, which includes its name, state,
@@ -4546,7 +4398,7 @@ module Aws::Athena
       :engine_version,
       :identity_center_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

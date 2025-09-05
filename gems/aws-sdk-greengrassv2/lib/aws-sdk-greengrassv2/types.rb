@@ -12,7 +12,7 @@ module Aws::GreengrassV2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a request to associate a client device with a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these
@@ -23,7 +23,7 @@ module Aws::GreengrassV2
     class AssociateClientDeviceWithCoreDeviceEntry < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an error that occurs from a request to associate a client device with a core
@@ -43,7 +43,7 @@ module Aws::GreengrassV2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -53,7 +53,7 @@ module Aws::GreengrassV2
     class AssociateServiceRoleToAccountRequest < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_at
@@ -63,7 +63,7 @@ module Aws::GreengrassV2
     class AssociateServiceRoleToAccountResponse < Struct.new(
       :associated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a client device that is associated to a core device for cloud
@@ -78,7 +78,7 @@ module Aws::GreengrassV2
       :thing_name,
       :association_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -91,7 +91,7 @@ module Aws::GreengrassV2
       :entries,
       :core_device_thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error_entries
@@ -101,7 +101,7 @@ module Aws::GreengrassV2
     class BatchAssociateClientDeviceWithCoreDeviceResponse < Struct.new(
       :error_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -114,7 +114,7 @@ module Aws::GreengrassV2
       :entries,
       :core_device_thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error_entries
@@ -124,7 +124,7 @@ module Aws::GreengrassV2
     class BatchDisassociateClientDeviceFromCoreDeviceResponse < Struct.new(
       :error_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -133,7 +133,7 @@ module Aws::GreengrassV2
     class CancelDeploymentRequest < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -142,15 +142,7 @@ module Aws::GreengrassV2
     class CancelDeploymentResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudComponentState
-      REQUESTED = 'REQUESTED'
-      INITIATED = 'INITIATED'
-      DEPLOYABLE = 'DEPLOYABLE'
-      FAILED = 'FAILED'
-      DEPRECATED = 'DEPRECATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the status of a component version in the IoT Greengrass service.</p>
@@ -198,7 +190,7 @@ module Aws::GreengrassV2
       :vendor_guidance,
       :vendor_guidance_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component.</p>
@@ -216,7 +208,7 @@ module Aws::GreengrassV2
       :component_name,
       :latest_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component that is a candidate to deploy to a Greengrass core
@@ -237,7 +229,7 @@ module Aws::GreengrassV2
       :component_version,
       :version_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a deployment's update to a component's configuration on
@@ -264,7 +256,7 @@ module Aws::GreengrassV2
       :merge,
       :reset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component dependency for a Lambda function component.</p>
@@ -293,12 +285,7 @@ module Aws::GreengrassV2
       :version_requirement,
       :dependency_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComponentDependencyType
-      HARD = 'HARD'
-      SOFT = 'SOFT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component to deploy.</p>
@@ -325,7 +312,7 @@ module Aws::GreengrassV2
       :configuration_update,
       :run_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the latest version of a component.</p>
@@ -355,7 +342,7 @@ module Aws::GreengrassV2
       :publisher,
       :platforms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a platform that a component supports.</p>
@@ -375,7 +362,7 @@ module Aws::GreengrassV2
       :name,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information system user and group that the IoT Greengrass Core software uses to run component
@@ -408,7 +395,7 @@ module Aws::GreengrassV2
       :system_resource_limits,
       :windows_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component version in a list.</p>
@@ -426,12 +413,7 @@ module Aws::GreengrassV2
       :component_version,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComponentVisibilityScope
-      PRIVATE = 'PRIVATE'
-      PUBLIC = 'PUBLIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request has conflicting operations. This can occur if you're trying to perform more
@@ -449,7 +431,7 @@ module Aws::GreengrassV2
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an endpoint and port where client devices can connect to an
@@ -474,7 +456,7 @@ module Aws::GreengrassV2
       :port_number,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port_number] = 0 unless options.key?(:port_number)
@@ -535,12 +517,7 @@ module Aws::GreengrassV2
       :architecture,
       :runtime,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CoreDeviceStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inline_recipe
@@ -570,7 +547,7 @@ module Aws::GreengrassV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -596,7 +573,7 @@ module Aws::GreengrassV2
       :creation_timestamp,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -642,7 +619,7 @@ module Aws::GreengrassV2
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -659,7 +636,7 @@ module Aws::GreengrassV2
       :iot_job_id,
       :iot_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -668,7 +645,7 @@ module Aws::GreengrassV2
     class DeleteComponentRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_device_thing_name
@@ -677,7 +654,7 @@ module Aws::GreengrassV2
     class DeleteCoreDeviceRequest < Struct.new(
       :core_device_thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -686,7 +663,7 @@ module Aws::GreengrassV2
     class DeleteDeploymentRequest < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a deployment.</p>
@@ -724,7 +701,7 @@ module Aws::GreengrassV2
       :is_latest_for_target,
       :parent_target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_latest_for_target] = false unless options.key?(:is_latest_for_target)
@@ -770,17 +747,12 @@ module Aws::GreengrassV2
       :timeout_in_seconds,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:timeout_in_seconds] =  unless options.key?(:timeout_in_seconds)
+        options[:timeout_in_seconds] = nil unless options.key?(:timeout_in_seconds)
         super
       end
-    end
-
-    module DeploymentComponentUpdatePolicyAction
-      NOTIFY_COMPONENTS = 'NOTIFY_COMPONENTS'
-      SKIP_NOTIFY_COMPONENTS = 'SKIP_NOTIFY_COMPONENTS'
     end
 
     # <p>Contains information about how long a component on a core device can validate its
@@ -796,22 +768,12 @@ module Aws::GreengrassV2
     class DeploymentConfigurationValidationPolicy < Struct.new(
       :timeout_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:timeout_in_seconds] =  unless options.key?(:timeout_in_seconds)
+        options[:timeout_in_seconds] = nil unless options.key?(:timeout_in_seconds)
         super
       end
-    end
-
-    module DeploymentFailureHandlingPolicy
-      ROLLBACK = 'ROLLBACK'
-      DO_NOTHING = 'DO_NOTHING'
-    end
-
-    module DeploymentHistoryFilter
-      ALL = 'ALL'
-      LATEST_ONLY = 'LATEST_ONLY'
     end
 
     # <p>Contains information about an IoT job configuration.</p>
@@ -832,7 +794,7 @@ module Aws::GreengrassV2
       :abort_config,
       :timeout_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about policies that define how a deployment updates components and
@@ -856,15 +818,7 @@ module Aws::GreengrassV2
       :component_update_policy,
       :configuration_validation_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentStatus
-      ACTIVE = 'ACTIVE'
-      COMPLETED = 'COMPLETED'
-      CANCELED = 'CANCELED'
-      FAILED = 'FAILED'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -873,7 +827,7 @@ module Aws::GreengrassV2
     class DescribeComponentRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -917,7 +871,7 @@ module Aws::GreengrassV2
       :platforms,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a request to disassociate a client device from a core device. The <a href="https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html">BatchDisassociateClientDeviceWithCoreDevice</a> operation consumes a list of these
@@ -928,7 +882,7 @@ module Aws::GreengrassV2
     class DisassociateClientDeviceFromCoreDeviceEntry < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an error that occurs from a request to disassociate a client device from a core
@@ -948,12 +902,12 @@ module Aws::GreengrassV2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateServiceRoleFromAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute disassociated_at
@@ -963,7 +917,7 @@ module Aws::GreengrassV2
     class DisassociateServiceRoleFromAccountResponse < Struct.new(
       :disassociated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.</p>
@@ -1055,18 +1009,7 @@ module Aws::GreengrassV2
       :modified_timestamp,
       :status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EffectiveDeploymentExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      QUEUED = 'QUEUED'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      TIMED_OUT = 'TIMED_OUT'
-      CANCELED = 'CANCELED'
-      REJECTED = 'REJECTED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all error-related information for the deployment record. The status details will
@@ -1091,7 +1034,7 @@ module Aws::GreengrassV2
       :error_stack,
       :error_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipe_output_format
@@ -1104,7 +1047,7 @@ module Aws::GreengrassV2
       :recipe_output_format,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipe_output_format
@@ -1123,7 +1066,7 @@ module Aws::GreengrassV2
       :recipe,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1154,7 +1097,7 @@ module Aws::GreengrassV2
       :s3_endpoint_type,
       :iot_endpoint_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pre_signed_url
@@ -1163,7 +1106,7 @@ module Aws::GreengrassV2
     class GetComponentVersionArtifactResponse < Struct.new(
       :pre_signed_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -1172,7 +1115,7 @@ module Aws::GreengrassV2
     class GetConnectivityInfoRequest < Struct.new(
       :thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connectivity_info
@@ -1185,7 +1128,7 @@ module Aws::GreengrassV2
       :connectivity_info,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_device_thing_name
@@ -1194,7 +1137,7 @@ module Aws::GreengrassV2
     class GetCoreDeviceRequest < Struct.new(
       :core_device_thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_device_thing_name
@@ -1260,7 +1203,7 @@ module Aws::GreengrassV2
       :last_status_update_timestamp,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -1269,7 +1212,7 @@ module Aws::GreengrassV2
     class GetDeploymentRequest < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -1335,7 +1278,7 @@ module Aws::GreengrassV2
       :parent_target_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_latest_for_target] = false unless options.key?(:is_latest_for_target)
@@ -1345,7 +1288,7 @@ module Aws::GreengrassV2
 
     class GetServiceRoleForAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_at
@@ -1360,7 +1303,7 @@ module Aws::GreengrassV2
       :associated_at,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component on a Greengrass core device.</p>
@@ -1420,28 +1363,12 @@ module Aws::GreengrassV2
       :last_installation_source,
       :lifecycle_status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_root] = false unless options.key?(:is_root)
         super
       end
-    end
-
-    module InstalledComponentLifecycleState
-      NEW = 'NEW'
-      INSTALLED = 'INSTALLED'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      ERRORED = 'ERRORED'
-      BROKEN = 'BROKEN'
-      FINISHED = 'FINISHED'
-    end
-
-    module InstalledComponentTopologyFilter
-      ALL = 'ALL'
-      ROOT = 'ROOT'
     end
 
     # <p>IoT Greengrass can't process your request right now. Try again later.</p>
@@ -1454,16 +1381,12 @@ module Aws::GreengrassV2
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
         super
       end
-    end
-
-    module IoTJobAbortAction
-      CANCEL = 'CANCEL'
     end
 
     # <p>Contains a list of criteria that define when and how to cancel a configuration
@@ -1475,7 +1398,7 @@ module Aws::GreengrassV2
     class IoTJobAbortConfig < Struct.new(
       :criteria_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains criteria that define when and how to cancel a job.</p>
@@ -1512,19 +1435,12 @@ module Aws::GreengrassV2
       :threshold_percentage,
       :min_number_of_executed_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:threshold_percentage] = 0 unless options.key?(:threshold_percentage)
         super
       end
-    end
-
-    module IoTJobExecutionFailureType
-      FAILED = 'FAILED'
-      REJECTED = 'REJECTED'
-      TIMED_OUT = 'TIMED_OUT'
-      ALL = 'ALL'
     end
 
     # <p>Contains information about the rollout configuration for a job. This configuration defines
@@ -1539,7 +1455,7 @@ module Aws::GreengrassV2
       :exponential_rate,
       :maximum_per_minute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an exponential rollout rate for a configuration deployment
@@ -1561,7 +1477,7 @@ module Aws::GreengrassV2
       :increment_factor,
       :rate_increase_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about criteria to meet before a job increases its rollout rate.
@@ -1579,7 +1495,7 @@ module Aws::GreengrassV2
       :number_of_notified_things,
       :number_of_succeeded_things,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the timeout configuration for a job.</p>
@@ -1593,17 +1509,12 @@ module Aws::GreengrassV2
     class IoTJobTimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:in_progress_timeout_in_minutes] =  unless options.key?(:in_progress_timeout_in_minutes)
+        options[:in_progress_timeout_in_minutes] = nil unless options.key?(:in_progress_timeout_in_minutes)
         super
       end
-    end
-
-    module IotEndpointType
-      fips = 'fips'
-      standard = 'standard'
     end
 
     # <p>Contains information about a container in which Lambda functions run on Greengrass core
@@ -1630,11 +1541,11 @@ module Aws::GreengrassV2
       :volumes,
       :devices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:memory_size_in_kb] =  unless options.key?(:memory_size_in_kb)
-        options[:mount_ro_sysfs] =  unless options.key?(:mount_ro_sysfs)
+        options[:memory_size_in_kb] = nil unless options.key?(:memory_size_in_kb)
+        options[:mount_ro_sysfs] = nil unless options.key?(:mount_ro_sysfs)
         super
       end
     end
@@ -1659,10 +1570,10 @@ module Aws::GreengrassV2
       :permission,
       :add_group_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:add_group_owner] =  unless options.key?(:add_group_owner)
+        options[:add_group_owner] = nil unless options.key?(:add_group_owner)
         super
       end
     end
@@ -1694,12 +1605,7 @@ module Aws::GreengrassV2
       :topic,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LambdaEventSourceType
-      PUB_SUB = 'PUB_SUB'
-      IOT_CORE = 'IOT_CORE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains parameters for a Lambda function that runs on IoT Greengrass.</p>
@@ -1773,22 +1679,17 @@ module Aws::GreengrassV2
       :environment_variables,
       :linux_process_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_queue_size] =  unless options.key?(:max_queue_size)
-        options[:max_instances_count] =  unless options.key?(:max_instances_count)
-        options[:max_idle_time_in_seconds] =  unless options.key?(:max_idle_time_in_seconds)
-        options[:timeout_in_seconds] =  unless options.key?(:timeout_in_seconds)
-        options[:status_timeout_in_seconds] =  unless options.key?(:status_timeout_in_seconds)
-        options[:pinned] =  unless options.key?(:pinned)
+        options[:max_queue_size] = nil unless options.key?(:max_queue_size)
+        options[:max_instances_count] = nil unless options.key?(:max_instances_count)
+        options[:max_idle_time_in_seconds] = nil unless options.key?(:max_idle_time_in_seconds)
+        options[:timeout_in_seconds] = nil unless options.key?(:timeout_in_seconds)
+        options[:status_timeout_in_seconds] = nil unless options.key?(:status_timeout_in_seconds)
+        options[:pinned] = nil unless options.key?(:pinned)
         super
       end
-    end
-
-    module LambdaFilesystemPermission
-      RO = 'ro'
-      RW = 'rw'
     end
 
     # <p>Contains information about an Lambda function to import to create a component.</p>
@@ -1823,17 +1724,7 @@ module Aws::GreengrassV2
       :component_dependencies,
       :component_lambda_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LambdaInputPayloadEncodingType
-      JSON = 'json'
-      BINARY = 'binary'
-    end
-
-    module LambdaIsolationMode
-      GREENGRASS_CONTAINER = 'GreengrassContainer'
-      NO_CONTAINER = 'NoContainer'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains parameters for a Linux process that contains an Lambda function.</p>
@@ -1851,7 +1742,7 @@ module Aws::GreengrassV2
       :isolation_mode,
       :container_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a volume that Linux processes in a container can access. When
@@ -1880,10 +1771,10 @@ module Aws::GreengrassV2
       :permission,
       :add_group_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:add_group_owner] =  unless options.key?(:add_group_owner)
+        options[:add_group_owner] = nil unless options.key?(:add_group_owner)
         super
       end
     end
@@ -1902,7 +1793,7 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_client_devices
@@ -1915,7 +1806,7 @@ module Aws::GreengrassV2
       :associated_client_devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1932,7 +1823,7 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_versions
@@ -1945,7 +1836,7 @@ module Aws::GreengrassV2
       :component_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -1964,7 +1855,7 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute components
@@ -1977,7 +1868,7 @@ module Aws::GreengrassV2
       :components,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_group_arn
@@ -2029,7 +1920,7 @@ module Aws::GreengrassV2
       :next_token,
       :runtime,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_devices
@@ -2042,7 +1933,7 @@ module Aws::GreengrassV2
       :core_devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -2082,7 +1973,7 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -2095,7 +1986,7 @@ module Aws::GreengrassV2
       :deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_device_thing_name
@@ -2112,7 +2003,7 @@ module Aws::GreengrassV2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effective_deployments
@@ -2125,7 +2016,7 @@ module Aws::GreengrassV2
       :effective_deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute core_device_thing_name
@@ -2162,7 +2053,7 @@ module Aws::GreengrassV2
       :next_token,
       :topology_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute installed_components
@@ -2185,7 +2076,7 @@ module Aws::GreengrassV2
       :installed_components,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2194,7 +2085,7 @@ module Aws::GreengrassV2
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2205,12 +2096,7 @@ module Aws::GreengrassV2
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecipeOutputFormat
-      JSON = 'JSON'
-      YAML = 'YAML'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is already in progress. This exception occurs when you use a client token for
@@ -2221,7 +2107,7 @@ module Aws::GreengrassV2
     class RequestAlreadyInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform
@@ -2234,7 +2120,7 @@ module Aws::GreengrassV2
       :platform,
       :component_candidates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolved_component_versions
@@ -2244,7 +2130,7 @@ module Aws::GreengrassV2
     class ResolveComponentCandidatesResponse < Struct.new(
       :resolved_component_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a component version that is compatible to run on a Greengrass core
@@ -2293,7 +2179,7 @@ module Aws::GreengrassV2
       :vendor_guidance,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource can't be found.</p>
@@ -2310,12 +2196,7 @@ module Aws::GreengrassV2
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3EndpointType
-      REGIONAL = 'REGIONAL'
-      GLOBAL = 'GLOBAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeds a service quota. For example, you might have the maximum number of
@@ -2341,7 +2222,7 @@ module Aws::GreengrassV2
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about system resource limits that the IoT Greengrass Core software applies to a
@@ -2363,7 +2244,7 @@ module Aws::GreengrassV2
       :memory,
       :cpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:memory] = 0 unless options.key?(:memory)
@@ -2384,12 +2265,12 @@ module Aws::GreengrassV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeded a request rate quota. For example, you might have exceeded the
@@ -2411,7 +2292,7 @@ module Aws::GreengrassV2
       :service_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -2429,12 +2310,12 @@ module Aws::GreengrassV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -2447,7 +2328,7 @@ module Aws::GreengrassV2
       :thing_name,
       :connectivity_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -2460,7 +2341,7 @@ module Aws::GreengrassV2
       :version,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request isn't valid. This can occur if your request contains malformed JSON or
@@ -2478,7 +2359,7 @@ module Aws::GreengrassV2
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a validation exception field.</p>
@@ -2492,20 +2373,7 @@ module Aws::GreengrassV2
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
-    end
-
-    module VendorGuidance
-      ACTIVE = 'ACTIVE'
-      DISCONTINUED = 'DISCONTINUED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
   end

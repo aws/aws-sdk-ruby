@@ -22,12 +22,12 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :cloud_watch_logging_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddApplicationCloudWatchLoggingOptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -51,12 +51,12 @@ module Aws::KinesisAnalytics
       :input_id,
       :input_processing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddApplicationInputProcessingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -75,13 +75,13 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddApplicationInputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -105,13 +105,13 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddApplicationOutputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -132,13 +132,13 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :reference_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class AddApplicationReferenceDataSourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -211,16 +211,7 @@ module Aws::KinesisAnalytics
       :application_code,
       :application_version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationStatus
-      DELETING = 'DELETING'
-      STARTING = 'STARTING'
-      STOPPING = 'STOPPING'
-      READY = 'READY'
-      RUNNING = 'RUNNING'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -241,7 +232,7 @@ module Aws::KinesisAnalytics
       :application_arn,
       :application_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to apply to an existing Amazon Kinesis Analytics application.</p>
@@ -267,7 +258,7 @@ module Aws::KinesisAnalytics
       :reference_data_source_updates,
       :cloud_watch_logging_option_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional mapping information when the record format 
@@ -291,7 +282,7 @@ module Aws::KinesisAnalytics
       :record_row_delimiter,
       :record_column_delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of CloudWatch logging options, including the log stream
@@ -308,7 +299,7 @@ module Aws::KinesisAnalytics
       :log_stream_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Description of the CloudWatch logging option.</p>
@@ -326,7 +317,7 @@ module Aws::KinesisAnalytics
       :log_stream_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes CloudWatch logging option updates.</p>
@@ -344,7 +335,7 @@ module Aws::KinesisAnalytics
       :log_stream_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User-provided application code (query) is invalid. This can be a simple syntax error.</p>
@@ -354,7 +345,7 @@ module Aws::KinesisAnalytics
     class CodeValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time.</p>
@@ -364,7 +355,7 @@ module Aws::KinesisAnalytics
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TBD</p>
@@ -429,7 +420,7 @@ module Aws::KinesisAnalytics
       :application_code,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TBD</p>
@@ -441,7 +432,7 @@ module Aws::KinesisAnalytics
     class CreateApplicationResponse < Struct.new(
       :application_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -459,12 +450,12 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :cloud_watch_logging_option_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationCloudWatchLoggingOptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -482,12 +473,12 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :input_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationInputProcessingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -516,13 +507,13 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :output_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DeleteApplicationOutputResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -546,12 +537,12 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :reference_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationReferenceDataSourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -567,13 +558,13 @@ module Aws::KinesisAnalytics
       :application_name,
       :create_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DeleteApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -583,7 +574,7 @@ module Aws::KinesisAnalytics
     class DescribeApplicationRequest < Struct.new(
       :application_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -593,7 +584,7 @@ module Aws::KinesisAnalytics
     class DescribeApplicationResponse < Struct.new(
       :application_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data format when records are written to the destination. 
@@ -608,7 +599,7 @@ module Aws::KinesisAnalytics
     class DestinationSchema < Struct.new(
       :record_format_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -634,7 +625,7 @@ module Aws::KinesisAnalytics
       :s3_configuration,
       :input_processing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -656,7 +647,7 @@ module Aws::KinesisAnalytics
       :processed_input_records,
       :raw_input_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you configure the application input, you specify the streaming source,  the 
@@ -704,7 +695,7 @@ module Aws::KinesisAnalytics
       :input_parallelism,
       :input_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you start your application, 
@@ -722,7 +713,7 @@ module Aws::KinesisAnalytics
       :id,
       :input_starting_position_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the application input configuration. 
@@ -776,7 +767,7 @@ module Aws::KinesisAnalytics
       :input_parallelism,
       :input_starting_position_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that
@@ -797,7 +788,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that
@@ -813,7 +804,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an update to the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a> that is used to preprocess the records in the stream.</p>
@@ -833,7 +824,7 @@ module Aws::KinesisAnalytics
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the number of in-application streams to create for a given 
@@ -848,7 +839,7 @@ module Aws::KinesisAnalytics
     class InputParallelism < Struct.new(
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides updates to the parallelism count.</p>
@@ -859,7 +850,7 @@ module Aws::KinesisAnalytics
     class InputParallelismUpdate < Struct.new(
       :count_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of a processor that is used to preprocess the records in the
@@ -873,7 +864,7 @@ module Aws::KinesisAnalytics
     class InputProcessingConfiguration < Struct.new(
       :input_lambda_processor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information about an input processor. Currently, the only input processor available is 
@@ -884,7 +875,7 @@ module Aws::KinesisAnalytics
     class InputProcessingConfigurationDescription < Struct.new(
       :input_lambda_processor_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to an <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a>. </p>
@@ -894,7 +885,7 @@ module Aws::KinesisAnalytics
     class InputProcessingConfigurationUpdate < Struct.new(
       :input_lambda_processor_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates for the application's input schema.</p>
@@ -913,13 +904,7 @@ module Aws::KinesisAnalytics
       :record_encoding_update,
       :record_column_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputStartingPosition
-      NOW = 'NOW'
-      TRIM_HORIZON = 'TRIM_HORIZON'
-      LAST_STOPPED_POINT = 'LAST_STOPPED_POINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the point at which the application reads from 
@@ -949,7 +934,7 @@ module Aws::KinesisAnalytics
     class InputStartingPositionConfiguration < Struct.new(
       :input_starting_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes updates to a specific input configuration (identified by the 
@@ -989,7 +974,7 @@ module Aws::KinesisAnalytics
       :input_schema_update,
       :input_parallelism_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User-provided application configuration is not valid.</p>
@@ -999,7 +984,7 @@ module Aws::KinesisAnalytics
     class InvalidApplicationConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified input parameter value is invalid.</p>
@@ -1009,7 +994,7 @@ module Aws::KinesisAnalytics
     class InvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional mapping information when JSON is the record format on the streaming source.</p>
@@ -1019,7 +1004,7 @@ module Aws::KinesisAnalytics
     class JSONMappingParameters < Struct.new(
       :record_row_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Identifies an Amazon Kinesis Firehose delivery stream as the streaming source. You
@@ -1037,7 +1022,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1054,7 +1039,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When updating application input configuration, provides information about an  
@@ -1071,7 +1056,7 @@ module Aws::KinesisAnalytics
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When configuring application output, 
@@ -1088,7 +1073,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1105,7 +1090,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1125,7 +1110,7 @@ module Aws::KinesisAnalytics
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Identifies an Amazon Kinesis stream as the streaming source. You provide the
@@ -1141,7 +1126,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1158,7 +1143,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When updating application input configuration, provides information about an 
@@ -1173,7 +1158,7 @@ module Aws::KinesisAnalytics
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When configuring application output, identifies an Amazon Kinesis stream as the
@@ -1189,7 +1174,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1206,7 +1191,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1225,7 +1210,7 @@ module Aws::KinesisAnalytics
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When configuring application output, identifies an AWS Lambda function as the
@@ -1246,7 +1231,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For an application output, describes the AWS Lambda function configured as its
@@ -1261,7 +1246,7 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When updating an output configuration using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html">UpdateApplication</a>
@@ -1281,7 +1266,7 @@ module Aws::KinesisAnalytics
       :resource_arn_update,
       :role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceeded the number of applications allowed.</p>
@@ -1291,7 +1276,7 @@ module Aws::KinesisAnalytics
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1305,7 +1290,7 @@ module Aws::KinesisAnalytics
       :limit,
       :exclusive_start_application_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1319,7 +1304,7 @@ module Aws::KinesisAnalytics
       :application_summaries,
       :has_more_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1328,7 +1313,7 @@ module Aws::KinesisAnalytics
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1337,7 +1322,7 @@ module Aws::KinesisAnalytics
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When configuring application input 
@@ -1356,7 +1341,7 @@ module Aws::KinesisAnalytics
       :json_mapping_parameters,
       :csv_mapping_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1394,7 +1379,7 @@ module Aws::KinesisAnalytics
       :lambda_output,
       :destination_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the application output configuration, which includes  
@@ -1431,7 +1416,7 @@ module Aws::KinesisAnalytics
       :lambda_output_description,
       :destination_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1467,7 +1452,7 @@ module Aws::KinesisAnalytics
       :lambda_output_update,
       :destination_schema_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the mapping of each data element in the streaming 
@@ -1488,7 +1473,7 @@ module Aws::KinesisAnalytics
       :mapping,
       :sql_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1505,12 +1490,7 @@ module Aws::KinesisAnalytics
       :record_format_type,
       :mapping_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordFormatType
-      JSON = 'JSON'
-      CSV = 'CSV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the reference data source by providing the source information (S3 bucket name and object key name), the resulting in-application table name that is created, and the necessary schema to map the data elements in the Amazon S3 object to the in-application table.</p>
@@ -1530,7 +1510,7 @@ module Aws::KinesisAnalytics
       :s3_reference_data_source,
       :reference_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the reference data source configured for an application.</p>
@@ -1554,7 +1534,7 @@ module Aws::KinesisAnalytics
       :s3_reference_data_source_description,
       :reference_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you update a reference data source configuration for an application, this object provides all the updated values (such as the source bucket name and object key name), the in-application table name that is created, and updated mapping information that maps the data in the Amazon S3 object to the in-application reference table that is created.</p>
@@ -1577,7 +1557,7 @@ module Aws::KinesisAnalytics
       :s3_reference_data_source_update,
       :reference_schema_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application is not available for this operation.</p>
@@ -1587,7 +1567,7 @@ module Aws::KinesisAnalytics
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified application can't be found.</p>
@@ -1597,7 +1577,7 @@ module Aws::KinesisAnalytics
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Discovery failed to get a record from the 
@@ -1610,7 +1590,7 @@ module Aws::KinesisAnalytics
     class ResourceProvisionedThroughputExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a description of an Amazon S3 data source, including the Amazon Resource
@@ -1630,7 +1610,7 @@ module Aws::KinesisAnalytics
       :bucket_arn,
       :file_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf.</p>
@@ -1651,7 +1631,7 @@ module Aws::KinesisAnalytics
       :file_key,
       :reference_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the bucket name and object key name that stores the reference data.</p>
@@ -1669,7 +1649,7 @@ module Aws::KinesisAnalytics
       :file_key,
       :reference_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.</p>
@@ -1687,7 +1667,7 @@ module Aws::KinesisAnalytics
       :file_key_update,
       :reference_role_arn_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unavailable. Back off and retry the operation. </p>
@@ -1696,7 +1676,7 @@ module Aws::KinesisAnalytics
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.</p>
@@ -1714,7 +1694,7 @@ module Aws::KinesisAnalytics
       :record_encoding,
       :record_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1728,13 +1708,13 @@ module Aws::KinesisAnalytics
       :application_name,
       :input_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class StartApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1744,13 +1724,13 @@ module Aws::KinesisAnalytics
     class StopApplicationRequest < Struct.new(
       :application_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class StopApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that 
@@ -1766,7 +1746,7 @@ module Aws::KinesisAnalytics
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1779,12 +1759,12 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application created with too many tags, or too many tags added to an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.</p>
@@ -1793,7 +1773,7 @@ module Aws::KinesisAnalytics
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data format is not valid. Amazon Kinesis Analytics is not able to detect schema for
@@ -1809,7 +1789,7 @@ module Aws::KinesisAnalytics
       :raw_input_records,
       :processed_input_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation. </p>
@@ -1818,7 +1798,7 @@ module Aws::KinesisAnalytics
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1831,12 +1811,12 @@ module Aws::KinesisAnalytics
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_name
@@ -1854,12 +1834,12 @@ module Aws::KinesisAnalytics
       :current_application_version_id,
       :application_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

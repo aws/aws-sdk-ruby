@@ -22,12 +22,7 @@ module Aws::BCMDataExports
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompressionOption
-      GZIP = 'GZIP'
-      PARQUET = 'PARQUET'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export
@@ -42,7 +37,7 @@ module Aws::BCMDataExports
       :export,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -51,7 +46,7 @@ module Aws::BCMDataExports
     class CreateExportResponse < Struct.new(
       :export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SQL query of column selections and row filters from the data table you want.</p>
@@ -65,7 +60,7 @@ module Aws::BCMDataExports
       :query_statement,
       :table_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -74,7 +69,7 @@ module Aws::BCMDataExports
     class DeleteExportRequest < Struct.new(
       :export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -83,7 +78,7 @@ module Aws::BCMDataExports
     class DeleteExportResponse < Struct.new(
       :export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destinations used for data exports.</p>
@@ -93,7 +88,7 @@ module Aws::BCMDataExports
     class DestinationConfigurations < Struct.new(
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference for the data export update.</p>
@@ -107,7 +102,7 @@ module Aws::BCMDataExports
       :execution_id,
       :execution_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the execution.</p>
@@ -133,23 +128,7 @@ module Aws::BCMDataExports
       :completed_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionStatusCode
-      INITIATION_IN_PROCESS = 'INITIATION_IN_PROCESS'
-      QUERY_QUEUED = 'QUERY_QUEUED'
-      QUERY_IN_PROCESS = 'QUERY_IN_PROCESS'
-      QUERY_FAILURE = 'QUERY_FAILURE'
-      DELIVERY_IN_PROCESS = 'DELIVERY_IN_PROCESS'
-      DELIVERY_SUCCESS = 'DELIVERY_SUCCESS'
-      DELIVERY_FAILURE = 'DELIVERY_FAILURE'
-    end
-
-    module ExecutionStatusReason
-      INSUFFICIENT_PERMISSION = 'INSUFFICIENT_PERMISSION'
-      BILL_OWNER_CHANGED = 'BILL_OWNER_CHANGED'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details that are available for an export.</p>
@@ -179,7 +158,7 @@ module Aws::BCMDataExports
       :destination_configurations,
       :refresh_cadence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference details for a given export.</p>
@@ -197,7 +176,7 @@ module Aws::BCMDataExports
       :export_name,
       :export_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the data export.</p>
@@ -223,21 +202,7 @@ module Aws::BCMDataExports
       :last_updated_at,
       :last_refreshed_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportStatusCode
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-    end
-
-    module FormatOption
-      TEXT_OR_CSV = 'TEXT_OR_CSV'
-      PARQUET = 'PARQUET'
-    end
-
-    module FrequencyOption
-      SYNCHRONOUS = 'SYNCHRONOUS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -251,7 +216,7 @@ module Aws::BCMDataExports
       :export_arn,
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -270,7 +235,7 @@ module Aws::BCMDataExports
       :export,
       :execution_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -279,7 +244,7 @@ module Aws::BCMDataExports
     class GetExportRequest < Struct.new(
       :export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export
@@ -292,7 +257,7 @@ module Aws::BCMDataExports
       :export,
       :export_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_name
@@ -308,7 +273,7 @@ module Aws::BCMDataExports
       :table_name,
       :table_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_name
@@ -332,7 +297,7 @@ module Aws::BCMDataExports
       :table_properties,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error on the server occurred during the processing of your request. Try again
@@ -342,7 +307,7 @@ module Aws::BCMDataExports
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -359,7 +324,7 @@ module Aws::BCMDataExports
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute executions
@@ -372,7 +337,7 @@ module Aws::BCMDataExports
       :executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -385,7 +350,7 @@ module Aws::BCMDataExports
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exports
@@ -398,7 +363,7 @@ module Aws::BCMDataExports
       :exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -411,7 +376,7 @@ module Aws::BCMDataExports
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tables
@@ -424,7 +389,7 @@ module Aws::BCMDataExports
       :tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -441,7 +406,7 @@ module Aws::BCMDataExports
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -455,12 +420,7 @@ module Aws::BCMDataExports
       :resource_tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OverwriteOption
-      CREATE_NEW_REPORT = 'CREATE_NEW_REPORT'
-      OVERWRITE_REPORT = 'OVERWRITE_REPORT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cadence for Amazon Web Services to update the data export in your S3 bucket.</p>
@@ -471,7 +431,7 @@ module Aws::BCMDataExports
     class RefreshCadence < Struct.new(
       :frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon Resource Name (ARN) in the request doesn't exist.</p>
@@ -488,7 +448,7 @@ module Aws::BCMDataExports
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag structure that contains a tag key and value.</p>
@@ -502,7 +462,7 @@ module Aws::BCMDataExports
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object
@@ -525,7 +485,7 @@ module Aws::BCMDataExports
       :s3_region,
       :s3_output_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The compression type, file format, and overwrite preference for the data export.</p>
@@ -550,11 +510,7 @@ module Aws::BCMDataExports
       :compression,
       :overwrite,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3OutputType
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit on the number of resources you can create, or exceeded the size
@@ -581,7 +537,7 @@ module Aws::BCMDataExports
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the data export table.</p>
@@ -599,7 +555,7 @@ module Aws::BCMDataExports
       :description,
       :table_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for the data export table.</p>
@@ -621,7 +577,7 @@ module Aws::BCMDataExports
       :default_value,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -635,12 +591,12 @@ module Aws::BCMDataExports
       :resource_arn,
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -658,7 +614,7 @@ module Aws::BCMDataExports
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -671,12 +627,12 @@ module Aws::BCMDataExports
       :resource_arn,
       :resource_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -689,7 +645,7 @@ module Aws::BCMDataExports
       :export_arn,
       :export,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_arn
@@ -698,7 +654,7 @@ module Aws::BCMDataExports
     class UpdateExportResponse < Struct.new(
       :export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services
@@ -716,7 +672,7 @@ module Aws::BCMDataExports
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the Amazon Web Services service in a
@@ -731,14 +687,7 @@ module Aws::BCMDataExports
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

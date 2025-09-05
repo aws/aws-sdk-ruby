@@ -19,7 +19,7 @@ module Aws::CodeDeploy
       :tags,
       :instance_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an alarm.</p>
@@ -30,7 +30,7 @@ module Aws::CodeDeploy
     class Alarm < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about alarms associated with a deployment or deployment group.</p>
@@ -62,7 +62,7 @@ module Aws::CodeDeploy
       :ignore_poll_alarm_failure,
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -78,7 +78,7 @@ module Aws::CodeDeploy
     class AlarmsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A revision for an Lambda or Amazon ECS deployment that is a
@@ -102,7 +102,7 @@ module Aws::CodeDeploy
       :content,
       :sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An application with the specified name with the user or Amazon Web Services account
@@ -113,7 +113,7 @@ module Aws::CodeDeploy
     class ApplicationAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application does not exist with the user or Amazon Web Services account.</p>
@@ -123,7 +123,7 @@ module Aws::CodeDeploy
     class ApplicationDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an application.</p>
@@ -154,7 +154,7 @@ module Aws::CodeDeploy
       :git_hub_account_name,
       :compute_platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:linked_to_git_hub] = false unless options.key?(:linked_to_git_hub)
@@ -169,7 +169,7 @@ module Aws::CodeDeploy
     class ApplicationLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum number of required application names was not specified.</p>
@@ -179,13 +179,7 @@ module Aws::CodeDeploy
     class ApplicationNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationRevisionSortBy
-      RegisterTime = 'registerTime'
-      FirstUsedTime = 'firstUsedTime'
-      LastUsedTime = 'lastUsedTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified ARN is not supported. For example, it might be an ARN for a resource
@@ -196,7 +190,7 @@ module Aws::CodeDeploy
     class ArnNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a configuration for automatically rolling back to a previous version
@@ -212,18 +206,12 @@ module Aws::CodeDeploy
       :enabled,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module AutoRollbackEvent
-      DEPLOYMENT_FAILURE = 'DEPLOYMENT_FAILURE'
-      DEPLOYMENT_STOP_ON_ALARM = 'DEPLOYMENT_STOP_ON_ALARM'
-      DEPLOYMENT_STOP_ON_REQUEST = 'DEPLOYMENT_STOP_ON_REQUEST'
     end
 
     # <p>Information about an Auto Scaling group.</p>
@@ -245,7 +233,7 @@ module Aws::CodeDeploy
       :hook,
       :termination_hook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>BatchGetApplicationRevisions</code> operation.</p>
@@ -262,7 +250,7 @@ module Aws::CodeDeploy
       :application_name,
       :revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchGetApplicationRevisions</code> operation.</p>
@@ -280,7 +268,7 @@ module Aws::CodeDeploy
       :error_message,
       :revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>BatchGetApplications</code> operation.</p>
@@ -291,7 +279,7 @@ module Aws::CodeDeploy
     class BatchGetApplicationsInput < Struct.new(
       :application_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchGetApplications</code> operation.</p>
@@ -301,7 +289,7 @@ module Aws::CodeDeploy
     class BatchGetApplicationsOutput < Struct.new(
       :applications_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>BatchGetDeploymentGroups</code> operation.</p>
@@ -316,7 +304,7 @@ module Aws::CodeDeploy
       :application_name,
       :deployment_group_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchGetDeploymentGroups</code> operation.</p>
@@ -330,7 +318,7 @@ module Aws::CodeDeploy
       :deployment_groups_info,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>BatchGetDeploymentInstances</code> operation. </p>
@@ -345,7 +333,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchGetDeploymentInstances</code> operation.</p>
@@ -359,7 +347,7 @@ module Aws::CodeDeploy
       :instances_summary,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -397,7 +385,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :target_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_targets
@@ -430,7 +418,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentTargetsOutput < Struct.new(
       :deployment_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>BatchGetDeployments</code> operation. </p>
@@ -441,7 +429,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentsInput < Struct.new(
       :deployment_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>BatchGetDeployments</code> operation. </p>
@@ -451,7 +439,7 @@ module Aws::CodeDeploy
     class BatchGetDeploymentsOutput < Struct.new(
       :deployments_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>BatchGetOnPremisesInstances</code> operation.</p>
@@ -462,7 +450,7 @@ module Aws::CodeDeploy
     class BatchGetOnPremisesInstancesInput < Struct.new(
       :instance_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>BatchGetOnPremisesInstances</code> operation.</p>
@@ -472,7 +460,7 @@ module Aws::CodeDeploy
     class BatchGetOnPremisesInstancesOutput < Struct.new(
       :instance_infos,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of names or IDs allowed for this request (100) was exceeded.</p>
@@ -482,7 +470,7 @@ module Aws::CodeDeploy
     class BatchLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about blue/green deployment options for a deployment group.</p>
@@ -503,7 +491,7 @@ module Aws::CodeDeploy
       :deployment_ready_option,
       :green_fleet_provisioning_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about whether instances in the original environment are terminated when a
@@ -538,7 +526,7 @@ module Aws::CodeDeploy
       :action,
       :termination_wait_time_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:termination_wait_time_in_minutes] = 0 unless options.key?(:termination_wait_time_in_minutes)
@@ -553,15 +541,7 @@ module Aws::CodeDeploy
     class BucketNameFilterRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BundleType
-      Tar = 'tar'
-      TarGZip = 'tgz'
-      Zip = 'zip'
-      YAML = 'YAML'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the target to be updated by an CloudFormation blue/green
@@ -601,18 +581,12 @@ module Aws::CodeDeploy
       :resource_type,
       :target_version_weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:target_version_weight] = 0 unless options.key?(:target_version_weight)
         super
       end
-    end
-
-    module ComputePlatform
-      SERVER = 'Server'
-      LAMBDA = 'Lambda'
-      ECS = 'ECS'
     end
 
     # @!attribute deployment_id
@@ -629,7 +603,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :deployment_wait_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateApplication</code> operation.</p>
@@ -651,7 +625,7 @@ module Aws::CodeDeploy
       :compute_platform,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateApplication</code> operation.</p>
@@ -661,7 +635,7 @@ module Aws::CodeDeploy
     class CreateApplicationOutput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateDeploymentConfig</code> operation.</p>
@@ -708,7 +682,7 @@ module Aws::CodeDeploy
       :compute_platform,
       :zonal_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateDeploymentConfig</code> operation.</p>
@@ -718,7 +692,7 @@ module Aws::CodeDeploy
     class CreateDeploymentConfigOutput < Struct.new(
       :deployment_config_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateDeploymentGroup</code> operation.</p>
@@ -841,7 +815,7 @@ module Aws::CodeDeploy
       :tags,
       :termination_hook_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateDeploymentGroup</code> operation.</p>
@@ -851,7 +825,7 @@ module Aws::CodeDeploy
     class CreateDeploymentGroupOutput < Struct.new(
       :deployment_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateDeployment</code> operation.</p>
@@ -959,7 +933,7 @@ module Aws::CodeDeploy
       :file_exists_behavior,
       :override_alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>CreateDeployment</code> operation. </p>
@@ -969,7 +943,7 @@ module Aws::CodeDeploy
     class CreateDeploymentOutput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteApplication</code> operation.</p>
@@ -979,7 +953,7 @@ module Aws::CodeDeploy
     class DeleteApplicationInput < Struct.new(
       :application_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteDeploymentConfig</code> operation.</p>
@@ -989,7 +963,7 @@ module Aws::CodeDeploy
     class DeleteDeploymentConfigInput < Struct.new(
       :deployment_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteDeploymentGroup</code> operation.</p>
@@ -1003,7 +977,7 @@ module Aws::CodeDeploy
       :application_name,
       :deployment_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DeleteDeploymentGroup</code> operation.</p>
@@ -1017,7 +991,7 @@ module Aws::CodeDeploy
     class DeleteDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteGitHubAccount</code> operation.</p>
@@ -1027,7 +1001,7 @@ module Aws::CodeDeploy
     class DeleteGitHubAccountTokenInput < Struct.new(
       :token_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DeleteGitHubAccountToken</code> operation.</p>
@@ -1037,7 +1011,7 @@ module Aws::CodeDeploy
     class DeleteGitHubAccountTokenOutput < Struct.new(
       :token_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute external_id
@@ -1047,12 +1021,12 @@ module Aws::CodeDeploy
     class DeleteResourcesByExternalIdInput < Struct.new(
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcesByExternalIdOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment is already complete.</p>
@@ -1062,7 +1036,7 @@ module Aws::CodeDeploy
     class DeploymentAlreadyCompletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A deployment configuration with the specified name with the user or Amazon Web Services account already exists.</p>
@@ -1072,7 +1046,7 @@ module Aws::CodeDeploy
     class DeploymentConfigAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configuration does not exist with the user or Amazon Web Services account.</p>
@@ -1082,7 +1056,7 @@ module Aws::CodeDeploy
     class DeploymentConfigDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configuration is still in use.</p>
@@ -1092,7 +1066,7 @@ module Aws::CodeDeploy
     class DeploymentConfigInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment configuration.</p>
@@ -1129,7 +1103,7 @@ module Aws::CodeDeploy
       :traffic_routing_config,
       :zonal_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configurations limit was exceeded.</p>
@@ -1139,7 +1113,7 @@ module Aws::CodeDeploy
     class DeploymentConfigLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configuration name was not specified.</p>
@@ -1149,18 +1123,7 @@ module Aws::CodeDeploy
     class DeploymentConfigNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentCreator
-      User = 'user'
-      Autoscaling = 'autoscaling'
-      CodeDeployRollback = 'codeDeployRollback'
-      CodeDeploy = 'CodeDeploy'
-      CodeDeployAutoUpdate = 'CodeDeployAutoUpdate'
-      CloudFormation = 'CloudFormation'
-      CloudFormationRollback = 'CloudFormationRollback'
-      AutoscalingTermination = 'autoscalingTermination'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment with the user or Amazon Web Services account does not exist.</p>
@@ -1170,7 +1133,7 @@ module Aws::CodeDeploy
     class DeploymentDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A deployment group with the specified name with the user or Amazon Web Services account
@@ -1181,7 +1144,7 @@ module Aws::CodeDeploy
     class DeploymentGroupAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The named deployment group with the user or Amazon Web Services account does not
@@ -1192,7 +1155,7 @@ module Aws::CodeDeploy
     class DeploymentGroupDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment group.</p>
@@ -1315,7 +1278,7 @@ module Aws::CodeDeploy
       :ecs_services,
       :termination_hook_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:termination_hook_enabled] = false unless options.key?(:termination_hook_enabled)
@@ -1330,7 +1293,7 @@ module Aws::CodeDeploy
     class DeploymentGroupLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment group name was not specified.</p>
@@ -1340,7 +1303,7 @@ module Aws::CodeDeploy
     class DeploymentGroupNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one deployment ID must be specified.</p>
@@ -1350,7 +1313,7 @@ module Aws::CodeDeploy
     class DeploymentIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment.</p>
@@ -1551,7 +1514,7 @@ module Aws::CodeDeploy
       :related_deployments,
       :override_alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ignore_application_stop_failures] = false unless options.key?(:ignore_application_stop_failures)
@@ -1568,7 +1531,7 @@ module Aws::CodeDeploy
     class DeploymentIsNotInReadyStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of allowed deployments was exceeded.</p>
@@ -1578,7 +1541,7 @@ module Aws::CodeDeploy
     class DeploymentLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified deployment has not started.</p>
@@ -1588,12 +1551,7 @@ module Aws::CodeDeploy
     class DeploymentNotStartedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentOption
-      WITH_TRAFFIC_CONTROL = 'WITH_TRAFFIC_CONTROL'
-      WITHOUT_TRAFFIC_CONTROL = 'WITHOUT_TRAFFIC_CONTROL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the deployment status of the instances in the deployment.</p>
@@ -1625,7 +1583,7 @@ module Aws::CodeDeploy
       :skipped,
       :ready,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:pending] = 0 unless options.key?(:pending)
@@ -1636,11 +1594,6 @@ module Aws::CodeDeploy
         options[:ready] = 0 unless options.key?(:ready)
         super
       end
-    end
-
-    module DeploymentReadyAction
-      CONTINUE_DEPLOYMENT = 'CONTINUE_DEPLOYMENT'
-      STOP_DEPLOYMENT = 'STOP_DEPLOYMENT'
     end
 
     # <p>Information about how traffic is rerouted to instances in a replacement environment in
@@ -1671,23 +1624,12 @@ module Aws::CodeDeploy
       :action_on_timeout,
       :wait_time_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:wait_time_in_minutes] = 0 unless options.key?(:wait_time_in_minutes)
         super
       end
-    end
-
-    module DeploymentStatus
-      CREATED = 'Created'
-      QUEUED = 'Queued'
-      IN_PROGRESS = 'InProgress'
-      BAKING = 'Baking'
-      SUCCEEDED = 'Succeeded'
-      FAILED = 'Failed'
-      STOPPED = 'Stopped'
-      READY = 'Ready'
     end
 
     # <p>Information about the type of deployment, either in-place or blue/green, you want to
@@ -1702,7 +1644,7 @@ module Aws::CodeDeploy
       :deployment_type,
       :deployment_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the deployment target. </p>
@@ -1733,7 +1675,7 @@ module Aws::CodeDeploy
       :ecs_target,
       :cloud_formation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The provided target ID does not belong to the attempted deployment. </p>
@@ -1743,7 +1685,7 @@ module Aws::CodeDeploy
     class DeploymentTargetDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A deployment target ID was not provided. </p>
@@ -1753,7 +1695,7 @@ module Aws::CodeDeploy
     class DeploymentTargetIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The maximum number of targets that can be associated with an Amazon ECS or
@@ -1766,24 +1708,7 @@ module Aws::CodeDeploy
     class DeploymentTargetListSizeExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentTargetType
-      INSTANCE_TARGET = 'InstanceTarget'
-      LAMBDA_TARGET = 'LambdaTarget'
-      ECS_TARGET = 'ECSTarget'
-      CLOUDFORMATION_TARGET = 'CloudFormationTarget'
-    end
-
-    module DeploymentType
-      IN_PLACE = 'IN_PLACE'
-      BLUE_GREEN = 'BLUE_GREEN'
-    end
-
-    module DeploymentWaitType
-      READY_WAIT = 'READY_WAIT'
-      TERMINATION_WAIT = 'TERMINATION_WAIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeregisterOnPremisesInstance</code> operation.</p>
@@ -1793,7 +1718,7 @@ module Aws::CodeDeploy
     class DeregisterOnPremisesInstanceInput < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description is too long.</p>
@@ -1803,7 +1728,7 @@ module Aws::CodeDeploy
     class DescriptionTooLongException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Diagnostic information about executable scripts that are part of a deployment.</p>
@@ -1850,7 +1775,7 @@ module Aws::CodeDeploy
       :message,
       :log_tail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an EC2 tag filter.</p>
@@ -1882,13 +1807,7 @@ module Aws::CodeDeploy
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EC2TagFilterType
-      KEY_ONLY = 'KEY_ONLY'
-      VALUE_ONLY = 'VALUE_ONLY'
-      KEY_AND_VALUE = 'KEY_AND_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about groups of Amazon EC2 instance tags.</p>
@@ -1900,7 +1819,7 @@ module Aws::CodeDeploy
     class EC2TagSet < Struct.new(
       :ec2_tag_set_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the service and cluster names used to identify an Amazon ECS
@@ -1916,7 +1835,7 @@ module Aws::CodeDeploy
       :service_name,
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Amazon ECS service is associated with more than one deployment groups. An
@@ -1927,7 +1846,7 @@ module Aws::CodeDeploy
     class ECSServiceMappingLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the target of an Amazon ECS deployment. </p>
@@ -1964,7 +1883,7 @@ module Aws::CodeDeploy
       :status,
       :task_sets_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a set of Amazon ECS tasks in an CodeDeploy
@@ -2034,7 +1953,7 @@ module Aws::CodeDeploy
       :target_group,
       :task_set_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:desired_count] = 0 unless options.key?(:desired_count)
@@ -2058,44 +1977,7 @@ module Aws::CodeDeploy
     class ELBInfo < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      AGENT_ISSUE = 'AGENT_ISSUE'
-      ALARM_ACTIVE = 'ALARM_ACTIVE'
-      APPLICATION_MISSING = 'APPLICATION_MISSING'
-      AUTOSCALING_VALIDATION_ERROR = 'AUTOSCALING_VALIDATION_ERROR'
-      AUTO_SCALING_CONFIGURATION = 'AUTO_SCALING_CONFIGURATION'
-      AUTO_SCALING_IAM_ROLE_PERMISSIONS = 'AUTO_SCALING_IAM_ROLE_PERMISSIONS'
-      CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND = 'CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND'
-      CUSTOMER_APPLICATION_UNHEALTHY = 'CUSTOMER_APPLICATION_UNHEALTHY'
-      DEPLOYMENT_GROUP_MISSING = 'DEPLOYMENT_GROUP_MISSING'
-      ECS_UPDATE_ERROR = 'ECS_UPDATE_ERROR'
-      ELASTIC_LOAD_BALANCING_INVALID = 'ELASTIC_LOAD_BALANCING_INVALID'
-      ELB_INVALID_INSTANCE = 'ELB_INVALID_INSTANCE'
-      HEALTH_CONSTRAINTS = 'HEALTH_CONSTRAINTS'
-      HEALTH_CONSTRAINTS_INVALID = 'HEALTH_CONSTRAINTS_INVALID'
-      HOOK_EXECUTION_FAILURE = 'HOOK_EXECUTION_FAILURE'
-      IAM_ROLE_MISSING = 'IAM_ROLE_MISSING'
-      IAM_ROLE_PERMISSIONS = 'IAM_ROLE_PERMISSIONS'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      INVALID_ECS_SERVICE = 'INVALID_ECS_SERVICE'
-      INVALID_LAMBDA_CONFIGURATION = 'INVALID_LAMBDA_CONFIGURATION'
-      INVALID_LAMBDA_FUNCTION = 'INVALID_LAMBDA_FUNCTION'
-      INVALID_REVISION = 'INVALID_REVISION'
-      MANUAL_STOP = 'MANUAL_STOP'
-      MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION = 'MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION'
-      MISSING_ELB_INFORMATION = 'MISSING_ELB_INFORMATION'
-      MISSING_GITHUB_TOKEN = 'MISSING_GITHUB_TOKEN'
-      NO_EC2_SUBSCRIPTION = 'NO_EC2_SUBSCRIPTION'
-      NO_INSTANCES = 'NO_INSTANCES'
-      OVER_MAX_INSTANCES = 'OVER_MAX_INSTANCES'
-      RESOURCE_LIMIT_EXCEEDED = 'RESOURCE_LIMIT_EXCEEDED'
-      REVISION_MISSING = 'REVISION_MISSING'
-      THROTTLED = 'THROTTLED'
-      TIMEOUT = 'TIMEOUT'
-      CLOUDFORMATION_STACK_FAILURE = 'CLOUDFORMATION_STACK_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment error.</p>
@@ -2162,13 +2044,7 @@ module Aws::CodeDeploy
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileExistsBehavior
-      DISALLOW = 'DISALLOW'
-      OVERWRITE = 'OVERWRITE'
-      RETAIN = 'RETAIN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an application revision.</p>
@@ -2194,7 +2070,7 @@ module Aws::CodeDeploy
       :last_used_time,
       :register_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetApplication</code> operation.</p>
@@ -2204,7 +2080,7 @@ module Aws::CodeDeploy
     class GetApplicationInput < Struct.new(
       :application_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetApplication</code> operation.</p>
@@ -2214,7 +2090,7 @@ module Aws::CodeDeploy
     class GetApplicationOutput < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetApplicationRevision</code> operation.</p>
@@ -2228,7 +2104,7 @@ module Aws::CodeDeploy
       :application_name,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetApplicationRevision</code> operation.</p>
@@ -2246,7 +2122,7 @@ module Aws::CodeDeploy
       :revision,
       :revision_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetDeploymentConfig</code> operation.</p>
@@ -2256,7 +2132,7 @@ module Aws::CodeDeploy
     class GetDeploymentConfigInput < Struct.new(
       :deployment_config_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetDeploymentConfig</code> operation.</p>
@@ -2266,7 +2142,7 @@ module Aws::CodeDeploy
     class GetDeploymentConfigOutput < Struct.new(
       :deployment_config_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetDeploymentGroup</code> operation.</p>
@@ -2280,7 +2156,7 @@ module Aws::CodeDeploy
       :application_name,
       :deployment_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetDeploymentGroup</code> operation.</p>
@@ -2290,7 +2166,7 @@ module Aws::CodeDeploy
     class GetDeploymentGroupOutput < Struct.new(
       :deployment_group_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetDeployment</code> operation.</p>
@@ -2301,7 +2177,7 @@ module Aws::CodeDeploy
     class GetDeploymentInput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>GetDeploymentInstance</code> operation. </p>
@@ -2315,7 +2191,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>GetDeploymentInstance</code> operation. </p>
@@ -2325,7 +2201,7 @@ module Aws::CodeDeploy
     class GetDeploymentInstanceOutput < Struct.new(
       :instance_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetDeployment</code> operation.</p>
@@ -2335,7 +2211,7 @@ module Aws::CodeDeploy
     class GetDeploymentOutput < Struct.new(
       :deployment_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -2348,7 +2224,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_target
@@ -2361,7 +2237,7 @@ module Aws::CodeDeploy
     class GetDeploymentTargetOutput < Struct.new(
       :deployment_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>GetOnPremisesInstance</code> operation. </p>
@@ -2371,7 +2247,7 @@ module Aws::CodeDeploy
     class GetOnPremisesInstanceInput < Struct.new(
       :instance_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>GetOnPremisesInstance</code> operation. </p>
@@ -2381,7 +2257,7 @@ module Aws::CodeDeploy
     class GetOnPremisesInstanceOutput < Struct.new(
       :instance_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No GitHub account connection exists with the named specified in the call.</p>
@@ -2391,7 +2267,7 @@ module Aws::CodeDeploy
     class GitHubAccountTokenDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The call is missing a required GitHub account connection name.</p>
@@ -2401,7 +2277,7 @@ module Aws::CodeDeploy
     class GitHubAccountTokenNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of application artifacts stored in GitHub.</p>
@@ -2418,12 +2294,7 @@ module Aws::CodeDeploy
       :repository,
       :commit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GreenFleetProvisioningAction
-      DISCOVER_EXISTING = 'DISCOVER_EXISTING'
-      COPY_AUTO_SCALING_GROUP = 'COPY_AUTO_SCALING_GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instances that belong to the replacement environment in a
@@ -2446,7 +2317,7 @@ module Aws::CodeDeploy
     class GreenFleetProvisioningOption < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No IAM ARN was included in the request. You must use an IAM session ARN or user ARN in the request.</p>
@@ -2456,7 +2327,7 @@ module Aws::CodeDeploy
     class IamArnRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request included an IAM session ARN that has already been used to
@@ -2467,7 +2338,7 @@ module Aws::CodeDeploy
     class IamSessionArnAlreadyRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified user ARN is already registered with an on-premises instance.</p>
@@ -2477,7 +2348,7 @@ module Aws::CodeDeploy
     class IamUserArnAlreadyRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An user ARN was not specified.</p>
@@ -2487,12 +2358,7 @@ module Aws::CodeDeploy
     class IamUserArnRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceAction
-      TERMINATE = 'TERMINATE'
-      KEEP_ALIVE = 'KEEP_ALIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified instance does not exist in the deployment group.</p>
@@ -2504,7 +2370,7 @@ module Aws::CodeDeploy
     class InstanceDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance ID was not specified.</p>
@@ -2516,7 +2382,7 @@ module Aws::CodeDeploy
     class InstanceIdRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an on-premises instance.</p>
@@ -2552,7 +2418,7 @@ module Aws::CodeDeploy
       :deregister_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of allowed on-premises instances in a single call was
@@ -2563,7 +2429,7 @@ module Aws::CodeDeploy
     class InstanceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified on-premises instance name is already registered.</p>
@@ -2573,7 +2439,7 @@ module Aws::CodeDeploy
     class InstanceNameAlreadyRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An on-premises instance name was not specified.</p>
@@ -2583,7 +2449,7 @@ module Aws::CodeDeploy
     class InstanceNameRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified on-premises instance is not registered.</p>
@@ -2593,19 +2459,7 @@ module Aws::CodeDeploy
     class InstanceNotRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @deprecated
-    #   InstanceStatus is deprecated, use TargetStatus instead.
-    module InstanceStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      SUCCEEDED = 'Succeeded'
-      FAILED = 'Failed'
-      SKIPPED = 'Skipped'
-      UNKNOWN = 'Unknown'
-      READY = 'Ready'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an instance in a deployment.</p>
@@ -2675,7 +2529,7 @@ module Aws::CodeDeploy
       :lifecycle_events,
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A target Amazon EC2 or on-premises instance during a deployment that uses the
@@ -2712,12 +2566,7 @@ module Aws::CodeDeploy
       :lifecycle_events,
       :instance_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceType
-      BLUE = 'Blue'
-      GREEN = 'Green'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the alarm configuration is invalid. Possible causes include:</p>
@@ -2744,7 +2593,7 @@ module Aws::CodeDeploy
     class InvalidAlarmConfigException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application name was specified in an invalid format.</p>
@@ -2754,7 +2603,7 @@ module Aws::CodeDeploy
     class InvalidApplicationNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified ARN is not in a valid format. </p>
@@ -2764,7 +2613,7 @@ module Aws::CodeDeploy
     class InvalidArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The automatic rollback configuration was specified in an invalid format. For example,
@@ -2776,7 +2625,7 @@ module Aws::CodeDeploy
     class InvalidAutoRollbackConfigException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Auto Scaling group was specified in an invalid format or does not
@@ -2787,7 +2636,7 @@ module Aws::CodeDeploy
     class InvalidAutoScalingGroupException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the blue/green deployment group was provided in an invalid
@@ -2798,7 +2647,7 @@ module Aws::CodeDeploy
     class InvalidBlueGreenDeploymentConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The bucket name either doesn't exist or was specified in an invalid format.</p>
@@ -2808,7 +2657,7 @@ module Aws::CodeDeploy
     class InvalidBucketNameFilterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The computePlatform is invalid. The computePlatform should be <code>Lambda</code>, <code>Server</code>, or <code>ECS</code>.</p>
@@ -2818,7 +2667,7 @@ module Aws::CodeDeploy
     class InvalidComputePlatformException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployed state filter was specified in an invalid format.</p>
@@ -2828,7 +2677,7 @@ module Aws::CodeDeploy
     class InvalidDeployedStateFilterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment configuration name was specified in an invalid format.</p>
@@ -2838,7 +2687,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentConfigNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment group name was specified in an invalid format.</p>
@@ -2848,7 +2697,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentGroupNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one of the deployment IDs was specified in an invalid format.</p>
@@ -2858,7 +2707,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance type was specified for an in-place deployment. Instance types are
@@ -2869,7 +2718,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentInstanceTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified deployment status doesn't exist or cannot be determined.</p>
@@ -2879,7 +2728,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid deployment style was specified. Valid deployment types include "IN_PLACE"
@@ -2891,7 +2740,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentStyleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The target ID provided was not valid. </p>
@@ -2901,7 +2750,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentTargetIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The wait type is invalid. </p>
@@ -2911,7 +2760,7 @@ module Aws::CodeDeploy
     class InvalidDeploymentWaitTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but only one of
@@ -2922,7 +2771,7 @@ module Aws::CodeDeploy
     class InvalidEC2TagCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag was specified in an invalid format.</p>
@@ -2932,7 +2781,7 @@ module Aws::CodeDeploy
     class InvalidEC2TagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The Amazon ECS service identifier is not valid. </p>
@@ -2942,7 +2791,7 @@ module Aws::CodeDeploy
     class InvalidECSServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The external ID was specified in an invalid format.</p>
@@ -2952,7 +2801,7 @@ module Aws::CodeDeploy
     class InvalidExternalIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid fileExistsBehavior option was specified to determine how CodeDeploy handles files or directories that already exist in a deployment
@@ -2964,7 +2813,7 @@ module Aws::CodeDeploy
     class InvalidFileExistsBehaviorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GitHub token is not valid.</p>
@@ -2974,7 +2823,7 @@ module Aws::CodeDeploy
     class InvalidGitHubAccountTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the specified GitHub account connection name is invalid.</p>
@@ -2984,7 +2833,7 @@ module Aws::CodeDeploy
     class InvalidGitHubAccountTokenNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM session ARN was specified in an invalid format.</p>
@@ -2994,7 +2843,7 @@ module Aws::CodeDeploy
     class InvalidIamSessionArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user ARN was specified in an invalid format.</p>
@@ -3004,7 +2853,7 @@ module Aws::CodeDeploy
     class InvalidIamUserArnException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IgnoreApplicationStopFailures value is invalid. For Lambda
@@ -3016,7 +2865,7 @@ module Aws::CodeDeploy
     class InvalidIgnoreApplicationStopFailuresValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input was specified in an invalid format.</p>
@@ -3026,7 +2875,7 @@ module Aws::CodeDeploy
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The on-premises instance name was specified in an invalid format.</p>
@@ -3036,7 +2885,7 @@ module Aws::CodeDeploy
     class InvalidInstanceNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified instance status does not exist.</p>
@@ -3046,7 +2895,7 @@ module Aws::CodeDeploy
     class InvalidInstanceStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid instance type was specified for instances in a blue/green deployment. Valid
@@ -3058,7 +2907,7 @@ module Aws::CodeDeploy
     class InvalidInstanceTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified key prefix filter was specified in an invalid format.</p>
@@ -3068,7 +2917,7 @@ module Aws::CodeDeploy
     class InvalidKeyPrefixFilterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lifecycle event hook is invalid. Review the <code>hooks</code> section in your
@@ -3080,7 +2929,7 @@ module Aws::CodeDeploy
     class InvalidLifecycleEventHookExecutionIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a Lambda validation function that verifies a lifecycle event
@@ -3091,7 +2940,7 @@ module Aws::CodeDeploy
     class InvalidLifecycleEventHookExecutionStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid load balancer name, or no load balancer name, was specified.</p>
@@ -3101,7 +2950,7 @@ module Aws::CodeDeploy
     class InvalidLoadBalancerInfoException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum healthy instance value was specified in an invalid format.</p>
@@ -3111,7 +2960,7 @@ module Aws::CodeDeploy
     class InvalidMinimumHealthyHostValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The next token was specified in an invalid format.</p>
@@ -3121,7 +2970,7 @@ module Aws::CodeDeploy
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet,
@@ -3132,7 +2981,7 @@ module Aws::CodeDeploy
     class InvalidOnPremisesTagCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid operation was detected.</p>
@@ -3142,7 +2991,7 @@ module Aws::CodeDeploy
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The registration status was specified in an invalid format.</p>
@@ -3152,7 +3001,7 @@ module Aws::CodeDeploy
     class InvalidRegistrationStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The revision was specified in an invalid format.</p>
@@ -3162,7 +3011,7 @@ module Aws::CodeDeploy
     class InvalidRevisionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service role ARN was specified in an invalid format. Or, if an Auto Scaling
@@ -3174,7 +3023,7 @@ module Aws::CodeDeploy
     class InvalidRoleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The column name to sort by is either not present or was specified in an invalid
@@ -3185,7 +3034,7 @@ module Aws::CodeDeploy
     class InvalidSortByException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort order was specified in an invalid format.</p>
@@ -3195,7 +3044,7 @@ module Aws::CodeDeploy
     class InvalidSortOrderException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag was specified in an invalid format.</p>
@@ -3205,7 +3054,7 @@ module Aws::CodeDeploy
     class InvalidTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag filter was specified in an invalid format.</p>
@@ -3215,7 +3064,7 @@ module Aws::CodeDeploy
     class InvalidTagFilterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The specified tags are not valid. </p>
@@ -3225,7 +3074,7 @@ module Aws::CodeDeploy
     class InvalidTagsToAddException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The target filter name is invalid. </p>
@@ -3235,7 +3084,7 @@ module Aws::CodeDeploy
     class InvalidTargetFilterNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A target group pair associated with this deployment is not valid. </p>
@@ -3245,7 +3094,7 @@ module Aws::CodeDeploy
     class InvalidTargetGroupPairException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target instance configuration is invalid. Possible causes include:</p>
@@ -3270,7 +3119,7 @@ module Aws::CodeDeploy
     class InvalidTargetInstancesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified time range was specified in an invalid format.</p>
@@ -3280,7 +3129,7 @@ module Aws::CodeDeploy
     class InvalidTimeRangeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration that specifies how traffic is routed during a deployment is
@@ -3291,7 +3140,7 @@ module Aws::CodeDeploy
     class InvalidTrafficRoutingConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trigger was specified in an invalid format.</p>
@@ -3301,7 +3150,7 @@ module Aws::CodeDeploy
     class InvalidTriggerConfigException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The UpdateOutdatedInstancesOnly value is invalid. For Lambda
@@ -3313,7 +3162,7 @@ module Aws::CodeDeploy
     class InvalidUpdateOutdatedInstancesOnlyValueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ZonalConfig</code> object is not valid.</p>
@@ -3323,7 +3172,7 @@ module Aws::CodeDeploy
     class InvalidZonalDeploymentConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a Lambda function specified in a deployment. </p>
@@ -3353,7 +3202,7 @@ module Aws::CodeDeploy
       :target_version,
       :target_version_weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:target_version_weight] = 0 unless options.key?(:target_version_weight)
@@ -3397,7 +3246,7 @@ module Aws::CodeDeploy
       :lifecycle_events,
       :lambda_function_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the most recent attempted or successful deployment to a deployment
@@ -3422,16 +3271,7 @@ module Aws::CodeDeploy
       :end_time,
       :create_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleErrorCode
-      SUCCESS = 'Success'
-      SCRIPT_MISSING = 'ScriptMissing'
-      SCRIPT_NOT_EXECUTABLE = 'ScriptNotExecutable'
-      SCRIPT_TIMED_OUT = 'ScriptTimedOut'
-      SCRIPT_FAILED = 'ScriptFailed'
-      UNKNOWN_ERROR = 'UnknownError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment lifecycle event.</p>
@@ -3479,7 +3319,7 @@ module Aws::CodeDeploy
       :end_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attempt to return the status of an already completed lifecycle event
@@ -3490,16 +3330,7 @@ module Aws::CodeDeploy
     class LifecycleEventAlreadyCompletedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleEventStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      SUCCEEDED = 'Succeeded'
-      FAILED = 'Failed'
-      SKIPPED = 'Skipped'
-      UNKNOWN = 'Unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit for lifecycle hooks was exceeded.</p>
@@ -3509,7 +3340,7 @@ module Aws::CodeDeploy
     class LifecycleHookLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>ListApplicationRevisions</code> operation. </p>
@@ -3594,7 +3425,7 @@ module Aws::CodeDeploy
       :deployed,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListApplicationRevisions</code> operation.</p>
@@ -3610,7 +3441,7 @@ module Aws::CodeDeploy
       :revisions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListApplications</code> operation.</p>
@@ -3621,7 +3452,7 @@ module Aws::CodeDeploy
     class ListApplicationsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a ListApplications operation.</p>
@@ -3637,7 +3468,7 @@ module Aws::CodeDeploy
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListDeploymentConfigs</code> operation.</p>
@@ -3648,7 +3479,7 @@ module Aws::CodeDeploy
     class ListDeploymentConfigsInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListDeploymentConfigs</code> operation.</p>
@@ -3665,7 +3496,7 @@ module Aws::CodeDeploy
       :deployment_configs_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListDeploymentGroups</code> operation.</p>
@@ -3680,7 +3511,7 @@ module Aws::CodeDeploy
       :application_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListDeploymentGroups</code> operation.</p>
@@ -3700,7 +3531,7 @@ module Aws::CodeDeploy
       :deployment_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>ListDeploymentInstances</code> operation. </p>
@@ -3754,7 +3585,7 @@ module Aws::CodeDeploy
       :instance_status_filter,
       :instance_type_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListDeploymentInstances</code> operation.</p>
@@ -3770,7 +3601,7 @@ module Aws::CodeDeploy
       :instances_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -3802,7 +3633,7 @@ module Aws::CodeDeploy
       :next_token,
       :target_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_ids
@@ -3817,7 +3648,7 @@ module Aws::CodeDeploy
       :target_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListDeployments</code> operation.</p>
@@ -3889,7 +3720,7 @@ module Aws::CodeDeploy
       :create_time_range,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListDeployments</code> operation.</p>
@@ -3905,7 +3736,7 @@ module Aws::CodeDeploy
       :deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListGitHubAccountTokenNames</code> operation.</p>
@@ -3916,7 +3747,7 @@ module Aws::CodeDeploy
     class ListGitHubAccountTokenNamesInput < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListGitHubAccountTokenNames</code> operation.</p>
@@ -3932,7 +3763,7 @@ module Aws::CodeDeploy
       :token_name_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListOnPremisesInstances</code> operation.</p>
@@ -3964,7 +3795,7 @@ module Aws::CodeDeploy
       :tag_filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of the list on-premises instances operation.</p>
@@ -3980,13 +3811,7 @@ module Aws::CodeDeploy
       :instance_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListStateFilterAction
-      Include = 'include'
-      Exclude = 'exclude'
-      Ignore = 'ignore'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4002,7 +3827,7 @@ module Aws::CodeDeploy
       :resource_arn,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4018,7 +3843,7 @@ module Aws::CodeDeploy
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Elastic Load Balancing load balancer or target group used in a
@@ -4060,7 +3885,7 @@ module Aws::CodeDeploy
       :target_group_info_list,
       :target_group_pair_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the minimum number of healthy instances.</p>
@@ -4106,7 +3931,7 @@ module Aws::CodeDeploy
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -4128,22 +3953,12 @@ module Aws::CodeDeploy
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module MinimumHealthyHostsPerZoneType
-      HOST_COUNT = 'HOST_COUNT'
-      FLEET_PERCENT = 'FLEET_PERCENT'
-    end
-
-    module MinimumHealthyHostsType
-      HOST_COUNT = 'HOST_COUNT'
-      FLEET_PERCENT = 'FLEET_PERCENT'
     end
 
     # <p>Both an user ARN and an IAM session ARN were included in the request.
@@ -4154,7 +3969,7 @@ module Aws::CodeDeploy
     class MultipleIamArnsProvidedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about groups of on-premises instance tags.</p>
@@ -4166,7 +3981,7 @@ module Aws::CodeDeploy
     class OnPremisesTagSet < Struct.new(
       :on_premises_tag_set_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API used does not support the deployment.</p>
@@ -4176,12 +3991,7 @@ module Aws::CodeDeploy
     class OperationNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutdatedInstancesStrategy
-      Update = 'UPDATE'
-      Ignore = 'IGNORE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -4203,7 +4013,7 @@ module Aws::CodeDeploy
       :lifecycle_event_hook_execution_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lifecycle_event_hook_execution_id
@@ -4213,7 +4023,7 @@ module Aws::CodeDeploy
     class PutLifecycleEventHookExecutionStatusOutput < Struct.new(
       :lifecycle_event_hook_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A revision for an Lambda deployment that is a YAML-formatted or
@@ -4233,7 +4043,7 @@ module Aws::CodeDeploy
       :content,
       :sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a RegisterApplicationRevision operation.</p>
@@ -4252,7 +4062,7 @@ module Aws::CodeDeploy
       :description,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of the register on-premises instance operation.</p>
@@ -4271,12 +4081,7 @@ module Aws::CodeDeploy
       :iam_session_arn,
       :iam_user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationStatus
-      Registered = 'Registered'
-      Deregistered = 'Deregistered'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about deployments related to the specified deployment.</p>
@@ -4291,7 +4096,7 @@ module Aws::CodeDeploy
       :auto_update_outdated_instances_root_deployment_id,
       :auto_update_outdated_instances_deployment_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>RemoveTagsFromOnPremisesInstances</code>
@@ -4306,7 +4111,7 @@ module Aws::CodeDeploy
       :tags,
       :instance_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The ARN of a resource is required, but was not found. </p>
@@ -4316,7 +4121,7 @@ module Aws::CodeDeploy
     class ResourceArnRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be validated.</p>
@@ -4326,7 +4131,7 @@ module Aws::CodeDeploy
     class ResourceValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The named revision does not exist with the user or Amazon Web Services account.</p>
@@ -4336,7 +4141,7 @@ module Aws::CodeDeploy
     class RevisionDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an application revision.</p>
@@ -4351,7 +4156,7 @@ module Aws::CodeDeploy
       :revision_location,
       :generic_revision_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of an application revision.</p>
@@ -4398,14 +4203,7 @@ module Aws::CodeDeploy
       :string,
       :app_spec_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RevisionLocationType
-      S3 = 'S3'
-      GitHub = 'GitHub'
-      String = 'String'
-      AppSpecContent = 'AppSpecContent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The revision ID was not specified.</p>
@@ -4415,7 +4213,7 @@ module Aws::CodeDeploy
     class RevisionRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The role ID was not specified.</p>
@@ -4425,7 +4223,7 @@ module Aws::CodeDeploy
     class RoleRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a deployment rollback.</p>
@@ -4445,7 +4243,7 @@ module Aws::CodeDeploy
       :rollback_triggering_deployment_id,
       :rollback_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of application artifacts stored in Amazon S3.</p>
@@ -4501,7 +4299,7 @@ module Aws::CodeDeploy
       :version,
       :e_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -4511,12 +4309,7 @@ module Aws::CodeDeploy
     class SkipWaitTimeForInstanceTerminationInput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      Ascending = 'ascending'
-      Descending = 'descending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the input of a <code>StopDeployment</code> operation. </p>
@@ -4531,7 +4324,7 @@ module Aws::CodeDeploy
       :deployment_id,
       :auto_rollback_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the output of a <code>StopDeployment</code> operation. </p>
@@ -4553,12 +4346,7 @@ module Aws::CodeDeploy
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopStatus
-      PENDING = 'Pending'
-      SUCCEEDED = 'Succeeded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a tag.</p>
@@ -4572,7 +4360,7 @@ module Aws::CodeDeploy
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an on-premises instance tag filter.</p>
@@ -4601,13 +4389,7 @@ module Aws::CodeDeploy
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagFilterType
-      KEY_ONLY = 'KEY_ONLY'
-      VALUE_ONLY = 'VALUE_ONLY'
-      KEY_AND_VALUE = 'KEY_AND_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum allowed number of tags was exceeded.</p>
@@ -4617,7 +4399,7 @@ module Aws::CodeDeploy
     class TagLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag was not specified.</p>
@@ -4627,7 +4409,7 @@ module Aws::CodeDeploy
     class TagRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4641,12 +4423,12 @@ module Aws::CodeDeploy
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of tag groups included in the tag set list exceeded the maximum allowed
@@ -4657,12 +4439,7 @@ module Aws::CodeDeploy
     class TagSetListLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetFilterName
-      TARGET_STATUS = 'TargetStatus'
-      SERVER_INSTANCE_LABEL = 'ServerInstanceLabel'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a target group in Elastic Load Balancing to use in a deployment.
@@ -4678,7 +4455,7 @@ module Aws::CodeDeploy
     class TargetGroupInfo < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about two target groups and how traffic is routed during an Amazon ECS deployment. An optional test traffic route can be specified. </p>
@@ -4699,7 +4476,7 @@ module Aws::CodeDeploy
       :prod_traffic_route,
       :test_traffic_route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instances to be used in the replacement environment in a
@@ -4724,22 +4501,7 @@ module Aws::CodeDeploy
       :auto_scaling_groups,
       :ec2_tag_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetLabel
-      BLUE = 'Blue'
-      GREEN = 'Green'
-    end
-
-    module TargetStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      SUCCEEDED = 'Succeeded'
-      FAILED = 'Failed'
-      SKIPPED = 'Skipped'
-      UNKNOWN = 'Unknown'
-      READY = 'Ready'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API function was called too frequently.</p>
@@ -4749,7 +4511,7 @@ module Aws::CodeDeploy
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration that shifts traffic from one version of a Lambda function
@@ -4768,7 +4530,7 @@ module Aws::CodeDeploy
       :canary_percentage,
       :canary_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:canary_percentage] = 0 unless options.key?(:canary_percentage)
@@ -4793,7 +4555,7 @@ module Aws::CodeDeploy
       :linear_percentage,
       :linear_interval,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:linear_percentage] = 0 unless options.key?(:linear_percentage)
@@ -4819,7 +4581,7 @@ module Aws::CodeDeploy
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a listener. The listener contains the path used to route traffic
@@ -4832,7 +4594,7 @@ module Aws::CodeDeploy
     class TrafficRoute < Struct.new(
       :listener_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that specifies how traffic is shifted from one version of a Lambda function to another version during an Lambda deployment,
@@ -4860,13 +4622,7 @@ module Aws::CodeDeploy
       :time_based_canary,
       :time_based_linear,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficRoutingType
-      TimeBasedCanary = 'TimeBasedCanary'
-      TimeBasedLinear = 'TimeBasedLinear'
-      AllAtOnce = 'AllAtOnce'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about notification triggers for the deployment group.</p>
@@ -4885,20 +4641,7 @@ module Aws::CodeDeploy
       :trigger_target_arn,
       :trigger_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggerEventType
-      DEPLOYMENT_START = 'DeploymentStart'
-      DEPLOYMENT_SUCCESS = 'DeploymentSuccess'
-      DEPLOYMENT_FAILURE = 'DeploymentFailure'
-      DEPLOYMENT_STOP = 'DeploymentStop'
-      DEPLOYMENT_ROLLBACK = 'DeploymentRollback'
-      DEPLOYMENT_READY = 'DeploymentReady'
-      INSTANCE_START = 'InstanceStart'
-      INSTANCE_SUCCESS = 'InstanceSuccess'
-      INSTANCE_FAILURE = 'InstanceFailure'
-      INSTANCE_READY = 'InstanceReady'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum allowed number of triggers was exceeded.</p>
@@ -4908,7 +4651,7 @@ module Aws::CodeDeploy
     class TriggerTargetsLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A call was submitted that is not supported for the specified deployment type.</p>
@@ -4918,7 +4661,7 @@ module Aws::CodeDeploy
     class UnsupportedActionForDeploymentTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4934,12 +4677,12 @@ module Aws::CodeDeploy
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an <code>UpdateApplication</code> operation.</p>
@@ -4953,7 +4696,7 @@ module Aws::CodeDeploy
       :application_name,
       :new_application_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an <code>UpdateDeploymentGroup</code> operation.</p>
@@ -5077,7 +4820,7 @@ module Aws::CodeDeploy
       :on_premises_tag_set,
       :termination_hook_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdateDeploymentGroup</code> operation.</p>
@@ -5089,7 +4832,7 @@ module Aws::CodeDeploy
     class UpdateDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure the <code>ZonalConfig</code> object if you want CodeDeploy to
@@ -5136,7 +4879,7 @@ module Aws::CodeDeploy
       :monitor_duration_in_seconds,
       :minimum_healthy_hosts_per_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

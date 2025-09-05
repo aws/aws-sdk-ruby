@@ -12,7 +12,7 @@ module Aws::ControlCatalog
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the domain that a common control or an objective belongs to.</p>
@@ -26,7 +26,7 @@ module Aws::ControlCatalog
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the objective that a common control supports.</p>
@@ -40,7 +40,7 @@ module Aws::ControlCatalog
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional filter that narrows the results to a specific objective.</p>
@@ -50,7 +50,7 @@ module Aws::ControlCatalog
     class CommonControlFilter < Struct.new(
       :objectives,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details about a common control mapping. In particular, it returns the Amazon Resource Name (ARN) of the common control.</p>
@@ -60,7 +60,7 @@ module Aws::ControlCatalog
     class CommonControlMappingDetails < Struct.new(
       :common_control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of metadata for a common control.</p>
@@ -94,13 +94,7 @@ module Aws::ControlCatalog
       :create_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlBehavior
-      PREVENTIVE = 'PREVENTIVE'
-      PROACTIVE = 'PROACTIVE'
-      DETECTIVE = 'DETECTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines filtering criteria for the ListControls operation. You can use this filter to narrow down the list of controls based on their implementation details.</p>
@@ -110,7 +104,7 @@ module Aws::ControlCatalog
     class ControlFilter < Struct.new(
       :implementations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a control mapping, including the control ARN, mapping type, and mapping details.</p>
@@ -128,7 +122,7 @@ module Aws::ControlCatalog
       :mapping_type,
       :mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines filtering criteria for the ListControlMappings operation. You can use this filter to narrow down the list of control mappings based on control ARNs, common control ARNs, or mapping types.</p>
@@ -146,7 +140,7 @@ module Aws::ControlCatalog
       :common_control_arns,
       :mapping_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Five types of control parameters are supported.</p> <ul> <li> <p> <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p> <p>Example: <code>["us-east-1","us-west-2"]</code> </p> </li> <li> <p> <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted from the control. Each string is expected to be an IAM action.</p> <p>Example: <code>["logs:DescribeLogGroups","logs:StartQuery","logs:GetQueryResults"]</code> </p> </li> <li> <p> <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs exempted from the control. Each string is expected to be an IAM principal that follows the pattern <code>^arn:(aws|aws-us-gov):(iam|sts)::.+:.+$</code> </p> <p>Example: <code>["arn:aws:iam::*:role/ReadOnly","arn:aws:sts::*:assumed-role/ReadOnly/*"]</code> </p> </li> <li> <p> <b>ExemptedResourceArns</b>: List of resource ARNs exempted from the control. Each string is expected to be a resource ARN.</p> <p>Example: <code>["arn:aws:s3:::my-bucket-name"]</code> </p> </li> <li> <p> <b>ExemptAssumeRoot</b>: A parameter that lets you choose whether to exempt requests made with <code>AssumeRoot</code> from this control, for this OU. For member accounts, the <code>AssumeRoot</code> property is included in requests initiated by IAM centralized root access. This parameter applies only to the <code>AWS-GR_RESTRICT_ROOT_USER</code> control. If you add the parameter when enabling the control, the <code>AssumeRoot</code> exemption is allowed. If you omit the parameter, the <code>AssumeRoot</code> exception is not permitted. The parameter does not accept <code>False</code> as a value.</p> <p> <i>Example: Enabling the control and allowing <code>AssumeRoot</code> </i> </p> <p> <code>{ "controlIdentifier": "arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui", "parameters": [ { "key": "ExemptAssumeRoot", "value": true } ], "targetIdentifier": "arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla" }</code> </p> </li> </ul>
@@ -156,19 +150,7 @@ module Aws::ControlCatalog
     class ControlParameter < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlScope
-      GLOBAL = 'GLOBAL'
-      REGIONAL = 'REGIONAL'
-    end
-
-    module ControlSeverity
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      CRITICAL = 'CRITICAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Overview of information about a control.</p>
@@ -210,7 +192,7 @@ module Aws::ControlCatalog
       :create_time,
       :governed_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain resource that's being used as a filter.</p>
@@ -220,7 +202,7 @@ module Aws::ControlCatalog
     class DomainResourceFilter < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of metadata for a domain.</p>
@@ -246,7 +228,7 @@ module Aws::ControlCatalog
       :create_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details about a framework mapping, including the framework name and specific item within the framework that the control maps to.</p>
@@ -260,7 +242,7 @@ module Aws::ControlCatalog
       :name,
       :item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_arn
@@ -269,7 +251,7 @@ module Aws::ControlCatalog
     class GetControlRequest < Struct.new(
       :control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -318,7 +300,7 @@ module Aws::ControlCatalog
       :create_time,
       :governed_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the implementation type for a control.</p> <p>Our <code>ImplementationDetails</code> <code>Type</code> format has three required segments:</p> <ul> <li> <p> <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME</code> </p> </li> </ul> <p>For example, <code>AWS::Config::ConfigRule</code> <b>or</b> <code>AWS::SecurityHub::SecurityControl</code> resources have the format with three required segments.</p> <p>Our <code>ImplementationDetails</code> <code>Type</code> format has an optional fourth segment, which is present for applicable implementation types. The format is as follows: </p> <ul> <li> <p> <code>SERVICE-PROVIDER::SERVICE-NAME::RESOURCE-NAME::RESOURCE-TYPE-DESCRIPTION</code> </p> </li> </ul> <p>For example, <code>AWS::Organizations::Policy::SERVICE_CONTROL_POLICY</code> <b>or</b> <code>AWS::CloudFormation::Type::HOOK</code> have the format with four segments.</p> <p>Although the format is similar, the values for the <code>Type</code> field do not match any Amazon Web Services CloudFormation values.</p>
@@ -332,7 +314,7 @@ module Aws::ControlCatalog
       :type,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines filtering criteria for control implementations. You can use this filter to find controls that are implemented by specific Amazon Web Services services or with specific service identifiers.</p>
@@ -346,7 +328,7 @@ module Aws::ControlCatalog
       :types,
       :identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of how the control is implemented, including the Amazon Web Services service that enforces the control and its service-specific identifier. For example, the value of this field could indicate that the control is implemented as an Amazon Web Services Config Rule or an Amazon Web Services Security Hub control.</p>
@@ -360,7 +342,7 @@ module Aws::ControlCatalog
       :type,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service error occurred during the processing of your request. Try again later.</p>
@@ -369,7 +351,7 @@ module Aws::ControlCatalog
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -386,7 +368,7 @@ module Aws::ControlCatalog
       :next_token,
       :common_control_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute common_controls
@@ -399,7 +381,7 @@ module Aws::ControlCatalog
       :common_controls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -416,7 +398,7 @@ module Aws::ControlCatalog
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_mappings
@@ -429,7 +411,7 @@ module Aws::ControlCatalog
       :control_mappings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -446,7 +428,7 @@ module Aws::ControlCatalog
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute controls
@@ -459,7 +441,7 @@ module Aws::ControlCatalog
       :controls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -472,7 +454,7 @@ module Aws::ControlCatalog
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domains
@@ -485,7 +467,7 @@ module Aws::ControlCatalog
       :domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -502,7 +484,7 @@ module Aws::ControlCatalog
       :next_token,
       :objective_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute objectives
@@ -515,7 +497,7 @@ module Aws::ControlCatalog
       :objectives,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the details of a mapping relationship, which can be either to a framework or to a common control.</p>
@@ -530,16 +512,11 @@ module Aws::ControlCatalog
       :common_control,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Framework < Mapping; end
       class CommonControl < Mapping; end
       class Unknown < Mapping; end
-    end
-
-    module MappingType
-      FRAMEWORK = 'FRAMEWORK'
-      COMMON_CONTROL = 'COMMON_CONTROL'
     end
 
     # <p>An optional filter that narrows the list of objectives to a specific domain.</p>
@@ -549,7 +526,7 @@ module Aws::ControlCatalog
     class ObjectiveFilter < Struct.new(
       :domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The objective resource that's being used as a filter.</p>
@@ -559,7 +536,7 @@ module Aws::ControlCatalog
     class ObjectiveResourceFilter < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of metadata for an objective.</p>
@@ -589,7 +566,7 @@ module Aws::ControlCatalog
       :create_time,
       :last_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the control, including the scope of the control, if enabled, and the Regions in which the control is available for deployment. For more information about scope, see <a href="https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/global-services.html">Global services</a>.</p> <p>If you are applying controls through an Amazon Web Services Control Tower landing zone environment, remember that the values returned in the <code>RegionConfiguration</code> API operation are not related to the governed Regions in your landing zone. For example, if you are governing Regions <code>A</code>,<code>B</code>,and <code>C</code> while the control is available in Regions <code>A</code>, <code>B</code>, C<code>,</code> and <code>D</code>, you'd see a response with <code>DeployableRegions</code> of <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code> for a control with <code>REGIONAL</code> scope, even though you may not intend to deploy the control in Region <code>D</code>, because you do not govern it through your landing zone.</p>
@@ -603,7 +580,7 @@ module Aws::ControlCatalog
       :scope,
       :deployable_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource does not exist.</p>
@@ -612,7 +589,7 @@ module Aws::ControlCatalog
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -621,7 +598,7 @@ module Aws::ControlCatalog
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has invalid or missing parameters.</p>
@@ -630,7 +607,7 @@ module Aws::ControlCatalog
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

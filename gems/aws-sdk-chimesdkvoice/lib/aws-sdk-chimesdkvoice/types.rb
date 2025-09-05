@@ -15,7 +15,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validated address.</p>
@@ -63,12 +63,7 @@ module Aws::ChimeSDKVoice
       :postal_code_plus4,
       :country,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlexaSkillStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group_id
@@ -86,7 +81,7 @@ module Aws::ChimeSDKVoice
       :e164_phone_numbers,
       :force_associate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -95,7 +90,7 @@ module Aws::ChimeSDKVoice
     class AssociatePhoneNumbersWithVoiceConnectorGroupResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -112,7 +107,7 @@ module Aws::ChimeSDKVoice
       :e164_phone_numbers,
       :force_associate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -122,7 +117,7 @@ module Aws::ChimeSDKVoice
     class AssociatePhoneNumbersWithVoiceConnectorResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters don't match the service's restrictions.</p>
@@ -134,7 +129,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_ids
@@ -143,7 +138,7 @@ module Aws::ChimeSDKVoice
     class BatchDeletePhoneNumberRequest < Struct.new(
       :phone_number_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -152,7 +147,7 @@ module Aws::ChimeSDKVoice
     class BatchDeletePhoneNumberResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_phone_number_request_items
@@ -161,7 +156,7 @@ module Aws::ChimeSDKVoice
     class BatchUpdatePhoneNumberRequest < Struct.new(
       :update_phone_number_request_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -170,7 +165,7 @@ module Aws::ChimeSDKVoice
     class BatchUpdatePhoneNumberResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Amazon Chime SDK Voice Connector call.</p>
@@ -188,19 +183,7 @@ module Aws::ChimeSDKVoice
       :transaction_id,
       :is_caller,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CallLegType
-      CALLER = 'Caller'
-      CALLEE = 'Callee'
-    end
-
-    module CallingNameStatus
-      Unassigned = 'Unassigned'
-      UpdateInProgress = 'UpdateInProgress'
-      UpdateSucceeded = 'UpdateSucceeded'
-      UpdateFailed = 'UpdateFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A suggested address.</p>
@@ -234,12 +217,7 @@ module Aws::ChimeSDKVoice
       :postal_code_plus4,
       :country,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Capability
-      Voice = 'Voice'
-      SMS = 'SMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Multiple instances of the same request were made simultaneously.</p>
@@ -251,14 +229,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactCenterSystemType
-      GENESYS_ENGAGE_ON_PREMISES = 'GENESYS_ENGAGE_ON_PREMISES'
-      AVAYA_AURA_CALL_CENTER_ELITE = 'AVAYA_AURA_CALL_CENTER_ELITE'
-      AVAYA_AURA_CONTACT_CENTER = 'AVAYA_AURA_CONTACT_CENTER'
-      CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE = 'CISCO_UNIFIED_CONTACT_CENTER_ENTERPRISE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_type
@@ -275,7 +246,7 @@ module Aws::ChimeSDKVoice
       :e164_phone_numbers,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_order
@@ -284,7 +255,7 @@ module Aws::ChimeSDKVoice
     class CreatePhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -322,7 +293,7 @@ module Aws::ChimeSDKVoice
       :geo_match_level,
       :geo_match_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proxy_session
@@ -331,7 +302,7 @@ module Aws::ChimeSDKVoice
     class CreateProxySessionResponse < Struct.new(
       :proxy_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute from_phone_number
@@ -359,7 +330,7 @@ module Aws::ChimeSDKVoice
       :sip_headers,
       :arguments_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_call
@@ -368,7 +339,7 @@ module Aws::ChimeSDKVoice
     class CreateSipMediaApplicationCallResponse < Struct.new(
       :sip_media_application_call,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_region
@@ -389,7 +360,7 @@ module Aws::ChimeSDKVoice
       :endpoints,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application
@@ -398,7 +369,7 @@ module Aws::ChimeSDKVoice
     class CreateSipMediaApplicationResponse < Struct.new(
       :sip_media_application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -433,7 +404,7 @@ module Aws::ChimeSDKVoice
       :disabled,
       :target_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rule
@@ -442,7 +413,7 @@ module Aws::ChimeSDKVoice
     class CreateSipRuleResponse < Struct.new(
       :sip_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -455,7 +426,7 @@ module Aws::ChimeSDKVoice
       :name,
       :voice_connector_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group
@@ -464,7 +435,7 @@ module Aws::ChimeSDKVoice
     class CreateVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -518,7 +489,7 @@ module Aws::ChimeSDKVoice
       :tags,
       :integration_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector
@@ -527,7 +498,7 @@ module Aws::ChimeSDKVoice
     class CreateVoiceConnectorResponse < Struct.new(
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -552,7 +523,7 @@ module Aws::ChimeSDKVoice
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain
@@ -561,7 +532,7 @@ module Aws::ChimeSDKVoice
     class CreateVoiceProfileDomainResponse < Struct.new(
       :voice_profile_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker_search_task_id
@@ -570,7 +541,7 @@ module Aws::ChimeSDKVoice
     class CreateVoiceProfileRequest < Struct.new(
       :speaker_search_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile
@@ -579,7 +550,7 @@ module Aws::ChimeSDKVoice
     class CreateVoiceProfileResponse < Struct.new(
       :voice_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SIP credentials used to authenticate requests to an Amazon Chime SDK Voice Connector.</p>
@@ -594,7 +565,7 @@ module Aws::ChimeSDKVoice
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Dialed Number Identification Service (DNIS) emergency calling configuration 
@@ -614,7 +585,7 @@ module Aws::ChimeSDKVoice
       :test_phone_number,
       :calling_country,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -623,7 +594,7 @@ module Aws::ChimeSDKVoice
     class DeletePhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -636,7 +607,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :proxy_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -645,7 +616,7 @@ module Aws::ChimeSDKVoice
     class DeleteSipMediaApplicationRequest < Struct.new(
       :sip_media_application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rule_id
@@ -654,7 +625,7 @@ module Aws::ChimeSDKVoice
     class DeleteSipRuleRequest < Struct.new(
       :sip_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -663,7 +634,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -673,7 +644,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group_id
@@ -682,7 +653,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -691,7 +662,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -700,7 +671,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -709,7 +680,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -718,7 +689,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -732,7 +703,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :usernames,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -741,7 +712,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain_id
@@ -750,7 +721,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceProfileDomainRequest < Struct.new(
       :voice_profile_domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_id
@@ -759,7 +730,7 @@ module Aws::ChimeSDKVoice
     class DeleteVoiceProfileRequest < Struct.new(
       :voice_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group_id
@@ -772,7 +743,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_group_id,
       :e164_phone_numbers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -782,7 +753,7 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorGroupResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -795,7 +766,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :e164_phone_numbers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_errors
@@ -805,7 +776,7 @@ module Aws::ChimeSDKVoice
     class DisassociatePhoneNumbersFromVoiceConnectorResponse < Struct.new(
       :phone_number_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The emergency calling configuration details associated with an Amazon Chime SDK 
@@ -817,26 +788,7 @@ module Aws::ChimeSDKVoice
     class EmergencyCallingConfiguration < Struct.new(
       :dnis,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCode
-      BadRequest = 'BadRequest'
-      Conflict = 'Conflict'
-      Forbidden = 'Forbidden'
-      NotFound = 'NotFound'
-      PreconditionFailed = 'PreconditionFailed'
-      ResourceLimitExceeded = 'ResourceLimitExceeded'
-      ServiceFailure = 'ServiceFailure'
-      AccessDenied = 'AccessDenied'
-      ServiceUnavailable = 'ServiceUnavailable'
-      Throttled = 'Throttled'
-      Throttling = 'Throttling'
-      Unauthorized = 'Unauthorized'
-      Unprocessable = 'Unprocessable'
-      VoiceConnectorGroupAssociationsExist = 'VoiceConnectorGroupAssociationsExist'
-      PhoneNumberAssociationsExist = 'PhoneNumberAssociationsExist'
-      Gone = 'Gone'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an external systems configuration for a Voice
@@ -851,7 +803,7 @@ module Aws::ChimeSDKVoice
       :session_border_controller_types,
       :contact_center_system_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is permanently forbidden from making the request.</p>
@@ -863,12 +815,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeoMatchLevel
-      Country = 'Country'
-      AreaCode = 'AreaCode'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The country and area code for a proxy phone number in a proxy phone session.</p>
@@ -882,7 +829,7 @@ module Aws::ChimeSDKVoice
       :country,
       :area_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector
@@ -891,7 +838,7 @@ module Aws::ChimeSDKVoice
     class GetGlobalSettingsResponse < Struct.new(
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_order_id
@@ -900,7 +847,7 @@ module Aws::ChimeSDKVoice
     class GetPhoneNumberOrderRequest < Struct.new(
       :phone_number_order_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_order
@@ -909,7 +856,7 @@ module Aws::ChimeSDKVoice
     class GetPhoneNumberOrderResponse < Struct.new(
       :phone_number_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -918,7 +865,7 @@ module Aws::ChimeSDKVoice
     class GetPhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -927,7 +874,7 @@ module Aws::ChimeSDKVoice
     class GetPhoneNumberResponse < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calling_name
@@ -940,7 +887,7 @@ module Aws::ChimeSDKVoice
       :calling_name,
       :calling_name_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -953,7 +900,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :proxy_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proxy_session
@@ -962,7 +909,7 @@ module Aws::ChimeSDKVoice
     class GetProxySessionResponse < Struct.new(
       :proxy_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -971,7 +918,7 @@ module Aws::ChimeSDKVoice
     class GetSipMediaApplicationAlexaSkillConfigurationRequest < Struct.new(
       :sip_media_application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_alexa_skill_configuration
@@ -980,7 +927,7 @@ module Aws::ChimeSDKVoice
     class GetSipMediaApplicationAlexaSkillConfigurationResponse < Struct.new(
       :sip_media_application_alexa_skill_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -989,7 +936,7 @@ module Aws::ChimeSDKVoice
     class GetSipMediaApplicationLoggingConfigurationRequest < Struct.new(
       :sip_media_application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_logging_configuration
@@ -998,7 +945,7 @@ module Aws::ChimeSDKVoice
     class GetSipMediaApplicationLoggingConfigurationResponse < Struct.new(
       :sip_media_application_logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -1007,7 +954,7 @@ module Aws::ChimeSDKVoice
     class GetSipMediaApplicationRequest < Struct.new(
       :sip_media_application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application
@@ -1016,7 +963,7 @@ module Aws::ChimeSDKVoice
     class GetSipMediaApplicationResponse < Struct.new(
       :sip_media_application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rule_id
@@ -1025,7 +972,7 @@ module Aws::ChimeSDKVoice
     class GetSipRuleRequest < Struct.new(
       :sip_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rule
@@ -1034,7 +981,7 @@ module Aws::ChimeSDKVoice
     class GetSipRuleResponse < Struct.new(
       :sip_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1047,7 +994,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :speaker_search_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker_search_task
@@ -1056,7 +1003,7 @@ module Aws::ChimeSDKVoice
     class GetSpeakerSearchTaskResponse < Struct.new(
       :speaker_search_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1065,7 +1012,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorEmergencyCallingConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute emergency_calling_configuration
@@ -1074,7 +1021,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
       :emergency_calling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1084,7 +1031,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorExternalSystemsConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute external_systems_configuration
@@ -1093,7 +1040,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorExternalSystemsConfigurationResponse < Struct.new(
       :external_systems_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group_id
@@ -1102,7 +1049,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorGroupRequest < Struct.new(
       :voice_connector_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group
@@ -1111,7 +1058,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1120,7 +1067,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorLoggingConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -1129,7 +1076,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1138,7 +1085,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorOriginationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination
@@ -1147,7 +1094,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorOriginationResponse < Struct.new(
       :origination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1156,7 +1103,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorProxyRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proxy
@@ -1165,7 +1112,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorProxyResponse < Struct.new(
       :proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1174,7 +1121,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector
@@ -1183,7 +1130,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorResponse < Struct.new(
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1192,7 +1139,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorStreamingConfigurationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streaming_configuration
@@ -1201,7 +1148,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorStreamingConfigurationResponse < Struct.new(
       :streaming_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1210,7 +1157,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorTerminationHealthRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute termination_health
@@ -1219,7 +1166,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorTerminationHealthResponse < Struct.new(
       :termination_health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1228,7 +1175,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorTerminationRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute termination
@@ -1237,7 +1184,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceConnectorTerminationResponse < Struct.new(
       :termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain_id
@@ -1246,7 +1193,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceProfileDomainRequest < Struct.new(
       :voice_profile_domain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain
@@ -1255,7 +1202,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceProfileDomainResponse < Struct.new(
       :voice_profile_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_id
@@ -1264,7 +1211,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceProfileRequest < Struct.new(
       :voice_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile
@@ -1273,7 +1220,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceProfileResponse < Struct.new(
       :voice_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1290,7 +1237,7 @@ module Aws::ChimeSDKVoice
       :voice_tone_analysis_task_id,
       :is_caller,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_tone_analysis_task
@@ -1299,7 +1246,7 @@ module Aws::ChimeSDKVoice
     class GetVoiceToneAnalysisTaskResponse < Struct.new(
       :voice_tone_analysis_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Access to the target resource is no longer available at the origin server. This condition is likely to be permanent.</p>
@@ -1311,11 +1258,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LanguageCode
-      EN_US = 'en-US'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_regions
@@ -1324,7 +1267,7 @@ module Aws::ChimeSDKVoice
     class ListAvailableVoiceConnectorRegionsResponse < Struct.new(
       :voice_connector_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1337,7 +1280,7 @@ module Aws::ChimeSDKVoice
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_orders
@@ -1350,7 +1293,7 @@ module Aws::ChimeSDKVoice
       :phone_number_orders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1379,7 +1322,7 @@ module Aws::ChimeSDKVoice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_numbers
@@ -1392,7 +1335,7 @@ module Aws::ChimeSDKVoice
       :phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1413,7 +1356,7 @@ module Aws::ChimeSDKVoice
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proxy_sessions
@@ -1426,7 +1369,7 @@ module Aws::ChimeSDKVoice
       :proxy_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1439,7 +1382,7 @@ module Aws::ChimeSDKVoice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_applications
@@ -1452,7 +1395,7 @@ module Aws::ChimeSDKVoice
       :sip_media_applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -1469,7 +1412,7 @@ module Aws::ChimeSDKVoice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rules
@@ -1482,7 +1425,7 @@ module Aws::ChimeSDKVoice
       :sip_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_type
@@ -1491,7 +1434,7 @@ module Aws::ChimeSDKVoice
     class ListSupportedPhoneNumberCountriesRequest < Struct.new(
       :product_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_countries
@@ -1500,7 +1443,7 @@ module Aws::ChimeSDKVoice
     class ListSupportedPhoneNumberCountriesResponse < Struct.new(
       :phone_number_countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1509,7 +1452,7 @@ module Aws::ChimeSDKVoice
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1518,7 +1461,7 @@ module Aws::ChimeSDKVoice
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1531,7 +1474,7 @@ module Aws::ChimeSDKVoice
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_groups
@@ -1544,7 +1487,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -1553,7 +1496,7 @@ module Aws::ChimeSDKVoice
     class ListVoiceConnectorTerminationCredentialsRequest < Struct.new(
       :voice_connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usernames
@@ -1562,7 +1505,7 @@ module Aws::ChimeSDKVoice
     class ListVoiceConnectorTerminationCredentialsResponse < Struct.new(
       :usernames,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1575,7 +1518,7 @@ module Aws::ChimeSDKVoice
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connectors
@@ -1588,7 +1531,7 @@ module Aws::ChimeSDKVoice
       :voice_connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1601,7 +1544,7 @@ module Aws::ChimeSDKVoice
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domains
@@ -1614,7 +1557,7 @@ module Aws::ChimeSDKVoice
       :voice_profile_domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain_id
@@ -1631,7 +1574,7 @@ module Aws::ChimeSDKVoice
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profiles
@@ -1644,7 +1587,7 @@ module Aws::ChimeSDKVoice
       :voice_profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging configuration associated with an Amazon Chime SDK Voice Connector. 
@@ -1659,7 +1602,7 @@ module Aws::ChimeSDKVoice
       :enable_sip_logs,
       :enable_media_metric_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a call analytics task.</p>
@@ -1673,7 +1616,7 @@ module Aws::ChimeSDKVoice
       :disabled,
       :configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource couldn't be found.</p>
@@ -1685,18 +1628,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationTarget
-      EventBridge = 'EventBridge'
-      SNS = 'SNS'
-      SQS = 'SQS'
-    end
-
-    module NumberSelectionBehavior
-      PreferSticky = 'PreferSticky'
-      AvoidSticky = 'AvoidSticky'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A phone number for which an order has been placed.</p>
@@ -1710,13 +1642,7 @@ module Aws::ChimeSDKVoice
       :e164_phone_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderedPhoneNumberStatus
-      Processing = 'Processing'
-      Acquired = 'Acquired'
-      Failed = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Origination settings enable your SIP hosts to receive inbound calls using your 
@@ -1740,7 +1666,7 @@ module Aws::ChimeSDKVoice
       :routes,
       :disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Origination routes define call distribution properties for your SIP hosts to 
@@ -1774,12 +1700,7 @@ module Aws::ChimeSDKVoice
       :priority,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginationRouteProtocol
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number and proxy phone number for a participant in an Amazon Chime SDK Voice Connector proxy session.</p>
@@ -1793,7 +1714,7 @@ module Aws::ChimeSDKVoice
       :phone_number,
       :proxy_phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A phone number used to call an Amazon 
@@ -1860,7 +1781,7 @@ module Aws::ChimeSDKVoice
       :order_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number associations, such as an Amazon Chime SDK account ID, user ID, 
@@ -1879,13 +1800,7 @@ module Aws::ChimeSDKVoice
       :name,
       :associated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhoneNumberAssociationName
-      VoiceConnectorId = 'VoiceConnectorId'
-      VoiceConnectorGroupId = 'VoiceConnectorGroupId'
-      SipRuleId = 'SipRuleId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number capabilities for Amazon Chime SDK phone numbers, 
@@ -1916,7 +1831,7 @@ module Aws::ChimeSDKVoice
       :inbound_mms,
       :outbound_mms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number's country.</p>
@@ -1930,7 +1845,7 @@ module Aws::ChimeSDKVoice
       :country_code,
       :supported_phone_number_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If a phone number action fails for one or more of the phone numbers in a request, 
@@ -1949,7 +1864,7 @@ module Aws::ChimeSDKVoice
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Amazon Chime SDK phone number order.</p>
@@ -1989,50 +1904,7 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :foc_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhoneNumberOrderStatus
-      Processing = 'Processing'
-      Successful = 'Successful'
-      Failed = 'Failed'
-      Partial = 'Partial'
-      PendingDocuments = 'PendingDocuments'
-      Submitted = 'Submitted'
-      FOC = 'FOC'
-      ChangeRequested = 'ChangeRequested'
-      Exception = 'Exception'
-      CancelRequested = 'CancelRequested'
-      Cancelled = 'Cancelled'
-    end
-
-    module PhoneNumberOrderType
-      New = 'New'
-      Porting = 'Porting'
-    end
-
-    module PhoneNumberProductType
-      VoiceConnector = 'VoiceConnector'
-      SipMediaApplicationDialIn = 'SipMediaApplicationDialIn'
-    end
-
-    module PhoneNumberStatus
-      Cancelled = 'Cancelled'
-      PortinCancelRequested = 'PortinCancelRequested'
-      PortinInProgress = 'PortinInProgress'
-      AcquireInProgress = 'AcquireInProgress'
-      AcquireFailed = 'AcquireFailed'
-      Unassigned = 'Unassigned'
-      Assigned = 'Assigned'
-      ReleaseInProgress = 'ReleaseInProgress'
-      DeleteInProgress = 'DeleteInProgress'
-      ReleaseFailed = 'ReleaseFailed'
-      DeleteFailed = 'DeleteFailed'
-    end
-
-    module PhoneNumberType
-      Local = 'Local'
-      TollFree = 'TollFree'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The proxy configuration for an Amazon Chime SDK Voice Connector.</p>
@@ -2054,7 +1926,7 @@ module Aws::ChimeSDKVoice
       :fall_back_phone_number,
       :phone_number_countries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The proxy session for an Amazon Chime SDK Voice Connector.</p>
@@ -2112,13 +1984,7 @@ module Aws::ChimeSDKVoice
       :geo_match_level,
       :geo_match_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProxySessionStatus
-      Open = 'Open'
-      InProgress = 'InProgress'
-      Closed = 'Closed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -2131,7 +1997,7 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :sip_media_application_alexa_skill_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_alexa_skill_configuration
@@ -2140,7 +2006,7 @@ module Aws::ChimeSDKVoice
     class PutSipMediaApplicationAlexaSkillConfigurationResponse < Struct.new(
       :sip_media_application_alexa_skill_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -2153,7 +2019,7 @@ module Aws::ChimeSDKVoice
       :sip_media_application_id,
       :sip_media_application_logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_logging_configuration
@@ -2162,7 +2028,7 @@ module Aws::ChimeSDKVoice
     class PutSipMediaApplicationLoggingConfigurationResponse < Struct.new(
       :sip_media_application_logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2175,7 +2041,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :emergency_calling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute emergency_calling_configuration
@@ -2184,7 +2050,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorEmergencyCallingConfigurationResponse < Struct.new(
       :emergency_calling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2202,7 +2068,7 @@ module Aws::ChimeSDKVoice
       :session_border_controller_types,
       :contact_center_system_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute external_systems_configuration
@@ -2211,7 +2077,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorExternalSystemsConfigurationResponse < Struct.new(
       :external_systems_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2224,7 +2090,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -2233,7 +2099,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2246,7 +2112,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :origination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origination
@@ -2255,7 +2121,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorOriginationResponse < Struct.new(
       :origination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2280,7 +2146,7 @@ module Aws::ChimeSDKVoice
       :fall_back_phone_number,
       :disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proxy
@@ -2289,7 +2155,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorProxyResponse < Struct.new(
       :proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2302,7 +2168,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :streaming_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streaming_configuration
@@ -2311,7 +2177,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorStreamingConfigurationResponse < Struct.new(
       :streaming_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2324,7 +2190,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2337,7 +2203,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute termination
@@ -2346,7 +2212,7 @@ module Aws::ChimeSDKVoice
     class PutVoiceConnectorTerminationResponse < Struct.new(
       :termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the resource limit.</p>
@@ -2358,7 +2224,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -2367,7 +2233,7 @@ module Aws::ChimeSDKVoice
     class RestorePhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -2376,7 +2242,7 @@ module Aws::ChimeSDKVoice
     class RestorePhoneNumberResponse < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute area_code
@@ -2413,7 +2279,7 @@ module Aws::ChimeSDKVoice
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute e164_phone_numbers
@@ -2426,7 +2292,7 @@ module Aws::ChimeSDKVoice
       :e164_phone_numbers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration settings for server-side encryption.</p>
@@ -2440,7 +2306,7 @@ module Aws::ChimeSDKVoice
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service encountered an unexpected error.</p>
@@ -2452,7 +2318,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable.</p>
@@ -2464,15 +2330,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionBorderControllerType
-      RIBBON_SBC = 'RIBBON_SBC'
-      ORACLE_ACME_PACKET_SBC = 'ORACLE_ACME_PACKET_SBC'
-      AVAYA_SBCE = 'AVAYA_SBCE'
-      CISCO_UNIFIED_BORDER_ELEMENT = 'CISCO_UNIFIED_BORDER_ELEMENT'
-      AUDIOCODES_MEDIANT_SBC = 'AUDIOCODES_MEDIANT_SBC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the SIP media application, including name and endpoints. 
@@ -2508,7 +2366,7 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :sip_media_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Alexa Skill configuration of a SIP media application.</p>
@@ -2526,7 +2384,7 @@ module Aws::ChimeSDKVoice
       :alexa_skill_status,
       :alexa_skill_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>Call</code> instance for a SIP media application.</p>
@@ -2536,7 +2394,7 @@ module Aws::ChimeSDKVoice
     class SipMediaApplicationCall < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The endpoint assigned to a SIP media application.</p>
@@ -2547,7 +2405,7 @@ module Aws::ChimeSDKVoice
     class SipMediaApplicationEndpoint < Struct.new(
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logging configuration of a SIP media application.</p>
@@ -2557,7 +2415,7 @@ module Aws::ChimeSDKVoice
     class SipMediaApplicationLoggingConfiguration < Struct.new(
       :enable_sip_media_application_message_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a SIP rule, including name, triggers, and target applications. 
@@ -2597,7 +2455,7 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A target SIP media application and other details, such as priority and AWS Region, 
@@ -2616,12 +2474,7 @@ module Aws::ChimeSDKVoice
       :priority,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SipRuleTriggerType
-      ToPhoneNumber = 'ToPhoneNumber'
-      RequestUriHostname = 'RequestUriHostname'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a speaker search task.</p>
@@ -2635,7 +2488,7 @@ module Aws::ChimeSDKVoice
       :results,
       :voiceprint_generation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a speaker search analysis.</p>
@@ -2649,7 +2502,7 @@ module Aws::ChimeSDKVoice
       :confidence_score,
       :voice_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:confidence_score] = 0 unless options.key?(:confidence_score)
@@ -2694,7 +2547,7 @@ module Aws::ChimeSDKVoice
       :started_timestamp,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2719,7 +2572,7 @@ module Aws::ChimeSDKVoice
       :client_request_token,
       :call_leg,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute speaker_search_task
@@ -2728,7 +2581,7 @@ module Aws::ChimeSDKVoice
     class StartSpeakerSearchTaskResponse < Struct.new(
       :speaker_search_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2750,7 +2603,7 @@ module Aws::ChimeSDKVoice
       :language_code,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_tone_analysis_task
@@ -2759,7 +2612,7 @@ module Aws::ChimeSDKVoice
     class StartVoiceToneAnalysisTaskResponse < Struct.new(
       :voice_tone_analysis_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2772,7 +2625,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :speaker_search_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -2785,7 +2638,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :voice_tone_analysis_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The streaming configuration associated with an Amazon Chime SDK Voice Connector. 
@@ -2809,7 +2662,7 @@ module Aws::ChimeSDKVoice
       :streaming_notification_targets,
       :media_insights_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target recipient for a streaming configuration notification.</p>
@@ -2819,7 +2672,7 @@ module Aws::ChimeSDKVoice
     class StreamingNotificationTarget < Struct.new(
       :notification_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag applied to a resource.</p>
@@ -2833,7 +2686,7 @@ module Aws::ChimeSDKVoice
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2846,7 +2699,7 @@ module Aws::ChimeSDKVoice
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Termination settings enable SIP hosts to make outbound calls using an Amazon Chime SDK Voice Connector.</p>
@@ -2872,7 +2725,7 @@ module Aws::ChimeSDKVoice
       :cidr_allowed_list,
       :disabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The termination health details, including the source IP address and timestamp of the last successful <code>SIP OPTIONS</code> message from your SIP infrastructure.</p>
@@ -2886,7 +2739,7 @@ module Aws::ChimeSDKVoice
       :timestamp,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of customer requests exceeds the request rate limit.</p>
@@ -2898,7 +2751,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client isn't authorized to request a resource.</p>
@@ -2910,7 +2763,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A well-formed request couldn't be followed due to semantic errors.</p>
@@ -2922,7 +2775,7 @@ module Aws::ChimeSDKVoice
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2935,7 +2788,7 @@ module Aws::ChimeSDKVoice
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector
@@ -2944,7 +2797,7 @@ module Aws::ChimeSDKVoice
     class UpdateGlobalSettingsRequest < Struct.new(
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -2965,7 +2818,7 @@ module Aws::ChimeSDKVoice
       :calling_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number ID, product type, or calling name fields to update, 
@@ -2988,7 +2841,7 @@ module Aws::ChimeSDKVoice
       :calling_name,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number
@@ -2997,7 +2850,7 @@ module Aws::ChimeSDKVoice
     class UpdatePhoneNumberResponse < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calling_name
@@ -3006,7 +2859,7 @@ module Aws::ChimeSDKVoice
     class UpdatePhoneNumberSettingsRequest < Struct.new(
       :calling_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -3027,7 +2880,7 @@ module Aws::ChimeSDKVoice
       :capabilities,
       :expiry_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proxy_session
@@ -3036,7 +2889,7 @@ module Aws::ChimeSDKVoice
     class UpdateProxySessionResponse < Struct.new(
       :proxy_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -3054,7 +2907,7 @@ module Aws::ChimeSDKVoice
       :transaction_id,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_call
@@ -3063,7 +2916,7 @@ module Aws::ChimeSDKVoice
     class UpdateSipMediaApplicationCallResponse < Struct.new(
       :sip_media_application_call,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application_id
@@ -3080,7 +2933,7 @@ module Aws::ChimeSDKVoice
       :name,
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_media_application
@@ -3089,7 +2942,7 @@ module Aws::ChimeSDKVoice
     class UpdateSipMediaApplicationResponse < Struct.new(
       :sip_media_application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rule_id
@@ -3110,7 +2963,7 @@ module Aws::ChimeSDKVoice
       :disabled,
       :target_applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sip_rule
@@ -3119,7 +2972,7 @@ module Aws::ChimeSDKVoice
     class UpdateSipRuleResponse < Struct.new(
       :sip_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group_id
@@ -3137,7 +2990,7 @@ module Aws::ChimeSDKVoice
       :name,
       :voice_connector_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_group
@@ -3146,7 +2999,7 @@ module Aws::ChimeSDKVoice
     class UpdateVoiceConnectorGroupResponse < Struct.new(
       :voice_connector_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector_id
@@ -3163,7 +3016,7 @@ module Aws::ChimeSDKVoice
       :name,
       :require_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_connector
@@ -3172,7 +3025,7 @@ module Aws::ChimeSDKVoice
     class UpdateVoiceConnectorResponse < Struct.new(
       :voice_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain_id
@@ -3189,7 +3042,7 @@ module Aws::ChimeSDKVoice
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_domain
@@ -3198,7 +3051,7 @@ module Aws::ChimeSDKVoice
     class UpdateVoiceProfileDomainResponse < Struct.new(
       :voice_profile_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile_id
@@ -3211,7 +3064,7 @@ module Aws::ChimeSDKVoice
       :voice_profile_id,
       :speaker_search_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute voice_profile
@@ -3220,7 +3073,7 @@ module Aws::ChimeSDKVoice
     class UpdateVoiceProfileResponse < Struct.new(
       :voice_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -3255,7 +3108,7 @@ module Aws::ChimeSDKVoice
       :country,
       :postal_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute validation_result
@@ -3294,7 +3147,7 @@ module Aws::ChimeSDKVoice
       :address,
       :candidate_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:validation_result] = 0 unless options.key?(:validation_result)
@@ -3343,20 +3196,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_arn,
       :integration_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VoiceConnectorAwsRegion
-      US_EAST_1 = 'us-east-1'
-      US_WEST_2 = 'us-west-2'
-      CA_CENTRAL_1 = 'ca-central-1'
-      EU_CENTRAL_1 = 'eu-central-1'
-      EU_WEST_1 = 'eu-west-1'
-      EU_WEST_2 = 'eu-west-2'
-      AP_NORTHEAST_2 = 'ap-northeast-2'
-      AP_NORTHEAST_1 = 'ap-northeast-1'
-      AP_SOUTHEAST_1 = 'ap-southeast-1'
-      AP_SOUTHEAST_2 = 'ap-southeast-2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime SDK Voice Connector group configuration, including 
@@ -3389,12 +3229,7 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :voice_connector_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VoiceConnectorIntegrationType
-      CONNECT_CALL_TRANSFER_CONNECTOR = 'CONNECT_CALL_TRANSFER_CONNECTOR'
-      CONNECT_ANALYTICS_CONNECTOR = 'CONNECT_ANALYTICS_CONNECTOR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For Amazon Chime SDK Voice Connector groups, the Amazon Chime SDK Voice 
@@ -3412,7 +3247,7 @@ module Aws::ChimeSDKVoice
       :voice_connector_id,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Chime SDK Voice Connector settings. Includes any Amazon 
@@ -3423,7 +3258,7 @@ module Aws::ChimeSDKVoice
     class VoiceConnectorSettings < Struct.new(
       :cdr_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The combination of a voice print and caller ID.</p>
@@ -3454,7 +3289,7 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of voice profiles.</p>
@@ -3488,7 +3323,7 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A high-level overview of a voice profile domain.</p>
@@ -3518,7 +3353,7 @@ module Aws::ChimeSDKVoice
       :created_timestamp,
       :updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A high-level summary of a voice profile.</p>
@@ -3548,7 +3383,7 @@ module Aws::ChimeSDKVoice
       :updated_timestamp,
       :expiration_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A representation of an asynchronous request to perform voice tone analysis on a Voice Connector call.</p>
@@ -3583,7 +3418,7 @@ module Aws::ChimeSDKVoice
       :started_timestamp,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

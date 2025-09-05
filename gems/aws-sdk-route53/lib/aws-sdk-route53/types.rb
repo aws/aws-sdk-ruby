@@ -48,15 +48,7 @@ module Aws::Route53
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountLimitType
-      MAX_HEALTH_CHECKS_BY_OWNER = 'MAX_HEALTH_CHECKS_BY_OWNER'
-      MAX_HOSTED_ZONES_BY_OWNER = 'MAX_HOSTED_ZONES_BY_OWNER'
-      MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER = 'MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER'
-      MAX_REUSABLE_DELEGATION_SETS_BY_OWNER = 'MAX_REUSABLE_DELEGATION_SETS_BY_OWNER'
-      MAX_TRAFFIC_POLICIES_BY_OWNER = 'MAX_TRAFFIC_POLICIES_BY_OWNER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -71,7 +63,7 @@ module Aws::Route53
       :hosted_zone_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_info
@@ -81,7 +73,7 @@ module Aws::Route53
     class ActivateKeySigningKeyResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that identifies the CloudWatch alarm that you want Amazon Route 53
@@ -116,7 +108,7 @@ module Aws::Route53
       :region,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -541,7 +533,7 @@ module Aws::Route53
       :dns_name,
       :evaluate_target_health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluate_target_health] = false unless options.key?(:evaluate_target_health)
@@ -570,7 +562,7 @@ module Aws::Route53
       :vpc,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the
@@ -581,7 +573,7 @@ module Aws::Route53
     class AssociateVPCWithHostedZoneResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for each resource record set that you want to change.</p>
@@ -620,13 +612,7 @@ module Aws::Route53
       :action,
       :resource_record_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeAction
-      CREATE = 'CREATE'
-      DELETE = 'DELETE'
-      UPSERT = 'UPSERT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a change request.</p>
@@ -642,7 +628,7 @@ module Aws::Route53
       :comment,
       :changes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -677,7 +663,7 @@ module Aws::Route53
       :collection_version,
       :changes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -688,7 +674,7 @@ module Aws::Route53
     class ChangeCidrCollectionResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes change information about changes made to your hosted
@@ -715,7 +701,7 @@ module Aws::Route53
       :submitted_at,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains change information for the resource record set.</p>
@@ -731,7 +717,7 @@ module Aws::Route53
       :hosted_zone_id,
       :change_batch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing the response for the request.</p>
@@ -744,12 +730,7 @@ module Aws::Route53
     class ChangeResourceRecordSetsResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeStatus
-      PENDING = 'PENDING'
-      INSYNC = 'INSYNC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the tags that you want to add, edit, or
@@ -784,13 +765,13 @@ module Aws::Route53
       :add_tags,
       :remove_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Empty response for the request.</p>
     class ChangeTagsForResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This CIDR block is already in use.</p>
@@ -799,7 +780,7 @@ module Aws::Route53
     class CidrBlockInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that lists the CIDR blocks.</p>
@@ -813,7 +794,7 @@ module Aws::Route53
       :cidr_block,
       :location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex
@@ -840,7 +821,7 @@ module Aws::Route53
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CIDR collection with this name and a different caller reference already exists in this account.</p>
@@ -849,7 +830,7 @@ module Aws::Route53
     class CidrCollectionAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the CIDR collection change.</p>
@@ -867,12 +848,7 @@ module Aws::Route53
       :action,
       :cidr_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CidrCollectionChangeAction
-      PUT = 'PUT'
-      DELETE_IF_EXISTS = 'DELETE_IF_EXISTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This CIDR collection is in use, and isn't empty.</p>
@@ -881,7 +857,7 @@ module Aws::Route53
     class CidrCollectionInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR collection version you provided, doesn't match the one in the
@@ -891,7 +867,7 @@ module Aws::Route53
     class CidrCollectionVersionMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that is specified in resource record set object when you are linking a
@@ -908,7 +884,7 @@ module Aws::Route53
       :collection_id,
       :location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the CloudWatch alarm that Amazon Route
@@ -958,53 +934,7 @@ module Aws::Route53
       :statistic,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudWatchRegion
-      us_east_1 = 'us-east-1'
-      us_east_2 = 'us-east-2'
-      us_west_1 = 'us-west-1'
-      us_west_2 = 'us-west-2'
-      ca_central_1 = 'ca-central-1'
-      eu_central_1 = 'eu-central-1'
-      eu_central_2 = 'eu-central-2'
-      eu_west_1 = 'eu-west-1'
-      eu_west_2 = 'eu-west-2'
-      eu_west_3 = 'eu-west-3'
-      ap_east_1 = 'ap-east-1'
-      me_south_1 = 'me-south-1'
-      me_central_1 = 'me-central-1'
-      ap_south_1 = 'ap-south-1'
-      ap_south_2 = 'ap-south-2'
-      ap_southeast_1 = 'ap-southeast-1'
-      ap_southeast_2 = 'ap-southeast-2'
-      ap_southeast_3 = 'ap-southeast-3'
-      ap_northeast_1 = 'ap-northeast-1'
-      ap_northeast_2 = 'ap-northeast-2'
-      ap_northeast_3 = 'ap-northeast-3'
-      eu_north_1 = 'eu-north-1'
-      sa_east_1 = 'sa-east-1'
-      cn_northwest_1 = 'cn-northwest-1'
-      cn_north_1 = 'cn-north-1'
-      af_south_1 = 'af-south-1'
-      eu_south_1 = 'eu-south-1'
-      eu_south_2 = 'eu-south-2'
-      us_gov_west_1 = 'us-gov-west-1'
-      us_gov_east_1 = 'us-gov-east-1'
-      us_iso_east_1 = 'us-iso-east-1'
-      us_iso_west_1 = 'us-iso-west-1'
-      us_isob_east_1 = 'us-isob-east-1'
-      ap_southeast_4 = 'ap-southeast-4'
-      il_central_1 = 'il-central-1'
-      ca_west_1 = 'ca-west-1'
-      ap_southeast_5 = 'ap-southeast-5'
-      mx_central_1 = 'mx-central-1'
-      us_isof_south_1 = 'us-isof-south-1'
-      us_isof_east_1 = 'us-isof-east-1'
-      ap_southeast_7 = 'ap-southeast-7'
-      ap_east_2 = 'ap-east-2'
-      eu_isoe_west_1 = 'eu-isoe-west-1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that is an entry in an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_CidrCollection.html">CidrCollection</a>
@@ -1030,14 +960,7 @@ module Aws::Route53
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      GreaterThanOrEqualToThreshold = 'GreaterThanOrEqualToThreshold'
-      GreaterThanThreshold = 'GreaterThanThreshold'
-      LessThanThreshold = 'LessThanThreshold'
-      LessThanOrEqualToThreshold = 'LessThanOrEqualToThreshold'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another user submitted a request to create, update, or delete the object at the same
@@ -1048,7 +971,7 @@ module Aws::Route53
     class ConcurrentModification < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cause of this error depends on the operation that you're performing:</p>
@@ -1081,7 +1004,7 @@ module Aws::Route53
     class ConflictingDomainExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You tried to update a traffic policy instance by using a traffic policy version that
@@ -1094,7 +1017,7 @@ module Aws::Route53
     class ConflictingTypes < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1112,7 +1035,7 @@ module Aws::Route53
       :latitude,
       :longitude,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1128,7 +1051,7 @@ module Aws::Route53
       :name,
       :caller_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection
@@ -1141,7 +1064,7 @@ module Aws::Route53
       :collection,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the health check request information.</p>
@@ -1183,7 +1106,7 @@ module Aws::Route53
       :caller_reference,
       :health_check_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing the response information for the new health check.</p>
@@ -1197,7 +1120,7 @@ module Aws::Route53
       :health_check,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the request to create a public or
@@ -1258,7 +1181,7 @@ module Aws::Route53
       :hosted_zone_config,
       :delegation_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing the response information for the hosted zone.</p>
@@ -1286,7 +1209,7 @@ module Aws::Route53
       :vpc,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute caller_reference
@@ -1358,7 +1281,7 @@ module Aws::Route53
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_info
@@ -1376,7 +1299,7 @@ module Aws::Route53
       :key_signing_key,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -1395,7 +1318,7 @@ module Aws::Route53
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_logging_config
@@ -1410,7 +1333,7 @@ module Aws::Route53
       :query_logging_config,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute caller_reference
@@ -1429,7 +1352,7 @@ module Aws::Route53
       :caller_reference,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegation_set
@@ -1442,7 +1365,7 @@ module Aws::Route53
       :delegation_set,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the resource record sets that you want
@@ -1475,7 +1398,7 @@ module Aws::Route53
       :traffic_policy_id,
       :traffic_policy_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the
@@ -1490,7 +1413,7 @@ module Aws::Route53
       :traffic_policy_instance,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the traffic policy that you want to
@@ -1509,7 +1432,7 @@ module Aws::Route53
       :document,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the
@@ -1524,7 +1447,7 @@ module Aws::Route53
       :traffic_policy,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the traffic policy that you want to
@@ -1546,7 +1469,7 @@ module Aws::Route53
       :document,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the
@@ -1562,7 +1485,7 @@ module Aws::Route53
       :traffic_policy,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the request to authorize associating a
@@ -1580,7 +1503,7 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information from a
@@ -1595,7 +1518,7 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hosted zone doesn't have any DNSSEC resources.</p>
@@ -1604,7 +1527,7 @@ module Aws::Route53
     class DNSSECNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string representing the status of DNSSEC signing.</p>
@@ -1649,7 +1572,7 @@ module Aws::Route53
       :serve_signature,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -1662,7 +1585,7 @@ module Aws::Route53
       :hosted_zone_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_info
@@ -1672,7 +1595,7 @@ module Aws::Route53
     class DeactivateKeySigningKeyResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that lists the name servers in a delegation set, as well as the
@@ -1693,7 +1616,7 @@ module Aws::Route53
       :caller_reference,
       :name_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A delegation set with the same owner and caller reference combination has already been
@@ -1704,7 +1627,7 @@ module Aws::Route53
     class DelegationSetAlreadyCreated < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified delegation set has already been marked as reusable.</p>
@@ -1714,7 +1637,7 @@ module Aws::Route53
     class DelegationSetAlreadyReusable < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified delegation contains associated hosted zones which must be deleted before
@@ -1725,7 +1648,7 @@ module Aws::Route53
     class DelegationSetInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can create a hosted zone that has the same name as an existing hosted zone
@@ -1738,7 +1661,7 @@ module Aws::Route53
     class DelegationSetNotAvailable < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reusable delegation set with the specified ID does not exist.</p>
@@ -1748,7 +1671,7 @@ module Aws::Route53
     class DelegationSetNotReusable < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1757,12 +1680,12 @@ module Aws::Route53
     class DeleteCidrCollectionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCidrCollectionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This action deletes a health check.</p>
@@ -1772,13 +1695,13 @@ module Aws::Route53
     class DeleteHealthCheckRequest < Struct.new(
       :health_check_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteHealthCheckResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a hosted zone.</p>
@@ -1788,7 +1711,7 @@ module Aws::Route53
     class DeleteHostedZoneRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>DeleteHostedZone</code>
@@ -1800,7 +1723,7 @@ module Aws::Route53
     class DeleteHostedZoneResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -1813,7 +1736,7 @@ module Aws::Route53
       :hosted_zone_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_info
@@ -1823,7 +1746,7 @@ module Aws::Route53
     class DeleteKeySigningKeyResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1832,12 +1755,12 @@ module Aws::Route53
     class DeleteQueryLoggingConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueryLoggingConfigResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a reusable delegation set.</p>
@@ -1847,13 +1770,13 @@ module Aws::Route53
     class DeleteReusableDelegationSetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteReusableDelegationSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a specified traffic policy instance.</p>
@@ -1868,13 +1791,13 @@ module Aws::Route53
     class DeleteTrafficPolicyInstanceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteTrafficPolicyInstanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to delete a specified traffic policy version.</p>
@@ -1888,13 +1811,13 @@ module Aws::Route53
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty element.</p>
     class DeleteTrafficPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the request to remove authorization to
@@ -1911,13 +1834,13 @@ module Aws::Route53
       :hosted_zone_id,
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Empty response for the request.</p>
     class DeleteVPCAssociationAuthorizationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For the metric that the CloudWatch alarm is associated with, a complex type that
@@ -1934,7 +1857,7 @@ module Aws::Route53
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -1943,7 +1866,7 @@ module Aws::Route53
     class DisableHostedZoneDNSSECRequest < Struct.new(
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_info
@@ -1953,7 +1876,7 @@ module Aws::Route53
     class DisableHostedZoneDNSSECResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the VPC that you want to disassociate
@@ -1974,7 +1897,7 @@ module Aws::Route53
       :vpc,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the disassociate
@@ -1986,7 +1909,7 @@ module Aws::Route53
     class DisassociateVPCFromHostedZoneResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -1995,7 +1918,7 @@ module Aws::Route53
     class EnableHostedZoneDNSSECRequest < Struct.new(
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_info
@@ -2005,7 +1928,7 @@ module Aws::Route53
     class EnableHostedZoneDNSSECResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a geographic location.</p>
@@ -2065,7 +1988,7 @@ module Aws::Route53
       :country_code,
       :subdivision_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the codes and full continent, country, and subdivision
@@ -2101,7 +2024,7 @@ module Aws::Route53
       :subdivision_code,
       :subdivision_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> (Resource record sets only): A complex type that lets you specify where your resources are
@@ -2148,7 +2071,7 @@ module Aws::Route53
       :coordinates,
       :bias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the request to create a hosted
@@ -2189,7 +2112,7 @@ module Aws::Route53
     class GetAccountLimitRequest < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the requested limit. </p>
@@ -2209,7 +2132,7 @@ module Aws::Route53
       :limit,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -2226,7 +2149,7 @@ module Aws::Route53
     class GetChangeRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the <code>ChangeInfo</code> element.</p>
@@ -2236,13 +2159,13 @@ module Aws::Route53
     class GetChangeResponse < Struct.new(
       :change_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Empty request.</p>
     class GetCheckerIpRangesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the <code>CheckerIpRanges</code> element.</p>
@@ -2253,7 +2176,7 @@ module Aws::Route53
     class GetCheckerIpRangesResponse < Struct.new(
       :checker_ip_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_id
@@ -2262,7 +2185,7 @@ module Aws::Route53
     class GetDNSSECRequest < Struct.new(
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2275,7 +2198,7 @@ module Aws::Route53
       :status,
       :key_signing_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request for information about whether a specified geographic location is supported
@@ -2332,7 +2255,7 @@ module Aws::Route53
       :country_code,
       :subdivision_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the specified geolocation
@@ -2344,13 +2267,13 @@ module Aws::Route53
     class GetGeoLocationResponse < Struct.new(
       :geo_location_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request for the number of health checks that are associated with the current Amazon Web Services account.</p>
     class GetHealthCheckCountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>GetHealthCheckCount</code>
@@ -2361,7 +2284,7 @@ module Aws::Route53
     class GetHealthCheckCountResponse < Struct.new(
       :health_check_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request for the reason that a health check failed most recently.</p>
@@ -2379,7 +2302,7 @@ module Aws::Route53
     class GetHealthCheckLastFailureReasonRequest < Struct.new(
       :health_check_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a
@@ -2391,7 +2314,7 @@ module Aws::Route53
     class GetHealthCheckLastFailureReasonResponse < Struct.new(
       :health_check_observations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get information about a specified health check. </p>
@@ -2403,7 +2326,7 @@ module Aws::Route53
     class GetHealthCheckRequest < Struct.new(
       :health_check_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>GetHealthCheck</code>
@@ -2415,7 +2338,7 @@ module Aws::Route53
     class GetHealthCheckResponse < Struct.new(
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get the status for a health check.</p>
@@ -2433,7 +2356,7 @@ module Aws::Route53
     class GetHealthCheckStatusRequest < Struct.new(
       :health_check_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>GetHealthCheck</code>
@@ -2446,14 +2369,14 @@ module Aws::Route53
     class GetHealthCheckStatusResponse < Struct.new(
       :health_check_observations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to retrieve a count of all the hosted zones that are associated with the
     # 			current Amazon Web Services account.</p>
     class GetHostedZoneCountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>GetHostedZoneCount</code>
@@ -2465,7 +2388,7 @@ module Aws::Route53
     class GetHostedZoneCountResponse < Struct.new(
       :hosted_zone_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the request to create a hosted
@@ -2493,7 +2416,7 @@ module Aws::Route53
       :type,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the requested limit. </p>
@@ -2513,7 +2436,7 @@ module Aws::Route53
       :limit,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -2528,7 +2451,7 @@ module Aws::Route53
     class GetHostedZoneRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contain the response to a <code>GetHostedZone</code>
@@ -2550,7 +2473,7 @@ module Aws::Route53
       :delegation_set,
       :vp_cs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2560,7 +2483,7 @@ module Aws::Route53
     class GetQueryLoggingConfigRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_logging_config
@@ -2570,7 +2493,7 @@ module Aws::Route53
     class GetQueryLoggingConfigResponse < Struct.new(
       :query_logging_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the request to create a hosted
@@ -2586,7 +2509,7 @@ module Aws::Route53
       :type,
       :delegation_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the requested limit. </p>
@@ -2602,7 +2525,7 @@ module Aws::Route53
       :limit,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -2618,7 +2541,7 @@ module Aws::Route53
     class GetReusableDelegationSetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to the <code>GetReusableDelegationSet</code>
@@ -2629,14 +2552,14 @@ module Aws::Route53
     class GetReusableDelegationSetResponse < Struct.new(
       :delegation_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to get the number of traffic policy instances that are associated with the
     # 			current Amazon Web Services account.</p>
     class GetTrafficPolicyInstanceCountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the resource record sets that Amazon
@@ -2647,7 +2570,7 @@ module Aws::Route53
     class GetTrafficPolicyInstanceCountResponse < Struct.new(
       :traffic_policy_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets information about a specified traffic policy instance.</p>
@@ -2657,7 +2580,7 @@ module Aws::Route53
     class GetTrafficPolicyInstanceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the resource record sets that Amazon
@@ -2668,7 +2591,7 @@ module Aws::Route53
     class GetTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets information about a specific traffic policy version.</p>
@@ -2683,7 +2606,7 @@ module Aws::Route53
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -2693,7 +2616,7 @@ module Aws::Route53
     class GetTrafficPolicyResponse < Struct.new(
       :traffic_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about one health check that is associated
@@ -2731,7 +2654,7 @@ module Aws::Route53
       :health_check_version,
       :cloud_watch_alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The health check you're attempting to create already exists. Amazon Route 53 returns
@@ -2754,7 +2677,7 @@ module Aws::Route53
     class HealthCheckAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the health check.</p>
@@ -3149,7 +3072,7 @@ module Aws::Route53
       :insufficient_data_health_status,
       :routing_control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error code is not in use.</p>
@@ -3160,7 +3083,7 @@ module Aws::Route53
     class HealthCheckInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the last failure reason as reported by one Amazon Route
@@ -3182,29 +3105,7 @@ module Aws::Route53
       :ip_address,
       :status_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HealthCheckRegion
-      us_east_1 = 'us-east-1'
-      us_west_1 = 'us-west-1'
-      us_west_2 = 'us-west-2'
-      eu_west_1 = 'eu-west-1'
-      ap_southeast_1 = 'ap-southeast-1'
-      ap_southeast_2 = 'ap-southeast-2'
-      ap_northeast_1 = 'ap-northeast-1'
-      sa_east_1 = 'sa-east-1'
-    end
-
-    module HealthCheckType
-      HTTP = 'HTTP'
-      HTTPS = 'HTTPS'
-      HTTP_STR_MATCH = 'HTTP_STR_MATCH'
-      HTTPS_STR_MATCH = 'HTTPS_STR_MATCH'
-      TCP = 'TCP'
-      CALCULATED = 'CALCULATED'
-      CLOUDWATCH_METRIC = 'CLOUDWATCH_METRIC'
-      RECOVERY_CONTROL = 'RECOVERY_CONTROL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of <code>HealthCheckVersion</code> in the request doesn't match the value of
@@ -3214,7 +3115,7 @@ module Aws::Route53
     class HealthCheckVersionMismatch < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains general information about the hosted zone.</p>
@@ -3254,7 +3155,7 @@ module Aws::Route53
       :resource_record_set_count,
       :linked_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hosted zone you're trying to create already exists. Amazon Route 53 returns this
@@ -3266,7 +3167,7 @@ module Aws::Route53
     class HostedZoneAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains an optional comment about your hosted zone. If you don't
@@ -3282,7 +3183,7 @@ module Aws::Route53
       :comment,
       :private_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:private_zone] = false unless options.key?(:private_zone)
@@ -3315,12 +3216,7 @@ module Aws::Route53
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostedZoneLimitType
-      MAX_RRSETS_BY_ZONE = 'MAX_RRSETS_BY_ZONE'
-      MAX_VPCS_ASSOCIATED_BY_ZONE = 'MAX_VPCS_ASSOCIATED_BY_ZONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hosted zone contains resource records that are not SOA or NS records.</p>
@@ -3330,7 +3226,7 @@ module Aws::Route53
     class HostedZoneNotEmpty < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified HostedZone can't be found.</p>
@@ -3340,7 +3236,7 @@ module Aws::Route53
     class HostedZoneNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified hosted zone is a public hosted zone, not a private hosted zone.</p>
@@ -3350,7 +3246,7 @@ module Aws::Route53
     class HostedZoneNotPrivate < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that identifies a hosted zone that a specified Amazon VPC is associated
@@ -3375,7 +3271,7 @@ module Aws::Route53
       :owning_account,
       :owning_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hosted zone nameservers don't match the parent nameservers. The hosted zone and
@@ -3385,7 +3281,7 @@ module Aws::Route53
     class HostedZonePartiallyDelegated < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In the response to a <code>ListHostedZonesByVPC</code> request, the
@@ -3410,11 +3306,7 @@ module Aws::Route53
       :name,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostedZoneType
-      PRIVATE_HOSTED_ZONE = 'PrivateHostedZone'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you're trying to access is unsupported on this Amazon Route 53
@@ -3424,7 +3316,7 @@ module Aws::Route53
     class IncompatibleVersion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Route 53 doesn't have the permissions required to create log streams and send
@@ -3457,13 +3349,7 @@ module Aws::Route53
     class InsufficientCloudWatchLogsResourcePolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InsufficientDataHealthStatus
-      Healthy = 'Healthy'
-      Unhealthy = 'Unhealthy'
-      LastKnownStatus = 'LastKnownStatus'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter name is not valid.</p>
@@ -3473,7 +3359,7 @@ module Aws::Route53
     class InvalidArgument < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception contains a list of messages that might contain one or more error
@@ -3487,7 +3373,7 @@ module Aws::Route53
       :messages,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified domain name is not valid.</p>
@@ -3497,7 +3383,7 @@ module Aws::Route53
     class InvalidDomainName < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input is not valid.</p>
@@ -3507,7 +3393,7 @@ module Aws::Route53
     class InvalidInput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The KeyManagementServiceArn that you specified isn't valid to use with DNSSEC
@@ -3517,7 +3403,7 @@ module Aws::Route53
     class InvalidKMSArn < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-signing key (KSK) name that you specified isn't a valid name.</p>
@@ -3526,7 +3412,7 @@ module Aws::Route53
     class InvalidKeySigningKeyName < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-signing key (KSK) status isn't valid or another KSK has the status
@@ -3536,7 +3422,7 @@ module Aws::Route53
     class InvalidKeySigningKeyStatus < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value that you specified to get the second or subsequent page of results is
@@ -3546,7 +3432,7 @@ module Aws::Route53
     class InvalidPaginationToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your hosted zone status isn't valid for this operation. In the hosted zone, change the
@@ -3556,7 +3442,7 @@ module Aws::Route53
     class InvalidSigningStatus < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the traffic policy document that you specified in the
@@ -3567,7 +3453,7 @@ module Aws::Route53
     class InvalidTrafficPolicyDocument < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC ID that you specified either isn't a valid ID or the current account is not
@@ -3578,7 +3464,7 @@ module Aws::Route53
     class InvalidVPCId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-signing key (KSK) is a complex type that represents a public/private key pair.
@@ -3737,7 +3623,7 @@ module Aws::Route53
       :created_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:flag] = 0 unless options.key?(:flag)
@@ -3754,7 +3640,7 @@ module Aws::Route53
     class KeySigningKeyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-signing key (KSK) is specified in a parent DS record.</p>
@@ -3763,7 +3649,7 @@ module Aws::Route53
     class KeySigningKeyInParentDSRecord < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-signing key (KSK) that you specified can't be deactivated because it's the
@@ -3774,7 +3660,7 @@ module Aws::Route53
     class KeySigningKeyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-signing key (KSK) with <code>ACTIVE</code> status wasn't found.</p>
@@ -3783,7 +3669,7 @@ module Aws::Route53
     class KeySigningKeyWithActiveStatusNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC that you're trying to disassociate from the private hosted zone is the last
@@ -3795,7 +3681,7 @@ module Aws::Route53
     class LastVPCAssociation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation can't be completed because the current account has reached the
@@ -3807,7 +3693,7 @@ module Aws::Route53
     class LimitsExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If a health check or hosted zone was created by another service,
@@ -3828,7 +3714,7 @@ module Aws::Route53
       :service_principal,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -3850,7 +3736,7 @@ module Aws::Route53
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3865,7 +3751,7 @@ module Aws::Route53
       :next_token,
       :cidr_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3880,7 +3766,7 @@ module Aws::Route53
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3895,7 +3781,7 @@ module Aws::Route53
       :next_token,
       :cidr_collections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collection_id
@@ -3914,7 +3800,7 @@ module Aws::Route53
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3929,7 +3815,7 @@ module Aws::Route53
       :next_token,
       :cidr_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to get a list of geographic locations that Amazon Route 53 supports for
@@ -3973,7 +3859,7 @@ module Aws::Route53
       :start_subdivision_code,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing the response information for the request.</p>
@@ -4019,7 +3905,7 @@ module Aws::Route53
       :next_subdivision_code,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4049,7 +3935,7 @@ module Aws::Route53
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>ListHealthChecks</code>
@@ -4086,7 +3972,7 @@ module Aws::Route53
       :next_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4128,7 +4014,7 @@ module Aws::Route53
       :hosted_zone_id,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -4179,7 +4065,7 @@ module Aws::Route53
       :next_hosted_zone_id,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4218,7 +4104,7 @@ module Aws::Route53
       :max_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zone_summaries
@@ -4240,7 +4126,7 @@ module Aws::Route53
       :max_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to retrieve a list of the public and private hosted zones that are
@@ -4278,7 +4164,7 @@ module Aws::Route53
       :delegation_set_id,
       :hosted_zone_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosted_zones
@@ -4314,7 +4200,7 @@ module Aws::Route53
       :next_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4349,7 +4235,7 @@ module Aws::Route53
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_logging_configs
@@ -4369,7 +4255,7 @@ module Aws::Route53
       :query_logging_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request for the resource record sets that are associated with a specified hosted
@@ -4456,7 +4342,7 @@ module Aws::Route53
       :start_record_identifier,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains list information for the resource record set.</p>
@@ -4496,7 +4382,7 @@ module Aws::Route53
       :next_record_identifier,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4525,7 +4411,7 @@ module Aws::Route53
       :marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the reusable delegation sets that are
@@ -4560,7 +4446,7 @@ module Aws::Route53
       :next_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4588,7 +4474,7 @@ module Aws::Route53
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the health checks or hosted zones for
@@ -4600,7 +4486,7 @@ module Aws::Route53
     class ListTagsForResourceResponse < Struct.new(
       :resource_tag_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the health checks or hosted zones for
@@ -4624,7 +4510,7 @@ module Aws::Route53
       :resource_type,
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing tags for the specified resources.</p>
@@ -4635,7 +4521,7 @@ module Aws::Route53
     class ListTagsForResourcesResponse < Struct.new(
       :resource_tag_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the information about the request to list the traffic
@@ -4662,7 +4548,7 @@ module Aws::Route53
       :traffic_policy_id_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -4692,7 +4578,7 @@ module Aws::Route53
       :traffic_policy_id_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4742,7 +4628,7 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -4781,7 +4667,7 @@ module Aws::Route53
       :is_truncated,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4853,7 +4739,7 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -4898,7 +4784,7 @@ module Aws::Route53
       :is_truncated,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -4956,7 +4842,7 @@ module Aws::Route53
       :traffic_policy_instance_type_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -5002,7 +4888,7 @@ module Aws::Route53
       :is_truncated,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5039,7 +4925,7 @@ module Aws::Route53
       :traffic_policy_version_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -5073,7 +4959,7 @@ module Aws::Route53
       :traffic_policy_version_marker,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_truncated] = false unless options.key?(:is_truncated)
@@ -5106,7 +4992,7 @@ module Aws::Route53
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the request.</p>
@@ -5129,7 +5015,7 @@ module Aws::Route53
       :next_token,
       :vp_cs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the CIDR location.</p>
@@ -5139,7 +5025,7 @@ module Aws::Route53
     class LocationSummary < Struct.new(
       :location_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A change with the specified change ID does not exist.</p>
@@ -5148,7 +5034,7 @@ module Aws::Route53
     class NoSuchChange < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR collection you specified, doesn't exist.</p>
@@ -5157,7 +5043,7 @@ module Aws::Route53
     class NoSuchCidrCollectionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR collection location doesn't match any locations in your account.</p>
@@ -5166,7 +5052,7 @@ module Aws::Route53
     class NoSuchCidrLocationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no CloudWatch Logs log group with the specified ARN.</p>
@@ -5175,7 +5061,7 @@ module Aws::Route53
     class NoSuchCloudWatchLogsLogGroup < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reusable delegation set with the specified ID does not exist.</p>
@@ -5185,7 +5071,7 @@ module Aws::Route53
     class NoSuchDelegationSet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Route 53 doesn't support the specified geographic location. For a list of
@@ -5197,7 +5083,7 @@ module Aws::Route53
     class NoSuchGeoLocation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No health check exists with the specified ID.</p>
@@ -5207,7 +5093,7 @@ module Aws::Route53
     class NoSuchHealthCheck < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No hosted zone exists with the ID that you specified.</p>
@@ -5217,7 +5103,7 @@ module Aws::Route53
     class NoSuchHostedZone < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified key-signing key (KSK) doesn't exist.</p>
@@ -5226,7 +5112,7 @@ module Aws::Route53
     class NoSuchKeySigningKey < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no DNS query logging configuration with the specified ID.</p>
@@ -5235,7 +5121,7 @@ module Aws::Route53
     class NoSuchQueryLoggingConfig < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No traffic policy exists with the specified ID.</p>
@@ -5245,7 +5131,7 @@ module Aws::Route53
     class NoSuchTrafficPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No traffic policy instance exists with the specified ID.</p>
@@ -5255,7 +5141,7 @@ module Aws::Route53
     class NoSuchTrafficPolicyInstance < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associating the specified VPC with the specified hosted zone has not been
@@ -5266,7 +5152,7 @@ module Aws::Route53
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If Amazon Route 53 can't process a request before the next request arrives, it will
@@ -5279,7 +5165,7 @@ module Aws::Route53
     class PriorRequestNotComplete < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You're trying to associate a VPC with a public hosted zone. Amazon Route 53 doesn't
@@ -5290,7 +5176,7 @@ module Aws::Route53
     class PublicZoneVPCAssociation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a configuration for DNS query
@@ -5310,7 +5196,7 @@ module Aws::Route53
       :hosted_zone_id,
       :cloud_watch_logs_log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can create only one query logging configuration for a hosted zone, and a query
@@ -5320,34 +5206,7 @@ module Aws::Route53
     class QueryLoggingConfigAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RRType
-      SOA = 'SOA'
-      A = 'A'
-      TXT = 'TXT'
-      NS = 'NS'
-      CNAME = 'CNAME'
-      MX = 'MX'
-      NAPTR = 'NAPTR'
-      PTR = 'PTR'
-      SRV = 'SRV'
-      SPF = 'SPF'
-      AAAA = 'AAAA'
-      CAA = 'CAA'
-      DS = 'DS'
-      TLSA = 'TLSA'
-      SSHFP = 'SSHFP'
-      SVCB = 'SVCB'
-      HTTPS = 'HTTPS'
-    end
-
-    module ResettableElementName
-      FullyQualifiedDomainName = 'FullyQualifiedDomainName'
-      Regions = 'Regions'
-      ResourcePath = 'ResourcePath'
-      ChildHealthChecks = 'ChildHealthChecks'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information specific to the resource record.</p>
@@ -5371,7 +5230,7 @@ module Aws::Route53
     class ResourceRecord < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resource record set to create or delete.</p>
@@ -5965,52 +5824,7 @@ module Aws::Route53
       :cidr_routing_config,
       :geo_proximity_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceRecordSetFailover
-      PRIMARY = 'PRIMARY'
-      SECONDARY = 'SECONDARY'
-    end
-
-    module ResourceRecordSetRegion
-      us_east_1 = 'us-east-1'
-      us_east_2 = 'us-east-2'
-      us_west_1 = 'us-west-1'
-      us_west_2 = 'us-west-2'
-      ca_central_1 = 'ca-central-1'
-      eu_west_1 = 'eu-west-1'
-      eu_west_2 = 'eu-west-2'
-      eu_west_3 = 'eu-west-3'
-      eu_central_1 = 'eu-central-1'
-      eu_central_2 = 'eu-central-2'
-      ap_southeast_1 = 'ap-southeast-1'
-      ap_southeast_2 = 'ap-southeast-2'
-      ap_southeast_3 = 'ap-southeast-3'
-      ap_northeast_1 = 'ap-northeast-1'
-      ap_northeast_2 = 'ap-northeast-2'
-      ap_northeast_3 = 'ap-northeast-3'
-      eu_north_1 = 'eu-north-1'
-      sa_east_1 = 'sa-east-1'
-      cn_north_1 = 'cn-north-1'
-      cn_northwest_1 = 'cn-northwest-1'
-      ap_east_1 = 'ap-east-1'
-      me_south_1 = 'me-south-1'
-      me_central_1 = 'me-central-1'
-      ap_south_1 = 'ap-south-1'
-      ap_south_2 = 'ap-south-2'
-      af_south_1 = 'af-south-1'
-      eu_south_1 = 'eu-south-1'
-      eu_south_2 = 'eu-south-2'
-      ap_southeast_4 = 'ap-southeast-4'
-      il_central_1 = 'il-central-1'
-      ca_west_1 = 'ca-west-1'
-      ap_southeast_5 = 'ap-southeast-5'
-      mx_central_1 = 'mx-central-1'
-      ap_southeast_7 = 'ap-southeast-7'
-      us_gov_east_1 = 'us-gov-east-1'
-      us_gov_west_1 = 'us-gov-west-1'
-      ap_east_2 = 'ap-east-2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing a resource and its associated tags.</p>
@@ -6036,7 +5850,7 @@ module Aws::Route53
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the type of limit that you specified in the request and
@@ -6054,19 +5868,7 @@ module Aws::Route53
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReusableDelegationSetLimitType
-      MAX_ZONES_BY_REUSABLE_DELEGATION_SET = 'MAX_ZONES_BY_REUSABLE_DELEGATION_SET'
-    end
-
-    module Statistic
-      Average = 'Average'
-      Sum = 'Sum'
-      SampleCount = 'SampleCount'
-      Maximum = 'Maximum'
-      Minimum = 'Minimum'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the status that one Amazon Route 53 health checker
@@ -6084,7 +5886,7 @@ module Aws::Route53
       :status,
       :checked_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a tag that you want to add or edit for
@@ -6137,12 +5939,7 @@ module Aws::Route53
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagResourceType
-      healthcheck = 'healthcheck'
-      hostedzone = 'hostedzone'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets the value that Amazon Route 53 returns in response to a DNS request for a
@@ -6200,7 +5997,7 @@ module Aws::Route53
       :edns0_client_subnet_ip,
       :edns0_client_subnet_mask,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to a <code>TestDNSAnswer</code> request.
@@ -6236,7 +6033,7 @@ module Aws::Route53
       :response_code,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -6245,7 +6042,7 @@ module Aws::Route53
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This health check can't be created because the current account has reached the limit
@@ -6261,7 +6058,7 @@ module Aws::Route53
     class TooManyHealthChecks < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation can't be completed either because the current account has reached the
@@ -6280,7 +6077,7 @@ module Aws::Route53
     class TooManyHostedZones < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've reached the limit for the number of key-signing keys (KSKs). Remove at least
@@ -6290,7 +6087,7 @@ module Aws::Route53
     class TooManyKeySigningKeys < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This traffic policy can't be created because the current account has reached the limit
@@ -6306,7 +6103,7 @@ module Aws::Route53
     class TooManyTrafficPolicies < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This traffic policy instance can't be created because the current account has reached
@@ -6322,7 +6119,7 @@ module Aws::Route53
     class TooManyTrafficPolicyInstances < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This traffic policy version can't be created because you've reached the limit of 1000
@@ -6337,7 +6134,7 @@ module Aws::Route53
     class TooManyTrafficPolicyVersionsForCurrentPolicy < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've created the maximum number of authorizations that can be created for the
@@ -6351,7 +6148,7 @@ module Aws::Route53
     class TooManyVPCAssociationAuthorizations < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains settings for a traffic policy.</p>
@@ -6386,7 +6183,7 @@ module Aws::Route53
       :document,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A traffic policy that has the same value for <code>Name</code> already exists.</p>
@@ -6396,7 +6193,7 @@ module Aws::Route53
     class TrafficPolicyAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more traffic policy instances were created by using the specified traffic
@@ -6407,7 +6204,7 @@ module Aws::Route53
     class TrafficPolicyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains settings for the new traffic policy instance.</p>
@@ -6477,7 +6274,7 @@ module Aws::Route53
       :traffic_policy_version,
       :traffic_policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is already a traffic policy instance with the specified ID.</p>
@@ -6487,7 +6284,7 @@ module Aws::Route53
     class TrafficPolicyInstanceAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the latest version of one traffic
@@ -6515,7 +6312,7 @@ module Aws::Route53
       :latest_version,
       :traffic_policy_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a request to update a health
@@ -6879,7 +6676,7 @@ module Aws::Route53
       :insufficient_data_health_status,
       :reset_elements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to the <code>UpdateHealthCheck</code>
@@ -6891,7 +6688,7 @@ module Aws::Route53
     class UpdateHealthCheckResponse < Struct.new(
       :health_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to update the comment for a hosted zone.</p>
@@ -6907,7 +6704,7 @@ module Aws::Route53
       :id,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response to the <code>UpdateHostedZoneComment</code>
@@ -6919,7 +6716,7 @@ module Aws::Route53
     class UpdateHostedZoneCommentResponse < Struct.new(
       :hosted_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the traffic policy that you want to
@@ -6940,7 +6737,7 @@ module Aws::Route53
       :version,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains the response information for the traffic policy.</p>
@@ -6950,7 +6747,7 @@ module Aws::Route53
     class UpdateTrafficPolicyCommentResponse < Struct.new(
       :traffic_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the resource record sets that you want
@@ -6976,7 +6773,7 @@ module Aws::Route53
       :traffic_policy_id,
       :traffic_policy_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about the resource record sets that Amazon
@@ -6987,7 +6784,7 @@ module Aws::Route53
     class UpdateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>(Private hosted zones only) A complex type that contains information about an Amazon VPC.</p>
@@ -7005,7 +6802,7 @@ module Aws::Route53
       :vpc_region,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC that you specified is not authorized to be associated with the hosted
@@ -7016,7 +6813,7 @@ module Aws::Route53
     class VPCAssociationAuthorizationNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified VPC and hosted zone are not currently associated.</p>
@@ -7026,53 +6823,7 @@ module Aws::Route53
     class VPCAssociationNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VPCRegion
-      us_east_1 = 'us-east-1'
-      us_east_2 = 'us-east-2'
-      us_west_1 = 'us-west-1'
-      us_west_2 = 'us-west-2'
-      eu_west_1 = 'eu-west-1'
-      eu_west_2 = 'eu-west-2'
-      eu_west_3 = 'eu-west-3'
-      eu_central_1 = 'eu-central-1'
-      eu_central_2 = 'eu-central-2'
-      ap_east_1 = 'ap-east-1'
-      me_south_1 = 'me-south-1'
-      us_gov_west_1 = 'us-gov-west-1'
-      us_gov_east_1 = 'us-gov-east-1'
-      us_iso_east_1 = 'us-iso-east-1'
-      us_iso_west_1 = 'us-iso-west-1'
-      us_isob_east_1 = 'us-isob-east-1'
-      me_central_1 = 'me-central-1'
-      ap_southeast_1 = 'ap-southeast-1'
-      ap_southeast_2 = 'ap-southeast-2'
-      ap_southeast_3 = 'ap-southeast-3'
-      ap_south_1 = 'ap-south-1'
-      ap_south_2 = 'ap-south-2'
-      ap_northeast_1 = 'ap-northeast-1'
-      ap_northeast_2 = 'ap-northeast-2'
-      ap_northeast_3 = 'ap-northeast-3'
-      eu_north_1 = 'eu-north-1'
-      sa_east_1 = 'sa-east-1'
-      ca_central_1 = 'ca-central-1'
-      cn_north_1 = 'cn-north-1'
-      cn_northwest_1 = 'cn-northwest-1'
-      af_south_1 = 'af-south-1'
-      eu_south_1 = 'eu-south-1'
-      eu_south_2 = 'eu-south-2'
-      ap_southeast_4 = 'ap-southeast-4'
-      il_central_1 = 'il-central-1'
-      ca_west_1 = 'ca-west-1'
-      ap_southeast_5 = 'ap-southeast-5'
-      mx_central_1 = 'mx-central-1'
-      us_isof_south_1 = 'us-isof-south-1'
-      us_isof_east_1 = 'us-isof-east-1'
-      ap_southeast_7 = 'ap-southeast-7'
-      ap_east_2 = 'ap-east-2'
-      eu_isoe_west_1 = 'eu-isoe-west-1'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -6,22 +6,13 @@ module Aws::Artifact
   # This module contains the types returned by client operations.
   module Types
 
-    module AcceptanceType
-      # Do not require explicit click-through acceptance
-      # of the Term associated with this Report
-      PASSTHROUGH = 'PASSTHROUGH'
-      # Require explicit click-through acceptance of the
-      # Term associated with this Report.
-      EXPLICIT = 'EXPLICIT'
-    end
-
     # <p>User does not have sufficient access to perform this action.</p>
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Account settings for the customer.</p>
@@ -31,13 +22,7 @@ module Aws::Artifact
     class AccountSettings < Struct.new(
       :notification_subscription_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgreementType
-      CUSTOM = 'CUSTOM'
-      DEFAULT = 'DEFAULT'
-      MODIFIED = 'MODIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create/modify content would result in a conflict.</p>
@@ -54,13 +39,7 @@ module Aws::Artifact
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomerAgreementState
-      ACTIVE = 'ACTIVE'
-      CUSTOMER_TERMINATED = 'CUSTOMER_TERMINATED'
-      AWS_TERMINATED = 'AWS_TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary for customer-agreement resource.</p>
@@ -118,12 +97,12 @@ module Aws::Artifact
       :terminate_terms,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAccountSettingsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -132,7 +111,7 @@ module Aws::Artifact
     class GetAccountSettingsResponse < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -145,7 +124,7 @@ module Aws::Artifact
       :report_id,
       :report_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_details
@@ -154,7 +133,7 @@ module Aws::Artifact
     class GetReportMetadataResponse < Struct.new(
       :report_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -171,7 +150,7 @@ module Aws::Artifact
       :report_version,
       :term_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_presigned_url
@@ -180,7 +159,7 @@ module Aws::Artifact
     class GetReportResponse < Struct.new(
       :document_presigned_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -193,7 +172,7 @@ module Aws::Artifact
       :report_id,
       :report_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_presigned_url
@@ -206,7 +185,7 @@ module Aws::Artifact
       :document_presigned_url,
       :term_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unknown server exception has occurred.</p>
@@ -219,7 +198,7 @@ module Aws::Artifact
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -232,7 +211,7 @@ module Aws::Artifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute customer_agreements
@@ -245,7 +224,7 @@ module Aws::Artifact
       :customer_agreements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -258,7 +237,7 @@ module Aws::Artifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reports
@@ -271,17 +250,7 @@ module Aws::Artifact
       :reports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationSubscriptionStatus
-      SUBSCRIBED = 'SUBSCRIBED'
-      NOT_SUBSCRIBED = 'NOT_SUBSCRIBED'
-    end
-
-    module PublishedState
-      PUBLISHED = 'PUBLISHED'
-      UNPUBLISHED = 'UNPUBLISHED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_subscription_status
@@ -290,7 +259,7 @@ module Aws::Artifact
     class PutAccountSettingsRequest < Struct.new(
       :notification_subscription_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -299,7 +268,7 @@ module Aws::Artifact
     class PutAccountSettingsResponse < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Full detail for report resource metadata.</p>
@@ -385,7 +354,7 @@ module Aws::Artifact
       :upload_state,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary for report resource.</p>
@@ -451,7 +420,7 @@ module Aws::Artifact
       :status_message,
       :acceptance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which does not exist.</p>
@@ -468,7 +437,7 @@ module Aws::Artifact
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would cause a service quota to be exceeded.</p>
@@ -493,7 +462,7 @@ module Aws::Artifact
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling.</p>
@@ -514,14 +483,7 @@ module Aws::Artifact
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UploadState
-      PROCESSING = 'PROCESSING'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      FAULT = 'FAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request fails to satisfy the constraints specified by an AWS service.</p>
@@ -538,7 +500,7 @@ module Aws::Artifact
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Validation exception message and name.</p>
@@ -552,7 +514,7 @@ module Aws::Artifact
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

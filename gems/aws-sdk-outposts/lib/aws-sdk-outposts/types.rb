@@ -6,22 +6,13 @@ module Aws::Outposts
   # This module contains the types returned by client operations.
   module Types
 
-    module AWSServiceName
-      AWS = 'AWS'
-      EC2 = 'EC2'
-      ELASTICACHE = 'ELASTICACHE'
-      ELB = 'ELB'
-      RDS = 'RDS'
-      ROUTE53 = 'ROUTE53'
-    end
-
     # <p>You do not have permission to perform this operation.</p>
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about an address. </p>
@@ -71,12 +62,7 @@ module Aws::Outposts
       :country_code,
       :municipality,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddressType
-      SHIPPING_ADDRESS = 'SHIPPING_ADDRESS'
-      OPERATING_ADDRESS = 'OPERATING_ADDRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about hardware assets. </p>
@@ -103,7 +89,7 @@ module Aws::Outposts
       :compute_attributes,
       :asset_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon EC2 instance.</p>
@@ -130,7 +116,7 @@ module Aws::Outposts
       :account_id,
       :aws_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The capacity for each instance type.</p>
@@ -144,7 +130,7 @@ module Aws::Outposts
       :instance_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -159,17 +145,7 @@ module Aws::Outposts
     class AssetLocation < Struct.new(
       :rack_elevation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetState
-      ACTIVE = 'ACTIVE'
-      RETIRING = 'RETIRING'
-      ISOLATED = 'ISOLATED'
-    end
-
-    module AssetType
-      COMPUTE = 'COMPUTE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A running Amazon EC2 instance that can be stopped to free up capacity needed to run the
@@ -188,7 +164,7 @@ module Aws::Outposts
       :account_id,
       :aws_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_task_id
@@ -201,12 +177,12 @@ module Aws::Outposts
       :capacity_task_id,
       :outpost_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelCapacityTaskOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute order_id
@@ -215,12 +191,12 @@ module Aws::Outposts
     class CancelOrderInput < Struct.new(
       :order_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelOrderOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The capacity tasks that failed.</p>
@@ -234,25 +210,7 @@ module Aws::Outposts
       :reason,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityTaskFailureType
-      UNSUPPORTED_CAPACITY_CONFIGURATION = 'UNSUPPORTED_CAPACITY_CONFIGURATION'
-      UNEXPECTED_ASSET_STATE = 'UNEXPECTED_ASSET_STATE'
-      BLOCKING_INSTANCES_NOT_EVACUATED = 'BLOCKING_INSTANCES_NOT_EVACUATED'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-    end
-
-    module CapacityTaskStatus
-      REQUESTED = 'REQUESTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      WAITING_FOR_EVACUATION = 'WAITING_FOR_EVACUATION'
-      CANCELLATION_IN_PROGRESS = 'CANCELLATION_IN_PROGRESS'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the capacity task.</p>
@@ -291,7 +249,7 @@ module Aws::Outposts
       :completion_date,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a catalog item. </p>
@@ -325,23 +283,7 @@ module Aws::Outposts
       :supported_uplink_gbps,
       :supported_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CatalogItemClass
-      RACK = 'RACK'
-      SERVER = 'SERVER'
-    end
-
-    module CatalogItemStatus
-      AVAILABLE = 'AVAILABLE'
-      DISCONTINUED = 'DISCONTINUED'
-    end
-
-    module ComputeAssetState
-      ACTIVE = 'ACTIVE'
-      ISOLATED = 'ISOLATED'
-      RETIRING = 'RETIRING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about compute hardware assets. </p>
@@ -384,7 +326,7 @@ module Aws::Outposts
       :instance_type_capacities,
       :max_vcpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting this resource can cause an inconsistent state.</p>
@@ -401,7 +343,7 @@ module Aws::Outposts
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a connection. </p>
@@ -431,7 +373,7 @@ module Aws::Outposts
       :server_tunnel_address,
       :allowed_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier
@@ -452,7 +394,7 @@ module Aws::Outposts
       :payment_option,
       :payment_term,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute order
@@ -461,7 +403,7 @@ module Aws::Outposts
     class CreateOrderOutput < Struct.new(
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -494,7 +436,7 @@ module Aws::Outposts
       :tags,
       :supported_hardware_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost
@@ -503,7 +445,7 @@ module Aws::Outposts
     class CreateOutpostOutput < Struct.new(
       :outpost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -544,7 +486,7 @@ module Aws::Outposts
       :shipping_address,
       :rack_physical_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -553,7 +495,7 @@ module Aws::Outposts
     class CreateSiteOutput < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_id
@@ -562,12 +504,12 @@ module Aws::Outposts
     class DeleteOutpostInput < Struct.new(
       :outpost_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOutpostOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -576,12 +518,12 @@ module Aws::Outposts
     class DeleteSiteInput < Struct.new(
       :site_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSiteOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about EC2 capacity. </p>
@@ -599,12 +541,7 @@ module Aws::Outposts
       :max_size,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FiberOpticCableType
-      SINGLE_MODE = 'SINGLE_MODE'
-      MULTI_MODE = 'MULTI_MODE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_task_id
@@ -617,7 +554,7 @@ module Aws::Outposts
       :capacity_task_id,
       :outpost_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_task_id
@@ -724,7 +661,7 @@ module Aws::Outposts
       :last_modified_date,
       :task_action_on_blocking_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dry_run] = false unless options.key?(:dry_run)
@@ -738,7 +675,7 @@ module Aws::Outposts
     class GetCatalogItemInput < Struct.new(
       :catalog_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_item
@@ -747,7 +684,7 @@ module Aws::Outposts
     class GetCatalogItemOutput < Struct.new(
       :catalog_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -756,7 +693,7 @@ module Aws::Outposts
     class GetConnectionRequest < Struct.new(
       :connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -769,7 +706,7 @@ module Aws::Outposts
       :connection_id,
       :connection_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute order_id
@@ -778,7 +715,7 @@ module Aws::Outposts
     class GetOrderInput < Struct.new(
       :order_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute order
@@ -787,7 +724,7 @@ module Aws::Outposts
     class GetOrderOutput < Struct.new(
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -804,7 +741,7 @@ module Aws::Outposts
       :max_results,
       :outpost_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -824,7 +761,7 @@ module Aws::Outposts
       :subscriptions,
       :contract_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_id
@@ -833,7 +770,7 @@ module Aws::Outposts
     class GetOutpostInput < Struct.new(
       :outpost_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_id
@@ -850,7 +787,7 @@ module Aws::Outposts
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_types
@@ -871,7 +808,7 @@ module Aws::Outposts
       :outpost_id,
       :outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost
@@ -880,7 +817,7 @@ module Aws::Outposts
     class GetOutpostOutput < Struct.new(
       :outpost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier
@@ -906,7 +843,7 @@ module Aws::Outposts
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_types
@@ -919,7 +856,7 @@ module Aws::Outposts
       :instance_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -932,7 +869,7 @@ module Aws::Outposts
       :site_id,
       :address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -949,7 +886,7 @@ module Aws::Outposts
       :address_type,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -958,7 +895,7 @@ module Aws::Outposts
     class GetSiteInput < Struct.new(
       :site_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -967,7 +904,7 @@ module Aws::Outposts
     class GetSiteOutput < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance type that you specify determines the combination of CPU, memory, storage, and
@@ -982,7 +919,7 @@ module Aws::Outposts
       :instance_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1001,7 +938,7 @@ module Aws::Outposts
       :instance_type,
       :vcp_us,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User-specified instances that must not be stopped. These instances will not appear in the
@@ -1021,7 +958,7 @@ module Aws::Outposts
       :account_ids,
       :services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred.</p>
@@ -1030,7 +967,7 @@ module Aws::Outposts
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a line item.</p>
@@ -1068,7 +1005,7 @@ module Aws::Outposts
       :previous_line_item_id,
       :previous_order_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a line item asset. </p>
@@ -1083,7 +1020,7 @@ module Aws::Outposts
       :asset_id,
       :mac_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a line item request.</p>
@@ -1097,19 +1034,7 @@ module Aws::Outposts
       :catalog_item_id,
       :quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineItemStatus
-      PREPARING = 'PREPARING'
-      BUILDING = 'BUILDING'
-      SHIPPED = 'SHIPPED'
-      DELIVERED = 'DELIVERED'
-      INSTALLING = 'INSTALLING'
-      INSTALLED = 'INSTALLED'
-      ERROR = 'ERROR'
-      CANCELLED = 'CANCELLED'
-      REPLACED = 'REPLACED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier
@@ -1142,7 +1067,7 @@ module Aws::Outposts
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_instances
@@ -1156,7 +1081,7 @@ module Aws::Outposts
       :asset_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier
@@ -1181,7 +1106,7 @@ module Aws::Outposts
       :next_token,
       :status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assets
@@ -1194,7 +1119,7 @@ module Aws::Outposts
       :assets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier
@@ -1215,7 +1140,7 @@ module Aws::Outposts
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blocking_instances
@@ -1229,7 +1154,7 @@ module Aws::Outposts
       :blocking_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier_filter
@@ -1251,7 +1176,7 @@ module Aws::Outposts
       :next_token,
       :capacity_task_status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_tasks
@@ -1264,7 +1189,7 @@ module Aws::Outposts
       :capacity_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1289,7 +1214,7 @@ module Aws::Outposts
       :supported_storage_filter,
       :ec2_family_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_items
@@ -1302,7 +1227,7 @@ module Aws::Outposts
       :catalog_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier_filter
@@ -1319,7 +1244,7 @@ module Aws::Outposts
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute orders
@@ -1332,7 +1257,7 @@ module Aws::Outposts
       :orders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1357,7 +1282,7 @@ module Aws::Outposts
       :availability_zone_filter,
       :availability_zone_id_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outposts
@@ -1370,7 +1295,7 @@ module Aws::Outposts
       :outposts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1395,7 +1320,7 @@ module Aws::Outposts
       :operating_address_state_or_region_filter,
       :operating_address_city_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sites
@@ -1408,7 +1333,7 @@ module Aws::Outposts
       :sites,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1417,7 +1342,7 @@ module Aws::Outposts
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1426,15 +1351,7 @@ module Aws::Outposts
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaximumSupportedWeightLbs
-      NO_LIMIT = 'NO_LIMIT'
-      MAX_1400_LBS = 'MAX_1400_LBS'
-      MAX_1600_LBS = 'MAX_1600_LBS'
-      MAX_1800_LBS = 'MAX_1800_LBS'
-      MAX_2000_LBS = 'MAX_2000_LBS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified request is not valid.</p>
@@ -1443,23 +1360,7 @@ module Aws::Outposts
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpticalStandard
-      OPTIC_10GBASE_SR = 'OPTIC_10GBASE_SR'
-      OPTIC_10GBASE_IR = 'OPTIC_10GBASE_IR'
-      OPTIC_10GBASE_LR = 'OPTIC_10GBASE_LR'
-      OPTIC_40GBASE_SR = 'OPTIC_40GBASE_SR'
-      OPTIC_40GBASE_ESR = 'OPTIC_40GBASE_ESR'
-      OPTIC_40GBASE_IR4_LR4L = 'OPTIC_40GBASE_IR4_LR4L'
-      OPTIC_40GBASE_LR4 = 'OPTIC_40GBASE_LR4'
-      OPTIC_100GBASE_SR4 = 'OPTIC_100GBASE_SR4'
-      OPTIC_100GBASE_CWDM4 = 'OPTIC_100GBASE_CWDM4'
-      OPTIC_100GBASE_LR4 = 'OPTIC_100GBASE_LR4'
-      OPTIC_100G_PSM4_MSA = 'OPTIC_100G_PSM4_MSA'
-      OPTIC_1000BASE_LX = 'OPTIC_1000BASE_LX'
-      OPTIC_1000BASE_SX = 'OPTIC_1000BASE_SX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an order.</p>
@@ -1532,21 +1433,7 @@ module Aws::Outposts
       :payment_term,
       :order_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderStatus
-      RECEIVED = 'RECEIVED'
-      PENDING = 'PENDING'
-      PROCESSING = 'PROCESSING'
-      INSTALLING = 'INSTALLING'
-      FULFILLED = 'FULFILLED'
-      CANCELLED = 'CANCELLED'
-      PREPARING = 'PREPARING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      DELIVERED = 'DELIVERED'
-      COMPLETED = 'COMPLETED'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A summary of line items in your order. </p>
@@ -1607,12 +1494,7 @@ module Aws::Outposts
       :order_submission_date,
       :order_fulfilled_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderType
-      OUTPOST = 'OUTPOST'
-      REPLACEMENT = 'REPLACEMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Outpost.</p>
@@ -1666,44 +1548,7 @@ module Aws::Outposts
       :site_arn,
       :supported_hardware_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PaymentOption
-      ALL_UPFRONT = 'ALL_UPFRONT'
-      NO_UPFRONT = 'NO_UPFRONT'
-      PARTIAL_UPFRONT = 'PARTIAL_UPFRONT'
-    end
-
-    module PaymentTerm
-      THREE_YEARS = 'THREE_YEARS'
-      ONE_YEAR = 'ONE_YEAR'
-      FIVE_YEARS = 'FIVE_YEARS'
-    end
-
-    module PowerConnector
-      L6_30P = 'L6_30P'
-      IEC309 = 'IEC309'
-      AH530P7W = 'AH530P7W'
-      AH532P6W = 'AH532P6W'
-      CS8365C = 'CS8365C'
-    end
-
-    module PowerDrawKva
-      POWER_5_KVA = 'POWER_5_KVA'
-      POWER_10_KVA = 'POWER_10_KVA'
-      POWER_15_KVA = 'POWER_15_KVA'
-      POWER_30_KVA = 'POWER_30_KVA'
-    end
-
-    module PowerFeedDrop
-      ABOVE_RACK = 'ABOVE_RACK'
-      BELOW_RACK = 'BELOW_RACK'
-    end
-
-    module PowerPhase
-      SINGLE_PHASE = 'SINGLE_PHASE'
-      THREE_PHASE = 'THREE_PHASE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the physical and logistical details for racks at sites.
@@ -1755,12 +1600,7 @@ module Aws::Outposts
       :optical_standard,
       :maximum_supported_weight_lbs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      OUTPOST = 'OUTPOST'
-      ORDER = 'ORDER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded a service quota.</p>
@@ -1769,15 +1609,7 @@ module Aws::Outposts
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShipmentCarrier
-      DHL = 'DHL'
-      DBS = 'DBS'
-      FEDEX = 'FEDEX'
-      UPS = 'UPS'
-      EXPEDITORS = 'EXPEDITORS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a line item shipment. </p>
@@ -1791,7 +1623,7 @@ module Aws::Outposts
       :shipment_tracking_number,
       :shipment_carrier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a site.</p>
@@ -1842,7 +1674,7 @@ module Aws::Outposts
       :operating_address_city,
       :rack_physical_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_identifier
@@ -1891,7 +1723,7 @@ module Aws::Outposts
       :dry_run,
       :task_action_on_blocking_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_task_id
@@ -1963,7 +1795,7 @@ module Aws::Outposts
       :last_modified_date,
       :task_action_on_blocking_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dry_run] = false unless options.key?(:dry_run)
@@ -1989,7 +1821,7 @@ module Aws::Outposts
       :client_public_key,
       :network_interface_device_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_id
@@ -2002,7 +1834,7 @@ module Aws::Outposts
       :connection_id,
       :underlay_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about your Amazon Web Services Outposts subscriptions.</p>
@@ -2072,29 +1904,7 @@ module Aws::Outposts
       :monthly_recurring_price,
       :upfront_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubscriptionStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      CANCELLED = 'CANCELLED'
-    end
-
-    module SubscriptionType
-      ORIGINAL = 'ORIGINAL'
-      RENEWAL = 'RENEWAL'
-      CAPACITY_INCREASE = 'CAPACITY_INCREASE'
-    end
-
-    module SupportedHardwareType
-      RACK = 'RACK'
-      SERVER = 'SERVER'
-    end
-
-    module SupportedStorageEnum
-      EBS = 'EBS'
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2107,17 +1917,12 @@ module Aws::Outposts
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskActionOnBlockingInstances
-      WAIT_FOR_EVACUATION = 'WAIT_FOR_EVACUATION'
-      FAIL_TASK = 'FAIL_TASK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2130,12 +1935,12 @@ module Aws::Outposts
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_id
@@ -2156,7 +1961,7 @@ module Aws::Outposts
       :description,
       :supported_hardware_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost
@@ -2165,7 +1970,7 @@ module Aws::Outposts
     class UpdateOutpostOutput < Struct.new(
       :outpost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -2182,7 +1987,7 @@ module Aws::Outposts
       :address_type,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_type
@@ -2195,7 +2000,7 @@ module Aws::Outposts
       :address_type,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -2216,7 +2021,7 @@ module Aws::Outposts
       :description,
       :notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -2225,7 +2030,7 @@ module Aws::Outposts
     class UpdateSiteOutput < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site_id
@@ -2389,7 +2194,7 @@ module Aws::Outposts
       :optical_standard,
       :maximum_supported_weight_lbs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute site
@@ -2398,27 +2203,7 @@ module Aws::Outposts
     class UpdateSiteRackPhysicalPropertiesOutput < Struct.new(
       :site,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UplinkCount
-      UPLINK_COUNT_1 = 'UPLINK_COUNT_1'
-      UPLINK_COUNT_2 = 'UPLINK_COUNT_2'
-      UPLINK_COUNT_3 = 'UPLINK_COUNT_3'
-      UPLINK_COUNT_4 = 'UPLINK_COUNT_4'
-      UPLINK_COUNT_5 = 'UPLINK_COUNT_5'
-      UPLINK_COUNT_6 = 'UPLINK_COUNT_6'
-      UPLINK_COUNT_7 = 'UPLINK_COUNT_7'
-      UPLINK_COUNT_8 = 'UPLINK_COUNT_8'
-      UPLINK_COUNT_12 = 'UPLINK_COUNT_12'
-      UPLINK_COUNT_16 = 'UPLINK_COUNT_16'
-    end
-
-    module UplinkGbps
-      UPLINK_1G = 'UPLINK_1G'
-      UPLINK_10G = 'UPLINK_10G'
-      UPLINK_40G = 'UPLINK_40G'
-      UPLINK_100G = 'UPLINK_100G'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter is not valid.</p>
@@ -2427,7 +2212,7 @@ module Aws::Outposts
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

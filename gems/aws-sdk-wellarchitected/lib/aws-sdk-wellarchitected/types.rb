@@ -13,7 +13,7 @@ module Aws::WellArchitected
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Account-level: Input for the Jira configuration.</p>
@@ -35,7 +35,7 @@ module Aws::WellArchitected
       :jira_project_key,
       :integration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Account-level: Output configuration of the Jira integration.</p>
@@ -65,17 +65,7 @@ module Aws::WellArchitected
       :jira_project_key,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountJiraIssueManagementStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module AdditionalResourceType
-      HELPFUL_RESOURCE = 'HELPFUL_RESOURCE'
-      IMPROVEMENT_PLAN = 'IMPROVEMENT_PLAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The choice level additional resources for a custom lens.</p>
@@ -90,7 +80,7 @@ module Aws::WellArchitected
       :type,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An answer of the question.</p>
@@ -165,15 +155,7 @@ module Aws::WellArchitected
       :reason,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnswerReason
-      OUT_OF_SCOPE = 'OUT_OF_SCOPE'
-      BUSINESS_PRIORITIES = 'BUSINESS_PRIORITIES'
-      ARCHITECTURE_CONSTRAINTS = 'ARCHITECTURE_CONSTRAINTS'
-      OTHER = 'OTHER'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An answer summary of a lens review in a workload.</p>
@@ -225,7 +207,7 @@ module Aws::WellArchitected
       :question_type,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to associate lens reviews.</p>
@@ -240,7 +222,7 @@ module Aws::WellArchitected
       :workload_id,
       :lens_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -253,7 +235,7 @@ module Aws::WellArchitected
       :workload_id,
       :profile_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A best practice, or question choice, that has been identified as a risk in this question.</p>
@@ -267,7 +249,7 @@ module Aws::WellArchitected
       :choice_id,
       :choice_title,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Account details for a Well-Architected best practice in relation to Trusted Advisor checks.</p>
@@ -326,26 +308,7 @@ module Aws::WellArchitected
       :reason,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CheckFailureReason
-      ASSUME_ROLE_ERROR = 'ASSUME_ROLE_ERROR'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      UNKNOWN_ERROR = 'UNKNOWN_ERROR'
-      PREMIUM_SUPPORT_REQUIRED = 'PREMIUM_SUPPORT_REQUIRED'
-    end
-
-    module CheckProvider
-      TRUSTED_ADVISOR = 'TRUSTED_ADVISOR'
-    end
-
-    module CheckStatus
-      OKAY = 'OKAY'
-      WARNING = 'WARNING'
-      ERROR = 'ERROR'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
-      FETCH_FAILED = 'FETCH_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Trusted Advisor check summary.</p>
@@ -396,7 +359,7 @@ module Aws::WellArchitected
       :status,
       :account_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A choice available to answer question.</p>
@@ -430,7 +393,7 @@ module Aws::WellArchitected
       :improvement_plan,
       :additional_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A choice that has been answered on a question in your workload.</p>
@@ -452,7 +415,7 @@ module Aws::WellArchitected
       :reason,
       :notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A choice summary that has been answered on a question in your workload.</p>
@@ -470,7 +433,7 @@ module Aws::WellArchitected
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The choice content.</p>
@@ -484,7 +447,7 @@ module Aws::WellArchitected
       :display_text,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The choice level improvement plan.</p>
@@ -504,21 +467,7 @@ module Aws::WellArchitected
       :display_text,
       :improvement_plan_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChoiceReason
-      OUT_OF_SCOPE = 'OUT_OF_SCOPE'
-      BUSINESS_PRIORITIES = 'BUSINESS_PRIORITIES'
-      ARCHITECTURE_CONSTRAINTS = 'ARCHITECTURE_CONSTRAINTS'
-      OTHER = 'OTHER'
-      NONE = 'NONE'
-    end
-
-    module ChoiceStatus
-      SELECTED = 'SELECTED'
-      NOT_APPLICABLE = 'NOT_APPLICABLE'
-      UNSELECTED = 'UNSELECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of choices to be updated.</p>
@@ -536,7 +485,7 @@ module Aws::WellArchitected
       :reason,
       :notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource has already been processed, was deleted, or is too large.</p>
@@ -554,7 +503,7 @@ module Aws::WellArchitected
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metric that contributes to the consolidated report.</p>
@@ -594,7 +543,7 @@ module Aws::WellArchitected
       :lenses,
       :lenses_applied_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -628,7 +577,7 @@ module Aws::WellArchitected
       :shared_with,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -637,7 +586,7 @@ module Aws::WellArchitected
     class CreateLensShareOutput < Struct.new(
       :share_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -674,7 +623,7 @@ module Aws::WellArchitected
       :is_major_version,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_arn
@@ -687,7 +636,7 @@ module Aws::WellArchitected
       :lens_arn,
       :lens_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for milestone creation.</p>
@@ -715,7 +664,7 @@ module Aws::WellArchitected
       :milestone_name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a create milestone call.</p>
@@ -730,7 +679,7 @@ module Aws::WellArchitected
       :workload_id,
       :milestone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name
@@ -764,7 +713,7 @@ module Aws::WellArchitected
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_arn
@@ -777,7 +726,7 @@ module Aws::WellArchitected
       :profile_arn,
       :profile_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_arn
@@ -804,7 +753,7 @@ module Aws::WellArchitected
       :shared_with,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -817,7 +766,7 @@ module Aws::WellArchitected
       :share_id,
       :profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -856,7 +805,7 @@ module Aws::WellArchitected
       :tags,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -865,7 +814,7 @@ module Aws::WellArchitected
     class CreateReviewTemplateOutput < Struct.new(
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -892,7 +841,7 @@ module Aws::WellArchitected
       :shared_with,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -905,7 +854,7 @@ module Aws::WellArchitected
       :template_arn,
       :share_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for workload creation.</p>
@@ -1146,7 +1095,7 @@ module Aws::WellArchitected
       :review_template_arns,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a create workload call.</p>
@@ -1160,7 +1109,7 @@ module Aws::WellArchitected
       :workload_id,
       :workload_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Create Workload Share</p>
@@ -1192,7 +1141,7 @@ module Aws::WellArchitected
       :permission_type,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Create Workload Share</p>
@@ -1206,12 +1155,7 @@ module Aws::WellArchitected
       :workload_id,
       :share_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DefinitionType
-      WORKLOAD_METADATA = 'WORKLOAD_METADATA'
-      APP_REGISTRY = 'APP_REGISTRY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -1244,7 +1188,7 @@ module Aws::WellArchitected
       :client_request_token,
       :lens_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -1277,7 +1221,7 @@ module Aws::WellArchitected
       :lens_alias,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_arn
@@ -1299,7 +1243,7 @@ module Aws::WellArchitected
       :profile_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -1325,7 +1269,7 @@ module Aws::WellArchitected
       :profile_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -1347,7 +1291,7 @@ module Aws::WellArchitected
       :template_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_id
@@ -1373,7 +1317,7 @@ module Aws::WellArchitected
       :template_arn,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for workload deletion.</p>
@@ -1396,7 +1340,7 @@ module Aws::WellArchitected
       :workload_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Delete Workload Share</p>
@@ -1423,13 +1367,7 @@ module Aws::WellArchitected
       :workload_id,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DifferenceStatus
-      UPDATED = 'UPDATED'
-      NEW = 'NEW'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to disassociate lens reviews.</p>
@@ -1444,7 +1382,7 @@ module Aws::WellArchitected
       :workload_id,
       :lens_aliases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -1457,12 +1395,7 @@ module Aws::WellArchitected
       :workload_id,
       :profile_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiscoveryIntegrationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -1482,7 +1415,7 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_json
@@ -1491,7 +1424,7 @@ module Aws::WellArchitected
     class ExportLensOutput < Struct.new(
       :lens_json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to get answer.</p>
@@ -1521,7 +1454,7 @@ module Aws::WellArchitected
       :question_id,
       :milestone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a get answer call.</p>
@@ -1555,7 +1488,7 @@ module Aws::WellArchitected
       :lens_arn,
       :answer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format
@@ -1578,7 +1511,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics
@@ -1599,7 +1532,7 @@ module Aws::WellArchitected
       :next_token,
       :base64_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_sharing_status
@@ -1616,7 +1549,7 @@ module Aws::WellArchitected
       :discovery_integration_status,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -1636,7 +1569,7 @@ module Aws::WellArchitected
       :lens_alias,
       :lens_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens
@@ -1645,7 +1578,7 @@ module Aws::WellArchitected
     class GetLensOutput < Struct.new(
       :lens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to get lens review.</p>
@@ -1671,7 +1604,7 @@ module Aws::WellArchitected
       :lens_alias,
       :milestone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a get lens review call.</p>
@@ -1690,7 +1623,7 @@ module Aws::WellArchitected
       :milestone_number,
       :lens_review,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to get lens review report.</p>
@@ -1716,7 +1649,7 @@ module Aws::WellArchitected
       :lens_alias,
       :milestone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a get lens review report call.</p>
@@ -1735,7 +1668,7 @@ module Aws::WellArchitected
       :milestone_number,
       :lens_review_report,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -1759,7 +1692,7 @@ module Aws::WellArchitected
       :base_lens_version,
       :target_lens_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -1795,7 +1728,7 @@ module Aws::WellArchitected
       :latest_lens_version,
       :version_differences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to get a milestone.</p>
@@ -1810,7 +1743,7 @@ module Aws::WellArchitected
       :workload_id,
       :milestone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a get milestone call.</p>
@@ -1824,7 +1757,7 @@ module Aws::WellArchitected
       :workload_id,
       :milestone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_arn
@@ -1837,7 +1770,7 @@ module Aws::WellArchitected
       :profile_arn,
       :profile_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -1846,12 +1779,12 @@ module Aws::WellArchitected
     class GetProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetProfileTemplateInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_template
@@ -1860,7 +1793,7 @@ module Aws::WellArchitected
     class GetProfileTemplateOutput < Struct.new(
       :profile_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -1884,7 +1817,7 @@ module Aws::WellArchitected
       :lens_alias,
       :question_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -1908,7 +1841,7 @@ module Aws::WellArchitected
       :lens_alias,
       :answer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -1917,7 +1850,7 @@ module Aws::WellArchitected
     class GetReviewTemplateInput < Struct.new(
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -1937,7 +1870,7 @@ module Aws::WellArchitected
       :template_arn,
       :lens_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -1950,7 +1883,7 @@ module Aws::WellArchitected
       :template_arn,
       :lens_review,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute review_template
@@ -1959,7 +1892,7 @@ module Aws::WellArchitected
     class GetReviewTemplateOutput < Struct.new(
       :review_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to get a workload.</p>
@@ -1969,7 +1902,7 @@ module Aws::WellArchitected
     class GetWorkloadInput < Struct.new(
       :workload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a get workload call.</p>
@@ -1979,7 +1912,7 @@ module Aws::WellArchitected
     class GetWorkloadOutput < Struct.new(
       :workload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -2016,7 +1949,7 @@ module Aws::WellArchitected
       :client_request_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_arn
@@ -2029,13 +1962,7 @@ module Aws::WellArchitected
       :lens_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportLensStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An improvement summary of a lens review in a workload.</p>
@@ -2072,20 +1999,7 @@ module Aws::WellArchitected
       :improvement_plans,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegratingService
-      JIRA = 'JIRA'
-    end
-
-    module IntegrationStatus
-      CONFIGURED = 'CONFIGURED'
-      NOT_CONFIGURED = 'NOT_CONFIGURED'
-    end
-
-    module IntegrationStatusInput
-      NOT_CONFIGURED = 'NOT_CONFIGURED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is a problem with the Well-Architected Tool API service.</p>
@@ -2095,12 +2009,7 @@ module Aws::WellArchitected
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IssueManagementType
-      AUTO = 'AUTO'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the Jira integration.</p>
@@ -2114,7 +2023,7 @@ module Aws::WellArchitected
       :jira_issue_url,
       :last_synced_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Selected questions in the workload.</p>
@@ -2124,7 +2033,7 @@ module Aws::WellArchitected
     class JiraSelectedQuestionConfiguration < Struct.new(
       :selected_pillars,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lens return object.</p>
@@ -2158,7 +2067,7 @@ module Aws::WellArchitected
       :share_invitation_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metric for a particular lens in a workload.</p>
@@ -2176,7 +2085,7 @@ module Aws::WellArchitected
       :pillars,
       :risk_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lens review of a question.</p>
@@ -2242,7 +2151,7 @@ module Aws::WellArchitected
       :profiles,
       :prioritized_risk_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A report of a lens review.</p>
@@ -2270,7 +2179,7 @@ module Aws::WellArchitected
       :lens_arn,
       :base64_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lens review summary of a workload.</p>
@@ -2319,7 +2228,7 @@ module Aws::WellArchitected
       :profiles,
       :prioritized_risk_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lens share summary return object.</p>
@@ -2342,21 +2251,7 @@ module Aws::WellArchitected
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LensStatus
-      CURRENT = 'CURRENT'
-      NOT_CURRENT = 'NOT_CURRENT'
-      DEPRECATED = 'DEPRECATED'
-      DELETED = 'DELETED'
-      UNSHARED = 'UNSHARED'
-    end
-
-    module LensStatusType
-      ALL = 'ALL'
-      DRAFT = 'DRAFT'
-      PUBLISHED = 'PUBLISHED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A lens summary of a lens.</p>
@@ -2409,13 +2304,7 @@ module Aws::WellArchitected
       :owner,
       :lens_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LensType
-      AWS_OFFICIAL = 'AWS_OFFICIAL'
-      CUSTOM_SHARED = 'CUSTOM_SHARED'
-      CUSTOM_SELF = 'CUSTOM_SELF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lens upgrade summary return object.</p>
@@ -2465,7 +2354,7 @@ module Aws::WellArchitected
       :resource_arn,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to list answers.</p>
@@ -2508,7 +2397,7 @@ module Aws::WellArchitected
       :max_results,
       :question_priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a list answers call.</p>
@@ -2546,7 +2435,7 @@ module Aws::WellArchitected
       :answer_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -2580,7 +2469,7 @@ module Aws::WellArchitected
       :question_id,
       :choice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_details
@@ -2593,7 +2482,7 @@ module Aws::WellArchitected
       :check_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -2627,7 +2516,7 @@ module Aws::WellArchitected
       :question_id,
       :choice_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute check_summaries
@@ -2640,7 +2529,7 @@ module Aws::WellArchitected
       :check_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to list lens review improvements.</p>
@@ -2683,7 +2572,7 @@ module Aws::WellArchitected
       :max_results,
       :question_priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a list lens review improvements call.</p>
@@ -2721,7 +2610,7 @@ module Aws::WellArchitected
       :improvement_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to list lens reviews.</p>
@@ -2744,7 +2633,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a list lens reviews call.</p>
@@ -2767,7 +2656,7 @@ module Aws::WellArchitected
       :lens_review_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_alias
@@ -2799,7 +2688,7 @@ module Aws::WellArchitected
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lens_share_summaries
@@ -2812,7 +2701,7 @@ module Aws::WellArchitected
       :lens_share_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to list lenses.</p>
@@ -2838,7 +2727,7 @@ module Aws::WellArchitected
       :lens_status,
       :lens_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a list lenses call.</p>
@@ -2852,7 +2741,7 @@ module Aws::WellArchitected
       :lens_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to list all milestones for a workload.</p>
@@ -2870,7 +2759,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a list milestones call.</p>
@@ -2888,7 +2777,7 @@ module Aws::WellArchitected
       :milestone_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -2912,7 +2801,7 @@ module Aws::WellArchitected
       :max_results,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_summaries
@@ -2925,7 +2814,7 @@ module Aws::WellArchitected
       :notification_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -2942,7 +2831,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_summaries
@@ -2955,7 +2844,7 @@ module Aws::WellArchitected
       :notification_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_arn
@@ -2980,7 +2869,7 @@ module Aws::WellArchitected
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_share_summaries
@@ -2993,7 +2882,7 @@ module Aws::WellArchitected
       :profile_share_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_name_prefix
@@ -3015,7 +2904,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_summaries
@@ -3028,7 +2917,7 @@ module Aws::WellArchitected
       :profile_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -3061,7 +2950,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -3089,7 +2978,7 @@ module Aws::WellArchitected
       :answer_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3102,7 +2991,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute review_templates
@@ -3115,7 +3004,7 @@ module Aws::WellArchitected
       :review_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for List Share Invitations</p>
@@ -3152,7 +3041,7 @@ module Aws::WellArchitected
       :profile_name_prefix,
       :template_name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for List Share Invitations</p>
@@ -3166,7 +3055,7 @@ module Aws::WellArchitected
       :share_invitation_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_arn
@@ -3175,7 +3064,7 @@ module Aws::WellArchitected
     class ListTagsForResourceInput < Struct.new(
       :workload_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3184,7 +3073,7 @@ module Aws::WellArchitected
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -3210,7 +3099,7 @@ module Aws::WellArchitected
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -3227,7 +3116,7 @@ module Aws::WellArchitected
       :template_share_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for List Workload Share</p>
@@ -3253,7 +3142,7 @@ module Aws::WellArchitected
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for List Workload Share</p>
@@ -3271,7 +3160,7 @@ module Aws::WellArchitected
       :workload_share_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to list all workloads.</p>
@@ -3290,7 +3179,7 @@ module Aws::WellArchitected
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a list workloads call.</p>
@@ -3304,11 +3193,7 @@ module Aws::WellArchitected
       :workload_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricType
-      WORKLOAD = 'WORKLOAD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A milestone return object.</p>
@@ -3332,7 +3217,7 @@ module Aws::WellArchitected
       :recorded_at,
       :workload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A milestone summary return object.</p>
@@ -3356,7 +3241,7 @@ module Aws::WellArchitected
       :recorded_at,
       :workload_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notification summary return object.</p>
@@ -3370,23 +3255,7 @@ module Aws::WellArchitected
       :type,
       :lens_upgrade_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationType
-      LENS_VERSION_UPGRADED = 'LENS_VERSION_UPGRADED'
-      LENS_VERSION_DEPRECATED = 'LENS_VERSION_DEPRECATED'
-    end
-
-    module OrganizationSharingStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    # <p>Permission granted on a share request.</p>
-    module PermissionType
-      READONLY = 'READONLY'
-      CONTRIBUTOR = 'CONTRIBUTOR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pillar difference return object.</p>
@@ -3409,7 +3278,7 @@ module Aws::WellArchitected
       :difference_status,
       :question_differences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metric for a particular pillar in a lens.</p>
@@ -3428,7 +3297,7 @@ module Aws::WellArchitected
       :risk_counts,
       :questions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pillar review summary of a lens review.</p>
@@ -3456,7 +3325,7 @@ module Aws::WellArchitected
       :risk_counts,
       :prioritized_risk_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A profile.</p>
@@ -3502,7 +3371,7 @@ module Aws::WellArchitected
       :share_invitation_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The profile choice.</p>
@@ -3520,7 +3389,7 @@ module Aws::WellArchitected
       :choice_title,
       :choice_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The profile notification summary.</p>
@@ -3556,17 +3425,7 @@ module Aws::WellArchitected
       :workload_id,
       :workload_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProfileNotificationType
-      PROFILE_ANSWERS_UPDATED = 'PROFILE_ANSWERS_UPDATED'
-      PROFILE_DELETED = 'PROFILE_DELETED'
-    end
-
-    module ProfileOwnerType
-      SELF = 'SELF'
-      SHARED = 'SHARED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A profile question.</p>
@@ -3600,7 +3459,7 @@ module Aws::WellArchitected
       :min_selected_choices,
       :max_selected_choices,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An update to a profile question.</p>
@@ -3614,7 +3473,7 @@ module Aws::WellArchitected
       :question_id,
       :selected_choice_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a profile share.</p>
@@ -3637,7 +3496,7 @@ module Aws::WellArchitected
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a profile.</p>
@@ -3671,7 +3530,7 @@ module Aws::WellArchitected
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The profile template.</p>
@@ -3693,7 +3552,7 @@ module Aws::WellArchitected
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A profile template choice.</p>
@@ -3711,7 +3570,7 @@ module Aws::WellArchitected
       :choice_title,
       :choice_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A profile template question.</p>
@@ -3741,12 +3600,7 @@ module Aws::WellArchitected
       :min_selected_choices,
       :max_selected_choices,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Question
-      UNANSWERED = 'UNANSWERED'
-      ANSWERED = 'ANSWERED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A question difference return object.</p>
@@ -3764,7 +3618,7 @@ module Aws::WellArchitected
       :question_title,
       :difference_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A metric for a particular question in the pillar. </p>
@@ -3782,22 +3636,7 @@ module Aws::WellArchitected
       :risk,
       :best_practices,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuestionPriority
-      PRIORITIZED = 'PRIORITIZED'
-      NONE = 'NONE'
-    end
-
-    module QuestionType
-      PRIORITIZED = 'PRIORITIZED'
-      NON_PRIORITIZED = 'NON_PRIORITIZED'
-    end
-
-    module ReportFormat
-      PDF = 'PDF'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource was not found.</p>
@@ -3815,7 +3654,7 @@ module Aws::WellArchitected
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A review template.</p>
@@ -3866,7 +3705,7 @@ module Aws::WellArchitected
       :update_status,
       :share_invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An answer of the question.</p>
@@ -3939,12 +3778,7 @@ module Aws::WellArchitected
       :notes,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReviewTemplateAnswerStatus
-      UNANSWERED = 'UNANSWERED'
-      ANSWERED = 'ANSWERED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of review template answers.</p>
@@ -3992,7 +3826,7 @@ module Aws::WellArchitected
       :reason,
       :question_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lens review of a review template.</p>
@@ -4046,7 +3880,7 @@ module Aws::WellArchitected
       :question_counts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a review template.</p>
@@ -4070,7 +3904,7 @@ module Aws::WellArchitected
       :notes,
       :question_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a review template.</p>
@@ -4104,21 +3938,7 @@ module Aws::WellArchitected
       :template_name,
       :update_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReviewTemplateUpdateStatus
-      CURRENT = 'CURRENT'
-      LENS_NOT_CURRENT = 'LENS_NOT_CURRENT'
-    end
-
-    # <p>The risk for a given workload, lens review, pillar, or question.</p>
-    module Risk
-      UNANSWERED = 'UNANSWERED'
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      NONE = 'NONE'
-      NOT_APPLICABLE = 'NOT_APPLICABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selected pillar.</p>
@@ -4133,7 +3953,7 @@ module Aws::WellArchitected
       :pillar_id,
       :selected_question_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user has reached their resource quota.</p>
@@ -4159,7 +3979,7 @@ module Aws::WellArchitected
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The share invitation.</p>
@@ -4200,13 +4020,7 @@ module Aws::WellArchitected
       :profile_arn,
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Share invitation action taken by contributor.</p>
-    module ShareInvitationAction
-      ACCEPT = 'ACCEPT'
-      REJECT = 'REJECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A share invitation summary return object.</p>
@@ -4267,26 +4081,7 @@ module Aws::WellArchitected
       :template_name,
       :template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShareResourceType
-      WORKLOAD = 'WORKLOAD'
-      LENS = 'LENS'
-      PROFILE = 'PROFILE'
-      TEMPLATE = 'TEMPLATE'
-    end
-
-    # <p>The status of the share request.</p>
-    module ShareStatus
-      ACCEPTED = 'ACCEPTED'
-      REJECTED = 'REJECTED'
-      PENDING = 'PENDING'
-      REVOKED = 'REVOKED'
-      EXPIRED = 'EXPIRED'
-      ASSOCIATING = 'ASSOCIATING'
-      ASSOCIATED = 'ASSOCIATED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_arn
@@ -4299,12 +4094,12 @@ module Aws::WellArchitected
       :workload_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a review template share.</p>
@@ -4327,7 +4122,7 @@ module Aws::WellArchitected
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling.</p>
@@ -4345,12 +4140,7 @@ module Aws::WellArchitected
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrustedAdvisorIntegrationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_arn
@@ -4364,12 +4154,12 @@ module Aws::WellArchitected
       :workload_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to update answer.</p>
@@ -4417,7 +4207,7 @@ module Aws::WellArchitected
       :is_applicable,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a update answer call.</p>
@@ -4446,7 +4236,7 @@ module Aws::WellArchitected
       :lens_arn,
       :answer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_sharing_status
@@ -4463,7 +4253,7 @@ module Aws::WellArchitected
       :discovery_integration_status,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -4489,7 +4279,7 @@ module Aws::WellArchitected
       :client_request_token,
       :integrating_service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for update lens review.</p>
@@ -4524,7 +4314,7 @@ module Aws::WellArchitected
       :pillar_notes,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of a update lens review call.</p>
@@ -4538,7 +4328,7 @@ module Aws::WellArchitected
       :workload_id,
       :lens_review,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_arn
@@ -4555,7 +4345,7 @@ module Aws::WellArchitected
       :profile_description,
       :profile_questions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -4564,7 +4354,7 @@ module Aws::WellArchitected
     class UpdateProfileOutput < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -4610,7 +4400,7 @@ module Aws::WellArchitected
       :is_applicable,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -4634,7 +4424,7 @@ module Aws::WellArchitected
       :lens_alias,
       :answer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -4664,7 +4454,7 @@ module Aws::WellArchitected
       :lenses_to_associate,
       :lenses_to_disassociate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -4694,7 +4484,7 @@ module Aws::WellArchitected
       :lens_notes,
       :pillar_notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -4707,7 +4497,7 @@ module Aws::WellArchitected
       :template_arn,
       :lens_review,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute review_template
@@ -4716,7 +4506,7 @@ module Aws::WellArchitected
     class UpdateReviewTemplateOutput < Struct.new(
       :review_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Update Share Invitation</p>
@@ -4730,7 +4520,7 @@ module Aws::WellArchitected
       :share_invitation_id,
       :share_invitation_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute share_invitation
@@ -4739,7 +4529,7 @@ module Aws::WellArchitected
     class UpdateShareInvitationOutput < Struct.new(
       :share_invitation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input to update a workload.</p>
@@ -4965,7 +4755,7 @@ module Aws::WellArchitected
       :applications,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output of an update workload call.</p>
@@ -4975,7 +4765,7 @@ module Aws::WellArchitected
     class UpdateWorkloadOutput < Struct.new(
       :workload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Update Workload Share</p>
@@ -4993,7 +4783,7 @@ module Aws::WellArchitected
       :workload_id,
       :permission_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input for Update Workload Share</p>
@@ -5007,7 +4797,7 @@ module Aws::WellArchitected
       :workload_id,
       :workload_share,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -5045,7 +4835,7 @@ module Aws::WellArchitected
       :milestone_name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_id
@@ -5076,7 +4866,7 @@ module Aws::WellArchitected
       :milestone_name,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_arn
@@ -5109,7 +4899,7 @@ module Aws::WellArchitected
       :lens_alias,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user input is not valid.</p>
@@ -5127,7 +4917,7 @@ module Aws::WellArchitected
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an exception.</p>
@@ -5141,15 +4931,7 @@ module Aws::WellArchitected
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The reason why the request failed validation.</p>
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The differences between the base and latest versions of the lens.</p>
@@ -5159,7 +4941,7 @@ module Aws::WellArchitected
     class VersionDifferences < Struct.new(
       :pillar_differences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workload return object.</p>
@@ -5427,7 +5209,7 @@ module Aws::WellArchitected
       :prioritized_risk_counts,
       :jira_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Discovery configuration associated to the workload.</p>
@@ -5442,28 +5224,7 @@ module Aws::WellArchitected
       :trusted_advisor_integration_status,
       :workload_resource_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The environment for the workload.</p>
-    module WorkloadEnvironment
-      PRODUCTION = 'PRODUCTION'
-      PREPRODUCTION = 'PREPRODUCTION'
-    end
-
-    # <p>The improvement status for a workload.</p>
-    module WorkloadImprovementStatus
-      NOT_APPLICABLE = 'NOT_APPLICABLE'
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      RISK_ACKNOWLEDGED = 'RISK_ACKNOWLEDGED'
-    end
-
-    module WorkloadIssueManagementStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      INHERIT = 'INHERIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Workload-level: Input for the Jira configuration.</p>
@@ -5481,7 +5242,7 @@ module Aws::WellArchitected
       :issue_management_type,
       :jira_project_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Workload-level: Output configuration of the Jira integration.</p>
@@ -5503,7 +5264,7 @@ module Aws::WellArchitected
       :jira_project_key,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The profile associated with a workload.</p>
@@ -5517,7 +5278,7 @@ module Aws::WellArchitected
       :profile_arn,
       :profile_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workload share return object.</p>
@@ -5554,7 +5315,7 @@ module Aws::WellArchitected
       :workload_name,
       :workload_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workload share summary return object.</p>
@@ -5581,7 +5342,7 @@ module Aws::WellArchitected
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workload summary return object.</p>
@@ -5631,7 +5392,7 @@ module Aws::WellArchitected
       :profiles,
       :prioritized_risk_counts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,11 +13,7 @@ module Aws::MPA
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionCompletionStrategy
-      AUTO_COMPLETION_UPON_APPROVAL = 'AUTO_COMPLETION_UPON_APPROVAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Strategy for how an approval team grants approval.</p>
@@ -28,7 +24,7 @@ module Aws::MPA
       :mof_n,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class MofN < ApprovalStrategy; end
       class Unknown < ApprovalStrategy; end
@@ -42,7 +38,7 @@ module Aws::MPA
       :mof_n,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class MofN < ApprovalStrategyResponse; end
       class Unknown < ApprovalStrategyResponse; end
@@ -59,29 +55,7 @@ module Aws::MPA
       :primary_identity_id,
       :primary_identity_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApprovalTeamStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      DELETING = 'DELETING'
-      PENDING = 'PENDING'
-    end
-
-    module ApprovalTeamStatusCode
-      VALIDATING = 'VALIDATING'
-      PENDING_ACTIVATION = 'PENDING_ACTIVATION'
-      FAILED_VALIDATION = 'FAILED_VALIDATION'
-      FAILED_ACTIVATION = 'FAILED_ACTIVATION'
-      UPDATE_PENDING_APPROVAL = 'UPDATE_PENDING_APPROVAL'
-      UPDATE_PENDING_ACTIVATION = 'UPDATE_PENDING_ACTIVATION'
-      UPDATE_FAILED_APPROVAL = 'UPDATE_FAILED_APPROVAL'
-      UPDATE_FAILED_ACTIVATION = 'UPDATE_FAILED_ACTIVATION'
-      UPDATE_FAILED_VALIDATION = 'UPDATE_FAILED_VALIDATION'
-      DELETE_PENDING_APPROVAL = 'DELETE_PENDING_APPROVAL'
-      DELETE_FAILED_APPROVAL = 'DELETE_FAILED_APPROVAL'
-      DELETE_FAILED_VALIDATION = 'DELETE_FAILED_VALIDATION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_arn
@@ -90,12 +64,12 @@ module Aws::MPA
     class CancelSessionRequest < Struct.new(
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelSessionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request cannot be completed because it conflicts with the current state of a resource.</p>
@@ -105,7 +79,7 @@ module Aws::MPA
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -138,7 +112,7 @@ module Aws::MPA
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -159,7 +133,7 @@ module Aws::MPA
       :name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_source_parameters
@@ -176,7 +150,7 @@ module Aws::MPA
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_source_type
@@ -193,7 +167,7 @@ module Aws::MPA
       :identity_source_arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_source_arn
@@ -202,7 +176,7 @@ module Aws::MPA
     class DeleteIdentitySourceRequest < Struct.new(
       :identity_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -215,12 +189,12 @@ module Aws::MPA
       :arn,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteInactiveApprovalTeamVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the filter to apply to requests. You can specify up to 10 filters for a request.</p>
@@ -238,16 +212,7 @@ module Aws::MPA
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterField
-      ACTION_NAME = 'ActionName'
-      APPROVAL_TEAM_NAME = 'ApprovalTeamName'
-      VOTING_TIME = 'VotingTime'
-      VOTE = 'Vote'
-      SESSION_STATUS = 'SessionStatus'
-      INITIATION_TIME = 'InitiationTime'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -256,7 +221,7 @@ module Aws::MPA
     class GetApprovalTeamRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -321,7 +286,7 @@ module Aws::MPA
       :last_update_time,
       :pending_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for an approver.</p>
@@ -347,7 +312,7 @@ module Aws::MPA
       :primary_identity_source_arn,
       :primary_identity_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_source_arn
@@ -356,7 +321,7 @@ module Aws::MPA
     class GetIdentitySourceRequest < Struct.new(
       :identity_source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_source_type
@@ -389,7 +354,7 @@ module Aws::MPA
       :status_code,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_version_arn
@@ -398,7 +363,7 @@ module Aws::MPA
     class GetPolicyVersionRequest < Struct.new(
       :policy_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_version
@@ -407,7 +372,7 @@ module Aws::MPA
     class GetPolicyVersionResponse < Struct.new(
       :policy_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -424,7 +389,7 @@ module Aws::MPA
       :policy_name,
       :policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -449,7 +414,7 @@ module Aws::MPA
       :policy_name,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_arn
@@ -458,7 +423,7 @@ module Aws::MPA
     class GetSessionRequest < Struct.new(
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_arn
@@ -555,7 +520,7 @@ module Aws::MPA
       :action_completion_strategy,
       :approver_responses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for an approver response in an approval session.</p>
@@ -581,7 +546,7 @@ module Aws::MPA
       :response,
       :response_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IAM Identity Center credentials. For more information see, <a href="http://aws.amazon.com/identity-center/">IAM Identity Center</a> .</p>
@@ -595,7 +560,7 @@ module Aws::MPA
       :instance_arn,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IAM Identity Center credentials. For more information see, <a href="http://aws.amazon.com/identity-center/">IAM Identity Center</a> .</p>
@@ -613,7 +578,7 @@ module Aws::MPA
       :approval_portal_url,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IAM Identity Center credentials. For more information see, <a href="http://aws.amazon.com/identity-center/">IAM Identity Center</a> .</p>
@@ -631,7 +596,7 @@ module Aws::MPA
       :approval_portal_url,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for an identity source. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-concepts.html">Identity source</a> in the <i>Multi-party approval User Guide</i>.</p>
@@ -665,7 +630,7 @@ module Aws::MPA
       :status_code,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for the resource that provides identities to the identity source. For example, an IAM Identity Center instance.</p>
@@ -675,7 +640,7 @@ module Aws::MPA
     class IdentitySourceParameters < Struct.new(
       :iam_identity_center,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for the resource that provides identities to the identity source. For example, an IAM Identity Center instance. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-concepts.html">Identity source</a> in the <i>Multi-party approval User Guide</i>.</p>
@@ -686,7 +651,7 @@ module Aws::MPA
       :iam_identity_center,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IamIdentityCenter < IdentitySourceParametersForGet; end
       class Unknown < IdentitySourceParametersForGet; end
@@ -700,35 +665,10 @@ module Aws::MPA
       :iam_identity_center,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IamIdentityCenter < IdentitySourceParametersForList; end
       class Unknown < IdentitySourceParametersForList; end
-    end
-
-    module IdentitySourceStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      ERROR = 'ERROR'
-    end
-
-    module IdentitySourceStatusCode
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      DELETION_FAILED = 'DELETION_FAILED'
-      IDC_INSTANCE_NOT_FOUND = 'IDC_INSTANCE_NOT_FOUND'
-      IDC_INSTANCE_NOT_VALID = 'IDC_INSTANCE_NOT_VALID'
-    end
-
-    module IdentitySourceType
-      IAM_IDENTITY_CENTER = 'IAM_IDENTITY_CENTER'
-    end
-
-    module IdentityStatus
-      PENDING = 'PENDING'
-      ACCEPTED = 'ACCEPTED'
-      REJECTED = 'REJECTED'
-      INVALID = 'INVALID'
     end
 
     # <p>The service encountered an internal error. Try your request again. If the problem persists, contact Amazon Web Services Support.</p>
@@ -738,7 +678,7 @@ module Aws::MPA
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains an invalid parameter value.</p>
@@ -748,7 +688,7 @@ module Aws::MPA
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -761,7 +701,7 @@ module Aws::MPA
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -774,7 +714,7 @@ module Aws::MPA
       :next_token,
       :approval_teams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for an approval team</p>
@@ -816,7 +756,7 @@ module Aws::MPA
       :status_code,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -829,7 +769,7 @@ module Aws::MPA
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -842,7 +782,7 @@ module Aws::MPA
       :next_token,
       :identity_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -855,7 +795,7 @@ module Aws::MPA
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -868,7 +808,7 @@ module Aws::MPA
       :next_token,
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -885,7 +825,7 @@ module Aws::MPA
       :next_token,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -898,7 +838,7 @@ module Aws::MPA
       :next_token,
       :policy_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -915,7 +855,7 @@ module Aws::MPA
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -928,7 +868,7 @@ module Aws::MPA
       :next_token,
       :resource_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a policy for a resource.</p>
@@ -946,7 +886,7 @@ module Aws::MPA
       :policy_type,
       :policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_team_arn
@@ -967,7 +907,7 @@ module Aws::MPA
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -980,7 +920,7 @@ module Aws::MPA
       :next_token,
       :sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for an approval session. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-health.html">Session</a> in the <i>Multi-party approval User Guide</i> </p>
@@ -1054,7 +994,7 @@ module Aws::MPA
       :status_message,
       :action_completion_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1063,7 +1003,7 @@ module Aws::MPA
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1072,7 +1012,7 @@ module Aws::MPA
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Strategy for how an approval team grants approval.</p>
@@ -1082,19 +1022,7 @@ module Aws::MPA
     class MofNApprovalStrategy < Struct.new(
       :min_approvals_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operator
-      EQUALS = 'EQ'
-      NOT_EQUALS = 'NE'
-      GREATER_THAN = 'GT'
-      LESS_THAN = 'LT'
-      GREATER_THAN_OR_EQUAL_TO = 'GTE'
-      LESS_THAN_OR_EQUAL_TO = 'LTE'
-      CONTAINS = 'CONTAINS'
-      DOES_NOT_CONTAIN = 'NOT_CONTAINS'
-      BETWEEN = 'BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for the pending updates for an approval team, if applicable.</p>
@@ -1136,7 +1064,7 @@ module Aws::MPA
       :approvers,
       :update_initiation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
@@ -1158,7 +1086,7 @@ module Aws::MPA
       :policy_type,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the Amazon Resource Name (ARN) for a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
@@ -1168,17 +1096,7 @@ module Aws::MPA
     class PolicyReference < Struct.new(
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyStatus
-      ATTACHABLE = 'ATTACHABLE'
-      DEPRECATED = 'DEPRECATED'
-    end
-
-    module PolicyType
-      AWS_MANAGED = 'AWS_MANAGED'
-      AWS_RAM = 'AWS_RAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for the version of a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
@@ -1224,7 +1142,7 @@ module Aws::MPA
       :last_updated_time,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for the version of a policy. Policies define what operations a team that define the permissions for team resources.</p> <p>The protected operation for a service integration might require specific permissions. For more information, see <a href="https://docs.aws.amazon.com/mpa/latest/userguide/mpa-integrations.html">How other services work with Multi-party approval</a> in the <i>Multi-party approval User Guide</i>.</p>
@@ -1266,7 +1184,7 @@ module Aws::MPA
       :creation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist. Check the resource ID, and try again.</p>
@@ -1276,7 +1194,7 @@ module Aws::MPA
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the service quota for your account. Request a quota increase or reduce your request size.</p>
@@ -1286,33 +1204,7 @@ module Aws::MPA
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionExecutionStatus
-      EXECUTED = 'EXECUTED'
-      FAILED = 'FAILED'
-      PENDING = 'PENDING'
-    end
-
-    module SessionResponse
-      APPROVED = 'APPROVED'
-      REJECTED = 'REJECTED'
-      NO_RESPONSE = 'NO_RESPONSE'
-    end
-
-    module SessionStatus
-      PENDING = 'PENDING'
-      CANCELLED = 'CANCELLED'
-      APPROVED = 'APPROVED'
-      FAILED = 'FAILED'
-      CREATING = 'CREATING'
-    end
-
-    module SessionStatusCode
-      REJECTED = 'REJECTED'
-      EXPIRED = 'EXPIRED'
-      CONFIGURATION_CHANGED = 'CONFIGURATION_CHANGED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pending_window_days
@@ -1325,7 +1217,7 @@ module Aws::MPA
       :pending_window_days,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_completion_time
@@ -1338,7 +1230,7 @@ module Aws::MPA
       :deletion_completion_time,
       :deletion_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1351,12 +1243,12 @@ module Aws::MPA
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1366,7 +1258,7 @@ module Aws::MPA
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the maximum number of tags allowed for this resource. Remove some tags, and try again.</p>
@@ -1380,7 +1272,7 @@ module Aws::MPA
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1393,12 +1285,12 @@ module Aws::MPA
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approval_strategy
@@ -1419,7 +1311,7 @@ module Aws::MPA
       :description,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_id
@@ -1428,7 +1320,7 @@ module Aws::MPA
     class UpdateApprovalTeamResponse < Struct.new(
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -1438,7 +1330,7 @@ module Aws::MPA
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

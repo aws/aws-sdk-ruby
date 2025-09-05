@@ -12,7 +12,7 @@ module Aws::AppFabric
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains API key credential information.</p>
@@ -22,7 +22,7 @@ module Aws::AppFabric
     class ApiKeyCredential < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an app authorization.</p>
@@ -96,14 +96,7 @@ module Aws::AppFabric
       :persona,
       :auth_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppAuthorizationStatus
-      PENDING_CONNECT = 'PendingConnect'
-      CONNECTED = 'Connected'
-      CONNECTION_VALIDATION_FAILED = 'ConnectionValidationFailed'
-      TOKEN_AUTO_ROTATION_FAILED = 'TokenAutoRotationFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of an app authorization.</p>
@@ -160,7 +153,7 @@ module Aws::AppFabric
       :status,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an app bundle.</p>
@@ -175,7 +168,7 @@ module Aws::AppFabric
       :arn,
       :customer_managed_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of an app bundle.</p>
@@ -185,7 +178,7 @@ module Aws::AppFabric
     class AppBundleSummary < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an audit log destination configuration.</p>
@@ -195,7 +188,7 @@ module Aws::AppFabric
     class AuditLogDestinationConfiguration < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an audit log processing configuration.</p>
@@ -209,7 +202,7 @@ module Aws::AppFabric
       :schema,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains authorization request information, which is required for Amazon Web Services AppFabric to get the
@@ -225,12 +218,7 @@ module Aws::AppFabric
       :redirect_uri,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthType
-      OAUTH2 = 'oauth2'
-      API_KEY = 'apiKey'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -244,7 +232,7 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :task_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_access_results_list
@@ -253,7 +241,7 @@ module Aws::AppFabric
     class BatchGetUserAccessTasksResponse < Struct.new(
       :user_access_results_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has created a conflict. Check the request parameters and try again.</p>
@@ -270,7 +258,7 @@ module Aws::AppFabric
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -291,7 +279,7 @@ module Aws::AppFabric
       :app_authorization_identifier,
       :auth_request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_authorization_summary
@@ -300,7 +288,7 @@ module Aws::AppFabric
     class ConnectAppAuthorizationResponse < Struct.new(
       :app_authorization_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -411,7 +399,7 @@ module Aws::AppFabric
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_authorization
@@ -420,7 +408,7 @@ module Aws::AppFabric
     class CreateAppAuthorizationResponse < Struct.new(
       :app_authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -447,7 +435,7 @@ module Aws::AppFabric
       :customer_managed_key_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle
@@ -456,7 +444,7 @@ module Aws::AppFabric
     class CreateAppBundleResponse < Struct.new(
       :app_bundle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -496,7 +484,7 @@ module Aws::AppFabric
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_destination
@@ -505,7 +493,7 @@ module Aws::AppFabric
     class CreateIngestionDestinationResponse < Struct.new(
       :ingestion_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -607,7 +595,7 @@ module Aws::AppFabric
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion
@@ -616,7 +604,7 @@ module Aws::AppFabric
     class CreateIngestionResponse < Struct.new(
       :ingestion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains credential information for an application.</p>
@@ -631,7 +619,7 @@ module Aws::AppFabric
       :api_key_credential,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Oauth2Credential < Credential; end
       class ApiKeyCredential < Credential; end
@@ -650,12 +638,12 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :app_authorization_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppAuthorizationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -664,12 +652,12 @@ module Aws::AppFabric
     class DeleteAppBundleRequest < Struct.new(
       :app_bundle_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppBundleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -689,12 +677,12 @@ module Aws::AppFabric
       :ingestion_identifier,
       :ingestion_destination_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIngestionDestinationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -709,12 +697,12 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :ingestion_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIngestionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an audit log destination.</p>
@@ -729,7 +717,7 @@ module Aws::AppFabric
       :firehose_stream,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Bucket < Destination; end
       class FirehoseStream < Destination; end
@@ -744,7 +732,7 @@ module Aws::AppFabric
       :audit_log,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AuditLog < DestinationConfiguration; end
       class Unknown < DestinationConfiguration; end
@@ -757,12 +745,7 @@ module Aws::AppFabric
     class FirehoseStream < Struct.new(
       :stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      JSON = 'json'
-      PARQUET = 'parquet'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -777,7 +760,7 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :app_authorization_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_authorization
@@ -786,7 +769,7 @@ module Aws::AppFabric
     class GetAppAuthorizationResponse < Struct.new(
       :app_authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -796,7 +779,7 @@ module Aws::AppFabric
     class GetAppBundleRequest < Struct.new(
       :app_bundle_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle
@@ -805,7 +788,7 @@ module Aws::AppFabric
     class GetAppBundleResponse < Struct.new(
       :app_bundle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -825,7 +808,7 @@ module Aws::AppFabric
       :ingestion_identifier,
       :ingestion_destination_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_destination
@@ -834,7 +817,7 @@ module Aws::AppFabric
     class GetIngestionDestinationResponse < Struct.new(
       :ingestion_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -849,7 +832,7 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :ingestion_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion
@@ -858,7 +841,7 @@ module Aws::AppFabric
     class GetIngestionResponse < Struct.new(
       :ingestion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an ingestion.</p>
@@ -896,7 +879,7 @@ module Aws::AppFabric
       :state,
       :ingestion_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an ingestion destination.</p>
@@ -950,12 +933,7 @@ module Aws::AppFabric
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestionDestinationStatus
-      ACTIVE = 'Active'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of an ingestion destination.</p>
@@ -965,12 +943,7 @@ module Aws::AppFabric
     class IngestionDestinationSummary < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestionState
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of an ingestion.</p>
@@ -992,11 +965,7 @@ module Aws::AppFabric
       :tenant_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestionType
-      AUDIT_LOG = 'auditLog'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure
@@ -1010,7 +979,7 @@ module Aws::AppFabric
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -1035,7 +1004,7 @@ module Aws::AppFabric
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_authorization_summary_list
@@ -1052,7 +1021,7 @@ module Aws::AppFabric
       :app_authorization_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1072,7 +1041,7 @@ module Aws::AppFabric
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_summary_list
@@ -1089,7 +1058,7 @@ module Aws::AppFabric
       :app_bundle_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -1119,7 +1088,7 @@ module Aws::AppFabric
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_destinations
@@ -1136,7 +1105,7 @@ module Aws::AppFabric
       :ingestion_destinations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -1161,7 +1130,7 @@ module Aws::AppFabric
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestions
@@ -1178,7 +1147,7 @@ module Aws::AppFabric
       :ingestions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1188,7 +1157,7 @@ module Aws::AppFabric
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1197,7 +1166,7 @@ module Aws::AppFabric
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains OAuth2 client credential information.</p>
@@ -1211,12 +1180,7 @@ module Aws::AppFabric
       :client_id,
       :client_secret,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Persona
-      ADMIN = 'admin'
-      ENDUSER = 'endUser'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about how ingested data is processed.</p>
@@ -1227,7 +1191,7 @@ module Aws::AppFabric
       :audit_log,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AuditLog < ProcessingConfiguration; end
       class Unknown < ProcessingConfiguration; end
@@ -1247,14 +1211,7 @@ module Aws::AppFabric
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResultStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Amazon S3 bucket.</p>
@@ -1268,12 +1225,7 @@ module Aws::AppFabric
       :bucket_name,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Schema
-      OCSF = 'ocsf'
-      RAW = 'raw'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds a service quota.</p>
@@ -1298,7 +1250,7 @@ module Aws::AppFabric
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_identifier
@@ -1313,12 +1265,12 @@ module Aws::AppFabric
       :ingestion_identifier,
       :app_bundle_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartIngestionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -1332,7 +1284,7 @@ module Aws::AppFabric
       :app_bundle_identifier,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_access_tasks_list
@@ -1341,7 +1293,7 @@ module Aws::AppFabric
     class StartUserAccessTasksResponse < Struct.new(
       :user_access_tasks_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_identifier
@@ -1356,12 +1308,12 @@ module Aws::AppFabric
       :ingestion_identifier,
       :app_bundle_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopIngestionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key or keys of the key-value pairs for the tag or tags assigned to a
@@ -1376,7 +1328,7 @@ module Aws::AppFabric
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1389,12 +1341,12 @@ module Aws::AppFabric
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an error returned from a user access task.</p>
@@ -1408,7 +1360,7 @@ module Aws::AppFabric
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an application tenant.</p>
@@ -1422,7 +1374,7 @@ module Aws::AppFabric
       :tenant_identifier,
       :tenant_display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request rate exceeds the limit.</p>
@@ -1443,7 +1395,7 @@ module Aws::AppFabric
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1457,12 +1409,12 @@ module Aws::AppFabric
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -1490,7 +1442,7 @@ module Aws::AppFabric
       :credential,
       :tenant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_authorization
@@ -1499,7 +1451,7 @@ module Aws::AppFabric
     class UpdateAppAuthorizationResponse < Struct.new(
       :app_authorization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_bundle_identifier
@@ -1523,7 +1475,7 @@ module Aws::AppFabric
       :ingestion_destination_identifier,
       :destination_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion_destination
@@ -1532,7 +1484,7 @@ module Aws::AppFabric
     class UpdateIngestionDestinationResponse < Struct.new(
       :ingestion_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a user's access to an application.</p>
@@ -1605,7 +1557,7 @@ module Aws::AppFabric
       :user_status,
       :task_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a user access task.</p>
@@ -1627,7 +1579,7 @@ module Aws::AppFabric
       :task_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has invalid or missing parameters.</p>
@@ -1644,7 +1596,7 @@ module Aws::AppFabric
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the Amazon Web Services service in
@@ -1659,14 +1611,7 @@ module Aws::AppFabric
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

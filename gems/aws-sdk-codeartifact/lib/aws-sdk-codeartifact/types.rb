@@ -14,17 +14,7 @@ module Aws::Codeartifact
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllowPublish
-      ALLOW = 'ALLOW'
-      BLOCK = 'BLOCK'
-    end
-
-    module AllowUpstream
-      ALLOW = 'ALLOW'
-      BLOCK = 'BLOCK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -50,7 +40,7 @@ module Aws::Codeartifact
       :size,
       :hashes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -127,7 +117,7 @@ module Aws::Codeartifact
       :repository,
       :external_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -138,7 +128,7 @@ module Aws::Codeartifact
     class AssociateExternalConnectionResult < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -189,7 +179,7 @@ module Aws::Codeartifact
       :package,
       :association_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -212,7 +202,7 @@ module Aws::Codeartifact
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -332,7 +322,7 @@ module Aws::Codeartifact
       :allow_overwrite,
       :include_from_upstream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_versions
@@ -382,7 +372,7 @@ module Aws::Codeartifact
       :successful_versions,
       :failed_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -412,7 +402,7 @@ module Aws::Codeartifact
       :encryption_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -423,7 +413,7 @@ module Aws::Codeartifact
     class CreateDomainResult < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -461,7 +451,7 @@ module Aws::Codeartifact
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_group
@@ -472,7 +462,7 @@ module Aws::Codeartifact
     class CreatePackageGroupResult < Struct.new(
       :package_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -510,7 +500,7 @@ module Aws::Codeartifact
       :upstreams,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -521,7 +511,7 @@ module Aws::Codeartifact
     class CreateRepositoryResult < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -546,7 +536,7 @@ module Aws::Codeartifact
       :domain_owner,
       :policy_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -557,7 +547,7 @@ module Aws::Codeartifact
     class DeleteDomainPermissionsPolicyResult < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -575,7 +565,7 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -586,7 +576,7 @@ module Aws::Codeartifact
     class DeleteDomainResult < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -608,7 +598,7 @@ module Aws::Codeartifact
       :domain_owner,
       :package_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_group
@@ -619,7 +609,7 @@ module Aws::Codeartifact
     class DeletePackageGroupResult < Struct.new(
       :package_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -686,7 +676,7 @@ module Aws::Codeartifact
       :namespace,
       :package,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deleted_package
@@ -697,7 +687,7 @@ module Aws::Codeartifact
     class DeletePackageResult < Struct.new(
       :deleted_package,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -784,7 +774,7 @@ module Aws::Codeartifact
       :versions,
       :expected_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_versions
@@ -835,7 +825,7 @@ module Aws::Codeartifact
       :successful_versions,
       :failed_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -866,7 +856,7 @@ module Aws::Codeartifact
       :repository,
       :policy_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -877,7 +867,7 @@ module Aws::Codeartifact
     class DeleteRepositoryPermissionsPolicyResult < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -899,7 +889,7 @@ module Aws::Codeartifact
       :domain_owner,
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -910,7 +900,7 @@ module Aws::Codeartifact
     class DeleteRepositoryResult < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -928,7 +918,7 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -940,7 +930,7 @@ module Aws::Codeartifact
     class DescribeDomainResult < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -962,7 +952,7 @@ module Aws::Codeartifact
       :domain_owner,
       :package_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_group
@@ -972,7 +962,7 @@ module Aws::Codeartifact
     class DescribePackageGroupResult < Struct.new(
       :package_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1039,7 +1029,7 @@ module Aws::Codeartifact
       :namespace,
       :package,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package
@@ -1049,7 +1039,7 @@ module Aws::Codeartifact
     class DescribePackageResult < Struct.new(
       :package,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1127,7 +1117,7 @@ module Aws::Codeartifact
       :package,
       :package_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_version
@@ -1139,7 +1129,7 @@ module Aws::Codeartifact
     class DescribePackageVersionResult < Struct.new(
       :package_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1163,7 +1153,7 @@ module Aws::Codeartifact
       :domain_owner,
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -1174,7 +1164,7 @@ module Aws::Codeartifact
     class DescribeRepositoryResult < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1199,7 +1189,7 @@ module Aws::Codeartifact
       :repository,
       :external_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -1210,7 +1200,7 @@ module Aws::Codeartifact
     class DisassociateExternalConnectionResult < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1304,7 +1294,7 @@ module Aws::Codeartifact
       :version_revisions,
       :expected_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_versions
@@ -1354,7 +1344,7 @@ module Aws::Codeartifact
       :successful_versions,
       :failed_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1409,7 +1399,7 @@ module Aws::Codeartifact
       :asset_size_bytes,
       :s3_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:repository_count] = 0 unless options.key?(:repository_count)
@@ -1435,12 +1425,7 @@ module Aws::Codeartifact
       :repository_name,
       :external_connection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatus
-      ACTIVE = 'Active'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about a domain, including its name, Amazon Resource Name (ARN), and status.
@@ -1485,16 +1470,7 @@ module Aws::Codeartifact
       :created_time,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointType
-      DUALSTACK = 'dualstack'
-      IPV4 = 'ipv4'
-    end
-
-    module ExternalConnectionStatus
-      AVAILABLE = 'Available'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1564,7 +1540,7 @@ module Aws::Codeartifact
       :namespace,
       :package,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_group
@@ -1578,7 +1554,7 @@ module Aws::Codeartifact
       :package_group,
       :association_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1603,7 +1579,7 @@ module Aws::Codeartifact
       :domain_owner,
       :duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @note This shape contains sensitive data and should be treated as such.
@@ -1621,7 +1597,7 @@ module Aws::Codeartifact
       :authorization_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1639,7 +1615,7 @@ module Aws::Codeartifact
       :domain,
       :domain_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1650,7 +1626,7 @@ module Aws::Codeartifact
     class GetDomainPermissionsPolicyResult < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1744,7 +1720,7 @@ module Aws::Codeartifact
       :asset,
       :package_version_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset
@@ -1771,7 +1747,7 @@ module Aws::Codeartifact
       :package_version,
       :package_version_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:asset] = Base64.strict_decode64('') unless options.key?(:asset)
@@ -1858,7 +1834,7 @@ module Aws::Codeartifact
       :package,
       :package_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format
@@ -1919,7 +1895,7 @@ module Aws::Codeartifact
       :version_revision,
       :readme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1954,7 +1930,7 @@ module Aws::Codeartifact
       :format,
       :endpoint_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_endpoint
@@ -1965,7 +1941,7 @@ module Aws::Codeartifact
     class GetRepositoryEndpointResult < Struct.new(
       :repository_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -1989,7 +1965,7 @@ module Aws::Codeartifact
       :domain_owner,
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2000,14 +1976,7 @@ module Aws::Codeartifact
     class GetRepositoryPermissionsPolicyResult < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HashAlgorithm
-      MD5 = 'MD5'
-      SHA1 = 'SHA-1'
-      SHA256 = 'SHA-256'
-      SHA512 = 'SHA-512'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The operation did not succeed because of an error that occurred inside CodeArtifact. </p>
@@ -2016,7 +1985,7 @@ module Aws::Codeartifact
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2036,7 +2005,7 @@ module Aws::Codeartifact
       :name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2074,7 +2043,7 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allowed_repositories
@@ -2089,7 +2058,7 @@ module Aws::Codeartifact
       :allowed_repositories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2132,7 +2101,7 @@ module Aws::Codeartifact
       :next_token,
       :preview,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute packages
@@ -2149,7 +2118,7 @@ module Aws::Codeartifact
       :packages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2166,7 +2135,7 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domains
@@ -2183,7 +2152,7 @@ module Aws::Codeartifact
       :domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2220,7 +2189,7 @@ module Aws::Codeartifact
       :next_token,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_groups
@@ -2237,7 +2206,7 @@ module Aws::Codeartifact
       :package_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2331,7 +2300,7 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format
@@ -2398,7 +2367,7 @@ module Aws::Codeartifact
       :next_token,
       :assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2477,7 +2446,7 @@ module Aws::Codeartifact
       :package_version,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format
@@ -2549,7 +2518,7 @@ module Aws::Codeartifact
       :next_token,
       :dependencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2654,7 +2623,7 @@ module Aws::Codeartifact
       :next_token,
       :origin_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_display_version
@@ -2730,7 +2699,7 @@ module Aws::Codeartifact
       :versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2816,7 +2785,7 @@ module Aws::Codeartifact
       :publish,
       :upstream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute packages
@@ -2834,7 +2803,7 @@ module Aws::Codeartifact
       :packages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2877,7 +2846,7 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repositories
@@ -2894,7 +2863,7 @@ module Aws::Codeartifact
       :repositories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_prefix
@@ -2916,7 +2885,7 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repositories
@@ -2934,7 +2903,7 @@ module Aws::Codeartifact
       :repositories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -2970,7 +2939,7 @@ module Aws::Codeartifact
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_groups
@@ -2987,7 +2956,7 @@ module Aws::Codeartifact
       :package_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2996,7 +2965,7 @@ module Aws::Codeartifact
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3005,7 +2974,7 @@ module Aws::Codeartifact
     class ListTagsForResourceResult < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3076,7 +3045,7 @@ module Aws::Codeartifact
       :dependency_type,
       :version_requirement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a package.</p>
@@ -3120,18 +3089,7 @@ module Aws::Codeartifact
       :name,
       :origin_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageFormat
-      NPM = 'npm'
-      PYPI = 'pypi'
-      MAVEN = 'maven'
-      NUGET = 'nuget'
-      GENERIC = 'generic'
-      RUBY = 'ruby'
-      SWIFT = 'swift'
-      CARGO = 'cargo'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3149,17 +3107,7 @@ module Aws::Codeartifact
       :repository_name,
       :origin_restriction_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageGroupAllowedRepositoryUpdateType
-      ADDED = 'ADDED'
-      REMOVED = 'REMOVED'
-    end
-
-    module PackageGroupAssociationType
-      STRONG = 'STRONG'
-      WEAK = 'WEAK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3218,7 +3166,7 @@ module Aws::Codeartifact
       :origin_configuration,
       :parent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The package group origin configuration that determines how package versions can enter repositories.</p>
@@ -3228,7 +3176,7 @@ module Aws::Codeartifact
     class PackageGroupOriginConfiguration < Struct.new(
       :restrictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configured restrictions of the origin controls of a package group.</p>
@@ -3256,20 +3204,7 @@ module Aws::Codeartifact
       :inherited_from,
       :repositories_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageGroupOriginRestrictionMode
-      ALLOW = 'ALLOW'
-      ALLOW_SPECIFIC_REPOSITORIES = 'ALLOW_SPECIFIC_REPOSITORIES'
-      BLOCK = 'BLOCK'
-      INHERIT = 'INHERIT'
-    end
-
-    module PackageGroupOriginRestrictionType
-      EXTERNAL_UPSTREAM = 'EXTERNAL_UPSTREAM'
-      INTERNAL_UPSTREAM = 'INTERNAL_UPSTREAM'
-      PUBLISH = 'PUBLISH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the identifiers of a package group.</p>
@@ -3288,7 +3223,7 @@ module Aws::Codeartifact
       :arn,
       :pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a package group.</p>
@@ -3345,7 +3280,7 @@ module Aws::Codeartifact
       :origin_configuration,
       :parent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the package origin configuration of a package.</p>
@@ -3356,7 +3291,7 @@ module Aws::Codeartifact
     class PackageOriginConfiguration < Struct.new(
       :restrictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the origin restrictions set on the package. 
@@ -3372,7 +3307,7 @@ module Aws::Codeartifact
       :publish,
       :upstream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3424,7 +3359,7 @@ module Aws::Codeartifact
       :package,
       :origin_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3533,7 +3468,7 @@ module Aws::Codeartifact
       :status,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>l
@@ -3583,16 +3518,7 @@ module Aws::Codeartifact
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageVersionErrorCode
-      ALREADY_EXISTS = 'ALREADY_EXISTS'
-      MISMATCHED_REVISION = 'MISMATCHED_REVISION'
-      MISMATCHED_STATUS = 'MISMATCHED_STATUS'
-      NOT_ALLOWED = 'NOT_ALLOWED'
-      NOT_FOUND = 'NOT_FOUND'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how a package version was added to a repository.</p>
@@ -3608,26 +3534,7 @@ module Aws::Codeartifact
       :domain_entry_point,
       :origin_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageVersionOriginType
-      INTERNAL = 'INTERNAL'
-      EXTERNAL = 'EXTERNAL'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module PackageVersionSortType
-      PUBLISHED_TIME = 'PUBLISHED_TIME'
-    end
-
-    module PackageVersionStatus
-      PUBLISHED = 'Published'
-      UNFINISHED = 'Unfinished'
-      UNLISTED = 'Unlisted'
-      ARCHIVED = 'Archived'
-      DISPOSED = 'Disposed'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3660,7 +3567,7 @@ module Aws::Codeartifact
       :status,
       :origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3721,7 +3628,7 @@ module Aws::Codeartifact
       :asset_sha256,
       :unfinished,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute format
@@ -3754,7 +3661,7 @@ module Aws::Codeartifact
       :status,
       :asset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3784,7 +3691,7 @@ module Aws::Codeartifact
       :policy_revision,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -3793,7 +3700,7 @@ module Aws::Codeartifact
     class PutDomainPermissionsPolicyResult < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3855,7 +3762,7 @@ module Aws::Codeartifact
       :package,
       :restrictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origin_configuration
@@ -3867,7 +3774,7 @@ module Aws::Codeartifact
     class PutPackageOriginConfigurationResult < Struct.new(
       :origin_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -3902,7 +3809,7 @@ module Aws::Codeartifact
       :policy_revision,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -3911,7 +3818,7 @@ module Aws::Codeartifact
     class PutRepositoryPermissionsPolicyResult < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of a repository stored in CodeArtifact. A CodeArtifact repository contains a set of
@@ -3971,7 +3878,7 @@ module Aws::Codeartifact
       :external_connections,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4037,7 +3944,7 @@ module Aws::Codeartifact
       :package_format,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Details about a repository, including its Amazon Resource Name (ARN), description, and
@@ -4084,7 +3991,7 @@ module Aws::Codeartifact
       :description,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4107,7 +4014,7 @@ module Aws::Codeartifact
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4133,15 +4040,7 @@ module Aws::Codeartifact
       :revision,
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      DOMAIN = 'domain'
-      REPOSITORY = 'repository'
-      PACKAGE = 'package'
-      PACKAGE_VERSION = 'package-version'
-      ASSET = 'asset'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4164,7 +4063,7 @@ module Aws::Codeartifact
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4184,7 +4083,7 @@ module Aws::Codeartifact
       :revision,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag is a key-value pair that can be used to manage, search for, or filter resources in CodeArtifact.</p>
@@ -4198,7 +4097,7 @@ module Aws::Codeartifact
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4211,12 +4110,12 @@ module Aws::Codeartifact
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4233,7 +4132,7 @@ module Aws::Codeartifact
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4246,12 +4145,12 @@ module Aws::Codeartifact
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -4289,7 +4188,7 @@ module Aws::Codeartifact
       :add_allowed_repositories,
       :remove_allowed_repositories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_group
@@ -4304,7 +4203,7 @@ module Aws::Codeartifact
       :package_group,
       :allowed_repository_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -4340,7 +4239,7 @@ module Aws::Codeartifact
       :contact_info,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_group
@@ -4351,7 +4250,7 @@ module Aws::Codeartifact
     class UpdatePackageGroupResult < Struct.new(
       :package_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -4438,7 +4337,7 @@ module Aws::Codeartifact
       :expected_status,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_versions
@@ -4455,7 +4354,7 @@ module Aws::Codeartifact
       :successful_versions,
       :failed_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -4491,7 +4390,7 @@ module Aws::Codeartifact
       :description,
       :upstreams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository
@@ -4502,7 +4401,7 @@ module Aws::Codeartifact
     class UpdateRepositoryResult < Struct.new(
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4516,7 +4415,7 @@ module Aws::Codeartifact
     class UpstreamRepository < Struct.new(
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4528,7 +4427,7 @@ module Aws::Codeartifact
     class UpstreamRepositoryInfo < Struct.new(
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4545,15 +4444,7 @@ module Aws::Codeartifact
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      ENCRYPTION_KEY_ERROR = 'ENCRYPTION_KEY_ERROR'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
   end

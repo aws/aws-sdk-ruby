@@ -12,20 +12,7 @@ module Aws::SSM
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessRequestStatus
-      APPROVED = 'Approved'
-      REJECTED = 'Rejected'
-      REVOKED = 'Revoked'
-      EXPIRED = 'Expired'
-      PENDING = 'Pending'
-    end
-
-    module AccessType
-      STANDARD = 'Standard'
-      JUSTINTIME = 'JustInTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information includes the Amazon Web Services account ID where the current document is shared and the
@@ -40,7 +27,7 @@ module Aws::SSM
       :account_id,
       :shared_document_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An activation registers one or more on-premises servers or virtual machines (VMs) with Amazon Web Services
@@ -88,7 +75,7 @@ module Aws::SSM
       :created_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expired] = false unless options.key?(:expired)
@@ -150,12 +137,12 @@ module Aws::SSM
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddTagsToResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CloudWatch alarm you apply to an automation or command.</p>
@@ -165,7 +152,7 @@ module Aws::SSM
     class Alarm < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the CloudWatch alarm you want to apply to an automation or
@@ -183,7 +170,7 @@ module Aws::SSM
       :ignore_poll_alarm_failure,
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ignore_poll_alarm_failure] = false unless options.key?(:ignore_poll_alarm_failure)
@@ -202,7 +189,7 @@ module Aws::SSM
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error returned if an attempt is made to register a patch group with a patch baseline that is
@@ -212,7 +199,7 @@ module Aws::SSM
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item_id
@@ -240,7 +227,7 @@ module Aws::SSM
       :resource_type,
       :resource_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -249,13 +236,13 @@ module Aws::SSM
     class AssociateOpsItemRelatedItemResponse < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You must disassociate a document from all managed nodes before you can delete it.</p>
     class AssociatedInstances < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association of a Amazon Web Services Systems Manager document (SSM document) and a managed node.</p>
@@ -329,21 +316,13 @@ module Aws::SSM
       :duration,
       :target_maps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified association already exists.</p>
     class AssociationAlreadyExists < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationComplianceSeverity
-      Critical = 'CRITICAL'
-      High = 'HIGH'
-      Medium = 'MEDIUM'
-      Low = 'LOW'
-      Unspecified = 'UNSPECIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters for a document.</p>
@@ -502,7 +481,7 @@ module Aws::SSM
       :alarm_configuration,
       :triggered_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:apply_only_at_cron_interval] = false unless options.key?(:apply_only_at_cron_interval)
@@ -516,7 +495,7 @@ module Aws::SSM
     class AssociationDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes information about the specified association.</p>
@@ -563,7 +542,7 @@ module Aws::SSM
       :alarm_configuration,
       :triggered_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified execution ID doesn't exist. Verify the ID number and try again.</p>
@@ -572,7 +551,7 @@ module Aws::SSM
     class AssociationExecutionDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters used in the request.</p>
@@ -590,13 +569,7 @@ module Aws::SSM
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationExecutionFilterKey
-      ExecutionId = 'ExecutionId'
-      Status = 'Status'
-      CreatedTime = 'CreatedTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes information about the specified association execution.</p>
@@ -638,7 +611,7 @@ module Aws::SSM
       :last_execution_date,
       :output_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters for the association execution.</p>
@@ -652,13 +625,7 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationExecutionTargetsFilterKey
-      Status = 'Status'
-      ResourceId = 'ResourceId'
-      ResourceType = 'ResourceType'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter.</p>
@@ -676,30 +643,13 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationFilterKey
-      InstanceId = 'InstanceId'
-      Name = 'Name'
-      AssociationId = 'AssociationId'
-      Status = 'AssociationStatusName'
-      LastExecutedBefore = 'LastExecutedBefore'
-      LastExecutedAfter = 'LastExecutedAfter'
-      AssociationName = 'AssociationName'
-      ResourceGroupName = 'ResourceGroupName'
-    end
-
-    module AssociationFilterOperatorType
-      Equal = 'EQUAL'
-      LessThan = 'LESS_THAN'
-      GreaterThan = 'GREATER_THAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can have at most 2,000 active associations.</p>
     class AssociationLimitExceeded < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the association.</p>
@@ -719,7 +669,7 @@ module Aws::SSM
       :detailed_status,
       :association_status_aggregated_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association status.</p>
@@ -741,18 +691,7 @@ module Aws::SSM
       :message,
       :additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationStatusName
-      Pending = 'Pending'
-      Success = 'Success'
-      Failed = 'Failed'
-    end
-
-    module AssociationSyncCompliance
-      Auto = 'AUTO'
-      Manual = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the association version.</p>
@@ -876,7 +815,7 @@ module Aws::SSM
       :duration,
       :target_maps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:apply_only_at_cron_interval] = false unless options.key?(:apply_only_at_cron_interval)
@@ -891,7 +830,7 @@ module Aws::SSM
     class AssociationVersionLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that includes attributes that describe a document attachment.</p>
@@ -917,16 +856,12 @@ module Aws::SSM
       :hash_type,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
         super
       end
-    end
-
-    module AttachmentHashType
-      SHA256 = 'Sha256'
     end
 
     # <p>An attribute of an attachment, such as the attachment name.</p>
@@ -936,7 +871,7 @@ module Aws::SSM
     class AttachmentInformation < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifying information about a document attachment, including the file name and a key-value
@@ -989,13 +924,7 @@ module Aws::SSM
       :values,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachmentsSourceKey
-      SourceUrl = 'SourceUrl'
-      S3FileUrl = 'S3FileUrl'
-      AttachmentReference = 'AttachmentReference'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the Change Manager change template used in the change request was rejected or is
@@ -1005,7 +934,7 @@ module Aws::SSM
     class AutomationDefinitionNotApprovedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Automation runbook with the specified name couldn't be found.</p>
@@ -1014,7 +943,7 @@ module Aws::SSM
     class AutomationDefinitionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Automation runbook with the specified name and version couldn't be found.</p>
@@ -1023,7 +952,7 @@ module Aws::SSM
     class AutomationDefinitionVersionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the current state of an individual Automation execution.</p>
@@ -1181,7 +1110,7 @@ module Aws::SSM
       :change_request_name,
       :variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:step_executions_truncated] = false unless options.key?(:step_executions_truncated)
@@ -1201,22 +1130,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomationExecutionFilterKey
-      DOCUMENT_NAME_PREFIX = 'DocumentNamePrefix'
-      EXECUTION_STATUS = 'ExecutionStatus'
-      EXECUTION_ID = 'ExecutionId'
-      PARENT_EXECUTION_ID = 'ParentExecutionId'
-      CURRENT_ACTION = 'CurrentAction'
-      START_TIME_BEFORE = 'StartTimeBefore'
-      START_TIME_AFTER = 'StartTimeAfter'
-      AUTOMATION_TYPE = 'AutomationType'
-      TAG_KEY = 'TagKey'
-      TARGET_RESOURCE_GROUP = 'TargetResourceGroup'
-      AUTOMATION_SUBTYPE = 'AutomationSubtype'
-      OPS_ITEM_ID = 'OpsItemId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the optional inputs that can be specified for an automation execution
@@ -1253,7 +1167,7 @@ module Aws::SSM
       :target_locations,
       :target_locations_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of simultaneously running Automation executions exceeded the allowable
@@ -1263,7 +1177,7 @@ module Aws::SSM
     class AutomationExecutionLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a specific Automation execution.</p>
@@ -1405,7 +1319,7 @@ module Aws::SSM
       :association_id,
       :change_request_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no automation execution information for the requested automation execution
@@ -1415,7 +1329,7 @@ module Aws::SSM
     class AutomationExecutionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the results of the execution preview.</p>
@@ -1458,34 +1372,12 @@ module Aws::SSM
       :target_previews,
       :total_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_accounts] = 0 unless options.key?(:total_accounts)
         super
       end
-    end
-
-    module AutomationExecutionStatus
-      PENDING = 'Pending'
-      INPROGRESS = 'InProgress'
-      WAITING = 'Waiting'
-      SUCCESS = 'Success'
-      TIMEDOUT = 'TimedOut'
-      CANCELLING = 'Cancelling'
-      CANCELLED = 'Cancelled'
-      FAILED = 'Failed'
-      PENDING_APPROVAL = 'PendingApproval'
-      APPROVED = 'Approved'
-      REJECTED = 'Rejected'
-      SCHEDULED = 'Scheduled'
-      RUNBOOK_INPROGRESS = 'RunbookInProgress'
-      PENDING_CHANGE_CALENDAR_OVERRIDE = 'PendingChangeCalendarOverride'
-      CHANGE_CALENDAR_OVERRIDE_APPROVED = 'ChangeCalendarOverrideApproved'
-      CHANGE_CALENDAR_OVERRIDE_REJECTED = 'ChangeCalendarOverrideRejected'
-      COMPLETED_WITH_SUCCESS = 'CompletedWithSuccess'
-      COMPLETED_WITH_FAILURE = 'CompletedWithFailure'
-      EXITED = 'Exited'
     end
 
     # <p>The specified step name and execution ID don't exist. Verify the information and try
@@ -1495,17 +1387,7 @@ module Aws::SSM
     class AutomationStepNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomationSubtype
-      ChangeRequest = 'ChangeRequest'
-      AccessRequest = 'AccessRequest'
-    end
-
-    module AutomationType
-      CrossAccount = 'CrossAccount'
-      Local = 'Local'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the basic information about a patch baseline override.</p>
@@ -1567,17 +1449,12 @@ module Aws::SSM
       :sources,
       :available_security_updates_compliance_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:approved_patches_enable_non_security] = false unless options.key?(:approved_patches_enable_non_security)
         super
       end
-    end
-
-    module CalendarState
-      OPEN = 'OPEN'
-      CLOSED = 'CLOSED'
     end
 
     # <p></p>
@@ -1592,14 +1469,14 @@ module Aws::SSM
       :command_id,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Whether or not the command was successfully canceled. There is no guarantee that a request
     #    can be canceled.</p>
     class CancelCommandResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -1608,7 +1485,7 @@ module Aws::SSM
     class CancelMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -1617,7 +1494,7 @@ module Aws::SSM
     class CancelMaintenanceWindowExecutionResult < Struct.new(
       :window_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for sending command output to Amazon CloudWatch Logs.</p>
@@ -1637,7 +1514,7 @@ module Aws::SSM
       :cloud_watch_log_group_name,
       :cloud_watch_output_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cloud_watch_output_enabled] = false unless options.key?(:cloud_watch_output_enabled)
@@ -1822,7 +1699,7 @@ module Aws::SSM
       :alarm_configuration,
       :triggered_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:target_count] = 0 unless options.key?(:target_count)
@@ -2024,15 +1901,7 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommandFilterKey
-      INVOKED_AFTER = 'InvokedAfter'
-      INVOKED_BEFORE = 'InvokedBefore'
-      STATUS = 'Status'
-      EXECUTION_STAGE = 'ExecutionStage'
-      DOCUMENT_NAME = 'DocumentName'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invocation is a copy of a command sent to a specific managed node. A command can apply to
@@ -2170,18 +2039,7 @@ module Aws::SSM
       :notification_config,
       :cloud_watch_output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommandInvocationStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      DELAYED = 'Delayed'
-      SUCCESS = 'Success'
-      CANCELLED = 'Cancelled'
-      TIMED_OUT = 'TimedOut'
-      FAILED = 'Failed'
-      CANCELLING = 'Cancelling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes plugin details.</p>
@@ -2316,31 +2174,12 @@ module Aws::SSM
       :output_s3_bucket_name,
       :output_s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:response_code] = 0 unless options.key?(:response_code)
         super
       end
-    end
-
-    module CommandPluginStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      SUCCESS = 'Success'
-      TIMED_OUT = 'TimedOut'
-      CANCELLED = 'Cancelled'
-      FAILED = 'Failed'
-    end
-
-    module CommandStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      SUCCESS = 'Success'
-      CANCELLED = 'Cancelled'
-      FAILED = 'Failed'
-      TIMED_OUT = 'TimedOut'
-      CANCELLING = 'Cancelling'
     end
 
     # <p>A summary of the call execution that includes an execution ID, the type of execution (for
@@ -2370,7 +2209,7 @@ module Aws::SSM
       :execution_id,
       :execution_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the compliance as defined by the resource type. For example, for a patch
@@ -2430,7 +2269,7 @@ module Aws::SSM
       :execution_summary,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a compliance item.</p>
@@ -2460,29 +2299,7 @@ module Aws::SSM
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComplianceQueryOperatorType
-      Equal = 'EQUAL'
-      NotEqual = 'NOT_EQUAL'
-      BeginWith = 'BEGIN_WITH'
-      LessThan = 'LESS_THAN'
-      GreaterThan = 'GREATER_THAN'
-    end
-
-    module ComplianceSeverity
-      Critical = 'CRITICAL'
-      High = 'HIGH'
-      Medium = 'MEDIUM'
-      Low = 'LOW'
-      Informational = 'INFORMATIONAL'
-      Unspecified = 'UNSPECIFIED'
-    end
-
-    module ComplianceStatus
-      Compliant = 'COMPLIANT'
-      NonCompliant = 'NON_COMPLIANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more filters. Use a filter to return a more specific list of results.</p>
@@ -2501,7 +2318,7 @@ module Aws::SSM
       :values,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of compliance information by compliance type.</p>
@@ -2520,7 +2337,7 @@ module Aws::SSM
       :compliant_summary,
       :non_compliant_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified too many custom compliance types. You can specify a maximum of 10 different
@@ -2530,12 +2347,7 @@ module Aws::SSM
     class ComplianceTypeCountLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComplianceUploadType
-      Complete = 'COMPLETE'
-      Partial = 'PARTIAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of resources that are compliant. The summary is organized according to the
@@ -2550,17 +2362,12 @@ module Aws::SSM
       :compliant_count,
       :severity_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compliant_count] = 0 unless options.key?(:compliant_count)
         super
       end
-    end
-
-    module ConnectionStatus
-      CONNECTED = 'connected'
-      NOT_CONNECTED = 'notconnected'
     end
 
     # @!attribute description
@@ -2635,7 +2442,7 @@ module Aws::SSM
       :tags,
       :registration_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activation_id
@@ -2650,7 +2457,7 @@ module Aws::SSM
       :activation_id,
       :activation_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -2659,7 +2466,7 @@ module Aws::SSM
     class CreateAssociationBatchRequest < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association of a Amazon Web Services Systems Manager document (SSM document) and a managed node.</p>
@@ -2826,7 +2633,7 @@ module Aws::SSM
       :target_maps,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:apply_only_at_cron_interval] = false unless options.key?(:apply_only_at_cron_interval)
@@ -2844,7 +2651,7 @@ module Aws::SSM
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3040,7 +2847,7 @@ module Aws::SSM
       :tags,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_description
@@ -3049,7 +2856,7 @@ module Aws::SSM
     class CreateAssociationResult < Struct.new(
       :association_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -3193,7 +3000,7 @@ module Aws::SSM
       :target_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_description
@@ -3202,7 +3009,7 @@ module Aws::SSM
     class CreateDocumentResult < Struct.new(
       :document_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3304,7 +3111,7 @@ module Aws::SSM
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -3313,7 +3120,7 @@ module Aws::SSM
     class CreateMaintenanceWindowResult < Struct.new(
       :window_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -3449,7 +3256,7 @@ module Aws::SSM
       :planned_end_time,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item_id
@@ -3462,7 +3269,7 @@ module Aws::SSM
       :ops_item_id,
       :ops_item_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3495,7 +3302,7 @@ module Aws::SSM
       :metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_metadata_arn
@@ -3504,7 +3311,7 @@ module Aws::SSM
     class CreateOpsMetadataResult < Struct.new(
       :ops_metadata_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operating_system
@@ -3634,7 +3441,7 @@ module Aws::SSM
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -3643,7 +3450,7 @@ module Aws::SSM
     class CreatePatchBaselineResult < Struct.new(
       :baseline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_name
@@ -3671,12 +3478,12 @@ module Aws::SSM
       :sync_type,
       :sync_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateResourceDataSyncResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The temporary security credentials, which include an access key ID, a secret access key, and
@@ -3699,7 +3506,7 @@ module Aws::SSM
       :session_token,
       :expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the limit for custom schemas. Delete one or more custom schemas and try
@@ -3709,7 +3516,7 @@ module Aws::SSM
     class CustomSchemaCountLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activation_id
@@ -3718,12 +3525,12 @@ module Aws::SSM
     class DeleteActivationRequest < Struct.new(
       :activation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteActivationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3751,12 +3558,12 @@ module Aws::SSM
       :instance_id,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAssociationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3782,12 +3589,12 @@ module Aws::SSM
       :version_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDocumentResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -3819,7 +3626,7 @@ module Aws::SSM
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_id
@@ -3838,7 +3645,7 @@ module Aws::SSM
       :type_name,
       :deletion_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -3847,7 +3654,7 @@ module Aws::SSM
     class DeleteMaintenanceWindowRequest < Struct.new(
       :window_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -3856,7 +3663,7 @@ module Aws::SSM
     class DeleteMaintenanceWindowResult < Struct.new(
       :window_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item_id
@@ -3865,12 +3672,12 @@ module Aws::SSM
     class DeleteOpsItemRequest < Struct.new(
       :ops_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOpsItemResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_metadata_arn
@@ -3879,12 +3686,12 @@ module Aws::SSM
     class DeleteOpsMetadataRequest < Struct.new(
       :ops_metadata_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteOpsMetadataResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3897,12 +3704,12 @@ module Aws::SSM
     class DeleteParameterRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteParameterResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -3916,7 +3723,7 @@ module Aws::SSM
     class DeleteParametersRequest < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deleted_parameters
@@ -3929,7 +3736,7 @@ module Aws::SSM
       :deleted_parameters,
       :invalid_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -3938,7 +3745,7 @@ module Aws::SSM
     class DeletePatchBaselineRequest < Struct.new(
       :baseline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -3947,7 +3754,7 @@ module Aws::SSM
     class DeletePatchBaselineResult < Struct.new(
       :baseline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_name
@@ -3960,12 +3767,12 @@ module Aws::SSM
       :sync_name,
       :sync_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourceDataSyncResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3983,12 +3790,12 @@ module Aws::SSM
       :policy_id,
       :policy_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3998,12 +3805,12 @@ module Aws::SSM
     class DeregisterManagedInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterManagedInstanceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -4016,7 +3823,7 @@ module Aws::SSM
       :baseline_id,
       :patch_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -4029,7 +3836,7 @@ module Aws::SSM
       :baseline_id,
       :patch_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -4048,7 +3855,7 @@ module Aws::SSM
       :window_target_id,
       :safe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -4061,7 +3868,7 @@ module Aws::SSM
       :window_id,
       :window_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -4074,7 +3881,7 @@ module Aws::SSM
       :window_id,
       :window_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -4087,7 +3894,7 @@ module Aws::SSM
       :window_id,
       :window_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter for the DescribeActivation API.</p>
@@ -4101,13 +3908,7 @@ module Aws::SSM
       :filter_key,
       :filter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribeActivationsFilterKeys
-      ACTIVATION_IDS = 'ActivationIds'
-      DEFAULT_INSTANCE_NAME = 'DefaultInstanceName'
-      IAM_ROLE = 'IamRole'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4125,7 +3926,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute activation_list
@@ -4139,7 +3940,7 @@ module Aws::SSM
       :activation_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -4168,7 +3969,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_execution_targets
@@ -4182,7 +3983,7 @@ module Aws::SSM
       :association_execution_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -4207,7 +4008,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_executions
@@ -4221,7 +4022,7 @@ module Aws::SSM
       :association_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4245,7 +4046,7 @@ module Aws::SSM
       :association_id,
       :association_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_description
@@ -4254,7 +4055,7 @@ module Aws::SSM
     class DescribeAssociationResult < Struct.new(
       :association_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4273,7 +4074,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_metadata_list
@@ -4288,7 +4089,7 @@ module Aws::SSM
       :automation_execution_metadata_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_id
@@ -4316,7 +4117,7 @@ module Aws::SSM
       :max_results,
       :reverse_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_executions
@@ -4330,7 +4131,7 @@ module Aws::SSM
       :step_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -4529,7 +4330,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute patches
@@ -4543,7 +4344,7 @@ module Aws::SSM
       :patches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4567,7 +4368,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -4587,7 +4388,7 @@ module Aws::SSM
       :account_sharing_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4611,7 +4412,7 @@ module Aws::SSM
       :document_version,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -4620,7 +4421,7 @@ module Aws::SSM
     class DescribeDocumentResult < Struct.new(
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4639,7 +4440,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -4653,7 +4454,7 @@ module Aws::SSM
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -4671,7 +4472,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effective_patches
@@ -4685,7 +4486,7 @@ module Aws::SSM
       :effective_patches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4704,7 +4505,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_association_status_infos
@@ -4718,7 +4519,7 @@ module Aws::SSM
       :instance_association_status_infos,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_information_filter_list
@@ -4751,7 +4552,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_information_list
@@ -4765,7 +4566,7 @@ module Aws::SSM
       :instance_information_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute patch_group
@@ -4799,7 +4600,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_patch_states
@@ -4813,7 +4614,7 @@ module Aws::SSM
       :instance_patch_states,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -4831,7 +4632,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_patch_states
@@ -4845,7 +4646,7 @@ module Aws::SSM
       :instance_patch_states,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4909,7 +4710,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute patches
@@ -4946,7 +4747,7 @@ module Aws::SSM
       :patches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_property_filter_list
@@ -4968,7 +4769,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_properties
@@ -4982,7 +4783,7 @@ module Aws::SSM
       :instance_properties,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_id
@@ -5001,7 +4802,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inventory_deletions
@@ -5015,7 +4816,7 @@ module Aws::SSM
       :inventory_deletions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -5045,7 +4846,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_task_invocation_identities
@@ -5059,7 +4860,7 @@ module Aws::SSM
       :window_execution_task_invocation_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -5085,7 +4886,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_task_identities
@@ -5099,7 +4900,7 @@ module Aws::SSM
       :window_execution_task_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -5133,7 +4934,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_executions
@@ -5147,7 +4948,7 @@ module Aws::SSM
       :window_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -5180,7 +4981,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_window_executions
@@ -5194,7 +4995,7 @@ module Aws::SSM
       :scheduled_window_executions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -5219,7 +5020,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -5233,7 +5034,7 @@ module Aws::SSM
       :targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -5258,7 +5059,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -5272,7 +5073,7 @@ module Aws::SSM
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -5296,7 +5097,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_identities
@@ -5310,7 +5111,7 @@ module Aws::SSM
       :window_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5331,7 +5132,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_identities
@@ -5345,7 +5146,7 @@ module Aws::SSM
       :window_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item_filters
@@ -5426,7 +5227,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5440,7 +5241,7 @@ module Aws::SSM
       :next_token,
       :ops_item_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5477,7 +5278,7 @@ module Aws::SSM
       :next_token,
       :shared,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -5490,7 +5291,7 @@ module Aws::SSM
       :parameters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -5538,7 +5339,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_identities
@@ -5552,7 +5353,7 @@ module Aws::SSM
       :baseline_identities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute patch_group
@@ -5561,7 +5362,7 @@ module Aws::SSM
     class DescribePatchGroupStateRequest < Struct.new(
       :patch_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -5642,22 +5443,22 @@ module Aws::SSM
       :instances_with_other_non_compliant_patches,
       :instances_with_available_security_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:instances] = 0 unless options.key?(:instances)
         options[:instances_with_installed_patches] = 0 unless options.key?(:instances_with_installed_patches)
         options[:instances_with_installed_other_patches] = 0 unless options.key?(:instances_with_installed_other_patches)
-        options[:instances_with_installed_pending_reboot_patches] =  unless options.key?(:instances_with_installed_pending_reboot_patches)
-        options[:instances_with_installed_rejected_patches] =  unless options.key?(:instances_with_installed_rejected_patches)
+        options[:instances_with_installed_pending_reboot_patches] = nil unless options.key?(:instances_with_installed_pending_reboot_patches)
+        options[:instances_with_installed_rejected_patches] = nil unless options.key?(:instances_with_installed_rejected_patches)
         options[:instances_with_missing_patches] = 0 unless options.key?(:instances_with_missing_patches)
         options[:instances_with_failed_patches] = 0 unless options.key?(:instances_with_failed_patches)
         options[:instances_with_not_applicable_patches] = 0 unless options.key?(:instances_with_not_applicable_patches)
-        options[:instances_with_unreported_not_applicable_patches] =  unless options.key?(:instances_with_unreported_not_applicable_patches)
-        options[:instances_with_critical_non_compliant_patches] =  unless options.key?(:instances_with_critical_non_compliant_patches)
-        options[:instances_with_security_non_compliant_patches] =  unless options.key?(:instances_with_security_non_compliant_patches)
-        options[:instances_with_other_non_compliant_patches] =  unless options.key?(:instances_with_other_non_compliant_patches)
-        options[:instances_with_available_security_updates] =  unless options.key?(:instances_with_available_security_updates)
+        options[:instances_with_unreported_not_applicable_patches] = nil unless options.key?(:instances_with_unreported_not_applicable_patches)
+        options[:instances_with_critical_non_compliant_patches] = nil unless options.key?(:instances_with_critical_non_compliant_patches)
+        options[:instances_with_security_non_compliant_patches] = nil unless options.key?(:instances_with_security_non_compliant_patches)
+        options[:instances_with_other_non_compliant_patches] = nil unless options.key?(:instances_with_other_non_compliant_patches)
+        options[:instances_with_available_security_updates] = nil unless options.key?(:instances_with_available_security_updates)
         super
       end
     end
@@ -5697,7 +5498,7 @@ module Aws::SSM
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mappings
@@ -5723,7 +5524,7 @@ module Aws::SSM
       :mappings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operating_system
@@ -5751,7 +5552,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute properties
@@ -5764,7 +5565,7 @@ module Aws::SSM
       :properties,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -5787,7 +5588,7 @@ module Aws::SSM
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sessions
@@ -5801,7 +5602,7 @@ module Aws::SSM
       :sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item_id
@@ -5816,12 +5617,12 @@ module Aws::SSM
       :ops_item_id,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateOpsItemRelatedItemResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified document already exists.</p>
@@ -5830,7 +5631,7 @@ module Aws::SSM
     class DocumentAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A default version of a document.</p>
@@ -5848,7 +5649,7 @@ module Aws::SSM
       :default_version,
       :default_version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Web Services Systems Manager document (SSM document). </p>
@@ -5988,7 +5789,7 @@ module Aws::SSM
       :category,
       :category_enum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is deprecated. Instead, use <a>DocumentKeyValuesFilter</a>.</p>
@@ -6002,25 +5803,7 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentFilterKey
-      Name = 'Name'
-      Owner = 'Owner'
-      PlatformTypes = 'PlatformTypes'
-      DocumentType = 'DocumentType'
-    end
-
-    module DocumentFormat
-      YAML = 'YAML'
-      JSON = 'JSON'
-      TEXT = 'TEXT'
-    end
-
-    module DocumentHashType
-      SHA256 = 'Sha256'
-      SHA1 = 'Sha1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the name of a SSM document.</p>
@@ -6093,7 +5876,7 @@ module Aws::SSM
       :review_status,
       :author,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more filters. Use a filter to return a more specific list of documents.</p>
@@ -6225,7 +6008,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can have at most 500 active SSM documents.</p>
@@ -6234,11 +6017,7 @@ module Aws::SSM
     class DocumentLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentMetadataEnum
-      DocumentReviews = 'DocumentReviews'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the response to a document review request.</p>
@@ -6248,7 +6027,7 @@ module Aws::SSM
     class DocumentMetadataResponseInfo < Struct.new(
       :reviewer_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters specified in a Systems Manager document that run on the server when the command is run.
@@ -6273,12 +6052,7 @@ module Aws::SSM
       :description,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentParameterType
-      String = 'String'
-      StringList = 'StringList'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document can't be shared with more Amazon Web Services accounts. You can specify a maximum of 20
@@ -6292,11 +6066,7 @@ module Aws::SSM
     class DocumentPermissionLimit < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentPermissionType
-      SHARE = 'Share'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An SSM document required by the current document.</p>
@@ -6320,14 +6090,7 @@ module Aws::SSM
       :require_type,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentReviewAction
-      SendForReview = 'SendForReview'
-      UpdateReview = 'UpdateReview'
-      Approve = 'Approve'
-      Reject = 'Reject'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about comments added to a document review request.</p>
@@ -6343,11 +6106,7 @@ module Aws::SSM
       :type,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentReviewCommentType
-      Comment = 'Comment'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reviewer's response to a document review request.</p>
@@ -6378,7 +6137,7 @@ module Aws::SSM
       :comment,
       :reviewer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a document approval review.</p>
@@ -6392,36 +6151,7 @@ module Aws::SSM
       :action,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The status of a document.</p>
-    module DocumentStatus
-      Creating = 'Creating'
-      Active = 'Active'
-      Updating = 'Updating'
-      Deleting = 'Deleting'
-      Failed = 'Failed'
-    end
-
-    module DocumentType
-      Command = 'Command'
-      Policy = 'Policy'
-      Automation = 'Automation'
-      Session = 'Session'
-      Package = 'Package'
-      ApplicationConfiguration = 'ApplicationConfiguration'
-      ApplicationConfigurationSchema = 'ApplicationConfigurationSchema'
-      DeploymentStrategy = 'DeploymentStrategy'
-      ChangeCalendar = 'ChangeCalendar'
-      ChangeTemplate = 'Automation.ChangeTemplate'
-      ProblemAnalysis = 'ProblemAnalysis'
-      ProblemAnalysisTemplate = 'ProblemAnalysisTemplate'
-      CloudFormation = 'CloudFormation'
-      ConformancePackTemplate = 'ConformancePackTemplate'
-      QuickSetup = 'QuickSetup'
-      ManualApprovalPolicy = 'ManualApprovalPolicy'
-      AutoApprovalPolicy = 'AutoApprovalPolicy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Version information about the document.</p>
@@ -6472,7 +6202,7 @@ module Aws::SSM
       :status_information,
       :review_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_version] = false unless options.key?(:is_default_version)
@@ -6487,7 +6217,7 @@ module Aws::SSM
     class DocumentVersionLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error returned when the ID specified for a resource, such as a maintenance window or patch
@@ -6499,7 +6229,7 @@ module Aws::SSM
     class DoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content of the association document matches another document. Change the content of the
@@ -6509,7 +6239,7 @@ module Aws::SSM
     class DuplicateDocumentContent < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version name has already been used in this document. Specify a different version name,
@@ -6519,13 +6249,13 @@ module Aws::SSM
     class DuplicateDocumentVersionName < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't specify a managed node ID in more than one association.</p>
     class DuplicateInstanceId < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>EffectivePatch</code> structure defines metadata about a patch along with the
@@ -6546,7 +6276,7 @@ module Aws::SSM
       :patch,
       :patch_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the inputs for an execution preview.</p>
@@ -6558,15 +6288,10 @@ module Aws::SSM
       :automation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Automation < ExecutionInputs; end
       class Unknown < ExecutionInputs; end
-    end
-
-    module ExecutionMode
-      Auto = 'Auto'
-      Interactive = 'Interactive'
     end
 
     # <p>Information about the changes that would be made if an execution were run.</p>
@@ -6577,22 +6302,10 @@ module Aws::SSM
       :automation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Automation < ExecutionPreview; end
       class Unknown < ExecutionPreview; end
-    end
-
-    module ExecutionPreviewStatus
-      PENDING = 'Pending'
-      IN_PROGRESS = 'InProgress'
-      SUCCESS = 'Success'
-      FAILED = 'Failed'
-    end
-
-    module ExternalAlarmState
-      UNKNOWN = 'UNKNOWN'
-      ALARM = 'ALARM'
     end
 
     # <p>Describes a failed association.</p>
@@ -6610,7 +6323,7 @@ module Aws::SSM
       :message,
       :fault,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Automation failure.</p>
@@ -6630,13 +6343,7 @@ module Aws::SSM
       :failure_type,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Fault
-      Client = 'Client'
-      Server = 'Server'
-      Unknown = 'Unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to register a <code>LAMBDA</code> or <code>STEP_FUNCTIONS</code> task in a
@@ -6646,7 +6353,7 @@ module Aws::SSM
     class FeatureNotAvailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_request_id
@@ -6655,7 +6362,7 @@ module Aws::SSM
     class GetAccessTokenRequest < Struct.new(
       :access_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute credentials
@@ -6669,7 +6376,7 @@ module Aws::SSM
       :credentials,
       :access_request_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_id
@@ -6680,7 +6387,7 @@ module Aws::SSM
     class GetAutomationExecutionRequest < Struct.new(
       :automation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution
@@ -6689,7 +6396,7 @@ module Aws::SSM
     class GetAutomationExecutionResult < Struct.new(
       :automation_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calendar_names
@@ -6704,7 +6411,7 @@ module Aws::SSM
       :calendar_names,
       :at_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -6728,7 +6435,7 @@ module Aws::SSM
       :at_time,
       :next_transition_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -6756,7 +6463,7 @@ module Aws::SSM
       :instance_id,
       :plugin_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -6905,7 +6612,7 @@ module Aws::SSM
       :standard_error_url,
       :cloud_watch_output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:response_code] = 0 unless options.key?(:response_code)
@@ -6919,7 +6626,7 @@ module Aws::SSM
     class GetConnectionStatusRequest < Struct.new(
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target
@@ -6932,7 +6639,7 @@ module Aws::SSM
       :target,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operating_system
@@ -6941,7 +6648,7 @@ module Aws::SSM
     class GetDefaultPatchBaselineRequest < Struct.new(
       :operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -6954,7 +6661,7 @@ module Aws::SSM
       :baseline_id,
       :operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6972,7 +6679,7 @@ module Aws::SSM
       :snapshot_id,
       :baseline_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6995,7 +6702,7 @@ module Aws::SSM
       :snapshot_download_url,
       :product,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7019,7 +6726,7 @@ module Aws::SSM
       :document_version,
       :document_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7088,7 +6795,7 @@ module Aws::SSM
       :attachments_content,
       :review_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_preview_id
@@ -7097,7 +6804,7 @@ module Aws::SSM
     class GetExecutionPreviewRequest < Struct.new(
       :execution_preview_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_preview_id
@@ -7122,7 +6829,7 @@ module Aws::SSM
       :status_message,
       :execution_preview,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -7152,7 +6859,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -7166,7 +6873,7 @@ module Aws::SSM
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -7196,7 +6903,7 @@ module Aws::SSM
       :aggregator,
       :sub_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schemas
@@ -7210,7 +6917,7 @@ module Aws::SSM
       :schemas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -7219,7 +6926,7 @@ module Aws::SSM
     class GetMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -7248,7 +6955,7 @@ module Aws::SSM
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -7265,7 +6972,7 @@ module Aws::SSM
       :task_id,
       :invocation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -7320,7 +7027,7 @@ module Aws::SSM
       :owner_information,
       :window_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -7334,7 +7041,7 @@ module Aws::SSM
       :window_execution_id,
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_execution_id
@@ -7420,7 +7127,7 @@ module Aws::SSM
       :alarm_configuration,
       :triggered_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
@@ -7434,7 +7141,7 @@ module Aws::SSM
     class GetMaintenanceWindowRequest < Struct.new(
       :window_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -7508,7 +7215,7 @@ module Aws::SSM
       :created_date,
       :modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cutoff] = 0 unless options.key?(:cutoff)
@@ -7528,7 +7235,7 @@ module Aws::SSM
       :window_id,
       :window_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -7642,7 +7349,7 @@ module Aws::SSM
       :cutoff_behavior,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
@@ -7660,7 +7367,7 @@ module Aws::SSM
       :ops_item_id,
       :ops_item_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item
@@ -7669,7 +7376,7 @@ module Aws::SSM
     class GetOpsItemResponse < Struct.new(
       :ops_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_metadata_arn
@@ -7687,7 +7394,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -7705,7 +7412,7 @@ module Aws::SSM
       :metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_name
@@ -7735,7 +7442,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -7749,7 +7456,7 @@ module Aws::SSM
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7774,7 +7481,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -7788,7 +7495,7 @@ module Aws::SSM
       :parameters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7807,7 +7514,7 @@ module Aws::SSM
       :name,
       :with_decryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameter
@@ -7816,7 +7523,7 @@ module Aws::SSM
     class GetParameterResult < Struct.new(
       :parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute path
@@ -7865,7 +7572,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -7879,7 +7586,7 @@ module Aws::SSM
       :parameters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -7902,7 +7609,7 @@ module Aws::SSM
       :names,
       :with_decryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -7916,7 +7623,7 @@ module Aws::SSM
       :parameters,
       :invalid_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute patch_group
@@ -7930,7 +7637,7 @@ module Aws::SSM
       :patch_group,
       :operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -7947,7 +7654,7 @@ module Aws::SSM
       :patch_group,
       :operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -7963,7 +7670,7 @@ module Aws::SSM
     class GetPatchBaselineRequest < Struct.new(
       :baseline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -8041,10 +7748,10 @@ module Aws::SSM
       :sources,
       :available_security_updates_compliance_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:approved_patches_enable_non_security] =  unless options.key?(:approved_patches_enable_non_security)
+        options[:approved_patches_enable_non_security] = nil unless options.key?(:approved_patches_enable_non_security)
         super
       end
     end
@@ -8064,7 +7771,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -8078,7 +7785,7 @@ module Aws::SSM
       :next_token,
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource policy helps you to define the IAM entity (for example, an
@@ -8106,7 +7813,7 @@ module Aws::SSM
       :policy_hash,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body of the GetServiceSetting API operation.</p>
@@ -8166,7 +7873,7 @@ module Aws::SSM
     class GetServiceSettingRequest < Struct.new(
       :setting_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query result body of the GetServiceSetting API operation.</p>
@@ -8176,7 +7883,7 @@ module Aws::SSM
     class GetServiceSettingResult < Struct.new(
       :service_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A hierarchy can have a maximum of 15 levels. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">Requirements and
@@ -8188,7 +7895,7 @@ module Aws::SSM
     class HierarchyLevelLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter Store doesn't support changing a parameter type in a hierarchy. For example, you
@@ -8202,7 +7909,7 @@ module Aws::SSM
     class HierarchyTypeMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error returned when an idempotent operation is retried and the parameters don't match the
@@ -8212,13 +7919,7 @@ module Aws::SSM
     class IdempotentParameterMismatch < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImpactType
-      MUTATING = 'Mutating'
-      NON_MUTATING = 'NonMutating'
-      UNDETERMINED = 'Undetermined'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is a conflict in the policies specified for this parameter. You can't, for example,
@@ -8228,7 +7929,7 @@ module Aws::SSM
     class IncompatiblePolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information about the aggregated associations.</p>
@@ -8242,7 +7943,7 @@ module Aws::SSM
       :detailed_status,
       :instance_association_status_aggregated_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more association documents on the managed node. </p>
@@ -8264,7 +7965,7 @@ module Aws::SSM
       :content,
       :association_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An S3 bucket where you want to store the results of this request.</p>
@@ -8276,7 +7977,7 @@ module Aws::SSM
     class InstanceAssociationOutputLocation < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URL of S3 bucket where you want to store the results of this request.</p>
@@ -8286,7 +7987,7 @@ module Aws::SSM
     class InstanceAssociationOutputUrl < Struct.new(
       :s3_output_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information about the association.</p>
@@ -8340,7 +8041,7 @@ module Aws::SSM
       :output_url,
       :association_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a specific managed node.</p>
@@ -8387,7 +8088,7 @@ module Aws::SSM
       :platform_version,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for a specific list of managed nodes. </p>
@@ -8502,10 +8203,10 @@ module Aws::SSM
       :source_id,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:is_latest_version] =  unless options.key?(:is_latest_version)
+        options[:is_latest_version] = nil unless options.key?(:is_latest_version)
         super
       end
     end
@@ -8525,18 +8226,7 @@ module Aws::SSM
       :key,
       :value_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceInformationFilterKey
-      INSTANCE_IDS = 'InstanceIds'
-      AGENT_VERSION = 'AgentVersion'
-      PING_STATUS = 'PingStatus'
-      PLATFORM_TYPES = 'PlatformTypes'
-      ACTIVATION_IDS = 'ActivationIds'
-      IAM_ROLE = 'IamRole'
-      RESOURCE_TYPE = 'ResourceType'
-      ASSOCIATION_STATUS = 'AssociationStatus'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filters to describe or get information about your managed nodes.</p>
@@ -8579,7 +8269,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the high-level patch compliance state for a managed node, providing information
@@ -8745,21 +8435,21 @@ module Aws::SSM
       :security_non_compliant_count,
       :other_non_compliant_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:installed_count] = 0 unless options.key?(:installed_count)
         options[:installed_other_count] = 0 unless options.key?(:installed_other_count)
-        options[:installed_pending_reboot_count] =  unless options.key?(:installed_pending_reboot_count)
-        options[:installed_rejected_count] =  unless options.key?(:installed_rejected_count)
+        options[:installed_pending_reboot_count] = nil unless options.key?(:installed_pending_reboot_count)
+        options[:installed_rejected_count] = nil unless options.key?(:installed_rejected_count)
         options[:missing_count] = 0 unless options.key?(:missing_count)
         options[:failed_count] = 0 unless options.key?(:failed_count)
-        options[:unreported_not_applicable_count] =  unless options.key?(:unreported_not_applicable_count)
+        options[:unreported_not_applicable_count] = nil unless options.key?(:unreported_not_applicable_count)
         options[:not_applicable_count] = 0 unless options.key?(:not_applicable_count)
-        options[:available_security_update_count] =  unless options.key?(:available_security_update_count)
-        options[:critical_non_compliant_count] =  unless options.key?(:critical_non_compliant_count)
-        options[:security_non_compliant_count] =  unless options.key?(:security_non_compliant_count)
-        options[:other_non_compliant_count] =  unless options.key?(:other_non_compliant_count)
+        options[:available_security_update_count] = nil unless options.key?(:available_security_update_count)
+        options[:critical_non_compliant_count] = nil unless options.key?(:critical_non_compliant_count)
+        options[:security_non_compliant_count] = nil unless options.key?(:security_non_compliant_count)
+        options[:other_non_compliant_count] = nil unless options.key?(:other_non_compliant_count)
         super
       end
     end
@@ -8840,14 +8530,7 @@ module Aws::SSM
       :values,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstancePatchStateOperatorType
-      EQUAL = 'Equal'
-      NOT_EQUAL = 'NotEqual'
-      LESS_THAN = 'LessThan'
-      GREATER_THAN = 'GreaterThan'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing various properties of a managed node.</p>
@@ -8964,7 +8647,7 @@ module Aws::SSM
       :source_id,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for a specific list of managed nodes. You can filter node information by
@@ -8979,27 +8662,7 @@ module Aws::SSM
       :key,
       :value_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstancePropertyFilterKey
-      INSTANCE_IDS = 'InstanceIds'
-      AGENT_VERSION = 'AgentVersion'
-      PING_STATUS = 'PingStatus'
-      PLATFORM_TYPES = 'PlatformTypes'
-      DOCUMENT_NAME = 'DocumentName'
-      ACTIVATION_IDS = 'ActivationIds'
-      IAM_ROLE = 'IamRole'
-      RESOURCE_TYPE = 'ResourceType'
-      ASSOCIATION_STATUS = 'AssociationStatus'
-    end
-
-    module InstancePropertyFilterOperator
-      EQUAL = 'Equal'
-      NOT_EQUAL = 'NotEqual'
-      BEGIN_WITH = 'BeginWith'
-      LESS_THAN = 'LessThan'
-      GREATER_THAN = 'GreaterThan'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filters to describe or get information about your managed nodes.</p>
@@ -9017,7 +8680,7 @@ module Aws::SSM
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred on the server side.</p>
@@ -9026,7 +8689,7 @@ module Aws::SSM
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The activation isn't valid. The activation might have been deleted, or the ActivationId and
@@ -9036,7 +8699,7 @@ module Aws::SSM
     class InvalidActivation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The activation ID isn't valid. Verify that you entered the correct ActivationId or
@@ -9046,7 +8709,7 @@ module Aws::SSM
     class InvalidActivationId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified aggregator isn't valid for the group type. Verify that the aggregator you
@@ -9056,7 +8719,7 @@ module Aws::SSM
     class InvalidAggregatorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request doesn't meet the regular expression requirement.</p>
@@ -9066,7 +8729,7 @@ module Aws::SSM
     class InvalidAllowedPatternException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The association isn't valid or doesn't exist. </p>
@@ -9075,7 +8738,7 @@ module Aws::SSM
     class InvalidAssociation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version you specified isn't valid. Use ListAssociationVersions to view all versions of
@@ -9086,7 +8749,7 @@ module Aws::SSM
     class InvalidAssociationVersion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied parameters for invoking the specified Automation runbook are incorrect. For
@@ -9097,7 +8760,7 @@ module Aws::SSM
     class InvalidAutomationExecutionParametersException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The signal isn't valid for the current Automation execution.</p>
@@ -9106,7 +8769,7 @@ module Aws::SSM
     class InvalidAutomationSignalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified update status operation isn't valid.</p>
@@ -9115,13 +8778,13 @@ module Aws::SSM
     class InvalidAutomationStatusUpdateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified command ID isn't valid. Verify the ID and try again.</p>
     class InvalidCommandId < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the parameters specified for the delete operation isn't valid. Verify all
@@ -9131,7 +8794,7 @@ module Aws::SSM
     class InvalidDeleteInventoryParametersException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID specified for the delete operation doesn't exist or isn't valid. Verify the ID and
@@ -9141,7 +8804,7 @@ module Aws::SSM
     class InvalidDeletionIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified SSM document doesn't exist.</p>
@@ -9152,7 +8815,7 @@ module Aws::SSM
     class InvalidDocument < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The content for the document isn't valid.</p>
@@ -9162,7 +8825,7 @@ module Aws::SSM
     class InvalidDocumentContent < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to delete a document while it is still shared. You must stop sharing the
@@ -9172,7 +8835,7 @@ module Aws::SSM
     class InvalidDocumentOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of the document schema isn't supported.</p>
@@ -9181,7 +8844,7 @@ module Aws::SSM
     class InvalidDocumentSchemaVersion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SSM document type isn't valid. Valid document types are described in the
@@ -9191,7 +8854,7 @@ module Aws::SSM
     class InvalidDocumentType < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document version isn't valid or doesn't exist.</p>
@@ -9200,7 +8863,7 @@ module Aws::SSM
     class InvalidDocumentVersion < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter name isn't valid. Verify that you entered the correct name and try again.</p>
@@ -9209,13 +8872,13 @@ module Aws::SSM
     class InvalidFilter < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified key isn't valid.</p>
     class InvalidFilterKey < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified filter option isn't valid. Valid options are Equals and BeginsWith. For Path
@@ -9227,7 +8890,7 @@ module Aws::SSM
     class InvalidFilterOption < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter value isn't valid. Verify the value and try again.</p>
@@ -9236,7 +8899,7 @@ module Aws::SSM
     class InvalidFilterValue < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The following problems can cause this exception:</p>
@@ -9262,7 +8925,7 @@ module Aws::SSM
     class InvalidInstanceId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified filter value isn't valid.</p>
@@ -9271,7 +8934,7 @@ module Aws::SSM
     class InvalidInstanceInformationFilterValue < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified filter value isn't valid.</p>
@@ -9280,7 +8943,7 @@ module Aws::SSM
     class InvalidInstancePropertyFilterValue < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified inventory group isn't valid.</p>
@@ -9289,7 +8952,7 @@ module Aws::SSM
     class InvalidInventoryGroupException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified invalid keys or values in the <code>Context</code> attribute for
@@ -9299,7 +8962,7 @@ module Aws::SSM
     class InvalidInventoryItemContextException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request isn't valid.</p>
@@ -9308,7 +8971,7 @@ module Aws::SSM
     class InvalidInventoryRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more content items isn't valid.</p>
@@ -9320,7 +8983,7 @@ module Aws::SSM
       :type_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query key ID isn't valid.</p>
@@ -9329,7 +8992,7 @@ module Aws::SSM
     class InvalidKeyId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified token isn't valid.</p>
@@ -9338,7 +9001,7 @@ module Aws::SSM
     class InvalidNextToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more configuration items isn't valid. Verify that a valid Amazon Resource Name (ARN)
@@ -9348,7 +9011,7 @@ module Aws::SSM
     class InvalidNotificationConfig < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The delete inventory option specified isn't valid. Verify the option and try again.</p>
@@ -9357,19 +9020,19 @@ module Aws::SSM
     class InvalidOptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket doesn't exist.</p>
     class InvalidOutputFolder < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output location isn't valid or doesn't exist.</p>
     class InvalidOutputLocation < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You must specify values for all required parameters in the Amazon Web Services Systems Manager document (SSM
@@ -9379,7 +9042,7 @@ module Aws::SSM
     class InvalidParameters < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The permission type isn't supported. <i>Share</i> is the only supported
@@ -9389,13 +9052,13 @@ module Aws::SSM
     class InvalidPermissionType < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The plugin name isn't valid.</p>
     class InvalidPluginName < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy attribute or its value is invalid. </p>
@@ -9404,7 +9067,7 @@ module Aws::SSM
     class InvalidPolicyAttributeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy type isn't supported. Parameter Store supports the following policy types:
@@ -9414,20 +9077,20 @@ module Aws::SSM
     class InvalidPolicyTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource ID isn't valid. Verify that you entered the correct ID and try again.</p>
     class InvalidResourceId < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource type isn't valid. For example, if you are attempting to tag an EC2 instance,
     #    the instance must be a registered managed node.</p>
     class InvalidResourceType < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified inventory item result attribute isn't valid.</p>
@@ -9436,7 +9099,7 @@ module Aws::SSM
     class InvalidResultAttributeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The role name can't contain invalid characters. Also verify that you specified an IAM role for notifications that includes the required trust policy. For information about
@@ -9447,7 +9110,7 @@ module Aws::SSM
     class InvalidRole < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schedule is invalid. Verify your cron or rate expression and try again.</p>
@@ -9456,7 +9119,7 @@ module Aws::SSM
     class InvalidSchedule < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified tag key or value isn't valid.</p>
@@ -9465,7 +9128,7 @@ module Aws::SSM
     class InvalidTag < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target isn't valid or doesn't exist. It might not be configured for Systems Manager or you might
@@ -9475,7 +9138,7 @@ module Aws::SSM
     class InvalidTarget < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TargetMap parameter isn't valid.</p>
@@ -9484,7 +9147,7 @@ module Aws::SSM
     class InvalidTargetMaps < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter type name isn't valid.</p>
@@ -9493,7 +9156,7 @@ module Aws::SSM
     class InvalidTypeNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The update isn't valid.</p>
@@ -9502,7 +9165,7 @@ module Aws::SSM
     class InvalidUpdate < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the inventory type and attribute for the aggregation execution.</p>
@@ -9521,17 +9184,7 @@ module Aws::SSM
       :aggregators,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InventoryAttributeDataType
-      STRING = 'string'
-      NUMBER = 'number'
-    end
-
-    module InventoryDeletionStatus
-      IN_PROGRESS = 'InProgress'
-      COMPLETE = 'Complete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information returned by the <code>DeleteInventory</code> operation.</p>
@@ -9566,7 +9219,7 @@ module Aws::SSM
       :deletion_summary,
       :last_status_update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the delete operation.</p>
@@ -9585,7 +9238,7 @@ module Aws::SSM
       :remaining_count,
       :summary_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_count] = 0 unless options.key?(:total_count)
@@ -9609,7 +9262,7 @@ module Aws::SSM
       :count,
       :remaining_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -9681,7 +9334,7 @@ module Aws::SSM
       :values,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user-defined set of one or more filters on which to aggregate inventory data. Groups
@@ -9698,7 +9351,7 @@ module Aws::SSM
       :name,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information collected from managed nodes based on your inventory policy document</p>
@@ -9736,7 +9389,7 @@ module Aws::SSM
       :content,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes are the entries within the inventory item content. It contains name and
@@ -9751,7 +9404,7 @@ module Aws::SSM
       :name,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inventory item schema definition. Users can use this to compose inventory query
@@ -9778,16 +9431,7 @@ module Aws::SSM
       :attributes,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InventoryQueryOperatorType
-      EQUAL = 'Equal'
-      NOT_EQUAL = 'NotEqual'
-      BEGIN_WITH = 'BeginWith'
-      LESS_THAN = 'LessThan'
-      GREATER_THAN = 'GreaterThan'
-      EXISTS = 'Exists'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inventory query results.</p>
@@ -9802,7 +9446,7 @@ module Aws::SSM
       :id,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inventory result item.</p>
@@ -9831,19 +9475,14 @@ module Aws::SSM
       :content_hash,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InventorySchemaDeleteOption
-      DISABLE_SCHEMA = 'DisableSchema'
-      DELETE_SCHEMA = 'DeleteSchema'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The command ID and managed node ID you specified didn't match any invocations. Verify the
     #    command ID and the managed node ID and try again. </p>
     class InvocationDoesNotExist < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inventory item has invalid content. </p>
@@ -9855,7 +9494,7 @@ module Aws::SSM
       :type_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inventory item size has exceeded the size limit.</p>
@@ -9867,7 +9506,7 @@ module Aws::SSM
       :type_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9889,7 +9528,7 @@ module Aws::SSM
       :parameter_version,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invalid_labels
@@ -9904,18 +9543,12 @@ module Aws::SSM
       :invalid_labels,
       :parameter_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:parameter_version] = 0 unless options.key?(:parameter_version)
         super
       end
-    end
-
-    module LastResourceDataSyncStatus
-      SUCCESSFUL = 'Successful'
-      FAILED = 'Failed'
-      INPROGRESS = 'InProgress'
     end
 
     # @!attribute association_id
@@ -9933,7 +9566,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_versions
@@ -9947,7 +9580,7 @@ module Aws::SSM
       :association_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_filter_list
@@ -9972,7 +9605,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -9986,7 +9619,7 @@ module Aws::SSM
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -10019,7 +9652,7 @@ module Aws::SSM
       :filters,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_invocations
@@ -10033,7 +9666,7 @@ module Aws::SSM
       :command_invocations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command_id
@@ -10066,7 +9699,7 @@ module Aws::SSM
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute commands
@@ -10080,7 +9713,7 @@ module Aws::SSM
       :commands,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -10109,7 +9742,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compliance_items
@@ -10123,7 +9756,7 @@ module Aws::SSM
       :compliance_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -10143,7 +9776,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compliance_summary_items
@@ -10159,7 +9792,7 @@ module Aws::SSM
       :compliance_summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -10187,7 +9820,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -10214,7 +9847,7 @@ module Aws::SSM
       :metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -10233,7 +9866,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_versions
@@ -10247,7 +9880,7 @@ module Aws::SSM
       :document_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_filter_list
@@ -10280,7 +9913,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_identifiers
@@ -10294,7 +9927,7 @@ module Aws::SSM
       :document_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -10321,7 +9954,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -10351,7 +9984,7 @@ module Aws::SSM
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_name
@@ -10377,7 +10010,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -10391,7 +10024,7 @@ module Aws::SSM
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_name
@@ -10424,7 +10057,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -10439,7 +10072,7 @@ module Aws::SSM
       :summary,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -10457,7 +10090,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10471,7 +10104,7 @@ module Aws::SSM
       :next_token,
       :summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_item_id
@@ -10494,7 +10127,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10508,7 +10141,7 @@ module Aws::SSM
       :next_token,
       :summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -10526,7 +10159,7 @@ module Aws::SSM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_metadata_list
@@ -10540,7 +10173,7 @@ module Aws::SSM
       :ops_metadata_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -10558,7 +10191,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_compliance_summary_items
@@ -10574,7 +10207,7 @@ module Aws::SSM
       :resource_compliance_summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_type
@@ -10594,7 +10227,7 @@ module Aws::SSM
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_data_sync_items
@@ -10608,7 +10241,7 @@ module Aws::SSM
       :resource_data_sync_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -10621,7 +10254,7 @@ module Aws::SSM
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -10630,7 +10263,7 @@ module Aws::SSM
     class ListTagsForResourceResult < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Simple Storage Service (Amazon S3) bucket to write managed
@@ -10656,7 +10289,7 @@ module Aws::SSM
       :s3_key_prefix,
       :s3_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for an <code>AUTOMATION</code> task type.</p>
@@ -10685,7 +10318,7 @@ module Aws::SSM
       :document_version,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information about an execution of a maintenance window. </p>
@@ -10715,18 +10348,7 @@ module Aws::SSM
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceWindowExecutionStatus
-      Pending = 'PENDING'
-      InProgress = 'IN_PROGRESS'
-      Success = 'SUCCESS'
-      Failed = 'FAILED'
-      TimedOut = 'TIMED_OUT'
-      Cancelling = 'CANCELLING'
-      Cancelled = 'CANCELLED'
-      SkippedOverlapping = 'SKIPPED_OVERLAPPING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a task execution performed as part of a maintenance window
@@ -10774,7 +10396,7 @@ module Aws::SSM
       :alarm_configuration,
       :triggered_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information about a task invocation for a particular target as part of a task
@@ -10834,7 +10456,7 @@ module Aws::SSM
       :owner_information,
       :window_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter used in the request. Supported filter keys depend on the API operation that includes
@@ -10882,7 +10504,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the maintenance window.</p>
@@ -10942,7 +10564,7 @@ module Aws::SSM
       :start_date,
       :next_execution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -10962,7 +10584,7 @@ module Aws::SSM
       :window_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for a <code>LAMBDA</code> task type.</p>
@@ -11000,12 +10622,7 @@ module Aws::SSM
       :qualifier,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceWindowResourceType
-      Instance = 'INSTANCE'
-      ResourceGroup = 'RESOURCE_GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for a <code>RUN_COMMAND</code> task type.</p>
@@ -11095,7 +10712,7 @@ module Aws::SSM
       :service_role_arn,
       :timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>
@@ -11124,7 +10741,7 @@ module Aws::SSM
       :input,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target registered with the maintenance window.</p>
@@ -11166,7 +10783,7 @@ module Aws::SSM
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a task defined for a maintenance window.</p>
@@ -11278,17 +10895,12 @@ module Aws::SSM
       :cutoff_behavior,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
         super
       end
-    end
-
-    module MaintenanceWindowTaskCutoffBehavior
-      ContinueTask = 'CONTINUE_TASK'
-      CancelTask = 'CANCEL_TASK'
     end
 
     # <p>The parameters for task execution.</p>
@@ -11310,7 +10922,7 @@ module Aws::SSM
       :step_functions,
       :lambda,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the values for a task parameter.</p>
@@ -11322,14 +10934,7 @@ module Aws::SSM
     class MaintenanceWindowTaskParameterValueExpression < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceWindowTaskType
-      RunCommand = 'RUN_COMMAND'
-      Automation = 'AUTOMATION'
-      StepFunctions = 'STEP_FUNCTIONS'
-      Lambda = 'LAMBDA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified policy document is malformed or invalid, or excessive
@@ -11339,13 +10944,7 @@ module Aws::SSM
     class MalformedResourcePolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedStatus
-      ALL = 'All'
-      MANAGED = 'Managed'
-      UNMANAGED = 'Unmanaged'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size limit of a document is 64 KB.</p>
@@ -11354,7 +10953,7 @@ module Aws::SSM
     class MaxDocumentSizeExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata to assign to an Application Manager application.</p>
@@ -11364,7 +10963,7 @@ module Aws::SSM
     class MetadataValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -11397,12 +10996,12 @@ module Aws::SSM
       :account_ids_to_remove,
       :shared_document_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyDocumentPermissionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an individual managed node.</p>
@@ -11428,7 +11027,7 @@ module Aws::SSM
       :region,
       :node_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more aggregators for viewing counts of nodes using different
@@ -11453,20 +11052,7 @@ module Aws::SSM
       :attribute_name,
       :aggregators,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeAggregatorType
-      COUNT = 'Count'
-    end
-
-    module NodeAttributeName
-      AGENT_VERSION = 'AgentVersion'
-      PLATFORM_NAME = 'PlatformName'
-      PLATFORM_TYPE = 'PlatformType'
-      PLATFORM_VERSION = 'PlatformVersion'
-      REGION = 'Region'
-      RESOURCE_TYPE = 'ResourceType'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filters for the operation.</p>
@@ -11486,31 +11072,7 @@ module Aws::SSM
       :values,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeFilterKey
-      AGENT_TYPE = 'AgentType'
-      AGENT_VERSION = 'AgentVersion'
-      COMPUTER_NAME = 'ComputerName'
-      INSTANCE_ID = 'InstanceId'
-      INSTANCE_STATUS = 'InstanceStatus'
-      IP_ADDRESS = 'IpAddress'
-      MANAGED_STATUS = 'ManagedStatus'
-      PLATFORM_NAME = 'PlatformName'
-      PLATFORM_TYPE = 'PlatformType'
-      PLATFORM_VERSION = 'PlatformVersion'
-      RESOURCE_TYPE = 'ResourceType'
-      ORGANIZATIONAL_UNIT_ID = 'OrganizationalUnitId'
-      ORGANIZATIONAL_UNIT_PATH = 'OrganizationalUnitPath'
-      REGION = 'Region'
-      ACCOUNT_ID = 'AccountId'
-    end
-
-    module NodeFilterOperatorType
-      EQUAL = 'Equal'
-      NOT_EQUAL = 'NotEqual'
-      BEGIN_WITH = 'BeginWith'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about ownership of a managed node.</p>
@@ -11533,7 +11095,7 @@ module Aws::SSM
       :organizational_unit_id,
       :organizational_unit_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a managed node's type.</p>
@@ -11544,14 +11106,10 @@ module Aws::SSM
       :instance,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Instance < NodeType; end
       class Unknown < NodeType; end
-    end
-
-    module NodeTypeName
-      INSTANCE = 'Instance'
     end
 
     # <p>A summary of resources that aren't compliant. The summary is organized according to resource
@@ -11566,7 +11124,7 @@ module Aws::SSM
       :non_compliant_count,
       :severity_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:non_compliant_count] = 0 unless options.key?(:non_compliant_count)
@@ -11604,39 +11162,7 @@ module Aws::SSM
       :notification_events,
       :notification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationEvent
-      ALL = 'All'
-      IN_PROGRESS = 'InProgress'
-      SUCCESS = 'Success'
-      TIMED_OUT = 'TimedOut'
-      CANCELLED = 'Cancelled'
-      FAILED = 'Failed'
-    end
-
-    module NotificationType
-      Command = 'Command'
-      Invocation = 'Invocation'
-    end
-
-    module OperatingSystem
-      Windows = 'WINDOWS'
-      AmazonLinux = 'AMAZON_LINUX'
-      AmazonLinux2 = 'AMAZON_LINUX_2'
-      AmazonLinux2022 = 'AMAZON_LINUX_2022'
-      Ubuntu = 'UBUNTU'
-      RedhatEnterpriseLinux = 'REDHAT_ENTERPRISE_LINUX'
-      Suse = 'SUSE'
-      CentOS = 'CENTOS'
-      OracleLinux = 'ORACLE_LINUX'
-      Debian = 'DEBIAN'
-      MacOS = 'MACOS'
-      Raspbian = 'RASPBIAN'
-      Rocky_Linux = 'ROCKY_LINUX'
-      AlmaLinux = 'ALMA_LINUX'
-      AmazonLinux2023 = 'AMAZON_LINUX_2023'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more aggregators for viewing counts of OpsData using different dimensions such as
@@ -11669,7 +11195,7 @@ module Aws::SSM
       :filters,
       :aggregators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the query.</p>
@@ -11683,7 +11209,7 @@ module Aws::SSM
       :id,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpsData summary.</p>
@@ -11697,7 +11223,7 @@ module Aws::SSM
       :capture_time,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for viewing OpsData summaries.</p>
@@ -11715,16 +11241,7 @@ module Aws::SSM
       :values,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpsFilterOperatorType
-      EQUAL = 'Equal'
-      NOT_EQUAL = 'NotEqual'
-      BEGIN_WITH = 'BeginWith'
-      LESS_THAN = 'LessThan'
-      GREATER_THAN = 'GreaterThan'
-      EXISTS = 'Exists'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and
@@ -11881,7 +11398,7 @@ module Aws::SSM
       :planned_end_time,
       :ops_item_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permission to view OpsItems in the specified account. Verify that your account
@@ -11892,7 +11409,7 @@ module Aws::SSM
     class OpsItemAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpsItem already exists.</p>
@@ -11904,7 +11421,7 @@ module Aws::SSM
       :message,
       :ops_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified OpsItem is in the process of being deleted.</p>
@@ -11913,12 +11430,7 @@ module Aws::SSM
     class OpsItemConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpsItemDataType
-      SEARCHABLE_STRING = 'SearchableString'
-      STRING = 'String'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the value of the key and its type in the OperationalData map.</p>
@@ -11933,7 +11445,7 @@ module Aws::SSM
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for a specific list of OpsItem events. You can filter event information
@@ -11954,15 +11466,7 @@ module Aws::SSM
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpsItemEventFilterKey
-      OPSITEM_ID = 'OpsItemId'
-    end
-
-    module OpsItemEventFilterOperator
-      EQUAL = 'Equal'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an OpsItem event or that associated an OpsItem with a related
@@ -11997,7 +11501,7 @@ module Aws::SSM
       :created_by,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an OpsItem filter.</p>
@@ -12015,54 +11519,7 @@ module Aws::SSM
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpsItemFilterKey
-      STATUS = 'Status'
-      CREATED_BY = 'CreatedBy'
-      SOURCE = 'Source'
-      PRIORITY = 'Priority'
-      TITLE = 'Title'
-      OPSITEM_ID = 'OpsItemId'
-      CREATED_TIME = 'CreatedTime'
-      LAST_MODIFIED_TIME = 'LastModifiedTime'
-      ACTUAL_START_TIME = 'ActualStartTime'
-      ACTUAL_END_TIME = 'ActualEndTime'
-      PLANNED_START_TIME = 'PlannedStartTime'
-      PLANNED_END_TIME = 'PlannedEndTime'
-      OPERATIONAL_DATA = 'OperationalData'
-      OPERATIONAL_DATA_KEY = 'OperationalDataKey'
-      OPERATIONAL_DATA_VALUE = 'OperationalDataValue'
-      RESOURCE_ID = 'ResourceId'
-      AUTOMATION_ID = 'AutomationId'
-      CATEGORY = 'Category'
-      SEVERITY = 'Severity'
-      OPSITEM_TYPE = 'OpsItemType'
-      ACCESS_REQUEST_REQUESTER_ARN = 'AccessRequestByRequesterArn'
-      ACCESS_REQUEST_REQUESTER_ID = 'AccessRequestByRequesterId'
-      ACCESS_REQUEST_APPROVER_ARN = 'AccessRequestByApproverArn'
-      ACCESS_REQUEST_APPROVER_ID = 'AccessRequestByApproverId'
-      ACCESS_REQUEST_SOURCE_ACCOUNT_ID = 'AccessRequestBySourceAccountId'
-      ACCESS_REQUEST_SOURCE_OPS_ITEM_ID = 'AccessRequestBySourceOpsItemId'
-      ACCESS_REQUEST_SOURCE_REGION = 'AccessRequestBySourceRegion'
-      ACCESS_REQUEST_IS_REPLICA = 'AccessRequestByIsReplica'
-      ACCESS_REQUEST_TARGET_RESOURCE_ID = 'AccessRequestByTargetResourceId'
-      CHANGE_REQUEST_REQUESTER_ARN = 'ChangeRequestByRequesterArn'
-      CHANGE_REQUEST_REQUESTER_NAME = 'ChangeRequestByRequesterName'
-      CHANGE_REQUEST_APPROVER_ARN = 'ChangeRequestByApproverArn'
-      CHANGE_REQUEST_APPROVER_NAME = 'ChangeRequestByApproverName'
-      CHANGE_REQUEST_TEMPLATE = 'ChangeRequestByTemplate'
-      CHANGE_REQUEST_TARGETS_RESOURCE_GROUP = 'ChangeRequestByTargetsResourceGroup'
-      INSIGHT_TYPE = 'InsightByType'
-      ACCOUNT_ID = 'AccountId'
-    end
-
-    module OpsItemFilterOperator
-      EQUAL = 'Equal'
-      CONTAINS = 'Contains'
-      GREATER_THAN = 'GreaterThan'
-      LESS_THAN = 'LessThan'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the user or resource that created an OpsItem event.</p>
@@ -12073,7 +11530,7 @@ module Aws::SSM
     class OpsItemIdentity < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified parameter argument isn't valid. Verify the available arguments and try
@@ -12086,7 +11543,7 @@ module Aws::SSM
       :parameter_names,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request caused OpsItems to exceed one or more quotas.</p>
@@ -12104,7 +11561,7 @@ module Aws::SSM
       :limit_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -12118,7 +11575,7 @@ module Aws::SSM
     class OpsItemNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notification about the OpsItem.</p>
@@ -12129,7 +11586,7 @@ module Aws::SSM
     class OpsItemNotification < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Resource Name (ARN) is already associated with the OpsItem.</p>
@@ -12144,7 +11601,7 @@ module Aws::SSM
       :resource_uri,
       :ops_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The association wasn't found using the parameters you specified in the call. Verify the
@@ -12154,7 +11611,7 @@ module Aws::SSM
     class OpsItemRelatedItemAssociationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about related-item resources for an OpsItem.</p>
@@ -12196,7 +11653,7 @@ module Aws::SSM
       :last_modified_by,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for a specific list of related-item resources. </p>
@@ -12216,40 +11673,7 @@ module Aws::SSM
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpsItemRelatedItemsFilterKey
-      RESOURCE_TYPE = 'ResourceType'
-      ASSOCIATION_ID = 'AssociationId'
-      RESOURCE_URI = 'ResourceUri'
-    end
-
-    module OpsItemRelatedItemsFilterOperator
-      EQUAL = 'Equal'
-    end
-
-    module OpsItemStatus
-      OPEN = 'Open'
-      IN_PROGRESS = 'InProgress'
-      RESOLVED = 'Resolved'
-      PENDING = 'Pending'
-      TIMED_OUT = 'TimedOut'
-      CANCELLING = 'Cancelling'
-      CANCELLED = 'Cancelled'
-      FAILED = 'Failed'
-      COMPLETED_WITH_SUCCESS = 'CompletedWithSuccess'
-      COMPLETED_WITH_FAILURE = 'CompletedWithFailure'
-      SCHEDULED = 'Scheduled'
-      RUNBOOK_IN_PROGRESS = 'RunbookInProgress'
-      PENDING_CHANGE_CALENDAR_OVERRIDE = 'PendingChangeCalendarOverride'
-      CHANGE_CALENDAR_OVERRIDE_APPROVED = 'ChangeCalendarOverrideApproved'
-      CHANGE_CALENDAR_OVERRIDE_REJECTED = 'ChangeCalendarOverrideRejected'
-      PENDING_APPROVAL = 'PendingApproval'
-      APPROVED = 'Approved'
-      REVOKED = 'Revoked'
-      REJECTED = 'Rejected'
-      CLOSED = 'Closed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A count of OpsItems.</p>
@@ -12352,7 +11776,7 @@ module Aws::SSM
       :planned_start_time,
       :planned_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Operational metadata for an application in Application Manager.</p>
@@ -12378,7 +11802,7 @@ module Aws::SSM
       :last_modified_user,
       :creation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An OpsMetadata object already exists for the selected resource.</p>
@@ -12387,7 +11811,7 @@ module Aws::SSM
     class OpsMetadataAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter to limit the number of OpsMetadata objects displayed.</p>
@@ -12401,7 +11825,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the arguments passed is invalid. </p>
@@ -12410,7 +11834,7 @@ module Aws::SSM
     class OpsMetadataInvalidArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpsMetadata object exceeds the maximum number of OpsMetadata keys that you can assign to
@@ -12420,7 +11844,7 @@ module Aws::SSM
     class OpsMetadataKeyLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your account reached the maximum number of OpsMetadata objects allowed by Application Manager. The
@@ -12430,7 +11854,7 @@ module Aws::SSM
     class OpsMetadataLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpsMetadata object doesn't exist. </p>
@@ -12439,7 +11863,7 @@ module Aws::SSM
     class OpsMetadataNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The system is processing too many concurrent updates. Wait a few moments and try
@@ -12449,7 +11873,7 @@ module Aws::SSM
     class OpsMetadataTooManyUpdatesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpsItem data type to return.</p>
@@ -12461,7 +11885,7 @@ module Aws::SSM
     class OpsResultAttribute < Struct.new(
       :type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the source where the association execution details are stored.</p>
@@ -12475,7 +11899,7 @@ module Aws::SSM
       :output_source_id,
       :output_source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Web Services Systems Manager parameter in Parameter Store.</p>
@@ -12531,7 +11955,7 @@ module Aws::SSM
       :arn,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -12545,7 +11969,7 @@ module Aws::SSM
     class ParameterAlreadyExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about parameter usage.</p>
@@ -12609,7 +12033,7 @@ module Aws::SSM
       :policies,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -12635,7 +12059,7 @@ module Aws::SSM
       :policy_type,
       :policy_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the number of parameters for this Amazon Web Services account. Delete one or more
@@ -12645,7 +12069,7 @@ module Aws::SSM
     class ParameterLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter Store retains the 100 most recently created versions of a parameter. After this
@@ -12669,7 +12093,7 @@ module Aws::SSM
     class ParameterMaxVersionLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata includes information like the Amazon Resource Name (ARN) of the last user to update
@@ -12728,7 +12152,7 @@ module Aws::SSM
       :policies,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -12747,7 +12171,7 @@ module Aws::SSM
     class ParameterNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter name isn't valid.</p>
@@ -12757,7 +12181,7 @@ module Aws::SSM
     class ParameterPatternMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more filters. Use a filter to return a more specific list of results.</p>
@@ -12792,19 +12216,7 @@ module Aws::SSM
       :option,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterTier
-      STANDARD = 'Standard'
-      ADVANCED = 'Advanced'
-      INTELLIGENT_TIERING = 'Intelligent-Tiering'
-    end
-
-    module ParameterType
-      STRING = 'String'
-      STRING_LIST = 'StringList'
-      SECURE_STRING = 'SecureString'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter version can have a maximum of ten labels.</p>
@@ -12813,7 +12225,7 @@ module Aws::SSM
     class ParameterVersionLabelLimitExceeded < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter version wasn't found. Verify the parameter name and version, and try
@@ -12823,7 +12235,7 @@ module Aws::SSM
     class ParameterVersionNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is deprecated. Instead, use <a>ParameterStringFilter</a>.</p>
@@ -12837,13 +12249,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParametersFilterKey
-      NAME = 'Name'
-      TYPE = 'Type'
-      KEY_ID = 'KeyId'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A detailed status of the parent step.</p>
@@ -12869,10 +12275,10 @@ module Aws::SSM
       :iteration,
       :iterator_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:iteration] =  unless options.key?(:iteration)
+        options[:iteration] = nil unless options.key?(:iteration)
         super
       end
     end
@@ -12994,17 +12400,12 @@ module Aws::SSM
       :severity,
       :repository,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:epoch] = 0 unless options.key?(:epoch)
         super
       end
-    end
-
-    module PatchAction
-      AllowAsDependency = 'ALLOW_AS_DEPENDENCY'
-      Block = 'BLOCK'
     end
 
     # <p>Defines the basic information about a patch baseline.</p>
@@ -13033,7 +12434,7 @@ module Aws::SSM
       :baseline_description,
       :default_baseline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_baseline] = false unless options.key?(:default_baseline)
@@ -13083,39 +12484,7 @@ module Aws::SSM
       :installed_time,
       :cve_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PatchComplianceDataState
-      Installed = 'INSTALLED'
-      InstalledOther = 'INSTALLED_OTHER'
-      InstalledPendingReboot = 'INSTALLED_PENDING_REBOOT'
-      InstalledRejected = 'INSTALLED_REJECTED'
-      Missing = 'MISSING'
-      NotApplicable = 'NOT_APPLICABLE'
-      Failed = 'FAILED'
-      AvailableSecurityUpdate = 'AVAILABLE_SECURITY_UPDATE'
-    end
-
-    module PatchComplianceLevel
-      Critical = 'CRITICAL'
-      High = 'HIGH'
-      Medium = 'MEDIUM'
-      Low = 'LOW'
-      Informational = 'INFORMATIONAL'
-      Unspecified = 'UNSPECIFIED'
-    end
-
-    module PatchComplianceStatus
-      Compliant = 'COMPLIANT'
-      NonCompliant = 'NON_COMPLIANT'
-    end
-
-    module PatchDeploymentStatus
-      Approved = 'APPROVED'
-      PendingApproval = 'PENDING_APPROVAL'
-      ExplicitApproved = 'EXPLICIT_APPROVED'
-      ExplicitRejected = 'EXPLICIT_REJECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Defines which patches should be included in a patch baseline.</p>
@@ -13145,7 +12514,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of patch filters, typically used for approval rules.</p>
@@ -13155,29 +12524,7 @@ module Aws::SSM
     class PatchFilterGroup < Struct.new(
       :patch_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PatchFilterKey
-      Arch = 'ARCH'
-      AdvisoryId = 'ADVISORY_ID'
-      BugzillaId = 'BUGZILLA_ID'
-      PatchSet = 'PATCH_SET'
-      Product = 'PRODUCT'
-      ProductFamily = 'PRODUCT_FAMILY'
-      Classification = 'CLASSIFICATION'
-      CVEId = 'CVE_ID'
-      Epoch = 'EPOCH'
-      MsrcSeverity = 'MSRC_SEVERITY'
-      Name = 'NAME'
-      PatchId = 'PATCH_ID'
-      Section = 'SECTION'
-      Priority = 'PRIORITY'
-      Repository = 'REPOSITORY'
-      Release = 'RELEASE'
-      Severity = 'SEVERITY'
-      Security = 'SECURITY'
-      Version = 'VERSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The mapping between a patch group and the patch baseline the patch group is registered
@@ -13192,12 +12539,7 @@ module Aws::SSM
       :patch_group,
       :baseline_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PatchOperationType
-      SCAN = 'Scan'
-      INSTALL = 'Install'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a filter used in Patch Manager APIs. Supported filter keys depend on the API
@@ -13235,16 +12577,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PatchProperty
-      Product = 'PRODUCT'
-      PatchProductFamily = 'PRODUCT_FAMILY'
-      PatchClassification = 'CLASSIFICATION'
-      PatchMsrcSeverity = 'MSRC_SEVERITY'
-      PatchPriority = 'PRIORITY'
-      PatchSeverity = 'SEVERITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an approval rule for a patch baseline.</p>
@@ -13297,11 +12630,11 @@ module Aws::SSM
       :approve_until_date,
       :enable_non_security,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:approve_after_days] =  unless options.key?(:approve_after_days)
-        options[:enable_non_security] =  unless options.key?(:enable_non_security)
+        options[:approve_after_days] = nil unless options.key?(:approve_after_days)
+        options[:enable_non_security] = nil unless options.key?(:enable_non_security)
         super
       end
     end
@@ -13313,12 +12646,7 @@ module Aws::SSM
     class PatchRuleGroup < Struct.new(
       :patch_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PatchSet
-      Os = 'OS'
-      Application = 'APPLICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the patches to use to update the managed nodes, including target operating
@@ -13370,7 +12698,7 @@ module Aws::SSM
       :products,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the approval status of a patch.</p>
@@ -13389,19 +12717,7 @@ module Aws::SSM
       :compliance_level,
       :approval_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PingStatus
-      ONLINE = 'Online'
-      CONNECTION_LOST = 'ConnectionLost'
-      INACTIVE = 'Inactive'
-    end
-
-    module PlatformType
-      WINDOWS = 'Windows'
-      LINUX = 'Linux'
-      MACOS = 'MacOS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified more than the maximum number of allowed policies for the parameter. The
@@ -13411,7 +12727,7 @@ module Aws::SSM
     class PoliciesLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregate of step execution statuses displayed in the Amazon Web Services Systems Manager console for a
@@ -13443,7 +12759,7 @@ module Aws::SSM
       :cancelled_steps,
       :timed_out_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_steps] = 0 unless options.key?(:total_steps)
@@ -13503,12 +12819,12 @@ module Aws::SSM
       :item_content_hash,
       :upload_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutComplianceItemsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -13521,7 +12837,7 @@ module Aws::SSM
       :instance_id,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -13530,7 +12846,7 @@ module Aws::SSM
     class PutInventoryResult < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -13792,7 +13108,7 @@ module Aws::SSM
       :policies,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -13809,7 +13125,7 @@ module Aws::SSM
       :version,
       :tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -13837,7 +13153,7 @@ module Aws::SSM
       :policy_id,
       :policy_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -13851,12 +13167,7 @@ module Aws::SSM
       :policy_id,
       :policy_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RebootOption
-      REBOOT_IF_NEEDED = 'RebootIfNeeded'
-      NO_REBOOT = 'NoReboot'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -13865,7 +13176,7 @@ module Aws::SSM
     class RegisterDefaultPatchBaselineRequest < Struct.new(
       :baseline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -13874,7 +13185,7 @@ module Aws::SSM
     class RegisterDefaultPatchBaselineResult < Struct.new(
       :baseline_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -13887,7 +13198,7 @@ module Aws::SSM
       :baseline_id,
       :patch_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -13900,7 +13211,7 @@ module Aws::SSM
       :baseline_id,
       :patch_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -13979,7 +13290,7 @@ module Aws::SSM
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_target_id
@@ -13988,7 +13299,7 @@ module Aws::SSM
     class RegisterTargetWithMaintenanceWindowResult < Struct.new(
       :window_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -14141,7 +13452,7 @@ module Aws::SSM
       :cutoff_behavior,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_task_id
@@ -14150,7 +13461,7 @@ module Aws::SSM
     class RegisterTaskWithMaintenanceWindowResult < Struct.new(
       :window_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for internal use.</p>
@@ -14164,7 +13475,7 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An OpsItems that shares something in common with the current OpsItem. For example, related
@@ -14176,7 +13487,7 @@ module Aws::SSM
     class RelatedOpsItem < Struct.new(
       :ops_item_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_type
@@ -14218,12 +13529,12 @@ module Aws::SSM
       :resource_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveTagsFromResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body of the ResetServiceSetting API operation.</p>
@@ -14284,7 +13595,7 @@ module Aws::SSM
     class ResetServiceSettingRequest < Struct.new(
       :setting_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result body of the ResetServiceSetting API operation.</p>
@@ -14295,7 +13606,7 @@ module Aws::SSM
     class ResetServiceSettingResult < Struct.new(
       :service_setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about targets that resolved during the Automation execution.</p>
@@ -14310,7 +13621,7 @@ module Aws::SSM
       :parameter_values,
       :truncated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:truncated] = false unless options.key?(:truncated)
@@ -14354,7 +13665,7 @@ module Aws::SSM
       :compliant_summary,
       :non_compliant_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A sync configuration with the same name already exists.</p>
@@ -14363,7 +13674,7 @@ module Aws::SSM
     class ResourceDataSyncAlreadyExistsException < Struct.new(
       :sync_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync
@@ -14382,7 +13693,7 @@ module Aws::SSM
       :organization_source_type,
       :organizational_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another <code>UpdateResourceDataSync</code> request is being processed. Wait a few minutes
@@ -14392,7 +13703,7 @@ module Aws::SSM
     class ResourceDataSyncConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the allowed maximum sync configurations.</p>
@@ -14401,7 +13712,7 @@ module Aws::SSM
     class ResourceDataSyncCountExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Synchronize Amazon Web Services Systems Manager Inventory data from multiple Amazon Web Services accounts defined in Organizations to a
@@ -14413,7 +13724,7 @@ module Aws::SSM
     class ResourceDataSyncDestinationDataSharing < Struct.new(
       :destination_data_sharing_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified sync configuration is invalid.</p>
@@ -14422,7 +13733,7 @@ module Aws::SSM
     class ResourceDataSyncInvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a resource data sync configuration, including its current status and last
@@ -14472,7 +13783,7 @@ module Aws::SSM
       :sync_created_time,
       :last_sync_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified sync name wasn't found.</p>
@@ -14487,7 +13798,7 @@ module Aws::SSM
       :sync_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Organizations organizational unit data source for the sync.</p>
@@ -14497,7 +13808,7 @@ module Aws::SSM
     class ResourceDataSyncOrganizationalUnit < Struct.new(
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the target S3 bucket for the resource data sync.</p>
@@ -14528,11 +13839,7 @@ module Aws::SSM
       :awskms_key_arn,
       :destination_data_sharing,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceDataSyncS3Format
-      JSON_SERDE = 'JsonSerDe'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the source of the data included in the resource data sync.</p>
@@ -14565,7 +13872,7 @@ module Aws::SSM
       :include_future_regions,
       :enable_all_ops_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_future_regions] = false unless options.key?(:include_future_regions)
@@ -14632,7 +13939,7 @@ module Aws::SSM
       :state,
       :enable_all_ops_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_future_regions] = false unless options.key?(:include_future_regions)
@@ -14648,7 +13955,7 @@ module Aws::SSM
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error returned when the caller has exceeded the default resource quotas. For example, too
@@ -14660,7 +13967,7 @@ module Aws::SSM
     class ResourceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter to be shared could not be found.</p>
@@ -14669,7 +13976,7 @@ module Aws::SSM
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The hash provided in the call doesn't match the stored hash. This exception is thrown when
@@ -14680,7 +13987,7 @@ module Aws::SSM
     class ResourcePolicyConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters specified for the call aren't valid. Verify the parameters and their
@@ -14693,7 +14000,7 @@ module Aws::SSM
       :parameter_names,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <a>PutResourcePolicy</a> API action enforces two limits. A policy can't be
@@ -14710,7 +14017,7 @@ module Aws::SSM
       :limit_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
@@ -14724,24 +14031,7 @@ module Aws::SSM
     class ResourcePolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      MANAGED_INSTANCE = 'ManagedInstance'
-      EC2_INSTANCE = 'EC2Instance'
-    end
-
-    module ResourceTypeForTagging
-      DOCUMENT = 'Document'
-      MANAGED_INSTANCE = 'ManagedInstance'
-      MAINTENANCE_WINDOW = 'MaintenanceWindow'
-      PARAMETER = 'Parameter'
-      PATCH_BASELINE = 'PatchBaseline'
-      OPS_ITEM = 'OpsItem'
-      OPSMETADATA = 'OpsMetadata'
-      AUTOMATION = 'Automation'
-      ASSOCIATION = 'Association'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inventory item result attribute.</p>
@@ -14752,7 +14042,7 @@ module Aws::SSM
     class ResultAttribute < Struct.new(
       :type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -14761,7 +14051,7 @@ module Aws::SSM
     class ResumeSessionRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -14788,7 +14078,7 @@ module Aws::SSM
       :token_value,
       :stream_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the result of a document review request.</p>
@@ -14806,14 +14096,7 @@ module Aws::SSM
       :status,
       :reviewer,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReviewStatus
-      APPROVED = 'APPROVED'
-      NOT_REVIEWED = 'NOT_REVIEWED'
-      PENDING = 'PENDING'
-      REJECTED = 'REJECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Automation runbook used in a runbook workflow in Change Manager.</p>
@@ -14868,7 +14151,7 @@ module Aws::SSM
       :max_errors,
       :target_locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An S3 bucket where you want to store the results of this request.</p>
@@ -14886,7 +14169,7 @@ module Aws::SSM
       :output_s3_bucket_name,
       :output_s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A URL for the Amazon Web Services Systems Manager (Systems Manager) bucket where you want to store the
@@ -14897,7 +14180,7 @@ module Aws::SSM
     class S3OutputUrl < Struct.new(
       :output_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a scheduled execution for a maintenance window.</p>
@@ -14916,7 +14199,7 @@ module Aws::SSM
       :name,
       :execution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_id
@@ -14950,12 +14233,12 @@ module Aws::SSM
       :signal_type,
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendAutomationSignalResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -15081,7 +14364,7 @@ module Aws::SSM
       :cloud_watch_output_config,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute command
@@ -15091,7 +14374,7 @@ module Aws::SSM
     class SendCommandResult < Struct.new(
       :command,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the service quota. Service quotas, also referred to as limits, are the
@@ -15117,7 +14400,7 @@ module Aws::SSM
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service setting data structure.</p>
@@ -15175,7 +14458,7 @@ module Aws::SSM
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified service setting wasn't found. Either the service name or the setting hasn't
@@ -15185,7 +14468,7 @@ module Aws::SSM
     class ServiceSettingNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Session Manager connection to a managed node.</p>
@@ -15242,7 +14525,7 @@ module Aws::SSM
       :max_session_duration,
       :access_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for Session Manager information.</p>
@@ -15299,17 +14582,7 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionFilterKey
-      INVOKED_AFTER = 'InvokedAfter'
-      INVOKED_BEFORE = 'InvokedBefore'
-      TARGET_ID = 'Target'
-      OWNER = 'Owner'
-      STATUS = 'Status'
-      SESSION_ID = 'SessionId'
-      ACCESS_TYPE = 'AccessType'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for future use.</p>
@@ -15323,21 +14596,7 @@ module Aws::SSM
       :s3_output_url,
       :cloud_watch_output_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionState
-      ACTIVE = 'Active'
-      HISTORY = 'History'
-    end
-
-    module SessionStatus
-      CONNECTED = 'Connected'
-      CONNECTING = 'Connecting'
-      DISCONNECTED = 'Disconnected'
-      TERMINATED = 'Terminated'
-      TERMINATING = 'Terminating'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of managed nodes found for each patch severity level defined in the request
@@ -15377,7 +14636,7 @@ module Aws::SSM
       :informational_count,
       :unspecified_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:critical_count] = 0 unless options.key?(:critical_count)
@@ -15388,21 +14647,6 @@ module Aws::SSM
         options[:unspecified_count] = 0 unless options.key?(:unspecified_count)
         super
       end
-    end
-
-    module SignalType
-      APPROVE = 'Approve'
-      REJECT = 'Reject'
-      START_STEP = 'StartStep'
-      STOP_STEP = 'StopStep'
-      RESUME = 'Resume'
-      REVOKE = 'Revoke'
-    end
-
-    module SourceType
-      AWS_EC2_INSTANCE = 'AWS::EC2::Instance'
-      AWS_IOT_THING = 'AWS::IoT::Thing'
-      AWS_SSM_MANAGEDINSTANCE = 'AWS::SSM::ManagedInstance'
     end
 
     # @!attribute reason
@@ -15419,7 +14663,7 @@ module Aws::SSM
       :targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_request_id
@@ -15428,7 +14672,7 @@ module Aws::SSM
     class StartAccessRequestResponse < Struct.new(
       :access_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_ids
@@ -15437,12 +14681,12 @@ module Aws::SSM
     class StartAssociationsOnceRequest < Struct.new(
       :association_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartAssociationsOnceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_name
@@ -15555,7 +14799,7 @@ module Aws::SSM
       :alarm_configuration,
       :target_locations_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_id
@@ -15564,7 +14808,7 @@ module Aws::SSM
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scheduled_time
@@ -15659,7 +14903,7 @@ module Aws::SSM
       :scheduled_end_time,
       :change_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_id
@@ -15669,7 +14913,7 @@ module Aws::SSM
     class StartChangeRequestExecutionResult < Struct.new(
       :automation_execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_name
@@ -15689,7 +14933,7 @@ module Aws::SSM
       :document_version,
       :execution_inputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_preview_id
@@ -15698,7 +14942,7 @@ module Aws::SSM
     class StartExecutionPreviewResponse < Struct.new(
       :execution_preview_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target
@@ -15728,7 +14972,7 @@ module Aws::SSM
       :reason,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -15757,13 +15001,13 @@ module Aws::SSM
       :token_value,
       :stream_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The updated status is the same as the current status.</p>
     class StatusUnchanged < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an the execution state of an Automation step.</p>
@@ -15874,13 +15118,13 @@ module Aws::SSM
       :triggered_alarms,
       :parent_step_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:timeout_seconds] =  unless options.key?(:timeout_seconds)
-        options[:max_attempts] =  unless options.key?(:max_attempts)
-        options[:is_end] =  unless options.key?(:is_end)
-        options[:is_critical] =  unless options.key?(:is_critical)
+        options[:timeout_seconds] = nil unless options.key?(:timeout_seconds)
+        options[:max_attempts] = nil unless options.key?(:max_attempts)
+        options[:is_end] = nil unless options.key?(:is_end)
+        options[:is_critical] = nil unless options.key?(:is_critical)
         super
       end
     end
@@ -15896,19 +15140,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepExecutionFilterKey
-      START_TIME_BEFORE = 'StartTimeBefore'
-      START_TIME_AFTER = 'StartTimeAfter'
-      STEP_EXECUTION_STATUS = 'StepExecutionStatus'
-      STEP_EXECUTION_ID = 'StepExecutionId'
-      STEP_NAME = 'StepName'
-      ACTION = 'Action'
-      PARENT_STEP_EXECUTION_ID = 'ParentStepExecutionId'
-      PARENT_STEP_ITERATION = 'ParentStepIteration'
-      PARENT_STEP_ITERATOR_VALUE = 'ParentStepIteratorValue'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute automation_execution_id
@@ -15922,17 +15154,12 @@ module Aws::SSM
       :automation_execution_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopAutomationExecutionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopType
-      COMPLETE = 'Complete'
-      CANCEL = 'Cancel'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sub-type count exceeded the limit for the inventory type.</p>
@@ -15941,7 +15168,7 @@ module Aws::SSM
     class SubTypeCountLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that you assign to your Amazon Web Services resources. Tags enable you to categorize your
@@ -15958,7 +15185,7 @@ module Aws::SSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of search criteria that targets managed nodes using a key-value pair that you
@@ -16089,7 +15316,7 @@ module Aws::SSM
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You specified the <code>Safe</code> option for the DeregisterTargetFromMaintenanceWindow
@@ -16099,7 +15326,7 @@ module Aws::SSM
     class TargetInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation
@@ -16162,7 +15389,7 @@ module Aws::SSM
       :targets_max_concurrency,
       :targets_max_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_child_organization_units] = false unless options.key?(:include_child_organization_units)
@@ -16180,7 +15407,7 @@ module Aws::SSM
     class TargetNotConnected < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the resources that would be included in the actual runbook execution, if
@@ -16195,7 +15422,7 @@ module Aws::SSM
       :count,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -16209,7 +15436,7 @@ module Aws::SSM
     class TerminateSessionRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -16218,7 +15445,7 @@ module Aws::SSM
     class TerminateSessionResponse < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request or operation couldn't be performed because the service is throttling
@@ -16236,14 +15463,14 @@ module Aws::SSM
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Targets</code> parameter includes too many tags. Remove one or more tags and try
     #    the command again.</p>
     class TooManyTagsError < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are concurrent updates for a resource that supports one update at a time.</p>
@@ -16252,7 +15479,7 @@ module Aws::SSM
     class TooManyUpdates < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size of inventory data has exceeded the total size limit for the resource.</p>
@@ -16261,7 +15488,7 @@ module Aws::SSM
     class TotalSizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -16283,7 +15510,7 @@ module Aws::SSM
       :parameter_version,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute removed_labels
@@ -16296,7 +15523,7 @@ module Aws::SSM
       :removed_labels,
       :invalid_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The calendar entry contained in the specified SSM document isn't supported.</p>
@@ -16305,7 +15532,7 @@ module Aws::SSM
     class UnsupportedCalendarException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Patching for applications released by Microsoft is only available on EC2 instances and
@@ -16317,7 +15544,7 @@ module Aws::SSM
     class UnsupportedFeatureRequiredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Context</code> attribute that you specified for the <code>InventoryItem</code>
@@ -16331,7 +15558,7 @@ module Aws::SSM
       :type_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inventory item type schema version has to match supported versions in the service. Check
@@ -16341,7 +15568,7 @@ module Aws::SSM
     class UnsupportedInventorySchemaVersionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operating systems you specified isn't supported, or the operation isn't supported for
@@ -16351,7 +15578,7 @@ module Aws::SSM
     class UnsupportedOperatingSystem < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not supported for the current account. You must first enable the Systems Manager integrated experience in your account.</p>
@@ -16360,7 +15587,7 @@ module Aws::SSM
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter type isn't supported.</p>
@@ -16369,7 +15596,7 @@ module Aws::SSM
     class UnsupportedParameterType < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document doesn't support the platform type of the given managed node IDs. For example,
@@ -16379,7 +15606,7 @@ module Aws::SSM
     class UnsupportedPlatformType < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -16571,7 +15798,7 @@ module Aws::SSM
       :target_maps,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_description
@@ -16580,7 +15807,7 @@ module Aws::SSM
     class UpdateAssociationResult < Struct.new(
       :association_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -16597,7 +15824,7 @@ module Aws::SSM
       :instance_id,
       :association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_description
@@ -16606,7 +15833,7 @@ module Aws::SSM
     class UpdateAssociationStatusResult < Struct.new(
       :association_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -16619,7 +15846,7 @@ module Aws::SSM
       :name,
       :document_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -16628,7 +15855,7 @@ module Aws::SSM
     class UpdateDocumentDefaultVersionResult < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -16645,12 +15872,12 @@ module Aws::SSM
       :document_version,
       :document_reviews,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDocumentMetadataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -16699,7 +15926,7 @@ module Aws::SSM
       :document_format,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_description
@@ -16708,7 +15935,7 @@ module Aws::SSM
     class UpdateDocumentResult < Struct.new(
       :document_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -16787,7 +16014,7 @@ module Aws::SSM
       :enabled,
       :replace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -16848,7 +16075,7 @@ module Aws::SSM
       :allow_unassociated_targets,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cutoff] = 0 unless options.key?(:cutoff)
@@ -16890,7 +16117,7 @@ module Aws::SSM
       :description,
       :replace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -16919,7 +16146,7 @@ module Aws::SSM
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -17080,7 +16307,7 @@ module Aws::SSM
       :cutoff_behavior,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute window_id
@@ -17170,7 +16397,7 @@ module Aws::SSM
       :cutoff_behavior,
       :alarm_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
@@ -17195,12 +16422,12 @@ module Aws::SSM
       :instance_id,
       :iam_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateManagedInstanceRoleResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -17296,12 +16523,12 @@ module Aws::SSM
       :planned_end_time,
       :ops_item_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateOpsItemResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_metadata_arn
@@ -17318,7 +16545,7 @@ module Aws::SSM
       :metadata_to_update,
       :keys_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ops_metadata_arn
@@ -17327,7 +16554,7 @@ module Aws::SSM
     class UpdateOpsMetadataResult < Struct.new(
       :ops_metadata_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -17432,7 +16659,7 @@ module Aws::SSM
       :available_security_updates_compliance_status,
       :replace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute baseline_id
@@ -17506,10 +16733,10 @@ module Aws::SSM
       :sources,
       :available_security_updates_compliance_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:approved_patches_enable_non_security] =  unless options.key?(:approved_patches_enable_non_security)
+        options[:approved_patches_enable_non_security] = nil unless options.key?(:approved_patches_enable_non_security)
         super
       end
     end
@@ -17529,12 +16756,12 @@ module Aws::SSM
       :sync_type,
       :sync_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceDataSyncResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body of the UpdateServiceSetting API operation.</p>
@@ -17645,13 +16872,13 @@ module Aws::SSM
       :setting_id,
       :setting_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result body of the UpdateServiceSetting API operation.</p>
     class UpdateServiceSettingResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request isn't valid. Verify that you entered valid contents for the command and try
@@ -17665,7 +16892,7 @@ module Aws::SSM
       :message,
       :reason_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

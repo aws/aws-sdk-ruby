@@ -21,7 +21,7 @@ module Aws::Health
       :count,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -81,7 +81,7 @@ module Aws::Health
       :tags,
       :entity_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -92,7 +92,7 @@ module Aws::Health
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of dates and times that is used by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html">EventFilter</a> and <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html">EntityFilter</a> objects. If <code>from</code> is set and <code>to</code> is set:
@@ -112,7 +112,7 @@ module Aws::Health
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_arn
@@ -139,7 +139,7 @@ module Aws::Health
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute affected_accounts
@@ -177,7 +177,7 @@ module Aws::Health
       :event_scope_code,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_entity_filters
@@ -208,7 +208,7 @@ module Aws::Health
       :max_results,
       :organization_entity_account_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -231,7 +231,7 @@ module Aws::Health
       :failed_set,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -255,7 +255,7 @@ module Aws::Health
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -271,7 +271,7 @@ module Aws::Health
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_arns
@@ -285,7 +285,7 @@ module Aws::Health
       :event_arns,
       :aws_account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_entity_aggregates
@@ -294,7 +294,7 @@ module Aws::Health
     class DescribeEntityAggregatesForOrganizationResponse < Struct.new(
       :organization_entity_aggregates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_arns
@@ -304,7 +304,7 @@ module Aws::Health
     class DescribeEntityAggregatesRequest < Struct.new(
       :event_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_aggregates
@@ -313,7 +313,7 @@ module Aws::Health
     class DescribeEntityAggregatesResponse < Struct.new(
       :entity_aggregates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -337,7 +337,7 @@ module Aws::Health
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_aggregates
@@ -353,7 +353,7 @@ module Aws::Health
       :event_aggregates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_event_detail_filters
@@ -367,7 +367,7 @@ module Aws::Health
       :organization_event_detail_filters,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_set
@@ -380,7 +380,7 @@ module Aws::Health
       :successful_set,
       :failed_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_arns
@@ -394,7 +394,7 @@ module Aws::Health
       :event_arns,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_set
@@ -407,7 +407,7 @@ module Aws::Health
       :successful_set,
       :failed_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -435,7 +435,7 @@ module Aws::Health
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_types
@@ -457,7 +457,7 @@ module Aws::Health
       :event_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -481,7 +481,7 @@ module Aws::Health
       :max_results,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -497,7 +497,7 @@ module Aws::Health
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -521,7 +521,7 @@ module Aws::Health
       :max_results,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -537,7 +537,7 @@ module Aws::Health
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute health_service_access_status_for_organization
@@ -548,7 +548,7 @@ module Aws::Health
     class DescribeHealthServiceStatusForOrganizationResponse < Struct.new(
       :health_service_access_status_for_organization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A JSON set of elements including the <code>awsAccountId</code>, <code>eventArn</code> and a set of <code>statusCodes</code>.</p>
@@ -573,7 +573,7 @@ module Aws::Health
       :aws_account_id,
       :status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of entities that are affected by one or more events. Returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html">DescribeEntityAggregates</a> operation.</p>
@@ -598,7 +598,7 @@ module Aws::Health
       :count,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -638,7 +638,7 @@ module Aws::Health
       :tags,
       :status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an Health event.</p>
@@ -736,7 +736,7 @@ module Aws::Health
       :status_code,
       :event_scope_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values used to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> and <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html">DescribeAffectedEntitiesForOrganization</a> operations.</p>
@@ -757,7 +757,7 @@ module Aws::Health
       :event_arn,
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of events of each issue type. Returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html">DescribeEventAggregates</a> operation.</p>
@@ -771,7 +771,7 @@ module Aws::Health
       :aggregate_value,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -787,7 +787,7 @@ module Aws::Health
     class EventDescription < Struct.new(
       :latest_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an event. A combination of an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a> object, an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html">EventDescription</a> object, and additional metadata about the event. Returned by
@@ -806,7 +806,7 @@ module Aws::Health
       :event_description,
       :event_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html">DescribeEventDetails</a> operation can't find a specified event.</p>
@@ -831,7 +831,7 @@ module Aws::Health
       :error_name,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values to use to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> and
@@ -898,7 +898,7 @@ module Aws::Health
       :tags,
       :event_status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metadata about a type of event that is reported by Health. The
@@ -928,7 +928,7 @@ module Aws::Health
       :code,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values to use to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html">DescribeEventTypes</a>
@@ -949,7 +949,7 @@ module Aws::Health
       :services,
       :event_type_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified pagination token (<code>nextToken</code>) is not valid.</p>
@@ -958,7 +958,7 @@ module Aws::Health
     class InvalidPaginationToken < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html">DescribeAffectedEntitiesForOrganization</a> operation can't find or process a
@@ -992,7 +992,7 @@ module Aws::Health
       :error_name,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregate results of entities affected by the specified event in your organization.
@@ -1017,7 +1017,7 @@ module Aws::Health
       :statuses,
       :accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -1098,7 +1098,7 @@ module Aws::Health
       :last_updated_time,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about an event. A combination of an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a> object, an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html">EventDescription</a> object, and additional metadata about the event. Returned by
@@ -1141,7 +1141,7 @@ module Aws::Health
       :event_description,
       :event_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> operation can't find a specified
@@ -1185,7 +1185,7 @@ module Aws::Health
       :error_name,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html">DescribeEventsForOrganization</a> operation.</p>
@@ -1256,7 +1256,7 @@ module Aws::Health
       :event_type_categories,
       :event_status_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified locale is not supported.</p>
@@ -1265,38 +1265,7 @@ module Aws::Health
     class UnsupportedLocale < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityStatusCode
-      IMPAIRED = 'IMPAIRED'
-      UNIMPAIRED = 'UNIMPAIRED'
-      UNKNOWN = 'UNKNOWN'
-      PENDING = 'PENDING'
-      RESOLVED = 'RESOLVED'
-    end
-
-    module EventAggregateField
-      EventTypeCategory = 'eventTypeCategory'
-    end
-
-    module EventScopeCode
-      PUBLIC = 'PUBLIC'
-      ACCOUNT_SPECIFIC = 'ACCOUNT_SPECIFIC'
-      NONE = 'NONE'
-    end
-
-    module EventStatusCode
-      OPEN = 'open'
-      CLOSED = 'closed'
-      UPCOMING = 'upcoming'
-    end
-
-    module EventTypeCategory
-      ISSUE = 'issue'
-      ACCOUNT_NOTIFICATION = 'accountNotification'
-      SCHEDULED_CHANGE = 'scheduledChange'
-      INVESTIGATION = 'investigation'
+      include ::Smithy::Schema::Structure
     end
 
   end

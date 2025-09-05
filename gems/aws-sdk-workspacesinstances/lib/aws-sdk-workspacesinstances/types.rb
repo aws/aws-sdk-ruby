@@ -13,12 +13,7 @@ module Aws::WorkspacesInstances
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmdSevSnpEnum
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies volume attachment parameters.</p>
@@ -36,24 +31,13 @@ module Aws::WorkspacesInstances
       :volume_id,
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms volume attachment.</p>
     class AssociateVolumeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoRecoveryEnum
-      DISABLED = 'disabled'
-      DEFAULT = 'default'
-    end
-
-    module BandwidthWeightingEnum
-      DEFAULT = 'default'
-      VPC_1 = 'vpc-1'
-      EBS_1 = 'ebs-1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines device mapping for WorkSpace Instance storage.</p>
@@ -75,13 +59,7 @@ module Aws::WorkspacesInstances
       :no_device,
       :virtual_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationPreferenceEnum
-      CAPACITY_RESERVATIONS_ONLY = 'capacity-reservations-only'
-      OPEN = 'open'
-      NONE = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies capacity reservation preferences.</p>
@@ -95,7 +73,7 @@ module Aws::WorkspacesInstances
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a specific capacity reservation.</p>
@@ -109,7 +87,7 @@ module Aws::WorkspacesInstances
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Signals a conflict with the current state of the resource.</p>
@@ -127,7 +105,7 @@ module Aws::WorkspacesInstances
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines connection tracking parameters for network interfaces.</p>
@@ -145,12 +123,7 @@ module Aws::WorkspacesInstances
       :udp_stream_timeout,
       :udp_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CpuCreditsEnum
-      STANDARD = 'standard'
-      UNLIMITED = 'unlimited'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures CPU-specific settings for WorkSpace Instance.</p>
@@ -168,7 +141,7 @@ module Aws::WorkspacesInstances
       :core_count,
       :threads_per_core,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies volume creation parameters.</p>
@@ -214,7 +187,7 @@ module Aws::WorkspacesInstances
       :throughput,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the created volume identifier.</p>
@@ -224,7 +197,7 @@ module Aws::WorkspacesInstances
     class CreateVolumeResponse < Struct.new(
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the configuration parameters for creating a new WorkSpaces Instance.</p>
@@ -242,7 +215,7 @@ module Aws::WorkspacesInstances
       :tags,
       :managed_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the unique identifier for the newly created WorkSpaces Instance.</p>
@@ -252,7 +225,7 @@ module Aws::WorkspacesInstances
     class CreateWorkspaceInstanceResponse < Struct.new(
       :workspace_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines CPU credit configuration for burstable instances.</p>
@@ -262,7 +235,7 @@ module Aws::WorkspacesInstances
     class CreditSpecificationRequest < Struct.new(
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the volume to delete.</p>
@@ -272,13 +245,13 @@ module Aws::WorkspacesInstances
     class DeleteVolumeRequest < Struct.new(
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms volume deletion.</p>
     class DeleteVolumeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The WorkSpace to delete</p>
@@ -288,18 +261,13 @@ module Aws::WorkspacesInstances
     class DeleteWorkspaceInstanceRequest < Struct.new(
       :workspace_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms the successful deletion of the specified WorkSpace Instance.</p>
     class DeleteWorkspaceInstanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DisassociateModeEnum
-      FORCE = 'FORCE'
-      NO_FORCE = 'NO_FORCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies volume detachment parameters.</p>
@@ -321,13 +289,13 @@ module Aws::WorkspacesInstances
       :device,
       :disassociate_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms volume detachment.</p>
     class DisassociateVolumeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Captures detailed error information for EC2 instance operations.</p>
@@ -345,7 +313,7 @@ module Aws::WorkspacesInstances
       :ec2_exception_type,
       :ec2_error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an EC2 instance managed by WorkSpaces.</p>
@@ -355,7 +323,7 @@ module Aws::WorkspacesInstances
     class EC2ManagedInstance < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines configuration for an Elastic Block Store volume.</p>
@@ -385,7 +353,7 @@ module Aws::WorkspacesInstances
       :throughput,
       :volume_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines Elastic Network Adapter (ENA) Scalable Reliable Datagram (SRD) configuration.</p>
@@ -399,7 +367,7 @@ module Aws::WorkspacesInstances
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies UDP configuration for ENA SRD.</p>
@@ -409,7 +377,7 @@ module Aws::WorkspacesInstances
     class EnaSrdUdpSpecificationRequest < Struct.new(
       :ena_srd_udp_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures AWS Nitro Enclave options for the WorkSpace Instance.</p>
@@ -419,7 +387,7 @@ module Aws::WorkspacesInstances
     class EnclaveOptionsRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the WorkSpaces Instance to retrieve detailed information for.</p>
@@ -429,7 +397,7 @@ module Aws::WorkspacesInstances
     class GetWorkspaceInstanceRequest < Struct.new(
       :workspace_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides comprehensive details about the requested WorkSpaces Instance.</p>
@@ -455,7 +423,7 @@ module Aws::WorkspacesInstances
       :workspace_instance_id,
       :ec2_managed_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines hibernation configuration for the WorkSpace Instance.</p>
@@ -465,27 +433,7 @@ module Aws::WorkspacesInstances
     class HibernationOptionsRequest < Struct.new(
       :configured,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostnameTypeEnum
-      IP_NAME = 'ip-name'
-      RESOURCE_NAME = 'resource-name'
-    end
-
-    module HttpEndpointEnum
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-    end
-
-    module HttpProtocolIpv6Enum
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-    end
-
-    module HttpTokensEnum
-      OPTIONAL = 'optional'
-      REQUIRED = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines IAM instance profile configuration for WorkSpace Instance.</p>
@@ -499,12 +447,7 @@ module Aws::WorkspacesInstances
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceInterruptionBehaviorEnum
-      HIBERNATE = 'hibernate'
-      STOP = 'stop'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an IPv6 address configuration for a WorkSpace Instance.</p>
@@ -518,7 +461,7 @@ module Aws::WorkspacesInstances
       :ipv6_address,
       :is_primary_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures automatic maintenance settings for WorkSpace Instance.</p>
@@ -528,7 +471,7 @@ module Aws::WorkspacesInstances
     class InstanceMaintenanceOptionsRequest < Struct.new(
       :auto_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures marketplace-specific instance deployment options.</p>
@@ -542,7 +485,7 @@ module Aws::WorkspacesInstances
       :market_type,
       :spot_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines instance metadata service configuration.</p>
@@ -568,12 +511,7 @@ module Aws::WorkspacesInstances
       :http_tokens,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMetadataTagsEnum
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines network interface configuration for WorkSpace Instance.</p>
@@ -663,7 +601,7 @@ module Aws::WorkspacesInstances
       :groups,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures network performance settings for WorkSpace Instance.</p>
@@ -673,7 +611,7 @@ module Aws::WorkspacesInstances
     class InstanceNetworkPerformanceOptionsRequest < Struct.new(
       :bandwidth_weighting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a specific WorkSpace Instance type.</p>
@@ -683,13 +621,7 @@ module Aws::WorkspacesInstances
     class InstanceTypeInfo < Struct.new(
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InterfaceTypeEnum
-      INTERFACE = 'interface'
-      EFA = 'efa'
-      EFA_ONLY = 'efa-only'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates an unexpected server-side error occurred.</p>
@@ -703,7 +635,7 @@ module Aws::WorkspacesInstances
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies IPv4 prefix configuration for network interfaces.</p>
@@ -713,7 +645,7 @@ module Aws::WorkspacesInstances
     class Ipv4PrefixSpecificationRequest < Struct.new(
       :ipv4_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies IPv6 prefix configuration for network interfaces.</p>
@@ -723,7 +655,7 @@ module Aws::WorkspacesInstances
     class Ipv6PrefixSpecificationRequest < Struct.new(
       :ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies license configuration for WorkSpace Instance.</p>
@@ -733,7 +665,7 @@ module Aws::WorkspacesInstances
     class LicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines input parameters for retrieving supported WorkSpaces Instances instance types.</p>
@@ -747,7 +679,7 @@ module Aws::WorkspacesInstances
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of instance types supported by WorkSpaces Instances.</p>
@@ -761,7 +693,7 @@ module Aws::WorkspacesInstances
       :instance_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines input parameters for retrieving supported WorkSpaces Instances regions.</p>
@@ -775,7 +707,7 @@ module Aws::WorkspacesInstances
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of supported AWS regions for WorkSpaces Instances.</p>
@@ -789,7 +721,7 @@ module Aws::WorkspacesInstances
       :regions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the WorkSpace Instance to retrieve tags for.</p>
@@ -799,7 +731,7 @@ module Aws::WorkspacesInstances
     class ListTagsForResourceRequest < Struct.new(
       :workspace_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the list of tags for the specified WorkSpace Instance.</p>
@@ -809,7 +741,7 @@ module Aws::WorkspacesInstances
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines filters and pagination parameters for retrieving WorkSpaces Instances.</p>
@@ -827,7 +759,7 @@ module Aws::WorkspacesInstances
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of WorkSpaces Instances matching the specified criteria.</p>
@@ -841,7 +773,7 @@ module Aws::WorkspacesInstances
       :workspace_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines comprehensive configuration for a managed WorkSpace Instance.</p>
@@ -975,12 +907,7 @@ module Aws::WorkspacesInstances
       :tag_specifications,
       :user_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketTypeEnum
-      SPOT = 'spot'
-      CAPACITY_BLOCK = 'capacity-block'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines instance placement configuration for WorkSpace Instance.</p>
@@ -1018,7 +945,7 @@ module Aws::WorkspacesInstances
       :partition_number,
       :tenancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures private DNS name settings for WorkSpace Instance.</p>
@@ -1036,7 +963,7 @@ module Aws::WorkspacesInstances
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines private IP address configuration for network interface.</p>
@@ -1050,16 +977,7 @@ module Aws::WorkspacesInstances
       :primary,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProvisionStateEnum
-      ALLOCATING = 'ALLOCATING'
-      ALLOCATED = 'ALLOCATED'
-      DEALLOCATING = 'DEALLOCATING'
-      DEALLOCATED = 'DEALLOCATED'
-      ERROR_ALLOCATING = 'ERROR_ALLOCATING'
-      ERROR_DEALLOCATING = 'ERROR_DEALLOCATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an AWS region supported by WorkSpaces Instances.</p>
@@ -1069,7 +987,7 @@ module Aws::WorkspacesInstances
     class Region < Struct.new(
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the requested resource could not be found.</p>
@@ -1087,14 +1005,7 @@ module Aws::WorkspacesInstances
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceTypeEnum
-      INSTANCE = 'instance'
-      VOLUME = 'volume'
-      SPOT_INSTANCES_REQUEST = 'spot-instances-request'
-      NETWORK_INTERFACE = 'network-interface'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures detailed monitoring for WorkSpace Instance.</p>
@@ -1104,7 +1015,7 @@ module Aws::WorkspacesInstances
     class RunInstancesMonitoringEnabled < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a service quota has been exceeded.</p>
@@ -1130,12 +1041,7 @@ module Aws::WorkspacesInstances
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotInstanceTypeEnum
-      ONE_TIME = 'one-time'
-      PERSISTENT = 'persistent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines configuration for spot instance deployment.</p>
@@ -1161,7 +1067,7 @@ module Aws::WorkspacesInstances
       :spot_instance_type,
       :valid_until_utc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a key-value metadata tag.</p>
@@ -1175,7 +1081,7 @@ module Aws::WorkspacesInstances
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies tags to add to a WorkSpace Instance.</p>
@@ -1189,13 +1095,13 @@ module Aws::WorkspacesInstances
       :workspace_instance_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms successful tag addition.</p>
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines tagging configuration for a resource.</p>
@@ -1209,13 +1115,7 @@ module Aws::WorkspacesInstances
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TenancyEnum
-      DEFAULT = 'default'
-      DEDICATED = 'dedicated'
-      HOST = 'host'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the request rate has exceeded limits.</p>
@@ -1237,7 +1137,7 @@ module Aws::WorkspacesInstances
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies tags to remove from a WorkSpace Instance.</p>
@@ -1251,13 +1151,13 @@ module Aws::WorkspacesInstances
       :workspace_instance_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Confirms successful tag removal.</p>
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates invalid input parameters in the request.</p>
@@ -1275,7 +1175,7 @@ module Aws::WorkspacesInstances
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a validation error field in an API request.</p>
@@ -1293,26 +1193,7 @@ module Aws::WorkspacesInstances
       :reason,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      UNSUPPORTED_OPERATION = 'UNSUPPORTED_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      DEPENDENCY_FAILURE = 'DEPENDENCY_FAILURE'
-      OTHER = 'OTHER'
-    end
-
-    module VolumeTypeEnum
-      STANDARD = 'standard'
-      IO1 = 'io1'
-      IO2 = 'io2'
-      GP2 = 'gp2'
-      SC1 = 'sc1'
-      ST1 = 'st1'
-      GP3 = 'gp3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single WorkSpace Instance.</p>
@@ -1330,7 +1211,7 @@ module Aws::WorkspacesInstances
       :workspace_instance_id,
       :ec2_managed_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Captures errors specific to WorkSpace Instance operations.</p>
@@ -1344,7 +1225,7 @@ module Aws::WorkspacesInstances
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

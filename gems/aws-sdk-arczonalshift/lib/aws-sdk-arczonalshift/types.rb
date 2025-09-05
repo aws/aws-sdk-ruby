@@ -12,22 +12,7 @@ module Aws::ARCZonalShift
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppliedStatus
-      APPLIED = 'APPLIED'
-      NOT_APPLIED = 'NOT_APPLIED'
-    end
-
-    module AutoshiftAppliedStatus
-      APPLIED = 'APPLIED'
-      NOT_APPLIED = 'NOT_APPLIED'
-    end
-
-    module AutoshiftExecutionStatus
-      ACTIVE = 'ACTIVE'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex structure that lists an autoshift that is currently active for a managed resource and information about the autoshift.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.how-it-works.html">How zonal autoshift and practice runs work</a> in the Amazon Application Recovery Controller Developer Guide.</p>
@@ -45,12 +30,7 @@ module Aws::ARCZonalShift
       :away_from,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoshiftObserverNotificationStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an autoshift. Amazon Web Services starts an autoshift to temporarily move traffic for a resource away from an Availability Zone in an Amazon Web Services Region when Amazon Web Services determines that there's an issue in the Availability Zone that could potentially affect customers. You can configure zonal autoshift in ARC for managed resources in your Amazon Web Services account in a Region. Supported Amazon Web Services resources are automatically registered with ARC.</p> <p>Autoshifts are temporary. When the Availability Zone recovers, Amazon Web Services ends the autoshift, and traffic for the resource is no longer directed to the other Availability Zones in the Region.</p> <p>You can stop an autoshift for a resource by disabling zonal autoshift.</p>
@@ -72,7 +52,7 @@ module Aws::ARCZonalShift
       :start_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -81,7 +61,7 @@ module Aws::ARCZonalShift
     class CancelPracticeRunRequest < Struct.new(
       :zonal_shift_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -114,7 +94,7 @@ module Aws::ARCZonalShift
       :status,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -147,7 +127,7 @@ module Aws::ARCZonalShift
       :status,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -156,7 +136,7 @@ module Aws::ARCZonalShift
     class CancelZonalShiftRequest < Struct.new(
       :zonal_shift_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the resource.</p>
@@ -173,21 +153,7 @@ module Aws::ARCZonalShift
       :reason,
       :zonal_shift_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictExceptionReason
-      ZONAL_SHIFT_ALREADY_EXISTS = 'ZonalShiftAlreadyExists'
-      ZONAL_SHIFT_STATUS_NOT_ACTIVE = 'ZonalShiftStatusNotActive'
-      SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT = 'SimultaneousZonalShiftsConflict'
-      PRACTICE_CONFIGURATION_ALREADY_EXISTS = 'PracticeConfigurationAlreadyExists'
-      AUTOSHIFT_ENABLED = 'AutoShiftEnabled'
-      PRACTICE_CONFIGURATION_DOES_NOT_EXIST = 'PracticeConfigurationDoesNotExist'
-      ZONAL_AUTOSHIFT_ACTIVE = 'ZonalAutoshiftActive'
-      PRACTICE_OUTCOME_ALARMS_RED = 'PracticeOutcomeAlarmsRed'
-      PRACTICE_BLOCKING_ALARMS_RED = 'PracticeBlockingAlarmsRed'
-      PRACTICE_IN_BLOCKED_DATES = 'PracticeInBlockedDates'
-      PRACTICE_IN_BLOCKED_WINDOWS = 'PracticeInBlockedWindows'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control condition is an alarm that you specify for a practice run. When you configure practice runs with zonal autoshift for a resource, you specify Amazon CloudWatch alarms, which you create in CloudWatch to use with the practice run. The alarms that you specify are an <i>outcome alarm</i>, to monitor application health during practice runs and, optionally, a <i>blocking alarm</i>, to block practice runs from starting or to interrupt a practice run in progress.</p> <p>Control condition alarms do not apply for autoshifts.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-autoshift.considerations.html"> Considerations when you configure zonal autoshift</a> in the Amazon Application Recovery Controller Developer Guide.</p>
@@ -201,11 +167,7 @@ module Aws::ARCZonalShift
       :type,
       :alarm_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ControlConditionType
-      CLOUDWATCH = 'CLOUDWATCH'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -230,7 +192,7 @@ module Aws::ARCZonalShift
       :blocking_alarms,
       :outcome_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -251,7 +213,7 @@ module Aws::ARCZonalShift
       :zonal_autoshift_status,
       :practice_run_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -260,7 +222,7 @@ module Aws::ARCZonalShift
     class DeletePracticeRunConfigurationRequest < Struct.new(
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -277,12 +239,12 @@ module Aws::ARCZonalShift
       :name,
       :zonal_autoshift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAutoshiftObserverNotificationStatusRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -291,7 +253,7 @@ module Aws::ARCZonalShift
     class GetAutoshiftObserverNotificationStatusResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -300,7 +262,7 @@ module Aws::ARCZonalShift
     class GetManagedResourceRequest < Struct.new(
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -333,7 +295,7 @@ module Aws::ARCZonalShift
       :practice_run_configuration,
       :zonal_autoshift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an internal server error.</p>
@@ -342,7 +304,7 @@ module Aws::ARCZonalShift
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -359,7 +321,7 @@ module Aws::ARCZonalShift
       :status,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -372,7 +334,7 @@ module Aws::ARCZonalShift
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -385,7 +347,7 @@ module Aws::ARCZonalShift
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -398,7 +360,7 @@ module Aws::ARCZonalShift
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -419,7 +381,7 @@ module Aws::ARCZonalShift
       :max_results,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -432,7 +394,7 @@ module Aws::ARCZonalShift
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex structure for a managed resource in an Amazon Web Services account with information about zonal shifts and autoshifts.</p> <p>You can start a zonal shift in ARC for a managed resource to temporarily move traffic for the resource away from an Availability Zone in an Amazon Web Services Region. You can also configure zonal autoshift for a managed resource.</p> <note> <p>At this time, managed resources are Amazon EC2 Auto Scaling groups, Amazon Elastic Kubernetes Service, Network Load Balancers, and Application Load Balancer.</p> </note>
@@ -470,7 +432,7 @@ module Aws::ARCZonalShift
       :zonal_autoshift_status,
       :practice_run_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A practice run configuration for a resource includes the Amazon CloudWatch alarms that you've specified for a practice run, as well as any blocked dates or blocked windows for the practice run. When a resource has a practice run configuration, ARC shifts traffic for the resource weekly for practice runs.</p> <p>Practice runs are required for zonal autoshift. The zonal shifts that ARC starts for practice runs help you to ensure that shifting away traffic from an Availability Zone during an autoshift is safe for your application.</p> <p>You can update or delete a practice run configuration. Before you delete a practice run configuration, you must disable zonal autoshift for the resource. A practice run configuration is required when zonal autoshift is enabled.</p>
@@ -492,20 +454,12 @@ module Aws::ARCZonalShift
       :blocked_windows,
       :blocked_dates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:blocked_dates] = [] unless options.key?(:blocked_dates)
         super
       end
-    end
-
-    module PracticeRunOutcome
-      FAILED = 'FAILED'
-      INTERRUPTED = 'INTERRUPTED'
-      PENDING = 'PENDING'
-      SUCCEEDED = 'SUCCEEDED'
-      CAPACITY_CHECK_FAILED = 'CAPACITY_CHECK_FAILED'
     end
 
     # <p>The input requested a resource that was not found.</p>
@@ -514,14 +468,7 @@ module Aws::ARCZonalShift
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShiftType
-      ZONAL_SHIFT = 'ZONAL_SHIFT'
-      PRACTICE_RUN = 'PRACTICE_RUN'
-      FIS_EXPERIMENT = 'FIS_EXPERIMENT'
-      ZONAL_AUTOSHIFT = 'ZONAL_AUTOSHIFT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -538,7 +485,7 @@ module Aws::ARCZonalShift
       :away_from,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -571,7 +518,7 @@ module Aws::ARCZonalShift
       :status,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -604,7 +551,7 @@ module Aws::ARCZonalShift
       :status,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -625,7 +572,7 @@ module Aws::ARCZonalShift
       :expires_in,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -634,7 +581,7 @@ module Aws::ARCZonalShift
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -643,7 +590,7 @@ module Aws::ARCZonalShift
     class UpdateAutoshiftObserverNotificationStatusRequest < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -652,7 +599,7 @@ module Aws::ARCZonalShift
     class UpdateAutoshiftObserverNotificationStatusResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -677,7 +624,7 @@ module Aws::ARCZonalShift
       :blocking_alarms,
       :outcome_alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -698,7 +645,7 @@ module Aws::ARCZonalShift
       :zonal_autoshift_status,
       :practice_run_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -711,7 +658,7 @@ module Aws::ARCZonalShift
       :resource_identifier,
       :zonal_autoshift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -724,7 +671,7 @@ module Aws::ARCZonalShift
       :resource_identifier,
       :zonal_autoshift_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -757,7 +704,7 @@ module Aws::ARCZonalShift
       :status,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zonal_shift_id
@@ -774,7 +721,7 @@ module Aws::ARCZonalShift
       :comment,
       :expires_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -787,28 +734,7 @@ module Aws::ARCZonalShift
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      INVALID_EXPIRES_IN = 'InvalidExpiresIn'
-      INVALID_STATUS = 'InvalidStatus'
-      MISSING_VALUE = 'MissingValue'
-      INVALID_TOKEN = 'InvalidToken'
-      INVALID_RESOURCE_IDENTIFIER = 'InvalidResourceIdentifier'
-      INVALID_AZ = 'InvalidAz'
-      UNSUPPORTED_AZ = 'UnsupportedAz'
-      INVALID_ALARM_CONDITION = 'InvalidAlarmCondition'
-      INVALID_CONDITION_TYPE = 'InvalidConditionType'
-      INVALID_PRACTICE_BLOCKER = 'InvalidPracticeBlocker'
-      FIS_EXPERIMENT_UPDATE_NOT_ALLOWED = 'FISExperimentUpdateNotAllowed'
-      AUTOSHIFT_UPDATE_NOT_ALLOWED = 'AutoshiftUpdateNotAllowed'
-      UNSUPPORTED_PRACTICE_CANCEL_SHIFT_TYPE = 'UnsupportedPracticeCancelShiftType'
-    end
-
-    module ZonalAutoshiftStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex structure that lists the zonal shifts for a managed resource and their statuses for the resource.</p>
@@ -850,13 +776,7 @@ module Aws::ARCZonalShift
       :shift_type,
       :practice_run_outcome,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ZonalShiftStatus
-      ACTIVE = 'ACTIVE'
-      EXPIRED = 'EXPIRED'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists information about zonal shifts in Amazon Application Recovery Controller, including zonal shifts that you start yourself and zonal shifts that ARC starts on your behalf for practice runs with zonal autoshift.</p> <p>Zonal shifts are temporary, including customer-initiated zonal shifts and the zonal autoshift practice run zonal shifts that ARC starts weekly, on your behalf. A zonal shift that a customer starts can be active for up to three days (72 hours). A practice run zonal shift has a 30 minute duration.</p>
@@ -898,7 +818,7 @@ module Aws::ARCZonalShift
       :shift_type,
       :practice_run_outcome,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

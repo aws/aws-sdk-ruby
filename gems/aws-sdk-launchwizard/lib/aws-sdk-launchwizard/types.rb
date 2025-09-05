@@ -47,7 +47,7 @@ module Aws::LaunchWizard
       :dry_run,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -56,7 +56,7 @@ module Aws::LaunchWizard
     class CreateDeploymentOutput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -65,7 +65,7 @@ module Aws::LaunchWizard
     class DeleteDeploymentInput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -78,7 +78,7 @@ module Aws::LaunchWizard
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A field that details a condition of the specifications for a deployment.</p>
@@ -98,7 +98,7 @@ module Aws::LaunchWizard
       :value,
       :comparator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data associated with a deployment.</p>
@@ -154,7 +154,7 @@ module Aws::LaunchWizard
       :tags,
       :deployment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the deployment data.</p>
@@ -184,7 +184,7 @@ module Aws::LaunchWizard
       :status,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the deployment event data.</p>
@@ -210,7 +210,7 @@ module Aws::LaunchWizard
       :status_reason,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to return more specific results from a
@@ -228,12 +228,7 @@ module Aws::LaunchWizard
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentFilterKey
-      WORKLOAD_NAME = 'WORKLOAD_NAME'
-      DEPLOYMENT_STATUS = 'DEPLOYMENT_STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A field that details a specification of a deployment pattern.</p>
@@ -259,30 +254,7 @@ module Aws::LaunchWizard
       :required,
       :conditionals,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentStatus
-      COMPLETED = 'COMPLETED'
-      CREATING = 'CREATING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_INITIATING = 'DELETE_INITIATING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      VALIDATING = 'VALIDATING'
-    end
-
-    module EventStatus
-      CANCELED = 'CANCELED'
-      CANCELING = 'CANCELING'
-      COMPLETED = 'COMPLETED'
-      CREATED = 'CREATED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      PENDING = 'PENDING'
-      TIMED_OUT = 'TIMED_OUT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -291,7 +263,7 @@ module Aws::LaunchWizard
     class GetDeploymentInput < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment
@@ -300,7 +272,7 @@ module Aws::LaunchWizard
     class GetDeploymentOutput < Struct.new(
       :deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_name
@@ -313,7 +285,7 @@ module Aws::LaunchWizard
       :workload_name,
       :deployment_pattern_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_deployment_pattern
@@ -322,7 +294,7 @@ module Aws::LaunchWizard
     class GetWorkloadDeploymentPatternOutput < Struct.new(
       :workload_deployment_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_name
@@ -331,7 +303,7 @@ module Aws::LaunchWizard
     class GetWorkloadInput < Struct.new(
       :workload_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload
@@ -340,7 +312,7 @@ module Aws::LaunchWizard
     class GetWorkloadOutput < Struct.new(
       :workload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred. Retry your request, but if the problem persists, contact
@@ -350,7 +322,7 @@ module Aws::LaunchWizard
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -369,7 +341,7 @@ module Aws::LaunchWizard
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_events
@@ -383,7 +355,7 @@ module Aws::LaunchWizard
       :deployment_events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -416,7 +388,7 @@ module Aws::LaunchWizard
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployments
@@ -430,7 +402,7 @@ module Aws::LaunchWizard
       :deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -439,7 +411,7 @@ module Aws::LaunchWizard
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -448,7 +420,7 @@ module Aws::LaunchWizard
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_name
@@ -467,7 +439,7 @@ module Aws::LaunchWizard
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workload_deployment_patterns
@@ -481,7 +453,7 @@ module Aws::LaunchWizard
       :workload_deployment_patterns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -496,7 +468,7 @@ module Aws::LaunchWizard
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workloads
@@ -510,7 +482,7 @@ module Aws::LaunchWizard
       :workloads,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded an Launch Wizard resource limit. For example, you might have too many
@@ -520,7 +492,7 @@ module Aws::LaunchWizard
     class ResourceLimitException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified workload or deployment resource can't be found.</p>
@@ -529,7 +501,7 @@ module Aws::LaunchWizard
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -542,12 +514,12 @@ module Aws::LaunchWizard
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -560,12 +532,12 @@ module Aws::LaunchWizard
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -574,7 +546,7 @@ module Aws::LaunchWizard
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a workload.</p>
@@ -608,7 +580,7 @@ module Aws::LaunchWizard
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes workload data.</p>
@@ -622,7 +594,7 @@ module Aws::LaunchWizard
       :workload_name,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data that details a workload deployment pattern.</p>
@@ -666,7 +638,7 @@ module Aws::LaunchWizard
       :status_message,
       :specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a workload deployment pattern.</p>
@@ -700,21 +672,7 @@ module Aws::LaunchWizard
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkloadDeploymentPatternStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      DISABLED = 'DISABLED'
-      DELETED = 'DELETED'
-    end
-
-    module WorkloadStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      DISABLED = 'DISABLED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
   end

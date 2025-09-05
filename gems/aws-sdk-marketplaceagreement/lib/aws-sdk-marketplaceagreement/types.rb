@@ -54,7 +54,7 @@ module Aws::MarketplaceAgreement
       :fixed_upfront_pricing_term,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class LegalTerm < AcceptedTerm; end
       class SupportTerm < AcceptedTerm; end
@@ -78,7 +78,7 @@ module Aws::MarketplaceAgreement
     class Acceptor < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User does not have sufficient access to perform this action.</p>
@@ -91,19 +91,7 @@ module Aws::MarketplaceAgreement
       :request_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgreementStatus
-      ACTIVE = 'ACTIVE'
-      ARCHIVED = 'ARCHIVED'
-      CANCELLED = 'CANCELLED'
-      EXPIRED = 'EXPIRED'
-      RENEWED = 'RENEWED'
-      REPLACED = 'REPLACED'
-      ROLLED_BACK = 'ROLLED_BACK'
-      SUPERSEDED = 'SUPERSEDED'
-      TERMINATED = 'TERMINATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the agreement, including top-level attributes (for example, the agreement
@@ -151,7 +139,7 @@ module Aws::MarketplaceAgreement
       :proposal_summary,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables you and your customers to move your existing agreements to AWS Marketplace. The
@@ -163,7 +151,7 @@ module Aws::MarketplaceAgreement
     class ByolPricingTerm < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a prepaid payment model that allows buyers to configure the entitlements they
@@ -186,7 +174,7 @@ module Aws::MarketplaceAgreement
       :rate_cards,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a prepaid payment model that allows buyers to configure the entitlements they
@@ -203,7 +191,7 @@ module Aws::MarketplaceAgreement
       :selector_value,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Within the prepaid payment model defined under <code>ConfigurableUpfrontPricingTerm</code>, the <code>RateCardItem</code> defines all the various rate cards (including pricing and dimensions) that have been proposed.</p>
@@ -221,7 +209,7 @@ module Aws::MarketplaceAgreement
       :constraints,
       :rate_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines limits on how the term can be configured by acceptors. </p>
@@ -239,7 +227,7 @@ module Aws::MarketplaceAgreement
       :multiple_dimension_selection,
       :quantity_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -248,7 +236,7 @@ module Aws::MarketplaceAgreement
     class DescribeAgreementInput < Struct.new(
       :agreement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -349,7 +337,7 @@ module Aws::MarketplaceAgreement
       :proposal_summary,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the dimensions that the acceptor has purchased from the overall set of
@@ -370,7 +358,7 @@ module Aws::MarketplaceAgreement
       :dimension_key,
       :dimension_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dimension_value] = 0 unless options.key?(:dimension_value)
@@ -419,7 +407,7 @@ module Aws::MarketplaceAgreement
       :url,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Estimated cost of the agreement.</p>
@@ -451,7 +439,7 @@ module Aws::MarketplaceAgreement
       :currency_code,
       :agreement_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter name and value pair that is used to return a more specific list of results.
@@ -467,7 +455,7 @@ module Aws::MarketplaceAgreement
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a prepaid pricing model where the customers are charged a fixed upfront
@@ -495,7 +483,7 @@ module Aws::MarketplaceAgreement
       :price,
       :grants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a short-term free pricing model where the buyers aren’t charged anything within
@@ -515,7 +503,7 @@ module Aws::MarketplaceAgreement
       :duration,
       :grants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -532,7 +520,7 @@ module Aws::MarketplaceAgreement
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accepted_terms
@@ -546,7 +534,7 @@ module Aws::MarketplaceAgreement
       :accepted_terms,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Entitlements granted to the acceptor of fixed upfront as part of agreement execution.</p>
@@ -560,7 +548,7 @@ module Aws::MarketplaceAgreement
       :dimension_key,
       :max_quantity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_quantity] = 1 unless options.key?(:max_quantity)
@@ -578,7 +566,7 @@ module Aws::MarketplaceAgreement
       :request_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the list of text agreements proposed to the acceptors. An example is the end
@@ -594,7 +582,7 @@ module Aws::MarketplaceAgreement
       :type,
       :documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an installment-based pricing model where customers are charged a fixed price on
@@ -615,7 +603,7 @@ module Aws::MarketplaceAgreement
       :currency_code,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the proposal received from the proposer.</p>
@@ -629,7 +617,7 @@ module Aws::MarketplaceAgreement
       :resources,
       :offer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the party proposing the agreement terms,. This is commonly the seller for
@@ -640,7 +628,7 @@ module Aws::MarketplaceAgreement
     class Proposer < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the per unit rates for each individual product dimension.</p>
@@ -654,7 +642,7 @@ module Aws::MarketplaceAgreement
       :dimension_key,
       :price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a pricing model where customers are charged a fixed recurring price at the end
@@ -677,7 +665,7 @@ module Aws::MarketplaceAgreement
       :billing_period,
       :price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines that on graceful expiration of the agreement (when the agreement ends on its
@@ -698,7 +686,7 @@ module Aws::MarketplaceAgreement
       :type,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional parameters specified by the acceptor while accepting the term.</p>
@@ -709,7 +697,7 @@ module Aws::MarketplaceAgreement
     class RenewalTermConfiguration < Struct.new(
       :enable_auto_renew,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of resources involved in the agreement.</p>
@@ -728,7 +716,7 @@ module Aws::MarketplaceAgreement
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which does not exist.</p>
@@ -749,11 +737,7 @@ module Aws::MarketplaceAgreement
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      AGREEMENT = 'Agreement'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An individual installment of the payment that includes the date and amount of the charge.</p>
@@ -767,7 +751,7 @@ module Aws::MarketplaceAgreement
       :charge_date,
       :charge_amount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -845,7 +829,7 @@ module Aws::MarketplaceAgreement
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_view_summaries
@@ -860,7 +844,7 @@ module Aws::MarketplaceAgreement
       :agreement_view_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Differentiates between the mutually exclusive rate cards in the same pricing term to be
@@ -875,7 +859,7 @@ module Aws::MarketplaceAgreement
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the <code>SortBy</code> and <code>SortOrder</code>
@@ -892,12 +876,7 @@ module Aws::MarketplaceAgreement
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the customer support available for the acceptors when they purchase the
@@ -913,7 +892,7 @@ module Aws::MarketplaceAgreement
       :type,
       :refund_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling.</p>
@@ -926,7 +905,7 @@ module Aws::MarketplaceAgreement
       :request_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a usage-based pricing model (typically, pay-as-you-go pricing), where the
@@ -945,7 +924,7 @@ module Aws::MarketplaceAgreement
       :currency_code,
       :rate_cards,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Within the pay-as-you-go model defined under <code>UsageBasedPricingTerm</code>, the <code>UsageBasedRateCardItem</code> defines an individual rate for a product dimension.</p>
@@ -955,7 +934,7 @@ module Aws::MarketplaceAgreement
     class UsageBasedRateCardItem < Struct.new(
       :rate_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the service.</p>
@@ -976,7 +955,7 @@ module Aws::MarketplaceAgreement
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the service.</p>
@@ -990,21 +969,7 @@ module Aws::MarketplaceAgreement
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      INVALID_AGREEMENT_ID = 'INVALID_AGREEMENT_ID'
-      MISSING_AGREEMENT_ID = 'MISSING_AGREEMENT_ID'
-      INVALID_CATALOG = 'INVALID_CATALOG'
-      INVALID_FILTER_NAME = 'INVALID_FILTER_NAME'
-      INVALID_FILTER_VALUES = 'INVALID_FILTER_VALUES'
-      INVALID_SORT_BY = 'INVALID_SORT_BY'
-      INVALID_SORT_ORDER = 'INVALID_SORT_ORDER'
-      INVALID_NEXT_TOKEN = 'INVALID_NEXT_TOKEN'
-      INVALID_MAX_RESULTS = 'INVALID_MAX_RESULTS'
-      UNSUPPORTED_FILTERS = 'UNSUPPORTED_FILTERS'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the conditions that will keep an agreement created from this offer valid. </p>
@@ -1032,7 +997,7 @@ module Aws::MarketplaceAgreement
       :agreement_start_date,
       :agreement_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

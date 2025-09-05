@@ -12,22 +12,7 @@ module Aws::Finspacedata
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApiAccess
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module ApplicationPermission
-      CreateDataset = 'CreateDataset'
-      ManageClusters = 'ManageClusters'
-      ManageUsersAndGroups = 'ManageUsersAndGroups'
-      ManageAttributeSets = 'ManageAttributeSets'
-      ViewAuditData = 'ViewAuditData'
-      AccessNotebooks = 'AccessNotebooks'
-      GetTemporaryCredentials = 'GetTemporaryCredentials'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -44,7 +29,7 @@ module Aws::Finspacedata
       :user_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -53,7 +38,7 @@ module Aws::Finspacedata
     class AssociateUserToPermissionGroupResponse < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -81,19 +66,12 @@ module Aws::Finspacedata
       :session_token,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expiration] = 0 unless options.key?(:expiration)
         super
       end
-    end
-
-    # Indicates how the given change will be applied to the dataset.
-    module ChangeType
-      REPLACE = 'REPLACE'
-      APPEND = 'APPEND'
-      MODIFY = 'MODIFY'
     end
 
     # <p>The structure with error messages.</p>
@@ -146,7 +124,7 @@ module Aws::Finspacedata
       :error_message,
       :error_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Changeset is unit of data in a Dataset.</p>
@@ -243,30 +221,14 @@ module Aws::Finspacedata
       :updates_changeset_id,
       :updated_by_changeset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
-        options[:active_until_timestamp] =  unless options.key?(:active_until_timestamp)
-        options[:active_from_timestamp] =  unless options.key?(:active_from_timestamp)
+        options[:active_until_timestamp] = nil unless options.key?(:active_until_timestamp)
+        options[:active_from_timestamp] = nil unless options.key?(:active_from_timestamp)
         super
       end
-    end
-
-    # Data type of a column.
-    module ColumnDataType
-      STRING = 'STRING'
-      CHAR = 'CHAR'
-      INTEGER = 'INTEGER'
-      TINYINT = 'TINYINT'
-      SMALLINT = 'SMALLINT'
-      BIGINT = 'BIGINT'
-      FLOAT = 'FLOAT'
-      DOUBLE = 'DOUBLE'
-      DATE = 'DATE'
-      DATETIME = 'DATETIME'
-      BOOLEAN = 'BOOLEAN'
-      BINARY = 'BINARY'
     end
 
     # <p>The definition of a column in a tabular Dataset.</p>
@@ -312,7 +274,7 @@ module Aws::Finspacedata
       :column_name,
       :column_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request conflicts with an existing resource.</p>
@@ -324,7 +286,7 @@ module Aws::Finspacedata
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request for a CreateChangeset operation.
@@ -423,7 +385,7 @@ module Aws::Finspacedata
       :source_params,
       :format_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response from a CreateChangeset operation.
@@ -437,7 +399,7 @@ module Aws::Finspacedata
       :dataset_id,
       :changeset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request for creating a data view.
@@ -471,7 +433,7 @@ module Aws::Finspacedata
       :as_of_timestamp,
       :destination_type_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response for creating a data view.
@@ -485,7 +447,7 @@ module Aws::Finspacedata
       :dataset_id,
       :data_view_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request for a CreateDataset operation
@@ -533,7 +495,7 @@ module Aws::Finspacedata
       :alias,
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response from a CreateDataset operation
@@ -543,7 +505,7 @@ module Aws::Finspacedata
     class CreateDatasetResponse < Struct.new(
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -597,7 +559,7 @@ module Aws::Finspacedata
       :application_permissions,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -606,7 +568,7 @@ module Aws::Finspacedata
     class CreatePermissionGroupResponse < Struct.new(
       :permission_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_address
@@ -659,7 +621,7 @@ module Aws::Finspacedata
       :api_access_principal_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -668,7 +630,7 @@ module Aws::Finspacedata
     class CreateUserResponse < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Short term API credentials.</p>
@@ -687,7 +649,7 @@ module Aws::Finspacedata
       :secret_access_key,
       :session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure for the Dataview destination type parameters.</p>
@@ -735,7 +697,7 @@ module Aws::Finspacedata
       :s3_destination_export_file_format,
       :s3_destination_export_file_format_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure with error messages.</p>
@@ -788,19 +750,7 @@ module Aws::Finspacedata
       :error_message,
       :error_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Status of a DataView
-    module DataViewStatus
-      RUNNING = 'RUNNING'
-      STARTING = 'STARTING'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
-      TIMEOUT = 'TIMEOUT'
-      SUCCESS = 'SUCCESS'
-      PENDING = 'PENDING'
-      FAILED_CLEANUP_FAILED = 'FAILED_CLEANUP_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure for the summary of a Dataview.</p>
@@ -888,10 +838,10 @@ module Aws::Finspacedata
       :create_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:as_of_timestamp] =  unless options.key?(:as_of_timestamp)
+        options[:as_of_timestamp] = nil unless options.key?(:as_of_timestamp)
         options[:auto_update] = false unless options.key?(:auto_update)
         options[:create_time] = 0 unless options.key?(:create_time)
         options[:last_modified_time] = 0 unless options.key?(:last_modified_time)
@@ -952,19 +902,13 @@ module Aws::Finspacedata
       :schema_definition,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
         options[:last_modified_time] = 0 unless options.key?(:last_modified_time)
         super
       end
-    end
-
-    # Dataset Kind
-    module DatasetKind
-      TABULAR = 'TABULAR'
-      NON_TABULAR = 'NON_TABULAR'
     end
 
     # <p>A structure for Dataset owner info.</p>
@@ -982,15 +926,7 @@ module Aws::Finspacedata
       :phone_number,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Status of the dataset process returned from scheduler service.
-    module DatasetStatus
-      PENDING = 'PENDING'
-      FAILED = 'FAILED'
-      SUCCESS = 'SUCCESS'
-      RUNNING = 'RUNNING'
+      include ::Smithy::Schema::Structure
     end
 
     # The request for a DeleteDataset operation.
@@ -1004,7 +940,7 @@ module Aws::Finspacedata
       :client_token,
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response from an DeleteDataset operation
@@ -1014,7 +950,7 @@ module Aws::Finspacedata
     class DeleteDatasetResponse < Struct.new(
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -1027,7 +963,7 @@ module Aws::Finspacedata
       :permission_group_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -1036,7 +972,7 @@ module Aws::Finspacedata
     class DeletePermissionGroupResponse < Struct.new(
       :permission_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1049,7 +985,7 @@ module Aws::Finspacedata
       :user_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1058,7 +994,7 @@ module Aws::Finspacedata
     class DisableUserResponse < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -1075,7 +1011,7 @@ module Aws::Finspacedata
       :user_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status_code
@@ -1084,7 +1020,7 @@ module Aws::Finspacedata
     class DisassociateUserFromPermissionGroupResponse < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -1102,7 +1038,7 @@ module Aws::Finspacedata
       :user_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1111,25 +1047,7 @@ module Aws::Finspacedata
     class EnableUserResponse < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Changeset Error Category
-    module ErrorCategory
-      VALIDATION = 'VALIDATION'
-      SERVICE_QUOTA_EXCEEDED = 'SERVICE_QUOTA_EXCEEDED'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-      THROTTLING = 'THROTTLING'
-      INTERNAL_SERVICE_EXCEPTION = 'INTERNAL_SERVICE_EXCEPTION'
-      CANCELLED = 'CANCELLED'
-      USER_RECOVERABLE = 'USER_RECOVERABLE'
-    end
-
-    # Data View Export File Format
-    module ExportFileFormat
-      PARQUET = 'PARQUET'
-      DELIMITED_TEXT = 'DELIMITED_TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # Request to describe a changeset.
@@ -1143,7 +1061,7 @@ module Aws::Finspacedata
       :dataset_id,
       :changeset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response from a describe changeset operation
@@ -1215,12 +1133,12 @@ module Aws::Finspacedata
       :updates_changeset_id,
       :updated_by_changeset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
-        options[:active_until_timestamp] =  unless options.key?(:active_until_timestamp)
-        options[:active_from_timestamp] =  unless options.key?(:active_from_timestamp)
+        options[:active_until_timestamp] = nil unless options.key?(:active_until_timestamp)
+        options[:active_from_timestamp] = nil unless options.key?(:active_from_timestamp)
         super
       end
     end
@@ -1236,7 +1154,7 @@ module Aws::Finspacedata
       :data_view_id,
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response from retrieving a dataview, which includes details on the target database and table name
@@ -1324,11 +1242,11 @@ module Aws::Finspacedata
       :destination_type_params,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_update] = false unless options.key?(:auto_update)
-        options[:as_of_timestamp] =  unless options.key?(:as_of_timestamp)
+        options[:as_of_timestamp] = nil unless options.key?(:as_of_timestamp)
         options[:last_modified_time] = 0 unless options.key?(:last_modified_time)
         options[:create_time] = 0 unless options.key?(:create_time)
         super
@@ -1342,7 +1260,7 @@ module Aws::Finspacedata
     class GetDatasetRequest < Struct.new(
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response for the GetDataset operation
@@ -1416,7 +1334,7 @@ module Aws::Finspacedata
       :alias,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
@@ -1435,7 +1353,7 @@ module Aws::Finspacedata
       :data_view_id,
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute credentials
@@ -1448,7 +1366,7 @@ module Aws::Finspacedata
       :credentials,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -1457,7 +1375,7 @@ module Aws::Finspacedata
     class GetPermissionGroupRequest < Struct.new(
       :permission_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group
@@ -1466,7 +1384,7 @@ module Aws::Finspacedata
     class GetPermissionGroupResponse < Struct.new(
       :permission_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request for GetProgrammaticAccessCredentials operation
@@ -1480,7 +1398,7 @@ module Aws::Finspacedata
       :duration_in_minutes,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response for GetProgrammaticAccessCredentials operation
@@ -1494,7 +1412,7 @@ module Aws::Finspacedata
       :credentials,
       :duration_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1503,7 +1421,7 @@ module Aws::Finspacedata
     class GetUserRequest < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1596,7 +1514,7 @@ module Aws::Finspacedata
       :last_modified_time,
       :last_login_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
@@ -1626,7 +1544,7 @@ module Aws::Finspacedata
     class GetWorkingLocationRequest < Struct.new(
       :location_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_uri
@@ -1643,16 +1561,7 @@ module Aws::Finspacedata
       :s3_path,
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Status of the ingestion process returned from scheduler service.
-    module IngestionStatus
-      PENDING = 'PENDING'
-      FAILED = 'FAILED'
-      SUCCESS = 'SUCCESS'
-      RUNNING = 'RUNNING'
-      STOP_REQUESTED = 'STOP_REQUESTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or
@@ -1662,7 +1571,7 @@ module Aws::Finspacedata
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit has exceeded.</p>
@@ -1671,7 +1580,7 @@ module Aws::Finspacedata
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request to ListChangesetsRequest. It exposes minimal query filters.
@@ -1689,7 +1598,7 @@ module Aws::Finspacedata
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response to ListChangesetsResponse. This returns a list of dataset changesets that match the query criteria.
@@ -1703,7 +1612,7 @@ module Aws::Finspacedata
       :changesets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request for a list data views.
@@ -1721,7 +1630,7 @@ module Aws::Finspacedata
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1734,7 +1643,7 @@ module Aws::Finspacedata
       :next_token,
       :data_views,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request for the ListDatasets operation.
@@ -1748,7 +1657,7 @@ module Aws::Finspacedata
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response for the ListDatasets operation
@@ -1762,7 +1671,7 @@ module Aws::Finspacedata
       :datasets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1779,7 +1688,7 @@ module Aws::Finspacedata
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_groups
@@ -1792,7 +1701,7 @@ module Aws::Finspacedata
       :permission_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1805,7 +1714,7 @@ module Aws::Finspacedata
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_groups
@@ -1818,7 +1727,7 @@ module Aws::Finspacedata
       :permission_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -1835,7 +1744,7 @@ module Aws::Finspacedata
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -1848,7 +1757,7 @@ module Aws::Finspacedata
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1861,7 +1770,7 @@ module Aws::Finspacedata
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -1874,7 +1783,7 @@ module Aws::Finspacedata
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure for a permission group.</p>
@@ -1957,7 +1866,7 @@ module Aws::Finspacedata
       :last_modified_time,
       :membership_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
@@ -1995,13 +1904,7 @@ module Aws::Finspacedata
       :name,
       :membership_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionGroupMembershipStatus
-      ADDITION_IN_PROGRESS = 'ADDITION_IN_PROGRESS'
-      ADDITION_SUCCESS = 'ADDITION_SUCCESS'
-      REMOVAL_IN_PROGRESS = 'REMOVAL_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Permission group parameters for Dataset permissions.</p>
@@ -2029,7 +1932,7 @@ module Aws::Finspacedata
       :permission_group_id,
       :dataset_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -2042,7 +1945,7 @@ module Aws::Finspacedata
       :user_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -2055,7 +1958,7 @@ module Aws::Finspacedata
       :user_id,
       :temporary_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more resources can't be found.</p>
@@ -2067,7 +1970,7 @@ module Aws::Finspacedata
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource permission for a dataset. When you create a dataset, all the other members of the same user group inherit access to the dataset. You can only create a dataset if your user group has application permission for Create Datasets.</p>
@@ -2113,7 +2016,7 @@ module Aws::Finspacedata
     class ResourcePermission < Struct.new(
       :permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of an external Dataview in an S3 bucket.</p>
@@ -2127,7 +2030,7 @@ module Aws::Finspacedata
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Definition for a schema on a tabular Dataset.</p>
@@ -2141,7 +2044,7 @@ module Aws::Finspacedata
       :columns,
       :primary_key_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union of schema types.</p>
@@ -2151,13 +2054,13 @@ module Aws::Finspacedata
     class SchemaUnion < Struct.new(
       :tabular_schema_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
     class ThrottlingException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request to update an existing changeset.
@@ -2239,7 +2142,7 @@ module Aws::Finspacedata
       :source_params,
       :format_params,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response from a update changeset operation.
@@ -2253,7 +2156,7 @@ module Aws::Finspacedata
       :changeset_id,
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The request for an UpdateDataset operation
@@ -2297,7 +2200,7 @@ module Aws::Finspacedata
       :alias,
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response from an UpdateDataset operation
@@ -2307,7 +2210,7 @@ module Aws::Finspacedata
     class UpdateDatasetResponse < Struct.new(
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -2365,7 +2268,7 @@ module Aws::Finspacedata
       :application_permissions,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permission_group_id
@@ -2374,7 +2277,7 @@ module Aws::Finspacedata
     class UpdatePermissionGroupResponse < Struct.new(
       :permission_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -2427,7 +2330,7 @@ module Aws::Finspacedata
       :api_access_principal_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -2436,7 +2339,7 @@ module Aws::Finspacedata
     class UpdateUserResponse < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the user.</p>
@@ -2531,7 +2434,7 @@ module Aws::Finspacedata
       :last_modified_time,
       :last_login_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_time] = 0 unless options.key?(:create_time)
@@ -2630,18 +2533,7 @@ module Aws::Finspacedata
       :api_access_principal_arn,
       :membership_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserStatus
-      CREATING = 'CREATING'
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module UserType
-      SUPER_USER = 'SUPER_USER'
-      APP_USER = 'APP_USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -2653,12 +2545,7 @@ module Aws::Finspacedata
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocationType
-      INGESTION = 'INGESTION'
-      SAGEMAKER = 'SAGEMAKER'
+      include ::Smithy::Schema::Structure
     end
 
   end

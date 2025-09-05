@@ -12,7 +12,7 @@ module Aws::SageMakerMetrics
     class BatchGetMetricsRequest < Struct.new(
       :metric_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_query_results
@@ -21,7 +21,7 @@ module Aws::SageMakerMetrics
     class BatchGetMetricsResponse < Struct.new(
       :metric_query_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that occured when putting the metric data.</p>
@@ -55,7 +55,7 @@ module Aws::SageMakerMetrics
       :code,
       :metric_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trial_component_name
@@ -68,7 +68,7 @@ module Aws::SageMakerMetrics
       :trial_component_name,
       :metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -77,7 +77,7 @@ module Aws::SageMakerMetrics
     class BatchPutMetricsResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a query to retrieve training metrics from SageMaker.</p>
@@ -111,7 +111,7 @@ module Aws::SageMakerMetrics
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a query to retrieve training metrics from SageMaker.</p>
@@ -133,37 +133,7 @@ module Aws::SageMakerMetrics
       :x_axis_values,
       :metric_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricQueryResultStatus
-      COMPLETE = 'Complete'
-      TRUNCATED = 'Truncated'
-      INTERNAL_ERROR = 'InternalError'
-      VALIDATION_ERROR = 'ValidationError'
-    end
-
-    module MetricStatistic
-      MIN = 'Min'
-      MAX = 'Max'
-      AVG = 'Avg'
-      COUNT = 'Count'
-      STD_DEV = 'StdDev'
-      LAST = 'Last'
-    end
-
-    module Period
-      ONE_MINUTE = 'OneMinute'
-      FIVE_MINUTE = 'FiveMinute'
-      ONE_HOUR = 'OneHour'
-      ITERATION_NUMBER = 'IterationNumber'
-    end
-
-    module PutMetricsErrorCode
-      METRIC_LIMIT_EXCEEDED = 'METRIC_LIMIT_EXCEEDED'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-      CONFLICT_ERROR = 'CONFLICT_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The raw metric data to associate with the resource.</p>
@@ -186,12 +156,7 @@ module Aws::SageMakerMetrics
       :step,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module XAxisType
-      ITERATION_NUMBER = 'IterationNumber'
-      TIMESTAMP = 'Timestamp'
+      include ::Smithy::Schema::Structure
     end
 
   end

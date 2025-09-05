@@ -65,17 +65,7 @@ module Aws::WorkMail
       :impersonation_role_ids,
       :not_impersonation_role_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessControlRuleEffect
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
-    end
-
-    module AccessEffect
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -116,12 +106,12 @@ module Aws::WorkMail
       :resource_id,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateDelegateToResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -162,12 +152,12 @@ module Aws::WorkMail
       :group_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateMemberToGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -180,7 +170,7 @@ module Aws::WorkMail
       :organization_id,
       :impersonation_role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token
@@ -193,7 +183,7 @@ module Aws::WorkMail
       :token,
       :expires_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List all the <code>AvailabilityConfiguration</code>'s for the given WorkMail
@@ -226,12 +216,7 @@ module Aws::WorkMail
       :date_created,
       :date_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AvailabilityProviderType
-      EWS = 'EWS'
-      LAMBDA = 'LAMBDA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>At least one delegate must be associated to the resource to disable automatic replies
@@ -251,7 +236,7 @@ module Aws::WorkMail
       :auto_decline_recurring_requests,
       :auto_decline_conflicting_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_accept_requests] = false unless options.key?(:auto_accept_requests)
@@ -275,12 +260,12 @@ module Aws::WorkMail
       :job_id,
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelMailboxExportJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -297,12 +282,12 @@ module Aws::WorkMail
       :entity_id,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateAliasResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -327,12 +312,12 @@ module Aws::WorkMail
       :ews_provider,
       :lambda_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateAvailabilityConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -349,7 +334,7 @@ module Aws::WorkMail
       :name,
       :hidden_from_global_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -358,7 +343,7 @@ module Aws::WorkMail
     class CreateGroupResponse < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -385,7 +370,7 @@ module Aws::WorkMail
       :instance_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -396,7 +381,7 @@ module Aws::WorkMail
     class CreateIdentityCenterApplicationResponse < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -426,7 +411,7 @@ module Aws::WorkMail
       :description,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute impersonation_role_id
@@ -435,7 +420,7 @@ module Aws::WorkMail
     class CreateImpersonationRoleResponse < Struct.new(
       :impersonation_role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -492,7 +477,7 @@ module Aws::WorkMail
       :device_user_agents,
       :not_device_user_agents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mobile_device_access_rule_id
@@ -501,7 +486,7 @@ module Aws::WorkMail
     class CreateMobileDeviceAccessRuleResponse < Struct.new(
       :mobile_device_access_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -532,7 +517,7 @@ module Aws::WorkMail
       :kms_key_arn,
       :enable_interoperability,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -541,7 +526,7 @@ module Aws::WorkMail
     class CreateOrganizationResponse < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -568,7 +553,7 @@ module Aws::WorkMail
       :description,
       :hidden_from_global_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -577,7 +562,7 @@ module Aws::WorkMail
     class CreateResourceResponse < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -619,7 +604,7 @@ module Aws::WorkMail
       :hidden_from_global_address_list,
       :identity_provider_user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -628,7 +613,7 @@ module Aws::WorkMail
     class CreateUserResponse < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the attribute, which is one of the values defined in the UserAttribute
@@ -643,7 +628,7 @@ module Aws::WorkMail
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -656,12 +641,12 @@ module Aws::WorkMail
       :organization_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessControlRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -680,12 +665,12 @@ module Aws::WorkMail
       :entity_id,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAliasResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -698,12 +683,12 @@ module Aws::WorkMail
       :organization_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAvailabilityConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -712,12 +697,12 @@ module Aws::WorkMail
     class DeleteEmailMonitoringConfigurationRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEmailMonitoringConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -739,12 +724,12 @@ module Aws::WorkMail
       :organization_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_arn
@@ -755,12 +740,12 @@ module Aws::WorkMail
     class DeleteIdentityCenterApplicationRequest < Struct.new(
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIdentityCenterApplicationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -770,12 +755,12 @@ module Aws::WorkMail
     class DeleteIdentityProviderConfigurationRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIdentityProviderConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -788,12 +773,12 @@ module Aws::WorkMail
       :organization_id,
       :impersonation_role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteImpersonationRoleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -835,12 +820,12 @@ module Aws::WorkMail
       :entity_id,
       :grantee_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMailboxPermissionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -871,12 +856,12 @@ module Aws::WorkMail
       :user_id,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMobileDeviceAccessOverrideResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -889,12 +874,12 @@ module Aws::WorkMail
       :organization_id,
       :mobile_device_access_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMobileDeviceAccessRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -919,7 +904,7 @@ module Aws::WorkMail
       :force_delete,
       :delete_identity_center_application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -932,7 +917,7 @@ module Aws::WorkMail
       :organization_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -947,12 +932,12 @@ module Aws::WorkMail
       :organization_id,
       :personal_access_token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePersonalAccessTokenResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -975,12 +960,12 @@ module Aws::WorkMail
       :organization_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -993,12 +978,12 @@ module Aws::WorkMail
       :organization_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRetentionPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1020,12 +1005,12 @@ module Aws::WorkMail
       :organization_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1050,12 +1035,12 @@ module Aws::WorkMail
       :organization_id,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterFromWorkMailResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1068,12 +1053,12 @@ module Aws::WorkMail
       :organization_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterMailDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1082,7 +1067,7 @@ module Aws::WorkMail
     class DescribeEmailMonitoringConfigurationRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute role_arn
@@ -1095,7 +1080,7 @@ module Aws::WorkMail
       :role_arn,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1108,7 +1093,7 @@ module Aws::WorkMail
       :organization_id,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_id
@@ -1125,7 +1110,7 @@ module Aws::WorkMail
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1150,7 +1135,7 @@ module Aws::WorkMail
       :organization_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -1186,7 +1171,7 @@ module Aws::WorkMail
       :disabled_date,
       :hidden_from_global_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:hidden_from_global_address_list] = false unless options.key?(:hidden_from_global_address_list)
@@ -1201,7 +1186,7 @@ module Aws::WorkMail
     class DescribeIdentityProviderConfigurationRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_mode
@@ -1223,7 +1208,7 @@ module Aws::WorkMail
       :identity_center_configuration,
       :personal_access_token_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1232,7 +1217,7 @@ module Aws::WorkMail
     class DescribeInboundDmarcSettingsRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enforced
@@ -1241,7 +1226,7 @@ module Aws::WorkMail
     class DescribeInboundDmarcSettingsResponse < Struct.new(
       :enforced,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enforced] = false unless options.key?(:enforced)
@@ -1259,7 +1244,7 @@ module Aws::WorkMail
       :job_id,
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_id
@@ -1315,7 +1300,7 @@ module Aws::WorkMail
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated_progress] = 0 unless options.key?(:estimated_progress)
@@ -1329,7 +1314,7 @@ module Aws::WorkMail
     class DescribeOrganizationRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1380,7 +1365,7 @@ module Aws::WorkMail
       :migration_admin,
       :interoperability_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:interoperability_enabled] = false unless options.key?(:interoperability_enabled)
@@ -1411,7 +1396,7 @@ module Aws::WorkMail
       :organization_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1459,7 +1444,7 @@ module Aws::WorkMail
       :description,
       :hidden_from_global_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:hidden_from_global_address_list] = false unless options.key?(:hidden_from_global_address_list)
@@ -1490,7 +1475,7 @@ module Aws::WorkMail
       :organization_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -1604,7 +1589,7 @@ module Aws::WorkMail
       :identity_provider_user_id,
       :identity_provider_identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:hidden_from_global_address_list] = false unless options.key?(:hidden_from_global_address_list)
@@ -1618,7 +1603,7 @@ module Aws::WorkMail
     class DirectoryInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The directory service doesn't recognize the credentials supplied by WorkMail.</p>
@@ -1627,7 +1612,7 @@ module Aws::WorkMail
     class DirectoryServiceAuthenticationFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The directory is unavailable. It might be located in another Region or deleted.</p>
@@ -1636,7 +1621,7 @@ module Aws::WorkMail
     class DirectoryUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1679,12 +1664,12 @@ module Aws::WorkMail
       :resource_id,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateDelegateFromResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1725,12 +1710,12 @@ module Aws::WorkMail
       :group_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateMemberFromGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DNS record uploaded to your DNS provider.</p>
@@ -1748,13 +1733,7 @@ module Aws::WorkMail
       :hostname,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsRecordVerificationStatus
-      PENDING = 'PENDING'
-      VERIFIED = 'VERIFIED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain to associate with an WorkMail organization.</p>
@@ -1769,7 +1748,7 @@ module Aws::WorkMail
       :domain_name,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The email address that you're trying to assign is already created for a different
@@ -1779,7 +1758,7 @@ module Aws::WorkMail
     class EmailAddressInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user, group, or resource that you're trying to register is already
@@ -1789,7 +1768,7 @@ module Aws::WorkMail
     class EntityAlreadyRegisteredException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier supplied for the user, group, or resource does not exist in your
@@ -1799,13 +1778,7 @@ module Aws::WorkMail
     class EntityNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You are performing an operation on a user, group, or resource that isn't in the
@@ -1815,13 +1788,7 @@ module Aws::WorkMail
     class EntityStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityType
-      GROUP = 'GROUP'
-      USER = 'USER'
-      RESOURCE = 'RESOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EWS based availability provider. This is only used as input to the service.</p>
@@ -1839,7 +1806,7 @@ module Aws::WorkMail
       :ews_username,
       :ews_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration applied to an organization's folders by its retention
@@ -1859,15 +1826,7 @@ module Aws::WorkMail
       :action,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FolderName
-      INBOX = 'INBOX'
-      DELETED_ITEMS = 'DELETED_ITEMS'
-      SENT_ITEMS = 'SENT_ITEMS'
-      DRAFTS = 'DRAFTS'
-      JUNK_EMAIL = 'JUNK_EMAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1894,7 +1853,7 @@ module Aws::WorkMail
       :user_id,
       :impersonation_role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effect
@@ -1907,7 +1866,7 @@ module Aws::WorkMail
       :effect,
       :matched_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1916,7 +1875,7 @@ module Aws::WorkMail
     class GetDefaultRetentionPolicyRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1937,7 +1896,7 @@ module Aws::WorkMail
       :description,
       :folder_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -1969,7 +1928,7 @@ module Aws::WorkMail
       :impersonation_role_id,
       :target_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -1988,7 +1947,7 @@ module Aws::WorkMail
       :effect,
       :matched_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2001,7 +1960,7 @@ module Aws::WorkMail
       :organization_id,
       :impersonation_role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute impersonation_role_id
@@ -2034,7 +1993,7 @@ module Aws::WorkMail
       :date_created,
       :date_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2047,7 +2006,7 @@ module Aws::WorkMail
       :organization_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records
@@ -2073,7 +2032,7 @@ module Aws::WorkMail
       :ownership_verification_status,
       :dkim_verification_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_test_domain] = false unless options.key?(:is_test_domain)
@@ -2105,7 +2064,7 @@ module Aws::WorkMail
       :organization_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mailbox_quota
@@ -2118,7 +2077,7 @@ module Aws::WorkMail
       :mailbox_quota,
       :mailbox_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mailbox_size] = 0 unless options.key?(:mailbox_size)
@@ -2148,7 +2107,7 @@ module Aws::WorkMail
       :device_operating_system,
       :device_user_agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effect
@@ -2162,7 +2121,7 @@ module Aws::WorkMail
       :effect,
       :matched_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2193,7 +2152,7 @@ module Aws::WorkMail
       :user_id,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -2222,7 +2181,7 @@ module Aws::WorkMail
       :date_created,
       :date_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2237,7 +2196,7 @@ module Aws::WorkMail
       :organization_id,
       :personal_access_token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute personal_access_token_id
@@ -2283,7 +2242,7 @@ module Aws::WorkMail
       :expires_time,
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The representation of an WorkMail group.</p>
@@ -2313,7 +2272,7 @@ module Aws::WorkMail
       :enabled_date,
       :disabled_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier that contains the Group ID and name of a group.</p>
@@ -2327,7 +2286,7 @@ module Aws::WorkMail
       :group_id,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2345,12 +2304,7 @@ module Aws::WorkMail
       :instance_arn,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdentityProviderAuthenticationMode
-      IDENTITY_PROVIDER_ONLY = 'IDENTITY_PROVIDER_ONLY'
-      IDENTITY_PROVIDER_AND_DIRECTORY = 'IDENTITY_PROVIDER_AND_DIRECTORY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The impersonation rule that matched the input.</p>
@@ -2364,7 +2318,7 @@ module Aws::WorkMail
       :impersonation_rule_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An impersonation role for the given WorkMail organization.</p>
@@ -2390,12 +2344,7 @@ module Aws::WorkMail
       :date_created,
       :date_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImpersonationRoleType
-      FULL_ACCESS = 'FULL_ACCESS'
-      READ_ONLY = 'READ_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rules for the given impersonation role.</p>
@@ -2426,7 +2375,7 @@ module Aws::WorkMail
       :target_users,
       :not_target_users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a resource isn't valid. A resource must either be able to
@@ -2437,7 +2386,7 @@ module Aws::WorkMail
     class InvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You SES configuration has customizations that WorkMail cannot save. The error message lists the invalid setting. For examples of invalid settings, refer to 
@@ -2447,7 +2396,7 @@ module Aws::WorkMail
     class InvalidCustomSesConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the input parameters don't match the service's restrictions.</p>
@@ -2456,7 +2405,7 @@ module Aws::WorkMail
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied password doesn't match the minimum security constraints, such as length
@@ -2466,7 +2415,7 @@ module Aws::WorkMail
     class InvalidPasswordException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Lambda based availability provider.</p>
@@ -2476,7 +2425,7 @@ module Aws::WorkMail
     class LambdaAvailabilityProvider < Struct.new(
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds the limit of the resource.</p>
@@ -2485,7 +2434,7 @@ module Aws::WorkMail
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2494,7 +2443,7 @@ module Aws::WorkMail
     class ListAccessControlRulesRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -2503,7 +2452,7 @@ module Aws::WorkMail
     class ListAccessControlRulesResponse < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2525,7 +2474,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aliases
@@ -2539,7 +2488,7 @@ module Aws::WorkMail
       :aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2557,7 +2506,7 @@ module Aws::WorkMail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_configurations
@@ -2570,7 +2519,7 @@ module Aws::WorkMail
       :availability_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2605,7 +2554,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -2619,7 +2568,7 @@ module Aws::WorkMail
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filtering options for <i>ListGroups</i> operation. This is only used as input to Operation.</p>
@@ -2637,7 +2586,7 @@ module Aws::WorkMail
       :primary_email_prefix,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filtering options for <i>ListGroupsForEntity</i> operation. This is only used as input to Operation.</p>
@@ -2647,7 +2596,7 @@ module Aws::WorkMail
     class ListGroupsForEntityFilters < Struct.new(
       :group_name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2684,7 +2633,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -2697,7 +2646,7 @@ module Aws::WorkMail
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2719,7 +2668,7 @@ module Aws::WorkMail
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -2733,7 +2682,7 @@ module Aws::WorkMail
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2751,7 +2700,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute roles
@@ -2765,7 +2714,7 @@ module Aws::WorkMail
       :roles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2782,7 +2731,7 @@ module Aws::WorkMail
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mail_domains
@@ -2795,7 +2744,7 @@ module Aws::WorkMail
       :mail_domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2812,7 +2761,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -2825,7 +2774,7 @@ module Aws::WorkMail
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2861,7 +2810,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -2875,7 +2824,7 @@ module Aws::WorkMail
       :permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2914,7 +2863,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute overrides
@@ -2927,7 +2876,7 @@ module Aws::WorkMail
       :overrides,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -2936,7 +2885,7 @@ module Aws::WorkMail
     class ListMobileDeviceAccessRulesRequest < Struct.new(
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rules
@@ -2945,7 +2894,7 @@ module Aws::WorkMail
     class ListMobileDeviceAccessRulesResponse < Struct.new(
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2959,7 +2908,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_summaries
@@ -2974,7 +2923,7 @@ module Aws::WorkMail
       :organization_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3001,7 +2950,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3017,7 +2966,7 @@ module Aws::WorkMail
       :next_token,
       :personal_access_token_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3052,7 +3001,7 @@ module Aws::WorkMail
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delegates
@@ -3067,7 +3016,7 @@ module Aws::WorkMail
       :delegates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filtering options for <i>ListResources</i> operation. This is only used as input to Operation.</p>
@@ -3085,7 +3034,7 @@ module Aws::WorkMail
       :primary_email_prefix,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3107,7 +3056,7 @@ module Aws::WorkMail
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -3122,7 +3071,7 @@ module Aws::WorkMail
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3131,7 +3080,7 @@ module Aws::WorkMail
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3140,7 +3089,7 @@ module Aws::WorkMail
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Filtering options for <i>ListUsers</i> operation. This is only used as input to Operation.</p>
@@ -3166,7 +3115,7 @@ module Aws::WorkMail
       :state,
       :identity_provider_user_id_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3188,7 +3137,7 @@ module Aws::WorkMail
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -3202,7 +3151,7 @@ module Aws::WorkMail
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain you're trying to change is in use by another user or organization in your account. See the error message for details.</p>
@@ -3211,7 +3160,7 @@ module Aws::WorkMail
     class MailDomainInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The domain specified is not found in your organization.</p>
@@ -3220,7 +3169,7 @@ module Aws::WorkMail
     class MailDomainNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>After a domain has been added to the organization, it must be verified. The domain is
@@ -3230,7 +3179,7 @@ module Aws::WorkMail
     class MailDomainStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data for a given domain.</p>
@@ -3244,7 +3193,7 @@ module Aws::WorkMail
       :domain_name,
       :default_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_domain] = false unless options.key?(:default_domain)
@@ -3292,19 +3241,12 @@ module Aws::WorkMail
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:estimated_progress] = 0 unless options.key?(:estimated_progress)
         super
       end
-    end
-
-    module MailboxExportJobState
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
     end
 
     # <p>The representation of a user or group.</p>
@@ -3334,12 +3276,7 @@ module Aws::WorkMail
       :enabled_date,
       :disabled_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberType
-      GROUP = 'GROUP'
-      USER = 'USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rule that a simulated user matches.</p>
@@ -3353,7 +3290,7 @@ module Aws::WorkMail
       :mobile_device_access_rule_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override object.</p>
@@ -3383,7 +3320,7 @@ module Aws::WorkMail
       :date_created,
       :date_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule that controls access to mobile devices for an WorkMail group.</p>
@@ -3445,12 +3382,7 @@ module Aws::WorkMail
       :date_created,
       :date_modified,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MobileDeviceAccessRuleEffect
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user, group, or resource name isn't unique in WorkMail.</p>
@@ -3459,7 +3391,7 @@ module Aws::WorkMail
     class NameAvailabilityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation received a valid organization identifier that either doesn't belong or
@@ -3469,7 +3401,7 @@ module Aws::WorkMail
     class OrganizationNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The organization must have a valid state to perform certain
@@ -3479,7 +3411,7 @@ module Aws::WorkMail
     class OrganizationStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The representation of an organization.</p>
@@ -3507,7 +3439,7 @@ module Aws::WorkMail
       :error_message,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Permission granted to a user, group, or resource to access a certain aspect of
@@ -3532,13 +3464,7 @@ module Aws::WorkMail
       :grantee_type,
       :permission_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PermissionType
-      FULL_ACCESS = 'FULL_ACCESS'
-      SEND_AS = 'SEND_AS'
-      SEND_ON_BEHALF = 'SEND_ON_BEHALF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3570,12 +3496,7 @@ module Aws::WorkMail
       :status,
       :lifetime_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PersonalAccessTokenConfigurationStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3625,7 +3546,7 @@ module Aws::WorkMail
       :expires_time,
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3682,12 +3603,12 @@ module Aws::WorkMail
       :impersonation_role_ids,
       :not_impersonation_role_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutAccessControlRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3704,12 +3625,12 @@ module Aws::WorkMail
       :role_arn,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutEmailMonitoringConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3735,12 +3656,12 @@ module Aws::WorkMail
       :identity_center_configuration,
       :personal_access_token_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutIdentityProviderConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3753,12 +3674,12 @@ module Aws::WorkMail
       :organization_id,
       :enforced,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutInboundDmarcSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3811,12 +3732,12 @@ module Aws::WorkMail
       :grantee_id,
       :permission_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutMailboxPermissionsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3855,12 +3776,12 @@ module Aws::WorkMail
       :effect,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutMobileDeviceAccessOverrideResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3885,12 +3806,12 @@ module Aws::WorkMail
       :description,
       :folder_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutRetentionPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EWS based availability provider when returned from the service. It does not
@@ -3905,7 +3826,7 @@ module Aws::WorkMail
       :ews_endpoint,
       :ews_username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -3922,12 +3843,12 @@ module Aws::WorkMail
       :organization_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterMailDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3954,12 +3875,12 @@ module Aws::WorkMail
       :entity_id,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterToWorkMailResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This user, group, or resource name is not allowed in WorkMail.</p>
@@ -3968,7 +3889,7 @@ module Aws::WorkMail
     class ReservedNameException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -3986,12 +3907,12 @@ module Aws::WorkMail
       :user_id,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetPasswordResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The representation of a resource.</p>
@@ -4029,7 +3950,7 @@ module Aws::WorkMail
       :disabled_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource cannot be found.</p>
@@ -4038,18 +3959,7 @@ module Aws::WorkMail
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      ROOM = 'ROOM'
-      EQUIPMENT = 'EQUIPMENT'
-    end
-
-    module RetentionAction
-      NONE = 'NONE'
-      DELETE = 'DELETE'
-      PERMANENTLY_DELETE = 'PERMANENTLY_DELETE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -4101,7 +4011,7 @@ module Aws::WorkMail
       :s3_bucket_name,
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -4110,7 +4020,7 @@ module Aws::WorkMail
     class StartMailboxExportJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag applied to a resource.</p>
@@ -4124,7 +4034,7 @@ module Aws::WorkMail
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4137,12 +4047,12 @@ module Aws::WorkMail
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4163,7 +4073,7 @@ module Aws::WorkMail
       :ews_provider,
       :lambda_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute test_passed
@@ -4176,7 +4086,7 @@ module Aws::WorkMail
       :test_passed,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:test_passed] = false unless options.key?(:test_passed)
@@ -4190,7 +4100,7 @@ module Aws::WorkMail
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't perform a write operation against a read-only directory.</p>
@@ -4199,7 +4109,7 @@ module Aws::WorkMail
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4212,12 +4122,12 @@ module Aws::WorkMail
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4243,12 +4153,12 @@ module Aws::WorkMail
       :ews_provider,
       :lambda_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAvailabilityConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4261,12 +4171,12 @@ module Aws::WorkMail
       :organization_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDefaultMailDomainResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4295,12 +4205,12 @@ module Aws::WorkMail
       :group_id,
       :hidden_from_global_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4329,12 +4239,12 @@ module Aws::WorkMail
       :description,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateImpersonationRoleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4364,12 +4274,12 @@ module Aws::WorkMail
       :user_id,
       :mailbox_quota,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMailboxQuotaResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4426,12 +4336,12 @@ module Aws::WorkMail
       :device_user_agents,
       :not_device_user_agents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMobileDeviceAccessRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4460,12 +4370,12 @@ module Aws::WorkMail
       :entity_id,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePrimaryEmailAddressResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4511,12 +4421,12 @@ module Aws::WorkMail
       :type,
       :hidden_from_global_address_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute organization_id
@@ -4606,12 +4516,12 @@ module Aws::WorkMail
       :office,
       :identity_provider_user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The representation of an WorkMail user.</p>
@@ -4657,14 +4567,7 @@ module Aws::WorkMail
       :identity_provider_user_id,
       :identity_provider_identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserRole
-      USER = 'USER'
-      RESOURCE = 'RESOURCE'
-      SYSTEM_USER = 'SYSTEM_USER'
-      REMOTE_USER = 'REMOTE_USER'
+      include ::Smithy::Schema::Structure
     end
 
   end

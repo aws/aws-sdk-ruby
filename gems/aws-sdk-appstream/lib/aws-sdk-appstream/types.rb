@@ -17,22 +17,7 @@ module Aws::AppStream
       :endpoint_type,
       :vpce_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessEndpointType
-      STREAMING = 'STREAMING'
-    end
-
-    module Action
-      CLIPBOARD_COPY_FROM_LOCAL_DEVICE = 'CLIPBOARD_COPY_FROM_LOCAL_DEVICE'
-      CLIPBOARD_COPY_TO_LOCAL_DEVICE = 'CLIPBOARD_COPY_TO_LOCAL_DEVICE'
-      FILE_UPLOAD = 'FILE_UPLOAD'
-      FILE_DOWNLOAD = 'FILE_DOWNLOAD'
-      PRINTING_TO_LOCAL_DEVICE = 'PRINTING_TO_LOCAL_DEVICE'
-      DOMAIN_PASSWORD_SIGNIN = 'DOMAIN_PASSWORD_SIGNIN'
-      DOMAIN_SMART_CARD_SIGNIN = 'DOMAIN_SMART_CARD_SIGNIN'
-      AUTO_TIME_ZONE_REDIRECTION = 'AUTO_TIME_ZONE_REDIRECTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an app block.</p>
@@ -94,7 +79,7 @@ module Aws::AppStream
       :state,
       :app_block_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an app block builder.</p>
@@ -158,7 +143,7 @@ module Aws::AppStream
       :state_change_reason,
       :access_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between an app block builder and app block.</p>
@@ -172,24 +157,7 @@ module Aws::AppStream
       :app_block_arn,
       :app_block_builder_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppBlockBuilderAttribute
-      IAM_ROLE_ARN = 'IAM_ROLE_ARN'
-      ACCESS_ENDPOINTS = 'ACCESS_ENDPOINTS'
-      VPC_CONFIGURATION_SECURITY_GROUP_IDS = 'VPC_CONFIGURATION_SECURITY_GROUP_IDS'
-    end
-
-    module AppBlockBuilderPlatformType
-      WINDOWS_SERVER_2019 = 'WINDOWS_SERVER_2019'
-    end
-
-    module AppBlockBuilderState
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the reason why the last app block builder state change occurred.</p>
@@ -203,21 +171,7 @@ module Aws::AppStream
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppBlockBuilderStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-    end
-
-    module AppBlockState
-      INACTIVE = 'INACTIVE'
-      ACTIVE = 'ACTIVE'
-    end
-
-    module AppVisibility
-      ALL = 'ALL'
-      ASSOCIATED = 'ASSOCIATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an application in the application catalog.</p>
@@ -283,12 +237,7 @@ module Aws::AppStream
       :instance_families,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationAttribute
-      LAUNCH_PARAMETERS = 'LAUNCH_PARAMETERS'
-      WORKING_DIRECTORY = 'WORKING_DIRECTORY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the application fleet association.</p>
@@ -302,7 +251,7 @@ module Aws::AppStream
       :fleet_name,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The persistent application settings for users of a stack.</p>
@@ -316,7 +265,7 @@ module Aws::AppStream
       :enabled,
       :settings_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the persistent application settings for users of a stack.</p>
@@ -335,7 +284,7 @@ module Aws::AppStream
       :settings_group,
       :s3_bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_arn
@@ -348,7 +297,7 @@ module Aws::AppStream
       :app_block_arn,
       :app_block_builder_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder_app_block_association
@@ -357,7 +306,7 @@ module Aws::AppStream
     class AssociateAppBlockBuilderAppBlockResult < Struct.new(
       :app_block_builder_app_block_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_name
@@ -370,7 +319,7 @@ module Aws::AppStream
       :fleet_name,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_fleet_association
@@ -381,7 +330,7 @@ module Aws::AppStream
     class AssociateApplicationFleetResult < Struct.new(
       :application_fleet_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -398,12 +347,12 @@ module Aws::AppStream
       :entitlement_name,
       :application_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateApplicationToEntitlementResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_name
@@ -416,19 +365,12 @@ module Aws::AppStream
       :fleet_name,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateFleetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      API = 'API'
-      SAML = 'SAML'
-      USERPOOL = 'USERPOOL'
-      AWS_AD = 'AWS_AD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_stack_associations
@@ -437,7 +379,7 @@ module Aws::AppStream
     class BatchAssociateUserStackRequest < Struct.new(
       :user_stack_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -446,7 +388,7 @@ module Aws::AppStream
     class BatchAssociateUserStackResult < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_stack_associations
@@ -455,7 +397,7 @@ module Aws::AppStream
     class BatchDisassociateUserStackRequest < Struct.new(
       :user_stack_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -464,7 +406,7 @@ module Aws::AppStream
     class BatchDisassociateUserStackResult < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity
@@ -484,13 +426,7 @@ module Aws::AppStream
       :status,
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateBasedAuthStatus
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      ENABLED_NO_DIRECTORY_LOGIN_FALLBACK = 'ENABLED_NO_DIRECTORY_LOGIN_FALLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the capacity for a fleet.</p>
@@ -505,7 +441,7 @@ module Aws::AppStream
       :desired_instances,
       :desired_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the capacity status for a fleet.</p>
@@ -550,7 +486,7 @@ module Aws::AppStream
       :active_user_sessions,
       :actual_user_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An API error occurred. Wait a few minutes and try again.</p>
@@ -560,7 +496,7 @@ module Aws::AppStream
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_image_name
@@ -581,7 +517,7 @@ module Aws::AppStream
       :destination_region,
       :destination_image_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_image_name
@@ -590,7 +526,7 @@ module Aws::AppStream
     class CopyImageResponse < Struct.new(
       :destination_image_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -668,7 +604,7 @@ module Aws::AppStream
       :iam_role_arn,
       :access_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder
@@ -677,7 +613,7 @@ module Aws::AppStream
     class CreateAppBlockBuilderResult < Struct.new(
       :app_block_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder_name
@@ -691,7 +627,7 @@ module Aws::AppStream
       :app_block_builder_name,
       :validity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streaming_url
@@ -704,7 +640,7 @@ module Aws::AppStream
       :streaming_url,
       :expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -743,7 +679,7 @@ module Aws::AppStream
       :post_setup_script_details,
       :packaging_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block
@@ -752,7 +688,7 @@ module Aws::AppStream
     class CreateAppBlockResult < Struct.new(
       :app_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -801,7 +737,7 @@ module Aws::AppStream
       :app_block_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -810,7 +746,7 @@ module Aws::AppStream
     class CreateApplicationResult < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_name
@@ -837,7 +773,7 @@ module Aws::AppStream
       :service_account_credentials,
       :certificate_based_auth_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_config
@@ -846,7 +782,7 @@ module Aws::AppStream
     class CreateDirectoryConfigResult < Struct.new(
       :directory_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -871,7 +807,7 @@ module Aws::AppStream
       :app_visibility,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlement
@@ -880,7 +816,7 @@ module Aws::AppStream
     class CreateEntitlementResult < Struct.new(
       :entitlement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1182,7 +1118,7 @@ module Aws::AppStream
       :session_script_s3_location,
       :max_sessions_per_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet
@@ -1191,7 +1127,7 @@ module Aws::AppStream
     class CreateFleetResult < Struct.new(
       :fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1402,7 +1338,7 @@ module Aws::AppStream
       :tags,
       :access_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_builder
@@ -1411,7 +1347,7 @@ module Aws::AppStream
     class CreateImageBuilderResult < Struct.new(
       :image_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1425,7 +1361,7 @@ module Aws::AppStream
       :name,
       :validity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streaming_url
@@ -1438,7 +1374,7 @@ module Aws::AppStream
       :streaming_url,
       :expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1495,7 +1431,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack
@@ -1504,7 +1440,7 @@ module Aws::AppStream
     class CreateStackResult < Struct.new(
       :stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -1535,7 +1471,7 @@ module Aws::AppStream
       :validity,
       :session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streaming_url
@@ -1548,7 +1484,7 @@ module Aws::AppStream
       :streaming_url,
       :expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -1577,7 +1513,7 @@ module Aws::AppStream
       :organization_logo_s3_location,
       :favicon_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme
@@ -1586,7 +1522,7 @@ module Aws::AppStream
     class CreateThemeForStackResult < Struct.new(
       :theme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute existing_image_name
@@ -1619,7 +1555,7 @@ module Aws::AppStream
       :new_image_tags,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -1632,12 +1568,12 @@ module Aws::AppStream
       :image,
       :can_update_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUsageReportSubscriptionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_bucket_name
@@ -1655,7 +1591,7 @@ module Aws::AppStream
       :s3_bucket_name,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1686,12 +1622,12 @@ module Aws::AppStream
       :last_name,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1700,12 +1636,12 @@ module Aws::AppStream
     class DeleteAppBlockBuilderRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppBlockBuilderResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1714,12 +1650,12 @@ module Aws::AppStream
     class DeleteAppBlockRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppBlockResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1728,12 +1664,12 @@ module Aws::AppStream
     class DeleteApplicationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_name
@@ -1742,12 +1678,12 @@ module Aws::AppStream
     class DeleteDirectoryConfigRequest < Struct.new(
       :directory_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDirectoryConfigResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1760,12 +1696,12 @@ module Aws::AppStream
       :name,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEntitlementResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1774,12 +1710,12 @@ module Aws::AppStream
     class DeleteFleetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFleetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1788,7 +1724,7 @@ module Aws::AppStream
     class DeleteImageBuilderRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_builder
@@ -1797,7 +1733,7 @@ module Aws::AppStream
     class DeleteImageBuilderResult < Struct.new(
       :image_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1810,12 +1746,12 @@ module Aws::AppStream
       :name,
       :shared_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteImagePermissionsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1824,7 +1760,7 @@ module Aws::AppStream
     class DeleteImageRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image
@@ -1833,7 +1769,7 @@ module Aws::AppStream
     class DeleteImageResult < Struct.new(
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1842,12 +1778,12 @@ module Aws::AppStream
     class DeleteStackRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStackResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -1856,22 +1792,22 @@ module Aws::AppStream
     class DeleteThemeForStackRequest < Struct.new(
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteThemeForStackResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageReportSubscriptionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageReportSubscriptionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1887,12 +1823,12 @@ module Aws::AppStream
       :user_name,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_arn
@@ -1914,7 +1850,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder_app_block_associations
@@ -1928,7 +1864,7 @@ module Aws::AppStream
       :app_block_builder_app_block_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -1946,7 +1882,7 @@ module Aws::AppStream
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builders
@@ -1960,7 +1896,7 @@ module Aws::AppStream
       :app_block_builders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arns
@@ -1978,7 +1914,7 @@ module Aws::AppStream
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_blocks
@@ -1992,7 +1928,7 @@ module Aws::AppStream
       :app_blocks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_name
@@ -2014,7 +1950,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_fleet_associations
@@ -2028,7 +1964,7 @@ module Aws::AppStream
       :application_fleet_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arns
@@ -2046,7 +1982,7 @@ module Aws::AppStream
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -2060,7 +1996,7 @@ module Aws::AppStream
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_names
@@ -2077,7 +2013,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_configs
@@ -2090,7 +2026,7 @@ module Aws::AppStream
       :directory_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2111,7 +2047,7 @@ module Aws::AppStream
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlements
@@ -2125,7 +2061,7 @@ module Aws::AppStream
       :entitlements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -2138,7 +2074,7 @@ module Aws::AppStream
       :names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleets
@@ -2151,7 +2087,7 @@ module Aws::AppStream
       :fleets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -2168,7 +2104,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_builders
@@ -2181,7 +2117,7 @@ module Aws::AppStream
       :image_builders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2202,7 +2138,7 @@ module Aws::AppStream
       :shared_aws_account_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2219,7 +2155,7 @@ module Aws::AppStream
       :shared_image_permissions_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -2244,7 +2180,7 @@ module Aws::AppStream
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute images
@@ -2257,7 +2193,7 @@ module Aws::AppStream
       :images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -2292,7 +2228,7 @@ module Aws::AppStream
       :authentication_type,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sessions
@@ -2305,7 +2241,7 @@ module Aws::AppStream
       :sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -2318,7 +2254,7 @@ module Aws::AppStream
       :names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stacks
@@ -2331,7 +2267,7 @@ module Aws::AppStream
       :stacks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -2340,7 +2276,7 @@ module Aws::AppStream
     class DescribeThemeForStackRequest < Struct.new(
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme
@@ -2349,7 +2285,7 @@ module Aws::AppStream
     class DescribeThemeForStackResult < Struct.new(
       :theme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2362,7 +2298,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage_report_subscriptions
@@ -2375,7 +2311,7 @@ module Aws::AppStream
       :usage_report_subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -2403,7 +2339,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_stack_associations
@@ -2416,7 +2352,7 @@ module Aws::AppStream
       :user_stack_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_type
@@ -2433,7 +2369,7 @@ module Aws::AppStream
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -2446,7 +2382,7 @@ module Aws::AppStream
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
@@ -2478,7 +2414,7 @@ module Aws::AppStream
       :created_time,
       :certificate_based_auth_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2494,12 +2430,12 @@ module Aws::AppStream
       :user_name,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_arn
@@ -2512,12 +2448,12 @@ module Aws::AppStream
       :app_block_arn,
       :app_block_builder_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAppBlockBuilderAppBlockResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_name
@@ -2530,12 +2466,12 @@ module Aws::AppStream
       :fleet_name,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateApplicationFleetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -2552,12 +2488,12 @@ module Aws::AppStream
       :entitlement_name,
       :application_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateApplicationFromEntitlementResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_name
@@ -2570,12 +2506,12 @@ module Aws::AppStream
       :fleet_name,
       :stack_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFleetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>
@@ -2589,12 +2525,7 @@ module Aws::AppStream
       :directory_name,
       :organizational_unit_distinguished_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DynamicAppProvidersEnabled
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2610,12 +2541,12 @@ module Aws::AppStream
       :user_name,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableUserResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application associated to an entitlement. Access is controlled based on user attributes.</p>
@@ -2625,7 +2556,7 @@ module Aws::AppStream
     class EntitledApplication < Struct.new(
       :application_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an entitlement. Entitlements control access to specific applications within
@@ -2664,7 +2595,7 @@ module Aws::AppStream
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entitlement already exists.</p>
@@ -2674,7 +2605,7 @@ module Aws::AppStream
     class EntitlementAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute associated with an entitlement. Application entitlements work by matching
@@ -2718,7 +2649,7 @@ module Aws::AppStream
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entitlement can't be found.</p>
@@ -2728,7 +2659,7 @@ module Aws::AppStream
     class EntitlementNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error details.</p>
@@ -2742,7 +2673,7 @@ module Aws::AppStream
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -2751,12 +2682,12 @@ module Aws::AppStream
     class ExpireSessionRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ExpireSessionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a fleet.</p>
@@ -3041,18 +2972,7 @@ module Aws::AppStream
       :session_script_s3_location,
       :max_sessions_per_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The fleet attribute.</p>
-    module FleetAttribute
-      VPC_CONFIGURATION = 'VPC_CONFIGURATION'
-      VPC_CONFIGURATION_SECURITY_GROUP_IDS = 'VPC_CONFIGURATION_SECURITY_GROUP_IDS'
-      DOMAIN_JOIN_INFO = 'DOMAIN_JOIN_INFO'
-      IAM_ROLE_ARN = 'IAM_ROLE_ARN'
-      USB_DEVICE_FILTER_STRINGS = 'USB_DEVICE_FILTER_STRINGS'
-      SESSION_SCRIPT_S3_LOCATION = 'SESSION_SCRIPT_S3_LOCATION'
-      MAX_SESSIONS_PER_INSTANCE = 'MAX_SESSIONS_PER_INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a fleet error.</p>
@@ -3066,53 +2986,7 @@ module Aws::AppStream
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetErrorCode
-      IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION = 'IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION'
-      IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION = 'IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION'
-      IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION = 'IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION'
-      NETWORK_INTERFACE_LIMIT_EXCEEDED = 'NETWORK_INTERFACE_LIMIT_EXCEEDED'
-      INTERNAL_SERVICE_ERROR = 'INTERNAL_SERVICE_ERROR'
-      IAM_SERVICE_ROLE_IS_MISSING = 'IAM_SERVICE_ROLE_IS_MISSING'
-      MACHINE_ROLE_IS_MISSING = 'MACHINE_ROLE_IS_MISSING'
-      STS_DISABLED_IN_REGION = 'STS_DISABLED_IN_REGION'
-      SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES = 'SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES'
-      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION = 'IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION'
-      SUBNET_NOT_FOUND = 'SUBNET_NOT_FOUND'
-      IMAGE_NOT_FOUND = 'IMAGE_NOT_FOUND'
-      INVALID_SUBNET_CONFIGURATION = 'INVALID_SUBNET_CONFIGURATION'
-      SECURITY_GROUPS_NOT_FOUND = 'SECURITY_GROUPS_NOT_FOUND'
-      IGW_NOT_ATTACHED = 'IGW_NOT_ATTACHED'
-      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION = 'IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION'
-      FLEET_STOPPED = 'FLEET_STOPPED'
-      FLEET_INSTANCE_PROVISIONING_FAILURE = 'FLEET_INSTANCE_PROVISIONING_FAILURE'
-      DOMAIN_JOIN_ERROR_FILE_NOT_FOUND = 'DOMAIN_JOIN_ERROR_FILE_NOT_FOUND'
-      DOMAIN_JOIN_ERROR_ACCESS_DENIED = 'DOMAIN_JOIN_ERROR_ACCESS_DENIED'
-      DOMAIN_JOIN_ERROR_LOGON_FAILURE = 'DOMAIN_JOIN_ERROR_LOGON_FAILURE'
-      DOMAIN_JOIN_ERROR_INVALID_PARAMETER = 'DOMAIN_JOIN_ERROR_INVALID_PARAMETER'
-      DOMAIN_JOIN_ERROR_MORE_DATA = 'DOMAIN_JOIN_ERROR_MORE_DATA'
-      DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN = 'DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN'
-      DOMAIN_JOIN_ERROR_NOT_SUPPORTED = 'DOMAIN_JOIN_ERROR_NOT_SUPPORTED'
-      DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME = 'DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME'
-      DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED = 'DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED'
-      DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED = 'DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED'
-      DOMAIN_JOIN_NERR_PASSWORD_EXPIRED = 'DOMAIN_JOIN_NERR_PASSWORD_EXPIRED'
-      DOMAIN_JOIN_INTERNAL_SERVICE_ERROR = 'DOMAIN_JOIN_INTERNAL_SERVICE_ERROR'
-    end
-
-    module FleetState
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-    end
-
-    module FleetType
-      ALWAYS_ON = 'ALWAYS_ON'
-      ON_DEMAND = 'ON_DEMAND'
-      ELASTIC = 'ELASTIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an image.</p>
@@ -3230,7 +3104,7 @@ module Aws::AppStream
       :dynamic_app_providers_enabled,
       :image_shared_with_others,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a virtual machine that is used to create an image. </p>
@@ -3462,21 +3336,7 @@ module Aws::AppStream
       :access_endpoints,
       :latest_appstream_agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageBuilderState
-      PENDING = 'PENDING'
-      UPDATING_AGENT = 'UPDATING_AGENT'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      REBOOTING = 'REBOOTING'
-      SNAPSHOTTING = 'SNAPSHOTTING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-      PENDING_QUALIFICATION = 'PENDING_QUALIFICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the reason why the last image builder state change occurred.</p>
@@ -3490,12 +3350,7 @@ module Aws::AppStream
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageBuilderStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      IMAGE_UNAVAILABLE = 'IMAGE_UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the permissions for an image. </p>
@@ -3509,22 +3364,7 @@ module Aws::AppStream
       :allow_fleet,
       :allow_image_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageSharedWithOthers
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
-    end
-
-    module ImageState
-      PENDING = 'PENDING'
-      AVAILABLE = 'AVAILABLE'
-      FAILED = 'FAILED'
-      COPYING = 'COPYING'
-      DELETING = 'DELETING'
-      CREATING = 'CREATING'
-      IMPORTING = 'IMPORTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the reason why the last image state change occurred.</p>
@@ -3538,13 +3378,7 @@ module Aws::AppStream
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageStateChangeReasonCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      IMAGE_BUILDER_NOT_AVAILABLE = 'IMAGE_BUILDER_NOT_AVAILABLE'
-      IMAGE_COPY_FAILURE = 'IMAGE_COPY_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image can't be updated because it's not compatible for updates.</p>
@@ -3554,7 +3388,7 @@ module Aws::AppStream
     class IncompatibleImageException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource cannot be created because your AWS account is suspended. For assistance, contact AWS Support. </p>
@@ -3564,7 +3398,7 @@ module Aws::AppStream
     class InvalidAccountStatusException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates an incorrect combination of parameters, or a missing parameter.</p>
@@ -3574,7 +3408,7 @@ module Aws::AppStream
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified role is invalid.</p>
@@ -3584,7 +3418,7 @@ module Aws::AppStream
     class InvalidRoleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error that is returned when a usage report can't be generated.</p>
@@ -3598,12 +3432,7 @@ module Aws::AppStream
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LatestAppstreamAgentVersion
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested limit exceeds the permitted limit for an account.</p>
@@ -3613,7 +3442,7 @@ module Aws::AppStream
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -3626,7 +3455,7 @@ module Aws::AppStream
       :stack_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -3639,7 +3468,7 @@ module Aws::AppStream
       :names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_name
@@ -3652,7 +3481,7 @@ module Aws::AppStream
       :fleet_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -3665,7 +3494,7 @@ module Aws::AppStream
       :names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -3686,7 +3515,7 @@ module Aws::AppStream
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitled_applications
@@ -3699,7 +3528,7 @@ module Aws::AppStream
       :entitled_applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3708,7 +3537,7 @@ module Aws::AppStream
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3717,12 +3546,7 @@ module Aws::AppStream
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageAction
-      SUPPRESS = 'SUPPRESS'
-      RESEND = 'RESEND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the network details of the fleet or image builder instance.</p>
@@ -3736,7 +3560,7 @@ module Aws::AppStream
       :eni_private_ip_address,
       :eni_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attempted operation is not permitted.</p>
@@ -3746,32 +3570,7 @@ module Aws::AppStream
     class OperationNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackagingType
-      CUSTOM = 'CUSTOM'
-      APPSTREAM2 = 'APPSTREAM2'
-    end
-
-    module Permission
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module PlatformType
-      WINDOWS = 'WINDOWS'
-      WINDOWS_SERVER_2016 = 'WINDOWS_SERVER_2016'
-      WINDOWS_SERVER_2019 = 'WINDOWS_SERVER_2019'
-      WINDOWS_SERVER_2022 = 'WINDOWS_SERVER_2022'
-      AMAZON_LINUX2 = 'AMAZON_LINUX2'
-      RHEL8 = 'RHEL8'
-      ROCKY_LINUX8 = 'ROCKY_LINUX8'
-    end
-
-    module PreferredProtocol
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AppStream 2.0 can’t process the request right now because the Describe calls from your AWS account are being throttled by Amazon EC2. Try again later.</p>
@@ -3781,7 +3580,7 @@ module Aws::AppStream
     class RequestLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource already exists.</p>
@@ -3791,7 +3590,7 @@ module Aws::AppStream
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource error.</p>
@@ -3809,7 +3608,7 @@ module Aws::AppStream
       :error_message,
       :error_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is in use.</p>
@@ -3819,7 +3618,7 @@ module Aws::AppStream
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource exists and is not in use, but isn't available.</p>
@@ -3829,7 +3628,7 @@ module Aws::AppStream
     class ResourceNotAvailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -3839,7 +3638,7 @@ module Aws::AppStream
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the S3 location.</p>
@@ -3876,7 +3675,7 @@ module Aws::AppStream
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the details of the script.</p>
@@ -3898,7 +3697,7 @@ module Aws::AppStream
       :executable_parameters,
       :timeout_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the credentials for the service account used by the fleet or image builder to connect to the directory.</p>
@@ -3914,7 +3713,7 @@ module Aws::AppStream
       :account_name,
       :account_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a streaming session.</p>
@@ -3965,19 +3764,7 @@ module Aws::AppStream
       :network_access_configuration,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionConnectionState
-      CONNECTED = 'CONNECTED'
-      NOT_CONNECTED = 'NOT_CONNECTED'
-    end
-
-    # <p>Possible values for the state of a streaming session.</p>
-    module SessionState
-      ACTIVE = 'ACTIVE'
-      PENDING = 'PENDING'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the permissions that are available to the specified AWS account for a shared image.</p>
@@ -3991,7 +3778,7 @@ module Aws::AppStream
       :shared_account_id,
       :image_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stack.</p>
@@ -4053,22 +3840,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackAttribute
-      STORAGE_CONNECTORS = 'STORAGE_CONNECTORS'
-      STORAGE_CONNECTOR_HOMEFOLDERS = 'STORAGE_CONNECTOR_HOMEFOLDERS'
-      STORAGE_CONNECTOR_GOOGLE_DRIVE = 'STORAGE_CONNECTOR_GOOGLE_DRIVE'
-      STORAGE_CONNECTOR_ONE_DRIVE = 'STORAGE_CONNECTOR_ONE_DRIVE'
-      REDIRECT_URL = 'REDIRECT_URL'
-      FEEDBACK_URL = 'FEEDBACK_URL'
-      THEME_NAME = 'THEME_NAME'
-      USER_SETTINGS = 'USER_SETTINGS'
-      EMBED_HOST_DOMAINS = 'EMBED_HOST_DOMAINS'
-      IAM_ROLE_ARN = 'IAM_ROLE_ARN'
-      ACCESS_ENDPOINTS = 'ACCESS_ENDPOINTS'
-      STREAMING_EXPERIENCE_SETTINGS = 'STREAMING_EXPERIENCE_SETTINGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stack error.</p>
@@ -4082,12 +3854,7 @@ module Aws::AppStream
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackErrorCode
-      STORAGE_CONNECTOR_ERROR = 'STORAGE_CONNECTOR_ERROR'
-      INTERNAL_SERVICE_ERROR = 'INTERNAL_SERVICE_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4096,7 +3863,7 @@ module Aws::AppStream
     class StartAppBlockBuilderRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder
@@ -4105,7 +3872,7 @@ module Aws::AppStream
     class StartAppBlockBuilderResult < Struct.new(
       :app_block_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4114,12 +3881,12 @@ module Aws::AppStream
     class StartFleetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartFleetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4132,7 +3899,7 @@ module Aws::AppStream
       :name,
       :appstream_agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_builder
@@ -4141,7 +3908,7 @@ module Aws::AppStream
     class StartImageBuilderResult < Struct.new(
       :image_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4150,7 +3917,7 @@ module Aws::AppStream
     class StopAppBlockBuilderRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder
@@ -4159,7 +3926,7 @@ module Aws::AppStream
     class StopAppBlockBuilderResult < Struct.new(
       :app_block_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4168,12 +3935,12 @@ module Aws::AppStream
     class StopFleetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopFleetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4182,7 +3949,7 @@ module Aws::AppStream
     class StopImageBuilderRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_builder
@@ -4191,7 +3958,7 @@ module Aws::AppStream
     class StopImageBuilderResult < Struct.new(
       :image_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a connector that enables persistent storage for users.</p>
@@ -4213,19 +3980,7 @@ module Aws::AppStream
       :domains,
       :domains_require_admin_consent,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of storage connector.</p>
-    module StorageConnectorType
-      HOMEFOLDERS = 'HOMEFOLDERS'
-      GOOGLE_DRIVE = 'GOOGLE_DRIVE'
-      ONE_DRIVE = 'ONE_DRIVE'
-    end
-
-    module StreamView
-      APP = 'APP'
-      DESKTOP = 'DESKTOP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The streaming protocol you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.</p>
@@ -4235,7 +3990,7 @@ module Aws::AppStream
     class StreamingExperienceSettings < Struct.new(
       :preferred_protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4251,12 +4006,12 @@ module Aws::AppStream
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom branding theme, which might include a custom logo, website links, and other branding to display to users.</p>
@@ -4294,11 +4049,7 @@ module Aws::AppStream
       :theme_favicon_url,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThemeAttribute
-      FOOTER_LINKS = 'FOOTER_LINKS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The website links that display in the catalog page footer.</p>
@@ -4312,19 +4063,7 @@ module Aws::AppStream
       :display_name,
       :footer_link_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThemeState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module ThemeStyling
-      LIGHT_BLUE = 'LIGHT_BLUE'
-      BLUE = 'BLUE'
-      PINK = 'PINK'
-      RED = 'RED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4337,12 +4076,12 @@ module Aws::AppStream
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4414,7 +4153,7 @@ module Aws::AppStream
       :access_endpoints,
       :attributes_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_block_builder
@@ -4423,7 +4162,7 @@ module Aws::AppStream
     class UpdateAppBlockBuilderResult < Struct.new(
       :app_block_builder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4464,7 +4203,7 @@ module Aws::AppStream
       :app_block_arn,
       :attributes_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -4473,7 +4212,7 @@ module Aws::AppStream
     class UpdateApplicationResult < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_name
@@ -4500,7 +4239,7 @@ module Aws::AppStream
       :service_account_credentials,
       :certificate_based_auth_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_config
@@ -4509,7 +4248,7 @@ module Aws::AppStream
     class UpdateDirectoryConfigResult < Struct.new(
       :directory_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4534,7 +4273,7 @@ module Aws::AppStream
       :app_visibility,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlement
@@ -4543,7 +4282,7 @@ module Aws::AppStream
     class UpdateEntitlementResult < Struct.new(
       :entitlement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_name
@@ -4779,7 +4518,7 @@ module Aws::AppStream
       :session_script_s3_location,
       :max_sessions_per_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet
@@ -4788,7 +4527,7 @@ module Aws::AppStream
     class UpdateFleetResult < Struct.new(
       :fleet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4805,12 +4544,12 @@ module Aws::AppStream
       :shared_account_id,
       :image_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateImagePermissionsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute display_name
@@ -4868,7 +4607,7 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack
@@ -4877,7 +4616,7 @@ module Aws::AppStream
     class UpdateStackResult < Struct.new(
       :stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_name
@@ -4914,7 +4653,7 @@ module Aws::AppStream
       :state,
       :attributes_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme
@@ -4923,17 +4662,7 @@ module Aws::AppStream
     class UpdateThemeForStackResult < Struct.new(
       :theme,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageReportExecutionErrorCode
-      RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND'
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      INTERNAL_SERVICE_ERROR = 'INTERNAL_SERVICE_ERROR'
-    end
-
-    module UsageReportSchedule
-      DAILY = 'DAILY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information about the usage report subscription.</p>
@@ -4960,7 +4689,7 @@ module Aws::AppStream
       :last_generated_report_date,
       :subscription_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a user in the user pool.</p>
@@ -5018,7 +4747,7 @@ module Aws::AppStream
       :created_time,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an action and whether the action is enabled or disabled for users during their streaming sessions.</p>
@@ -5039,7 +4768,7 @@ module Aws::AppStream
       :permission,
       :maximum_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a user in the user pool and the associated stack.</p>
@@ -5064,7 +4793,7 @@ module Aws::AppStream
       :authentication_type,
       :send_email_notification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error that is returned when a user can’t be associated with or disassociated from a stack. </p>
@@ -5082,20 +4811,7 @@ module Aws::AppStream
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserStackAssociationErrorCode
-      STACK_NOT_FOUND = 'STACK_NOT_FOUND'
-      USER_NAME_NOT_FOUND = 'USER_NAME_NOT_FOUND'
-      DIRECTORY_NOT_FOUND = 'DIRECTORY_NOT_FOUND'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-    end
-
-    module VisibilityType
-      PUBLIC = 'PUBLIC'
-      PRIVATE = 'PRIVATE'
-      SHARED = 'SHARED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes VPC configuration information for fleets and image builders.</p>
@@ -5109,7 +4825,7 @@ module Aws::AppStream
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

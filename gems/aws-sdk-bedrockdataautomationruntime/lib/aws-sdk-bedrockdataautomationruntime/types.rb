@@ -12,7 +12,7 @@ module Aws::BedrockDataAutomationRuntime
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Config containing asset processing related knobs for all modalities
@@ -22,16 +22,7 @@ module Aws::BedrockDataAutomationRuntime
     class AssetProcessingConfiguration < Struct.new(
       :video,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # List of status supported by automation jobs
-    module AutomationJobStatus
-      CREATED = 'Created'
-      IN_PROGRESS = 'InProgress'
-      SUCCESS = 'Success'
-      SERVICE_ERROR = 'ServiceError'
-      CLIENT_ERROR = 'ClientError'
+      include ::Smithy::Schema::Structure
     end
 
     # Structure for single blueprint entity.
@@ -49,13 +40,7 @@ module Aws::BedrockDataAutomationRuntime
       :version,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Blueprint stage enum.
-    module BlueprintStage
-      DEVELOPMENT = 'DEVELOPMENT'
-      LIVE = 'LIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # Data automation configuration.
@@ -69,13 +54,7 @@ module Aws::BedrockDataAutomationRuntime
       :data_automation_project_arn,
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Data automation stage.
-    module DataAutomationStage
-      LIVE = 'LIVE'
-      DEVELOPMENT = 'DEVELOPMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # Encryption configuration.
@@ -89,7 +68,7 @@ module Aws::BedrockDataAutomationRuntime
       :kms_key_id,
       :kms_encryption_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Event bridge configuration.
@@ -99,7 +78,7 @@ module Aws::BedrockDataAutomationRuntime
     class EventBridgeConfiguration < Struct.new(
       :event_bridge_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Structure for request of GetDataAutomationStatus API.
@@ -109,7 +88,7 @@ module Aws::BedrockDataAutomationRuntime
     class GetDataAutomationStatusRequest < Struct.new(
       :invocation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response of GetDataAutomationStatus API.
@@ -131,7 +110,7 @@ module Aws::BedrockDataAutomationRuntime
       :error_message,
       :output_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Input configuration.
@@ -145,7 +124,7 @@ module Aws::BedrockDataAutomationRuntime
       :s3_uri,
       :asset_processing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # This exception is for any internal un-expected service errors.
@@ -154,7 +133,7 @@ module Aws::BedrockDataAutomationRuntime
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Invoke Data Automation Async Request
@@ -196,7 +175,7 @@ module Aws::BedrockDataAutomationRuntime
       :data_automation_profile_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Invoke Data Automation Async Response
@@ -206,7 +185,7 @@ module Aws::BedrockDataAutomationRuntime
     class InvokeDataAutomationAsyncResponse < Struct.new(
       :invocation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -215,7 +194,7 @@ module Aws::BedrockDataAutomationRuntime
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -224,7 +203,7 @@ module Aws::BedrockDataAutomationRuntime
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Notification configuration.
@@ -234,7 +213,7 @@ module Aws::BedrockDataAutomationRuntime
     class NotificationConfiguration < Struct.new(
       :event_bridge_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Output configuration.
@@ -244,7 +223,7 @@ module Aws::BedrockDataAutomationRuntime
     class OutputConfiguration < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # This exception will be thrown when resource provided from customer not found.
@@ -253,7 +232,7 @@ module Aws::BedrockDataAutomationRuntime
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # This exception will be thrown when service quota is exceeded.
@@ -262,7 +241,7 @@ module Aws::BedrockDataAutomationRuntime
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Key value pair of a tag
@@ -276,7 +255,7 @@ module Aws::BedrockDataAutomationRuntime
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -289,12 +268,12 @@ module Aws::BedrockDataAutomationRuntime
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # This exception will be thrown when customer reached API TPS limit.
@@ -303,7 +282,7 @@ module Aws::BedrockDataAutomationRuntime
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Timestamp segment
@@ -317,7 +296,7 @@ module Aws::BedrockDataAutomationRuntime
       :start_time_millis,
       :end_time_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -330,12 +309,12 @@ module Aws::BedrockDataAutomationRuntime
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # This exception will be thrown when customer provided invalid parameters.
@@ -344,7 +323,7 @@ module Aws::BedrockDataAutomationRuntime
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Video asset processing configuration
@@ -354,7 +333,7 @@ module Aws::BedrockDataAutomationRuntime
     class VideoAssetProcessingConfiguration < Struct.new(
       :segment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Delimits the segment of the input that will be processed
@@ -365,7 +344,7 @@ module Aws::BedrockDataAutomationRuntime
       :timestamp_segment,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TimestampSegment < VideoSegmentConfiguration; end
       class Unknown < VideoSegmentConfiguration; end

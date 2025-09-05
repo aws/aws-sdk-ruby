@@ -9,7 +9,7 @@ module Aws::QLDBSession
     # <p>Contains the details of the transaction to abort.</p>
     class AbortTransactionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the aborted transaction.</p>
@@ -19,7 +19,7 @@ module Aws::QLDBSession
     class AbortTransactionResult < Struct.new(
       :timing_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if the request is malformed or contains an error such as an invalid parameter
@@ -32,7 +32,7 @@ module Aws::QLDBSession
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the request exceeds the processing capacity of the ledger.</p>
@@ -41,7 +41,7 @@ module Aws::QLDBSession
     class CapacityExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the transaction to commit.</p>
@@ -61,7 +61,7 @@ module Aws::QLDBSession
       :transaction_id,
       :commit_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the committed transaction.</p>
@@ -83,13 +83,13 @@ module Aws::QLDBSession
       :timing_information,
       :consumed_i_os,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a request to end the session.</p>
     class EndSessionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the ended session.</p>
@@ -99,7 +99,7 @@ module Aws::QLDBSession
     class EndSessionResult < Struct.new(
       :timing_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a request to execute a statement.</p>
@@ -117,7 +117,7 @@ module Aws::QLDBSession
       :statement,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the executed statement.</p>
@@ -135,7 +135,7 @@ module Aws::QLDBSession
       :timing_information,
       :consumed_i_os,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the details of the page to be fetched.</p>
@@ -149,7 +149,7 @@ module Aws::QLDBSession
       :transaction_id,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the page that was fetched.</p>
@@ -167,7 +167,7 @@ module Aws::QLDBSession
       :timing_information,
       :consumed_i_os,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains I/O usage metrics for a command that was invoked.</p>
@@ -181,7 +181,7 @@ module Aws::QLDBSession
       :read_i_os,
       :write_i_os,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:read_i_os] = 0 unless options.key?(:read_i_os)
@@ -199,7 +199,7 @@ module Aws::QLDBSession
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned if a resource limit such as number of active sessions is exceeded.</p>
@@ -208,7 +208,7 @@ module Aws::QLDBSession
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when a transaction cannot be written to the journal due to a failure in the
@@ -218,7 +218,7 @@ module Aws::QLDBSession
     class OccConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details of the fetched page.</p>
@@ -232,7 +232,7 @@ module Aws::QLDBSession
       :values,
       :next_page_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when the rate of requests exceeds the allowed throughput.</p>
@@ -241,7 +241,7 @@ module Aws::QLDBSession
     class RateExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_token
@@ -283,7 +283,7 @@ module Aws::QLDBSession
       :execute_statement,
       :fetch_page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_session
@@ -318,7 +318,7 @@ module Aws::QLDBSession
       :execute_statement,
       :fetch_page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a request to start a new session.</p>
@@ -328,7 +328,7 @@ module Aws::QLDBSession
     class StartSessionRequest < Struct.new(
       :ledger_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the started session.</p>
@@ -343,13 +343,13 @@ module Aws::QLDBSession
       :session_token,
       :timing_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a request to start a transaction.</p>
     class StartTransactionRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the started transaction.</p>
@@ -363,7 +363,7 @@ module Aws::QLDBSession
       :transaction_id,
       :timing_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains server-side performance information for a command. Amazon QLDB captures timing
@@ -376,7 +376,7 @@ module Aws::QLDBSession
     class TimingInformation < Struct.new(
       :processing_time_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:processing_time_milliseconds] = 0 unless options.key?(:processing_time_milliseconds)
@@ -395,7 +395,7 @@ module Aws::QLDBSession
       :ion_binary,
       :ion_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

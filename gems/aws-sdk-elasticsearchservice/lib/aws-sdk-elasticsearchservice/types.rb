@@ -13,7 +13,7 @@ module Aws::ElasticsearchService
     class AcceptInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>AcceptInboundCrossClusterSearchConnection</a></code> operation. Contains details of accepted inbound connection.</p>
@@ -23,7 +23,7 @@ module Aws::ElasticsearchService
     class AcceptInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred because user does not have permissions to access the resource. Returns HTTP status code 403.</p>
@@ -33,7 +33,7 @@ module Aws::ElasticsearchService
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured access rules for the domain's document and search endpoints, and the current status of those rules.</p>
@@ -48,7 +48,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.</p>
@@ -62,7 +62,7 @@ module Aws::ElasticsearchService
       :arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -113,7 +113,7 @@ module Aws::ElasticsearchService
       :limit_name,
       :limit_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p>
@@ -133,7 +133,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>
@@ -159,7 +159,7 @@ module Aws::ElasticsearchService
       :anonymous_auth_disable_date,
       :anonymous_auth_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>
@@ -185,7 +185,7 @@ module Aws::ElasticsearchService
       :saml_options,
       :anonymous_auth_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the status of advanced security options for the specified Elasticsearch domain.</p>
@@ -199,7 +199,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -219,7 +219,7 @@ module Aws::ElasticsearchService
       :package_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -235,7 +235,7 @@ module Aws::ElasticsearchService
     class AssociatePackageResponse < Struct.new(
       :domain_package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code><a>AuthorizeVpcEndpointAccess</a></code> operation.
@@ -250,7 +250,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>AuthorizeVpcEndpointAccess</a></code> operation.
@@ -262,7 +262,7 @@ module Aws::ElasticsearchService
     class AuthorizeVpcEndpointAccessResponse < Struct.new(
       :authorized_principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an  account or service that has access to an Amazon
@@ -277,7 +277,7 @@ module Aws::ElasticsearchService
       :principal_type,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies Auto-Tune type and Auto-Tune action details. </p>
@@ -291,13 +291,7 @@ module Aws::ElasticsearchService
       :auto_tune_type,
       :auto_tune_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.</p>
-    module AutoTuneDesiredState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies details of the Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
@@ -307,7 +301,7 @@ module Aws::ElasticsearchService
     class AutoTuneDetails < Struct.new(
       :scheduled_auto_tune_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies Auto-Tune maitenance schedule. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
@@ -325,7 +319,7 @@ module Aws::ElasticsearchService
       :duration,
       :cron_expression_for_recurrence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.</p>
@@ -343,7 +337,7 @@ module Aws::ElasticsearchService
       :rollback_on_disable,
       :maintenance_schedules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>
@@ -357,7 +351,7 @@ module Aws::ElasticsearchService
       :desired_state,
       :maintenance_schedules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>
@@ -371,7 +365,7 @@ module Aws::ElasticsearchService
       :state,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the status of Auto-Tune options for the specified Elasticsearch domain.</p>
@@ -385,20 +379,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the Auto-Tune state for the Elasticsearch domain. For valid states see the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a>.</p>
-    module AutoTuneState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      ENABLE_IN_PROGRESS = 'ENABLE_IN_PROGRESS'
-      DISABLE_IN_PROGRESS = 'DISABLE_IN_PROGRESS'
-      DISABLED_AND_ROLLBACK_SCHEDULED = 'DISABLED_AND_ROLLBACK_SCHEDULED'
-      DISABLED_AND_ROLLBACK_IN_PROGRESS = 'DISABLED_AND_ROLLBACK_IN_PROGRESS'
-      DISABLED_AND_ROLLBACK_COMPLETE = 'DISABLED_AND_ROLLBACK_COMPLETE'
-      DISABLED_AND_ROLLBACK_ERROR = 'DISABLED_AND_ROLLBACK_ERROR'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the current status of the Auto-Tune options. </p>
@@ -428,17 +409,12 @@ module Aws::ElasticsearchService
       :error_message,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:update_version] = 0 unless options.key?(:update_version)
         super
       end
-    end
-
-    # <p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>
-    module AutoTuneType
-      SCHEDULED_ACTION = 'SCHEDULED_ACTION'
     end
 
     # <p>An error occurred while processing the request.</p>
@@ -448,7 +424,7 @@ module Aws::ElasticsearchService
     class BaseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters of the <code>CancelDomainConfigChange</code> operation.</p>
@@ -462,7 +438,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of the cancelled domain config change.</p>
@@ -480,7 +456,7 @@ module Aws::ElasticsearchService
       :cancelled_change_ids,
       :cancelled_change_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.</p>
@@ -490,7 +466,7 @@ module Aws::ElasticsearchService
     class CancelElasticsearchServiceSoftwareUpdateRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>
@@ -500,7 +476,7 @@ module Aws::ElasticsearchService
     class CancelElasticsearchServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A property change that was cancelled for an Amazon OpenSearch Service domain.</p>
@@ -518,7 +494,7 @@ module Aws::ElasticsearchService
       :cancelled_value,
       :active_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies change details of the domain configuration change.</p>
@@ -548,7 +524,7 @@ module Aws::ElasticsearchService
       :last_updated_time,
       :initiated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A progress stage details of a specific domain configuration change.</p>
@@ -570,7 +546,7 @@ module Aws::ElasticsearchService
       :description,
       :last_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The progress details of a specific domain configuration change.</p>
@@ -616,7 +592,7 @@ module Aws::ElasticsearchService
       :last_updated_time,
       :initiated_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_number_of_stages] = 0 unless options.key?(:total_number_of_stages)
@@ -643,7 +619,7 @@ module Aws::ElasticsearchService
       :identity_pool_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the Cognito options for the specified Elasticsearch domain.</p>
@@ -657,7 +633,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for cold storage options such as enabled</p>
@@ -667,7 +643,7 @@ module Aws::ElasticsearchService
     class ColdStorageOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -692,18 +668,7 @@ module Aws::ElasticsearchService
       :source_version,
       :target_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigChangeStatus
-      PENDING = 'Pending'
-      INITIALIZING = 'Initializing'
-      VALIDATING = 'Validating'
-      VALIDATION_FAILED = 'ValidationFailed'
-      APPLYING_CHANGES = 'ApplyingChanges'
-      COMPLETED = 'Completed'
-      PENDING_USER_INPUT = 'PendingUserInput'
-      CANCELLED = 'Cancelled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred because the client attempts to remove a resource that is currently in use. Returns HTTP status code 409.</p>
@@ -713,7 +678,7 @@ module Aws::ElasticsearchService
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -784,7 +749,7 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>CreateElasticsearchDomain</code> operation. Contains the status of the newly created Elasticsearch domain.</p>
@@ -794,7 +759,7 @@ module Aws::ElasticsearchService
     class CreateElasticsearchDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>CreateOutboundCrossClusterSearchConnection</a></code> operation.</p>
@@ -812,7 +777,7 @@ module Aws::ElasticsearchService
       :destination_domain_info,
       :connection_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>CreateOutboundCrossClusterSearchConnection</a></code> request. Contains the details of the newly created cross-cluster search connection.</p>
@@ -838,7 +803,7 @@ module Aws::ElasticsearchService
       :connection_status,
       :cross_cluster_search_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -866,7 +831,7 @@ module Aws::ElasticsearchService
       :package_description,
       :package_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -882,7 +847,7 @@ module Aws::ElasticsearchService
     class CreatePackageResponse < Struct.new(
       :package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>CreateVpcEndpointRequest</a></code> operation.</p>
@@ -900,7 +865,7 @@ module Aws::ElasticsearchService
       :vpc_options,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>CreateVpcEndpoint</a></code> operation. Contains the configuration and status of the VPC Endpoint being created.</p>
@@ -910,7 +875,7 @@ module Aws::ElasticsearchService
     class CreateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.</p>
@@ -920,7 +885,7 @@ module Aws::ElasticsearchService
     class DeleteElasticsearchDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.</p>
@@ -930,7 +895,7 @@ module Aws::ElasticsearchService
     class DeleteElasticsearchDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation.</p>
@@ -940,7 +905,7 @@ module Aws::ElasticsearchService
     class DeleteInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted inbound connection.</p>
@@ -950,7 +915,7 @@ module Aws::ElasticsearchService
     class DeleteInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation.</p>
@@ -960,7 +925,7 @@ module Aws::ElasticsearchService
     class DeleteOutboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted outbound connection.</p>
@@ -970,7 +935,7 @@ module Aws::ElasticsearchService
     class DeleteOutboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -986,7 +951,7 @@ module Aws::ElasticsearchService
     class DeletePackageRequest < Struct.new(
       :package_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1002,7 +967,7 @@ module Aws::ElasticsearchService
     class DeletePackageResponse < Struct.new(
       :package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.</p>
@@ -1012,7 +977,7 @@ module Aws::ElasticsearchService
     class DeleteVpcEndpointRequest < Struct.new(
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>DeleteVpcEndpoint</a></code> operation. Contains the summarized detail of the VPC Endpoint being deleted.</p>
@@ -1023,15 +988,7 @@ module Aws::ElasticsearchService
     class DeleteVpcEndpointResponse < Struct.new(
       :vpc_endpoint_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentStatus
-      PENDING_UPDATE = 'PENDING_UPDATE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      NOT_ELIGIBLE = 'NOT_ELIGIBLE'
-      ELIGIBLE = 'ELIGIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>
@@ -1049,7 +1006,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
@@ -1063,7 +1020,7 @@ module Aws::ElasticsearchService
       :auto_tunes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the
@@ -1081,7 +1038,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :change_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeDomainChangeProgress</code> request. Contains the progress information of
@@ -1094,7 +1051,7 @@ module Aws::ElasticsearchService
     class DescribeDomainChangeProgressResponse < Struct.new(
       :change_progress_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Container for the parameters to the <code>DescribeElasticsearchDomainConfig</code> operation. Specifies the domain name for which you want configuration information.</p>
@@ -1104,7 +1061,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeElasticsearchDomainConfig</code> request. Contains the configuration information of the requested domain.</p>
@@ -1114,7 +1071,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchDomainConfigResponse < Struct.new(
       :domain_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeElasticsearchDomain</a></code> operation.</p>
@@ -1124,7 +1081,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeElasticsearchDomain</code> request. Contains the status of the domain specified in the request.</p>
@@ -1134,7 +1091,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchDomainResponse < Struct.new(
       :domain_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeElasticsearchDomains</a></code> operation. By default, the API returns the status of all Elasticsearch domains.</p>
@@ -1144,7 +1101,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchDomainsRequest < Struct.new(
       :domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.</p>
@@ -1154,7 +1111,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchDomainsResponse < Struct.new(
       :domain_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1198,7 +1155,7 @@ module Aws::ElasticsearchService
       :instance_type,
       :elasticsearch_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1223,7 +1180,7 @@ module Aws::ElasticsearchService
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
       :limits_by_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeInboundCrossClusterSearchConnections</a></code> operation.</p>
@@ -1251,7 +1208,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DescribeInboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.</p>
@@ -1266,7 +1223,7 @@ module Aws::ElasticsearchService
       :cross_cluster_search_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> operation.</p>
@@ -1294,7 +1251,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.</p>
@@ -1309,7 +1266,7 @@ module Aws::ElasticsearchService
       :cross_cluster_search_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter to apply in <code>DescribePackage</code> response.</p>
@@ -1323,13 +1280,7 @@ module Aws::ElasticsearchService
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribePackagesFilterName
-      PackageID = 'PackageID'
-      PackageName = 'PackageName'
-      PackageStatus = 'PackageStatus'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1353,7 +1304,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1372,7 +1323,7 @@ module Aws::ElasticsearchService
       :package_details_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters to <code>DescribeReservedElasticsearchInstanceOfferings</code></p>
@@ -1391,7 +1342,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for results from <code>DescribeReservedElasticsearchInstanceOfferings</code></p>
@@ -1405,7 +1356,7 @@ module Aws::ElasticsearchService
       :next_token,
       :reserved_elasticsearch_instance_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters to <code>DescribeReservedElasticsearchInstances</code></p>
@@ -1424,7 +1375,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for results from <code>DescribeReservedElasticsearchInstances</code></p>
@@ -1438,7 +1389,7 @@ module Aws::ElasticsearchService
       :next_token,
       :reserved_elasticsearch_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code><a>DescribeVpcEndpoints</a></code> operation. Specifies the list of VPC endpoints to be described.</p>
@@ -1448,7 +1399,7 @@ module Aws::ElasticsearchService
     class DescribeVpcEndpointsRequest < Struct.new(
       :vpc_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>DescribeVpcEndpoints</a></code> operation. Returns a list containing configuration details and
@@ -1463,7 +1414,7 @@ module Aws::ElasticsearchService
       :vpc_endpoints,
       :vpc_endpoint_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occured because the client wanted to access a not supported operation. Gives http status code of 409.</p>
@@ -1473,7 +1424,7 @@ module Aws::ElasticsearchService
     class DisabledOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1493,7 +1444,7 @@ module Aws::ElasticsearchService
       :package_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1509,7 +1460,7 @@ module Aws::ElasticsearchService
     class DissociatePackageResponse < Struct.new(
       :domain_package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to configure endpoint for the Elasticsearch domain.</p>
@@ -1542,7 +1493,7 @@ module Aws::ElasticsearchService
       :custom_endpoint,
       :custom_endpoint_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured endpoint options for the domain and their current status.</p>
@@ -1556,7 +1507,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1569,7 +1520,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :engine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_id
@@ -1584,7 +1535,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on a package that is associated with a domain.</p>
@@ -1625,25 +1576,7 @@ module Aws::ElasticsearchService
       :reference_path,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainPackageStatus
-      ASSOCIATING = 'ASSOCIATING'
-      ASSOCIATION_FAILED = 'ASSOCIATION_FAILED'
-      ACTIVE = 'ACTIVE'
-      DISSOCIATING = 'DISSOCIATING'
-      DISSOCIATION_FAILED = 'DISSOCIATION_FAILED'
-    end
-
-    module DomainProcessingStatusType
-      CREATING = 'Creating'
-      ACTIVE = 'Active'
-      MODIFYING = 'Modifying'
-      UPGRADING = 'UpgradingEngineVersion'
-      UPDATING = 'UpdatingServiceSoftware'
-      ISOLATED = 'Isolated'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_type
@@ -1663,7 +1596,7 @@ module Aws::ElasticsearchService
       :deployment_type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
@@ -1677,7 +1610,7 @@ module Aws::ElasticsearchService
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.</p>
@@ -1703,7 +1636,7 @@ module Aws::ElasticsearchService
       :iops,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Status of the EBS options for the specified Elasticsearch domain.</p>
@@ -1717,73 +1650,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ESPartitionInstanceType
-      m3_medium_elasticsearch = 'm3.medium.elasticsearch'
-      m3_large_elasticsearch = 'm3.large.elasticsearch'
-      m3_xlarge_elasticsearch = 'm3.xlarge.elasticsearch'
-      m3_2xlarge_elasticsearch = 'm3.2xlarge.elasticsearch'
-      m4_large_elasticsearch = 'm4.large.elasticsearch'
-      m4_xlarge_elasticsearch = 'm4.xlarge.elasticsearch'
-      m4_2xlarge_elasticsearch = 'm4.2xlarge.elasticsearch'
-      m4_4xlarge_elasticsearch = 'm4.4xlarge.elasticsearch'
-      m4_10xlarge_elasticsearch = 'm4.10xlarge.elasticsearch'
-      m5_large_elasticsearch = 'm5.large.elasticsearch'
-      m5_xlarge_elasticsearch = 'm5.xlarge.elasticsearch'
-      m5_2xlarge_elasticsearch = 'm5.2xlarge.elasticsearch'
-      m5_4xlarge_elasticsearch = 'm5.4xlarge.elasticsearch'
-      m5_12xlarge_elasticsearch = 'm5.12xlarge.elasticsearch'
-      r5_large_elasticsearch = 'r5.large.elasticsearch'
-      r5_xlarge_elasticsearch = 'r5.xlarge.elasticsearch'
-      r5_2xlarge_elasticsearch = 'r5.2xlarge.elasticsearch'
-      r5_4xlarge_elasticsearch = 'r5.4xlarge.elasticsearch'
-      r5_12xlarge_elasticsearch = 'r5.12xlarge.elasticsearch'
-      c5_large_elasticsearch = 'c5.large.elasticsearch'
-      c5_xlarge_elasticsearch = 'c5.xlarge.elasticsearch'
-      c5_2xlarge_elasticsearch = 'c5.2xlarge.elasticsearch'
-      c5_4xlarge_elasticsearch = 'c5.4xlarge.elasticsearch'
-      c5_9xlarge_elasticsearch = 'c5.9xlarge.elasticsearch'
-      c5_18xlarge_elasticsearch = 'c5.18xlarge.elasticsearch'
-      ultrawarm1_medium_elasticsearch = 'ultrawarm1.medium.elasticsearch'
-      ultrawarm1_large_elasticsearch = 'ultrawarm1.large.elasticsearch'
-      t2_micro_elasticsearch = 't2.micro.elasticsearch'
-      t2_small_elasticsearch = 't2.small.elasticsearch'
-      t2_medium_elasticsearch = 't2.medium.elasticsearch'
-      r3_large_elasticsearch = 'r3.large.elasticsearch'
-      r3_xlarge_elasticsearch = 'r3.xlarge.elasticsearch'
-      r3_2xlarge_elasticsearch = 'r3.2xlarge.elasticsearch'
-      r3_4xlarge_elasticsearch = 'r3.4xlarge.elasticsearch'
-      r3_8xlarge_elasticsearch = 'r3.8xlarge.elasticsearch'
-      i2_xlarge_elasticsearch = 'i2.xlarge.elasticsearch'
-      i2_2xlarge_elasticsearch = 'i2.2xlarge.elasticsearch'
-      d2_xlarge_elasticsearch = 'd2.xlarge.elasticsearch'
-      d2_2xlarge_elasticsearch = 'd2.2xlarge.elasticsearch'
-      d2_4xlarge_elasticsearch = 'd2.4xlarge.elasticsearch'
-      d2_8xlarge_elasticsearch = 'd2.8xlarge.elasticsearch'
-      c4_large_elasticsearch = 'c4.large.elasticsearch'
-      c4_xlarge_elasticsearch = 'c4.xlarge.elasticsearch'
-      c4_2xlarge_elasticsearch = 'c4.2xlarge.elasticsearch'
-      c4_4xlarge_elasticsearch = 'c4.4xlarge.elasticsearch'
-      c4_8xlarge_elasticsearch = 'c4.8xlarge.elasticsearch'
-      r4_large_elasticsearch = 'r4.large.elasticsearch'
-      r4_xlarge_elasticsearch = 'r4.xlarge.elasticsearch'
-      r4_2xlarge_elasticsearch = 'r4.2xlarge.elasticsearch'
-      r4_4xlarge_elasticsearch = 'r4.4xlarge.elasticsearch'
-      r4_8xlarge_elasticsearch = 'r4.8xlarge.elasticsearch'
-      r4_16xlarge_elasticsearch = 'r4.16xlarge.elasticsearch'
-      i3_large_elasticsearch = 'i3.large.elasticsearch'
-      i3_xlarge_elasticsearch = 'i3.xlarge.elasticsearch'
-      i3_2xlarge_elasticsearch = 'i3.2xlarge.elasticsearch'
-      i3_4xlarge_elasticsearch = 'i3.4xlarge.elasticsearch'
-      i3_8xlarge_elasticsearch = 'i3.8xlarge.elasticsearch'
-      i3_16xlarge_elasticsearch = 'i3.16xlarge.elasticsearch'
-    end
-
-    module ESWarmPartitionInstanceType
-      ultrawarm1_medium_elasticsearch = 'ultrawarm1.medium.elasticsearch'
-      ultrawarm1_large_elasticsearch = 'ultrawarm1.large.elasticsearch'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>
@@ -1833,7 +1700,7 @@ module Aws::ElasticsearchService
       :warm_count,
       :cold_storage_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the configuration status for the specified Elasticsearch domain.</p>
@@ -1847,7 +1714,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an Elasticsearch domain.</p>
@@ -1917,7 +1784,7 @@ module Aws::ElasticsearchService
       :change_progress_details,
       :modifying_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of an Elasticsearch domain.</p>
@@ -2030,7 +1897,7 @@ module Aws::ElasticsearchService
       :domain_processing_status,
       :modifying_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Status of the Elasticsearch version options for the specified Elasticsearch domain.</p>
@@ -2044,7 +1911,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Encryption At Rest Options.</p>
@@ -2058,7 +1925,7 @@ module Aws::ElasticsearchService
       :enabled,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Status of the Encryption At Rest options for the specified Elasticsearch domain.</p>
@@ -2072,12 +1939,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EngineType
-      OpenSearch = 'OpenSearch'
-      Elasticsearch = 'Elasticsearch'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error_type
@@ -2088,7 +1950,7 @@ module Aws::ElasticsearchService
       :error_type,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2111,7 +1973,7 @@ module Aws::ElasticsearchService
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2127,7 +1989,7 @@ module Aws::ElasticsearchService
     class GetCompatibleElasticsearchVersionsRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2149,7 +2011,7 @@ module Aws::ElasticsearchService
     class GetCompatibleElasticsearchVersionsResponse < Struct.new(
       :compatible_elasticsearch_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2173,7 +2035,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2195,7 +2057,7 @@ module Aws::ElasticsearchService
       :package_version_history_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2224,7 +2086,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2254,7 +2116,7 @@ module Aws::ElasticsearchService
       :upgrade_histories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2270,7 +2132,7 @@ module Aws::ElasticsearchService
     class GetUpgradeStatusRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2313,7 +2175,7 @@ module Aws::ElasticsearchService
       :step_status,
       :upgrade_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies details of an inbound connection.</p>
@@ -2335,7 +2197,7 @@ module Aws::ElasticsearchService
       :cross_cluster_search_connection_id,
       :connection_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the coonection status of an inbound cross-cluster search connection.</p>
@@ -2357,21 +2219,7 @@ module Aws::ElasticsearchService
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InboundCrossClusterSearchConnectionStatusCode
-      PENDING_ACCEPTANCE = 'PENDING_ACCEPTANCE'
-      APPROVED = 'APPROVED'
-      REJECTING = 'REJECTING'
-      REJECTED = 'REJECTED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    module InitiatedBy
-      CUSTOMER = 'CUSTOMER'
-      SERVICE = 'SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2392,7 +2240,7 @@ module Aws::ElasticsearchService
       :minimum_instance_count,
       :maximum_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:minimum_instance_count] = 0 unless options.key?(:minimum_instance_count)
@@ -2412,7 +2260,7 @@ module Aws::ElasticsearchService
     class InstanceLimits < Struct.new(
       :instance_count_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.</p>
@@ -2422,7 +2270,7 @@ module Aws::ElasticsearchService
     class InternalException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of invalid pagination token provided by customer. Returns an HTTP status code of 400. </p>
@@ -2432,7 +2280,7 @@ module Aws::ElasticsearchService
     class InvalidPaginationTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.</p>
@@ -2442,7 +2290,7 @@ module Aws::ElasticsearchService
     class InvalidTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for trying to create more than allowed resources or sub-resources. Gives http status code of 409.</p>
@@ -2452,7 +2300,7 @@ module Aws::ElasticsearchService
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2493,7 +2341,7 @@ module Aws::ElasticsearchService
       :instance_limits,
       :additional_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>
@@ -2503,7 +2351,7 @@ module Aws::ElasticsearchService
     class ListDomainNamesRequest < Struct.new(
       :engine_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>
@@ -2513,7 +2361,7 @@ module Aws::ElasticsearchService
     class ListDomainNamesResponse < Struct.new(
       :domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2537,7 +2385,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2556,7 +2404,7 @@ module Aws::ElasticsearchService
       :domain_package_details_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2593,7 +2441,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2622,7 +2470,7 @@ module Aws::ElasticsearchService
       :elasticsearch_instance_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2664,7 +2512,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2688,7 +2536,7 @@ module Aws::ElasticsearchService
       :elasticsearch_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2712,7 +2560,7 @@ module Aws::ElasticsearchService
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2732,7 +2580,7 @@ module Aws::ElasticsearchService
       :domain_package_details_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>ListTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view are attached.</p>
@@ -2742,7 +2590,7 @@ module Aws::ElasticsearchService
     class ListTagsRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.</p>
@@ -2752,7 +2600,7 @@ module Aws::ElasticsearchService
     class ListTagsResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves information about each principal that is allowed to access a
@@ -2767,7 +2615,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>ListVpcEndpointAccess</a></code> operation.
@@ -2782,7 +2630,7 @@ module Aws::ElasticsearchService
       :authorized_principal_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code><a>ListVpcEndpointsForDomain</a></code> operation. Specifies the domain whose VPC endpoints will be listed.</p>
@@ -2796,7 +2644,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>ListVpcEndpointsForDomain</a></code> operation. Returns a list containing summarized details of the VPC endpoints.</p>
@@ -2810,7 +2658,7 @@ module Aws::ElasticsearchService
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for request parameters to the <code><a>ListVpcEndpoints</a></code> operation.</p>
@@ -2820,7 +2668,7 @@ module Aws::ElasticsearchService
     class ListVpcEndpointsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>ListVpcEndpoints</a></code> operation. Returns a list containing summarized details of the VPC endpoints.</p>
@@ -2834,7 +2682,7 @@ module Aws::ElasticsearchService
       :vpc_endpoint_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Log Publishing option that is set for given domain.
@@ -2854,7 +2702,7 @@ module Aws::ElasticsearchService
       :cloud_watch_logs_log_group_arn,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured log publishing options for the domain and their current status.</p>
@@ -2868,22 +2716,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Type of Log File, it can be one of the following:
-    #      <ul>
-    #        <li>INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more time than configured index query log threshold to execute.</li>
-    #        <li>SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more time than configured search query log threshold to execute.</li>
-    #        <li>ES_APPLICATION_LOGS: Elasticsearch application logs contain information about errors and warnings raised during the operation of the service and can be useful for troubleshooting.</li>
-    #        <li>AUDIT_LOGS: Audit logs contain records of user requests for access from the domain.</li>
-    #      </ul>
-    #     </p>
-    module LogType
-      INDEX_SLOW_LOGS = 'INDEX_SLOW_LOGS'
-      SEARCH_SLOW_LOGS = 'SEARCH_SLOW_LOGS'
-      ES_APPLICATION_LOGS = 'ES_APPLICATION_LOGS'
-      AUDIT_LOGS = 'AUDIT_LOGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Credentials for the master user: username and password, ARN, or both.</p>
@@ -2901,7 +2734,7 @@ module Aws::ElasticsearchService
       :master_user_name,
       :master_user_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the domain properties that are currently being modified.</p>
@@ -2927,7 +2760,7 @@ module Aws::ElasticsearchService
       :pending_value,
       :value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the node-to-node encryption options.</p>
@@ -2937,7 +2770,7 @@ module Aws::ElasticsearchService
     class NodeToNodeEncryptionOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of the node-to-node encryption options for the specified Elasticsearch domain.</p>
@@ -2951,18 +2784,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The state of a requested change. One of the following:</p>
-    #     <ul>
-    #       <li>Processing: The request change is still in-process.</li>
-    #       <li>Active: The request change is processed and deployed to the Elasticsearch domain.</li>
-    #     </ul>
-    module OptionState
-      RequiresIndexDocuments = 'RequiresIndexDocuments'
-      Processing = 'Processing'
-      Active = 'Active'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the current status of the entity.</p>
@@ -2988,7 +2810,7 @@ module Aws::ElasticsearchService
       :state,
       :pending_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:update_version] = 0 unless options.key?(:update_version)
@@ -3019,7 +2841,7 @@ module Aws::ElasticsearchService
       :connection_alias,
       :connection_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the connection status of an outbound cross-cluster search connection.</p>
@@ -3043,26 +2865,7 @@ module Aws::ElasticsearchService
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutboundCrossClusterSearchConnectionStatusCode
-      PENDING_ACCEPTANCE = 'PENDING_ACCEPTANCE'
-      VALIDATING = 'VALIDATING'
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
-      PROVISIONING = 'PROVISIONING'
-      ACTIVE = 'ACTIVE'
-      REJECTED = 'REJECTED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    # <p>The overall status value of the domain configuration change.</p>
-    module OverallChangeStatus
-      PENDING = 'PENDING'
-      PROCESSING = 'PROCESSING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Basic information about a package.</p>
@@ -3102,7 +2905,7 @@ module Aws::ElasticsearchService
       :available_package_version,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code></p>
@@ -3116,22 +2919,7 @@ module Aws::ElasticsearchService
       :s3_bucket_name,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PackageStatus
-      COPYING = 'COPYING'
-      COPY_FAILED = 'COPY_FAILED'
-      VALIDATING = 'VALIDATING'
-      VALIDATION_FAILED = 'VALIDATION_FAILED'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
-    module PackageType
-      TXT_DICTIONARY = 'TXT-DICTIONARY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a package version.</p>
@@ -3149,23 +2937,7 @@ module Aws::ElasticsearchService
       :commit_message,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the type of AWS account permitted to manage VPC endpoints.:
-    #      <ul>
-    #        <li>AWS_ACCOUNT: Indicates that the account is owned by an AWS user.</li>
-    #        <li>AWS_SERVICE: Indicates the the account is owned by an AWS service.</li>
-    #      </ul>
-    #     </p>
-    module PrincipalType
-      AWS_ACCOUNT = 'AWS_ACCOUNT'
-      AWS_SERVICE = 'AWS_SERVICE'
-    end
-
-    module PropertyValueType
-      PLAIN_TEXT = 'PLAIN_TEXT'
-      STRINGIFIED_JSON = 'STRINGIFIED_JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code></p>
@@ -3183,7 +2955,7 @@ module Aws::ElasticsearchService
       :reservation_name,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.</p>
@@ -3197,7 +2969,7 @@ module Aws::ElasticsearchService
       :reserved_elasticsearch_instance_id,
       :reservation_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the specific price and frequency of a recurring charges for a reserved Elasticsearch instance, or for a reserved Elasticsearch instance offering.</p>
@@ -3211,7 +2983,7 @@ module Aws::ElasticsearchService
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation.</p>
@@ -3221,7 +2993,7 @@ module Aws::ElasticsearchService
     class RejectInboundCrossClusterSearchConnectionRequest < Struct.new(
       :cross_cluster_search_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation. Contains details of rejected inbound connection.</p>
@@ -3231,7 +3003,7 @@ module Aws::ElasticsearchService
     class RejectInboundCrossClusterSearchConnectionResponse < Struct.new(
       :cross_cluster_search_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.</p>
@@ -3245,7 +3017,7 @@ module Aws::ElasticsearchService
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a reserved Elasticsearch instance.</p>
@@ -3303,7 +3075,7 @@ module Aws::ElasticsearchService
       :payment_option,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
@@ -3347,18 +3119,12 @@ module Aws::ElasticsearchService
       :payment_option,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:duration] = 0 unless options.key?(:duration)
         super
       end
-    end
-
-    module ReservedElasticsearchInstancePaymentOption
-      ALL_UPFRONT = 'ALL_UPFRONT'
-      PARTIAL_UPFRONT = 'PARTIAL_UPFRONT'
-      NO_UPFRONT = 'NO_UPFRONT'
     end
 
     # <p>An exception for creating a resource that already exists. Gives http status code of 400.</p>
@@ -3368,7 +3134,7 @@ module Aws::ElasticsearchService
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.</p>
@@ -3378,7 +3144,7 @@ module Aws::ElasticsearchService
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Revokes access to an Amazon OpenSearch Service domain that was provided through an interface
@@ -3393,19 +3159,13 @@ module Aws::ElasticsearchService
       :domain_name,
       :account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for response parameters to the <code><a>RevokeVpcEndpointAccess</a></code> operation. The response body for this operation is empty.</p>
     class RevokeVpcEndpointAccessResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK.</p>
-    module RollbackOnDisable
-      NO_ROLLBACK = 'NO_ROLLBACK'
-      DEFAULT_ROLLBACK = 'DEFAULT_ROLLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the SAML Identity Provider's information.</p>
@@ -3419,7 +3179,7 @@ module Aws::ElasticsearchService
       :metadata_content,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the SAML application configuration for the domain.</p>
@@ -3453,7 +3213,7 @@ module Aws::ElasticsearchService
       :roles_key,
       :session_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the SAML application configured for the domain.</p>
@@ -3479,13 +3239,7 @@ module Aws::ElasticsearchService
       :roles_key,
       :session_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>
-    module ScheduledAutoTuneActionType
-      JVM_HEAP_SIZE_TUNING = 'JVM_HEAP_SIZE_TUNING'
-      JVM_YOUNG_GEN_TUNING = 'JVM_YOUNG_GEN_TUNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies details of the scheduled Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
@@ -3507,14 +3261,7 @@ module Aws::ElasticsearchService
       :action,
       :severity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>
-    module ScheduledAutoTuneSeverityType
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current options of an Elasticsearch domain service software options.</p>
@@ -3552,7 +3299,7 @@ module Aws::ElasticsearchService
       :automated_update_date,
       :optional_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.</p>
@@ -3562,7 +3309,7 @@ module Aws::ElasticsearchService
     class SnapshotOptions < Struct.new(
       :automated_snapshot_start_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status of a daily automated snapshot.</p>
@@ -3576,7 +3323,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.</p>
@@ -3586,7 +3333,7 @@ module Aws::ElasticsearchService
     class StartElasticsearchServiceSoftwareUpdateRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a <code>StartElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>
@@ -3596,7 +3343,7 @@ module Aws::ElasticsearchService
     class StartElasticsearchServiceSoftwareUpdateResponse < Struct.new(
       :service_software_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>StorageTypes represents the list of storage related types and their attributes
@@ -3636,7 +3383,7 @@ module Aws::ElasticsearchService
       :storage_sub_type_name,
       :storage_type_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Limits that are applicable for given storage type.
@@ -3678,13 +3425,7 @@ module Aws::ElasticsearchService
       :limit_name,
       :limit_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TLSSecurityPolicy
-      POLICY_MIN_TLS_1_0_2019_07 = 'Policy-Min-TLS-1-0-2019-07'
-      POLICY_MIN_TLS_1_2_2019_07 = 'Policy-Min-TLS-1-2-2019-07'
-      POLICY_MIN_TLS_1_2_PFS_2023_10 = 'Policy-Min-TLS-1-2-PFS-2023-10'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a key value pair for a resource tag.</p>
@@ -3699,12 +3440,7 @@ module Aws::ElasticsearchService
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
-    module TimeUnit
-      HOURS = 'HOURS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>
@@ -3775,7 +3511,7 @@ module Aws::ElasticsearchService
       :auto_tune_options,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>
@@ -3789,7 +3525,7 @@ module Aws::ElasticsearchService
       :domain_config,
       :dry_run_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3817,7 +3553,7 @@ module Aws::ElasticsearchService
       :package_description,
       :commit_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3833,7 +3569,7 @@ module Aws::ElasticsearchService
     class UpdatePackageResponse < Struct.new(
       :package_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.</p>
@@ -3847,7 +3583,7 @@ module Aws::ElasticsearchService
       :vpc_endpoint_id,
       :vpc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration and status of the VPC endpoint being updated.</p>
@@ -3857,7 +3593,7 @@ module Aws::ElasticsearchService
     class UpdateVpcEndpointResponse < Struct.new(
       :vpc_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3884,7 +3620,7 @@ module Aws::ElasticsearchService
       :target_version,
       :perform_check_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3915,7 +3651,7 @@ module Aws::ElasticsearchService
       :perform_check_only,
       :change_progress_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>History of the last 10 Upgrades and Upgrade Eligibility Checks.</p>
@@ -3951,20 +3687,7 @@ module Aws::ElasticsearchService
       :upgrade_status,
       :steps_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpgradeStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      SUCCEEDED_WITH_ISSUES = 'SUCCEEDED_WITH_ISSUES'
-      FAILED = 'FAILED'
-    end
-
-    module UpgradeStep
-      PRE_UPGRADE_CHECK = 'PRE_UPGRADE_CHECK'
-      SNAPSHOT = 'SNAPSHOT'
-      UPGRADE = 'UPGRADE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.</p>
@@ -4001,7 +3724,7 @@ module Aws::ElasticsearchService
       :issues,
       :progress_percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>
@@ -4023,7 +3746,7 @@ module Aws::ElasticsearchService
       :availability_zones,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Status of the VPC options for the specified Elasticsearch domain.</p>
@@ -4037,7 +3760,7 @@ module Aws::ElasticsearchService
       :options,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>
@@ -4051,7 +3774,7 @@ module Aws::ElasticsearchService
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception for missing / invalid input fields. Gives http status code of 400.</p>
@@ -4061,15 +3784,7 @@ module Aws::ElasticsearchService
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p> The type of EBS volume, standard, gp2, gp3 or io1. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a>for more information.</p>
-    module VolumeType
-      standard = 'standard'
-      gp2 = 'gp2'
-      io1 = 'io1'
-      gp3 = 'gp3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connection endpoint for connecting to an Amazon OpenSearch Service domain through a
@@ -4101,7 +3816,7 @@ module Aws::ElasticsearchService
       :status,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information when attempting to describe an Amazon OpenSearch Service-managed VPC
@@ -4120,39 +3835,7 @@ module Aws::ElasticsearchService
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the error code of the failure encountered while describing the VPC endpoint:
-    #      <ul>
-    #        <li>ENDPOINT_NOT_FOUND: Indicates that the requested VPC endpoint does not exist.</li>
-    #        <li>SERVER_ERROR: Indicates the describe endpoint operation failed due to an internal server error.</li>
-    #      </ul>
-    #     </p>
-    module VpcEndpointErrorCode
-      ENDPOINT_NOT_FOUND = 'ENDPOINT_NOT_FOUND'
-      SERVER_ERROR = 'SERVER_ERROR'
-    end
-
-    # <p>Specifies the current status of the VPC endpoint:
-    #      <ul>
-    #        <li>CREATING: Indicates that the VPC endpoint is currently being created.</li>
-    #        <li>CREATE_FAILED: Indicates that the VPC endpoint creation failed.</li>
-    #        <li>ACTIVE: Indicates that the VPC endpoint is currently active.</li>
-    #        <li>UPDATING: Indicates that the VPC endpoint is currently being updated.</li>
-    #        <li>UPDATE_FAILED: Indicates that the VPC endpoint update failed.</li>
-    #        <li>DELETING: Indicates that the VPC endpoint is currently being deleted.</li>
-    #        <li>DELETE_FAILED: Indicates that the VPC endpoint deletion failed.</li>
-    #      </ul>
-    #     </p>
-    module VpcEndpointStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an Amazon OpenSearch Service-managed VPC endpoint.</p>
@@ -4174,7 +3857,7 @@ module Aws::ElasticsearchService
       :domain_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.</p>
@@ -4184,7 +3867,7 @@ module Aws::ElasticsearchService
     class ZoneAwarenessConfig < Struct.new(
       :availability_zone_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

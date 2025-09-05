@@ -6,11 +6,6 @@ module Aws::EMRcontainers
   # This module contains the types returned by client operations.
   module Types
 
-    module AllowAWSToRetainLogs
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
     # <p>Authorization-related configuration inputs for the security configuration.</p>
     # @!attribute lake_formation_configuration
     #   <p>Lake Formation related configuration inputs for the security
@@ -23,7 +18,7 @@ module Aws::EMRcontainers
       :lake_formation_configuration,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -36,7 +31,7 @@ module Aws::EMRcontainers
       :id,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -49,7 +44,7 @@ module Aws::EMRcontainers
       :id,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity representing certificate data generated for managed endpoint.</p>
@@ -63,11 +58,7 @@ module Aws::EMRcontainers
       :certificate_arn,
       :certificate_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateProviderType
-      PEM = 'PEM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for CloudWatch monitoring. You can configure your jobs to send log
@@ -82,7 +73,7 @@ module Aws::EMRcontainers
       :log_group_name,
       :log_stream_name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration specification to be used when provisioning virtual clusters, which can
@@ -104,7 +95,7 @@ module Aws::EMRcontainers
       :properties,
       :configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration specification to be used to override existing configurations.</p>
@@ -118,7 +109,7 @@ module Aws::EMRcontainers
       :application_configuration,
       :monitoring_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the container used for a job run or a managed endpoint.</p>
@@ -129,7 +120,7 @@ module Aws::EMRcontainers
       :eks_info,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EksInfo < ContainerInfo; end
       class Unknown < ContainerInfo; end
@@ -146,7 +137,7 @@ module Aws::EMRcontainers
       :rotation_size,
       :max_files_to_keep,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the container provider.</p>
@@ -165,11 +156,7 @@ module Aws::EMRcontainers
       :id,
       :info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerProviderType
-      EKS = 'EKS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -194,7 +181,7 @@ module Aws::EMRcontainers
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -215,7 +202,7 @@ module Aws::EMRcontainers
       :arn,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -259,7 +246,7 @@ module Aws::EMRcontainers
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -280,7 +267,7 @@ module Aws::EMRcontainers
       :arn,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -301,7 +288,7 @@ module Aws::EMRcontainers
       :security_configuration_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -318,7 +305,7 @@ module Aws::EMRcontainers
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -343,7 +330,7 @@ module Aws::EMRcontainers
       :tags,
       :security_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -360,7 +347,7 @@ module Aws::EMRcontainers
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure containing the session token being returned.</p>
@@ -371,7 +358,7 @@ module Aws::EMRcontainers
       :token,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Token < Credentials; end
       class Unknown < Credentials; end
@@ -383,7 +370,7 @@ module Aws::EMRcontainers
     class DeleteJobTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -392,7 +379,7 @@ module Aws::EMRcontainers
     class DeleteJobTemplateResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -405,7 +392,7 @@ module Aws::EMRcontainers
       :id,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -418,7 +405,7 @@ module Aws::EMRcontainers
       :id,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -427,7 +414,7 @@ module Aws::EMRcontainers
     class DeleteVirtualClusterRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -436,7 +423,7 @@ module Aws::EMRcontainers
     class DeleteVirtualClusterResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -449,7 +436,7 @@ module Aws::EMRcontainers
       :id,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_run
@@ -458,7 +445,7 @@ module Aws::EMRcontainers
     class DescribeJobRunResponse < Struct.new(
       :job_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -467,7 +454,7 @@ module Aws::EMRcontainers
     class DescribeJobTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_template
@@ -476,7 +463,7 @@ module Aws::EMRcontainers
     class DescribeJobTemplateResponse < Struct.new(
       :job_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -489,7 +476,7 @@ module Aws::EMRcontainers
       :id,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint
@@ -498,7 +485,7 @@ module Aws::EMRcontainers
     class DescribeManagedEndpointResponse < Struct.new(
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -507,7 +494,7 @@ module Aws::EMRcontainers
     class DescribeSecurityConfigurationRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_configuration
@@ -516,7 +503,7 @@ module Aws::EMRcontainers
     class DescribeSecurityConfigurationResponse < Struct.new(
       :security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -525,7 +512,7 @@ module Aws::EMRcontainers
     class DescribeVirtualClusterRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_cluster
@@ -534,7 +521,7 @@ module Aws::EMRcontainers
     class DescribeVirtualClusterResponse < Struct.new(
       :virtual_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded the Amazon EKS API operation limits.</p>
@@ -543,7 +530,7 @@ module Aws::EMRcontainers
     class EKSRequestThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the Amazon EKS cluster.</p>
@@ -553,7 +540,7 @@ module Aws::EMRcontainers
     class EksInfo < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations related to encryption for the security configuration.</p>
@@ -563,7 +550,7 @@ module Aws::EMRcontainers
     class EncryptionConfiguration < Struct.new(
       :in_transit_encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This entity represents the endpoint that is managed by Amazon EMR on EKS.</p>
@@ -646,22 +633,7 @@ module Aws::EMRcontainers
       :failure_reason,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointState
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      TERMINATED_WITH_ERRORS = 'TERMINATED_WITH_ERRORS'
-    end
-
-    module FailureReason
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      USER_ERROR = 'USER_ERROR'
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
-      CLUSTER_UNAVAILABLE = 'CLUSTER_UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_identifier
@@ -696,7 +668,7 @@ module Aws::EMRcontainers
       :log_context,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -713,7 +685,7 @@ module Aws::EMRcontainers
       :credentials,
       :expires_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations related to in-transit encryption for the security configuration.</p>
@@ -723,7 +695,7 @@ module Aws::EMRcontainers
     class InTransitEncryptionConfiguration < Struct.new(
       :tls_certificate_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is an internal server exception.</p>
@@ -732,7 +704,7 @@ module Aws::EMRcontainers
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify the driver that the job runs on. Exactly one of the two available job drivers is
@@ -747,7 +719,7 @@ module Aws::EMRcontainers
       :spark_submit_job_driver,
       :spark_sql_job_driver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This entity describes a job run. A job run is a unit of work, such as a Spark jar,
@@ -826,17 +798,7 @@ module Aws::EMRcontainers
       :retry_policy_configuration,
       :retry_policy_execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobRunState
-      PENDING = 'PENDING'
-      SUBMITTED = 'SUBMITTED'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
-      CANCEL_PENDING = 'CANCEL_PENDING'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This entity describes a job template. Job template stores values of StartJobRun API
@@ -881,7 +843,7 @@ module Aws::EMRcontainers
       :kms_key_arn,
       :decryption_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values of StartJobRun API requests used in job runs started using the job
@@ -913,7 +875,7 @@ module Aws::EMRcontainers
       :parameter_configuration,
       :job_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lake Formation related configuration inputs for the security
@@ -934,7 +896,7 @@ module Aws::EMRcontainers
       :secure_namespace_info,
       :query_engine_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_cluster_id
@@ -967,7 +929,7 @@ module Aws::EMRcontainers
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_runs
@@ -980,7 +942,7 @@ module Aws::EMRcontainers
       :job_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -1001,7 +963,7 @@ module Aws::EMRcontainers
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute templates
@@ -1014,7 +976,7 @@ module Aws::EMRcontainers
       :templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_cluster_id
@@ -1047,7 +1009,7 @@ module Aws::EMRcontainers
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -1060,7 +1022,7 @@ module Aws::EMRcontainers
       :endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_after
@@ -1081,7 +1043,7 @@ module Aws::EMRcontainers
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_configurations
@@ -1094,7 +1056,7 @@ module Aws::EMRcontainers
       :security_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1103,7 +1065,7 @@ module Aws::EMRcontainers
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1112,7 +1074,7 @@ module Aws::EMRcontainers
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_provider_id
@@ -1152,7 +1114,7 @@ module Aws::EMRcontainers
       :next_token,
       :eks_access_entry_integrated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute virtual_clusters
@@ -1165,7 +1127,7 @@ module Aws::EMRcontainers
       :virtual_clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity that provides configuration control over managed logs.</p>
@@ -1179,7 +1141,7 @@ module Aws::EMRcontainers
       :allow_aws_to_retain_logs,
       :encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration setting for monitoring.</p>
@@ -1205,7 +1167,7 @@ module Aws::EMRcontainers
       :s3_monitoring_configuration,
       :container_log_rotation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A configuration for CloudWatch monitoring. You can configure your jobs to send log
@@ -1221,7 +1183,7 @@ module Aws::EMRcontainers
       :log_group_name,
       :log_stream_name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A configuration specification to be used to override existing configurations. This data
@@ -1236,7 +1198,7 @@ module Aws::EMRcontainers
       :application_configuration,
       :monitoring_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configuration setting for monitoring. This data type allows job template parameters to
@@ -1255,7 +1217,7 @@ module Aws::EMRcontainers
       :cloud_watch_monitoring_configuration,
       :s3_monitoring_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to
@@ -1267,12 +1229,7 @@ module Aws::EMRcontainers
     class ParametricS3MonitoringConfiguration < Struct.new(
       :log_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PersistentAppUI
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request throttled.</p>
@@ -1281,7 +1238,7 @@ module Aws::EMRcontainers
     class RequestThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -1290,7 +1247,7 @@ module Aws::EMRcontainers
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the retry policy that the job runs on.</p>
@@ -1300,7 +1257,7 @@ module Aws::EMRcontainers
     class RetryPolicyConfiguration < Struct.new(
       :max_attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of the retry policy executed on the job.</p>
@@ -1310,7 +1267,7 @@ module Aws::EMRcontainers
     class RetryPolicyExecution < Struct.new(
       :current_attempt_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to
@@ -1321,7 +1278,7 @@ module Aws::EMRcontainers
     class S3MonitoringConfiguration < Struct.new(
       :log_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Namespace inputs for the system job.</p>
@@ -1335,7 +1292,7 @@ module Aws::EMRcontainers
       :cluster_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inputs related to the security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security
@@ -1372,7 +1329,7 @@ module Aws::EMRcontainers
       :security_configuration_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations related to the security configuration for the request.</p>
@@ -1382,7 +1339,7 @@ module Aws::EMRcontainers
     class SecurityConfigurationData < Struct.new(
       :authorization_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The job driver for job type.</p>
@@ -1396,7 +1353,7 @@ module Aws::EMRcontainers
       :entry_point,
       :spark_sql_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about job driver for Spark submit.</p>
@@ -1414,7 +1371,7 @@ module Aws::EMRcontainers
       :entry_point_arguments,
       :spark_submit_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1463,7 +1420,7 @@ module Aws::EMRcontainers
       :job_template_parameters,
       :retry_policy_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1484,7 +1441,7 @@ module Aws::EMRcontainers
       :arn,
       :virtual_cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configurations related to the TLS certificate for the security configuration.</p>
@@ -1505,7 +1462,7 @@ module Aws::EMRcontainers
       :public_certificate_secret_arn,
       :private_certificate_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1518,12 +1475,12 @@ module Aws::EMRcontainers
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a job template parameter.</p>
@@ -1537,12 +1494,7 @@ module Aws::EMRcontainers
       :type,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateParameterDataType
-      NUMBER = 'NUMBER'
-      STRING = 'STRING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1555,12 +1507,12 @@ module Aws::EMRcontainers
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There are invalid parameters in the client request.</p>
@@ -1569,7 +1521,7 @@ module Aws::EMRcontainers
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace
@@ -1612,14 +1564,7 @@ module Aws::EMRcontainers
       :tags,
       :security_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VirtualClusterState
-      RUNNING = 'RUNNING'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      ARRESTED = 'ARRESTED'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::LexRuntimeV2
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the contexts that a user is using in a
@@ -44,7 +44,7 @@ module Aws::LexRuntimeV2
       :time_to_live,
       :context_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time that a context is active. You can specify the time to live
@@ -61,7 +61,7 @@ module Aws::LexRuntimeV2
       :time_to_live_in_seconds,
       :turns_to_live,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a chunk of audio sent from the client application to
@@ -94,7 +94,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_timestamp_millis] = 0 unless options.key?(:client_timestamp_millis)
@@ -123,7 +123,7 @@ module Aws::LexRuntimeV2
       :content_type,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -132,7 +132,7 @@ module Aws::LexRuntimeV2
     class BadGatewayException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A button that appears on a response card show to the user.</p>
@@ -146,7 +146,7 @@ module Aws::LexRuntimeV2
       :text,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a score that indicates the confidence that Amazon Lex V2 has that
@@ -159,7 +159,7 @@ module Aws::LexRuntimeV2
     class ConfidenceScore < Struct.new(
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -258,7 +258,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_playback] = false unless options.key?(:disable_playback)
@@ -267,24 +267,13 @@ module Aws::LexRuntimeV2
       end
     end
 
-    module ConfirmationState
-      CONFIRMED = 'Confirmed'
-      DENIED = 'Denied'
-      NONE = 'None'
-    end
-
     # <p></p>
     # @!attribute message
     #   @return [String]
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConversationMode
-      AUDIO = 'AUDIO'
-      TEXT = 'TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DTMF character sent from the client application. DTMF characters
@@ -308,7 +297,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_timestamp_millis] = 0 unless options.key?(:client_timestamp_millis)
@@ -335,7 +324,7 @@ module Aws::LexRuntimeV2
       :locale_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -357,7 +346,7 @@ module Aws::LexRuntimeV2
       :locale_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -366,7 +355,7 @@ module Aws::LexRuntimeV2
     class DependencyFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The next action that Amazon Lex V2 should take.</p>
@@ -432,16 +421,7 @@ module Aws::LexRuntimeV2
       :slot_elicitation_style,
       :sub_slot_to_elicit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DialogActionType
-      CLOSE = 'Close'
-      CONFIRM_INTENT = 'ConfirmIntent'
-      DELEGATE = 'Delegate'
-      ELICIT_INTENT = 'ElicitIntent'
-      ELICIT_SLOT = 'ElicitSlot'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notification from the client that it is disconnecting from Amazon Lex V2.
@@ -459,7 +439,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_timestamp_millis] = 0 unless options.key?(:client_timestamp_millis)
@@ -478,7 +458,7 @@ module Aws::LexRuntimeV2
       :name,
       :sub_slot_to_elicit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -500,7 +480,7 @@ module Aws::LexRuntimeV2
       :locale_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -532,7 +512,7 @@ module Aws::LexRuntimeV2
       :interpretations,
       :session_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Event that Amazon Lex V2 sends to indicate that the stream is still open
@@ -546,7 +526,7 @@ module Aws::LexRuntimeV2
     class HeartbeatEvent < Struct.new(
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A card that is shown to the user by a messaging platform. You define
@@ -578,13 +558,7 @@ module Aws::LexRuntimeV2
       :image_url,
       :buttons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputMode
-      TEXT = 'Text'
-      SPEECH = 'Speech'
-      DTMF = 'DTMF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current intent that Amazon Lex V2 is attempting to fulfill.</p>
@@ -634,7 +608,7 @@ module Aws::LexRuntimeV2
       :state,
       :confirmation_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the current state of the conversation between the client
@@ -677,16 +651,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :recognized_bot_member,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntentState
-      FAILED = 'Failed'
-      FULFILLED = 'Fulfilled'
-      IN_PROGRESS = 'InProgress'
-      READY_FOR_FULFILLMENT = 'ReadyForFulfillment'
-      WAITING = 'Waiting'
-      FULFILLMENT_IN_PROGRESS = 'FulfillmentInProgress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -695,7 +660,7 @@ module Aws::LexRuntimeV2
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing information about an intent that Amazon Lex V2 determined might satisfy the user's utterance.
@@ -727,12 +692,7 @@ module Aws::LexRuntimeV2
       :intent,
       :interpretation_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InterpretationSource
-      BEDROCK = 'Bedrock'
-      LEX = 'Lex'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for text that is returned to the customer..</p>
@@ -753,14 +713,7 @@ module Aws::LexRuntimeV2
       :content_type,
       :image_response_card,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageContentType
-      CUSTOM_PAYLOAD = 'CustomPayload'
-      IMAGE_RESPONSE_CARD = 'ImageResponseCard'
-      PLAIN_TEXT = 'PlainText'
-      SSML = 'SSML'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Event sent from the client application to Amazon Lex V2 to indicate that
@@ -778,7 +731,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_timestamp_millis] = 0 unless options.key?(:client_timestamp_millis)
@@ -810,13 +763,7 @@ module Aws::LexRuntimeV2
       :caused_by_event_id,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlaybackInterruptionReason
-      DTMF_START_DETECTED = 'DTMF_START_DETECTED'
-      TEXT_DETECTED = 'TEXT_DETECTED'
-      VOICE_START_DETECTED = 'VOICE_START_DETECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -869,7 +816,7 @@ module Aws::LexRuntimeV2
       :request_attributes,
       :response_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -907,7 +854,7 @@ module Aws::LexRuntimeV2
       :session_id,
       :audio_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:audio_stream] = Base64.strict_decode64('') unless options.key?(:audio_stream)
@@ -951,7 +898,7 @@ module Aws::LexRuntimeV2
       :session_state,
       :request_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute messages
@@ -990,7 +937,7 @@ module Aws::LexRuntimeV2
       :session_id,
       :recognized_bot_member,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -1119,7 +1066,7 @@ module Aws::LexRuntimeV2
       :response_content_type,
       :input_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute input_mode
@@ -1209,7 +1156,7 @@ module Aws::LexRuntimeV2
       :audio_stream,
       :recognized_bot_member,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:audio_stream] = Base64.strict_decode64('') unless options.key?(:audio_stream)
@@ -1228,7 +1175,7 @@ module Aws::LexRuntimeV2
       :bot_id,
       :bot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1237,7 +1184,7 @@ module Aws::LexRuntimeV2
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides an array of phrases that should be given preference when
@@ -1257,7 +1204,7 @@ module Aws::LexRuntimeV2
       :runtime_hint_values,
       :sub_slot_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the phrase that Amazon Lex V2 should look for in the user's input
@@ -1269,7 +1216,7 @@ module Aws::LexRuntimeV2
     class RuntimeHintValue < Struct.new(
       :phrase,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can provide Amazon Lex V2 with hints to the phrases that a customer is
@@ -1293,7 +1240,7 @@ module Aws::LexRuntimeV2
     class RuntimeHints < Struct.new(
       :slot_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the sentiment expressed in a user's
@@ -1315,7 +1262,7 @@ module Aws::LexRuntimeV2
       :sentiment,
       :sentiment_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The individual sentiment responses for the utterance.</p>
@@ -1341,7 +1288,7 @@ module Aws::LexRuntimeV2
       :neutral,
       :mixed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:positive] = 0 unless options.key?(:positive)
@@ -1350,13 +1297,6 @@ module Aws::LexRuntimeV2
         options[:mixed] = 0 unless options.key?(:mixed)
         super
       end
-    end
-
-    module SentimentType
-      MIXED = 'MIXED'
-      NEGATIVE = 'NEGATIVE'
-      NEUTRAL = 'NEUTRAL'
-      POSITIVE = 'POSITIVE'
     end
 
     # <p>The state of the user's session with Amazon Lex V2.</p>
@@ -1392,13 +1332,7 @@ module Aws::LexRuntimeV2
       :originating_request_id,
       :runtime_hints,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Shape
-      SCALAR = 'Scalar'
-      LIST = 'List'
-      COMPOSITE = 'Composite'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value that Amazon Lex V2 uses to fulfill an intent. </p>
@@ -1425,7 +1359,7 @@ module Aws::LexRuntimeV2
       :values,
       :sub_slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bot_id
@@ -1460,7 +1394,7 @@ module Aws::LexRuntimeV2
       :conversation_mode,
       :request_event_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a stream of events between your application and
@@ -1515,7 +1449,7 @@ module Aws::LexRuntimeV2
       :disconnection_event,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ConfigurationEvent < StartConversationRequestEventStream; end
       class AudioInputEvent < StartConversationRequestEventStream; end
@@ -1533,7 +1467,7 @@ module Aws::LexRuntimeV2
     class StartConversationResponse < Struct.new(
       :response_event_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a stream of events between Amazon Lex V2 and your
@@ -1616,7 +1550,7 @@ module Aws::LexRuntimeV2
       :bad_gateway_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PlaybackInterruptionEvent < StartConversationResponseEventStream; end
       class TranscriptEvent < StartConversationResponseEventStream; end
@@ -1633,12 +1567,6 @@ module Aws::LexRuntimeV2
       class DependencyFailedException < StartConversationResponseEventStream; end
       class BadGatewayException < StartConversationResponseEventStream; end
       class Unknown < StartConversationResponseEventStream; end
-    end
-
-    module StyleType
-      DEFAULT = 'Default'
-      SPELL_BY_LETTER = 'SpellByLetter'
-      SPELL_BY_WORD = 'SpellByWord'
     end
 
     # <p>The event sent from your client application to Amazon Lex V2 with text input
@@ -1660,7 +1588,7 @@ module Aws::LexRuntimeV2
       :event_id,
       :client_timestamp_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:client_timestamp_millis] = 0 unless options.key?(:client_timestamp_millis)
@@ -1685,7 +1613,7 @@ module Aws::LexRuntimeV2
       :messages,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1694,7 +1622,7 @@ module Aws::LexRuntimeV2
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Event sent from Amazon Lex V2 to your client application that contains a
@@ -1712,7 +1640,7 @@ module Aws::LexRuntimeV2
       :transcript,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1721,7 +1649,7 @@ module Aws::LexRuntimeV2
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the value provided for a slot and Amazon Lex V2's interpretation.</p>
@@ -1739,7 +1667,7 @@ module Aws::LexRuntimeV2
       :interpreted_value,
       :resolved_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

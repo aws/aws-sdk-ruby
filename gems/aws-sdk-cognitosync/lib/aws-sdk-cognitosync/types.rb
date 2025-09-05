@@ -13,7 +13,7 @@ module Aws::CognitoSync
     class AlreadyStreamedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The input for the BulkPublish operation.
@@ -25,7 +25,7 @@ module Aws::CognitoSync
     class BulkPublishRequest < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The output for the BulkPublish operation.
@@ -37,14 +37,7 @@ module Aws::CognitoSync
     class BulkPublishResponse < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BulkPublishStatus
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # Configuration options for configure Cognito streams.
@@ -64,7 +57,7 @@ module Aws::CognitoSync
       :role_arn,
       :streaming_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown if there are parallel requests to modify a resource.</p>
@@ -74,7 +67,7 @@ module Aws::CognitoSync
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A collection of data for an identity pool. An identity pool can
@@ -119,7 +112,7 @@ module Aws::CognitoSync
       :data_storage,
       :num_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to delete the specific
@@ -144,7 +137,7 @@ module Aws::CognitoSync
       :identity_id,
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response to a successful DeleteDataset
@@ -159,7 +152,7 @@ module Aws::CognitoSync
     class DeleteDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request for meta data about a dataset (creation
@@ -184,7 +177,7 @@ module Aws::CognitoSync
       :identity_id,
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response to a successful DescribeDataset
@@ -199,7 +192,7 @@ module Aws::CognitoSync
     class DescribeDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request for usage information about
@@ -212,7 +205,7 @@ module Aws::CognitoSync
     class DescribeIdentityPoolUsageRequest < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response to a successful
@@ -224,7 +217,7 @@ module Aws::CognitoSync
     class DescribeIdentityPoolUsageResponse < Struct.new(
       :identity_pool_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request for information about the usage of
@@ -243,7 +236,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :identity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The response to a successful
@@ -255,7 +248,7 @@ module Aws::CognitoSync
     class DescribeIdentityUsageResponse < Struct.new(
       :identity_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
@@ -265,7 +258,7 @@ module Aws::CognitoSync
     class DuplicateRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The input for the GetBulkPublishDetails operation.
@@ -277,7 +270,7 @@ module Aws::CognitoSync
     class GetBulkPublishDetailsRequest < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The output for the GetBulkPublishDetails operation.
@@ -309,7 +302,7 @@ module Aws::CognitoSync
       :bulk_publish_status,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request for a list of the configured Cognito Events</p>
@@ -319,7 +312,7 @@ module Aws::CognitoSync
     class GetCognitoEventsRequest < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the GetCognitoEvents request</p>
@@ -329,7 +322,7 @@ module Aws::CognitoSync
     class GetCognitoEventsResponse < Struct.new(
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the GetIdentityPoolConfiguration operation.</p>
@@ -340,7 +333,7 @@ module Aws::CognitoSync
     class GetIdentityPoolConfigurationRequest < Struct.new(
       :identity_pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the GetIdentityPoolConfiguration operation.</p>
@@ -359,7 +352,7 @@ module Aws::CognitoSync
       :push_sync,
       :cognito_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Usage information for the identity
@@ -387,7 +380,7 @@ module Aws::CognitoSync
       :data_storage,
       :last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Usage information for the identity.
@@ -420,7 +413,7 @@ module Aws::CognitoSync
       :dataset_count,
       :data_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dataset_count] = 0 unless options.key?(:dataset_count)
@@ -437,7 +430,7 @@ module Aws::CognitoSync
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -447,7 +440,7 @@ module Aws::CognitoSync
     class InvalidConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AWS Lambda function returned invalid output or an exception.</p>
@@ -457,7 +450,7 @@ module Aws::CognitoSync
     class InvalidLambdaFunctionOutputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thrown when a request parameter does not comply
@@ -469,7 +462,7 @@ module Aws::CognitoSync
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>AWS Lambda throttled your account, please contact AWS Support</p>
@@ -479,7 +472,7 @@ module Aws::CognitoSync
     class LambdaThrottledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thrown when the limit on the number of objects or
@@ -491,7 +484,7 @@ module Aws::CognitoSync
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request for a list of datasets for an
@@ -520,7 +513,7 @@ module Aws::CognitoSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Returned for a successful ListDatasets
@@ -540,7 +533,7 @@ module Aws::CognitoSync
       :count,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -562,7 +555,7 @@ module Aws::CognitoSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Returned for a successful
@@ -589,7 +582,7 @@ module Aws::CognitoSync
       :count,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_results] = 0 unless options.key?(:max_results)
@@ -638,7 +631,7 @@ module Aws::CognitoSync
       :max_results,
       :sync_session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Returned for a successful
@@ -688,7 +681,7 @@ module Aws::CognitoSync
       :dataset_deleted_after_requested_sync_count,
       :sync_session_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -707,19 +700,7 @@ module Aws::CognitoSync
     class NotAuthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operation
-      replace = 'replace'
-      remove = 'remove'
-    end
-
-    module Platform
-      APNS = 'APNS'
-      APNS_SANDBOX = 'APNS_SANDBOX'
-      GCM = 'GCM'
-      ADM = 'ADM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options to be applied to the identity pool.</p>
@@ -733,7 +714,7 @@ module Aws::CognitoSync
       :application_arns,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # The basic data structure of a dataset.
@@ -766,7 +747,7 @@ module Aws::CognitoSync
       :last_modified_by,
       :device_last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # An update operation for a record.
@@ -795,7 +776,7 @@ module Aws::CognitoSync
       :sync_count,
       :device_last_modified_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to RegisterDevice.</p>
@@ -818,7 +799,7 @@ module Aws::CognitoSync
       :platform,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response to a RegisterDevice request.</p>
@@ -828,7 +809,7 @@ module Aws::CognitoSync
     class RegisterDeviceResponse < Struct.new(
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thrown if an update can't be applied because
@@ -840,7 +821,7 @@ module Aws::CognitoSync
     class ResourceConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thrown if the resource doesn't
@@ -852,7 +833,7 @@ module Aws::CognitoSync
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to configure Cognito Events"</p>"
@@ -866,7 +847,7 @@ module Aws::CognitoSync
       :identity_pool_id,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input for the SetIdentityPoolConfiguration operation.</p>
@@ -885,7 +866,7 @@ module Aws::CognitoSync
       :push_sync,
       :cognito_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output for the SetIdentityPoolConfiguration operation</p>
@@ -904,12 +885,7 @@ module Aws::CognitoSync
       :push_sync,
       :cognito_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamingStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to SubscribeToDatasetRequest.</p>
@@ -932,13 +908,13 @@ module Aws::CognitoSync
       :dataset_name,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response to a SubscribeToDataset request.</p>
     class SubscribeToDatasetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Thrown if the request is
@@ -950,7 +926,7 @@ module Aws::CognitoSync
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to UnsubscribeFromDataset.</p>
@@ -973,13 +949,13 @@ module Aws::CognitoSync
       :dataset_name,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Response to an UnsubscribeFromDataset request.</p>
     class UnsubscribeFromDatasetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # A request to post updates to records or add and
@@ -1024,7 +1000,7 @@ module Aws::CognitoSync
       :sync_session_token,
       :client_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Returned for a successful
@@ -1036,7 +1012,7 @@ module Aws::CognitoSync
     class UpdateRecordsResponse < Struct.new(
       :records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

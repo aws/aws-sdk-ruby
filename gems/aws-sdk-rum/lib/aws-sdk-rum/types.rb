@@ -12,7 +12,7 @@ module Aws::RUM
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A RUM app monitor collects telemetry data from your application and sends that
@@ -76,7 +76,7 @@ module Aws::RUM
       :custom_events,
       :deobfuscation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains much of the configuration data for the app monitor.</p>
@@ -170,7 +170,7 @@ module Aws::RUM
       :telemetries,
       :enable_x_ray,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:session_sample_rate] = 0 unless options.key?(:session_sample_rate)
@@ -193,7 +193,7 @@ module Aws::RUM
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that includes some data about app monitors and their settings.</p>
@@ -219,7 +219,7 @@ module Aws::RUM
       :last_modified,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines one error caused by a 
@@ -239,7 +239,7 @@ module Aws::RUM
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -267,7 +267,7 @@ module Aws::RUM
       :destination_arn,
       :metric_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -280,7 +280,7 @@ module Aws::RUM
       :errors,
       :metric_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines one error caused by a 
@@ -300,7 +300,7 @@ module Aws::RUM
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -327,7 +327,7 @@ module Aws::RUM
       :destination_arn,
       :metric_definition_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -340,7 +340,7 @@ module Aws::RUM
       :errors,
       :metric_definition_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -372,7 +372,7 @@ module Aws::RUM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_definitions
@@ -387,7 +387,7 @@ module Aws::RUM
       :metric_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation attempted to create a resource that already exists.</p>
@@ -404,7 +404,7 @@ module Aws::RUM
       :resource_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -464,7 +464,7 @@ module Aws::RUM
       :custom_events,
       :deobfuscation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -473,7 +473,7 @@ module Aws::RUM
     class CreateAppMonitorOutput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about custom events for this app monitor.</p>
@@ -484,7 +484,7 @@ module Aws::RUM
     class CustomEvents < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information about whether the app monitor stores copies of the data
@@ -500,7 +500,7 @@ module Aws::RUM
       :cw_log_enabled,
       :cw_log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about whether this app monitor stores a copy of
@@ -512,7 +512,7 @@ module Aws::RUM
     class DataStorage < Struct.new(
       :cw_log,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -521,12 +521,12 @@ module Aws::RUM
     class DeleteAppMonitorInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAppMonitorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -540,7 +540,7 @@ module Aws::RUM
       :name,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_revision_id
@@ -549,7 +549,7 @@ module Aws::RUM
     class DeleteResourcePolicyResponse < Struct.new(
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -568,12 +568,12 @@ module Aws::RUM
       :destination,
       :destination_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRumMetricsDestinationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -587,7 +587,7 @@ module Aws::RUM
     class DeobfuscationConfiguration < Struct.new(
       :java_script_source_maps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -613,7 +613,7 @@ module Aws::RUM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -627,7 +627,7 @@ module Aws::RUM
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -636,7 +636,7 @@ module Aws::RUM
     class GetAppMonitorInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor
@@ -645,7 +645,7 @@ module Aws::RUM
     class GetAppMonitorOutput < Struct.new(
       :app_monitor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -654,7 +654,7 @@ module Aws::RUM
     class GetResourcePolicyRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_document
@@ -667,7 +667,7 @@ module Aws::RUM
       :policy_document,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Internal service exception.</p>
@@ -680,7 +680,7 @@ module Aws::RUM
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy revision ID that you provided doeesn't match the latest policy revision ID.</p>
@@ -689,7 +689,7 @@ module Aws::RUM
     class InvalidPolicyRevisionIdException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -709,7 +709,7 @@ module Aws::RUM
       :status,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -723,7 +723,7 @@ module Aws::RUM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -737,7 +737,7 @@ module Aws::RUM
       :next_token,
       :app_monitor_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -757,7 +757,7 @@ module Aws::RUM
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destinations
@@ -772,7 +772,7 @@ module Aws::RUM
       :destinations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -781,7 +781,7 @@ module Aws::RUM
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -794,7 +794,7 @@ module Aws::RUM
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy document that you specified is not formatted correctly.</p>
@@ -803,7 +803,7 @@ module Aws::RUM
     class MalformedPolicyDocumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that displays the definition of one extended metric that RUM sends
@@ -848,7 +848,7 @@ module Aws::RUM
       :event_pattern,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to define one extended metric or custom metric that RUM will send
@@ -1268,7 +1268,7 @@ module Aws::RUM
       :event_pattern,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that displays information about one destination that CloudWatch RUM sends
@@ -1289,7 +1289,7 @@ module Aws::RUM
       :destination_arn,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource-based policy doesn't exist on this app monitor.</p>
@@ -1298,7 +1298,7 @@ module Aws::RUM
     class PolicyNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy document is too large. The limit is 4 KB.</p>
@@ -1307,7 +1307,7 @@ module Aws::RUM
     class PolicySizeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1328,7 +1328,7 @@ module Aws::RUM
       :policy_document,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_document
@@ -1341,7 +1341,7 @@ module Aws::RUM
       :policy_document,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1371,12 +1371,12 @@ module Aws::RUM
       :rum_events,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutRumEventsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -1410,12 +1410,12 @@ module Aws::RUM
       :destination_arn,
       :iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutRumMetricsDestinationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines a key and values that you can use to filter the results. The
@@ -1444,7 +1444,7 @@ module Aws::RUM
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource not found.</p>
@@ -1461,7 +1461,7 @@ module Aws::RUM
       :resource_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information for one performance event that RUM collects from a user session with your
@@ -1490,7 +1490,7 @@ module Aws::RUM
       :metadata,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request exceeds a service quota.</p>
@@ -1499,7 +1499,7 @@ module Aws::RUM
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1512,12 +1512,12 @@ module Aws::RUM
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was throttled because of quota limits.</p>
@@ -1538,7 +1538,7 @@ module Aws::RUM
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines the time range that you want to retrieve results from.</p>
@@ -1553,7 +1553,7 @@ module Aws::RUM
       :after,
       :before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:after] = 0 unless options.key?(:after)
@@ -1572,12 +1572,12 @@ module Aws::RUM
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1625,12 +1625,12 @@ module Aws::RUM
       :custom_events,
       :deobfuscation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAppMonitorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_monitor_name
@@ -1661,12 +1661,12 @@ module Aws::RUM
       :metric_definition,
       :metric_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRumMetricDefinitionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about the user session that this batch of events was collected from.</p>
@@ -1681,7 +1681,7 @@ module Aws::RUM
       :user_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the arguments for the request is not valid.</p>
@@ -1690,7 +1690,7 @@ module Aws::RUM
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

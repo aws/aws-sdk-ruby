@@ -12,7 +12,7 @@ module Aws::MigrationHubOrchestrator
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when an attempt to update or delete
@@ -22,7 +22,7 @@ module Aws::MigrationHubOrchestrator
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_name
@@ -48,7 +48,7 @@ module Aws::MigrationHubOrchestrator
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -69,7 +69,7 @@ module Aws::MigrationHubOrchestrator
       :template_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -102,7 +102,7 @@ module Aws::MigrationHubOrchestrator
       :step_targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -151,7 +151,7 @@ module Aws::MigrationHubOrchestrator
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -176,7 +176,7 @@ module Aws::MigrationHubOrchestrator
       :next,
       :previous,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -213,7 +213,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -259,7 +259,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -280,7 +280,7 @@ module Aws::MigrationHubOrchestrator
       :workflow_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -289,12 +289,12 @@ module Aws::MigrationHubOrchestrator
     class DeleteTemplateRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -303,7 +303,7 @@ module Aws::MigrationHubOrchestrator
     class DeleteWorkflowInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -320,7 +320,7 @@ module Aws::MigrationHubOrchestrator
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -333,12 +333,12 @@ module Aws::MigrationHubOrchestrator
       :workflow_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkflowStepGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -355,12 +355,12 @@ module Aws::MigrationHubOrchestrator
       :step_group_id,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkflowStepOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -369,7 +369,7 @@ module Aws::MigrationHubOrchestrator
     class GetTemplateInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -447,7 +447,7 @@ module Aws::MigrationHubOrchestrator
       :template_class,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -460,7 +460,7 @@ module Aws::MigrationHubOrchestrator
       :template_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -505,7 +505,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -522,7 +522,7 @@ module Aws::MigrationHubOrchestrator
       :template_id,
       :step_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -572,7 +572,7 @@ module Aws::MigrationHubOrchestrator
       :outputs,
       :step_automation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -581,7 +581,7 @@ module Aws::MigrationHubOrchestrator
     class GetWorkflowInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -666,7 +666,7 @@ module Aws::MigrationHubOrchestrator
       :tags,
       :workflow_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -679,7 +679,7 @@ module Aws::MigrationHubOrchestrator
       :id,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -732,7 +732,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -749,7 +749,7 @@ module Aws::MigrationHubOrchestrator
       :step_group_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -839,7 +839,7 @@ module Aws::MigrationHubOrchestrator
       :no_of_srv_failed,
       :total_no_of_srv,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred.</p>
@@ -848,7 +848,7 @@ module Aws::MigrationHubOrchestrator
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -861,7 +861,7 @@ module Aws::MigrationHubOrchestrator
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -874,7 +874,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :plugins,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -883,7 +883,7 @@ module Aws::MigrationHubOrchestrator
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -892,7 +892,7 @@ module Aws::MigrationHubOrchestrator
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -909,7 +909,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -922,7 +922,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :template_step_group_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -943,7 +943,7 @@ module Aws::MigrationHubOrchestrator
       :template_id,
       :step_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -956,7 +956,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :template_step_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -973,7 +973,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -986,7 +986,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :template_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1003,7 +1003,7 @@ module Aws::MigrationHubOrchestrator
       :max_results,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1016,7 +1016,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :workflow_step_groups_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1037,7 +1037,7 @@ module Aws::MigrationHubOrchestrator
       :workflow_id,
       :step_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1050,7 +1050,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :workflow_steps_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1079,7 +1079,7 @@ module Aws::MigrationHubOrchestrator
       :status,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1092,7 +1092,7 @@ module Aws::MigrationHubOrchestrator
       :next_token,
       :migration_workflow_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a migration workflow.</p>
@@ -1138,7 +1138,7 @@ module Aws::MigrationHubOrchestrator
       :completed_steps,
       :total_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Command to be run on a particular operating system.</p>
@@ -1152,7 +1152,7 @@ module Aws::MigrationHubOrchestrator
       :linux,
       :windows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The script location for a particular operating system.</p>
@@ -1166,7 +1166,7 @@ module Aws::MigrationHubOrchestrator
       :linux,
       :windows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the Migration Hub Orchestrator plugin.</p>
@@ -1196,7 +1196,7 @@ module Aws::MigrationHubOrchestrator
       :version,
       :registered_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is not available.</p>
@@ -1205,7 +1205,7 @@ module Aws::MigrationHubOrchestrator
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1222,7 +1222,7 @@ module Aws::MigrationHubOrchestrator
       :step_group_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute step_group_id
@@ -1243,7 +1243,7 @@ module Aws::MigrationHubOrchestrator
       :id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1252,7 +1252,7 @@ module Aws::MigrationHubOrchestrator
     class StartWorkflowInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1277,7 +1277,7 @@ module Aws::MigrationHubOrchestrator
       :status_message,
       :last_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom script to run tests on source or target environments.</p>
@@ -1303,7 +1303,7 @@ module Aws::MigrationHubOrchestrator
       :run_environment,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of key value pairs that is generated when you create a migration workflow. The
@@ -1327,7 +1327,7 @@ module Aws::MigrationHubOrchestrator
       :map_of_string_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IntegerValue < StepInput; end
       class StringValue < StepInput; end
@@ -1351,7 +1351,7 @@ module Aws::MigrationHubOrchestrator
       :data_type,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1360,7 +1360,7 @@ module Aws::MigrationHubOrchestrator
     class StopWorkflowInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1385,7 +1385,7 @@ module Aws::MigrationHubOrchestrator
       :status_message,
       :last_stop_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1399,12 +1399,12 @@ module Aws::MigrationHubOrchestrator
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters of a template.</p>
@@ -1422,7 +1422,7 @@ module Aws::MigrationHubOrchestrator
       :data_type,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The migration workflow template used as the source for the new template.</p>
@@ -1433,7 +1433,7 @@ module Aws::MigrationHubOrchestrator
       :workflow_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class WorkflowId < TemplateSource; end
       class Unknown < TemplateSource; end
@@ -1458,7 +1458,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the step.</p>
@@ -1501,7 +1501,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the template.</p>
@@ -1523,7 +1523,7 @@ module Aws::MigrationHubOrchestrator
       :arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1532,7 +1532,7 @@ module Aws::MigrationHubOrchestrator
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of AWS services utilized in a migration workflow.</p>
@@ -1546,7 +1546,7 @@ module Aws::MigrationHubOrchestrator
       :name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1560,12 +1560,12 @@ module Aws::MigrationHubOrchestrator
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1587,7 +1587,7 @@ module Aws::MigrationHubOrchestrator
       :template_description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -1608,7 +1608,7 @@ module Aws::MigrationHubOrchestrator
       :template_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1633,7 +1633,7 @@ module Aws::MigrationHubOrchestrator
       :input_parameters,
       :step_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1686,7 +1686,7 @@ module Aws::MigrationHubOrchestrator
       :last_modified_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1715,7 +1715,7 @@ module Aws::MigrationHubOrchestrator
       :next,
       :previous,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1752,7 +1752,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1806,7 +1806,7 @@ module Aws::MigrationHubOrchestrator
       :next,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1827,7 +1827,7 @@ module Aws::MigrationHubOrchestrator
       :workflow_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -1836,7 +1836,7 @@ module Aws::MigrationHubOrchestrator
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom script to run tests on source or target environments.</p>
@@ -1862,7 +1862,7 @@ module Aws::MigrationHubOrchestrator
       :run_environment,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of a step group in a workflow.</p>
@@ -1892,7 +1892,7 @@ module Aws::MigrationHubOrchestrator
       :previous,
       :next,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output of a step.</p>
@@ -1914,7 +1914,7 @@ module Aws::MigrationHubOrchestrator
       :required,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure to hold multiple values of an output.</p>
@@ -1933,7 +1933,7 @@ module Aws::MigrationHubOrchestrator
       :list_of_string_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IntegerValue < WorkflowStepOutputUnion; end
       class StringValue < WorkflowStepOutputUnion; end
@@ -1997,7 +1997,7 @@ module Aws::MigrationHubOrchestrator
       :description,
       :script_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

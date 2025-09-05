@@ -21,7 +21,7 @@ module Aws::MediaConnect
       :flow_vpc_interface_attachment,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Add a network output to an existing bridge. </p>
@@ -51,7 +51,7 @@ module Aws::MediaConnect
       :protocol,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Add a network source to an existing bridge. </p>
@@ -81,7 +81,7 @@ module Aws::MediaConnect
       :port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Add outputs to the specified bridge.</p>
@@ -91,7 +91,7 @@ module Aws::MediaConnect
     class AddBridgeOutputRequest < Struct.new(
       :network_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -104,7 +104,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -117,7 +117,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Add an output to a bridge. </p>
@@ -131,7 +131,7 @@ module Aws::MediaConnect
       :flow_source,
       :network_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -144,7 +144,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -157,7 +157,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises. </p>
@@ -167,7 +167,7 @@ module Aws::MediaConnect
     class AddEgressGatewayBridgeRequest < Struct.new(
       :max_bitrate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -180,7 +180,7 @@ module Aws::MediaConnect
       :flow_arn,
       :media_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -193,7 +193,7 @@ module Aws::MediaConnect
       :flow_arn,
       :media_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised by Elemental MediaConnect when adding the flow output. See the error message for the operation for more information on the cause of this exception. </p>
@@ -202,7 +202,7 @@ module Aws::MediaConnect
     class AddFlowOutputs420Exception < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -215,7 +215,7 @@ module Aws::MediaConnect
       :flow_arn,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -228,7 +228,7 @@ module Aws::MediaConnect
       :flow_arn,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -241,7 +241,7 @@ module Aws::MediaConnect
       :flow_arn,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -254,7 +254,7 @@ module Aws::MediaConnect
       :flow_arn,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -267,7 +267,7 @@ module Aws::MediaConnect
       :flow_arn,
       :vpc_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -280,7 +280,7 @@ module Aws::MediaConnect
       :flow_arn,
       :vpc_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>
@@ -294,7 +294,7 @@ module Aws::MediaConnect
       :max_bitrate,
       :max_outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Create a maintenance setting for a flow.</p>
@@ -308,7 +308,7 @@ module Aws::MediaConnect
       :maintenance_day,
       :maintenance_start_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The media stream that you want to add to the flow. </p>
@@ -342,7 +342,7 @@ module Aws::MediaConnect
       :media_stream_type,
       :video_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A request to add an output to a flow.</p>
@@ -420,13 +420,7 @@ module Aws::MediaConnect
       :ndi_speed_hq_quality,
       :ndi_program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Algorithm
-      aes128 = 'aes128'
-      aes192 = 'aes192'
-      aes256 = 'aes256'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the configuration for audio stream metrics monitoring.</p>
@@ -436,7 +430,7 @@ module Aws::MediaConnect
     class AudioMonitoringSetting < Struct.new(
       :silent_audio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if the request contains a semantic error. The precise meaning depends on the API, and is documented in the error message. </p>
@@ -445,7 +439,7 @@ module Aws::MediaConnect
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configures settings for the <code>BlackFrames</code> metric.</p>
@@ -459,7 +453,7 @@ module Aws::MediaConnect
       :state,
       :threshold_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A Bridge is the connection between your data center's Instances and the Amazon Web Services cloud. A bridge can be used to send video from the Amazon Web Services cloud to your data center or from your data center to the Amazon Web Services cloud.</p>
@@ -505,7 +499,7 @@ module Aws::MediaConnect
       :source_failover_config,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output of the bridge. A flow output is delivered to the Amazon Web Services cloud. </p>
@@ -523,7 +517,7 @@ module Aws::MediaConnect
       :flow_source_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The source of the bridge. A flow source originates in MediaConnect as an existing cloud flow.</p>
@@ -545,7 +539,7 @@ module Aws::MediaConnect
       :name,
       :output_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output of the bridge. A network output is delivered to your premises.</p>
@@ -575,7 +569,7 @@ module Aws::MediaConnect
       :protocol,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The source of the bridge. A network source originates at your premises.</p>
@@ -605,7 +599,7 @@ module Aws::MediaConnect
       :port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output of the bridge.</p>
@@ -619,12 +613,7 @@ module Aws::MediaConnect
       :flow_output,
       :network_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BridgePlacement
-      AVAILABLE = 'AVAILABLE'
-      LOCKED = 'LOCKED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The bridge's source.</p>
@@ -638,32 +627,7 @@ module Aws::MediaConnect
       :flow_source,
       :network_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BridgeState
-      CREATING = 'CREATING'
-      STANDBY = 'STANDBY'
-      STARTING = 'STARTING'
-      DEPLOYING = 'DEPLOYING'
-      ACTIVE = 'ACTIVE'
-      STOPPING = 'STOPPING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      START_FAILED = 'START_FAILED'
-      START_PENDING = 'START_PENDING'
-      STOP_FAILED = 'STOP_FAILED'
-      UPDATING = 'UPDATING'
-    end
-
-    module Colorimetry
-      BT601 = 'BT601'
-      BT709 = 'BT709'
-      BT2020 = 'BT2020'
-      BT2100 = 'BT2100'
-      ST2065_1 = 'ST2065-1'
-      ST2065_3 = 'ST2065-3'
-      XYZ = 'XYZ'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request. </p>
@@ -672,17 +636,7 @@ module Aws::MediaConnect
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionStatus
-      CONNECTED = 'CONNECTED'
-      DISCONNECTED = 'DISCONNECTED'
-    end
-
-    module ContentQualityAnalysisState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised by Elemental MediaConnect when creating the bridge. See the error message for the operation for more information on the cause of this exception. </p>
@@ -691,7 +645,7 @@ module Aws::MediaConnect
     class CreateBridge420Exception < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute egress_gateway_bridge
@@ -724,7 +678,7 @@ module Aws::MediaConnect
       :source_failover_config,
       :sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge
@@ -733,7 +687,7 @@ module Aws::MediaConnect
     class CreateBridgeResponse < Struct.new(
       :bridge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised by Elemental MediaConnect when creating the flow. See the error message for the operation for more information on the cause of this exception. </p>
@@ -742,7 +696,7 @@ module Aws::MediaConnect
     class CreateFlow420Exception < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zone
@@ -799,7 +753,7 @@ module Aws::MediaConnect
       :flow_size,
       :ndi_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow
@@ -808,7 +762,7 @@ module Aws::MediaConnect
     class CreateFlowResponse < Struct.new(
       :flow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised by Elemental MediaConnect when creating the gateway. See the error message for the operation for more information on the cause of this exception. </p>
@@ -817,7 +771,7 @@ module Aws::MediaConnect
     class CreateGateway420Exception < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute egress_cidr_blocks
@@ -834,7 +788,7 @@ module Aws::MediaConnect
       :name,
       :networks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway
@@ -843,7 +797,7 @@ module Aws::MediaConnect
     class CreateGatewayResponse < Struct.new(
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -852,7 +806,7 @@ module Aws::MediaConnect
     class DeleteBridgeRequest < Struct.new(
       :bridge_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -861,7 +815,7 @@ module Aws::MediaConnect
     class DeleteBridgeResponse < Struct.new(
       :bridge_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -870,7 +824,7 @@ module Aws::MediaConnect
     class DeleteFlowRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -883,7 +837,7 @@ module Aws::MediaConnect
       :flow_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -892,7 +846,7 @@ module Aws::MediaConnect
     class DeleteGatewayRequest < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -901,7 +855,7 @@ module Aws::MediaConnect
     class DeleteGatewayResponse < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute force
@@ -914,7 +868,7 @@ module Aws::MediaConnect
       :force,
       :gateway_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_instance_arn
@@ -927,7 +881,7 @@ module Aws::MediaConnect
       :gateway_instance_arn,
       :instance_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -936,7 +890,7 @@ module Aws::MediaConnect
     class DescribeBridgeRequest < Struct.new(
       :bridge_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge
@@ -945,7 +899,7 @@ module Aws::MediaConnect
     class DescribeBridgeResponse < Struct.new(
       :bridge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -954,7 +908,7 @@ module Aws::MediaConnect
     class DescribeFlowRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow
@@ -967,7 +921,7 @@ module Aws::MediaConnect
       :flow,
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -976,7 +930,7 @@ module Aws::MediaConnect
     class DescribeFlowSourceMetadataRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -997,7 +951,7 @@ module Aws::MediaConnect
       :timestamp,
       :transport_media_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -1006,7 +960,7 @@ module Aws::MediaConnect
     class DescribeFlowSourceThumbnailRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thumbnail_details
@@ -1015,7 +969,7 @@ module Aws::MediaConnect
     class DescribeFlowSourceThumbnailResponse < Struct.new(
       :thumbnail_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_instance_arn
@@ -1024,7 +978,7 @@ module Aws::MediaConnect
     class DescribeGatewayInstanceRequest < Struct.new(
       :gateway_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_instance
@@ -1033,7 +987,7 @@ module Aws::MediaConnect
     class DescribeGatewayInstanceResponse < Struct.new(
       :gateway_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_arn
@@ -1042,7 +996,7 @@ module Aws::MediaConnect
     class DescribeGatewayRequest < Struct.new(
       :gateway_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway
@@ -1051,7 +1005,7 @@ module Aws::MediaConnect
     class DescribeGatewayResponse < Struct.new(
       :gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute offering_arn
@@ -1060,7 +1014,7 @@ module Aws::MediaConnect
     class DescribeOfferingRequest < Struct.new(
       :offering_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute offering
@@ -1069,7 +1023,7 @@ module Aws::MediaConnect
     class DescribeOfferingResponse < Struct.new(
       :offering,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reservation_arn
@@ -1078,7 +1032,7 @@ module Aws::MediaConnect
     class DescribeReservationRequest < Struct.new(
       :reservation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reservation
@@ -1087,13 +1041,7 @@ module Aws::MediaConnect
     class DescribeReservationResponse < Struct.new(
       :reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DesiredState
-      ACTIVE = 'ACTIVE'
-      STANDBY = 'STANDBY'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The transport parameters that you want to associate with an outbound media stream.</p>
@@ -1115,7 +1063,7 @@ module Aws::MediaConnect
       :interface,
       :outbound_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a media stream that you want to associate with the output. </p>
@@ -1133,11 +1081,7 @@ module Aws::MediaConnect
       :destination_port,
       :interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DurationUnits
-      MONTHS = 'MONTHS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises. </p>
@@ -1151,19 +1095,7 @@ module Aws::MediaConnect
       :instance_id,
       :max_bitrate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncoderProfile
-      main = 'main'
-      high = 'high'
-    end
-
-    module EncodingName
-      jxsv = 'jxsv'
-      raw = 'raw'
-      smpte291 = 'smpte291'
-      pcm = 'pcm'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.</p>
@@ -1177,7 +1109,7 @@ module Aws::MediaConnect
       :compression_factor,
       :encoder_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.</p>
@@ -1191,7 +1123,7 @@ module Aws::MediaConnect
       :compression_factor,
       :encoder_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the encryption of the flow.</p>
@@ -1233,7 +1165,7 @@ module Aws::MediaConnect
       :secret_arn,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for a flow entitlement.</p>
@@ -1267,12 +1199,7 @@ module Aws::MediaConnect
       :name,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntitlementStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for source failover.</p>
@@ -1294,12 +1221,7 @@ module Aws::MediaConnect
       :source_priority,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailoverMode
-      MERGE = 'MERGE'
-      FAILOVER = 'FAILOVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for a flow, including its source, outputs, and entitlements.</p>
@@ -1373,12 +1295,7 @@ module Aws::MediaConnect
       :flow_size,
       :ndi_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowSize
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A set of parameters that define the media stream. </p>
@@ -1412,7 +1329,7 @@ module Aws::MediaConnect
       :scan_mode,
       :tcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings that you want to use to define the media stream.</p>
@@ -1446,7 +1363,7 @@ module Aws::MediaConnect
       :scan_mode,
       :tcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action. </p>
@@ -1455,7 +1372,7 @@ module Aws::MediaConnect
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The frame resolution used by the video stream.</p>
@@ -1469,7 +1386,7 @@ module Aws::MediaConnect
       :frame_height,
       :frame_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Configures settings for the <code>FrozenFrames</code> metric.</p>
@@ -1483,7 +1400,7 @@ module Aws::MediaConnect
       :state,
       :threshold_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for a gateway, including its networks. </p>
@@ -1513,7 +1430,7 @@ module Aws::MediaConnect
       :name,
       :networks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The source configuration for cloud flows receiving a stream from a bridge.</p>
@@ -1527,7 +1444,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :vpc_interface_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for an instance in a gateway.</p>
@@ -1565,7 +1482,7 @@ module Aws::MediaConnect
       :instance_state,
       :running_bridge_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network settings for a gateway. </p>
@@ -1579,16 +1496,7 @@ module Aws::MediaConnect
       :cidr_block,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GatewayState
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The entitlements that you want to grant on a flow.</p>
@@ -1618,7 +1526,7 @@ module Aws::MediaConnect
       :name,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception raised by Elemental MediaConnect when granting the entitlement. See the error message for the operation for more information on the cause of this exception. </p>
@@ -1627,7 +1535,7 @@ module Aws::MediaConnect
     class GrantFlowEntitlements420Exception < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlements
@@ -1640,7 +1548,7 @@ module Aws::MediaConnect
       :entitlements,
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlements
@@ -1653,7 +1561,7 @@ module Aws::MediaConnect
       :entitlements,
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Create a bridge with the ingress bridge type. An ingress bridge is a ground-to-cloud bridge. The content originates at your premises and is delivered to the cloud. </p>
@@ -1671,7 +1579,7 @@ module Aws::MediaConnect
       :max_bitrate,
       :max_outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The transport parameters that are associated with an incoming media stream.</p>
@@ -1689,7 +1597,7 @@ module Aws::MediaConnect
       :input_port,
       :interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The transport parameters that you want to associate with an incoming media stream.</p>
@@ -1703,16 +1611,7 @@ module Aws::MediaConnect
       :input_port,
       :interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceState
-      REGISTERING = 'REGISTERING'
-      ACTIVE = 'ACTIVE'
-      DEREGISTERING = 'DEREGISTERING'
-      DEREGISTERED = 'DEREGISTERED'
-      REGISTRATION_ERROR = 'REGISTRATION_ERROR'
-      DEREGISTRATION_ERROR = 'DEREGISTRATION_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The VPC interface that is used for the media stream associated with the source or output.</p>
@@ -1722,7 +1621,7 @@ module Aws::MediaConnect
     class Interface < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The VPC interface that you want to designate where the media stream is coming from or going to.</p>
@@ -1732,7 +1631,7 @@ module Aws::MediaConnect
     class InterfaceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an internal error and is unable to complete the request. </p>
@@ -1741,13 +1640,7 @@ module Aws::MediaConnect
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyType
-      speke = 'speke'
-      static_key = 'static-key'
-      srt_password = 'srt-password'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_arn
@@ -1764,7 +1657,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridges
@@ -1777,7 +1670,7 @@ module Aws::MediaConnect
       :bridges,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1790,7 +1683,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlements
@@ -1803,7 +1696,7 @@ module Aws::MediaConnect
       :entitlements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1816,7 +1709,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flows
@@ -1829,7 +1722,7 @@ module Aws::MediaConnect
       :flows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_arn
@@ -1846,7 +1739,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -1859,7 +1752,7 @@ module Aws::MediaConnect
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1872,7 +1765,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateways
@@ -1885,7 +1778,7 @@ module Aws::MediaConnect
       :gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1898,7 +1791,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1911,7 +1804,7 @@ module Aws::MediaConnect
       :next_token,
       :offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1924,7 +1817,7 @@ module Aws::MediaConnect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1937,7 +1830,7 @@ module Aws::MediaConnect
       :next_token,
       :reservations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1946,7 +1839,7 @@ module Aws::MediaConnect
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1955,7 +1848,7 @@ module Aws::MediaConnect
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Displays details of the selected bridge.</p>
@@ -1981,7 +1874,7 @@ module Aws::MediaConnect
       :name,
       :placement_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An entitlement that has been granted to you from other Amazon Web Services accounts.</p>
@@ -1999,7 +1892,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :entitlement_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A summary of a flow, including its ARN, Availability Zone, and source type.</p>
@@ -2033,7 +1926,7 @@ module Aws::MediaConnect
       :status,
       :maintenance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A summary of a gateway, including its name, ARN, and status.</p>
@@ -2051,7 +1944,7 @@ module Aws::MediaConnect
       :gateway_state,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A summary of an instance. </p>
@@ -2073,7 +1966,7 @@ module Aws::MediaConnect
       :instance_id,
       :instance_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The maintenance setting of a flow.</p>
@@ -2095,17 +1988,7 @@ module Aws::MediaConnect
       :maintenance_scheduled_date,
       :maintenance_start_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceDay
-      Monday = 'Monday'
-      Tuesday = 'Tuesday'
-      Wednesday = 'Wednesday'
-      Thursday = 'Thursday'
-      Friday = 'Friday'
-      Saturday = 'Saturday'
-      Sunday = 'Sunday'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A media stream represents one component of your content, such as video, audio, or ancillary data. After you add a media stream to your flow, you can associate it with sources and outputs that use the ST 2110 JPEG XS or CDI protocol. </p>
@@ -2143,7 +2026,7 @@ module Aws::MediaConnect
       :media_stream_type,
       :video_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes that are related to the media stream. </p>
@@ -2157,7 +2040,7 @@ module Aws::MediaConnect
       :fmtp,
       :lang,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes that are related to the media stream. </p>
@@ -2171,7 +2054,7 @@ module Aws::MediaConnect
       :fmtp,
       :lang,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The media stream that is associated with the output, and the parameters for that association.</p>
@@ -2193,7 +2076,7 @@ module Aws::MediaConnect
       :encoding_parameters,
       :media_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The media stream that you want to associate with the output, and the parameters for that association.</p>
@@ -2215,7 +2098,7 @@ module Aws::MediaConnect
       :encoding_parameters,
       :media_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The media stream that is associated with the source, and the parameters for that association. </p>
@@ -2233,7 +2116,7 @@ module Aws::MediaConnect
       :input_configurations,
       :media_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The media stream that you want to associate with the source, and the parameters for that association. </p>
@@ -2251,13 +2134,7 @@ module Aws::MediaConnect
       :input_configurations,
       :media_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaStreamType
-      video = 'video'
-      audio = 'audio'
-      ancillary_data = 'ancillary-data'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an error message. </p>
@@ -2275,7 +2152,7 @@ module Aws::MediaConnect
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Messages that provide the state of the flow.</p>
@@ -2285,7 +2162,7 @@ module Aws::MediaConnect
     class Messages < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for source monitoring. </p>
@@ -2307,7 +2184,7 @@ module Aws::MediaConnect
       :content_quality_analysis_state,
       :video_monitoring_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings related to the multicast source. </p>
@@ -2317,7 +2194,7 @@ module Aws::MediaConnect
     class MulticastSourceSettings < Struct.new(
       :multicast_source_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration settings for NDI outputs. Required when the flow includes NDI outputs. </p>
@@ -2335,7 +2212,7 @@ module Aws::MediaConnect
       :machine_name,
       :ndi_discovery_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration settings for individual NDI discovery servers. A maximum of 3 servers is allowed. </p>
@@ -2353,17 +2230,7 @@ module Aws::MediaConnect
       :discovery_server_port,
       :vpc_interface_adapter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NdiState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module NetworkInterfaceType
-      ena = 'ena'
-      efa = 'efa'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the resources in the request does not exist in the system. </p>
@@ -2372,7 +2239,7 @@ module Aws::MediaConnect
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A savings plan that reserves a certain amount of outbound bandwidth usage at a discounted rate each month over a period of time. </p>
@@ -2410,7 +2277,7 @@ module Aws::MediaConnect
       :price_units,
       :resource_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for an output. </p>
@@ -2484,31 +2351,7 @@ module Aws::MediaConnect
       :output_status,
       :peer_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutputStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module PriceUnits
-      HOURLY = 'HOURLY'
-    end
-
-    module Protocol
-      zixi_push = 'zixi-push'
-      rtp_fec = 'rtp-fec'
-      rtp = 'rtp'
-      zixi_pull = 'zixi-pull'
-      rist = 'rist'
-      st2110_jpegxs = 'st2110-jpegxs'
-      cdi = 'cdi'
-      srt_listener = 'srt-listener'
-      srt_caller = 'srt-caller'
-      fujitsu_qos = 'fujitsu-qos'
-      udp = 'udp'
-      ndi_speed_hq = 'ndi-speed-hq'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute offering_arn
@@ -2525,7 +2368,7 @@ module Aws::MediaConnect
       :reservation_name,
       :start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reservation
@@ -2534,13 +2377,7 @@ module Aws::MediaConnect
     class PurchaseOfferingResponse < Struct.new(
       :reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Range
-      NARROW = 'NARROW'
-      FULL = 'FULL'
-      FULLPROTECT = 'FULLPROTECT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -2553,7 +2390,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :output_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -2566,7 +2403,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :output_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -2579,7 +2416,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -2592,7 +2429,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2605,7 +2442,7 @@ module Aws::MediaConnect
       :flow_arn,
       :media_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2618,7 +2455,7 @@ module Aws::MediaConnect
       :flow_arn,
       :media_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2631,7 +2468,7 @@ module Aws::MediaConnect
       :flow_arn,
       :output_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2644,7 +2481,7 @@ module Aws::MediaConnect
       :flow_arn,
       :output_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2657,7 +2494,7 @@ module Aws::MediaConnect
       :flow_arn,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2670,7 +2507,7 @@ module Aws::MediaConnect
       :flow_arn,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2683,7 +2520,7 @@ module Aws::MediaConnect
       :flow_arn,
       :vpc_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -2700,7 +2537,7 @@ module Aws::MediaConnect
       :non_deleted_network_interface_ids,
       :vpc_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate.</p>
@@ -2758,14 +2595,7 @@ module Aws::MediaConnect
       :resource_specification,
       :start,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservationState
-      ACTIVE = 'ACTIVE'
-      EXPIRED = 'EXPIRED'
-      PROCESSING = 'PROCESSING'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A definition of what is being billed for, including the type and amount.</p>
@@ -2779,11 +2609,7 @@ module Aws::MediaConnect
       :reserved_bitrate,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      Mbps_Outbound_Bandwidth = 'Mbps_Outbound_Bandwidth'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlement_arn
@@ -2796,7 +2622,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlement_arn
@@ -2809,13 +2635,7 @@ module Aws::MediaConnect
       :entitlement_arn,
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScanMode
-      progressive = 'progressive'
-      interlace = 'interlace'
-      progressive_segmented_frame = 'progressive-segmented-frame'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is currently unavailable or busy. </p>
@@ -2824,7 +2644,7 @@ module Aws::MediaConnect
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The source configuration for cloud flows receiving a stream from a bridge.</p>
@@ -2838,7 +2658,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :vpc_interface_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for the source of the flow.</p>
@@ -2920,7 +2740,7 @@ module Aws::MediaConnect
       :whitelist_cidr,
       :gateway_bridge_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures settings for the <code>SilentAudio</code> metric. </p>
@@ -2934,7 +2754,7 @@ module Aws::MediaConnect
       :state,
       :threshold_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for the source of the flow.</p>
@@ -3004,7 +2824,7 @@ module Aws::MediaConnect
       :gateway_bridge_source,
       :peer_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams. </p>
@@ -3014,12 +2834,7 @@ module Aws::MediaConnect
     class SourcePriority < Struct.new(
       :primary_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      OWNED = 'OWNED'
-      ENTITLED = 'ENTITLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3028,7 +2843,7 @@ module Aws::MediaConnect
     class StartFlowRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3041,22 +2856,7 @@ module Aws::MediaConnect
       :flow_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module State
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module Status
-      STANDBY = 'STANDBY'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      STARTING = 'STARTING'
-      STOPPING = 'STOPPING'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3065,7 +2865,7 @@ module Aws::MediaConnect
     class StopFlowRequest < Struct.new(
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3078,7 +2878,7 @@ module Aws::MediaConnect
       :flow_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3091,19 +2891,7 @@ module Aws::MediaConnect
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Tcs
-      SDR = 'SDR'
-      PQ = 'PQ'
-      HLG = 'HLG'
-      LINEAR = 'LINEAR'
-      BT2100LINPQ = 'BT2100LINPQ'
-      BT2100LINHLG = 'BT2100LINHLG'
-      ST2065_1 = 'ST2065-1'
-      ST428_1 = 'ST428-1'
-      DENSITY = 'DENSITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of the thumbnail, including thumbnail base64 string, timecode and the time when thumbnail was generated.</p>
@@ -3129,12 +2917,7 @@ module Aws::MediaConnect
       :timecode,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThumbnailState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. </p>
@@ -3143,7 +2926,7 @@ module Aws::MediaConnect
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Attributes related to the transport stream that are used in a source or output.</p>
@@ -3209,7 +2992,7 @@ module Aws::MediaConnect
       :ndi_speed_hq_quality,
       :ndi_program_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata of the transport stream in the current flow's source.</p>
@@ -3219,7 +3002,7 @@ module Aws::MediaConnect
     class TransportMediaInfo < Struct.new(
       :programs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata of an elementary transport stream.</p>
@@ -3257,7 +3040,7 @@ module Aws::MediaConnect
       :sample_size,
       :stream_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The metadata of a single transport stream program.</p>
@@ -3283,7 +3066,7 @@ module Aws::MediaConnect
       :program_pid,
       :streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3296,7 +3079,7 @@ module Aws::MediaConnect
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Update the flow source of the bridge. </p>
@@ -3310,7 +3093,7 @@ module Aws::MediaConnect
       :flow_arn,
       :flow_vpc_interface_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update an existing network output. </p>
@@ -3336,7 +3119,7 @@ module Aws::MediaConnect
       :protocol,
       :ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Update the network source of the bridge.</p>
@@ -3362,7 +3145,7 @@ module Aws::MediaConnect
       :port,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3379,7 +3162,7 @@ module Aws::MediaConnect
       :network_output,
       :output_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3392,7 +3175,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3413,7 +3196,7 @@ module Aws::MediaConnect
       :ingress_gateway_bridge,
       :source_failover_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge
@@ -3422,7 +3205,7 @@ module Aws::MediaConnect
     class UpdateBridgeResponse < Struct.new(
       :bridge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3443,7 +3226,7 @@ module Aws::MediaConnect
       :network_source,
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3456,7 +3239,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3469,7 +3252,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :desired_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_arn
@@ -3482,7 +3265,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :desired_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Update an existing egress-type bridge.</p>
@@ -3492,7 +3275,7 @@ module Aws::MediaConnect
     class UpdateEgressGatewayBridgeRequest < Struct.new(
       :max_bitrate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the encryption of the flow.</p>
@@ -3534,7 +3317,7 @@ module Aws::MediaConnect
       :secret_arn,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for source failover.</p>
@@ -3556,7 +3339,7 @@ module Aws::MediaConnect
       :source_priority,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -3585,7 +3368,7 @@ module Aws::MediaConnect
       :flow_arn,
       :subscribers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entitlement
@@ -3598,7 +3381,7 @@ module Aws::MediaConnect
       :entitlement,
       :flow_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -3631,7 +3414,7 @@ module Aws::MediaConnect
       :media_stream_type,
       :video_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3644,7 +3427,7 @@ module Aws::MediaConnect
       :flow_arn,
       :media_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr_allow_list
@@ -3729,7 +3512,7 @@ module Aws::MediaConnect
       :ndi_program_name,
       :ndi_speed_hq_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3742,7 +3525,7 @@ module Aws::MediaConnect
       :flow_arn,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3767,7 +3550,7 @@ module Aws::MediaConnect
       :source_monitoring_config,
       :ndi_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow
@@ -3776,7 +3559,7 @@ module Aws::MediaConnect
     class UpdateFlowResponse < Struct.new(
       :flow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute decryption
@@ -3861,7 +3644,7 @@ module Aws::MediaConnect
       :whitelist_cidr,
       :gateway_bridge_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_arn
@@ -3874,7 +3657,7 @@ module Aws::MediaConnect
       :flow_arn,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The source configuration for cloud flows receiving a stream from a bridge.</p>
@@ -3888,7 +3671,7 @@ module Aws::MediaConnect
       :bridge_arn,
       :vpc_interface_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_placement
@@ -3901,7 +3684,7 @@ module Aws::MediaConnect
       :bridge_placement,
       :gateway_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bridge_placement
@@ -3914,7 +3697,7 @@ module Aws::MediaConnect
       :bridge_placement,
       :gateway_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Update an existing ingress-type bridge. </p>
@@ -3928,7 +3711,7 @@ module Aws::MediaConnect
       :max_bitrate,
       :max_outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Update maintenance setting for a flow.</p>
@@ -3946,7 +3729,7 @@ module Aws::MediaConnect
       :maintenance_scheduled_date,
       :maintenance_start_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration for video stream metrics monitoring.</p>
@@ -3960,7 +3743,7 @@ module Aws::MediaConnect
       :black_frames,
       :frozen_frames,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for a VPC source.</p>
@@ -3990,7 +3773,7 @@ module Aws::MediaConnect
       :security_group_ids,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The settings for attaching a VPC interface to an resource. </p>
@@ -4000,7 +3783,7 @@ module Aws::MediaConnect
     class VpcInterfaceAttachment < Struct.new(
       :vpc_interface_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the VPC interfaces that you want to add to the flow. </p>
@@ -4026,7 +3809,7 @@ module Aws::MediaConnect
       :security_group_ids,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

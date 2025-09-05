@@ -12,7 +12,7 @@ module Aws::NetworkFlowMonitor
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource is in use.</p>
@@ -21,7 +21,7 @@ module Aws::NetworkFlowMonitor
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -50,7 +50,7 @@ module Aws::NetworkFlowMonitor
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -87,7 +87,7 @@ module Aws::NetworkFlowMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -104,7 +104,7 @@ module Aws::NetworkFlowMonitor
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -125,7 +125,7 @@ module Aws::NetworkFlowMonitor
       :scope_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -134,12 +134,12 @@ module Aws::NetworkFlowMonitor
     class DeleteMonitorInput < Struct.new(
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMonitorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -148,21 +148,12 @@ module Aws::NetworkFlowMonitor
     class DeleteScopeInput < Struct.new(
       :scope_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteScopeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DestinationCategory
-      INTRA_AZ = 'INTRA_AZ'
-      INTER_AZ = 'INTER_AZ'
-      INTER_VPC = 'INTER_VPC'
-      UNCLASSIFIED = 'UNCLASSIFIED'
-      AMAZON_S3 = 'AMAZON_S3'
-      AMAZON_DYNAMODB = 'AMAZON_DYNAMODB'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -171,7 +162,7 @@ module Aws::NetworkFlowMonitor
     class GetMonitorInput < Struct.new(
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -208,7 +199,7 @@ module Aws::NetworkFlowMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -229,7 +220,7 @@ module Aws::NetworkFlowMonitor
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unit
@@ -246,7 +237,7 @@ module Aws::NetworkFlowMonitor
       :top_contributors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -267,7 +258,7 @@ module Aws::NetworkFlowMonitor
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unit
@@ -284,7 +275,7 @@ module Aws::NetworkFlowMonitor
       :datapoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -305,7 +296,7 @@ module Aws::NetworkFlowMonitor
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute top_contributors
@@ -318,7 +309,7 @@ module Aws::NetworkFlowMonitor
       :top_contributors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -331,7 +322,7 @@ module Aws::NetworkFlowMonitor
       :monitor_name,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -340,7 +331,7 @@ module Aws::NetworkFlowMonitor
     class GetQueryStatusMonitorTopContributorsOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -353,7 +344,7 @@ module Aws::NetworkFlowMonitor
       :scope_id,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -362,7 +353,7 @@ module Aws::NetworkFlowMonitor
     class GetQueryStatusWorkloadInsightsTopContributorsDataOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -375,7 +366,7 @@ module Aws::NetworkFlowMonitor
       :scope_id,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -384,7 +375,7 @@ module Aws::NetworkFlowMonitor
     class GetQueryStatusWorkloadInsightsTopContributorsOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -393,7 +384,7 @@ module Aws::NetworkFlowMonitor
     class GetScopeInput < Struct.new(
       :scope_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -418,7 +409,7 @@ module Aws::NetworkFlowMonitor
       :targets,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
@@ -427,7 +418,7 @@ module Aws::NetworkFlowMonitor
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Meta data about Kubernetes resources.</p>
@@ -457,7 +448,7 @@ module Aws::NetworkFlowMonitor
       :remote_pod_name,
       :remote_pod_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -474,7 +465,7 @@ module Aws::NetworkFlowMonitor
       :max_results,
       :monitor_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitors
@@ -487,7 +478,7 @@ module Aws::NetworkFlowMonitor
       :monitors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -500,7 +491,7 @@ module Aws::NetworkFlowMonitor
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scopes
@@ -513,7 +504,7 @@ module Aws::NetworkFlowMonitor
       :scopes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -522,7 +513,7 @@ module Aws::NetworkFlowMonitor
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -531,37 +522,7 @@ module Aws::NetworkFlowMonitor
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricUnit
-      SECONDS = 'Seconds'
-      MICROSECONDS = 'Microseconds'
-      MILLISECONDS = 'Milliseconds'
-      BYTES = 'Bytes'
-      KILOBYTES = 'Kilobytes'
-      MEGABYTES = 'Megabytes'
-      GIGABYTES = 'Gigabytes'
-      TERABYTES = 'Terabytes'
-      BITS = 'Bits'
-      KILOBITS = 'Kilobits'
-      MEGABITS = 'Megabits'
-      GIGABITS = 'Gigabits'
-      TERABITS = 'Terabits'
-      PERCENT = 'Percent'
-      COUNT = 'Count'
-      BYTES_PER_SECOND = 'Bytes/Second'
-      KILOBYTES_PER_SECOND = 'Kilobytes/Second'
-      MEGABYTES_PER_SECOND = 'Megabytes/Second'
-      GIGABYTES_PER_SECOND = 'Gigabytes/Second'
-      TERABYTES_PER_SECOND = 'Terabytes/Second'
-      BITS_PER_SECOND = 'Bits/Second'
-      KILOBITS_PER_SECOND = 'Kilobits/Second'
-      MEGABITS_PER_SECOND = 'Megabits/Second'
-      GIGABITS_PER_SECOND = 'Gigabits/Second'
-      TERABITS_PER_SECOND = 'Terabits/Second'
-      COUNT_PER_SECOND = 'Count/Second'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A local resource is the host where the agent is installed. Local resources can be a a subnet, a VPC, or an Availability Zone.</p>
@@ -575,20 +536,7 @@ module Aws::NetworkFlowMonitor
       :type,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitorLocalResourceType
-      AWS_VPC = 'AWS::EC2::VPC'
-      AWS_AZ = 'AWS::AvailabilityZone'
-      AWS_SUBNET = 'AWS::EC2::Subnet'
-    end
-
-    module MonitorMetric
-      ROUND_TRIP_TIME = 'ROUND_TRIP_TIME'
-      TIMEOUTS = 'TIMEOUTS'
-      RETRANSMISSIONS = 'RETRANSMISSIONS'
-      DATA_TRANSFERRED = 'DATA_TRANSFERRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A remote resource is the other endpoint in a network flow. That is, one endpoint is the local resource and the other is the remote resource. Remote resources can be a a subnet, a VPC, an Availability Zone, or an Amazon Web Services service. </p>
@@ -602,22 +550,7 @@ module Aws::NetworkFlowMonitor
       :type,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitorRemoteResourceType
-      AWS_VPC = 'AWS::EC2::VPC'
-      AWS_AZ = 'AWS::AvailabilityZone'
-      AWS_SUBNET = 'AWS::EC2::Subnet'
-      AWS_SERVICE = 'AWS::AWSService'
-    end
-
-    module MonitorStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a monitor, includ the ARN, the name, and the status.</p>
@@ -635,7 +568,7 @@ module Aws::NetworkFlowMonitor
       :monitor_name,
       :monitor_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of information for a top contributor network flow in a monitor. In a monitor, Network Flow Monitor returns information about the network flows for top contributors for each metric. Top contributors are network flows with the top values for each metric type.</p>
@@ -741,15 +674,7 @@ module Aws::NetworkFlowMonitor
       :remote_subnet_arn,
       :remote_vpc_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryStatus
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request specifies a resource that doesn't exist.</p>
@@ -758,15 +683,7 @@ module Aws::NetworkFlowMonitor
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScopeStatus
-      SUCCEEDED = 'SUCCEEDED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      DEACTIVATING = 'DEACTIVATING'
-      DEACTIVATED = 'DEACTIVATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about a scope, including the ARN, target ID, and Amazon Web Services Region.</p>
@@ -784,7 +701,7 @@ module Aws::NetworkFlowMonitor
       :status,
       :scope_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded a service quota.</p>
@@ -793,7 +710,7 @@ module Aws::NetworkFlowMonitor
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -822,7 +739,7 @@ module Aws::NetworkFlowMonitor
       :destination_category,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -831,7 +748,7 @@ module Aws::NetworkFlowMonitor
     class StartQueryMonitorTopContributorsOutput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -856,7 +773,7 @@ module Aws::NetworkFlowMonitor
       :metric_name,
       :destination_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -865,7 +782,7 @@ module Aws::NetworkFlowMonitor
     class StartQueryWorkloadInsightsTopContributorsDataOutput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -894,7 +811,7 @@ module Aws::NetworkFlowMonitor
       :destination_category,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -903,7 +820,7 @@ module Aws::NetworkFlowMonitor
     class StartQueryWorkloadInsightsTopContributorsOutput < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -916,12 +833,12 @@ module Aws::NetworkFlowMonitor
       :monitor_name,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopQueryMonitorTopContributorsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -934,12 +851,12 @@ module Aws::NetworkFlowMonitor
       :scope_id,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopQueryWorkloadInsightsTopContributorsDataOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -952,12 +869,12 @@ module Aws::NetworkFlowMonitor
       :scope_id,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopQueryWorkloadInsightsTopContributorsOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -970,12 +887,12 @@ module Aws::NetworkFlowMonitor
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A target ID is an internally-generated identifier for a target. A target allows you to identify all the resources in a Network Flow Monitor scope. Currently, a target is always an Amazon Web Services account.</p>
@@ -986,7 +903,7 @@ module Aws::NetworkFlowMonitor
       :account_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccountId < TargetId; end
       class Unknown < TargetId; end
@@ -1003,7 +920,7 @@ module Aws::NetworkFlowMonitor
       :target_id,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A target resource in a scope. The resource is identified by a Region and a target identifier, which includes a target ID and a target type.</p>
@@ -1017,11 +934,7 @@ module Aws::NetworkFlowMonitor
       :target_identifier,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      ACCOUNT = 'ACCOUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1030,7 +943,7 @@ module Aws::NetworkFlowMonitor
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A section of the network that a network flow has traveled through.</p>
@@ -1052,7 +965,7 @@ module Aws::NetworkFlowMonitor
       :component_arn,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1065,12 +978,12 @@ module Aws::NetworkFlowMonitor
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -1099,7 +1012,7 @@ module Aws::NetworkFlowMonitor
       :remote_resources_to_remove,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -1136,7 +1049,7 @@ module Aws::NetworkFlowMonitor
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -1153,7 +1066,7 @@ module Aws::NetworkFlowMonitor
       :resources_to_add,
       :resources_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope_id
@@ -1174,7 +1087,7 @@ module Aws::NetworkFlowMonitor
       :scope_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Invalid request.</p>
@@ -1183,13 +1096,7 @@ module Aws::NetworkFlowMonitor
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkloadInsightsMetric
-      TIMEOUTS = 'TIMEOUTS'
-      RETRANSMISSIONS = 'RETRANSMISSIONS'
-      DATA_TRANSFERRED = 'DATA_TRANSFERRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data point for a top contributor network flow in a scope. Network Flow Monitor returns information about the network flows with the top values for each metric type, which are called top contributors.</p>
@@ -1207,7 +1114,7 @@ module Aws::NetworkFlowMonitor
       :values,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A row for a top contributor for a scope.</p>
@@ -1249,7 +1156,7 @@ module Aws::NetworkFlowMonitor
       :local_subnet_arn,
       :local_vpc_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

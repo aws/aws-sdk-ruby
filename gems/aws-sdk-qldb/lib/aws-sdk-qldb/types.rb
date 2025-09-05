@@ -17,7 +17,7 @@ module Aws::QLDB
       :ledger_name,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_id
@@ -26,7 +26,7 @@ module Aws::QLDB
     class CancelJournalKinesisStreamResponse < Struct.new(
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -137,7 +137,7 @@ module Aws::QLDB
       :deletion_protection,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -175,7 +175,7 @@ module Aws::QLDB
       :deletion_protection,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -184,7 +184,7 @@ module Aws::QLDB
     class DeleteLedgerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ledger_name
@@ -198,7 +198,7 @@ module Aws::QLDB
       :ledger_name,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream
@@ -208,7 +208,7 @@ module Aws::QLDB
     class DescribeJournalKinesisStreamResponse < Struct.new(
       :stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -222,7 +222,7 @@ module Aws::QLDB
       :name,
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_description
@@ -232,7 +232,7 @@ module Aws::QLDB
     class DescribeJournalS3ExportResponse < Struct.new(
       :export_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -241,7 +241,7 @@ module Aws::QLDB
     class DescribeLedgerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -280,18 +280,7 @@ module Aws::QLDB
       :deletion_protection,
       :encryption_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionStatus
-      ENABLED = 'ENABLED'
-      UPDATING = 'UPDATING'
-      KMS_KEY_INACCESSIBLE = 'KMS_KEY_INACCESSIBLE'
-    end
-
-    module ErrorCause
-      KINESIS_STREAM_NOT_FOUND = 'KINESIS_STREAM_NOT_FOUND'
-      IAM_PERMISSION_REVOKED = 'IAM_PERMISSION_REVOKED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -353,7 +342,7 @@ module Aws::QLDB
       :role_arn,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_id
@@ -365,13 +354,7 @@ module Aws::QLDB
     class ExportJournalToS3Response < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -393,7 +376,7 @@ module Aws::QLDB
       :block_address,
       :digest_tip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute block
@@ -408,7 +391,7 @@ module Aws::QLDB
       :block,
       :proof,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -417,7 +400,7 @@ module Aws::QLDB
     class GetDigestRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute digest
@@ -433,7 +416,7 @@ module Aws::QLDB
       :digest,
       :digest_tip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -459,7 +442,7 @@ module Aws::QLDB
       :document_id,
       :digest_tip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proof
@@ -474,7 +457,7 @@ module Aws::QLDB
       :proof,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters in the request aren't valid.</p>
@@ -487,7 +470,7 @@ module Aws::QLDB
       :message,
       :parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon QLDB journal stream, including the Amazon Resource Name
@@ -546,7 +529,7 @@ module Aws::QLDB
       :error_cause,
       :stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a journal export job, including the ledger name, export ID, creation
@@ -603,7 +586,7 @@ module Aws::QLDB
       :role_arn,
       :output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings of the Amazon Kinesis Data Streams destination for an Amazon QLDB journal
@@ -627,7 +610,7 @@ module Aws::QLDB
       :stream_arn,
       :aggregation_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the encryption of data at rest in an Amazon QLDB ledger. This includes
@@ -681,14 +664,7 @@ module Aws::QLDB
       :encryption_status,
       :inaccessible_kms_key_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LedgerState
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a ledger, including its name, state, and when it was created.</p>
@@ -707,7 +683,7 @@ module Aws::QLDB
       :state,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit on the maximum number of resources allowed.</p>
@@ -720,7 +696,7 @@ module Aws::QLDB
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ledger_name
@@ -742,7 +718,7 @@ module Aws::QLDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streams
@@ -766,7 +742,7 @@ module Aws::QLDB
       :streams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -788,7 +764,7 @@ module Aws::QLDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journal_s3_exports
@@ -812,7 +788,7 @@ module Aws::QLDB
       :journal_s3_exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -829,7 +805,7 @@ module Aws::QLDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute journal_s3_exports
@@ -854,7 +830,7 @@ module Aws::QLDB
       :journal_s3_exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -870,7 +846,7 @@ module Aws::QLDB
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ledgers
@@ -894,7 +870,7 @@ module Aws::QLDB
       :ledgers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -906,7 +882,7 @@ module Aws::QLDB
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -915,18 +891,7 @@ module Aws::QLDB
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutputFormat
-      ION_BINARY = 'ION_BINARY'
-      ION_TEXT = 'ION_TEXT'
-      JSON = 'JSON'
-    end
-
-    module PermissionsMode
-      ALLOW_ALL = 'ALLOW_ALL'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource already exists.</p>
@@ -943,7 +908,7 @@ module Aws::QLDB
       :resource_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource can't be modified at this time.</p>
@@ -960,7 +925,7 @@ module Aws::QLDB
       :resource_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -977,7 +942,7 @@ module Aws::QLDB
       :resource_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because a condition wasn't satisfied in advance.</p>
@@ -994,7 +959,7 @@ module Aws::QLDB
       :resource_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption settings that are used by a journal export job to write data in an
@@ -1018,7 +983,7 @@ module Aws::QLDB
       :object_encryption_type,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Simple Storage Service (Amazon S3) bucket location in which a journal export job writes the journal
@@ -1063,13 +1028,7 @@ module Aws::QLDB
       :prefix,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3ObjectEncryptionType
-      SSE_KMS = 'SSE_KMS'
-      SSE_S3 = 'SSE_S3'
-      NO_ENCRYPTION = 'NO_ENCRYPTION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ledger_name
@@ -1123,7 +1082,7 @@ module Aws::QLDB
       :kinesis_configuration,
       :stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_id
@@ -1133,15 +1092,7 @@ module Aws::QLDB
     class StreamJournalToKinesisResponse < Struct.new(
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamStatus
-      ACTIVE = 'ACTIVE'
-      COMPLETED = 'COMPLETED'
-      CANCELED = 'CANCELED'
-      FAILED = 'FAILED'
-      IMPAIRED = 'IMPAIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1159,12 +1110,12 @@ module Aws::QLDB
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1180,12 +1131,12 @@ module Aws::QLDB
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1227,7 +1178,7 @@ module Aws::QLDB
       :name,
       :permissions_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1244,7 +1195,7 @@ module Aws::QLDB
       :arn,
       :permissions_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1314,7 +1265,7 @@ module Aws::QLDB
       :deletion_protection,
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1349,7 +1300,7 @@ module Aws::QLDB
       :deletion_protection,
       :encryption_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that can contain a value in multiple encoding formats.</p>
@@ -1360,7 +1311,7 @@ module Aws::QLDB
     class ValueHolder < Struct.new(
       :ion_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -57,7 +57,7 @@ module Aws::ARCRegionswitch
       :execution_region,
       :actual_recovery_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summarized representation of a Region switch plan. This structure contains key information about a plan without all the detailed workflow and step data.</p>
@@ -111,7 +111,7 @@ module Aws::ARCRegionswitch
       :active_plan_execution,
       :recovery_time_objective_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p> <p>HTTP Status Code: 403</p>
@@ -120,22 +120,7 @@ module Aws::ARCRegionswitch
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlarmCondition
-      RED = 'red'
-      GREEN = 'green'
-    end
-
-    module AlarmType
-      APPLICATION_HEALTH = 'applicationHealth'
-      TRIGGER = 'trigger'
-    end
-
-    module Approval
-      APPROVE = 'approve'
-      DECLINE = 'decline'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -160,12 +145,12 @@ module Aws::ARCRegionswitch
       :approval,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ApprovePlanExecutionStepResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for ARC routing controls used in a Region switch plan. Routing controls are simple on/off switches that you can use to shift traffic away from an impaired Region.</p>
@@ -187,7 +172,7 @@ module Aws::ARCRegionswitch
       :external_id,
       :region_and_routing_controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -206,7 +191,7 @@ module Aws::ARCRegionswitch
       :routing_control_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for an Amazon EC2 Auto Scaling group used in a Region switch plan.</p>
@@ -224,7 +209,7 @@ module Aws::ARCRegionswitch
       :external_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon CloudWatch alarm associated with a Region switch plan. These alarms can be used to trigger automatic execution of the plan.</p>
@@ -246,7 +231,7 @@ module Aws::ARCRegionswitch
       :resource_identifier,
       :alarm_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -263,12 +248,12 @@ module Aws::ARCRegionswitch
       :execution_id,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelPlanExecutionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -317,7 +302,7 @@ module Aws::ARCRegionswitch
       :primary_region,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan
@@ -326,7 +311,7 @@ module Aws::ARCRegionswitch
     class CreatePlanResponse < Struct.new(
       :plan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for Amazon Web Services Lambda functions that perform custom actions during a Region switch.</p>
@@ -352,7 +337,7 @@ module Aws::ARCRegionswitch
       :region_to_run,
       :ungraceful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -366,12 +351,12 @@ module Aws::ARCRegionswitch
     class DeletePlanRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePlanResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for increasing the capacity of Amazon EC2 Auto Scaling groups during a Region switch.</p>
@@ -397,7 +382,7 @@ module Aws::ARCRegionswitch
       :target_percent,
       :capacity_monitoring_approach,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -407,11 +392,6 @@ module Aws::ARCRegionswitch
       end
     end
 
-    module Ec2AsgCapacityMonitoringApproach
-      SAMPLED_MAX_IN_LAST_24_HOURS = 'sampledMaxInLast24Hours'
-      AUTOSCALING_MAX_IN_LAST_24_HOURS = 'autoscalingMaxInLast24Hours'
-    end
-
     # <p>Configuration for handling failures when performing operations on EC2 resources.</p>
     # @!attribute minimum_success_percentage
     #   <p>The minimum success percentage that you specify for EC2 Auto Scaling groups.</p>
@@ -419,7 +399,7 @@ module Aws::ARCRegionswitch
     class Ec2Ungraceful < Struct.new(
       :minimum_success_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an Amazon Web Services ECS capacity increase.</p>
@@ -445,7 +425,7 @@ module Aws::ARCRegionswitch
       :target_percent,
       :capacity_monitoring_approach,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -455,11 +435,6 @@ module Aws::ARCRegionswitch
       end
     end
 
-    module EcsCapacityMonitoringApproach
-      SAMPLED_MAX_IN_LAST_24_HOURS = 'sampledMaxInLast24Hours'
-      CONTAINER_INSIGHTS_MAX_IN_LAST_24_HOURS = 'containerInsightsMaxInLast24Hours'
-    end
-
     # <p>The settings for ungraceful execution.</p>
     # @!attribute minimum_success_percentage
     #   <p>The minimum success percentage specified for the configuration.</p>
@@ -467,11 +442,7 @@ module Aws::ARCRegionswitch
     class EcsUngraceful < Struct.new(
       :minimum_success_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EksCapacityMonitoringApproach
-      SAMPLED_MAX_IN_LAST_24_HOURS = 'sampledMaxInLast24Hours'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services EKS cluster execution block configuration.</p>
@@ -489,7 +460,7 @@ module Aws::ARCRegionswitch
       :external_id,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services EKS resource scaling configuration.</p>
@@ -523,7 +494,7 @@ module Aws::ARCRegionswitch
       :target_percent,
       :capacity_monitoring_approach,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -540,19 +511,7 @@ module Aws::ARCRegionswitch
     class EksResourceScalingUngraceful < Struct.new(
       :minimum_success_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationStatus
-      PASSED = 'passed'
-      ACTION_REQUIRED = 'actionRequired'
-      PENDING_EVALUATION = 'pendingEvaluation'
-      UNKNOWN = 'unknown'
-    end
-
-    module ExecutionAction
-      ACTIVATE = 'activate'
-      DEACTIVATE = 'deactivate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for approval steps in a Region switch plan execution. Approval steps require manual intervention before the execution can proceed.</p>
@@ -566,7 +525,7 @@ module Aws::ARCRegionswitch
       :timeout_minutes,
       :approval_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -618,7 +577,7 @@ module Aws::ARCRegionswitch
       :route53_health_check_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CustomActionLambdaConfig < ExecutionBlockConfiguration; end
       class Ec2AsgCapacityIncreaseConfig < ExecutionBlockConfiguration; end
@@ -631,19 +590,6 @@ module Aws::ARCRegionswitch
       class EksResourceScalingConfig < ExecutionBlockConfiguration; end
       class Route53HealthCheckConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
-    end
-
-    module ExecutionBlockType
-      CUSTOM_ACTION_LAMBDA = 'CustomActionLambda'
-      EXECUTION_APPROVAL = 'ManualApproval'
-      AURORA = 'AuroraGlobalDatabase'
-      EC2_ASG = 'EC2AutoScaling'
-      ROUTING_CONTROL = 'ARCRoutingControl'
-      REGION_SWITCH = 'ARCRegionSwitchPlan'
-      PARALLEL = 'Parallel'
-      ECS = 'ECSServiceScaling'
-      EKS_RESOURCE_SCALING = 'EKSResourceScaling'
-      ROUTE53_HEALTH_CHECK = 'Route53HealthCheck'
     end
 
     # <p>Represents an event that occurred during a plan execution. These events provide a detailed timeline of the execution process.</p>
@@ -685,54 +631,7 @@ module Aws::ARCRegionswitch
       :event_id,
       :previous_event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionEventType
-      UNKNOWN = 'unknown'
-      EXECUTION_PENDING = 'executionPending'
-      EXECUTION_STARTED = 'executionStarted'
-      EXECUTION_SUCCEEDED = 'executionSucceeded'
-      EXECUTION_FAILED = 'executionFailed'
-      EXECUTION_PAUSING = 'executionPausing'
-      EXECUTION_PAUSED = 'executionPaused'
-      EXECUTION_CANCELING = 'executionCanceling'
-      EXECUTION_CANCELED = 'executionCanceled'
-      EXECUTION_PENDING_APPROVAL = 'executionPendingApproval'
-      EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL = 'executionBehaviorChangedToUngraceful'
-      EXECUTION_BEHAVIOR_CHANGED_TO_GRACEFUL = 'executionBehaviorChangedToGraceful'
-      EXECUTION_PENDING_CHILD_PLAN_MANUAL_APPROVAL = 'executionPendingChildPlanManualApproval'
-      EXECUTION_SUCCESS_MONITORING_APPLICATION_HEALTH = 'executionSuccessMonitoringApplicationHealth'
-      STEP_STARTED = 'stepStarted'
-      STEP_UPDATE = 'stepUpdate'
-      STEP_SUCCEEDED = 'stepSucceeded'
-      STEP_FAILED = 'stepFailed'
-      STEP_SKIPPED = 'stepSkipped'
-      STEP_PAUSED_BY_ERROR = 'stepPausedByError'
-      STEP_PAUSED_BY_OPERATOR = 'stepPausedByOperator'
-      STEP_CANCELED = 'stepCanceled'
-      STEP_PENDING_APPROVAL = 'stepPendingApproval'
-      STEP_EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL = 'stepExecutionBehaviorChangedToUngraceful'
-      STEP_PENDING_APPLICATION_HEALTH_MONITOR = 'stepPendingApplicationHealthMonitor'
-    end
-
-    module ExecutionMode
-      GRACEFUL = 'graceful'
-      UNGRACEFUL = 'ungraceful'
-    end
-
-    module ExecutionState
-      IN_PROGRESS = 'inProgress'
-      PAUSED_BY_FAILED_STEP = 'pausedByFailedStep'
-      PAUSED_BY_OPERATOR = 'pausedByOperator'
-      COMPLETED = 'completed'
-      COMPLETED_WITH_EXCEPTIONS = 'completedWithExceptions'
-      CANCELLED = 'canceled'
-      PLAN_EXECUTION_TIMED_OUT = 'planExecutionTimedOut'
-      PENDING_MANUAL_APPROVAL = 'pendingManualApproval'
-      FAILED = 'failed'
-      PENDING = 'pending'
-      COMPLETED_MONITORING_APPLICATION_HEALTH = 'completedMonitoringApplicationHealth'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -749,7 +648,7 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -782,7 +681,7 @@ module Aws::ARCRegionswitch
       :warnings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -803,7 +702,7 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -868,7 +767,7 @@ module Aws::ARCRegionswitch
       :actual_recovery_time,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -877,7 +776,7 @@ module Aws::ARCRegionswitch
     class GetPlanInRegionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan
@@ -886,7 +785,7 @@ module Aws::ARCRegionswitch
     class GetPlanInRegionResponse < Struct.new(
       :plan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -895,7 +794,7 @@ module Aws::ARCRegionswitch
     class GetPlanRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan
@@ -904,7 +803,7 @@ module Aws::ARCRegionswitch
     class GetPlanResponse < Struct.new(
       :plan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for Amazon Aurora global databases used in a Region switch plan.</p>
@@ -938,18 +837,13 @@ module Aws::ARCRegionswitch
       :global_cluster_identifier,
       :database_cluster_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
         options[:behavior] = 'switchoverOnly' unless options.key?(:behavior)
         super
       end
-    end
-
-    module GlobalAuroraDefaultBehavior
-      SWITCHOVER_ONLY = 'switchoverOnly'
-      FAILOVER = 'failover'
     end
 
     # <p>Configuration for handling failures when performing operations on Aurora global databases.</p>
@@ -959,11 +853,7 @@ module Aws::ARCRegionswitch
     class GlobalAuroraUngraceful < Struct.new(
       :ungraceful,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlobalAuroraUngracefulBehavior
-      FAILOVER = 'failover'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has an invalid argument.</p>
@@ -972,7 +862,7 @@ module Aws::ARCRegionswitch
     class IllegalArgumentException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the current state of the resource doesn't allow the operation to proceed.</p> <p>HTTP Status Code: 400</p>
@@ -981,7 +871,7 @@ module Aws::ARCRegionswitch
     class IllegalStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure.</p> <p>HTTP Status Code: 500</p>
@@ -990,7 +880,7 @@ module Aws::ARCRegionswitch
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the type of Kubernetes resource to scale in an Amazon EKS cluster.</p>
@@ -1004,7 +894,7 @@ module Aws::ARCRegionswitch
       :api_version,
       :kind,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a Kubernetes resource to scale in an Amazon EKS cluster.</p>
@@ -1022,7 +912,7 @@ module Aws::ARCRegionswitch
       :name,
       :hpa_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for handling failures when invoking Lambda functions.</p>
@@ -1032,16 +922,12 @@ module Aws::ARCRegionswitch
     class LambdaUngraceful < Struct.new(
       :behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:behavior] = 'skip' unless options.key?(:behavior)
         super
       end
-    end
-
-    module LambdaUngracefulBehavior
-      SKIP = 'skip'
     end
 
     # <p>Configuration for Amazon Web Services Lambda functions used in a Region switch plan.</p>
@@ -1059,7 +945,7 @@ module Aws::ARCRegionswitch
       :external_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -1084,7 +970,7 @@ module Aws::ARCRegionswitch
       :next_token,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1097,7 +983,7 @@ module Aws::ARCRegionswitch
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -1118,7 +1004,7 @@ module Aws::ARCRegionswitch
       :next_token,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1131,7 +1017,7 @@ module Aws::ARCRegionswitch
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1144,7 +1030,7 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plans
@@ -1157,7 +1043,7 @@ module Aws::ARCRegionswitch
       :plans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1170,7 +1056,7 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plans
@@ -1183,7 +1069,7 @@ module Aws::ARCRegionswitch
       :plans,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1208,7 +1094,7 @@ module Aws::ARCRegionswitch
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute health_checks
@@ -1221,7 +1107,7 @@ module Aws::ARCRegionswitch
       :health_checks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1230,7 +1116,7 @@ module Aws::ARCRegionswitch
     class ListTagsForResourceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_tags
@@ -1239,7 +1125,7 @@ module Aws::ARCRegionswitch
     class ListTagsForResourceResponse < Struct.new(
       :resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A simplified representation of a workflow in a Region switch plan.</p>
@@ -1253,7 +1139,7 @@ module Aws::ARCRegionswitch
       :action,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for steps that should be executed in parallel during a Region switch.</p>
@@ -1263,7 +1149,7 @@ module Aws::ARCRegionswitch
     class ParallelExecutionBlockConfiguration < Struct.new(
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a Region switch plan. A plan defines the steps required to shift traffic from one Amazon Web Services Region to another.</p>
@@ -1325,12 +1211,7 @@ module Aws::ARCRegionswitch
       :version,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecoveryApproach
-      ACTIVE_ACTIVE = 'activeActive'
-      ACTIVE_PASSIVE = 'activePassive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for nested Region switch plans. This allows one Region switch plan to trigger another plan as part of its execution.</p>
@@ -1348,12 +1229,7 @@ module Aws::ARCRegionswitch
       :external_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegionToRunIn
-      ACTIVATING_REGION = 'activatingRegion'
-      DEACTIVATING_REGION = 'deactivatingRegion'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p> <p>HTTP Status Code: 404</p>
@@ -1362,7 +1238,7 @@ module Aws::ARCRegionswitch
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a warning about a resource in a Region switch plan.</p>
@@ -1396,12 +1272,7 @@ module Aws::ARCRegionswitch
       :warning_updated_time,
       :warning_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceWarningStatus
-      ACTIVE = 'active'
-      RESOLVED = 'resolved'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Route 53 health check.</p>
@@ -1423,7 +1294,7 @@ module Aws::ARCRegionswitch
       :health_check_id,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Route 53 health check configuration.</p>
@@ -1453,7 +1324,7 @@ module Aws::ARCRegionswitch
       :record_name,
       :record_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:timeout_minutes] = 60 unless options.key?(:timeout_minutes)
@@ -1472,12 +1343,7 @@ module Aws::ARCRegionswitch
       :record_set_identifier,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoutingControlStateChange
-      ON = 'On'
-      OFF = 'Off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service for a cross account role.</p>
@@ -1499,7 +1365,7 @@ module Aws::ARCRegionswitch
       :cluster_arn,
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -1528,7 +1394,7 @@ module Aws::ARCRegionswitch
       :comment,
       :latest_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -1553,7 +1419,7 @@ module Aws::ARCRegionswitch
       :activate_region,
       :deactivate_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a step in a Region switch plan workflow. Each step performs a specific action during the Region switch process.</p>
@@ -1575,7 +1441,7 @@ module Aws::ARCRegionswitch
       :execution_block_configuration,
       :execution_block_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the state of a step in a plan execution.</p>
@@ -1601,17 +1467,7 @@ module Aws::ARCRegionswitch
       :end_time,
       :step_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StepStatus
-      NOT_STARTED = 'notStarted'
-      RUNNING = 'running'
-      FAILED = 'failed'
-      COMPLETED = 'completed'
-      CANCELLED = 'canceled'
-      SKIPPED = 'skipped'
-      PENDING_APPROVAL = 'pendingApproval'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1624,12 +1480,12 @@ module Aws::ARCRegionswitch
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a condition that can automatically trigger the execution of a Region switch plan.</p>
@@ -1655,7 +1511,7 @@ module Aws::ARCRegionswitch
       :conditions,
       :min_delay_minutes_between_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a condition that must be met for a trigger to fire.</p>
@@ -1669,7 +1525,7 @@ module Aws::ARCRegionswitch
       :associated_alarm_name,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1682,19 +1538,12 @@ module Aws::ARCRegionswitch
       :arn,
       :resource_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdatePlanExecutionAction
-      SWITCH_TO_GRACEFUL = 'switchToGraceful'
-      SWITCH_TO_UNGRACEFUL = 'switchToUngraceful'
-      PAUSE = 'pause'
-      RESUME = 'resume'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -1715,17 +1564,12 @@ module Aws::ARCRegionswitch
       :action,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePlanExecutionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdatePlanExecutionStepAction
-      SWITCH_TO_UNGRACEFUL = 'switchToUngraceful'
-      SKIP = 'skip'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan_arn
@@ -1750,12 +1594,12 @@ module Aws::ARCRegionswitch
       :step_name,
       :action_to_take,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePlanExecutionStepResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1788,7 +1632,7 @@ module Aws::ARCRegionswitch
       :associated_alarms,
       :triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute plan
@@ -1797,7 +1641,7 @@ module Aws::ARCRegionswitch
     class UpdatePlanResponse < Struct.new(
       :plan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a workflow in a Region switch plan. A workflow defines a sequence of steps to execute during a Region switch.</p>
@@ -1819,12 +1663,7 @@ module Aws::ARCRegionswitch
       :workflow_target_region,
       :workflow_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowTargetAction
-      ACTIVATE = 'activate'
-      DEACTIVATE = 'deactivate'
+      include ::Smithy::Schema::Structure
     end
 
   end

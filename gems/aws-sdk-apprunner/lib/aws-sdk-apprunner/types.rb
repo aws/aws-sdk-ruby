@@ -25,7 +25,7 @@ module Aws::AppRunner
       :domain_name,
       :enable_www_subdomain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dns_target
@@ -47,7 +47,7 @@ module Aws::AppRunner
       :custom_domain,
       :vpc_dns_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes resources needed to authenticate access to some source repositories. The specific resource depends on the repository provider.</p>
@@ -63,7 +63,7 @@ module Aws::AppRunner
       :connection_arn,
       :access_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an App Runner automatic scaling configuration resource.</p>
@@ -133,12 +133,7 @@ module Aws::AppRunner
       :has_associated_service,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoScalingConfigurationStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an App Runner automatic scaling configuration resource.</p>
@@ -181,7 +176,7 @@ module Aws::AppRunner
       :has_associated_service,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_scaling_configuration_revision] = 0 unless options.key?(:auto_scaling_configuration_revision)
@@ -209,13 +204,7 @@ module Aws::AppRunner
       :value,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateValidationRecordStatus
-      PENDING_VALIDATION = 'PENDING_VALIDATION'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration that App Runner uses to build and run an App Runner service from a source code repository.</p>
@@ -242,7 +231,7 @@ module Aws::AppRunner
       :configuration_source,
       :code_configuration_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the basic configuration needed for building and running an App Runner service. This type doesn't support the full set of possible
@@ -292,7 +281,7 @@ module Aws::AppRunner
       :runtime_environment_variables,
       :runtime_environment_secrets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a source code repository.</p>
@@ -319,12 +308,7 @@ module Aws::AppRunner
       :code_configuration,
       :source_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationSource
-      REPOSITORY = 'REPOSITORY'
-      API = 'API'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an App Runner connection resource.</p>
@@ -350,14 +334,7 @@ module Aws::AppRunner
       :status,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionStatus
-      PENDING_HANDSHAKE = 'PENDING_HANDSHAKE'
-      AVAILABLE = 'AVAILABLE'
-      ERROR = 'ERROR'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an App Runner connection resource.</p>
@@ -383,7 +360,7 @@ module Aws::AppRunner
       :status,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_name
@@ -441,7 +418,7 @@ module Aws::AppRunner
       :max_size,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration
@@ -450,7 +427,7 @@ module Aws::AppRunner
     class CreateAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_name
@@ -467,7 +444,7 @@ module Aws::AppRunner
       :provider_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -476,7 +453,7 @@ module Aws::AppRunner
     class CreateConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration_name
@@ -500,7 +477,7 @@ module Aws::AppRunner
       :trace_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration
@@ -509,7 +486,7 @@ module Aws::AppRunner
     class CreateObservabilityConfigurationResponse < Struct.new(
       :observability_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_name
@@ -558,7 +535,7 @@ module Aws::AppRunner
       :network_configuration,
       :observability_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -571,7 +548,7 @@ module Aws::AppRunner
       :service,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connector_name
@@ -599,7 +576,7 @@ module Aws::AppRunner
       :security_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connector
@@ -608,7 +585,7 @@ module Aws::AppRunner
     class CreateVpcConnectorResponse < Struct.new(
       :vpc_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -631,7 +608,7 @@ module Aws::AppRunner
       :ingress_vpc_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection
@@ -640,7 +617,7 @@ module Aws::AppRunner
     class CreateVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom domain that's associated with an App Runner service.</p>
@@ -665,17 +642,7 @@ module Aws::AppRunner
       :certificate_validation_records,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomDomainAssociationStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
-      PENDING_CERTIFICATE_DNS_VALIDATION = 'PENDING_CERTIFICATE_DNS_VALIDATION'
-      BINDING_CERTIFICATE = 'BINDING_CERTIFICATE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_arn
@@ -694,7 +661,7 @@ module Aws::AppRunner
       :auto_scaling_configuration_arn,
       :delete_all_revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration
@@ -703,7 +670,7 @@ module Aws::AppRunner
     class DeleteAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -712,7 +679,7 @@ module Aws::AppRunner
     class DeleteConnectionRequest < Struct.new(
       :connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -721,7 +688,7 @@ module Aws::AppRunner
     class DeleteConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration_arn
@@ -734,7 +701,7 @@ module Aws::AppRunner
     class DeleteObservabilityConfigurationRequest < Struct.new(
       :observability_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration
@@ -743,7 +710,7 @@ module Aws::AppRunner
     class DeleteObservabilityConfigurationResponse < Struct.new(
       :observability_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -752,7 +719,7 @@ module Aws::AppRunner
     class DeleteServiceRequest < Struct.new(
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -766,7 +733,7 @@ module Aws::AppRunner
       :service,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connector_arn
@@ -776,7 +743,7 @@ module Aws::AppRunner
     class DeleteVpcConnectorRequest < Struct.new(
       :vpc_connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connector
@@ -785,7 +752,7 @@ module Aws::AppRunner
     class DeleteVpcConnectorResponse < Struct.new(
       :vpc_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection_arn
@@ -794,7 +761,7 @@ module Aws::AppRunner
     class DeleteVpcIngressConnectionRequest < Struct.new(
       :vpc_ingress_connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection
@@ -803,7 +770,7 @@ module Aws::AppRunner
     class DeleteVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_arn
@@ -817,7 +784,7 @@ module Aws::AppRunner
     class DescribeAutoScalingConfigurationRequest < Struct.new(
       :auto_scaling_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration
@@ -826,7 +793,7 @@ module Aws::AppRunner
     class DescribeAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -846,7 +813,7 @@ module Aws::AppRunner
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dns_target
@@ -873,7 +840,7 @@ module Aws::AppRunner
       :vpc_dns_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration_arn
@@ -887,7 +854,7 @@ module Aws::AppRunner
     class DescribeObservabilityConfigurationRequest < Struct.new(
       :observability_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration
@@ -896,7 +863,7 @@ module Aws::AppRunner
     class DescribeObservabilityConfigurationResponse < Struct.new(
       :observability_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -905,7 +872,7 @@ module Aws::AppRunner
     class DescribeServiceRequest < Struct.new(
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -914,7 +881,7 @@ module Aws::AppRunner
     class DescribeServiceResponse < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connector_arn
@@ -924,7 +891,7 @@ module Aws::AppRunner
     class DescribeVpcConnectorRequest < Struct.new(
       :vpc_connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connector
@@ -933,7 +900,7 @@ module Aws::AppRunner
     class DescribeVpcConnectorResponse < Struct.new(
       :vpc_connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection_arn
@@ -942,7 +909,7 @@ module Aws::AppRunner
     class DescribeVpcIngressConnectionRequest < Struct.new(
       :vpc_ingress_connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection
@@ -951,7 +918,7 @@ module Aws::AppRunner
     class DescribeVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -964,7 +931,7 @@ module Aws::AppRunner
       :service_arn,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dns_target
@@ -986,7 +953,7 @@ module Aws::AppRunner
       :custom_domain,
       :vpc_dns_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration settings related to outbound network traffic of an App Runner service.</p>
@@ -1003,12 +970,7 @@ module Aws::AppRunner
       :egress_type,
       :vpc_connector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EgressType
-      DEFAULT = 'DEFAULT'
-      VPC = 'VPC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom encryption key that App Runner uses to encrypt copies of the source repository and service logs.</p>
@@ -1018,7 +980,7 @@ module Aws::AppRunner
     class EncryptionConfiguration < Struct.new(
       :kms_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the settings for the health check that App Runner performs to monitor the health of a service.</p>
@@ -1063,12 +1025,7 @@ module Aws::AppRunner
       :healthy_threshold,
       :unhealthy_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HealthCheckProtocol
-      TCP = 'TCP'
-      HTTP = 'HTTP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration that App Runner uses to run an App Runner service using an image pulled from a source image repository.</p>
@@ -1106,7 +1063,7 @@ module Aws::AppRunner
       :port,
       :runtime_environment_secrets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a source image repository.</p>
@@ -1125,12 +1082,7 @@ module Aws::AppRunner
       :image_configuration,
       :image_repository_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageRepositoryType
-      ECR = 'ECR'
-      ECR_PUBLIC = 'ECR_PUBLIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network configuration settings for inbound network traffic.</p>
@@ -1141,7 +1093,7 @@ module Aws::AppRunner
     class IngressConfiguration < Struct.new(
       :is_publicly_accessible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_publicly_accessible] = false unless options.key?(:is_publicly_accessible)
@@ -1162,7 +1114,7 @@ module Aws::AppRunner
       :vpc_id,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the runtime configuration of an App Runner service instance (scaling unit).</p>
@@ -1185,7 +1137,7 @@ module Aws::AppRunner
       :memory,
       :instance_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected service exception occurred.</p>
@@ -1194,7 +1146,7 @@ module Aws::AppRunner
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
@@ -1203,7 +1155,7 @@ module Aws::AppRunner
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't perform this action when the resource is in its current state.</p>
@@ -1212,12 +1164,7 @@ module Aws::AppRunner
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressType
-      IPV4 = 'IPV4'
-      DUAL_STACK = 'DUAL_STACK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_name
@@ -1245,7 +1192,7 @@ module Aws::AppRunner
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_summary_list
@@ -1259,7 +1206,7 @@ module Aws::AppRunner
       :auto_scaling_configuration_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_name
@@ -1279,7 +1226,7 @@ module Aws::AppRunner
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_summary_list
@@ -1293,7 +1240,7 @@ module Aws::AppRunner
       :connection_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration_name
@@ -1321,7 +1268,7 @@ module Aws::AppRunner
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute observability_configuration_summary_list
@@ -1335,7 +1282,7 @@ module Aws::AppRunner
       :observability_configuration_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -1355,7 +1302,7 @@ module Aws::AppRunner
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_summary_list
@@ -1369,7 +1316,7 @@ module Aws::AppRunner
       :operation_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_arn
@@ -1393,7 +1340,7 @@ module Aws::AppRunner
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn_list
@@ -1406,7 +1353,7 @@ module Aws::AppRunner
       :service_arn_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1422,7 +1369,7 @@ module Aws::AppRunner
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_summary_list
@@ -1435,7 +1382,7 @@ module Aws::AppRunner
       :service_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1445,7 +1392,7 @@ module Aws::AppRunner
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1454,7 +1401,7 @@ module Aws::AppRunner
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1470,7 +1417,7 @@ module Aws::AppRunner
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connectors
@@ -1484,7 +1431,7 @@ module Aws::AppRunner
       :vpc_connectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a list of VPC Ingress Connections based on the filter provided. It can return either <code>ServiceArn</code> or <code>VpcEndpointId</code>, or both.</p>
@@ -1500,7 +1447,7 @@ module Aws::AppRunner
       :service_arn,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -1520,7 +1467,7 @@ module Aws::AppRunner
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection_summary_list
@@ -1533,7 +1480,7 @@ module Aws::AppRunner
       :vpc_ingress_connection_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes configuration settings related to network traffic of an App Runner service. Consists of embedded objects for each configurable network
@@ -1560,7 +1507,7 @@ module Aws::AppRunner
       :ingress_configuration,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an App Runner observability configuration resource. Multiple revisions of a configuration have the same
@@ -1605,18 +1552,13 @@ module Aws::AppRunner
       :created_at,
       :deleted_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:observability_configuration_revision] = 0 unless options.key?(:observability_configuration_revision)
         options[:latest] = false unless options.key?(:latest)
         super
       end
-    end
-
-    module ObservabilityConfigurationStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
     end
 
     # <p>Provides summary information about an App Runner observability configuration resource.</p>
@@ -1638,22 +1580,12 @@ module Aws::AppRunner
       :observability_configuration_name,
       :observability_configuration_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:observability_configuration_revision] = 0 unless options.key?(:observability_configuration_revision)
         super
       end
-    end
-
-    module OperationStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
-      ROLLBACK_SUCCEEDED = 'ROLLBACK_SUCCEEDED'
     end
 
     # <p>Provides summary information for an operation that occurred on an App Runner service.</p>
@@ -1687,16 +1619,7 @@ module Aws::AppRunner
       :ended_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationType
-      START_DEPLOYMENT = 'START_DEPLOYMENT'
-      CREATE_SERVICE = 'CREATE_SERVICE'
-      PAUSE_SERVICE = 'PAUSE_SERVICE'
-      RESUME_SERVICE = 'RESUME_SERVICE'
-      DELETE_SERVICE = 'DELETE_SERVICE'
-      UPDATE_SERVICE = 'UPDATE_SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -1705,7 +1628,7 @@ module Aws::AppRunner
     class PauseServiceRequest < Struct.new(
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -1719,12 +1642,7 @@ module Aws::AppRunner
       :service,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProviderType
-      GITHUB = 'GITHUB'
-      BITBUCKET = 'BITBUCKET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource doesn't exist for the specified Amazon Resource Name (ARN) in your Amazon Web Services account.</p>
@@ -1733,7 +1651,7 @@ module Aws::AppRunner
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -1742,7 +1660,7 @@ module Aws::AppRunner
     class ResumeServiceRequest < Struct.new(
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -1756,23 +1674,7 @@ module Aws::AppRunner
       :service,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Runtime
-      PYTHON_3 = 'PYTHON_3'
-      NODEJS_12 = 'NODEJS_12'
-      NODEJS_14 = 'NODEJS_14'
-      CORRETTO_8 = 'CORRETTO_8'
-      CORRETTO_11 = 'CORRETTO_11'
-      NODEJS_16 = 'NODEJS_16'
-      GO_1 = 'GO_1'
-      DOTNET_6 = 'DOTNET_6'
-      PHP_81 = 'PHP_81'
-      RUBY_31 = 'RUBY_31'
-      PYTHON_311 = 'PYTHON_311'
-      NODEJS_18 = 'NODEJS_18'
-      NODEJS_22 = 'NODEJS_22'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an App Runner service. It can describe a service in any state, including deleted services.</p>
@@ -1854,7 +1756,7 @@ module Aws::AppRunner
       :network_configuration,
       :observability_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the observability configuration of an App Runner service. These are additional observability features, like tracing, that you choose to
@@ -1877,7 +1779,7 @@ module Aws::AppRunner
       :observability_enabled,
       :observability_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:observability_enabled] = false unless options.key?(:observability_enabled)
@@ -1893,16 +1795,7 @@ module Aws::AppRunner
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceStatus
-      CREATE_FAILED = 'CREATE_FAILED'
-      RUNNING = 'RUNNING'
-      DELETED = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      PAUSED = 'PAUSED'
-      OPERATION_IN_PROGRESS = 'OPERATION_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information for an App Runner service.</p>
@@ -1950,7 +1843,7 @@ module Aws::AppRunner
       :updated_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a version of code that App Runner refers to within a source code repository.</p>
@@ -1966,11 +1859,7 @@ module Aws::AppRunner
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceCodeVersionType
-      BRANCH = 'BRANCH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the source deployed to an App Runner service. It can be a code or an image repository.</p>
@@ -1999,7 +1888,7 @@ module Aws::AppRunner
       :auto_deployments_enabled,
       :authentication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -2008,7 +1897,7 @@ module Aws::AppRunner
     class StartDeploymentRequest < Struct.new(
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute operation_id
@@ -2018,7 +1907,7 @@ module Aws::AppRunner
     class StartDeploymentResponse < Struct.new(
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag that is applied to an App Runner resource. A tag is a metadata item consisting of a key-value pair.</p>
@@ -2032,7 +1921,7 @@ module Aws::AppRunner
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2047,12 +1936,12 @@ module Aws::AppRunner
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of the tracing feature within an App Runner observability configuration.</p>
@@ -2062,11 +1951,7 @@ module Aws::AppRunner
     class TraceConfiguration < Struct.new(
       :vendor,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TracingVendor
-      AWSXRAY = 'AWSXRAY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2080,12 +1965,12 @@ module Aws::AppRunner
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration_arn
@@ -2099,7 +1984,7 @@ module Aws::AppRunner
     class UpdateDefaultAutoScalingConfigurationRequest < Struct.new(
       :auto_scaling_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_scaling_configuration
@@ -2108,7 +1993,7 @@ module Aws::AppRunner
     class UpdateDefaultAutoScalingConfigurationResponse < Struct.new(
       :auto_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arn
@@ -2145,7 +2030,7 @@ module Aws::AppRunner
       :network_configuration,
       :observability_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -2160,7 +2045,7 @@ module Aws::AppRunner
       :service,
       :operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection_arn
@@ -2174,7 +2059,7 @@ module Aws::AppRunner
       :vpc_ingress_connection_arn,
       :ingress_vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ingress_connection
@@ -2183,7 +2068,7 @@ module Aws::AppRunner
     class UpdateVpcIngressConnectionResponse < Struct.new(
       :vpc_ingress_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an App Runner VPC connector resource. A VPC connector describes the Amazon Virtual Private Cloud (Amazon VPC) that an App Runner service is
@@ -2232,17 +2117,12 @@ module Aws::AppRunner
       :created_at,
       :deleted_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vpc_connector_revision] = 0 unless options.key?(:vpc_connector_revision)
         super
       end
-    end
-
-    module VpcConnectorStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
     end
 
     # <p>DNS Target record for a custom domain of this Amazon VPC.</p>
@@ -2260,7 +2140,7 @@ module Aws::AppRunner
       :vpc_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The App Runner resource that specifies an App Runner endpoint for incoming traffic. It establishes a connection between a VPC interface endpoint and a App Runner
@@ -2331,18 +2211,7 @@ module Aws::AppRunner
       :created_at,
       :deleted_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcIngressConnectionStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING_CREATION = 'PENDING_CREATION'
-      PENDING_UPDATE = 'PENDING_UPDATE'
-      PENDING_DELETION = 'PENDING_DELETION'
-      FAILED_CREATION = 'FAILED_CREATION'
-      FAILED_UPDATE = 'FAILED_UPDATE'
-      FAILED_DELETION = 'FAILED_DELETION'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an VPC Ingress Connection, which includes its VPC Ingress Connection ARN and its associated Service ARN.</p>
@@ -2358,7 +2227,7 @@ module Aws::AppRunner
       :vpc_ingress_connection_arn,
       :service_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

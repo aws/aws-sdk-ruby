@@ -17,7 +17,7 @@ module Aws::OpsWorks
       :version,
       :configuration_manager,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the app.</p>
@@ -89,29 +89,7 @@ module Aws::OpsWorks
       :created_at,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AppAttributesKeys
-      DocumentRoot = 'DocumentRoot'
-      RailsEnv = 'RailsEnv'
-      AutoBundleOnDeploy = 'AutoBundleOnDeploy'
-      AwsFlowRubySettings = 'AwsFlowRubySettings'
-    end
-
-    module AppType
-      aws_flow_ruby = 'aws-flow-ruby'
-      java = 'java'
-      rails = 'rails'
-      php = 'php'
-      nodejs = 'nodejs'
-      static = 'static'
-      other = 'other'
-    end
-
-    module Architecture
-      x86_64 = 'x86_64'
-      i386 = 'i386'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -124,7 +102,7 @@ module Aws::OpsWorks
       :instance_id,
       :layer_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -137,7 +115,7 @@ module Aws::OpsWorks
       :volume_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_ip
@@ -150,7 +128,7 @@ module Aws::OpsWorks
       :elastic_ip,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_load_balancer_name
@@ -163,7 +141,7 @@ module Aws::OpsWorks
       :elastic_load_balancer_name,
       :layer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load-based auto scaling upscaling or downscaling threshold configuration, which specifies when OpsWorks Stacks starts or 
@@ -211,12 +189,7 @@ module Aws::OpsWorks
       :load_threshold,
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoScalingType
-      load = 'load'
-      timer = 'timer'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping. This data type maps directly to the Amazon EC2 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html">BlockDeviceMapping</a> data type. </p>
@@ -241,7 +214,7 @@ module Aws::OpsWorks
       :virtual_name,
       :ebs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Chef configuration.</p>
@@ -255,7 +228,7 @@ module Aws::OpsWorks
       :manage_berkshelf,
       :berkshelf_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_stack_id
@@ -552,7 +525,7 @@ module Aws::OpsWorks
       :default_root_device_type,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CloneStack</code> request.</p>
@@ -562,7 +535,7 @@ module Aws::OpsWorks
     class CloneStackResult < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon CloudWatch Logs configuration for a layer.</p>
@@ -576,110 +549,7 @@ module Aws::OpsWorks
       :enabled,
       :log_streams,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the encoding of the log file so that the file can be read correctly. 
-    #             The default is <code>utf_8</code>. Encodings supported by Python <code>codecs.decode()</code> can be used here.</p>
-    module CloudWatchLogsEncoding
-      ascii = 'ascii'
-      big5 = 'big5'
-      big5hkscs = 'big5hkscs'
-      cp037 = 'cp037'
-      cp424 = 'cp424'
-      cp437 = 'cp437'
-      cp500 = 'cp500'
-      cp720 = 'cp720'
-      cp737 = 'cp737'
-      cp775 = 'cp775'
-      cp850 = 'cp850'
-      cp852 = 'cp852'
-      cp855 = 'cp855'
-      cp856 = 'cp856'
-      cp857 = 'cp857'
-      cp858 = 'cp858'
-      cp860 = 'cp860'
-      cp861 = 'cp861'
-      cp862 = 'cp862'
-      cp863 = 'cp863'
-      cp864 = 'cp864'
-      cp865 = 'cp865'
-      cp866 = 'cp866'
-      cp869 = 'cp869'
-      cp874 = 'cp874'
-      cp875 = 'cp875'
-      cp932 = 'cp932'
-      cp949 = 'cp949'
-      cp950 = 'cp950'
-      cp1006 = 'cp1006'
-      cp1026 = 'cp1026'
-      cp1140 = 'cp1140'
-      cp1250 = 'cp1250'
-      cp1251 = 'cp1251'
-      cp1252 = 'cp1252'
-      cp1253 = 'cp1253'
-      cp1254 = 'cp1254'
-      cp1255 = 'cp1255'
-      cp1256 = 'cp1256'
-      cp1257 = 'cp1257'
-      cp1258 = 'cp1258'
-      euc_jp = 'euc_jp'
-      euc_jis_2004 = 'euc_jis_2004'
-      euc_jisx0213 = 'euc_jisx0213'
-      euc_kr = 'euc_kr'
-      gb2312 = 'gb2312'
-      gbk = 'gbk'
-      gb18030 = 'gb18030'
-      hz = 'hz'
-      iso2022_jp = 'iso2022_jp'
-      iso2022_jp_1 = 'iso2022_jp_1'
-      iso2022_jp_2 = 'iso2022_jp_2'
-      iso2022_jp_2004 = 'iso2022_jp_2004'
-      iso2022_jp_3 = 'iso2022_jp_3'
-      iso2022_jp_ext = 'iso2022_jp_ext'
-      iso2022_kr = 'iso2022_kr'
-      latin_1 = 'latin_1'
-      iso8859_2 = 'iso8859_2'
-      iso8859_3 = 'iso8859_3'
-      iso8859_4 = 'iso8859_4'
-      iso8859_5 = 'iso8859_5'
-      iso8859_6 = 'iso8859_6'
-      iso8859_7 = 'iso8859_7'
-      iso8859_8 = 'iso8859_8'
-      iso8859_9 = 'iso8859_9'
-      iso8859_10 = 'iso8859_10'
-      iso8859_13 = 'iso8859_13'
-      iso8859_14 = 'iso8859_14'
-      iso8859_15 = 'iso8859_15'
-      iso8859_16 = 'iso8859_16'
-      johab = 'johab'
-      koi8_r = 'koi8_r'
-      koi8_u = 'koi8_u'
-      mac_cyrillic = 'mac_cyrillic'
-      mac_greek = 'mac_greek'
-      mac_iceland = 'mac_iceland'
-      mac_latin2 = 'mac_latin2'
-      mac_roman = 'mac_roman'
-      mac_turkish = 'mac_turkish'
-      ptcp154 = 'ptcp154'
-      shift_jis = 'shift_jis'
-      shift_jis_2004 = 'shift_jis_2004'
-      shift_jisx0213 = 'shift_jisx0213'
-      utf_32 = 'utf_32'
-      utf_32_be = 'utf_32_be'
-      utf_32_le = 'utf_32_le'
-      utf_16 = 'utf_16'
-      utf_16_be = 'utf_16_be'
-      utf_16_le = 'utf_16_le'
-      utf_7 = 'utf_7'
-      utf_8 = 'utf_8'
-      utf_8_sig = 'utf_8_sig'
-    end
-
-    # <p>Specifies where to start to read data (start_of_file or end_of_file). The default is start_of_file. It's only used if there is no state persisted for that log stream.</p>
-    module CloudWatchLogsInitialPosition
-      start_of_file = 'start_of_file'
-      end_of_file = 'end_of_file'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the CloudWatch Logs configuration for a layer. For detailed information about members of this data type, 
@@ -750,14 +620,7 @@ module Aws::OpsWorks
       :batch_count,
       :batch_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The preferred time zone for logs streamed to CloudWatch Logs. 
-    #             Valid values are <code>LOCAL</code> and <code>UTC</code>, for Coordinated Universal Time.</p>
-    module CloudWatchLogsTimeZone
-      LOCAL = 'LOCAL'
-      UTC = 'UTC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a command.</p>
@@ -879,7 +742,7 @@ module Aws::OpsWorks
       :log_url,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -943,7 +806,7 @@ module Aws::OpsWorks
       :attributes,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CreateApp</code> request.</p>
@@ -953,7 +816,7 @@ module Aws::OpsWorks
     class CreateAppResult < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -995,7 +858,7 @@ module Aws::OpsWorks
       :comment,
       :custom_json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CreateDeployment</code> request.</p>
@@ -1005,7 +868,7 @@ module Aws::OpsWorks
     class CreateDeploymentResult < Struct.new(
       :deployment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -1176,7 +1039,7 @@ module Aws::OpsWorks
       :agent_version,
       :tenancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CreateInstance</code> request.</p>
@@ -1186,7 +1049,7 @@ module Aws::OpsWorks
     class CreateInstanceResult < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -1291,7 +1154,7 @@ module Aws::OpsWorks
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CreateLayer</code> request.</p>
@@ -1301,7 +1164,7 @@ module Aws::OpsWorks
     class CreateLayerResult < Struct.new(
       :layer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1598,7 +1461,7 @@ module Aws::OpsWorks
       :default_root_device_type,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CreateStack</code> request.</p>
@@ -1609,7 +1472,7 @@ module Aws::OpsWorks
     class CreateStackResult < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_user_arn
@@ -1635,7 +1498,7 @@ module Aws::OpsWorks
       :ssh_public_key,
       :allow_self_management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>CreateUserProfile</code> request.</p>
@@ -1645,7 +1508,7 @@ module Aws::OpsWorks
     class CreateUserProfileResult < Struct.new(
       :iam_user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an app's data source.</p>
@@ -1664,7 +1527,7 @@ module Aws::OpsWorks
       :arn,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1673,7 +1536,7 @@ module Aws::OpsWorks
     class DeleteAppRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1690,7 +1553,7 @@ module Aws::OpsWorks
       :delete_elastic_ip,
       :delete_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_id
@@ -1699,7 +1562,7 @@ module Aws::OpsWorks
     class DeleteLayerRequest < Struct.new(
       :layer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -1708,7 +1571,7 @@ module Aws::OpsWorks
     class DeleteStackRequest < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_user_arn
@@ -1717,7 +1580,7 @@ module Aws::OpsWorks
     class DeleteUserProfileRequest < Struct.new(
       :iam_user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a deployment of a stack or app.</p>
@@ -1788,7 +1651,7 @@ module Aws::OpsWorks
       :custom_json,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to specify a stack or deployment command.</p>
@@ -1882,22 +1745,7 @@ module Aws::OpsWorks
       :name,
       :args,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentCommandName
-      install_dependencies = 'install_dependencies'
-      update_dependencies = 'update_dependencies'
-      update_custom_cookbooks = 'update_custom_cookbooks'
-      execute_recipes = 'execute_recipes'
-      configure = 'configure'
-      setup = 'setup'
-      deploy = 'deploy'
-      rollback = 'rollback'
-      start = 'start'
-      stop = 'stop'
-      restart = 'restart'
-      undeploy = 'undeploy'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecs_cluster_arn
@@ -1906,7 +1754,7 @@ module Aws::OpsWorks
     class DeregisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_ip
@@ -1915,7 +1763,7 @@ module Aws::OpsWorks
     class DeregisterElasticIpRequest < Struct.new(
       :elastic_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1924,7 +1772,7 @@ module Aws::OpsWorks
     class DeregisterInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rds_db_instance_arn
@@ -1933,7 +1781,7 @@ module Aws::OpsWorks
     class DeregisterRdsDbInstanceRequest < Struct.new(
       :rds_db_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -1943,7 +1791,7 @@ module Aws::OpsWorks
     class DeregisterVolumeRequest < Struct.new(
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -1956,7 +1804,7 @@ module Aws::OpsWorks
       :stack_id,
       :configuration_manager,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeAgentVersions</code> request.</p>
@@ -1967,7 +1815,7 @@ module Aws::OpsWorks
     class DescribeAgentVersionsResult < Struct.new(
       :agent_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -1983,7 +1831,7 @@ module Aws::OpsWorks
       :stack_id,
       :app_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeApps</code> request.</p>
@@ -1993,7 +1841,7 @@ module Aws::OpsWorks
     class DescribeAppsResult < Struct.new(
       :apps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_id
@@ -2014,7 +1862,7 @@ module Aws::OpsWorks
       :instance_id,
       :command_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeCommands</code> request.</p>
@@ -2024,7 +1872,7 @@ module Aws::OpsWorks
     class DescribeCommandsResult < Struct.new(
       :commands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2045,7 +1893,7 @@ module Aws::OpsWorks
       :app_id,
       :deployment_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeDeployments</code> request.</p>
@@ -2055,7 +1903,7 @@ module Aws::OpsWorks
     class DescribeDeploymentsResult < Struct.new(
       :deployments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecs_cluster_arns
@@ -2085,7 +1933,7 @@ module Aws::OpsWorks
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeEcsClusters</code> request.</p>
@@ -2102,7 +1950,7 @@ module Aws::OpsWorks
       :ecs_clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2123,7 +1971,7 @@ module Aws::OpsWorks
       :stack_id,
       :ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeElasticIps</code> request.</p>
@@ -2133,7 +1981,7 @@ module Aws::OpsWorks
     class DescribeElasticIpsResult < Struct.new(
       :elastic_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2146,7 +1994,7 @@ module Aws::OpsWorks
       :stack_id,
       :layer_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeElasticLoadBalancers</code> request.</p>
@@ -2157,7 +2005,7 @@ module Aws::OpsWorks
     class DescribeElasticLoadBalancersResult < Struct.new(
       :elastic_load_balancers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2178,7 +2026,7 @@ module Aws::OpsWorks
       :layer_id,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeInstances</code> request.</p>
@@ -2188,7 +2036,7 @@ module Aws::OpsWorks
     class DescribeInstancesResult < Struct.new(
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2202,7 +2050,7 @@ module Aws::OpsWorks
       :stack_id,
       :layer_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeLayers</code> request.</p>
@@ -2212,7 +2060,7 @@ module Aws::OpsWorks
     class DescribeLayersResult < Struct.new(
       :layers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_ids
@@ -2221,7 +2069,7 @@ module Aws::OpsWorks
     class DescribeLoadBasedAutoScalingRequest < Struct.new(
       :layer_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeLoadBasedAutoScaling</code> request.</p>
@@ -2232,7 +2080,7 @@ module Aws::OpsWorks
     class DescribeLoadBasedAutoScalingResult < Struct.new(
       :load_based_auto_scaling_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeMyUserProfile</code> request.</p>
@@ -2242,7 +2090,7 @@ module Aws::OpsWorks
     class DescribeMyUserProfileResult < Struct.new(
       :user_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <code>DescribeOperatingSystems</code> request.</p>
@@ -2252,7 +2100,7 @@ module Aws::OpsWorks
     class DescribeOperatingSystemsResponse < Struct.new(
       :operating_systems,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_user_arn
@@ -2267,7 +2115,7 @@ module Aws::OpsWorks
       :iam_user_arn,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribePermissions</code> request.</p>
@@ -2291,7 +2139,7 @@ module Aws::OpsWorks
     class DescribePermissionsResult < Struct.new(
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2311,7 +2159,7 @@ module Aws::OpsWorks
       :stack_id,
       :raid_array_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeRaidArrays</code> request.</p>
@@ -2321,7 +2169,7 @@ module Aws::OpsWorks
     class DescribeRaidArraysResult < Struct.new(
       :raid_arrays,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2335,7 +2183,7 @@ module Aws::OpsWorks
       :stack_id,
       :rds_db_instance_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeRdsDbInstances</code> request.</p>
@@ -2345,7 +2193,7 @@ module Aws::OpsWorks
     class DescribeRdsDbInstancesResult < Struct.new(
       :rds_db_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2366,7 +2214,7 @@ module Aws::OpsWorks
       :instance_id,
       :service_error_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeServiceErrors</code> request.</p>
@@ -2376,7 +2224,7 @@ module Aws::OpsWorks
     class DescribeServiceErrorsResult < Struct.new(
       :service_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2385,7 +2233,7 @@ module Aws::OpsWorks
     class DescribeStackProvisioningParametersRequest < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeStackProvisioningParameters</code> request.</p>
@@ -2399,7 +2247,7 @@ module Aws::OpsWorks
       :agent_installer_url,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -2408,7 +2256,7 @@ module Aws::OpsWorks
     class DescribeStackSummaryRequest < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeStackSummary</code> request.</p>
@@ -2418,7 +2266,7 @@ module Aws::OpsWorks
     class DescribeStackSummaryResult < Struct.new(
       :stack_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_ids
@@ -2430,7 +2278,7 @@ module Aws::OpsWorks
     class DescribeStacksRequest < Struct.new(
       :stack_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeStacks</code> request.</p>
@@ -2440,7 +2288,7 @@ module Aws::OpsWorks
     class DescribeStacksResult < Struct.new(
       :stacks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -2449,7 +2297,7 @@ module Aws::OpsWorks
     class DescribeTimeBasedAutoScalingRequest < Struct.new(
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeTimeBasedAutoScaling</code> request.</p>
@@ -2460,7 +2308,7 @@ module Aws::OpsWorks
     class DescribeTimeBasedAutoScalingResult < Struct.new(
       :time_based_auto_scaling_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_user_arns
@@ -2469,7 +2317,7 @@ module Aws::OpsWorks
     class DescribeUserProfilesRequest < Struct.new(
       :iam_user_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeUserProfiles</code> request.</p>
@@ -2479,7 +2327,7 @@ module Aws::OpsWorks
     class DescribeUserProfilesResult < Struct.new(
       :user_profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2504,7 +2352,7 @@ module Aws::OpsWorks
       :raid_array_id,
       :volume_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>DescribeVolumes</code> request.</p>
@@ -2514,7 +2362,7 @@ module Aws::OpsWorks
     class DescribeVolumesResult < Struct.new(
       :volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_load_balancer_name
@@ -2527,7 +2375,7 @@ module Aws::OpsWorks
       :elastic_load_balancer_name,
       :layer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_ip
@@ -2536,7 +2384,7 @@ module Aws::OpsWorks
     class DisassociateElasticIpRequest < Struct.new(
       :elastic_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html">EbsBlockDevice</a>
@@ -2568,7 +2416,7 @@ module Aws::OpsWorks
       :volume_type,
       :delete_on_termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a registered Amazon ECS cluster.</p>
@@ -2590,7 +2438,7 @@ module Aws::OpsWorks
       :stack_id,
       :registered_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Elastic IP address.</p>
@@ -2616,7 +2464,7 @@ module Aws::OpsWorks
       :region,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Elastic Load Balancing instance.</p>
@@ -2658,7 +2506,7 @@ module Aws::OpsWorks
       :subnet_ids,
       :ec2_instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an app's environment variable.</p>
@@ -2681,7 +2529,7 @@ module Aws::OpsWorks
       :value,
       :secure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_id
@@ -2690,7 +2538,7 @@ module Aws::OpsWorks
     class GetHostnameSuggestionRequest < Struct.new(
       :layer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>GetHostnameSuggestion</code> request.</p>
@@ -2704,7 +2552,7 @@ module Aws::OpsWorks
       :layer_id,
       :hostname,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2719,7 +2567,7 @@ module Aws::OpsWorks
       :instance_id,
       :valid_for_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>GrantAccess</code> request.</p>
@@ -2730,7 +2578,7 @@ module Aws::OpsWorks
     class GrantAccessResult < Struct.new(
       :temporary_credential,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance.</p>
@@ -3003,7 +2851,7 @@ module Aws::OpsWorks
       :tenancy,
       :virtualization_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata service. For more
@@ -3018,7 +2866,7 @@ module Aws::OpsWorks
       :document,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how many instances a stack has for each status.</p>
@@ -3104,7 +2952,7 @@ module Aws::OpsWorks
       :terminating,
       :unassigning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a layer.</p>
@@ -3229,50 +3077,7 @@ module Aws::OpsWorks
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayerAttributesKeys
-      EcsClusterArn = 'EcsClusterArn'
-      EnableHaproxyStats = 'EnableHaproxyStats'
-      HaproxyStatsUrl = 'HaproxyStatsUrl'
-      HaproxyStatsUser = 'HaproxyStatsUser'
-      HaproxyStatsPassword = 'HaproxyStatsPassword'
-      HaproxyHealthCheckUrl = 'HaproxyHealthCheckUrl'
-      HaproxyHealthCheckMethod = 'HaproxyHealthCheckMethod'
-      MysqlRootPassword = 'MysqlRootPassword'
-      MysqlRootPasswordUbiquitous = 'MysqlRootPasswordUbiquitous'
-      GangliaUrl = 'GangliaUrl'
-      GangliaUser = 'GangliaUser'
-      GangliaPassword = 'GangliaPassword'
-      MemcachedMemory = 'MemcachedMemory'
-      NodejsVersion = 'NodejsVersion'
-      RubyVersion = 'RubyVersion'
-      RubygemsVersion = 'RubygemsVersion'
-      ManageBundler = 'ManageBundler'
-      BundlerVersion = 'BundlerVersion'
-      RailsStack = 'RailsStack'
-      PassengerVersion = 'PassengerVersion'
-      Jvm = 'Jvm'
-      JvmVersion = 'JvmVersion'
-      JvmOptions = 'JvmOptions'
-      JavaAppServer = 'JavaAppServer'
-      JavaAppServerVersion = 'JavaAppServerVersion'
-    end
-
-    module LayerType
-      aws_flow_ruby = 'aws-flow-ruby'
-      ecs_cluster = 'ecs-cluster'
-      java_app = 'java-app'
-      lb = 'lb'
-      web = 'web'
-      php_app = 'php-app'
-      rails_app = 'rails-app'
-      nodejs_app = 'nodejs-app'
-      memcached = 'memcached'
-      db_master = 'db-master'
-      monitoring_master = 'monitoring-master'
-      custom = 'custom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the lifecycle event configuration</p>
@@ -3283,7 +3088,7 @@ module Aws::OpsWorks
     class LifecycleEventConfiguration < Struct.new(
       :shutdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3304,7 +3109,7 @@ module Aws::OpsWorks
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>ListTags</code> request.</p>
@@ -3322,7 +3127,7 @@ module Aws::OpsWorks
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a layer's load-based auto scaling configuration.</p>
@@ -3346,7 +3151,7 @@ module Aws::OpsWorks
       :up_scaling,
       :down_scaling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes supported operating systems in OpsWorks Stacks.</p>
@@ -3380,7 +3185,7 @@ module Aws::OpsWorks
       :reported_version,
       :supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A block that contains information about the configuration manager (Chef) and the versions of the 
@@ -3395,7 +3200,7 @@ module Aws::OpsWorks
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes stack or user permissions.</p>
@@ -3452,7 +3257,7 @@ module Aws::OpsWorks
       :allow_sudo,
       :level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance's RAID array.</p>
@@ -3510,7 +3315,7 @@ module Aws::OpsWorks
       :volume_type,
       :iops,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon RDS instance.</p>
@@ -3555,7 +3360,7 @@ module Aws::OpsWorks
       :stack_id,
       :missing_on_rds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3564,7 +3369,7 @@ module Aws::OpsWorks
     class RebootInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>OpsWorks Stacks supports five
@@ -3599,7 +3404,7 @@ module Aws::OpsWorks
       :undeploy,
       :shutdown,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ecs_cluster_arn
@@ -3612,7 +3417,7 @@ module Aws::OpsWorks
       :ecs_cluster_arn,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>RegisterEcsCluster</code> request.</p>
@@ -3622,7 +3427,7 @@ module Aws::OpsWorks
     class RegisterEcsClusterResult < Struct.new(
       :ecs_cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_ip
@@ -3635,7 +3440,7 @@ module Aws::OpsWorks
       :elastic_ip,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>RegisterElasticIp</code> request.</p>
@@ -3645,7 +3450,7 @@ module Aws::OpsWorks
     class RegisterElasticIpResult < Struct.new(
       :elastic_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -3686,7 +3491,7 @@ module Aws::OpsWorks
       :rsa_public_key_fingerprint,
       :instance_identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>RegisterInstanceResult</code> request.</p>
@@ -3696,7 +3501,7 @@ module Aws::OpsWorks
     class RegisterInstanceResult < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -3717,7 +3522,7 @@ module Aws::OpsWorks
       :db_user,
       :db_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ec2_volume_id
@@ -3730,7 +3535,7 @@ module Aws::OpsWorks
       :ec2_volume_id,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the response to a <code>RegisterVolume</code> request.</p>
@@ -3740,7 +3545,7 @@ module Aws::OpsWorks
     class RegisterVolumeResult < Struct.new(
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A registered instance's reported operating system.</p>
@@ -3758,7 +3563,7 @@ module Aws::OpsWorks
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a resource was not found.</p>
@@ -3768,12 +3573,7 @@ module Aws::OpsWorks
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RootDeviceType
-      ebs = 'ebs'
-      instance_store = 'instance-store'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a user's SSH information.</p>
@@ -3795,7 +3595,7 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an OpsWorks Stacks service error.</p>
@@ -3825,7 +3625,7 @@ module Aws::OpsWorks
       :message,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_id
@@ -3850,7 +3650,7 @@ module Aws::OpsWorks
       :up_scaling,
       :down_scaling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -3903,7 +3703,7 @@ module Aws::OpsWorks
       :allow_sudo,
       :level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3916,7 +3716,7 @@ module Aws::OpsWorks
       :instance_id,
       :auto_scaling_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Shutdown event configuration.</p>
@@ -3932,7 +3732,7 @@ module Aws::OpsWorks
       :execution_timeout,
       :delay_until_elb_connections_drained,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the information required to retrieve an app or cookbook from a repository. For more
@@ -3990,14 +3790,7 @@ module Aws::OpsWorks
       :ssh_key,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      git = 'git'
-      svn = 'svn'
-      archive = 'archive'
-      s3 = 's3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an app's SSL configuration.</p>
@@ -4015,7 +3808,7 @@ module Aws::OpsWorks
       :private_key,
       :chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stack.</p>
@@ -4126,11 +3919,7 @@ module Aws::OpsWorks
       :default_root_device_type,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StackAttributesKeys
-      Color = 'Color'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration manager.</p>
@@ -4145,7 +3934,7 @@ module Aws::OpsWorks
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes the number of layers, instances, and apps in a stack.</p>
@@ -4175,7 +3964,7 @@ module Aws::OpsWorks
       :apps_count,
       :instances_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4184,7 +3973,7 @@ module Aws::OpsWorks
     class StartInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -4193,7 +3982,7 @@ module Aws::OpsWorks
     class StartStackRequest < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4210,7 +3999,7 @@ module Aws::OpsWorks
       :instance_id,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -4219,7 +4008,7 @@ module Aws::OpsWorks
     class StopStackRequest < Struct.new(
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4253,7 +4042,7 @@ module Aws::OpsWorks
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the data needed by RDP clients such as the Microsoft Remote Desktop Connection to log in to the instance.</p>
@@ -4277,7 +4066,7 @@ module Aws::OpsWorks
       :valid_for_in_minutes,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance's time-based auto scaling configuration.</p>
@@ -4291,7 +4080,7 @@ module Aws::OpsWorks
       :instance_id,
       :auto_scaling_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4300,7 +4089,7 @@ module Aws::OpsWorks
     class UnassignInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -4309,7 +4098,7 @@ module Aws::OpsWorks
     class UnassignVolumeRequest < Struct.new(
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4322,7 +4111,7 @@ module Aws::OpsWorks
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -4381,7 +4170,7 @@ module Aws::OpsWorks
       :attributes,
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_ip
@@ -4394,7 +4183,7 @@ module Aws::OpsWorks
       :elastic_ip,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4525,7 +4314,7 @@ module Aws::OpsWorks
       :ebs_optimized,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layer_id
@@ -4623,7 +4412,7 @@ module Aws::OpsWorks
       :use_ebs_optimized_instances,
       :lifecycle_event_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ssh_public_key
@@ -4632,7 +4421,7 @@ module Aws::OpsWorks
     class UpdateMyUserProfileRequest < Struct.new(
       :ssh_public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rds_db_instance_arn
@@ -4649,7 +4438,7 @@ module Aws::OpsWorks
       :db_user,
       :db_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stack_id
@@ -4889,7 +4678,7 @@ module Aws::OpsWorks
       :use_opsworks_security_groups,
       :agent_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_user_arn
@@ -4915,7 +4704,7 @@ module Aws::OpsWorks
       :ssh_public_key,
       :allow_self_management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -4932,7 +4721,7 @@ module Aws::OpsWorks
       :name,
       :mount_point,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a user's SSH information.</p>
@@ -4960,7 +4749,7 @@ module Aws::OpsWorks
       :ssh_public_key,
       :allow_self_management,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that a request was not valid.</p>
@@ -4970,12 +4759,7 @@ module Aws::OpsWorks
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VirtualizationType
-      paravirtual = 'paravirtual'
-      hvm = 'hvm'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance's Amazon EBS volume.</p>
@@ -5064,7 +4848,7 @@ module Aws::OpsWorks
       :iops,
       :encrypted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon EBS volume configuration.</p>
@@ -5124,13 +4908,7 @@ module Aws::OpsWorks
       :iops,
       :encrypted,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeType
-      gp2 = 'gp2'
-      io1 = 'io1'
-      standard = 'standard'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a time-based instance's auto scaling schedule. The schedule consists of a set of key-value pairs.</p>
@@ -5179,7 +4957,7 @@ module Aws::OpsWorks
       :saturday,
       :sunday,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

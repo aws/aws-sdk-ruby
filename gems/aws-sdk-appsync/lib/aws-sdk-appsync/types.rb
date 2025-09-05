@@ -12,7 +12,7 @@ module Aws::AppSync
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an additional authentication provider.</p>
@@ -35,7 +35,7 @@ module Aws::AppSync
       :user_pool_config,
       :lambda_authorizer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an AppSync API. You can use <code>Api</code> for an AppSync API with your preferred configuration, such as an Event API that provides
@@ -87,7 +87,7 @@ module Aws::AppSync
       :waf_web_acl_arn,
       :event_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:xray_enabled] = false unless options.key?(:xray_enabled)
@@ -131,7 +131,7 @@ module Aws::AppSync
       :association_status,
       :deployment_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ApiCache</code> object.</p>
@@ -299,7 +299,7 @@ module Aws::AppSync
       :status,
       :health_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ttl] = 0 unless options.key?(:ttl)
@@ -307,38 +307,6 @@ module Aws::AppSync
         options[:at_rest_encryption_enabled] = false unless options.key?(:at_rest_encryption_enabled)
         super
       end
-    end
-
-    module ApiCacheStatus
-      AVAILABLE = 'AVAILABLE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      MODIFYING = 'MODIFYING'
-      FAILED = 'FAILED'
-    end
-
-    module ApiCacheType
-      T2_SMALL = 'T2_SMALL'
-      T2_MEDIUM = 'T2_MEDIUM'
-      R4_LARGE = 'R4_LARGE'
-      R4_XLARGE = 'R4_XLARGE'
-      R4_2XLARGE = 'R4_2XLARGE'
-      R4_4XLARGE = 'R4_4XLARGE'
-      R4_8XLARGE = 'R4_8XLARGE'
-      SMALL = 'SMALL'
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
-      XLARGE = 'XLARGE'
-      LARGE_2X = 'LARGE_2X'
-      LARGE_4X = 'LARGE_4X'
-      LARGE_8X = 'LARGE_8X'
-      LARGE_12X = 'LARGE_12X'
-    end
-
-    module ApiCachingBehavior
-      FULL_REQUEST_CACHING = 'FULL_REQUEST_CACHING'
-      PER_RESOLVER_CACHING = 'PER_RESOLVER_CACHING'
-      OPERATION_LEVEL_CACHING = 'OPERATION_LEVEL_CACHING'
     end
 
     # <p>Describes an API key.</p>
@@ -429,7 +397,7 @@ module Aws::AppSync
       :expires,
       :deletes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expires] = 0 unless options.key?(:expires)
@@ -444,7 +412,7 @@ module Aws::AppSync
     class ApiKeyLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The API key expiration must be set to a value between 1 and 365 days from creation (for
@@ -454,7 +422,7 @@ module Aws::AppSync
     class ApiKeyValidityOutOfBoundsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GraphQL API exceeded a limit. Try your request again.</p>
@@ -463,7 +431,7 @@ module Aws::AppSync
     class ApiLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or Amazon Web Services AppSync function. Specifies the name and version of the runtime to use. Note
@@ -480,7 +448,7 @@ module Aws::AppSync
       :name,
       :runtime_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -493,7 +461,7 @@ module Aws::AppSync
       :domain_name,
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_association
@@ -502,7 +470,7 @@ module Aws::AppSync
     class AssociateApiResponse < Struct.new(
       :api_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_identifier
@@ -529,7 +497,7 @@ module Aws::AppSync
       :description,
       :source_api_association_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association
@@ -538,7 +506,7 @@ module Aws::AppSync
     class AssociateMergedGraphqlApiResponse < Struct.new(
       :source_api_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute merged_api_identifier
@@ -565,7 +533,7 @@ module Aws::AppSync
       :description,
       :source_api_association_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association
@@ -574,13 +542,7 @@ module Aws::AppSync
     class AssociateSourceGraphqlApiResponse < Struct.new(
       :source_api_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationStatus
-      Processing = 'PROCESSING'
-      Failed = 'FAILED'
-      Success = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an authorization configuration. Use <code>AuthMode</code> to specify the
@@ -591,7 +553,7 @@ module Aws::AppSync
     class AuthMode < Struct.new(
       :auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an authorization provider.</p>
@@ -615,15 +577,7 @@ module Aws::AppSync
       :open_id_connect_config,
       :lambda_authorizer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      API_KEY = 'API_KEY'
-      AWS_IAM = 'AWS_IAM'
-      AMAZON_COGNITO_USER_POOLS = 'AMAZON_COGNITO_USER_POOLS'
-      OPENID_CONNECT = 'OPENID_CONNECT'
-      AWS_LAMBDA = 'AWS_LAMBDA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization configuration in case the HTTP endpoint requires authorization.</p>
@@ -644,11 +598,7 @@ module Aws::AppSync
       :authorization_type,
       :aws_iam_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthorizationType
-      AWS_IAM = 'AWS_IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Identity and Access Management (IAM) configuration.</p>
@@ -662,7 +612,7 @@ module Aws::AppSync
       :signing_region,
       :signing_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides further details for the reason behind the bad request. For reason type
@@ -673,7 +623,7 @@ module Aws::AppSync
     class BadRequestDetail < Struct.new(
       :code_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not well formed. For example, a value is invalid or a required field is
@@ -693,18 +643,7 @@ module Aws::AppSync
       :reason,
       :detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Provides context for the cause of the bad request. The only supported value is
-    #             <code>CODE_ERROR</code>.</p>
-    module BadRequestReason
-      CODE_ERROR = 'CODE_ERROR'
-    end
-
-    module CacheHealthMetricsConfig
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caching configuration for a resolver that has caching activated.</p>
@@ -721,7 +660,7 @@ module Aws::AppSync
       :ttl,
       :caching_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ttl] = 0 unless options.key?(:ttl)
@@ -779,7 +718,7 @@ module Aws::AppSync
       :last_modified,
       :handler_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an AppSync error.</p>
@@ -801,7 +740,7 @@ module Aws::AppSync
       :value,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the location of the error in a code sample.</p>
@@ -819,7 +758,7 @@ module Aws::AppSync
       :column,
       :span,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:line] = 0 unless options.key?(:line)
@@ -845,7 +784,7 @@ module Aws::AppSync
       :aws_region,
       :app_id_client_regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Cognito user pool configuration.</p>
@@ -864,7 +803,7 @@ module Aws::AppSync
       :aws_region,
       :app_id_client_regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another modification is in progress at this time and it must complete before you can
@@ -874,12 +813,7 @@ module Aws::AppSync
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictDetectionType
-      VERSION = 'VERSION'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict with a previous successful update is detected. This typically occurs when the
@@ -890,14 +824,7 @@ module Aws::AppSync
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictHandlerType
-      OPTIMISTIC_CONCURRENCY = 'OPTIMISTIC_CONCURRENCY'
-      LAMBDA = 'LAMBDA'
-      AUTOMERGE = 'AUTOMERGE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateApiCache</code> operation.</p>
@@ -1044,7 +971,7 @@ module Aws::AppSync
       :type,
       :health_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateApiCache</code> operation.</p>
@@ -1054,7 +981,7 @@ module Aws::AppSync
     class CreateApiCacheResponse < Struct.new(
       :api_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1073,7 +1000,7 @@ module Aws::AppSync
       :description,
       :expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_key
@@ -1082,7 +1009,7 @@ module Aws::AppSync
     class CreateApiKeyResponse < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1105,7 +1032,7 @@ module Aws::AppSync
       :tags,
       :event_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api
@@ -1114,7 +1041,7 @@ module Aws::AppSync
     class CreateApiResponse < Struct.new(
       :api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1153,7 +1080,7 @@ module Aws::AppSync
       :tags,
       :handler_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_namespace
@@ -1162,7 +1089,7 @@ module Aws::AppSync
     class CreateChannelNamespaceResponse < Struct.new(
       :channel_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1229,7 +1156,7 @@ module Aws::AppSync
       :event_bridge_config,
       :metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -1238,7 +1165,7 @@ module Aws::AppSync
     class CreateDataSourceResponse < Struct.new(
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1262,7 +1189,7 @@ module Aws::AppSync
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name_config
@@ -1271,7 +1198,7 @@ module Aws::AppSync
     class CreateDomainNameResponse < Struct.new(
       :domain_name_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1329,7 +1256,7 @@ module Aws::AppSync
       :runtime,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_configuration
@@ -1338,7 +1265,7 @@ module Aws::AppSync
     class CreateFunctionResponse < Struct.new(
       :function_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1437,7 +1364,7 @@ module Aws::AppSync
       :resolver_count_limit,
       :enhanced_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graphql_api
@@ -1446,7 +1373,7 @@ module Aws::AppSync
     class CreateGraphqlApiResponse < Struct.new(
       :graphql_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1538,7 +1465,7 @@ module Aws::AppSync
       :code,
       :metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver
@@ -1547,7 +1474,7 @@ module Aws::AppSync
     class CreateResolverResponse < Struct.new(
       :resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1566,7 +1493,7 @@ module Aws::AppSync
       :definition,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -1575,7 +1502,7 @@ module Aws::AppSync
     class CreateTypeResponse < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data source.</p>
@@ -1688,7 +1615,7 @@ module Aws::AppSync
       :event_bridge_config,
       :metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the introspected data that was retrieved from the data source.</p>
@@ -1718,7 +1645,7 @@ module Aws::AppSync
       :indexes,
       :sdl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the fields that were retrieved from the introspected data.</p>
@@ -1736,7 +1663,7 @@ module Aws::AppSync
       :type,
       :length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:length] = 0 unless options.key?(:length)
@@ -1792,7 +1719,7 @@ module Aws::AppSync
       :type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The index that was retrieved from the introspected data.</p>
@@ -1806,7 +1733,7 @@ module Aws::AppSync
       :name,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DataSourceIntrospectionResult</code>. This is the
@@ -1823,40 +1750,7 @@ module Aws::AppSync
       :models,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceIntrospectionStatus
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
-      SUCCESS = 'SUCCESS'
-    end
-
-    module DataSourceLevelMetricsBehavior
-      FULL_REQUEST_DATA_SOURCE_METRICS = 'FULL_REQUEST_DATA_SOURCE_METRICS'
-      PER_DATA_SOURCE_METRICS = 'PER_DATA_SOURCE_METRICS'
-    end
-
-    module DataSourceLevelMetricsConfig
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module DataSourceType
-      AWS_LAMBDA = 'AWS_LAMBDA'
-      AMAZON_DYNAMODB = 'AMAZON_DYNAMODB'
-      AMAZON_ELASTICSEARCH = 'AMAZON_ELASTICSEARCH'
-      NONE = 'NONE'
-      HTTP = 'HTTP'
-      RELATIONAL_DATABASE = 'RELATIONAL_DATABASE'
-      AMAZON_OPENSEARCH_SERVICE = 'AMAZON_OPENSEARCH_SERVICE'
-      AMAZON_EVENTBRIDGE = 'AMAZON_EVENTBRIDGE'
-      AMAZON_BEDROCK_RUNTIME = 'AMAZON_BEDROCK_RUNTIME'
-    end
-
-    module DefaultAction
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteApiCache</code> operation.</p>
@@ -1866,13 +1760,13 @@ module Aws::AppSync
     class DeleteApiCacheRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DeleteApiCache</code> operation.</p>
     class DeleteApiCacheResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1885,12 +1779,12 @@ module Aws::AppSync
       :api_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApiKeyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1899,12 +1793,12 @@ module Aws::AppSync
     class DeleteApiRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApiResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1917,12 +1811,12 @@ module Aws::AppSync
       :api_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteChannelNamespaceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1935,12 +1829,12 @@ module Aws::AppSync
       :api_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataSourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1949,12 +1843,12 @@ module Aws::AppSync
     class DeleteDomainNameRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDomainNameResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1967,12 +1861,12 @@ module Aws::AppSync
       :api_id,
       :function_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteFunctionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -1981,12 +1875,12 @@ module Aws::AppSync
     class DeleteGraphqlApiRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGraphqlApiResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2003,12 +1897,12 @@ module Aws::AppSync
       :type_name,
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResolverResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2021,12 +1915,12 @@ module Aws::AppSync
       :api_id,
       :type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTypeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Delta Sync configuration.</p>
@@ -2045,7 +1939,7 @@ module Aws::AppSync
       :delta_sync_table_name,
       :delta_sync_table_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:base_table_ttl] = 0 unless options.key?(:base_table_ttl)
@@ -2060,12 +1954,12 @@ module Aws::AppSync
     class DisassociateApiRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateApiResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_identifier
@@ -2081,7 +1975,7 @@ module Aws::AppSync
       :source_api_identifier,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association_status
@@ -2090,7 +1984,7 @@ module Aws::AppSync
     class DisassociateMergedGraphqlApiResponse < Struct.new(
       :source_api_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute merged_api_identifier
@@ -2106,7 +2000,7 @@ module Aws::AppSync
       :merged_api_identifier,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association_status
@@ -2115,7 +2009,7 @@ module Aws::AppSync
     class DisassociateSourceGraphqlApiResponse < Struct.new(
       :source_api_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a configuration for a custom domain.</p>
@@ -2152,7 +2046,7 @@ module Aws::AppSync
       :tags,
       :domain_name_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon DynamoDB data source configuration.</p>
@@ -2178,7 +2072,7 @@ module Aws::AppSync
       :delta_sync_config,
       :versioned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_caller_credentials] = false unless options.key?(:use_caller_credentials)
@@ -2201,7 +2095,7 @@ module Aws::AppSync
       :endpoint,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enables and controls the enhanced metrics feature. Enhanced metrics emit granular data
@@ -2395,7 +2289,7 @@ module Aws::AppSync
       :data_source_level_metrics_behavior,
       :operation_level_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of errors generated. When using JavaScript, this will apply to the
@@ -2406,7 +2300,7 @@ module Aws::AppSync
     class ErrorDetail < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of errors from a code evaluation response.</p>
@@ -2420,7 +2314,7 @@ module Aws::AppSync
       :message,
       :code_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runtime
@@ -2446,7 +2340,7 @@ module Aws::AppSync
       :context,
       :function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_result
@@ -2472,7 +2366,7 @@ module Aws::AppSync
       :stash,
       :out_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template
@@ -2487,7 +2381,7 @@ module Aws::AppSync
       :template,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_result
@@ -2513,7 +2407,7 @@ module Aws::AppSync
       :stash,
       :out_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon EventBridge bus data source configuration.</p>
@@ -2524,7 +2418,7 @@ module Aws::AppSync
     class EventBridgeDataSourceConfig < Struct.new(
       :event_bus_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the authorization configuration for connections, message publishing, message
@@ -2551,7 +2445,7 @@ module Aws::AppSync
       :default_subscribe_auth_modes,
       :log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the CloudWatch Logs configuration for the Event API.</p>
@@ -2565,23 +2459,7 @@ module Aws::AppSync
       :log_level,
       :cloud_watch_logs_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventLogLevel
-      NONE = 'NONE'
-      ERROR = 'ERROR'
-      ALL = 'ALL'
-      INFO = 'INFO'
-      DEBUG = 'DEBUG'
-    end
-
-    module FieldLogLevel
-      NONE = 'NONE'
-      ERROR = 'ERROR'
-      ALL = 'ALL'
-      INFO = 'INFO'
-      DEBUG = 'DEBUG'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>FlushApiCache</code> operation.</p>
@@ -2591,13 +2469,13 @@ module Aws::AppSync
     class FlushApiCacheRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>FlushApiCache</code> operation.</p>
     class FlushApiCacheResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A function is a reusable entity. You can use multiple functions to compose the resolver
@@ -2659,7 +2537,7 @@ module Aws::AppSync
       :runtime,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_batch_size] = 0 unless options.key?(:max_batch_size)
@@ -2673,7 +2551,7 @@ module Aws::AppSync
     class GetApiAssociationRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_association
@@ -2682,7 +2560,7 @@ module Aws::AppSync
     class GetApiAssociationResponse < Struct.new(
       :api_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetApiCache</code> operation.</p>
@@ -2692,7 +2570,7 @@ module Aws::AppSync
     class GetApiCacheRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetApiCache</code> operation.</p>
@@ -2702,7 +2580,7 @@ module Aws::AppSync
     class GetApiCacheResponse < Struct.new(
       :api_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2711,7 +2589,7 @@ module Aws::AppSync
     class GetApiRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api
@@ -2720,7 +2598,7 @@ module Aws::AppSync
     class GetApiResponse < Struct.new(
       :api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2733,7 +2611,7 @@ module Aws::AppSync
       :api_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_namespace
@@ -2742,7 +2620,7 @@ module Aws::AppSync
     class GetChannelNamespaceResponse < Struct.new(
       :channel_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute introspection_id
@@ -2770,7 +2648,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute introspection_id
@@ -2798,7 +2676,7 @@ module Aws::AppSync
       :introspection_status_detail,
       :introspection_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2811,7 +2689,7 @@ module Aws::AppSync
       :api_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -2820,7 +2698,7 @@ module Aws::AppSync
     class GetDataSourceResponse < Struct.new(
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2829,7 +2707,7 @@ module Aws::AppSync
     class GetDomainNameRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name_config
@@ -2838,7 +2716,7 @@ module Aws::AppSync
     class GetDomainNameResponse < Struct.new(
       :domain_name_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2851,7 +2729,7 @@ module Aws::AppSync
       :api_id,
       :function_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_configuration
@@ -2860,7 +2738,7 @@ module Aws::AppSync
     class GetFunctionResponse < Struct.new(
       :function_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2869,7 +2747,7 @@ module Aws::AppSync
     class GetGraphqlApiEnvironmentVariablesRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_variables
@@ -2879,7 +2757,7 @@ module Aws::AppSync
     class GetGraphqlApiEnvironmentVariablesResponse < Struct.new(
       :environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2888,7 +2766,7 @@ module Aws::AppSync
     class GetGraphqlApiRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graphql_api
@@ -2897,7 +2775,7 @@ module Aws::AppSync
     class GetGraphqlApiResponse < Struct.new(
       :graphql_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2914,7 +2792,7 @@ module Aws::AppSync
       :format,
       :include_directives,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema
@@ -2925,7 +2803,7 @@ module Aws::AppSync
     class GetIntrospectionSchemaResponse < Struct.new(
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2942,7 +2820,7 @@ module Aws::AppSync
       :type_name,
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver
@@ -2951,7 +2829,7 @@ module Aws::AppSync
     class GetResolverResponse < Struct.new(
       :resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -2960,7 +2838,7 @@ module Aws::AppSync
     class GetSchemaCreationStatusRequest < Struct.new(
       :api_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2974,7 +2852,7 @@ module Aws::AppSync
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute merged_api_identifier
@@ -2990,7 +2868,7 @@ module Aws::AppSync
       :merged_api_identifier,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association
@@ -2999,7 +2877,7 @@ module Aws::AppSync
     class GetSourceApiAssociationResponse < Struct.new(
       :source_api_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3016,7 +2894,7 @@ module Aws::AppSync
       :type_name,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -3025,22 +2903,7 @@ module Aws::AppSync
     class GetTypeResponse < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GraphQLApiIntrospectionConfig
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module GraphQLApiType
-      GRAPHQL = 'GRAPHQL'
-      MERGED = 'MERGED'
-    end
-
-    module GraphQLApiVisibility
-      GLOBAL = 'GLOBAL'
-      PRIVATE = 'PRIVATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The GraphQL schema is not valid.</p>
@@ -3049,7 +2912,7 @@ module Aws::AppSync
     class GraphQLSchemaException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a GraphQL API.</p>
@@ -3173,7 +3036,7 @@ module Aws::AppSync
       :resolver_count_limit,
       :enhanced_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:xray_enabled] = false unless options.key?(:xray_enabled)
@@ -3181,11 +3044,6 @@ module Aws::AppSync
         options[:resolver_count_limit] = 0 unless options.key?(:resolver_count_limit)
         super
       end
-    end
-
-    module HandlerBehavior
-      CODE = 'CODE'
-      DIRECT = 'DIRECT'
     end
 
     # <p>The configuration for a handler.</p>
@@ -3199,7 +3057,7 @@ module Aws::AppSync
       :behavior,
       :integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the <code>OnPublish</code> and <code>OnSubscribe</code> handlers.</p>
@@ -3213,7 +3071,7 @@ module Aws::AppSync
       :on_publish,
       :on_subscribe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an HTTP data source configuration.</p>
@@ -3230,7 +3088,7 @@ module Aws::AppSync
       :endpoint,
       :authorization_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration data source configuration for the handler.</p>
@@ -3244,7 +3102,7 @@ module Aws::AppSync
       :data_source_name,
       :lambda_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal AppSync error occurred. Try your request again.</p>
@@ -3253,12 +3111,7 @@ module Aws::AppSync
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvokeType
-      REQUEST_RESPONSE = 'REQUEST_RESPONSE'
-      EVENT = 'EVENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>LambdaAuthorizerConfig</code> specifies how to authorize AppSync
@@ -3295,7 +3148,7 @@ module Aws::AppSync
       :authorizer_uri,
       :identity_validation_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:authorizer_result_ttl_in_seconds] = 0 unless options.key?(:authorizer_result_ttl_in_seconds)
@@ -3310,7 +3163,7 @@ module Aws::AppSync
     class LambdaConfig < Struct.new(
       :invoke_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>LambdaConflictHandlerConfig</code> object when configuring <code>LAMBDA</code>
@@ -3322,7 +3175,7 @@ module Aws::AppSync
     class LambdaConflictHandlerConfig < Struct.new(
       :lambda_conflict_handler_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Lambda data source configuration.</p>
@@ -3332,7 +3185,7 @@ module Aws::AppSync
     class LambdaDataSourceConfig < Struct.new(
       :lambda_function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded a limit. Try your request again.</p>
@@ -3341,7 +3194,7 @@ module Aws::AppSync
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3359,7 +3212,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_keys
@@ -3373,7 +3226,7 @@ module Aws::AppSync
       :api_keys,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3387,7 +3240,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apis
@@ -3401,7 +3254,7 @@ module Aws::AppSync
       :apis,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3419,7 +3272,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_namespaces
@@ -3433,7 +3286,7 @@ module Aws::AppSync
       :channel_namespaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3451,7 +3304,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_sources
@@ -3465,7 +3318,7 @@ module Aws::AppSync
       :data_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3479,7 +3332,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name_configs
@@ -3493,7 +3346,7 @@ module Aws::AppSync
       :domain_name_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3511,7 +3364,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute functions
@@ -3525,7 +3378,7 @@ module Aws::AppSync
       :functions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3548,7 +3401,7 @@ module Aws::AppSync
       :api_type,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graphql_apis
@@ -3562,7 +3415,7 @@ module Aws::AppSync
       :graphql_apis,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3584,7 +3437,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolvers
@@ -3597,7 +3450,7 @@ module Aws::AppSync
       :resolvers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3619,7 +3472,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolvers
@@ -3633,7 +3486,7 @@ module Aws::AppSync
       :resolvers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3651,7 +3504,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association_summaries
@@ -3665,7 +3518,7 @@ module Aws::AppSync
       :source_api_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3674,7 +3527,7 @@ module Aws::AppSync
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3683,7 +3536,7 @@ module Aws::AppSync
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute merged_api_identifier
@@ -3712,7 +3565,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute types
@@ -3726,7 +3579,7 @@ module Aws::AppSync
       :types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3748,7 +3601,7 @@ module Aws::AppSync
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute types
@@ -3762,7 +3615,7 @@ module Aws::AppSync
       :types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon CloudWatch Logs configuration.</p>
@@ -3820,17 +3673,12 @@ module Aws::AppSync
       :cloud_watch_logs_role_arn,
       :exclude_verbose_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exclude_verbose_content] = false unless options.key?(:exclude_verbose_content)
         super
       end
-    end
-
-    module MergeType
-      MANUAL_MERGE = 'MANUAL_MERGE'
-      AUTO_MERGE = 'AUTO_MERGE'
     end
 
     # <p>The resource specified in the request was not found. Check the resource, and then try
@@ -3840,7 +3688,7 @@ module Aws::AppSync
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an OpenID Connect (OIDC) configuration.</p>
@@ -3866,7 +3714,7 @@ module Aws::AppSync
       :iat_ttl,
       :auth_ttl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:iat_ttl] = 0 unless options.key?(:iat_ttl)
@@ -3886,22 +3734,7 @@ module Aws::AppSync
       :endpoint,
       :aws_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationLevelMetricsConfig
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module OutputType
-      SDL = 'SDL'
-      JSON = 'JSON'
-    end
-
-    module Ownership
-      CURRENT_ACCOUNT = 'CURRENT_ACCOUNT'
-      OTHER_ACCOUNTS = 'OTHER_ACCOUNTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pipeline configuration for a resolver of kind <code>PIPELINE</code>.</p>
@@ -3911,7 +3744,7 @@ module Aws::AppSync
     class PipelineConfig < Struct.new(
       :functions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -3951,7 +3784,7 @@ module Aws::AppSync
       :api_id,
       :environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_variables
@@ -3961,7 +3794,7 @@ module Aws::AppSync
     class PutGraphqlApiEnvironmentVariablesResponse < Struct.new(
       :environment_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metadata required to introspect the RDS cluster.</p>
@@ -3982,7 +3815,7 @@ module Aws::AppSync
       :secret_arn,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Relational Database Service (Amazon RDS) HTTP endpoint configuration.</p>
@@ -4009,7 +3842,7 @@ module Aws::AppSync
       :schema,
       :aws_secret_store_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a relational database data source configuration.</p>
@@ -4031,11 +3864,7 @@ module Aws::AppSync
       :relational_database_source_type,
       :rds_http_endpoint_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationalDatabaseSourceType
-      RDS_HTTP_ENDPOINT = 'RDS_HTTP_ENDPOINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resolver.</p>
@@ -4122,40 +3951,12 @@ module Aws::AppSync
       :code,
       :metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_batch_size] = 0 unless options.key?(:max_batch_size)
         super
       end
-    end
-
-    module ResolverKind
-      UNIT = 'UNIT'
-      PIPELINE = 'PIPELINE'
-    end
-
-    module ResolverLevelMetricsBehavior
-      FULL_REQUEST_RESOLVER_METRICS = 'FULL_REQUEST_RESOLVER_METRICS'
-      PER_RESOLVER_METRICS = 'PER_RESOLVER_METRICS'
-    end
-
-    module ResolverLevelMetricsConfig
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module RuntimeName
-      APPSYNC_JS = 'APPSYNC_JS'
-    end
-
-    module SchemaStatus
-      Processing = 'PROCESSING'
-      Active = 'ACTIVE'
-      Deleting = 'DELETING'
-      Failed = 'FAILED'
-      Success = 'SUCCESS'
-      NotApplicable = 'NOT_APPLICABLE'
     end
 
     # <p>The operation exceeded the service quota for this resource.</p>
@@ -4164,7 +3965,7 @@ module Aws::AppSync
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a source API. A source API is a GraphQL API that is
@@ -4220,7 +4021,7 @@ module Aws::AppSync
       :source_api_association_status_detail,
       :last_successful_merge_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes properties used to specify configurations related to a source API.</p>
@@ -4237,18 +4038,7 @@ module Aws::AppSync
     class SourceApiAssociationConfig < Struct.new(
       :merge_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceApiAssociationStatus
-      MERGE_SCHEDULED = 'MERGE_SCHEDULED'
-      MERGE_FAILED = 'MERGE_FAILED'
-      MERGE_SUCCESS = 'MERGE_SUCCESS'
-      MERGE_IN_PROGRESS = 'MERGE_IN_PROGRESS'
-      AUTO_MERGE_SCHEDULE_FAILED = 'AUTO_MERGE_SCHEDULE_FAILED'
-      DELETION_SCHEDULED = 'DELETION_SCHEDULED'
-      DELETION_IN_PROGRESS = 'DELETION_IN_PROGRESS'
-      DELETION_FAILED = 'DELETION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the ARNs and IDs of associations, Merged APIs, and source APIs.</p>
@@ -4282,7 +4072,7 @@ module Aws::AppSync
       :merged_api_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rds_data_api_config
@@ -4291,7 +4081,7 @@ module Aws::AppSync
     class StartDataSourceIntrospectionRequest < Struct.new(
       :rds_data_api_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute introspection_id
@@ -4315,7 +4105,7 @@ module Aws::AppSync
       :introspection_status,
       :introspection_status_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4328,7 +4118,7 @@ module Aws::AppSync
       :api_id,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -4338,7 +4128,7 @@ module Aws::AppSync
     class StartSchemaCreationResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -4354,7 +4144,7 @@ module Aws::AppSync
       :association_id,
       :merged_api_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association_status
@@ -4363,7 +4153,7 @@ module Aws::AppSync
     class StartSchemaMergeResponse < Struct.new(
       :source_api_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Sync configuration for a resolver.</p>
@@ -4414,7 +4204,7 @@ module Aws::AppSync
       :conflict_detection,
       :lambda_conflict_handler_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4427,12 +4217,12 @@ module Aws::AppSync
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a type.</p>
@@ -4458,12 +4248,7 @@ module Aws::AppSync
       :definition,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TypeDefinitionFormat
-      SDL = 'SDL'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You aren't authorized to perform this operation.</p>
@@ -4472,7 +4257,7 @@ module Aws::AppSync
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4485,12 +4270,12 @@ module Aws::AppSync
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>UpdateApiCache</code> operation.</p>
@@ -4622,7 +4407,7 @@ module Aws::AppSync
       :type,
       :health_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>UpdateApiCache</code> operation.</p>
@@ -4632,7 +4417,7 @@ module Aws::AppSync
     class UpdateApiCacheResponse < Struct.new(
       :api_cache,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4654,7 +4439,7 @@ module Aws::AppSync
       :description,
       :expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_key
@@ -4663,7 +4448,7 @@ module Aws::AppSync
     class UpdateApiKeyResponse < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4685,7 +4470,7 @@ module Aws::AppSync
       :owner_contact,
       :event_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api
@@ -4694,7 +4479,7 @@ module Aws::AppSync
     class UpdateApiResponse < Struct.new(
       :api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4726,7 +4511,7 @@ module Aws::AppSync
       :code_handlers,
       :handler_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_namespace
@@ -4735,7 +4520,7 @@ module Aws::AppSync
     class UpdateChannelNamespaceResponse < Struct.new(
       :channel_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4801,7 +4586,7 @@ module Aws::AppSync
       :event_bridge_config,
       :metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -4810,7 +4595,7 @@ module Aws::AppSync
     class UpdateDataSourceResponse < Struct.new(
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4823,7 +4608,7 @@ module Aws::AppSync
       :domain_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name_config
@@ -4832,7 +4617,7 @@ module Aws::AppSync
     class UpdateDomainNameResponse < Struct.new(
       :domain_name_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4894,7 +4679,7 @@ module Aws::AppSync
       :runtime,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute function_configuration
@@ -4903,7 +4688,7 @@ module Aws::AppSync
     class UpdateFunctionResponse < Struct.new(
       :function_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -4990,7 +4775,7 @@ module Aws::AppSync
       :resolver_count_limit,
       :enhanced_metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graphql_api
@@ -4999,7 +4784,7 @@ module Aws::AppSync
     class UpdateGraphqlApiResponse < Struct.new(
       :graphql_api,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -5091,7 +4876,7 @@ module Aws::AppSync
       :code,
       :metrics_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver
@@ -5100,7 +4885,7 @@ module Aws::AppSync
     class UpdateResolverResponse < Struct.new(
       :resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -5124,7 +4909,7 @@ module Aws::AppSync
       :description,
       :source_api_association_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_api_association
@@ -5133,7 +4918,7 @@ module Aws::AppSync
     class UpdateSourceApiAssociationResponse < Struct.new(
       :source_api_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_id
@@ -5154,7 +4939,7 @@ module Aws::AppSync
       :definition,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5163,7 +4948,7 @@ module Aws::AppSync
     class UpdateTypeResponse < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Cognito user pool configuration.</p>
@@ -5187,7 +4972,7 @@ module Aws::AppSync
       :default_action,
       :app_id_client_regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

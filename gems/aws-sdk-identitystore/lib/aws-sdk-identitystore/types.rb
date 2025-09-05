@@ -18,7 +18,7 @@ module Aws::Identitystore
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The address associated with the specified user.</p>
@@ -61,7 +61,7 @@ module Aws::Identitystore
       :type,
       :primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:primary] = false unless options.key?(:primary)
@@ -82,7 +82,7 @@ module Aws::Identitystore
       :unique_attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ExternalId < AlternateIdentifier; end
       class UniqueAttribute < AlternateIdentifier; end
@@ -102,7 +102,7 @@ module Aws::Identitystore
       :attribute_path,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request cannot be completed for one of the following reasons:</p>
@@ -135,7 +135,7 @@ module Aws::Identitystore
       :request_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -154,7 +154,7 @@ module Aws::Identitystore
       :display_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -171,7 +171,7 @@ module Aws::Identitystore
       :group_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_id
@@ -185,7 +185,7 @@ module Aws::Identitystore
       :membership_id,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -200,7 +200,7 @@ module Aws::Identitystore
       :group_id,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -269,7 +269,7 @@ module Aws::Identitystore
       :locale,
       :timezone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -282,7 +282,7 @@ module Aws::Identitystore
       :user_id,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -295,7 +295,7 @@ module Aws::Identitystore
       :identity_store_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -308,17 +308,17 @@ module Aws::Identitystore
       :identity_store_id,
       :membership_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupMembershipOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -331,12 +331,12 @@ module Aws::Identitystore
       :identity_store_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -353,7 +353,7 @@ module Aws::Identitystore
       :identity_store_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -366,7 +366,7 @@ module Aws::Identitystore
       :identity_store_id,
       :membership_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -387,7 +387,7 @@ module Aws::Identitystore
       :group_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -417,7 +417,7 @@ module Aws::Identitystore
       :description,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -434,7 +434,7 @@ module Aws::Identitystore
       :identity_store_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -506,7 +506,7 @@ module Aws::Identitystore
       :timezone,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The email address associated with the user.</p>
@@ -525,7 +525,7 @@ module Aws::Identitystore
       :type,
       :primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:primary] = false unless options.key?(:primary)
@@ -544,7 +544,7 @@ module Aws::Identitystore
       :issuer,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A query filter used by <code>ListUsers</code> and <code>ListGroups</code>. This filter
@@ -563,7 +563,7 @@ module Aws::Identitystore
       :attribute_path,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -577,7 +577,7 @@ module Aws::Identitystore
       :identity_store_id,
       :alternate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -590,7 +590,7 @@ module Aws::Identitystore
       :group_id,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -607,7 +607,7 @@ module Aws::Identitystore
       :group_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_id
@@ -620,7 +620,7 @@ module Aws::Identitystore
       :membership_id,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -634,7 +634,7 @@ module Aws::Identitystore
       :identity_store_id,
       :alternate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -647,7 +647,7 @@ module Aws::Identitystore
       :user_id,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group object that contains the metadata and attributes for a specified group.</p>
@@ -678,7 +678,7 @@ module Aws::Identitystore
       :description,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the identifiers for a group, a group member, and a <code>GroupMembership</code>
@@ -701,7 +701,7 @@ module Aws::Identitystore
       :group_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether a resource is a member of a group in the identity store.</p>
@@ -719,7 +719,7 @@ module Aws::Identitystore
       :member_id,
       :membership_exists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:membership_exists] = false unless options.key?(:membership_exists)
@@ -743,7 +743,7 @@ module Aws::Identitystore
       :request_id,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -765,7 +765,7 @@ module Aws::Identitystore
       :member_id,
       :group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -774,7 +774,7 @@ module Aws::Identitystore
     class IsMemberInGroupsOutput < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -795,7 +795,7 @@ module Aws::Identitystore
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_memberships
@@ -809,7 +809,7 @@ module Aws::Identitystore
       :group_memberships,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -831,7 +831,7 @@ module Aws::Identitystore
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_memberships
@@ -844,7 +844,7 @@ module Aws::Identitystore
       :group_memberships,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -877,7 +877,7 @@ module Aws::Identitystore
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -893,7 +893,7 @@ module Aws::Identitystore
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -926,7 +926,7 @@ module Aws::Identitystore
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -942,7 +942,7 @@ module Aws::Identitystore
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the identifier of a group member.</p>
@@ -953,7 +953,7 @@ module Aws::Identitystore
       :user_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UserId < MemberId; end
       class Unknown < MemberId; end
@@ -988,7 +988,7 @@ module Aws::Identitystore
       :honorific_prefix,
       :honorific_suffix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The phone number associated with the user.</p>
@@ -1009,7 +1009,7 @@ module Aws::Identitystore
       :type,
       :primary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:primary] = false unless options.key?(:primary)
@@ -1037,7 +1037,7 @@ module Aws::Identitystore
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause the number of users or groups in the identity store to exceed the maximum allowed.</p>
@@ -1050,7 +1050,7 @@ module Aws::Identitystore
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the principal has crossed the throttling limits of the API operations.</p>
@@ -1069,7 +1069,7 @@ module Aws::Identitystore
       :request_id,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1090,7 +1090,7 @@ module Aws::Identitystore
       :attribute_path,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -1108,12 +1108,12 @@ module Aws::Identitystore
       :group_id,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_store_id
@@ -1131,12 +1131,12 @@ module Aws::Identitystore
       :user_id,
       :operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateUserOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A user object that contains the metadata and attributes for a specified user.</p>
@@ -1213,7 +1213,7 @@ module Aws::Identitystore
       :timezone,
       :identity_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it contains a syntax error.</p>
@@ -1228,7 +1228,7 @@ module Aws::Identitystore
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

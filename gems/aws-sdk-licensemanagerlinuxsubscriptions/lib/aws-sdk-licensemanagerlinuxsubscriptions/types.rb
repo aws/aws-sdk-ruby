@@ -12,12 +12,12 @@ module Aws::LicenseManagerLinuxSubscriptions
     class DeregisterSubscriptionProviderRequest < Struct.new(
       :subscription_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterSubscriptionProviderResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter object that is used to return more specific results from a describe operation.
@@ -36,7 +36,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_provider_arn
@@ -45,7 +45,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class GetRegisteredSubscriptionProviderRequest < Struct.new(
       :subscription_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_provider_arn
@@ -78,12 +78,12 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_status_message,
       :last_successful_data_retrieval_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetServiceSettingsInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute linux_subscriptions_discovery
@@ -110,7 +110,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :status_message,
       :home_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details discovered information about a running instance using Linux subscriptions.</p>
@@ -183,7 +183,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :dual_subscription,
       :registered_with_subscription_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception occurred with the service.</p>
@@ -192,7 +192,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the settings defined for discovering Linux subscriptions.</p>
@@ -206,7 +206,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :source_regions,
       :organization_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # NextToken length limit is half of ddb accepted limit.
@@ -297,7 +297,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -313,7 +313,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # NextToken length limit is half of ddb accepted limit.
@@ -362,7 +362,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscriptions
@@ -378,7 +378,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_provider_sources
@@ -397,7 +397,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registered_subscription_providers
@@ -414,7 +414,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :registered_subscription_providers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -423,7 +423,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -432,7 +432,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_provider_source
@@ -452,7 +452,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :secret_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_provider_source
@@ -470,7 +470,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_arn,
       :subscription_provider_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A third-party provider for operating system (OS) platform software and license 
@@ -508,7 +508,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :subscription_provider_status_message,
       :last_successful_data_retrieval_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to find the requested Amazon Web Services resource.</p>
@@ -517,7 +517,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object which details a discovered Linux subscription.</p>
@@ -537,7 +537,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :type,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -552,12 +552,12 @@ module Aws::LicenseManagerLinuxSubscriptions
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -566,7 +566,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -580,12 +580,12 @@ module Aws::LicenseManagerLinuxSubscriptions
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute linux_subscriptions_discovery
@@ -604,7 +604,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :linux_subscriptions_discovery_settings,
       :allow_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute linux_subscriptions_discovery
@@ -631,7 +631,7 @@ module Aws::LicenseManagerLinuxSubscriptions
       :status_message,
       :home_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The provided input is not valid. Try your request again.</p>
@@ -640,7 +640,7 @@ module Aws::LicenseManagerLinuxSubscriptions
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

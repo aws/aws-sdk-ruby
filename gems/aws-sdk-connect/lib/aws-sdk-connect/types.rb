@@ -12,7 +12,7 @@ module Aws::Connect
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an action.</p>
@@ -22,19 +22,7 @@ module Aws::Connect
     class ActionSummary < Struct.new(
       :action_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionType
-      CREATE_TASK = 'CREATE_TASK'
-      ASSIGN_CONTACT_CATEGORY = 'ASSIGN_CONTACT_CATEGORY'
-      GENERATE_EVENTBRIDGE_EVENT = 'GENERATE_EVENTBRIDGE_EVENT'
-      SEND_NOTIFICATION = 'SEND_NOTIFICATION'
-      CREATE_CASE = 'CREATE_CASE'
-      UPDATE_CASE = 'UPDATE_CASE'
-      ASSIGN_SLA = 'ASSIGN_SLA'
-      END_ASSOCIATED_TASKS = 'END_ASSOCIATED_TASKS'
-      SUBMIT_AUTO_EVALUATION = 'SUBMIT_AUTO_EVALUATION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -52,7 +40,7 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form_id
@@ -69,7 +57,7 @@ module Aws::Connect
       :evaluation_form_arn,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_form_version] = 0 unless options.key?(:evaluation_form_version)
@@ -88,12 +76,7 @@ module Aws::Connect
       :to_list,
       :cc_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentAvailabilityTimer
-      TIME_SINCE_LAST_ACTIVITY = 'TIME_SINCE_LAST_ACTIVITY'
-      TIME_SINCE_LAST_INBOUND = 'TIME_SINCE_LAST_INBOUND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The distribution of agents between the instance and its replica(s).</p>
@@ -103,7 +86,7 @@ module Aws::Connect
     class AgentConfig < Struct.new(
       :distributions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html">contact</a> associated to the
@@ -143,7 +126,7 @@ module Aws::Connect
       :connected_to_agent_timestamp,
       :queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an agent hierarchy group.</p>
@@ -153,7 +136,7 @@ module Aws::Connect
     class AgentHierarchyGroup < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines search criteria for contacts using agent hierarchy group levels.
@@ -181,7 +164,7 @@ module Aws::Connect
       :l4_ids,
       :l5_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the agent who accepted the contact.</p>
@@ -239,7 +222,7 @@ module Aws::Connect
       :agent_initiated_hold_duration,
       :state_transitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the quality of the Agent's media connection</p>
@@ -249,7 +232,7 @@ module Aws::Connect
     class AgentQualityMetrics < Struct.new(
       :audio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an agent status.</p>
@@ -295,7 +278,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the agent's status.</p>
@@ -313,7 +296,7 @@ module Aws::Connect
       :status_arn,
       :status_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return agent statuses.</p>
@@ -342,7 +325,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -363,12 +346,7 @@ module Aws::Connect
     class AgentStatusSearchFilter < Struct.new(
       :attribute_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentStatusState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an agent status.</p>
@@ -398,13 +376,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentStatusType
-      ROUTABLE = 'ROUTABLE'
-      CUSTOM = 'CUSTOM'
-      OFFLINE = 'OFFLINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Can be used to define a list of preferred agents to target the contact to within the queue. 
@@ -416,7 +388,7 @@ module Aws::Connect
     class AgentsCriteria < Struct.new(
       :agent_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the capabilities enabled for participants of the contact.</p>
@@ -430,7 +402,7 @@ module Aws::Connect
       :customer,
       :agent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change.</p>
@@ -459,7 +431,7 @@ module Aws::Connect
       :resource_share_arn,
       :resource_share_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about datasets that are available to associate with: <code>DataSetId</code>,
@@ -474,7 +446,7 @@ module Aws::Connect
       :data_set_id,
       :data_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the answering machine detection.</p>
@@ -490,30 +462,13 @@ module Aws::Connect
       :enable_answer_machine_detection,
       :await_answer_machine_prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_answer_machine_detection] = false unless options.key?(:enable_answer_machine_detection)
         options[:await_answer_machine_prompt] = false unless options.key?(:await_answer_machine_prompt)
         super
       end
-    end
-
-    module AnsweringMachineDetectionStatus
-      ANSWERED = 'ANSWERED'
-      UNDETECTED = 'UNDETECTED'
-      ERROR = 'ERROR'
-      HUMAN_ANSWERED = 'HUMAN_ANSWERED'
-      SIT_TONE_DETECTED = 'SIT_TONE_DETECTED'
-      SIT_TONE_BUSY = 'SIT_TONE_BUSY'
-      SIT_TONE_INVALID_NUMBER = 'SIT_TONE_INVALID_NUMBER'
-      FAX_MACHINE_DETECTED = 'FAX_MACHINE_DETECTED'
-      VOICEMAIL_BEEP = 'VOICEMAIL_BEEP'
-      VOICEMAIL_NO_BEEP = 'VOICEMAIL_NO_BEEP'
-      AMD_UNRESOLVED = 'AMD_UNRESOLVED'
-      AMD_UNANSWERED = 'AMD_UNANSWERED'
-      AMD_ERROR = 'AMD_ERROR'
-      AMD_NOT_APPLICABLE = 'AMD_NOT_APPLICABLE'
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change.</p>
@@ -529,13 +484,7 @@ module Aws::Connect
       :namespace,
       :application_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactStatus
-      APPROVED = 'APPROVED'
-      REJECTED = 'REJECTED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This action must be set if <code>TriggerEventSource</code> is one of the following values:
@@ -546,7 +495,7 @@ module Aws::Connect
     #             <code>RuleName</code> is used as <code>ContactCategory</code>.</p>
     class AssignContactCategoryActionDefinition < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AssignSla action definition.</p>
@@ -560,7 +509,7 @@ module Aws::Connect
       :sla_assignment_type,
       :case_sla_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -578,7 +527,7 @@ module Aws::Connect
       :data_set_id,
       :target_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_id
@@ -599,7 +548,7 @@ module Aws::Connect
       :resource_share_id,
       :resource_share_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -619,7 +568,7 @@ module Aws::Connect
       :origin,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -643,7 +592,7 @@ module Aws::Connect
       :lex_v2_bot,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -662,12 +611,12 @@ module Aws::Connect
       :language_code,
       :vocabulary_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateDefaultVocabularyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -700,12 +649,12 @@ module Aws::Connect
       :flow_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateFlowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -748,7 +697,7 @@ module Aws::Connect
       :storage_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -757,7 +706,7 @@ module Aws::Connect
     class AssociateInstanceStorageConfigResponse < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -778,7 +727,7 @@ module Aws::Connect
       :function_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -798,7 +747,7 @@ module Aws::Connect
       :lex_bot,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -815,7 +764,7 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -832,7 +781,7 @@ module Aws::Connect
       :queue_id,
       :quick_connect_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -849,7 +798,7 @@ module Aws::Connect
       :routing_profile_id,
       :queue_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -869,7 +818,7 @@ module Aws::Connect
       :key,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -878,7 +827,7 @@ module Aws::Connect
     class AssociateSecurityKeyResponse < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_distribution_group_id
@@ -896,12 +845,12 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateTrafficDistributionGroupUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -919,7 +868,7 @@ module Aws::Connect
       :user_id,
       :user_proficiencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contact summary of a contact in contact tree associated with unique identifier.</p>
@@ -963,7 +912,7 @@ module Aws::Connect
       :initiation_method,
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the attached file.</p>
@@ -1016,7 +965,7 @@ module Aws::Connect
       :associated_resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error describing a failure to retrieve attached file metadata through
@@ -1035,18 +984,7 @@ module Aws::Connect
       :error_message,
       :file_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachedFileInvalidRequestExceptionReason
-      INVALID_FILE_SIZE = 'INVALID_FILE_SIZE'
-      INVALID_FILE_TYPE = 'INVALID_FILE_TYPE'
-      INVALID_FILE_NAME = 'INVALID_FILE_NAME'
-    end
-
-    module AttachedFileServiceQuotaExceededExceptionReason
-      TOTAL_FILE_SIZE_EXCEEDED = 'TOTAL_FILE_SIZE_EXCEEDED'
-      TOTAL_FILE_COUNT_EXCEEDED = 'TOTAL_FILE_COUNT_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reference when the <code>referenceType</code> is
@@ -1069,7 +1007,7 @@ module Aws::Connect
       :status,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attendee information, including attendee ID and join token.</p>
@@ -1083,7 +1021,7 @@ module Aws::Connect
       :attendee_id,
       :join_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A toggle for an individual feature at the instance level.</p>
@@ -1097,7 +1035,7 @@ module Aws::Connect
       :attribute_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of conditions which would be applied together with an <code>AND</code>
@@ -1112,7 +1050,7 @@ module Aws::Connect
       :tag_conditions,
       :hierarchy_group_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to specify the predefined attribute condition.</p>
@@ -1142,7 +1080,7 @@ module Aws::Connect
       :match_criteria,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Has audio-specific configurations as the operating parameter for Echo Reduction.</p>
@@ -1152,7 +1090,7 @@ module Aws::Connect
     class AudioFeatures < Struct.new(
       :echo_reduction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information for score and potential quality issues for Audio</p>
@@ -1170,7 +1108,7 @@ module Aws::Connect
       :quality_score,
       :potential_quality_issues,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:quality_score] = 0 unless options.key?(:quality_score)
@@ -1248,7 +1186,7 @@ module Aws::Connect
       :periodic_session_duration,
       :max_session_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -1288,7 +1226,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -1311,7 +1249,7 @@ module Aws::Connect
       :phone_number_country_code,
       :phone_number_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1329,7 +1267,7 @@ module Aws::Connect
       :data_set_ids,
       :target_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created
@@ -1345,7 +1283,7 @@ module Aws::Connect
       :created,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1363,7 +1301,7 @@ module Aws::Connect
       :data_set_ids,
       :target_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deleted
@@ -1376,7 +1314,7 @@ module Aws::Connect
       :deleted,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_ids
@@ -1397,7 +1335,7 @@ module Aws::Connect
       :instance_id,
       :associated_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute files
@@ -1410,7 +1348,7 @@ module Aws::Connect
       :files,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -1439,7 +1377,7 @@ module Aws::Connect
       :resource_ids,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_association_summary_list
@@ -1448,7 +1386,7 @@ module Aws::Connect
     class BatchGetFlowAssociationResponse < Struct.new(
       :flow_association_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1468,7 +1406,7 @@ module Aws::Connect
       :instance_id,
       :contact_data_request_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_request_list
@@ -1481,12 +1419,7 @@ module Aws::Connect
       :successful_request_list,
       :failed_request_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BehaviorType
-      ROUTE_CURRENT_CHANNEL_ONLY = 'ROUTE_CURRENT_CHANNEL_ONLY'
-      ROUTE_ANY_CHANNEL = 'ROUTE_ANY_CHANNEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information associated with a campaign.</p>
@@ -1496,7 +1429,7 @@ module Aws::Connect
     class Campaign < Struct.new(
       :campaign_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SLA configuration for Case SlaAssignmentType.</p>
@@ -1524,14 +1457,7 @@ module Aws::Connect
       :target_field_values,
       :target_sla_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Channel
-      VOICE = 'VOICE'
-      CHAT = 'CHAT'
-      TASK = 'TASK'
-      EMAIL = 'EMAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the overall participant interactions at the contact level.</p>
@@ -1571,7 +1497,7 @@ module Aws::Connect
       :agent_first_response_timestamp,
       :agent_first_response_time_in_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Chat integration event containing payload to perform different chat actions such as:</p>
@@ -1624,13 +1550,7 @@ module Aws::Connect
       :content_type,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChatEventType
-      DISCONNECT = 'DISCONNECT'
-      MESSAGE = 'MESSAGE'
-      EVENT = 'EVENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A chat message.</p>
@@ -1660,7 +1580,7 @@ module Aws::Connect
       :content_type,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how agent, bot, and customer interact in a chat contact.</p>
@@ -1678,7 +1598,7 @@ module Aws::Connect
       :agent_metrics,
       :customer_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the chat participant role.</p>
@@ -1689,7 +1609,7 @@ module Aws::Connect
     class ChatParticipantRoleConfig < Struct.new(
       :participant_timer_config_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The streaming configuration, such as the Amazon SNS streaming endpoint.</p>
@@ -1700,7 +1620,7 @@ module Aws::Connect
     class ChatStreamingConfiguration < Struct.new(
       :streaming_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -1737,7 +1657,7 @@ module Aws::Connect
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -1750,7 +1670,7 @@ module Aws::Connect
       :phone_number_id,
       :phone_number_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a phone number that has been claimed to your Amazon Connect instance
@@ -1831,7 +1751,7 @@ module Aws::Connect
       :phone_number_status,
       :source_phone_number_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of conditions which would be applied together with an <code>AND</code>
@@ -1842,11 +1762,7 @@ module Aws::Connect
     class CommonAttributeAndCondition < Struct.new(
       :tag_conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Comparison
-      LT = 'LT'
+      include ::Smithy::Schema::Structure
     end
 
     # Request to CompleteAttachedFileUpload API
@@ -1868,13 +1784,13 @@ module Aws::Connect
       :file_id,
       :associated_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response from CompleteAttachedFileUpload API
     class CompleteAttachedFileUploadResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a ProficiencyName, ProficiencyValue and
@@ -1893,7 +1809,7 @@ module Aws::Connect
       :string_condition,
       :number_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed because dependent condition failed.</p>
@@ -1902,7 +1818,7 @@ module Aws::Connect
     class ConditionalOperationFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Operation cannot be performed at this time as there is a conflict with another operation or
@@ -1912,7 +1828,7 @@ module Aws::Connect
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to join the call.</p>
@@ -1926,7 +1842,7 @@ module Aws::Connect
       :attendee,
       :meeting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a contact.</p>
@@ -2134,7 +2050,7 @@ module Aws::Connect
       :contact_details,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines search criteria for contacts using analysis outputs from Amazon Connect Contact Lens.</p>
@@ -2144,7 +2060,7 @@ module Aws::Connect
     class ContactAnalysis < Struct.new(
       :transcript,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contact configuration for push notification registration.</p>
@@ -2167,7 +2083,7 @@ module Aws::Connect
       :participant_role,
       :include_raw_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_raw_message] = false unless options.key?(:include_raw_message)
@@ -2204,7 +2120,7 @@ module Aws::Connect
       :attributes,
       :campaign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A map of string key/value pairs that contain user-defined attributes which are lightly typed
@@ -2219,7 +2135,7 @@ module Aws::Connect
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the contact evaluations where the key is the FormId, which is a unique
@@ -2254,7 +2170,7 @@ module Aws::Connect
       :delete_timestamp,
       :export_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters user data based on the contact information that is associated to the users. It
@@ -2265,7 +2181,7 @@ module Aws::Connect
     class ContactFilter < Struct.new(
       :contact_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a flow.</p>
@@ -2330,7 +2246,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a flow module.</p>
@@ -2369,7 +2285,7 @@ module Aws::Connect
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return flow modules.</p>
@@ -2397,7 +2313,7 @@ module Aws::Connect
       :state_condition,
       :status_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return flow modules.</p>
@@ -2418,17 +2334,7 @@ module Aws::Connect
     class ContactFlowModuleSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactFlowModuleState
-      ACTIVE = 'ACTIVE'
-      ARCHIVED = 'ARCHIVED'
-    end
-
-    module ContactFlowModuleStatus
-      PUBLISHED = 'PUBLISHED'
-      SAVED = 'SAVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a flow.</p>
@@ -2450,7 +2356,7 @@ module Aws::Connect
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The flow has not been published.</p>
@@ -2459,7 +2365,7 @@ module Aws::Connect
     class ContactFlowNotPublishedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return flows.</p>
@@ -2491,7 +2397,7 @@ module Aws::Connect
       :state_condition,
       :status_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -2512,17 +2418,7 @@ module Aws::Connect
     class ContactFlowSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactFlowState
-      ACTIVE = 'ACTIVE'
-      ARCHIVED = 'ARCHIVED'
-    end
-
-    module ContactFlowStatus
-      PUBLISHED = 'PUBLISHED'
-      SAVED = 'SAVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a flow.</p>
@@ -2554,20 +2450,7 @@ module Aws::Connect
       :contact_flow_state,
       :contact_flow_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactFlowType
-      CONTACT_FLOW = 'CONTACT_FLOW'
-      CUSTOMER_QUEUE = 'CUSTOMER_QUEUE'
-      CUSTOMER_HOLD = 'CUSTOMER_HOLD'
-      CUSTOMER_WHISPER = 'CUSTOMER_WHISPER'
-      AGENT_HOLD = 'AGENT_HOLD'
-      AGENT_WHISPER = 'AGENT_WHISPER'
-      OUTBOUND_WHISPER = 'OUTBOUND_WHISPER'
-      AGENT_TRANSFER = 'AGENT_TRANSFER'
-      QUEUE_TRANSFER = 'QUEUE_TRANSFER'
-      CAMPAIGN = 'CAMPAIGN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a flow version's metadata.</p>
@@ -2585,22 +2468,7 @@ module Aws::Connect
       :version_description,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactInitiationMethod
-      INBOUND = 'INBOUND'
-      OUTBOUND = 'OUTBOUND'
-      TRANSFER = 'TRANSFER'
-      QUEUE_TRANSFER = 'QUEUE_TRANSFER'
-      CALLBACK = 'CALLBACK'
-      API = 'API'
-      DISCONNECT = 'DISCONNECT'
-      MONITOR = 'MONITOR'
-      EXTERNAL_OUTBOUND = 'EXTERNAL_OUTBOUND'
-      WEBRTC_API = 'WEBRTC_API'
-      AGENT_REPLY = 'AGENT_REPLY'
-      FLOW = 'FLOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that contains information about metric being requested.</p>
@@ -2610,11 +2478,7 @@ module Aws::Connect
     class ContactMetricInfo < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactMetricName
-      POSITION_IN_QUEUE = 'POSITION_IN_QUEUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing information about metric requested for the contact.</p>
@@ -2628,7 +2492,7 @@ module Aws::Connect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object which contains the number.</p>
@@ -2639,7 +2503,7 @@ module Aws::Connect
       :number,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Number < ContactMetricValue; end
       class Unknown < ContactMetricValue; end
@@ -2653,13 +2517,7 @@ module Aws::Connect
     class ContactNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactRecordingType
-      AGENT = 'AGENT'
-      IVR = 'IVR'
-      SCREEN = 'SCREEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information of returned contact.</p>
@@ -2719,7 +2577,7 @@ module Aws::Connect
       :scheduled_timestamp,
       :segment_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the agent who accepted the contact.</p>
@@ -2733,7 +2591,7 @@ module Aws::Connect
       :id,
       :connected_to_agent_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If this contact was queued, this contains information about the queue.</p>
@@ -2747,7 +2605,7 @@ module Aws::Connect
       :id,
       :enqueue_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a segment attribute. This is structured as a map with a single key-value pair.
@@ -2759,19 +2617,7 @@ module Aws::Connect
     class ContactSearchSummarySegmentAttributeValue < Struct.new(
       :value_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactState
-      INCOMING = 'INCOMING'
-      PENDING = 'PENDING'
-      CONNECTING = 'CONNECTING'
-      CONNECTED = 'CONNECTED'
-      CONNECTED_ONHOLD = 'CONNECTED_ONHOLD'
-      MISSED = 'MISSED'
-      ERROR = 'ERROR'
-      ENDED = 'ENDED'
-      REJECTED = 'REJECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>.
@@ -2803,7 +2649,7 @@ module Aws::Connect
       :and_condition,
       :tag_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>.
@@ -2834,7 +2680,7 @@ module Aws::Connect
       :and_conditions,
       :tag_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside
@@ -2875,7 +2721,7 @@ module Aws::Connect
       :tag_condition,
       :hierarchy_group_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2904,7 +2750,7 @@ module Aws::Connect
       :display_order,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_status_arn
@@ -2917,7 +2763,7 @@ module Aws::Connect
       :agent_status_arn,
       :agent_status_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreateCase</code> action definition.</p>
@@ -2931,7 +2777,7 @@ module Aws::Connect
       :fields,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -2964,7 +2810,7 @@ module Aws::Connect
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2977,7 +2823,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3016,7 +2862,7 @@ module Aws::Connect
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_id
@@ -3033,7 +2879,7 @@ module Aws::Connect
       :contact_flow_arn,
       :flow_content_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3066,7 +2912,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_arn
@@ -3079,7 +2925,7 @@ module Aws::Connect
       :contact_flow_arn,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3188,7 +3034,7 @@ module Aws::Connect
       :segment_attributes,
       :previous_contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -3201,7 +3047,7 @@ module Aws::Connect
       :contact_id,
       :contact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -3233,7 +3079,7 @@ module Aws::Connect
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_address_id
@@ -3246,7 +3092,7 @@ module Aws::Connect
       :email_address_id,
       :email_address_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3278,7 +3124,7 @@ module Aws::Connect
       :scoring_strategy,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form_id
@@ -3291,7 +3137,7 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3325,7 +3171,7 @@ module Aws::Connect
       :effective_from,
       :effective_till,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operation_override_id
@@ -3334,7 +3180,7 @@ module Aws::Connect
     class CreateHoursOfOperationOverrideResponse < Struct.new(
       :hours_of_operation_override_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3363,7 +3209,7 @@ module Aws::Connect
       :config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operation_id
@@ -3376,7 +3222,7 @@ module Aws::Connect
       :hours_of_operation_id,
       :hours_of_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -3410,7 +3256,7 @@ module Aws::Connect
       :outbound_calls_enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3423,7 +3269,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3460,7 +3306,7 @@ module Aws::Connect
       :source_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_association_id
@@ -3473,7 +3319,7 @@ module Aws::Connect
       :integration_association_id,
       :integration_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3502,7 +3348,7 @@ module Aws::Connect
       :client_token,
       :participant_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute participant_credentials
@@ -3517,7 +3363,7 @@ module Aws::Connect
       :participant_credentials,
       :participant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3638,7 +3484,7 @@ module Aws::Connect
       :source_contact_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute continued_from_contact_id
@@ -3648,7 +3494,7 @@ module Aws::Connect
     class CreatePersistentContactAssociationResponse < Struct.new(
       :continued_from_contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3666,7 +3512,7 @@ module Aws::Connect
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3693,7 +3539,7 @@ module Aws::Connect
       :s3_uri,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_arn
@@ -3706,7 +3552,7 @@ module Aws::Connect
       :prompt_arn,
       :prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3739,7 +3585,7 @@ module Aws::Connect
       :device_type,
       :contact_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registration_id
@@ -3748,7 +3594,7 @@ module Aws::Connect
     class CreatePushNotificationRegistrationResponse < Struct.new(
       :registration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3789,7 +3635,7 @@ module Aws::Connect
       :quick_connect_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_arn
@@ -3802,7 +3648,7 @@ module Aws::Connect
       :queue_arn,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3827,7 +3673,7 @@ module Aws::Connect
       :quick_connect_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_connect_arn
@@ -3840,7 +3686,7 @@ module Aws::Connect
       :quick_connect_arn,
       :quick_connect_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3886,7 +3732,7 @@ module Aws::Connect
       :tags,
       :agent_availability_timer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_profile_arn
@@ -3899,7 +3745,7 @@ module Aws::Connect
       :routing_profile_arn,
       :routing_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -3935,7 +3781,7 @@ module Aws::Connect
       :publish_status,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_arn
@@ -3948,7 +3794,7 @@ module Aws::Connect
       :rule_arn,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_name
@@ -3998,7 +3844,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_id
@@ -4011,7 +3857,7 @@ module Aws::Connect
       :security_profile_id,
       :security_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4062,7 +3908,7 @@ module Aws::Connect
       :fields,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4075,7 +3921,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4104,7 +3950,7 @@ module Aws::Connect
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4118,7 +3964,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4140,7 +3986,7 @@ module Aws::Connect
       :use_case_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute use_case_id
@@ -4153,7 +3999,7 @@ module Aws::Connect
       :use_case_id,
       :use_case_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4175,7 +4021,7 @@ module Aws::Connect
       :instance_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_group_id
@@ -4188,7 +4034,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :hierarchy_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute username
@@ -4253,7 +4099,7 @@ module Aws::Connect
       :instance_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -4266,7 +4112,7 @@ module Aws::Connect
       :user_id,
       :user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4306,7 +4152,7 @@ module Aws::Connect
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -4315,7 +4161,7 @@ module Aws::Connect
     class CreateViewResponse < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4338,7 +4184,7 @@ module Aws::Connect
       :version_description,
       :view_content_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -4347,7 +4193,7 @@ module Aws::Connect
     class CreateViewVersionResponse < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -4386,7 +4232,7 @@ module Aws::Connect
       :content,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vocabulary_arn
@@ -4403,7 +4249,7 @@ module Aws::Connect
       :vocabulary_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the identity that created the file.</p>
@@ -4419,7 +4265,7 @@ module Aws::Connect
       :aws_identity_arn,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ConnectUserArn < CreatedByInfo; end
       class AWSIdentityArn < CreatedByInfo; end
@@ -4446,7 +4292,7 @@ module Aws::Connect
       :refresh_token,
       :refresh_token_expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the cross-channel routing behavior that allows an agent working on a contact in one
@@ -4458,7 +4304,7 @@ module Aws::Connect
     class CrossChannelBehavior < Struct.new(
       :behavior_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a real-time metric. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html">Metrics
@@ -4473,7 +4319,7 @@ module Aws::Connect
       :name,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the data for a real-time metric.</p>
@@ -4487,24 +4333,7 @@ module Aws::Connect
       :metric,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The current metric names.</p>
-    module CurrentMetricName
-      AGENTS_ONLINE = 'AGENTS_ONLINE'
-      AGENTS_AVAILABLE = 'AGENTS_AVAILABLE'
-      AGENTS_ON_CALL = 'AGENTS_ON_CALL'
-      AGENTS_NON_PRODUCTIVE = 'AGENTS_NON_PRODUCTIVE'
-      AGENTS_AFTER_CONTACT_WORK = 'AGENTS_AFTER_CONTACT_WORK'
-      AGENTS_ERROR = 'AGENTS_ERROR'
-      AGENTS_STAFFED = 'AGENTS_STAFFED'
-      CONTACTS_IN_QUEUE = 'CONTACTS_IN_QUEUE'
-      OLDEST_CONTACT_AGE = 'OLDEST_CONTACT_AGE'
-      CONTACTS_SCHEDULED = 'CONTACTS_SCHEDULED'
-      AGENTS_ON_CONTACT = 'AGENTS_ON_CONTACT'
-      SLOTS_ACTIVE = 'SLOTS_ACTIVE'
-      SLOTS_AVAILABLE = 'SLOTS_AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a set of real-time metrics.</p>
@@ -4518,7 +4347,7 @@ module Aws::Connect
       :dimensions,
       :collections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The way to sort the resulting response based on metrics. By default resources are sorted
@@ -4534,7 +4363,7 @@ module Aws::Connect
       :sort_by_metric,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Customer on the contact.</p>
@@ -4550,7 +4379,7 @@ module Aws::Connect
       :device_info,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the quality of the Customer's media connection</p>
@@ -4560,7 +4389,7 @@ module Aws::Connect
     class CustomerQualityMetrics < Struct.new(
       :audio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about customer’s voice activity.</p>
@@ -4575,15 +4404,7 @@ module Aws::Connect
       :greeting_start_timestamp,
       :greeting_end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DateComparisonType
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to specify the hours of operation override date condition.</p>
@@ -4602,7 +4423,7 @@ module Aws::Connect
       :value,
       :comparison_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.
@@ -4617,7 +4438,7 @@ module Aws::Connect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4635,7 +4456,7 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form_id
@@ -4652,7 +4473,7 @@ module Aws::Connect
       :evaluation_form_arn,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_form_version] = 0 unless options.key?(:evaluation_form_version)
@@ -4681,7 +4502,7 @@ module Aws::Connect
       :vocabulary_id,
       :vocabulary_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request to DeleteAttachedFile API
@@ -4703,13 +4524,13 @@ module Aws::Connect
       :file_id,
       :associated_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response from DeleteAttachedFile API
     class DeleteAttachedFileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4722,7 +4543,7 @@ module Aws::Connect
       :instance_id,
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4735,12 +4556,12 @@ module Aws::Connect
       :instance_id,
       :contact_flow_module_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContactFlowModuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4753,12 +4574,12 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContactFlowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4775,12 +4596,12 @@ module Aws::Connect
       :contact_flow_id,
       :contact_flow_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteContactFlowVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4793,12 +4614,12 @@ module Aws::Connect
       :instance_id,
       :email_address_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEmailAddressResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4815,7 +4636,7 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4832,7 +4653,7 @@ module Aws::Connect
       :hours_of_operation_id,
       :hours_of_operation_override_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4845,7 +4666,7 @@ module Aws::Connect
       :instance_id,
       :hours_of_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4861,7 +4682,7 @@ module Aws::Connect
       :instance_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4874,7 +4695,7 @@ module Aws::Connect
       :instance_id,
       :integration_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4888,7 +4709,7 @@ module Aws::Connect
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4901,7 +4722,7 @@ module Aws::Connect
       :instance_id,
       :prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4919,12 +4740,12 @@ module Aws::Connect
       :registration_id,
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePushNotificationRegistrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4937,7 +4758,7 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4950,7 +4771,7 @@ module Aws::Connect
       :instance_id,
       :quick_connect_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4963,7 +4784,7 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4976,7 +4797,7 @@ module Aws::Connect
       :instance_id,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -4989,7 +4810,7 @@ module Aws::Connect
       :instance_id,
       :security_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5002,12 +4823,12 @@ module Aws::Connect
       :instance_id,
       :task_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTaskTemplateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_distribution_group_id
@@ -5017,12 +4838,12 @@ module Aws::Connect
     class DeleteTrafficDistributionGroupRequest < Struct.new(
       :traffic_distribution_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTrafficDistributionGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5039,7 +4860,7 @@ module Aws::Connect
       :integration_association_id,
       :use_case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_group_id
@@ -5052,7 +4873,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5065,7 +4886,7 @@ module Aws::Connect
       :instance_id,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5080,12 +4901,12 @@ module Aws::Connect
       :instance_id,
       :view_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteViewResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5104,12 +4925,12 @@ module Aws::Connect
       :view_id,
       :view_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteViewVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5122,7 +4943,7 @@ module Aws::Connect
       :instance_id,
       :vocabulary_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vocabulary_arn
@@ -5139,7 +4960,7 @@ module Aws::Connect
       :vocabulary_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5152,7 +4973,7 @@ module Aws::Connect
       :instance_id,
       :agent_status_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_status
@@ -5161,7 +4982,7 @@ module Aws::Connect
     class DescribeAgentStatusResponse < Struct.new(
       :agent_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_id
@@ -5174,7 +4995,7 @@ module Aws::Connect
       :authentication_profile_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile
@@ -5183,7 +5004,7 @@ module Aws::Connect
     class DescribeAuthenticationProfileResponse < Struct.new(
       :authentication_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5196,7 +5017,7 @@ module Aws::Connect
       :instance_id,
       :evaluation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation
@@ -5209,7 +5030,7 @@ module Aws::Connect
       :evaluation,
       :evaluation_form,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5222,7 +5043,7 @@ module Aws::Connect
       :instance_id,
       :contact_flow_module_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_module
@@ -5231,7 +5052,7 @@ module Aws::Connect
     class DescribeContactFlowModuleResponse < Struct.new(
       :contact_flow_module,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5244,7 +5065,7 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow
@@ -5253,7 +5074,7 @@ module Aws::Connect
     class DescribeContactFlowResponse < Struct.new(
       :contact_flow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5266,7 +5087,7 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact
@@ -5275,7 +5096,7 @@ module Aws::Connect
     class DescribeContactResponse < Struct.new(
       :contact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5288,7 +5109,7 @@ module Aws::Connect
       :instance_id,
       :email_address_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_address_id
@@ -5325,7 +5146,7 @@ module Aws::Connect
       :modified_timestamp,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5342,7 +5163,7 @@ module Aws::Connect
       :evaluation_form_id,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form
@@ -5351,7 +5172,7 @@ module Aws::Connect
     class DescribeEvaluationFormResponse < Struct.new(
       :evaluation_form,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5368,7 +5189,7 @@ module Aws::Connect
       :hours_of_operation_id,
       :hours_of_operation_override_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operation_override
@@ -5377,7 +5198,7 @@ module Aws::Connect
     class DescribeHoursOfOperationOverrideResponse < Struct.new(
       :hours_of_operation_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5390,7 +5211,7 @@ module Aws::Connect
       :instance_id,
       :hours_of_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operation
@@ -5399,7 +5220,7 @@ module Aws::Connect
     class DescribeHoursOfOperationResponse < Struct.new(
       :hours_of_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5412,7 +5233,7 @@ module Aws::Connect
       :instance_id,
       :attribute_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -5423,7 +5244,7 @@ module Aws::Connect
     class DescribeInstanceAttributeResponse < Struct.new(
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5432,7 +5253,7 @@ module Aws::Connect
     class DescribeInstanceRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance
@@ -5450,7 +5271,7 @@ module Aws::Connect
       :instance,
       :replication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5467,7 +5288,7 @@ module Aws::Connect
       :association_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_config
@@ -5476,7 +5297,7 @@ module Aws::Connect
     class DescribeInstanceStorageConfigResponse < Struct.new(
       :storage_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -5485,7 +5306,7 @@ module Aws::Connect
     class DescribePhoneNumberRequest < Struct.new(
       :phone_number_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute claimed_phone_number_summary
@@ -5495,7 +5316,7 @@ module Aws::Connect
     class DescribePhoneNumberResponse < Struct.new(
       :claimed_phone_number_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5509,7 +5330,7 @@ module Aws::Connect
       :instance_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predefined_attribute
@@ -5518,7 +5339,7 @@ module Aws::Connect
     class DescribePredefinedAttributeResponse < Struct.new(
       :predefined_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5531,7 +5352,7 @@ module Aws::Connect
       :instance_id,
       :prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt
@@ -5540,7 +5361,7 @@ module Aws::Connect
     class DescribePromptResponse < Struct.new(
       :prompt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5553,7 +5374,7 @@ module Aws::Connect
       :instance_id,
       :queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue
@@ -5562,7 +5383,7 @@ module Aws::Connect
     class DescribeQueueResponse < Struct.new(
       :queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5575,7 +5396,7 @@ module Aws::Connect
       :instance_id,
       :quick_connect_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_connect
@@ -5584,7 +5405,7 @@ module Aws::Connect
     class DescribeQuickConnectResponse < Struct.new(
       :quick_connect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5597,7 +5418,7 @@ module Aws::Connect
       :instance_id,
       :routing_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_profile
@@ -5606,7 +5427,7 @@ module Aws::Connect
     class DescribeRoutingProfileResponse < Struct.new(
       :routing_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5619,7 +5440,7 @@ module Aws::Connect
       :instance_id,
       :rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule
@@ -5628,7 +5449,7 @@ module Aws::Connect
     class DescribeRuleResponse < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_id
@@ -5641,7 +5462,7 @@ module Aws::Connect
       :security_profile_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile
@@ -5650,7 +5471,7 @@ module Aws::Connect
     class DescribeSecurityProfileResponse < Struct.new(
       :security_profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_distribution_group_id
@@ -5661,7 +5482,7 @@ module Aws::Connect
     class DescribeTrafficDistributionGroupRequest < Struct.new(
       :traffic_distribution_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_distribution_group
@@ -5670,7 +5491,7 @@ module Aws::Connect
     class DescribeTrafficDistributionGroupResponse < Struct.new(
       :traffic_distribution_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_group_id
@@ -5683,7 +5504,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_group
@@ -5692,7 +5513,7 @@ module Aws::Connect
     class DescribeUserHierarchyGroupResponse < Struct.new(
       :hierarchy_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5701,7 +5522,7 @@ module Aws::Connect
     class DescribeUserHierarchyStructureRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_structure
@@ -5710,7 +5531,7 @@ module Aws::Connect
     class DescribeUserHierarchyStructureResponse < Struct.new(
       :hierarchy_structure,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -5723,7 +5544,7 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -5732,7 +5553,7 @@ module Aws::Connect
     class DescribeUserResponse < Struct.new(
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5746,7 +5567,7 @@ module Aws::Connect
       :instance_id,
       :view_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -5755,7 +5576,7 @@ module Aws::Connect
     class DescribeViewResponse < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5768,7 +5589,7 @@ module Aws::Connect
       :instance_id,
       :vocabulary_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vocabulary
@@ -5779,7 +5600,7 @@ module Aws::Connect
     class DescribeVocabularyResponse < Struct.new(
       :vocabulary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Outbound calls to the destination number are not allowed.</p>
@@ -5789,7 +5610,7 @@ module Aws::Connect
     class DestinationNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information regarding the device.</p>
@@ -5807,13 +5628,7 @@ module Aws::Connect
       :platform_version,
       :operating_system,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceType
-      GCM = 'GCM'
-      APNS = 'APNS'
-      APNS_SANDBOX = 'APNS_SANDBOX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the dimensions for a set of metrics.</p>
@@ -5835,13 +5650,7 @@ module Aws::Connect
       :routing_profile,
       :routing_step_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectoryType
-      SAML = 'SAML'
-      CONNECT_MANAGED = 'CONNECT_MANAGED'
-      EXISTING_DIRECTORY = 'EXISTING_DIRECTORY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5859,7 +5668,7 @@ module Aws::Connect
       :data_set_id,
       :target_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5879,7 +5688,7 @@ module Aws::Connect
       :origin,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5903,7 +5712,7 @@ module Aws::Connect
       :lex_v2_bot,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5932,12 +5741,12 @@ module Aws::Connect
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateFlowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5961,7 +5770,7 @@ module Aws::Connect
       :resource_type,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5981,7 +5790,7 @@ module Aws::Connect
       :function_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6005,7 +5814,7 @@ module Aws::Connect
       :lex_region,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -6018,7 +5827,7 @@ module Aws::Connect
       :phone_number_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6035,7 +5844,7 @@ module Aws::Connect
       :queue_id,
       :quick_connect_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6052,7 +5861,7 @@ module Aws::Connect
       :routing_profile_id,
       :queue_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6072,7 +5881,7 @@ module Aws::Connect
       :association_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_distribution_group_id
@@ -6090,12 +5899,12 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateTrafficDistributionGroupUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -6113,7 +5922,7 @@ module Aws::Connect
       :user_id,
       :user_proficiencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the call disconnect experience.</p>
@@ -6124,7 +5933,7 @@ module Aws::Connect
     class DisconnectDetails < Struct.new(
       :potential_disconnect_issue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about why a contact was disconnected. Only Amazon Connect outbound
@@ -6135,7 +5944,7 @@ module Aws::Connect
     class DisconnectReason < Struct.new(
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -6153,12 +5962,12 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DismissUserContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a traffic distribution.</p>
@@ -6172,7 +5981,7 @@ module Aws::Connect
       :region,
       :percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percentage] = 0 unless options.key?(:percentage)
@@ -6192,7 +6001,7 @@ module Aws::Connect
       :url,
       :url_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the specified name already exists.</p>
@@ -6201,7 +6010,7 @@ module Aws::Connect
     class DuplicateResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the hours of operations with the effective override applied.</p>
@@ -6215,7 +6024,7 @@ module Aws::Connect
       :date,
       :operational_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a source or destination email address.</p>
@@ -6229,7 +6038,7 @@ module Aws::Connect
       :email_address,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an email address for a contact center.</p>
@@ -6255,7 +6064,7 @@ module Aws::Connect
       :description,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return email addresses.</p>
@@ -6273,7 +6082,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -6294,7 +6103,7 @@ module Aws::Connect
     class EmailAddressSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the email attachment files.</p>
@@ -6308,15 +6117,7 @@ module Aws::Connect
       :file_name,
       :s3_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EmailHeaderType
-      REFERENCES = 'REFERENCES'
-      MESSAGE_ID = 'MESSAGE_ID'
-      IN_REPLY_TO = 'IN_REPLY_TO'
-      X_SES_SPAM_VERDICT = 'X_SES_SPAM_VERDICT'
-      X_SES_VIRUS_VERDICT = 'X_SES_VIRUS_VERDICT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the reference when the referenceType is <code>EMAIL_MESSAGE</code>.
@@ -6331,7 +6132,7 @@ module Aws::Connect
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the email recipient</p>
@@ -6345,7 +6146,7 @@ module Aws::Connect
       :address,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reference when the <code>referenceType</code> is <code>EMAIL</code>.
@@ -6360,13 +6161,13 @@ module Aws::Connect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty value.</p>
     class EmptyFieldValue < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption configuration.</p>
@@ -6387,17 +6188,13 @@ module Aws::Connect
       :encryption_type,
       :key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionType
-      KMS = 'KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>End associated tasks related to a case.</p>
     class EndAssociatedTasksActionDefinition < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the endpoint.</p>
@@ -6411,7 +6208,7 @@ module Aws::Connect
       :type,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the endpoint.</p>
@@ -6429,15 +6226,7 @@ module Aws::Connect
       :address,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointType
-      TELEPHONE_NUMBER = 'TELEPHONE_NUMBER'
-      VOIP = 'VOIP'
-      CONTACT_FLOW = 'CONTACT_FLOW'
-      CONNECT_PHONENUMBER_ARN = 'CONNECT_PHONENUMBER_ARN'
-      EMAIL_ADDRESS = 'EMAIL_ADDRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This API is in preview release for Amazon Connect and is subject to change.</p>
@@ -6452,7 +6241,7 @@ module Aws::Connect
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a contact evaluation.</p>
@@ -6498,7 +6287,7 @@ module Aws::Connect
       :last_modified_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about answer data for a contact evaluation. Answer data must be either string,
@@ -6518,7 +6307,7 @@ module Aws::Connect
       :not_applicable,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringValue < EvaluationAnswerData; end
       class NumericValue < EvaluationAnswerData; end
@@ -6533,7 +6322,7 @@ module Aws::Connect
     class EvaluationAnswerInput < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about output answers for a contact evaluation.</p>
@@ -6547,7 +6336,7 @@ module Aws::Connect
       :value,
       :system_suggested_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the evaluation form.</p>
@@ -6609,7 +6398,7 @@ module Aws::Connect
       :last_modified_by,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_form_version] = 0 unless options.key?(:evaluation_form_version)
@@ -6649,7 +6438,7 @@ module Aws::Connect
       :items,
       :scoring_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_form_version] = 0 unless options.key?(:evaluation_form_version)
@@ -6670,7 +6459,7 @@ module Aws::Connect
       :question,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Section < EvaluationFormItem; end
       class Question < EvaluationFormItem; end
@@ -6685,7 +6474,7 @@ module Aws::Connect
       :property_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PropertyValue < EvaluationFormNumericQuestionAutomation; end
       class Unknown < EvaluationFormNumericQuestionAutomation; end
@@ -6711,7 +6500,7 @@ module Aws::Connect
       :score,
       :automatic_fail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_value] = 0 unless options.key?(:min_value)
@@ -6741,7 +6530,7 @@ module Aws::Connect
       :options,
       :automation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_value] = 0 unless options.key?(:min_value)
@@ -6783,19 +6572,13 @@ module Aws::Connect
       :question_type_properties,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:not_applicable_enabled] = false unless options.key?(:not_applicable_enabled)
         options[:weight] = 0 unless options.key?(:weight)
         super
       end
-    end
-
-    module EvaluationFormQuestionType
-      TEXT = 'TEXT'
-      SINGLESELECT = 'SINGLESELECT'
-      NUMERIC = 'NUMERIC'
     end
 
     # <p>Information about properties for a question in an evaluation form. The question type
@@ -6811,21 +6594,11 @@ module Aws::Connect
       :single_select,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Numeric < EvaluationFormQuestionTypeProperties; end
       class SingleSelect < EvaluationFormQuestionTypeProperties; end
       class Unknown < EvaluationFormQuestionTypeProperties; end
-    end
-
-    module EvaluationFormScoringMode
-      QUESTION_ONLY = 'QUESTION_ONLY'
-      SECTION_ONLY = 'SECTION_ONLY'
-    end
-
-    module EvaluationFormScoringStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
     end
 
     # <p>Information about scoring strategy for an evaluation form.</p>
@@ -6839,7 +6612,7 @@ module Aws::Connect
       :mode,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a section from an evaluation form. A section can contain sections and/or
@@ -6867,7 +6640,7 @@ module Aws::Connect
       :items,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
@@ -6889,7 +6662,7 @@ module Aws::Connect
       :options,
       :default_option_ref_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the automation option of a single select question.</p>
@@ -6900,15 +6673,10 @@ module Aws::Connect
       :rule_category,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RuleCategory < EvaluationFormSingleSelectQuestionAutomationOption; end
       class Unknown < EvaluationFormSingleSelectQuestionAutomationOption; end
-    end
-
-    module EvaluationFormSingleSelectQuestionDisplayMode
-      DROPDOWN = 'DROPDOWN'
-      RADIO = 'RADIO'
     end
 
     # <p>Information about the automation configuration in single select questions.</p>
@@ -6932,7 +6700,7 @@ module Aws::Connect
       :score,
       :automatic_fail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -6956,7 +6724,7 @@ module Aws::Connect
       :display_as,
       :automation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an evaluation form.</p>
@@ -7006,18 +6774,13 @@ module Aws::Connect
       :latest_version,
       :active_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:latest_version] = 0 unless options.key?(:latest_version)
-        options[:active_version] =  unless options.key?(:active_version)
+        options[:active_version] = nil unless options.key?(:active_version)
         super
       end
-    end
-
-    module EvaluationFormVersionStatus
-      DRAFT = 'DRAFT'
-      ACTIVE = 'ACTIVE'
     end
 
     # <p>Summary information about an evaluation form.</p>
@@ -7059,7 +6822,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_form_version] = 0 unless options.key?(:evaluation_form_version)
@@ -7087,7 +6850,7 @@ module Aws::Connect
       :contact_agent_id,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about notes for a contact evaluation.</p>
@@ -7103,7 +6866,7 @@ module Aws::Connect
     class EvaluationNote < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about scores of a contact evaluation item (section or question).</p>
@@ -7122,7 +6885,7 @@ module Aws::Connect
       :not_applicable,
       :automatic_fail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percentage] = 0 unless options.key?(:percentage)
@@ -7130,11 +6893,6 @@ module Aws::Connect
         options[:automatic_fail] = false unless options.key?(:automatic_fail)
         super
       end
-    end
-
-    module EvaluationStatus
-      DRAFT = 'DRAFT'
-      SUBMITTED = 'SUBMITTED'
     end
 
     # <p>Summary information about a contact evaluation.</p>
@@ -7176,7 +6934,7 @@ module Aws::Connect
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EventBridge action definition.</p>
@@ -7186,22 +6944,7 @@ module Aws::Connect
     class EventBridgeActionDefinition < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventSourceName
-      OnPostCallAnalysisAvailable = 'OnPostCallAnalysisAvailable'
-      OnRealTimeCallAnalysisAvailable = 'OnRealTimeCallAnalysisAvailable'
-      OnRealTimeChatAnalysisAvailable = 'OnRealTimeChatAnalysisAvailable'
-      OnPostChatAnalysisAvailable = 'OnPostChatAnalysisAvailable'
-      OnZendeskTicketCreate = 'OnZendeskTicketCreate'
-      OnZendeskTicketStatusUpdate = 'OnZendeskTicketStatusUpdate'
-      OnSalesforceCaseCreate = 'OnSalesforceCaseCreate'
-      OnContactEvaluationSubmit = 'OnContactEvaluationSubmit'
-      OnMetricDataUpdate = 'OnMetricDataUpdate'
-      OnCaseCreate = 'OnCaseCreate'
-      OnCaseUpdate = 'OnCaseUpdate'
-      OnSlaBreach = 'OnSlaBreach'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to specify the expiration of a routing step.</p>
@@ -7215,7 +6958,7 @@ module Aws::Connect
       :duration_in_seconds,
       :expiry_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tagged union to specify expression for a routing step.</p>
@@ -7237,7 +6980,7 @@ module Aws::Connect
       :or_expression,
       :not_attribute_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request for which contact failed to be generated.</p>
@@ -7256,20 +6999,7 @@ module Aws::Connect
       :failure_reason_code,
       :failure_reason_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureReasonCode
-      INVALID_ATTRIBUTE_KEY = 'INVALID_ATTRIBUTE_KEY'
-      INVALID_CUSTOMER_ENDPOINT = 'INVALID_CUSTOMER_ENDPOINT'
-      INVALID_SYSTEM_ENDPOINT = 'INVALID_SYSTEM_ENDPOINT'
-      INVALID_QUEUE = 'INVALID_QUEUE'
-      MISSING_CAMPAIGN = 'MISSING_CAMPAIGN'
-      MISSING_CUSTOMER_ENDPOINT = 'MISSING_CUSTOMER_ENDPOINT'
-      MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT = 'MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT'
-      REQUEST_THROTTLED = 'REQUEST_THROTTLED'
-      IDEMPOTENCY_EXCEPTION = 'IDEMPOTENCY_EXCEPTION'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object for case field values.</p>
@@ -7283,7 +7013,7 @@ module Aws::Connect
       :id,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to store union of Field values.</p>
@@ -7305,24 +7035,12 @@ module Aws::Connect
       :empty_value,
       :string_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:boolean_value] = false unless options.key?(:boolean_value)
         super
       end
-    end
-
-    module FileStatusType
-      APPROVED = 'APPROVED'
-      REJECTED = 'REJECTED'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
-    end
-
-    module FileUseCaseType
-      EMAIL_MESSAGE = 'EMAIL_MESSAGE'
-      ATTACHMENT = 'ATTACHMENT'
     end
 
     # <p>Contains the filter to apply when retrieving metrics with the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html">GetMetricDataV2</a> API.</p>
@@ -7341,7 +7059,7 @@ module Aws::Connect
       :filter_key,
       :filter_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the filter to apply when retrieving metrics.</p>
@@ -7366,15 +7084,7 @@ module Aws::Connect
       :routing_profiles,
       :routing_step_expressions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowAssociationResourceType
-      SMS_PHONE_NUMBER = 'SMS_PHONE_NUMBER'
-      INBOUND_EMAIL = 'INBOUND_EMAIL'
-      OUTBOUND_EMAIL = 'OUTBOUND_EMAIL'
-      ANALYTICS_CONNECTOR = 'ANALYTICS_CONNECTOR'
-      WHATSAPP_MESSAGING_PHONE_NUMBER = 'WHATSAPP_MESSAGING_PHONE_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about flow associations.</p>
@@ -7392,7 +7102,7 @@ module Aws::Connect
       :flow_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request to GetAttachedFile API.
@@ -7419,7 +7129,7 @@ module Aws::Connect
       :url_expiry_in_seconds,
       :associated_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response from GetAttachedFile API.
@@ -7473,7 +7183,7 @@ module Aws::Connect
       :download_url_metadata,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7486,7 +7196,7 @@ module Aws::Connect
       :instance_id,
       :initial_contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -7495,7 +7205,7 @@ module Aws::Connect
     class GetContactAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7512,7 +7222,7 @@ module Aws::Connect
       :contact_id,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_results
@@ -7530,7 +7240,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7717,7 +7427,7 @@ module Aws::Connect
       :max_results,
       :sort_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -7740,7 +7450,7 @@ module Aws::Connect
       :data_snapshot_time,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7783,7 +7493,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -7800,7 +7510,7 @@ module Aws::Connect
       :user_data_list,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7821,7 +7531,7 @@ module Aws::Connect
       :from_date,
       :to_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute effective_hours_of_operation_list
@@ -7834,7 +7544,7 @@ module Aws::Connect
       :effective_hours_of_operation_list,
       :time_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7843,7 +7553,7 @@ module Aws::Connect
     class GetFederationTokenRequest < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute credentials
@@ -7864,7 +7574,7 @@ module Aws::Connect
       :user_arn,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -7893,7 +7603,7 @@ module Aws::Connect
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -7910,7 +7620,7 @@ module Aws::Connect
       :flow_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -8173,7 +7883,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -8189,7 +7899,7 @@ module Aws::Connect
       :next_token,
       :metric_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9624,7 +9334,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -9638,7 +9348,7 @@ module Aws::Connect
       :next_token,
       :metric_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -9651,7 +9361,7 @@ module Aws::Connect
       :instance_id,
       :prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_presigned_url
@@ -9669,7 +9379,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -9687,7 +9397,7 @@ module Aws::Connect
       :task_template_id,
       :snapshot_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -9751,7 +9461,7 @@ module Aws::Connect
       :created_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -9762,7 +9472,7 @@ module Aws::Connect
     class GetTrafficDistributionRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute telephony_config
@@ -9790,14 +9500,7 @@ module Aws::Connect
       :sign_in_config,
       :agent_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Grouping
-      QUEUE = 'QUEUE'
-      CHANNEL = 'CHANNEL'
-      ROUTING_PROFILE = 'ROUTING_PROFILE'
-      ROUTING_STEP_EXPRESSION = 'ROUTING_STEP_EXPRESSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a hierarchy group.</p>
@@ -9835,7 +9538,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a hierarchy group condition.</p>
@@ -9849,12 +9552,7 @@ module Aws::Connect
       :value,
       :hierarchy_group_match_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HierarchyGroupMatchType
-      EXACT = 'EXACT'
-      WITH_CHILD_GROUPS = 'WITH_CHILD_GROUPS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a hierarchy group.</p>
@@ -9880,7 +9578,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the hierarchy group.</p>
@@ -9894,7 +9592,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the agent hierarchy. Hierarchies can be configured with up to five
@@ -9921,7 +9619,7 @@ module Aws::Connect
       :level4,
       :level5,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a hierarchy level.</p>
@@ -9947,7 +9645,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the hierarchy level to update.</p>
@@ -9957,7 +9655,7 @@ module Aws::Connect
     class HierarchyLevelUpdate < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the levels of a hierarchy group.</p>
@@ -9983,7 +9681,7 @@ module Aws::Connect
       :level_four,
       :level_five,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the levels in the hierarchy group.</p>
@@ -10009,7 +9707,7 @@ module Aws::Connect
       :level_four,
       :level_five,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a hierarchy structure.</p>
@@ -10035,7 +9733,7 @@ module Aws::Connect
       :level_four,
       :level_five,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the level hierarchy to update.</p>
@@ -10063,7 +9761,7 @@ module Aws::Connect
       :level_four,
       :level_five,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a historical metric. </p>
@@ -10286,7 +9984,7 @@ module Aws::Connect
       :statistic,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the data for a historical metric.</p>
@@ -10300,36 +9998,7 @@ module Aws::Connect
       :metric,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The historical metric names.</p>
-    module HistoricalMetricName
-      CONTACTS_QUEUED = 'CONTACTS_QUEUED'
-      CONTACTS_HANDLED = 'CONTACTS_HANDLED'
-      CONTACTS_ABANDONED = 'CONTACTS_ABANDONED'
-      CONTACTS_CONSULTED = 'CONTACTS_CONSULTED'
-      CONTACTS_AGENT_HUNG_UP_FIRST = 'CONTACTS_AGENT_HUNG_UP_FIRST'
-      CONTACTS_HANDLED_INCOMING = 'CONTACTS_HANDLED_INCOMING'
-      CONTACTS_HANDLED_OUTBOUND = 'CONTACTS_HANDLED_OUTBOUND'
-      CONTACTS_HOLD_ABANDONS = 'CONTACTS_HOLD_ABANDONS'
-      CONTACTS_TRANSFERRED_IN = 'CONTACTS_TRANSFERRED_IN'
-      CONTACTS_TRANSFERRED_OUT = 'CONTACTS_TRANSFERRED_OUT'
-      CONTACTS_TRANSFERRED_IN_FROM_QUEUE = 'CONTACTS_TRANSFERRED_IN_FROM_QUEUE'
-      CONTACTS_TRANSFERRED_OUT_FROM_QUEUE = 'CONTACTS_TRANSFERRED_OUT_FROM_QUEUE'
-      CONTACTS_MISSED = 'CONTACTS_MISSED'
-      CALLBACK_CONTACTS_HANDLED = 'CALLBACK_CONTACTS_HANDLED'
-      API_CONTACTS_HANDLED = 'API_CONTACTS_HANDLED'
-      OCCUPANCY = 'OCCUPANCY'
-      HANDLE_TIME = 'HANDLE_TIME'
-      AFTER_CONTACT_WORK_TIME = 'AFTER_CONTACT_WORK_TIME'
-      QUEUED_TIME = 'QUEUED_TIME'
-      ABANDON_TIME = 'ABANDON_TIME'
-      QUEUE_ANSWER_TIME = 'QUEUE_ANSWER_TIME'
-      HOLD_TIME = 'HOLD_TIME'
-      INTERACTION_TIME = 'INTERACTION_TIME'
-      INTERACTION_AND_HOLD_TIME = 'INTERACTION_AND_HOLD_TIME'
-      SERVICE_LEVEL = 'SERVICE_LEVEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the historical metrics retrieved.</p>
@@ -10343,7 +10012,7 @@ module Aws::Connect
       :dimensions,
       :collections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about of the hours of operation.</p>
@@ -10385,7 +10054,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the hours of operation.</p>
@@ -10403,17 +10072,7 @@ module Aws::Connect
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HoursOfOperationDays
-      SUNDAY = 'SUNDAY'
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the hours of operations override.</p>
@@ -10452,7 +10111,7 @@ module Aws::Connect
       :effective_from,
       :effective_till,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the hours of operation override config: day, start time, and end
@@ -10471,7 +10130,7 @@ module Aws::Connect
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return hours of operations overrides.</p>
@@ -10493,7 +10152,7 @@ module Aws::Connect
       :string_condition,
       :date_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return hours of operations.</p>
@@ -10515,7 +10174,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -10536,7 +10195,7 @@ module Aws::Connect
     class HoursOfOperationSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about hours of operation for a contact center.</p>
@@ -10562,7 +10221,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start time or end time for an hours of operation.</p>
@@ -10576,11 +10235,11 @@ module Aws::Connect
       :hours,
       :minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:hours] =  unless options.key?(:hours)
-        options[:minutes] =  unless options.key?(:minutes)
+        options[:hours] = nil unless options.key?(:hours)
+        options[:minutes] = nil unless options.key?(:minutes)
         super
       end
     end
@@ -10591,7 +10250,7 @@ module Aws::Connect
     class IdempotencyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -10620,7 +10279,7 @@ module Aws::Connect
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -10633,7 +10292,7 @@ module Aws::Connect
       :phone_number_id,
       :phone_number_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the additional TO and CC recipients of an inbound email contact.</p>
@@ -10659,7 +10318,7 @@ module Aws::Connect
       :to_addresses,
       :cc_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about email body content.</p>
@@ -10673,11 +10332,7 @@ module Aws::Connect
       :message_source_type,
       :raw_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InboundMessageSourceType
-      RAW = 'RAW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the raw email body content.</p>
@@ -10699,12 +10354,7 @@ module Aws::Connect
       :content_type,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InitiateAs
-      CONNECTED_TO_USER = 'CONNECTED_TO_USER'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Connect instance.</p>
@@ -10759,37 +10409,7 @@ module Aws::Connect
       :instance_access_url,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceAttributeType
-      INBOUND_CALLS = 'INBOUND_CALLS'
-      OUTBOUND_CALLS = 'OUTBOUND_CALLS'
-      CONTACTFLOW_LOGS = 'CONTACTFLOW_LOGS'
-      CONTACT_LENS = 'CONTACT_LENS'
-      AUTO_RESOLVE_BEST_VOICES = 'AUTO_RESOLVE_BEST_VOICES'
-      USE_CUSTOM_TTS_VOICES = 'USE_CUSTOM_TTS_VOICES'
-      EARLY_MEDIA = 'EARLY_MEDIA'
-      MULTI_PARTY_CONFERENCE = 'MULTI_PARTY_CONFERENCE'
-      HIGH_VOLUME_OUTBOUND = 'HIGH_VOLUME_OUTBOUND'
-      ENHANCED_CONTACT_MONITORING = 'ENHANCED_CONTACT_MONITORING'
-      ENHANCED_CHAT_MONITORING = 'ENHANCED_CHAT_MONITORING'
-      MULTI_PARTY_CHAT_CONFERENCE = 'MULTI_PARTY_CHAT_CONFERENCE'
-    end
-
-    module InstanceReplicationStatus
-      INSTANCE_REPLICATION_COMPLETE = 'INSTANCE_REPLICATION_COMPLETE'
-      INSTANCE_REPLICATION_IN_PROGRESS = 'INSTANCE_REPLICATION_IN_PROGRESS'
-      INSTANCE_REPLICATION_FAILED = 'INSTANCE_REPLICATION_FAILED'
-      INSTANCE_REPLICA_DELETING = 'INSTANCE_REPLICA_DELETING'
-      INSTANCE_REPLICATION_DELETION_FAILED = 'INSTANCE_REPLICATION_DELETION_FAILED'
-      RESOURCE_REPLICATION_NOT_STARTED = 'RESOURCE_REPLICATION_NOT_STARTED'
-    end
-
-    module InstanceStatus
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-      CREATION_FAILED = 'CREATION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Relevant
@@ -10800,7 +10420,7 @@ module Aws::Connect
     class InstanceStatusReason < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The storage configuration for the instance.</p>
@@ -10831,23 +10451,7 @@ module Aws::Connect
       :kinesis_stream_config,
       :kinesis_firehose_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceStorageResourceType
-      CHAT_TRANSCRIPTS = 'CHAT_TRANSCRIPTS'
-      CALL_RECORDINGS = 'CALL_RECORDINGS'
-      SCHEDULED_REPORTS = 'SCHEDULED_REPORTS'
-      MEDIA_STREAMS = 'MEDIA_STREAMS'
-      CONTACT_TRACE_RECORDS = 'CONTACT_TRACE_RECORDS'
-      AGENT_EVENTS = 'AGENT_EVENTS'
-      REAL_TIME_CONTACT_ANALYSIS_SEGMENTS = 'REAL_TIME_CONTACT_ANALYSIS_SEGMENTS'
-      ATTACHMENTS = 'ATTACHMENTS'
-      CONTACT_EVALUATIONS = 'CONTACT_EVALUATIONS'
-      SCREEN_RECORDINGS = 'SCREEN_RECORDINGS'
-      REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS = 'REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS'
-      REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS = 'REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS'
-      EMAIL_MESSAGES = 'EMAIL_MESSAGES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instance.</p>
@@ -10893,7 +10497,7 @@ module Aws::Connect
       :outbound_calls_enabled,
       :instance_access_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about the associated AppIntegrations.</p>
@@ -10931,24 +10535,7 @@ module Aws::Connect
       :source_application_name,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegrationType
-      EVENT = 'EVENT'
-      VOICE_ID = 'VOICE_ID'
-      PINPOINT_APP = 'PINPOINT_APP'
-      WISDOM_ASSISTANT = 'WISDOM_ASSISTANT'
-      WISDOM_KNOWLEDGE_BASE = 'WISDOM_KNOWLEDGE_BASE'
-      WISDOM_QUICK_RESPONSES = 'WISDOM_QUICK_RESPONSES'
-      Q_MESSAGE_TEMPLATES = 'Q_MESSAGE_TEMPLATES'
-      CASES_DOMAIN = 'CASES_DOMAIN'
-      APPLICATION = 'APPLICATION'
-      FILE_SCANNER = 'FILE_SCANNER'
-      SES_IDENTITY = 'SES_IDENTITY'
-      ANALYTICS_CONNECTOR = 'ANALYTICS_CONNECTOR'
-      CALL_TRANSFER_CONNECTOR = 'CALL_TRANSFER_CONNECTOR'
-      COGNITO_USER_POOL = 'COGNITO_USER_POOL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed because of an error or failure with the service.</p>
@@ -10958,7 +10545,7 @@ module Aws::Connect
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the interval period to use for returning results.</p>
@@ -11013,16 +10600,7 @@ module Aws::Connect
       :time_zone,
       :interval_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntervalPeriod
-      FIFTEEN_MIN = 'FIFTEEN_MIN'
-      THIRTY_MIN = 'THIRTY_MIN'
-      HOUR = 'HOUR'
-      DAY = 'DAY'
-      WEEK = 'WEEK'
-      TOTAL = 'TOTAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The flow is not valid.</p>
@@ -11032,7 +10610,7 @@ module Aws::Connect
     class InvalidContactFlowException < Struct.new(
       :problems,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The problems with the module. Please fix before trying again.</p>
@@ -11041,7 +10619,7 @@ module Aws::Connect
     class InvalidContactFlowModuleException < Struct.new(
       :problems,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified parameters are not valid.</p>
@@ -11051,7 +10629,7 @@ module Aws::Connect
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is not valid.</p>
@@ -11065,7 +10643,7 @@ module Aws::Connect
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reason why the request was invalid.</p>
@@ -11076,7 +10654,7 @@ module Aws::Connect
       :attached_file_invalid_request_exception_reason,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AttachedFileInvalidRequestExceptionReason < InvalidRequestExceptionReason; end
       class Unknown < InvalidRequestExceptionReason; end
@@ -11089,11 +10667,7 @@ module Aws::Connect
     class InvisibleFieldInfo < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IvrRecordingTrack
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of a Kinesis Data Firehose delivery stream.</p>
@@ -11103,7 +10677,7 @@ module Aws::Connect
     class KinesisFirehoseConfig < Struct.new(
       :firehose_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of a Kinesis data stream.</p>
@@ -11113,7 +10687,7 @@ module Aws::Connect
     class KinesisStreamConfig < Struct.new(
       :stream_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of a Kinesis video stream.</p>
@@ -11133,7 +10707,7 @@ module Aws::Connect
       :retention_period_hours,
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retention_period_hours] = 0 unless options.key?(:retention_period_hours)
@@ -11152,7 +10726,7 @@ module Aws::Connect
       :name,
       :lex_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of an Amazon Lex or Amazon Lex V2 bot.</p>
@@ -11166,7 +10740,7 @@ module Aws::Connect
       :lex_bot,
       :lex_v2_bot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of an Amazon Lex V2 bot.</p>
@@ -11176,12 +10750,7 @@ module Aws::Connect
     class LexV2Bot < Struct.new(
       :alias_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LexVersion
-      V1 = 'V1'
-      V2 = 'V2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The allowed limit for the resource has been exceeded.</p>
@@ -11191,7 +10760,7 @@ module Aws::Connect
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11213,7 +10782,7 @@ module Aws::Connect
       :max_results,
       :agent_status_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -11226,7 +10795,7 @@ module Aws::Connect
       :next_token,
       :agent_status_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11248,7 +10817,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -11263,7 +10832,7 @@ module Aws::Connect
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11281,7 +10850,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -11296,7 +10865,7 @@ module Aws::Connect
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11314,7 +10883,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute origins
@@ -11327,7 +10896,7 @@ module Aws::Connect
       :origins,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11349,7 +10918,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_summary_list
@@ -11363,7 +10932,7 @@ module Aws::Connect
       :contact_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11381,7 +10950,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_summary_list
@@ -11394,7 +10963,7 @@ module Aws::Connect
       :authentication_profile_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11416,7 +10985,7 @@ module Aws::Connect
       :max_results,
       :lex_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lex_bots
@@ -11430,7 +10999,7 @@ module Aws::Connect
       :lex_bots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a List condition to search users with
@@ -11445,7 +11014,7 @@ module Aws::Connect
       :target_list_type,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11467,7 +11036,7 @@ module Aws::Connect
       :contact_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_summary_list
@@ -11483,7 +11052,7 @@ module Aws::Connect
       :evaluation_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11505,7 +11074,7 @@ module Aws::Connect
       :max_results,
       :contact_flow_module_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_modules_summary_list
@@ -11518,7 +11087,7 @@ module Aws::Connect
       :contact_flow_modules_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11540,7 +11109,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_version_summary_list
@@ -11553,7 +11122,7 @@ module Aws::Connect
       :contact_flow_version_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11575,7 +11144,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_summary_list
@@ -11588,7 +11157,7 @@ module Aws::Connect
       :contact_flow_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11614,7 +11183,7 @@ module Aws::Connect
       :reference_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reference_summary_list
@@ -11630,7 +11199,7 @@ module Aws::Connect
       :reference_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11654,7 +11223,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_vocabulary_list
@@ -11667,7 +11236,7 @@ module Aws::Connect
       :default_vocabulary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11689,7 +11258,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form_version_summary_list
@@ -11702,7 +11271,7 @@ module Aws::Connect
       :evaluation_form_version_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11720,7 +11289,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form_summary_list
@@ -11733,15 +11302,7 @@ module Aws::Connect
       :evaluation_form_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListFlowAssociationResourceType
-      WHATSAPP_MESSAGING_PHONE_NUMBER = 'WHATSAPP_MESSAGING_PHONE_NUMBER'
-      VOICE_PHONE_NUMBER = 'VOICE_PHONE_NUMBER'
-      INBOUND_EMAIL = 'INBOUND_EMAIL'
-      OUTBOUND_EMAIL = 'OUTBOUND_EMAIL'
-      ANALYTICS_CONNECTOR = 'ANALYTICS_CONNECTOR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11763,7 +11324,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_association_summary_list
@@ -11776,7 +11337,7 @@ module Aws::Connect
       :flow_association_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11798,7 +11359,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -11820,7 +11381,7 @@ module Aws::Connect
       :last_modified_region,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11838,7 +11399,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operation_summary_list
@@ -11851,7 +11412,7 @@ module Aws::Connect
       :hours_of_operation_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11869,7 +11430,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -11882,7 +11443,7 @@ module Aws::Connect
       :attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11904,7 +11465,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_configs
@@ -11917,7 +11478,7 @@ module Aws::Connect
       :storage_configs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -11931,7 +11492,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_summary_list
@@ -11944,7 +11505,7 @@ module Aws::Connect
       :instance_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -11970,7 +11531,7 @@ module Aws::Connect
       :max_results,
       :integration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_association_summary_list
@@ -11983,7 +11544,7 @@ module Aws::Connect
       :integration_association_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12001,7 +11562,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lambda_functions
@@ -12014,7 +11575,7 @@ module Aws::Connect
       :lambda_functions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12033,7 +11594,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute lex_bots
@@ -12047,7 +11608,7 @@ module Aws::Connect
       :lex_bots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12079,7 +11640,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_summary_list
@@ -12092,7 +11653,7 @@ module Aws::Connect
       :phone_number_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about phone numbers that have been claimed to your Amazon Connect instance
@@ -12140,7 +11701,7 @@ module Aws::Connect
       :phone_number_description,
       :source_phone_number_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -12180,7 +11741,7 @@ module Aws::Connect
       :phone_number_types,
       :phone_number_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12194,7 +11755,7 @@ module Aws::Connect
       :next_token,
       :list_phone_numbers_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12213,7 +11774,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12226,7 +11787,7 @@ module Aws::Connect
       :next_token,
       :predefined_attribute_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12244,7 +11805,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_summary_list
@@ -12257,7 +11818,7 @@ module Aws::Connect
       :prompt_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12279,7 +11840,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12300,7 +11861,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12322,7 +11883,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_summary_list
@@ -12335,7 +11896,7 @@ module Aws::Connect
       :queue_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12358,7 +11919,7 @@ module Aws::Connect
       :max_results,
       :quick_connect_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_connect_summary_list
@@ -12371,7 +11932,7 @@ module Aws::Connect
       :quick_connect_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12403,7 +11964,7 @@ module Aws::Connect
       :output_type,
       :segment_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -12429,7 +11990,7 @@ module Aws::Connect
       :segments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12451,7 +12012,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12472,7 +12033,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12490,7 +12051,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_profile_summary_list
@@ -12503,7 +12064,7 @@ module Aws::Connect
       :routing_profile_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12529,7 +12090,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_summary_list
@@ -12542,7 +12103,7 @@ module Aws::Connect
       :rule_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12560,7 +12121,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_keys
@@ -12573,7 +12134,7 @@ module Aws::Connect
       :security_keys,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_id
@@ -12595,7 +12156,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -12616,7 +12177,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_id
@@ -12638,7 +12199,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute permissions
@@ -12661,7 +12222,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12679,7 +12240,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_summary_list
@@ -12692,7 +12253,7 @@ module Aws::Connect
       :security_profile_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -12702,7 +12263,7 @@ module Aws::Connect
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -12711,7 +12272,7 @@ module Aws::Connect
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12746,7 +12307,7 @@ module Aws::Connect
       :status,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_templates
@@ -12762,7 +12323,7 @@ module Aws::Connect
       :task_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_distribution_group_id
@@ -12782,7 +12343,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12795,7 +12356,7 @@ module Aws::Connect
       :next_token,
       :traffic_distribution_group_user_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -12813,7 +12374,7 @@ module Aws::Connect
       :next_token,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12826,7 +12387,7 @@ module Aws::Connect
       :next_token,
       :traffic_distribution_group_summary_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about the use cases for the specified integration
@@ -12850,7 +12411,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute use_case_summary_list
@@ -12863,7 +12424,7 @@ module Aws::Connect
       :use_case_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12881,7 +12442,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_hierarchy_group_summary_list
@@ -12894,7 +12455,7 @@ module Aws::Connect
       :user_hierarchy_group_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12917,7 +12478,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -12938,7 +12499,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12956,7 +12517,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_summary_list
@@ -12969,7 +12530,7 @@ module Aws::Connect
       :user_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -12993,7 +12554,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_version_summary_list
@@ -13007,7 +12568,7 @@ module Aws::Connect
       :view_version_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -13030,7 +12591,7 @@ module Aws::Connect
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute views_summary_list
@@ -13044,7 +12605,7 @@ module Aws::Connect
       :views_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to define AgentsCriteria.</p>
@@ -13054,7 +12615,7 @@ module Aws::Connect
     class MatchCriteria < Struct.new(
       :agents_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maximum number (1000) of tags have been returned with current request. Consider changing
@@ -13064,7 +12625,7 @@ module Aws::Connect
     class MaximumResultReturnedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about which channels are supported, and how many contacts an agent can
@@ -13088,7 +12649,7 @@ module Aws::Connect
       :concurrency,
       :cross_channel_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.</p>
@@ -13114,12 +12675,7 @@ module Aws::Connect
       :turn_control_url,
       :event_ingestion_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaStreamType
-      AUDIO = 'AUDIO'
-      VIDEO = 'VIDEO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A meeting created using the Amazon Chime SDK.</p>
@@ -13141,12 +12697,7 @@ module Aws::Connect
       :meeting_features,
       :meeting_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MeetingFeatureStatus
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings of the features available to a meeting.</p>
@@ -13156,7 +12707,7 @@ module Aws::Connect
     class MeetingFeaturesConfiguration < Struct.new(
       :audio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name, thresholds, and metric filters.</p>
@@ -13170,7 +12721,7 @@ module Aws::Connect
       :metric,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the filter used when retrieving metrics.
@@ -13234,7 +12785,7 @@ module Aws::Connect
       :metric_filter_values,
       :negate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:negate] = false unless options.key?(:negate)
@@ -13262,7 +12813,7 @@ module Aws::Connect
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the metric results.</p>
@@ -13280,7 +12831,7 @@ module Aws::Connect
       :metric_interval,
       :collections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the metric.</p>
@@ -13301,12 +12852,7 @@ module Aws::Connect
       :threshold,
       :metric_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitorCapability
-      SILENT_MONITOR = 'SILENT_MONITOR'
-      BARGE = 'BARGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -13337,7 +12883,7 @@ module Aws::Connect
       :allowed_monitor_capabilities,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -13350,7 +12896,7 @@ module Aws::Connect
       :contact_id,
       :contact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Payload of chat properties to apply when starting a new contact.</p>
@@ -13382,15 +12928,7 @@ module Aws::Connect
       :attributes,
       :streaming_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationContentType
-      PLAIN_TEXT = 'PLAIN_TEXT'
-    end
-
-    module NotificationDeliveryType
-      EMAIL = 'EMAIL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of notification recipient.</p>
@@ -13406,17 +12944,7 @@ module Aws::Connect
       :user_tags,
       :user_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NumberComparisonType
-      GREATER_OR_EQUAL = 'GREATER_OR_EQUAL'
-      GREATER = 'GREATER'
-      LESSER_OR_EQUAL = 'LESSER_OR_EQUAL'
-      LESSER = 'LESSER'
-      EQUAL = 'EQUAL'
-      NOT_EQUAL = 'NOT_EQUAL'
-      RANGE = 'RANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a numeric condition.</p>
@@ -13441,7 +12969,7 @@ module Aws::Connect
       :max_value,
       :comparison_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reference when the <code>referenceType</code> is <code>NUMBER</code>.
@@ -13456,18 +12984,7 @@ module Aws::Connect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NumericQuestionPropertyAutomationLabel
-      OVERALL_CUSTOMER_SENTIMENT_SCORE = 'OVERALL_CUSTOMER_SENTIMENT_SCORE'
-      OVERALL_AGENT_SENTIMENT_SCORE = 'OVERALL_AGENT_SENTIMENT_SCORE'
-      NON_TALK_TIME = 'NON_TALK_TIME'
-      NON_TALK_TIME_PERCENTAGE = 'NON_TALK_TIME_PERCENTAGE'
-      NUMBER_OF_INTERRUPTIONS = 'NUMBER_OF_INTERRUPTIONS'
-      CONTACT_DURATION = 'CONTACT_DURATION'
-      AGENT_INTERACTION_DURATION = 'AGENT_INTERACTION_DURATION'
-      CUSTOMER_HOLD_TIME = 'CUSTOMER_HOLD_TIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the property value used in automation of a numeric questions. Label values
@@ -13496,7 +13013,7 @@ module Aws::Connect
     class NumericQuestionPropertyValueAutomation < Struct.new(
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the hours of operations with the effective override applied.</p>
@@ -13510,7 +13027,7 @@ module Aws::Connect
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the additional recipients of outbound email.</p>
@@ -13523,7 +13040,7 @@ module Aws::Connect
     class OutboundAdditionalRecipients < Struct.new(
       :cc_email_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The outbound caller ID name, number, and outbound whisper flow.</p>
@@ -13541,7 +13058,7 @@ module Aws::Connect
       :outbound_caller_id_number_id,
       :outbound_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contact is not permitted.</p>
@@ -13551,7 +13068,7 @@ module Aws::Connect
     class OutboundContactNotPermittedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The outbound email address ID.</p>
@@ -13561,7 +13078,7 @@ module Aws::Connect
     class OutboundEmailConfig < Struct.new(
       :outbound_email_address_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about email body content.</p>
@@ -13579,12 +13096,7 @@ module Aws::Connect
       :templated_message_config,
       :raw_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutboundMessageSourceType
-      TEMPLATE = 'TEMPLATE'
-      RAW = 'RAW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the raw email body content.</p>
@@ -13602,7 +13114,7 @@ module Aws::Connect
       :body,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown for analyzed content when requested OutputType was not enabled for a given contact.
@@ -13613,17 +13125,7 @@ module Aws::Connect
     class OutputTypeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OverrideDays
-      SUNDAY = 'SUNDAY'
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start time or end time for an hours of operation override.</p>
@@ -13637,11 +13139,11 @@ module Aws::Connect
       :hours,
       :minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:hours] =  unless options.key?(:hours)
-        options[:minutes] =  unless options.key?(:minutes)
+        options[:hours] = nil unless options.key?(:hours)
+        options[:minutes] = nil unless options.key?(:minutes)
         super
       end
     end
@@ -13661,7 +13163,7 @@ module Aws::Connect
       :video,
       :screen_share,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The customer's details.</p>
@@ -13671,7 +13173,7 @@ module Aws::Connect
     class ParticipantDetails < Struct.new(
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details to add for the participant.</p>
@@ -13685,7 +13187,7 @@ module Aws::Connect
       :participant_role,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a participant's interactions in a contact.</p>
@@ -13729,26 +13231,7 @@ module Aws::Connect
       :max_response_time_in_millis,
       :last_message_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParticipantRole
-      AGENT = 'AGENT'
-      CUSTOMER = 'CUSTOMER'
-      SYSTEM = 'SYSTEM'
-      CUSTOM_BOT = 'CUSTOM_BOT'
-      SUPERVISOR = 'SUPERVISOR'
-    end
-
-    module ParticipantState
-      INITIAL = 'INITIAL'
-      CONNECTED = 'CONNECTED'
-      DISCONNECTED = 'DISCONNECTED'
-      MISSED = 'MISSED'
-    end
-
-    module ParticipantTimerAction
-      Unset = 'Unset'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the timer. After the timer configuration is set, it persists
@@ -13773,12 +13256,7 @@ module Aws::Connect
       :timer_type,
       :timer_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParticipantTimerType
-      IDLE = 'IDLE'
-      DISCONNECT_NONCUSTOMER = 'DISCONNECT_NONCUSTOMER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of the timer. Either the timer action (<code>Unset</code> to delete the timer), or
@@ -13797,7 +13275,7 @@ module Aws::Connect
       :participant_timer_duration_in_minutes,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ParticipantTimerAction < ParticipantTimerValue; end
       class ParticipantTimerDurationInMinutes < ParticipantTimerValue; end
@@ -13817,15 +13295,7 @@ module Aws::Connect
       :participant_token,
       :expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParticipantType
-      ALL = 'ALL'
-      MANAGER = 'MANAGER'
-      AGENT = 'AGENT'
-      CUSTOMER = 'CUSTOMER'
-      THIRDPARTY = 'THIRDPARTY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -13843,12 +13313,12 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PauseContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Enable persistent chats. For more information about enabling persistent chat, and for
@@ -13881,247 +13351,7 @@ module Aws::Connect
       :rehydration_type,
       :source_contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhoneNumberCountryCode
-      AF = 'AF'
-      AL = 'AL'
-      DZ = 'DZ'
-      AS = 'AS'
-      AD = 'AD'
-      AO = 'AO'
-      AI = 'AI'
-      AQ = 'AQ'
-      AG = 'AG'
-      AR = 'AR'
-      AM = 'AM'
-      AW = 'AW'
-      AU = 'AU'
-      AT = 'AT'
-      AZ = 'AZ'
-      BS = 'BS'
-      BH = 'BH'
-      BD = 'BD'
-      BB = 'BB'
-      BY = 'BY'
-      BE = 'BE'
-      BZ = 'BZ'
-      BJ = 'BJ'
-      BM = 'BM'
-      BT = 'BT'
-      BO = 'BO'
-      BA = 'BA'
-      BW = 'BW'
-      BR = 'BR'
-      IO = 'IO'
-      VG = 'VG'
-      BN = 'BN'
-      BG = 'BG'
-      BF = 'BF'
-      BI = 'BI'
-      KH = 'KH'
-      CM = 'CM'
-      CA = 'CA'
-      CV = 'CV'
-      KY = 'KY'
-      CF = 'CF'
-      TD = 'TD'
-      CL = 'CL'
-      CN = 'CN'
-      CX = 'CX'
-      CC = 'CC'
-      CO = 'CO'
-      KM = 'KM'
-      CK = 'CK'
-      CR = 'CR'
-      HR = 'HR'
-      CU = 'CU'
-      CW = 'CW'
-      CY = 'CY'
-      CZ = 'CZ'
-      CD = 'CD'
-      DK = 'DK'
-      DJ = 'DJ'
-      DM = 'DM'
-      DO = 'DO'
-      TL = 'TL'
-      EC = 'EC'
-      EG = 'EG'
-      SV = 'SV'
-      GQ = 'GQ'
-      ER = 'ER'
-      EE = 'EE'
-      ET = 'ET'
-      FK = 'FK'
-      FO = 'FO'
-      FJ = 'FJ'
-      FI = 'FI'
-      FR = 'FR'
-      PF = 'PF'
-      GA = 'GA'
-      GM = 'GM'
-      GE = 'GE'
-      DE = 'DE'
-      GH = 'GH'
-      GI = 'GI'
-      GR = 'GR'
-      GL = 'GL'
-      GD = 'GD'
-      GU = 'GU'
-      GT = 'GT'
-      GG = 'GG'
-      GN = 'GN'
-      GW = 'GW'
-      GY = 'GY'
-      HT = 'HT'
-      HN = 'HN'
-      HK = 'HK'
-      HU = 'HU'
-      IS = 'IS'
-      IN = 'IN'
-      ID = 'ID'
-      IR = 'IR'
-      IQ = 'IQ'
-      IE = 'IE'
-      IM = 'IM'
-      IL = 'IL'
-      IT = 'IT'
-      CI = 'CI'
-      JM = 'JM'
-      JP = 'JP'
-      JE = 'JE'
-      JO = 'JO'
-      KZ = 'KZ'
-      KE = 'KE'
-      KI = 'KI'
-      KW = 'KW'
-      KG = 'KG'
-      LA = 'LA'
-      LV = 'LV'
-      LB = 'LB'
-      LS = 'LS'
-      LR = 'LR'
-      LY = 'LY'
-      LI = 'LI'
-      LT = 'LT'
-      LU = 'LU'
-      MO = 'MO'
-      MK = 'MK'
-      MG = 'MG'
-      MW = 'MW'
-      MY = 'MY'
-      MV = 'MV'
-      ML = 'ML'
-      MT = 'MT'
-      MH = 'MH'
-      MR = 'MR'
-      MU = 'MU'
-      YT = 'YT'
-      MX = 'MX'
-      FM = 'FM'
-      MD = 'MD'
-      MC = 'MC'
-      MN = 'MN'
-      ME = 'ME'
-      MS = 'MS'
-      MA = 'MA'
-      MZ = 'MZ'
-      MM = 'MM'
-      NA = 'NA'
-      NR = 'NR'
-      NP = 'NP'
-      NL = 'NL'
-      AN = 'AN'
-      NC = 'NC'
-      NZ = 'NZ'
-      NI = 'NI'
-      NE = 'NE'
-      NG = 'NG'
-      NU = 'NU'
-      KP = 'KP'
-      MP = 'MP'
-      NO = 'NO'
-      OM = 'OM'
-      PK = 'PK'
-      PW = 'PW'
-      PA = 'PA'
-      PG = 'PG'
-      PY = 'PY'
-      PE = 'PE'
-      PH = 'PH'
-      PN = 'PN'
-      PL = 'PL'
-      PT = 'PT'
-      PR = 'PR'
-      QA = 'QA'
-      CG = 'CG'
-      RE = 'RE'
-      RO = 'RO'
-      RU = 'RU'
-      RW = 'RW'
-      BL = 'BL'
-      SH = 'SH'
-      KN = 'KN'
-      LC = 'LC'
-      MF = 'MF'
-      PM = 'PM'
-      VC = 'VC'
-      WS = 'WS'
-      SM = 'SM'
-      ST = 'ST'
-      SA = 'SA'
-      SN = 'SN'
-      RS = 'RS'
-      SC = 'SC'
-      SL = 'SL'
-      SG = 'SG'
-      SX = 'SX'
-      SK = 'SK'
-      SI = 'SI'
-      SB = 'SB'
-      SO = 'SO'
-      ZA = 'ZA'
-      KR = 'KR'
-      ES = 'ES'
-      LK = 'LK'
-      SD = 'SD'
-      SR = 'SR'
-      SJ = 'SJ'
-      SZ = 'SZ'
-      SE = 'SE'
-      CH = 'CH'
-      SY = 'SY'
-      TW = 'TW'
-      TJ = 'TJ'
-      TZ = 'TZ'
-      TH = 'TH'
-      TG = 'TG'
-      TK = 'TK'
-      TO = 'TO'
-      TT = 'TT'
-      TN = 'TN'
-      TR = 'TR'
-      TM = 'TM'
-      TC = 'TC'
-      TV = 'TV'
-      VI = 'VI'
-      UG = 'UG'
-      UA = 'UA'
-      AE = 'AE'
-      GB = 'GB'
-      US = 'US'
-      UY = 'UY'
-      UZ = 'UZ'
-      VU = 'VU'
-      VA = 'VA'
-      VE = 'VE'
-      VN = 'VN'
-      WF = 'WF'
-      EH = 'EH'
-      YE = 'YE'
-      ZM = 'ZM'
-      ZW = 'ZW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a phone number for a quick connect.</p>
@@ -14131,7 +13361,7 @@ module Aws::Connect
     class PhoneNumberQuickConnectConfig < Struct.new(
       :phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the phone number.</p>
@@ -14166,7 +13396,7 @@ module Aws::Connect
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a phone number for a contact center.</p>
@@ -14192,28 +13422,7 @@ module Aws::Connect
       :phone_number_type,
       :phone_number_country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhoneNumberType
-      TOLL_FREE = 'TOLL_FREE'
-      DID = 'DID'
-      UIFN = 'UIFN'
-      SHARED = 'SHARED'
-      THIRD_PARTY_TF = 'THIRD_PARTY_TF'
-      THIRD_PARTY_DID = 'THIRD_PARTY_DID'
-      SHORT_CODE = 'SHORT_CODE'
-    end
-
-    module PhoneNumberWorkflowStatus
-      Claimed = 'CLAIMED'
-      InProgress = 'IN_PROGRESS'
-      Failed = 'FAILED'
-    end
-
-    module PhoneType
-      SOFT_PHONE = 'SOFT_PHONE'
-      DESK_PHONE = 'DESK_PHONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a predefined attribute.</p>
@@ -14235,7 +13444,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return predefined attributes.</p>
@@ -14255,7 +13464,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of a predefined attribute.</p>
@@ -14273,7 +13482,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about values of a predefined attribute.</p>
@@ -14284,7 +13493,7 @@ module Aws::Connect
       :string_list,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringList < PredefinedAttributeValues; end
       class Unknown < PredefinedAttributeValues; end
@@ -14297,7 +13506,7 @@ module Aws::Connect
     class ProblemDetail < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a prompt.</p>
@@ -14331,7 +13540,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return prompts.</p>
@@ -14353,7 +13562,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -14374,7 +13583,7 @@ module Aws::Connect
     class PromptSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the prompt.</p>
@@ -14400,7 +13609,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The property is not valid.</p>
@@ -14412,7 +13621,7 @@ module Aws::Connect
       :message,
       :property_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about why a property is not valid.</p>
@@ -14430,16 +13639,7 @@ module Aws::Connect
       :reason,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PropertyValidationExceptionReason
-      INVALID_FORMAT = 'INVALID_FORMAT'
-      UNIQUE_CONSTRAINT_VIOLATED = 'UNIQUE_CONSTRAINT_VIOLATED'
-      REFERENCED_RESOURCE_NOT_FOUND = 'REFERENCED_RESOURCE_NOT_FOUND'
-      RESOURCE_NAME_ALREADY_EXISTS = 'RESOURCE_NAME_ALREADY_EXISTS'
-      REQUIRED_PROPERTY_MISSING = 'REQUIRED_PROPERTY_MISSING'
-      NOT_SUPPORTED = 'NOT_SUPPORTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_id
@@ -14456,12 +13656,12 @@ module Aws::Connect
       :instance_id,
       :agent_status_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutUserStatusResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the quality of the participant's media connection.</p>
@@ -14475,7 +13675,7 @@ module Aws::Connect
       :agent,
       :customer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a queue.</p>
@@ -14529,10 +13729,10 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_contacts] =  unless options.key?(:max_contacts)
+        options[:max_contacts] = nil unless options.key?(:max_contacts)
         super
       end
     end
@@ -14548,7 +13748,7 @@ module Aws::Connect
       :id,
       :enqueue_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a queue.</p>
@@ -14558,7 +13758,7 @@ module Aws::Connect
     class QueueInfoInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a queue for a quick connect. The flow must be of type Transfer to
@@ -14573,7 +13773,7 @@ module Aws::Connect
       :queue_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a queue resource for which metrics are returned.</p>
@@ -14587,7 +13787,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return queues.</p>
@@ -14618,7 +13818,7 @@ module Aws::Connect
       :string_condition,
       :queue_type_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -14639,12 +13839,7 @@ module Aws::Connect
     class QueueSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a queue.</p>
@@ -14674,12 +13869,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueType
-      STANDARD = 'STANDARD'
-      AGENT = 'AGENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a quick connect.</p>
@@ -14717,7 +13907,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration settings for a quick connect.</p>
@@ -14740,7 +13930,7 @@ module Aws::Connect
       :queue_config,
       :phone_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return quick connects.</p>
@@ -14762,7 +13952,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -14783,7 +13973,7 @@ module Aws::Connect
     class QuickConnectSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a quick connect.</p>
@@ -14814,13 +14004,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuickConnectType
-      USER = 'USER'
-      QUEUE = 'QUEUE'
-      PHONE_NUMBER = 'PHONE_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Object to define the minimum and maximum proficiency levels.</p>
@@ -14834,7 +14018,7 @@ module Aws::Connect
       :min_proficiency_level,
       :max_proficiency_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates a field that is read-only to an agent.</p>
@@ -14844,7 +14028,7 @@ module Aws::Connect
     class ReadOnlyFieldInfo < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that describes attached file. </p>
@@ -14869,7 +14053,7 @@ module Aws::Connect
       :attachment_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the category rule that was matched.</p>
@@ -14879,7 +14063,7 @@ module Aws::Connect
     class RealTimeContactAnalysisCategoryDetails < Struct.new(
       :points_of_interest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Begin and end offsets for a part of text.</p>
@@ -14893,7 +14077,7 @@ module Aws::Connect
       :begin_offset_char,
       :end_offset_char,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:begin_offset_char] = 0 unless options.key?(:begin_offset_char)
@@ -14910,12 +14094,7 @@ module Aws::Connect
     class RealTimeContactAnalysisIssueDetected < Struct.new(
       :transcript_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RealTimeContactAnalysisOutputType
-      Raw = 'Raw'
-      Redacted = 'Redacted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The section of the contact transcript segment that category rule was detected.</p>
@@ -14926,20 +14105,7 @@ module Aws::Connect
     class RealTimeContactAnalysisPointOfInterest < Struct.new(
       :transcript_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RealTimeContactAnalysisPostContactSummaryFailureCode
-      QUOTA_EXCEEDED = 'QUOTA_EXCEEDED'
-      INSUFFICIENT_CONVERSATION_CONTENT = 'INSUFFICIENT_CONVERSATION_CONTENT'
-      FAILED_SAFETY_GUIDELINES = 'FAILED_SAFETY_GUIDELINES'
-      INVALID_ANALYSIS_CONFIGURATION = 'INVALID_ANALYSIS_CONFIGURATION'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-    end
-
-    module RealTimeContactAnalysisPostContactSummaryStatus
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Segment containing list of attachments.</p>
@@ -14969,7 +14135,7 @@ module Aws::Connect
       :attachments,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The matched category rules.</p>
@@ -14979,7 +14145,7 @@ module Aws::Connect
     class RealTimeContactAnalysisSegmentCategories < Struct.new(
       :matched_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Segment type describing a contact event.</p>
@@ -15010,7 +14176,7 @@ module Aws::Connect
       :event_type,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Segment type containing a list of detected issues.</p>
@@ -15020,7 +14186,7 @@ module Aws::Connect
     class RealTimeContactAnalysisSegmentIssues < Struct.new(
       :issues_detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the post-contact summary for a real-time contact segment.</p>
@@ -15065,7 +14231,7 @@ module Aws::Connect
       :status,
       :failure_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The analyzed transcript segment.</p>
@@ -15108,33 +14274,7 @@ module Aws::Connect
       :redaction,
       :sentiment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RealTimeContactAnalysisSegmentType
-      Transcript = 'Transcript'
-      Categories = 'Categories'
-      Issues = 'Issues'
-      Event = 'Event'
-      Attachments = 'Attachments'
-      PostContactSummary = 'PostContactSummary'
-    end
-
-    module RealTimeContactAnalysisSentimentLabel
-      POSITIVE = 'POSITIVE'
-      NEGATIVE = 'NEGATIVE'
-      NEUTRAL = 'NEUTRAL'
-    end
-
-    module RealTimeContactAnalysisStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-    end
-
-    module RealTimeContactAnalysisSupportedChannel
-      VOICE = 'VOICE'
-      CHAT = 'CHAT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object describing time with which the segment is associated. It can have different
@@ -15147,7 +14287,7 @@ module Aws::Connect
       :absolute_time,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AbsoluteTime < RealTimeContactAnalysisTimeData; end
       class Unknown < RealTimeContactAnalysisTimeData; end
@@ -15162,7 +14302,7 @@ module Aws::Connect
     class RealTimeContactAnalysisTranscriptItemRedaction < Struct.new(
       :character_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Transcript representation containing Id and list of character intervals that are associated
@@ -15179,7 +14319,7 @@ module Aws::Connect
       :id,
       :character_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Transcript representation containing Id, Content and list of character intervals that are
@@ -15200,7 +14340,7 @@ module Aws::Connect
       :id,
       :character_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An analyzed segment for a real-time analysis session.</p>
@@ -15231,7 +14371,7 @@ module Aws::Connect
       :post_contact_summary,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Transcript < RealtimeContactAnalysisSegment; end
       class Categories < RealtimeContactAnalysisSegment; end
@@ -15308,12 +14448,7 @@ module Aws::Connect
       :status,
       :deletion_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecordingStatus
-      AVAILABLE = 'AVAILABLE'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Well-formed data on a contact, used by agents to complete a contact request. You can have up
@@ -15342,21 +14477,12 @@ module Aws::Connect
       :arn,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = '' unless options.key?(:value)
         super
       end
-    end
-
-    module ReferenceStatus
-      AVAILABLE = 'AVAILABLE'
-      DELETED = 'DELETED'
-      APPROVED = 'APPROVED'
-      REJECTED = 'REJECTED'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
     end
 
     # <p>Contains summary information about a reference. <code>ReferenceSummary</code> contains only
@@ -15399,7 +14525,7 @@ module Aws::Connect
       :email,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Url < ReferenceSummary; end
       class Attachment < ReferenceSummary; end
@@ -15409,22 +14535,6 @@ module Aws::Connect
       class Date < ReferenceSummary; end
       class Email < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
-    end
-
-    module ReferenceType
-      URL = 'URL'
-      ATTACHMENT = 'ATTACHMENT'
-      CONTACT_ANALYSIS = 'CONTACT_ANALYSIS'
-      NUMBER = 'NUMBER'
-      STRING = 'STRING'
-      DATE = 'DATE'
-      EMAIL = 'EMAIL'
-      EMAIL_MESSAGE = 'EMAIL_MESSAGE'
-    end
-
-    module RehydrationType
-      ENTIRE_PAST_SESSION = 'ENTIRE_PAST_SESSION'
-      FROM_SEGMENT = 'FROM_SEGMENT'
     end
 
     # @!attribute phone_number_id
@@ -15440,7 +14550,7 @@ module Aws::Connect
       :phone_number_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -15464,7 +14574,7 @@ module Aws::Connect
       :client_token,
       :replica_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -15479,7 +14589,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the status of the replication of a source Amazon Connect instance across
@@ -15509,7 +14619,7 @@ module Aws::Connect
       :source_region,
       :global_sign_in_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status information about the replication process, where you use the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html">ReplicateInstance</a> API to create a replica of your Amazon Connect instance in
@@ -15533,7 +14643,7 @@ module Aws::Connect
       :replication_status,
       :replication_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a required field.</p>
@@ -15543,7 +14653,7 @@ module Aws::Connect
     class RequiredFieldInfo < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource already has that name.</p>
@@ -15552,7 +14662,7 @@ module Aws::Connect
     class ResourceConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>That resource is already in use (for example, you're trying to add a record with the same
@@ -15572,7 +14682,7 @@ module Aws::Connect
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -15582,7 +14692,7 @@ module Aws::Connect
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is not ready.</p>
@@ -15591,7 +14701,7 @@ module Aws::Connect
     class ResourceNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to search tags.</p>
@@ -15601,18 +14711,7 @@ module Aws::Connect
     class ResourceTagsSearchCriteria < Struct.new(
       :tag_search_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      CONTACT = 'CONTACT'
-      CONTACT_FLOW = 'CONTACT_FLOW'
-      INSTANCE = 'INSTANCE'
-      PARTICIPANT = 'PARTICIPANT'
-      HIERARCHY_LEVEL = 'HIERARCHY_LEVEL'
-      HIERARCHY_GROUP = 'HIERARCHY_GROUP'
-      USER = 'USER'
-      PHONE_NUMBER = 'PHONE_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -15634,12 +14733,12 @@ module Aws::Connect
       :initial_contact_id,
       :contact_recording_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResumeContactRecordingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -15657,12 +14756,12 @@ module Aws::Connect
       :instance_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResumeContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Latest routing criteria on the contact.</p>
@@ -15686,7 +14785,7 @@ module Aws::Connect
       :activation_timestamp,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to define the RoutingCriteria.</p>
@@ -15699,7 +14798,7 @@ module Aws::Connect
     class RoutingCriteriaInput < Struct.new(
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Step defines the list of agents to be routed or route based on the agent requirements such
@@ -15714,7 +14813,7 @@ module Aws::Connect
       :expiry,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify whether this routing criteria step should apply for only a limited amount of time, 
@@ -15726,14 +14825,7 @@ module Aws::Connect
     class RoutingCriteriaInputStepExpiry < Struct.new(
       :duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RoutingCriteriaStepStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      JOINED = 'JOINED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a routing profile.</p>
@@ -15802,7 +14894,7 @@ module Aws::Connect
       :is_default,
       :associated_queue_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -15830,10 +14922,10 @@ module Aws::Connect
       :priority,
       :delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:delay] =  unless options.key?(:delay)
+        options[:delay] = nil unless options.key?(:delay)
         super
       end
     end
@@ -15869,7 +14961,7 @@ module Aws::Connect
       :delay,
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:delay] = 0 unless options.key?(:delay)
@@ -15889,7 +14981,7 @@ module Aws::Connect
       :queue_id,
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the routing profile assigned to the user.</p>
@@ -15903,7 +14995,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return routing profiles.</p>
@@ -15931,7 +15023,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -15952,7 +15044,7 @@ module Aws::Connect
     class RoutingProfileSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a routing profile.</p>
@@ -15978,7 +15070,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a rule.</p>
@@ -16028,7 +15120,7 @@ module Aws::Connect
       :last_updated_by,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the action to be performed when a rule is triggered.</p>
@@ -16098,12 +15190,7 @@ module Aws::Connect
       :end_associated_tasks_action,
       :submit_auto_evaluation_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RulePublishStatus
-      DRAFT = 'DRAFT'
-      PUBLISHED = 'PUBLISHED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>ActionTypes</code> associated with a rule. </p>
@@ -16141,7 +15228,7 @@ module Aws::Connect
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the
@@ -16158,7 +15245,7 @@ module Aws::Connect
       :event_source_name,
       :integration_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>
@@ -16176,11 +15263,7 @@ module Aws::Connect
       :bucket_prefix,
       :encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScreenShareCapability
-      SEND = 'SEND'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16207,7 +15290,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_statuses
@@ -16224,7 +15307,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -16260,7 +15343,7 @@ module Aws::Connect
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -16273,7 +15356,7 @@ module Aws::Connect
       :next_token,
       :available_numbers_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16305,7 +15388,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flow_modules
@@ -16322,7 +15405,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16354,7 +15437,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_flows
@@ -16371,12 +15454,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchContactsMatchType
-      MATCH_ALL = 'MATCH_ALL'
-      MATCH_ANY = 'MATCH_ANY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16407,7 +15485,7 @@ module Aws::Connect
       :next_token,
       :sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contacts
@@ -16424,7 +15502,7 @@ module Aws::Connect
       :next_token,
       :total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure of time range that you want to search results.</p>
@@ -16442,14 +15520,7 @@ module Aws::Connect
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchContactsTimeRangeType
-      INITIATION_TIMESTAMP = 'INITIATION_TIMESTAMP'
-      SCHEDULED_TIMESTAMP = 'SCHEDULED_TIMESTAMP'
-      CONNECTED_TO_AGENT_TIMESTAMP = 'CONNECTED_TO_AGENT_TIMESTAMP'
-      DISCONNECT_TIMESTAMP = 'DISCONNECT_TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure of search criteria to be used to return contacts.</p>
@@ -16494,7 +15565,7 @@ module Aws::Connect
       :searchable_contact_attributes,
       :searchable_segment_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16520,7 +15591,7 @@ module Aws::Connect
       :search_criteria,
       :search_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -16537,7 +15608,7 @@ module Aws::Connect
       :email_addresses,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16563,7 +15634,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operation_overrides
@@ -16581,7 +15652,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16607,7 +15678,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hours_of_operations
@@ -16624,7 +15695,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16647,7 +15718,7 @@ module Aws::Connect
       :max_results,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predefined_attributes
@@ -16665,7 +15736,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16691,7 +15762,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompts
@@ -16708,7 +15779,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16739,7 +15810,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queues
@@ -16756,7 +15827,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16782,7 +15853,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute quick_connects
@@ -16799,7 +15870,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16863,7 +15934,7 @@ module Aws::Connect
       :max_results,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -16876,7 +15947,7 @@ module Aws::Connect
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16907,7 +15978,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_profiles
@@ -16924,7 +15995,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -16959,7 +16030,7 @@ module Aws::Connect
       :search_criteria,
       :search_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profiles
@@ -16976,7 +16047,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17003,7 +16074,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_hierarchy_groups
@@ -17020,7 +16091,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17051,7 +16122,7 @@ module Aws::Connect
       :search_filter,
       :search_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -17068,7 +16139,7 @@ module Aws::Connect
       :next_token,
       :approximate_total_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17100,7 +16171,7 @@ module Aws::Connect
       :name_starts_with,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vocabulary_summary_list
@@ -17113,7 +16184,7 @@ module Aws::Connect
       :vocabulary_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines search criteria based on user-defined contact attributes that are
@@ -17130,7 +16201,7 @@ module Aws::Connect
       :criteria,
       :match_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria based on user-defined contact attribute key and values to search
@@ -17145,11 +16216,7 @@ module Aws::Connect
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchableQueueType
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria based on searchable segment attributes of a contact</p>
@@ -17164,7 +16231,7 @@ module Aws::Connect
       :criteria,
       :match_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria based on searchable segment attribute key and values to search
@@ -17179,7 +16246,7 @@ module Aws::Connect
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of the security key.</p>
@@ -17197,7 +16264,7 @@ module Aws::Connect
       :key,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a security profile.</p>
@@ -17252,7 +16319,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return security profiles.</p>
@@ -17275,7 +16342,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the returned security profiles.</p>
@@ -17305,7 +16372,7 @@ module Aws::Connect
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a security profile.</p>
@@ -17331,7 +16398,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -17352,7 +16419,7 @@ module Aws::Connect
     class SecurityProfilesSearchFilter < Struct.new(
       :tag_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value for a segment attribute. This is structured as a map where the key is
@@ -17371,7 +16438,7 @@ module Aws::Connect
       :value_map,
       :value_integer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_id
@@ -17402,7 +16469,7 @@ module Aws::Connect
       :event,
       :new_session_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute initial_contact_id
@@ -17417,7 +16484,7 @@ module Aws::Connect
       :initial_contact_id,
       :new_chat_created,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the send notification action.</p>
@@ -17448,7 +16515,7 @@ module Aws::Connect
       :content_type,
       :recipient,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17491,12 +16558,12 @@ module Aws::Connect
       :source_campaign,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendOutboundEmailResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service quota has been exceeded.</p>
@@ -17509,7 +16576,7 @@ module Aws::Connect
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reason for the exception.</p>
@@ -17520,7 +16587,7 @@ module Aws::Connect
       :attached_file_service_quota_exceeded_exception_reason,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AttachedFileServiceQuotaExceededExceptionReason < ServiceQuotaExceededExceptionReason; end
       class Unknown < ServiceQuotaExceededExceptionReason; end
@@ -17534,7 +16601,7 @@ module Aws::Connect
     class SignInConfig < Struct.new(
       :distributions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The distribution of sign in traffic between the instance and its replica(s).</p>
@@ -17548,7 +16615,7 @@ module Aws::Connect
       :region,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -17575,20 +16642,7 @@ module Aws::Connect
       :condition,
       :option_ref_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SingleSelectQuestionRuleCategoryAutomationCondition
-      PRESENT = 'PRESENT'
-      NOT_PRESENT = 'NOT_PRESENT'
-    end
-
-    module SlaAssignmentType
-      CASES = 'CASES'
-    end
-
-    module SlaType
-      CASE_FIELD = 'CaseField'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines the field name to sort by and a sort order.</p>
@@ -17602,21 +16656,7 @@ module Aws::Connect
       :field_name,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
-    end
-
-    module SortableFieldName
-      INITIATION_TIMESTAMP = 'INITIATION_TIMESTAMP'
-      SCHEDULED_TIMESTAMP = 'SCHEDULED_TIMESTAMP'
-      CONNECTED_TO_AGENT_TIMESTAMP = 'CONNECTED_TO_AGENT_TIMESTAMP'
-      DISCONNECT_TIMESTAMP = 'DISCONNECT_TIMESTAMP'
-      INITIATION_METHOD = 'INITIATION_METHOD'
-      CHANNEL = 'CHANNEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the campaign.</p>
@@ -17630,13 +16670,7 @@ module Aws::Connect
       :campaign_id,
       :outbound_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      SALESFORCE = 'SALESFORCE'
-      ZENDESK = 'ZENDESK'
-      CASES = 'CASES'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -17689,7 +16723,7 @@ module Aws::Connect
       :created_by,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Response from StartAttachedFileUpload API.
@@ -17721,7 +16755,7 @@ module Aws::Connect
       :created_by,
       :upload_url_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17817,7 +16851,7 @@ module Aws::Connect
       :segment_attributes,
       :customer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -17841,7 +16875,7 @@ module Aws::Connect
       :participant_token,
       :continued_from_contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17865,7 +16899,7 @@ module Aws::Connect
       :evaluation_form_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_id
@@ -17878,7 +16912,7 @@ module Aws::Connect
       :evaluation_id,
       :evaluation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17900,12 +16934,12 @@ module Aws::Connect
       :initial_contact_id,
       :voice_recording_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartContactRecordingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -17930,7 +16964,7 @@ module Aws::Connect
       :chat_streaming_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streaming_id
@@ -17939,7 +16973,7 @@ module Aws::Connect
     class StartContactStreamingResponse < Struct.new(
       :streaming_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18028,7 +17062,7 @@ module Aws::Connect
       :segment_attributes,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18037,7 +17071,7 @@ module Aws::Connect
     class StartEmailContactResponse < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_endpoint
@@ -18163,7 +17197,7 @@ module Aws::Connect
       :supported_messaging_content_types,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18172,7 +17206,7 @@ module Aws::Connect
     class StartOutboundChatContactResponse < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18208,7 +17242,7 @@ module Aws::Connect
       :email_message,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18217,7 +17251,7 @@ module Aws::Connect
     class StartOutboundEmailContactResponse < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -18308,7 +17342,7 @@ module Aws::Connect
       :campaign_id,
       :traffic_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18317,7 +17351,7 @@ module Aws::Connect
     class StartOutboundVoiceContactResponse < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -18337,12 +17371,12 @@ module Aws::Connect
       :instance_id,
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartScreenSharingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18439,7 +17473,7 @@ module Aws::Connect
       :related_contact_id,
       :segment_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18448,7 +17482,7 @@ module Aws::Connect
     class StartTaskContactResponse < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -18507,7 +17541,7 @@ module Aws::Connect
       :references,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_data
@@ -18531,7 +17565,7 @@ module Aws::Connect
       :participant_id,
       :participant_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the state transition of a supervisor.</p>
@@ -18549,19 +17583,7 @@ module Aws::Connect
       :state_start_timestamp,
       :state_end_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Statistic
-      SUM = 'SUM'
-      MAX = 'MAX'
-      AVG = 'AVG'
-    end
-
-    module Status
-      COMPLETE = 'COMPLETE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Step signifies the criteria to be used for routing to an agent</p>
@@ -18579,7 +17601,7 @@ module Aws::Connect
       :expression,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18601,12 +17623,12 @@ module Aws::Connect
       :initial_contact_id,
       :contact_recording_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopContactRecordingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18624,12 +17646,12 @@ module Aws::Connect
       :instance_id,
       :disconnect_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18647,25 +17669,12 @@ module Aws::Connect
       :contact_id,
       :streaming_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopContactStreamingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageType
-      S3 = 'S3'
-      KINESIS_VIDEO_STREAM = 'KINESIS_VIDEO_STREAM'
-      KINESIS_STREAM = 'KINESIS_STREAM'
-      KINESIS_FIREHOSE = 'KINESIS_FIREHOSE'
-    end
-
-    module StringComparisonType
-      STARTS_WITH = 'STARTS_WITH'
-      CONTAINS = 'CONTAINS'
-      EXACT = 'EXACT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a string condition.</p>
@@ -18683,7 +17692,7 @@ module Aws::Connect
       :value,
       :comparison_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a reference when the <code>referenceType</code> is <code>STRING</code>.
@@ -18698,7 +17707,7 @@ module Aws::Connect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the submit automated evaluation action.</p>
@@ -18708,7 +17717,7 @@ module Aws::Connect
     class SubmitAutoEvaluationActionDefinition < Struct.new(
       :evaluation_form_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18729,7 +17738,7 @@ module Aws::Connect
       :answers,
       :notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_id
@@ -18742,7 +17751,7 @@ module Aws::Connect
       :evaluation_id,
       :evaluation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request for which contact was successfully created.</p>
@@ -18757,7 +17766,7 @@ module Aws::Connect
       :request_identifier,
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -18779,12 +17788,12 @@ module Aws::Connect
       :initial_contact_id,
       :contact_recording_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SuspendContactRecordingResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE
@@ -18799,7 +17808,7 @@ module Aws::Connect
       :tag_key,
       :tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -18820,12 +17829,12 @@ module Aws::Connect
       :instance_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -18838,7 +17847,7 @@ module Aws::Connect
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return tags.</p>
@@ -18862,7 +17871,7 @@ module Aws::Connect
       :tag_key_comparison_type,
       :tag_value_comparison_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag set contains tag key and tag value.</p>
@@ -18876,11 +17885,7 @@ module Aws::Connect
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetListType
-      PROFICIENCIES = 'PROFICIENCIES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the task action.</p>
@@ -18907,7 +17912,7 @@ module Aws::Connect
       :contact_flow_id,
       :references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes constraints that apply to the template fields.</p>
@@ -18925,7 +17930,7 @@ module Aws::Connect
       :read_only_fields,
       :invisible_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a default field and its corresponding value.</p>
@@ -18939,7 +17944,7 @@ module Aws::Connect
       :id,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes default values for fields on a template.</p>
@@ -18949,7 +17954,7 @@ module Aws::Connect
     class TaskTemplateDefaults < Struct.new(
       :default_field_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a single task template field.</p>
@@ -18971,7 +17976,7 @@ module Aws::Connect
       :type,
       :single_select_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identifier of the task template field.</p>
@@ -18981,24 +17986,7 @@ module Aws::Connect
     class TaskTemplateFieldIdentifier < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskTemplateFieldType
-      NAME = 'NAME'
-      DESCRIPTION = 'DESCRIPTION'
-      SCHEDULED_TIME = 'SCHEDULED_TIME'
-      QUICK_CONNECT = 'QUICK_CONNECT'
-      URL = 'URL'
-      NUMBER = 'NUMBER'
-      TEXT = 'TEXT'
-      TEXT_AREA = 'TEXT_AREA'
-      DATE_TIME = 'DATE_TIME'
-      BOOLEAN = 'BOOLEAN'
-      SINGLE_SELECT = 'SINGLE_SELECT'
-      EMAIL = 'EMAIL'
-      SELF_ASSIGN = 'SELF_ASSIGN'
-      EXPIRY_DURATION = 'EXPIRY_DURATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about the task template.</p>
@@ -19034,12 +18022,7 @@ module Aws::Connect
       :last_modified_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskTemplateStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The distribution of traffic between the instance and its replicas.</p>
@@ -19049,7 +18032,7 @@ module Aws::Connect
     class TelephonyConfig < Struct.new(
       :distributions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the template attributes.</p>
@@ -19067,7 +18050,7 @@ module Aws::Connect
       :custom_attributes,
       :customer_profile_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about template message configuration.</p>
@@ -19087,7 +18070,7 @@ module Aws::Connect
       :message_template_id,
       :template_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the threshold for service level metrics.</p>
@@ -19101,7 +18084,7 @@ module Aws::Connect
       :comparison,
       :threshold_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the threshold for service level metrics.</p>
@@ -19116,7 +18099,7 @@ module Aws::Connect
       :comparison,
       :threshold_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The throttling limit has been exceeded.</p>
@@ -19125,12 +18108,7 @@ module Aws::Connect
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimerEligibleParticipantRoles
-      CUSTOMER = 'CUSTOMER'
-      AGENT = 'AGENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Displayed when rate-related API limits are exceeded.</p>
@@ -19139,7 +18117,7 @@ module Aws::Connect
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a traffic distribution group.</p>
@@ -19219,21 +18197,12 @@ module Aws::Connect
       :tags,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
         super
       end
-    end
-
-    module TrafficDistributionGroupStatus
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-      CREATION_FAILED = 'CREATION_FAILED'
-      PENDING_DELETION = 'PENDING_DELETION'
-      DELETION_FAILED = 'DELETION_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
     end
 
     # <p>Information about traffic distribution groups.</p>
@@ -19297,7 +18266,7 @@ module Aws::Connect
       :status,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -19312,12 +18281,7 @@ module Aws::Connect
     class TrafficDistributionGroupUserSummary < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficType
-      GENERAL = 'GENERAL'
-      CAMPAIGN = 'CAMPAIGN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines search criteria and matching logic to search for contacts by
@@ -19333,7 +18297,7 @@ module Aws::Connect
       :criteria,
       :match_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines search criteria base on words or phrases, participants in the
@@ -19353,7 +18317,7 @@ module Aws::Connect
       :search_text,
       :match_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19385,7 +18349,7 @@ module Aws::Connect
       :contact_flow_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -19398,13 +18362,7 @@ module Aws::Connect
       :contact_id,
       :contact_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Unit
-      SECONDS = 'SECONDS'
-      COUNT = 'COUNT'
-      PERCENT = 'PERCENT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -19422,12 +18380,12 @@ module Aws::Connect
       :instance_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -19440,7 +18398,7 @@ module Aws::Connect
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19473,7 +18431,7 @@ module Aws::Connect
       :display_order,
       :reset_order_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_profile_id
@@ -19515,7 +18473,7 @@ module Aws::Connect
       :blocked_ips,
       :periodic_session_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>UpdateCase</code> action definition.</p>
@@ -19525,7 +18483,7 @@ module Aws::Connect
     class UpdateCaseActionDefinition < Struct.new(
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute initial_contact_id
@@ -19561,12 +18519,12 @@ module Aws::Connect
       :instance_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactAttributesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19587,7 +18545,7 @@ module Aws::Connect
       :answers,
       :notes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_id
@@ -19600,7 +18558,7 @@ module Aws::Connect
       :evaluation_id,
       :evaluation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19619,12 +18577,12 @@ module Aws::Connect
       :contact_flow_id,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowContentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19649,12 +18607,12 @@ module Aws::Connect
       :description,
       :contact_flow_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowMetadataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19672,12 +18630,12 @@ module Aws::Connect
       :contact_flow_module_id,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowModuleContentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19702,12 +18660,12 @@ module Aws::Connect
       :description,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowModuleMetadataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19728,12 +18686,12 @@ module Aws::Connect
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactFlowNameResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19799,12 +18757,12 @@ module Aws::Connect
       :customer_endpoint,
       :system_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19834,12 +18792,12 @@ module Aws::Connect
       :queue_priority,
       :routing_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactRoutingDataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19856,12 +18814,12 @@ module Aws::Connect
       :contact_id,
       :scheduled_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateContactScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19889,7 +18847,7 @@ module Aws::Connect
       :display_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute email_address_id
@@ -19902,7 +18860,7 @@ module Aws::Connect
       :email_address_id,
       :email_address_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -19946,7 +18904,7 @@ module Aws::Connect
       :scoring_strategy,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute evaluation_form_id
@@ -19963,7 +18921,7 @@ module Aws::Connect
       :evaluation_form_arn,
       :evaluation_form_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_form_version] = 0 unless options.key?(:evaluation_form_version)
@@ -20006,7 +18964,7 @@ module Aws::Connect
       :effective_from,
       :effective_till,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20035,7 +18993,7 @@ module Aws::Connect
       :time_zone,
       :config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20063,7 +19021,7 @@ module Aws::Connect
       :value,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20091,7 +19049,7 @@ module Aws::Connect
       :storage_config,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -20122,12 +19080,12 @@ module Aws::Connect
       :error,
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateParticipantAuthenticationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the chat participant role.</p>
@@ -20138,7 +19096,7 @@ module Aws::Connect
       :chat,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Chat < UpdateParticipantRoleConfigChannelInfo; end
       class Unknown < UpdateParticipantRoleConfigChannelInfo; end
@@ -20158,12 +19116,12 @@ module Aws::Connect
       :contact_id,
       :channel_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateParticipantRoleConfigResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -20183,7 +19141,7 @@ module Aws::Connect
       :phone_number_description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -20209,7 +19167,7 @@ module Aws::Connect
       :instance_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_number_id
@@ -20222,7 +19180,7 @@ module Aws::Connect
       :phone_number_id,
       :phone_number_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20240,7 +19198,7 @@ module Aws::Connect
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20267,7 +19225,7 @@ module Aws::Connect
       :description,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prompt_arn
@@ -20280,7 +19238,7 @@ module Aws::Connect
       :prompt_arn,
       :prompt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20297,7 +19255,7 @@ module Aws::Connect
       :queue_id,
       :hours_of_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20314,7 +19272,7 @@ module Aws::Connect
       :queue_id,
       :max_contacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20335,7 +19293,7 @@ module Aws::Connect
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20352,7 +19310,7 @@ module Aws::Connect
       :queue_id,
       :outbound_caller_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20369,7 +19327,7 @@ module Aws::Connect
       :queue_id,
       :outbound_email_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20386,7 +19344,7 @@ module Aws::Connect
       :queue_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20403,7 +19361,7 @@ module Aws::Connect
       :quick_connect_id,
       :quick_connect_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20424,7 +19382,7 @@ module Aws::Connect
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20443,7 +19401,7 @@ module Aws::Connect
       :routing_profile_id,
       :agent_availability_timer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20460,7 +19418,7 @@ module Aws::Connect
       :routing_profile_id,
       :media_concurrencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20477,7 +19435,7 @@ module Aws::Connect
       :routing_profile_id,
       :default_outbound_queue_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20498,7 +19456,7 @@ module Aws::Connect
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20517,7 +19475,7 @@ module Aws::Connect
       :routing_profile_id,
       :queue_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_id
@@ -20549,7 +19507,7 @@ module Aws::Connect
       :actions,
       :publish_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -20592,7 +19550,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_template_id
@@ -20640,7 +19598,7 @@ module Aws::Connect
       :status,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20700,7 +19658,7 @@ module Aws::Connect
       :last_modified_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -20724,12 +19682,12 @@ module Aws::Connect
       :sign_in_config,
       :agent_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTrafficDistributionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20746,7 +19704,7 @@ module Aws::Connect
       :hierarchy_group_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_group_id
@@ -20763,7 +19721,7 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hierarchy_structure
@@ -20776,7 +19734,7 @@ module Aws::Connect
       :hierarchy_structure,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_info
@@ -20793,7 +19751,7 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute phone_config
@@ -20810,7 +19768,7 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20829,7 +19787,7 @@ module Aws::Connect
       :user_id,
       :user_proficiencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_profile_id
@@ -20846,7 +19804,7 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_profile_ids
@@ -20863,7 +19821,7 @@ module Aws::Connect
       :user_id,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20889,7 +19847,7 @@ module Aws::Connect
       :status,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -20898,7 +19856,7 @@ module Aws::Connect
     class UpdateViewContentResponse < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -20921,12 +19879,12 @@ module Aws::Connect
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateViewMetadataResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Fields required when uploading an attached file. </p>
@@ -20946,7 +19904,7 @@ module Aws::Connect
       :url_expiry,
       :headers_to_include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URL reference.</p>
@@ -20960,7 +19918,7 @@ module Aws::Connect
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the
@@ -20981,12 +19939,7 @@ module Aws::Connect
       :use_case_arn,
       :use_case_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UseCaseType
-      RULES_EVALUATION = 'RULES_EVALUATION'
-      CONNECT_CAMPAIGNS = 'CONNECT_CAMPAIGNS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a user account for an Amazon Connect instance.</p>
@@ -21041,7 +19994,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data for a user.</p>
@@ -21089,7 +20042,7 @@ module Aws::Connect
       :contacts,
       :next_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for the user data.</p>
@@ -21116,7 +20069,7 @@ module Aws::Connect
       :agents,
       :user_hierarchy_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return userHierarchyGroup.</p>
@@ -21138,7 +20091,7 @@ module Aws::Connect
       :and_conditions,
       :string_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -21159,7 +20112,7 @@ module Aws::Connect
     class UserHierarchyGroupSearchFilter < Struct.new(
       :attribute_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the identity of a user.</p>
@@ -21206,7 +20159,7 @@ module Aws::Connect
       :secondary_email,
       :mobile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user's first name and last name.</p>
@@ -21220,7 +20173,7 @@ module Aws::Connect
       :first_name,
       :last_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user details for the contact.</p>
@@ -21230,7 +20183,7 @@ module Aws::Connect
     class UserInfo < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No user with the specified credentials was found in the Amazon Connect instance.</p>
@@ -21239,7 +20192,7 @@ module Aws::Connect
     class UserNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the phone configuration settings for a user.</p>
@@ -21268,7 +20221,7 @@ module Aws::Connect
       :after_contact_work_time_limit,
       :desk_phone_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_accept] = false unless options.key?(:auto_accept)
@@ -21294,7 +20247,7 @@ module Aws::Connect
       :attribute_value,
       :level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:level] = 1 unless options.key?(:level)
@@ -21313,7 +20266,7 @@ module Aws::Connect
       :attribute_name,
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the quick connect configuration settings for a user. The contact
@@ -21328,7 +20281,7 @@ module Aws::Connect
       :user_id,
       :contact_flow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the user.</p>
@@ -21342,7 +20295,7 @@ module Aws::Connect
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The search criteria to be used to return users.</p>
@@ -21379,7 +20332,7 @@ module Aws::Connect
       :list_condition,
       :hierarchy_group_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters to be applied to search results.</p>
@@ -21421,7 +20374,7 @@ module Aws::Connect
       :tag_filter,
       :user_attribute_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the returned users.</p>
@@ -21467,7 +20420,7 @@ module Aws::Connect
       :tags,
       :username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a user.</p>
@@ -21493,11 +20446,7 @@ module Aws::Connect
       :last_modified_time,
       :last_modified_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoCapability
-      SEND = 'SEND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A view resource object. Contains metadata and content necessary to render the view.</p>
@@ -21558,7 +20507,7 @@ module Aws::Connect
       :last_modified_time,
       :view_content_sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -21582,7 +20531,7 @@ module Aws::Connect
       :template,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>View content containing all content necessary to render a view except for runtime input data
@@ -21597,12 +20546,7 @@ module Aws::Connect
       :template,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViewStatus
-      PUBLISHED = 'PUBLISHED'
-      SAVED = 'SAVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a view's metadata.</p>
@@ -21633,12 +20577,7 @@ module Aws::Connect
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViewType
-      CUSTOMER_MANAGED = 'CUSTOMER_MANAGED'
-      AWS_MANAGED = 'AWS_MANAGED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a view version's metadata.</p>
@@ -21672,7 +20611,7 @@ module Aws::Connect
       :version,
       :version_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -21725,50 +20664,7 @@ module Aws::Connect
       :content,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VocabularyLanguageCode
-      AR_AE = 'ar-AE'
-      DE_CH = 'de-CH'
-      DE_DE = 'de-DE'
-      EN_AB = 'en-AB'
-      EN_AU = 'en-AU'
-      EN_GB = 'en-GB'
-      EN_IE = 'en-IE'
-      EN_IN = 'en-IN'
-      EN_US = 'en-US'
-      EN_WL = 'en-WL'
-      ES_ES = 'es-ES'
-      ES_US = 'es-US'
-      FR_CA = 'fr-CA'
-      FR_FR = 'fr-FR'
-      HI_IN = 'hi-IN'
-      IT_IT = 'it-IT'
-      JA_JP = 'ja-JP'
-      KO_KR = 'ko-KR'
-      PT_BR = 'pt-BR'
-      PT_PT = 'pt-PT'
-      ZH_CN = 'zh-CN'
-      EN_NZ = 'en-NZ'
-      EN_ZA = 'en-ZA'
-      CA_ES = 'ca-ES'
-      DA_DK = 'da-DK'
-      FI_FI = 'fi-FI'
-      ID_ID = 'id-ID'
-      MS_MY = 'ms-MY'
-      NL_NL = 'nl-NL'
-      NO_NO = 'no-NO'
-      PL_PL = 'pl-PL'
-      SV_SE = 'sv-SE'
-      TL_PH = 'tl-PH'
-    end
-
-    module VocabularyState
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-      CREATION_FAILED = 'CREATION_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about the custom vocabulary.</p>
@@ -21804,7 +20700,7 @@ module Aws::Connect
       :last_modified_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the recording configuration settings.</p>
@@ -21819,13 +20715,7 @@ module Aws::Connect
       :voice_recording_track,
       :ivr_recording_track,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VoiceRecordingTrack
-      FROM_AGENT = 'FROM_AGENT'
-      TO_AGENT = 'TO_AGENT'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about Amazon Connect Wisdom.</p>
@@ -21835,7 +20725,7 @@ module Aws::Connect
     class WisdomInfo < Struct.new(
       :session_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

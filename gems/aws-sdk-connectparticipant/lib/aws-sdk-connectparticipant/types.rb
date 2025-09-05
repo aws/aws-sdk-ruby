@@ -12,13 +12,7 @@ module Aws::ConnectParticipant
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArtifactStatus
-      APPROVED = 'APPROVED'
-      REJECTED = 'REJECTED'
-      IN_PROGRESS = 'IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The case-insensitive input to indicate standard MIME type that describes the format of the file
@@ -41,7 +35,7 @@ module Aws::ConnectParticipant
       :attachment_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -55,27 +49,12 @@ module Aws::ConnectParticipant
       :session_id,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelParticipantAuthenticationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChatItemType
-      TYPING = 'TYPING'
-      PARTICIPANT_JOINED = 'PARTICIPANT_JOINED'
-      PARTICIPANT_LEFT = 'PARTICIPANT_LEFT'
-      CHAT_ENDED = 'CHAT_ENDED'
-      TRANSFER_SUCCEEDED = 'TRANSFER_SUCCEEDED'
-      TRANSFER_FAILED = 'TRANSFER_FAILED'
-      MESSAGE = 'MESSAGE'
-      EVENT = 'EVENT'
-      ATTACHMENT = 'ATTACHMENT'
-      CONNECTION_ACK = 'CONNECTION_ACK'
-      MESSAGE_DELIVERED = 'MESSAGE_DELIVERED'
-      MESSAGE_READ = 'MESSAGE_READ'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_ids
@@ -95,12 +74,12 @@ module Aws::ConnectParticipant
       :client_token,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CompleteAttachmentUploadResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation conflicts with the current state of a service resource
@@ -110,7 +89,7 @@ module Aws::ConnectParticipant
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Connection credentials. </p>
@@ -126,12 +105,7 @@ module Aws::ConnectParticipant
       :connection_token,
       :expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionType
-      WEBSOCKET = 'WEBSOCKET'
-      CONNECTION_CREDENTIALS = 'CONNECTION_CREDENTIALS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -154,7 +128,7 @@ module Aws::ConnectParticipant
       :participant_token,
       :connect_participant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute websocket
@@ -168,7 +142,7 @@ module Aws::ConnectParticipant
       :websocket,
       :connection_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view_token
@@ -182,7 +156,7 @@ module Aws::ConnectParticipant
       :view_token,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute view
@@ -192,7 +166,7 @@ module Aws::ConnectParticipant
     class DescribeViewResponse < Struct.new(
       :view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -208,12 +182,12 @@ module Aws::ConnectParticipant
       :client_token,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisconnectParticipantResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -231,7 +205,7 @@ module Aws::ConnectParticipant
       :connection_token,
       :url_expiry_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -249,10 +223,10 @@ module Aws::ConnectParticipant
       :url_expiry,
       :attachment_size_in_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:attachment_size_in_bytes] =  unless options.key?(:attachment_size_in_bytes)
+        options[:attachment_size_in_bytes] = nil unless options.key?(:attachment_size_in_bytes)
         super
       end
     end
@@ -272,7 +246,7 @@ module Aws::ConnectParticipant
       :redirect_uri,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication_url
@@ -282,7 +256,7 @@ module Aws::ConnectParticipant
     class GetAuthenticationUrlResponse < Struct.new(
       :authentication_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_id
@@ -317,7 +291,7 @@ module Aws::ConnectParticipant
       :start_position,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute initial_contact_id
@@ -335,7 +309,7 @@ module Aws::ConnectParticipant
       :transcript,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception occurs when there is an internal failure in the Amazon Connect service.</p>
@@ -344,7 +318,7 @@ module Aws::ConnectParticipant
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An item - message or event - that has been sent. </p>
@@ -405,7 +379,7 @@ module Aws::ConnectParticipant
       :related_contact_id,
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata related to a message.</p>
@@ -419,15 +393,7 @@ module Aws::ConnectParticipant
       :message_id,
       :receipts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParticipantRole
-      AGENT = 'AGENT'
-      CUSTOMER = 'CUSTOMER'
-      SYSTEM = 'SYSTEM'
-      CUSTOM_BOT = 'CUSTOM_BOT'
-      SUPERVISOR = 'SUPERVISOR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The receipt for the message delivered to the recipient.</p>
@@ -445,7 +411,7 @@ module Aws::ConnectParticipant
       :read_timestamp,
       :recipient_participant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource was not found.</p>
@@ -462,23 +428,7 @@ module Aws::ConnectParticipant
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      CONTACT = 'CONTACT'
-      CONTACT_FLOW = 'CONTACT_FLOW'
-      INSTANCE = 'INSTANCE'
-      PARTICIPANT = 'PARTICIPANT'
-      HIERARCHY_LEVEL = 'HIERARCHY_LEVEL'
-      HIERARCHY_GROUP = 'HIERARCHY_GROUP'
-      USER = 'USER'
-      PHONE_NUMBER = 'PHONE_NUMBER'
-    end
-
-    module ScanDirection
-      FORWARD = 'FORWARD'
-      BACKWARD = 'BACKWARD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -519,7 +469,7 @@ module Aws::ConnectParticipant
       :client_token,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -534,7 +484,7 @@ module Aws::ConnectParticipant
       :id,
       :absolute_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -575,7 +525,7 @@ module Aws::ConnectParticipant
       :client_token,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -590,7 +540,7 @@ module Aws::ConnectParticipant
       :id,
       :absolute_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of attachments per contact exceeds the quota.</p>
@@ -599,12 +549,7 @@ module Aws::ConnectParticipant
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortKey
-      DESCENDING = 'DESCENDING'
-      ASCENDING = 'ASCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content_type
@@ -632,7 +577,7 @@ module Aws::ConnectParticipant
       :client_token,
       :connection_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attachment_id
@@ -645,7 +590,7 @@ module Aws::ConnectParticipant
       :attachment_id,
       :upload_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filtering option for where to start. For example, if you sent 100 messages, start
@@ -666,7 +611,7 @@ module Aws::ConnectParticipant
       :absolute_time,
       :most_recent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:most_recent] = 0 unless options.key?(:most_recent)
@@ -680,7 +625,7 @@ module Aws::ConnectParticipant
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Fields to be used while uploading the attachment.</p>
@@ -699,7 +644,7 @@ module Aws::ConnectParticipant
       :url_expiry,
       :headers_to_include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by Amazon Connect.</p>
@@ -708,7 +653,7 @@ module Aws::ConnectParticipant
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A view resource object. Contains metadata and content necessary to render the
@@ -736,7 +681,7 @@ module Aws::ConnectParticipant
       :version,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>View content containing all content necessary to render a view except for runtime
@@ -756,7 +701,7 @@ module Aws::ConnectParticipant
       :template,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The websocket for the participant's connection.</p>
@@ -772,7 +717,7 @@ module Aws::ConnectParticipant
       :url,
       :connection_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

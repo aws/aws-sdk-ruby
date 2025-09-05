@@ -21,7 +21,7 @@ module Aws::ResourceGroups
       :group_lifecycle_events_status,
       :group_lifecycle_events_status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request includes one or more parameters that violate validation rules.</p>
@@ -30,7 +30,7 @@ module Aws::ResourceGroups
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_arn
@@ -39,7 +39,7 @@ module Aws::ResourceGroups
     class CancelTagSyncTaskInput < Struct.new(
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -97,7 +97,7 @@ module Aws::ResourceGroups
       :owner,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -121,7 +121,7 @@ module Aws::ResourceGroups
       :tags,
       :group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -136,7 +136,7 @@ module Aws::ResourceGroups
       :group_name,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -145,7 +145,7 @@ module Aws::ResourceGroups
     class DeleteGroupOutput < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that failed to be added to or removed from a group.</p>
@@ -163,7 +163,7 @@ module Aws::ResourceGroups
       :error_message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller isn't authorized to make the request. Check permissions.</p>
@@ -172,7 +172,7 @@ module Aws::ResourceGroups
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -181,7 +181,7 @@ module Aws::ResourceGroups
     class GetAccountSettingsOutput < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -191,7 +191,7 @@ module Aws::ResourceGroups
     class GetGroupConfigurationInput < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_configuration
@@ -202,7 +202,7 @@ module Aws::ResourceGroups
     class GetGroupConfigurationOutput < Struct.new(
       :group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -217,7 +217,7 @@ module Aws::ResourceGroups
       :group_name,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -228,7 +228,7 @@ module Aws::ResourceGroups
     class GetGroupOutput < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -243,7 +243,7 @@ module Aws::ResourceGroups
       :group_name,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_query
@@ -254,7 +254,7 @@ module Aws::ResourceGroups
     class GetGroupQueryOutput < Struct.new(
       :group_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_arn
@@ -263,7 +263,7 @@ module Aws::ResourceGroups
     class GetTagSyncTaskInput < Struct.new(
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_arn
@@ -354,7 +354,7 @@ module Aws::ResourceGroups
       :error_message,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -363,7 +363,7 @@ module Aws::ResourceGroups
     class GetTagsInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -376,7 +376,7 @@ module Aws::ResourceGroups
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource group that contains Amazon Web Services resources. You can assign resources to the group
@@ -429,7 +429,7 @@ module Aws::ResourceGroups
       :display_name,
       :application_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service configuration associated with a resource group. The configuration options
@@ -457,7 +457,7 @@ module Aws::ResourceGroups
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An item in a group configuration. A group service configuration can have one or more
@@ -478,7 +478,7 @@ module Aws::ResourceGroups
       :type,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter for a group configuration item. For details about group service
@@ -498,13 +498,7 @@ module Aws::ResourceGroups
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupConfigurationStatus
-      UPDATING = 'UPDATING'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter collection that you can use to restrict the results from a <code>List</code>
@@ -520,15 +514,7 @@ module Aws::ResourceGroups
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupFilterName
-      ResourceType = 'resource-type'
-      ConfigurationType = 'configuration-type'
-      Owner = 'owner'
-      DisplayName = 'display-name'
-      Criticality = 'criticality'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique identifiers for a resource group.</p>
@@ -560,19 +546,7 @@ module Aws::ResourceGroups
       :owner,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupLifecycleEventsDesiredStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-    end
-
-    module GroupLifecycleEventsStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A mapping of a query attached to a resource group that determines the Amazon Web Services resources
@@ -589,7 +563,7 @@ module Aws::ResourceGroups
       :group_name,
       :resource_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -602,7 +576,7 @@ module Aws::ResourceGroups
       :group,
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute succeeded
@@ -626,14 +600,7 @@ module Aws::ResourceGroups
       :failed,
       :pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupingStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SKIPPED = 'SKIPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about a grouping or ungrouping resource action. </p>
@@ -666,12 +633,7 @@ module Aws::ResourceGroups
       :error_code,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupingType
-      GROUP = 'GROUP'
-      UNGROUP = 'UNGROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred while processing the request. Try again later.</p>
@@ -680,7 +642,7 @@ module Aws::ResourceGroups
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -752,7 +714,7 @@ module Aws::ResourceGroups
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure returned by the <a>ListGroupResources</a> operation that
@@ -773,7 +735,7 @@ module Aws::ResourceGroups
       :identifier,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -811,7 +773,7 @@ module Aws::ResourceGroups
       :next_token,
       :query_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to obtain more specific results from the list of grouping statuses. </p>
@@ -825,12 +787,7 @@ module Aws::ResourceGroups
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListGroupingStatusesFilterName
-      Status = 'status'
-      ResourceArn = 'resource-arn'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -857,7 +814,7 @@ module Aws::ResourceGroups
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -877,7 +834,7 @@ module Aws::ResourceGroups
       :grouping_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -957,7 +914,7 @@ module Aws::ResourceGroups
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_identifiers
@@ -988,7 +945,7 @@ module Aws::ResourceGroups
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns tag-sync tasks filtered by the Amazon resource name (ARN) or name of a 
@@ -1003,7 +960,7 @@ module Aws::ResourceGroups
       :group_arn,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -1025,7 +982,7 @@ module Aws::ResourceGroups
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_sync_tasks
@@ -1040,7 +997,7 @@ module Aws::ResourceGroups
       :tag_sync_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request uses an HTTP method that isn't allowed for the specified resource.</p>
@@ -1049,7 +1006,7 @@ module Aws::ResourceGroups
     class MethodNotAllowedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more of the specified resources don't exist.</p>
@@ -1058,7 +1015,7 @@ module Aws::ResourceGroups
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that identifies a resource that is currently pending addition to the group
@@ -1070,7 +1027,7 @@ module Aws::ResourceGroups
     class PendingResource < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -1092,12 +1049,12 @@ module Aws::ResourceGroups
       :group,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutGroupConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A two-part error structure that can occur in <code>ListGroupResources</code> or
@@ -1112,19 +1069,7 @@ module Aws::ResourceGroups
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryErrorCode
-      CLOUDFORMATION_STACK_INACTIVE = 'CLOUDFORMATION_STACK_INACTIVE'
-      CLOUDFORMATION_STACK_NOT_EXISTING = 'CLOUDFORMATION_STACK_NOT_EXISTING'
-      CLOUDFORMATION_STACK_UNASSUMABLE_ROLE = 'CLOUDFORMATION_STACK_UNASSUMABLE_ROLE'
-      RESOURCE_TYPE_NOT_SUPPORTED = 'RESOURCE_TYPE_NOT_SUPPORTED'
-    end
-
-    module QueryType
-      TAG_FILTERS_1_0 = 'TAG_FILTERS_1_0'
-      CLOUDFORMATION_STACK_1_0 = 'CLOUDFORMATION_STACK_1_0'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to obtain more specific results from a list
@@ -1140,11 +1085,7 @@ module Aws::ResourceGroups
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceFilterName
-      ResourceType = 'resource-type'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the ARN of a resource and its resource type.</p>
@@ -1158,7 +1099,7 @@ module Aws::ResourceGroups
       :resource_arn,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query you can use to define a resource group or a search for resources. A
@@ -1310,7 +1251,7 @@ module Aws::ResourceGroups
       :type,
       :query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that identifies the current group membership status for a resource. Adding
@@ -1323,11 +1264,7 @@ module Aws::ResourceGroups
     class ResourceStatus < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceStatusValue
-      Pending = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_query
@@ -1355,7 +1292,7 @@ module Aws::ResourceGroups
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifiers
@@ -1395,7 +1332,7 @@ module Aws::ResourceGroups
       :next_token,
       :query_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -1454,7 +1391,7 @@ module Aws::ResourceGroups
       :resource_query,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_arn
@@ -1513,7 +1450,7 @@ module Aws::ResourceGroups
       :resource_query,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1527,7 +1464,7 @@ module Aws::ResourceGroups
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1540,7 +1477,7 @@ module Aws::ResourceGroups
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon resource name (ARN) of the tag-sync task. </p>
@@ -1630,12 +1567,7 @@ module Aws::ResourceGroups
       :error_message,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TagSyncTaskStatus
-      ACTIVE = 'ACTIVE'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded throttling limits by making too many requests in a period of
@@ -1645,7 +1577,7 @@ module Aws::ResourceGroups
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it doesn't have valid credentials for the target
@@ -1655,7 +1587,7 @@ module Aws::ResourceGroups
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -1668,7 +1600,7 @@ module Aws::ResourceGroups
       :group,
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute succeeded
@@ -1692,7 +1624,7 @@ module Aws::ResourceGroups
       :failed,
       :pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1706,7 +1638,7 @@ module Aws::ResourceGroups
       :arn,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1719,7 +1651,7 @@ module Aws::ResourceGroups
       :arn,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_lifecycle_events_desired_status
@@ -1729,7 +1661,7 @@ module Aws::ResourceGroups
     class UpdateAccountSettingsInput < Struct.new(
       :group_lifecycle_events_desired_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -1738,7 +1670,7 @@ module Aws::ResourceGroups
     class UpdateAccountSettingsOutput < Struct.new(
       :account_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -1772,7 +1704,7 @@ module Aws::ResourceGroups
       :owner,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -1781,7 +1713,7 @@ module Aws::ResourceGroups
     class UpdateGroupOutput < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -1805,7 +1737,7 @@ module Aws::ResourceGroups
       :group,
       :resource_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_query
@@ -1814,7 +1746,7 @@ module Aws::ResourceGroups
     class UpdateGroupQueryOutput < Struct.new(
       :group_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

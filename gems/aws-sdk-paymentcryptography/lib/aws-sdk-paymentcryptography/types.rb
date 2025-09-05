@@ -12,7 +12,7 @@ module Aws::PaymentCryptography
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an alias.</p>
@@ -26,7 +26,7 @@ module Aws::PaymentCryptography
       :alias_name,
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request can cause an inconsistent state for the resource.</p>
@@ -35,7 +35,7 @@ module Aws::PaymentCryptography
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -48,7 +48,7 @@ module Aws::PaymentCryptography
       :alias_name,
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias
@@ -57,7 +57,7 @@ module Aws::PaymentCryptography
     class CreateAliasOutput < Struct.new(
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_attributes
@@ -86,7 +86,7 @@ module Aws::PaymentCryptography
       :tags,
       :derive_key_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -95,7 +95,7 @@ module Aws::PaymentCryptography
     class CreateKeyOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -104,12 +104,12 @@ module Aws::PaymentCryptography
     class DeleteAliasInput < Struct.new(
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAliasOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -122,7 +122,7 @@ module Aws::PaymentCryptography
       :key_identifier,
       :delete_key_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -131,7 +131,7 @@ module Aws::PaymentCryptography
     class DeleteKeyOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shared information used when deriving a key using ECDH.</p>
@@ -142,7 +142,7 @@ module Aws::PaymentCryptography
       :shared_information,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SharedInformation < DiffieHellmanDerivationData; end
       class Unknown < DiffieHellmanDerivationData; end
@@ -159,7 +159,7 @@ module Aws::PaymentCryptography
       :export_dukpt_initial_key,
       :key_check_value_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Key derivation parameter information for key material export using asymmetric ECDH key exchange method.</p>
@@ -197,7 +197,7 @@ module Aws::PaymentCryptography
       :derivation_data,
       :key_block_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for IPEK generation during export.</p>
@@ -207,7 +207,7 @@ module Aws::PaymentCryptography
     class ExportDukptInitialKey < Struct.new(
       :key_serial_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material export using asymmetric RSA wrap and unwrap key exchange method.</p>
@@ -225,7 +225,7 @@ module Aws::PaymentCryptography
       :wrapping_key_certificate,
       :wrapping_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_material
@@ -242,7 +242,7 @@ module Aws::PaymentCryptography
       :export_key_identifier,
       :export_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material export from Amazon Web Services Payment Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key exchange method.</p>
@@ -265,7 +265,7 @@ module Aws::PaymentCryptography
       :diffie_hellman_tr31_key_block,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Tr31KeyBlock < ExportKeyMaterial; end
       class Tr34KeyBlock < ExportKeyMaterial; end
@@ -280,7 +280,7 @@ module Aws::PaymentCryptography
     class ExportKeyOutput < Struct.new(
       :wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material export using symmetric TR-31 key exchange method.</p>
@@ -294,7 +294,7 @@ module Aws::PaymentCryptography
       :wrapping_key_identifier,
       :key_block_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material export using the asymmetric TR-34 key exchange method.</p>
@@ -324,7 +324,7 @@ module Aws::PaymentCryptography
       :random_nonce,
       :key_block_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -333,7 +333,7 @@ module Aws::PaymentCryptography
     class GetAliasInput < Struct.new(
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias
@@ -342,7 +342,7 @@ module Aws::PaymentCryptography
     class GetAliasOutput < Struct.new(
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -351,7 +351,7 @@ module Aws::PaymentCryptography
     class GetKeyInput < Struct.new(
       :key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -360,7 +360,7 @@ module Aws::PaymentCryptography
     class GetKeyOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_material_type
@@ -373,7 +373,7 @@ module Aws::PaymentCryptography
       :key_material_type,
       :signing_key_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signing_key_certificate
@@ -398,7 +398,7 @@ module Aws::PaymentCryptography
       :export_token,
       :parameters_valid_until_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_material_type
@@ -411,7 +411,7 @@ module Aws::PaymentCryptography
       :key_material_type,
       :wrapping_key_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute wrapping_key_certificate
@@ -436,7 +436,7 @@ module Aws::PaymentCryptography
       :import_token,
       :parameters_valid_until_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -445,7 +445,7 @@ module Aws::PaymentCryptography
     class GetPublicKeyCertificateInput < Struct.new(
       :key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_certificate
@@ -458,7 +458,7 @@ module Aws::PaymentCryptography
       :key_certificate,
       :key_certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Key derivation parameter information for key material import using asymmetric ECDH key exchange method.</p>
@@ -496,7 +496,7 @@ module Aws::PaymentCryptography
       :derivation_data,
       :wrapped_key_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material import using asymmetric RSA wrap and unwrap key exchange method.</p>
@@ -522,7 +522,7 @@ module Aws::PaymentCryptography
       :import_token,
       :wrapping_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_material
@@ -543,7 +543,7 @@ module Aws::PaymentCryptography
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material import into Amazon Web Services Payment Cryptography using TR-31 or TR-34 or RSA wrap and unwrap key exchange method.</p>
@@ -574,7 +574,7 @@ module Aws::PaymentCryptography
       :diffie_hellman_tr31_key_block,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RootCertificatePublicKey < ImportKeyMaterial; end
       class TrustedCertificatePublicKey < ImportKeyMaterial; end
@@ -591,7 +591,7 @@ module Aws::PaymentCryptography
     class ImportKeyOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material import using symmetric TR-31 key exchange method.</p>
@@ -605,7 +605,7 @@ module Aws::PaymentCryptography
       :wrapping_key_identifier,
       :wrapped_key_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for key material import using the asymmetric TR-34 key exchange method.</p>
@@ -635,7 +635,7 @@ module Aws::PaymentCryptography
       :key_block_format,
       :random_nonce,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
@@ -644,7 +644,7 @@ module Aws::PaymentCryptography
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about an Amazon Web Services Payment Cryptography key.</p>
@@ -706,7 +706,7 @@ module Aws::PaymentCryptography
       :delete_timestamp,
       :derive_key_usage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>
@@ -728,7 +728,7 @@ module Aws::PaymentCryptography
       :key_algorithm,
       :key_modes_of_use,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional metadata for export associated with the key material. This data is signed but transmitted in clear text.</p>
@@ -750,18 +750,7 @@ module Aws::PaymentCryptography
       :key_version,
       :optional_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyDerivationFunction
-      NIST_SP800 = 'NIST_SP800'
-      ANSI_X963 = 'ANSI_X963'
-    end
-
-    module KeyDerivationHashAlgorithm
-      SHA_256 = 'SHA_256'
-      SHA_384 = 'SHA_384'
-      SHA_512 = 'SHA_512'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of cryptographic operations that you can perform using the key. The modes of use are deﬁned in section A.5.3 of the TR-31 spec.</p>
@@ -803,7 +792,7 @@ module Aws::PaymentCryptography
       :derive_key,
       :no_restrictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:encrypt] = false unless options.key?(:encrypt)
@@ -846,7 +835,7 @@ module Aws::PaymentCryptography
       :exportable,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -863,7 +852,7 @@ module Aws::PaymentCryptography
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aliases
@@ -876,7 +865,7 @@ module Aws::PaymentCryptography
       :aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_state
@@ -893,7 +882,7 @@ module Aws::PaymentCryptography
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute keys
@@ -906,7 +895,7 @@ module Aws::PaymentCryptography
       :keys,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -923,7 +912,7 @@ module Aws::PaymentCryptography
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -936,7 +925,7 @@ module Aws::PaymentCryptography
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to an invalid resource error.</p>
@@ -946,7 +935,7 @@ module Aws::PaymentCryptography
     class ResourceNotFoundException < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -955,7 +944,7 @@ module Aws::PaymentCryptography
     class RestoreKeyInput < Struct.new(
       :key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -964,7 +953,7 @@ module Aws::PaymentCryptography
     class RestoreKeyOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for root public key certificate import.</p>
@@ -978,7 +967,7 @@ module Aws::PaymentCryptography
       :key_attributes,
       :public_key_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request would cause a service quota to be exceeded.</p>
@@ -987,7 +976,7 @@ module Aws::PaymentCryptography
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service cannot complete the request.</p>
@@ -996,7 +985,7 @@ module Aws::PaymentCryptography
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -1005,7 +994,7 @@ module Aws::PaymentCryptography
     class StartKeyUsageInput < Struct.new(
       :key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -1014,7 +1003,7 @@ module Aws::PaymentCryptography
     class StartKeyUsageOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -1023,7 +1012,7 @@ module Aws::PaymentCryptography
     class StopKeyUsageInput < Struct.new(
       :key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key
@@ -1032,19 +1021,7 @@ module Aws::PaymentCryptography
     class StopKeyUsageOutput < Struct.new(
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SymmetricKeyAlgorithm
-      TDES_2KEY = 'TDES_2KEY'
-      TDES_3KEY = 'TDES_3KEY'
-      AES_128 = 'AES_128'
-      AES_192 = 'AES_192'
-      AES_256 = 'AES_256'
-      HMAC_SHA256 = 'HMAC_SHA256'
-      HMAC_SHA384 = 'HMAC_SHA384'
-      HMAC_SHA512 = 'HMAC_SHA512'
-      HMAC_SHA224 = 'HMAC_SHA224'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a tag.</p>
@@ -1058,7 +1035,7 @@ module Aws::PaymentCryptography
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1071,12 +1048,12 @@ module Aws::PaymentCryptography
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1085,7 +1062,7 @@ module Aws::PaymentCryptography
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for trusted public key certificate import.</p>
@@ -1103,7 +1080,7 @@ module Aws::PaymentCryptography
       :public_key_certificate,
       :certificate_authority_public_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1116,12 +1093,12 @@ module Aws::PaymentCryptography
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -1134,7 +1111,7 @@ module Aws::PaymentCryptography
       :alias_name,
       :key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias
@@ -1143,7 +1120,7 @@ module Aws::PaymentCryptography
     class UpdateAliasOutput < Struct.new(
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to an invalid request error.</p>
@@ -1152,7 +1129,7 @@ module Aws::PaymentCryptography
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information for generating a WrappedKeyBlock for key exchange.</p>
@@ -1178,7 +1155,7 @@ module Aws::PaymentCryptography
       :key_check_value,
       :key_check_value_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -74,11 +74,7 @@ module Aws::CloudHSMV2
       :hsm_type,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BackupPolicy
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy that defines the number of days to retain backups.</p>
@@ -93,18 +89,7 @@ module Aws::CloudHSMV2
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BackupRetentionType
-      DAYS = 'DAYS'
-    end
-
-    module BackupState
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      READY = 'READY'
-      DELETED = 'DELETED'
-      PENDING_DELETION = 'PENDING_DELETION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains one or more certificates or a certificate signing request (CSR).</p>
@@ -132,7 +117,7 @@ module Aws::CloudHSMV2
       :manufacturer_hardware_certificate,
       :cluster_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the requester does not have permission to perform the
@@ -142,7 +127,7 @@ module Aws::CloudHSMV2
     class CloudHsmAccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because of an CloudHSM internal failure. The request can
@@ -152,7 +137,7 @@ module Aws::CloudHSMV2
     class CloudHsmInternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it is not a valid request.</p>
@@ -161,7 +146,7 @@ module Aws::CloudHSMV2
     class CloudHsmInvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it exceeds an CloudHSM limit.</p>
@@ -170,7 +155,7 @@ module Aws::CloudHSMV2
     class CloudHsmResourceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because it refers to a resource that cannot be
@@ -180,7 +165,7 @@ module Aws::CloudHSMV2
     class CloudHsmResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because an error occurred.</p>
@@ -189,7 +174,7 @@ module Aws::CloudHSMV2
     class CloudHsmServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because of a tagging failure. Verify the tag conditions in all applicable policies, and then retry the request.</p>
@@ -198,7 +183,7 @@ module Aws::CloudHSMV2
     class CloudHsmTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an CloudHSM cluster.</p>
@@ -282,26 +267,7 @@ module Aws::CloudHSMV2
       :tag_list,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterMode
-      FIPS = 'FIPS'
-      NON_FIPS = 'NON_FIPS'
-    end
-
-    module ClusterState
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      UNINITIALIZED = 'UNINITIALIZED'
-      INITIALIZE_IN_PROGRESS = 'INITIALIZE_IN_PROGRESS'
-      INITIALIZED = 'INITIALIZED'
-      ACTIVE = 'ACTIVE'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      MODIFY_IN_PROGRESS = 'MODIFY_IN_PROGRESS'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETED = 'DELETED'
-      DEGRADED = 'DEGRADED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_region
@@ -318,7 +284,7 @@ module Aws::CloudHSMV2
       :backup_id,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_backup
@@ -332,7 +298,7 @@ module Aws::CloudHSMV2
     class CopyBackupToRegionResponse < Struct.new(
       :destination_backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_retention_policy
@@ -381,7 +347,7 @@ module Aws::CloudHSMV2
       :tag_list,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -390,7 +356,7 @@ module Aws::CloudHSMV2
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -410,7 +376,7 @@ module Aws::CloudHSMV2
       :availability_zone,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hsm
@@ -419,7 +385,7 @@ module Aws::CloudHSMV2
     class CreateHsmResponse < Struct.new(
       :hsm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -428,7 +394,7 @@ module Aws::CloudHSMV2
     class DeleteBackupRequest < Struct.new(
       :backup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup
@@ -437,7 +403,7 @@ module Aws::CloudHSMV2
     class DeleteBackupResponse < Struct.new(
       :backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -447,7 +413,7 @@ module Aws::CloudHSMV2
     class DeleteClusterRequest < Struct.new(
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -456,7 +422,7 @@ module Aws::CloudHSMV2
     class DeleteClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -480,7 +446,7 @@ module Aws::CloudHSMV2
       :eni_id,
       :eni_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hsm_id
@@ -489,7 +455,7 @@ module Aws::CloudHSMV2
     class DeleteHsmResponse < Struct.new(
       :hsm_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -498,7 +464,7 @@ module Aws::CloudHSMV2
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -511,7 +477,7 @@ module Aws::CloudHSMV2
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -558,7 +524,7 @@ module Aws::CloudHSMV2
       :shared,
       :sort_ascending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backups
@@ -573,7 +539,7 @@ module Aws::CloudHSMV2
       :backups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -598,7 +564,7 @@ module Aws::CloudHSMV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -613,7 +579,7 @@ module Aws::CloudHSMV2
       :clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the backup that will be copied and created by the <a>CopyBackupToRegion</a> operation.</p>
@@ -635,7 +601,7 @@ module Aws::CloudHSMV2
       :source_backup,
       :source_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -644,7 +610,7 @@ module Aws::CloudHSMV2
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -653,7 +619,7 @@ module Aws::CloudHSMV2
     class GetResourcePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a hardware security module (HSM) in an CloudHSM
@@ -700,15 +666,7 @@ module Aws::CloudHSMV2
       :state,
       :state_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HsmState
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-      DEGRADED = 'DEGRADED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_id
@@ -730,7 +688,7 @@ module Aws::CloudHSMV2
       :signed_cert,
       :trust_anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -743,7 +701,7 @@ module Aws::CloudHSMV2
       :state,
       :state_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -763,7 +721,7 @@ module Aws::CloudHSMV2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -777,7 +735,7 @@ module Aws::CloudHSMV2
       :tag_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -791,7 +749,7 @@ module Aws::CloudHSMV2
       :backup_id,
       :never_expires,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup
@@ -805,7 +763,7 @@ module Aws::CloudHSMV2
     class ModifyBackupAttributesResponse < Struct.new(
       :backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hsm_type
@@ -823,7 +781,7 @@ module Aws::CloudHSMV2
       :backup_retention_policy,
       :cluster_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -832,12 +790,7 @@ module Aws::CloudHSMV2
     class ModifyClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkType
-      IPV4 = 'IPV4'
-      DUALSTACK = 'DUALSTACK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -851,7 +804,7 @@ module Aws::CloudHSMV2
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -864,7 +817,7 @@ module Aws::CloudHSMV2
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup_id
@@ -873,7 +826,7 @@ module Aws::CloudHSMV2
     class RestoreBackupRequest < Struct.new(
       :backup_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute backup
@@ -882,7 +835,7 @@ module Aws::CloudHSMV2
     class RestoreBackupResponse < Struct.new(
       :backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a tag. A tag is a key-value pair.</p>
@@ -896,7 +849,7 @@ module Aws::CloudHSMV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -910,12 +863,12 @@ module Aws::CloudHSMV2
       :resource_id,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -930,12 +883,12 @@ module Aws::CloudHSMV2
       :resource_id,
       :tag_key_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

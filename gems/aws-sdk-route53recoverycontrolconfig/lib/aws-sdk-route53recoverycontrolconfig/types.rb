@@ -12,7 +12,7 @@ module Aws::Route53RecoveryControlConfig
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An assertion rule enforces that, when you change a routing control state, that the criteria that you set in the rule configuration is met. Otherwise, the change to the routing control is not accepted. For example, the criteria might be that at least one routing control state is On after the transaction so that traffic continues to flow to at least one cell for the application. This ensures that you avoid a fail-open scenario.</p>
@@ -50,7 +50,7 @@ module Aws::Route53RecoveryControlConfig
       :wait_period_ms,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An update to an assertion rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.</p>
@@ -68,7 +68,7 @@ module Aws::Route53RecoveryControlConfig
       :safety_rule_arn,
       :wait_period_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of five redundant Regional endpoints against which you can execute API calls to update or get the state of routing controls. You can host multiple control panels and routing controls on one cluster.</p>
@@ -98,7 +98,7 @@ module Aws::Route53RecoveryControlConfig
       :owner,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A cluster endpoint. Specify an endpoint when you want to set or retrieve a routing control state in the cluster.</p>
@@ -112,7 +112,7 @@ module Aws::Route53RecoveryControlConfig
       :endpoint,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>409 response - ConflictException. You might be using a predefined variable.</p>
@@ -121,7 +121,7 @@ module Aws::Route53RecoveryControlConfig
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control panel represents a group of routing controls that can be changed together in a single transaction.</p>
@@ -155,7 +155,7 @@ module Aws::Route53RecoveryControlConfig
       :status,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a cluster.</p>
@@ -177,7 +177,7 @@ module Aws::Route53RecoveryControlConfig
       :tags,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -186,7 +186,7 @@ module Aws::Route53RecoveryControlConfig
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the control panel that you're creating.</p>
@@ -208,7 +208,7 @@ module Aws::Route53RecoveryControlConfig
       :control_panel_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel
@@ -217,7 +217,7 @@ module Aws::Route53RecoveryControlConfig
     class CreateControlPanelResponse < Struct.new(
       :control_panel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the routing control that you're creating.</p>
@@ -239,7 +239,7 @@ module Aws::Route53RecoveryControlConfig
       :control_panel_arn,
       :routing_control_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control
@@ -248,7 +248,7 @@ module Aws::Route53RecoveryControlConfig
     class CreateRoutingControlResponse < Struct.new(
       :routing_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request body that you include when you create a safety rule.</p>
@@ -270,7 +270,7 @@ module Aws::Route53RecoveryControlConfig
       :gating_rule,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assertion_rule
@@ -283,7 +283,7 @@ module Aws::Route53RecoveryControlConfig
       :assertion_rule,
       :gating_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -292,12 +292,12 @@ module Aws::Route53RecoveryControlConfig
     class DeleteClusterRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteClusterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel_arn
@@ -306,12 +306,12 @@ module Aws::Route53RecoveryControlConfig
     class DeleteControlPanelRequest < Struct.new(
       :control_panel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteControlPanelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control_arn
@@ -320,12 +320,12 @@ module Aws::Route53RecoveryControlConfig
     class DeleteRoutingControlRequest < Struct.new(
       :routing_control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRoutingControlResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute safety_rule_arn
@@ -334,12 +334,12 @@ module Aws::Route53RecoveryControlConfig
     class DeleteSafetyRuleRequest < Struct.new(
       :safety_rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSafetyRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -348,7 +348,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeClusterRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -357,7 +357,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel_arn
@@ -366,7 +366,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeControlPanelRequest < Struct.new(
       :control_panel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel
@@ -375,7 +375,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeControlPanelResponse < Struct.new(
       :control_panel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control_arn
@@ -384,7 +384,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeRoutingControlRequest < Struct.new(
       :routing_control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control
@@ -393,7 +393,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeRoutingControlResponse < Struct.new(
       :routing_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute safety_rule_arn
@@ -402,7 +402,7 @@ module Aws::Route53RecoveryControlConfig
     class DescribeSafetyRuleRequest < Struct.new(
       :safety_rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assertion_rule
@@ -415,7 +415,7 @@ module Aws::Route53RecoveryControlConfig
       :assertion_rule,
       :gating_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gating rule verifies that a gating routing control or set of gating routing controls, evaluates as true, based on a rule configuration that you specify, which allows a set of routing control state changes to complete.</p> <p>For example, if you specify one gating routing control and you set the Type in the rule configuration to OR, that indicates that you must set the gating routing control to On for the rule to evaluate as true; that is, for the gating control "switch" to be "On". When you do that, then you can update the routing control states for the target routing controls that you specify in the gating rule.</p>
@@ -457,7 +457,7 @@ module Aws::Route53RecoveryControlConfig
       :wait_period_ms,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update to a gating rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.</p>
@@ -475,7 +475,7 @@ module Aws::Route53RecoveryControlConfig
       :safety_rule_arn,
       :wait_period_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -484,7 +484,7 @@ module Aws::Route53RecoveryControlConfig
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -493,7 +493,7 @@ module Aws::Route53RecoveryControlConfig
     class GetResourcePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>500 response - InternalServiceError. Temporary service error. Retry the request.</p>
@@ -502,7 +502,7 @@ module Aws::Route53RecoveryControlConfig
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -519,7 +519,7 @@ module Aws::Route53RecoveryControlConfig
       :next_token,
       :routing_control_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute health_check_ids
@@ -532,7 +532,7 @@ module Aws::Route53RecoveryControlConfig
       :health_check_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -545,7 +545,7 @@ module Aws::Route53RecoveryControlConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -558,7 +558,7 @@ module Aws::Route53RecoveryControlConfig
       :clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -575,7 +575,7 @@ module Aws::Route53RecoveryControlConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panels
@@ -588,7 +588,7 @@ module Aws::Route53RecoveryControlConfig
       :control_panels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel_arn
@@ -605,7 +605,7 @@ module Aws::Route53RecoveryControlConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -618,7 +618,7 @@ module Aws::Route53RecoveryControlConfig
       :next_token,
       :routing_controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel_arn
@@ -635,7 +635,7 @@ module Aws::Route53RecoveryControlConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -648,7 +648,7 @@ module Aws::Route53RecoveryControlConfig
       :next_token,
       :safety_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -657,7 +657,7 @@ module Aws::Route53RecoveryControlConfig
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -666,13 +666,7 @@ module Aws::Route53RecoveryControlConfig
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The network type of a cluster. NetworkType can be one of the following:</p> <p>IPV4: Cluster endpoints support IPv4 only.</p> <p>DUALSTACK: Cluster endpoints support both IPv4 and IPv6.</p>
-    module NetworkType
-      IPV4 = 'IPV4'
-      DUALSTACK = 'DUALSTACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A new assertion rule for a control panel.</p>
@@ -698,7 +692,7 @@ module Aws::Route53RecoveryControlConfig
       :rule_config,
       :wait_period_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A new gating rule for a control panel.</p>
@@ -728,7 +722,7 @@ module Aws::Route53RecoveryControlConfig
       :target_controls,
       :wait_period_ms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>404 response - MalformedQueryString. The query string contains a syntax error or resource not found.</p>
@@ -737,7 +731,7 @@ module Aws::Route53RecoveryControlConfig
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control traffic routing.</p>
@@ -763,7 +757,7 @@ module Aws::Route53RecoveryControlConfig
       :status,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A safety rule. A safety rule can be an assertion rule or a gating rule.</p>
@@ -777,7 +771,7 @@ module Aws::Route53RecoveryControlConfig
       :assertion,
       :gating,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rule configuration for an assertion rule. That is, the criteria that you set for specific assertion controls (routing controls) that specify how many control states must be ON after a transaction completes.</p>
@@ -795,14 +789,7 @@ module Aws::Route53RecoveryControlConfig
       :threshold,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>An enumerated type that determines how the evaluated rules are processed. RuleType can be one of the following:</p> <p>ATLEAST - At least N routing controls must be set. You specify N as the Threshold in the rule configuration.</p> <p>AND - All routing controls must be set. This is a shortcut for "At least N," where N is the total number of controls in the rule.</p> <p>OR - Any control must be set. This is a shortcut for "At least N," where N is 1.</p>
-    module RuleType
-      ATLEAST = 'ATLEAST'
-      AND = 'AND'
-      OR = 'OR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>402 response - You attempted to create more resources than the service allows based on service quotas.</p>
@@ -811,14 +798,7 @@ module Aws::Route53RecoveryControlConfig
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The deployment status of a resource. Status can be one of the following:</p> <p>PENDING: Amazon Route 53 Application Recovery Controller is creating the resource.</p> <p>DEPLOYED: The resource is deployed and ready to use.</p> <p>PENDING_DELETION: Amazon Route 53 Application Recovery Controller is deleting the resource.</p>
-    module Status
-      PENDING = 'PENDING'
-      DEPLOYED = 'DEPLOYED'
-      PENDING_DELETION = 'PENDING_DELETION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request of adding tag to the resource</p>
@@ -832,12 +812,12 @@ module Aws::Route53RecoveryControlConfig
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>429 response - LimitExceededException or TooManyRequestsException.</p>
@@ -846,7 +826,7 @@ module Aws::Route53RecoveryControlConfig
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -859,12 +839,12 @@ module Aws::Route53RecoveryControlConfig
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the cluster that you're updating.</p>
@@ -878,7 +858,7 @@ module Aws::Route53RecoveryControlConfig
       :cluster_arn,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -887,7 +867,7 @@ module Aws::Route53RecoveryControlConfig
     class UpdateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the control panel that you're updating.</p>
@@ -901,7 +881,7 @@ module Aws::Route53RecoveryControlConfig
       :control_panel_arn,
       :control_panel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute control_panel
@@ -910,7 +890,7 @@ module Aws::Route53RecoveryControlConfig
     class UpdateControlPanelResponse < Struct.new(
       :control_panel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the routing control that you're updating.</p>
@@ -924,7 +904,7 @@ module Aws::Route53RecoveryControlConfig
       :routing_control_arn,
       :routing_control_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routing_control
@@ -933,7 +913,7 @@ module Aws::Route53RecoveryControlConfig
     class UpdateRoutingControlResponse < Struct.new(
       :routing_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule that you add to Application Recovery Controller to ensure that recovery actions don't accidentally impair your application's availability.</p>
@@ -947,7 +927,7 @@ module Aws::Route53RecoveryControlConfig
       :assertion_rule_update,
       :gating_rule_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assertion_rule
@@ -960,7 +940,7 @@ module Aws::Route53RecoveryControlConfig
       :assertion_rule,
       :gating_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>400 response - Multiple causes. For example, you might have a malformed query string and input parameter might be out of range, or you might have used parameters together incorrectly.</p>
@@ -969,7 +949,7 @@ module Aws::Route53RecoveryControlConfig
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

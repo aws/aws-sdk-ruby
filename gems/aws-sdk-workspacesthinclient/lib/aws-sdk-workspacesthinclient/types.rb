@@ -12,12 +12,7 @@ module Aws::WorkSpacesThinClient
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplyTimeOf
-      UTC = 'UTC'
-      DEVICE = 'DEVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state of a service resource associated with the request. Resolve the conflict before retrying this request.</p>
@@ -34,7 +29,7 @@ module Aws::WorkSpacesThinClient
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -83,7 +78,7 @@ module Aws::WorkSpacesThinClient
       :tags,
       :device_creation_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -92,17 +87,7 @@ module Aws::WorkSpacesThinClient
     class CreateEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DayOfWeek
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-      SUNDAY = 'SUNDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -115,12 +100,12 @@ module Aws::WorkSpacesThinClient
       :id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -133,12 +118,12 @@ module Aws::WorkSpacesThinClient
       :id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -155,18 +140,12 @@ module Aws::WorkSpacesThinClient
       :target_device_status,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterDeviceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DesktopType
-      WORKSPACES = 'workspaces'
-      APPSTREAM = 'appstream'
-      WORKSPACES_WEB = 'workspaces-web'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a thin client device.</p>
@@ -256,20 +235,7 @@ module Aws::WorkSpacesThinClient
       :kms_key_arn,
       :last_user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceSoftwareSetComplianceStatus
-      NONE = 'NONE'
-      COMPLIANT = 'COMPLIANT'
-      NOT_COMPLIANT = 'NOT_COMPLIANT'
-    end
-
-    module DeviceStatus
-      REGISTERED = 'REGISTERED'
-      DEREGISTERING = 'DEREGISTERING'
-      DEREGISTERED = 'DEREGISTERED'
-      ARCHIVED = 'ARCHIVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a thin client device.</p>
@@ -339,7 +305,7 @@ module Aws::WorkSpacesThinClient
       :arn,
       :last_user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an environment.</p>
@@ -421,13 +387,7 @@ module Aws::WorkSpacesThinClient
       :kms_key_arn,
       :device_creation_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentSoftwareSetComplianceStatus
-      NO_REGISTERED_DEVICES = 'NO_REGISTERED_DEVICES'
-      COMPLIANT = 'COMPLIANT'
-      NOT_COMPLIANT = 'NOT_COMPLIANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an environment.</p>
@@ -489,7 +449,7 @@ module Aws::WorkSpacesThinClient
       :updated_at,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -498,7 +458,7 @@ module Aws::WorkSpacesThinClient
     class GetDeviceRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -507,7 +467,7 @@ module Aws::WorkSpacesThinClient
     class GetDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -516,7 +476,7 @@ module Aws::WorkSpacesThinClient
     class GetEnvironmentRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -525,7 +485,7 @@ module Aws::WorkSpacesThinClient
     class GetEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -534,7 +494,7 @@ module Aws::WorkSpacesThinClient
     class GetSoftwareSetRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute software_set
@@ -543,7 +503,7 @@ module Aws::WorkSpacesThinClient
     class GetSoftwareSetResponse < Struct.new(
       :software_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an internal error and is unable to complete the request.</p>
@@ -556,7 +516,7 @@ module Aws::WorkSpacesThinClient
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -569,7 +529,7 @@ module Aws::WorkSpacesThinClient
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute devices
@@ -582,7 +542,7 @@ module Aws::WorkSpacesThinClient
       :devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -595,7 +555,7 @@ module Aws::WorkSpacesThinClient
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -608,7 +568,7 @@ module Aws::WorkSpacesThinClient
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -621,7 +581,7 @@ module Aws::WorkSpacesThinClient
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute software_sets
@@ -634,7 +594,7 @@ module Aws::WorkSpacesThinClient
       :software_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -643,7 +603,7 @@ module Aws::WorkSpacesThinClient
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -652,7 +612,7 @@ module Aws::WorkSpacesThinClient
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the maintenance window for a thin client device.</p>
@@ -686,12 +646,7 @@ module Aws::WorkSpacesThinClient
       :days_of_the_week,
       :apply_time_of,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceWindowType
-      SYSTEM = 'SYSTEM'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request was not found.</p>
@@ -708,7 +663,7 @@ module Aws::WorkSpacesThinClient
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeds a service quota.</p>
@@ -733,7 +688,7 @@ module Aws::WorkSpacesThinClient
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes software.</p>
@@ -747,7 +702,7 @@ module Aws::WorkSpacesThinClient
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a software set.</p>
@@ -781,7 +736,7 @@ module Aws::WorkSpacesThinClient
       :software,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a software set.</p>
@@ -811,28 +766,7 @@ module Aws::WorkSpacesThinClient
       :validation_status,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SoftwareSetUpdateMode
-      USE_LATEST = 'USE_LATEST'
-      USE_DESIRED = 'USE_DESIRED'
-    end
-
-    module SoftwareSetUpdateSchedule
-      USE_MAINTENANCE_WINDOW = 'USE_MAINTENANCE_WINDOW'
-      APPLY_IMMEDIATELY = 'APPLY_IMMEDIATELY'
-    end
-
-    module SoftwareSetUpdateStatus
-      AVAILABLE = 'AVAILABLE'
-      IN_PROGRESS = 'IN_PROGRESS'
-      UP_TO_DATE = 'UP_TO_DATE'
-    end
-
-    module SoftwareSetValidationStatus
-      VALIDATED = 'VALIDATED'
-      NOT_VALIDATED = 'NOT_VALIDATED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -845,17 +779,12 @@ module Aws::WorkSpacesThinClient
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetDeviceStatus
-      DEREGISTERED = 'DEREGISTERED'
-      ARCHIVED = 'ARCHIVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -876,7 +805,7 @@ module Aws::WorkSpacesThinClient
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -889,12 +818,12 @@ module Aws::WorkSpacesThinClient
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -915,7 +844,7 @@ module Aws::WorkSpacesThinClient
       :desired_software_set_id,
       :software_set_update_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -924,7 +853,7 @@ module Aws::WorkSpacesThinClient
     class UpdateDeviceResponse < Struct.new(
       :device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -965,7 +894,7 @@ module Aws::WorkSpacesThinClient
       :desired_software_set_id,
       :device_creation_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -974,7 +903,7 @@ module Aws::WorkSpacesThinClient
     class UpdateEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -987,12 +916,12 @@ module Aws::WorkSpacesThinClient
       :id,
       :validation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateSoftwareSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the specified constraints.</p>
@@ -1009,7 +938,7 @@ module Aws::WorkSpacesThinClient
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a validation exception.</p>
@@ -1023,14 +952,7 @@ module Aws::WorkSpacesThinClient
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

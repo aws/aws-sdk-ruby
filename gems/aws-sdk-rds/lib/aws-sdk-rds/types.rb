@@ -14,7 +14,7 @@ module Aws::RDS
     class AccountAttributesMessage < Struct.new(
       :account_quotas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a quota for an Amazon Web Services account.</p>
@@ -141,26 +141,7 @@ module Aws::RDS
       :used,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActivityStreamMode
-      sync = 'sync'
-      async = 'async'
-    end
-
-    module ActivityStreamPolicyStatus
-      locked = 'locked'
-      unlocked = 'unlocked'
-      locking_policy = 'locking-policy'
-      unlocking_policy = 'unlocking-policy'
-    end
-
-    module ActivityStreamStatus
-      stopped = 'stopped'
-      starting = 'starting'
-      started = 'started'
-      stopping = 'stopping'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -179,7 +160,7 @@ module Aws::RDS
       :role_arn,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -198,7 +179,7 @@ module Aws::RDS
       :role_arn,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -236,7 +217,7 @@ module Aws::RDS
       :subscription_name,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -245,7 +226,7 @@ module Aws::RDS
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -262,12 +243,7 @@ module Aws::RDS
       :resource_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplyMethod
-      immediate = 'immediate'
-      pending_reboot = 'pending-reboot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -338,7 +314,7 @@ module Aws::RDS
       :apply_action,
       :opt_in_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_pending_maintenance_actions
@@ -347,16 +323,7 @@ module Aws::RDS
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditPolicyState
-      LOCKED_POLICY = 'locked'
-      UNLOCKED_POLICY = 'unlocked'
-    end
-
-    module AuthScheme
-      SECRETS = 'SECRETS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CIDR IP range or Amazon EC2 security group is already authorized for
@@ -366,7 +333,7 @@ module Aws::RDS
     class AuthorizationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CIDR IP range or Amazon EC2 security group might not be authorized
@@ -378,7 +345,7 @@ module Aws::RDS
     class AuthorizationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB security group authorization quota has been reached.</p>
@@ -387,7 +354,7 @@ module Aws::RDS
     class AuthorizationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -422,7 +389,7 @@ module Aws::RDS
       :ec2_security_group_id,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_security_group
@@ -433,12 +400,7 @@ module Aws::RDS
     class AuthorizeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutomationMode
-      FULL = 'full'
-      ALL_PAUSED = 'all-paused'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains Availability Zone information.</p>
@@ -450,7 +412,7 @@ module Aws::RDS
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the available processor feature information for the DB instance class of a DB instance.</p>
@@ -473,7 +435,7 @@ module Aws::RDS
       :default_value,
       :allowed_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -532,7 +494,7 @@ module Aws::RDS
       :force,
       :use_earliest_time_on_point_in_time_unavailable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>DescribeDBClusterBacktracks</code> action.</p>
@@ -581,7 +543,7 @@ module Aws::RDS
       :backtrack_request_creation_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -591,7 +553,7 @@ module Aws::RDS
     class BackupPolicyNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a blue/green deployment.</p>
@@ -686,7 +648,7 @@ module Aws::RDS
       :delete_time,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A blue/green deployment with the specified name already exists.</p>
@@ -695,7 +657,7 @@ module Aws::RDS
     class BlueGreenDeploymentAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -705,7 +667,7 @@ module Aws::RDS
     class BlueGreenDeploymentNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a task for a blue/green deployment.</p>
@@ -743,7 +705,7 @@ module Aws::RDS
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_task_identifier
@@ -752,7 +714,7 @@ module Aws::RDS
     class CancelExportTaskMessage < Struct.new(
       :export_task_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a snapshot or cluster export to Amazon S3.</p>
@@ -883,7 +845,7 @@ module Aws::RDS
       :warning_message,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CA certificate for an Amazon Web Services account.</p>
@@ -927,7 +889,7 @@ module Aws::RDS
       :customer_override,
       :customer_override_valid_till,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the DB instance’s server certificate.</p>
@@ -946,7 +908,7 @@ module Aws::RDS
       :ca_identifier,
       :valid_till,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data returned by the <b>DescribeCertificates</b> action.</p>
@@ -970,7 +932,7 @@ module Aws::RDS
       :certificates,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -981,7 +943,7 @@ module Aws::RDS
     class CertificateNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.</p>
@@ -995,15 +957,7 @@ module Aws::RDS
       :character_set_name,
       :character_set_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientPasswordAuthType
-      MYSQL_NATIVE_PASSWORD = 'MYSQL_NATIVE_PASSWORD'
-      MYSQL_CACHING_SHA2_PASSWORD = 'MYSQL_CACHING_SHA2_PASSWORD'
-      POSTGRES_SCRAM_SHA_256 = 'POSTGRES_SCRAM_SHA_256'
-      POSTGRES_MD5 = 'POSTGRES_MD5'
-      SQL_SERVER_AUTHENTICATION = 'SQL_SERVER_AUTHENTICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration setting for the log types to be enabled for export to CloudWatch
@@ -1061,7 +1015,7 @@ module Aws::RDS
       :enable_log_types,
       :disable_log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>ModifyDBCluster</code> operation and 
@@ -1119,12 +1073,7 @@ module Aws::RDS
       :storage_type,
       :certificate_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterScalabilityType
-      STANDARD = 'standard'
-      LIMITLESS = 'limitless'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>
@@ -1194,7 +1143,7 @@ module Aws::RDS
       :session_pinning_filters,
       :init_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>
@@ -1237,7 +1186,7 @@ module Aws::RDS
       :session_pinning_filters,
       :init_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The additional attributes of <code>RecommendedAction</code> data type.</p>
@@ -1251,7 +1200,7 @@ module Aws::RDS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_db_cluster_parameter_group_identifier
@@ -1303,7 +1252,7 @@ module Aws::RDS
       :target_db_cluster_parameter_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group
@@ -1313,7 +1262,7 @@ module Aws::RDS
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1437,7 +1386,7 @@ module Aws::RDS
       :copy_tags,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -1448,7 +1397,7 @@ module Aws::RDS
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1501,7 +1450,7 @@ module Aws::RDS
       :target_db_parameter_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group
@@ -1511,7 +1460,7 @@ module Aws::RDS
     class CopyDBParameterGroupResult < Struct.new(
       :db_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1691,7 +1640,7 @@ module Aws::RDS
       :snapshot_availability_zone,
       :snapshot_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot
@@ -1702,7 +1651,7 @@ module Aws::RDS
     class CopyDBSnapshotResult < Struct.new(
       :db_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1751,7 +1700,7 @@ module Aws::RDS
       :target_option_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute option_group
@@ -1760,7 +1709,7 @@ module Aws::RDS
     class CopyOptionGroupResult < Struct.new(
       :option_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment_name
@@ -1845,7 +1794,7 @@ module Aws::RDS
       :target_allocated_storage,
       :target_storage_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment
@@ -1859,7 +1808,7 @@ module Aws::RDS
     class CreateBlueGreenDeploymentResponse < Struct.new(
       :blue_green_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred while trying to create the CEV.</p>
@@ -1868,7 +1817,7 @@ module Aws::RDS
     class CreateCustomDBEngineVersionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -1991,7 +1940,7 @@ module Aws::RDS
       :source_custom_db_engine_version_identifier,
       :use_aws_provided_latest_image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.</p>
@@ -2175,7 +2124,7 @@ module Aws::RDS
       :supports_integrations,
       :serverless_v2_features_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -2207,7 +2156,7 @@ module Aws::RDS
       :excluded_members,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Aurora DB cluster.
@@ -2283,7 +2232,7 @@ module Aws::RDS
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3071,7 +3020,7 @@ module Aws::RDS
       :ca_certificate_identifier,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3157,7 +3106,7 @@ module Aws::RDS
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group
@@ -3167,7 +3116,7 @@ module Aws::RDS
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -3193,7 +3142,7 @@ module Aws::RDS
     class CreateDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -3233,7 +3182,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -3244,7 +3193,7 @@ module Aws::RDS
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -4570,7 +4519,7 @@ module Aws::RDS
       :multi_tenant,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -5208,7 +5157,7 @@ module Aws::RDS
       :upgrade_storage_config,
       :ca_certificate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -5222,7 +5171,7 @@ module Aws::RDS
     class CreateDBInstanceReadReplicaResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -5236,7 +5185,7 @@ module Aws::RDS
     class CreateDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5357,7 +5306,7 @@ module Aws::RDS
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group
@@ -5367,7 +5316,7 @@ module Aws::RDS
     class CreateDBParameterGroupResult < Struct.new(
       :db_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -5405,7 +5354,7 @@ module Aws::RDS
       :target_role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_endpoint
@@ -5416,7 +5365,7 @@ module Aws::RDS
     class CreateDBProxyEndpointResponse < Struct.new(
       :db_proxy_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -5472,7 +5421,7 @@ module Aws::RDS
       :debug_logging,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy
@@ -5481,7 +5430,7 @@ module Aws::RDS
     class CreateDBProxyResponse < Struct.new(
       :db_proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5516,7 +5465,7 @@ module Aws::RDS
       :db_security_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_security_group
@@ -5527,7 +5476,7 @@ module Aws::RDS
     class CreateDBSecurityGroupResult < Struct.new(
       :db_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_shard_group_identifier
@@ -5600,7 +5549,7 @@ module Aws::RDS
       :publicly_accessible,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB shard group.</p>
@@ -5674,7 +5623,7 @@ module Aws::RDS
       :db_shard_group_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5719,7 +5668,7 @@ module Aws::RDS
       :db_instance_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot
@@ -5730,7 +5679,7 @@ module Aws::RDS
     class CreateDBSnapshotResult < Struct.new(
       :db_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5766,7 +5715,7 @@ module Aws::RDS
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group
@@ -5777,7 +5726,7 @@ module Aws::RDS
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -5863,7 +5812,7 @@ module Aws::RDS
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -5872,7 +5821,7 @@ module Aws::RDS
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -5976,7 +5925,7 @@ module Aws::RDS
       :storage_encrypted,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -5985,7 +5934,7 @@ module Aws::RDS
     class CreateGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -6037,7 +5986,7 @@ module Aws::RDS
       :data_filter,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A zero-ETL integration with Amazon Redshift.</p>
@@ -6101,7 +6050,7 @@ module Aws::RDS
       :data_filter,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -6209,7 +6158,7 @@ module Aws::RDS
       :option_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute option_group
@@ -6218,7 +6167,7 @@ module Aws::RDS
     class CreateOptionGroupResult < Struct.new(
       :option_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -6317,7 +6266,7 @@ module Aws::RDS
       :master_user_secret_kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tenant_database
@@ -6327,7 +6276,7 @@ module Aws::RDS
     class CreateTenantDatabaseResult < Struct.new(
       :tenant_database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6338,7 +6287,7 @@ module Aws::RDS
     class CustomAvailabilityZoneNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value that indicates the AMI information.</p>
@@ -6352,7 +6301,7 @@ module Aws::RDS
       :image_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CEV with the specified name already exists.</p>
@@ -6361,7 +6310,7 @@ module Aws::RDS
     class CustomDBEngineVersionAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified CEV was not found.</p>
@@ -6370,7 +6319,7 @@ module Aws::RDS
     class CustomDBEngineVersionNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded your CEV quota.</p>
@@ -6379,13 +6328,7 @@ module Aws::RDS
     class CustomDBEngineVersionQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomEngineVersionStatus
-      available = 'available'
-      inactive = 'inactive'
-      inactive_except_restore = 'inactive-except-restore'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. </p>
@@ -6859,7 +6802,7 @@ module Aws::RDS
       :certificate_details,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user already has a DB cluster with the given identifier.</p>
@@ -6868,7 +6811,7 @@ module Aws::RDS
     class DBClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An automated backup of a DB cluster. It consists of system backups, transaction logs, and the database cluster 
@@ -6993,7 +6936,7 @@ module Aws::RDS
       :aws_backup_recovery_point_arn,
       :storage_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -7007,7 +6950,7 @@ module Aws::RDS
       :marker,
       :db_cluster_automated_backups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No automated backup for this DB cluster was found.</p>
@@ -7016,7 +6959,7 @@ module Aws::RDS
     class DBClusterAutomatedBackupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for retained automated backups was exceeded. This prevents you from retaining any additional automated 
@@ -7026,7 +6969,7 @@ module Aws::RDS
     class DBClusterAutomatedBackupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>DescribeDBClusterBacktracks</code> action.</p>
@@ -7075,7 +7018,7 @@ module Aws::RDS
       :backtrack_request_creation_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBClusterBacktracks</code> action.</p>
@@ -7089,7 +7032,7 @@ module Aws::RDS
       :marker,
       :db_cluster_backtracks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -7099,7 +7042,7 @@ module Aws::RDS
     class DBClusterBacktrackNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Aurora DB cluster.
@@ -7175,7 +7118,7 @@ module Aws::RDS
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified custom endpoint can't be created because it already exists.</p>
@@ -7184,7 +7127,7 @@ module Aws::RDS
     class DBClusterEndpointAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -7202,7 +7145,7 @@ module Aws::RDS
       :marker,
       :db_cluster_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified custom endpoint doesn't exist.</p>
@@ -7211,7 +7154,7 @@ module Aws::RDS
     class DBClusterEndpointNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster already has the maximum number of custom endpoints.</p>
@@ -7220,7 +7163,7 @@ module Aws::RDS
     class DBClusterEndpointQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an instance that is part of a DB cluster.</p>
@@ -7245,7 +7188,7 @@ module Aws::RDS
       :db_cluster_parameter_group_status,
       :promotion_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBClusters</code> action.</p>
@@ -7259,7 +7202,7 @@ module Aws::RDS
       :marker,
       :db_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -7269,7 +7212,7 @@ module Aws::RDS
     class DBClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains status information for a DB cluster option group.</p>
@@ -7283,7 +7226,7 @@ module Aws::RDS
       :db_cluster_option_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB cluster parameter group.</p>
@@ -7306,7 +7249,7 @@ module Aws::RDS
       :description,
       :db_cluster_parameter_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -7317,7 +7260,7 @@ module Aws::RDS
     class DBClusterParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -7335,7 +7278,7 @@ module Aws::RDS
       :marker,
       :db_cluster_parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user attempted to create a new DB cluster and the user has already reached the
@@ -7345,7 +7288,7 @@ module Aws::RDS
     class DBClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Web Services Identity and Access Management (IAM) role that is associated with a DB cluster.</p>
@@ -7381,7 +7324,7 @@ module Aws::RDS
       :status,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified IAM role Amazon Resource Name (ARN) is already associated with the specified DB cluster.</p>
@@ -7390,7 +7333,7 @@ module Aws::RDS
     class DBClusterRoleAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified IAM role Amazon Resource Name (ARN) isn't associated with the specified DB cluster.</p>
@@ -7399,7 +7342,7 @@ module Aws::RDS
     class DBClusterRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of IAM roles that can be associated with the specified DB cluster.</p>
@@ -7408,7 +7351,7 @@ module Aws::RDS
     class DBClusterRoleQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB cluster snapshot</p>
@@ -7545,7 +7488,7 @@ module Aws::RDS
       :db_cluster_resource_id,
       :storage_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user already has a DB cluster snapshot with the given identifier.</p>
@@ -7554,7 +7497,7 @@ module Aws::RDS
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and values of a manual DB cluster snapshot attribute.</p>
@@ -7579,7 +7522,7 @@ module Aws::RDS
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful call to the <code>DescribeDBClusterSnapshotAttributes</code>
@@ -7597,7 +7540,7 @@ module Aws::RDS
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of DB cluster snapshots for the user as the result of a call to the <code>DescribeDBClusterSnapshots</code> action.</p>
@@ -7615,7 +7558,7 @@ module Aws::RDS
       :marker,
       :db_cluster_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -7625,7 +7568,7 @@ module Aws::RDS
     class DBClusterSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for future use.</p>
@@ -7647,7 +7590,7 @@ module Aws::RDS
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.</p>
@@ -7831,7 +7774,7 @@ module Aws::RDS
       :supports_integrations,
       :serverless_v2_features_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBEngineVersions</code> action.</p>
@@ -7848,7 +7791,7 @@ module Aws::RDS
       :marker,
       :db_engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB instance.</p>
@@ -8350,7 +8293,7 @@ module Aws::RDS
       :multi_tenant,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user already has a DB instance with the given identifier.</p>
@@ -8359,7 +8302,7 @@ module Aws::RDS
     class DBInstanceAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An automated backup of a DB instance. It consists of system backups, transaction logs, and the database instance properties that
@@ -8515,7 +8458,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :multi_tenant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBInstanceAutomatedBackups</code> action.</p>
@@ -8532,7 +8475,7 @@ module Aws::RDS
       :marker,
       :db_instance_automated_backups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No automated backup for this DB instance was found.</p>
@@ -8541,7 +8484,7 @@ module Aws::RDS
     class DBInstanceAutomatedBackupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota for retained automated backups was exceeded. This prevents you
@@ -8552,7 +8495,7 @@ module Aws::RDS
     class DBInstanceAutomatedBackupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Automated backups of a DB instance replicated to another Amazon Web Services Region. They consist of system backups, transaction logs, and database instance properties.</p>
@@ -8562,7 +8505,7 @@ module Aws::RDS
     class DBInstanceAutomatedBackupsReplication < Struct.new(
       :db_instance_automated_backups_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBInstances</code> action.</p>
@@ -8579,7 +8522,7 @@ module Aws::RDS
       :marker,
       :db_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -8589,7 +8532,7 @@ module Aws::RDS
     class DBInstanceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attempt to download or examine log files didn't succeed because an Aurora Serverless v2 instance was paused.</p>
@@ -8598,7 +8541,7 @@ module Aws::RDS
     class DBInstanceNotReadyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an Amazon Web Services Identity and Access Management (IAM) role that is associated with a DB instance.</p>
@@ -8635,7 +8578,7 @@ module Aws::RDS
       :feature_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified <code>RoleArn</code> or <code>FeatureName</code> value is already associated with the DB instance.</p>
@@ -8644,7 +8587,7 @@ module Aws::RDS
     class DBInstanceRoleAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified <code>RoleArn</code> value doesn't match the specified feature for
@@ -8654,7 +8597,7 @@ module Aws::RDS
     class DBInstanceRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't associate any more Amazon Web Services Identity and Access Management (IAM) roles with the DB instance because the quota has been reached.</p>
@@ -8663,7 +8606,7 @@ module Aws::RDS
     class DBInstanceRoleQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of status information for a DB instance.</p>
@@ -8687,7 +8630,7 @@ module Aws::RDS
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -8697,7 +8640,7 @@ module Aws::RDS
     class DBLogFileNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the operation
@@ -8717,7 +8660,7 @@ module Aws::RDS
       :major_engine_version,
       :supported_engine_lifecycles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB parameter group.</p>
@@ -8740,7 +8683,7 @@ module Aws::RDS
       :description,
       :db_parameter_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DB parameter group with the same name exists.</p>
@@ -8749,7 +8692,7 @@ module Aws::RDS
     class DBParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -8760,7 +8703,7 @@ module Aws::RDS
     class DBParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of DB parameter
@@ -8770,7 +8713,7 @@ module Aws::RDS
     class DBParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the DB parameter group.</p>
@@ -8844,7 +8787,7 @@ module Aws::RDS
       :db_parameter_group_name,
       :parameter_apply_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBParameterGroups</code> action.</p>
@@ -8861,7 +8804,7 @@ module Aws::RDS
       :marker,
       :db_parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data structure representing a proxy managed by the RDS Proxy.</p>
@@ -8944,7 +8887,7 @@ module Aws::RDS
       :created_date,
       :updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified proxy name must be unique for all proxies owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
@@ -8953,7 +8896,7 @@ module Aws::RDS
     class DBProxyAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data structure representing an endpoint associated with a DB proxy. RDS automatically creates one
@@ -9014,7 +8957,7 @@ module Aws::RDS
       :target_role,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified DB proxy endpoint name must be unique for all DB proxy endpoints owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
@@ -9023,7 +8966,7 @@ module Aws::RDS
     class DBProxyEndpointAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB proxy endpoint doesn't exist.</p>
@@ -9032,7 +8975,7 @@ module Aws::RDS
     class DBProxyEndpointNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB proxy already has the maximum number of endpoints.</p>
@@ -9041,21 +8984,7 @@ module Aws::RDS
     class DBProxyEndpointQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DBProxyEndpointStatus
-      AVAILABLE = 'available'
-      MODIFYING = 'modifying'
-      INCOMPATIBLE_NETWORK = 'incompatible-network'
-      INSUFFICIENT_RESOURCE_LIMITS = 'insufficient-resource-limits'
-      CREATING = 'creating'
-      DELETING = 'deleting'
-    end
-
-    module DBProxyEndpointTargetRole
-      READ_WRITE = 'READ_WRITE'
-      READ_ONLY = 'READ_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified proxy name doesn't correspond to a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
@@ -9064,7 +8993,7 @@ module Aws::RDS
     class DBProxyNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your Amazon Web Services account already has the maximum number of proxies in the specified Amazon Web Services Region.</p>
@@ -9073,19 +9002,7 @@ module Aws::RDS
     class DBProxyQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DBProxyStatus
-      AVAILABLE = 'available'
-      MODIFYING = 'modifying'
-      INCOMPATIBLE_NETWORK = 'incompatible-network'
-      INSUFFICIENT_RESOURCE_LIMITS = 'insufficient-resource-limits'
-      CREATING = 'creating'
-      DELETING = 'deleting'
-      SUSPENDED = 'suspended'
-      SUSPENDING = 'suspending'
-      REACTIVATING = 'reactivating'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster
@@ -9126,7 +9043,7 @@ module Aws::RDS
       :role,
       :target_health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The proxy is already associated with the specified RDS DB instance or Aurora DB cluster.</p>
@@ -9135,7 +9052,7 @@ module Aws::RDS
     class DBProxyTargetAlreadyRegisteredFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group
@@ -9179,7 +9096,7 @@ module Aws::RDS
       :created_date,
       :updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified target group isn't available for a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
@@ -9188,7 +9105,7 @@ module Aws::RDS
     class DBProxyTargetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified RDS DB instance or Aurora DB cluster isn't available for a proxy owned by your Amazon Web Services account in the specified Amazon Web Services Region.</p>
@@ -9197,7 +9114,7 @@ module Aws::RDS
     class DBProxyTargetNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommendation for your DB instances, DB clusters, and DB parameter groups.</p>
@@ -9359,7 +9276,7 @@ module Aws::RDS
       :links,
       :issue_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_recommendation
@@ -9368,7 +9285,7 @@ module Aws::RDS
     class DBRecommendationMessage < Struct.new(
       :db_recommendation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_recommendations
@@ -9383,7 +9300,7 @@ module Aws::RDS
       :db_recommendations,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB security group.</p>
@@ -9419,7 +9336,7 @@ module Aws::RDS
       :ip_ranges,
       :db_security_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DB security group with the name specified in
@@ -9429,7 +9346,7 @@ module Aws::RDS
     class DBSecurityGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the following actions:</p>
@@ -9465,7 +9382,7 @@ module Aws::RDS
       :db_security_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBSecurityGroups</code> action.</p>
@@ -9482,7 +9399,7 @@ module Aws::RDS
       :marker,
       :db_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -9492,7 +9409,7 @@ module Aws::RDS
     class DBSecurityGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DB security group isn't allowed for this action.</p>
@@ -9501,7 +9418,7 @@ module Aws::RDS
     class DBSecurityGroupNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of DB security
@@ -9511,7 +9428,7 @@ module Aws::RDS
     class DBSecurityGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB shard group.</p>
@@ -9585,7 +9502,7 @@ module Aws::RDS
       :db_shard_group_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified DB shard group name must be unique in your Amazon Web Services account in the specified Amazon Web Services Region.</p>
@@ -9594,7 +9511,7 @@ module Aws::RDS
     class DBShardGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified DB shard group name wasn't found.</p>
@@ -9603,7 +9520,7 @@ module Aws::RDS
     class DBShardGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB snapshot.</p>
@@ -9779,7 +9696,7 @@ module Aws::RDS
       :multi_tenant,
       :snapshot_availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -9789,7 +9706,7 @@ module Aws::RDS
     class DBSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and values of a manual DB snapshot attribute</p>
@@ -9814,7 +9731,7 @@ module Aws::RDS
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful call to the <code>DescribeDBSnapshotAttributes</code>
@@ -9832,7 +9749,7 @@ module Aws::RDS
       :db_snapshot_identifier,
       :db_snapshot_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBSnapshots</code> action.</p>
@@ -9849,7 +9766,7 @@ module Aws::RDS
       :marker,
       :db_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -9859,7 +9776,7 @@ module Aws::RDS
     class DBSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a tenant database in a snapshot of a DB instance.</p>
@@ -9923,7 +9840,7 @@ module Aws::RDS
       :nchar_character_set_name,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified snapshot tenant database wasn't found.</p>
@@ -9932,7 +9849,7 @@ module Aws::RDS
     class DBSnapshotTenantDatabaseNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -9947,7 +9864,7 @@ module Aws::RDS
       :marker,
       :db_snapshot_tenant_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB subnet group.</p>
@@ -10004,7 +9921,7 @@ module Aws::RDS
       :db_subnet_group_arn,
       :supported_network_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10014,7 +9931,7 @@ module Aws::RDS
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subnets in the DB subnet group should cover at least two Availability Zones unless there is only one Availability Zone.</p>
@@ -10023,7 +9940,7 @@ module Aws::RDS
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBSubnetGroups</code> action.</p>
@@ -10040,7 +9957,7 @@ module Aws::RDS
       :marker,
       :db_subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DBSubnetGroup shouldn't be specified while creating read replicas that lie
@@ -10050,7 +9967,7 @@ module Aws::RDS
     class DBSubnetGroupNotAllowedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -10060,7 +9977,7 @@ module Aws::RDS
     class DBSubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of DB subnet
@@ -10070,7 +9987,7 @@ module Aws::RDS
     class DBSubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of subnets in a
@@ -10080,7 +9997,7 @@ module Aws::RDS
     class DBSubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB upgrade failed because a resource the DB depends on can't be
@@ -10090,12 +10007,7 @@ module Aws::RDS
     class DBUpgradeDependencyFailureFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseInsightsMode
-      STANDARD = 'standard'
-      ADVANCED = 'advanced'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment_identifier
@@ -10118,7 +10030,7 @@ module Aws::RDS
       :blue_green_deployment_identifier,
       :delete_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment
@@ -10132,7 +10044,7 @@ module Aws::RDS
     class DeleteBlueGreenDeploymentResponse < Struct.new(
       :blue_green_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -10169,7 +10081,7 @@ module Aws::RDS
       :engine,
       :engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.</p>
@@ -10353,7 +10265,7 @@ module Aws::RDS
       :supports_integrations,
       :serverless_v2_features_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_resource_id
@@ -10362,7 +10274,7 @@ module Aws::RDS
     class DeleteDBClusterAutomatedBackupMessage < Struct.new(
       :db_cluster_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_automated_backup
@@ -10372,7 +10284,7 @@ module Aws::RDS
     class DeleteDBClusterAutomatedBackupResult < Struct.new(
       :db_cluster_automated_backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_endpoint_identifier
@@ -10381,7 +10293,7 @@ module Aws::RDS
     class DeleteDBClusterEndpointMessage < Struct.new(
       :db_cluster_endpoint_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Aurora DB cluster.
@@ -10457,7 +10369,7 @@ module Aws::RDS
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10514,7 +10426,7 @@ module Aws::RDS
       :final_db_snapshot_identifier,
       :delete_automated_backups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10536,7 +10448,7 @@ module Aws::RDS
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -10562,7 +10474,7 @@ module Aws::RDS
     class DeleteDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10573,7 +10485,7 @@ module Aws::RDS
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -10584,7 +10496,7 @@ module Aws::RDS
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter input for the <code>DeleteDBInstanceAutomatedBackup</code> operation.</p>
@@ -10600,7 +10512,7 @@ module Aws::RDS
       :dbi_resource_id,
       :db_instance_automated_backups_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_automated_backup
@@ -10610,7 +10522,7 @@ module Aws::RDS
     class DeleteDBInstanceAutomatedBackupResult < Struct.new(
       :db_instance_automated_backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10670,7 +10582,7 @@ module Aws::RDS
       :final_db_snapshot_identifier,
       :delete_automated_backups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -10684,7 +10596,7 @@ module Aws::RDS
     class DeleteDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10706,7 +10618,7 @@ module Aws::RDS
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_endpoint_name
@@ -10715,7 +10627,7 @@ module Aws::RDS
     class DeleteDBProxyEndpointRequest < Struct.new(
       :db_proxy_endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_endpoint
@@ -10724,7 +10636,7 @@ module Aws::RDS
     class DeleteDBProxyEndpointResponse < Struct.new(
       :db_proxy_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -10733,7 +10645,7 @@ module Aws::RDS
     class DeleteDBProxyRequest < Struct.new(
       :db_proxy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy
@@ -10742,7 +10654,7 @@ module Aws::RDS
     class DeleteDBProxyResponse < Struct.new(
       :db_proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10770,7 +10682,7 @@ module Aws::RDS
     class DeleteDBSecurityGroupMessage < Struct.new(
       :db_security_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_shard_group_identifier
@@ -10779,7 +10691,7 @@ module Aws::RDS
     class DeleteDBShardGroupMessage < Struct.new(
       :db_shard_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB shard group.</p>
@@ -10853,7 +10765,7 @@ module Aws::RDS
       :db_shard_group_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10864,7 +10776,7 @@ module Aws::RDS
     class DeleteDBSnapshotMessage < Struct.new(
       :db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot
@@ -10875,7 +10787,7 @@ module Aws::RDS
     class DeleteDBSnapshotResult < Struct.new(
       :db_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10891,7 +10803,7 @@ module Aws::RDS
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -10901,7 +10813,7 @@ module Aws::RDS
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -10910,7 +10822,7 @@ module Aws::RDS
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -10919,7 +10831,7 @@ module Aws::RDS
     class DeleteGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -10928,7 +10840,7 @@ module Aws::RDS
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_identifier
@@ -10937,7 +10849,7 @@ module Aws::RDS
     class DeleteIntegrationMessage < Struct.new(
       :integration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A zero-ETL integration with Amazon Redshift.</p>
@@ -11001,7 +10913,7 @@ module Aws::RDS
       :data_filter,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11014,7 +10926,7 @@ module Aws::RDS
     class DeleteOptionGroupMessage < Struct.new(
       :option_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -11048,7 +10960,7 @@ module Aws::RDS
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tenant_database
@@ -11058,7 +10970,7 @@ module Aws::RDS
     class DeleteTenantDatabaseResult < Struct.new(
       :tenant_database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -11079,18 +10991,18 @@ module Aws::RDS
       :db_instance_identifiers,
       :db_cluster_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterDBProxyTargetsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
     class DescribeAccountAttributesMessage < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment_identifier
@@ -11162,7 +11074,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployments
@@ -11176,7 +11088,7 @@ module Aws::RDS
       :blue_green_deployments,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11212,7 +11124,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_resource_id
@@ -11266,7 +11178,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11363,7 +11275,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -11403,7 +11315,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11439,7 +11351,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11498,7 +11410,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a DB cluster parameter group including the parameters in the DB cluster parameter group.</p>
@@ -11516,7 +11428,7 @@ module Aws::RDS
       :parameters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11526,7 +11438,7 @@ module Aws::RDS
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_attributes_result
@@ -11539,7 +11451,7 @@ module Aws::RDS
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11663,7 +11575,7 @@ module Aws::RDS
       :include_public,
       :db_cluster_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -11738,7 +11650,7 @@ module Aws::RDS
       :marker,
       :include_shared,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -11977,7 +11889,7 @@ module Aws::RDS
       :list_supported_timezones,
       :include_all,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter input for DescribeDBInstanceAutomatedBackups.</p>
@@ -12048,7 +11960,7 @@ module Aws::RDS
       :marker,
       :db_instance_automated_backups_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -12116,7 +12028,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element to <code>DescribeDBLogFiles</code>.</p>
@@ -12134,7 +12046,7 @@ module Aws::RDS
       :last_written,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -12174,7 +12086,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from a call to <code>DescribeDBLogFiles</code>.</p>
@@ -12188,7 +12100,7 @@ module Aws::RDS
       :describe_db_log_files,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -12309,7 +12221,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_major_engine_versions
@@ -12324,7 +12236,7 @@ module Aws::RDS
       :db_major_engine_versions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -12361,7 +12273,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -12405,7 +12317,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeDBParameters</code> action.</p>
@@ -12422,7 +12334,7 @@ module Aws::RDS
       :parameters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -12451,7 +12363,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxies
@@ -12466,7 +12378,7 @@ module Aws::RDS
       :db_proxies,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -12501,7 +12413,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_endpoints
@@ -12516,7 +12428,7 @@ module Aws::RDS
       :db_proxy_endpoints,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -12548,7 +12460,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_groups
@@ -12563,7 +12475,7 @@ module Aws::RDS
       :target_groups,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -12595,7 +12507,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -12610,7 +12522,7 @@ module Aws::RDS
       :targets,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_updated_after
@@ -12792,7 +12704,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -12823,7 +12735,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_shard_group_identifier
@@ -12855,7 +12767,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_shard_groups
@@ -12868,7 +12780,7 @@ module Aws::RDS
       :db_shard_groups,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -12878,7 +12790,7 @@ module Aws::RDS
     class DescribeDBSnapshotAttributesMessage < Struct.new(
       :db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot_attributes_result
@@ -12891,7 +12803,7 @@ module Aws::RDS
     class DescribeDBSnapshotAttributesResult < Struct.new(
       :db_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -13009,7 +12921,7 @@ module Aws::RDS
       :marker,
       :dbi_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13147,7 +13059,7 @@ module Aws::RDS
       :include_public,
       :dbi_resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13177,7 +13089,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13207,7 +13119,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_defaults
@@ -13216,7 +13128,7 @@ module Aws::RDS
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13495,7 +13407,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_defaults
@@ -13504,7 +13416,7 @@ module Aws::RDS
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13520,7 +13432,7 @@ module Aws::RDS
       :source_type,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13551,7 +13463,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13641,7 +13553,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_task_identifier
@@ -13729,7 +13641,7 @@ module Aws::RDS
       :max_records,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -13764,7 +13676,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_identifier
@@ -13791,7 +13703,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -13805,7 +13717,7 @@ module Aws::RDS
       :marker,
       :integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -13907,7 +13819,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14013,7 +13925,7 @@ module Aws::RDS
       :engine_name,
       :major_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of option groups.</p>
@@ -14030,7 +13942,7 @@ module Aws::RDS
       :option_groups_list,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14185,7 +14097,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14231,7 +14143,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14295,7 +14207,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14353,7 +14265,7 @@ module Aws::RDS
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14387,7 +14299,7 @@ module Aws::RDS
       :marker,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -14441,7 +14353,7 @@ module Aws::RDS
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14451,7 +14363,7 @@ module Aws::RDS
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
       :db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute valid_db_instance_modifications_message
@@ -14464,7 +14376,7 @@ module Aws::RDS
     class DescribeValidDBInstanceModificationsResult < Struct.new(
       :valid_db_instance_modifications_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -14473,7 +14385,7 @@ module Aws::RDS
     class DisableHttpEndpointRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -14486,7 +14398,7 @@ module Aws::RDS
       :resource_arn,
       :http_endpoint_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A link to documentation that provides additional information for a recommendation.</p>
@@ -14500,7 +14412,7 @@ module Aws::RDS
       :text,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Active Directory Domain membership record associated with the DB instance or cluster.</p>
@@ -14534,7 +14446,7 @@ module Aws::RDS
       :auth_secret_arn,
       :dns_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -14544,7 +14456,7 @@ module Aws::RDS
     class DomainNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of double values.</p>
@@ -14558,7 +14470,7 @@ module Aws::RDS
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -14610,7 +14522,7 @@ module Aws::RDS
       :marker,
       :number_of_lines,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element to <code>DownloadDBLogFilePortion</code>.</p>
@@ -14628,7 +14540,7 @@ module Aws::RDS
       :marker,
       :additional_data_pending,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the following actions:</p>
@@ -14668,7 +14580,7 @@ module Aws::RDS
       :ec2_security_group_id,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AMI configuration prerequisite has not been met.</p>
@@ -14677,7 +14589,7 @@ module Aws::RDS
     class Ec2ImagePropertiesNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -14686,7 +14598,7 @@ module Aws::RDS
     class EnableHttpEndpointRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -14699,7 +14611,7 @@ module Aws::RDS
       :resource_arn,
       :http_endpoint_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon RDS DB instance.
@@ -14737,7 +14649,7 @@ module Aws::RDS
       :port,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeEngineDefaultParameters</code> action.</p>
@@ -14759,13 +14671,7 @@ module Aws::RDS
       :marker,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EngineFamily
-      MYSQL = 'MYSQL'
-      POSTGRESQL = 'POSTGRESQL'
-      SQLSERVER = 'SQLSERVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> action.</p>
@@ -14795,7 +14701,7 @@ module Aws::RDS
       :date,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful invocation of the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeEventCategories.html">DescribeEventCategories</a>
@@ -14810,7 +14716,7 @@ module Aws::RDS
       :source_type,
       :event_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data returned from the <code>DescribeEventCategories</code> operation.</p>
@@ -14820,7 +14726,7 @@ module Aws::RDS
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful invocation of the <code>DescribeEventSubscriptions</code> action.</p>
@@ -14869,7 +14775,7 @@ module Aws::RDS
       :enabled,
       :event_subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of event subscriptions.</p>
@@ -14878,7 +14784,7 @@ module Aws::RDS
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data returned by the <b>DescribeEventSubscriptions</b> action.</p>
@@ -14896,7 +14802,7 @@ module Aws::RDS
       :marker,
       :event_subscriptions_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeEvents</code> action.</p>
@@ -14914,12 +14820,7 @@ module Aws::RDS
       :marker,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportSourceType
-      SNAPSHOT = 'SNAPSHOT'
-      CLUSTER = 'CLUSTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a snapshot or cluster export to Amazon S3.</p>
@@ -15050,7 +14951,7 @@ module Aws::RDS
       :warning_message,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't start an export task that's already running.</p>
@@ -15059,7 +14960,7 @@ module Aws::RDS
     class ExportTaskAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The export task doesn't exist.</p>
@@ -15068,7 +14969,7 @@ module Aws::RDS
     class ExportTaskNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -15083,7 +14984,7 @@ module Aws::RDS
       :marker,
       :export_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -15106,7 +15007,7 @@ module Aws::RDS
       :db_cluster_identifier,
       :target_db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -15132,7 +15033,7 @@ module Aws::RDS
     class FailoverDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -15175,7 +15076,7 @@ module Aws::RDS
       :allow_data_loss,
       :switchover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -15184,7 +15085,7 @@ module Aws::RDS
     class FailoverGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the state of scheduled or in-process operations on a
@@ -15229,13 +15130,7 @@ module Aws::RDS
       :to_db_cluster_arn,
       :is_data_loss_allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailoverStatus
-      PENDING = 'pending'
-      FAILING_OVER = 'failing-over'
-      CANCELLING = 'cancelling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to return a more specific list of results 
@@ -15293,7 +15188,7 @@ module Aws::RDS
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data type representing an Aurora global database.</p>
@@ -15366,7 +15261,7 @@ module Aws::RDS
       :failover_state,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>GlobalClusterIdentifier</code> already exists. Specify a new global database identifier 
@@ -15376,7 +15271,7 @@ module Aws::RDS
     class GlobalClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data structure with information about any primary and
@@ -15406,12 +15301,7 @@ module Aws::RDS
       :global_write_forwarding_status,
       :synchronization_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlobalClusterMemberSynchronizationStatus
-      CONNECTED = 'connected'
-      PENDING_RESYNC = 'pending-resync'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster.</p>
@@ -15420,7 +15310,7 @@ module Aws::RDS
     class GlobalClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of global database clusters for this account is already at the maximum allowed.</p>
@@ -15429,7 +15319,7 @@ module Aws::RDS
     class GlobalClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -15444,13 +15334,7 @@ module Aws::RDS
       :marker,
       :global_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IAMAuthMode
-      DISABLED = 'DISABLED'
-      REQUIRED = 'REQUIRED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>DescribeDBSecurityGroups</code> action.</p>
@@ -15464,7 +15348,7 @@ module Aws::RDS
       :status,
       :cidrip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM role requires additional permissions to export to an Amazon S3 bucket.</p>
@@ -15473,7 +15357,7 @@ module Aws::RDS
     class IamRoleMissingPermissionsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM role is missing for exporting to an Amazon S3 bucket.</p>
@@ -15482,7 +15366,7 @@ module Aws::RDS
     class IamRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of DB
@@ -15492,7 +15376,7 @@ module Aws::RDS
     class InstanceQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation can't be performed because there aren't enough available IP addresses 
@@ -15503,7 +15387,7 @@ module Aws::RDS
     class InsufficientAvailableIPsInSubnetFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB cluster doesn't have enough capacity for the current operation.</p>
@@ -15512,7 +15396,7 @@ module Aws::RDS
     class InsufficientDBClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified DB instance class isn't available in the specified Availability
@@ -15522,7 +15406,7 @@ module Aws::RDS
     class InsufficientDBInstanceCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is insufficient storage available for the current action. You might be able to
@@ -15533,7 +15417,7 @@ module Aws::RDS
     class InsufficientStorageClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A zero-ETL integration with Amazon Redshift.</p>
@@ -15597,7 +15481,7 @@ module Aws::RDS
       :data_filter,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration you are trying to create already exists.</p>
@@ -15606,7 +15490,7 @@ module Aws::RDS
     class IntegrationAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflicting conditional operation is currently in progress against this resource.
@@ -15617,7 +15501,7 @@ module Aws::RDS
     class IntegrationConflictOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error associated with a zero-ETL integration with Amazon Redshift.</p>
@@ -15631,7 +15515,7 @@ module Aws::RDS
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified integration could not be found.</p>
@@ -15640,7 +15524,7 @@ module Aws::RDS
     class IntegrationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't crate any more zero-ETL integrations because the quota has been reached.</p>
@@ -15649,17 +15533,7 @@ module Aws::RDS
     class IntegrationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegrationStatus
-      CREATING = 'creating'
-      ACTIVE = 'active'
-      MODIFYING = 'modifying'
-      FAILED = 'failed'
-      DELETING = 'deleting'
-      SYNCING = 'syncing'
-      NEEDS_ATTENTION = 'needs_attention'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The blue/green deployment can't be switched over or deleted because there is an invalid configuration in 
@@ -15669,7 +15543,7 @@ module Aws::RDS
     class InvalidBlueGreenDeploymentStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete the CEV.</p>
@@ -15678,7 +15552,7 @@ module Aws::RDS
     class InvalidCustomDBEngineVersionStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The automated backup is in an invalid state. 
@@ -15688,7 +15562,7 @@ module Aws::RDS
     class InvalidDBClusterAutomatedBackupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -15700,7 +15574,7 @@ module Aws::RDS
     class InvalidDBClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation can't be performed on the endpoint while the endpoint is in this state.</p>
@@ -15709,7 +15583,7 @@ module Aws::RDS
     class InvalidDBClusterEndpointStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied value isn't a valid DB cluster snapshot state.</p>
@@ -15718,7 +15592,7 @@ module Aws::RDS
     class InvalidDBClusterSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation can't be performed while the cluster is in this state.</p>
@@ -15727,7 +15601,7 @@ module Aws::RDS
     class InvalidDBClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The automated backup is in an invalid state. 
@@ -15737,7 +15611,7 @@ module Aws::RDS
     class InvalidDBInstanceAutomatedBackupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB instance isn't in a valid state.</p>
@@ -15746,7 +15620,7 @@ module Aws::RDS
     class InvalidDBInstanceStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB parameter group is in use or is in an invalid state. If you are attempting
@@ -15757,7 +15631,7 @@ module Aws::RDS
     class InvalidDBParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't perform this operation while the DB proxy endpoint is in a particular state.</p>
@@ -15766,7 +15640,7 @@ module Aws::RDS
     class InvalidDBProxyEndpointStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation can't be performed while the proxy is in this state.</p>
@@ -15775,7 +15649,7 @@ module Aws::RDS
     class InvalidDBProxyStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the DB security group doesn't allow deletion.</p>
@@ -15784,7 +15658,7 @@ module Aws::RDS
     class InvalidDBSecurityGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB shard group must be in the available state.</p>
@@ -15793,7 +15667,7 @@ module Aws::RDS
     class InvalidDBShardGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the DB snapshot doesn't allow deletion.</p>
@@ -15802,7 +15676,7 @@ module Aws::RDS
     class InvalidDBSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DBSubnetGroup doesn't belong to the same VPC as that of an existing
@@ -15812,7 +15686,7 @@ module Aws::RDS
     class InvalidDBSubnetGroupFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet group cannot be deleted because it's in use.</p>
@@ -15821,7 +15695,7 @@ module Aws::RDS
     class InvalidDBSubnetGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet isn't in the <i>available</i> state.</p>
@@ -15830,7 +15704,7 @@ module Aws::RDS
     class InvalidDBSubnetStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error can occur if someone else is modifying a subscription. You should retry the action.</p>
@@ -15839,7 +15713,7 @@ module Aws::RDS
     class InvalidEventSubscriptionStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The export is invalid for exporting to an Amazon S3 bucket.</p>
@@ -15848,7 +15722,7 @@ module Aws::RDS
     class InvalidExportOnlyFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the export snapshot is invalid for exporting to an Amazon S3 bucket.</p>
@@ -15857,7 +15731,7 @@ module Aws::RDS
     class InvalidExportSourceStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't cancel an export task that has completed.</p>
@@ -15866,7 +15740,7 @@ module Aws::RDS
     class InvalidExportTaskStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The global cluster is in an invalid state and can't perform the requested operation.</p>
@@ -15875,7 +15749,7 @@ module Aws::RDS
     class InvalidGlobalClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration is in an invalid state and can't perform the requested operation.</p>
@@ -15884,7 +15758,7 @@ module Aws::RDS
     class InvalidIntegrationStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option group isn't in the <i>available</i> state.</p>
@@ -15893,7 +15767,7 @@ module Aws::RDS
     class InvalidOptionGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation can't be performed because another operation is in progress.</p>
@@ -15902,7 +15776,7 @@ module Aws::RDS
     class InvalidResourceStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot restore from VPC backup to non-VPC DB instance.</p>
@@ -15911,7 +15785,7 @@ module Aws::RDS
     class InvalidRestoreFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Amazon S3 bucket name can't be found or Amazon RDS isn't
@@ -15921,7 +15795,7 @@ module Aws::RDS
     class InvalidS3BucketFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet is invalid, or multiple subnets were requested that are not all in a common VPC.</p>
@@ -15930,7 +15804,7 @@ module Aws::RDS
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet group doesn't cover all Availability Zones after it's
@@ -15940,7 +15814,7 @@ module Aws::RDS
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an issue with your DB instances, DB clusters, and DB parameter groups.</p>
@@ -15950,7 +15824,7 @@ module Aws::RDS
     class IssueDetails < Struct.new(
       :performance_issue_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred accessing an Amazon Web Services KMS key.</p>
@@ -15959,12 +15833,7 @@ module Aws::RDS
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LifecycleSupportName
-      OPEN_SOURCE_RDS_STANDARD_SUPPORT = 'open-source-rds-standard-support'
-      OPEN_SOURCE_RDS_EXTENDED_SUPPORT = 'open-source-rds-extended-support'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for Aurora Limitless Database.</p>
@@ -15978,18 +15847,7 @@ module Aws::RDS
       :status,
       :min_required_acu,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LimitlessDatabaseStatus
-      ACTIVE = 'active'
-      NOT_IN_USE = 'not-in-use'
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      ENABLING = 'enabling'
-      DISABLING = 'disabling'
-      MODIFYING_MAX_CAPACITY = 'modifying-max-capacity'
-      ERROR = 'error'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -16006,15 +15864,7 @@ module Aws::RDS
       :resource_name,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalWriteForwardingStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      ENABLING = 'enabling'
-      DISABLING = 'disabling'
-      REQUESTED = 'requested'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password.</p>
@@ -16062,7 +15912,7 @@ module Aws::RDS
       :secret_status,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of DB shard groups for your Amazon Web Services account in the specified Amazon Web Services Region has been reached.</p>
@@ -16071,7 +15921,7 @@ module Aws::RDS
     class MaxDBShardGroupLimitReached < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The representation of a metric.</p>
@@ -16093,7 +15943,7 @@ module Aws::RDS
       :statistics_details,
       :metric_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query to retrieve metric data points.</p>
@@ -16103,7 +15953,7 @@ module Aws::RDS
     class MetricQuery < Struct.new(
       :performance_insights_metric_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference (threshold) for a metric.</p>
@@ -16117,7 +15967,7 @@ module Aws::RDS
       :name,
       :reference_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum DB engine version required for each corresponding allowed value for an option setting.</p>
@@ -16131,7 +15981,7 @@ module Aws::RDS
       :allowed_value,
       :minimum_engine_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -16146,7 +15996,7 @@ module Aws::RDS
       :resource_arn,
       :audit_policy_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -16175,7 +16025,7 @@ module Aws::RDS
       :engine_native_audit_fields_included,
       :policy_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_identifier
@@ -16192,7 +16042,7 @@ module Aws::RDS
       :certificate_identifier,
       :remove_customer_override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -16206,7 +16056,7 @@ module Aws::RDS
     class ModifyCertificatesResult < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -16250,7 +16100,7 @@ module Aws::RDS
       :seconds_before_timeout,
       :timeout_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -16277,7 +16127,7 @@ module Aws::RDS
       :seconds_before_timeout,
       :timeout_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -16338,7 +16188,7 @@ module Aws::RDS
       :description,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.</p>
@@ -16522,7 +16372,7 @@ module Aws::RDS
       :supports_integrations,
       :serverless_v2_features_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_endpoint_identifier
@@ -16545,7 +16395,7 @@ module Aws::RDS
       :static_members,
       :excluded_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Aurora DB cluster.
@@ -16621,7 +16471,7 @@ module Aws::RDS
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -17210,7 +17060,7 @@ module Aws::RDS
       :enable_limitless_database,
       :ca_certificate_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -17234,7 +17084,7 @@ module Aws::RDS
       :db_cluster_parameter_group_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -17259,7 +17109,7 @@ module Aws::RDS
     class ModifyDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -17285,7 +17135,7 @@ module Aws::RDS
     class ModifyDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -17324,7 +17174,7 @@ module Aws::RDS
       :values_to_add,
       :values_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_attributes_result
@@ -17337,7 +17187,7 @@ module Aws::RDS
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -18368,7 +18218,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :multi_tenant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -18382,7 +18232,7 @@ module Aws::RDS
     class ModifyDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -18416,7 +18266,7 @@ module Aws::RDS
       :db_parameter_group_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the 
@@ -18427,7 +18277,7 @@ module Aws::RDS
     class ModifyDBParameterGroupOutput < Struct.new(
       :db_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_endpoint_name
@@ -18448,7 +18298,7 @@ module Aws::RDS
       :new_db_proxy_endpoint_name,
       :vpc_security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_endpoint
@@ -18457,7 +18307,7 @@ module Aws::RDS
     class ModifyDBProxyEndpointResponse < Struct.new(
       :db_proxy_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -18502,7 +18352,7 @@ module Aws::RDS
       :role_arn,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy
@@ -18511,7 +18361,7 @@ module Aws::RDS
     class ModifyDBProxyResponse < Struct.new(
       :db_proxy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_group_name
@@ -18533,7 +18383,7 @@ module Aws::RDS
       :connection_pool_config,
       :new_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_target_group
@@ -18542,7 +18392,7 @@ module Aws::RDS
     class ModifyDBProxyTargetGroupResponse < Struct.new(
       :db_proxy_target_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_id
@@ -18572,7 +18422,7 @@ module Aws::RDS
       :status,
       :recommended_action_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_shard_group_identifier
@@ -18604,7 +18454,7 @@ module Aws::RDS
       :min_acu,
       :compute_redundancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB shard group.</p>
@@ -18678,7 +18528,7 @@ module Aws::RDS
       :db_shard_group_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -18717,7 +18567,7 @@ module Aws::RDS
       :values_to_add,
       :values_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot_attributes_result
@@ -18730,7 +18580,7 @@ module Aws::RDS
     class ModifyDBSnapshotAttributeResult < Struct.new(
       :db_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot_identifier
@@ -18794,7 +18644,7 @@ module Aws::RDS
       :engine_version,
       :option_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_snapshot
@@ -18805,7 +18655,7 @@ module Aws::RDS
     class ModifyDBSnapshotResult < Struct.new(
       :db_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -18827,7 +18677,7 @@ module Aws::RDS
       :db_subnet_group_description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group
@@ -18838,7 +18688,7 @@ module Aws::RDS
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -18869,7 +18719,7 @@ module Aws::RDS
       :event_categories,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -18878,7 +18728,7 @@ module Aws::RDS
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -18940,7 +18790,7 @@ module Aws::RDS
       :engine_version,
       :allow_major_version_upgrade,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -18949,7 +18799,7 @@ module Aws::RDS
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_identifier
@@ -18972,7 +18822,7 @@ module Aws::RDS
       :data_filter,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A zero-ETL integration with Amazon Redshift.</p>
@@ -19036,7 +18886,7 @@ module Aws::RDS
       :data_filter,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -19059,7 +18909,7 @@ module Aws::RDS
       :options_to_remove,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute option_group
@@ -19068,7 +18918,7 @@ module Aws::RDS
     class ModifyOptionGroupResult < Struct.new(
       :option_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -19212,7 +19062,7 @@ module Aws::RDS
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tenant_database
@@ -19222,7 +19072,7 @@ module Aws::RDS
     class ModifyTenantDatabaseResult < Struct.new(
       :tenant_database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network type is invalid for the DB instance. Valid nework type values are <code>IPV4</code> and <code>DUAL</code>.</p>
@@ -19231,7 +19081,7 @@ module Aws::RDS
     class NetworkTypeNotSupported < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an option.</p>
@@ -19273,7 +19123,7 @@ module Aws::RDS
       :db_security_group_memberships,
       :vpc_security_group_memberships,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of all available options for an option group.</p>
@@ -19303,7 +19153,7 @@ module Aws::RDS
       :vpc_security_group_memberships,
       :option_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -19359,7 +19209,7 @@ module Aws::RDS
       :source_account_id,
       :copy_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option group you are trying to create already exists.</p>
@@ -19368,7 +19218,7 @@ module Aws::RDS
     class OptionGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information on the option groups the DB instance is a member of.</p>
@@ -19390,7 +19240,7 @@ module Aws::RDS
       :option_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified option group could not be found.</p>
@@ -19399,7 +19249,7 @@ module Aws::RDS
     class OptionGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Available option.</p>
@@ -19477,7 +19327,7 @@ module Aws::RDS
       :option_group_option_versions,
       :copyable_cross_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Option group option settings are used to display settings available for each option with their default values and other information. These values are used with the DescribeOptionGroupOptions action.</p>
@@ -19515,7 +19365,7 @@ module Aws::RDS
       :is_required,
       :minimum_engine_version_per_allowed_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -19532,7 +19382,7 @@ module Aws::RDS
       :option_group_options,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The quota of 20 option groups was exceeded for this Amazon Web Services account.</p>
@@ -19541,7 +19391,7 @@ module Aws::RDS
     class OptionGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Option settings are the actual settings being applied or configured for that option. It is used when you modify an option group or describe option groups. For example, the NATIVE_NETWORK_ENCRYPTION option has a setting called SQLNET.ENCRYPTION_SERVER that can have several different values.</p>
@@ -19583,7 +19433,7 @@ module Aws::RDS
       :is_modifiable,
       :is_collection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version for an option. Option group option versions are returned by 
@@ -19598,7 +19448,7 @@ module Aws::RDS
       :version,
       :is_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of available options for a DB instance.</p>
@@ -19764,7 +19614,7 @@ module Aws::RDS
       :max_storage_throughput_per_iops,
       :supports_dedicated_log_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeOrderableDBInstanceOptions</code> action.</p>
@@ -19782,7 +19632,7 @@ module Aws::RDS
       :orderable_db_instance_options,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data type that represents an Outpost.</p>
@@ -19795,7 +19645,7 @@ module Aws::RDS
     class Outpost < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a request parameter in the
@@ -19850,7 +19700,7 @@ module Aws::RDS
       :apply_method,
       :supported_engine_modes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.</p>
@@ -19864,7 +19714,7 @@ module Aws::RDS
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a pending maintenance action for a resource.</p>
@@ -19936,7 +19786,7 @@ module Aws::RDS
       :current_apply_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data returned from the <b>DescribePendingMaintenanceActions</b> action.</p>
@@ -19954,7 +19804,7 @@ module Aws::RDS
       :pending_maintenance_actions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>ModifyDBInstance</code> operation and 
@@ -20063,7 +19913,7 @@ module Aws::RDS
       :dedicated_log_volume,
       :multi_tenant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical grouping of Performance Insights metrics for a related subject area. For example, the <code>db.sql</code> dimension group consists of the following dimensions: </p>
@@ -20102,7 +19952,7 @@ module Aws::RDS
       :group,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single Performance Insights metric query to process. You must provide the metric to the query. 
@@ -20149,7 +19999,7 @@ module Aws::RDS
       :group_by,
       :metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the performance issue.</p>
@@ -20171,7 +20021,7 @@ module Aws::RDS
       :metrics,
       :analysis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -20183,7 +20033,7 @@ module Aws::RDS
     class PointInTimeRestoreNotEnabledFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the processor features of a DB instance class.</p>
@@ -20267,7 +20117,7 @@ module Aws::RDS
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -20286,7 +20136,7 @@ module Aws::RDS
     class PromoteReadReplicaDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -20312,7 +20162,7 @@ module Aws::RDS
     class PromoteReadReplicaDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -20371,7 +20221,7 @@ module Aws::RDS
       :backup_retention_period,
       :preferred_backup_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -20385,7 +20235,7 @@ module Aws::RDS
     class PromoteReadReplicaResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provisioned IOPS not available in the specified Availability Zone.</p>
@@ -20394,7 +20244,7 @@ module Aws::RDS
     class ProvisionedIopsNotAvailableInAZFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -20424,7 +20274,7 @@ module Aws::RDS
       :db_instance_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reserved_db_instance
@@ -20435,7 +20285,7 @@ module Aws::RDS
     class PurchaseReservedDBInstancesOfferingResult < Struct.new(
       :reserved_db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of integer values.</p>
@@ -20459,7 +20309,7 @@ module Aws::RDS
       :to,
       :step,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved for future use.</p>
@@ -20477,7 +20327,7 @@ module Aws::RDS
       :transit_gateway_multicast_domain_id,
       :replica_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -20492,7 +20342,7 @@ module Aws::RDS
     class RebootDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -20518,7 +20368,7 @@ module Aws::RDS
     class RebootDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -20539,7 +20389,7 @@ module Aws::RDS
       :db_instance_identifier,
       :force_failover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -20553,7 +20403,7 @@ module Aws::RDS
     class RebootDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_shard_group_identifier
@@ -20562,7 +20412,7 @@ module Aws::RDS
     class RebootDBShardGroupMessage < Struct.new(
       :db_shard_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon RDS DB shard group.</p>
@@ -20636,7 +20486,7 @@ module Aws::RDS
       :db_shard_group_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommended actions to apply to resolve the issues associated with your DB instances, DB clusters, and DB parameter groups.</p>
@@ -20715,7 +20565,7 @@ module Aws::RDS
       :issue_details,
       :context_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single parameter to use with the <code>RecommendedAction</code> API operation to apply the action.</p>
@@ -20729,7 +20579,7 @@ module Aws::RDS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommended status to update for the specified recommendation action ID.</p>
@@ -20755,7 +20605,7 @@ module Aws::RDS
       :action_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the 
@@ -20770,7 +20620,7 @@ module Aws::RDS
       :recurring_charge_amount,
       :recurring_charge_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference details of a metric.</p>
@@ -20780,7 +20630,7 @@ module Aws::RDS
     class ReferenceDetails < Struct.new(
       :scalar_reference_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_name
@@ -20801,7 +20651,7 @@ module Aws::RDS
       :db_instance_identifiers,
       :db_cluster_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_proxy_targets
@@ -20810,7 +20660,7 @@ module Aws::RDS
     class RegisterDBProxyTargetsResponse < Struct.new(
       :db_proxy_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -20823,7 +20673,7 @@ module Aws::RDS
       :global_cluster_identifier,
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -20832,7 +20682,7 @@ module Aws::RDS
     class RemoveFromGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -20851,7 +20701,7 @@ module Aws::RDS
       :role_arn,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -20870,7 +20720,7 @@ module Aws::RDS
       :role_arn,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -20885,7 +20735,7 @@ module Aws::RDS
       :subscription_name,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -20894,7 +20744,7 @@ module Aws::RDS
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -20912,12 +20762,7 @@ module Aws::RDS
       :resource_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicaMode
-      OPEN_READ_ONLY = 'open-read-only'
-      MOUNTED = 'mounted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the 
@@ -20992,7 +20837,7 @@ module Aws::RDS
       :reserved_db_instance_arn,
       :lease_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User already has a reservation with the given identifier.</p>
@@ -21001,7 +20846,7 @@ module Aws::RDS
     class ReservedDBInstanceAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeReservedDBInstances</code> action.</p>
@@ -21018,7 +20863,7 @@ module Aws::RDS
       :marker,
       :reserved_db_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified reserved DB Instance not found.</p>
@@ -21027,7 +20872,7 @@ module Aws::RDS
     class ReservedDBInstanceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would exceed the user's DB Instance quota.</p>
@@ -21036,7 +20881,7 @@ module Aws::RDS
     class ReservedDBInstanceQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>DescribeReservedDBInstancesOfferings</code> action.</p>
@@ -21082,7 +20927,7 @@ module Aws::RDS
       :multi_az,
       :recurring_charges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeReservedDBInstancesOfferings</code> action.</p>
@@ -21099,7 +20944,7 @@ module Aws::RDS
       :marker,
       :reserved_db_instances_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified offering does not exist.</p>
@@ -21108,7 +20953,7 @@ module Aws::RDS
     class ReservedDBInstancesOfferingNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -21129,7 +20974,7 @@ module Aws::RDS
       :reset_all_parameters,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -21154,7 +20999,7 @@ module Aws::RDS
     class ResetDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -21204,7 +21049,7 @@ module Aws::RDS
       :reset_all_parameters,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the 
@@ -21215,7 +21060,7 @@ module Aws::RDS
     class ResetDBParameterGroupOutput < Struct.new(
       :db_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource ID was not found.</p>
@@ -21224,7 +21069,7 @@ module Aws::RDS
     class ResourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the pending maintenance actions for a resource.</p>
@@ -21238,7 +21083,7 @@ module Aws::RDS
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -21612,7 +21457,7 @@ module Aws::RDS
       :storage_type,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -21638,7 +21483,7 @@ module Aws::RDS
     class RestoreDBClusterFromS3Result < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -22073,7 +21918,7 @@ module Aws::RDS
       :performance_insights_retention_period,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -22099,7 +21944,7 @@ module Aws::RDS
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -22524,7 +22369,7 @@ module Aws::RDS
       :performance_insights_retention_period,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -22550,7 +22395,7 @@ module Aws::RDS
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -23124,7 +22969,7 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -23138,7 +22983,7 @@ module Aws::RDS
     class RestoreDBInstanceFromDBSnapshotResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_name
@@ -23659,7 +23504,7 @@ module Aws::RDS
       :ca_certificate_identifier,
       :engine_lifecycle_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -23673,7 +23518,7 @@ module Aws::RDS
     class RestoreDBInstanceFromS3Result < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -24303,7 +24148,7 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -24317,7 +24162,7 @@ module Aws::RDS
     class RestoreDBInstanceToPointInTimeResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Earliest and latest time an instance can be restored to:</p>
@@ -24331,7 +24176,7 @@ module Aws::RDS
       :earliest_time,
       :latest_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -24368,7 +24213,7 @@ module Aws::RDS
       :ec2_security_group_id,
       :ec2_security_group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_security_group
@@ -24379,7 +24224,7 @@ module Aws::RDS
     class RevokeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>SNS has responded that there is a problem with the SNS topic specified.</p>
@@ -24388,7 +24233,7 @@ module Aws::RDS
     class SNSInvalidTopicFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have permission to publish to the SNS topic ARN.</p>
@@ -24397,7 +24242,7 @@ module Aws::RDS
     class SNSNoAuthorizationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SNS topic ARN does not exist.</p>
@@ -24406,7 +24251,7 @@ module Aws::RDS
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric reference details when the reference is a scalar.</p>
@@ -24416,7 +24261,7 @@ module Aws::RDS
     class ScalarReferenceDetails < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the scaling configuration of an Aurora Serverless v1 DB cluster.</p>
@@ -24472,7 +24317,7 @@ module Aws::RDS
       :timeout_action,
       :seconds_before_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p>
@@ -24515,7 +24360,7 @@ module Aws::RDS
       :timeout_action,
       :seconds_before_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies any Aurora Serverless v2 properties or limits that differ between Aurora engine versions and platform versions.
@@ -24538,7 +24383,7 @@ module Aws::RDS
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the scaling configuration of an Aurora Serverless v2 DB cluster.</p>
@@ -24567,7 +24412,7 @@ module Aws::RDS
       :max_capacity,
       :seconds_until_auto_pause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scaling configuration for an Aurora Serverless v2 DB cluster.</p>
@@ -24601,7 +24446,7 @@ module Aws::RDS
       :max_capacity,
       :seconds_until_auto_pause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of accounts that you can share a manual DB snapshot with.</p>
@@ -24610,7 +24455,7 @@ module Aws::RDS
     class SharedSnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed number of DB
@@ -24620,7 +24465,7 @@ module Aws::RDS
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source DB cluster isn't supported for a blue/green deployment.</p>
@@ -24629,7 +24474,7 @@ module Aws::RDS
     class SourceClusterNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source DB instance isn't supported for a blue/green deployment.</p>
@@ -24638,7 +24483,7 @@ module Aws::RDS
     class SourceDatabaseNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested source could not be found.</p>
@@ -24647,7 +24492,7 @@ module Aws::RDS
     class SourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an Amazon Web Services Region name as the result of a successful call to the <code>DescribeSourceRegions</code> action.</p>
@@ -24669,7 +24514,7 @@ module Aws::RDS
       :status,
       :supports_db_instance_automated_backups_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the result of a successful invocation of the <code>DescribeSourceRegions</code> action.</p>
@@ -24687,19 +24532,7 @@ module Aws::RDS
       :marker,
       :source_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      db_instance = 'db-instance'
-      db_parameter_group = 'db-parameter-group'
-      db_security_group = 'db-security-group'
-      db_snapshot = 'db-snapshot'
-      db_cluster = 'db-cluster'
-      db_cluster_snapshot = 'db-cluster-snapshot'
-      custom_engine_version = 'custom-engine-version'
-      db_proxy = 'db-proxy'
-      blue_green_deployment = 'blue-green-deployment'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -24730,7 +24563,7 @@ module Aws::RDS
       :apply_immediately,
       :engine_native_audit_fields_included,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -24760,7 +24593,7 @@ module Aws::RDS
       :apply_immediately,
       :engine_native_audit_fields_included,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -24770,7 +24603,7 @@ module Aws::RDS
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -24796,7 +24629,7 @@ module Aws::RDS
     class StartDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_db_instance_arn
@@ -24838,7 +24671,7 @@ module Aws::RDS
       :kms_key_id,
       :pre_signed_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_automated_backup
@@ -24848,7 +24681,7 @@ module Aws::RDS
     class StartDBInstanceAutomatedBackupsReplicationResult < Struct.new(
       :db_instance_automated_backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -24857,7 +24690,7 @@ module Aws::RDS
     class StartDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -24871,7 +24704,7 @@ module Aws::RDS
     class StartDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_task_identifier
@@ -24977,7 +24810,7 @@ module Aws::RDS
       :s3_prefix,
       :export_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a snapshot or cluster export to Amazon S3.</p>
@@ -25108,7 +24941,7 @@ module Aws::RDS
       :warning_message,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -25123,7 +24956,7 @@ module Aws::RDS
       :resource_arn,
       :apply_immediately,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -25141,7 +24974,7 @@ module Aws::RDS
       :kinesis_stream_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -25151,7 +24984,7 @@ module Aws::RDS
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -25177,7 +25010,7 @@ module Aws::RDS
     class StopDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_db_instance_arn
@@ -25188,7 +25021,7 @@ module Aws::RDS
     class StopDBInstanceAutomatedBackupsReplicationMessage < Struct.new(
       :source_db_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_automated_backup
@@ -25198,7 +25031,7 @@ module Aws::RDS
     class StopDBInstanceAutomatedBackupsReplicationResult < Struct.new(
       :db_instance_automated_backup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -25211,7 +25044,7 @@ module Aws::RDS
       :db_instance_identifier,
       :db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -25225,7 +25058,7 @@ module Aws::RDS
     class StopDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would result in the user exceeding the allowed amount of storage
@@ -25235,7 +25068,7 @@ module Aws::RDS
     class StorageQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>aurora-iopt1</code> storage type isn't available, because you modified the DB cluster 
@@ -25245,7 +25078,7 @@ module Aws::RDS
     class StorageTypeNotAvailableFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified <code>StorageType</code> can't be associated with the DB instance.</p>
@@ -25254,7 +25087,7 @@ module Aws::RDS
     class StorageTypeNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element for the <code>DescribeDBSubnetGroups</code> operation.</p>
@@ -25281,7 +25114,7 @@ module Aws::RDS
       :subnet_outpost,
       :subnet_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet is already in use in the Availability Zone.</p>
@@ -25290,7 +25123,7 @@ module Aws::RDS
     class SubnetAlreadyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied subscription name already exists.</p>
@@ -25299,7 +25132,7 @@ module Aws::RDS
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied category does not exist.</p>
@@ -25308,7 +25141,7 @@ module Aws::RDS
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subscription name does not exist.</p>
@@ -25317,7 +25150,7 @@ module Aws::RDS
     class SubscriptionNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the operation
@@ -25359,7 +25192,7 @@ module Aws::RDS
       :lifecycle_support_start_date,
       :lifecycle_support_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment_identifier
@@ -25381,7 +25214,7 @@ module Aws::RDS
       :blue_green_deployment_identifier,
       :switchover_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blue_green_deployment
@@ -25395,7 +25228,7 @@ module Aws::RDS
     class SwitchoverBlueGreenDeploymentResponse < Struct.new(
       :blue_green_deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details about a blue/green deployment.</p>
@@ -25453,7 +25286,7 @@ module Aws::RDS
       :target_member,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -25473,7 +25306,7 @@ module Aws::RDS
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -25482,7 +25315,7 @@ module Aws::RDS
     class SwitchoverGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -25497,7 +25330,7 @@ module Aws::RDS
     class SwitchoverReadReplicaMessage < Struct.new(
       :db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -25511,7 +25344,7 @@ module Aws::RDS
     class SwitchoverReadReplicaResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>
@@ -25529,7 +25362,7 @@ module Aws::RDS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -25539,7 +25372,7 @@ module Aws::RDS
     class TagListMessage < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the connection health of an RDS Proxy target.</p>
@@ -25562,33 +25395,7 @@ module Aws::RDS
       :reason,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetHealthReason
-      UNREACHABLE = 'UNREACHABLE'
-      CONNECTION_FAILED = 'CONNECTION_FAILED'
-      AUTH_FAILURE = 'AUTH_FAILURE'
-      PENDING_PROXY_CAPACITY = 'PENDING_PROXY_CAPACITY'
-      INVALID_REPLICATION_STATE = 'INVALID_REPLICATION_STATE'
-    end
-
-    module TargetRole
-      READ_WRITE = 'READ_WRITE'
-      READ_ONLY = 'READ_ONLY'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module TargetState
-      registering = 'REGISTERING'
-      available = 'AVAILABLE'
-      unavailable = 'UNAVAILABLE'
-    end
-
-    module TargetType
-      RDS_INSTANCE = 'RDS_INSTANCE'
-      RDS_SERVERLESS_ENDPOINT = 'RDS_SERVERLESS_ENDPOINT'
-      TRACKED_CLUSTER = 'TRACKED_CLUSTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tenant database in the DB instance. This data type is an element in the response to
@@ -25659,7 +25466,7 @@ module Aws::RDS
       :master_user_secret,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to either create a tenant database that already exists or  
@@ -25669,7 +25476,7 @@ module Aws::RDS
     class TenantDatabaseAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified tenant database wasn't found in the DB instance.</p>
@@ -25678,7 +25485,7 @@ module Aws::RDS
     class TenantDatabaseNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A response element in the <code>ModifyTenantDatabase</code> operation that describes
@@ -25693,7 +25500,7 @@ module Aws::RDS
       :master_user_password,
       :tenant_db_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You attempted to create more tenant databases than are permitted in your Amazon Web Services
@@ -25703,7 +25510,7 @@ module Aws::RDS
     class TenantDatabaseQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -25720,7 +25527,7 @@ module Aws::RDS
       :marker,
       :tenant_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time zone associated with a 
@@ -25737,7 +25544,7 @@ module Aws::RDS
     class Timezone < Struct.new(
       :timezone_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified DB engine version isn't supported for Aurora Limitless Database.</p>
@@ -25746,7 +25553,7 @@ module Aws::RDS
     class UnsupportedDBEngineVersionFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of the database engine that a DB instance can be upgraded to.</p>
@@ -25804,7 +25611,7 @@ module Aws::RDS
       :supports_local_write_forwarding,
       :supports_integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>
@@ -25850,7 +25657,7 @@ module Aws::RDS
       :iam_auth,
       :client_password_auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>
@@ -25881,7 +25688,7 @@ module Aws::RDS
       :iam_auth,
       :client_password_auth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about valid modifications that you can make to your DB instance.
@@ -25903,7 +25710,7 @@ module Aws::RDS
       :valid_processor_features,
       :supports_dedicated_log_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about valid modifications that you can make to your DB instance.
@@ -25946,7 +25753,7 @@ module Aws::RDS
       :provisioned_storage_throughput,
       :storage_throughput_to_iops_ratio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element for queries on VPC security group membership.</p>
@@ -25961,15 +25768,7 @@ module Aws::RDS
       :vpc_security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WriteForwardingStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
-      ENABLING = 'enabling'
-      DISABLING = 'disabling'
-      UNKNOWN = 'unknown'
+      include ::Smithy::Schema::Structure
     end
 
   end

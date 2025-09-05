@@ -13,7 +13,7 @@ module Aws::ECS
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The advanced settings for a load balancer used in blue/green deployments. Specify the
@@ -40,27 +40,7 @@ module Aws::ECS
       :test_listener_rule,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentUpdateStatus
-      PENDING = 'PENDING'
-      STAGING = 'STAGING'
-      STAGED = 'STAGED'
-      UPDATING = 'UPDATING'
-      UPDATED = 'UPDATED'
-      FAILED = 'FAILED'
-    end
-
-    module ApplicationProtocol
-      HTTP = 'http'
-      HTTP2 = 'http2'
-      GRPC = 'grpc'
-    end
-
-    module AssignPublicIp
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a container instance or task attachment.</p>
@@ -95,7 +75,7 @@ module Aws::ECS
       :status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a change in state for a task attachment.</p>
@@ -109,7 +89,7 @@ module Aws::ECS
       :attachment_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute is a name-value pair that's associated with an Amazon ECS object. Use
@@ -140,7 +120,7 @@ module Aws::ECS
       :target_type,
       :target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can apply up to 10 custom attributes for each resource. You can view the
@@ -152,7 +132,7 @@ module Aws::ECS
     class AttributeLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Auto Scaling group for the capacity provider.</p>
@@ -187,7 +167,7 @@ module Aws::ECS
       :managed_termination_protection,
       :managed_draining,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the Auto Scaling group capacity provider to update.</p>
@@ -217,12 +197,7 @@ module Aws::ECS
       :managed_termination_protection,
       :managed_draining,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AvailabilityZoneRebalancing
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the networking details for a task or service. For example
@@ -261,7 +236,7 @@ module Aws::ECS
       :security_groups,
       :assign_public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your Amazon Web Services account was blocked. For more information, contact <a href="http://aws.amazon.com/contact-us/">
@@ -272,12 +247,7 @@ module Aws::ECS
     class BlockedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CPUArchitecture
-      X86_64 = 'X86_64'
-      ARM64 = 'ARM64'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a capacity provider.</p>
@@ -363,16 +333,7 @@ module Aws::ECS
       :update_status_reason,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityProviderField
-      TAGS = 'TAGS'
-    end
-
-    module CapacityProviderStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a capacity provider strategy. A capacity provider strategy can be set
@@ -432,22 +393,13 @@ module Aws::ECS
       :weight,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
         options[:base] = 0 unless options.key?(:base)
         super
       end
-    end
-
-    module CapacityProviderUpdateStatus
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED = 'UPDATE_FAILED'
     end
 
     # <p>These errors are usually caused by a client action. This client action might be using
@@ -459,7 +411,7 @@ module Aws::ECS
     class ClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A regional grouping of one or more container instances where you can run task
@@ -655,7 +607,7 @@ module Aws::ECS
       :attachments_status,
       :service_connect_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:registered_container_instances_count] = 0 unless options.key?(:registered_container_instances_count)
@@ -677,7 +629,7 @@ module Aws::ECS
       :execute_command_configuration,
       :managed_storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete a cluster that has registered container instances. First, deregister
@@ -689,7 +641,7 @@ module Aws::ECS
     class ClusterContainsContainerInstancesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete a cluster that contains services. First, update the service to reduce
@@ -702,7 +654,7 @@ module Aws::ECS
     class ClusterContainsServicesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't delete a cluster that has active tasks.</p>
@@ -712,15 +664,7 @@ module Aws::ECS
     class ClusterContainsTasksException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterField
-      ATTACHMENTS = 'ATTACHMENTS'
-      CONFIGURATIONS = 'CONFIGURATIONS'
-      SETTINGS = 'SETTINGS'
-      STATISTICS = 'STATISTICS'
-      TAGS = 'TAGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified cluster wasn't found. You can view your available clusters with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListClusters.html">ListClusters</a>. Amazon ECS clusters are Region specific.</p>
@@ -730,7 +674,7 @@ module Aws::ECS
     class ClusterNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this parameter to set a default Service Connect namespace. After you set a default 
@@ -752,7 +696,7 @@ module Aws::ECS
     class ClusterServiceConnectDefaults < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this parameter to set a default Service Connect namespace. After you set a default 
@@ -788,7 +732,7 @@ module Aws::ECS
     class ClusterServiceConnectDefaultsRequest < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings to use when creating a cluster. This parameter is used to turn on CloudWatch
@@ -821,17 +765,7 @@ module Aws::ECS
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterSettingName
-      CONTAINER_INSIGHTS = 'containerInsights'
-    end
-
-    module Compatibility
-      EC2 = 'EC2'
-      FARGATE = 'FARGATE'
-      EXTERNAL = 'EXTERNAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the resource. </p>
@@ -846,12 +780,7 @@ module Aws::ECS
       :resource_ids,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Connectivity
-      CONNECTED = 'CONNECTED'
-      DISCONNECTED = 'DISCONNECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Docker container that's part of a task.</p>
@@ -930,14 +859,7 @@ module Aws::ECS
       :memory_reservation,
       :gpu_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerCondition
-      START = 'START'
-      COMPLETE = 'COMPLETE'
-      SUCCESS = 'SUCCESS'
-      HEALTHY = 'HEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container definitions are used in task definitions to describe the different
@@ -1606,7 +1528,7 @@ module Aws::ECS
       :firelens_configuration,
       :credential_specs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cpu] = 0 unless options.key?(:cpu)
@@ -1680,7 +1602,7 @@ module Aws::ECS
       :container_name,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the container image a service revision uses. </p>
@@ -1705,7 +1627,7 @@ module Aws::ECS
       :image_digest,
       :image,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon EC2 or External instance that's running the Amazon ECS agent and has been registered
@@ -1859,7 +1781,7 @@ module Aws::ECS
       :tags,
       :health_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -1868,11 +1790,6 @@ module Aws::ECS
         options[:pending_tasks_count] = 0 unless options.key?(:pending_tasks_count)
         super
       end
-    end
-
-    module ContainerInstanceField
-      TAGS = 'TAGS'
-      CONTAINER_INSTANCE_HEALTH = 'CONTAINER_INSTANCE_HEALTH'
     end
 
     # <p>An object representing the health status of the container instance.</p>
@@ -1888,15 +1805,7 @@ module Aws::ECS
       :overall_status,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContainerInstanceStatus
-      ACTIVE = 'ACTIVE'
-      DRAINING = 'DRAINING'
-      REGISTERING = 'REGISTERING'
-      DEREGISTERING = 'DEREGISTERING'
-      REGISTRATION_FAILED = 'REGISTRATION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that are sent to a container. An empty container override can be passed
@@ -1951,7 +1860,7 @@ module Aws::ECS
       :memory_reservation,
       :resource_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can enable a restart policy for each container defined in your task definition, to
@@ -1982,7 +1891,7 @@ module Aws::ECS
       :ignored_exit_codes,
       :restart_attempt_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents a change in state for a container.</p>
@@ -2017,7 +1926,7 @@ module Aws::ECS
       :reason,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2070,7 +1979,7 @@ module Aws::ECS
       :auto_scaling_group_provider,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_provider
@@ -2079,7 +1988,7 @@ module Aws::ECS
     class CreateCapacityProviderResponse < Struct.new(
       :capacity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -2176,7 +2085,7 @@ module Aws::ECS
       :default_capacity_provider_strategy,
       :service_connect_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2185,7 +2094,7 @@ module Aws::ECS
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2494,7 +2403,7 @@ module Aws::ECS
       :volume_configurations,
       :vpc_lattice_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -2513,7 +2422,7 @@ module Aws::ECS
     class CreateServiceResponse < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -2636,7 +2545,7 @@ module Aws::ECS
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_set
@@ -2648,7 +2557,7 @@ module Aws::ECS
     class CreateTaskSetResponse < Struct.new(
       :task_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optional filter to narrow the <code>ListServiceDeployment</code> results.</p>
@@ -2666,7 +2575,7 @@ module Aws::ECS
       :before,
       :after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2689,7 +2598,7 @@ module Aws::ECS
       :name,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute setting
@@ -2698,7 +2607,7 @@ module Aws::ECS
     class DeleteAccountSettingResponse < Struct.new(
       :setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2715,7 +2624,7 @@ module Aws::ECS
       :cluster,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -2724,7 +2633,7 @@ module Aws::ECS
     class DeleteAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_provider
@@ -2733,7 +2642,7 @@ module Aws::ECS
     class DeleteCapacityProviderRequest < Struct.new(
       :capacity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_provider
@@ -2742,7 +2651,7 @@ module Aws::ECS
     class DeleteCapacityProviderResponse < Struct.new(
       :capacity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2751,7 +2660,7 @@ module Aws::ECS
     class DeleteClusterRequest < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2760,7 +2669,7 @@ module Aws::ECS
     class DeleteClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2780,7 +2689,7 @@ module Aws::ECS
       :service,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -2789,7 +2698,7 @@ module Aws::ECS
     class DeleteServiceResponse < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definitions
@@ -2801,7 +2710,7 @@ module Aws::ECS
     class DeleteTaskDefinitionsRequest < Struct.new(
       :task_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definitions
@@ -2814,7 +2723,7 @@ module Aws::ECS
       :task_definitions,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -2838,7 +2747,7 @@ module Aws::ECS
       :task_set,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_set
@@ -2847,7 +2756,7 @@ module Aws::ECS
     class DeleteTaskSetResponse < Struct.new(
       :task_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an Amazon ECS service deployment. This is used only when a service uses the
@@ -2995,7 +2904,7 @@ module Aws::ECS
       :fargate_ephemeral_storage,
       :vpc_lattice_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:desired_count] = 0 unless options.key?(:desired_count)
@@ -3035,7 +2944,7 @@ module Aws::ECS
       :rollback,
       :enable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rollback] = false unless options.key?(:rollback)
@@ -3068,7 +2977,7 @@ module Aws::ECS
       :enable,
       :rollback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable] = false unless options.key?(:enable)
@@ -3245,7 +3154,7 @@ module Aws::ECS
       :bake_time_in_minutes,
       :lifecycle_hooks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deployment controller to use for the service. </p>
@@ -3360,13 +3269,7 @@ module Aws::ECS
     class DeploymentController < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentControllerType
-      ECS = 'ECS'
-      CODE_DEPLOY = 'CODE_DEPLOY'
-      EXTERNAL = 'EXTERNAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of ephemeral storage to allocate for the deployment.</p>
@@ -3377,7 +3280,7 @@ module Aws::ECS
     class DeploymentEphemeralStorage < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.</p>
@@ -3439,28 +3342,7 @@ module Aws::ECS
       :role_arn,
       :lifecycle_stages,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentLifecycleHookStage
-      RECONCILE_SERVICE = 'RECONCILE_SERVICE'
-      PRE_SCALE_UP = 'PRE_SCALE_UP'
-      POST_SCALE_UP = 'POST_SCALE_UP'
-      TEST_TRAFFIC_SHIFT = 'TEST_TRAFFIC_SHIFT'
-      POST_TEST_TRAFFIC_SHIFT = 'POST_TEST_TRAFFIC_SHIFT'
-      PRODUCTION_TRAFFIC_SHIFT = 'PRODUCTION_TRAFFIC_SHIFT'
-      POST_PRODUCTION_TRAFFIC_SHIFT = 'POST_PRODUCTION_TRAFFIC_SHIFT'
-    end
-
-    module DeploymentRolloutState
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      IN_PROGRESS = 'IN_PROGRESS'
-    end
-
-    module DeploymentStrategy
-      ROLLING = 'ROLLING'
-      BLUE_GREEN = 'BLUE_GREEN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3488,7 +3370,7 @@ module Aws::ECS
       :container_instance,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instance
@@ -3497,7 +3379,7 @@ module Aws::ECS
     class DeregisterContainerInstanceResponse < Struct.new(
       :container_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definition
@@ -3508,7 +3390,7 @@ module Aws::ECS
     class DeregisterTaskDefinitionRequest < Struct.new(
       :task_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definition
@@ -3517,7 +3399,7 @@ module Aws::ECS
     class DeregisterTaskDefinitionResponse < Struct.new(
       :task_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_providers
@@ -3558,7 +3440,7 @@ module Aws::ECS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_providers
@@ -3579,7 +3461,7 @@ module Aws::ECS
       :failures,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -3604,7 +3486,7 @@ module Aws::ECS
       :clusters,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -3617,7 +3499,7 @@ module Aws::ECS
       :clusters,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3641,7 +3523,7 @@ module Aws::ECS
       :container_instances,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instances
@@ -3654,7 +3536,7 @@ module Aws::ECS
       :container_instances,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_deployment_arns
@@ -3664,7 +3546,7 @@ module Aws::ECS
     class DescribeServiceDeploymentsRequest < Struct.new(
       :service_deployment_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_deployments
@@ -3680,7 +3562,7 @@ module Aws::ECS
       :service_deployments,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_revision_arns
@@ -3691,7 +3573,7 @@ module Aws::ECS
     class DescribeServiceRevisionsRequest < Struct.new(
       :service_revision_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_revisions
@@ -3704,7 +3586,7 @@ module Aws::ECS
       :service_revisions,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3726,7 +3608,7 @@ module Aws::ECS
       :services,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute services
@@ -3739,7 +3621,7 @@ module Aws::ECS
       :services,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definition
@@ -3757,7 +3639,7 @@ module Aws::ECS
       :task_definition,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definition
@@ -3802,7 +3684,7 @@ module Aws::ECS
       :task_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3827,7 +3709,7 @@ module Aws::ECS
       :task_sets,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_sets
@@ -3840,7 +3722,7 @@ module Aws::ECS
       :task_sets,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -3861,7 +3743,7 @@ module Aws::ECS
       :tasks,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -3874,13 +3756,7 @@ module Aws::ECS
       :tasks,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DesiredStatus
-      RUNNING = 'RUNNING'
-      PENDING = 'PENDING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a container instance host device.</p>
@@ -3900,13 +3776,7 @@ module Aws::ECS
       :container_path,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceCgroupPermission
-      READ = 'read'
-      WRITE = 'write'
-      MKNOD = 'mknod'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instance
@@ -3921,7 +3791,7 @@ module Aws::ECS
       :container_instance,
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint
@@ -3939,7 +3809,7 @@ module Aws::ECS
       :telemetry_endpoint,
       :service_connect_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This parameter is specified when you're using Docker volumes. Docker volumes are only
@@ -3985,11 +3855,7 @@ module Aws::ECS
       :driver_opts,
       :labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EBSResourceType
-      VOLUME = 'volume'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag specifications of an Amazon EBS volume.</p>
@@ -4011,7 +3877,7 @@ module Aws::ECS
       :tags,
       :propagate_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorization configuration details for the Amazon EFS file system.</p>
@@ -4034,17 +3900,7 @@ module Aws::ECS
       :access_point_id,
       :iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EFSAuthorizationConfigIAM
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module EFSTransitEncryption
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This parameter is specified when you're using an Amazon Elastic File System file system for task
@@ -4086,7 +3942,7 @@ module Aws::ECS
       :transit_encryption_port,
       :authorization_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of files containing the environment variables to pass to a container. You can
@@ -4135,11 +3991,7 @@ module Aws::ECS
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentFileType
-      S3 = 's3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of ephemeral storage to allocate for the task. This parameter is used to
@@ -4166,7 +4018,7 @@ module Aws::ECS
     class EphemeralStorage < Struct.new(
       :size_in_gi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size_in_gi_b] = 0 unless options.key?(:size_in_gi_b)
@@ -4212,7 +4064,7 @@ module Aws::ECS
       :logging,
       :log_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log configuration for the results of the execute command actions. The logs can be
@@ -4247,19 +4099,13 @@ module Aws::ECS
       :s3_encryption_enabled,
       :s3_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cloud_watch_encryption_enabled] = false unless options.key?(:cloud_watch_encryption_enabled)
         options[:s3_encryption_enabled] = false unless options.key?(:s3_encryption_enabled)
         super
       end
-    end
-
-    module ExecuteCommandLogging
-      NONE = 'NONE'
-      DEFAULT = 'DEFAULT'
-      OVERRIDE = 'OVERRIDE'
     end
 
     # @!attribute cluster
@@ -4286,7 +4132,7 @@ module Aws::ECS
       :interactive,
       :task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -4318,7 +4164,7 @@ module Aws::ECS
       :session,
       :task_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:interactive] = false unless options.key?(:interactive)
@@ -4343,7 +4189,7 @@ module Aws::ECS
       :credentials_parameter,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This parameter is specified when you're using <a href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html">Amazon FSx for Windows File Server</a> file system for task
@@ -4365,7 +4211,7 @@ module Aws::ECS
       :root_directory,
       :authorization_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A failed resource. For a list of common causes, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html">API failure
@@ -4384,7 +4230,7 @@ module Aws::ECS
       :reason,
       :detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The FireLens configuration for the container. This is used to specify and configure a
@@ -4412,12 +4258,7 @@ module Aws::ECS
       :type,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirelensConfigurationType
-      FLUENTD = 'fluentd'
-      FLUENTBIT = 'fluentbit'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -4431,7 +4272,7 @@ module Aws::ECS
       :cluster,
       :tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_tasks
@@ -4461,7 +4302,7 @@ module Aws::ECS
       :protected_tasks,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a container health check. Health check parameters that are
@@ -4713,13 +4554,7 @@ module Aws::ECS
       :retries,
       :start_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HealthStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Hostnames and IP address entries that are added to the <code>/etc/hosts</code> file of
@@ -4734,7 +4569,7 @@ module Aws::ECS
       :hostname,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on a container instance bind mount host volume.</p>
@@ -4753,7 +4588,7 @@ module Aws::ECS
     class HostVolumeProperties < Struct.new(
       :source_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on an Elastic Inference accelerator. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html">Working with Amazon Elastic Inference on Amazon ECS</a> in the
@@ -4769,7 +4604,7 @@ module Aws::ECS
       :device_name,
       :device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on an Elastic Inference accelerator task override. This parameter is used to
@@ -4787,7 +4622,7 @@ module Aws::ECS
       :device_name,
       :device_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the result of a container instance health status check.</p>
@@ -4810,18 +4645,7 @@ module Aws::ECS
       :last_updated,
       :last_status_change,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceHealthCheckState
-      OK = 'OK'
-      IMPAIRED = 'IMPAIRED'
-      INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
-      INITIALIZING = 'INITIALIZING'
-    end
-
-    module InstanceHealthCheckType
-      CONTAINER_RUNTIME = 'CONTAINER_RUNTIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter isn't valid. Review the available parameters for the API
@@ -4834,13 +4658,7 @@ module Aws::ECS
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpcMode
-      HOST = 'host'
-      TASK = 'task'
-      NONE = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Linux capabilities to add or remove from the default Docker configuration for a
@@ -4916,7 +4734,7 @@ module Aws::ECS
       :add,
       :drop,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair object.</p>
@@ -4932,13 +4750,7 @@ module Aws::ECS
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchType
-      EC2 = 'EC2'
-      FARGATE = 'FARGATE'
-      EXTERNAL = 'EXTERNAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit for the resource was exceeded.</p>
@@ -4948,7 +4760,7 @@ module Aws::ECS
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Linux-specific options that are applied to the container, such as Linux <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_KernelCapabilities.html">KernelCapabilities</a>.</p>
@@ -5034,7 +4846,7 @@ module Aws::ECS
       :max_swap,
       :swappiness,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5089,7 +4901,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute settings
@@ -5106,7 +4918,7 @@ module Aws::ECS
       :settings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -5151,7 +4963,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -5168,7 +4980,7 @@ module Aws::ECS
       :attributes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5195,7 +5007,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arns
@@ -5213,7 +5025,7 @@ module Aws::ECS
       :cluster_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -5260,7 +5072,7 @@ module Aws::ECS
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instance_arns
@@ -5278,7 +5090,7 @@ module Aws::ECS
       :container_instance_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -5325,7 +5137,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_deployments
@@ -5369,7 +5181,7 @@ module Aws::ECS
       :service_deployments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -5406,7 +5218,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arns
@@ -5424,7 +5236,7 @@ module Aws::ECS
       :service_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -5466,7 +5278,7 @@ module Aws::ECS
       :launch_type,
       :scheduling_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_arns
@@ -5484,7 +5296,7 @@ module Aws::ECS
       :service_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5495,7 +5307,7 @@ module Aws::ECS
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5504,7 +5316,7 @@ module Aws::ECS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute family_prefix
@@ -5553,7 +5365,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute families
@@ -5571,7 +5383,7 @@ module Aws::ECS
       :families,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute family_prefix
@@ -5623,7 +5435,7 @@ module Aws::ECS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definition_arns
@@ -5641,7 +5453,7 @@ module Aws::ECS
       :task_definition_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -5719,7 +5531,7 @@ module Aws::ECS
       :desired_status,
       :launch_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_arns
@@ -5736,7 +5548,7 @@ module Aws::ECS
       :task_arns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The load balancer configuration to use with a service or task set.</p>
@@ -5795,7 +5607,7 @@ module Aws::ECS
       :container_port,
       :advanced_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The log configuration for the container. This parameter maps to <code>LogConfig</code>
@@ -6036,18 +5848,7 @@ module Aws::ECS
       :options,
       :secret_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDriver
-      JSON_FILE = 'json-file'
-      SYSLOG = 'syslog'
-      JOURNALD = 'journald'
-      GELF = 'gelf'
-      FLUENTD = 'fluentd'
-      AWSLOGS = 'awslogs'
-      SPLUNK = 'splunk'
-      AWSFIRELENS = 'awsfirelens'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the managed agent status for the container.</p>
@@ -6070,11 +5871,7 @@ module Aws::ECS
       :reason,
       :last_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedAgentName
-      ExecuteCommandAgent = 'ExecuteCommandAgent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a change in state for a managed agent.</p>
@@ -6096,12 +5893,7 @@ module Aws::ECS
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedDraining
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The managed scaling settings for the Auto Scaling group capacity provider.</p>
@@ -6150,12 +5942,7 @@ module Aws::ECS
       :maximum_scaling_step_size,
       :instance_warmup_period,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedScalingStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The managed storage configuration for the cluster.</p>
@@ -6180,12 +5967,7 @@ module Aws::ECS
       :kms_key_id,
       :fargate_ephemeral_storage_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedTerminationProtection
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon ECS can't determine the current version of the Amazon ECS container agent on the
@@ -6198,7 +5980,7 @@ module Aws::ECS
     class MissingVersionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a volume mount point that's used in a container definition.</p>
@@ -6219,7 +6001,7 @@ module Aws::ECS
       :container_path,
       :read_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified namespace wasn't found.</p>
@@ -6229,7 +6011,7 @@ module Aws::ECS
     class NamespaceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on the network bindings between a container and its host container instance.
@@ -6322,7 +6104,7 @@ module Aws::ECS
       :container_port_range,
       :host_port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network configuration for a task or service.</p>
@@ -6335,7 +6117,7 @@ module Aws::ECS
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the elastic network interface for tasks that use the
@@ -6354,14 +6136,7 @@ module Aws::ECS
       :private_ipv4_address,
       :ipv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkMode
-      BRIDGE = 'bridge'
-      HOST = 'host'
-      AWSVPC = 'awsvpc'
-      NONE = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There's no update available for this Amazon ECS container agent. This might be because the
@@ -6373,25 +6148,7 @@ module Aws::ECS
     class NoUpdateAvailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OSFamily
-      WINDOWS_SERVER_2019_FULL = 'WINDOWS_SERVER_2019_FULL'
-      WINDOWS_SERVER_2019_CORE = 'WINDOWS_SERVER_2019_CORE'
-      WINDOWS_SERVER_2016_FULL = 'WINDOWS_SERVER_2016_FULL'
-      WINDOWS_SERVER_2004_CORE = 'WINDOWS_SERVER_2004_CORE'
-      WINDOWS_SERVER_2022_CORE = 'WINDOWS_SERVER_2022_CORE'
-      WINDOWS_SERVER_2022_FULL = 'WINDOWS_SERVER_2022_FULL'
-      WINDOWS_SERVER_2025_CORE = 'WINDOWS_SERVER_2025_CORE'
-      WINDOWS_SERVER_2025_FULL = 'WINDOWS_SERVER_2025_FULL'
-      WINDOWS_SERVER_20H2_CORE = 'WINDOWS_SERVER_20H2_CORE'
-      LINUX = 'LINUX'
-    end
-
-    module PidMode
-      HOST = 'host'
-      TASK = 'task'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a constraint on task placement. For more information, see
@@ -6416,12 +6173,7 @@ module Aws::ECS
       :type,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementConstraintType
-      DISTINCT_INSTANCE = 'distinctInstance'
-      MEMBER_OF = 'memberOf'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task placement strategy for a task or service. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task placement strategies</a> in the
@@ -6448,13 +6200,7 @@ module Aws::ECS
       :type,
       :field,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementStrategyType
-      RANDOM = 'random'
-      SPREAD = 'spread'
-      BINPACK = 'binpack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The devices that are available on the container instance. The only supported device
@@ -6472,11 +6218,7 @@ module Aws::ECS
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlatformDeviceType
-      GPU = 'GPU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified platform version doesn't satisfy the required capabilities of the task
@@ -6487,7 +6229,7 @@ module Aws::ECS
     class PlatformTaskDefinitionIncompatibilityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified platform version doesn't exist.</p>
@@ -6497,7 +6239,7 @@ module Aws::ECS
     class PlatformUnknownException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Port mappings allow containers to access ports on the host container instance to send
@@ -6670,13 +6412,7 @@ module Aws::ECS
       :app_protocol,
       :container_port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PropagateTags
-      TASK_DEFINITION = 'TASK_DEFINITION'
-      SERVICE = 'SERVICE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the protection status details for a task. You can set the
@@ -6696,7 +6432,7 @@ module Aws::ECS
       :protection_enabled,
       :expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:protection_enabled] = false unless options.key?(:protection_enabled)
@@ -6771,11 +6507,7 @@ module Aws::ECS
       :container_name,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProxyConfigurationType
-      APPMESH = 'APPMESH'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -6932,7 +6664,7 @@ module Aws::ECS
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute setting
@@ -6941,7 +6673,7 @@ module Aws::ECS
     class PutAccountSettingDefaultResponse < Struct.new(
       :setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7108,7 +6840,7 @@ module Aws::ECS
       :value,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute setting
@@ -7117,7 +6849,7 @@ module Aws::ECS
     class PutAccountSettingResponse < Struct.new(
       :setting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7132,7 +6864,7 @@ module Aws::ECS
       :cluster,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attributes
@@ -7141,7 +6873,7 @@ module Aws::ECS
     class PutAttributesResponse < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7180,7 +6912,7 @@ module Aws::ECS
       :capacity_providers,
       :default_capacity_provider_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7189,7 +6921,7 @@ module Aws::ECS
     class PutClusterCapacityProvidersResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -7271,7 +7003,7 @@ module Aws::ECS
       :platform_devices,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instance
@@ -7280,7 +7012,7 @@ module Aws::ECS
     class RegisterContainerInstanceResponse < Struct.new(
       :container_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute family
@@ -7556,7 +7288,7 @@ module Aws::ECS
       :runtime_platform,
       :enable_fault_injection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_definition
@@ -7569,7 +7301,7 @@ module Aws::ECS
       :task_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The repository credentials for private registry authentication.</p>
@@ -7586,7 +7318,7 @@ module Aws::ECS
     class RepositoryCredentials < Struct.new(
       :credentials_parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resolved configuration for a service revision, which contains the actual resources your service revision uses, such as which target groups serve traffic.</p>
@@ -7596,7 +7328,7 @@ module Aws::ECS
     class ResolvedConfiguration < Struct.new(
       :load_balancers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resources available for a container instance.</p>
@@ -7632,7 +7364,7 @@ module Aws::ECS
       :integer_value,
       :string_set_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:double_value] = 0 unless options.key?(:double_value)
@@ -7649,7 +7381,7 @@ module Aws::ECS
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource wasn't found.</p>
@@ -7659,7 +7391,7 @@ module Aws::ECS
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type and amount of a resource to assign to a container. The supported resource
@@ -7683,12 +7415,7 @@ module Aws::ECS
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      GPU = 'GPU'
-      INFERENCE_ACCELERATOR = 'InferenceAccelerator'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the service deployment rollback.</p>
@@ -7707,7 +7434,7 @@ module Aws::ECS
       :started_at,
       :service_revision_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_provider_strategy
@@ -7902,7 +7629,7 @@ module Aws::ECS
       :client_token,
       :volume_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -7918,7 +7645,7 @@ module Aws::ECS
       :tasks,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the platform for the Amazon ECS service or task.</p>
@@ -7936,7 +7663,7 @@ module Aws::ECS
       :cpu_architecture,
       :operating_system_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A floating-point percentage of the desired number of tasks to place and keep running
@@ -7952,26 +7679,12 @@ module Aws::ECS
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module ScaleUnit
-      PERCENT = 'PERCENT'
-    end
-
-    module SchedulingStrategy
-      REPLICA = 'REPLICA'
-      DAEMON = 'DAEMON'
-    end
-
-    module Scope
-      TASK = 'task'
-      SHARED = 'shared'
     end
 
     # <p>An object representing the secret to expose to your container. Secrets can be exposed
@@ -8009,7 +7722,7 @@ module Aws::ECS
       :name,
       :value_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a server issue.</p>
@@ -8019,7 +7732,7 @@ module Aws::ECS
     class ServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on a service within a cluster.</p>
@@ -8245,7 +7958,7 @@ module Aws::ECS
       :enable_execute_command,
       :availability_zone_rebalancing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:desired_count] = 0 unless options.key?(:desired_count)
@@ -8292,7 +8005,7 @@ module Aws::ECS
       :dns_name,
       :test_traffic_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Service Connect configuration of your Amazon ECS service. The configuration for this
@@ -8372,7 +8085,7 @@ module Aws::ECS
       :services,
       :log_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -8428,7 +8141,7 @@ module Aws::ECS
       :timeout,
       :tls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Service Connect resource. Each configuration maps a discovery name to a
@@ -8454,7 +8167,7 @@ module Aws::ECS
       :discovery_name,
       :discovery_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The header matching rules for test traffic routing in Amazon ECS blue/green deployments.
@@ -8466,7 +8179,7 @@ module Aws::ECS
     class ServiceConnectTestTrafficHeaderMatchRules < Struct.new(
       :exact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HTTP header rules used to identify and route test traffic during Amazon ECS blue/green
@@ -8484,7 +8197,7 @@ module Aws::ECS
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The test traffic routing configuration for Amazon ECS blue/green deployments. This
@@ -8499,7 +8212,7 @@ module Aws::ECS
     class ServiceConnectTestTrafficRules < Struct.new(
       :header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate root authority that secures your service.</p>
@@ -8509,7 +8222,7 @@ module Aws::ECS
     class ServiceConnectTlsCertificateAuthority < Struct.new(
       :aws_pca_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key that encrypts and decrypts your resources for Service Connect TLS.</p>
@@ -8527,7 +8240,7 @@ module Aws::ECS
       :kms_key,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the service deployment.</p>
@@ -8665,7 +8378,7 @@ module Aws::ECS
       :deployment_circuit_breaker,
       :alarms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CloudWatch alarms used to determine a service deployment failed. </p>
@@ -8690,7 +8403,7 @@ module Aws::ECS
       :alarm_names,
       :triggered_alarm_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service deployment properties that are retured when you call
@@ -8738,7 +8451,7 @@ module Aws::ECS
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the circuit breaker used to determine when a service deployment has
@@ -8771,26 +8484,13 @@ module Aws::ECS
       :failure_count,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:failure_count] = 0 unless options.key?(:failure_count)
         options[:threshold] = 0 unless options.key?(:threshold)
         super
       end
-    end
-
-    module ServiceDeploymentLifecycleStage
-      RECONCILE_SERVICE = 'RECONCILE_SERVICE'
-      PRE_SCALE_UP = 'PRE_SCALE_UP'
-      SCALE_UP = 'SCALE_UP'
-      POST_SCALE_UP = 'POST_SCALE_UP'
-      TEST_TRAFFIC_SHIFT = 'TEST_TRAFFIC_SHIFT'
-      POST_TEST_TRAFFIC_SHIFT = 'POST_TEST_TRAFFIC_SHIFT'
-      PRODUCTION_TRAFFIC_SHIFT = 'PRODUCTION_TRAFFIC_SHIFT'
-      POST_PRODUCTION_TRAFFIC_SHIFT = 'POST_PRODUCTION_TRAFFIC_SHIFT'
-      BAKE_TIME = 'BAKE_TIME'
-      CLEAN_UP = 'CLEAN_UP'
     end
 
     # <p>The service deploy ARN that you specified in the <code>StopServiceDeployment</code> doesn't exist. You can use <code>ListServiceDeployments</code> to retrieve the service deployment ARNs.</p>
@@ -8800,26 +8500,7 @@ module Aws::ECS
     class ServiceDeploymentNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceDeploymentRollbackMonitorsStatus
-      TRIGGERED = 'TRIGGERED'
-      MONITORING = 'MONITORING'
-      MONITORING_COMPLETE = 'MONITORING_COMPLETE'
-      DISABLED = 'DISABLED'
-    end
-
-    module ServiceDeploymentStatus
-      PENDING = 'PENDING'
-      SUCCESSFUL = 'SUCCESSFUL'
-      STOPPED = 'STOPPED'
-      STOP_REQUESTED = 'STOP_REQUESTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      ROLLBACK_REQUESTED = 'ROLLBACK_REQUESTED'
-      ROLLBACK_IN_PROGRESS = 'ROLLBACK_IN_PROGRESS'
-      ROLLBACK_SUCCESSFUL = 'ROLLBACK_SUCCESSFUL'
-      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for an event that's associated with a service.</p>
@@ -8837,11 +8518,7 @@ module Aws::ECS
       :created_at,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceField
-      TAGS = 'TAGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.
@@ -9010,7 +8687,7 @@ module Aws::ECS
       :role_arn,
       :filesystem_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified service isn't active. You can't update a service that's inactive. If you
@@ -9021,7 +8698,7 @@ module Aws::ECS
     class ServiceNotActiveException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified service wasn't found. You can view your available services with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html">ListServices</a>. Amazon ECS services are cluster specific and Region
@@ -9032,7 +8709,7 @@ module Aws::ECS
     class ServiceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the service registry.</p>
@@ -9076,7 +8753,7 @@ module Aws::ECS
       :container_name,
       :container_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the service revision.</p>
@@ -9174,7 +8851,7 @@ module Aws::ECS
       :vpc_lattice_configurations,
       :resolved_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:guard_duty_enabled] = false unless options.key?(:guard_duty_enabled)
@@ -9193,7 +8870,7 @@ module Aws::ECS
       :target_group_arn,
       :production_listener_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the number of requested, pending, and running tasks for a
@@ -9216,7 +8893,7 @@ module Aws::ECS
       :running_task_count,
       :pending_task_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:requested_task_count] = 0 unless options.key?(:requested_task_count)
@@ -9243,7 +8920,7 @@ module Aws::ECS
       :name,
       :managed_ebs_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for the execute command session.</p>
@@ -9263,7 +8940,7 @@ module Aws::ECS
       :stream_url,
       :token_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current account setting for a resource.</p>
@@ -9290,35 +8967,7 @@ module Aws::ECS
       :principal_arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SettingName
-      SERVICE_LONG_ARN_FORMAT = 'serviceLongArnFormat'
-      TASK_LONG_ARN_FORMAT = 'taskLongArnFormat'
-      CONTAINER_INSTANCE_LONG_ARN_FORMAT = 'containerInstanceLongArnFormat'
-      AWSVPC_TRUNKING = 'awsvpcTrunking'
-      CONTAINER_INSIGHTS = 'containerInsights'
-      FARGATE_FIPS_MODE = 'fargateFIPSMode'
-      TAG_RESOURCE_AUTHORIZATION = 'tagResourceAuthorization'
-      FARGATE_TASK_RETIREMENT_WAIT_PERIOD = 'fargateTaskRetirementWaitPeriod'
-      GUARD_DUTY_ACTIVATE = 'guardDutyActivate'
-      DEFAULT_LOG_DRIVER_MODE = 'defaultLogDriverMode'
-    end
-
-    module SettingType
-      USER = 'user'
-      AWS_MANAGED = 'aws_managed'
-    end
-
-    module SortOrder
-      ASC = 'ASC'
-      DESC = 'DESC'
-    end
-
-    module StabilityStatus
-      STEADY_STATE = 'STEADY_STATE'
-      STABILIZING = 'STABILIZING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9436,7 +9085,7 @@ module Aws::ECS
       :task_definition,
       :volume_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -9450,7 +9099,7 @@ module Aws::ECS
       :tasks,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_deployment_arn
@@ -9464,7 +9113,7 @@ module Aws::ECS
       :service_deployment_arn,
       :stop_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_deployment_arn
@@ -9473,12 +9122,7 @@ module Aws::ECS
     class StopServiceDeploymentResponse < Struct.new(
       :service_deployment_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StopServiceDeploymentStopType
-      ABORT = 'ABORT'
-      ROLLBACK = 'ROLLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9499,7 +9143,7 @@ module Aws::ECS
       :task,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task
@@ -9508,7 +9152,7 @@ module Aws::ECS
     class StopTaskResponse < Struct.new(
       :task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9522,7 +9166,7 @@ module Aws::ECS
       :cluster,
       :attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acknowledgment
@@ -9531,7 +9175,7 @@ module Aws::ECS
     class SubmitAttachmentStateChangesResponse < Struct.new(
       :acknowledgment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9568,7 +9212,7 @@ module Aws::ECS
       :reason,
       :network_bindings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acknowledgment
@@ -9577,7 +9221,7 @@ module Aws::ECS
     class SubmitContainerStateChangeResponse < Struct.new(
       :acknowledgment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -9622,7 +9266,7 @@ module Aws::ECS
       :pull_stopped_at,
       :execution_stopped_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute acknowledgment
@@ -9631,7 +9275,7 @@ module Aws::ECS
     class SubmitTaskStateChangeResponse < Struct.new(
       :acknowledgment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of namespaced kernel parameters to set in the container. This parameter maps to
@@ -9697,7 +9341,7 @@ module Aws::ECS
       :namespace,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata that you apply to a resource to help you categorize and organize them.
@@ -9745,7 +9389,7 @@ module Aws::ECS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -9803,12 +9447,12 @@ module Aws::ECS
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The execute command cannot run. This error can be caused by any of the following
@@ -9833,7 +9477,7 @@ module Aws::ECS
     class TargetNotConnectedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified target wasn't found. You can view your available container instances
@@ -9845,11 +9489,7 @@ module Aws::ECS
     class TargetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      CONTAINER_INSTANCE = 'container-instance'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on a task in a cluster.</p>
@@ -10121,7 +9761,7 @@ module Aws::ECS
       :ephemeral_storage,
       :fargate_ephemeral_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_execute_command] = false unless options.key?(:enable_execute_command)
@@ -10400,22 +10040,12 @@ module Aws::ECS
       :ephemeral_storage,
       :enable_fault_injection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:revision] = 0 unless options.key?(:revision)
         super
       end
-    end
-
-    module TaskDefinitionFamilyStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      ALL = 'ALL'
-    end
-
-    module TaskDefinitionField
-      TAGS = 'TAGS'
     end
 
     # <p>The constraint on task placement in the task definition. For more information, see
@@ -10436,17 +10066,7 @@ module Aws::ECS
       :type,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskDefinitionPlacementConstraintType
-      MEMBER_OF = 'memberOf'
-    end
-
-    module TaskDefinitionStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The amount of ephemeral storage to allocate for the task.</p>
@@ -10463,23 +10083,12 @@ module Aws::ECS
       :size_in_gi_b,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size_in_gi_b] = 0 unless options.key?(:size_in_gi_b)
         super
       end
-    end
-
-    module TaskField
-      TAGS = 'TAGS'
-    end
-
-    module TaskFilesystemType
-      EXT3 = 'ext3'
-      EXT4 = 'ext4'
-      XFS = 'xfs'
-      NTFS = 'ntfs'
     end
 
     # <p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.
@@ -10646,7 +10255,7 @@ module Aws::ECS
       :termination_policy,
       :filesystem_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The termination policy for the Amazon EBS volume when the task exits. For more information,
@@ -10661,7 +10270,7 @@ module Aws::ECS
     class TaskManagedEBSVolumeTerminationPolicy < Struct.new(
       :delete_on_termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The overrides that are associated with a task.</p>
@@ -10712,7 +10321,7 @@ module Aws::ECS
       :task_role_arn,
       :ephemeral_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a set of Amazon ECS tasks in either an CodeDeploy or an <code>EXTERNAL</code>
@@ -10913,7 +10522,7 @@ module Aws::ECS
       :tags,
       :fargate_ephemeral_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:computed_desired_count] = 0 unless options.key?(:computed_desired_count)
@@ -10921,10 +10530,6 @@ module Aws::ECS
         options[:running_count] = 0 unless options.key?(:running_count)
         super
       end
-    end
-
-    module TaskSetField
-      TAGS = 'TAGS'
     end
 
     # <p>The specified task set wasn't found. You can view your available task sets with <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskSets.html">DescribeTaskSets</a>. Task sets are specific to each cluster, service and
@@ -10935,16 +10540,7 @@ module Aws::ECS
     class TaskSetNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskStopCode
-      TASK_FAILED_TO_START = 'TaskFailedToStart'
-      ESSENTIAL_CONTAINER_EXITED = 'EssentialContainerExited'
-      USER_INITIATED = 'UserInitiated'
-      SERVICE_SCHEDULER_INITIATED = 'ServiceSchedulerInitiated'
-      SPOT_INTERRUPTION = 'SpotInterruption'
-      TERMINATION_NOTICE = 'TerminationNotice'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for the task volume that was <code>configuredAtLaunch</code>
@@ -10963,7 +10559,7 @@ module Aws::ECS
       :name,
       :managed_ebs_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the timeout configurations for Service Connect.</p>
@@ -10992,7 +10588,7 @@ module Aws::ECS
       :idle_timeout_seconds,
       :per_request_timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The container path, mount options, and size of the tmpfs mount.</p>
@@ -11017,17 +10613,12 @@ module Aws::ECS
       :size,
       :mount_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
         super
       end
-    end
-
-    module TransportProtocol
-      TCP = 'tcp'
-      UDP = 'udp'
     end
 
     # <p>The <code>ulimit</code> settings to pass to the container.</p>
@@ -11058,31 +10649,13 @@ module Aws::ECS
       :soft_limit,
       :hard_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:soft_limit] = 0 unless options.key?(:soft_limit)
         options[:hard_limit] = 0 unless options.key?(:hard_limit)
         super
       end
-    end
-
-    module UlimitName
-      CORE = 'core'
-      CPU = 'cpu'
-      DATA = 'data'
-      FSIZE = 'fsize'
-      LOCKS = 'locks'
-      MEMLOCK = 'memlock'
-      MSGQUEUE = 'msgqueue'
-      NICE = 'nice'
-      NOFILE = 'nofile'
-      NPROC = 'nproc'
-      RSS = 'rss'
-      RTPRIO = 'rtprio'
-      RTTIME = 'rttime'
-      SIGPENDING = 'sigpending'
-      STACK = 'stack'
     end
 
     # <p>The specified task isn't supported in this Region.</p>
@@ -11092,7 +10665,7 @@ module Aws::ECS
     class UnsupportedFeatureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -11107,12 +10680,12 @@ module Aws::ECS
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -11126,7 +10699,7 @@ module Aws::ECS
       :name,
       :auto_scaling_group_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_provider
@@ -11135,7 +10708,7 @@ module Aws::ECS
     class UpdateCapacityProviderResponse < Struct.new(
       :capacity_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11167,7 +10740,7 @@ module Aws::ECS
       :configuration,
       :service_connect_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11176,7 +10749,7 @@ module Aws::ECS
     class UpdateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11198,7 +10771,7 @@ module Aws::ECS
       :cluster,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11207,7 +10780,7 @@ module Aws::ECS
     class UpdateClusterSettingsResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11222,7 +10795,7 @@ module Aws::ECS
       :cluster,
       :container_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instance
@@ -11231,7 +10804,7 @@ module Aws::ECS
     class UpdateContainerAgentResponse < Struct.new(
       :container_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11254,7 +10827,7 @@ module Aws::ECS
       :container_instances,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute container_instances
@@ -11267,7 +10840,7 @@ module Aws::ECS
       :container_instances,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There's already a current Amazon ECS container agent update in progress on the container
@@ -11281,7 +10854,7 @@ module Aws::ECS
     class UpdateInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11300,7 +10873,7 @@ module Aws::ECS
       :service,
       :primary_task_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_set
@@ -11309,7 +10882,7 @@ module Aws::ECS
     class UpdateServicePrimaryTaskSetResponse < Struct.new(
       :task_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11528,7 +11101,7 @@ module Aws::ECS
       :volume_configurations,
       :vpc_lattice_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -11537,7 +11110,7 @@ module Aws::ECS
     class UpdateServiceResponse < Struct.new(
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11566,7 +11139,7 @@ module Aws::ECS
       :protection_enabled,
       :expires_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_tasks
@@ -11596,7 +11169,7 @@ module Aws::ECS
       :protected_tasks,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -11619,7 +11192,7 @@ module Aws::ECS
       :task_set,
       :scale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_set
@@ -11628,12 +11201,7 @@ module Aws::ECS
     class UpdateTaskSetResponse < Struct.new(
       :task_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VersionConsistency
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Docker and Amazon ECS container agent version information about a container
@@ -11653,7 +11221,7 @@ module Aws::ECS
       :agent_hash,
       :docker_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data volume configuration for tasks launched using this task definition.
@@ -11725,7 +11293,7 @@ module Aws::ECS
       :fsx_windows_file_server_volume_configuration,
       :configured_at_launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on a data volume from another container in the same task definition.</p>
@@ -11742,7 +11310,7 @@ module Aws::ECS
       :source_container,
       :read_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC Lattice configuration for your service that holds the information for the target
@@ -11765,7 +11333,7 @@ module Aws::ECS
       :target_group_arn,
       :port_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,12 +12,7 @@ module Aws::Transfer
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgreementStatusType
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an AS2 connector object. The connector object is used for AS2 outbound processes, to connect the Transfer Family customer with the trading partner.</p>
@@ -63,33 +58,7 @@ module Aws::Transfer
       :basic_auth_secret_id,
       :preserve_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module As2Transport
-      HTTP = 'HTTP'
-    end
-
-    module CertificateStatusType
-      ACTIVE = 'ACTIVE'
-      PENDING_ROTATION = 'PENDING_ROTATION'
-      INACTIVE = 'INACTIVE'
-    end
-
-    module CertificateType
-      CERTIFICATE = 'CERTIFICATE'
-      CERTIFICATE_WITH_PRIVATE_KEY = 'CERTIFICATE_WITH_PRIVATE_KEY'
-    end
-
-    module CertificateUsageType
-      SIGNING = 'SIGNING'
-      ENCRYPTION = 'ENCRYPTION'
-      TLS = 'TLS'
-    end
-
-    module CompressionEnum
-      ZLIB = 'ZLIB'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the <code>UpdateServer</code> is called for a file transfer protocol-enabled server that has VPC as the endpoint type and the server's <code>VpcEndpointID</code> is not in the available state.</p>
@@ -98,7 +67,7 @@ module Aws::Transfer
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the details for files transferred using an SFTP connector, during a single transfer.</p>
@@ -120,7 +89,7 @@ module Aws::Transfer
       :failure_code,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each step type has its own <code>StepDetails</code> structure.</p>
@@ -142,7 +111,7 @@ module Aws::Transfer
       :overwrite_existing,
       :source_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_directory
@@ -179,7 +148,7 @@ module Aws::Transfer
       :server_id,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -192,7 +161,7 @@ module Aws::Transfer
       :server_id,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -241,7 +210,7 @@ module Aws::Transfer
       :enforce_message_signing,
       :custom_directories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -250,7 +219,7 @@ module Aws::Transfer
     class CreateAgreementResponse < Struct.new(
       :agreement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -283,7 +252,7 @@ module Aws::Transfer
       :sftp_config,
       :security_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -292,7 +261,7 @@ module Aws::Transfer
     class CreateConnectorResponse < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute as2_id
@@ -313,7 +282,7 @@ module Aws::Transfer
       :certificate_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -322,7 +291,7 @@ module Aws::Transfer
     class CreateProfileResponse < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -399,7 +368,7 @@ module Aws::Transfer
       :s3_storage_options,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -408,7 +377,7 @@ module Aws::Transfer
     class CreateServerResponse < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_directory
@@ -453,7 +422,7 @@ module Aws::Transfer
       :tags,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -466,7 +435,7 @@ module Aws::Transfer
       :server_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_provider_details
@@ -491,7 +460,7 @@ module Aws::Transfer
       :tags,
       :web_app_endpoint_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -500,7 +469,7 @@ module Aws::Transfer
     class CreateWebAppResponse < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -521,7 +490,7 @@ module Aws::Transfer
       :on_exception_steps,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -530,7 +499,7 @@ module Aws::Transfer
     class CreateWorkflowResponse < Struct.new(
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains Amazon S3 locations for storing specific types of AS2 message files.</p>
@@ -556,7 +525,7 @@ module Aws::Transfer
       :status_files_directory,
       :temporary_files_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each step type has its own <code>StepDetails</code> structure.</p>
@@ -578,12 +547,7 @@ module Aws::Transfer
       :timeout_seconds,
       :source_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomStepStatus
-      SUCCESS = 'SUCCESS'
-      FAILURE = 'FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each step type has its own <code>StepDetails</code> structure.</p>
@@ -609,7 +573,7 @@ module Aws::Transfer
       :overwrite_existing,
       :destination_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -622,7 +586,7 @@ module Aws::Transfer
       :server_id,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -635,7 +599,7 @@ module Aws::Transfer
       :agreement_id,
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -644,7 +608,7 @@ module Aws::Transfer
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -653,7 +617,7 @@ module Aws::Transfer
     class DeleteConnectorRequest < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -666,7 +630,7 @@ module Aws::Transfer
       :server_id,
       :host_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -675,7 +639,7 @@ module Aws::Transfer
     class DeleteProfileRequest < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -684,7 +648,7 @@ module Aws::Transfer
     class DeleteServerRequest < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -701,7 +665,7 @@ module Aws::Transfer
       :ssh_public_key_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the step, used to identify the delete step.</p>
@@ -715,7 +679,7 @@ module Aws::Transfer
       :name,
       :source_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -728,7 +692,7 @@ module Aws::Transfer
       :server_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -737,7 +701,7 @@ module Aws::Transfer
     class DeleteWebAppCustomizationRequest < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -746,7 +710,7 @@ module Aws::Transfer
     class DeleteWebAppRequest < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -755,7 +719,7 @@ module Aws::Transfer
     class DeleteWorkflowRequest < Struct.new(
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -768,7 +732,7 @@ module Aws::Transfer
       :server_id,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -781,7 +745,7 @@ module Aws::Transfer
       :server_id,
       :access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -794,7 +758,7 @@ module Aws::Transfer
       :agreement_id,
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement
@@ -803,7 +767,7 @@ module Aws::Transfer
     class DescribeAgreementResponse < Struct.new(
       :agreement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -812,7 +776,7 @@ module Aws::Transfer
     class DescribeCertificateRequest < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -821,7 +785,7 @@ module Aws::Transfer
     class DescribeCertificateResponse < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -830,7 +794,7 @@ module Aws::Transfer
     class DescribeConnectorRequest < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector
@@ -839,7 +803,7 @@ module Aws::Transfer
     class DescribeConnectorResponse < Struct.new(
       :connector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -852,7 +816,7 @@ module Aws::Transfer
       :execution_id,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -865,7 +829,7 @@ module Aws::Transfer
       :workflow_id,
       :execution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -878,7 +842,7 @@ module Aws::Transfer
       :server_id,
       :host_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_key
@@ -887,7 +851,7 @@ module Aws::Transfer
     class DescribeHostKeyResponse < Struct.new(
       :host_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -896,7 +860,7 @@ module Aws::Transfer
     class DescribeProfileRequest < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile
@@ -905,7 +869,7 @@ module Aws::Transfer
     class DescribeProfileResponse < Struct.new(
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_policy_name
@@ -914,7 +878,7 @@ module Aws::Transfer
     class DescribeSecurityPolicyRequest < Struct.new(
       :security_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_policy
@@ -923,7 +887,7 @@ module Aws::Transfer
     class DescribeSecurityPolicyResponse < Struct.new(
       :security_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -932,7 +896,7 @@ module Aws::Transfer
     class DescribeServerRequest < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server
@@ -941,7 +905,7 @@ module Aws::Transfer
     class DescribeServerResponse < Struct.new(
       :server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -954,7 +918,7 @@ module Aws::Transfer
       :server_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -967,7 +931,7 @@ module Aws::Transfer
       :server_id,
       :user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -976,7 +940,7 @@ module Aws::Transfer
     class DescribeWebAppCustomizationRequest < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_customization
@@ -985,7 +949,7 @@ module Aws::Transfer
     class DescribeWebAppCustomizationResponse < Struct.new(
       :web_app_customization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -994,7 +958,7 @@ module Aws::Transfer
     class DescribeWebAppRequest < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app
@@ -1003,7 +967,7 @@ module Aws::Transfer
     class DescribeWebAppResponse < Struct.new(
       :web_app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1012,7 +976,7 @@ module Aws::Transfer
     class DescribeWorkflowRequest < Struct.new(
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow
@@ -1021,7 +985,7 @@ module Aws::Transfer
     class DescribeWorkflowResponse < Struct.new(
       :workflow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the access that was specified.</p>
@@ -1055,7 +1019,7 @@ module Aws::Transfer
       :role,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an agreement.</p>
@@ -1113,7 +1077,7 @@ module Aws::Transfer
       :enforce_message_signing,
       :custom_directories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a certificate.</p>
@@ -1175,7 +1139,7 @@ module Aws::Transfer
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters for the connector, as identified by the <code>ConnectorId</code>.</p>
@@ -1221,7 +1185,7 @@ module Aws::Transfer
       :service_managed_egress_ip_addresses,
       :security_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for an execution object.</p>
@@ -1259,7 +1223,7 @@ module Aws::Transfer
       :status,
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a server host key.</p>
@@ -1293,7 +1257,7 @@ module Aws::Transfer
       :date_imported,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the details of the IAM Identity Center used for your web app. Returned during a call to <code>DescribeWebApp</code>.</p>
@@ -1311,7 +1275,7 @@ module Aws::Transfer
       :instance_arn,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a local or partner AS2 profile. </p>
@@ -1341,7 +1305,7 @@ module Aws::Transfer
       :certificate_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a security policy that you specify. For more information about security policies, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html">Working with security policies for servers</a> or <a href="https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html">Working with security policies for SFTP connectors</a>.</p>
@@ -1383,7 +1347,7 @@ module Aws::Transfer
       :type,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a file transfer protocol-enabled server that was specified.</p>
@@ -1481,7 +1445,7 @@ module Aws::Transfer
       :as2_service_managed_egress_ip_addresses,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a user that was specified.</p>
@@ -1527,7 +1491,7 @@ module Aws::Transfer
       :tags,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the parameters for the web app, as identified by the <code>WebAppId</code>.</p>
@@ -1565,7 +1529,7 @@ module Aws::Transfer
       :tags,
       :web_app_endpoint_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the customization fields for the web app. You can provide a title, logo, and icon to customize the appearance of your web app.</p>
@@ -1591,7 +1555,7 @@ module Aws::Transfer
       :logo_file,
       :favicon_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns a structure that contains the identity provider details for your web app.</p>
@@ -1602,7 +1566,7 @@ module Aws::Transfer
       :identity_center_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IdentityCenterConfig < DescribedWebAppIdentityProviderDetails; end
       class Unknown < DescribedWebAppIdentityProviderDetails; end
@@ -1635,18 +1599,7 @@ module Aws::Transfer
       :workflow_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Indicates whether optimization to directory listing on S3 servers is used. Disabled by default for compatibility.
-    module DirectoryListingOptimization
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module Domain
-      S3 = 'S3'
-      EFS = 'EFS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the details for the file location for the file that's being used in the workflow. Only applicable if you are using Amazon Elastic File Systems (Amazon EFS) for storage.</p> <p> </p>
@@ -1660,19 +1613,7 @@ module Aws::Transfer
       :file_system_id,
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionAlg
-      AES128_CBC = 'AES128_CBC'
-      AES192_CBC = 'AES192_CBC'
-      AES256_CBC = 'AES256_CBC'
-      DES_EDE3_CBC = 'DES_EDE3_CBC'
-      NONE = 'NONE'
-    end
-
-    module EncryptionType
-      PGP = 'PGP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server and resources only within your VPC. To control incoming internet traffic, invoke the <code>UpdateServer</code> API and attach an Elastic IP address to your server's endpoint.</p> <note> <p> After May 19, 2021, you won't be able to create a server using <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account if your account hasn't already done so before May 19, 2021. If you have already created servers with <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account on or before May 19, 2021, you will not be affected. After this date, use <code>EndpointType</code>=<code>VPC</code>.</p> <p>For more information, see https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p> <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p> </note>
@@ -1698,18 +1639,7 @@ module Aws::Transfer
       :vpc_id,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointType
-      PUBLIC = 'PUBLIC'
-      VPC = 'VPC'
-      VPC_ENDPOINT = 'VPC_ENDPOINT'
-    end
-
-    module EnforceMessageSigningType
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the error message and type, for an error that occurs during the execution of the workflow.</p>
@@ -1723,18 +1653,7 @@ module Aws::Transfer
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionErrorType
-      PERMISSION_DENIED = 'PERMISSION_DENIED'
-      CUSTOM_STEP_FAILED = 'CUSTOM_STEP_FAILED'
-      THROTTLED = 'THROTTLED'
-      ALREADY_EXISTS = 'ALREADY_EXISTS'
-      NOT_FOUND = 'NOT_FOUND'
-      BAD_REQUEST = 'BAD_REQUEST'
-      TIMEOUT = 'TIMEOUT'
-      INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the steps in the workflow, as well as the steps to execute in case of any errors during workflow execution.</p>
@@ -1748,14 +1667,7 @@ module Aws::Transfer
       :steps,
       :on_exception_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      EXCEPTION = 'EXCEPTION'
-      HANDLING_EXCEPTION = 'HANDLING_EXCEPTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the following details for the step: error (if any), outputs (if any), and the step type.</p>
@@ -1773,7 +1685,7 @@ module Aws::Transfer
       :outputs,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the Amazon S3 or EFS file details to be used in the step.</p>
@@ -1787,7 +1699,7 @@ module Aws::Transfer
       :s3_file_location,
       :efs_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an object that contains entries and targets for <code>HomeDirectoryMappings</code>.</p> <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p> <p> <code>[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]</code> </p>
@@ -1805,12 +1717,7 @@ module Aws::Transfer
       :target,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HomeDirectoryType
-      PATH = 'PATH'
-      LOGICAL = 'LOGICAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the values to use for the IAM Identity Center settings when you create or update a web app.</p>
@@ -1824,7 +1731,7 @@ module Aws::Transfer
       :instance_arn,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information related to the type of user authentication that is in use for a file transfer protocol-enabled server's users. A server can have only one method of authentication.</p>
@@ -1850,15 +1757,7 @@ module Aws::Transfer
       :function,
       :sftp_authentication_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the Transfer Family service.</p> <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the <code>IdentityProviderDetails</code> parameter.</p> <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter for the <code>IdentityProviderDetails</code> data type.</p>
-    module IdentityProviderType
-      SERVICE_MANAGED = 'SERVICE_MANAGED'
-      API_GATEWAY = 'API_GATEWAY'
-      AWS_DIRECTORY_SERVICE = 'AWS_DIRECTORY_SERVICE'
-      AWS_LAMBDA = 'AWS_LAMBDA'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute usage
@@ -1895,7 +1794,7 @@ module Aws::Transfer
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -1904,7 +1803,7 @@ module Aws::Transfer
     class ImportCertificateResponse < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -1925,7 +1824,7 @@ module Aws::Transfer
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -1938,7 +1837,7 @@ module Aws::Transfer
       :server_id,
       :host_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -1955,7 +1854,7 @@ module Aws::Transfer
       :ssh_public_key_body,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the user, the server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associated with.</p>
@@ -1973,7 +1872,7 @@ module Aws::Transfer
       :ssh_public_key_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the location for the file that's being processed.</p>
@@ -1987,7 +1886,7 @@ module Aws::Transfer
       :s3_file_location,
       :efs_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
@@ -1996,7 +1895,7 @@ module Aws::Transfer
     class InternalServiceError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>NextToken</code> parameter that was passed is invalid.</p>
@@ -2005,7 +1904,7 @@ module Aws::Transfer
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the client submits a malformed request.</p>
@@ -2014,12 +1913,7 @@ module Aws::Transfer
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressType
-      IPV4 = 'IPV4'
-      DUALSTACK = 'DUALSTACK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2036,7 +1930,7 @@ module Aws::Transfer
       :next_token,
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2053,7 +1947,7 @@ module Aws::Transfer
       :server_id,
       :accesses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2070,7 +1964,7 @@ module Aws::Transfer
       :next_token,
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2083,7 +1977,7 @@ module Aws::Transfer
       :next_token,
       :agreements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2096,7 +1990,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2109,7 +2003,7 @@ module Aws::Transfer
       :next_token,
       :certificates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2122,7 +2016,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2135,7 +2029,7 @@ module Aws::Transfer
       :next_token,
       :connectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2152,7 +2046,7 @@ module Aws::Transfer
       :next_token,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2169,7 +2063,7 @@ module Aws::Transfer
       :workflow_id,
       :executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -2190,7 +2084,7 @@ module Aws::Transfer
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute file_transfer_results
@@ -2203,7 +2097,7 @@ module Aws::Transfer
       :file_transfer_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2220,7 +2114,7 @@ module Aws::Transfer
       :next_token,
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2237,7 +2131,7 @@ module Aws::Transfer
       :server_id,
       :host_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2254,7 +2148,7 @@ module Aws::Transfer
       :next_token,
       :profile_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2267,7 +2161,7 @@ module Aws::Transfer
       :next_token,
       :profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2280,7 +2174,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2293,7 +2187,7 @@ module Aws::Transfer
       :next_token,
       :security_policy_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2306,7 +2200,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2319,7 +2213,7 @@ module Aws::Transfer
       :next_token,
       :servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2336,7 +2230,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2353,7 +2247,7 @@ module Aws::Transfer
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2370,7 +2264,7 @@ module Aws::Transfer
       :next_token,
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2387,7 +2281,7 @@ module Aws::Transfer
       :server_id,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2400,7 +2294,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2413,7 +2307,7 @@ module Aws::Transfer
       :next_token,
       :web_apps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2426,7 +2320,7 @@ module Aws::Transfer
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2439,7 +2333,7 @@ module Aws::Transfer
       :next_token,
       :workflows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the properties for one or more specified associated accesses.</p>
@@ -2461,7 +2355,7 @@ module Aws::Transfer
       :role,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of an agreement.</p>
@@ -2495,7 +2389,7 @@ module Aws::Transfer
       :local_profile_id,
       :partner_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a certificate.</p>
@@ -2533,7 +2427,7 @@ module Aws::Transfer
       :type,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns details of the connector that is specified.</p>
@@ -2551,7 +2445,7 @@ module Aws::Transfer
       :connector_id,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns properties of the execution that is specified.</p>
@@ -2573,7 +2467,7 @@ module Aws::Transfer
       :service_metadata,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns properties of the host key that's specified.</p>
@@ -2603,7 +2497,7 @@ module Aws::Transfer
       :type,
       :date_imported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the properties of the profile that was specified.</p>
@@ -2625,7 +2519,7 @@ module Aws::Transfer
       :as2_id,
       :profile_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns properties of a file transfer protocol-enabled server that was specified.</p>
@@ -2663,7 +2557,7 @@ module Aws::Transfer
       :state,
       :user_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns properties of the user that you specify.</p>
@@ -2693,7 +2587,7 @@ module Aws::Transfer
       :ssh_public_key_count,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> a structure that contains details for the web app.</p>
@@ -2715,7 +2609,7 @@ module Aws::Transfer
       :access_endpoint,
       :web_app_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the identifier, text description, and Amazon Resource Name (ARN) for the workflow.</p>
@@ -2733,7 +2627,7 @@ module Aws::Transfer
       :description,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Consists of the logging role and the log group name.</p>
@@ -2747,31 +2641,7 @@ module Aws::Transfer
       :logging_role,
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MapType
-      FILE = 'FILE'
-      DIRECTORY = 'DIRECTORY'
-    end
-
-    module MdnResponse
-      SYNC = 'SYNC'
-      NONE = 'NONE'
-    end
-
-    module MdnSigningAlg
-      SHA256 = 'SHA256'
-      SHA384 = 'SHA384'
-      SHA512 = 'SHA512'
-      SHA1 = 'SHA1'
-      NONE = 'NONE'
-      DEFAULT = 'DEFAULT'
-    end
-
-    module OverwriteExisting
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The full POSIX identity, including user ID (<code>Uid</code>), group ID (<code>Gid</code>), and any secondary groups IDs (<code>SecondaryGids</code>), that controls your users' access to your Amazon EFS file systems. The POSIX permissions that are set on files and directories in your file system determine the level of access your users get when transferring files into and out of your Amazon EFS file systems.</p>
@@ -2789,29 +2659,7 @@ module Aws::Transfer
       :gid,
       :secondary_gids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreserveContentType
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module PreserveFilenameType
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module ProfileType
-      LOCAL = 'LOCAL'
-      PARTNER = 'PARTNER'
-    end
-
-    module Protocol
-      SFTP = 'SFTP'
-      FTP = 'FTP'
-      FTPS = 'FTPS'
-      AS2 = 'AS2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The protocol settings that are configured for your server. </p>
@@ -2833,7 +2681,7 @@ module Aws::Transfer
       :set_stat_option,
       :as2_transports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource does not exist, or exists in a region other than the one specified for the command.</p>
@@ -2848,7 +2696,7 @@ module Aws::Transfer
       :resource,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
@@ -2863,7 +2711,7 @@ module Aws::Transfer
       :resource,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the details for the file location for the file that's being used in the workflow. Only applicable if you are using S3 storage.</p>
@@ -2885,7 +2733,7 @@ module Aws::Transfer
       :version_id,
       :etag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the customer input Amazon S3 file location. If it is used inside <code>copyStepDetails.DestinationFileLocation</code>, it should be the S3 copy destination.</p> <p> You need to provide the bucket and key. The key can represent either a path or a file. This is determined by whether or not you end the key value with the forward slash (/) character. If the final character is "/", then your file is copied to the folder, and its name does not change. If, rather, the final character is alphanumeric, your uploaded file is renamed to the path value. In this case, if a file with that name already exists, it is overwritten. </p> <p>For example, if your path is <code>shared-files/bob/</code>, your uploaded files are copied to the <code>shared-files/bob/</code>, folder. If your path is <code>shared-files/today</code>, each uploaded file is copied to the <code>shared-files</code> folder and named <code>today</code>: each upload overwrites the previous version of the <i>bob</i> file.</p>
@@ -2899,7 +2747,7 @@ module Aws::Transfer
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 storage options that are configured for your server.</p>
@@ -2909,7 +2757,7 @@ module Aws::Transfer
     class S3StorageOptions < Struct.new(
       :directory_listing_optimization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.</p>
@@ -2923,17 +2771,7 @@ module Aws::Transfer
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityPolicyProtocol
-      SFTP = 'SFTP'
-      FTPS = 'FTPS'
-    end
-
-    module SecurityPolicyResourceType
-      SERVER = 'SERVER'
-      CONNECTOR = 'CONNECTOR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -2954,12 +2792,12 @@ module Aws::Transfer
       :token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class SendWorkflowStepStateResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A container object for the session details that are associated with a workflow.</p>
@@ -2969,7 +2807,7 @@ module Aws::Transfer
     class ServiceMetadata < Struct.new(
       :user_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
@@ -2978,19 +2816,7 @@ module Aws::Transfer
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SetStatOption
-      DEFAULT = 'DEFAULT'
-      ENABLE_NO_OP = 'ENABLE_NO_OP'
-    end
-
-    module SftpAuthenticationMethods
-      PASSWORD = 'PASSWORD'
-      PUBLIC_KEY = 'PUBLIC_KEY'
-      PUBLIC_KEY_OR_PASSWORD = 'PUBLIC_KEY_OR_PASSWORD'
-      PUBLIC_KEY_AND_PASSWORD = 'PUBLIC_KEY_AND_PASSWORD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an SFTP connector object. The connector object is used for transferring files to and from a partner's SFTP server.</p>
@@ -3008,7 +2834,7 @@ module Aws::Transfer
       :trusted_host_keys,
       :max_concurrent_connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_concurrent_connections] = 1 unless options.key?(:max_concurrent_connections)
@@ -3023,15 +2849,7 @@ module Aws::Transfer
     class SftpConnectorConnectionDetails < Struct.new(
       :host_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SigningAlg
-      SHA256 = 'SHA256'
-      SHA384 = 'SHA384'
-      SHA512 = 'SHA512'
-      SHA1 = 'SHA1'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the public Secure Shell (SSH) key that is associated with a Transfer Family user for the specific file transfer protocol-enabled server (as identified by <code>ServerId</code>). The information returned includes the date the key was imported, the public key contents, and the public key ID. A user can store more than one SSH public key associated with their user name on a specific server.</p>
@@ -3049,7 +2867,7 @@ module Aws::Transfer
       :ssh_public_key_body,
       :ssh_public_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3070,7 +2888,7 @@ module Aws::Transfer
       :max_items,
       :output_directory_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute listing_id
@@ -3083,7 +2901,7 @@ module Aws::Transfer
       :listing_id,
       :output_file_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3108,7 +2926,7 @@ module Aws::Transfer
       :local_directory_path,
       :remote_directory_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transfer_id
@@ -3117,7 +2935,7 @@ module Aws::Transfer
     class StartFileTransferResponse < Struct.new(
       :transfer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3130,7 +2948,7 @@ module Aws::Transfer
       :connector_id,
       :delete_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delete_id
@@ -3139,7 +2957,7 @@ module Aws::Transfer
     class StartRemoteDeleteResponse < Struct.new(
       :delete_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3156,7 +2974,7 @@ module Aws::Transfer
       :source_path,
       :target_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute move_id
@@ -3165,7 +2983,7 @@ module Aws::Transfer
     class StartRemoteMoveResponse < Struct.new(
       :move_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3174,17 +2992,7 @@ module Aws::Transfer
     class StartServerRequest < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Describes the condition of a file transfer protocol-enabled server with respect to its ability to perform file operations. There are six possible states: <code>OFFLINE</code>, <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>, <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p> <p> <code>OFFLINE</code> indicates that the server exists, but that it is not available for file operations. <code>ONLINE</code> indicates that the server is available to perform file operations. <code>STARTING</code> indicates that the server's was instantiated, but the server is not yet available to perform file operations. Under normal conditions, it can take a couple of minutes for the server to be completely operational. Both <code>START_FAILED</code> and <code>STOP_FAILED</code> are error conditions.</p>
-    module State
-      OFFLINE = 'OFFLINE'
-      ONLINE = 'ONLINE'
-      STARTING = 'STARTING'
-      STOPPING = 'STOPPING'
-      START_FAILED = 'START_FAILED'
-      STOP_FAILED = 'STOP_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3193,7 +3001,7 @@ module Aws::Transfer
     class StopServerRequest < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a key-value pair for a specific resource. Tags are metadata that you can use to search for and group a resource for various purposes. You can apply tags to servers, users, and roles. A tag key can take more than one value. For example, to group servers for accounting purposes, you might create a tag called <code>Group</code> and assign the values <code>Research</code> and <code>Accounting</code> to that group.</p>
@@ -3207,7 +3015,7 @@ module Aws::Transfer
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3220,7 +3028,7 @@ module Aws::Transfer
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each step type has its own <code>StepDetails</code> structure.</p> <p>The key/value pairs used to tag a file during the execution of a workflow step.</p>
@@ -3238,7 +3046,7 @@ module Aws::Transfer
       :tags,
       :source_file_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3247,7 +3055,7 @@ module Aws::Transfer
     class TestConnectionRequest < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3268,7 +3076,7 @@ module Aws::Transfer
       :status_message,
       :sftp_connection_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3293,7 +3101,7 @@ module Aws::Transfer
       :user_name,
       :user_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response
@@ -3314,7 +3122,7 @@ module Aws::Transfer
       :message,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -3328,20 +3136,7 @@ module Aws::Transfer
     class ThrottlingException < Struct.new(
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TlsSessionResumptionMode
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      ENFORCED = 'ENFORCED'
-    end
-
-    module TransferTableStatus
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3354,7 +3149,7 @@ module Aws::Transfer
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_directory
@@ -3391,7 +3186,7 @@ module Aws::Transfer
       :server_id,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3404,7 +3199,7 @@ module Aws::Transfer
       :server_id,
       :external_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -3453,7 +3248,7 @@ module Aws::Transfer
       :enforce_message_signing,
       :custom_directories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agreement_id
@@ -3462,7 +3257,7 @@ module Aws::Transfer
     class UpdateAgreementResponse < Struct.new(
       :agreement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -3483,7 +3278,7 @@ module Aws::Transfer
       :inactive_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -3492,7 +3287,7 @@ module Aws::Transfer
     class UpdateCertificateResponse < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3525,7 +3320,7 @@ module Aws::Transfer
       :sftp_config,
       :security_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connector_id
@@ -3534,7 +3329,7 @@ module Aws::Transfer
     class UpdateConnectorResponse < Struct.new(
       :connector_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3551,7 +3346,7 @@ module Aws::Transfer
       :host_key_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3564,7 +3359,7 @@ module Aws::Transfer
       :server_id,
       :host_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -3577,7 +3372,7 @@ module Aws::Transfer
       :profile_id,
       :certificate_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -3586,7 +3381,7 @@ module Aws::Transfer
     class UpdateProfileResponse < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -3655,7 +3450,7 @@ module Aws::Transfer
       :s3_storage_options,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute server_id
@@ -3664,7 +3459,7 @@ module Aws::Transfer
     class UpdateServerResponse < Struct.new(
       :server_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute home_directory
@@ -3701,7 +3496,7 @@ module Aws::Transfer
       :server_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> <code>UpdateUserResponse</code> returns the user name and identifier for the request to update a user's properties.</p>
@@ -3715,7 +3510,7 @@ module Aws::Transfer
       :server_id,
       :user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -3736,7 +3531,7 @@ module Aws::Transfer
       :logo_file,
       :favicon_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -3745,7 +3540,7 @@ module Aws::Transfer
     class UpdateWebAppCustomizationResponse < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the values to use for the IAM Identity Center settings when you update a web app.</p>
@@ -3755,7 +3550,7 @@ module Aws::Transfer
     class UpdateWebAppIdentityCenterConfig < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union that contains the <code>UpdateWebAppIdentityCenterConfig</code> object.</p>
@@ -3766,7 +3561,7 @@ module Aws::Transfer
       :identity_center_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IdentityCenterConfig < UpdateWebAppIdentityProviderDetails; end
       class Unknown < UpdateWebAppIdentityProviderDetails; end
@@ -3790,7 +3585,7 @@ module Aws::Transfer
       :access_endpoint,
       :web_app_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_app_id
@@ -3799,7 +3594,7 @@ module Aws::Transfer
     class UpdateWebAppResponse < Struct.new(
       :web_app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the user name, server ID, and session ID for a workflow.</p>
@@ -3817,12 +3612,7 @@ module Aws::Transfer
       :server_id,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WebAppEndpointPolicy
-      FIPS = 'FIPS'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A union that contains the <code>IdentityCenterConfig</code> object.</p>
@@ -3833,7 +3623,7 @@ module Aws::Transfer
       :identity_center_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IdentityCenterConfig < WebAppIdentityProviderDetails; end
       class Unknown < WebAppIdentityProviderDetails; end
@@ -3847,7 +3637,7 @@ module Aws::Transfer
       :provisioned,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Provisioned < WebAppUnits; end
       class Unknown < WebAppUnits; end
@@ -3864,7 +3654,7 @@ module Aws::Transfer
       :workflow_id,
       :execution_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Container for the <code>WorkflowDetail</code> data type. It is used by actions that trigger a workflow to begin execution.</p>
@@ -3878,7 +3668,7 @@ module Aws::Transfer
       :on_upload,
       :on_partial_upload,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The basic building block of a workflow.</p>
@@ -3908,15 +3698,7 @@ module Aws::Transfer
       :tag_step_details,
       :decrypt_step_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowStepType
-      COPY = 'COPY'
-      CUSTOM = 'CUSTOM'
-      TAG = 'TAG'
-      DELETE = 'DELETE'
-      DECRYPT = 'DECRYPT'
+      include ::Smithy::Schema::Structure
     end
 
   end

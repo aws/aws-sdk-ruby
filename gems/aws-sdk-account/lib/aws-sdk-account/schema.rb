@@ -6,349 +6,349 @@ module Aws::Account
   # This module contains a schema composed of shapes used by the client.
   module Schema
 
-    AcceptPrimaryEmailUpdateRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AcceptPrimaryEmailUpdateRequest', name: 'AcceptPrimaryEmailUpdateRequest')
-    AcceptPrimaryEmailUpdateResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AcceptPrimaryEmailUpdateResponse', name: 'AcceptPrimaryEmailUpdateResponse')
-    AccessDeniedException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
-    AccountCreatedDate = Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.account#AccountCreatedDate', name: 'AccountCreatedDate', traits: {"smithy.api#timestampFormat" => "date-time"})
-    AccountId = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AccountId', name: 'AccountId', traits: {"smithy.api#pattern" => "^\\d{12}$"})
-    AccountName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AccountName', name: 'AccountName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[ -;=?-~]+$", "smithy.api#sensitive" => {}})
-    AddressLine = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AddressLine', name: 'AddressLine', traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#sensitive" => {}})
-    AlternateContact = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AlternateContact', name: 'AlternateContact')
-    AlternateContactType = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AlternateContactType', name: 'AlternateContactType', traits: {"smithy.api#enum" => [{"value" => "BILLING", "name" => "BILLING"}, {"value" => "OPERATIONS", "name" => "OPERATIONS"}, {"value" => "SECURITY", "name" => "SECURITY"}]})
-    City = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#City', name: 'City', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
-    CompanyName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#CompanyName', name: 'CompanyName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
-    ConflictException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
-    ContactInformation = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ContactInformation', name: 'ContactInformation')
-    ContactInformationPhoneNumber = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#ContactInformationPhoneNumber', name: 'ContactInformationPhoneNumber', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[+][\\s0-9()-]+$", "smithy.api#sensitive" => {}})
-    CountryCode = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#CountryCode', name: 'CountryCode', traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#sensitive" => {}})
-    DeleteAlternateContactRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#DeleteAlternateContactRequest', name: 'DeleteAlternateContactRequest')
-    DisableRegionRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#DisableRegionRequest', name: 'DisableRegionRequest')
-    DistrictOrCounty = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#DistrictOrCounty', name: 'DistrictOrCounty', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
-    EmailAddress = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#EmailAddress', name: 'EmailAddress', traits: {"smithy.api#length" => {"min" => 1, "max" => 254}, "smithy.api#pattern" => "^[\\s]*[\\w+=.#|!&-]+@[\\w.-]+\\.[\\w]+[\\s]*$", "smithy.api#sensitive" => {}})
-    EnableRegionRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#EnableRegionRequest', name: 'EnableRegionRequest')
-    FullName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#FullName', name: 'FullName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
-    GetAccountInformationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAccountInformationRequest', name: 'GetAccountInformationRequest')
-    GetAccountInformationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAccountInformationResponse', name: 'GetAccountInformationResponse')
-    GetAlternateContactRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAlternateContactRequest', name: 'GetAlternateContactRequest')
-    GetAlternateContactResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAlternateContactResponse', name: 'GetAlternateContactResponse')
-    GetContactInformationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetContactInformationRequest', name: 'GetContactInformationRequest')
-    GetContactInformationResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetContactInformationResponse', name: 'GetContactInformationResponse')
-    GetPrimaryEmailRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetPrimaryEmailRequest', name: 'GetPrimaryEmailRequest')
-    GetPrimaryEmailResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetPrimaryEmailResponse', name: 'GetPrimaryEmailResponse')
-    GetRegionOptStatusRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetRegionOptStatusRequest', name: 'GetRegionOptStatusRequest')
-    GetRegionOptStatusResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetRegionOptStatusResponse', name: 'GetRegionOptStatusResponse')
-    InternalServerException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
-    ListRegionsRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ListRegionsRequest', name: 'ListRegionsRequest')
-    ListRegionsResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ListRegionsResponse', name: 'ListRegionsResponse')
-    Name = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#Name', name: 'Name', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#sensitive" => {}})
-    Otp = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#Otp', name: 'Otp', traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{6}$", "smithy.api#sensitive" => {}})
-    PhoneNumber = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PhoneNumber', name: 'PhoneNumber', traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#pattern" => "^[\\s0-9()+-]+$", "smithy.api#sensitive" => {}})
-    PostalCode = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PostalCode', name: 'PostalCode', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#sensitive" => {}})
-    PrimaryEmailAddress = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PrimaryEmailAddress', name: 'PrimaryEmailAddress', traits: {"smithy.api#length" => {"min" => 5, "max" => 64}, "smithy.api#sensitive" => {}})
-    PrimaryEmailUpdateStatus = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PrimaryEmailUpdateStatus', name: 'PrimaryEmailUpdateStatus', traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACCEPTED", "name" => "ACCEPTED"}]})
-    PutAccountNameRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#PutAccountNameRequest', name: 'PutAccountNameRequest')
-    PutAlternateContactRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#PutAlternateContactRequest', name: 'PutAlternateContactRequest')
-    PutContactInformationRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#PutContactInformationRequest', name: 'PutContactInformationRequest')
-    Region = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#Region', name: 'Region')
-    RegionName = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#RegionName', name: 'RegionName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
-    RegionOptList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.account#RegionOptList', name: 'RegionOptList')
-    RegionOptStatus = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#RegionOptStatus', name: 'RegionOptStatus', traits: {"smithy.api#enum" => [{"value" => "ENABLED", "name" => "ENABLED"}, {"value" => "ENABLING", "name" => "ENABLING"}, {"value" => "DISABLING", "name" => "DISABLING"}, {"value" => "DISABLED", "name" => "DISABLED"}, {"value" => "ENABLED_BY_DEFAULT", "name" => "ENABLED_BY_DEFAULT"}]})
-    RegionOptStatusList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.account#RegionOptStatusList', name: 'RegionOptStatusList')
-    ResourceNotFoundException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
-    SensitiveString = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#SensitiveString', name: 'SensitiveString', traits: {"smithy.api#sensitive" => {}})
-    StartPrimaryEmailUpdateRequest = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#StartPrimaryEmailUpdateRequest', name: 'StartPrimaryEmailUpdateRequest')
-    StartPrimaryEmailUpdateResponse = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#StartPrimaryEmailUpdateResponse', name: 'StartPrimaryEmailUpdateResponse')
-    StateOrRegion = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#StateOrRegion', name: 'StateOrRegion', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
-    Title = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#Title', name: 'Title', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
-    TooManyRequestsException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#TooManyRequestsException', name: 'TooManyRequestsException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
-    ValidationException = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
-    ValidationExceptionField = Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ValidationExceptionField', name: 'ValidationExceptionField')
-    ValidationExceptionFieldList = Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.account#ValidationExceptionFieldList', name: 'ValidationExceptionFieldList')
-    ValidationExceptionReason = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#ValidationExceptionReason', name: 'ValidationExceptionReason', traits: {"smithy.api#enum" => [{"value" => "invalidRegionOptTarget", "name" => "INVALID_REGION_OPT_TARGET"}, {"value" => "fieldValidationFailed", "name" => "FIELD_VALIDATION_FAILED"}]})
-    WebsiteUrl = Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#WebsiteUrl', name: 'WebsiteUrl', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
+    AcceptPrimaryEmailUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AcceptPrimaryEmailUpdateRequest', name: 'AcceptPrimaryEmailUpdateRequest')
+    AcceptPrimaryEmailUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AcceptPrimaryEmailUpdateResponse', name: 'AcceptPrimaryEmailUpdateResponse')
+    AccessDeniedException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AccessDeniedException', name: 'AccessDeniedException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
+    AccountCreatedDate = ::Smithy::Schema::Shapes::TimestampShape.new(id: 'com.amazonaws.account#AccountCreatedDate', name: 'AccountCreatedDate', traits: {"smithy.api#timestampFormat" => "date-time"})
+    AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AccountId', name: 'AccountId', traits: {"smithy.api#pattern" => "^\\d{12}$"})
+    AccountName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AccountName', name: 'AccountName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#pattern" => "^[ -;=?-~]+$", "smithy.api#sensitive" => {}})
+    AddressLine = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AddressLine', name: 'AddressLine', traits: {"smithy.api#length" => {"min" => 1, "max" => 60}, "smithy.api#sensitive" => {}})
+    AlternateContact = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#AlternateContact', name: 'AlternateContact')
+    AlternateContactType = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#AlternateContactType', name: 'AlternateContactType', traits: {"smithy.api#enum" => [{"value" => "BILLING", "name" => "BILLING"}, {"value" => "OPERATIONS", "name" => "OPERATIONS"}, {"value" => "SECURITY", "name" => "SECURITY"}]})
+    City = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#City', name: 'City', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
+    CompanyName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#CompanyName', name: 'CompanyName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
+    ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ConflictException', name: 'ConflictException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ContactInformation = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ContactInformation', name: 'ContactInformation')
+    ContactInformationPhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#ContactInformationPhoneNumber', name: 'ContactInformationPhoneNumber', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#pattern" => "^[+][\\s0-9()-]+$", "smithy.api#sensitive" => {}})
+    CountryCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#CountryCode', name: 'CountryCode', traits: {"smithy.api#length" => {"min" => 2, "max" => 2}, "smithy.api#sensitive" => {}})
+    DeleteAlternateContactRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#DeleteAlternateContactRequest', name: 'DeleteAlternateContactRequest')
+    DisableRegionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#DisableRegionRequest', name: 'DisableRegionRequest')
+    DistrictOrCounty = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#DistrictOrCounty', name: 'DistrictOrCounty', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
+    EmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#EmailAddress', name: 'EmailAddress', traits: {"smithy.api#length" => {"min" => 1, "max" => 254}, "smithy.api#pattern" => "^[\\s]*[\\w+=.#|!&-]+@[\\w.-]+\\.[\\w]+[\\s]*$", "smithy.api#sensitive" => {}})
+    EnableRegionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#EnableRegionRequest', name: 'EnableRegionRequest')
+    FullName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#FullName', name: 'FullName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
+    GetAccountInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAccountInformationRequest', name: 'GetAccountInformationRequest')
+    GetAccountInformationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAccountInformationResponse', name: 'GetAccountInformationResponse')
+    GetAlternateContactRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAlternateContactRequest', name: 'GetAlternateContactRequest')
+    GetAlternateContactResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetAlternateContactResponse', name: 'GetAlternateContactResponse')
+    GetContactInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetContactInformationRequest', name: 'GetContactInformationRequest')
+    GetContactInformationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetContactInformationResponse', name: 'GetContactInformationResponse')
+    GetPrimaryEmailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetPrimaryEmailRequest', name: 'GetPrimaryEmailRequest')
+    GetPrimaryEmailResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetPrimaryEmailResponse', name: 'GetPrimaryEmailResponse')
+    GetRegionOptStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetRegionOptStatusRequest', name: 'GetRegionOptStatusRequest')
+    GetRegionOptStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#GetRegionOptStatusResponse', name: 'GetRegionOptStatusResponse')
+    InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#InternalServerException', name: 'InternalServerException', traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500, "smithy.api#retryable" => {}})
+    ListRegionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ListRegionsRequest', name: 'ListRegionsRequest')
+    ListRegionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ListRegionsResponse', name: 'ListRegionsResponse')
+    Name = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#Name', name: 'Name', traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#sensitive" => {}})
+    Otp = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#Otp', name: 'Otp', traits: {"smithy.api#pattern" => "^[a-zA-Z0-9]{6}$", "smithy.api#sensitive" => {}})
+    PhoneNumber = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PhoneNumber', name: 'PhoneNumber', traits: {"smithy.api#length" => {"min" => 1, "max" => 25}, "smithy.api#pattern" => "^[\\s0-9()+-]+$", "smithy.api#sensitive" => {}})
+    PostalCode = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PostalCode', name: 'PostalCode', traits: {"smithy.api#length" => {"min" => 1, "max" => 20}, "smithy.api#sensitive" => {}})
+    PrimaryEmailAddress = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PrimaryEmailAddress', name: 'PrimaryEmailAddress', traits: {"smithy.api#length" => {"min" => 5, "max" => 64}, "smithy.api#sensitive" => {}})
+    PrimaryEmailUpdateStatus = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#PrimaryEmailUpdateStatus', name: 'PrimaryEmailUpdateStatus', traits: {"smithy.api#enum" => [{"value" => "PENDING", "name" => "PENDING"}, {"value" => "ACCEPTED", "name" => "ACCEPTED"}]})
+    PutAccountNameRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#PutAccountNameRequest', name: 'PutAccountNameRequest')
+    PutAlternateContactRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#PutAlternateContactRequest', name: 'PutAlternateContactRequest')
+    PutContactInformationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#PutContactInformationRequest', name: 'PutContactInformationRequest')
+    Region = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#Region', name: 'Region')
+    RegionName = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#RegionName', name: 'RegionName', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}})
+    RegionOptList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.account#RegionOptList', name: 'RegionOptList')
+    RegionOptStatus = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#RegionOptStatus', name: 'RegionOptStatus', traits: {"smithy.api#enum" => [{"value" => "ENABLED", "name" => "ENABLED"}, {"value" => "ENABLING", "name" => "ENABLING"}, {"value" => "DISABLING", "name" => "DISABLING"}, {"value" => "DISABLED", "name" => "DISABLED"}, {"value" => "ENABLED_BY_DEFAULT", "name" => "ENABLED_BY_DEFAULT"}]})
+    RegionOptStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.account#RegionOptStatusList', name: 'RegionOptStatusList')
+    ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ResourceNotFoundException', name: 'ResourceNotFoundException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    SensitiveString = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#SensitiveString', name: 'SensitiveString', traits: {"smithy.api#sensitive" => {}})
+    StartPrimaryEmailUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#StartPrimaryEmailUpdateRequest', name: 'StartPrimaryEmailUpdateRequest')
+    StartPrimaryEmailUpdateResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#StartPrimaryEmailUpdateResponse', name: 'StartPrimaryEmailUpdateResponse')
+    StateOrRegion = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#StateOrRegion', name: 'StateOrRegion', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
+    Title = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#Title', name: 'Title', traits: {"smithy.api#length" => {"min" => 1, "max" => 50}, "smithy.api#sensitive" => {}})
+    TooManyRequestsException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#TooManyRequestsException', name: 'TooManyRequestsException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 429, "smithy.api#retryable" => {"throttling" => true}})
+    ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ValidationException', name: 'ValidationException', traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: 'com.amazonaws.account#ValidationExceptionField', name: 'ValidationExceptionField')
+    ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: 'com.amazonaws.account#ValidationExceptionFieldList', name: 'ValidationExceptionFieldList')
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#ValidationExceptionReason', name: 'ValidationExceptionReason', traits: {"smithy.api#enum" => [{"value" => "invalidRegionOptTarget", "name" => "INVALID_REGION_OPT_TARGET"}, {"value" => "fieldValidationFailed", "name" => "FIELD_VALIDATION_FAILED"}]})
+    WebsiteUrl = ::Smithy::Schema::Shapes::StringShape.new(id: 'com.amazonaws.account#WebsiteUrl', name: 'WebsiteUrl', traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#sensitive" => {}})
 
-    AcceptPrimaryEmailUpdateRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <p>This operation can only be called from the management account or the delegated administrator account of an organization for a member account.</p> <note> <p>The management account can't specify its own <code>AccountId</code>.</p> </note>", "smithy.api#required" => {}}))
-    AcceptPrimaryEmailUpdateRequest.add_member(:primary_email, Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: 'PrimaryEmail', traits: {"smithy.api#documentation" => "<p>The new primary email address for use with the specified account. This must match the <code>PrimaryEmail</code> from the <code>StartPrimaryEmailUpdate</code> API call.</p>", "smithy.api#required" => {}}))
-    AcceptPrimaryEmailUpdateRequest.add_member(:otp, Smithy::Schema::Shapes::ShapeRef.new(shape: Otp, location_name: 'Otp', traits: {"smithy.api#documentation" => "<p>The OTP code sent to the <code>PrimaryEmail</code> specified on the <code>StartPrimaryEmailUpdate</code> API call.</p>", "smithy.api#required" => {}}))
+    AcceptPrimaryEmailUpdateRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#required" => {}}))
+    AcceptPrimaryEmailUpdateRequest.add_member(:primary_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: 'PrimaryEmail', traits: {"smithy.api#required" => {}}))
+    AcceptPrimaryEmailUpdateRequest.add_member(:otp, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Otp, location_name: 'Otp', traits: {"smithy.api#required" => {}}))
     AcceptPrimaryEmailUpdateRequest.type = Types::AcceptPrimaryEmailUpdateRequest
-    AcceptPrimaryEmailUpdateResponse.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailUpdateStatus, location_name: 'Status', traits: {"smithy.api#documentation" => "<p>Retrieves the status of the accepted primary email update request.</p>"}))
+    AcceptPrimaryEmailUpdateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailUpdateStatus, location_name: 'Status'))
     AcceptPrimaryEmailUpdateResponse.type = Types::AcceptPrimaryEmailUpdateResponse
-    AccessDeniedException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
-    AccessDeniedException.add_member(:error_type, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#documentation" => "<p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>", "smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    AccessDeniedException.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     AccessDeniedException.type = Types::AccessDeniedException
-    AlternateContact.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#documentation" => "<p>The name associated with this alternate contact.</p>"}))
-    AlternateContact.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: 'Title', traits: {"smithy.api#documentation" => "<p>The title associated with this alternate contact.</p>"}))
-    AlternateContact.add_member(:email_address, Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: 'EmailAddress', traits: {"smithy.api#documentation" => "<p>The email address associated with this alternate contact.</p>"}))
-    AlternateContact.add_member(:phone_number, Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: 'PhoneNumber', traits: {"smithy.api#documentation" => "<p>The phone number associated with this alternate contact.</p>"}))
-    AlternateContact.add_member(:alternate_contact_type, Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#documentation" => "<p>The type of alternate contact.</p>"}))
+    AlternateContact.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name'))
+    AlternateContact.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: 'Title'))
+    AlternateContact.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: 'EmailAddress'))
+    AlternateContact.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: 'PhoneNumber'))
+    AlternateContact.add_member(:alternate_contact_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType'))
     AlternateContact.type = Types::AlternateContact
-    ConflictException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
-    ConflictException.add_member(:error_type, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#documentation" => "<p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>", "smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    ConflictException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ConflictException.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ConflictException.type = Types::ConflictException
-    ContactInformation.add_member(:full_name, Smithy::Schema::Shapes::ShapeRef.new(shape: FullName, location_name: 'FullName', traits: {"smithy.api#documentation" => "<p>The full name of the primary contact address.</p>", "smithy.api#required" => {}}))
-    ContactInformation.add_member(:address_line1, Smithy::Schema::Shapes::ShapeRef.new(shape: AddressLine, location_name: 'AddressLine1', traits: {"smithy.api#documentation" => "<p>The first line of the primary contact address.</p>", "smithy.api#required" => {}}))
-    ContactInformation.add_member(:address_line2, Smithy::Schema::Shapes::ShapeRef.new(shape: AddressLine, location_name: 'AddressLine2', traits: {"smithy.api#documentation" => "<p>The second line of the primary contact address, if any.</p>"}))
-    ContactInformation.add_member(:address_line3, Smithy::Schema::Shapes::ShapeRef.new(shape: AddressLine, location_name: 'AddressLine3', traits: {"smithy.api#documentation" => "<p>The third line of the primary contact address, if any.</p>"}))
-    ContactInformation.add_member(:city, Smithy::Schema::Shapes::ShapeRef.new(shape: City, location_name: 'City', traits: {"smithy.api#documentation" => "<p>The city of the primary contact address.</p>", "smithy.api#required" => {}}))
-    ContactInformation.add_member(:state_or_region, Smithy::Schema::Shapes::ShapeRef.new(shape: StateOrRegion, location_name: 'StateOrRegion', traits: {"smithy.api#documentation" => "<p>The state or region of the primary contact address. If the mailing address is within the United States (US), the value in this field can be either a two character state code (for example, <code>NJ</code>) or the full state name (for example, <code>New Jersey</code>). This field is required in the following countries: <code>US</code>, <code>CA</code>, <code>GB</code>, <code>DE</code>, <code>JP</code>, <code>IN</code>, and <code>BR</code>.</p>"}))
-    ContactInformation.add_member(:district_or_county, Smithy::Schema::Shapes::ShapeRef.new(shape: DistrictOrCounty, location_name: 'DistrictOrCounty', traits: {"smithy.api#documentation" => "<p>The district or county of the primary contact address, if any.</p>"}))
-    ContactInformation.add_member(:postal_code, Smithy::Schema::Shapes::ShapeRef.new(shape: PostalCode, location_name: 'PostalCode', traits: {"smithy.api#documentation" => "<p>The postal code of the primary contact address.</p>", "smithy.api#required" => {}}))
-    ContactInformation.add_member(:country_code, Smithy::Schema::Shapes::ShapeRef.new(shape: CountryCode, location_name: 'CountryCode', traits: {"smithy.api#documentation" => "<p>The ISO-3166 two-letter country code for the primary contact address.</p>", "smithy.api#required" => {}}))
-    ContactInformation.add_member(:phone_number, Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInformationPhoneNumber, location_name: 'PhoneNumber', traits: {"smithy.api#documentation" => "<p>The phone number of the primary contact information. The number will be validated and, in some countries, checked for activation.</p>", "smithy.api#required" => {}}))
-    ContactInformation.add_member(:company_name, Smithy::Schema::Shapes::ShapeRef.new(shape: CompanyName, location_name: 'CompanyName', traits: {"smithy.api#documentation" => "<p>The name of the company associated with the primary contact information, if any.</p>"}))
-    ContactInformation.add_member(:website_url, Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: 'WebsiteUrl', traits: {"smithy.api#documentation" => "<p>The URL of the website associated with the primary contact information, if any.</p>"}))
+    ContactInformation.add_member(:full_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: FullName, location_name: 'FullName', traits: {"smithy.api#required" => {}}))
+    ContactInformation.add_member(:address_line1, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressLine, location_name: 'AddressLine1', traits: {"smithy.api#required" => {}}))
+    ContactInformation.add_member(:address_line2, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressLine, location_name: 'AddressLine2'))
+    ContactInformation.add_member(:address_line3, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AddressLine, location_name: 'AddressLine3'))
+    ContactInformation.add_member(:city, ::Smithy::Schema::Shapes::ShapeRef.new(shape: City, location_name: 'City', traits: {"smithy.api#required" => {}}))
+    ContactInformation.add_member(:state_or_region, ::Smithy::Schema::Shapes::ShapeRef.new(shape: StateOrRegion, location_name: 'StateOrRegion'))
+    ContactInformation.add_member(:district_or_county, ::Smithy::Schema::Shapes::ShapeRef.new(shape: DistrictOrCounty, location_name: 'DistrictOrCounty'))
+    ContactInformation.add_member(:postal_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PostalCode, location_name: 'PostalCode', traits: {"smithy.api#required" => {}}))
+    ContactInformation.add_member(:country_code, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CountryCode, location_name: 'CountryCode', traits: {"smithy.api#required" => {}}))
+    ContactInformation.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInformationPhoneNumber, location_name: 'PhoneNumber', traits: {"smithy.api#required" => {}}))
+    ContactInformation.add_member(:company_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: CompanyName, location_name: 'CompanyName'))
+    ContactInformation.add_member(:website_url, ::Smithy::Schema::Shapes::ShapeRef.new(shape: WebsiteUrl, location_name: 'WebsiteUrl'))
     ContactInformation.type = Types::ContactInformation
-    DeleteAlternateContactRequest.add_member(:alternate_contact_type, Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#documentation" => "<p>Specifies which of the alternate contacts to delete. </p>", "smithy.api#required" => {}}))
-    DeleteAlternateContactRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    DeleteAlternateContactRequest.add_member(:alternate_contact_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#required" => {}}))
+    DeleteAlternateContactRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     DeleteAlternateContactRequest.type = Types::DeleteAlternateContactRequest
-    DisableRegionRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
-    DisableRegionRequest.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#documentation" => "<p>Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you disable a Region, Amazon Web Services performs actions to deactivate that Region in your account, such as destroying IAM resources in the Region. This process takes a few minutes for most accounts, but this can take several hours. You cannot enable the Region until the disabling process is fully completed.</p>", "smithy.api#required" => {}}))
+    DisableRegionRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
+    DisableRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#required" => {}}))
     DisableRegionRequest.type = Types::DisableRegionRequest
-    EnableRegionRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
-    EnableRegionRequest.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#documentation" => "<p>Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). When you enable a Region, Amazon Web Services performs actions to prepare your account in that Region, such as distributing your IAM resources to the Region. This process takes a few minutes for most accounts, but it can take several hours. You cannot use the Region until this process is complete. Furthermore, you cannot disable the Region until the enabling process is fully completed.</p>", "smithy.api#required" => {}}))
+    EnableRegionRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
+    EnableRegionRequest.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#required" => {}}))
     EnableRegionRequest.type = Types::EnableRegionRequest
-    GetAccountInformationRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    GetAccountInformationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     GetAccountInformationRequest.type = Types::GetAccountInformationRequest
-    GetAccountInformationResponse.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <p>This operation can only be called from the management account or the delegated administrator account of an organization for a member account.</p> <note> <p>The management account can't specify its own <code>AccountId</code>.</p> </note>"}))
-    GetAccountInformationResponse.add_member(:account_name, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountName, location_name: 'AccountName', traits: {"smithy.api#documentation" => "<p>The name of the account.</p>"}))
-    GetAccountInformationResponse.add_member(:account_created_date, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountCreatedDate, location_name: 'AccountCreatedDate', traits: {"smithy.api#documentation" => "<p>The date and time the account was created.</p>"}))
+    GetAccountInformationResponse.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
+    GetAccountInformationResponse.add_member(:account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountName, location_name: 'AccountName'))
+    GetAccountInformationResponse.add_member(:account_created_date, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountCreatedDate, location_name: 'AccountCreatedDate'))
     GetAccountInformationResponse.type = Types::GetAccountInformationResponse
-    GetAlternateContactRequest.add_member(:alternate_contact_type, Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#documentation" => "<p>Specifies which alternate contact you want to retrieve.</p>", "smithy.api#required" => {}}))
-    GetAlternateContactRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    GetAlternateContactRequest.add_member(:alternate_contact_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#required" => {}}))
+    GetAlternateContactRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     GetAlternateContactRequest.type = Types::GetAlternateContactRequest
-    GetAlternateContactResponse.add_member(:alternate_contact, Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContact, location_name: 'AlternateContact', traits: {"smithy.api#documentation" => "<p>A structure that contains the details for the specified alternate contact.</p>"}))
+    GetAlternateContactResponse.add_member(:alternate_contact, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContact, location_name: 'AlternateContact'))
     GetAlternateContactResponse.type = Types::GetAlternateContactResponse
-    GetContactInformationRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    GetContactInformationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     GetContactInformationRequest.type = Types::GetContactInformationRequest
-    GetContactInformationResponse.add_member(:contact_information, Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInformation, location_name: 'ContactInformation', traits: {"smithy.api#documentation" => "<p>Contains the details of the primary contact information associated with an Amazon Web Services account.</p>"}))
+    GetContactInformationResponse.add_member(:contact_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInformation, location_name: 'ContactInformation'))
     GetContactInformationResponse.type = Types::GetContactInformationResponse
-    GetPrimaryEmailRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <p>This operation can only be called from the management account or the delegated administrator account of an organization for a member account.</p> <note> <p>The management account can't specify its own <code>AccountId</code>.</p> </note>", "smithy.api#required" => {}}))
+    GetPrimaryEmailRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#required" => {}}))
     GetPrimaryEmailRequest.type = Types::GetPrimaryEmailRequest
-    GetPrimaryEmailResponse.add_member(:primary_email, Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: 'PrimaryEmail', traits: {"smithy.api#documentation" => "<p>Retrieves the primary email address associated with the specified account.</p>"}))
+    GetPrimaryEmailResponse.add_member(:primary_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: 'PrimaryEmail'))
     GetPrimaryEmailResponse.type = Types::GetPrimaryEmailResponse
-    GetRegionOptStatusRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
-    GetRegionOptStatusRequest.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#documentation" => "<p>Specifies the Region-code for a given Region name (for example, <code>af-south-1</code>). This function will return the status of whatever Region you pass into this parameter. </p>", "smithy.api#required" => {}}))
+    GetRegionOptStatusRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
+    GetRegionOptStatusRequest.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#required" => {}}))
     GetRegionOptStatusRequest.type = Types::GetRegionOptStatusRequest
-    GetRegionOptStatusResponse.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#documentation" => "<p>The Region code that was passed in.</p>"}))
-    GetRegionOptStatusResponse.add_member(:region_opt_status, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatus, location_name: 'RegionOptStatus', traits: {"smithy.api#documentation" => "<p>One of the potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).</p>"}))
+    GetRegionOptStatusResponse.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName'))
+    GetRegionOptStatusResponse.add_member(:region_opt_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatus, location_name: 'RegionOptStatus'))
     GetRegionOptStatusResponse.type = Types::GetRegionOptStatusResponse
-    InternalServerException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
-    InternalServerException.add_member(:error_type, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#documentation" => "<p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>", "smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    InternalServerException.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     InternalServerException.type = Types::InternalServerException
-    ListRegionsRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
-    ListRegionsRequest.add_member(:max_results, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Integer, location_name: 'MaxResults', traits: {"smithy.api#documentation" => "<p>The total number of items to return in the command’s output. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the command’s output. To resume pagination, provide the <code>NextToken</code> value in the <code>starting-token</code> argument of a subsequent command. Do not use the <code>NextToken</code> response element directly outside of the Amazon Web Services CLI. For usage examples, see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Pagination</a> in the <i>Amazon Web Services Command Line Interface User Guide</i>. </p>", "smithy.api#range" => {"min" => 1, "max" => 50}}))
-    ListRegionsRequest.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'NextToken', traits: {"smithy.api#documentation" => "<p>A token used to specify where to start paginating. This is the <code>NextToken</code> from a previously truncated response. For usage examples, see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Pagination</a> in the <i>Amazon Web Services Command Line Interface User Guide</i>.</p>", "smithy.api#length" => {"max" => 1000}}))
-    ListRegionsRequest.add_member(:region_opt_status_contains, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatusList, location_name: 'RegionOptStatusContains', traits: {"smithy.api#documentation" => "<p>A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled_by_default) to use to filter the list of Regions for a given account. For example, passing in a value of ENABLING will only return a list of Regions with a Region status of ENABLING.</p>"}))
+    ListRegionsRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
+    ListRegionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Integer, location_name: 'MaxResults', traits: {"smithy.api#range" => {"min" => 1, "max" => 50}}))
+    ListRegionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'NextToken', traits: {"smithy.api#length" => {"max" => 1000}}))
+    ListRegionsRequest.add_member(:region_opt_status_contains, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatusList, location_name: 'RegionOptStatusContains'))
     ListRegionsRequest.type = Types::ListRegionsRequest
-    ListRegionsResponse.add_member(:next_token, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'NextToken', traits: {"smithy.api#documentation" => "<p>If there is more data to be returned, this will be populated. It should be passed into the <code>next-token</code> request parameter of <code>list-regions</code>.</p>"}))
-    ListRegionsResponse.add_member(:regions, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptList, location_name: 'Regions', traits: {"smithy.api#documentation" => "<p>This is a list of Regions for a given account, or if the filtered parameter was used, a list of Regions that match the filter criteria set in the <code>filter</code> parameter.</p>"}))
+    ListRegionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'NextToken'))
+    ListRegionsResponse.add_member(:regions, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptList, location_name: 'Regions'))
     ListRegionsResponse.type = Types::ListRegionsResponse
-    PutAccountNameRequest.add_member(:account_name, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountName, location_name: 'AccountName', traits: {"smithy.api#documentation" => "<p>The name of the account.</p>", "smithy.api#required" => {}}))
-    PutAccountNameRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    PutAccountNameRequest.add_member(:account_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountName, location_name: 'AccountName', traits: {"smithy.api#required" => {}}))
+    PutAccountNameRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     PutAccountNameRequest.type = Types::PutAccountNameRequest
-    PutAlternateContactRequest.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#documentation" => "<p>Specifies a name for the alternate contact.</p>", "smithy.api#required" => {}}))
-    PutAlternateContactRequest.add_member(:title, Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: 'Title', traits: {"smithy.api#documentation" => "<p>Specifies a title for the alternate contact.</p>", "smithy.api#required" => {}}))
-    PutAlternateContactRequest.add_member(:email_address, Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: 'EmailAddress', traits: {"smithy.api#documentation" => "<p>Specifies an email address for the alternate contact. </p>", "smithy.api#required" => {}}))
-    PutAlternateContactRequest.add_member(:phone_number, Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: 'PhoneNumber', traits: {"smithy.api#documentation" => "<p>Specifies a phone number for the alternate contact.</p>", "smithy.api#required" => {}}))
-    PutAlternateContactRequest.add_member(:alternate_contact_type, Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#documentation" => "<p>Specifies which alternate contact you want to create or update.</p>", "smithy.api#required" => {}}))
-    PutAlternateContactRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.</p> <p>If you do not specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation.</p> <p>To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account, and the specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>; it must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, then don't specify this parameter, and call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    PutAlternateContactRequest.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Name, location_name: 'Name', traits: {"smithy.api#required" => {}}))
+    PutAlternateContactRequest.add_member(:title, ::Smithy::Schema::Shapes::ShapeRef.new(shape: Title, location_name: 'Title', traits: {"smithy.api#required" => {}}))
+    PutAlternateContactRequest.add_member(:email_address, ::Smithy::Schema::Shapes::ShapeRef.new(shape: EmailAddress, location_name: 'EmailAddress', traits: {"smithy.api#required" => {}}))
+    PutAlternateContactRequest.add_member(:phone_number, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PhoneNumber, location_name: 'PhoneNumber', traits: {"smithy.api#required" => {}}))
+    PutAlternateContactRequest.add_member(:alternate_contact_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AlternateContactType, location_name: 'AlternateContactType', traits: {"smithy.api#required" => {}}))
+    PutAlternateContactRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     PutAlternateContactRequest.type = Types::PutAlternateContactRequest
-    PutContactInformationRequest.add_member(:contact_information, Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInformation, location_name: 'ContactInformation', traits: {"smithy.api#documentation" => "<p>Contains the details of the primary contact information associated with an Amazon Web Services account.</p>", "smithy.api#required" => {}}))
-    PutContactInformationRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. If you don't specify this parameter, it defaults to the Amazon Web Services account of the identity used to call the operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <note> <p>The management account can't specify its own <code>AccountId</code>. It must call the operation in standalone context by not including the <code>AccountId</code> parameter.</p> </note> <p>To call this operation on an account that is not a member of an organization, don't specify this parameter. Instead, call the operation using an identity belonging to the account whose contacts you wish to retrieve or modify.</p>"}))
+    PutContactInformationRequest.add_member(:contact_information, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ContactInformation, location_name: 'ContactInformation', traits: {"smithy.api#required" => {}}))
+    PutContactInformationRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId'))
     PutContactInformationRequest.type = Types::PutContactInformationRequest
-    Region.add_member(:region_name, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName', traits: {"smithy.api#documentation" => "<p>The Region code of a given Region (for example, <code>us-east-1</code>).</p>"}))
-    Region.add_member(:region_opt_status, Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatus, location_name: 'RegionOptStatus', traits: {"smithy.api#documentation" => "<p>One of potential statuses a Region can undergo (Enabled, Enabling, Disabled, Disabling, Enabled_By_Default).</p>"}))
+    Region.add_member(:region_name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionName, location_name: 'RegionName'))
+    Region.add_member(:region_opt_status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatus, location_name: 'RegionOptStatus'))
     Region.type = Types::Region
-    RegionOptList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
-    RegionOptStatusList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatus)
-    ResourceNotFoundException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
-    ResourceNotFoundException.add_member(:error_type, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#documentation" => "<p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>", "smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    RegionOptList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: Region)
+    RegionOptStatusList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: RegionOptStatus)
+    ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ResourceNotFoundException.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
-    StartPrimaryEmailUpdateRequest.add_member(:account_id, Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#documentation" => "<p>Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation. To use this parameter, the caller must be an identity in the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account\">organization's management account</a> or a delegated administrator account. The specified account ID must be a member account in the same organization. The organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">all features enabled</a>, and the organization must have <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">trusted access</a> enabled for the Account Management service, and optionally a <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#delegated-admin\">delegated admin</a> account assigned.</p> <p>This operation can only be called from the management account or the delegated administrator account of an organization for a member account.</p> <note> <p>The management account can't specify its own <code>AccountId</code>.</p> </note>", "smithy.api#required" => {}}))
-    StartPrimaryEmailUpdateRequest.add_member(:primary_email, Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: 'PrimaryEmail', traits: {"smithy.api#documentation" => "<p>The new primary email address (also known as the root user email address) to use in the specified account.</p>", "smithy.api#required" => {}}))
+    StartPrimaryEmailUpdateRequest.add_member(:account_id, ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccountId, location_name: 'AccountId', traits: {"smithy.api#required" => {}}))
+    StartPrimaryEmailUpdateRequest.add_member(:primary_email, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailAddress, location_name: 'PrimaryEmail', traits: {"smithy.api#required" => {}}))
     StartPrimaryEmailUpdateRequest.type = Types::StartPrimaryEmailUpdateRequest
-    StartPrimaryEmailUpdateResponse.add_member(:status, Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailUpdateStatus, location_name: 'Status', traits: {"smithy.api#documentation" => "<p>The status of the primary email update request.</p>"}))
+    StartPrimaryEmailUpdateResponse.add_member(:status, ::Smithy::Schema::Shapes::ShapeRef.new(shape: PrimaryEmailUpdateStatus, location_name: 'Status'))
     StartPrimaryEmailUpdateResponse.type = Types::StartPrimaryEmailUpdateResponse
-    TooManyRequestsException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
-    TooManyRequestsException.add_member(:error_type, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#documentation" => "<p>The value populated to the <code>x-amzn-ErrorType</code> response header by API Gateway.</p>", "smithy.api#httpHeader" => "x-amzn-ErrorType"}))
+    TooManyRequestsException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    TooManyRequestsException.add_member(:error_type, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'errorType', traits: {"smithy.api#httpHeader" => "x-amzn-ErrorType"}))
     TooManyRequestsException.type = Types::TooManyRequestsException
-    ValidationException.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'message', traits: {"smithy.api#documentation" => "<p>The message that informs you about what was invalid about the request.</p>", "smithy.api#required" => {}}))
-    ValidationException.add_member(:reason, Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: 'reason', traits: {"smithy.api#documentation" => "<p>The reason that validation failed.</p>"}))
-    ValidationException.add_member(:field_list, Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: 'fieldList', traits: {"smithy.api#documentation" => "<p>The field where the invalid entry was detected.</p>"}))
+    ValidationException.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'message', traits: {"smithy.api#required" => {}}))
+    ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: 'reason'))
+    ValidationException.add_member(:field_list, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: 'fieldList'))
     ValidationException.type = Types::ValidationException
-    ValidationExceptionField.add_member(:name, Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::String, location_name: 'name', traits: {"smithy.api#documentation" => "<p>The field name where the invalid entry was detected.</p>", "smithy.api#required" => {}}))
-    ValidationExceptionField.add_member(:message, Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'message', traits: {"smithy.api#documentation" => "<p>A message about the validation exception.</p>", "smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:name, ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::String, location_name: 'name', traits: {"smithy.api#required" => {}}))
+    ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::ShapeRef.new(shape: SensitiveString, location_name: 'message', traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
-    ValidationExceptionFieldList.member = Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
+    ValidationExceptionFieldList.member = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
-    Account = Smithy::Schema::Shapes::ServiceShape.new do |service|
+    Account = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.account#Account"
       service.name = "Account"
       service.version = "2021-02-01"
       service.traits = {"aws.api#service" => {"sdkId" => "Account", "arnNamespace" => "account", "cloudTrailEventSource" => "CLOUDTRAIL_EVENT_SOURCE"}, "aws.auth#sigv4" => {"name" => "account"}, "aws.endpoints#standardPartitionalEndpoints" => {"endpointPatternType" => "service_region_dnsSuffix"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#suppress" => ["EventSource"], "smithy.api#title" => "AWS Account"}
-      service.add_operation(:accept_primary_email_update, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:accept_primary_email_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#AcceptPrimaryEmailUpdate"
         operation.name = "AcceptPrimaryEmailUpdate"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptPrimaryEmailUpdateRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptPrimaryEmailUpdateResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptPrimaryEmailUpdateRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: AcceptPrimaryEmailUpdateResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/acceptPrimaryEmailUpdate", "method" => "POST", "code" => 200}}
       end)
-      service.add_operation(:delete_alternate_contact, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:delete_alternate_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#DeleteAlternateContact"
         operation.name = "DeleteAlternateContact"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAlternateContactRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DeleteAlternateContactRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/deleteAlternateContact", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-      service.add_operation(:disable_region, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:disable_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#DisableRegion"
         operation.name = "DisableRegion"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: DisableRegionRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: DisableRegionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/disableRegion", "method" => "POST", "code" => 200}}
       end)
-      service.add_operation(:enable_region, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:enable_region, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#EnableRegion"
         operation.name = "EnableRegion"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: EnableRegionRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: EnableRegionRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/enableRegion", "method" => "POST", "code" => 200}}
       end)
-      service.add_operation(:get_account_information, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:get_account_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetAccountInformation"
         operation.name = "GetAccountInformation"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountInformationRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountInformationResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountInformationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAccountInformationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/getAccountInformation", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
-      service.add_operation(:get_alternate_contact, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:get_alternate_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetAlternateContact"
         operation.name = "GetAlternateContact"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetAlternateContactRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetAlternateContactResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAlternateContactRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetAlternateContactResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/getAlternateContact", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
-      service.add_operation(:get_contact_information, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:get_contact_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetContactInformation"
         operation.name = "GetContactInformation"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactInformationRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactInformationResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactInformationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetContactInformationResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/getContactInformation", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
-      service.add_operation(:get_primary_email, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:get_primary_email, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetPrimaryEmail"
         operation.name = "GetPrimaryEmail"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetPrimaryEmailRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetPrimaryEmailResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPrimaryEmailRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetPrimaryEmailResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/getPrimaryEmail", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
-      service.add_operation(:get_region_opt_status, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:get_region_opt_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#GetRegionOptStatus"
         operation.name = "GetRegionOptStatus"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegionOptStatusRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegionOptStatusResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegionOptStatusRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: GetRegionOptStatusResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/getRegionOptStatus", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
       end)
-      service.add_operation(:list_regions, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:list_regions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#ListRegions"
         operation.name = "ListRegions"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegionsRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegionsResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegionsRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ListRegionsResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/listRegions", "method" => "POST", "code" => 200}, "smithy.api#readonly" => {}, "smithy.api#suppress" => ["HttpMethodSemantics"]}
         operation[:paginator] = Paginators::ListRegions.new
       end)
-      service.add_operation(:put_account_name, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:put_account_name, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#PutAccountName"
         operation.name = "PutAccountName"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccountNameRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAccountNameRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/putAccountName", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-      service.add_operation(:put_alternate_contact, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:put_alternate_contact, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#PutAlternateContact"
         operation.name = "PutAlternateContact"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: PutAlternateContactRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutAlternateContactRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/putAlternateContact", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-      service.add_operation(:put_contact_information, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:put_contact_information, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#PutContactInformation"
         operation.name = "PutContactInformation"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: PutContactInformationRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: Smithy::Schema::Shapes::Prelude::Unit)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: PutContactInformationRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: ::Smithy::Schema::Shapes::Prelude::Unit)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/putContactInformation", "method" => "POST", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
-      service.add_operation(:start_primary_email_update, Smithy::Schema::Shapes::OperationShape.new do |operation|
+      service.add_operation(:start_primary_email_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.account#StartPrimaryEmailUpdate"
         operation.name = "StartPrimaryEmailUpdate"
-        operation.input = Smithy::Schema::Shapes::ShapeRef.new(shape: StartPrimaryEmailUpdateRequest)
-        operation.output = Smithy::Schema::Shapes::ShapeRef.new(shape: StartPrimaryEmailUpdateResponse)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
-        operation.errors << Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
+        operation.input = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartPrimaryEmailUpdateRequest)
+        operation.output = ::Smithy::Schema::Shapes::ShapeRef.new(shape: StartPrimaryEmailUpdateResponse)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: AccessDeniedException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ConflictException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: InternalServerException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        operation.errors << ::Smithy::Schema::Shapes::ShapeRef.new(shape: ValidationException)
         operation.traits = {"smithy.api#http" => {"uri" => "/startPrimaryEmailUpdate", "method" => "POST", "code" => 200}}
       end)
 
@@ -358,8 +358,8 @@ module Aws::Account
       def type_registry
         return @type_registry if @type_registry
 
-        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(Smithy::Schema::Shapes::StructureShape) }
-        @type_registry = Smithy::Schema::TypeRegistry.new(shapes)
+        shapes = constants.map { |sym| const_get(sym) }.select { |const| const.is_a?(::Smithy::Schema::Shapes::StructureShape) }
+        @type_registry = ::Smithy::Schema::TypeRegistry.new(shapes)
       end
     end
   end

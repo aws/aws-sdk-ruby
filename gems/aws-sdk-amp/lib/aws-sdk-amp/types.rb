@@ -13,7 +13,7 @@ module Aws::Amp
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of an alert manager definition. It is the configuration for the alert manager, including information about receivers for routing alerts.</p>
@@ -35,7 +35,7 @@ module Aws::Amp
       :created_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the alert manager. </p>
@@ -49,7 +49,7 @@ module Aws::Amp
       :status_code,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>AmpConfiguration</code> structure defines the Amazon Managed Service for Prometheus instance a scraper should send metrics to.</p>
@@ -59,7 +59,7 @@ module Aws::Amp
     class AmpConfiguration < Struct.new(
       :workspace_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details for logging to CloudWatch Logs.</p>
@@ -69,7 +69,7 @@ module Aws::Amp
     class CloudWatchLogDestination < Struct.new(
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause an inconsistent state.</p>
@@ -87,7 +87,7 @@ module Aws::Amp
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateAlertManagerDefinition</code> operation.</p>
@@ -105,7 +105,7 @@ module Aws::Amp
       :data,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateAlertManagerDefinition</code> operation.</p>
@@ -115,7 +115,7 @@ module Aws::Amp
     class CreateAlertManagerDefinitionOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateLoggingConfiguration</code> operation.</p>
@@ -133,7 +133,7 @@ module Aws::Amp
       :log_group_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateLoggingConfiguration</code> operation.</p>
@@ -143,7 +143,7 @@ module Aws::Amp
     class CreateLoggingConfigurationOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -160,7 +160,7 @@ module Aws::Amp
       :destinations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -169,7 +169,7 @@ module Aws::Amp
     class CreateQueryLoggingConfigurationResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateRuleGroupsNamespace</code> operation.</p>
@@ -195,7 +195,7 @@ module Aws::Amp
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateRuleGroupsNamespace</code> operation.</p>
@@ -217,7 +217,7 @@ module Aws::Amp
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateScraper</code> operation.</p>
@@ -251,7 +251,7 @@ module Aws::Amp
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateScraper</code> operation.</p>
@@ -273,7 +273,7 @@ module Aws::Amp
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>CreateWorkspace</code> operation.</p>
@@ -295,7 +295,7 @@ module Aws::Amp
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>CreateWorkspace</code> operation.</p>
@@ -321,7 +321,7 @@ module Aws::Amp
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteAlertManagerDefinition</code> operation.</p>
@@ -335,7 +335,7 @@ module Aws::Amp
       :workspace_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteLoggingConfiguration</code> operation.</p>
@@ -349,7 +349,7 @@ module Aws::Amp
       :workspace_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -362,7 +362,7 @@ module Aws::Amp
       :workspace_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteRuleGroupsNamespace</code> operation.</p>
@@ -380,7 +380,7 @@ module Aws::Amp
       :name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteScraper</code> operation.</p>
@@ -394,7 +394,7 @@ module Aws::Amp
       :scraper_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DeleteScraper</code> operation.</p>
@@ -408,7 +408,7 @@ module Aws::Amp
       :scraper_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DeleteWorkspace</code> operation.</p>
@@ -422,7 +422,7 @@ module Aws::Amp
       :workspace_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeAlertManagerDefinition</code> operation.</p>
@@ -432,7 +432,7 @@ module Aws::Amp
     class DescribeAlertManagerDefinitionInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeAlertManagerDefinition</code> operation.</p>
@@ -442,7 +442,7 @@ module Aws::Amp
     class DescribeAlertManagerDefinitionOutput < Struct.new(
       :alert_manager_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeLoggingConfiguration</code> operation.</p>
@@ -452,7 +452,7 @@ module Aws::Amp
     class DescribeLoggingConfigurationInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeLoggingConfiguration</code> operation.</p>
@@ -462,7 +462,7 @@ module Aws::Amp
     class DescribeLoggingConfigurationOutput < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -471,7 +471,7 @@ module Aws::Amp
     class DescribeQueryLoggingConfigurationRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_logging_configuration
@@ -480,7 +480,7 @@ module Aws::Amp
     class DescribeQueryLoggingConfigurationResponse < Struct.new(
       :query_logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeRuleGroupsNamespace</code> operation.</p>
@@ -494,7 +494,7 @@ module Aws::Amp
       :workspace_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeRuleGroupsNamespace</code> operation.</p>
@@ -504,7 +504,7 @@ module Aws::Amp
     class DescribeRuleGroupsNamespaceOutput < Struct.new(
       :rule_groups_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeScraper</code> operation.</p>
@@ -514,7 +514,7 @@ module Aws::Amp
     class DescribeScraperRequest < Struct.new(
       :scraper_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeScraper</code> operation.</p>
@@ -524,7 +524,7 @@ module Aws::Amp
     class DescribeScraperResponse < Struct.new(
       :scraper,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -533,7 +533,7 @@ module Aws::Amp
     class DescribeWorkspaceConfigurationRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_configuration
@@ -542,7 +542,7 @@ module Aws::Amp
     class DescribeWorkspaceConfigurationResponse < Struct.new(
       :workspace_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>DescribeWorkspace</code> operation.</p>
@@ -552,7 +552,7 @@ module Aws::Amp
     class DescribeWorkspaceInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>DescribeWorkspace</code> operation.</p>
@@ -562,7 +562,7 @@ module Aws::Amp
     class DescribeWorkspaceOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Where to send the metrics from a scraper.</p>
@@ -573,7 +573,7 @@ module Aws::Amp
       :amp_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AmpConfiguration < Destination; end
       class Unknown < Destination; end
@@ -594,13 +594,13 @@ module Aws::Amp
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>GetDefaultScraperConfiguration</code> operation.</p>
     class GetDefaultScraperConfigurationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>GetDefaultScraperConfiguration</code> operation.</p>
@@ -610,7 +610,7 @@ module Aws::Amp
     class GetDefaultScraperConfigurationResponse < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error occurred during the processing of the request.</p>
@@ -624,7 +624,7 @@ module Aws::Amp
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines one label set used to enforce active time series limits for the workspace, and defines the limit for that label set.</p> <p>A label set is a unique combination of label-value pairs. Use them to control time series limits and to monitor usage by specific label groups. Example label sets might be <code>team:finance</code> or <code>env:prod</code> </p>
@@ -638,7 +638,7 @@ module Aws::Amp
       :limits,
       :label_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the information about the limits that apply to time series that match one label set.</p>
@@ -648,7 +648,7 @@ module Aws::Amp
     class LimitsPerLabelSetEntry < Struct.new(
       :max_series,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListRuleGroupsNamespaces</code> operation.</p>
@@ -670,7 +670,7 @@ module Aws::Amp
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListRuleGroupsNamespaces</code> operation.</p>
@@ -684,7 +684,7 @@ module Aws::Amp
       :rule_groups_namespaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListScrapers</code> operation.</p>
@@ -702,7 +702,7 @@ module Aws::Amp
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListScrapers</code> operation.</p>
@@ -716,7 +716,7 @@ module Aws::Amp
       :scrapers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -725,7 +725,7 @@ module Aws::Amp
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -734,7 +734,7 @@ module Aws::Amp
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>ListWorkspaces</code> operation.</p>
@@ -752,7 +752,7 @@ module Aws::Amp
       :alias,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>ListWorkspaces</code> operation.</p>
@@ -766,7 +766,7 @@ module Aws::Amp
       :workspaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the current rules and alerting logging configuration for the workspace.</p> <note> <p>These logging configurations are only for rules and alerting logs.</p> </note>
@@ -792,7 +792,7 @@ module Aws::Amp
       :created_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the logging configuration. </p>
@@ -806,7 +806,7 @@ module Aws::Amp
       :status_code,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a destination and its associated filtering criteria for query logging.</p>
@@ -820,7 +820,7 @@ module Aws::Amp
       :cloud_watch_logs,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filtering criteria that determine which queries are logged.</p>
@@ -830,7 +830,7 @@ module Aws::Amp
     class LoggingFilter < Struct.new(
       :qsp_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutAlertManagerDefinition</code> operation.</p>
@@ -848,7 +848,7 @@ module Aws::Amp
       :data,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PutAlertManagerDefinition</code> operation.</p>
@@ -858,7 +858,7 @@ module Aws::Amp
     class PutAlertManagerDefinitionOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of a <code>PutRuleGroupsNamespace</code> operation.</p>
@@ -880,7 +880,7 @@ module Aws::Amp
       :data,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of a <code>PutRuleGroupsNamespace</code> operation.</p>
@@ -902,7 +902,7 @@ module Aws::Amp
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for a query logging configuration.</p>
@@ -928,7 +928,7 @@ module Aws::Amp
       :created_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status information for a query logging configuration.</p>
@@ -942,7 +942,7 @@ module Aws::Amp
       :status_code,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resources that doesn't exist.</p>
@@ -960,7 +960,7 @@ module Aws::Amp
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to enable cross-account access, so that you can use a target account to access Prometheus metrics from source accounts.</p>
@@ -974,7 +974,7 @@ module Aws::Amp
       :source_role_arn,
       :target_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about one rule groups namespace. </p>
@@ -1008,7 +1008,7 @@ module Aws::Amp
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status information about a rule groups namespace. </p>
@@ -1022,7 +1022,7 @@ module Aws::Amp
       :status_code,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The high-level information about a rule groups namespace. To retrieve more information, use <code>DescribeRuleGroupsNamespace</code>.</p>
@@ -1052,7 +1052,7 @@ module Aws::Amp
       :modified_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A scrape configuration for a scraper, base 64 encoded. For more information, see <a href="https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>
@@ -1063,7 +1063,7 @@ module Aws::Amp
       :configuration_blob,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ConfigurationBlob < ScrapeConfiguration; end
       class Unknown < ScrapeConfiguration; end
@@ -1124,7 +1124,7 @@ module Aws::Amp
       :destination,
       :role_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ScraperStatus</code> structure contains status information about the scraper.</p>
@@ -1134,7 +1134,7 @@ module Aws::Amp
     class ScraperStatus < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>ScraperSummary</code> structure contains a summary of the details about one scraper in your account.</p>
@@ -1188,7 +1188,7 @@ module Aws::Amp
       :destination,
       :role_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Completing the request would cause a service quota to be exceeded.</p>
@@ -1214,7 +1214,7 @@ module Aws::Amp
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of collected metrics for a scraper.</p>
@@ -1225,7 +1225,7 @@ module Aws::Amp
       :eks_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EksConfiguration < Source; end
       class Unknown < Source; end
@@ -1241,12 +1241,12 @@ module Aws::Amp
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1268,7 +1268,7 @@ module Aws::Amp
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1281,12 +1281,12 @@ module Aws::Amp
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an <code>UpdateLoggingConfiguration</code> operation.</p>
@@ -1304,7 +1304,7 @@ module Aws::Amp
       :log_group_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the output of an <code>UpdateLoggingConfiguration</code> operation.</p>
@@ -1314,7 +1314,7 @@ module Aws::Amp
     class UpdateLoggingConfigurationOutput < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1331,7 +1331,7 @@ module Aws::Amp
       :destinations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1340,7 +1340,7 @@ module Aws::Amp
     class UpdateQueryLoggingConfigurationResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scraper_id
@@ -1369,7 +1369,7 @@ module Aws::Amp
       :role_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scraper_id
@@ -1390,7 +1390,7 @@ module Aws::Amp
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the input of an <code>UpdateWorkspaceAlias</code> operation.</p>
@@ -1408,7 +1408,7 @@ module Aws::Amp
       :alias,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1429,7 +1429,7 @@ module Aws::Amp
       :limits_per_label_set,
       :retention_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1438,7 +1438,7 @@ module Aws::Amp
     class UpdateWorkspaceConfigurationResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -1456,7 +1456,7 @@ module Aws::Amp
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a field passed into a request that resulted in an exception.</p>
@@ -1470,7 +1470,7 @@ module Aws::Amp
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the description of the workspace configuration.</p>
@@ -1488,7 +1488,7 @@ module Aws::Amp
       :limits_per_label_set,
       :retention_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure displays the current status of the workspace configuration, and might also contain a reason for that status.</p>
@@ -1502,7 +1502,7 @@ module Aws::Amp
       :status_code,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The full details about one Amazon Managed Service for Prometheus workspace in your account.</p>
@@ -1540,7 +1540,7 @@ module Aws::Amp
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the workspace.</p>
@@ -1550,7 +1550,7 @@ module Aws::Amp
     class WorkspaceStatus < Struct.new(
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about one Amazon Managed Service for Prometheus workspace in your account. </p>
@@ -1584,7 +1584,7 @@ module Aws::Amp
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

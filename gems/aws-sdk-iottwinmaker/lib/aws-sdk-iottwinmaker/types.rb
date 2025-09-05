@@ -12,7 +12,7 @@ module Aws::IoTTwinMaker
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error returned by the <code>BatchPutProperty</code> action.</p>
@@ -31,7 +31,7 @@ module Aws::IoTTwinMaker
       :error_message,
       :entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about errors returned by the
@@ -43,7 +43,7 @@ module Aws::IoTTwinMaker
     class BatchPutPropertyErrorEntry < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -57,7 +57,7 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute error_entries
@@ -66,7 +66,7 @@ module Aws::IoTTwinMaker
     class BatchPutPropertyValuesOutput < Struct.new(
       :error_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the pricing bundle.</p>
@@ -80,7 +80,7 @@ module Aws::IoTTwinMaker
       :bundle_names,
       :pricing_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_id
@@ -89,7 +89,7 @@ module Aws::IoTTwinMaker
     class CancelMetadataTransferJobRequest < Struct.new(
       :metadata_transfer_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_id
@@ -114,7 +114,7 @@ module Aws::IoTTwinMaker
       :status,
       :progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the column in the query results.</p>
@@ -128,7 +128,7 @@ module Aws::IoTTwinMaker
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The component property group request.</p>
@@ -146,7 +146,7 @@ module Aws::IoTTwinMaker
       :property_names,
       :update_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The component property group response.</p>
@@ -165,7 +165,7 @@ module Aws::IoTTwinMaker
       :property_names,
       :is_inherited,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that sets information about a component type create or update request.</p>
@@ -188,7 +188,7 @@ module Aws::IoTTwinMaker
       :properties,
       :property_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that returns information about a component type create or update
@@ -242,7 +242,7 @@ module Aws::IoTTwinMaker
       :composite_components,
       :are_all_composite_components_returned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that returns information about a component summary.</p>
@@ -280,7 +280,7 @@ module Aws::IoTTwinMaker
       :sync_source,
       :component_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a component type.</p>
@@ -314,7 +314,7 @@ module Aws::IoTTwinMaker
       :status,
       :component_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The component update request.</p>
@@ -341,7 +341,7 @@ module Aws::IoTTwinMaker
       :property_updates,
       :property_group_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that sets information about the composite component update request.</p>
@@ -360,7 +360,7 @@ module Aws::IoTTwinMaker
       :properties,
       :property_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that sets information about the composite component types of a component type.</p>
@@ -370,7 +370,7 @@ module Aws::IoTTwinMaker
     class CompositeComponentTypeRequest < Struct.new(
       :component_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that returns information about the composite component types of a component type.</p>
@@ -384,7 +384,7 @@ module Aws::IoTTwinMaker
       :component_type_id,
       :is_inherited,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that sets information about the composite component update request.</p>
@@ -406,7 +406,7 @@ module Aws::IoTTwinMaker
       :property_updates,
       :property_group_updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict occurred.</p>
@@ -415,7 +415,7 @@ module Aws::IoTTwinMaker
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connector failed.</p>
@@ -424,7 +424,7 @@ module Aws::IoTTwinMaker
     class ConnectorFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The connector timed out.</p>
@@ -433,7 +433,7 @@ module Aws::IoTTwinMaker
     class ConnectorTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -486,7 +486,7 @@ module Aws::IoTTwinMaker
       :component_type_name,
       :composite_component_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -503,7 +503,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -542,7 +542,7 @@ module Aws::IoTTwinMaker
       :parent_entity_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_id
@@ -563,7 +563,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_id
@@ -584,7 +584,7 @@ module Aws::IoTTwinMaker
       :sources,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_id
@@ -605,7 +605,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -638,7 +638,7 @@ module Aws::IoTTwinMaker
       :tags,
       :scene_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -651,7 +651,7 @@ module Aws::IoTTwinMaker
       :arn,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -676,7 +676,7 @@ module Aws::IoTTwinMaker
       :sync_role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -693,7 +693,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -719,7 +719,7 @@ module Aws::IoTTwinMaker
       :role,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -732,7 +732,7 @@ module Aws::IoTTwinMaker
       :arn,
       :creation_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data connector.</p>
@@ -747,7 +747,7 @@ module Aws::IoTTwinMaker
       :lambda,
       :is_native,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies the data type of a property.</p>
@@ -773,7 +773,7 @@ module Aws::IoTTwinMaker
       :unit_of_measure,
       :relationship,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies a value for a property.</p>
@@ -815,7 +815,7 @@ module Aws::IoTTwinMaker
       :relationship_value,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -828,7 +828,7 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :component_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -837,7 +837,7 @@ module Aws::IoTTwinMaker
     class DeleteComponentTypeOutput < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -854,7 +854,7 @@ module Aws::IoTTwinMaker
       :entity_id,
       :is_recursive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -863,7 +863,7 @@ module Aws::IoTTwinMaker
     class DeleteEntityOutput < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -876,12 +876,12 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :scene_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSceneOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -897,7 +897,7 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :sync_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -906,7 +906,7 @@ module Aws::IoTTwinMaker
     class DeleteSyncJobOutput < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -915,7 +915,7 @@ module Aws::IoTTwinMaker
     class DeleteWorkspaceInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -924,7 +924,7 @@ module Aws::IoTTwinMaker
     class DeleteWorkspaceOutput < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The [link to action] metadata transfer job destination configuration.</p>
@@ -942,7 +942,7 @@ module Aws::IoTTwinMaker
       :s3_configuration,
       :iot_twin_maker_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that uniquely identifies an entity property.</p>
@@ -969,7 +969,7 @@ module Aws::IoTTwinMaker
       :entity_id,
       :property_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about an entity.</p>
@@ -1011,7 +1011,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error details.</p>
@@ -1025,7 +1025,7 @@ module Aws::IoTTwinMaker
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1046,7 +1046,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_descriptions
@@ -1063,7 +1063,7 @@ module Aws::IoTTwinMaker
       :rows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter by asset. [TwinMaker asset]</p>
@@ -1085,7 +1085,7 @@ module Aws::IoTTwinMaker
       :include_offspring,
       :include_asset_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter by asset model.</p>
@@ -1107,7 +1107,7 @@ module Aws::IoTTwinMaker
       :include_offspring,
       :include_assets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter by component type.</p>
@@ -1117,7 +1117,7 @@ module Aws::IoTTwinMaker
     class FilterByComponentType < Struct.new(
       :component_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Vilter by entity.</p>
@@ -1127,7 +1127,7 @@ module Aws::IoTTwinMaker
     class FilterByEntity < Struct.new(
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function request body.</p>
@@ -1145,7 +1145,7 @@ module Aws::IoTTwinMaker
       :scope,
       :implemented_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The function response.</p>
@@ -1167,7 +1167,7 @@ module Aws::IoTTwinMaker
       :implemented_by,
       :is_inherited,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1180,7 +1180,7 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :component_type_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1258,7 +1258,7 @@ module Aws::IoTTwinMaker
       :component_type_name,
       :composite_component_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1271,7 +1271,7 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_id
@@ -1329,7 +1329,7 @@ module Aws::IoTTwinMaker
       :sync_source,
       :are_all_components_returned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_id
@@ -1338,7 +1338,7 @@ module Aws::IoTTwinMaker
     class GetMetadataTransferJobRequest < Struct.new(
       :metadata_transfer_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_id
@@ -1387,12 +1387,12 @@ module Aws::IoTTwinMaker
       :status,
       :progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetPricingPlanInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute current_pricing_plan
@@ -1405,7 +1405,7 @@ module Aws::IoTTwinMaker
       :current_pricing_plan,
       :pending_pricing_plan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1478,7 +1478,7 @@ module Aws::IoTTwinMaker
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute property_values
@@ -1492,7 +1492,7 @@ module Aws::IoTTwinMaker
       :property_values,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_name
@@ -1538,7 +1538,7 @@ module Aws::IoTTwinMaker
       :property_group_name,
       :tabular_conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute property_values
@@ -1556,7 +1556,7 @@ module Aws::IoTTwinMaker
       :next_token,
       :tabular_property_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1569,7 +1569,7 @@ module Aws::IoTTwinMaker
       :workspace_id,
       :scene_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1618,7 +1618,7 @@ module Aws::IoTTwinMaker
       :generated_scene_metadata,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_source
@@ -1634,7 +1634,7 @@ module Aws::IoTTwinMaker
       :sync_source,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1670,7 +1670,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1679,7 +1679,7 @@ module Aws::IoTTwinMaker
     class GetWorkspaceInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1717,7 +1717,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unexpected error has occurred.</p>
@@ -1726,7 +1726,7 @@ module Aws::IoTTwinMaker
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies how to interpolate data in a list.</p>
@@ -1740,7 +1740,7 @@ module Aws::IoTTwinMaker
       :interpolation_type,
       :interval_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata transfer job AWS IoT SiteWise source configuration.</p>
@@ -1750,7 +1750,7 @@ module Aws::IoTTwinMaker
     class IotSiteWiseSourceConfiguration < Struct.new(
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AWS IoT SiteWise soucre configuration filter.[need held with desc here]</p>
@@ -1765,7 +1765,7 @@ module Aws::IoTTwinMaker
       :filter_by_asset,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FilterByAssetModel < IotSiteWiseSourceConfigurationFilter; end
       class FilterByAsset < IotSiteWiseSourceConfigurationFilter; end
@@ -1779,7 +1779,7 @@ module Aws::IoTTwinMaker
     class IotTwinMakerDestinationConfiguration < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata transfer job AWS IoT TwinMaker source configuration.</p>
@@ -1793,7 +1793,7 @@ module Aws::IoTTwinMaker
       :workspace,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata transfer job AWS IoT TwinMaker source configuration filter.</p>
@@ -1808,7 +1808,7 @@ module Aws::IoTTwinMaker
       :filter_by_entity,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class FilterByComponentType < IotTwinMakerSourceConfigurationFilter; end
       class FilterByEntity < IotTwinMakerSourceConfigurationFilter; end
@@ -1822,7 +1822,7 @@ module Aws::IoTTwinMaker
     class LambdaFunction < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters items in a list of component types.</p>
@@ -1845,7 +1845,7 @@ module Aws::IoTTwinMaker
       :is_abstract,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ExtendsFrom < ListComponentTypesFilter; end
       class Namespace < ListComponentTypesFilter; end
@@ -1872,7 +1872,7 @@ module Aws::IoTTwinMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1893,7 +1893,7 @@ module Aws::IoTTwinMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1918,7 +1918,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component_summaries
@@ -1931,7 +1931,7 @@ module Aws::IoTTwinMaker
       :component_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters items in a list of entities.</p>
@@ -1951,7 +1951,7 @@ module Aws::IoTTwinMaker
       :external_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ParentEntityId < ListEntitiesFilter; end
       class ComponentTypeId < ListEntitiesFilter; end
@@ -1981,7 +1981,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity_summaries
@@ -1994,7 +1994,7 @@ module Aws::IoTTwinMaker
       :entity_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ListMetadataTransferJobs filter.</p>
@@ -2009,7 +2009,7 @@ module Aws::IoTTwinMaker
       :state,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class WorkspaceId < ListMetadataTransferJobsFilter; end
       class State < ListMetadataTransferJobsFilter; end
@@ -2038,7 +2038,7 @@ module Aws::IoTTwinMaker
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_transfer_job_summaries
@@ -2051,7 +2051,7 @@ module Aws::IoTTwinMaker
       :metadata_transfer_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -2080,7 +2080,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute property_summaries
@@ -2093,7 +2093,7 @@ module Aws::IoTTwinMaker
       :property_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -2110,7 +2110,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scene_summaries
@@ -2123,7 +2123,7 @@ module Aws::IoTTwinMaker
       :scene_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -2141,7 +2141,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_job_summaries
@@ -2154,7 +2154,7 @@ module Aws::IoTTwinMaker
       :sync_job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -2195,7 +2195,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_resources
@@ -2208,7 +2208,7 @@ module Aws::IoTTwinMaker
       :sync_resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2226,7 +2226,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2239,7 +2239,7 @@ module Aws::IoTTwinMaker
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2253,7 +2253,7 @@ module Aws::IoTTwinMaker
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_summaries
@@ -2266,7 +2266,7 @@ module Aws::IoTTwinMaker
       :workspace_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata transfer job's progress.</p>
@@ -2288,7 +2288,7 @@ module Aws::IoTTwinMaker
       :skipped_count,
       :failed_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata transfer job status.</p>
@@ -2306,7 +2306,7 @@ module Aws::IoTTwinMaker
       :error,
       :queued_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata transfer job summary.</p>
@@ -2336,7 +2336,7 @@ module Aws::IoTTwinMaker
       :status,
       :progress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filter criteria that orders the return output. It can be sorted in ascending or
@@ -2351,7 +2351,7 @@ module Aws::IoTTwinMaker
       :order,
       :property_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parent entity update request.</p>
@@ -2365,7 +2365,7 @@ module Aws::IoTTwinMaker
       :update_type,
       :parent_entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pricing plan.</p>
@@ -2395,7 +2395,7 @@ module Aws::IoTTwinMaker
       :update_date_time,
       :update_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that sets information about a property.</p>
@@ -2435,7 +2435,7 @@ module Aws::IoTTwinMaker
       :configuration,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains response data from a property definition request.</p>
@@ -2488,7 +2488,7 @@ module Aws::IoTTwinMaker
       :configuration,
       :display_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that filters items returned by a property request.</p>
@@ -2506,7 +2506,7 @@ module Aws::IoTTwinMaker
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2520,7 +2520,7 @@ module Aws::IoTTwinMaker
       :group_type,
       :property_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The property group response</p>
@@ -2539,7 +2539,7 @@ module Aws::IoTTwinMaker
       :property_names,
       :is_inherited,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The latest value of the property.</p>
@@ -2553,7 +2553,7 @@ module Aws::IoTTwinMaker
       :property_reference,
       :property_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that sets information about a property.</p>
@@ -2571,7 +2571,7 @@ module Aws::IoTTwinMaker
       :value,
       :update_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a property response.</p>
@@ -2589,7 +2589,7 @@ module Aws::IoTTwinMaker
       :value,
       :are_all_property_values_returned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is an object that contains the information of a property.</p>
@@ -2612,7 +2612,7 @@ module Aws::IoTTwinMaker
       :value,
       :are_all_property_values_returned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a value for a time series property.</p>
@@ -2675,7 +2675,7 @@ module Aws::IoTTwinMaker
       :value,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies information about time series property values. This object is
@@ -2690,7 +2690,7 @@ module Aws::IoTTwinMaker
       :entity_property_reference,
       :property_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The history of values for a time series property.</p>
@@ -2705,7 +2705,7 @@ module Aws::IoTTwinMaker
       :entity_property_reference,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query timeout exception.</p>
@@ -2714,7 +2714,7 @@ module Aws::IoTTwinMaker
     class QueryTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies a relationship with another component type.</p>
@@ -2728,7 +2728,7 @@ module Aws::IoTTwinMaker
       :target_component_type_id,
       :relationship_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value that associates a component and an entity.</p>
@@ -2742,7 +2742,7 @@ module Aws::IoTTwinMaker
       :target_entity_id,
       :target_component_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource wasn't found.</p>
@@ -2751,7 +2751,7 @@ module Aws::IoTTwinMaker
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single row in the query results.</p>
@@ -2761,7 +2761,7 @@ module Aws::IoTTwinMaker
     class Row < Struct.new(
       :row_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 destination configuration.</p>
@@ -2771,7 +2771,7 @@ module Aws::IoTTwinMaker
     class S3DestinationConfiguration < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 destination source configuration.</p>
@@ -2781,7 +2781,7 @@ module Aws::IoTTwinMaker
     class S3SourceConfiguration < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scene error.</p>
@@ -2795,7 +2795,7 @@ module Aws::IoTTwinMaker
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a scene.</p>
@@ -2825,7 +2825,7 @@ module Aws::IoTTwinMaker
       :update_date_time,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service quota was exceeded.</p>
@@ -2834,7 +2834,7 @@ module Aws::IoTTwinMaker
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source configuration.</p>
@@ -2856,7 +2856,7 @@ module Aws::IoTTwinMaker
       :iot_site_wise_configuration,
       :iot_twin_maker_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that represents the status of an entity, component, component type, or
@@ -2871,7 +2871,7 @@ module Aws::IoTTwinMaker
       :state,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SyncJob status.</p>
@@ -2885,7 +2885,7 @@ module Aws::IoTTwinMaker
       :state,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SyncJob summary.</p>
@@ -2915,7 +2915,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sync resource filter.</p>
@@ -2938,7 +2938,7 @@ module Aws::IoTTwinMaker
       :external_id,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class State < SyncResourceFilter; end
       class ResourceType < SyncResourceFilter; end
@@ -2958,7 +2958,7 @@ module Aws::IoTTwinMaker
       :state,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sync resource summary.</p>
@@ -2984,7 +2984,7 @@ module Aws::IoTTwinMaker
       :status,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tabular conditions.</p>
@@ -3003,7 +3003,7 @@ module Aws::IoTTwinMaker
       :order_by,
       :property_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3016,12 +3016,12 @@ module Aws::IoTTwinMaker
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rate exceeds the limit.</p>
@@ -3030,7 +3030,7 @@ module Aws::IoTTwinMaker
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of tags exceeds the limit.</p>
@@ -3039,7 +3039,7 @@ module Aws::IoTTwinMaker
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3053,12 +3053,12 @@ module Aws::IoTTwinMaker
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3107,7 +3107,7 @@ module Aws::IoTTwinMaker
       :component_type_name,
       :composite_component_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3128,7 +3128,7 @@ module Aws::IoTTwinMaker
       :component_type_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3163,7 +3163,7 @@ module Aws::IoTTwinMaker
       :composite_component_updates,
       :parent_entity_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_date_time
@@ -3176,7 +3176,7 @@ module Aws::IoTTwinMaker
       :update_date_time,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pricing_mode
@@ -3189,7 +3189,7 @@ module Aws::IoTTwinMaker
       :pricing_mode,
       :bundle_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute current_pricing_plan
@@ -3202,7 +3202,7 @@ module Aws::IoTTwinMaker
       :current_pricing_plan,
       :pending_pricing_plan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3231,7 +3231,7 @@ module Aws::IoTTwinMaker
       :capabilities,
       :scene_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_date_time
@@ -3240,7 +3240,7 @@ module Aws::IoTTwinMaker
     class UpdateSceneOutput < Struct.new(
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3262,7 +3262,7 @@ module Aws::IoTTwinMaker
       :role,
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_date_time
@@ -3271,7 +3271,7 @@ module Aws::IoTTwinMaker
     class UpdateWorkspaceOutput < Struct.new(
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Failed</p>
@@ -3280,7 +3280,7 @@ module Aws::IoTTwinMaker
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about a workspace.</p>
@@ -3310,7 +3310,7 @@ module Aws::IoTTwinMaker
       :creation_date_time,
       :update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::LookoutVision
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an anomaly type found on an image by an image segmentation model. 
@@ -29,7 +29,7 @@ module Aws::LookoutVision
       :name,
       :pixel_anomaly,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The update or deletion of a resource caused an inconsistent state.</p>
@@ -46,7 +46,7 @@ module Aws::LookoutVision
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -86,7 +86,7 @@ module Aws::LookoutVision
       :dataset_source,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_metadata
@@ -95,7 +95,7 @@ module Aws::LookoutVision
     class CreateDatasetResponse < Struct.new(
       :dataset_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -137,7 +137,7 @@ module Aws::LookoutVision
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_metadata
@@ -146,7 +146,7 @@ module Aws::LookoutVision
     class CreateModelResponse < Struct.new(
       :model_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -170,7 +170,7 @@ module Aws::LookoutVision
       :project_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_metadata
@@ -179,7 +179,7 @@ module Aws::LookoutVision
     class CreateProjectResponse < Struct.new(
       :project_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The description for a dataset. For more information, see <a>DescribeDataset</a>.</p>
@@ -214,7 +214,7 @@ module Aws::LookoutVision
       :status_message,
       :image_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Location information about a manifest file. You can use a manifest file to
@@ -225,7 +225,7 @@ module Aws::LookoutVision
     class DatasetGroundTruthManifest < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics about the images in a dataset.</p>
@@ -247,7 +247,7 @@ module Aws::LookoutVision
       :normal,
       :anomaly,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for an Amazon Lookout for Vision dataset. For more information,
@@ -270,7 +270,7 @@ module Aws::LookoutVision
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of a manifest file that Amazon Lookout for Vision uses to to create a dataset.</p>
@@ -280,20 +280,7 @@ module Aws::LookoutVision
     class DatasetSource < Struct.new(
       :ground_truth_manifest,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED_ROLLBACK_IN_PROGRESS = 'UPDATE_FAILED_ROLLBACK_IN_PROGRESS'
-      UPDATE_FAILED_ROLLBACK_COMPLETE = 'UPDATE_FAILED_ROLLBACK_COMPLETE'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_COMPLETE = 'DELETE_COMPLETE'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -321,12 +308,12 @@ module Aws::LookoutVision
       :dataset_type,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDatasetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -353,7 +340,7 @@ module Aws::LookoutVision
       :model_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -362,7 +349,7 @@ module Aws::LookoutVision
     class DeleteModelResponse < Struct.new(
       :model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -385,7 +372,7 @@ module Aws::LookoutVision
       :project_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_arn
@@ -394,7 +381,7 @@ module Aws::LookoutVision
     class DeleteProjectResponse < Struct.new(
       :project_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -410,7 +397,7 @@ module Aws::LookoutVision
       :project_name,
       :dataset_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_description
@@ -419,7 +406,7 @@ module Aws::LookoutVision
     class DescribeDatasetResponse < Struct.new(
       :dataset_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -435,7 +422,7 @@ module Aws::LookoutVision
       :project_name,
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_packaging_description
@@ -445,7 +432,7 @@ module Aws::LookoutVision
     class DescribeModelPackagingJobResponse < Struct.new(
       :model_packaging_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -458,7 +445,7 @@ module Aws::LookoutVision
       :project_name,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_description
@@ -467,7 +454,7 @@ module Aws::LookoutVision
     class DescribeModelResponse < Struct.new(
       :model_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -476,7 +463,7 @@ module Aws::LookoutVision
     class DescribeProjectRequest < Struct.new(
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_description
@@ -485,7 +472,7 @@ module Aws::LookoutVision
     class DescribeProjectResponse < Struct.new(
       :project_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -507,7 +494,7 @@ module Aws::LookoutVision
       :body,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detect_anomaly_result
@@ -516,7 +503,7 @@ module Aws::LookoutVision
     class DetectAnomaliesResponse < Struct.new(
       :detect_anomaly_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The prediction results from a call to <a>DetectAnomalies</a>.
@@ -559,7 +546,7 @@ module Aws::LookoutVision
       :anomalies,
       :anomaly_mask,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the AWS IoT Greengrass component created in a model packaging job. 
@@ -624,7 +611,7 @@ module Aws::LookoutVision
       :component_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the AWS IoT Greengrass component created by a model packaging job.
@@ -650,7 +637,7 @@ module Aws::LookoutVision
       :component_name,
       :component_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source for an image.</p>
@@ -660,7 +647,7 @@ module Aws::LookoutVision
     class ImageSource < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon S3 Location information for an input manifest file. </p>
@@ -678,7 +665,7 @@ module Aws::LookoutVision
       :key,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Lookout for Vision experienced a service issue. Try your call again.</p>
@@ -691,7 +678,7 @@ module Aws::LookoutVision
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -741,7 +728,7 @@ module Aws::LookoutVision
       :max_results,
       :source_ref_contains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_entries
@@ -755,7 +742,7 @@ module Aws::LookoutVision
       :dataset_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -778,7 +765,7 @@ module Aws::LookoutVision
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_packaging_jobs
@@ -796,7 +783,7 @@ module Aws::LookoutVision
       :model_packaging_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -817,7 +804,7 @@ module Aws::LookoutVision
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute models
@@ -831,7 +818,7 @@ module Aws::LookoutVision
       :models,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -848,7 +835,7 @@ module Aws::LookoutVision
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute projects
@@ -862,7 +849,7 @@ module Aws::LookoutVision
       :projects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -871,7 +858,7 @@ module Aws::LookoutVision
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -880,7 +867,7 @@ module Aws::LookoutVision
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Lookout for Vision model.</p>
@@ -947,15 +934,7 @@ module Aws::LookoutVision
       :min_inference_units,
       :max_inference_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelHostingStatus
-      STARTING_HOSTING = 'STARTING_HOSTING'
-      HOSTED = 'HOSTED'
-      HOSTING_FAILED = 'HOSTING_FAILED'
-      STOPPING_HOSTING = 'STOPPING_HOSTING'
-      SYSTEM_UPDATING = 'SYSTEM_UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Lookout for Vision model.</p>
@@ -989,7 +968,7 @@ module Aws::LookoutVision
       :status_message,
       :performance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1004,7 +983,7 @@ module Aws::LookoutVision
     class ModelPackagingConfiguration < Struct.new(
       :greengrass,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1079,7 +1058,7 @@ module Aws::LookoutVision
       :creation_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1136,14 +1115,7 @@ module Aws::LookoutVision
       :creation_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelPackagingJobStatus
-      CREATED = 'CREATED'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1157,7 +1129,7 @@ module Aws::LookoutVision
     class ModelPackagingOutputDetails < Struct.new(
       :greengrass,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the evaluation performance of a trained model. </p>
@@ -1175,19 +1147,7 @@ module Aws::LookoutVision
       :recall,
       :precision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelStatus
-      TRAINING = 'TRAINING'
-      TRAINED = 'TRAINED'
-      TRAINING_FAILED = 'TRAINING_FAILED'
-      STARTING_HOSTING = 'STARTING_HOSTING'
-      HOSTED = 'HOSTED'
-      HOSTING_FAILED = 'HOSTING_FAILED'
-      STOPPING_HOSTING = 'STOPPING_HOSTING'
-      SYSTEM_UPDATING = 'SYSTEM_UPDATING'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location where Amazon Lookout for Vision saves model training files.</p>
@@ -1197,7 +1157,7 @@ module Aws::LookoutVision
     class OutputConfig < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location where Amazon Lookout for Vision saves training output.</p>
@@ -1211,7 +1171,7 @@ module Aws::LookoutVision
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the pixels in an anomaly mask. For more information, see <a>Anomaly</a>.
@@ -1228,7 +1188,7 @@ module Aws::LookoutVision
       :total_percentage_area,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describe an Amazon Lookout for Vision project. For more information, see <a>DescribeProject</a>.</p>
@@ -1250,7 +1210,7 @@ module Aws::LookoutVision
       :creation_timestamp,
       :datasets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata about an Amazon Lookout for Vision project.</p>
@@ -1268,7 +1228,7 @@ module Aws::LookoutVision
       :project_name,
       :creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -1285,15 +1245,7 @@ module Aws::LookoutVision
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      PROJECT = 'PROJECT'
-      DATASET = 'DATASET'
-      MODEL = 'MODEL'
-      TRIAL = 'TRIAL'
-      MODEL_PACKAGE_JOB = 'MODEL_PACKAGE_JOB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the location of training output or the output of a model packaging job.</p>
@@ -1309,7 +1261,7 @@ module Aws::LookoutVision
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service quota was exceeded the allowed limit. For more information, see
@@ -1335,7 +1287,7 @@ module Aws::LookoutVision
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -1383,7 +1335,7 @@ module Aws::LookoutVision
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -1395,7 +1347,7 @@ module Aws::LookoutVision
     class StartModelPackagingJobResponse < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -1436,7 +1388,7 @@ module Aws::LookoutVision
       :client_token,
       :max_inference_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1445,7 +1397,7 @@ module Aws::LookoutVision
     class StartModelResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -1475,7 +1427,7 @@ module Aws::LookoutVision
       :model_version,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1484,7 +1436,7 @@ module Aws::LookoutVision
     class StopModelResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key and value pair that is attached to the specified Amazon Lookout for Vision model.</p>
@@ -1498,7 +1450,7 @@ module Aws::LookoutVision
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1511,16 +1463,12 @@ module Aws::LookoutVision
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetDevice
-      JETSON_XAVIER = 'jetson_xavier'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The platform on which a model runs on an AWS IoT Greengrass core device.</p>
@@ -1557,20 +1505,7 @@ module Aws::LookoutVision
       :arch,
       :accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetPlatformAccelerator
-      NVIDIA = 'NVIDIA'
-    end
-
-    module TargetPlatformArch
-      ARM64 = 'ARM64'
-      X86_64 = 'X86_64'
-    end
-
-    module TargetPlatformOs
-      LINUX = 'LINUX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Lookout for Vision is temporarily unable to process the request. Try your call again.</p>
@@ -1591,7 +1526,7 @@ module Aws::LookoutVision
       :service_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1604,12 +1539,12 @@ module Aws::LookoutVision
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute project_name
@@ -1644,7 +1579,7 @@ module Aws::LookoutVision
       :changes,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1653,7 +1588,7 @@ module Aws::LookoutVision
     class UpdateDatasetEntriesResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input validation error occured. For example, invalid characters in a project name,
@@ -1663,7 +1598,7 @@ module Aws::LookoutVision
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

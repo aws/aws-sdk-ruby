@@ -20,7 +20,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia chips)
@@ -39,30 +39,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorManufacturer
-      AMAZON_WEB_SERVICES = 'amazon-web-services'
-      AMD = 'amd'
-      NVIDIA = 'nvidia'
-      XILINX = 'xilinx'
-      HABANA = 'habana'
-    end
-
-    module AcceleratorName
-      A100 = 'a100'
-      INFERENTIA = 'inferentia'
-      K520 = 'k520'
-      K80 = 'k80'
-      M60 = 'm60'
-      RADEON_PRO_V520 = 'radeon-pro-v520'
-      T4 = 't4'
-      VU9P = 'vu9p'
-      V100 = 'v100'
-      A10G = 'a10g'
-      H100 = 'h100'
-      T4G = 't4g'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of total accelerator memory, in MiB.</p>
@@ -78,7 +55,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of total accelerator memory, in MiB.</p>
@@ -94,13 +71,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AcceleratorType
-      GPU = 'gpu'
-      FPGA = 'fpga'
-      INFERENCE = 'inference'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -121,7 +92,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_transfer
@@ -130,7 +101,7 @@ module Aws::EC2
     class AcceptAddressTransferResult < Struct.new(
       :address_transfer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -143,7 +114,7 @@ module Aws::EC2
       :dry_run,
       :capacity_reservation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -152,7 +123,7 @@ module Aws::EC2
     class AcceptCapacityReservationBillingOwnershipResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for accepting the quote.</p>
@@ -175,7 +146,7 @@ module Aws::EC2
       :reserved_instance_ids,
       :target_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of the exchange and whether it was <code>successful</code>.</p>
@@ -185,7 +156,7 @@ module Aws::EC2
     class AcceptReservedInstancesExchangeQuoteResult < Struct.new(
       :exchange_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -208,7 +179,7 @@ module Aws::EC2
       :subnet_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -217,7 +188,7 @@ module Aws::EC2
     class AcceptTransitGatewayMulticastDomainAssociationsResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -232,7 +203,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering_attachment
@@ -241,7 +212,7 @@ module Aws::EC2
     class AcceptTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -256,7 +227,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_vpc_attachment
@@ -265,7 +236,7 @@ module Aws::EC2
     class AcceptTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -284,7 +255,7 @@ module Aws::EC2
       :service_id,
       :vpc_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsuccessful
@@ -294,7 +265,7 @@ module Aws::EC2
     class AcceptVpcEndpointConnectionsResult < Struct.new(
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -310,7 +281,7 @@ module Aws::EC2
       :dry_run,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_peering_connection
@@ -319,7 +290,7 @@ module Aws::EC2
     class AcceptVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a finding for a Network Access Scope.</p>
@@ -341,7 +312,7 @@ module Aws::EC2
       :finding_id,
       :finding_components,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path.</p>
@@ -359,7 +330,7 @@ module Aws::EC2
       :destination,
       :through_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path.</p>
@@ -377,7 +348,7 @@ module Aws::EC2
       :destination,
       :through_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an account attribute.</p>
@@ -391,12 +362,7 @@ module Aws::EC2
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountAttributeName
-      supported_platforms = 'supported-platforms'
-      default_vpc = 'default-vpc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a value of an account attribute.</p>
@@ -406,7 +372,7 @@ module Aws::EC2
     class AccountAttributeValue < Struct.new(
       :attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a running instance in a Spot Fleet.</p>
@@ -430,7 +396,7 @@ module Aws::EC2
       :spot_instance_request_id,
       :instance_health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the current security configuration of an active VPN tunnel.</p>
@@ -472,14 +438,7 @@ module Aws::EC2
       :provisioning_status,
       :provisioning_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActivityStatus
-      ERROR = 'error'
-      PENDING_FULFILLMENT = 'pending_fulfillment'
-      PENDING_TERMINATION = 'pending_termination'
-      FULFILLED = 'fulfilled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Add an operating Region to an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.</p>
@@ -491,7 +450,7 @@ module Aws::EC2
     class AddIpamOperatingRegion < Struct.new(
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Add an Organizational Unit (OU) exclusion to your IPAM. If your IPAM is integrated with Amazon Web Services Organizations and you add an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that OU exclusion. There is a limit on the number of exclusions you can create. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html">Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
@@ -531,7 +490,7 @@ module Aws::EC2
     class AddIpamOrganizationalUnitExclusion < Struct.new(
       :organizations_entity_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entry for a prefix list.</p>
@@ -546,7 +505,7 @@ module Aws::EC2
       :cidr,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a principal.</p>
@@ -568,7 +527,7 @@ module Aws::EC2
       :service_permission_id,
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an additional detail for a path analysis. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/additional-detail-codes.html">Reachability Analyzer additional detail codes</a>.</p>
@@ -606,7 +565,7 @@ module Aws::EC2
       :service_name,
       :load_balancers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Elastic IP address, or a carrier IP address.</p>
@@ -681,7 +640,7 @@ module Aws::EC2
       :instance_id,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes associated with an Elastic IP address.</p>
@@ -703,16 +662,7 @@ module Aws::EC2
       :ptr_record,
       :ptr_record_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddressAttributeName
-      domain_name = 'domain-name'
-    end
-
-    module AddressFamily
-      ipv4 = 'ipv4'
-      ipv6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details on the Elastic IP address transfer. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro">Transfer Elastic IP addresses</a> in the <i>Amazon VPC User Guide</i>.</p>
@@ -744,13 +694,7 @@ module Aws::EC2
       :transfer_offer_accepted_timestamp,
       :address_transfer_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddressTransferStatus
-      pending = 'pending'
-      disabled = 'disabled'
-      accepted = 'accepted'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -789,7 +733,7 @@ module Aws::EC2
       :dry_run,
       :network_border_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -798,12 +742,7 @@ module Aws::EC2
     class AdvertiseByoipCidrResult < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Affinity
-      default = 'default'
-      host = 'host'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain
@@ -847,7 +786,7 @@ module Aws::EC2
       :ipam_pool_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -886,7 +825,7 @@ module Aws::EC2
       :carrier_ip,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_family
@@ -984,7 +923,7 @@ module Aws::EC2
       :quantity,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AllocateHosts.</p>
@@ -995,7 +934,7 @@ module Aws::EC2
     class AllocateHostsResult < Struct.new(
       :host_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -1056,7 +995,7 @@ module Aws::EC2
       :allowed_cidrs,
       :disallowed_cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool_allocation
@@ -1065,38 +1004,7 @@ module Aws::EC2
     class AllocateIpamPoolCidrResult < Struct.new(
       :ipam_pool_allocation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllocationState
-      available = 'available'
-      under_assessment = 'under-assessment'
-      permanent_failure = 'permanent-failure'
-      released = 'released'
-      released_permanent_failure = 'released-permanent-failure'
-      pending = 'pending'
-    end
-
-    module AllocationStrategy
-      LOWEST_PRICE = 'lowestPrice'
-      DIVERSIFIED = 'diversified'
-      CAPACITY_OPTIMIZED = 'capacityOptimized'
-      CAPACITY_OPTIMIZED_PRIORITIZED = 'capacityOptimizedPrioritized'
-      PRICE_CAPACITY_OPTIMIZED = 'priceCapacityOptimized'
-    end
-
-    module AllocationType
-      used = 'used'
-      future = 'future'
-    end
-
-    module AllowedImagesSettingsDisabledState
-      disabled = 'disabled'
-    end
-
-    module AllowedImagesSettingsEnabledState
-      enabled = 'enabled'
-      audit_mode = 'audit-mode'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a principal.</p>
@@ -1122,12 +1030,7 @@ module Aws::EC2
       :tags,
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllowsMultipleInstanceTypes
-      on = 'on'
-      off = 'off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an potential intermediate component of a feasible path.</p>
@@ -1141,12 +1044,7 @@ module Aws::EC2
       :component_id,
       :component_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AmdSevSnpSpecification
-      enabled = 'enabled'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network access control (ACL) rule.</p>
@@ -1176,7 +1074,7 @@ module Aws::EC2
       :rule_action,
       :rule_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path component.</p>
@@ -1194,7 +1092,7 @@ module Aws::EC2
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer listener.</p>
@@ -1208,7 +1106,7 @@ module Aws::EC2
       :load_balancer_port,
       :instance_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer target.</p>
@@ -1234,7 +1132,7 @@ module Aws::EC2
       :instance,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a header. Reflects any changes made by a component as traffic passes through.
@@ -1261,7 +1159,7 @@ module Aws::EC2
       :source_addresses,
       :source_port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route table route.</p>
@@ -1342,7 +1240,7 @@ module Aws::EC2
       :core_network_arn,
       :local_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group rule.</p>
@@ -1380,18 +1278,7 @@ module Aws::EC2
       :prefix_list_id,
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisStatus
-      running = 'running'
-      succeeded = 'succeeded'
-      failed = 'failed'
-    end
-
-    module ApplianceModeSupportValue
-      enable = 'enable'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -1413,7 +1300,7 @@ module Aws::EC2
       :security_group_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_group_ids
@@ -1422,23 +1309,7 @@ module Aws::EC2
     class ApplySecurityGroupsToClientVpnTargetNetworkResult < Struct.new(
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArchitectureType
-      i386 = 'i386'
-      x86_64 = 'x86_64'
-      arm64 = 'arm64'
-      x86_64_mac = 'x86_64_mac'
-      arm64_mac = 'arm64_mac'
-    end
-
-    module ArchitectureValues
-      i386 = 'i386'
-      x86_64 = 'x86_64'
-      arm64 = 'arm64'
-      x86_64_mac = 'x86_64_mac'
-      arm64_mac = 'arm64_mac'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Autonomous System Number (ASN) and BYOIP CIDR association.</p>
@@ -1460,16 +1331,7 @@ module Aws::EC2
       :status_message,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AsnAssociationState
-      disassociated = 'disassociated'
-      failed_disassociation = 'failed-disassociation'
-      failed_association = 'failed-association'
-      pending_disassociation = 'pending-disassociation'
-      pending_association = 'pending-association'
-      associated = 'associated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides authorization for Amazon to bring an Autonomous System Number (ASN) to a specific Amazon Web Services account using bring your own ASN (BYOASN). 
@@ -1484,16 +1346,7 @@ module Aws::EC2
       :message,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AsnState
-      deprovisioned = 'deprovisioned'
-      failed_deprovision = 'failed-deprovision'
-      failed_provision = 'failed-provision'
-      pending_deprovision = 'pending-deprovision'
-      pending_provision = 'pending-provision'
-      provisioned = 'provisioned'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_prefix_count
@@ -1525,7 +1378,7 @@ module Aws::EC2
       :ipv6_addresses,
       :ipv6_address_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assigned_ipv6_addresses
@@ -1543,7 +1396,7 @@ module Aws::EC2
       :assigned_ipv6_prefixes,
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for AssignPrivateIpAddresses.</p>
@@ -1579,7 +1432,7 @@ module Aws::EC2
       :secondary_private_ip_address_count,
       :allow_reassignment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interface_id
@@ -1596,7 +1449,7 @@ module Aws::EC2
       :assigned_private_ip_addresses,
       :assigned_ipv4_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -1619,7 +1472,7 @@ module Aws::EC2
       :private_ip_address_count,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -1632,7 +1485,7 @@ module Aws::EC2
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the private IP addresses assigned to a network interface.</p>
@@ -1642,7 +1495,7 @@ module Aws::EC2
     class AssignedPrivateIpAddress < Struct.new(
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -1679,7 +1532,7 @@ module Aws::EC2
       :private_ip_address,
       :allow_reassociation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -1688,7 +1541,7 @@ module Aws::EC2
     class AssociateAddressResult < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -1705,7 +1558,7 @@ module Aws::EC2
       :capacity_reservation_id,
       :unused_reservation_billing_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -1714,7 +1567,7 @@ module Aws::EC2
     class AssociateCapacityReservationBillingOwnerResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -1736,7 +1589,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -1749,7 +1602,7 @@ module Aws::EC2
       :association_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dhcp_options_id
@@ -1769,7 +1622,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -1787,7 +1640,7 @@ module Aws::EC2
       :role_arn,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_s3_bucket_name
@@ -1805,7 +1658,7 @@ module Aws::EC2
       :certificate_s3_object_key,
       :encryption_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_instance_profile
@@ -1818,7 +1671,7 @@ module Aws::EC2
       :iam_instance_profile,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_instance_profile_association
@@ -1827,7 +1680,7 @@ module Aws::EC2
     class AssociateIamInstanceProfileResult < Struct.new(
       :iam_instance_profile_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -1846,7 +1699,7 @@ module Aws::EC2
       :instance_event_window_id,
       :association_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_event_window
@@ -1855,7 +1708,7 @@ module Aws::EC2
     class AssociateInstanceEventWindowResult < Struct.new(
       :instance_event_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -1874,7 +1727,7 @@ module Aws::EC2
       :asn,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asn_association
@@ -1883,7 +1736,7 @@ module Aws::EC2
     class AssociateIpamByoasnResult < Struct.new(
       :asn_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -1910,7 +1763,7 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discovery_association
@@ -1919,7 +1772,7 @@ module Aws::EC2
     class AssociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -1942,7 +1795,7 @@ module Aws::EC2
       :private_ip_addresses,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -1955,7 +1808,7 @@ module Aws::EC2
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -1974,7 +1827,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_association
@@ -1983,7 +1836,7 @@ module Aws::EC2
     class AssociateRouteServerResult < Struct.new(
       :route_server_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute gateway_id
@@ -2010,7 +1863,7 @@ module Aws::EC2
       :subnet_id,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -2024,7 +1877,7 @@ module Aws::EC2
       :association_id,
       :association_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -2043,7 +1896,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -2052,7 +1905,7 @@ module Aws::EC2
     class AssociateSecurityGroupVpcResult < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_ipam_pool_id
@@ -2073,7 +1926,7 @@ module Aws::EC2
       :subnet_id,
       :ipv6_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_cidr_block_association
@@ -2086,7 +1939,7 @@ module Aws::EC2
       :ipv6_cidr_block_association,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -2109,7 +1962,7 @@ module Aws::EC2
       :subnet_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -2118,7 +1971,7 @@ module Aws::EC2
     class AssociateTransitGatewayMulticastDomainResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_id
@@ -2137,7 +1990,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -2146,7 +1999,7 @@ module Aws::EC2
     class AssociateTransitGatewayPolicyTableResult < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -2165,7 +2018,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -2174,7 +2027,7 @@ module Aws::EC2
     class AssociateTransitGatewayRouteTableResult < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute branch_interface_id
@@ -2207,7 +2060,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interface_association
@@ -2222,7 +2075,7 @@ module Aws::EC2
       :interface_association,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr_block
@@ -2273,7 +2126,7 @@ module Aws::EC2
       :vpc_id,
       :amazon_provided_ipv6_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_cidr_block_association
@@ -2290,11 +2143,7 @@ module Aws::EC2
       :cidr_block_association,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociatedNetworkType
-      vpc = 'vpc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the associated IAM roles.</p>
@@ -2318,7 +2167,7 @@ module Aws::EC2
       :certificate_s3_object_key,
       :encryption_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target network that is associated with a Client VPN endpoint. A target network is a subnet in a VPC.</p>
@@ -2332,7 +2181,7 @@ module Aws::EC2
       :network_id,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a target network association.</p>
@@ -2346,15 +2195,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationStatusCode
-      associating = 'associating'
-      associated = 'associated'
-      association_failed = 'association-failed'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes integration options for Amazon Athena.</p>
@@ -2376,7 +2217,7 @@ module Aws::EC2
       :partition_start_date,
       :partition_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -2399,7 +2240,7 @@ module Aws::EC2
       :vpc_id,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -2408,7 +2249,7 @@ module Aws::EC2
     class AttachClassicLinkVpcResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -2427,7 +2268,7 @@ module Aws::EC2
       :internet_gateway_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for AttachNetworkInterface.</p>
@@ -2467,7 +2308,7 @@ module Aws::EC2
       :instance_id,
       :device_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AttachNetworkInterface.</p>
@@ -2481,7 +2322,7 @@ module Aws::EC2
       :attachment_id,
       :network_card_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -2505,7 +2346,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider
@@ -2518,7 +2359,7 @@ module Aws::EC2
       :verified_access_trust_provider,
       :verified_access_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes volume attachment details.</p>
@@ -2564,7 +2405,7 @@ module Aws::EC2
       :state,
       :attach_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -2588,7 +2429,7 @@ module Aws::EC2
       :volume_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for AttachVpnGateway.</p>
@@ -2609,7 +2450,7 @@ module Aws::EC2
       :vpn_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of AttachVpnGateway.</p>
@@ -2619,7 +2460,7 @@ module Aws::EC2
     class AttachVpnGatewayResult < Struct.new(
       :vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
@@ -2640,7 +2481,7 @@ module Aws::EC2
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
@@ -2655,14 +2496,7 @@ module Aws::EC2
     class AttachmentEnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachmentStatus
-      attaching = 'attaching'
-      attached = 'attached'
-      detaching = 'detaching'
-      detached = 'detached'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a value for a resource attribute that is a Boolean value.</p>
@@ -2672,7 +2506,7 @@ module Aws::EC2
     class AttributeBooleanValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary report for the attribute across all Regions.</p>
@@ -2700,7 +2534,7 @@ module Aws::EC2
       :number_of_unmatched_accounts,
       :regional_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a value for a resource attribute that is a String.</p>
@@ -2710,7 +2544,7 @@ module Aws::EC2
     class AttributeValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an authorization rule.</p>
@@ -2740,7 +2574,7 @@ module Aws::EC2
       :destination_cidr,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -2776,7 +2610,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2785,7 +2619,7 @@ module Aws::EC2
     class AuthorizeClientVpnIngressResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -2832,7 +2666,7 @@ module Aws::EC2
       :cidr_ip,
       :ip_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -2845,7 +2679,7 @@ module Aws::EC2
       :return,
       :security_group_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr_ip
@@ -2923,7 +2757,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -2936,22 +2770,7 @@ module Aws::EC2
       :return,
       :security_group_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoAcceptSharedAssociationsValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module AutoAcceptSharedAttachmentsValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module AutoPlacement
-      on = 'on'
-      off = 'off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes Availability Zones, Local Zones, and Wavelength Zones.</p>
@@ -3029,7 +2848,7 @@ module Aws::EC2
       :group_long_name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a message about an Availability Zone, Local Zone, or Wavelength Zone.</p>
@@ -3039,21 +2858,7 @@ module Aws::EC2
     class AvailabilityZoneMessage < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AvailabilityZoneOptInStatus
-      opt_in_not_required = 'opt-in-not-required'
-      opted_in = 'opted-in'
-      not_opted_in = 'not-opted-in'
-    end
-
-    module AvailabilityZoneState
-      available = 'available'
-      information = 'information'
-      impaired = 'impaired'
-      unavailable = 'unavailable'
-      constrained = 'constrained'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The capacity information for instances that can be launched onto the Dedicated Host.
@@ -3071,19 +2876,7 @@ module Aws::EC2
       :available_instance_capacity,
       :available_v_cpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BandwidthWeightingType
-      DEFAULT = 'default'
-      VPC_1 = 'vpc-1'
-      EBS_1 = 'ebs-1'
-    end
-
-    module BareMetal
-      INCLUDED = 'included'
-      REQUIRED = 'required'
-      EXCLUDED = 'excluded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see
@@ -3101,7 +2894,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see
@@ -3119,7 +2912,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The baseline performance to consider, using an instance family as a baseline reference.
@@ -3135,7 +2928,7 @@ module Aws::EC2
     class BaselinePerformanceFactors < Struct.new(
       :cpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The baseline performance to consider, using an instance family as a baseline reference.
@@ -3151,22 +2944,7 @@ module Aws::EC2
     class BaselinePerformanceFactorsRequest < Struct.new(
       :cpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchState
-      SUBMITTED = 'submitted'
-      ACTIVE = 'active'
-      CANCELLED = 'cancelled'
-      FAILED = 'failed'
-      CANCELLED_RUNNING = 'cancelled_running'
-      CANCELLED_TERMINATING_INSTANCES = 'cancelled_terminating'
-      MODIFYING = 'modifying'
-    end
-
-    module BgpStatus
-      up = 'up'
-      down = 'down'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute value
@@ -3174,7 +2952,7 @@ module Aws::EC2
     class BlobAttributeValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping, which defines the EBS volumes and instance store
@@ -3209,7 +2987,7 @@ module Aws::EC2
       :device_name,
       :virtual_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping, which defines the EBS volumes and instance store
@@ -3233,13 +3011,7 @@ module Aws::EC2
       :ebs,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlockPublicAccessMode
-      off = 'off'
-      block_bidirectional = 'block-bidirectional'
-      block_ingress = 'block-ingress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of VPC Block Public Access (BPA).</p>
@@ -3263,18 +3035,7 @@ module Aws::EC2
     class BlockPublicAccessStates < Struct.new(
       :internet_gateway_block_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BootModeType
-      legacy_bios = 'legacy-bios'
-      uefi = 'uefi'
-    end
-
-    module BootModeValues
-      legacy_bios = 'legacy-bios'
-      uefi = 'uefi'
-      uefi_preferred = 'uefi-preferred'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for BundleInstance.</p>
@@ -3297,7 +3058,7 @@ module Aws::EC2
       :storage,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of BundleInstance.</p>
@@ -3307,7 +3068,7 @@ module Aws::EC2
     class BundleInstanceResult < Struct.new(
       :bundle_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a bundle task.</p>
@@ -3345,7 +3106,7 @@ module Aws::EC2
       :progress,
       :bundle_task_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error for <a>BundleInstance</a>.</p>
@@ -3359,23 +3120,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BundleTaskState
-      pending = 'pending'
-      waiting_for_shutdown = 'waiting-for-shutdown'
-      bundling = 'bundling'
-      storing = 'storing'
-      cancelling = 'cancelling'
-      complete = 'complete'
-      failed = 'failed'
-    end
-
-    module BurstablePerformance
-      INCLUDED = 'included'
-      REQUIRED = 'required'
-      EXCLUDED = 'excluded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Autonomous System Number (ASN) and BYOIP CIDR association.</p>
@@ -3397,7 +3142,7 @@ module Aws::EC2
       :status_message,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an address range that is provisioned for use with your Amazon Web Services resources 
@@ -3477,30 +3222,7 @@ module Aws::EC2
       :state,
       :network_border_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ByoipCidrState
-      advertised = 'advertised'
-      deprovisioned = 'deprovisioned'
-      failed_deprovision = 'failed-deprovision'
-      failed_provision = 'failed-provision'
-      pending_deprovision = 'pending-deprovision'
-      pending_provision = 'pending-provision'
-      provisioned = 'provisioned'
-      provisioned_not_publicly_advertisable = 'provisioned-not-publicly-advertisable'
-    end
-
-    module CallerRole
-      odcr_owner = 'odcr-owner'
-      unused_reservation_billing_owner = 'unused-reservation-billing-owner'
-    end
-
-    module CancelBatchErrorCode
-      FLEET_REQUEST_ID_DOES_NOT_EXIST = 'fleetRequestIdDoesNotExist'
-      FLEET_REQUEST_ID_MALFORMED = 'fleetRequestIdMalformed'
-      FLEET_REQUEST_NOT_IN_CANCELLABLE_STATE = 'fleetRequestNotInCancellableState'
-      UNEXPECTED_ERROR = 'unexpectedError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CancelBundleTask.</p>
@@ -3516,7 +3238,7 @@ module Aws::EC2
       :bundle_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CancelBundleTask.</p>
@@ -3526,7 +3248,7 @@ module Aws::EC2
     class CancelBundleTaskResult < Struct.new(
       :bundle_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Capacity Reservation Fleet cancellation error.</p>
@@ -3540,7 +3262,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -3553,7 +3275,7 @@ module Aws::EC2
       :dry_run,
       :capacity_reservation_fleet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_fleet_cancellations
@@ -3567,7 +3289,7 @@ module Aws::EC2
       :successful_fleet_cancellations,
       :failed_fleet_cancellations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_id
@@ -3580,7 +3302,7 @@ module Aws::EC2
       :capacity_reservation_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -3589,7 +3311,7 @@ module Aws::EC2
     class CancelCapacityReservationResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -3608,7 +3330,7 @@ module Aws::EC2
       :conversion_task_id,
       :reason_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -3623,7 +3345,7 @@ module Aws::EC2
       :dry_run,
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -3632,7 +3354,7 @@ module Aws::EC2
     class CancelDeclarativePoliciesReportResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_task_id
@@ -3642,7 +3364,7 @@ module Aws::EC2
     class CancelExportTaskRequest < Struct.new(
       :export_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -3657,7 +3379,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -3666,7 +3388,7 @@ module Aws::EC2
     class CancelImageLaunchPermissionResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cancel_reason
@@ -3685,7 +3407,7 @@ module Aws::EC2
       :dry_run,
       :import_task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_task_id
@@ -3702,7 +3424,7 @@ module Aws::EC2
       :previous_state,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CancelReservedInstancesListing.</p>
@@ -3712,7 +3434,7 @@ module Aws::EC2
     class CancelReservedInstancesListingRequest < Struct.new(
       :reserved_instances_listing_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CancelReservedInstancesListing.</p>
@@ -3722,7 +3444,7 @@ module Aws::EC2
     class CancelReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Spot Fleet error.</p>
@@ -3736,7 +3458,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Spot Fleet request that was not successfully canceled.</p>
@@ -3750,7 +3472,7 @@ module Aws::EC2
       :error,
       :spot_fleet_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CancelSpotFleetRequests.</p>
@@ -3774,7 +3496,7 @@ module Aws::EC2
       :spot_fleet_request_ids,
       :terminate_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CancelSpotFleetRequests.</p>
@@ -3788,7 +3510,7 @@ module Aws::EC2
       :successful_fleet_requests,
       :unsuccessful_fleet_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Spot Fleet request that was successfully canceled.</p>
@@ -3806,15 +3528,7 @@ module Aws::EC2
       :previous_spot_fleet_request_state,
       :spot_fleet_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CancelSpotInstanceRequestState
-      active = 'active'
-      open = 'open'
-      closed = 'closed'
-      cancelled = 'cancelled'
-      completed = 'completed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CancelSpotInstanceRequests.</p>
@@ -3831,7 +3545,7 @@ module Aws::EC2
       :dry_run,
       :spot_instance_request_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CancelSpotInstanceRequests.</p>
@@ -3841,7 +3555,7 @@ module Aws::EC2
     class CancelSpotInstanceRequestsResult < Struct.new(
       :cancelled_spot_instance_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to cancel a Spot Instance.</p>
@@ -3855,7 +3569,7 @@ module Aws::EC2
       :spot_instance_request_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about instance capacity usage for a Capacity Reservation.</p>
@@ -3872,7 +3586,7 @@ module Aws::EC2
       :allocation_type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserve powerful GPU instances on a future date to support your short duration machine learning (ML) workloads. Instances that run inside a Capacity Block are automatically placed close together inside <a href="http://aws.amazon.com/ec2/ultraclusters/">Amazon EC2 UltraClusters</a>, for low-latency, petabit-scale, non-blocking networking.</p>
@@ -3920,7 +3634,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Capacity Block extension. With an extension, you can extend the duration
@@ -4000,7 +3714,7 @@ module Aws::EC2
       :upfront_fee,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommended Capacity Block extension that fits your search requirements.</p>
@@ -4071,19 +3785,7 @@ module Aws::EC2
       :currency_code,
       :tenancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityBlockExtensionStatus
-      PAYMENT_PENDING = 'payment-pending'
-      PAYMENT_FAILED = 'payment-failed'
-      PAYMENT_SUCCEEDED = 'payment-succeeded'
-    end
-
-    module CapacityBlockInterconnectStatus
-      ok = 'ok'
-      impaired = 'impaired'
-      insufficient_data = 'insufficient-data'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recommended Capacity Block that fits your search requirements.</p>
@@ -4145,18 +3847,7 @@ module Aws::EC2
       :ultraserver_count,
       :capacity_block_duration_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityBlockResourceState
-      active = 'active'
-      expired = 'expired'
-      unavailable = 'unavailable'
-      cancelled = 'cancelled'
-      failed = 'failed'
-      scheduled = 'scheduled'
-      payment_pending = 'payment-pending'
-      payment_failed = 'payment-failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the availability of capacity for a Capacity Block.</p>
@@ -4201,7 +3892,7 @@ module Aws::EC2
       :total_unavailable_capacity,
       :capacity_reservation_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Capacity Reservation.</p>
@@ -4444,7 +4135,7 @@ module Aws::EC2
       :delivery_preference,
       :capacity_block_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a request to assign billing of the unused capacity of a Capacity
@@ -4480,16 +4171,7 @@ module Aws::EC2
       :status_message,
       :capacity_reservation_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationBillingRequestStatus
-      pending = 'pending'
-      accepted = 'accepted'
-      rejected = 'rejected'
-      cancelled = 'cancelled'
-      revoked = 'revoked'
-      expired = 'expired'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about your commitment for a future-dated Capacity Reservation.</p>
@@ -4506,12 +4188,7 @@ module Aws::EC2
       :committed_instance_count,
       :commitment_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationDeliveryPreference
-      FIXED = 'fixed'
-      INCREMENTAL = 'incremental'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Capacity Reservation Fleet.</p>
@@ -4642,7 +4319,7 @@ module Aws::EC2
       :instance_type_specifications,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Capacity Reservation Fleet that was successfully cancelled.</p>
@@ -4660,19 +4337,7 @@ module Aws::EC2
       :previous_fleet_state,
       :capacity_reservation_fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationFleetState
-      SUBMITTED = 'submitted'
-      MODIFYING = 'modifying'
-      ACTIVE = 'active'
-      PARTIALLY_FULFILLED = 'partially_fulfilled'
-      EXPIRING = 'expiring'
-      EXPIRED = 'expired'
-      CANCELLING = 'cancelling'
-      CANCELLED = 'cancelled'
-      FAILED = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource group to which a Capacity Reservation has been added.</p>
@@ -4686,7 +4351,7 @@ module Aws::EC2
       :group_arn,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Capacity Reservation.</p>
@@ -4708,28 +4373,7 @@ module Aws::EC2
       :tenancy,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationInstancePlatform
-      LINUX_UNIX = 'Linux/UNIX'
-      RED_HAT_ENTERPRISE_LINUX = 'Red Hat Enterprise Linux'
-      SUSE_LINUX = 'SUSE Linux'
-      WINDOWS = 'Windows'
-      WINDOWS_WITH_SQL_SERVER = 'Windows with SQL Server'
-      WINDOWS_WITH_SQL_SERVER_ENTERPRISE = 'Windows with SQL Server Enterprise'
-      WINDOWS_WITH_SQL_SERVER_STANDARD = 'Windows with SQL Server Standard'
-      WINDOWS_WITH_SQL_SERVER_WEB = 'Windows with SQL Server Web'
-      LINUX_WITH_SQL_SERVER_STANDARD = 'Linux with SQL Server Standard'
-      LINUX_WITH_SQL_SERVER_WEB = 'Linux with SQL Server Web'
-      LINUX_WITH_SQL_SERVER_ENTERPRISE = 'Linux with SQL Server Enterprise'
-      RHEL_WITH_SQL_SERVER_STANDARD = 'RHEL with SQL Server Standard'
-      RHEL_WITH_SQL_SERVER_ENTERPRISE = 'RHEL with SQL Server Enterprise'
-      RHEL_WITH_SQL_SERVER_WEB = 'RHEL with SQL Server Web'
-      RHEL_WITH_HA = 'RHEL with HA'
-      RHEL_WITH_HA_AND_SQL_SERVER_STANDARD = 'RHEL with HA and SQL Server Standard'
-      RHEL_WITH_HA_AND_SQL_SERVER_ENTERPRISE = 'RHEL with HA and SQL Server Enterprise'
-      UBUNTU_PRO_LINUX = 'Ubuntu Pro'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand
@@ -4757,7 +4401,7 @@ module Aws::EC2
     class CapacityReservationOptions < Struct.new(
       :usage_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand
@@ -4784,13 +4428,7 @@ module Aws::EC2
     class CapacityReservationOptionsRequest < Struct.new(
       :usage_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationPreference
-      capacity_reservations_only = 'capacity-reservations-only'
-      open = 'open'
-      none = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance's Capacity Reservation targeting option. </p>
@@ -4836,7 +4474,7 @@ module Aws::EC2
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instance's Capacity Reservation targeting preferences. The action returns the
@@ -4867,22 +4505,7 @@ module Aws::EC2
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationState
-      active = 'active'
-      expired = 'expired'
-      cancelled = 'cancelled'
-      pending = 'pending'
-      failed = 'failed'
-      scheduled = 'scheduled'
-      payment_pending = 'payment-pending'
-      payment_failed = 'payment-failed'
-      assessing = 'assessing'
-      delayed = 'delayed'
-      unsupported = 'unsupported'
-      unavailable = 'unavailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the availability of capacity for a Capacity Reservation.</p>
@@ -4904,7 +4527,7 @@ module Aws::EC2
       :total_available_capacity,
       :total_unavailable_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target Capacity Reservation or Capacity Reservation group.</p>
@@ -4919,7 +4542,7 @@ module Aws::EC2
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target Capacity Reservation or Capacity Reservation group.</p>
@@ -4933,17 +4556,7 @@ module Aws::EC2
       :capacity_reservation_id,
       :capacity_reservation_resource_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapacityReservationTenancy
-      default = 'default'
-      dedicated = 'dedicated'
-    end
-
-    module CapacityReservationType
-      DEFAULT = 'default'
-      CAPACITY_BLOCK = 'capacity-block'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a carrier gateway.</p>
@@ -4969,14 +4582,7 @@ module Aws::EC2
       :owner_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CarrierGatewayState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the client certificate used for authentication.</p>
@@ -4986,7 +4592,7 @@ module Aws::EC2
     class CertificateAuthentication < Struct.new(
       :client_root_certificate_chain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the client certificate to be used for authentication.</p>
@@ -4997,7 +4603,7 @@ module Aws::EC2
     class CertificateAuthenticationRequest < Struct.new(
       :client_root_certificate_chain_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides authorization for Amazon to bring a specific IP address range to a specific
@@ -5012,7 +4618,7 @@ module Aws::EC2
       :message,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv4 CIDR block.</p>
@@ -5022,7 +4628,7 @@ module Aws::EC2
     class CidrBlock < Struct.new(
       :cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5039,7 +4645,7 @@ module Aws::EC2
       :classic_link_dns_supported,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -5064,7 +4670,7 @@ module Aws::EC2
       :tags,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Classic Load Balancer.</p>
@@ -5074,7 +4680,7 @@ module Aws::EC2
     class ClassicLoadBalancer < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Classic Load Balancers to attach to a Spot Fleet. Spot Fleet registers
@@ -5085,7 +4691,7 @@ module Aws::EC2
     class ClassicLoadBalancersConfig < Struct.new(
       :classic_load_balancers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a client certificate revocation list.</p>
@@ -5099,12 +4705,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientCertificateRevocationListStatusCode
-      pending = 'pending'
-      active = 'active'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for managing connection authorization for new client connections.</p>
@@ -5118,7 +4719,7 @@ module Aws::EC2
       :enabled,
       :lambda_function_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for managing connection authorization for new client connections.</p>
@@ -5136,7 +4737,7 @@ module Aws::EC2
       :lambda_function_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the client-specific data.</p>
@@ -5158,7 +4759,7 @@ module Aws::EC2
       :upload_size,
       :upload_start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for enabling a customizable text banner that will be displayed on
@@ -5180,7 +4781,7 @@ module Aws::EC2
       :enabled,
       :banner_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Current state of options for customizable text banner that will be displayed on
@@ -5199,7 +4800,7 @@ module Aws::EC2
       :enabled,
       :banner_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Client Route Enforcement is a feature of Client VPN that helps enforce administrator defined
@@ -5221,7 +4822,7 @@ module Aws::EC2
     class ClientRouteEnforcementOptions < Struct.new(
       :enforced,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of Client Route Enforcement. </p>
@@ -5236,7 +4837,7 @@ module Aws::EC2
     class ClientRouteEnforcementResponseOptions < Struct.new(
       :enforced,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html">Authentication</a> 
@@ -5259,7 +4860,7 @@ module Aws::EC2
       :mutual_authentication,
       :federated_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication">Authentication</a> 
@@ -5282,13 +4883,7 @@ module Aws::EC2
       :mutual_authentication,
       :federated_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVpnAuthenticationType
-      certificate_authentication = 'certificate-authentication'
-      directory_service_authentication = 'directory-service-authentication'
-      federated_authentication = 'federated-authentication'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of an authorization rule.</p>
@@ -5302,14 +4897,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVpnAuthorizationRuleStatusCode
-      authorizing = 'authorizing'
-      active = 'active'
-      failed = 'failed'
-      revoking = 'revoking'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a client connection.</p>
@@ -5373,7 +4961,7 @@ module Aws::EC2
       :connection_end_time,
       :posture_compliance_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a client connection.</p>
@@ -5387,14 +4975,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVpnConnectionStatusCode
-      active = 'active'
-      failed_to_terminate = 'failed-to-terminate'
-      terminating = 'terminating'
-      terminated = 'terminated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Client VPN endpoint.</p>
@@ -5512,7 +5093,7 @@ module Aws::EC2
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of the Client VPN endpoint attribute.</p>
@@ -5526,12 +5107,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVpnEndpointAttributeStatusCode
-      applying = 'applying'
-      applied = 'applied'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a Client VPN endpoint.</p>
@@ -5567,14 +5143,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVpnEndpointStatusCode
-      pending_associate = 'pending-associate'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Client VPN endpoint route.</p>
@@ -5611,7 +5180,7 @@ module Aws::EC2
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a Client VPN endpoint route.</p>
@@ -5625,14 +5194,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVpnRouteStatusCode
-      creating = 'creating'
-      active = 'active'
-      failed = 'failed'
-      deleting = 'deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for sending VPN tunnel logs to CloudWatch.</p>
@@ -5654,7 +5216,7 @@ module Aws::EC2
       :log_group_arn,
       :log_output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for sending VPN tunnel logs to CloudWatch.</p>
@@ -5676,7 +5238,7 @@ module Aws::EC2
       :log_group_arn,
       :log_output_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes address usage for a customer-owned address pool.</p>
@@ -5698,7 +5260,7 @@ module Aws::EC2
       :aws_service,
       :co_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5724,7 +5286,7 @@ module Aws::EC2
       :coip_pool_id,
       :local_gateway_route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a customer-owned address pool.</p>
@@ -5750,7 +5312,7 @@ module Aws::EC2
       :tags,
       :pool_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -5769,7 +5331,7 @@ module Aws::EC2
       :product_code,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -5784,7 +5346,7 @@ module Aws::EC2
       :return,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the client connection logging options for the Client VPN endpoint.</p>
@@ -5802,7 +5364,7 @@ module Aws::EC2
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the client connection logging options for a Client VPN endpoint.</p>
@@ -5820,7 +5382,7 @@ module Aws::EC2
       :cloudwatch_log_group,
       :cloudwatch_log_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a connection notification for a VPC endpoint or VPC endpoint
@@ -5860,16 +5422,7 @@ module Aws::EC2
       :connection_notification_state,
       :service_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionNotificationState
-      Enabled = 'Enabled'
-      Disabled = 'Disabled'
-    end
-
-    module ConnectionNotificationType
-      Topic = 'Topic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group connection tracking configuration that enables you to set the idle
@@ -5897,7 +5450,7 @@ module Aws::EC2
       :udp_stream_timeout,
       :udp_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group connection tracking specification that enables you to set the idle
@@ -5925,7 +5478,7 @@ module Aws::EC2
       :udp_timeout,
       :udp_stream_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group connection tracking specification request that enables you to set the
@@ -5953,7 +5506,7 @@ module Aws::EC2
       :udp_stream_timeout,
       :udp_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group connection tracking specification response that enables you to set
@@ -5981,16 +5534,7 @@ module Aws::EC2
       :udp_stream_timeout,
       :udp_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectivityType
-      PRIVATE = 'private'
-      PUBLIC = 'public'
-    end
-
-    module ContainerFormat
-      ova = 'ova'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a conversion task.</p>
@@ -6025,14 +5569,7 @@ module Aws::EC2
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConversionTaskState
-      active = 'active'
-      cancelling = 'cancelling'
-      cancelled = 'cancelled'
-      completed = 'completed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -6064,7 +5601,7 @@ module Aws::EC2
       :source_region,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fpga_image_id
@@ -6073,7 +5610,7 @@ module Aws::EC2
     class CopyFpgaImageResult < Struct.new(
       :fpga_image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CopyImage.</p>
@@ -6194,7 +5731,7 @@ module Aws::EC2
       :snapshot_copy_completion_duration_minutes,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CopyImage.</p>
@@ -6204,7 +5741,7 @@ module Aws::EC2
     class CopyImageResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -6308,7 +5845,7 @@ module Aws::EC2
       :completion_duration_minutes,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -6321,18 +5858,7 @@ module Aws::EC2
       :tags,
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CopyTagsFromSource
-      volume = 'volume'
-    end
-
-    module CpuManufacturer
-      INTEL = 'intel'
-      AMD = 'amd'
-      AMAZON_WEB_SERVICES = 'amazon-web-services'
-      APPLE = 'apple'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CPU options for the instance.</p>
@@ -6351,7 +5877,7 @@ module Aws::EC2
       :threads_per_core,
       :amd_sev_snp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CPU options for the instance. Both the core count and threads per core must be
@@ -6374,7 +5900,7 @@ module Aws::EC2
       :threads_per_core,
       :amd_sev_snp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CPU performance to consider, using an instance family as the baseline reference.</p>
@@ -6390,7 +5916,7 @@ module Aws::EC2
     class CpuPerformanceFactor < Struct.new(
       :references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CPU performance to consider, using an instance family as the baseline reference.</p>
@@ -6406,7 +5932,7 @@ module Aws::EC2
     class CpuPerformanceFactorRequest < Struct.new(
       :references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -6431,7 +5957,7 @@ module Aws::EC2
       :instance_count,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_capacity_reservation
@@ -6449,7 +5975,7 @@ module Aws::EC2
       :destination_capacity_reservation,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_strategy
@@ -6527,7 +6053,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_fleet_id
@@ -6578,7 +6104,7 @@ module Aws::EC2
       :fleet_capacity_reservations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -6775,7 +6301,7 @@ module Aws::EC2
       :commitment_duration,
       :delivery_preference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation
@@ -6784,7 +6310,7 @@ module Aws::EC2
     class CreateCapacityReservationResult < Struct.new(
       :capacity_reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -6809,7 +6335,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute carrier_gateway
@@ -6818,7 +6344,7 @@ module Aws::EC2
     class CreateCarrierGatewayResult < Struct.new(
       :carrier_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_cidr_block
@@ -6942,7 +6468,7 @@ module Aws::EC2
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -6959,7 +6485,7 @@ module Aws::EC2
       :status,
       :dns_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -7006,7 +6532,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -7015,7 +6541,7 @@ module Aws::EC2
     class CreateClientVpnRouteResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -7038,7 +6564,7 @@ module Aws::EC2
       :coip_pool_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_cidr
@@ -7049,7 +6575,7 @@ module Aws::EC2
     class CreateCoipCidrResult < Struct.new(
       :coip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_id
@@ -7072,7 +6598,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_pool
@@ -7081,7 +6607,7 @@ module Aws::EC2
     class CreateCoipPoolResult < Struct.new(
       :coip_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateCustomerGateway.</p>
@@ -7138,7 +6664,7 @@ module Aws::EC2
       :bgp_asn_extended,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateCustomerGateway.</p>
@@ -7148,7 +6674,7 @@ module Aws::EC2
     class CreateCustomerGatewayResult < Struct.new(
       :customer_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zone
@@ -7176,7 +6702,7 @@ module Aws::EC2
       :ipv6_native,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet
@@ -7185,7 +6711,7 @@ module Aws::EC2
     class CreateDefaultSubnetResult < Struct.new(
       :subnet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -7196,7 +6722,7 @@ module Aws::EC2
     class CreateDefaultVpcRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc
@@ -7205,7 +6731,7 @@ module Aws::EC2
     class CreateDefaultVpcResult < Struct.new(
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7277,7 +6803,7 @@ module Aws::EC2
       :mac_credentials,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mac_modification_task
@@ -7286,7 +6812,7 @@ module Aws::EC2
     class CreateDelegateMacVolumeOwnershipTaskResult < Struct.new(
       :mac_modification_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dhcp_configurations
@@ -7305,7 +6831,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dhcp_options
@@ -7314,7 +6840,7 @@ module Aws::EC2
     class CreateDhcpOptionsResult < Struct.new(
       :dhcp_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7338,7 +6864,7 @@ module Aws::EC2
       :vpc_id,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7352,7 +6878,7 @@ module Aws::EC2
       :client_token,
       :egress_only_internet_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instances that could not be launched by the fleet.</p>
@@ -7377,7 +6903,7 @@ module Aws::EC2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instances that were launched by the fleet.</p>
@@ -7405,7 +6931,7 @@ module Aws::EC2
       :instance_type,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -7509,7 +7035,7 @@ module Aws::EC2
       :tag_specifications,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fleet_id
@@ -7528,7 +7054,7 @@ module Aws::EC2
       :errors,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -7634,7 +7160,7 @@ module Aws::EC2
       :max_aggregation_interval,
       :destination_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -7652,7 +7178,7 @@ module Aws::EC2
       :flow_log_ids,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -7688,7 +7214,7 @@ module Aws::EC2
       :client_token,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fpga_image_id
@@ -7701,7 +7227,7 @@ module Aws::EC2
       :fpga_image_id,
       :fpga_image_global_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -7810,7 +7336,7 @@ module Aws::EC2
       :no_reboot,
       :block_device_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -7819,7 +7345,7 @@ module Aws::EC2
     class CreateImageResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -7895,7 +7421,7 @@ module Aws::EC2
       :tag_specifications,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_connect_endpoint
@@ -7908,7 +7434,7 @@ module Aws::EC2
       :instance_connect_endpoint,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -7965,7 +7491,7 @@ module Aws::EC2
       :cron_expression,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_event_window
@@ -7974,7 +7500,7 @@ module Aws::EC2
     class CreateInstanceEventWindowResult < Struct.new(
       :instance_event_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -7999,7 +7525,7 @@ module Aws::EC2
       :target_environment,
       :export_to_s3_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_task
@@ -8008,7 +7534,7 @@ module Aws::EC2
     class CreateInstanceExportTaskResult < Struct.new(
       :export_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -8023,7 +7549,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute internet_gateway
@@ -8032,7 +7558,7 @@ module Aws::EC2
     class CreateInternetGatewayResult < Struct.new(
       :internet_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8055,7 +7581,7 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_external_resource_verification_token
@@ -8064,7 +7590,7 @@ module Aws::EC2
     class CreateIpamExternalResourceVerificationTokenResult < Struct.new(
       :ipam_external_resource_verification_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8160,7 +7686,7 @@ module Aws::EC2
       :public_ip_source,
       :source_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool
@@ -8169,7 +7695,7 @@ module Aws::EC2
     class CreateIpamPoolResult < Struct.new(
       :ipam_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8222,7 +7748,7 @@ module Aws::EC2
       :enable_private_gua,
       :metered_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8249,7 +7775,7 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discovery
@@ -8258,7 +7784,7 @@ module Aws::EC2
     class CreateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam
@@ -8267,7 +7793,7 @@ module Aws::EC2
     class CreateIpamResult < Struct.new(
       :ipam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8295,7 +7821,7 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_scope
@@ -8304,7 +7830,7 @@ module Aws::EC2
     class CreateIpamScopeResult < Struct.new(
       :ipam_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a key pair.</p>
@@ -8337,7 +7863,7 @@ module Aws::EC2
       :key_fingerprint,
       :key_material,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -8369,7 +7895,7 @@ module Aws::EC2
       :key_format,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8414,7 +7940,7 @@ module Aws::EC2
       :operator,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_template
@@ -8429,7 +7955,7 @@ module Aws::EC2
       :launch_template,
       :warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8490,7 +8016,7 @@ module Aws::EC2
       :launch_template_data,
       :resolve_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_template_version
@@ -8505,7 +8031,7 @@ module Aws::EC2
       :launch_template_version,
       :warning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_cidr_block
@@ -8540,7 +8066,7 @@ module Aws::EC2
       :network_interface_id,
       :destination_prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -8549,7 +8075,7 @@ module Aws::EC2
     class CreateLocalGatewayRouteResult < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_id
@@ -8578,7 +8104,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table
@@ -8587,7 +8113,7 @@ module Aws::EC2
     class CreateLocalGatewayRouteTableResult < Struct.new(
       :local_gateway_route_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_id
@@ -8616,7 +8142,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_virtual_interface_group_association
@@ -8625,7 +8151,7 @@ module Aws::EC2
     class CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult < Struct.new(
       :local_gateway_route_table_virtual_interface_group_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_id
@@ -8648,7 +8174,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_vpc_association
@@ -8657,7 +8183,7 @@ module Aws::EC2
     class CreateLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_id
@@ -8685,7 +8211,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_group
@@ -8694,7 +8220,7 @@ module Aws::EC2
     class CreateLocalGatewayVirtualInterfaceGroupResult < Struct.new(
       :local_gateway_virtual_interface_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_group_id
@@ -8738,7 +8264,7 @@ module Aws::EC2
       :dry_run,
       :peer_bgp_asn_extended,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface
@@ -8747,7 +8273,7 @@ module Aws::EC2
     class CreateLocalGatewayVirtualInterfaceResult < Struct.new(
       :local_gateway_virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -8832,7 +8358,7 @@ module Aws::EC2
       :mac_system_integrity_protection_status,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mac_modification_task
@@ -8841,7 +8367,7 @@ module Aws::EC2
     class CreateMacSystemIntegrityProtectionModificationTaskResult < Struct.new(
       :mac_modification_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -8882,7 +8408,7 @@ module Aws::EC2
       :address_family,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix_list
@@ -8891,7 +8417,7 @@ module Aws::EC2
     class CreateManagedPrefixListResult < Struct.new(
       :prefix_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -8947,7 +8473,7 @@ module Aws::EC2
       :secondary_private_ip_addresses,
       :secondary_private_ip_address_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -8960,7 +8486,7 @@ module Aws::EC2
       :client_token,
       :nat_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -9017,7 +8543,7 @@ module Aws::EC2
       :icmp_type_code,
       :port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -9041,7 +8567,7 @@ module Aws::EC2
       :dry_run,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_acl
@@ -9054,7 +8580,7 @@ module Aws::EC2
       :network_acl,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute match_paths
@@ -9082,7 +8608,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope
@@ -9095,7 +8621,7 @@ module Aws::EC2
       :network_insights_access_scope,
       :network_insights_access_scope_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_ip
@@ -9149,7 +8675,7 @@ module Aws::EC2
       :filter_at_source,
       :filter_at_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_path
@@ -9158,7 +8684,7 @@ module Aws::EC2
     class CreateNetworkInsightsPathResult < Struct.new(
       :network_insights_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateNetworkInterfacePermission.</p>
@@ -9187,7 +8713,7 @@ module Aws::EC2
       :permission,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateNetworkInterfacePermission.</p>
@@ -9197,7 +8723,7 @@ module Aws::EC2
     class CreateNetworkInterfacePermissionResult < Struct.new(
       :interface_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv4_prefixes
@@ -9330,7 +8856,7 @@ module Aws::EC2
       :ipv6_address_count,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interface
@@ -9343,7 +8869,7 @@ module Aws::EC2
       :network_interface,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partition_count
@@ -9386,7 +8912,7 @@ module Aws::EC2
       :group_name,
       :strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute placement_group
@@ -9395,7 +8921,7 @@ module Aws::EC2
     class CreatePlacementGroupResult < Struct.new(
       :placement_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -9415,7 +8941,7 @@ module Aws::EC2
       :tag_specifications,
       :network_border_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -9424,7 +8950,7 @@ module Aws::EC2
     class CreatePublicIpv4PoolResult < Struct.new(
       :pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -9498,7 +9024,7 @@ module Aws::EC2
       :delete_replaced_root_volume,
       :volume_initialization_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replace_root_volume_task
@@ -9507,7 +9033,7 @@ module Aws::EC2
     class CreateReplaceRootVolumeTaskResult < Struct.new(
       :replace_root_volume_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateReservedInstancesListing.</p>
@@ -9534,7 +9060,7 @@ module Aws::EC2
       :price_schedules,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateReservedInstancesListing.</p>
@@ -9544,7 +9070,7 @@ module Aws::EC2
     class CreateReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket
@@ -9585,7 +9111,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -9594,7 +9120,7 @@ module Aws::EC2
     class CreateRestoreImageTaskResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_prefix_list_id
@@ -9671,7 +9197,7 @@ module Aws::EC2
       :vpc_peering_connection_id,
       :nat_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -9680,7 +9206,7 @@ module Aws::EC2
     class CreateRouteResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -9707,7 +9233,7 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_endpoint
@@ -9716,7 +9242,7 @@ module Aws::EC2
     class CreateRouteServerEndpointResult < Struct.new(
       :route_server_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_endpoint_id
@@ -9743,7 +9269,7 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_peer
@@ -9752,7 +9278,7 @@ module Aws::EC2
     class CreateRouteServerPeerResult < Struct.new(
       :route_server_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute amazon_side_asn
@@ -9788,7 +9314,7 @@ module Aws::EC2
       :sns_notifications_enabled,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server
@@ -9797,7 +9323,7 @@ module Aws::EC2
     class CreateRouteServerResult < Struct.new(
       :route_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -9821,7 +9347,7 @@ module Aws::EC2
       :dry_run,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_table
@@ -9834,7 +9360,7 @@ module Aws::EC2
       :route_table,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -9865,7 +9391,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -9882,7 +9408,7 @@ module Aws::EC2
       :tags,
       :security_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a snapshot.</p>
@@ -10023,7 +9549,7 @@ module Aws::EC2
       :kms_key_id,
       :data_encryption_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -10082,7 +9608,7 @@ module Aws::EC2
       :location,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -10146,7 +9672,7 @@ module Aws::EC2
       :copy_tags_from_source,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshots
@@ -10155,7 +9681,7 @@ module Aws::EC2
     class CreateSnapshotsResult < Struct.new(
       :snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateSpotDatafeedSubscription.</p>
@@ -10178,7 +9704,7 @@ module Aws::EC2
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateSpotDatafeedSubscription.</p>
@@ -10188,7 +9714,7 @@ module Aws::EC2
     class CreateSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -10213,7 +9739,7 @@ module Aws::EC2
       :s3_object_tags,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_key
@@ -10222,7 +9748,7 @@ module Aws::EC2
     class CreateStoreImageTaskResult < Struct.new(
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_id
@@ -10265,7 +9791,7 @@ module Aws::EC2
       :dry_run,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_cidr_reservation
@@ -10274,7 +9800,7 @@ module Aws::EC2
     class CreateSubnetCidrReservationResult < Struct.new(
       :subnet_cidr_reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -10345,7 +9871,7 @@ module Aws::EC2
       :ipv6_netmask_length,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet
@@ -10354,7 +9880,7 @@ module Aws::EC2
     class CreateSubnetResult < Struct.new(
       :subnet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -10375,7 +9901,7 @@ module Aws::EC2
       :resources,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -10398,7 +9924,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter
@@ -10411,7 +9937,7 @@ module Aws::EC2
       :traffic_mirror_filter,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_id
@@ -10472,7 +9998,7 @@ module Aws::EC2
       :client_token,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rule
@@ -10485,7 +10011,7 @@ module Aws::EC2
       :traffic_mirror_filter_rule,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interface_id
@@ -10542,7 +10068,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_session
@@ -10555,7 +10081,7 @@ module Aws::EC2
       :traffic_mirror_session,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interface_id
@@ -10590,7 +10116,7 @@ module Aws::EC2
       :client_token,
       :gateway_load_balancer_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_target
@@ -10603,7 +10129,7 @@ module Aws::EC2
       :traffic_mirror_target,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -10644,7 +10170,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer
@@ -10653,7 +10179,7 @@ module Aws::EC2
     class CreateTransitGatewayConnectPeerResult < Struct.new(
       :transit_gateway_connect_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transport_transit_gateway_attachment_id
@@ -10676,7 +10202,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for a Connect attachment.</p>
@@ -10686,7 +10212,7 @@ module Aws::EC2
     class CreateTransitGatewayConnectRequestOptions < Struct.new(
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect
@@ -10695,7 +10221,7 @@ module Aws::EC2
     class CreateTransitGatewayConnectResult < Struct.new(
       :transit_gateway_connect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -10718,7 +10244,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for the transit gateway multicast domain.</p>
@@ -10736,7 +10262,7 @@ module Aws::EC2
       :static_sources_support,
       :auto_accept_shared_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain
@@ -10745,7 +10271,7 @@ module Aws::EC2
     class CreateTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -10780,7 +10306,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether dynamic routing is enabled or disabled for the transit gateway peering request.</p>
@@ -10790,7 +10316,7 @@ module Aws::EC2
     class CreateTransitGatewayPeeringAttachmentRequestOptions < Struct.new(
       :dynamic_routing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering_attachment
@@ -10799,7 +10325,7 @@ module Aws::EC2
     class CreateTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -10818,7 +10344,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table
@@ -10827,7 +10353,7 @@ module Aws::EC2
     class CreateTransitGatewayPolicyTableResult < Struct.new(
       :transit_gateway_policy_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -10854,7 +10380,7 @@ module Aws::EC2
       :blackhole,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_prefix_list_reference
@@ -10863,7 +10389,7 @@ module Aws::EC2
     class CreateTransitGatewayPrefixListReferenceResult < Struct.new(
       :transit_gateway_prefix_list_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -10886,7 +10412,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway
@@ -10895,7 +10421,7 @@ module Aws::EC2
     class CreateTransitGatewayResult < Struct.new(
       :transit_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_cidr_block
@@ -10923,7 +10449,7 @@ module Aws::EC2
       :blackhole,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -10932,7 +10458,7 @@ module Aws::EC2
     class CreateTransitGatewayRouteResult < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -10955,7 +10481,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_announcement
@@ -10964,7 +10490,7 @@ module Aws::EC2
     class CreateTransitGatewayRouteTableAnnouncementResult < Struct.new(
       :transit_gateway_route_table_announcement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -10983,7 +10509,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table
@@ -10992,7 +10518,7 @@ module Aws::EC2
     class CreateTransitGatewayRouteTableResult < Struct.new(
       :transit_gateway_route_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -11025,7 +10551,7 @@ module Aws::EC2
       :tag_specifications,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for a VPC attachment.</p>
@@ -11049,7 +10575,7 @@ module Aws::EC2
       :ipv6_support,
       :appliance_mode_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_vpc_attachment
@@ -11058,7 +10584,7 @@ module Aws::EC2
     class CreateTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the CIDR options for a Verified Access endpoint.</p>
@@ -11080,7 +10606,7 @@ module Aws::EC2
       :cidr,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the network interface options when creating an Amazon Web Services Verified Access endpoint using the
@@ -11103,7 +10629,7 @@ module Aws::EC2
       :port,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the load balancer options when creating an Amazon Web Services Verified Access endpoint using the
@@ -11130,7 +10656,7 @@ module Aws::EC2
       :subnet_ids,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the port range for a Verified Access endpoint.</p>
@@ -11144,7 +10670,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the RDS options for a Verified Access endpoint.</p>
@@ -11178,7 +10704,7 @@ module Aws::EC2
       :rds_endpoint,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group_id
@@ -11259,7 +10785,7 @@ module Aws::EC2
       :rds_options,
       :cidr_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint
@@ -11268,7 +10794,7 @@ module Aws::EC2
     class CreateVerifiedAccessEndpointResult < Struct.new(
       :verified_access_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -11304,7 +10830,7 @@ module Aws::EC2
       :dry_run,
       :sse_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group
@@ -11313,7 +10839,7 @@ module Aws::EC2
     class CreateVerifiedAccessGroupResult < Struct.new(
       :verified_access_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -11345,7 +10871,7 @@ module Aws::EC2
       :fips_enabled,
       :cidr_endpoints_custom_sub_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance
@@ -11354,7 +10880,7 @@ module Aws::EC2
     class CreateVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the OpenID Connect (OIDC) options.</p>
@@ -11392,7 +10918,7 @@ module Aws::EC2
       :client_secret,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options when creating an Amazon Web Services Verified Access trust provider using the
@@ -11409,7 +10935,7 @@ module Aws::EC2
       :tenant_id,
       :public_signing_key_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options when creating an Amazon Web Services Verified Access trust provider using the <code>user</code>
@@ -11444,7 +10970,7 @@ module Aws::EC2
       :client_secret,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_provider_type
@@ -11504,7 +11030,7 @@ module Aws::EC2
       :sse_specification,
       :native_application_oidc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider
@@ -11513,7 +11039,7 @@ module Aws::EC2
     class CreateVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a volume.</p>
@@ -11612,7 +11138,7 @@ module Aws::EC2
       :encrypted,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the user or group to be added or removed from the list of create volume
@@ -11627,7 +11153,7 @@ module Aws::EC2
       :user_id,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes modifications to the list of create volume permissions for a volume.</p>
@@ -11641,7 +11167,7 @@ module Aws::EC2
       :add,
       :remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zone
@@ -11851,7 +11377,7 @@ module Aws::EC2
       :operator,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -11890,7 +11416,7 @@ module Aws::EC2
       :internet_gateway_exclusion_mode,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_block_public_access_exclusion
@@ -11899,7 +11425,7 @@ module Aws::EC2
     class CreateVpcBlockPublicAccessExclusionResult < Struct.new(
       :vpc_block_public_access_exclusion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -11934,7 +11460,7 @@ module Aws::EC2
       :connection_events,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_notification
@@ -11948,7 +11474,7 @@ module Aws::EC2
       :connection_notification,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12043,7 +11569,7 @@ module Aws::EC2
       :resource_configuration_arn,
       :service_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint
@@ -12057,7 +11583,7 @@ module Aws::EC2
       :vpc_endpoint,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12103,7 +11629,7 @@ module Aws::EC2
       :client_token,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_configuration
@@ -12117,7 +11643,7 @@ module Aws::EC2
       :service_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute peer_region
@@ -12153,7 +11679,7 @@ module Aws::EC2
       :peer_vpc_id,
       :peer_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_peering_connection
@@ -12162,7 +11688,7 @@ module Aws::EC2
     class CreateVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr_block
@@ -12231,7 +11757,7 @@ module Aws::EC2
       :instance_tenancy,
       :amazon_provided_ipv6_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc
@@ -12240,7 +11766,7 @@ module Aws::EC2
     class CreateVpcResult < Struct.new(
       :vpc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateVpnConnection.</p>
@@ -12283,7 +11809,7 @@ module Aws::EC2
       :dry_run,
       :options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateVpnConnection.</p>
@@ -12293,7 +11819,7 @@ module Aws::EC2
     class CreateVpnConnectionResult < Struct.new(
       :vpn_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateVpnConnectionRoute.</p>
@@ -12307,7 +11833,7 @@ module Aws::EC2
       :destination_cidr_block,
       :vpn_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for CreateVpnGateway.</p>
@@ -12339,7 +11865,7 @@ module Aws::EC2
       :amazon_side_asn,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of CreateVpnGateway.</p>
@@ -12349,7 +11875,7 @@ module Aws::EC2
     class CreateVpnGatewayResult < Struct.new(
       :vpn_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the credit option for CPU usage of a T instance.</p>
@@ -12361,7 +11887,7 @@ module Aws::EC2
     class CreditSpecification < Struct.new(
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credit option for CPU usage of a T instance.</p>
@@ -12373,11 +11899,7 @@ module Aws::EC2
     class CreditSpecificationRequest < Struct.new(
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CurrencyCodeValues
-      USD = 'USD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a customer gateway.</p>
@@ -12430,7 +11952,7 @@ module Aws::EC2
       :ip_address,
       :bgp_asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A query used for retrieving network health data. </p>
@@ -12462,7 +11984,7 @@ module Aws::EC2
       :statistic,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <code>DataQuery</code>.</p>
@@ -12496,12 +12018,7 @@ module Aws::EC2
       :period,
       :metric_points,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatafeedSubscriptionState
-      Active = 'Active'
-      Inactive = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata of the account status report.</p>
@@ -12554,35 +12071,7 @@ module Aws::EC2
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DefaultInstanceMetadataEndpointState
-      disabled = 'disabled'
-      enabled = 'enabled'
-      no_preference = 'no-preference'
-    end
-
-    module DefaultInstanceMetadataTagsState
-      disabled = 'disabled'
-      enabled = 'enabled'
-      no_preference = 'no-preference'
-    end
-
-    module DefaultRouteTableAssociationValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module DefaultRouteTablePropagationValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module DefaultTargetCapacityType
-      SPOT = 'spot'
-      ON_DEMAND = 'on-demand'
-      CAPACITY_BLOCK = 'capacity-block'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute carrier_gateway_id
@@ -12597,7 +12086,7 @@ module Aws::EC2
       :carrier_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute carrier_gateway
@@ -12606,7 +12095,7 @@ module Aws::EC2
     class DeleteCarrierGatewayResult < Struct.new(
       :carrier_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -12619,7 +12108,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -12628,7 +12117,7 @@ module Aws::EC2
     class DeleteClientVpnEndpointResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -12649,7 +12138,7 @@ module Aws::EC2
       :destination_cidr_block,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -12658,7 +12147,7 @@ module Aws::EC2
     class DeleteClientVpnRouteResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -12679,7 +12168,7 @@ module Aws::EC2
       :coip_pool_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_cidr
@@ -12690,7 +12179,7 @@ module Aws::EC2
     class DeleteCoipCidrResult < Struct.new(
       :coip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_pool_id
@@ -12705,7 +12194,7 @@ module Aws::EC2
       :coip_pool_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_pool
@@ -12714,7 +12203,7 @@ module Aws::EC2
     class DeleteCoipPoolResult < Struct.new(
       :coip_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteCustomerGateway.</p>
@@ -12731,7 +12220,7 @@ module Aws::EC2
       :customer_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dhcp_options_id
@@ -12746,7 +12235,7 @@ module Aws::EC2
       :dhcp_options_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12761,7 +12250,7 @@ module Aws::EC2
       :dry_run,
       :egress_only_internet_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_code
@@ -12770,7 +12259,7 @@ module Aws::EC2
     class DeleteEgressOnlyInternetGatewayResult < Struct.new(
       :return_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 Fleet error.</p>
@@ -12784,14 +12273,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeleteFleetErrorCode
-      FLEET_ID_DOES_NOT_EXIST = 'fleetIdDoesNotExist'
-      FLEET_ID_MALFORMED = 'fleetIdMalformed'
-      FLEET_NOT_IN_DELETABLE_STATE = 'fleetNotInDeletableState'
-      UNEXPECTED_ERROR = 'unexpectedError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 Fleet that was not successfully deleted.</p>
@@ -12805,7 +12287,7 @@ module Aws::EC2
       :error,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 Fleet that was successfully deleted.</p>
@@ -12823,7 +12305,7 @@ module Aws::EC2
       :previous_fleet_state,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12850,7 +12332,7 @@ module Aws::EC2
       :fleet_ids,
       :terminate_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_fleet_deletions
@@ -12863,7 +12345,7 @@ module Aws::EC2
       :successful_fleet_deletions,
       :unsuccessful_fleet_deletions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12879,7 +12361,7 @@ module Aws::EC2
       :dry_run,
       :flow_log_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsuccessful
@@ -12888,7 +12370,7 @@ module Aws::EC2
     class DeleteFlowLogsResult < Struct.new(
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12903,7 +12385,7 @@ module Aws::EC2
       :dry_run,
       :fpga_image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -12912,7 +12394,7 @@ module Aws::EC2
     class DeleteFpgaImageResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12927,7 +12409,7 @@ module Aws::EC2
       :dry_run,
       :instance_connect_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_connect_endpoint
@@ -12936,7 +12418,7 @@ module Aws::EC2
     class DeleteInstanceConnectEndpointResult < Struct.new(
       :instance_connect_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12956,7 +12438,7 @@ module Aws::EC2
       :force_delete,
       :instance_event_window_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_event_window_state
@@ -12965,7 +12447,7 @@ module Aws::EC2
     class DeleteInstanceEventWindowResult < Struct.new(
       :instance_event_window_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12980,7 +12462,7 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -12995,7 +12477,7 @@ module Aws::EC2
       :dry_run,
       :ipam_external_resource_verification_token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_external_resource_verification_token
@@ -13004,7 +12486,7 @@ module Aws::EC2
     class DeleteIpamExternalResourceVerificationTokenResult < Struct.new(
       :ipam_external_resource_verification_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13027,7 +12509,7 @@ module Aws::EC2
       :ipam_pool_id,
       :cascade,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool
@@ -13036,7 +12518,7 @@ module Aws::EC2
     class DeleteIpamPoolResult < Struct.new(
       :ipam_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13076,7 +12558,7 @@ module Aws::EC2
       :ipam_id,
       :cascade,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13091,7 +12573,7 @@ module Aws::EC2
       :dry_run,
       :ipam_resource_discovery_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discovery
@@ -13100,7 +12582,7 @@ module Aws::EC2
     class DeleteIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam
@@ -13109,7 +12591,7 @@ module Aws::EC2
     class DeleteIpamResult < Struct.new(
       :ipam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13124,7 +12606,7 @@ module Aws::EC2
       :dry_run,
       :ipam_scope_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_scope
@@ -13133,7 +12615,7 @@ module Aws::EC2
     class DeleteIpamScopeResult < Struct.new(
       :ipam_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -13152,7 +12634,7 @@ module Aws::EC2
       :key_pair_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -13165,7 +12647,7 @@ module Aws::EC2
       :return,
       :key_pair_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13189,7 +12671,7 @@ module Aws::EC2
       :launch_template_id,
       :launch_template_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_template
@@ -13198,7 +12680,7 @@ module Aws::EC2
     class DeleteLaunchTemplateResult < Struct.new(
       :launch_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13227,7 +12709,7 @@ module Aws::EC2
       :launch_template_name,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template version that could not be deleted.</p>
@@ -13249,7 +12731,7 @@ module Aws::EC2
       :version_number,
       :response_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template version that was successfully deleted.</p>
@@ -13267,7 +12749,7 @@ module Aws::EC2
       :launch_template_name,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successfully_deleted_launch_template_versions
@@ -13280,7 +12762,7 @@ module Aws::EC2
       :successfully_deleted_launch_template_versions,
       :unsuccessfully_deleted_launch_template_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_cidr_block
@@ -13306,7 +12788,7 @@ module Aws::EC2
       :dry_run,
       :destination_prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -13315,7 +12797,7 @@ module Aws::EC2
     class DeleteLocalGatewayRouteResult < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_id
@@ -13332,7 +12814,7 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table
@@ -13341,7 +12823,7 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableResult < Struct.new(
       :local_gateway_route_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_virtual_interface_group_association_id
@@ -13358,7 +12840,7 @@ module Aws::EC2
       :local_gateway_route_table_virtual_interface_group_association_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_virtual_interface_group_association
@@ -13367,7 +12849,7 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationResult < Struct.new(
       :local_gateway_route_table_virtual_interface_group_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_vpc_association_id
@@ -13382,7 +12864,7 @@ module Aws::EC2
       :local_gateway_route_table_vpc_association_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_vpc_association
@@ -13391,7 +12873,7 @@ module Aws::EC2
     class DeleteLocalGatewayRouteTableVpcAssociationResult < Struct.new(
       :local_gateway_route_table_vpc_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_group_id
@@ -13406,7 +12888,7 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_group
@@ -13415,7 +12897,7 @@ module Aws::EC2
     class DeleteLocalGatewayVirtualInterfaceGroupResult < Struct.new(
       :local_gateway_virtual_interface_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_id
@@ -13430,7 +12912,7 @@ module Aws::EC2
       :local_gateway_virtual_interface_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface
@@ -13439,7 +12921,7 @@ module Aws::EC2
     class DeleteLocalGatewayVirtualInterfaceResult < Struct.new(
       :local_gateway_virtual_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13454,7 +12936,7 @@ module Aws::EC2
       :dry_run,
       :prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix_list
@@ -13463,7 +12945,7 @@ module Aws::EC2
     class DeleteManagedPrefixListResult < Struct.new(
       :prefix_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13478,7 +12960,7 @@ module Aws::EC2
       :dry_run,
       :nat_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -13487,7 +12969,7 @@ module Aws::EC2
     class DeleteNatGatewayResult < Struct.new(
       :nat_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13510,7 +12992,7 @@ module Aws::EC2
       :rule_number,
       :egress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13525,7 +13007,7 @@ module Aws::EC2
       :dry_run,
       :network_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analysis_id
@@ -13540,7 +13022,7 @@ module Aws::EC2
       :network_insights_access_scope_analysis_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analysis_id
@@ -13549,7 +13031,7 @@ module Aws::EC2
     class DeleteNetworkInsightsAccessScopeAnalysisResult < Struct.new(
       :network_insights_access_scope_analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13564,7 +13046,7 @@ module Aws::EC2
       :dry_run,
       :network_insights_access_scope_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_id
@@ -13573,7 +13055,7 @@ module Aws::EC2
     class DeleteNetworkInsightsAccessScopeResult < Struct.new(
       :network_insights_access_scope_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13588,7 +13070,7 @@ module Aws::EC2
       :dry_run,
       :network_insights_analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_analysis_id
@@ -13597,7 +13079,7 @@ module Aws::EC2
     class DeleteNetworkInsightsAnalysisResult < Struct.new(
       :network_insights_analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13612,7 +13094,7 @@ module Aws::EC2
       :dry_run,
       :network_insights_path_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_path_id
@@ -13621,7 +13103,7 @@ module Aws::EC2
     class DeleteNetworkInsightsPathResult < Struct.new(
       :network_insights_path_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteNetworkInterfacePermission.</p>
@@ -13643,7 +13125,7 @@ module Aws::EC2
       :force,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for DeleteNetworkInterfacePermission.</p>
@@ -13653,7 +13135,7 @@ module Aws::EC2
     class DeleteNetworkInterfacePermissionResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteNetworkInterface.</p>
@@ -13670,7 +13152,7 @@ module Aws::EC2
       :dry_run,
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13685,7 +13167,7 @@ module Aws::EC2
       :dry_run,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13704,7 +13186,7 @@ module Aws::EC2
       :pool_id,
       :network_border_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -13713,7 +13195,7 @@ module Aws::EC2
     class DeletePublicIpv4PoolResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error for a Reserved Instance whose queued purchase could not be
@@ -13728,13 +13210,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeleteQueuedReservedInstancesErrorCode
-      RESERVED_INSTANCES_ID_INVALID = 'reserved-instances-id-invalid'
-      RESERVED_INSTANCES_NOT_IN_QUEUED_STATE = 'reserved-instances-not-in-queued-state'
-      UNEXPECTED_ERROR = 'unexpected-error'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13750,7 +13226,7 @@ module Aws::EC2
       :dry_run,
       :reserved_instances_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_queued_purchase_deletions
@@ -13763,7 +13239,7 @@ module Aws::EC2
       :successful_queued_purchase_deletions,
       :failed_queued_purchase_deletions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_prefix_list_id
@@ -13790,7 +13266,7 @@ module Aws::EC2
       :destination_cidr_block,
       :destination_ipv6_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_endpoint_id
@@ -13805,7 +13281,7 @@ module Aws::EC2
       :route_server_endpoint_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_endpoint
@@ -13814,7 +13290,7 @@ module Aws::EC2
     class DeleteRouteServerEndpointResult < Struct.new(
       :route_server_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_peer_id
@@ -13829,7 +13305,7 @@ module Aws::EC2
       :route_server_peer_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_peer
@@ -13838,7 +13314,7 @@ module Aws::EC2
     class DeleteRouteServerPeerResult < Struct.new(
       :route_server_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -13853,7 +13329,7 @@ module Aws::EC2
       :route_server_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server
@@ -13862,7 +13338,7 @@ module Aws::EC2
     class DeleteRouteServerResult < Struct.new(
       :route_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -13877,7 +13353,7 @@ module Aws::EC2
       :dry_run,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -13898,7 +13374,7 @@ module Aws::EC2
       :group_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -13911,7 +13387,7 @@ module Aws::EC2
       :return,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -13926,7 +13402,7 @@ module Aws::EC2
       :snapshot_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The snapshot ID and its deletion result code.</p>
@@ -13970,7 +13446,7 @@ module Aws::EC2
       :snapshot_id,
       :return_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteSpotDatafeedSubscription.</p>
@@ -13983,7 +13459,7 @@ module Aws::EC2
     class DeleteSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_cidr_reservation_id
@@ -13998,7 +13474,7 @@ module Aws::EC2
       :subnet_cidr_reservation_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deleted_subnet_cidr_reservation
@@ -14007,7 +13483,7 @@ module Aws::EC2
     class DeleteSubnetCidrReservationResult < Struct.new(
       :deleted_subnet_cidr_reservation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_id
@@ -14022,7 +13498,7 @@ module Aws::EC2
       :subnet_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14049,7 +13525,7 @@ module Aws::EC2
       :resources,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_id
@@ -14064,7 +13540,7 @@ module Aws::EC2
       :traffic_mirror_filter_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_id
@@ -14073,7 +13549,7 @@ module Aws::EC2
     class DeleteTrafficMirrorFilterResult < Struct.new(
       :traffic_mirror_filter_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rule_id
@@ -14088,7 +13564,7 @@ module Aws::EC2
       :traffic_mirror_filter_rule_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rule_id
@@ -14097,7 +13573,7 @@ module Aws::EC2
     class DeleteTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_session_id
@@ -14112,7 +13588,7 @@ module Aws::EC2
       :traffic_mirror_session_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_session_id
@@ -14121,7 +13597,7 @@ module Aws::EC2
     class DeleteTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_target_id
@@ -14136,7 +13612,7 @@ module Aws::EC2
       :traffic_mirror_target_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_target_id
@@ -14145,7 +13621,7 @@ module Aws::EC2
     class DeleteTrafficMirrorTargetResult < Struct.new(
       :traffic_mirror_target_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer_id
@@ -14160,7 +13636,7 @@ module Aws::EC2
       :transit_gateway_connect_peer_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer
@@ -14169,7 +13645,7 @@ module Aws::EC2
     class DeleteTransitGatewayConnectPeerResult < Struct.new(
       :transit_gateway_connect_peer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -14184,7 +13660,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect
@@ -14193,7 +13669,7 @@ module Aws::EC2
     class DeleteTransitGatewayConnectResult < Struct.new(
       :transit_gateway_connect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -14208,7 +13684,7 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain
@@ -14217,7 +13693,7 @@ module Aws::EC2
     class DeleteTransitGatewayMulticastDomainResult < Struct.new(
       :transit_gateway_multicast_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -14232,7 +13708,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering_attachment
@@ -14241,7 +13717,7 @@ module Aws::EC2
     class DeleteTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_id
@@ -14256,7 +13732,7 @@ module Aws::EC2
       :transit_gateway_policy_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table
@@ -14265,7 +13741,7 @@ module Aws::EC2
     class DeleteTransitGatewayPolicyTableResult < Struct.new(
       :transit_gateway_policy_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -14284,7 +13760,7 @@ module Aws::EC2
       :prefix_list_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_prefix_list_reference
@@ -14293,7 +13769,7 @@ module Aws::EC2
     class DeleteTransitGatewayPrefixListReferenceResult < Struct.new(
       :transit_gateway_prefix_list_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -14308,7 +13784,7 @@ module Aws::EC2
       :transit_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway
@@ -14317,7 +13793,7 @@ module Aws::EC2
     class DeleteTransitGatewayResult < Struct.new(
       :transit_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -14336,7 +13812,7 @@ module Aws::EC2
       :destination_cidr_block,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -14345,7 +13821,7 @@ module Aws::EC2
     class DeleteTransitGatewayRouteResult < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_announcement_id
@@ -14360,7 +13836,7 @@ module Aws::EC2
       :transit_gateway_route_table_announcement_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_announcement
@@ -14369,7 +13845,7 @@ module Aws::EC2
     class DeleteTransitGatewayRouteTableAnnouncementResult < Struct.new(
       :transit_gateway_route_table_announcement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -14384,7 +13860,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table
@@ -14393,7 +13869,7 @@ module Aws::EC2
     class DeleteTransitGatewayRouteTableResult < Struct.new(
       :transit_gateway_route_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -14408,7 +13884,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_vpc_attachment
@@ -14417,7 +13893,7 @@ module Aws::EC2
     class DeleteTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_id
@@ -14437,7 +13913,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint
@@ -14446,7 +13922,7 @@ module Aws::EC2
     class DeleteVerifiedAccessEndpointResult < Struct.new(
       :verified_access_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group_id
@@ -14466,7 +13942,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group
@@ -14475,7 +13951,7 @@ module Aws::EC2
     class DeleteVerifiedAccessGroupResult < Struct.new(
       :verified_access_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -14495,7 +13971,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance
@@ -14504,7 +13980,7 @@ module Aws::EC2
     class DeleteVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider_id
@@ -14524,7 +14000,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider
@@ -14533,7 +14009,7 @@ module Aws::EC2
     class DeleteVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_id
@@ -14548,7 +14024,7 @@ module Aws::EC2
       :volume_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14563,7 +14039,7 @@ module Aws::EC2
       :dry_run,
       :exclusion_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_block_public_access_exclusion
@@ -14572,7 +14048,7 @@ module Aws::EC2
     class DeleteVpcBlockPublicAccessExclusionResult < Struct.new(
       :vpc_block_public_access_exclusion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14587,7 +14063,7 @@ module Aws::EC2
       :dry_run,
       :connection_notification_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsuccessful
@@ -14597,7 +14073,7 @@ module Aws::EC2
     class DeleteVpcEndpointConnectionNotificationsResult < Struct.new(
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14612,7 +14088,7 @@ module Aws::EC2
       :dry_run,
       :service_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsuccessful
@@ -14622,7 +14098,7 @@ module Aws::EC2
     class DeleteVpcEndpointServiceConfigurationsResult < Struct.new(
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14637,7 +14113,7 @@ module Aws::EC2
       :dry_run,
       :vpc_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsuccessful
@@ -14646,7 +14122,7 @@ module Aws::EC2
     class DeleteVpcEndpointsResult < Struct.new(
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14661,7 +14137,7 @@ module Aws::EC2
       :dry_run,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -14670,7 +14146,7 @@ module Aws::EC2
     class DeleteVpcPeeringConnectionResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -14685,7 +14161,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteVpnConnection.</p>
@@ -14702,7 +14178,7 @@ module Aws::EC2
       :vpn_connection_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteVpnConnectionRoute.</p>
@@ -14716,7 +14192,7 @@ module Aws::EC2
       :destination_cidr_block,
       :vpn_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeleteVpnGateway.</p>
@@ -14733,7 +14209,7 @@ module Aws::EC2
       :vpn_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -14749,7 +14225,7 @@ module Aws::EC2
       :cidr,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -14758,7 +14234,7 @@ module Aws::EC2
     class DeprovisionByoipCidrResult < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14777,7 +14253,7 @@ module Aws::EC2
       :ipam_id,
       :asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoasn
@@ -14786,7 +14262,7 @@ module Aws::EC2
     class DeprovisionIpamByoasnResult < Struct.new(
       :byoasn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14805,7 +14281,7 @@ module Aws::EC2
       :ipam_pool_id,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool_cidr
@@ -14814,7 +14290,7 @@ module Aws::EC2
     class DeprovisionIpamPoolCidrResult < Struct.new(
       :ipam_pool_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14833,7 +14309,7 @@ module Aws::EC2
       :pool_id,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -14846,7 +14322,7 @@ module Aws::EC2
       :pool_id,
       :deprovisioned_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DeregisterImage.</p>
@@ -14871,7 +14347,7 @@ module Aws::EC2
       :delete_associated_snapshots,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -14885,7 +14361,7 @@ module Aws::EC2
       :return,
       :delete_snapshot_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -14900,7 +14376,7 @@ module Aws::EC2
       :dry_run,
       :instance_tag_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_tag_attribute
@@ -14909,7 +14385,7 @@ module Aws::EC2
     class DeregisterInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the tag keys to deregister for the current Region. You can either
@@ -14927,7 +14403,7 @@ module Aws::EC2
       :include_all_tags_of_instance,
       :instance_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -14950,7 +14426,7 @@ module Aws::EC2
       :network_interface_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deregistered_multicast_group_members
@@ -14959,7 +14435,7 @@ module Aws::EC2
     class DeregisterTransitGatewayMulticastGroupMembersResult < Struct.new(
       :deregistered_multicast_group_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -14982,7 +14458,7 @@ module Aws::EC2
       :network_interface_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deregistered_multicast_group_sources
@@ -14991,7 +14467,7 @@ module Aws::EC2
     class DeregisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
       :deregistered_multicast_group_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -15006,7 +14482,7 @@ module Aws::EC2
       :dry_run,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_attributes
@@ -15015,7 +14491,7 @@ module Aws::EC2
     class DescribeAccountAttributesResult < Struct.new(
       :account_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_ids
@@ -15038,7 +14514,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_transfers
@@ -15051,7 +14527,7 @@ module Aws::EC2
       :address_transfers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_ids
@@ -15078,7 +14554,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addresses
@@ -15091,7 +14567,7 @@ module Aws::EC2
       :addresses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_ips
@@ -15159,7 +14635,7 @@ module Aws::EC2
       :filters,
       :allocation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addresses
@@ -15168,7 +14644,7 @@ module Aws::EC2
     class DescribeAddressesResult < Struct.new(
       :addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -15179,7 +14655,7 @@ module Aws::EC2
     class DescribeAggregateIdFormatRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute use_long_ids_aggregated
@@ -15194,7 +14670,7 @@ module Aws::EC2
       :use_long_ids_aggregated,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute zone_names
@@ -15284,7 +14760,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -15293,7 +14769,7 @@ module Aws::EC2
     class DescribeAvailabilityZonesResult < Struct.new(
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -15317,7 +14793,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15330,7 +14806,7 @@ module Aws::EC2
       :next_token,
       :subscriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_ids
@@ -15396,7 +14872,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_tasks
@@ -15405,7 +14881,7 @@ module Aws::EC2
     class DescribeBundleTasksResult < Struct.new(
       :bundle_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -15425,7 +14901,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidrs
@@ -15438,7 +14914,7 @@ module Aws::EC2
       :byoip_cidrs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_ids
@@ -15497,7 +14973,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_extensions
@@ -15511,7 +14987,7 @@ module Aws::EC2
       :capacity_block_extensions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -15537,7 +15013,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_extension_offerings
@@ -15550,7 +15026,7 @@ module Aws::EC2
       :capacity_block_extension_offerings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -15598,7 +15074,7 @@ module Aws::EC2
       :ultraserver_type,
       :ultraserver_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_offerings
@@ -15611,7 +15087,7 @@ module Aws::EC2
       :capacity_block_offerings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_ids
@@ -15643,7 +15119,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_statuses
@@ -15656,7 +15132,7 @@ module Aws::EC2
       :capacity_block_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_ids
@@ -15725,7 +15201,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_blocks
@@ -15738,7 +15214,7 @@ module Aws::EC2
       :capacity_blocks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_ids
@@ -15802,7 +15278,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15815,7 +15291,7 @@ module Aws::EC2
       :next_token,
       :capacity_reservation_billing_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_fleet_ids
@@ -15866,7 +15342,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_fleets
@@ -15879,7 +15355,7 @@ module Aws::EC2
       :capacity_reservation_fleets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_ids
@@ -16042,7 +15518,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -16055,7 +15531,7 @@ module Aws::EC2
       :next_token,
       :capacity_reservations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute carrier_gateway_ids
@@ -16111,7 +15587,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute carrier_gateways
@@ -16124,7 +15600,7 @@ module Aws::EC2
       :carrier_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -16177,7 +15653,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -16190,7 +15666,7 @@ module Aws::EC2
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -16230,7 +15706,7 @@ module Aws::EC2
       :filters,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authorization_rules
@@ -16243,7 +15719,7 @@ module Aws::EC2
       :authorization_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -16279,7 +15755,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -16292,7 +15768,7 @@ module Aws::EC2
       :connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_ids
@@ -16328,7 +15804,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoints
@@ -16341,7 +15817,7 @@ module Aws::EC2
       :client_vpn_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -16380,7 +15856,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routes
@@ -16393,7 +15869,7 @@ module Aws::EC2
       :routes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -16436,7 +15912,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_target_networks
@@ -16449,7 +15925,7 @@ module Aws::EC2
       :client_vpn_target_networks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_ids
@@ -16487,7 +15963,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_pools
@@ -16500,7 +15976,7 @@ module Aws::EC2
       :coip_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -16515,7 +15991,7 @@ module Aws::EC2
       :dry_run,
       :conversion_task_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conversion_tasks
@@ -16524,7 +16000,7 @@ module Aws::EC2
     class DescribeConversionTasksResult < Struct.new(
       :conversion_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeCustomerGateways.</p>
@@ -16582,7 +16058,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeCustomerGateways.</p>
@@ -16592,7 +16068,7 @@ module Aws::EC2
     class DescribeCustomerGatewaysResult < Struct.new(
       :customer_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -16617,7 +16093,7 @@ module Aws::EC2
       :max_results,
       :report_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -16630,7 +16106,7 @@ module Aws::EC2
       :next_token,
       :reports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dhcp_options_ids
@@ -16686,7 +16162,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -16699,7 +16175,7 @@ module Aws::EC2
       :next_token,
       :dhcp_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -16739,7 +16215,7 @@ module Aws::EC2
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute egress_only_internet_gateways
@@ -16752,7 +16228,7 @@ module Aws::EC2
       :egress_only_internet_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_gpu_ids
@@ -16808,7 +16284,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute elastic_gpu_set
@@ -16828,7 +16304,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -16856,7 +16332,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_image_tasks
@@ -16870,7 +16346,7 @@ module Aws::EC2
       :export_image_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -16883,7 +16359,7 @@ module Aws::EC2
       :filters,
       :export_task_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_tasks
@@ -16892,7 +16368,7 @@ module Aws::EC2
     class DescribeExportTasksResult < Struct.new(
       :export_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -16935,7 +16411,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fast_launch_images
@@ -16950,7 +16426,7 @@ module Aws::EC2
       :fast_launch_images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describe details about a Windows image with Windows fast launch enabled that meets the
@@ -16998,7 +16474,7 @@ module Aws::EC2
       :state_transition_reason,
       :state_transition_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes fast snapshot restores for a snapshot.</p>
@@ -17060,7 +16536,7 @@ module Aws::EC2
       :disabling_time,
       :disabled_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -17109,7 +16585,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fast_snapshot_restores
@@ -17123,7 +16599,7 @@ module Aws::EC2
       :fast_snapshot_restores,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instances that could not be launched by the fleet.</p>
@@ -17148,7 +16624,7 @@ module Aws::EC2
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -17182,7 +16658,7 @@ module Aws::EC2
       :fleet_id,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute history_records
@@ -17213,7 +16689,7 @@ module Aws::EC2
       :fleet_id,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -17248,7 +16724,7 @@ module Aws::EC2
       :fleet_id,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_instances
@@ -17267,7 +16743,7 @@ module Aws::EC2
       :next_token,
       :fleet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instances that were launched by the fleet.</p>
@@ -17295,7 +16771,7 @@ module Aws::EC2
       :instance_type,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -17359,7 +16835,7 @@ module Aws::EC2
       :fleet_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -17373,7 +16849,7 @@ module Aws::EC2
       :next_token,
       :fleets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -17442,7 +16918,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_logs
@@ -17455,7 +16931,7 @@ module Aws::EC2
       :flow_logs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -17474,7 +16950,7 @@ module Aws::EC2
       :fpga_image_id,
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fpga_image_attribute
@@ -17483,7 +16959,7 @@ module Aws::EC2
     class DescribeFpgaImageAttributeResult < Struct.new(
       :fpga_image_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -17563,7 +17039,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fpga_images
@@ -17576,7 +17052,7 @@ module Aws::EC2
       :fpga_images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -17623,7 +17099,7 @@ module Aws::EC2
       :next_token,
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -17636,7 +17112,7 @@ module Aws::EC2
       :next_token,
       :offering_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -17684,7 +17160,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_reservation_set
@@ -17697,7 +17173,7 @@ module Aws::EC2
       :host_reservation_set,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_ids
@@ -17758,7 +17234,7 @@ module Aws::EC2
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosts
@@ -17771,7 +17247,7 @@ module Aws::EC2
       :hosts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_ids
@@ -17806,7 +17282,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_instance_profile_associations
@@ -17820,7 +17296,7 @@ module Aws::EC2
       :iam_instance_profile_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -17842,7 +17318,7 @@ module Aws::EC2
     class DescribeIdFormatRequest < Struct.new(
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statuses
@@ -17851,7 +17327,7 @@ module Aws::EC2
     class DescribeIdFormatResult < Struct.new(
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -17877,7 +17353,7 @@ module Aws::EC2
       :resource,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statuses
@@ -17886,7 +17362,7 @@ module Aws::EC2
     class DescribeIdentityIdFormatResult < Struct.new(
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an image attribute.</p>
@@ -17963,7 +17439,7 @@ module Aws::EC2
       :product_codes,
       :block_device_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeImageAttribute.</p>
@@ -17987,7 +17463,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute executable_users
@@ -18244,7 +17720,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18258,7 +17734,7 @@ module Aws::EC2
       :next_token,
       :images,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -18286,7 +17762,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_image_tasks
@@ -18301,7 +17777,7 @@ module Aws::EC2
       :import_image_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -18329,7 +17805,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_snapshot_tasks
@@ -18344,7 +17820,7 @@ module Aws::EC2
       :import_snapshot_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance attribute.</p>
@@ -18422,7 +17898,7 @@ module Aws::EC2
       :disable_api_stop,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -18442,7 +17918,7 @@ module Aws::EC2
       :instance_id,
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -18506,7 +17982,7 @@ module Aws::EC2
       :filters,
       :instance_connect_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_connect_endpoints
@@ -18520,7 +17996,7 @@ module Aws::EC2
       :instance_connect_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -18559,7 +18035,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_credit_specifications
@@ -18573,7 +18049,7 @@ module Aws::EC2
       :instance_credit_specifications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -18584,7 +18060,7 @@ module Aws::EC2
     class DescribeInstanceEventNotificationAttributesRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_tag_attribute
@@ -18593,7 +18069,7 @@ module Aws::EC2
     class DescribeInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describe instance event windows by InstanceEventWindow.</p>
@@ -18676,7 +18152,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_event_windows
@@ -18690,7 +18166,7 @@ module Aws::EC2
       :instance_event_windows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -18785,7 +18261,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_image_metadata
@@ -18799,7 +18275,7 @@ module Aws::EC2
       :instance_image_metadata,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -18936,7 +18412,7 @@ module Aws::EC2
       :filters,
       :include_all_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_statuses
@@ -18950,7 +18426,7 @@ module Aws::EC2
       :instance_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -19011,7 +18487,7 @@ module Aws::EC2
       :group_names,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instances
@@ -19025,7 +18501,7 @@ module Aws::EC2
       :instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -19086,7 +18562,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_type_offerings
@@ -19100,7 +18576,7 @@ module Aws::EC2
       :instance_type_offerings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -19404,7 +18880,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_types
@@ -19418,7 +18894,7 @@ module Aws::EC2
       :instance_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -20163,7 +19639,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20177,7 +19653,7 @@ module Aws::EC2
       :next_token,
       :reservations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20235,7 +19711,7 @@ module Aws::EC2
       :internet_gateway_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute internet_gateways
@@ -20248,7 +19724,7 @@ module Aws::EC2
       :internet_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20268,7 +19744,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoasns
@@ -20281,7 +19757,7 @@ module Aws::EC2
       :byoasns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20356,7 +19832,7 @@ module Aws::EC2
       :max_results,
       :ipam_external_resource_verification_token_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20369,7 +19845,7 @@ module Aws::EC2
       :next_token,
       :ipam_external_resource_verification_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20396,7 +19872,7 @@ module Aws::EC2
       :next_token,
       :ipam_pool_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20409,7 +19885,7 @@ module Aws::EC2
       :next_token,
       :ipam_pools,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20436,7 +19912,7 @@ module Aws::EC2
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discoveries
@@ -20449,7 +19925,7 @@ module Aws::EC2
       :ipam_resource_discoveries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20476,7 +19952,7 @@ module Aws::EC2
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discovery_associations
@@ -20489,7 +19965,7 @@ module Aws::EC2
       :ipam_resource_discovery_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20516,7 +19992,7 @@ module Aws::EC2
       :next_token,
       :ipam_scope_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20529,7 +20005,7 @@ module Aws::EC2
       :next_token,
       :ipam_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20556,7 +20032,7 @@ module Aws::EC2
       :next_token,
       :ipam_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -20569,7 +20045,7 @@ module Aws::EC2
       :next_token,
       :ipams,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_ids
@@ -20608,7 +20084,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_pools
@@ -20621,7 +20097,7 @@ module Aws::EC2
       :ipv6_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_names
@@ -20674,7 +20150,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pairs
@@ -20683,7 +20159,7 @@ module Aws::EC2
     class DescribeKeyPairsResult < Struct.new(
       :key_pairs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20827,7 +20303,7 @@ module Aws::EC2
       :filters,
       :resolve_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_template_versions
@@ -20841,7 +20317,7 @@ module Aws::EC2
       :launch_template_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -20894,7 +20370,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_templates
@@ -20908,7 +20384,7 @@ module Aws::EC2
       :launch_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_virtual_interface_group_association_ids
@@ -20968,7 +20444,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_virtual_interface_group_associations
@@ -20981,7 +20457,7 @@ module Aws::EC2
       :local_gateway_route_table_virtual_interface_group_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_vpc_association_ids
@@ -21041,7 +20517,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_vpc_associations
@@ -21054,7 +20530,7 @@ module Aws::EC2
       :local_gateway_route_table_vpc_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_ids
@@ -21109,7 +20585,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_tables
@@ -21122,7 +20598,7 @@ module Aws::EC2
       :local_gateway_route_tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_group_ids
@@ -21168,7 +20644,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_groups
@@ -21181,7 +20657,7 @@ module Aws::EC2
       :local_gateway_virtual_interface_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interface_ids
@@ -21244,7 +20720,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_virtual_interfaces
@@ -21257,7 +20733,7 @@ module Aws::EC2
       :local_gateway_virtual_interfaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_ids
@@ -21303,7 +20779,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateways
@@ -21316,7 +20792,7 @@ module Aws::EC2
       :local_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -21353,7 +20829,7 @@ module Aws::EC2
       :snapshot_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshots
@@ -21367,7 +20843,7 @@ module Aws::EC2
       :snapshots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -21401,7 +20877,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mac_hosts
@@ -21416,7 +20892,7 @@ module Aws::EC2
       :mac_hosts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -21465,7 +20941,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mac_modification_tasks
@@ -21478,7 +20954,7 @@ module Aws::EC2
       :mac_modification_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -21520,7 +20996,7 @@ module Aws::EC2
       :next_token,
       :prefix_list_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21533,7 +21009,7 @@ module Aws::EC2
       :next_token,
       :prefix_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -21571,7 +21047,7 @@ module Aws::EC2
       :filters,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute moving_address_statuses
@@ -21584,7 +21060,7 @@ module Aws::EC2
       :moving_address_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -21641,7 +21117,7 @@ module Aws::EC2
       :nat_gateway_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateways
@@ -21654,7 +21130,7 @@ module Aws::EC2
       :nat_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -21764,7 +21240,7 @@ module Aws::EC2
       :network_acl_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_acls
@@ -21777,7 +21253,7 @@ module Aws::EC2
       :network_acls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analysis_ids
@@ -21817,7 +21293,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analyses
@@ -21830,7 +21306,7 @@ module Aws::EC2
       :network_insights_access_scope_analyses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_ids
@@ -21858,7 +21334,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scopes
@@ -21871,7 +21347,7 @@ module Aws::EC2
       :network_insights_access_scopes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_analysis_ids
@@ -21919,7 +21395,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_analyses
@@ -21932,7 +21408,7 @@ module Aws::EC2
       :network_insights_analyses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_path_ids
@@ -21995,7 +21471,7 @@ module Aws::EC2
       :dry_run,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_paths
@@ -22008,7 +21484,7 @@ module Aws::EC2
       :network_insights_paths,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeNetworkInterfaceAttribute.</p>
@@ -22029,7 +21505,7 @@ module Aws::EC2
       :network_interface_id,
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeNetworkInterfaceAttribute.</p>
@@ -22061,7 +21537,7 @@ module Aws::EC2
       :source_dest_check,
       :associate_public_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeNetworkInterfacePermissions.</p>
@@ -22112,7 +21588,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for DescribeNetworkInterfacePermissions.</p>
@@ -22127,7 +21603,7 @@ module Aws::EC2
       :network_interface_permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeNetworkInterfaces.</p>
@@ -22358,7 +21834,7 @@ module Aws::EC2
       :network_interface_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interfaces
@@ -22372,7 +21848,7 @@ module Aws::EC2
       :network_interfaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_lag_ids
@@ -22447,7 +21923,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_lags
@@ -22460,7 +21936,7 @@ module Aws::EC2
       :outpost_lags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_ids
@@ -22532,7 +22008,7 @@ module Aws::EC2
       :group_names,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute placement_groups
@@ -22541,7 +22017,7 @@ module Aws::EC2
     class DescribePlacementGroupsResult < Struct.new(
       :placement_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -22579,7 +22055,7 @@ module Aws::EC2
       :next_token,
       :prefix_list_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -22592,7 +22068,7 @@ module Aws::EC2
       :next_token,
       :prefix_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -22629,7 +22105,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principals
@@ -22642,7 +22118,7 @@ module Aws::EC2
       :principals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_ids
@@ -22675,7 +22151,7 @@ module Aws::EC2
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_ipv4_pools
@@ -22688,7 +22164,7 @@ module Aws::EC2
       :public_ipv4_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute region_names
@@ -22726,7 +22202,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions
@@ -22735,7 +22211,7 @@ module Aws::EC2
     class DescribeRegionsResult < Struct.new(
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replace_root_volume_task_ids
@@ -22771,7 +22247,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replace_root_volume_tasks
@@ -22785,7 +22261,7 @@ module Aws::EC2
       :replace_root_volume_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeReservedInstancesListings.</p>
@@ -22823,7 +22299,7 @@ module Aws::EC2
       :reserved_instances_listing_id,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeReservedInstancesListings.</p>
@@ -22833,7 +22309,7 @@ module Aws::EC2
     class DescribeReservedInstancesListingsResult < Struct.new(
       :reserved_instances_listings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeReservedInstancesModifications.</p>
@@ -22913,7 +22389,7 @@ module Aws::EC2
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeReservedInstancesModifications.</p>
@@ -22928,7 +22404,7 @@ module Aws::EC2
       :next_token,
       :reserved_instances_modifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeReservedInstancesOfferings.</p>
@@ -23080,7 +22556,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeReservedInstancesOfferings.</p>
@@ -23095,7 +22571,7 @@ module Aws::EC2
       :next_token,
       :reserved_instances_offerings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeReservedInstances.</p>
@@ -23202,7 +22678,7 @@ module Aws::EC2
       :filters,
       :offering_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output for DescribeReservedInstances.</p>
@@ -23212,7 +22688,7 @@ module Aws::EC2
     class DescribeReservedInstancesResult < Struct.new(
       :reserved_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_endpoint_ids
@@ -23239,7 +22715,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_endpoints
@@ -23252,7 +22728,7 @@ module Aws::EC2
       :route_server_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_peer_ids
@@ -23279,7 +22755,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_peers
@@ -23292,7 +22768,7 @@ module Aws::EC2
       :route_server_peers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_ids
@@ -23319,7 +22795,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_servers
@@ -23332,7 +22808,7 @@ module Aws::EC2
       :route_servers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -23467,7 +22943,7 @@ module Aws::EC2
       :route_table_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeRouteTables.</p>
@@ -23481,7 +22957,7 @@ module Aws::EC2
       :route_tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeScheduledInstanceAvailability.</p>
@@ -23539,7 +23015,7 @@ module Aws::EC2
       :next_token,
       :recurrence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeScheduledInstanceAvailability.</p>
@@ -23553,7 +23029,7 @@ module Aws::EC2
       :next_token,
       :scheduled_instance_availability_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeScheduledInstances.</p>
@@ -23602,7 +23078,7 @@ module Aws::EC2
       :scheduled_instance_ids,
       :slot_start_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeScheduledInstances.</p>
@@ -23616,7 +23092,7 @@ module Aws::EC2
       :next_token,
       :scheduled_instance_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -23631,7 +23107,7 @@ module Aws::EC2
       :dry_run,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_group_reference_set
@@ -23640,7 +23116,7 @@ module Aws::EC2
     class DescribeSecurityGroupReferencesResult < Struct.new(
       :security_group_reference_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -23686,7 +23162,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_group_rules
@@ -23700,7 +23176,7 @@ module Aws::EC2
       :security_group_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -23759,7 +23235,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_group_vpc_associations
@@ -23772,7 +23248,7 @@ module Aws::EC2
       :security_group_vpc_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_ids
@@ -23932,7 +23408,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -23945,7 +23421,7 @@ module Aws::EC2
       :next_token,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_link_virtual_interface_ids
@@ -24004,7 +23480,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_link_virtual_interfaces
@@ -24017,7 +23493,7 @@ module Aws::EC2
       :service_link_virtual_interfaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -24036,7 +23512,7 @@ module Aws::EC2
       :snapshot_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute product_codes
@@ -24054,7 +23530,7 @@ module Aws::EC2
       :snapshot_id,
       :create_volume_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -24096,7 +23572,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_tier_statuses
@@ -24110,7 +23586,7 @@ module Aws::EC2
       :snapshot_tier_statuses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -24217,7 +23693,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -24231,7 +23707,7 @@ module Aws::EC2
       :next_token,
       :snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeSpotDatafeedSubscription.</p>
@@ -24244,7 +23720,7 @@ module Aws::EC2
     class DescribeSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeSpotDatafeedSubscription.</p>
@@ -24254,7 +23730,7 @@ module Aws::EC2
     class DescribeSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeSpotFleetInstances.</p>
@@ -24282,7 +23758,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeSpotFleetInstances.</p>
@@ -24302,7 +23778,7 @@ module Aws::EC2
       :next_token,
       :spot_fleet_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeSpotFleetRequestHistory.</p>
@@ -24339,7 +23815,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeSpotFleetRequestHistory.</p>
@@ -24371,7 +23847,7 @@ module Aws::EC2
       :spot_fleet_request_id,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeSpotFleetRequests.</p>
@@ -24399,7 +23875,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeSpotFleetRequests.</p>
@@ -24414,7 +23890,7 @@ module Aws::EC2
       :next_token,
       :spot_fleet_request_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeSpotInstanceRequests.</p>
@@ -24643,7 +24119,7 @@ module Aws::EC2
       :spot_instance_request_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeSpotInstanceRequests.</p>
@@ -24658,7 +24134,7 @@ module Aws::EC2
       :spot_instance_requests,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeSpotPriceHistory.</p>
@@ -24755,7 +24231,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeSpotPriceHistory.</p>
@@ -24770,7 +24246,7 @@ module Aws::EC2
       :next_token,
       :spot_price_history,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -24795,7 +24271,7 @@ module Aws::EC2
       :next_token,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -24808,7 +24284,7 @@ module Aws::EC2
       :next_token,
       :stale_security_group_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -24856,7 +24332,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute store_image_task_results
@@ -24870,7 +24346,7 @@ module Aws::EC2
       :store_image_task_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -25033,7 +24509,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -25046,7 +24522,7 @@ module Aws::EC2
       :next_token,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -25097,7 +24573,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -25111,7 +24587,7 @@ module Aws::EC2
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rule_ids
@@ -25181,7 +24657,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rules
@@ -25194,7 +24670,7 @@ module Aws::EC2
       :traffic_mirror_filter_rules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_ids
@@ -25232,7 +24708,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filters
@@ -25245,7 +24721,7 @@ module Aws::EC2
       :traffic_mirror_filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_session_ids
@@ -25311,7 +24787,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_sessions
@@ -25324,7 +24800,7 @@ module Aws::EC2
       :traffic_mirror_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_target_ids
@@ -25374,7 +24850,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_targets
@@ -25387,7 +24863,7 @@ module Aws::EC2
       :traffic_mirror_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_ids
@@ -25456,7 +24932,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachments
@@ -25469,7 +24945,7 @@ module Aws::EC2
       :transit_gateway_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peer_ids
@@ -25513,7 +24989,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connect_peers
@@ -25526,7 +25002,7 @@ module Aws::EC2
       :transit_gateway_connect_peers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_ids
@@ -25582,7 +25058,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_connects
@@ -25595,7 +25071,7 @@ module Aws::EC2
       :transit_gateway_connects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_ids
@@ -25637,7 +25113,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domains
@@ -25650,7 +25126,7 @@ module Aws::EC2
       :transit_gateway_multicast_domains,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_ids
@@ -25709,7 +25185,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering_attachments
@@ -25722,7 +25198,7 @@ module Aws::EC2
       :transit_gateway_peering_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_ids
@@ -25750,7 +25226,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_tables
@@ -25763,7 +25239,7 @@ module Aws::EC2
       :transit_gateway_policy_tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_announcement_ids
@@ -25791,7 +25267,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_announcements
@@ -25804,7 +25280,7 @@ module Aws::EC2
       :transit_gateway_route_table_announcements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_ids
@@ -25856,7 +25332,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_tables
@@ -25869,7 +25345,7 @@ module Aws::EC2
       :transit_gateway_route_tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_ids
@@ -25915,7 +25391,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_vpc_attachments
@@ -25928,7 +25404,7 @@ module Aws::EC2
       :transit_gateway_vpc_attachments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_ids
@@ -26011,7 +25487,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateways
@@ -26024,7 +25500,7 @@ module Aws::EC2
       :transit_gateways,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_ids
@@ -26062,7 +25538,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute interface_associations
@@ -26075,7 +25551,7 @@ module Aws::EC2
       :interface_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_ids
@@ -26111,7 +25587,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoints
@@ -26124,7 +25600,7 @@ module Aws::EC2
       :verified_access_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group_ids
@@ -26156,7 +25632,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_groups
@@ -26169,7 +25645,7 @@ module Aws::EC2
       :verified_access_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_ids
@@ -26197,7 +25673,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configurations
@@ -26210,7 +25686,7 @@ module Aws::EC2
       :logging_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_ids
@@ -26238,7 +25714,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instances
@@ -26251,7 +25727,7 @@ module Aws::EC2
       :verified_access_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider_ids
@@ -26279,7 +25755,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_providers
@@ -26292,7 +25768,7 @@ module Aws::EC2
       :verified_access_trust_providers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -26311,7 +25787,7 @@ module Aws::EC2
       :volume_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_io
@@ -26328,7 +25804,7 @@ module Aws::EC2
       :product_codes,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -26420,7 +25896,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -26434,7 +25910,7 @@ module Aws::EC2
       :next_token,
       :volume_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -26512,7 +25988,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -26526,7 +26002,7 @@ module Aws::EC2
       :next_token,
       :volumes_modifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_ids
@@ -26655,7 +26131,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -26669,7 +26145,7 @@ module Aws::EC2
       :next_token,
       :volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -26688,7 +26164,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable_dns_hostnames
@@ -26714,7 +26190,7 @@ module Aws::EC2
       :enable_network_address_usage_metrics,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -26771,7 +26247,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_block_public_access_exclusions
@@ -26784,7 +26260,7 @@ module Aws::EC2
       :vpc_block_public_access_exclusions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -26795,7 +26271,7 @@ module Aws::EC2
     class DescribeVpcBlockPublicAccessOptionsRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_block_public_access_options
@@ -26804,7 +26280,7 @@ module Aws::EC2
     class DescribeVpcBlockPublicAccessOptionsResult < Struct.new(
       :vpc_block_public_access_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_ids
@@ -26823,7 +26299,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -26836,7 +26312,7 @@ module Aws::EC2
       :next_token,
       :vpcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -26871,7 +26347,7 @@ module Aws::EC2
       :vpc_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpcs
@@ -26880,7 +26356,7 @@ module Aws::EC2
     class DescribeVpcClassicLinkResult < Struct.new(
       :vpcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -26945,7 +26421,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_associations
@@ -26958,7 +26434,7 @@ module Aws::EC2
       :vpc_endpoint_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27016,7 +26492,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_notification_set
@@ -27030,7 +26506,7 @@ module Aws::EC2
       :connection_notification_set,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27088,7 +26564,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_connections
@@ -27101,7 +26577,7 @@ module Aws::EC2
       :vpc_endpoint_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27160,7 +26636,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_configurations
@@ -27173,7 +26649,7 @@ module Aws::EC2
       :service_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27216,7 +26692,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allowed_principals
@@ -27229,7 +26705,7 @@ module Aws::EC2
       :allowed_principals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27293,7 +26769,7 @@ module Aws::EC2
       :next_token,
       :service_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_names
@@ -27310,7 +26786,7 @@ module Aws::EC2
       :service_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27381,7 +26857,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoints
@@ -27394,7 +26870,7 @@ module Aws::EC2
       :vpc_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -27485,7 +26961,7 @@ module Aws::EC2
       :vpc_peering_connection_ids,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_peering_connections
@@ -27498,7 +26974,7 @@ module Aws::EC2
       :vpc_peering_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -27599,7 +27075,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -27612,7 +27088,7 @@ module Aws::EC2
       :next_token,
       :vpcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeVpnConnections.</p>
@@ -27696,7 +27172,7 @@ module Aws::EC2
       :vpn_connection_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeVpnConnections.</p>
@@ -27706,7 +27182,7 @@ module Aws::EC2
     class DescribeVpnConnectionsResult < Struct.new(
       :vpn_connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DescribeVpnGateways.</p>
@@ -27774,7 +27250,7 @@ module Aws::EC2
       :vpn_gateway_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of DescribeVpnGateways.</p>
@@ -27784,12 +27260,7 @@ module Aws::EC2
     class DescribeVpnGatewaysResult < Struct.new(
       :vpn_gateways,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DestinationFileFormat
-      plain_text = 'plain-text'
-      parquet = 'parquet'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination options for a flow log.</p>
@@ -27809,7 +27280,7 @@ module Aws::EC2
       :hive_compatible_partitions,
       :per_hour_partition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination options for a flow log.</p>
@@ -27827,7 +27298,7 @@ module Aws::EC2
       :hive_compatible_partitions,
       :per_hour_partition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27846,7 +27317,7 @@ module Aws::EC2
       :instance_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -27855,7 +27326,7 @@ module Aws::EC2
     class DetachClassicLinkVpcResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -27874,7 +27345,7 @@ module Aws::EC2
       :internet_gateway_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DetachNetworkInterface.</p>
@@ -27916,7 +27387,7 @@ module Aws::EC2
       :attachment_id,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -27940,7 +27411,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider
@@ -27953,7 +27424,7 @@ module Aws::EC2
       :verified_access_trust_provider,
       :verified_access_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes volume attachment details.</p>
@@ -27999,7 +27470,7 @@ module Aws::EC2
       :state,
       :attach_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device
@@ -28031,7 +27502,7 @@ module Aws::EC2
       :volume_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DetachVpnGateway.</p>
@@ -28052,7 +27523,7 @@ module Aws::EC2
       :vpn_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for an Amazon Web Services Verified Access device-identity based trust provider.</p>
@@ -28068,18 +27539,7 @@ module Aws::EC2
       :tenant_id,
       :public_signing_key_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeviceTrustProviderType
-      jamf = 'jamf'
-      crowdstrike = 'crowdstrike'
-      jumpcloud = 'jumpcloud'
-    end
-
-    module DeviceType
-      ebs = 'ebs'
-      instance_store = 'instance-store'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a DHCP configuration option.</p>
@@ -28093,7 +27553,7 @@ module Aws::EC2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of DHCP options.</p>
@@ -28115,7 +27575,7 @@ module Aws::EC2
       :dhcp_options_id,
       :dhcp_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Active Directory.</p>
@@ -28125,7 +27585,7 @@ module Aws::EC2
     class DirectoryServiceAuthentication < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Active Directory to be used for client authentication.</p>
@@ -28135,7 +27595,7 @@ module Aws::EC2
     class DirectoryServiceAuthenticationRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -28150,7 +27610,7 @@ module Aws::EC2
       :allocation_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_transfer
@@ -28159,7 +27619,7 @@ module Aws::EC2
     class DisableAddressTransferResult < Struct.new(
       :address_transfer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28170,7 +27630,7 @@ module Aws::EC2
     class DisableAllowedImagesSettingsRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allowed_images_settings_state
@@ -28180,7 +27640,7 @@ module Aws::EC2
     class DisableAllowedImagesSettingsResult < Struct.new(
       :allowed_images_settings_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -28207,7 +27667,7 @@ module Aws::EC2
       :statistic,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output
@@ -28216,7 +27676,7 @@ module Aws::EC2
     class DisableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28227,7 +27687,7 @@ module Aws::EC2
     class DisableEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ebs_encryption_by_default
@@ -28236,7 +27696,7 @@ module Aws::EC2
     class DisableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -28257,7 +27717,7 @@ module Aws::EC2
       :force,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -28302,7 +27762,7 @@ module Aws::EC2
       :state_transition_reason,
       :state_transition_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the errors that occurred when disabling fast snapshot restores.</p>
@@ -28316,7 +27776,7 @@ module Aws::EC2
       :snapshot_id,
       :fast_snapshot_restore_state_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error that occurred when disabling fast snapshot restores.</p>
@@ -28330,7 +27790,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an error that occurred when disabling fast snapshot restores.</p>
@@ -28344,7 +27804,7 @@ module Aws::EC2
       :availability_zone,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes fast snapshot restores that were successfully disabled.</p>
@@ -28406,7 +27866,7 @@ module Aws::EC2
       :disabling_time,
       :disabled_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -28425,7 +27885,7 @@ module Aws::EC2
       :source_snapshot_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -28438,7 +27898,7 @@ module Aws::EC2
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28449,7 +27909,7 @@ module Aws::EC2
     class DisableImageBlockPublicAccessRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_block_public_access_state
@@ -28459,7 +27919,7 @@ module Aws::EC2
     class DisableImageBlockPublicAccessResult < Struct.new(
       :image_block_public_access_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -28474,7 +27934,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28483,7 +27943,7 @@ module Aws::EC2
     class DisableImageDeprecationResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -28498,7 +27958,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28507,7 +27967,7 @@ module Aws::EC2
     class DisableImageDeregistrationProtectionResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -28522,7 +27982,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28531,7 +27991,7 @@ module Aws::EC2
     class DisableImageResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28546,7 +28006,7 @@ module Aws::EC2
       :dry_run,
       :delegated_admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -28555,7 +28015,7 @@ module Aws::EC2
     class DisableIpamOrganizationAdminAccountResult < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -28574,7 +28034,7 @@ module Aws::EC2
       :route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_propagation
@@ -28583,7 +28043,7 @@ module Aws::EC2
     class DisableRouteServerPropagationResult < Struct.new(
       :route_server_propagation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28592,7 +28052,7 @@ module Aws::EC2
     class DisableSerialConsoleAccessRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_console_access_enabled
@@ -28603,7 +28063,7 @@ module Aws::EC2
     class DisableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28614,7 +28074,7 @@ module Aws::EC2
     class DisableSnapshotBlockPublicAccessRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -28623,7 +28083,7 @@ module Aws::EC2
     class DisableSnapshotBlockPublicAccessResult < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -28646,7 +28106,7 @@ module Aws::EC2
       :dry_run,
       :transit_gateway_route_table_announcement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute propagation
@@ -28655,7 +28115,7 @@ module Aws::EC2
     class DisableTransitGatewayRouteTablePropagationResult < Struct.new(
       :propagation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for DisableVgwRoutePropagation.</p>
@@ -28676,7 +28136,7 @@ module Aws::EC2
       :route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -28685,7 +28145,7 @@ module Aws::EC2
     class DisableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28694,7 +28154,7 @@ module Aws::EC2
     class DisableVpcClassicLinkDnsSupportResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28709,7 +28169,7 @@ module Aws::EC2
       :dry_run,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28718,7 +28178,7 @@ module Aws::EC2
     class DisableVpcClassicLinkResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -28737,7 +28197,7 @@ module Aws::EC2
       :public_ip,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28754,7 +28214,7 @@ module Aws::EC2
       :capacity_reservation_id,
       :unused_reservation_billing_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28763,7 +28223,7 @@ module Aws::EC2
     class DisassociateCapacityReservationBillingOwnerResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -28780,7 +28240,7 @@ module Aws::EC2
       :association_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -28793,7 +28253,7 @@ module Aws::EC2
       :association_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -28810,7 +28270,7 @@ module Aws::EC2
       :role_arn,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -28819,7 +28279,7 @@ module Aws::EC2
     class DisassociateEnclaveCertificateIamRoleResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -28828,7 +28288,7 @@ module Aws::EC2
     class DisassociateIamInstanceProfileRequest < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_instance_profile_association
@@ -28837,7 +28297,7 @@ module Aws::EC2
     class DisassociateIamInstanceProfileResult < Struct.new(
       :iam_instance_profile_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28856,7 +28316,7 @@ module Aws::EC2
       :instance_event_window_id,
       :association_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_event_window
@@ -28865,7 +28325,7 @@ module Aws::EC2
     class DisassociateInstanceEventWindowResult < Struct.new(
       :instance_event_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28884,7 +28344,7 @@ module Aws::EC2
       :asn,
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asn_association
@@ -28893,7 +28353,7 @@ module Aws::EC2
     class DisassociateIpamByoasnResult < Struct.new(
       :asn_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28908,7 +28368,7 @@ module Aws::EC2
       :dry_run,
       :ipam_resource_discovery_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discovery_association
@@ -28917,7 +28377,7 @@ module Aws::EC2
     class DisassociateIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -28940,7 +28400,7 @@ module Aws::EC2
       :max_drain_duration_seconds,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -28953,7 +28413,7 @@ module Aws::EC2
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -28972,7 +28432,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_association
@@ -28981,7 +28441,7 @@ module Aws::EC2
     class DisassociateRouteServerResult < Struct.new(
       :route_server_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -28996,7 +28456,7 @@ module Aws::EC2
       :dry_run,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -29015,7 +28475,7 @@ module Aws::EC2
       :vpc_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -29024,7 +28484,7 @@ module Aws::EC2
     class DisassociateSecurityGroupVpcResult < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -29033,7 +28493,7 @@ module Aws::EC2
     class DisassociateSubnetCidrBlockRequest < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_cidr_block_association
@@ -29046,7 +28506,7 @@ module Aws::EC2
       :ipv6_cidr_block_association,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -29069,7 +28529,7 @@ module Aws::EC2
       :subnet_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -29078,7 +28538,7 @@ module Aws::EC2
     class DisassociateTransitGatewayMulticastDomainResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_id
@@ -29097,7 +28557,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -29106,7 +28566,7 @@ module Aws::EC2
     class DisassociateTransitGatewayPolicyTableResult < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -29125,7 +28585,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -29134,7 +28594,7 @@ module Aws::EC2
     class DisassociateTransitGatewayRouteTableResult < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -29155,7 +28615,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -29170,7 +28630,7 @@ module Aws::EC2
       :return,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association_id
@@ -29179,7 +28639,7 @@ module Aws::EC2
     class DisassociateVpcCidrBlockRequest < Struct.new(
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_cidr_block_association
@@ -29196,7 +28656,7 @@ module Aws::EC2
       :cidr_block_association,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk image.</p>
@@ -29214,7 +28674,7 @@ module Aws::EC2
       :image,
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk image.</p>
@@ -29239,7 +28699,7 @@ module Aws::EC2
       :import_manifest_url,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk image.</p>
@@ -29261,13 +28721,7 @@ module Aws::EC2
       :bytes,
       :import_manifest_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiskImageFormat
-      VMDK = 'VMDK'
-      RAW = 'RAW'
-      VHD = 'VHD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk image volume.</p>
@@ -29281,7 +28735,7 @@ module Aws::EC2
       :id,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a disk.</p>
@@ -29299,12 +28753,7 @@ module Aws::EC2
       :count,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiskType
-      hdd = 'hdd'
-      ssd = 'ssd'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a DNS entry.</p>
@@ -29318,13 +28767,7 @@ module Aws::EC2
       :dns_name,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsNameState
-      PendingVerification = 'pendingVerification'
-      Verified = 'verified'
-      Failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the DNS options for an endpoint.</p>
@@ -29338,7 +28781,7 @@ module Aws::EC2
       :dns_record_ip_type,
       :private_dns_only_for_inbound_resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the DNS options for an endpoint.</p>
@@ -29355,14 +28798,7 @@ module Aws::EC2
       :dns_record_ip_type,
       :private_dns_only_for_inbound_resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsRecordIpType
-      ipv4 = 'ipv4'
-      dualstack = 'dualstack'
-      ipv6 = 'ipv6'
-      service_defined = 'service-defined'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the DNS server to be used.</p>
@@ -29379,22 +28815,7 @@ module Aws::EC2
       :custom_dns_servers,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsSupportValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module DomainType
-      vpc = 'vpc'
-      standard = 'standard'
-    end
-
-    module DynamicRoutingValue
-      enable = 'enable'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device for an EBS volume.</p>
@@ -29587,7 +29008,7 @@ module Aws::EC2
       :volume_initialization_rate,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device for an EBS volume.</p>
@@ -29630,12 +29051,7 @@ module Aws::EC2
       :volume_size,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EbsEncryptionSupport
-      unsupported = 'unsupported'
-      supported = 'supported'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon EBS features supported by the instance type.</p>
@@ -29658,7 +29074,7 @@ module Aws::EC2
       :ebs_optimized_info,
       :nvme_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a parameter used to set up an EBS volume in a block device mapping.</p>
@@ -29695,7 +29111,7 @@ module Aws::EC2
       :volume_owner_id,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes information used to set up an EBS volume specified in a block device
@@ -29710,13 +29126,7 @@ module Aws::EC2
       :volume_id,
       :delete_on_termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EbsNvmeSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
-      REQUIRED = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the optimized EBS performance for supported instance types.</p>
@@ -29748,13 +29158,7 @@ module Aws::EC2
       :maximum_throughput_in_m_bps,
       :maximum_iops,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EbsOptimizedSupport
-      unsupported = 'unsupported'
-      supported = 'supported'
-      default = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the attached EBS status check for an instance.</p>
@@ -29772,7 +29176,7 @@ module Aws::EC2
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the attached EBS volume status for an instance.</p>
@@ -29786,7 +29190,7 @@ module Aws::EC2
       :details,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 Instance Connect Endpoint.</p>
@@ -29870,16 +29274,7 @@ module Aws::EC2
       :tags,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Ec2InstanceConnectEndpointState
-      create_in_progress = 'create-in-progress'
-      create_complete = 'create-complete'
-      create_failed = 'create-failed'
-      delete_in_progress = 'delete-in-progress'
-      delete_complete = 'delete-complete'
-      delete_failed = 'delete-failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Elastic Fabric Adapters for the instance type.</p>
@@ -29889,7 +29284,7 @@ module Aws::EC2
     class EfaInfo < Struct.new(
       :maximum_efa_interfaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an egress-only internet gateway.</p>
@@ -29907,17 +29302,7 @@ module Aws::EC2
       :egress_only_internet_gateway_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EkPubKeyFormat
-      der = 'der'
-      tpmt = 'tpmt'
-    end
-
-    module EkPubKeyType
-      RSA_2048 = 'rsa-2048'
-      ECC_SEC_P384 = 'ecc-sec-p384'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -29943,7 +29328,7 @@ module Aws::EC2
       :elastic_gpu_association_state,
       :elastic_gpu_association_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -29956,7 +29341,7 @@ module Aws::EC2
     class ElasticGpuHealth < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -29969,7 +29354,7 @@ module Aws::EC2
     class ElasticGpuSpecification < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deprecated.</p>
@@ -29985,16 +29370,7 @@ module Aws::EC2
     class ElasticGpuSpecificationResponse < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ElasticGpuState
-      Attached = 'ATTACHED'
-    end
-
-    module ElasticGpuStatus
-      Ok = 'OK'
-      Impaired = 'IMPAIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -30031,7 +29407,7 @@ module Aws::EC2
       :instance_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -30055,7 +29431,7 @@ module Aws::EC2
       :type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -30090,7 +29466,7 @@ module Aws::EC2
       :elastic_inference_accelerator_association_state,
       :elastic_inference_accelerator_association_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
@@ -30111,7 +29487,7 @@ module Aws::EC2
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Launch instances with ENA Express settings configured from your launch
@@ -30128,7 +29504,7 @@ module Aws::EC2
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
@@ -30143,7 +29519,7 @@ module Aws::EC2
     class EnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures ENA Express for UDP network traffic from your launch template.</p>
@@ -30154,13 +29530,7 @@ module Aws::EC2
     class EnaSrdUdpSpecificationRequest < Struct.new(
       :ena_srd_udp_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnaSupport
-      unsupported = 'unsupported'
-      supported = 'supported'
-      required = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -30179,7 +29549,7 @@ module Aws::EC2
       :transfer_account_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_transfer
@@ -30188,7 +29558,7 @@ module Aws::EC2
     class EnableAddressTransferResult < Struct.new(
       :address_transfer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allowed_images_settings_state
@@ -30205,7 +29575,7 @@ module Aws::EC2
       :allowed_images_settings_state,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allowed_images_settings_state
@@ -30215,7 +29585,7 @@ module Aws::EC2
     class EnableAllowedImagesSettingsResult < Struct.new(
       :allowed_images_settings_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -30242,7 +29612,7 @@ module Aws::EC2
       :statistic,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute output
@@ -30251,7 +29621,7 @@ module Aws::EC2
     class EnableAwsNetworkPerformanceMetricSubscriptionResult < Struct.new(
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -30262,7 +29632,7 @@ module Aws::EC2
     class EnableEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ebs_encryption_by_default
@@ -30271,7 +29641,7 @@ module Aws::EC2
     class EnableEbsEncryptionByDefaultResult < Struct.new(
       :ebs_encryption_by_default,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -30309,7 +29679,7 @@ module Aws::EC2
       :max_parallel_launches,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -30355,7 +29725,7 @@ module Aws::EC2
       :state_transition_reason,
       :state_transition_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the errors that occurred when enabling fast snapshot restores.</p>
@@ -30369,7 +29739,7 @@ module Aws::EC2
       :snapshot_id,
       :fast_snapshot_restore_state_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error that occurred when enabling fast snapshot restores.</p>
@@ -30383,7 +29753,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an error that occurred when enabling fast snapshot restores.</p>
@@ -30397,7 +29767,7 @@ module Aws::EC2
       :availability_zone,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes fast snapshot restores that were successfully enabled.</p>
@@ -30459,7 +29829,7 @@ module Aws::EC2
       :disabling_time,
       :disabled_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -30479,7 +29849,7 @@ module Aws::EC2
       :source_snapshot_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -30492,7 +29862,7 @@ module Aws::EC2
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_block_public_access_state
@@ -30509,7 +29879,7 @@ module Aws::EC2
       :image_block_public_access_state,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_block_public_access_state
@@ -30519,7 +29889,7 @@ module Aws::EC2
     class EnableImageBlockPublicAccessResult < Struct.new(
       :image_block_public_access_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -30543,7 +29913,7 @@ module Aws::EC2
       :deprecate_at,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -30552,7 +29922,7 @@ module Aws::EC2
     class EnableImageDeprecationResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -30572,7 +29942,7 @@ module Aws::EC2
       :with_cooldown,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -30581,7 +29951,7 @@ module Aws::EC2
     class EnableImageDeregistrationProtectionResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -30596,7 +29966,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -30605,7 +29975,7 @@ module Aws::EC2
     class EnableImageResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -30620,7 +29990,7 @@ module Aws::EC2
       :dry_run,
       :delegated_admin_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -30629,7 +29999,7 @@ module Aws::EC2
     class EnableIpamOrganizationAdminAccountResult < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -30640,7 +30010,7 @@ module Aws::EC2
     class EnableReachabilityAnalyzerOrganizationSharingRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -30649,7 +30019,7 @@ module Aws::EC2
     class EnableReachabilityAnalyzerOrganizationSharingResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -30668,7 +30038,7 @@ module Aws::EC2
       :route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_propagation
@@ -30677,7 +30047,7 @@ module Aws::EC2
     class EnableRouteServerPropagationResult < Struct.new(
       :route_server_propagation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -30686,7 +30056,7 @@ module Aws::EC2
     class EnableSerialConsoleAccessRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_console_access_enabled
@@ -30697,7 +30067,7 @@ module Aws::EC2
     class EnableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -30731,7 +30101,7 @@ module Aws::EC2
       :state,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -30742,7 +30112,7 @@ module Aws::EC2
     class EnableSnapshotBlockPublicAccessResult < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -30765,7 +30135,7 @@ module Aws::EC2
       :dry_run,
       :transit_gateway_route_table_announcement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute propagation
@@ -30774,7 +30144,7 @@ module Aws::EC2
     class EnableTransitGatewayRouteTablePropagationResult < Struct.new(
       :propagation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for EnableVgwRoutePropagation.</p>
@@ -30798,7 +30168,7 @@ module Aws::EC2
       :route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -30813,7 +30183,7 @@ module Aws::EC2
       :dry_run,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -30822,7 +30192,7 @@ module Aws::EC2
     class EnableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -30831,7 +30201,7 @@ module Aws::EC2
     class EnableVpcClassicLinkDnsSupportResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -30846,7 +30216,7 @@ module Aws::EC2
       :dry_run,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -30855,7 +30225,7 @@ module Aws::EC2
     class EnableVpcClassicLinkResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the instance is enabled for Amazon Web Services Nitro
@@ -30867,7 +30237,7 @@ module Aws::EC2
     class EnclaveOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For
@@ -30881,26 +30251,7 @@ module Aws::EC2
     class EnclaveOptionsRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndDateType
-      unlimited = 'unlimited'
-      limited = 'limited'
-    end
-
-    module EphemeralNvmeSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
-      REQUIRED = 'required'
-    end
-
-    module EventCode
-      instance_reboot = 'instance-reboot'
-      system_reboot = 'system-reboot'
-      system_maintenance = 'system-maintenance'
-      instance_retirement = 'instance-retirement'
-      instance_stop = 'instance-stop'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 Fleet or Spot Fleet event.</p>
@@ -31048,19 +30399,7 @@ module Aws::EC2
       :event_sub_type,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventType
-      INSTANCE_CHANGE = 'instanceChange'
-      BATCH_CHANGE = 'fleetRequestChange'
-      ERROR = 'error'
-      INFORMATION = 'information'
-    end
-
-    module ExcessCapacityTerminationPolicy
-      NO_TERMINATION = 'noTermination'
-      DEFAULT = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an explanation code for an unreachable path. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html">Reachability Analyzer explanation codes</a>.</p>
@@ -31290,7 +30629,7 @@ module Aws::EC2
       :firewall_stateless_rule,
       :firewall_stateful_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -31303,7 +30642,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_revocation_list
@@ -31316,7 +30655,7 @@ module Aws::EC2
       :certificate_revocation_list,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -31329,7 +30668,7 @@ module Aws::EC2
       :client_vpn_endpoint_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_configuration
@@ -31338,13 +30677,7 @@ module Aws::EC2
     class ExportClientVpnClientConfigurationResult < Struct.new(
       :client_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportEnvironment
-      citrix = 'citrix'
-      vmware = 'vmware'
-      microsoft = 'microsoft'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -31384,7 +30717,7 @@ module Aws::EC2
       :role_name,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -31431,7 +30764,7 @@ module Aws::EC2
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an export image task.</p>
@@ -31470,7 +30803,7 @@ module Aws::EC2
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an export instance task.</p>
@@ -31504,7 +30837,7 @@ module Aws::EC2
       :status_message,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination for an export image task.</p>
@@ -31518,7 +30851,7 @@ module Aws::EC2
       :s3_bucket,
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the destination for an export image task.</p>
@@ -31532,14 +30865,7 @@ module Aws::EC2
       :s3_bucket,
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportTaskState
-      active = 'active'
-      cancelling = 'cancelling'
-      cancelled = 'cancelled'
-      completed = 'completed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the format and location for the export task.</p>
@@ -31564,7 +30890,7 @@ module Aws::EC2
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an export instance task.</p>
@@ -31590,7 +30916,7 @@ module Aws::EC2
       :s3_bucket,
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -31652,7 +30978,7 @@ module Aws::EC2
       :s3_bucket,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_location
@@ -31662,7 +30988,7 @@ module Aws::EC2
     class ExportTransitGatewayRoutesResult < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -31677,7 +31003,7 @@ module Aws::EC2
       :verified_access_instance_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -31706,7 +31032,7 @@ module Aws::EC2
       :user_trust_provider,
       :open_vpn_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Capacity Reservation Fleet that could not be cancelled.</p>
@@ -31720,7 +31046,7 @@ module Aws::EC2
       :capacity_reservation_fleet_id,
       :cancel_capacity_reservation_fleet_error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance whose queued purchase was not deleted.</p>
@@ -31734,7 +31060,7 @@ module Aws::EC2
       :error,
       :reserved_instances_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create a launch template for a Windows fast launch enabled AMI.</p>
@@ -31759,7 +31085,7 @@ module Aws::EC2
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the launch template that the AMI uses for Windows fast launch.</p>
@@ -31777,11 +31103,7 @@ module Aws::EC2
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FastLaunchResourceType
-      SNAPSHOT = 'snapshot'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for creating and managing pre-provisioned snapshots for a Windows
@@ -31793,7 +31115,7 @@ module Aws::EC2
     class FastLaunchSnapshotConfigurationRequest < Struct.new(
       :target_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for creating and managing pre-provisioned snapshots for a Windows
@@ -31805,24 +31127,7 @@ module Aws::EC2
     class FastLaunchSnapshotConfigurationResponse < Struct.new(
       :target_resource_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FastLaunchStateCode
-      enabling = 'enabling'
-      enabling_failed = 'enabling-failed'
-      enabled = 'enabled'
-      enabled_failed = 'enabled-failed'
-      disabling = 'disabling'
-      disabling_failed = 'disabling-failed'
-    end
-
-    module FastSnapshotRestoreStateCode
-      enabling = 'enabling'
-      optimizing = 'optimizing'
-      enabled = 'enabled'
-      disabling = 'disabling'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the IAM SAML identity providers used for federated authentication.</p>
@@ -31836,7 +31141,7 @@ module Aws::EC2
       :saml_provider_arn,
       :self_service_saml_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM SAML identity provider used for federated authentication.</p>
@@ -31850,7 +31155,7 @@ module Aws::EC2
       :saml_provider_arn,
       :self_service_saml_provider_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter name and value pair that is used to return a more specific list of results from a describe operation. 
@@ -31870,7 +31175,7 @@ module Aws::EC2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a port range.</p>
@@ -31884,13 +31189,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FindingsFound
-      true = 'true'
-      false = 'false'
-      unknown = 'unknown'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stateful rule.</p>
@@ -31929,7 +31228,7 @@ module Aws::EC2
       :rule_action,
       :direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stateless rule.</p>
@@ -31968,14 +31267,7 @@ module Aws::EC2
       :rule_action,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetActivityStatus
-      ERROR = 'error'
-      PENDING_FULFILLMENT = 'pending_fulfillment'
-      PENDING_TERMINATION = 'pending_termination'
-      FULFILLED = 'fulfilled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping, which defines the EBS volumes and instance store
@@ -32034,7 +31326,7 @@ module Aws::EC2
       :ebs,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a Capacity Reservation in a Capacity Reservation Fleet.</p>
@@ -32094,15 +31386,7 @@ module Aws::EC2
       :weight,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetCapacityReservationTenancy
-      default = 'default'
-    end
-
-    module FleetCapacityReservationUsageStrategy
-      USE_CAPACITY_RESERVATIONS_FIRST = 'use-capacity-reservations-first'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EC2 Fleet.</p>
@@ -32221,7 +31505,7 @@ module Aws::EC2
       :instances,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device for an EBS volume.</p>
@@ -32353,22 +31637,7 @@ module Aws::EC2
       :volume_size,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetEventType
-      INSTANCE_CHANGE = 'instance-change'
-      FLEET_CHANGE = 'fleet-change'
-      SERVICE_ERROR = 'service-error'
-    end
-
-    module FleetExcessCapacityTerminationPolicy
-      NO_TERMINATION = 'no-termination'
-      TERMINATION = 'termination'
-    end
-
-    module FleetInstanceMatchCriteria
-      open = 'open'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template and overrides.</p>
@@ -32383,7 +31652,7 @@ module Aws::EC2
       :launch_template_specification,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template and overrides.</p>
@@ -32401,7 +31670,7 @@ module Aws::EC2
       :launch_template_specification,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes overrides for a launch template.</p>
@@ -32557,7 +31826,7 @@ module Aws::EC2
       :image_id,
       :block_device_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes overrides for a launch template.</p>
@@ -32713,7 +31982,7 @@ module Aws::EC2
       :instance_requirements,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon EC2 launch template that can be used by
@@ -32742,7 +32011,7 @@ module Aws::EC2
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon EC2 launch template that can be used by
@@ -32768,17 +32037,7 @@ module Aws::EC2
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetOnDemandAllocationStrategy
-      LOWEST_PRICE = 'lowest-price'
-      PRIORITIZED = 'prioritized'
-    end
-
-    module FleetReplacementStrategy
-      LAUNCH = 'launch'
-      LAUNCH_BEFORE_TERMINATE = 'launch-before-terminate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an
@@ -32809,7 +32068,7 @@ module Aws::EC2
       :replacement_strategy,
       :termination_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spot Instance replacement strategy to use when Amazon EC2 emits a rebalance
@@ -32841,7 +32100,7 @@ module Aws::EC2
       :replacement_strategy,
       :termination_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The strategies for managing your Spot Instances that are at an elevated risk of being
@@ -32853,7 +32112,7 @@ module Aws::EC2
     class FleetSpotMaintenanceStrategies < Struct.new(
       :capacity_rebalance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.</p>
@@ -32864,28 +32123,7 @@ module Aws::EC2
     class FleetSpotMaintenanceStrategiesRequest < Struct.new(
       :capacity_rebalance,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FleetStateCode
-      SUBMITTED = 'submitted'
-      ACTIVE = 'active'
-      DELETED = 'deleted'
-      FAILED = 'failed'
-      DELETED_RUNNING = 'deleted_running'
-      DELETED_TERMINATING_INSTANCES = 'deleted_terminating'
-      MODIFYING = 'modifying'
-    end
-
-    module FleetType
-      REQUEST = 'request'
-      MAINTAIN = 'maintain'
-      INSTANT = 'instant'
-    end
-
-    module FlexibleEnaQueuesSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a flow log.</p>
@@ -32965,15 +32203,7 @@ module Aws::EC2
       :max_aggregation_interval,
       :destination_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowLogsResourceType
-      VPC = 'VPC'
-      Subnet = 'Subnet'
-      NetworkInterface = 'NetworkInterface'
-      TransitGateway = 'TransitGateway'
-      TransitGatewayAttachment = 'TransitGatewayAttachment'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the FPGA accelerator for the instance type.</p>
@@ -32995,7 +32225,7 @@ module Aws::EC2
       :count,
       :memory_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the memory for the FPGA accelerator for the instance type.</p>
@@ -33005,7 +32235,7 @@ module Aws::EC2
     class FpgaDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon FPGA image (AFI).</p>
@@ -33075,7 +32305,7 @@ module Aws::EC2
       :data_retention_support,
       :instance_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon FPGA image (AFI) attribute.</p>
@@ -33101,14 +32331,7 @@ module Aws::EC2
       :load_permissions,
       :product_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FpgaImageAttributeName
-      description = 'description'
-      name = 'name'
-      loadPermission = 'loadPermission'
-      productCodes = 'productCodes'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of the bitstream generation process for an Amazon FPGA image (AFI).</p>
@@ -33140,14 +32363,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FpgaImageStateCode
-      pending = 'pending'
-      failed = 'failed'
-      available = 'available'
-      unavailable = 'unavailable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the FPGAs for the instance type.</p>
@@ -33161,18 +32377,7 @@ module Aws::EC2
       :fpgas,
       :total_fpga_memory_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GatewayAssociationState
-      associated = 'associated'
-      not_associated = 'not-associated'
-      associating = 'associating'
-      disassociating = 'disassociating'
-    end
-
-    module GatewayType
-      ipsec_1 = 'ipsec.1'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -33189,7 +32394,7 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_vpn_tunnel_status
@@ -33198,7 +32403,7 @@ module Aws::EC2
     class GetActiveVpnTunnelStatusResult < Struct.new(
       :active_vpn_tunnel_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33209,7 +32414,7 @@ module Aws::EC2
     class GetAllowedImagesSettingsRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -33257,7 +32462,7 @@ module Aws::EC2
       :image_criteria,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_arn
@@ -33271,7 +32476,7 @@ module Aws::EC2
       :certificate_arn,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associated_roles
@@ -33280,7 +32485,7 @@ module Aws::EC2
     class GetAssociatedEnclaveCertificateIamRolesResult < Struct.new(
       :associated_roles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -33304,7 +32509,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_cidr_associations
@@ -33317,7 +32522,7 @@ module Aws::EC2
       :ipv6_cidr_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_queries
@@ -33350,7 +32555,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_responses
@@ -33363,7 +32568,7 @@ module Aws::EC2
       :data_responses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_id
@@ -33385,7 +32590,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -33480,7 +32685,7 @@ module Aws::EC2
       :state,
       :instance_usages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -33526,7 +32731,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute coip_pool_id
@@ -33547,7 +32752,7 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -33567,7 +32772,7 @@ module Aws::EC2
       :latest,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -33585,7 +32790,7 @@ module Aws::EC2
       :timestamp,
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33605,7 +32810,7 @@ module Aws::EC2
       :instance_id,
       :wake_up,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_data
@@ -33618,7 +32823,7 @@ module Aws::EC2
       :image_data,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33633,7 +32838,7 @@ module Aws::EC2
       :dry_run,
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -33690,7 +32895,7 @@ module Aws::EC2
       :number_of_failed_accounts,
       :attribute_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33705,7 +32910,7 @@ module Aws::EC2
       :dry_run,
       :instance_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_family_credit_specification
@@ -33714,7 +32919,7 @@ module Aws::EC2
     class GetDefaultCreditSpecificationResult < Struct.new(
       :instance_family_credit_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33725,7 +32930,7 @@ module Aws::EC2
     class GetEbsDefaultKmsKeyIdRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -33734,7 +32939,7 @@ module Aws::EC2
     class GetEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33745,7 +32950,7 @@ module Aws::EC2
     class GetEbsEncryptionByDefaultRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ebs_encryption_by_default
@@ -33758,7 +32963,7 @@ module Aws::EC2
       :ebs_encryption_by_default,
       :sse_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33781,7 +32986,7 @@ module Aws::EC2
       :config_delivery_s3_destination_arn,
       :integrate_services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -33790,7 +32995,7 @@ module Aws::EC2
     class GetFlowLogsIntegrationTemplateResult < Struct.new(
       :result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_id
@@ -33814,7 +33019,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -33828,7 +33033,7 @@ module Aws::EC2
       :next_token,
       :capacity_reservation_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_id_set
@@ -33841,7 +33046,7 @@ module Aws::EC2
       :host_id_set,
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute currency_code
@@ -33865,7 +33070,7 @@ module Aws::EC2
       :total_hourly_price,
       :total_upfront_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33876,7 +33081,7 @@ module Aws::EC2
     class GetImageBlockPublicAccessStateRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_block_public_access_state
@@ -33915,7 +33120,7 @@ module Aws::EC2
       :image_block_public_access_state,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -33926,7 +33131,7 @@ module Aws::EC2
     class GetInstanceMetadataDefaultsRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_level
@@ -33935,7 +33140,7 @@ module Aws::EC2
     class GetInstanceMetadataDefaultsResult < Struct.new(
       :account_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -33960,7 +33165,7 @@ module Aws::EC2
       :key_format,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -33981,7 +33186,7 @@ module Aws::EC2
       :key_format,
       :key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34018,7 +33223,7 @@ module Aws::EC2
       :next_token,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_types
@@ -34032,7 +33237,7 @@ module Aws::EC2
       :instance_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -34047,7 +33252,7 @@ module Aws::EC2
       :instance_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -34060,7 +33265,7 @@ module Aws::EC2
       :instance_id,
       :uefi_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34100,7 +33305,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute history_records
@@ -34113,7 +33318,7 @@ module Aws::EC2
       :history_records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34144,7 +33349,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_discovered_accounts
@@ -34157,7 +33362,7 @@ module Aws::EC2
       :ipam_discovered_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34188,7 +33393,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_discovered_public_addresses
@@ -34205,7 +33410,7 @@ module Aws::EC2
       :oldest_sample_time,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34236,7 +33441,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_discovered_resource_cidrs
@@ -34249,7 +33454,7 @@ module Aws::EC2
       :ipam_discovered_resource_cidrs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34280,7 +33485,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool_allocations
@@ -34293,7 +33498,7 @@ module Aws::EC2
       :ipam_pool_allocations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34320,7 +33525,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool_cidrs
@@ -34333,7 +33538,7 @@ module Aws::EC2
       :ipam_pool_cidrs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34380,7 +33585,7 @@ module Aws::EC2
       :resource_tag,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -34393,7 +33598,7 @@ module Aws::EC2
       :next_token,
       :ipam_resource_cidrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34409,7 +33614,7 @@ module Aws::EC2
       :dry_run,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_template_data
@@ -34418,7 +33623,7 @@ module Aws::EC2
     class GetLaunchTemplateDataResult < Struct.new(
       :launch_template_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34442,7 +33647,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix_list_associations
@@ -34455,7 +33660,7 @@ module Aws::EC2
       :prefix_list_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34483,7 +33688,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -34496,7 +33701,7 @@ module Aws::EC2
       :entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analysis_id
@@ -34520,7 +33725,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analysis_id
@@ -34541,7 +33746,7 @@ module Aws::EC2
       :analysis_findings,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_id
@@ -34556,7 +33761,7 @@ module Aws::EC2
       :network_insights_access_scope_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_content
@@ -34565,7 +33770,7 @@ module Aws::EC2
     class GetNetworkInsightsAccessScopeContentResult < Struct.new(
       :network_insights_access_scope_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -34580,7 +33785,7 @@ module Aws::EC2
       :instance_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -34598,7 +33803,7 @@ module Aws::EC2
       :timestamp,
       :password_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for GetReservedInstanceExchangeQuote.</p>
@@ -34620,7 +33825,7 @@ module Aws::EC2
       :reserved_instance_ids,
       :target_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of GetReservedInstancesExchangeQuote.</p>
@@ -34663,7 +33868,7 @@ module Aws::EC2
       :target_configuration_value_set,
       :validation_failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -34678,7 +33883,7 @@ module Aws::EC2
       :route_server_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_associations
@@ -34687,7 +33892,7 @@ module Aws::EC2
     class GetRouteServerAssociationsResult < Struct.new(
       :route_server_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -34706,7 +33911,7 @@ module Aws::EC2
       :route_table_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_propagations
@@ -34715,7 +33920,7 @@ module Aws::EC2
     class GetRouteServerPropagationsResult < Struct.new(
       :route_server_propagations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -34742,7 +33947,7 @@ module Aws::EC2
       :dry_run,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute are_routes_persisted
@@ -34759,7 +33964,7 @@ module Aws::EC2
       :routes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -34810,7 +34015,7 @@ module Aws::EC2
       :filters,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -34823,7 +34028,7 @@ module Aws::EC2
       :next_token,
       :security_group_for_vpcs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34832,7 +34037,7 @@ module Aws::EC2
     class GetSerialConsoleAccessStatusRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute serial_console_access_enabled
@@ -34858,7 +34063,7 @@ module Aws::EC2
       :serial_console_access_enabled,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -34869,7 +34074,7 @@ module Aws::EC2
     class GetSnapshotBlockPublicAccessStateRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -34913,7 +34118,7 @@ module Aws::EC2
       :state,
       :managed_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_types
@@ -34970,7 +34175,7 @@ module Aws::EC2
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute spot_placement_scores
@@ -34999,7 +34204,7 @@ module Aws::EC2
       :spot_placement_scores,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -35047,7 +34252,7 @@ module Aws::EC2
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subnet_ipv4_cidr_reservations
@@ -35064,7 +34269,7 @@ module Aws::EC2
       :subnet_ipv6_cidr_reservations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -35098,7 +34303,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_propagations
@@ -35111,7 +34316,7 @@ module Aws::EC2
       :transit_gateway_attachment_propagations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -35163,7 +34368,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multicast_domain_associations
@@ -35176,7 +34381,7 @@ module Aws::EC2
       :multicast_domain_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_id
@@ -35204,7 +34409,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -35217,7 +34422,7 @@ module Aws::EC2
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_id
@@ -35245,7 +34450,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_policy_table_entries
@@ -35254,7 +34459,7 @@ module Aws::EC2
     class GetTransitGatewayPolicyTableEntriesResult < Struct.new(
       :transit_gateway_policy_table_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -35314,7 +34519,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_prefix_list_references
@@ -35327,7 +34532,7 @@ module Aws::EC2
       :transit_gateway_prefix_list_references,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -35371,7 +34576,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -35384,7 +34589,7 @@ module Aws::EC2
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -35428,7 +34633,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_propagations
@@ -35441,7 +34646,7 @@ module Aws::EC2
       :transit_gateway_route_table_propagations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_id
@@ -35456,7 +34661,7 @@ module Aws::EC2
       :verified_access_endpoint_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_enabled
@@ -35469,7 +34674,7 @@ module Aws::EC2
       :policy_enabled,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_id
@@ -35493,7 +34698,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_targets
@@ -35506,7 +34711,7 @@ module Aws::EC2
       :verified_access_endpoint_targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group_id
@@ -35521,7 +34726,7 @@ module Aws::EC2
       :verified_access_group_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_enabled
@@ -35534,7 +34739,7 @@ module Aws::EC2
       :policy_enabled,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -35565,7 +34770,7 @@ module Aws::EC2
       :sample_type,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_device_sample_configuration
@@ -35574,7 +34779,7 @@ module Aws::EC2
     class GetVpnConnectionDeviceSampleConfigurationResult < Struct.new(
       :vpn_connection_device_sample_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -35605,7 +34810,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_device_types
@@ -35623,7 +34828,7 @@ module Aws::EC2
       :vpn_connection_device_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -35640,7 +34845,7 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -35669,7 +34874,7 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :maintenance_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the GPU accelerators for the instance type.</p>
@@ -35691,7 +34896,7 @@ module Aws::EC2
       :count,
       :memory_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the memory available to the GPU accelerator.</p>
@@ -35701,7 +34906,7 @@ module Aws::EC2
     class GpuDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the GPU accelerators for the instance type.</p>
@@ -35715,7 +34920,7 @@ module Aws::EC2
       :gpus,
       :total_gpu_memory_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group.</p>
@@ -35729,7 +34934,7 @@ module Aws::EC2
       :group_id,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether your instance is configured for hibernation. This parameter is valid
@@ -35743,7 +34948,7 @@ module Aws::EC2
     class HibernationOptions < Struct.new(
       :configured,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether your instance is configured for hibernation. This parameter is valid
@@ -35773,7 +34978,7 @@ module Aws::EC2
     class HibernationOptionsRequest < Struct.new(
       :configured,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an event in the history of the Spot Fleet request.</p>
@@ -35811,7 +35016,7 @@ module Aws::EC2
       :event_type,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an event in the history of an EC2 Fleet.</p>
@@ -35830,7 +35035,7 @@ module Aws::EC2
       :event_type,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the Dedicated Host.</p>
@@ -35923,7 +35128,7 @@ module Aws::EC2
       :host_maintenance,
       :asset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance running on a Dedicated Host.</p>
@@ -35942,12 +35147,7 @@ module Aws::EC2
       :instance_type,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostMaintenance
-      on = 'on'
-      off = 'off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Dedicated Host Reservation offering.</p>
@@ -35981,7 +35181,7 @@ module Aws::EC2
       :payment_option,
       :upfront_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of a Dedicated Host.</p>
@@ -36009,12 +35209,7 @@ module Aws::EC2
       :sockets,
       :total_v_cpus,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostRecovery
-      on = 'on'
-      off = 'off'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the Dedicated Host Reservation and associated Dedicated Hosts.</p>
@@ -36081,28 +35276,7 @@ module Aws::EC2
       :upfront_price,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HostTenancy
-      default = 'default'
-      dedicated = 'dedicated'
-      host = 'host'
-    end
-
-    module HostnameType
-      ip_name = 'ip-name'
-      resource_name = 'resource-name'
-    end
-
-    module HttpTokensState
-      optional = 'optional'
-      required = 'required'
-    end
-
-    module HypervisorType
-      ovm = 'ovm'
-      xen = 'xen'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The internet key exchange (IKE) version permitted for the VPN tunnel.</p>
@@ -36112,7 +35286,7 @@ module Aws::EC2
     class IKEVersionsListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IKE version that is permitted for the VPN tunnel.</p>
@@ -36122,7 +35296,7 @@ module Aws::EC2
     class IKEVersionsRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IAM instance profile.</p>
@@ -36136,7 +35310,7 @@ module Aws::EC2
       :arn,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between an IAM instance profile and an instance.</p>
@@ -36162,14 +35336,7 @@ module Aws::EC2
       :state,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IamInstanceProfileAssociationState
-      ASSOCIATING = 'associating'
-      ASSOCIATED = 'associated'
-      DISASSOCIATING = 'disassociating'
-      DISASSOCIATED = 'disassociated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IAM instance profile.</p>
@@ -36183,7 +35350,7 @@ module Aws::EC2
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the ICMP type and code.</p>
@@ -36197,7 +35364,7 @@ module Aws::EC2
       :code,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the ID format for a resource.</p>
@@ -36215,12 +35382,7 @@ module Aws::EC2
       :resource,
       :use_long_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Igmpv2SupportValue
-      enable = 'enable'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an image.</p>
@@ -36419,31 +35581,7 @@ module Aws::EC2
       :ramdisk_id,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageAttributeName
-      description = 'description'
-      kernel = 'kernel'
-      ramdisk = 'ramdisk'
-      launchPermission = 'launchPermission'
-      productCodes = 'productCodes'
-      blockDeviceMapping = 'blockDeviceMapping'
-      sriovNetSupport = 'sriovNetSupport'
-      bootMode = 'bootMode'
-      tpmSupport = 'tpmSupport'
-      uefiData = 'uefiData'
-      lastLaunchedTime = 'lastLaunchedTime'
-      imdsSupport = 'imdsSupport'
-      deregistrationProtection = 'deregistrationProtection'
-    end
-
-    module ImageBlockPublicAccessDisabledState
-      unblocked = 'unblocked'
-    end
-
-    module ImageBlockPublicAccessEnabledState
-      block_new_sharing = 'block-new-sharing'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable
@@ -36472,7 +35610,7 @@ module Aws::EC2
     class ImageCriterion < Struct.new(
       :image_providers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of criteria that are evaluated to determine whch AMIs are discoverable and usable
@@ -36502,7 +35640,7 @@ module Aws::EC2
     class ImageCriterionRequest < Struct.new(
       :image_providers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the disk container object for an import image task.</p>
@@ -36535,7 +35673,7 @@ module Aws::EC2
       :url,
       :user_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the AMI.</p>
@@ -36589,7 +35727,7 @@ module Aws::EC2
       :image_allowed,
       :is_public,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an AMI that is currently in the Recycle Bin.</p>
@@ -36615,28 +35753,7 @@ module Aws::EC2
       :recycle_bin_enter_time,
       :recycle_bin_exit_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageState
-      pending = 'pending'
-      available = 'available'
-      invalid = 'invalid'
-      deregistered = 'deregistered'
-      transient = 'transient'
-      failed = 'failed'
-      error = 'error'
-      disabled = 'disabled'
-    end
-
-    module ImageTypeValues
-      machine = 'machine'
-      kernel = 'kernel'
-      ramdisk = 'ramdisk'
-    end
-
-    module ImdsSupportValues
-      v2_0 = 'v2.0'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -36654,7 +35771,7 @@ module Aws::EC2
       :certificate_revocation_list,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -36663,7 +35780,7 @@ module Aws::EC2
     class ImportClientVpnClientCertificateRevocationListResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request information of license configurations.</p>
@@ -36673,7 +35790,7 @@ module Aws::EC2
     class ImportImageLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The response information for license configurations.</p>
@@ -36683,7 +35800,7 @@ module Aws::EC2
     class ImportImageLicenseConfigurationResponse < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute architecture
@@ -36799,7 +35916,7 @@ module Aws::EC2
       :usage_operation,
       :boot_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute architecture
@@ -36868,7 +35985,7 @@ module Aws::EC2
       :tags,
       :usage_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an import image task.</p>
@@ -36946,7 +36063,7 @@ module Aws::EC2
       :usage_operation,
       :boot_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch specification for VM import.</p>
@@ -36998,7 +36115,7 @@ module Aws::EC2
       :instance_initiated_shutdown_behavior,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -37025,7 +36142,7 @@ module Aws::EC2
       :disk_images,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conversion_task
@@ -37034,7 +36151,7 @@ module Aws::EC2
     class ImportInstanceResult < Struct.new(
       :conversion_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an import instance task.</p>
@@ -37056,7 +36173,7 @@ module Aws::EC2
       :platform,
       :volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an import volume task.</p>
@@ -37094,7 +36211,7 @@ module Aws::EC2
       :status_message,
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_specifications
@@ -37117,7 +36234,7 @@ module Aws::EC2
       :key_name,
       :public_key_material,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_fingerprint
@@ -37145,7 +36262,7 @@ module Aws::EC2
       :key_pair_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_data
@@ -37212,7 +36329,7 @@ module Aws::EC2
       :role_name,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -37233,7 +36350,7 @@ module Aws::EC2
       :snapshot_task_detail,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an import snapshot task.</p>
@@ -37255,7 +36372,7 @@ module Aws::EC2
       :snapshot_task_detail,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zone_id
@@ -37290,7 +36407,7 @@ module Aws::EC2
       :description,
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute conversion_task
@@ -37299,7 +36416,7 @@ module Aws::EC2
     class ImportVolumeResult < Struct.new(
       :conversion_task,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an import volume task.</p>
@@ -37329,7 +36446,7 @@ module Aws::EC2
       :image,
       :volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -37347,7 +36464,7 @@ module Aws::EC2
       :accelerators,
       :total_inference_memory_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -37372,7 +36489,7 @@ module Aws::EC2
       :manufacturer,
       :memory_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -37385,7 +36502,7 @@ module Aws::EC2
     class InferenceDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the volume initialization. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html">Initialize Amazon EBS volumes</a>.</p>
@@ -37418,12 +36535,7 @@ module Aws::EC2
       :progress,
       :estimated_time_to_complete_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InitializationType
-      default = 'default'
-      provisioned_rate = 'provisioned-rate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance.</p>
@@ -37718,7 +36830,7 @@ module Aws::EC2
       :private_ip_address,
       :public_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
@@ -37739,7 +36851,7 @@ module Aws::EC2
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
@@ -37754,37 +36866,7 @@ module Aws::EC2
     class InstanceAttachmentEnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceAttributeName
-      instanceType = 'instanceType'
-      kernel = 'kernel'
-      ramdisk = 'ramdisk'
-      userData = 'userData'
-      disableApiTermination = 'disableApiTermination'
-      instanceInitiatedShutdownBehavior = 'instanceInitiatedShutdownBehavior'
-      rootDeviceName = 'rootDeviceName'
-      blockDeviceMapping = 'blockDeviceMapping'
-      productCodes = 'productCodes'
-      sourceDestCheck = 'sourceDestCheck'
-      groupSet = 'groupSet'
-      ebsOptimized = 'ebsOptimized'
-      sriovNetSupport = 'sriovNetSupport'
-      enaSupport = 'enaSupport'
-      enclaveOptions = 'enclaveOptions'
-      disableApiStop = 'disableApiStop'
-    end
-
-    module InstanceAutoRecoveryState
-      disabled = 'disabled'
-      default = 'default'
-    end
-
-    module InstanceBandwidthWeighting
-      DEFAULT = 'default'
-      VPC_1 = 'vpc-1'
-      EBS_1 = 'ebs-1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping.</p>
@@ -37799,7 +36881,7 @@ module Aws::EC2
       :device_name,
       :ebs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping entry.</p>
@@ -37822,12 +36904,7 @@ module Aws::EC2
       :virtual_name,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceBootModeValues
-      legacy_bios = 'legacy-bios'
-      uefi = 'uefi'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the number of instances that can be launched onto the Dedicated
@@ -37848,7 +36925,7 @@ module Aws::EC2
       :instance_type,
       :total_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance listing state.</p>
@@ -37863,7 +36940,7 @@ module Aws::EC2
       :instance_count,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the credit option for CPU usage of a burstable performance instance. </p>
@@ -37879,7 +36956,7 @@ module Aws::EC2
       :instance_id,
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the credit option for CPU usage of a burstable performance instance.</p>
@@ -37897,7 +36974,7 @@ module Aws::EC2
       :instance_id,
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event window.</p>
@@ -37931,7 +37008,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more targets associated with the specified event window. Only one
@@ -37957,7 +37034,7 @@ module Aws::EC2
       :instance_tags,
       :dedicated_host_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more targets associated with the event window.</p>
@@ -37979,7 +37056,7 @@ module Aws::EC2
       :tags,
       :dedicated_host_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The targets to disassociate from the specified event window.</p>
@@ -37998,14 +37075,7 @@ module Aws::EC2
       :instance_tags,
       :dedicated_host_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceEventWindowState
-      creating = 'creating'
-      deleting = 'deleting'
-      active = 'active'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the event window.</p>
@@ -38019,7 +37089,7 @@ module Aws::EC2
       :instance_event_window_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start day and time and the end day and time of the time range, in UTC.</p>
@@ -38041,7 +37111,7 @@ module Aws::EC2
       :end_week_day,
       :end_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The start day and time and the end day and time of the time range, in UTC.</p>
@@ -38063,7 +37133,7 @@ module Aws::EC2
       :end_week_day,
       :end_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance to export.</p>
@@ -38077,7 +37147,7 @@ module Aws::EC2
       :instance_id,
       :target_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the default credit option for CPU usage of a burstable performance instance
@@ -38093,17 +37163,7 @@ module Aws::EC2
       :instance_family,
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceGeneration
-      CURRENT = 'current'
-      PREVIOUS = 'previous'
-    end
-
-    module InstanceHealthStatus
-      HEALTHY_STATUS = 'healthy'
-      UNHEALTHY_STATUS = 'unhealthy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instance and the AMI used to launch the instance.</p>
@@ -38149,13 +37209,7 @@ module Aws::EC2
       :image_metadata,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceInterruptionBehavior
-      hibernate = 'hibernate'
-      stop = 'stop'
-      terminate = 'terminate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an IPv4 prefix.</p>
@@ -38165,7 +37219,7 @@ module Aws::EC2
     class InstanceIpv4Prefix < Struct.new(
       :ipv4_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 address.</p>
@@ -38180,7 +37234,7 @@ module Aws::EC2
       :ipv6_address,
       :is_primary_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 address.</p>
@@ -38190,7 +37244,7 @@ module Aws::EC2
     class InstanceIpv6AddressRequest < Struct.new(
       :ipv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an IPv6 prefix.</p>
@@ -38200,18 +37254,7 @@ module Aws::EC2
     class InstanceIpv6Prefix < Struct.new(
       :ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceLifecycle
-      SPOT = 'spot'
-      ON_DEMAND = 'on-demand'
-    end
-
-    module InstanceLifecycleType
-      spot = 'spot'
-      scheduled = 'scheduled'
-      capacity_block = 'capacity-block'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maintenance options for the instance.</p>
@@ -38245,7 +37288,7 @@ module Aws::EC2
       :auto_recovery,
       :reboot_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maintenance options for the instance.</p>
@@ -38256,7 +37299,7 @@ module Aws::EC2
     class InstanceMaintenanceOptionsRequest < Struct.new(
       :auto_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the market (purchasing) option for the instances.</p>
@@ -38270,12 +37313,7 @@ module Aws::EC2
       :market_type,
       :spot_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMatchCriteria
-      open = 'open'
-      targeted = 'targeted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default instance metadata service (IMDS) settings that were set at the account
@@ -38334,12 +37372,7 @@ module Aws::EC2
       :managed_by,
       :managed_exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMetadataEndpointState
-      disabled = 'disabled'
-      enabled = 'enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instance.</p>
@@ -38405,7 +37438,7 @@ module Aws::EC2
       :http_protocol_ipv6,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instance.</p>
@@ -38463,22 +37496,7 @@ module Aws::EC2
       :http_protocol_ipv6,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceMetadataOptionsState
-      pending = 'pending'
-      applied = 'applied'
-    end
-
-    module InstanceMetadataProtocolState
-      disabled = 'disabled'
-      enabled = 'enabled'
-    end
-
-    module InstanceMetadataTagsState
-      disabled = 'disabled'
-      enabled = 'enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the monitoring of an instance.</p>
@@ -38492,7 +37510,7 @@ module Aws::EC2
       :instance_id,
       :monitoring,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface.</p>
@@ -38585,7 +37603,7 @@ module Aws::EC2
       :connection_tracking_configuration,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes association information for an Elastic IP address (IPv4).</p>
@@ -38611,7 +37629,7 @@ module Aws::EC2
       :public_dns_name,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface attachment.</p>
@@ -38651,7 +37669,7 @@ module Aws::EC2
       :ena_srd_specification,
       :ena_queue_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface.</p>
@@ -38800,7 +37818,7 @@ module Aws::EC2
       :connection_tracking_specification,
       :ena_queue_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>With network performance options, you can adjust your bandwidth preferences to meet 
@@ -38813,7 +37831,7 @@ module Aws::EC2
     class InstanceNetworkPerformanceOptions < Struct.new(
       :bandwidth_weighting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configure network performance options for your instance that are geared towards performance 
@@ -38841,7 +37859,7 @@ module Aws::EC2
     class InstanceNetworkPerformanceOptionsRequest < Struct.new(
       :bandwidth_weighting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a private IPv4 address.</p>
@@ -38865,12 +37883,7 @@ module Aws::EC2
       :private_dns_name,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceRebootMigrationState
-      disabled = 'disabled'
-      default = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will
@@ -39262,7 +38275,7 @@ module Aws::EC2
       :max_spot_price_as_percentage_of_optimal_on_demand_price,
       :baseline_performance_factors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes for the instance types. When you specify instance attributes, Amazon EC2 will
@@ -39655,7 +38668,7 @@ module Aws::EC2
       :max_spot_price_as_percentage_of_optimal_on_demand_price,
       :baseline_performance_factors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The architecture type, virtualization type, and other attributes for the instance types.
@@ -39678,7 +38691,7 @@ module Aws::EC2
       :virtualization_types,
       :instance_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance details to specify which volumes should be snapshotted.</p>
@@ -39699,7 +38712,7 @@ module Aws::EC2
       :exclude_boot_volume,
       :exclude_data_volume_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the current state of an instance.</p>
@@ -39754,7 +38767,7 @@ module Aws::EC2
       :code,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance state change.</p>
@@ -39772,16 +38785,7 @@ module Aws::EC2
       :current_state,
       :previous_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceStateName
-      pending = 'pending'
-      running = 'running'
-      shutting_down = 'shutting-down'
-      terminated = 'terminated'
-      stopping = 'stopping'
-      stopped = 'stopped'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of an instance.</p>
@@ -39831,7 +38835,7 @@ module Aws::EC2
       :system_status,
       :attached_ebs_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instance status.</p>
@@ -39850,7 +38854,7 @@ module Aws::EC2
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a scheduled event for an instance.</p>
@@ -39883,7 +38887,7 @@ module Aws::EC2
       :not_before,
       :not_before_deadline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of an instance.</p>
@@ -39897,12 +38901,7 @@ module Aws::EC2
       :details,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceStorageEncryptionSupport
-      unsupported = 'unsupported'
-      required = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instance store features that are supported by the instance type.</p>
@@ -39924,7 +38923,7 @@ module Aws::EC2
       :nvme_support,
       :encryption_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the registered tag keys for the current Region.</p>
@@ -39940,7 +38939,7 @@ module Aws::EC2
       :instance_tag_keys,
       :include_all_tags_of_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instance topology.</p>
@@ -39977,974 +38976,7 @@ module Aws::EC2
       :zone_id,
       :capacity_block_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InstanceType
-      a1_medium = 'a1.medium'
-      a1_large = 'a1.large'
-      a1_xlarge = 'a1.xlarge'
-      a1_2xlarge = 'a1.2xlarge'
-      a1_4xlarge = 'a1.4xlarge'
-      a1_metal = 'a1.metal'
-      c1_medium = 'c1.medium'
-      c1_xlarge = 'c1.xlarge'
-      c3_large = 'c3.large'
-      c3_xlarge = 'c3.xlarge'
-      c3_2xlarge = 'c3.2xlarge'
-      c3_4xlarge = 'c3.4xlarge'
-      c3_8xlarge = 'c3.8xlarge'
-      c4_large = 'c4.large'
-      c4_xlarge = 'c4.xlarge'
-      c4_2xlarge = 'c4.2xlarge'
-      c4_4xlarge = 'c4.4xlarge'
-      c4_8xlarge = 'c4.8xlarge'
-      c5_large = 'c5.large'
-      c5_xlarge = 'c5.xlarge'
-      c5_2xlarge = 'c5.2xlarge'
-      c5_4xlarge = 'c5.4xlarge'
-      c5_9xlarge = 'c5.9xlarge'
-      c5_12xlarge = 'c5.12xlarge'
-      c5_18xlarge = 'c5.18xlarge'
-      c5_24xlarge = 'c5.24xlarge'
-      c5_metal = 'c5.metal'
-      c5a_large = 'c5a.large'
-      c5a_xlarge = 'c5a.xlarge'
-      c5a_2xlarge = 'c5a.2xlarge'
-      c5a_4xlarge = 'c5a.4xlarge'
-      c5a_8xlarge = 'c5a.8xlarge'
-      c5a_12xlarge = 'c5a.12xlarge'
-      c5a_16xlarge = 'c5a.16xlarge'
-      c5a_24xlarge = 'c5a.24xlarge'
-      c5ad_large = 'c5ad.large'
-      c5ad_xlarge = 'c5ad.xlarge'
-      c5ad_2xlarge = 'c5ad.2xlarge'
-      c5ad_4xlarge = 'c5ad.4xlarge'
-      c5ad_8xlarge = 'c5ad.8xlarge'
-      c5ad_12xlarge = 'c5ad.12xlarge'
-      c5ad_16xlarge = 'c5ad.16xlarge'
-      c5ad_24xlarge = 'c5ad.24xlarge'
-      c5d_large = 'c5d.large'
-      c5d_xlarge = 'c5d.xlarge'
-      c5d_2xlarge = 'c5d.2xlarge'
-      c5d_4xlarge = 'c5d.4xlarge'
-      c5d_9xlarge = 'c5d.9xlarge'
-      c5d_12xlarge = 'c5d.12xlarge'
-      c5d_18xlarge = 'c5d.18xlarge'
-      c5d_24xlarge = 'c5d.24xlarge'
-      c5d_metal = 'c5d.metal'
-      c5n_large = 'c5n.large'
-      c5n_xlarge = 'c5n.xlarge'
-      c5n_2xlarge = 'c5n.2xlarge'
-      c5n_4xlarge = 'c5n.4xlarge'
-      c5n_9xlarge = 'c5n.9xlarge'
-      c5n_18xlarge = 'c5n.18xlarge'
-      c5n_metal = 'c5n.metal'
-      c6g_medium = 'c6g.medium'
-      c6g_large = 'c6g.large'
-      c6g_xlarge = 'c6g.xlarge'
-      c6g_2xlarge = 'c6g.2xlarge'
-      c6g_4xlarge = 'c6g.4xlarge'
-      c6g_8xlarge = 'c6g.8xlarge'
-      c6g_12xlarge = 'c6g.12xlarge'
-      c6g_16xlarge = 'c6g.16xlarge'
-      c6g_metal = 'c6g.metal'
-      c6gd_medium = 'c6gd.medium'
-      c6gd_large = 'c6gd.large'
-      c6gd_xlarge = 'c6gd.xlarge'
-      c6gd_2xlarge = 'c6gd.2xlarge'
-      c6gd_4xlarge = 'c6gd.4xlarge'
-      c6gd_8xlarge = 'c6gd.8xlarge'
-      c6gd_12xlarge = 'c6gd.12xlarge'
-      c6gd_16xlarge = 'c6gd.16xlarge'
-      c6gd_metal = 'c6gd.metal'
-      c6gn_medium = 'c6gn.medium'
-      c6gn_large = 'c6gn.large'
-      c6gn_xlarge = 'c6gn.xlarge'
-      c6gn_2xlarge = 'c6gn.2xlarge'
-      c6gn_4xlarge = 'c6gn.4xlarge'
-      c6gn_8xlarge = 'c6gn.8xlarge'
-      c6gn_12xlarge = 'c6gn.12xlarge'
-      c6gn_16xlarge = 'c6gn.16xlarge'
-      c6i_large = 'c6i.large'
-      c6i_xlarge = 'c6i.xlarge'
-      c6i_2xlarge = 'c6i.2xlarge'
-      c6i_4xlarge = 'c6i.4xlarge'
-      c6i_8xlarge = 'c6i.8xlarge'
-      c6i_12xlarge = 'c6i.12xlarge'
-      c6i_16xlarge = 'c6i.16xlarge'
-      c6i_24xlarge = 'c6i.24xlarge'
-      c6i_32xlarge = 'c6i.32xlarge'
-      c6i_metal = 'c6i.metal'
-      cc1_4xlarge = 'cc1.4xlarge'
-      cc2_8xlarge = 'cc2.8xlarge'
-      cg1_4xlarge = 'cg1.4xlarge'
-      cr1_8xlarge = 'cr1.8xlarge'
-      d2_xlarge = 'd2.xlarge'
-      d2_2xlarge = 'd2.2xlarge'
-      d2_4xlarge = 'd2.4xlarge'
-      d2_8xlarge = 'd2.8xlarge'
-      d3_xlarge = 'd3.xlarge'
-      d3_2xlarge = 'd3.2xlarge'
-      d3_4xlarge = 'd3.4xlarge'
-      d3_8xlarge = 'd3.8xlarge'
-      d3en_xlarge = 'd3en.xlarge'
-      d3en_2xlarge = 'd3en.2xlarge'
-      d3en_4xlarge = 'd3en.4xlarge'
-      d3en_6xlarge = 'd3en.6xlarge'
-      d3en_8xlarge = 'd3en.8xlarge'
-      d3en_12xlarge = 'd3en.12xlarge'
-      dl1_24xlarge = 'dl1.24xlarge'
-      f1_2xlarge = 'f1.2xlarge'
-      f1_4xlarge = 'f1.4xlarge'
-      f1_16xlarge = 'f1.16xlarge'
-      g2_2xlarge = 'g2.2xlarge'
-      g2_8xlarge = 'g2.8xlarge'
-      g3_4xlarge = 'g3.4xlarge'
-      g3_8xlarge = 'g3.8xlarge'
-      g3_16xlarge = 'g3.16xlarge'
-      g3s_xlarge = 'g3s.xlarge'
-      g4ad_xlarge = 'g4ad.xlarge'
-      g4ad_2xlarge = 'g4ad.2xlarge'
-      g4ad_4xlarge = 'g4ad.4xlarge'
-      g4ad_8xlarge = 'g4ad.8xlarge'
-      g4ad_16xlarge = 'g4ad.16xlarge'
-      g4dn_xlarge = 'g4dn.xlarge'
-      g4dn_2xlarge = 'g4dn.2xlarge'
-      g4dn_4xlarge = 'g4dn.4xlarge'
-      g4dn_8xlarge = 'g4dn.8xlarge'
-      g4dn_12xlarge = 'g4dn.12xlarge'
-      g4dn_16xlarge = 'g4dn.16xlarge'
-      g4dn_metal = 'g4dn.metal'
-      g5_xlarge = 'g5.xlarge'
-      g5_2xlarge = 'g5.2xlarge'
-      g5_4xlarge = 'g5.4xlarge'
-      g5_8xlarge = 'g5.8xlarge'
-      g5_12xlarge = 'g5.12xlarge'
-      g5_16xlarge = 'g5.16xlarge'
-      g5_24xlarge = 'g5.24xlarge'
-      g5_48xlarge = 'g5.48xlarge'
-      g5g_xlarge = 'g5g.xlarge'
-      g5g_2xlarge = 'g5g.2xlarge'
-      g5g_4xlarge = 'g5g.4xlarge'
-      g5g_8xlarge = 'g5g.8xlarge'
-      g5g_16xlarge = 'g5g.16xlarge'
-      g5g_metal = 'g5g.metal'
-      hi1_4xlarge = 'hi1.4xlarge'
-      hpc6a_48xlarge = 'hpc6a.48xlarge'
-      hs1_8xlarge = 'hs1.8xlarge'
-      h1_2xlarge = 'h1.2xlarge'
-      h1_4xlarge = 'h1.4xlarge'
-      h1_8xlarge = 'h1.8xlarge'
-      h1_16xlarge = 'h1.16xlarge'
-      i2_xlarge = 'i2.xlarge'
-      i2_2xlarge = 'i2.2xlarge'
-      i2_4xlarge = 'i2.4xlarge'
-      i2_8xlarge = 'i2.8xlarge'
-      i3_large = 'i3.large'
-      i3_xlarge = 'i3.xlarge'
-      i3_2xlarge = 'i3.2xlarge'
-      i3_4xlarge = 'i3.4xlarge'
-      i3_8xlarge = 'i3.8xlarge'
-      i3_16xlarge = 'i3.16xlarge'
-      i3_metal = 'i3.metal'
-      i3en_large = 'i3en.large'
-      i3en_xlarge = 'i3en.xlarge'
-      i3en_2xlarge = 'i3en.2xlarge'
-      i3en_3xlarge = 'i3en.3xlarge'
-      i3en_6xlarge = 'i3en.6xlarge'
-      i3en_12xlarge = 'i3en.12xlarge'
-      i3en_24xlarge = 'i3en.24xlarge'
-      i3en_metal = 'i3en.metal'
-      im4gn_large = 'im4gn.large'
-      im4gn_xlarge = 'im4gn.xlarge'
-      im4gn_2xlarge = 'im4gn.2xlarge'
-      im4gn_4xlarge = 'im4gn.4xlarge'
-      im4gn_8xlarge = 'im4gn.8xlarge'
-      im4gn_16xlarge = 'im4gn.16xlarge'
-      inf1_xlarge = 'inf1.xlarge'
-      inf1_2xlarge = 'inf1.2xlarge'
-      inf1_6xlarge = 'inf1.6xlarge'
-      inf1_24xlarge = 'inf1.24xlarge'
-      is4gen_medium = 'is4gen.medium'
-      is4gen_large = 'is4gen.large'
-      is4gen_xlarge = 'is4gen.xlarge'
-      is4gen_2xlarge = 'is4gen.2xlarge'
-      is4gen_4xlarge = 'is4gen.4xlarge'
-      is4gen_8xlarge = 'is4gen.8xlarge'
-      m1_small = 'm1.small'
-      m1_medium = 'm1.medium'
-      m1_large = 'm1.large'
-      m1_xlarge = 'm1.xlarge'
-      m2_xlarge = 'm2.xlarge'
-      m2_2xlarge = 'm2.2xlarge'
-      m2_4xlarge = 'm2.4xlarge'
-      m3_medium = 'm3.medium'
-      m3_large = 'm3.large'
-      m3_xlarge = 'm3.xlarge'
-      m3_2xlarge = 'm3.2xlarge'
-      m4_large = 'm4.large'
-      m4_xlarge = 'm4.xlarge'
-      m4_2xlarge = 'm4.2xlarge'
-      m4_4xlarge = 'm4.4xlarge'
-      m4_10xlarge = 'm4.10xlarge'
-      m4_16xlarge = 'm4.16xlarge'
-      m5_large = 'm5.large'
-      m5_xlarge = 'm5.xlarge'
-      m5_2xlarge = 'm5.2xlarge'
-      m5_4xlarge = 'm5.4xlarge'
-      m5_8xlarge = 'm5.8xlarge'
-      m5_12xlarge = 'm5.12xlarge'
-      m5_16xlarge = 'm5.16xlarge'
-      m5_24xlarge = 'm5.24xlarge'
-      m5_metal = 'm5.metal'
-      m5a_large = 'm5a.large'
-      m5a_xlarge = 'm5a.xlarge'
-      m5a_2xlarge = 'm5a.2xlarge'
-      m5a_4xlarge = 'm5a.4xlarge'
-      m5a_8xlarge = 'm5a.8xlarge'
-      m5a_12xlarge = 'm5a.12xlarge'
-      m5a_16xlarge = 'm5a.16xlarge'
-      m5a_24xlarge = 'm5a.24xlarge'
-      m5ad_large = 'm5ad.large'
-      m5ad_xlarge = 'm5ad.xlarge'
-      m5ad_2xlarge = 'm5ad.2xlarge'
-      m5ad_4xlarge = 'm5ad.4xlarge'
-      m5ad_8xlarge = 'm5ad.8xlarge'
-      m5ad_12xlarge = 'm5ad.12xlarge'
-      m5ad_16xlarge = 'm5ad.16xlarge'
-      m5ad_24xlarge = 'm5ad.24xlarge'
-      m5d_large = 'm5d.large'
-      m5d_xlarge = 'm5d.xlarge'
-      m5d_2xlarge = 'm5d.2xlarge'
-      m5d_4xlarge = 'm5d.4xlarge'
-      m5d_8xlarge = 'm5d.8xlarge'
-      m5d_12xlarge = 'm5d.12xlarge'
-      m5d_16xlarge = 'm5d.16xlarge'
-      m5d_24xlarge = 'm5d.24xlarge'
-      m5d_metal = 'm5d.metal'
-      m5dn_large = 'm5dn.large'
-      m5dn_xlarge = 'm5dn.xlarge'
-      m5dn_2xlarge = 'm5dn.2xlarge'
-      m5dn_4xlarge = 'm5dn.4xlarge'
-      m5dn_8xlarge = 'm5dn.8xlarge'
-      m5dn_12xlarge = 'm5dn.12xlarge'
-      m5dn_16xlarge = 'm5dn.16xlarge'
-      m5dn_24xlarge = 'm5dn.24xlarge'
-      m5dn_metal = 'm5dn.metal'
-      m5n_large = 'm5n.large'
-      m5n_xlarge = 'm5n.xlarge'
-      m5n_2xlarge = 'm5n.2xlarge'
-      m5n_4xlarge = 'm5n.4xlarge'
-      m5n_8xlarge = 'm5n.8xlarge'
-      m5n_12xlarge = 'm5n.12xlarge'
-      m5n_16xlarge = 'm5n.16xlarge'
-      m5n_24xlarge = 'm5n.24xlarge'
-      m5n_metal = 'm5n.metal'
-      m5zn_large = 'm5zn.large'
-      m5zn_xlarge = 'm5zn.xlarge'
-      m5zn_2xlarge = 'm5zn.2xlarge'
-      m5zn_3xlarge = 'm5zn.3xlarge'
-      m5zn_6xlarge = 'm5zn.6xlarge'
-      m5zn_12xlarge = 'm5zn.12xlarge'
-      m5zn_metal = 'm5zn.metal'
-      m6a_large = 'm6a.large'
-      m6a_xlarge = 'm6a.xlarge'
-      m6a_2xlarge = 'm6a.2xlarge'
-      m6a_4xlarge = 'm6a.4xlarge'
-      m6a_8xlarge = 'm6a.8xlarge'
-      m6a_12xlarge = 'm6a.12xlarge'
-      m6a_16xlarge = 'm6a.16xlarge'
-      m6a_24xlarge = 'm6a.24xlarge'
-      m6a_32xlarge = 'm6a.32xlarge'
-      m6a_48xlarge = 'm6a.48xlarge'
-      m6g_metal = 'm6g.metal'
-      m6g_medium = 'm6g.medium'
-      m6g_large = 'm6g.large'
-      m6g_xlarge = 'm6g.xlarge'
-      m6g_2xlarge = 'm6g.2xlarge'
-      m6g_4xlarge = 'm6g.4xlarge'
-      m6g_8xlarge = 'm6g.8xlarge'
-      m6g_12xlarge = 'm6g.12xlarge'
-      m6g_16xlarge = 'm6g.16xlarge'
-      m6gd_metal = 'm6gd.metal'
-      m6gd_medium = 'm6gd.medium'
-      m6gd_large = 'm6gd.large'
-      m6gd_xlarge = 'm6gd.xlarge'
-      m6gd_2xlarge = 'm6gd.2xlarge'
-      m6gd_4xlarge = 'm6gd.4xlarge'
-      m6gd_8xlarge = 'm6gd.8xlarge'
-      m6gd_12xlarge = 'm6gd.12xlarge'
-      m6gd_16xlarge = 'm6gd.16xlarge'
-      m6i_large = 'm6i.large'
-      m6i_xlarge = 'm6i.xlarge'
-      m6i_2xlarge = 'm6i.2xlarge'
-      m6i_4xlarge = 'm6i.4xlarge'
-      m6i_8xlarge = 'm6i.8xlarge'
-      m6i_12xlarge = 'm6i.12xlarge'
-      m6i_16xlarge = 'm6i.16xlarge'
-      m6i_24xlarge = 'm6i.24xlarge'
-      m6i_32xlarge = 'm6i.32xlarge'
-      m6i_metal = 'm6i.metal'
-      mac1_metal = 'mac1.metal'
-      p2_xlarge = 'p2.xlarge'
-      p2_8xlarge = 'p2.8xlarge'
-      p2_16xlarge = 'p2.16xlarge'
-      p3_2xlarge = 'p3.2xlarge'
-      p3_8xlarge = 'p3.8xlarge'
-      p3_16xlarge = 'p3.16xlarge'
-      p3dn_24xlarge = 'p3dn.24xlarge'
-      p4d_24xlarge = 'p4d.24xlarge'
-      r3_large = 'r3.large'
-      r3_xlarge = 'r3.xlarge'
-      r3_2xlarge = 'r3.2xlarge'
-      r3_4xlarge = 'r3.4xlarge'
-      r3_8xlarge = 'r3.8xlarge'
-      r4_large = 'r4.large'
-      r4_xlarge = 'r4.xlarge'
-      r4_2xlarge = 'r4.2xlarge'
-      r4_4xlarge = 'r4.4xlarge'
-      r4_8xlarge = 'r4.8xlarge'
-      r4_16xlarge = 'r4.16xlarge'
-      r5_large = 'r5.large'
-      r5_xlarge = 'r5.xlarge'
-      r5_2xlarge = 'r5.2xlarge'
-      r5_4xlarge = 'r5.4xlarge'
-      r5_8xlarge = 'r5.8xlarge'
-      r5_12xlarge = 'r5.12xlarge'
-      r5_16xlarge = 'r5.16xlarge'
-      r5_24xlarge = 'r5.24xlarge'
-      r5_metal = 'r5.metal'
-      r5a_large = 'r5a.large'
-      r5a_xlarge = 'r5a.xlarge'
-      r5a_2xlarge = 'r5a.2xlarge'
-      r5a_4xlarge = 'r5a.4xlarge'
-      r5a_8xlarge = 'r5a.8xlarge'
-      r5a_12xlarge = 'r5a.12xlarge'
-      r5a_16xlarge = 'r5a.16xlarge'
-      r5a_24xlarge = 'r5a.24xlarge'
-      r5ad_large = 'r5ad.large'
-      r5ad_xlarge = 'r5ad.xlarge'
-      r5ad_2xlarge = 'r5ad.2xlarge'
-      r5ad_4xlarge = 'r5ad.4xlarge'
-      r5ad_8xlarge = 'r5ad.8xlarge'
-      r5ad_12xlarge = 'r5ad.12xlarge'
-      r5ad_16xlarge = 'r5ad.16xlarge'
-      r5ad_24xlarge = 'r5ad.24xlarge'
-      r5b_large = 'r5b.large'
-      r5b_xlarge = 'r5b.xlarge'
-      r5b_2xlarge = 'r5b.2xlarge'
-      r5b_4xlarge = 'r5b.4xlarge'
-      r5b_8xlarge = 'r5b.8xlarge'
-      r5b_12xlarge = 'r5b.12xlarge'
-      r5b_16xlarge = 'r5b.16xlarge'
-      r5b_24xlarge = 'r5b.24xlarge'
-      r5b_metal = 'r5b.metal'
-      r5d_large = 'r5d.large'
-      r5d_xlarge = 'r5d.xlarge'
-      r5d_2xlarge = 'r5d.2xlarge'
-      r5d_4xlarge = 'r5d.4xlarge'
-      r5d_8xlarge = 'r5d.8xlarge'
-      r5d_12xlarge = 'r5d.12xlarge'
-      r5d_16xlarge = 'r5d.16xlarge'
-      r5d_24xlarge = 'r5d.24xlarge'
-      r5d_metal = 'r5d.metal'
-      r5dn_large = 'r5dn.large'
-      r5dn_xlarge = 'r5dn.xlarge'
-      r5dn_2xlarge = 'r5dn.2xlarge'
-      r5dn_4xlarge = 'r5dn.4xlarge'
-      r5dn_8xlarge = 'r5dn.8xlarge'
-      r5dn_12xlarge = 'r5dn.12xlarge'
-      r5dn_16xlarge = 'r5dn.16xlarge'
-      r5dn_24xlarge = 'r5dn.24xlarge'
-      r5dn_metal = 'r5dn.metal'
-      r5n_large = 'r5n.large'
-      r5n_xlarge = 'r5n.xlarge'
-      r5n_2xlarge = 'r5n.2xlarge'
-      r5n_4xlarge = 'r5n.4xlarge'
-      r5n_8xlarge = 'r5n.8xlarge'
-      r5n_12xlarge = 'r5n.12xlarge'
-      r5n_16xlarge = 'r5n.16xlarge'
-      r5n_24xlarge = 'r5n.24xlarge'
-      r5n_metal = 'r5n.metal'
-      r6g_medium = 'r6g.medium'
-      r6g_large = 'r6g.large'
-      r6g_xlarge = 'r6g.xlarge'
-      r6g_2xlarge = 'r6g.2xlarge'
-      r6g_4xlarge = 'r6g.4xlarge'
-      r6g_8xlarge = 'r6g.8xlarge'
-      r6g_12xlarge = 'r6g.12xlarge'
-      r6g_16xlarge = 'r6g.16xlarge'
-      r6g_metal = 'r6g.metal'
-      r6gd_medium = 'r6gd.medium'
-      r6gd_large = 'r6gd.large'
-      r6gd_xlarge = 'r6gd.xlarge'
-      r6gd_2xlarge = 'r6gd.2xlarge'
-      r6gd_4xlarge = 'r6gd.4xlarge'
-      r6gd_8xlarge = 'r6gd.8xlarge'
-      r6gd_12xlarge = 'r6gd.12xlarge'
-      r6gd_16xlarge = 'r6gd.16xlarge'
-      r6gd_metal = 'r6gd.metal'
-      r6i_large = 'r6i.large'
-      r6i_xlarge = 'r6i.xlarge'
-      r6i_2xlarge = 'r6i.2xlarge'
-      r6i_4xlarge = 'r6i.4xlarge'
-      r6i_8xlarge = 'r6i.8xlarge'
-      r6i_12xlarge = 'r6i.12xlarge'
-      r6i_16xlarge = 'r6i.16xlarge'
-      r6i_24xlarge = 'r6i.24xlarge'
-      r6i_32xlarge = 'r6i.32xlarge'
-      r6i_metal = 'r6i.metal'
-      t1_micro = 't1.micro'
-      t2_nano = 't2.nano'
-      t2_micro = 't2.micro'
-      t2_small = 't2.small'
-      t2_medium = 't2.medium'
-      t2_large = 't2.large'
-      t2_xlarge = 't2.xlarge'
-      t2_2xlarge = 't2.2xlarge'
-      t3_nano = 't3.nano'
-      t3_micro = 't3.micro'
-      t3_small = 't3.small'
-      t3_medium = 't3.medium'
-      t3_large = 't3.large'
-      t3_xlarge = 't3.xlarge'
-      t3_2xlarge = 't3.2xlarge'
-      t3a_nano = 't3a.nano'
-      t3a_micro = 't3a.micro'
-      t3a_small = 't3a.small'
-      t3a_medium = 't3a.medium'
-      t3a_large = 't3a.large'
-      t3a_xlarge = 't3a.xlarge'
-      t3a_2xlarge = 't3a.2xlarge'
-      t4g_nano = 't4g.nano'
-      t4g_micro = 't4g.micro'
-      t4g_small = 't4g.small'
-      t4g_medium = 't4g.medium'
-      t4g_large = 't4g.large'
-      t4g_xlarge = 't4g.xlarge'
-      t4g_2xlarge = 't4g.2xlarge'
-      u_6tb1_56xlarge = 'u-6tb1.56xlarge'
-      u_6tb1_112xlarge = 'u-6tb1.112xlarge'
-      u_9tb1_112xlarge = 'u-9tb1.112xlarge'
-      u_12tb1_112xlarge = 'u-12tb1.112xlarge'
-      u_6tb1_metal = 'u-6tb1.metal'
-      u_9tb1_metal = 'u-9tb1.metal'
-      u_12tb1_metal = 'u-12tb1.metal'
-      u_18tb1_metal = 'u-18tb1.metal'
-      u_24tb1_metal = 'u-24tb1.metal'
-      vt1_3xlarge = 'vt1.3xlarge'
-      vt1_6xlarge = 'vt1.6xlarge'
-      vt1_24xlarge = 'vt1.24xlarge'
-      x1_16xlarge = 'x1.16xlarge'
-      x1_32xlarge = 'x1.32xlarge'
-      x1e_xlarge = 'x1e.xlarge'
-      x1e_2xlarge = 'x1e.2xlarge'
-      x1e_4xlarge = 'x1e.4xlarge'
-      x1e_8xlarge = 'x1e.8xlarge'
-      x1e_16xlarge = 'x1e.16xlarge'
-      x1e_32xlarge = 'x1e.32xlarge'
-      x2iezn_2xlarge = 'x2iezn.2xlarge'
-      x2iezn_4xlarge = 'x2iezn.4xlarge'
-      x2iezn_6xlarge = 'x2iezn.6xlarge'
-      x2iezn_8xlarge = 'x2iezn.8xlarge'
-      x2iezn_12xlarge = 'x2iezn.12xlarge'
-      x2iezn_metal = 'x2iezn.metal'
-      x2gd_medium = 'x2gd.medium'
-      x2gd_large = 'x2gd.large'
-      x2gd_xlarge = 'x2gd.xlarge'
-      x2gd_2xlarge = 'x2gd.2xlarge'
-      x2gd_4xlarge = 'x2gd.4xlarge'
-      x2gd_8xlarge = 'x2gd.8xlarge'
-      x2gd_12xlarge = 'x2gd.12xlarge'
-      x2gd_16xlarge = 'x2gd.16xlarge'
-      x2gd_metal = 'x2gd.metal'
-      z1d_large = 'z1d.large'
-      z1d_xlarge = 'z1d.xlarge'
-      z1d_2xlarge = 'z1d.2xlarge'
-      z1d_3xlarge = 'z1d.3xlarge'
-      z1d_6xlarge = 'z1d.6xlarge'
-      z1d_12xlarge = 'z1d.12xlarge'
-      z1d_metal = 'z1d.metal'
-      x2idn_16xlarge = 'x2idn.16xlarge'
-      x2idn_24xlarge = 'x2idn.24xlarge'
-      x2idn_32xlarge = 'x2idn.32xlarge'
-      x2iedn_xlarge = 'x2iedn.xlarge'
-      x2iedn_2xlarge = 'x2iedn.2xlarge'
-      x2iedn_4xlarge = 'x2iedn.4xlarge'
-      x2iedn_8xlarge = 'x2iedn.8xlarge'
-      x2iedn_16xlarge = 'x2iedn.16xlarge'
-      x2iedn_24xlarge = 'x2iedn.24xlarge'
-      x2iedn_32xlarge = 'x2iedn.32xlarge'
-      c6a_large = 'c6a.large'
-      c6a_xlarge = 'c6a.xlarge'
-      c6a_2xlarge = 'c6a.2xlarge'
-      c6a_4xlarge = 'c6a.4xlarge'
-      c6a_8xlarge = 'c6a.8xlarge'
-      c6a_12xlarge = 'c6a.12xlarge'
-      c6a_16xlarge = 'c6a.16xlarge'
-      c6a_24xlarge = 'c6a.24xlarge'
-      c6a_32xlarge = 'c6a.32xlarge'
-      c6a_48xlarge = 'c6a.48xlarge'
-      c6a_metal = 'c6a.metal'
-      m6a_metal = 'm6a.metal'
-      i4i_large = 'i4i.large'
-      i4i_xlarge = 'i4i.xlarge'
-      i4i_2xlarge = 'i4i.2xlarge'
-      i4i_4xlarge = 'i4i.4xlarge'
-      i4i_8xlarge = 'i4i.8xlarge'
-      i4i_16xlarge = 'i4i.16xlarge'
-      i4i_32xlarge = 'i4i.32xlarge'
-      i4i_metal = 'i4i.metal'
-      x2idn_metal = 'x2idn.metal'
-      x2iedn_metal = 'x2iedn.metal'
-      c7g_medium = 'c7g.medium'
-      c7g_large = 'c7g.large'
-      c7g_xlarge = 'c7g.xlarge'
-      c7g_2xlarge = 'c7g.2xlarge'
-      c7g_4xlarge = 'c7g.4xlarge'
-      c7g_8xlarge = 'c7g.8xlarge'
-      c7g_12xlarge = 'c7g.12xlarge'
-      c7g_16xlarge = 'c7g.16xlarge'
-      mac2_metal = 'mac2.metal'
-      c6id_large = 'c6id.large'
-      c6id_xlarge = 'c6id.xlarge'
-      c6id_2xlarge = 'c6id.2xlarge'
-      c6id_4xlarge = 'c6id.4xlarge'
-      c6id_8xlarge = 'c6id.8xlarge'
-      c6id_12xlarge = 'c6id.12xlarge'
-      c6id_16xlarge = 'c6id.16xlarge'
-      c6id_24xlarge = 'c6id.24xlarge'
-      c6id_32xlarge = 'c6id.32xlarge'
-      c6id_metal = 'c6id.metal'
-      m6id_large = 'm6id.large'
-      m6id_xlarge = 'm6id.xlarge'
-      m6id_2xlarge = 'm6id.2xlarge'
-      m6id_4xlarge = 'm6id.4xlarge'
-      m6id_8xlarge = 'm6id.8xlarge'
-      m6id_12xlarge = 'm6id.12xlarge'
-      m6id_16xlarge = 'm6id.16xlarge'
-      m6id_24xlarge = 'm6id.24xlarge'
-      m6id_32xlarge = 'm6id.32xlarge'
-      m6id_metal = 'm6id.metal'
-      r6id_large = 'r6id.large'
-      r6id_xlarge = 'r6id.xlarge'
-      r6id_2xlarge = 'r6id.2xlarge'
-      r6id_4xlarge = 'r6id.4xlarge'
-      r6id_8xlarge = 'r6id.8xlarge'
-      r6id_12xlarge = 'r6id.12xlarge'
-      r6id_16xlarge = 'r6id.16xlarge'
-      r6id_24xlarge = 'r6id.24xlarge'
-      r6id_32xlarge = 'r6id.32xlarge'
-      r6id_metal = 'r6id.metal'
-      r6a_large = 'r6a.large'
-      r6a_xlarge = 'r6a.xlarge'
-      r6a_2xlarge = 'r6a.2xlarge'
-      r6a_4xlarge = 'r6a.4xlarge'
-      r6a_8xlarge = 'r6a.8xlarge'
-      r6a_12xlarge = 'r6a.12xlarge'
-      r6a_16xlarge = 'r6a.16xlarge'
-      r6a_24xlarge = 'r6a.24xlarge'
-      r6a_32xlarge = 'r6a.32xlarge'
-      r6a_48xlarge = 'r6a.48xlarge'
-      r6a_metal = 'r6a.metal'
-      p4de_24xlarge = 'p4de.24xlarge'
-      u_3tb1_56xlarge = 'u-3tb1.56xlarge'
-      u_18tb1_112xlarge = 'u-18tb1.112xlarge'
-      u_24tb1_112xlarge = 'u-24tb1.112xlarge'
-      trn1_2xlarge = 'trn1.2xlarge'
-      trn1_32xlarge = 'trn1.32xlarge'
-      hpc6id_32xlarge = 'hpc6id.32xlarge'
-      c6in_large = 'c6in.large'
-      c6in_xlarge = 'c6in.xlarge'
-      c6in_2xlarge = 'c6in.2xlarge'
-      c6in_4xlarge = 'c6in.4xlarge'
-      c6in_8xlarge = 'c6in.8xlarge'
-      c6in_12xlarge = 'c6in.12xlarge'
-      c6in_16xlarge = 'c6in.16xlarge'
-      c6in_24xlarge = 'c6in.24xlarge'
-      c6in_32xlarge = 'c6in.32xlarge'
-      m6in_large = 'm6in.large'
-      m6in_xlarge = 'm6in.xlarge'
-      m6in_2xlarge = 'm6in.2xlarge'
-      m6in_4xlarge = 'm6in.4xlarge'
-      m6in_8xlarge = 'm6in.8xlarge'
-      m6in_12xlarge = 'm6in.12xlarge'
-      m6in_16xlarge = 'm6in.16xlarge'
-      m6in_24xlarge = 'm6in.24xlarge'
-      m6in_32xlarge = 'm6in.32xlarge'
-      m6idn_large = 'm6idn.large'
-      m6idn_xlarge = 'm6idn.xlarge'
-      m6idn_2xlarge = 'm6idn.2xlarge'
-      m6idn_4xlarge = 'm6idn.4xlarge'
-      m6idn_8xlarge = 'm6idn.8xlarge'
-      m6idn_12xlarge = 'm6idn.12xlarge'
-      m6idn_16xlarge = 'm6idn.16xlarge'
-      m6idn_24xlarge = 'm6idn.24xlarge'
-      m6idn_32xlarge = 'm6idn.32xlarge'
-      r6in_large = 'r6in.large'
-      r6in_xlarge = 'r6in.xlarge'
-      r6in_2xlarge = 'r6in.2xlarge'
-      r6in_4xlarge = 'r6in.4xlarge'
-      r6in_8xlarge = 'r6in.8xlarge'
-      r6in_12xlarge = 'r6in.12xlarge'
-      r6in_16xlarge = 'r6in.16xlarge'
-      r6in_24xlarge = 'r6in.24xlarge'
-      r6in_32xlarge = 'r6in.32xlarge'
-      r6idn_large = 'r6idn.large'
-      r6idn_xlarge = 'r6idn.xlarge'
-      r6idn_2xlarge = 'r6idn.2xlarge'
-      r6idn_4xlarge = 'r6idn.4xlarge'
-      r6idn_8xlarge = 'r6idn.8xlarge'
-      r6idn_12xlarge = 'r6idn.12xlarge'
-      r6idn_16xlarge = 'r6idn.16xlarge'
-      r6idn_24xlarge = 'r6idn.24xlarge'
-      r6idn_32xlarge = 'r6idn.32xlarge'
-      c7g_metal = 'c7g.metal'
-      m7g_medium = 'm7g.medium'
-      m7g_large = 'm7g.large'
-      m7g_xlarge = 'm7g.xlarge'
-      m7g_2xlarge = 'm7g.2xlarge'
-      m7g_4xlarge = 'm7g.4xlarge'
-      m7g_8xlarge = 'm7g.8xlarge'
-      m7g_12xlarge = 'm7g.12xlarge'
-      m7g_16xlarge = 'm7g.16xlarge'
-      m7g_metal = 'm7g.metal'
-      r7g_medium = 'r7g.medium'
-      r7g_large = 'r7g.large'
-      r7g_xlarge = 'r7g.xlarge'
-      r7g_2xlarge = 'r7g.2xlarge'
-      r7g_4xlarge = 'r7g.4xlarge'
-      r7g_8xlarge = 'r7g.8xlarge'
-      r7g_12xlarge = 'r7g.12xlarge'
-      r7g_16xlarge = 'r7g.16xlarge'
-      r7g_metal = 'r7g.metal'
-      c6in_metal = 'c6in.metal'
-      m6in_metal = 'm6in.metal'
-      m6idn_metal = 'm6idn.metal'
-      r6in_metal = 'r6in.metal'
-      r6idn_metal = 'r6idn.metal'
-      inf2_xlarge = 'inf2.xlarge'
-      inf2_8xlarge = 'inf2.8xlarge'
-      inf2_24xlarge = 'inf2.24xlarge'
-      inf2_48xlarge = 'inf2.48xlarge'
-      trn1n_32xlarge = 'trn1n.32xlarge'
-      i4g_large = 'i4g.large'
-      i4g_xlarge = 'i4g.xlarge'
-      i4g_2xlarge = 'i4g.2xlarge'
-      i4g_4xlarge = 'i4g.4xlarge'
-      i4g_8xlarge = 'i4g.8xlarge'
-      i4g_16xlarge = 'i4g.16xlarge'
-      hpc7g_4xlarge = 'hpc7g.4xlarge'
-      hpc7g_8xlarge = 'hpc7g.8xlarge'
-      hpc7g_16xlarge = 'hpc7g.16xlarge'
-      c7gn_medium = 'c7gn.medium'
-      c7gn_large = 'c7gn.large'
-      c7gn_xlarge = 'c7gn.xlarge'
-      c7gn_2xlarge = 'c7gn.2xlarge'
-      c7gn_4xlarge = 'c7gn.4xlarge'
-      c7gn_8xlarge = 'c7gn.8xlarge'
-      c7gn_12xlarge = 'c7gn.12xlarge'
-      c7gn_16xlarge = 'c7gn.16xlarge'
-      p5_48xlarge = 'p5.48xlarge'
-      m7i_large = 'm7i.large'
-      m7i_xlarge = 'm7i.xlarge'
-      m7i_2xlarge = 'm7i.2xlarge'
-      m7i_4xlarge = 'm7i.4xlarge'
-      m7i_8xlarge = 'm7i.8xlarge'
-      m7i_12xlarge = 'm7i.12xlarge'
-      m7i_16xlarge = 'm7i.16xlarge'
-      m7i_24xlarge = 'm7i.24xlarge'
-      m7i_48xlarge = 'm7i.48xlarge'
-      m7i_flex_large = 'm7i-flex.large'
-      m7i_flex_xlarge = 'm7i-flex.xlarge'
-      m7i_flex_2xlarge = 'm7i-flex.2xlarge'
-      m7i_flex_4xlarge = 'm7i-flex.4xlarge'
-      m7i_flex_8xlarge = 'm7i-flex.8xlarge'
-      m7a_medium = 'm7a.medium'
-      m7a_large = 'm7a.large'
-      m7a_xlarge = 'm7a.xlarge'
-      m7a_2xlarge = 'm7a.2xlarge'
-      m7a_4xlarge = 'm7a.4xlarge'
-      m7a_8xlarge = 'm7a.8xlarge'
-      m7a_12xlarge = 'm7a.12xlarge'
-      m7a_16xlarge = 'm7a.16xlarge'
-      m7a_24xlarge = 'm7a.24xlarge'
-      m7a_32xlarge = 'm7a.32xlarge'
-      m7a_48xlarge = 'm7a.48xlarge'
-      m7a_metal_48xl = 'm7a.metal-48xl'
-      hpc7a_12xlarge = 'hpc7a.12xlarge'
-      hpc7a_24xlarge = 'hpc7a.24xlarge'
-      hpc7a_48xlarge = 'hpc7a.48xlarge'
-      hpc7a_96xlarge = 'hpc7a.96xlarge'
-      c7gd_medium = 'c7gd.medium'
-      c7gd_large = 'c7gd.large'
-      c7gd_xlarge = 'c7gd.xlarge'
-      c7gd_2xlarge = 'c7gd.2xlarge'
-      c7gd_4xlarge = 'c7gd.4xlarge'
-      c7gd_8xlarge = 'c7gd.8xlarge'
-      c7gd_12xlarge = 'c7gd.12xlarge'
-      c7gd_16xlarge = 'c7gd.16xlarge'
-      m7gd_medium = 'm7gd.medium'
-      m7gd_large = 'm7gd.large'
-      m7gd_xlarge = 'm7gd.xlarge'
-      m7gd_2xlarge = 'm7gd.2xlarge'
-      m7gd_4xlarge = 'm7gd.4xlarge'
-      m7gd_8xlarge = 'm7gd.8xlarge'
-      m7gd_12xlarge = 'm7gd.12xlarge'
-      m7gd_16xlarge = 'm7gd.16xlarge'
-      r7gd_medium = 'r7gd.medium'
-      r7gd_large = 'r7gd.large'
-      r7gd_xlarge = 'r7gd.xlarge'
-      r7gd_2xlarge = 'r7gd.2xlarge'
-      r7gd_4xlarge = 'r7gd.4xlarge'
-      r7gd_8xlarge = 'r7gd.8xlarge'
-      r7gd_12xlarge = 'r7gd.12xlarge'
-      r7gd_16xlarge = 'r7gd.16xlarge'
-      r7a_medium = 'r7a.medium'
-      r7a_large = 'r7a.large'
-      r7a_xlarge = 'r7a.xlarge'
-      r7a_2xlarge = 'r7a.2xlarge'
-      r7a_4xlarge = 'r7a.4xlarge'
-      r7a_8xlarge = 'r7a.8xlarge'
-      r7a_12xlarge = 'r7a.12xlarge'
-      r7a_16xlarge = 'r7a.16xlarge'
-      r7a_24xlarge = 'r7a.24xlarge'
-      r7a_32xlarge = 'r7a.32xlarge'
-      r7a_48xlarge = 'r7a.48xlarge'
-      c7i_large = 'c7i.large'
-      c7i_xlarge = 'c7i.xlarge'
-      c7i_2xlarge = 'c7i.2xlarge'
-      c7i_4xlarge = 'c7i.4xlarge'
-      c7i_8xlarge = 'c7i.8xlarge'
-      c7i_12xlarge = 'c7i.12xlarge'
-      c7i_16xlarge = 'c7i.16xlarge'
-      c7i_24xlarge = 'c7i.24xlarge'
-      c7i_48xlarge = 'c7i.48xlarge'
-      mac2_m2pro_metal = 'mac2-m2pro.metal'
-      r7iz_large = 'r7iz.large'
-      r7iz_xlarge = 'r7iz.xlarge'
-      r7iz_2xlarge = 'r7iz.2xlarge'
-      r7iz_4xlarge = 'r7iz.4xlarge'
-      r7iz_8xlarge = 'r7iz.8xlarge'
-      r7iz_12xlarge = 'r7iz.12xlarge'
-      r7iz_16xlarge = 'r7iz.16xlarge'
-      r7iz_32xlarge = 'r7iz.32xlarge'
-      c7a_medium = 'c7a.medium'
-      c7a_large = 'c7a.large'
-      c7a_xlarge = 'c7a.xlarge'
-      c7a_2xlarge = 'c7a.2xlarge'
-      c7a_4xlarge = 'c7a.4xlarge'
-      c7a_8xlarge = 'c7a.8xlarge'
-      c7a_12xlarge = 'c7a.12xlarge'
-      c7a_16xlarge = 'c7a.16xlarge'
-      c7a_24xlarge = 'c7a.24xlarge'
-      c7a_32xlarge = 'c7a.32xlarge'
-      c7a_48xlarge = 'c7a.48xlarge'
-      c7a_metal_48xl = 'c7a.metal-48xl'
-      r7a_metal_48xl = 'r7a.metal-48xl'
-      r7i_large = 'r7i.large'
-      r7i_xlarge = 'r7i.xlarge'
-      r7i_2xlarge = 'r7i.2xlarge'
-      r7i_4xlarge = 'r7i.4xlarge'
-      r7i_8xlarge = 'r7i.8xlarge'
-      r7i_12xlarge = 'r7i.12xlarge'
-      r7i_16xlarge = 'r7i.16xlarge'
-      r7i_24xlarge = 'r7i.24xlarge'
-      r7i_48xlarge = 'r7i.48xlarge'
-      dl2q_24xlarge = 'dl2q.24xlarge'
-      mac2_m2_metal = 'mac2-m2.metal'
-      i4i_12xlarge = 'i4i.12xlarge'
-      i4i_24xlarge = 'i4i.24xlarge'
-      c7i_metal_24xl = 'c7i.metal-24xl'
-      c7i_metal_48xl = 'c7i.metal-48xl'
-      m7i_metal_24xl = 'm7i.metal-24xl'
-      m7i_metal_48xl = 'm7i.metal-48xl'
-      r7i_metal_24xl = 'r7i.metal-24xl'
-      r7i_metal_48xl = 'r7i.metal-48xl'
-      r7iz_metal_16xl = 'r7iz.metal-16xl'
-      r7iz_metal_32xl = 'r7iz.metal-32xl'
-      c7gd_metal = 'c7gd.metal'
-      m7gd_metal = 'm7gd.metal'
-      r7gd_metal = 'r7gd.metal'
-      g6_xlarge = 'g6.xlarge'
-      g6_2xlarge = 'g6.2xlarge'
-      g6_4xlarge = 'g6.4xlarge'
-      g6_8xlarge = 'g6.8xlarge'
-      g6_12xlarge = 'g6.12xlarge'
-      g6_16xlarge = 'g6.16xlarge'
-      g6_24xlarge = 'g6.24xlarge'
-      g6_48xlarge = 'g6.48xlarge'
-      gr6_4xlarge = 'gr6.4xlarge'
-      gr6_8xlarge = 'gr6.8xlarge'
-      c7i_flex_large = 'c7i-flex.large'
-      c7i_flex_xlarge = 'c7i-flex.xlarge'
-      c7i_flex_2xlarge = 'c7i-flex.2xlarge'
-      c7i_flex_4xlarge = 'c7i-flex.4xlarge'
-      c7i_flex_8xlarge = 'c7i-flex.8xlarge'
-      u7i_12tb_224xlarge = 'u7i-12tb.224xlarge'
-      u7in_16tb_224xlarge = 'u7in-16tb.224xlarge'
-      u7in_24tb_224xlarge = 'u7in-24tb.224xlarge'
-      u7in_32tb_224xlarge = 'u7in-32tb.224xlarge'
-      u7ib_12tb_224xlarge = 'u7ib-12tb.224xlarge'
-      c7gn_metal = 'c7gn.metal'
-      r8g_medium = 'r8g.medium'
-      r8g_large = 'r8g.large'
-      r8g_xlarge = 'r8g.xlarge'
-      r8g_2xlarge = 'r8g.2xlarge'
-      r8g_4xlarge = 'r8g.4xlarge'
-      r8g_8xlarge = 'r8g.8xlarge'
-      r8g_12xlarge = 'r8g.12xlarge'
-      r8g_16xlarge = 'r8g.16xlarge'
-      r8g_24xlarge = 'r8g.24xlarge'
-      r8g_48xlarge = 'r8g.48xlarge'
-      r8g_metal_24xl = 'r8g.metal-24xl'
-      r8g_metal_48xl = 'r8g.metal-48xl'
-      mac2_m1ultra_metal = 'mac2-m1ultra.metal'
-      g6e_xlarge = 'g6e.xlarge'
-      g6e_2xlarge = 'g6e.2xlarge'
-      g6e_4xlarge = 'g6e.4xlarge'
-      g6e_8xlarge = 'g6e.8xlarge'
-      g6e_12xlarge = 'g6e.12xlarge'
-      g6e_16xlarge = 'g6e.16xlarge'
-      g6e_24xlarge = 'g6e.24xlarge'
-      g6e_48xlarge = 'g6e.48xlarge'
-      c8g_medium = 'c8g.medium'
-      c8g_large = 'c8g.large'
-      c8g_xlarge = 'c8g.xlarge'
-      c8g_2xlarge = 'c8g.2xlarge'
-      c8g_4xlarge = 'c8g.4xlarge'
-      c8g_8xlarge = 'c8g.8xlarge'
-      c8g_12xlarge = 'c8g.12xlarge'
-      c8g_16xlarge = 'c8g.16xlarge'
-      c8g_24xlarge = 'c8g.24xlarge'
-      c8g_48xlarge = 'c8g.48xlarge'
-      c8g_metal_24xl = 'c8g.metal-24xl'
-      c8g_metal_48xl = 'c8g.metal-48xl'
-      m8g_medium = 'm8g.medium'
-      m8g_large = 'm8g.large'
-      m8g_xlarge = 'm8g.xlarge'
-      m8g_2xlarge = 'm8g.2xlarge'
-      m8g_4xlarge = 'm8g.4xlarge'
-      m8g_8xlarge = 'm8g.8xlarge'
-      m8g_12xlarge = 'm8g.12xlarge'
-      m8g_16xlarge = 'm8g.16xlarge'
-      m8g_24xlarge = 'm8g.24xlarge'
-      m8g_48xlarge = 'm8g.48xlarge'
-      m8g_metal_24xl = 'm8g.metal-24xl'
-      m8g_metal_48xl = 'm8g.metal-48xl'
-      x8g_medium = 'x8g.medium'
-      x8g_large = 'x8g.large'
-      x8g_xlarge = 'x8g.xlarge'
-      x8g_2xlarge = 'x8g.2xlarge'
-      x8g_4xlarge = 'x8g.4xlarge'
-      x8g_8xlarge = 'x8g.8xlarge'
-      x8g_12xlarge = 'x8g.12xlarge'
-      x8g_16xlarge = 'x8g.16xlarge'
-      x8g_24xlarge = 'x8g.24xlarge'
-      x8g_48xlarge = 'x8g.48xlarge'
-      x8g_metal_24xl = 'x8g.metal-24xl'
-      x8g_metal_48xl = 'x8g.metal-48xl'
-      i7ie_large = 'i7ie.large'
-      i7ie_xlarge = 'i7ie.xlarge'
-      i7ie_2xlarge = 'i7ie.2xlarge'
-      i7ie_3xlarge = 'i7ie.3xlarge'
-      i7ie_6xlarge = 'i7ie.6xlarge'
-      i7ie_12xlarge = 'i7ie.12xlarge'
-      i7ie_18xlarge = 'i7ie.18xlarge'
-      i7ie_24xlarge = 'i7ie.24xlarge'
-      i7ie_48xlarge = 'i7ie.48xlarge'
-      i8g_large = 'i8g.large'
-      i8g_xlarge = 'i8g.xlarge'
-      i8g_2xlarge = 'i8g.2xlarge'
-      i8g_4xlarge = 'i8g.4xlarge'
-      i8g_8xlarge = 'i8g.8xlarge'
-      i8g_12xlarge = 'i8g.12xlarge'
-      i8g_16xlarge = 'i8g.16xlarge'
-      i8g_24xlarge = 'i8g.24xlarge'
-      i8g_metal_24xl = 'i8g.metal-24xl'
-      u7i_6tb_112xlarge = 'u7i-6tb.112xlarge'
-      u7i_8tb_112xlarge = 'u7i-8tb.112xlarge'
-      u7inh_32tb_480xlarge = 'u7inh-32tb.480xlarge'
-      p5e_48xlarge = 'p5e.48xlarge'
-      p5en_48xlarge = 'p5en.48xlarge'
-      f2_12xlarge = 'f2.12xlarge'
-      f2_48xlarge = 'f2.48xlarge'
-      trn2_48xlarge = 'trn2.48xlarge'
-      c7i_flex_12xlarge = 'c7i-flex.12xlarge'
-      c7i_flex_16xlarge = 'c7i-flex.16xlarge'
-      m7i_flex_12xlarge = 'm7i-flex.12xlarge'
-      m7i_flex_16xlarge = 'm7i-flex.16xlarge'
-      i7ie_metal_24xl = 'i7ie.metal-24xl'
-      i7ie_metal_48xl = 'i7ie.metal-48xl'
-      i8g_48xlarge = 'i8g.48xlarge'
-      c8gd_medium = 'c8gd.medium'
-      c8gd_large = 'c8gd.large'
-      c8gd_xlarge = 'c8gd.xlarge'
-      c8gd_2xlarge = 'c8gd.2xlarge'
-      c8gd_4xlarge = 'c8gd.4xlarge'
-      c8gd_8xlarge = 'c8gd.8xlarge'
-      c8gd_12xlarge = 'c8gd.12xlarge'
-      c8gd_16xlarge = 'c8gd.16xlarge'
-      c8gd_24xlarge = 'c8gd.24xlarge'
-      c8gd_48xlarge = 'c8gd.48xlarge'
-      c8gd_metal_24xl = 'c8gd.metal-24xl'
-      c8gd_metal_48xl = 'c8gd.metal-48xl'
-      i7i_large = 'i7i.large'
-      i7i_xlarge = 'i7i.xlarge'
-      i7i_2xlarge = 'i7i.2xlarge'
-      i7i_4xlarge = 'i7i.4xlarge'
-      i7i_8xlarge = 'i7i.8xlarge'
-      i7i_12xlarge = 'i7i.12xlarge'
-      i7i_16xlarge = 'i7i.16xlarge'
-      i7i_24xlarge = 'i7i.24xlarge'
-      i7i_48xlarge = 'i7i.48xlarge'
-      i7i_metal_24xl = 'i7i.metal-24xl'
-      i7i_metal_48xl = 'i7i.metal-48xl'
-      p6_b200_48xlarge = 'p6-b200.48xlarge'
-      m8gd_medium = 'm8gd.medium'
-      m8gd_large = 'm8gd.large'
-      m8gd_xlarge = 'm8gd.xlarge'
-      m8gd_2xlarge = 'm8gd.2xlarge'
-      m8gd_4xlarge = 'm8gd.4xlarge'
-      m8gd_8xlarge = 'm8gd.8xlarge'
-      m8gd_12xlarge = 'm8gd.12xlarge'
-      m8gd_16xlarge = 'm8gd.16xlarge'
-      m8gd_24xlarge = 'm8gd.24xlarge'
-      m8gd_48xlarge = 'm8gd.48xlarge'
-      m8gd_metal_24xl = 'm8gd.metal-24xl'
-      m8gd_metal_48xl = 'm8gd.metal-48xl'
-      r8gd_medium = 'r8gd.medium'
-      r8gd_large = 'r8gd.large'
-      r8gd_xlarge = 'r8gd.xlarge'
-      r8gd_2xlarge = 'r8gd.2xlarge'
-      r8gd_4xlarge = 'r8gd.4xlarge'
-      r8gd_8xlarge = 'r8gd.8xlarge'
-      r8gd_12xlarge = 'r8gd.12xlarge'
-      r8gd_16xlarge = 'r8gd.16xlarge'
-      r8gd_24xlarge = 'r8gd.24xlarge'
-      r8gd_48xlarge = 'r8gd.48xlarge'
-      r8gd_metal_24xl = 'r8gd.metal-24xl'
-      r8gd_metal_48xl = 'r8gd.metal-48xl'
-      c8gn_medium = 'c8gn.medium'
-      c8gn_large = 'c8gn.large'
-      c8gn_xlarge = 'c8gn.xlarge'
-      c8gn_2xlarge = 'c8gn.2xlarge'
-      c8gn_4xlarge = 'c8gn.4xlarge'
-      c8gn_8xlarge = 'c8gn.8xlarge'
-      c8gn_12xlarge = 'c8gn.12xlarge'
-      c8gn_16xlarge = 'c8gn.16xlarge'
-      c8gn_24xlarge = 'c8gn.24xlarge'
-      c8gn_48xlarge = 'c8gn.48xlarge'
-      c8gn_metal_24xl = 'c8gn.metal-24xl'
-      c8gn_metal_48xl = 'c8gn.metal-48xl'
-      f2_6xlarge = 'f2.6xlarge'
-      p6e_gb200_36xlarge = 'p6e-gb200.36xlarge'
-    end
-
-    module InstanceTypeHypervisor
-      NITRO = 'nitro'
-      XEN = 'xen'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the instance type.</p>
@@ -41083,7 +39115,7 @@ module Aws::EC2
       :phc_support,
       :reboot_migration_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The list of instance types with the specified instance attributes.</p>
@@ -41093,7 +39125,7 @@ module Aws::EC2
     class InstanceTypeInfoFromInstanceRequirements < Struct.new(
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance types offered.</p>
@@ -41114,7 +39146,7 @@ module Aws::EC2
       :location_type,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Capacity Reservation usage.</p>
@@ -41130,7 +39162,7 @@ module Aws::EC2
       :account_id,
       :used_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes service integrations with VPC Flow logs.</p>
@@ -41140,17 +39172,7 @@ module Aws::EC2
     class IntegrateServices < Struct.new(
       :athena_integrations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InterfacePermissionType
-      INSTANCE_ATTACH = 'INSTANCE-ATTACH'
-      EIP_ASSOCIATE = 'EIP-ASSOCIATE'
-    end
-
-    module InterfaceProtocolType
-      VLAN = 'VLAN'
-      GRE = 'GRE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an internet gateway.</p>
@@ -41172,7 +39194,7 @@ module Aws::EC2
       :owner_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the attachment of a VPC to an internet gateway or an egress-only internet gateway.</p>
@@ -41188,24 +39210,7 @@ module Aws::EC2
       :state,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InternetGatewayBlockMode
-      off = 'off'
-      block_bidirectional = 'block-bidirectional'
-      block_ingress = 'block-ingress'
-    end
-
-    module InternetGatewayExclusionMode
-      allow_bidirectional = 'allow-bidirectional'
-      allow_egress = 'allow-egress'
-    end
-
-    module IpAddressType
-      ipv4 = 'ipv4'
-      dualstack = 'dualstack'
-      ipv6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the permissions for a security group rule.</p>
@@ -41249,7 +39254,7 @@ module Aws::EC2
       :ipv6_ranges,
       :prefix_list_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv4 address range.</p>
@@ -41274,13 +39279,7 @@ module Aws::EC2
       :description,
       :cidr_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpSource
-      amazon = 'amazon'
-      byoip = 'byoip'
-      none = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html">What is IPAM?</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
@@ -41372,7 +39371,7 @@ module Aws::EC2
       :enable_private_gua,
       :metered_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The historical record of a CIDR within an IPAM scope. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/view-history-cidr-ipam.html">View the history of IP addresses</a> in the <i>Amazon VPC IPAM User Guide</i>.
@@ -41423,20 +39422,7 @@ module Aws::EC2
       :sampled_start_time,
       :sampled_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamAddressHistoryResourceType
-      eip = 'eip'
-      vpc = 'vpc'
-      subnet = 'subnet'
-      network_interface = 'network-interface'
-      instance = 'instance'
-    end
-
-    module IpamAssociatedResourceDiscoveryStatus
-      ACTIVE = 'active'
-      NOT_FOUND = 'not-found'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.</p>
@@ -41450,14 +39436,7 @@ module Aws::EC2
       :message,
       :signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamComplianceStatus
-      compliant = 'compliant'
-      noncompliant = 'noncompliant'
-      unmanaged = 'unmanaged'
-      ignored = 'ignored'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IPAM discovered account. A discovered account is an Amazon Web Services account that is monitored under a resource discovery. If you have integrated IPAM with Amazon Web Services Organizations, all accounts in the organization are discovered accounts.</p>
@@ -41488,7 +39467,7 @@ module Aws::EC2
       :last_successful_discovery_time,
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A public IP Address discovered by IPAM.</p>
@@ -41570,7 +39549,7 @@ module Aws::EC2
       :security_groups,
       :sample_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IPAM discovered resource CIDR. A discovered resource is a resource CIDR monitored under a resource discovery. The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. The discovered resource CIDR is the IP address range in CIDR notation that is associated with the resource.</p>
@@ -41646,13 +39625,7 @@ module Aws::EC2
       :sample_time,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamDiscoveryFailureCode
-      assume_role_failure = 'assume-role-failure'
-      throttling_failure = 'throttling-failure'
-      unauthorized_failure = 'unauthorized-failure'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The discovery failure reason.</p>
@@ -41691,7 +39664,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP).
@@ -41742,32 +39715,7 @@ module Aws::EC2
       :tags,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamExternalResourceVerificationTokenState
-      CREATE_IN_PROGRESS = 'create-in-progress'
-      CREATE_COMPLETE = 'create-complete'
-      CREATE_FAILED = 'create-failed'
-      DELETE_IN_PROGRESS = 'delete-in-progress'
-      DELETE_COMPLETE = 'delete-complete'
-      DELETE_FAILED = 'delete-failed'
-    end
-
-    module IpamManagementState
-      managed = 'managed'
-      unmanaged = 'unmanaged'
-      ignored = 'ignored'
-    end
-
-    module IpamMeteredAccount
-      ipam_owner = 'ipam-owner'
-      resource_owner = 'resource-owner'
-    end
-
-    module IpamNetworkInterfaceAttachmentStatus
-      available = 'available'
-      in_use = 'in-use'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operating Regions for an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.</p>
@@ -41778,7 +39726,7 @@ module Aws::EC2
     class IpamOperatingRegion < Struct.new(
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If your IPAM is integrated with Amazon Web Services Organizations and you add an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that OU exclusion.</p>
@@ -41788,13 +39736,7 @@ module Aws::EC2
     class IpamOrganizationalUnitExclusion < Struct.new(
       :organizations_entity_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamOverlapStatus
-      overlapping = 'overlapping'
-      nonoverlapping = 'nonoverlapping'
-      ignored = 'ignored'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each.</p>
@@ -41917,7 +39859,7 @@ module Aws::EC2
       :public_ip_source,
       :source_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource.</p>
@@ -41952,20 +39894,7 @@ module Aws::EC2
       :resource_region,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamPoolAllocationResourceType
-      ipam_pool = 'ipam-pool'
-      vpc = 'vpc'
-      ec2_public_ipv4_pool = 'ec2-public-ipv4-pool'
-      custom = 'custom'
-      subnet = 'subnet'
-      eip = 'eip'
-    end
-
-    module IpamPoolAwsService
-      ec2 = 'ec2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A CIDR provisioned to an IPAM pool.</p>
@@ -41992,12 +39921,7 @@ module Aws::EC2
       :ipam_pool_cidr_id,
       :netmask_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamPoolCidrFailureCode
-      cidr_not_available = 'cidr-not-available'
-      limit_exceeded = 'limit-exceeded'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details related to why an IPAM pool CIDR failed to be provisioned.</p>
@@ -42011,23 +39935,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamPoolCidrState
-      pending_provision = 'pending-provision'
-      provisioned = 'provisioned'
-      failed_provision = 'failed-provision'
-      pending_deprovision = 'pending-deprovision'
-      deprovisioned = 'deprovisioned'
-      failed_deprovision = 'failed-deprovision'
-      pending_import = 'pending-import'
-      failed_import = 'failed-import'
-    end
-
-    module IpamPoolPublicIpSource
-      amazon = 'amazon'
-      byoip = 'byoip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource used to provision CIDRs to a resource planning pool.</p>
@@ -42049,7 +39957,7 @@ module Aws::EC2
       :resource_region,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource used to provision CIDRs to a resource planning pool.</p>
@@ -42071,43 +39979,7 @@ module Aws::EC2
       :resource_region,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamPoolSourceResourceType
-      vpc = 'vpc'
-    end
-
-    module IpamPoolState
-      create_in_progress = 'create-in-progress'
-      create_complete = 'create-complete'
-      create_failed = 'create-failed'
-      modify_in_progress = 'modify-in-progress'
-      modify_complete = 'modify-complete'
-      modify_failed = 'modify-failed'
-      delete_in_progress = 'delete-in-progress'
-      delete_complete = 'delete-complete'
-      delete_failed = 'delete-failed'
-      isolate_in_progress = 'isolate-in-progress'
-      isolate_complete = 'isolate-complete'
-      restore_in_progress = 'restore-in-progress'
-    end
-
-    module IpamPublicAddressAssociationStatus
-      ASSOCIATED = 'associated'
-      DISASSOCIATED = 'disassociated'
-    end
-
-    module IpamPublicAddressAwsService
-      NAT_GATEWAY = 'nat-gateway'
-      DMS = 'database-migration-service'
-      REDSHIFT = 'redshift'
-      ECS = 'elastic-container-service'
-      RDS = 'relational-database-service'
-      S2S_VPN = 'site-to-site-vpn'
-      EC2_LB = 'load-balancer'
-      AGA = 'global-accelerator'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The security group that the resource with the public IP address is in.</p>
@@ -42121,7 +39993,7 @@ module Aws::EC2
       :group_name,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag for a public IP address discovered by IPAM.</p>
@@ -42135,7 +40007,7 @@ module Aws::EC2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags for a public IP address discovered by IPAM.</p>
@@ -42145,16 +40017,7 @@ module Aws::EC2
     class IpamPublicAddressTags < Struct.new(
       :eip_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamPublicAddressType
-      SERVICE_MANAGED_IP = 'service-managed-ip'
-      SERVICE_MANAGED_BYOIP = 'service-managed-byoip'
-      AMAZON_OWNED_EIP = 'amazon-owned-eip'
-      AMAZON_OWNED_CONTIG = 'amazon-owned-contig'
-      BYOIP = 'byoip'
-      EC2_PUBLIC_IP = 'ec2-public-ip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR for an IPAM resource.</p>
@@ -42238,13 +40101,7 @@ module Aws::EC2
       :vpc_id,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamResourceCidrIpSource
-      amazon = 'amazon'
-      byoip = 'byoip'
-      none = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.</p>
@@ -42340,7 +40197,7 @@ module Aws::EC2
       :tags,
       :organizational_unit_exclusions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IPAM resource discovery association. An associated resource discovery is a resource discovery that has been associated with an IPAM. IPAM aggregates the resource CIDRs discovered by the associated resource discovery.</p>
@@ -42440,34 +40297,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamResourceDiscoveryAssociationState
-      ASSOCIATE_IN_PROGRESS = 'associate-in-progress'
-      ASSOCIATE_COMPLETE = 'associate-complete'
-      ASSOCIATE_FAILED = 'associate-failed'
-      DISASSOCIATE_IN_PROGRESS = 'disassociate-in-progress'
-      DISASSOCIATE_COMPLETE = 'disassociate-complete'
-      DISASSOCIATE_FAILED = 'disassociate-failed'
-      ISOLATE_IN_PROGRESS = 'isolate-in-progress'
-      ISOLATE_COMPLETE = 'isolate-complete'
-      RESTORE_IN_PROGRESS = 'restore-in-progress'
-    end
-
-    module IpamResourceDiscoveryState
-      CREATE_IN_PROGRESS = 'create-in-progress'
-      CREATE_COMPLETE = 'create-complete'
-      CREATE_FAILED = 'create-failed'
-      MODIFY_IN_PROGRESS = 'modify-in-progress'
-      MODIFY_COMPLETE = 'modify-complete'
-      MODIFY_FAILED = 'modify-failed'
-      DELETE_IN_PROGRESS = 'delete-in-progress'
-      DELETE_COMPLETE = 'delete-complete'
-      DELETE_FAILED = 'delete-failed'
-      ISOLATE_IN_PROGRESS = 'isolate-in-progress'
-      ISOLATE_COMPLETE = 'isolate-complete'
-      RESTORE_IN_PROGRESS = 'restore-in-progress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.
@@ -42482,16 +40312,7 @@ module Aws::EC2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamResourceType
-      vpc = 'vpc'
-      subnet = 'subnet'
-      eip = 'eip'
-      public_ipv4_pool = 'public-ipv4-pool'
-      ipv6_pool = 'ipv6-pool'
-      eni = 'eni'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In IPAM, a scope is the highest-level container within IPAM. An IPAM contains two default scopes. Each scope represents the IP space for a single network. The private scope is intended for all private IP address space. The public scope is intended for all public IP address space. Scopes enable you to reuse IP addresses across multiple unconnected networks without causing IP address overlap or conflict.</p>
@@ -42543,47 +40364,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpamScopeState
-      create_in_progress = 'create-in-progress'
-      create_complete = 'create-complete'
-      create_failed = 'create-failed'
-      modify_in_progress = 'modify-in-progress'
-      modify_complete = 'modify-complete'
-      modify_failed = 'modify-failed'
-      delete_in_progress = 'delete-in-progress'
-      delete_complete = 'delete-complete'
-      delete_failed = 'delete-failed'
-      isolate_in_progress = 'isolate-in-progress'
-      isolate_complete = 'isolate-complete'
-      restore_in_progress = 'restore-in-progress'
-    end
-
-    module IpamScopeType
-      public = 'public'
-      private = 'private'
-    end
-
-    module IpamState
-      create_in_progress = 'create-in-progress'
-      create_complete = 'create-complete'
-      create_failed = 'create-failed'
-      modify_in_progress = 'modify-in-progress'
-      modify_complete = 'modify-complete'
-      modify_failed = 'modify-failed'
-      delete_in_progress = 'delete-in-progress'
-      delete_complete = 'delete-complete'
-      delete_failed = 'delete-failed'
-      isolate_in_progress = 'isolate-in-progress'
-      isolate_complete = 'isolate-complete'
-      restore_in_progress = 'restore-in-progress'
-    end
-
-    module IpamTier
-      free = 'free'
-      advanced = 'advanced'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv4 prefix.</p>
@@ -42595,7 +40376,7 @@ module Aws::EC2
     class Ipv4PrefixSpecification < Struct.new(
       :ipv4_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the IPv4 prefix option for a network interface.</p>
@@ -42607,7 +40388,7 @@ module Aws::EC2
     class Ipv4PrefixSpecificationRequest < Struct.new(
       :ipv4_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the IPv4 delegated prefixes assigned to a network interface.</p>
@@ -42617,12 +40398,7 @@ module Aws::EC2
     class Ipv4PrefixSpecificationResponse < Struct.new(
       :ipv4_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Ipv6AddressAttribute
-      public = 'public'
-      private = 'private'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 CIDR block association.</p>
@@ -42636,7 +40412,7 @@ module Aws::EC2
       :ipv6_cidr,
       :associated_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 CIDR block.</p>
@@ -42646,7 +40422,7 @@ module Aws::EC2
     class Ipv6CidrBlock < Struct.new(
       :ipv6_cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 address pool.</p>
@@ -42668,7 +40444,7 @@ module Aws::EC2
       :pool_cidr_blocks,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the IPv6 prefix.</p>
@@ -42678,7 +40454,7 @@ module Aws::EC2
     class Ipv6PrefixSpecification < Struct.new(
       :ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the IPv6 prefix option for a network interface.</p>
@@ -42688,7 +40464,7 @@ module Aws::EC2
     class Ipv6PrefixSpecificationRequest < Struct.new(
       :ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the IPv6 delegated prefixes assigned to a network interface.</p>
@@ -42698,7 +40474,7 @@ module Aws::EC2
     class Ipv6PrefixSpecificationResponse < Struct.new(
       :ipv6_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 address range.</p>
@@ -42723,17 +40499,7 @@ module Aws::EC2
       :description,
       :cidr_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Ipv6SupportValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module KeyFormat
-      pem = 'pem'
-      ppk = 'ppk'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a key pair.</p>
@@ -42791,12 +40557,7 @@ module Aws::EC2
       :key_name,
       :key_fingerprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyType
-      rsa = 'rsa'
-      ed25519 = 'ed25519'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The last error that occurred for a VPC endpoint.</p>
@@ -42810,7 +40571,7 @@ module Aws::EC2
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch permission.</p>
@@ -42833,7 +40594,7 @@ module Aws::EC2
       :user_id,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch permission modification.</p>
@@ -42849,7 +40610,7 @@ module Aws::EC2
       :add,
       :remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch specification for an instance.</p>
@@ -42918,7 +40679,7 @@ module Aws::EC2
       :security_groups,
       :monitoring,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template.</p>
@@ -42956,7 +40717,7 @@ module Aws::EC2
       :tags,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template and overrides.</p>
@@ -42971,12 +40732,7 @@ module Aws::EC2
       :launch_template_specification,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchTemplateAutoRecoveryState
-      default = 'default'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping.</p>
@@ -42998,7 +40754,7 @@ module Aws::EC2
       :ebs,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping.</p>
@@ -43024,7 +40780,7 @@ module Aws::EC2
       :ebs,
       :no_device,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an instance's Capacity Reservation targeting option. You can specify only
@@ -43064,7 +40820,7 @@ module Aws::EC2
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Capacity Reservation targeting option.</p>
@@ -43093,7 +40849,7 @@ module Aws::EC2
       :capacity_reservation_preference,
       :capacity_reservation_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template and overrides.</p>
@@ -43110,7 +40866,7 @@ module Aws::EC2
       :launch_template_specification,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CPU options for the instance.</p>
@@ -43130,7 +40886,7 @@ module Aws::EC2
       :threads_per_core,
       :amd_sev_snp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CPU options for the instance. Both the core count and threads per core must be
@@ -43153,7 +40909,7 @@ module Aws::EC2
       :threads_per_core,
       :amd_sev_snp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device for an EBS volume.</p>
@@ -43196,7 +40952,7 @@ module Aws::EC2
       :throughput,
       :volume_initialization_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for a block device for an EBS volume.</p>
@@ -43311,7 +41067,7 @@ module Aws::EC2
       :throughput,
       :volume_initialization_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -43330,7 +41086,7 @@ module Aws::EC2
       :type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -43349,7 +41105,7 @@ module Aws::EC2
       :type,
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the 
@@ -43370,7 +41126,7 @@ module Aws::EC2
       :ena_srd_enabled,
       :ena_srd_udp_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ENA Express is compatible with both TCP and UDP transport protocols. When it's enabled, TCP traffic 
@@ -43385,7 +41141,7 @@ module Aws::EC2
     class LaunchTemplateEnaSrdUdpSpecification < Struct.new(
       :ena_srd_udp_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves.</p>
@@ -43396,7 +41152,7 @@ module Aws::EC2
     class LaunchTemplateEnclaveOptions < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more
@@ -43409,16 +41165,7 @@ module Aws::EC2
     class LaunchTemplateEnclaveOptionsRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchTemplateErrorCode
-      LAUNCH_TEMPLATE_ID_DOES_NOT_EXIST = 'launchTemplateIdDoesNotExist'
-      LAUNCH_TEMPLATE_ID_MALFORMED = 'launchTemplateIdMalformed'
-      LAUNCH_TEMPLATE_NAME_DOES_NOT_EXIST = 'launchTemplateNameDoesNotExist'
-      LAUNCH_TEMPLATE_NAME_MALFORMED = 'launchTemplateNameMalformed'
-      LAUNCH_TEMPLATE_VERSION_DOES_NOT_EXIST = 'launchTemplateVersionDoesNotExist'
-      UNEXPECTED_ERROR = 'unexpectedError'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether an instance is configured for hibernation.</p>
@@ -43429,7 +41176,7 @@ module Aws::EC2
     class LaunchTemplateHibernationOptions < Struct.new(
       :configured,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the instance is configured for hibernation. This parameter is valid
@@ -43444,12 +41191,7 @@ module Aws::EC2
     class LaunchTemplateHibernationOptionsRequest < Struct.new(
       :configured,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchTemplateHttpTokensState
-      optional = 'optional'
-      required = 'required'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IAM instance profile.</p>
@@ -43463,7 +41205,7 @@ module Aws::EC2
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IAM instance profile.</p>
@@ -43477,7 +41219,7 @@ module Aws::EC2
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maintenance options of your instance.</p>
@@ -43488,7 +41230,7 @@ module Aws::EC2
     class LaunchTemplateInstanceMaintenanceOptions < Struct.new(
       :auto_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maintenance options of your instance.</p>
@@ -43499,7 +41241,7 @@ module Aws::EC2
     class LaunchTemplateInstanceMaintenanceOptionsRequest < Struct.new(
       :auto_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The market (purchasing) option for the instances.</p>
@@ -43513,7 +41255,7 @@ module Aws::EC2
       :market_type,
       :spot_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The market (purchasing) option for the instances.</p>
@@ -43527,12 +41269,7 @@ module Aws::EC2
       :market_type,
       :spot_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchTemplateInstanceMetadataEndpointState
-      disabled = 'disabled'
-      enabled = 'enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Use
@@ -43602,7 +41339,7 @@ module Aws::EC2
       :http_protocol_ipv6,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Use
@@ -43665,22 +41402,7 @@ module Aws::EC2
       :http_protocol_ipv6,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LaunchTemplateInstanceMetadataOptionsState
-      pending = 'pending'
-      applied = 'applied'
-    end
-
-    module LaunchTemplateInstanceMetadataProtocolIpv6
-      disabled = 'disabled'
-      enabled = 'enabled'
-    end
-
-    module LaunchTemplateInstanceMetadataTagsState
-      disabled = 'disabled'
-      enabled = 'enabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface.</p>
@@ -43796,7 +41518,7 @@ module Aws::EC2
       :connection_tracking_specification,
       :ena_queue_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for a network interface.</p>
@@ -43931,7 +41653,7 @@ module Aws::EC2
       :connection_tracking_specification,
       :ena_queue_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a license configuration.</p>
@@ -43941,7 +41663,7 @@ module Aws::EC2
     class LaunchTemplateLicenseConfiguration < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a license configuration.</p>
@@ -43951,7 +41673,7 @@ module Aws::EC2
     class LaunchTemplateLicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>With network performance options, you can adjust your bandwidth preferences to meet
@@ -43965,7 +41687,7 @@ module Aws::EC2
     class LaunchTemplateNetworkPerformanceOptions < Struct.new(
       :bandwidth_weighting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When you configure network performance options in your launch template, your instance
@@ -43995,7 +41717,7 @@ module Aws::EC2
     class LaunchTemplateNetworkPerformanceOptionsRequest < Struct.new(
       :bandwidth_weighting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes overrides for a launch template.</p>
@@ -44064,7 +41786,7 @@ module Aws::EC2
       :priority,
       :instance_requirements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the placement of an instance.</p>
@@ -44113,7 +41835,7 @@ module Aws::EC2
       :partition_number,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the placement of an instance.</p>
@@ -44166,7 +41888,7 @@ module Aws::EC2
       :partition_number,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for instance hostnames.</p>
@@ -44186,7 +41908,7 @@ module Aws::EC2
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for instance hostnames.</p>
@@ -44209,7 +41931,7 @@ module Aws::EC2
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch template to use.</p>
@@ -44235,7 +41957,7 @@ module Aws::EC2
       :launch_template_name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for Spot Instances.</p>
@@ -44270,7 +41992,7 @@ module Aws::EC2
       :valid_until,
       :instance_interruption_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for Spot Instances.</p>
@@ -44320,7 +42042,7 @@ module Aws::EC2
       :valid_until,
       :instance_interruption_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags specification for the launch template.</p>
@@ -44334,7 +42056,7 @@ module Aws::EC2
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags specification for the resources that are created during instance
@@ -44356,7 +42078,7 @@ module Aws::EC2
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch template version.</p>
@@ -44398,7 +42120,7 @@ module Aws::EC2
       :launch_template_data,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the monitoring for the instance.</p>
@@ -44409,7 +42131,7 @@ module Aws::EC2
     class LaunchTemplatesMonitoring < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the monitoring for the instance.</p>
@@ -44420,7 +42142,7 @@ module Aws::EC2
     class LaunchTemplatesMonitoringRequest < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a license configuration.</p>
@@ -44430,7 +42152,7 @@ module Aws::EC2
     class LicenseConfiguration < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a license configuration.</p>
@@ -44440,7 +42162,7 @@ module Aws::EC2
     class LicenseConfigurationRequest < Struct.new(
       :license_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -44466,7 +42188,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute images
@@ -44480,7 +42202,7 @@ module Aws::EC2
       :images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -44507,7 +42229,7 @@ module Aws::EC2
       :snapshot_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshots
@@ -44521,21 +42243,7 @@ module Aws::EC2
       :snapshots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListingState
-      available = 'available'
-      sold = 'sold'
-      cancelled = 'cancelled'
-      pending = 'pending'
-    end
-
-    module ListingStatus
-      active = 'active'
-      pending = 'pending'
-      cancelled = 'cancelled'
-      closed = 'closed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Classic Load Balancers and target groups to attach to a Spot Fleet
@@ -44550,7 +42258,7 @@ module Aws::EC2
       :classic_load_balancers_config,
       :target_groups_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load permission.</p>
@@ -44564,7 +42272,7 @@ module Aws::EC2
       :user_id,
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes modifications to the load permissions of an Amazon FPGA image (AFI).</p>
@@ -44578,7 +42286,7 @@ module Aws::EC2
       :add,
       :remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load permission.</p>
@@ -44592,7 +42300,7 @@ module Aws::EC2
       :group,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a local gateway.</p>
@@ -44618,7 +42326,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route for a local gateway route table.</p>
@@ -44670,15 +42378,7 @@ module Aws::EC2
       :network_interface_id,
       :destination_prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalGatewayRouteState
-      pending = 'pending'
-      active = 'active'
-      blackhole = 'blackhole'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a local gateway route table.</p>
@@ -44720,12 +42420,7 @@ module Aws::EC2
       :mode,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalGatewayRouteTableMode
-      direct_vpc_routing = 'direct-vpc-routing'
-      coip = 'coip'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a local gateway route table and a virtual interface group.</p>
@@ -44763,7 +42458,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a local gateway route table and a VPC.</p>
@@ -44801,12 +42496,7 @@ module Aws::EC2
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalGatewayRouteType
-      static = 'static'
-      propagated = 'propagated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a local gateway virtual interface.</p>
@@ -44868,14 +42558,7 @@ module Aws::EC2
       :tags,
       :configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalGatewayVirtualInterfaceConfigurationState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a local gateway virtual interface group.</p>
@@ -44917,38 +42600,7 @@ module Aws::EC2
       :tags,
       :configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LocalGatewayVirtualInterfaceGroupConfigurationState
-      pending = 'pending'
-      incomplete = 'incomplete'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
-    end
-
-    module LocalStorage
-      INCLUDED = 'included'
-      REQUIRED = 'required'
-      EXCLUDED = 'excluded'
-    end
-
-    module LocalStorageType
-      HDD = 'hdd'
-      SSD = 'ssd'
-    end
-
-    module LocationType
-      region = 'region'
-      availability_zone = 'availability-zone'
-      availability_zone_id = 'availability-zone-id'
-      outpost = 'outpost'
-    end
-
-    module LockMode
-      compliance = 'compliance'
-      governance = 'governance'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -45025,7 +42677,7 @@ module Aws::EC2
       :lock_duration,
       :expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -45092,14 +42744,7 @@ module Aws::EC2
       :lock_expires_on,
       :lock_duration_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LockState
-      compliance = 'compliance'
-      governance = 'governance'
-      compliance_cooloff = 'compliance-cooloff'
-      expired = 'expired'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a locked snapshot.</p>
@@ -45170,13 +42815,7 @@ module Aws::EC2
       :lock_duration_start_time,
       :lock_expires_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDestinationType
-      cloud_watch_logs = 'cloud-watch-logs'
-      s3 = 's3'
-      kinesis_data_firehose = 'kinesis-data-firehose'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -45196,7 +42835,7 @@ module Aws::EC2
       :host_id,
       :mac_os_latest_supported_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a System Integrity Protection (SIP) modification task or volume 
@@ -45233,19 +42872,7 @@ module Aws::EC2
       :task_state,
       :task_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MacModificationTaskState
-      successful = 'successful'
-      failed = 'failed'
-      inprogress = 'in-progress'
-      pending = 'pending'
-    end
-
-    module MacModificationTaskType
-      SIPModification = 'sip-modification'
-      VolumeOwnershipDelegation = 'volume-ownership-delegation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for a System Integrity Protection (SIP) modification task.</p>
@@ -45283,7 +42910,7 @@ module Aws::EC2
       :nvram_protections,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom configuration for a System Integrity Protection (SIP) modification task.</p>
@@ -45317,12 +42944,7 @@ module Aws::EC2
       :kext_signing,
       :nvram_protections,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MacSystemIntegrityProtectionSettingStatus
-      enabled = 'enabled'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for Site-to-Site VPN tunnel endpoint maintenance events.</p>
@@ -45340,12 +42962,7 @@ module Aws::EC2
       :maintenance_auto_applied_after,
       :last_maintenance_applied,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ManagedBy
-      account = 'account'
-      declarative_policy = 'declarative-policy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a managed prefix list.</p>
@@ -45391,12 +43008,7 @@ module Aws::EC2
       :tags,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketType
-      spot = 'spot'
-      capacity_block = 'capacity-block'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the media accelerators for the instance type.</p>
@@ -45411,7 +43023,7 @@ module Aws::EC2
       :accelerators,
       :total_media_memory_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the media accelerators for the instance type.</p>
@@ -45433,7 +43045,7 @@ module Aws::EC2
       :manufacturer,
       :memory_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the memory available to the media accelerator.</p>
@@ -45443,12 +43055,7 @@ module Aws::EC2
     class MediaDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipType
-      static = 'static'
-      igmp = 'igmp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of memory per vCPU, in GiB.</p>
@@ -45465,7 +43072,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of memory per vCPU, in GiB.</p>
@@ -45481,7 +43088,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the memory for the instance type.</p>
@@ -45491,7 +43098,7 @@ module Aws::EC2
     class MemoryInfo < Struct.new(
       :size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of memory, in MiB.</p>
@@ -45507,7 +43114,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of memory, in MiB.</p>
@@ -45523,13 +43130,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetadataDefaultHttpTokensState
-      optional = 'optional'
-      required = 'required'
-      no_preference = 'no-preference'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether the network was healthy or degraded at a particular point. The value is aggregated from the <code>startDate</code> to the <code>endDate</code>. Currently only <code>five_minutes</code> is supported.</p>
@@ -45551,11 +43152,7 @@ module Aws::EC2
       :value,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricType
-      aggregate_latency = 'aggregate-latency'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -45574,7 +43171,7 @@ module Aws::EC2
       :domain_name,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -45583,7 +43180,7 @@ module Aws::EC2
     class ModifyAddressAttributeResult < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -45604,7 +43201,7 @@ module Aws::EC2
       :opt_in_status,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -45613,12 +43210,7 @@ module Aws::EC2
     class ModifyAvailabilityZoneGroupResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModifyAvailabilityZoneOptInStatus
-      opted_in = 'opted-in'
-      not_opted_in = 'not-opted-in'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_fleet_id
@@ -45659,7 +43251,7 @@ module Aws::EC2
       :dry_run,
       :remove_end_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -45668,7 +43260,7 @@ module Aws::EC2
     class ModifyCapacityReservationFleetResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation_id
@@ -45738,7 +43330,7 @@ module Aws::EC2
       :additional_info,
       :instance_match_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -45747,7 +43339,7 @@ module Aws::EC2
     class ModifyCapacityReservationResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -45848,7 +43440,7 @@ module Aws::EC2
       :client_route_enforcement_options,
       :disconnect_on_session_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -45857,7 +43449,7 @@ module Aws::EC2
     class ModifyClientVpnEndpointResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -45878,7 +43470,7 @@ module Aws::EC2
       :instance_family,
       :cpu_credits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_family_credit_specification
@@ -45887,7 +43479,7 @@ module Aws::EC2
     class ModifyDefaultCreditSpecificationResult < Struct.new(
       :instance_family_credit_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -45922,7 +43514,7 @@ module Aws::EC2
       :kms_key_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -45931,7 +43523,7 @@ module Aws::EC2
     class ModifyEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -45964,7 +43556,7 @@ module Aws::EC2
       :target_capacity_specification,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -45974,7 +43566,7 @@ module Aws::EC2
     class ModifyFleetResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -46022,7 +43614,7 @@ module Aws::EC2
       :description,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fpga_image_attribute
@@ -46031,7 +43623,7 @@ module Aws::EC2
     class ModifyFpgaImageAttributeResult < Struct.new(
       :fpga_image_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_recovery
@@ -46073,7 +43665,7 @@ module Aws::EC2
       :host_ids,
       :auto_placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -46087,7 +43679,7 @@ module Aws::EC2
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -46111,7 +43703,7 @@ module Aws::EC2
       :resource,
       :use_long_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource
@@ -46141,7 +43733,7 @@ module Aws::EC2
       :use_long_ids,
       :principal_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ModifyImageAttribute.</p>
@@ -46220,7 +43812,7 @@ module Aws::EC2
       :imds_support,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_dest_check
@@ -46351,7 +43943,7 @@ module Aws::EC2
       :sriov_net_support,
       :ena_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46368,7 +43960,7 @@ module Aws::EC2
       :capacity_reservation_specification,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -46377,7 +43969,7 @@ module Aws::EC2
     class ModifyInstanceCapacityReservationAttributesResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46400,7 +43992,7 @@ module Aws::EC2
       :threads_per_core,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46419,7 +44011,7 @@ module Aws::EC2
       :core_count,
       :threads_per_core,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -46440,7 +44032,7 @@ module Aws::EC2
       :client_token,
       :instance_credit_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_instance_credit_specifications
@@ -46455,7 +44047,7 @@ module Aws::EC2
       :successful_instance_credit_specifications,
       :unsuccessful_instance_credit_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -46478,7 +44070,7 @@ module Aws::EC2
       :instance_event_id,
       :not_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event
@@ -46487,7 +44079,7 @@ module Aws::EC2
     class ModifyInstanceEventStartTimeResult < Struct.new(
       :event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -46543,7 +44135,7 @@ module Aws::EC2
       :time_ranges,
       :cron_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_event_window
@@ -46552,7 +44144,7 @@ module Aws::EC2
     class ModifyInstanceEventWindowResult < Struct.new(
       :instance_event_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46596,7 +44188,7 @@ module Aws::EC2
       :reboot_migration,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46633,7 +44225,7 @@ module Aws::EC2
       :auto_recovery,
       :reboot_migration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute http_tokens
@@ -46679,7 +44271,7 @@ module Aws::EC2
       :instance_metadata_tags,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -46689,7 +44281,7 @@ module Aws::EC2
     class ModifyInstanceMetadataDefaultsResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46768,7 +44360,7 @@ module Aws::EC2
       :http_protocol_ipv6,
       :instance_metadata_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46781,7 +44373,7 @@ module Aws::EC2
       :instance_id,
       :instance_metadata_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46816,7 +44408,7 @@ module Aws::EC2
       :bandwidth_weighting,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -46829,7 +44421,7 @@ module Aws::EC2
       :instance_id,
       :bandwidth_weighting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -46880,7 +44472,7 @@ module Aws::EC2
       :affinity,
       :host_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -46889,7 +44481,7 @@ module Aws::EC2
     class ModifyInstancePlacementResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -46947,7 +44539,7 @@ module Aws::EC2
       :add_allocation_resource_tags,
       :remove_allocation_resource_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool
@@ -46956,7 +44548,7 @@ module Aws::EC2
     class ModifyIpamPoolResult < Struct.new(
       :ipam_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47007,7 +44599,7 @@ module Aws::EC2
       :enable_private_gua,
       :metered_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47042,7 +44634,7 @@ module Aws::EC2
       :destination_ipam_scope_id,
       :monitored,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_cidr
@@ -47051,7 +44643,7 @@ module Aws::EC2
     class ModifyIpamResourceCidrResult < Struct.new(
       :ipam_resource_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47096,7 +44688,7 @@ module Aws::EC2
       :add_organizational_unit_exclusions,
       :remove_organizational_unit_exclusions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_resource_discovery
@@ -47105,7 +44697,7 @@ module Aws::EC2
     class ModifyIpamResourceDiscoveryResult < Struct.new(
       :ipam_resource_discovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam
@@ -47114,7 +44706,7 @@ module Aws::EC2
     class ModifyIpamResult < Struct.new(
       :ipam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47133,7 +44725,7 @@ module Aws::EC2
       :ipam_scope_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_scope
@@ -47142,7 +44734,7 @@ module Aws::EC2
     class ModifyIpamScopeResult < Struct.new(
       :ipam_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47179,7 +44771,7 @@ module Aws::EC2
       :launch_template_name,
       :default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute launch_template
@@ -47188,7 +44780,7 @@ module Aws::EC2
     class ModifyLaunchTemplateResult < Struct.new(
       :launch_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_cidr_block
@@ -47224,7 +44816,7 @@ module Aws::EC2
       :dry_run,
       :destination_prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -47233,7 +44825,7 @@ module Aws::EC2
     class ModifyLocalGatewayRouteResult < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47272,7 +44864,7 @@ module Aws::EC2
       :remove_entries,
       :max_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix_list
@@ -47281,7 +44873,7 @@ module Aws::EC2
     class ModifyManagedPrefixListResult < Struct.new(
       :prefix_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ModifyNetworkInterfaceAttribute.</p>
@@ -47358,7 +44950,7 @@ module Aws::EC2
       :groups,
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -47391,7 +44983,7 @@ module Aws::EC2
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -47401,7 +44993,7 @@ module Aws::EC2
     class ModifyPrivateDnsNameOptionsResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interface_id
@@ -47434,7 +45026,7 @@ module Aws::EC2
       :hostname_type,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -47443,7 +45035,7 @@ module Aws::EC2
     class ModifyPublicIpDnsNameOptionsResult < Struct.new(
       :successful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ModifyReservedInstances.</p>
@@ -47463,7 +45055,7 @@ module Aws::EC2
       :client_token,
       :target_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ModifyReservedInstances.</p>
@@ -47473,7 +45065,7 @@ module Aws::EC2
     class ModifyReservedInstancesResult < Struct.new(
       :reserved_instances_modification_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server_id
@@ -47512,7 +45104,7 @@ module Aws::EC2
       :sns_notifications_enabled,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route_server
@@ -47521,7 +45113,7 @@ module Aws::EC2
     class ModifyRouteServerResult < Struct.new(
       :route_server,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -47540,7 +45132,7 @@ module Aws::EC2
       :security_group_rules,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -47549,7 +45141,7 @@ module Aws::EC2
     class ModifySecurityGroupRulesResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -47584,7 +45176,7 @@ module Aws::EC2
       :user_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -47603,7 +45195,7 @@ module Aws::EC2
       :storage_tier,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -47616,7 +45208,7 @@ module Aws::EC2
       :snapshot_id,
       :tiering_start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ModifySpotFleetRequest.</p>
@@ -47651,7 +45243,7 @@ module Aws::EC2
       :target_capacity,
       :excess_capacity_termination_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of ModifySpotFleetRequest.</p>
@@ -47662,7 +45254,7 @@ module Aws::EC2
     class ModifySpotFleetRequestResponse < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assign_ipv6_address_on_creation
@@ -47738,7 +45330,7 @@ module Aws::EC2
       :enable_lni_at_device_index,
       :disable_lni_at_device_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_id
@@ -47761,7 +45353,7 @@ module Aws::EC2
       :remove_network_services,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter
@@ -47770,7 +45362,7 @@ module Aws::EC2
     class ModifyTrafficMirrorFilterNetworkServicesResult < Struct.new(
       :traffic_mirror_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rule_id
@@ -47827,7 +45419,7 @@ module Aws::EC2
       :remove_fields,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_filter_rule
@@ -47839,7 +45431,7 @@ module Aws::EC2
     class ModifyTrafficMirrorFilterRuleResult < Struct.new(
       :traffic_mirror_filter_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_session_id
@@ -47885,7 +45477,7 @@ module Aws::EC2
       :remove_fields,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_mirror_session
@@ -47894,7 +45486,7 @@ module Aws::EC2
     class ModifyTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The transit gateway options.</p>
@@ -47966,7 +45558,7 @@ module Aws::EC2
       :propagation_default_route_table_id,
       :amazon_side_asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -47993,7 +45585,7 @@ module Aws::EC2
       :blackhole,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_prefix_list_reference
@@ -48002,7 +45594,7 @@ module Aws::EC2
     class ModifyTransitGatewayPrefixListReferenceResult < Struct.new(
       :transit_gateway_prefix_list_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_id
@@ -48025,7 +45617,7 @@ module Aws::EC2
       :options,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway
@@ -48034,7 +45626,7 @@ module Aws::EC2
     class ModifyTransitGatewayResult < Struct.new(
       :transit_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -48061,7 +45653,7 @@ module Aws::EC2
       :options,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for a VPC attachment.</p>
@@ -48087,7 +45679,7 @@ module Aws::EC2
       :ipv6_support,
       :appliance_mode_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_vpc_attachment
@@ -48096,7 +45688,7 @@ module Aws::EC2
     class ModifyTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The CIDR options for a Verified Access endpoint.</p>
@@ -48106,7 +45698,7 @@ module Aws::EC2
     class ModifyVerifiedAccessEndpointCidrOptions < Struct.new(
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options when modifying a Verified Access endpoint with the
@@ -48125,7 +45717,7 @@ module Aws::EC2
       :port,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer when creating an Amazon Web Services Verified Access endpoint using the
@@ -48148,7 +45740,7 @@ module Aws::EC2
       :port,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_id
@@ -48180,7 +45772,7 @@ module Aws::EC2
       :dry_run,
       :sse_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_enabled
@@ -48197,7 +45789,7 @@ module Aws::EC2
       :policy_document,
       :sse_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the port range for a Verified Access endpoint.</p>
@@ -48211,7 +45803,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RDS options for a Verified Access endpoint.</p>
@@ -48229,7 +45821,7 @@ module Aws::EC2
       :port,
       :rds_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint_id
@@ -48274,7 +45866,7 @@ module Aws::EC2
       :rds_options,
       :cidr_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_endpoint
@@ -48283,7 +45875,7 @@ module Aws::EC2
     class ModifyVerifiedAccessEndpointResult < Struct.new(
       :verified_access_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group_id
@@ -48315,7 +45907,7 @@ module Aws::EC2
       :dry_run,
       :sse_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_enabled
@@ -48332,7 +45924,7 @@ module Aws::EC2
       :policy_document,
       :sse_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group_id
@@ -48360,7 +45952,7 @@ module Aws::EC2
       :client_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_group
@@ -48369,7 +45961,7 @@ module Aws::EC2
     class ModifyVerifiedAccessGroupResult < Struct.new(
       :verified_access_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -48393,7 +45985,7 @@ module Aws::EC2
       :dry_run,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -48402,7 +45994,7 @@ module Aws::EC2
     class ModifyVerifiedAccessInstanceLoggingConfigurationResult < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance_id
@@ -48430,7 +46022,7 @@ module Aws::EC2
       :client_token,
       :cidr_endpoints_custom_sub_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_instance
@@ -48439,7 +46031,7 @@ module Aws::EC2
     class ModifyVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the OpenID Connect (OIDC) options.</p>
@@ -48477,7 +46069,7 @@ module Aws::EC2
       :client_secret,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Modifies the configuration of the specified device-based Amazon Web Services Verified Access trust provider.</p>
@@ -48487,7 +46079,7 @@ module Aws::EC2
     class ModifyVerifiedAccessTrustProviderDeviceOptions < Struct.new(
       :public_signing_key_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for an OpenID Connect-compatible user-identity trust provider.</p>
@@ -48521,7 +46113,7 @@ module Aws::EC2
       :client_secret,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider_id
@@ -48562,7 +46154,7 @@ module Aws::EC2
       :sse_specification,
       :native_application_oidc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verified_access_trust_provider
@@ -48571,7 +46163,7 @@ module Aws::EC2
     class ModifyVerifiedAccessTrustProviderResult < Struct.new(
       :verified_access_trust_provider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute auto_enable_io
@@ -48590,7 +46182,7 @@ module Aws::EC2
       :volume_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48680,7 +46272,7 @@ module Aws::EC2
       :throughput,
       :multi_attach_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_modification
@@ -48689,7 +46281,7 @@ module Aws::EC2
     class ModifyVolumeResult < Struct.new(
       :volume_modification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enable_dns_hostnames
@@ -48716,7 +46308,7 @@ module Aws::EC2
       :vpc_id,
       :enable_network_address_usage_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48745,7 +46337,7 @@ module Aws::EC2
       :exclusion_id,
       :internet_gateway_exclusion_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_block_public_access_exclusion
@@ -48754,7 +46346,7 @@ module Aws::EC2
     class ModifyVpcBlockPublicAccessExclusionResult < Struct.new(
       :vpc_block_public_access_exclusion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48783,7 +46375,7 @@ module Aws::EC2
       :dry_run,
       :internet_gateway_block_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_block_public_access_options
@@ -48792,7 +46384,7 @@ module Aws::EC2
     class ModifyVpcBlockPublicAccessOptionsResult < Struct.new(
       :vpc_block_public_access_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48816,7 +46408,7 @@ module Aws::EC2
       :connection_notification_arn,
       :connection_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -48825,7 +46417,7 @@ module Aws::EC2
     class ModifyVpcEndpointConnectionNotificationResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48891,7 +46483,7 @@ module Aws::EC2
       :private_dns_enabled,
       :subnet_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -48900,7 +46492,7 @@ module Aws::EC2
     class ModifyVpcEndpointResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48961,7 +46553,7 @@ module Aws::EC2
       :add_supported_regions,
       :remove_supported_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -48970,7 +46562,7 @@ module Aws::EC2
     class ModifyVpcEndpointServiceConfigurationResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -48991,7 +46583,7 @@ module Aws::EC2
       :service_id,
       :payer_responsibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -49000,7 +46592,7 @@ module Aws::EC2
     class ModifyVpcEndpointServicePayerResponsibilityResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -49026,7 +46618,7 @@ module Aws::EC2
       :add_allowed_principals,
       :remove_allowed_principals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute added_principals
@@ -49039,7 +46631,7 @@ module Aws::EC2
       :added_principals,
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accepter_peering_connection_options
@@ -49062,7 +46654,7 @@ module Aws::EC2
       :requester_peering_connection_options,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accepter_peering_connection_options
@@ -49075,7 +46667,7 @@ module Aws::EC2
       :accepter_peering_connection_options,
       :requester_peering_connection_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -49094,7 +46686,7 @@ module Aws::EC2
       :instance_tenancy,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -49104,7 +46696,7 @@ module Aws::EC2
     class ModifyVpcTenancyResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -49141,7 +46733,7 @@ module Aws::EC2
       :remote_ipv6_network_cidr,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection
@@ -49150,7 +46742,7 @@ module Aws::EC2
     class ModifyVpnConnectionOptionsResult < Struct.new(
       :vpn_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -49179,7 +46771,7 @@ module Aws::EC2
       :vpn_gateway_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection
@@ -49188,7 +46780,7 @@ module Aws::EC2
     class ModifyVpnConnectionResult < Struct.new(
       :vpn_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -49208,7 +46800,7 @@ module Aws::EC2
       :vpn_tunnel_outside_ip_address,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection
@@ -49217,7 +46809,7 @@ module Aws::EC2
     class ModifyVpnTunnelCertificateResult < Struct.new(
       :vpn_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -49251,7 +46843,7 @@ module Aws::EC2
       :skip_tunnel_replacement,
       :pre_shared_key_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection
@@ -49260,7 +46852,7 @@ module Aws::EC2
     class ModifyVpnTunnelOptionsResult < Struct.new(
       :vpn_connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Web Services Site-to-Site VPN tunnel options to modify.</p>
@@ -49457,7 +47049,7 @@ module Aws::EC2
       :log_options,
       :enable_tunnel_lifecycle_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -49472,7 +47064,7 @@ module Aws::EC2
       :instance_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_monitorings
@@ -49481,7 +47073,7 @@ module Aws::EC2
     class MonitorInstancesResult < Struct.new(
       :instance_monitorings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the monitoring of an instance.</p>
@@ -49492,14 +47084,7 @@ module Aws::EC2
     class Monitoring < Struct.new(
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MonitoringState
-      disabled = 'disabled'
-      disabling = 'disabling'
-      enabled = 'enabled'
-      pending = 'pending'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -49514,7 +47099,7 @@ module Aws::EC2
       :dry_run,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -49527,7 +47112,7 @@ module Aws::EC2
       :allocation_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -49550,7 +47135,7 @@ module Aws::EC2
       :ipam_pool_id,
       :ipam_pool_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -49559,7 +47144,7 @@ module Aws::EC2
     class MoveByoipCidrToIpamResult < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -49585,7 +47170,7 @@ module Aws::EC2
       :destination_capacity_reservation_id,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_capacity_reservation
@@ -49603,12 +47188,7 @@ module Aws::EC2
       :destination_capacity_reservation,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MoveStatus
-      movingToVpc = 'movingToVpc'
-      restoringToClassic = 'restoringToClassic'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -49625,12 +47205,7 @@ module Aws::EC2
       :move_status,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MulticastSupportValue
-      enable = 'enable'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a NAT gateway.</p>
@@ -49735,7 +47310,7 @@ module Aws::EC2
       :tags,
       :connectivity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the IP addresses and network interface associated with a NAT gateway.</p>
@@ -49773,24 +47348,7 @@ module Aws::EC2
       :failure_message,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NatGatewayAddressStatus
-      ASSIGNING = 'assigning'
-      UNASSIGNING = 'unassigning'
-      ASSOCIATING = 'associating'
-      DISASSOCIATING = 'disassociating'
-      SUCCEEDED = 'succeeded'
-      FAILED = 'failed'
-    end
-
-    module NatGatewayState
-      PENDING = 'pending'
-      FAILED = 'failed'
-      AVAILABLE = 'available'
-      DELETING = 'deleting'
-      DELETED = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the OpenID Connect (OIDC) options.</p>
@@ -49824,7 +47382,7 @@ module Aws::EC2
       :client_id,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network ACL.</p>
@@ -49858,7 +47416,7 @@ module Aws::EC2
       :vpc_id,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a network ACL and a subnet.</p>
@@ -49876,7 +47434,7 @@ module Aws::EC2
       :network_acl_id,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an entry in a network ACL.</p>
@@ -49914,7 +47472,7 @@ module Aws::EC2
       :rule_action,
       :rule_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).</p>
@@ -49937,7 +47495,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).</p>
@@ -49960,7 +47518,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the network card support of the instance type.</p>
@@ -49998,7 +47556,7 @@ module Aws::EC2
       :maximum_ena_queue_count,
       :maximum_ena_queue_count_per_interface,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the networking features of the instance type.</p>
@@ -50067,7 +47625,7 @@ module Aws::EC2
       :bandwidth_weightings,
       :flexible_ena_queues_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Network Access Scope.</p>
@@ -50093,7 +47651,7 @@ module Aws::EC2
       :updated_date,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Network Access Scope analysis.</p>
@@ -50143,7 +47701,7 @@ module Aws::EC2
       :analyzed_eni_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Network Access Scope content.</p>
@@ -50161,7 +47719,7 @@ module Aws::EC2
       :match_paths,
       :exclude_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network insights analysis.</p>
@@ -50235,7 +47793,7 @@ module Aws::EC2
       :suggested_accounts,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path.</p>
@@ -50297,7 +47855,7 @@ module Aws::EC2
       :filter_at_source,
       :filter_at_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface.</p>
@@ -50436,7 +47994,7 @@ module Aws::EC2
       :operator,
       :associated_subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes association information for an Elastic IP address (IPv4 only), or a Carrier
@@ -50474,7 +48032,7 @@ module Aws::EC2
       :customer_owned_ip,
       :carrier_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface attachment.</p>
@@ -50522,7 +48080,7 @@ module Aws::EC2
       :ena_srd_specification,
       :ena_queue_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an attachment change.</p>
@@ -50545,15 +48103,7 @@ module Aws::EC2
       :attachment_id,
       :delete_on_termination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkInterfaceAttribute
-      description = 'description'
-      groupSet = 'groupSet'
-      sourceDestCheck = 'sourceDestCheck'
-      attachment = 'attachment'
-      associatePublicIpAddress = 'associatePublicIpAddress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum number of network interfaces.</p>
@@ -50569,7 +48119,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum number of network interfaces.</p>
@@ -50585,14 +48135,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkInterfaceCreationType
-      efa = 'efa'
-      efa_only = 'efa-only'
-      branch = 'branch'
-      trunk = 'trunk'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 address associated with a network interface.</p>
@@ -50613,7 +48156,7 @@ module Aws::EC2
       :public_ipv6_dns_name,
       :is_primary_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a permission for a network interface.</p>
@@ -50643,7 +48186,7 @@ module Aws::EC2
       :permission,
       :permission_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a network interface permission.</p>
@@ -50657,14 +48200,7 @@ module Aws::EC2
       :state,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkInterfacePermissionStateCode
-      pending = 'pending'
-      granted = 'granted'
-      revoking = 'revoking'
-      revoked = 'revoked'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the private IPv4 address of a network interface.</p>
@@ -50688,36 +48224,7 @@ module Aws::EC2
       :private_dns_name,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkInterfaceStatus
-      available = 'available'
-      associated = 'associated'
-      attaching = 'attaching'
-      in_use = 'in-use'
-      detaching = 'detaching'
-    end
-
-    module NetworkInterfaceType
-      interface = 'interface'
-      natGateway = 'natGateway'
-      efa = 'efa'
-      efa_only = 'efa-only'
-      trunk = 'trunk'
-      load_balancer = 'load_balancer'
-      network_load_balancer = 'network_load_balancer'
-      vpc_endpoint = 'vpc_endpoint'
-      branch = 'branch'
-      transit_gateway = 'transit_gateway'
-      lambda = 'lambda'
-      quicksight = 'quicksight'
-      global_accelerator_managed = 'global_accelerator_managed'
-      api_gateway_managed = 'api_gateway_managed'
-      gateway_load_balancer = 'gateway_load_balancer'
-      gateway_load_balancer_endpoint = 'gateway_load_balancer_endpoint'
-      iot_rules_managed = 'iot_rules_managed'
-      aws_codestar_connections_managed = 'aws_codestar_connections_managed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the cores available to the neuron accelerator.</p>
@@ -50731,7 +48238,7 @@ module Aws::EC2
       :count,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the neuron accelerators for the instance type.</p>
@@ -50753,7 +48260,7 @@ module Aws::EC2
       :core_info,
       :memory_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the memory available to the neuron accelerator.</p>
@@ -50763,7 +48270,7 @@ module Aws::EC2
     class NeuronDeviceMemoryInfo < Struct.new(
       :size_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the neuron accelerators for the instance type.</p>
@@ -50778,7 +48285,7 @@ module Aws::EC2
       :neuron_devices,
       :total_neuron_device_memory_in_mi_b,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a DHCP configuration option.</p>
@@ -50792,12 +48299,7 @@ module Aws::EC2
       :key,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NitroEnclavesSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the supported NitroTPM versions for the instance type.</p>
@@ -50807,26 +48309,7 @@ module Aws::EC2
     class NitroTpmInfo < Struct.new(
       :supported_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NitroTpmSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
-    end
-
-    module OfferingClassType
-      STANDARD = 'standard'
-      CONVERTIBLE = 'convertible'
-    end
-
-    module OfferingTypeValues
-      Heavy_Utilization = 'Heavy Utilization'
-      Medium_Utilization = 'Medium Utilization'
-      Light_Utilization = 'Light Utilization'
-      No_Upfront = 'No Upfront'
-      Partial_Upfront = 'Partial Upfront'
-      All_Upfront = 'All Upfront'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for an OpenID Connect-compatible user-identity trust
@@ -50861,12 +48344,7 @@ module Aws::EC2
       :client_secret,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OnDemandAllocationStrategy
-      LOWEST_PRICE = 'lowestPrice'
-      PRIORITIZED = 'prioritized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of On-Demand Instances in an EC2 Fleet.</p>
@@ -50924,7 +48402,7 @@ module Aws::EC2
       :min_target_capacity,
       :max_total_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of On-Demand Instances in an EC2 Fleet.</p>
@@ -50981,12 +48459,7 @@ module Aws::EC2
       :min_target_capacity,
       :max_total_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperationType
-      add = 'add'
-      remove = 'remove'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service provider that manages the resource.</p>
@@ -50996,7 +48469,7 @@ module Aws::EC2
     class OperatorRequest < Struct.new(
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether the resource is managed by a service provider and, if so, describes
@@ -51012,7 +48485,7 @@ module Aws::EC2
       :managed,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Outpost link aggregation group (LAG).</p>
@@ -51046,7 +48519,7 @@ module Aws::EC2
       :service_link_virtual_interface_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a packet header statement.</p>
@@ -51080,7 +48553,7 @@ module Aws::EC2
       :destination_prefix_lists,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a packet header statement.</p>
@@ -51114,14 +48587,7 @@ module Aws::EC2
       :destination_prefix_lists,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartitionLoadFrequency
-      NONE = 'none'
-      DAILY = 'daily'
-      WEEKLY = 'weekly'
-      MONTHLY = 'monthly'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path component.</p>
@@ -51207,7 +48673,7 @@ module Aws::EC2
       :firewall_stateful_rule,
       :service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a set of filters for a path analysis. Use path filters to scope the analysis when
@@ -51230,7 +48696,7 @@ module Aws::EC2
       :destination_address,
       :destination_port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a set of filters for a path analysis. Use path filters to scope the analysis when
@@ -51253,7 +48719,7 @@ module Aws::EC2
       :destination_address,
       :destination_port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path statement.</p>
@@ -51267,7 +48733,7 @@ module Aws::EC2
       :packet_header_statement,
       :resource_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a path statement.</p>
@@ -51281,17 +48747,7 @@ module Aws::EC2
       :packet_header_statement,
       :resource_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PayerResponsibility
-      ServiceOwner = 'ServiceOwner'
-    end
-
-    module PaymentOption
-      ALL_UPFRONT = 'AllUpfront'
-      PARTIAL_UPFRONT = 'PartialUpfront'
-      NO_UPFRONT = 'NoUpfront'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data that identifies an Amazon FPGA image (AFI) on the PCI bus.</p>
@@ -51313,7 +48769,7 @@ module Aws::EC2
       :subsystem_id,
       :subsystem_vendor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the transit gateway peering attachment.</p>
@@ -51327,7 +48783,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the VPC peering connection options.</p>
@@ -51346,7 +48802,7 @@ module Aws::EC2
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC peering connection options.</p>
@@ -51365,7 +48821,7 @@ module Aws::EC2
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the transit gateway in the peering attachment.</p>
@@ -51387,7 +48843,7 @@ module Aws::EC2
       :owner_id,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify an instance family to use as the baseline reference for CPU performance. All
@@ -51463,7 +48919,7 @@ module Aws::EC2
     class PerformanceFactorReference < Struct.new(
       :instance_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specify an instance family to use as the baseline reference for CPU performance. All
@@ -51539,20 +48995,7 @@ module Aws::EC2
     class PerformanceFactorReferenceRequest < Struct.new(
       :instance_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PeriodType
-      five_minutes = 'five-minutes'
-      fifteen_minutes = 'fifteen-minutes'
-      one_hour = 'one-hour'
-      three_hours = 'three-hours'
-      one_day = 'one-day'
-      one_week = 'one-week'
-    end
-
-    module PermissionGroup
-      all = 'all'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Diffie-Hellmann group number for phase 1 IKE negotiations.</p>
@@ -51562,7 +49005,7 @@ module Aws::EC2
     class Phase1DHGroupNumbersListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 1 IKE
@@ -51573,7 +49016,7 @@ module Aws::EC2
     class Phase1DHGroupNumbersRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption algorithm for phase 1 IKE negotiations.</p>
@@ -51583,7 +49026,7 @@ module Aws::EC2
     class Phase1EncryptionAlgorithmsListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the encryption algorithm for the VPN tunnel for phase 1 IKE
@@ -51594,7 +49037,7 @@ module Aws::EC2
     class Phase1EncryptionAlgorithmsRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integrity algorithm for phase 1 IKE negotiations.</p>
@@ -51604,7 +49047,7 @@ module Aws::EC2
     class Phase1IntegrityAlgorithmsListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the integrity algorithm for the VPN tunnel for phase 1 IKE
@@ -51615,7 +49058,7 @@ module Aws::EC2
     class Phase1IntegrityAlgorithmsRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Diffie-Hellmann group number for phase 2 IKE negotiations.</p>
@@ -51625,7 +49068,7 @@ module Aws::EC2
     class Phase2DHGroupNumbersListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Diffie-Hellman group number for the VPN tunnel for phase 2 IKE
@@ -51636,7 +49079,7 @@ module Aws::EC2
     class Phase2DHGroupNumbersRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption algorithm for phase 2 IKE negotiations.</p>
@@ -51646,7 +49089,7 @@ module Aws::EC2
     class Phase2EncryptionAlgorithmsListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the encryption algorithm for the VPN tunnel for phase 2 IKE
@@ -51657,7 +49100,7 @@ module Aws::EC2
     class Phase2EncryptionAlgorithmsRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integrity algorithm for phase 2 IKE negotiations.</p>
@@ -51667,7 +49110,7 @@ module Aws::EC2
     class Phase2IntegrityAlgorithmsListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the integrity algorithm for the VPN tunnel for phase 2 IKE
@@ -51678,12 +49121,7 @@ module Aws::EC2
     class Phase2IntegrityAlgorithmsRequestListValue < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PhcSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the placement of an instance.</p>
@@ -51750,7 +49188,7 @@ module Aws::EC2
       :group_id,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a placement group.</p>
@@ -51790,7 +49228,7 @@ module Aws::EC2
       :group_arn,
       :spread_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the placement group support of the instance type.</p>
@@ -51800,20 +49238,7 @@ module Aws::EC2
     class PlacementGroupInfo < Struct.new(
       :supported_strategies,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementGroupState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
-    end
-
-    module PlacementGroupStrategy
-      cluster = 'cluster'
-      partition = 'partition'
-      spread = 'spread'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the placement of an instance.</p>
@@ -51823,17 +49248,7 @@ module Aws::EC2
     class PlacementResponse < Struct.new(
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PlacementStrategy
-      cluster = 'cluster'
-      spread = 'spread'
-      partition = 'partition'
-    end
-
-    module PlatformValues
-      Windows = 'Windows'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a CIDR block for an address pool.</p>
@@ -51843,7 +49258,7 @@ module Aws::EC2
     class PoolCidrBlock < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a range of ports.</p>
@@ -51857,7 +49272,7 @@ module Aws::EC2
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes prefixes for Amazon Web Services services.</p>
@@ -51875,7 +49290,7 @@ module Aws::EC2
       :prefix_list_id,
       :prefix_list_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resource with which a prefix list is associated.</p>
@@ -51889,7 +49304,7 @@ module Aws::EC2
       :resource_id,
       :resource_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a prefix list entry.</p>
@@ -51903,7 +49318,7 @@ module Aws::EC2
       :cidr,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a prefix list ID.</p>
@@ -51919,22 +49334,7 @@ module Aws::EC2
       :description,
       :prefix_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrefixListState
-      create_in_progress = 'create-in-progress'
-      create_complete = 'create-complete'
-      create_failed = 'create-failed'
-      modify_in_progress = 'modify-in-progress'
-      modify_complete = 'modify-complete'
-      modify_failed = 'modify-failed'
-      restore_in_progress = 'restore-in-progress'
-      restore_complete = 'restore-complete'
-      restore_failed = 'restore-failed'
-      delete_in_progress = 'delete-in-progress'
-      delete_complete = 'delete-complete'
-      delete_failed = 'delete-failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the price for a Reserved Instance.</p>
@@ -51965,7 +49365,7 @@ module Aws::EC2
       :price,
       :term,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the price for a Reserved Instance.</p>
@@ -51985,7 +49385,7 @@ module Aws::EC2
       :price,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance offering.</p>
@@ -51999,7 +49399,7 @@ module Aws::EC2
       :count,
       :price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>PrincipalIdFormat description</p>
@@ -52013,16 +49413,7 @@ module Aws::EC2
       :arn,
       :statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrincipalType
-      All = 'All'
-      Service = 'Service'
-      OrganizationUnit = 'OrganizationUnit'
-      Account = 'Account'
-      User = 'User'
-      Role = 'Role'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Private DNS name for interface endpoints.</p>
@@ -52032,7 +49423,7 @@ module Aws::EC2
     class PrivateDnsDetails < Struct.new(
       :private_dns_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the private DNS name for the service endpoint.</p>
@@ -52057,7 +49448,7 @@ module Aws::EC2
       :value,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for instance hostnames.</p>
@@ -52080,7 +49471,7 @@ module Aws::EC2
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for instance hostnames.</p>
@@ -52103,7 +49494,7 @@ module Aws::EC2
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for instance hostnames.</p>
@@ -52123,7 +49514,7 @@ module Aws::EC2
       :enable_resource_name_dns_a_record,
       :enable_resource_name_dns_aaaa_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a secondary private IPv4 address for a network interface.</p>
@@ -52138,7 +49529,7 @@ module Aws::EC2
       :primary,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the processor used by the instance type.</p>
@@ -52163,7 +49554,7 @@ module Aws::EC2
       :supported_features,
       :manufacturer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a product code.</p>
@@ -52177,12 +49568,7 @@ module Aws::EC2
       :product_code_id,
       :product_code_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProductCodeValues
-      devpay = 'devpay'
-      marketplace = 'marketplace'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a virtual private gateway propagating route.</p>
@@ -52192,16 +49578,7 @@ module Aws::EC2
     class PropagatingVgw < Struct.new(
       :gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Protocol
-      tcp = 'tcp'
-      udp = 'udp'
-    end
-
-    module ProtocolValue
-      gre = 'gre'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -52260,7 +49637,7 @@ module Aws::EC2
       :multi_region,
       :network_border_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -52269,7 +49646,7 @@ module Aws::EC2
     class ProvisionByoipCidrResult < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -52292,7 +49669,7 @@ module Aws::EC2
       :asn,
       :asn_authorization_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoasn
@@ -52301,7 +49678,7 @@ module Aws::EC2
     class ProvisionIpamByoasnResult < Struct.new(
       :byoasn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -52340,7 +49717,7 @@ module Aws::EC2
       :verification_method,
       :ipam_external_resource_verification_token_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipam_pool_cidr
@@ -52349,7 +49726,7 @@ module Aws::EC2
     class ProvisionIpamPoolCidrResult < Struct.new(
       :ipam_pool_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -52376,7 +49753,7 @@ module Aws::EC2
       :netmask_length,
       :network_border_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -52389,7 +49766,7 @@ module Aws::EC2
       :pool_id,
       :pool_address_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved. If you need to sustain traffic greater than the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways">documented limits</a>, 
@@ -52416,7 +49793,7 @@ module Aws::EC2
       :requested,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an updated pointer (PTR) record for an Elastic IP address.</p>
@@ -52434,7 +49811,7 @@ module Aws::EC2
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Public hostname type options. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html">EC2 instance hostnames, DNS names, and domains</a> in the <i>Amazon EC2 User Guide</i>.</p>
@@ -52456,13 +49833,7 @@ module Aws::EC2
       :public_ipv6_dns_name,
       :public_dual_stack_dns_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PublicIpDnsOption
-      public_dual_stack_dns_name = 'public-dual-stack-dns-name'
-      public_ipv4_dns_name = 'public-ipv4-dns-name'
-      public_ipv6_dns_name = 'public-ipv6-dns-name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv4 address pool.</p>
@@ -52498,7 +49869,7 @@ module Aws::EC2
       :network_border_group,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an address range of an IPv4 address pool.</p>
@@ -52520,7 +49891,7 @@ module Aws::EC2
       :address_count,
       :available_address_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of the purchase.</p>
@@ -52561,7 +49932,7 @@ module Aws::EC2
       :payment_option,
       :upfront_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_extension_offering_id
@@ -52578,7 +49949,7 @@ module Aws::EC2
       :capacity_reservation_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_block_extensions
@@ -52587,7 +49958,7 @@ module Aws::EC2
     class PurchaseCapacityBlockExtensionResult < Struct.new(
       :capacity_block_extensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -52608,7 +49979,7 @@ module Aws::EC2
       :capacity_block_offering_id,
       :instance_platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity_reservation
@@ -52621,7 +49992,7 @@ module Aws::EC2
       :capacity_reservation,
       :capacity_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -52657,7 +50028,7 @@ module Aws::EC2
       :offering_id,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -52684,7 +50055,7 @@ module Aws::EC2
       :total_hourly_price,
       :total_upfront_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a request to purchase Scheduled Instances.</p>
@@ -52698,7 +50069,7 @@ module Aws::EC2
       :instance_count,
       :purchase_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for PurchaseReservedInstancesOffering.</p>
@@ -52729,7 +50100,7 @@ module Aws::EC2
       :dry_run,
       :limit_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of PurchaseReservedInstancesOffering.</p>
@@ -52740,7 +50111,7 @@ module Aws::EC2
     class PurchaseReservedInstancesOfferingResult < Struct.new(
       :reserved_instances_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for PurchaseScheduledInstances.</p>
@@ -52761,7 +50132,7 @@ module Aws::EC2
       :dry_run,
       :purchase_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of PurchaseScheduledInstances.</p>
@@ -52771,14 +50142,7 @@ module Aws::EC2
     class PurchaseScheduledInstancesResult < Struct.new(
       :scheduled_instance_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RIProductDescription
-      Linux_UNIX = 'Linux/UNIX'
-      Linux_UNIX_Amazon_VPC_ = 'Linux/UNIX (Amazon VPC)'
-      Windows = 'Windows'
-      Windows_Amazon_VPC_ = 'Windows (Amazon VPC)'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -52793,12 +50157,7 @@ module Aws::EC2
       :instance_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RebootMigrationSupport
-      UNSUPPORTED = 'unsupported'
-      SUPPORTED = 'supported'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a recurring charge.</p>
@@ -52812,11 +50171,7 @@ module Aws::EC2
       :amount,
       :frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecurringChargeFrequency
-      Hourly = 'Hourly'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the security group that is referenced in the security group rule.</p>
@@ -52842,7 +50197,7 @@ module Aws::EC2
       :vpc_id,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Region.</p>
@@ -52861,7 +50216,7 @@ module Aws::EC2
       :region_name,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary report for the attribute for a Region.</p>
@@ -52881,7 +50236,7 @@ module Aws::EC2
       :number_of_matched_accounts,
       :number_of_unmatched_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for RegisterImage.</p>
@@ -53011,7 +50366,7 @@ module Aws::EC2
       :sriov_net_support,
       :ena_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RegisterImage.</p>
@@ -53021,7 +50376,7 @@ module Aws::EC2
     class RegisterImageResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53036,7 +50391,7 @@ module Aws::EC2
       :dry_run,
       :instance_tag_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_tag_attribute
@@ -53045,7 +50400,7 @@ module Aws::EC2
     class RegisterInstanceEventNotificationAttributesResult < Struct.new(
       :instance_tag_attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the tag keys to register for the current Region. You can either
@@ -53063,7 +50418,7 @@ module Aws::EC2
       :include_all_tags_of_instance,
       :instance_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -53086,7 +50441,7 @@ module Aws::EC2
       :network_interface_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registered_multicast_group_members
@@ -53095,7 +50450,7 @@ module Aws::EC2
     class RegisterTransitGatewayMulticastGroupMembersResult < Struct.new(
       :registered_multicast_group_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -53118,7 +50473,7 @@ module Aws::EC2
       :network_interface_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registered_multicast_group_sources
@@ -53127,7 +50482,7 @@ module Aws::EC2
     class RegisterTransitGatewayMulticastGroupSourcesResult < Struct.new(
       :registered_multicast_group_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53140,7 +50495,7 @@ module Aws::EC2
       :dry_run,
       :capacity_reservation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -53149,7 +50504,7 @@ module Aws::EC2
     class RejectCapacityReservationBillingOwnershipResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -53172,7 +50527,7 @@ module Aws::EC2
       :subnet_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -53181,7 +50536,7 @@ module Aws::EC2
     class RejectTransitGatewayMulticastDomainAssociationsResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -53196,7 +50551,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_peering_attachment
@@ -53205,7 +50560,7 @@ module Aws::EC2
     class RejectTransitGatewayPeeringAttachmentResult < Struct.new(
       :transit_gateway_peering_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -53220,7 +50575,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_vpc_attachment
@@ -53229,7 +50584,7 @@ module Aws::EC2
     class RejectTransitGatewayVpcAttachmentResult < Struct.new(
       :transit_gateway_vpc_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53248,7 +50603,7 @@ module Aws::EC2
       :service_id,
       :vpc_endpoint_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unsuccessful
@@ -53257,7 +50612,7 @@ module Aws::EC2
     class RejectVpcEndpointConnectionsResult < Struct.new(
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53272,7 +50627,7 @@ module Aws::EC2
       :dry_run,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -53281,7 +50636,7 @@ module Aws::EC2
     class RejectVpcPeeringConnectionResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -53306,7 +50661,7 @@ module Aws::EC2
       :network_border_group,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_ids
@@ -53315,7 +50670,7 @@ module Aws::EC2
     class ReleaseHostsRequest < Struct.new(
       :host_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful
@@ -53329,7 +50684,7 @@ module Aws::EC2
       :successful,
       :unsuccessful,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53352,7 +50707,7 @@ module Aws::EC2
       :cidr,
       :ipam_pool_allocation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -53361,7 +50716,7 @@ module Aws::EC2
     class ReleaseIpamPoolAllocationResult < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Remove an operating Region from an IPAM. Operating Regions are Amazon Web Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only discovers and monitors resources in the Amazon Web Services Regions you select as operating Regions.</p>
@@ -53373,7 +50728,7 @@ module Aws::EC2
     class RemoveIpamOperatingRegion < Struct.new(
       :region_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Remove an Organizational Unit (OU) exclusion to your IPAM. If your IPAM is integrated with Amazon Web Services Organizations and you add an organizational unit (OU) exclusion, IPAM will not manage the IP addresses in accounts in that OU exclusion. There is a limit on the number of exclusions you can create. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html">Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>
@@ -53413,7 +50768,7 @@ module Aws::EC2
     class RemoveIpamOrganizationalUnitExclusion < Struct.new(
       :organizations_entity_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entry for a prefix list.</p>
@@ -53423,7 +50778,7 @@ module Aws::EC2
     class RemovePrefixListEntry < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_instance_profile
@@ -53436,7 +50791,7 @@ module Aws::EC2
       :iam_instance_profile,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_instance_profile_association
@@ -53445,7 +50800,7 @@ module Aws::EC2
     class ReplaceIamInstanceProfileAssociationResult < Struct.new(
       :iam_instance_profile_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_criteria
@@ -53461,7 +50816,7 @@ module Aws::EC2
       :image_criteria,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -53470,7 +50825,7 @@ module Aws::EC2
     class ReplaceImageCriteriaInAllowedImagesSettingsResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53489,7 +50844,7 @@ module Aws::EC2
       :association_id,
       :network_acl_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute new_association_id
@@ -53498,7 +50853,7 @@ module Aws::EC2
     class ReplaceNetworkAclAssociationResult < Struct.new(
       :new_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53555,7 +50910,7 @@ module Aws::EC2
       :icmp_type_code,
       :port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a root volume replacement task.</p>
@@ -53633,16 +50988,7 @@ module Aws::EC2
       :snapshot_id,
       :delete_replaced_root_volume,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplaceRootVolumeTaskState
-      pending = 'pending'
-      in_progress = 'in-progress'
-      failing = 'failing'
-      succeeded = 'succeeded'
-      failed = 'failed'
-      failed_detached = 'failed-detached'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_prefix_list_id
@@ -53723,7 +51069,7 @@ module Aws::EC2
       :vpc_peering_connection_id,
       :nat_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53742,7 +51088,7 @@ module Aws::EC2
       :association_id,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute new_association_id
@@ -53755,7 +51101,7 @@ module Aws::EC2
       :new_association_id,
       :association_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_cidr_block
@@ -53782,7 +51128,7 @@ module Aws::EC2
       :blackhole,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute route
@@ -53791,7 +51137,7 @@ module Aws::EC2
     class ReplaceTransitGatewayRouteResult < Struct.new(
       :route,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpn_connection_id
@@ -53812,7 +51158,7 @@ module Aws::EC2
       :apply_pending_maintenance,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -53821,24 +51167,7 @@ module Aws::EC2
     class ReplaceVpnTunnelResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplacementStrategy
-      LAUNCH = 'launch'
-      LAUNCH_BEFORE_TERMINATE = 'launch-before-terminate'
-    end
-
-    module ReportInstanceReasonCodes
-      instance_stuck_in_state = 'instance-stuck-in-state'
-      unresponsive = 'unresponsive'
-      not_accepting_credentials = 'not-accepting-credentials'
-      password_not_available = 'password-not-available'
-      performance_network = 'performance-network'
-      performance_instance_store = 'performance-instance-store'
-      performance_ebs_volume = 'performance-ebs-volume'
-      performance_other = 'performance-other'
-      other = 'other'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -53919,19 +51248,7 @@ module Aws::EC2
       :reason_codes,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReportState
-      running = 'running'
-      cancelled = 'cancelled'
-      complete = 'complete'
-      error = 'error'
-    end
-
-    module ReportStatusType
-      ok = 'ok'
-      impaired = 'impaired'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a port range.</p>
@@ -53945,7 +51262,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag on an IPAM resource.</p>
@@ -53959,7 +51276,7 @@ module Aws::EC2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information to include in the launch template.</p>
@@ -54273,7 +51590,7 @@ module Aws::EC2
       :operator,
       :network_performance_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for RequestSpotFleet.</p>
@@ -54290,7 +51607,7 @@ module Aws::EC2
       :dry_run,
       :spot_fleet_request_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RequestSpotFleet.</p>
@@ -54300,7 +51617,7 @@ module Aws::EC2
     class RequestSpotFleetResponse < Struct.new(
       :spot_fleet_request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for RequestSpotInstances.</p>
@@ -54408,7 +51725,7 @@ module Aws::EC2
       :availability_zone_group,
       :block_duration_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RequestSpotInstances.</p>
@@ -54418,7 +51735,7 @@ module Aws::EC2
     class RequestSpotInstancesResult < Struct.new(
       :spot_instance_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch specification for an instance.</p>
@@ -54494,7 +51811,7 @@ module Aws::EC2
       :subnet_id,
       :user_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch request for one or more instances, and includes owner, requester,
@@ -54523,7 +51840,7 @@ module Aws::EC2
       :groups,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an instance type to use in a Capacity Reservation Fleet.</p>
@@ -54575,14 +51892,7 @@ module Aws::EC2
       :ebs_optimized,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservationState
-      PAYMENT_PENDING = 'payment-pending'
-      PAYMENT_FAILED = 'payment-failed'
-      ACTIVE = 'active'
-      RETIRED = 'retired'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cost associated with the Reserved Instance.</p>
@@ -54601,7 +51911,7 @@ module Aws::EC2
       :remaining_total_value,
       :remaining_upfront_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the limit price of a Reserved Instance offering.</p>
@@ -54617,7 +51927,7 @@ module Aws::EC2
       :amount,
       :currency_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total value of the Convertible Reserved Instance.</p>
@@ -54631,16 +51941,7 @@ module Aws::EC2
       :reservation_value,
       :reserved_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReservedInstanceState
-      payment_pending = 'payment-pending'
-      active = 'active'
-      payment_failed = 'payment-failed'
-      retired = 'retired'
-      queued = 'queued'
-      queued_deleted = 'queued-deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance.</p>
@@ -54723,7 +52024,7 @@ module Aws::EC2
       :product_description,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration settings for the modified Reserved Instances.</p>
@@ -54757,7 +52058,7 @@ module Aws::EC2
       :scope,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the ID of a Reserved Instance.</p>
@@ -54767,7 +52068,7 @@ module Aws::EC2
     class ReservedInstancesId < Struct.new(
       :reserved_instances_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance listing.</p>
@@ -54816,7 +52117,7 @@ module Aws::EC2
       :tags,
       :update_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance modification.</p>
@@ -54861,7 +52162,7 @@ module Aws::EC2
       :status_message,
       :update_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the modification request/s.</p>
@@ -54877,7 +52178,7 @@ module Aws::EC2
       :reserved_instances_id,
       :target_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance offering.</p>
@@ -54955,7 +52256,7 @@ module Aws::EC2
       :fixed_price,
       :product_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allocation_id
@@ -54974,7 +52275,7 @@ module Aws::EC2
       :attribute,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -54983,7 +52284,7 @@ module Aws::EC2
     class ResetAddressAttributeResult < Struct.new(
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -54994,7 +52295,7 @@ module Aws::EC2
     class ResetEbsDefaultKmsKeyIdRequest < Struct.new(
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kms_key_id
@@ -55003,11 +52304,7 @@ module Aws::EC2
     class ResetEbsDefaultKmsKeyIdResult < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResetFpgaImageAttributeName
-      loadPermission = 'loadPermission'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -55026,7 +52323,7 @@ module Aws::EC2
       :fpga_image_id,
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -55035,11 +52332,7 @@ module Aws::EC2
     class ResetFpgaImageAttributeResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResetImageAttributeName
-      launchPermission = 'launchPermission'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ResetImageAttribute.</p>
@@ -55060,7 +52353,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -55083,7 +52376,7 @@ module Aws::EC2
       :instance_id,
       :attribute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for ResetNetworkInterfaceAttribute.</p>
@@ -55105,7 +52398,7 @@ module Aws::EC2
       :network_interface_id,
       :source_dest_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attribute
@@ -55125,7 +52418,7 @@ module Aws::EC2
       :snapshot_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource statement.</p>
@@ -55139,7 +52432,7 @@ module Aws::EC2
       :resources,
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a resource statement.</p>
@@ -55153,106 +52446,7 @@ module Aws::EC2
       :resources,
       :resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      capacity_reservation = 'capacity-reservation'
-      client_vpn_endpoint = 'client-vpn-endpoint'
-      customer_gateway = 'customer-gateway'
-      carrier_gateway = 'carrier-gateway'
-      coip_pool = 'coip-pool'
-      declarative_policies_report = 'declarative-policies-report'
-      dedicated_host = 'dedicated-host'
-      dhcp_options = 'dhcp-options'
-      egress_only_internet_gateway = 'egress-only-internet-gateway'
-      elastic_ip = 'elastic-ip'
-      elastic_gpu = 'elastic-gpu'
-      export_image_task = 'export-image-task'
-      export_instance_task = 'export-instance-task'
-      fleet = 'fleet'
-      fpga_image = 'fpga-image'
-      host_reservation = 'host-reservation'
-      image = 'image'
-      import_image_task = 'import-image-task'
-      import_snapshot_task = 'import-snapshot-task'
-      instance = 'instance'
-      instance_event_window = 'instance-event-window'
-      internet_gateway = 'internet-gateway'
-      ipam = 'ipam'
-      ipam_pool = 'ipam-pool'
-      ipam_scope = 'ipam-scope'
-      ipv4pool_ec2 = 'ipv4pool-ec2'
-      ipv6pool_ec2 = 'ipv6pool-ec2'
-      key_pair = 'key-pair'
-      launch_template = 'launch-template'
-      local_gateway = 'local-gateway'
-      local_gateway_route_table = 'local-gateway-route-table'
-      local_gateway_virtual_interface = 'local-gateway-virtual-interface'
-      local_gateway_virtual_interface_group = 'local-gateway-virtual-interface-group'
-      local_gateway_route_table_vpc_association = 'local-gateway-route-table-vpc-association'
-      local_gateway_route_table_virtual_interface_group_association = 'local-gateway-route-table-virtual-interface-group-association'
-      natgateway = 'natgateway'
-      network_acl = 'network-acl'
-      network_interface = 'network-interface'
-      network_insights_analysis = 'network-insights-analysis'
-      network_insights_path = 'network-insights-path'
-      network_insights_access_scope = 'network-insights-access-scope'
-      network_insights_access_scope_analysis = 'network-insights-access-scope-analysis'
-      outpost_lag = 'outpost-lag'
-      placement_group = 'placement-group'
-      prefix_list = 'prefix-list'
-      replace_root_volume_task = 'replace-root-volume-task'
-      reserved_instances = 'reserved-instances'
-      route_table = 'route-table'
-      security_group = 'security-group'
-      security_group_rule = 'security-group-rule'
-      service_link_virtual_interface = 'service-link-virtual-interface'
-      snapshot = 'snapshot'
-      spot_fleet_request = 'spot-fleet-request'
-      spot_instances_request = 'spot-instances-request'
-      subnet = 'subnet'
-      subnet_cidr_reservation = 'subnet-cidr-reservation'
-      traffic_mirror_filter = 'traffic-mirror-filter'
-      traffic_mirror_session = 'traffic-mirror-session'
-      traffic_mirror_target = 'traffic-mirror-target'
-      transit_gateway = 'transit-gateway'
-      transit_gateway_attachment = 'transit-gateway-attachment'
-      transit_gateway_connect_peer = 'transit-gateway-connect-peer'
-      transit_gateway_multicast_domain = 'transit-gateway-multicast-domain'
-      transit_gateway_policy_table = 'transit-gateway-policy-table'
-      transit_gateway_route_table = 'transit-gateway-route-table'
-      transit_gateway_route_table_announcement = 'transit-gateway-route-table-announcement'
-      volume = 'volume'
-      vpc = 'vpc'
-      vpc_endpoint = 'vpc-endpoint'
-      vpc_endpoint_connection = 'vpc-endpoint-connection'
-      vpc_endpoint_service = 'vpc-endpoint-service'
-      vpc_endpoint_service_permission = 'vpc-endpoint-service-permission'
-      vpc_peering_connection = 'vpc-peering-connection'
-      vpn_connection = 'vpn-connection'
-      vpn_gateway = 'vpn-gateway'
-      vpc_flow_log = 'vpc-flow-log'
-      capacity_reservation_fleet = 'capacity-reservation-fleet'
-      traffic_mirror_filter_rule = 'traffic-mirror-filter-rule'
-      vpc_endpoint_connection_device_type = 'vpc-endpoint-connection-device-type'
-      verified_access_instance = 'verified-access-instance'
-      verified_access_group = 'verified-access-group'
-      verified_access_endpoint = 'verified-access-endpoint'
-      verified_access_policy = 'verified-access-policy'
-      verified_access_trust_provider = 'verified-access-trust-provider'
-      vpn_connection_device_type = 'vpn-connection-device-type'
-      vpc_block_public_access_exclusion = 'vpc-block-public-access-exclusion'
-      route_server = 'route-server'
-      route_server_endpoint = 'route-server-endpoint'
-      route_server_peer = 'route-server-peer'
-      ipam_resource_discovery = 'ipam-resource-discovery'
-      ipam_resource_discovery_association = 'ipam-resource-discovery-association'
-      instance_connect_endpoint = 'instance-connect-endpoint'
-      verified_access_endpoint_target = 'verified-access-endpoint-target'
-      ipam_external_resource_verification_token = 'ipam-external-resource-verification-token'
-      capacity_block = 'capacity-block'
-      mac_modification_task = 'mac-modification-task'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the error that's returned when you cannot delete a launch template
@@ -55267,7 +52461,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information for a launch template. </p>
@@ -55449,7 +52643,7 @@ module Aws::EC2
       :operator,
       :network_performance_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -55464,7 +52658,7 @@ module Aws::EC2
       :dry_run,
       :public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_ip
@@ -55477,7 +52671,7 @@ module Aws::EC2
       :public_ip,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -55492,7 +52686,7 @@ module Aws::EC2
       :image_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -55501,7 +52695,7 @@ module Aws::EC2
     class RestoreImageFromRecycleBinResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -55524,7 +52718,7 @@ module Aws::EC2
       :previous_version,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix_list
@@ -55533,7 +52727,7 @@ module Aws::EC2
     class RestoreManagedPrefixListVersionResult < Struct.new(
       :prefix_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -55548,7 +52742,7 @@ module Aws::EC2
       :snapshot_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -55598,7 +52792,7 @@ module Aws::EC2
       :volume_size,
       :sse_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -55628,7 +52822,7 @@ module Aws::EC2
       :permanent_restore,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -55651,7 +52845,7 @@ module Aws::EC2
       :restore_duration,
       :is_permanent_restore,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -55677,7 +52871,7 @@ module Aws::EC2
       :revoke_all_groups,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -55686,7 +52880,7 @@ module Aws::EC2
     class RevokeClientVpnIngressResult < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_group_rule_ids
@@ -55736,7 +52930,7 @@ module Aws::EC2
       :cidr_ip,
       :ip_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -55755,7 +52949,7 @@ module Aws::EC2
       :unknown_ip_permissions,
       :revoked_security_group_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr_ip
@@ -55815,7 +53009,7 @@ module Aws::EC2
       :security_group_rule_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -55834,7 +53028,7 @@ module Aws::EC2
       :unknown_ip_permissions,
       :revoked_security_group_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group rule removed with <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html">RevokeSecurityGroupEgress</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html">RevokeSecurityGroupIngress</a>.</p>
@@ -55884,12 +53078,7 @@ module Aws::EC2
       :referenced_group_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RootDeviceType
-      ebs = 'ebs'
-      instance_store = 'instance-store'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route in a route table.</p>
@@ -55984,13 +53173,7 @@ module Aws::EC2
       :odb_network_arn,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteOrigin
-      CreateRouteTable = 'CreateRouteTable'
-      CreateRoute = 'CreateRoute'
-      EnableVgwRoutePropagation = 'EnableVgwRoutePropagation'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route server and its configuration.</p>
@@ -56044,7 +53227,7 @@ module Aws::EC2
       :sns_notifications_enabled,
       :sns_topic_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between a route server and a VPC.</p>
@@ -56063,18 +53246,7 @@ module Aws::EC2
       :vpc_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteServerAssociationState
-      ASSOCIATING = 'associating'
-      ASSOCIATED = 'associated'
-      DISASSOCIATING = 'disassociating'
-    end
-
-    module RouteServerBfdState
-      UP = 'up'
-      DOWN = 'down'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of Bidirectional Forwarding Detection (BFD) for a BGP session.</p>
@@ -56084,7 +53256,7 @@ module Aws::EC2
     class RouteServerBfdStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The BGP configuration options for a route server peer.</p>
@@ -56110,7 +53282,7 @@ module Aws::EC2
       :peer_asn,
       :peer_liveness_detection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The BGP configuration options requested for a route server peer.</p>
@@ -56135,12 +53307,7 @@ module Aws::EC2
       :peer_asn,
       :peer_liveness_detection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteServerBgpState
-      UP = 'up'
-      DOWN = 'down'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of a BGP session.</p>
@@ -56150,7 +53317,7 @@ module Aws::EC2
     class RouteServerBgpStatus < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route server endpoint and its properties.</p>
@@ -56193,17 +53360,7 @@ module Aws::EC2
       :failure_reason,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteServerEndpointState
-      PENDING = 'pending'
-      AVAILABLE = 'available'
-      DELETING = 'deleting'
-      DELETED = 'deleted'
-      FAILING = 'failing'
-      FAILED = 'failed'
-      DELETE_FAILED = 'delete-failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a BGP peer configuration for a route server endpoint.</p>
@@ -56277,36 +53434,7 @@ module Aws::EC2
       :bfd_status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteServerPeerLivenessMode
-      BFD = 'bfd'
-      BGP_KEEPALIVE = 'bgp-keepalive'
-    end
-
-    module RouteServerPeerState
-      PENDING = 'pending'
-      AVAILABLE = 'available'
-      DELETING = 'deleting'
-      DELETED = 'deleted'
-      FAILING = 'failing'
-      FAILED = 'failed'
-    end
-
-    module RouteServerPersistRoutesAction
-      ENABLE = 'enable'
-      DISABLE = 'disable'
-      RESET = 'reset'
-    end
-
-    module RouteServerPersistRoutesState
-      ENABLING = 'enabling'
-      ENABLED = 'enabled'
-      RESETTING = 'resetting'
-      DISABLING = 'disabling'
-      DISABLED = 'disabled'
-      MODIFYING = 'modifying'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the route propagation configuration between a route server and a route table.</p>
@@ -56325,13 +53453,7 @@ module Aws::EC2
       :route_table_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteServerPropagationState
-      PENDING = 'pending'
-      AVAILABLE = 'available'
-      DELETING = 'deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route in the route server's routing database.</p>
@@ -56371,7 +53493,7 @@ module Aws::EC2
       :med,
       :next_hop_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the installation status of a route in a route table.</p>
@@ -56389,30 +53511,7 @@ module Aws::EC2
       :route_installation_status,
       :route_installation_status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteServerRouteInstallationStatus
-      INSTALLED = 'installed'
-      REJECTED = 'rejected'
-    end
-
-    module RouteServerRouteStatus
-      IN_RIB = 'in-rib'
-      IN_FIB = 'in-fib'
-    end
-
-    module RouteServerState
-      PENDING = 'pending'
-      AVAILABLE = 'available'
-      MODIFYING = 'modifying'
-      DELETING = 'deleting'
-      DELETED = 'deleted'
-    end
-
-    module RouteState
-      active = 'active'
-      blackhole = 'blackhole'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route table.</p>
@@ -56446,7 +53545,7 @@ module Aws::EC2
       :vpc_id,
       :owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a route table and a subnet or gateway.</p>
@@ -56480,7 +53579,7 @@ module Aws::EC2
       :public_ipv4_pool,
       :association_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of an association between a route table and a subnet or gateway.</p>
@@ -56494,20 +53593,7 @@ module Aws::EC2
       :state,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RouteTableAssociationStateCode
-      associating = 'associating'
-      associated = 'associated'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
-      failed = 'failed'
-    end
-
-    module RuleAction
-      allow = 'allow'
-      deny = 'deny'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the rule options for a stateful rule group.</p>
@@ -56521,7 +53607,7 @@ module Aws::EC2
       :rule_group_arn,
       :rule_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the type of a stateful rule group.</p>
@@ -56535,7 +53621,7 @@ module Aws::EC2
       :rule_group_arn,
       :rule_group_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes additional settings for a stateful rule.</p>
@@ -56549,7 +53635,7 @@ module Aws::EC2
       :keyword,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the monitoring of an instance.</p>
@@ -56560,7 +53646,7 @@ module Aws::EC2
     class RunInstancesMonitoringEnabled < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a launch request for one or more instances, and includes owner, requester,
@@ -56589,7 +53675,7 @@ module Aws::EC2
       :groups,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute block_device_mappings
@@ -56909,7 +53995,7 @@ module Aws::EC2
       :iam_instance_profile,
       :ebs_optimized,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for RunScheduledInstances.</p>
@@ -56940,7 +54026,7 @@ module Aws::EC2
       :launch_specification,
       :scheduled_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of RunScheduledInstances.</p>
@@ -56950,7 +54036,7 @@ module Aws::EC2
     class RunScheduledInstancesResult < Struct.new(
       :instance_id_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags to apply to the AMI object that will be stored in the Amazon S3 bucket. For more
@@ -56970,7 +54056,7 @@ module Aws::EC2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the storage parameters for Amazon S3 and Amazon S3 buckets for an instance store-backed
@@ -57002,13 +54088,7 @@ module Aws::EC2
       :upload_policy,
       :upload_policy_signature,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SSEType
-      sse_ebs = 'sse-ebs'
-      sse_kms = 'sse-kms'
-      none = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Scheduled Instance.</p>
@@ -57074,7 +54154,7 @@ module Aws::EC2
       :term_start_date,
       :total_scheduled_instance_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a schedule that is available for your Scheduled Instances.</p>
@@ -57132,7 +54212,7 @@ module Aws::EC2
       :slot_duration_in_hours,
       :total_scheduled_instance_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the recurring schedule for a Scheduled Instance.</p>
@@ -57159,7 +54239,7 @@ module Aws::EC2
       :occurrence_relative_to_end,
       :occurrence_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the recurring schedule for a Scheduled Instance.</p>
@@ -57189,7 +54269,7 @@ module Aws::EC2
       :occurrence_relative_to_end,
       :occurrence_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a block device mapping for a Scheduled Instance.</p>
@@ -57218,7 +54298,7 @@ module Aws::EC2
       :no_device,
       :virtual_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EBS volume for a Scheduled Instance.</p>
@@ -57254,7 +54334,7 @@ module Aws::EC2
       :volume_size,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IAM instance profile for a Scheduled Instance.</p>
@@ -57268,7 +54348,7 @@ module Aws::EC2
       :arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 address.</p>
@@ -57278,7 +54358,7 @@ module Aws::EC2
     class ScheduledInstancesIpv6Address < Struct.new(
       :ipv6_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch specification for a Scheduled Instance.</p>
@@ -57345,7 +54425,7 @@ module Aws::EC2
       :subnet_id,
       :user_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether monitoring is enabled for a Scheduled Instance.</p>
@@ -57355,7 +54435,7 @@ module Aws::EC2
     class ScheduledInstancesMonitoring < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a network interface for a Scheduled Instance.</p>
@@ -57415,7 +54495,7 @@ module Aws::EC2
       :secondary_private_ip_address_count,
       :subnet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the placement for a Scheduled Instance.</p>
@@ -57429,7 +54509,7 @@ module Aws::EC2
       :availability_zone,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a private IPv4 address for a Scheduled Instance.</p>
@@ -57443,7 +54523,7 @@ module Aws::EC2
       :primary,
       :private_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute local_gateway_route_table_id
@@ -57503,7 +54583,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routes
@@ -57516,7 +54596,7 @@ module Aws::EC2
       :routes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_multicast_domain_id
@@ -57582,7 +54662,7 @@ module Aws::EC2
       :next_token,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute multicast_groups
@@ -57595,7 +54675,7 @@ module Aws::EC2
       :multicast_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_route_table_id
@@ -57664,7 +54744,7 @@ module Aws::EC2
       :max_results,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute routes
@@ -57677,7 +54757,7 @@ module Aws::EC2
       :routes,
       :additional_routes_available,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group.</p>
@@ -57719,7 +54799,7 @@ module Aws::EC2
       :description,
       :ip_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group that can be used by interfaces in the VPC.</p>
@@ -57749,7 +54829,7 @@ module Aws::EC2
       :tags,
       :primary_vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group.</p>
@@ -57763,7 +54843,7 @@ module Aws::EC2
       :group_id,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC with a security group that references your security group.</p>
@@ -57787,12 +54867,7 @@ module Aws::EC2
       :vpc_peering_connection_id,
       :transit_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityGroupReferencingSupportValue
-      enable = 'enable'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group rule.</p>
@@ -57859,7 +54934,7 @@ module Aws::EC2
       :tags,
       :security_group_rule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the description of a security group rule.</p>
@@ -57874,7 +54949,7 @@ module Aws::EC2
       :security_group_rule_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group rule.</p>
@@ -57943,7 +55018,7 @@ module Aws::EC2
       :referenced_group_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update to a security group rule.</p>
@@ -57957,7 +55032,7 @@ module Aws::EC2
       :security_group_rule_id,
       :security_group_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A security group association with a VPC that you made with <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html">AssociateSecurityGroupVpc</a>.</p>
@@ -57987,21 +55062,7 @@ module Aws::EC2
       :state_reason,
       :group_owner_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityGroupVpcAssociationState
-      associating = 'associating'
-      associated = 'associated'
-      association_failed = 'association-failed'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
-      disassociation_failed = 'disassociation-failed'
-    end
-
-    module SelfServicePortal
-      enabled = 'enabled'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_id
@@ -58016,7 +55077,7 @@ module Aws::EC2
       :instance_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a service configuration for a VPC endpoint service.</p>
@@ -58098,12 +55159,7 @@ module Aws::EC2
       :supported_regions,
       :remote_access_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceConnectivityType
-      ipv4 = 'ipv4'
-      ipv6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC endpoint service.</p>
@@ -58181,7 +55237,7 @@ module Aws::EC2
       :private_dns_name_verification_state,
       :supported_ip_address_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the service link virtual interfaces that establish connectivity between Amazon Web Services Outpost and on-premises networks.</p>
@@ -58235,34 +55291,7 @@ module Aws::EC2
       :tags,
       :configuration_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceLinkVirtualInterfaceConfigurationState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
-    end
-
-    module ServiceManaged
-      alb = 'alb'
-      nlb = 'nlb'
-      rnat = 'rnat'
-    end
-
-    module ServiceState
-      Pending = 'Pending'
-      Available = 'Available'
-      Deleting = 'Deleting'
-      Deleted = 'Deleted'
-      Failed = 'Failed'
-    end
-
-    module ServiceType
-      Interface = 'Interface'
-      Gateway = 'Gateway'
-      GatewayLoadBalancer = 'GatewayLoadBalancer'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the type of service for a VPC endpoint.</p>
@@ -58272,12 +55301,7 @@ module Aws::EC2
     class ServiceTypeDetail < Struct.new(
       :service_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShutdownBehavior
-      stop = 'stop'
-      terminate = 'terminate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the time period for a Scheduled Instance to start its first schedule. The time period must span less than one day.</p>
@@ -58291,7 +55315,7 @@ module Aws::EC2
       :earliest_time,
       :latest_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the time period for a Scheduled Instance to start its first schedule.</p>
@@ -58305,7 +55329,7 @@ module Aws::EC2
       :earliest_time,
       :latest_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a snapshot.</p>
@@ -58446,18 +55470,7 @@ module Aws::EC2
       :kms_key_id,
       :data_encryption_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotAttributeName
-      productCodes = 'productCodes'
-      createVolumePermission = 'createVolumePermission'
-    end
-
-    module SnapshotBlockPublicAccessState
-      block_all_sharing = 'block-all-sharing'
-      block_new_sharing = 'block-new-sharing'
-      unblocked = 'unblocked'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the snapshot created from the imported disk.</p>
@@ -58503,7 +55516,7 @@ module Aws::EC2
       :url,
       :user_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The disk container object for the import snapshot request.</p>
@@ -58528,7 +55541,7 @@ module Aws::EC2
       :url,
       :user_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a snapshot.</p>
@@ -58590,12 +55603,7 @@ module Aws::EC2
       :sse_type,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotLocationEnum
-      REGIONAL = 'regional'
-      LOCAL = 'local'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a snapshot that is currently in the Recycle Bin.</p>
@@ -58621,23 +55629,7 @@ module Aws::EC2
       :description,
       :volume_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotReturnCodes
-      SUCCESS = 'success'
-      WARN_SKIPPED = 'skipped'
-      ERROR_MISSING_PERMISSIONS = 'missing-permissions'
-      ERROR_CODE_INTERNAL_ERROR = 'internal-error'
-      ERROR_CODE_CLIENT_ERROR = 'client-error'
-    end
-
-    module SnapshotState
-      pending = 'pending'
-      completed = 'completed'
-      error = 'error'
-      recoverable = 'recoverable'
-      recovering = 'recovering'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the import snapshot task.</p>
@@ -58687,7 +55679,7 @@ module Aws::EC2
       :url,
       :user_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a snapshot's storage tier.</p>
@@ -58745,15 +55737,7 @@ module Aws::EC2
       :archival_complete_time,
       :restore_expiry_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotAllocationStrategy
-      LOWEST_PRICE = 'lowest-price'
-      DIVERSIFIED = 'diversified'
-      CAPACITY_OPTIMIZED = 'capacity-optimized'
-      CAPACITY_OPTIMIZED_PRIORITIZED = 'capacity-optimized-prioritized'
-      PRICE_CAPACITY_OPTIMIZED = 'price-capacity-optimized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your
@@ -58786,7 +55770,7 @@ module Aws::EC2
       :replacement_strategy,
       :termination_delay,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data feed for a Spot Instance.</p>
@@ -58812,7 +55796,7 @@ module Aws::EC2
       :prefix,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the launch specification for one or more Spot Instances. If you include
@@ -58935,7 +55919,7 @@ module Aws::EC2
       :instance_requirements,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether monitoring is enabled.</p>
@@ -58947,7 +55931,7 @@ module Aws::EC2
     class SpotFleetMonitoring < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Spot Fleet request.</p>
@@ -58982,7 +55966,7 @@ module Aws::EC2
       :spot_fleet_request_state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a Spot Fleet request.</p>
@@ -59248,7 +56232,7 @@ module Aws::EC2
       :target_capacity_unit_type,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags for a Spot Fleet resource.</p>
@@ -59266,13 +56250,7 @@ module Aws::EC2
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotInstanceInterruptionBehavior
-      hibernate = 'hibernate'
-      stop = 'stop'
-      terminate = 'terminate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Spot Instance request.</p>
@@ -59381,16 +56359,7 @@ module Aws::EC2
       :valid_until,
       :instance_interruption_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotInstanceState
-      open = 'open'
-      active = 'active'
-      closed = 'closed'
-      cancelled = 'cancelled'
-      failed = 'failed'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Spot Instance state change.</p>
@@ -59404,7 +56373,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a Spot Instance request.</p>
@@ -59423,12 +56392,7 @@ module Aws::EC2
       :message,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotInstanceType
-      one_time = 'one-time'
-      persistent = 'persistent'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The strategies for managing your Spot Instances that are at an elevated risk of being
@@ -59442,7 +56406,7 @@ module Aws::EC2
     class SpotMaintenanceStrategies < Struct.new(
       :capacity_rebalance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for Spot Instances.</p>
@@ -59506,7 +56470,7 @@ module Aws::EC2
       :valid_until,
       :instance_interruption_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of Spot Instances in an EC2 Fleet.</p>
@@ -59628,7 +56592,7 @@ module Aws::EC2
       :min_target_capacity,
       :max_total_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of Spot Instances in an EC2 Fleet request.</p>
@@ -59749,7 +56713,7 @@ module Aws::EC2
       :min_target_capacity,
       :max_total_price,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes Spot Instance placement.</p>
@@ -59771,7 +56735,7 @@ module Aws::EC2
       :group_name,
       :tenancy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Spot placement score for this Region or Availability Zone. The score is calculated
@@ -59794,7 +56758,7 @@ module Aws::EC2
       :availability_zone_id,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum price per unit hour that you are willing to pay for a Spot Instance. We do not recommend 
@@ -59833,12 +56797,7 @@ module Aws::EC2
       :spot_price,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpreadLevel
-      host = 'host'
-      rack = 'rack'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stale rule in a security group.</p>
@@ -59871,7 +56830,7 @@ module Aws::EC2
       :to_port,
       :user_id_group_pairs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a stale security group (a security group that contains stale rules).</p>
@@ -59901,7 +56860,7 @@ module Aws::EC2
       :stale_ip_permissions_egress,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -59944,7 +56903,7 @@ module Aws::EC2
       :target_id,
       :tag_specifications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute report_id
@@ -59953,7 +56912,7 @@ module Aws::EC2
     class StartDeclarativePoliciesReportResult < Struct.new(
       :report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -59972,7 +56931,7 @@ module Aws::EC2
       :additional_info,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute starting_instances
@@ -59981,7 +56940,7 @@ module Aws::EC2
     class StartInstancesResult < Struct.new(
       :starting_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_id
@@ -60005,7 +56964,7 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_access_scope_analysis
@@ -60014,7 +56973,7 @@ module Aws::EC2
     class StartNetworkInsightsAccessScopeAnalysisResult < Struct.new(
       :network_insights_access_scope_analysis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_path_id
@@ -60050,7 +57009,7 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_insights_analysis
@@ -60059,7 +57018,7 @@ module Aws::EC2
     class StartNetworkInsightsAnalysisResult < Struct.new(
       :network_insights_analysis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -60074,7 +57033,7 @@ module Aws::EC2
       :dry_run,
       :service_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -60083,19 +57042,7 @@ module Aws::EC2
     class StartVpcEndpointServicePrivateDnsVerificationResult < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module State
-      PendingAcceptance = 'PendingAcceptance'
-      Pending = 'Pending'
-      Available = 'Available'
-      Deleting = 'Deleting'
-      Deleted = 'Deleted'
-      Rejected = 'Rejected'
-      Failed = 'Failed'
-      Expired = 'Expired'
-      Partial = 'Partial'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a state change.</p>
@@ -60176,33 +57123,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StaticSourcesSupportValue
-      enable = 'enable'
-      disable = 'disable'
-    end
-
-    module StatisticType
-      p50 = 'p50'
-    end
-
-    module Status
-      moveInProgress = 'MoveInProgress'
-      inVpc = 'InVpc'
-      inClassic = 'InClassic'
-    end
-
-    module StatusName
-      reachability = 'reachability'
-    end
-
-    module StatusType
-      passed = 'passed'
-      failed = 'failed'
-      insufficient_data = 'insufficient-data'
-      initializing = 'initializing'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -60252,7 +57173,7 @@ module Aws::EC2
       :dry_run,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stopping_instances
@@ -60261,7 +57182,7 @@ module Aws::EC2
     class StopInstancesResult < Struct.new(
       :stopping_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the storage location for an instance store-backed AMI.</p>
@@ -60271,7 +57192,7 @@ module Aws::EC2
     class Storage < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a storage location in Amazon S3.</p>
@@ -60285,12 +57206,7 @@ module Aws::EC2
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageTier
-      archive = 'archive'
-      standard = 'standard'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the AMI store task, including the progress of the task.</p>
@@ -60326,7 +57242,7 @@ module Aws::EC2
       :store_task_state,
       :store_task_failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a subnet.</p>
@@ -60452,7 +57368,7 @@ module Aws::EC2
       :default_for_az,
       :map_public_ip_on_launch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the subnet association with the transit gateway multicast domain.</p>
@@ -60466,7 +57382,7 @@ module Aws::EC2
       :subnet_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a CIDR block.</p>
@@ -60480,16 +57396,7 @@ module Aws::EC2
       :state,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubnetCidrBlockStateCode
-      associating = 'associating'
-      associated = 'associated'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
-      failing = 'failing'
-      failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a subnet CIDR reservation.</p>
@@ -60523,12 +57430,7 @@ module Aws::EC2
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubnetCidrReservationType
-      prefix = 'prefix'
-      explicit = 'explicit'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a subnet for a VPC endpoint.</p>
@@ -60554,7 +57456,7 @@ module Aws::EC2
       :ipv4,
       :ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Prefixes of the subnet IP.</p>
@@ -60568,7 +57470,7 @@ module Aws::EC2
       :subnet_id,
       :ip_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a subnet and an IPv6 CIDR block.</p>
@@ -60594,15 +57496,7 @@ module Aws::EC2
       :ipv6_address_attribute,
       :ip_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SubnetState
-      pending = 'pending'
-      available = 'available'
-      unavailable = 'unavailable'
-      failed = 'failed'
-      failed_insufficient_capacity = 'failed-insufficient-capacity'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Infrastructure Performance subscription.</p>
@@ -60628,7 +57522,7 @@ module Aws::EC2
       :statistic,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the burstable performance instance whose credit option for CPU usage was
@@ -60639,7 +57533,7 @@ module Aws::EC2
     class SuccessfulInstanceCreditSpecificationItem < Struct.new(
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Reserved Instance whose queued purchase was successfully deleted.</p>
@@ -60649,19 +57543,7 @@ module Aws::EC2
     class SuccessfulQueuedPurchaseDeletion < Struct.new(
       :reserved_instances_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SummaryStatus
-      ok = 'ok'
-      impaired = 'impaired'
-      insufficient_data = 'insufficient-data'
-      not_applicable = 'not-applicable'
-      initializing = 'initializing'
-    end
-
-    module SupportedAdditionalProcessorFeature
-      AMD_SEV_SNP = 'amd-sev-snp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a supported Region.</p>
@@ -60676,7 +57558,7 @@ module Aws::EC2
       :region,
       :service_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag.</p>
@@ -60693,7 +57575,7 @@ module Aws::EC2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag.</p>
@@ -60715,7 +57597,7 @@ module Aws::EC2
       :resource_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tags to apply to a resource when the resource is being created. When you specify a tag, you must 
@@ -60736,7 +57618,7 @@ module Aws::EC2
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of units to request. You can choose to set the target capacity in terms of
@@ -60773,7 +57655,7 @@ module Aws::EC2
       :default_target_capacity_type,
       :target_capacity_unit_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of units to request. You can choose to set the target capacity as the number of 
@@ -60812,13 +57694,7 @@ module Aws::EC2
       :default_target_capacity_type,
       :target_capacity_unit_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetCapacityUnitType
-      VCPU = 'vcpu'
-      MEMORY_MIB = 'memory-mib'
-      UNITS = 'units'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Convertible Reserved Instance offering.</p>
@@ -60833,7 +57709,7 @@ module Aws::EC2
       :instance_count,
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the target configuration.</p>
@@ -60848,7 +57724,7 @@ module Aws::EC2
       :instance_count,
       :offering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer target group.</p>
@@ -60858,7 +57734,7 @@ module Aws::EC2
     class TargetGroup < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the target groups to attach to a Spot Fleet. Spot Fleet registers the
@@ -60869,7 +57745,7 @@ module Aws::EC2
     class TargetGroupsConfig < Struct.new(
       :target_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a target network associated with a Client VPN endpoint.</p>
@@ -60899,7 +57775,7 @@ module Aws::EC2
       :status,
       :security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total value of the new Convertible Reserved Instances.</p>
@@ -60915,22 +57791,7 @@ module Aws::EC2
       :reservation_value,
       :target_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetStorageTier
-      archive = 'archive'
-    end
-
-    module TelemetryStatus
-      UP = 'UP'
-      DOWN = 'DOWN'
-    end
-
-    module Tenancy
-      default = 'default'
-      dedicated = 'dedicated'
-      host = 'host'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -60952,7 +57813,7 @@ module Aws::EC2
       :username,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpn_endpoint_id
@@ -60969,7 +57830,7 @@ module Aws::EC2
       :username,
       :connection_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a terminated Client VPN endpoint client connection.</p>
@@ -60987,7 +57848,7 @@ module Aws::EC2
       :previous_status,
       :current_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -61018,7 +57879,7 @@ module Aws::EC2
       :skip_os_shutdown,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute terminating_instances
@@ -61027,7 +57888,7 @@ module Aws::EC2
     class TerminateInstancesResult < Struct.new(
       :terminating_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a through resource statement.</p>
@@ -61037,7 +57898,7 @@ module Aws::EC2
     class ThroughResourcesStatement < Struct.new(
       :resource_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a through resource statement.</p>
@@ -61047,24 +57908,7 @@ module Aws::EC2
     class ThroughResourcesStatementRequest < Struct.new(
       :resource_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TieringOperationStatus
-      archival_in_progress = 'archival-in-progress'
-      archival_completed = 'archival-completed'
-      archival_failed = 'archival-failed'
-      temporary_restore_in_progress = 'temporary-restore-in-progress'
-      temporary_restore_completed = 'temporary-restore-completed'
-      temporary_restore_failed = 'temporary-restore-failed'
-      permanent_restore_in_progress = 'permanent-restore-in-progress'
-      permanent_restore_completed = 'permanent-restore-completed'
-      permanent_restore_failed = 'permanent-restore-failed'
-    end
-
-    module TokenState
-      valid = 'valid'
-      expired = 'expired'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of total local storage, in GB.</p>
@@ -61080,7 +57924,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum amount of total local storage, in GB.</p>
@@ -61096,16 +57940,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TpmSupportValues
-      v2_0 = 'v2.0'
-    end
-
-    module TrafficDirection
-      ingress = 'ingress'
-      egress = 'egress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Traffic Mirror filter.</p>
@@ -61135,7 +57970,7 @@ module Aws::EC2
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Traffic Mirror rule.</p>
@@ -61189,18 +58024,7 @@ module Aws::EC2
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficMirrorFilterRuleField
-      destination_port_range = 'destination-port-range'
-      source_port_range = 'source-port-range'
-      protocol = 'protocol'
-      description = 'description'
-    end
-
-    module TrafficMirrorNetworkService
-      amazon_dns = 'amazon-dns'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Traffic Mirror port range.</p>
@@ -61214,7 +58038,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Traffic Mirror filter rule port range.</p>
@@ -61228,12 +58052,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficMirrorRuleAction
-      accept = 'accept'
-      reject = 'reject'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Traffic Mirror session.</p>
@@ -61280,13 +58099,7 @@ module Aws::EC2
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficMirrorSessionField
-      packet_length = 'packet-length'
-      description = 'description'
-      virtual_network_id = 'virtual-network-id'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Traffic Mirror target.</p>
@@ -61324,24 +58137,7 @@ module Aws::EC2
       :tags,
       :gateway_load_balancer_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrafficMirrorTargetType
-      network_interface = 'network-interface'
-      network_load_balancer = 'network-load-balancer'
-      gateway_load_balancer_endpoint = 'gateway-load-balancer-endpoint'
-    end
-
-    module TrafficType
-      ACCEPT = 'ACCEPT'
-      REJECT = 'REJECT'
-      ALL = 'ALL'
-    end
-
-    module TransferType
-      time_based = 'time-based'
-      standard = 'standard'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway.</p>
@@ -61379,7 +58175,7 @@ module Aws::EC2
       :options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a resource attachment and a transit gateway route table.</p>
@@ -61405,14 +58201,7 @@ module Aws::EC2
       :resource_type,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayAssociationState
-      associating = 'associating'
-      associated = 'associated'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an attachment between a resource and a transit gateway.</p>
@@ -61458,7 +58247,7 @@ module Aws::EC2
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association.</p>
@@ -61472,7 +58261,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The BGP configuration information.</p>
@@ -61498,7 +58287,7 @@ module Aws::EC2
       :peer_address,
       :bgp_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a propagation route table.</p>
@@ -61512,33 +58301,7 @@ module Aws::EC2
       :transit_gateway_route_table_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayAttachmentResourceType
-      vpc = 'vpc'
-      vpn = 'vpn'
-      direct_connect_gateway = 'direct-connect-gateway'
-      connect = 'connect'
-      peering = 'peering'
-      tgw_peering = 'tgw-peering'
-      network_function = 'network-function'
-    end
-
-    module TransitGatewayAttachmentState
-      initiating = 'initiating'
-      initiatingRequest = 'initiatingRequest'
-      pendingAcceptance = 'pendingAcceptance'
-      rollingBack = 'rollingBack'
-      pending = 'pending'
-      available = 'available'
-      modifying = 'modifying'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      failed = 'failed'
-      rejected = 'rejected'
-      rejecting = 'rejecting'
-      failing = 'failing'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway Connect attachment.</p>
@@ -61572,7 +58335,7 @@ module Aws::EC2
       :options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Connect attachment options.</p>
@@ -61582,7 +58345,7 @@ module Aws::EC2
     class TransitGatewayConnectOptions < Struct.new(
       :protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway Connect peer.</p>
@@ -61612,7 +58375,7 @@ module Aws::EC2
       :connect_peer_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Connect peer details.</p>
@@ -61638,14 +58401,7 @@ module Aws::EC2
       :protocol,
       :bgp_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayConnectPeerState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The BGP options for the Connect attachment.</p>
@@ -61655,17 +58411,7 @@ module Aws::EC2
     class TransitGatewayConnectRequestBgpOptions < Struct.new(
       :peer_asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayMulitcastDomainAssociationState
-      pendingAcceptance = 'pendingAcceptance'
-      associating = 'associating'
-      associated = 'associated'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
-      rejected = 'rejected'
-      failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the deregistered  transit gateway multicast group members.</p>
@@ -61683,7 +58429,7 @@ module Aws::EC2
       :deregistered_network_interface_ids,
       :group_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the deregistered  transit gateway multicast group sources.</p>
@@ -61701,7 +58447,7 @@ module Aws::EC2
       :deregistered_network_interface_ids,
       :group_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the transit gateway multicast domain.</p>
@@ -61739,7 +58485,7 @@ module Aws::EC2
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resources associated with the transit gateway multicast domain.</p>
@@ -61765,7 +58511,7 @@ module Aws::EC2
       :resource_owner_id,
       :subnet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the multicast domain associations.</p>
@@ -61795,7 +58541,7 @@ module Aws::EC2
       :resource_owner_id,
       :subnets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for a transit gateway multicast domain.</p>
@@ -61813,14 +58559,7 @@ module Aws::EC2
       :static_sources_support,
       :auto_accept_shared_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayMulticastDomainState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the  transit gateway multicast group resources.</p>
@@ -61870,7 +58609,7 @@ module Aws::EC2
       :member_type,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the registered  transit gateway multicast group members.</p>
@@ -61888,7 +58627,7 @@ module Aws::EC2
       :registered_network_interface_ids,
       :group_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the members registered with the  transit gateway multicast group.</p>
@@ -61906,7 +58645,7 @@ module Aws::EC2
       :registered_network_interface_ids,
       :group_ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for a transit gateway.</p>
@@ -61968,7 +58707,7 @@ module Aws::EC2
       :security_group_referencing_support,
       :multicast_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the transit gateway peering attachment.</p>
@@ -62010,7 +58749,7 @@ module Aws::EC2
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes dynamic routing for the transit gateway peering attachment.</p>
@@ -62020,7 +58759,7 @@ module Aws::EC2
     class TransitGatewayPeeringAttachmentOptions < Struct.new(
       :dynamic_routing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule associated with a transit gateway policy.</p>
@@ -62050,7 +58789,7 @@ module Aws::EC2
       :protocol,
       :meta_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the meta data tags associated with a transit gateway policy rule.</p>
@@ -62064,7 +58803,7 @@ module Aws::EC2
       :meta_data_key,
       :meta_data_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway policy table.</p>
@@ -62090,7 +58829,7 @@ module Aws::EC2
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway policy table association.</p>
@@ -62116,7 +58855,7 @@ module Aws::EC2
       :resource_type,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway policy table entry</p>
@@ -62134,14 +58873,7 @@ module Aws::EC2
       :policy_rule,
       :target_route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayPolicyTableState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway prefix list attachment.</p>
@@ -62159,7 +58891,7 @@ module Aws::EC2
       :resource_type,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a prefix list reference.</p>
@@ -62189,14 +58921,7 @@ module Aws::EC2
       :blackhole,
       :transit_gateway_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayPrefixListReferenceState
-      pending = 'pending'
-      available = 'available'
-      modifying = 'modifying'
-      deleting = 'deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes route propagation.</p>
@@ -62226,14 +58951,7 @@ module Aws::EC2
       :state,
       :transit_gateway_route_table_announcement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayPropagationState
-      enabling = 'enabling'
-      enabled = 'enabled'
-      disabling = 'disabling'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for a transit gateway.</p>
@@ -62280,7 +58998,7 @@ module Aws::EC2
       :multicast_support,
       :transit_gateway_cidr_blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route for a transit gateway route table.</p>
@@ -62310,7 +59028,7 @@ module Aws::EC2
       :type,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route attachment.</p>
@@ -62328,15 +59046,7 @@ module Aws::EC2
       :transit_gateway_attachment_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayRouteState
-      pending = 'pending'
-      active = 'active'
-      blackhole = 'blackhole'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway route table.</p>
@@ -62370,7 +59080,7 @@ module Aws::EC2
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a transit gateway route table announcement.</p>
@@ -62420,21 +59130,7 @@ module Aws::EC2
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayRouteTableAnnouncementDirection
-      outgoing = 'outgoing'
-      incoming = 'incoming'
-    end
-
-    module TransitGatewayRouteTableAnnouncementState
-      available = 'available'
-      pending = 'pending'
-      failing = 'failing'
-      failed = 'failed'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an association between a route table and a resource attachment.</p>
@@ -62456,7 +59152,7 @@ module Aws::EC2
       :resource_type,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route table propagation.</p>
@@ -62482,7 +59178,7 @@ module Aws::EC2
       :state,
       :transit_gateway_route_table_announcement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route in a transit gateway route table.</p>
@@ -62524,27 +59220,7 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayRouteTableState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
-    end
-
-    module TransitGatewayRouteType
-      static = 'static'
-      propagated = 'propagated'
-    end
-
-    module TransitGatewayState
-      pending = 'pending'
-      available = 'available'
-      modifying = 'modifying'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC attachment.</p>
@@ -62586,7 +59262,7 @@ module Aws::EC2
       :options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the VPC attachment options.</p>
@@ -62610,12 +59286,7 @@ module Aws::EC2
       :ipv6_support,
       :appliance_mode_support,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransportProtocol
-      tcp = 'tcp'
-      udp = 'udp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an association between a branch network interface with a trunk network interface.</p>
@@ -62649,17 +59320,7 @@ module Aws::EC2
       :gre_key,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrustProviderType
-      user = 'user'
-      device = 'device'
-    end
-
-    module TunnelInsideIpVersion
-      ipv4 = 'ipv4'
-      ipv6 = 'ipv6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPN tunnel options.</p>
@@ -62758,7 +59419,7 @@ module Aws::EC2
       :log_options,
       :enable_tunnel_lifecycle_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ipv6_prefixes
@@ -62775,7 +59436,7 @@ module Aws::EC2
       :network_interface_id,
       :ipv6_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_interface_id
@@ -62792,7 +59453,7 @@ module Aws::EC2
       :unassigned_ipv6_addresses,
       :unassigned_ipv6_prefixes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the parameters for UnassignPrivateIpAddresses.</p>
@@ -62811,7 +59472,7 @@ module Aws::EC2
       :network_interface_id,
       :private_ip_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -62834,7 +59495,7 @@ module Aws::EC2
       :max_drain_duration_seconds,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nat_gateway_id
@@ -62847,14 +59508,7 @@ module Aws::EC2
       :nat_gateway_id,
       :nat_gateway_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnlimitedSupportedInstanceFamily
-      t2 = 't2'
-      t3 = 't3'
-      t3a = 't3a'
-      t4g = 't4g'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -62869,7 +59523,7 @@ module Aws::EC2
       :snapshot_id,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -62878,7 +59532,7 @@ module Aws::EC2
     class UnlockSnapshotResult < Struct.new(
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_ids
@@ -62893,7 +59547,7 @@ module Aws::EC2
       :instance_ids,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute instance_monitorings
@@ -62902,14 +59556,7 @@ module Aws::EC2
     class UnmonitorInstancesResult < Struct.new(
       :instance_monitorings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnsuccessfulInstanceCreditSpecificationErrorCode
-      INVALID_INSTANCE_ID = 'InvalidInstanceID.Malformed'
-      INSTANCE_NOT_FOUND = 'InvalidInstanceID.NotFound'
-      INCORRECT_INSTANCE_STATE = 'IncorrectInstanceState'
-      INSTANCE_CREDIT_SPECIFICATION_NOT_SUPPORTED = 'InstanceCreditSpecification.NotSupported'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the burstable performance instance whose credit option for CPU usage was not
@@ -62925,7 +59572,7 @@ module Aws::EC2
       :instance_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the error for the burstable performance instance whose credit option
@@ -62940,7 +59587,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about items that were not successfully processed in a batch call.</p>
@@ -62954,7 +59601,7 @@ module Aws::EC2
       :error,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the error that occurred. For more information about errors, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html">Error codes</a>.</p>
@@ -62968,7 +59615,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -63000,7 +59647,7 @@ module Aws::EC2
       :ip_permissions,
       :security_group_rule_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -63009,7 +59656,7 @@ module Aws::EC2
     class UpdateSecurityGroupRuleDescriptionsEgressResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run
@@ -63042,7 +59689,7 @@ module Aws::EC2
       :ip_permissions,
       :security_group_rule_descriptions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return
@@ -63051,13 +59698,7 @@ module Aws::EC2
     class UpdateSecurityGroupRuleDescriptionsIngressResult < Struct.new(
       :return,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageClassType
-      spot = 'spot'
-      on_demand = 'on-demand'
-      capacity_block = 'capacity-block'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon S3 bucket for the disk image.</p>
@@ -63071,7 +59712,7 @@ module Aws::EC2
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon S3 bucket for the disk image.</p>
@@ -63085,7 +59726,7 @@ module Aws::EC2
       :s3_bucket,
       :s3_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the user data for an instance.</p>
@@ -63097,7 +59738,7 @@ module Aws::EC2
     class UserData < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a security group and Amazon Web Services account ID pair.</p>
@@ -63140,12 +59781,7 @@ module Aws::EC2
       :vpc_peering_connection_id,
       :peering_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserTrustProviderType
-      iam_identity_center = 'iam-identity-center'
-      oidc = 'oidc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum number of vCPUs.</p>
@@ -63161,7 +59797,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum number of vCPUs.</p>
@@ -63175,7 +59811,7 @@ module Aws::EC2
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the vCPU configurations for the instance type.</p>
@@ -63201,7 +59837,7 @@ module Aws::EC2
       :valid_cores,
       :valid_threads_per_core,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error code and error message that is returned for a parameter or parameter
@@ -63219,7 +59855,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error codes and error messages that are returned for the parameters or parameter
@@ -63231,12 +59867,7 @@ module Aws::EC2
     class ValidationWarning < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerificationMethod
-      remarks_x509 = 'remarks-x509'
-      dns_token = 'dns-token'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Web Services Verified Access endpoint specifies the application that Amazon Web Services Verified Access provides access to. It must be
@@ -63332,11 +59963,7 @@ module Aws::EC2
       :rds_options,
       :cidr_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifiedAccessEndpointAttachmentType
-      vpc = 'vpc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the CIDR options for a Verified Access endpoint.</p>
@@ -63358,7 +59985,7 @@ module Aws::EC2
       :protocol,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for a network-interface type endpoint.</p>
@@ -63380,7 +60007,7 @@ module Aws::EC2
       :port,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a load balancer when creating an Amazon Web Services Verified Access endpoint using the
@@ -63407,7 +60034,7 @@ module Aws::EC2
       :subnet_ids,
       :port_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a port range.</p>
@@ -63421,13 +60048,7 @@ module Aws::EC2
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifiedAccessEndpointProtocol
-      http = 'http'
-      https = 'https'
-      tcp = 'tcp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the RDS options for a Verified Access endpoint.</p>
@@ -63461,7 +60082,7 @@ module Aws::EC2
       :rds_endpoint,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a Verified Access endpoint.</p>
@@ -63475,15 +60096,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifiedAccessEndpointStatusCode
-      pending = 'pending'
-      active = 'active'
-      updating = 'updating'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the targets for the specified Verified Access endpoint.</p>
@@ -63501,14 +60114,7 @@ module Aws::EC2
       :verified_access_endpoint_target_ip_address,
       :verified_access_endpoint_target_dns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifiedAccessEndpointType
-      load_balancer = 'load-balancer'
-      network_interface = 'network-interface'
-      rds = 'rds'
-      cidr = 'cidr'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Verified Access group.</p>
@@ -63554,7 +60160,7 @@ module Aws::EC2
       :tags,
       :sse_specification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Verified Access instance.</p>
@@ -63592,7 +60198,7 @@ module Aws::EC2
       :fips_enabled,
       :cidr_endpoints_custom_sub_domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom subdomain for a network CIDR endpoint for Verified Access.</p>
@@ -63606,7 +60212,7 @@ module Aws::EC2
       :sub_domain,
       :nameservers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes logging options for an Amazon Web Services Verified Access instance.</p>
@@ -63620,7 +60226,7 @@ module Aws::EC2
       :verified_access_instance_id,
       :access_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a set of routes.</p>
@@ -63634,7 +60240,7 @@ module Aws::EC2
       :config,
       :routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route.</p>
@@ -63644,7 +60250,7 @@ module Aws::EC2
     class VerifiedAccessInstanceOpenVpnClientConfigurationRoute < Struct.new(
       :cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the trust provider.</p>
@@ -63690,7 +60296,7 @@ module Aws::EC2
       :client_secret,
       :pkce_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for CloudWatch Logs as a logging destination.</p>
@@ -63708,7 +60314,7 @@ module Aws::EC2
       :delivery_status,
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for CloudWatch Logs as a logging destination.</p>
@@ -63722,7 +60328,7 @@ module Aws::EC2
       :enabled,
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a log delivery status.</p>
@@ -63736,12 +60342,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VerifiedAccessLogDeliveryStatusCode
-      SUCCESS = 'success'
-      FAILED = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for Kinesis as a logging destination.</p>
@@ -63759,7 +60360,7 @@ module Aws::EC2
       :delivery_status,
       :delivery_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes Amazon Kinesis Data Firehose logging options.</p>
@@ -63773,7 +60374,7 @@ module Aws::EC2
       :enabled,
       :delivery_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for Verified Access logs.</p>
@@ -63801,7 +60402,7 @@ module Aws::EC2
       :log_version,
       :include_trust_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for Amazon S3 as a logging destination.</p>
@@ -63827,7 +60428,7 @@ module Aws::EC2
       :prefix,
       :bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for Amazon S3 as a logging destination.</p>
@@ -63849,7 +60450,7 @@ module Aws::EC2
       :prefix,
       :bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the options for Verified Access logs.</p>
@@ -63875,7 +60476,7 @@ module Aws::EC2
       :log_version,
       :include_trust_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -63897,7 +60498,7 @@ module Aws::EC2
       :customer_managed_key_enabled,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options in use for server side encryption.</p>
@@ -63913,7 +60514,7 @@ module Aws::EC2
       :customer_managed_key_enabled,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a Verified Access trust provider.</p>
@@ -63971,7 +60572,7 @@ module Aws::EC2
       :sse_specification,
       :native_application_oidc_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Condensed information about a trust provider.</p>
@@ -63997,7 +60598,7 @@ module Aws::EC2
       :user_trust_provider_type,
       :device_trust_provider_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes telemetry for a VPN tunnel.</p>
@@ -64028,12 +60629,7 @@ module Aws::EC2
       :status_message,
       :certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VirtualizationType
-      hvm = 'hvm'
-      paravirtual = 'paravirtual'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a volume.</p>
@@ -64132,7 +60728,7 @@ module Aws::EC2
       :encrypted,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes volume attachment details.</p>
@@ -64178,20 +60774,7 @@ module Aws::EC2
       :state,
       :attach_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeAttachmentState
-      attaching = 'attaching'
-      attached = 'attached'
-      detaching = 'detaching'
-      detached = 'detached'
-      busy = 'busy'
-    end
-
-    module VolumeAttributeName
-      autoEnableIO = 'autoEnableIO'
-      productCodes = 'productCodes'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an EBS volume.</p>
@@ -64201,7 +60784,7 @@ module Aws::EC2
     class VolumeDetail < Struct.new(
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the modification status of an EBS volume.</p>
@@ -64271,23 +60854,7 @@ module Aws::EC2
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeModificationState
-      modifying = 'modifying'
-      optimizing = 'optimizing'
-      completed = 'completed'
-      failed = 'failed'
-    end
-
-    module VolumeState
-      creating = 'creating'
-      available = 'available'
-      in_use = 'in-use'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      error = 'error'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a volume status operation code.</p>
@@ -64309,7 +60876,7 @@ module Aws::EC2
       :event_id,
       :event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the instances to which the volume is attached.</p>
@@ -64323,7 +60890,7 @@ module Aws::EC2
       :io_performance,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a volume status.</p>
@@ -64356,7 +60923,7 @@ module Aws::EC2
       :name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a volume status event.</p>
@@ -64386,7 +60953,7 @@ module Aws::EC2
       :not_before,
       :instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a volume.</p>
@@ -64400,13 +60967,7 @@ module Aws::EC2
       :details,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeStatusInfoStatus
-      ok = 'ok'
-      impaired = 'impaired'
-      insufficient_data = 'insufficient-data'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the volume status.</p>
@@ -64454,23 +61015,7 @@ module Aws::EC2
       :initialization_status_details,
       :availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeStatusName
-      io_enabled = 'io-enabled'
-      io_performance = 'io-performance'
-      initialization_state = 'initialization-state'
-    end
-
-    module VolumeType
-      standard = 'standard'
-      io1 = 'io1'
-      io2 = 'io2'
-      gp2 = 'gp2'
-      sc1 = 'sc1'
-      st1 = 'st1'
-      gp3 = 'gp3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC.</p>
@@ -64523,7 +61068,7 @@ module Aws::EC2
       :cidr_block,
       :dhcp_options_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an attachment between a virtual private gateway and a VPC.</p>
@@ -64537,13 +61082,7 @@ module Aws::EC2
       :vpc_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcAttributeName
-      enableDnsSupport = 'enableDnsSupport'
-      enableDnsHostnames = 'enableDnsHostnames'
-      enableNetworkAddressUsageMetrics = 'enableNetworkAddressUsageMetrics'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VPC BPA exclusion is a mode that can be applied to a single VPC or subnet that exempts it from the account’s BPA mode and will allow bidirectional or egress-only access. You can create BPA exclusions for VPCs and subnets even when BPA is not enabled on the account to ensure that there is no traffic disruption to the exclusions when VPC BPA is turned on. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
@@ -64597,25 +61136,7 @@ module Aws::EC2
       :deletion_timestamp,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcBlockPublicAccessExclusionState
-      create_in_progress = 'create-in-progress'
-      create_complete = 'create-complete'
-      create_failed = 'create-failed'
-      update_in_progress = 'update-in-progress'
-      update_complete = 'update-complete'
-      update_failed = 'update-failed'
-      delete_in_progress = 'delete-in-progress'
-      delete_complete = 'delete-complete'
-      disable_in_progress = 'disable-in-progress'
-      disable_complete = 'disable-complete'
-    end
-
-    module VpcBlockPublicAccessExclusionsAllowed
-      allowed = 'allowed'
-      not_allowed = 'not-allowed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>VPC Block Public Access (BPA) enables you to block resources in VPCs and subnets that you own in a Region from reaching or being reached from the internet through internet gateways and egress-only internet gateways. To learn more about VPC BPA, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block public access to VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>
@@ -64679,13 +61200,7 @@ module Aws::EC2
       :managed_by,
       :exclusions_allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcBlockPublicAccessState
-      default_state = 'default-state'
-      update_in_progress = 'update-in-progress'
-      update_complete = 'update-complete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv4 CIDR block associated with a VPC.</p>
@@ -64703,7 +61218,7 @@ module Aws::EC2
       :cidr_block,
       :cidr_block_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the state of a CIDR block.</p>
@@ -64717,16 +61232,7 @@ module Aws::EC2
       :state,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcCidrBlockStateCode
-      associating = 'associating'
-      associated = 'associated'
-      disassociating = 'disassociating'
-      disassociated = 'disassociated'
-      failing = 'failing'
-      failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -64747,7 +61253,7 @@ module Aws::EC2
       :tags,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -64773,7 +61279,7 @@ module Aws::EC2
       :resource_exclusions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute state
@@ -64784,14 +61290,7 @@ module Aws::EC2
       :state,
       :state_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcEncryptionControlExclusionState
-      enabling = 'enabling'
-      enabled = 'enabled'
-      disabling = 'disabling'
-      disabled = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute internet_gateway
@@ -64811,24 +61310,7 @@ module Aws::EC2
       :virtual_private_gateway,
       :vpc_peering,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcEncryptionControlMode
-      monitor = 'monitor'
-      enforce = 'enforce'
-    end
-
-    module VpcEncryptionControlState
-      enforce_in_progress = 'enforce-in-progress'
-      monitor_in_progress = 'monitor-in-progress'
-      enforce_failed = 'enforce-failed'
-      monitor_failed = 'monitor-failed'
-      deleting = 'deleting'
-      deleted = 'deleted'
-      available = 'available'
-      creating = 'creating'
-      delete_failed = 'delete-failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC endpoint.</p>
@@ -64935,7 +61417,7 @@ module Aws::EC2
       :resource_configuration_arn,
       :service_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the VPC resources, VPC endpoint services, Lattice services, or service
@@ -64992,7 +61474,7 @@ module Aws::EC2
       :resource_configuration_group_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC endpoint connection to a service.</p>
@@ -65046,15 +61528,7 @@ module Aws::EC2
       :tags,
       :vpc_endpoint_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcEndpointType
-      Interface = 'Interface'
-      Gateway = 'Gateway'
-      GatewayLoadBalancer = 'GatewayLoadBalancer'
-      Resource = 'Resource'
-      ServiceNetwork = 'ServiceNetwork'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IPv6 CIDR block associated with a VPC.</p>
@@ -65089,7 +61563,7 @@ module Aws::EC2
       :ipv6_address_attribute,
       :ip_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC peering connection.</p>
@@ -65119,7 +61593,7 @@ module Aws::EC2
       :tags,
       :vpc_peering_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the VPC peering connection options.</p>
@@ -65138,7 +61612,7 @@ module Aws::EC2
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the status of a VPC peering connection.</p>
@@ -65152,19 +61626,7 @@ module Aws::EC2
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcPeeringConnectionStateReasonCode
-      initiating_request = 'initiating-request'
-      pending_acceptance = 'pending-acceptance'
-      active = 'active'
-      deleted = 'deleted'
-      rejected = 'rejected'
-      failed = 'failed'
-      expired = 'expired'
-      provisioning = 'provisioning'
-      deleting = 'deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPC in a VPC peering connection.</p>
@@ -65198,16 +61660,7 @@ module Aws::EC2
       :vpc_id,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpcState
-      pending = 'pending'
-      available = 'available'
-    end
-
-    module VpcTenancy
-      default = 'default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a VPN connection.</p>
@@ -65282,7 +61735,7 @@ module Aws::EC2
       :customer_gateway_id,
       :vpn_gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of customer gateway devices that have a sample configuration file available for
@@ -65307,7 +61760,7 @@ module Aws::EC2
       :platform,
       :software,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes VPN connection options.</p>
@@ -65358,7 +61811,7 @@ module Aws::EC2
       :tunnel_inside_ip_version,
       :tunnel_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes VPN connection options.</p>
@@ -65425,12 +61878,7 @@ module Aws::EC2
       :transport_transit_gateway_attachment_id,
       :static_routes_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpnEcmpSupportValue
-      enable = 'enable'
-      disable = 'disable'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a virtual private gateway.</p>
@@ -65466,18 +61914,7 @@ module Aws::EC2
       :availability_zone,
       :vpc_attachments,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpnProtocol
-      openvpn = 'openvpn'
-    end
-
-    module VpnState
-      pending = 'pending'
-      available = 'available'
-      deleting = 'deleting'
-      deleted = 'deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a static route for a VPN connection.</p>
@@ -65495,11 +61932,7 @@ module Aws::EC2
       :source,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpnStaticRouteSource
-      Static = 'Static'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for logging VPN tunnel activity.</p>
@@ -65509,7 +61942,7 @@ module Aws::EC2
     class VpnTunnelLogOptions < Struct.new(
       :cloud_watch_log_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for logging VPN tunnel activity.</p>
@@ -65519,7 +61952,7 @@ module Aws::EC2
     class VpnTunnelLogOptionsSpecification < Struct.new(
       :cloud_watch_log_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tunnel options for a single VPN tunnel.</p>
@@ -65715,23 +62148,7 @@ module Aws::EC2
       :log_options,
       :enable_tunnel_lifecycle_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VpnTunnelProvisioningStatus
-      available = 'available'
-      pending = 'pending'
-      failed = 'failed'
-    end
-
-    module WeekDay
-      sunday = 'sunday'
-      monday = 'monday'
-      tuesday = 'tuesday'
-      wednesday = 'wednesday'
-      thursday = 'thursday'
-      friday = 'friday'
-      saturday = 'saturday'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cidr
@@ -65746,7 +62163,7 @@ module Aws::EC2
       :cidr,
       :dry_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute byoip_cidr
@@ -65755,12 +62172,7 @@ module Aws::EC2
     class WithdrawByoipCidrResult < Struct.new(
       :byoip_cidr,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Scope
-      AVAILABILITY_ZONE = 'Availability Zone'
-      REGIONAL = 'Region'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -51,7 +51,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an algorithm image.</p>
@@ -65,7 +65,7 @@ module Aws::Personalize
       :name,
       :docker_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When the solution performs AutoML (<code>performAutoML</code> is true in
@@ -82,7 +82,7 @@ module Aws::Personalize
       :metric_name,
       :recipe_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When the solution performs AutoML (<code>performAutoML</code> is true in
@@ -94,7 +94,7 @@ module Aws::Personalize
     class AutoMLResult < Struct.new(
       :best_recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The automatic training configuration to use when <code>performAutoTraining</code> is true.</p>
@@ -108,7 +108,7 @@ module Aws::Personalize
     class AutoTrainingConfig < Struct.new(
       :scheduling_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a batch inference job.</p>
@@ -191,7 +191,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of a batch inference job.</p>
@@ -204,7 +204,7 @@ module Aws::Personalize
     class BatchInferenceJobConfig < Struct.new(
       :item_exploration_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input configuration of a batch inference job.</p>
@@ -215,12 +215,7 @@ module Aws::Personalize
     class BatchInferenceJobInput < Struct.new(
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchInferenceJobMode
-      BATCH_INFERENCE = 'BATCH_INFERENCE'
-      THEME_GENERATION = 'THEME_GENERATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration parameters of a batch inference job.</p>
@@ -230,7 +225,7 @@ module Aws::Personalize
     class BatchInferenceJobOutput < Struct.new(
       :s3_data_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A truncated version of the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_BatchInferenceJob.html">BatchInferenceJob</a>. The 
@@ -284,7 +279,7 @@ module Aws::Personalize
       :solution_version_arn,
       :batch_inference_job_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a batch segment job.</p>
@@ -352,7 +347,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input configuration of a batch segment job.</p>
@@ -362,7 +357,7 @@ module Aws::Personalize
     class BatchSegmentJobInput < Struct.new(
       :s3_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration parameters of a batch segment job.</p>
@@ -372,7 +367,7 @@ module Aws::Personalize
     class BatchSegmentJobOutput < Struct.new(
       :s3_data_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A truncated version of the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_BatchSegmentJob.html">BatchSegmentJob</a> datatype. 
@@ -422,7 +417,7 @@ module Aws::Personalize
       :failure_reason,
       :solution_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the deployment of a solution version.
@@ -481,7 +476,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :latest_campaign_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of a campaign.</p>
@@ -514,7 +509,7 @@ module Aws::Personalize
       :enable_metadata_with_recommendations,
       :sync_with_latest_solution_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a campaign. For a complete listing, call the
@@ -554,7 +549,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a campaign update. For a complete listing, call the
@@ -599,7 +594,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the name and range of a categorical hyperparameter.</p>
@@ -613,7 +608,7 @@ module Aws::Personalize
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the name and range of a continuous hyperparameter.</p>
@@ -631,7 +626,7 @@ module Aws::Personalize
       :min_value,
       :max_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_value] = 0 unless options.key?(:min_value)
@@ -696,7 +691,7 @@ module Aws::Personalize
       :batch_inference_job_mode,
       :theme_generation_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_inference_job_arn
@@ -705,7 +700,7 @@ module Aws::Personalize
     class CreateBatchInferenceJobResponse < Struct.new(
       :batch_inference_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -745,7 +740,7 @@ module Aws::Personalize
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_segment_job_arn
@@ -754,7 +749,7 @@ module Aws::Personalize
     class CreateBatchSegmentJobResponse < Struct.new(
       :batch_segment_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -792,7 +787,7 @@ module Aws::Personalize
       :campaign_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_arn
@@ -801,7 +796,7 @@ module Aws::Personalize
     class CreateCampaignResponse < Struct.new(
       :campaign_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -828,7 +823,7 @@ module Aws::Personalize
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_deletion_job_arn
@@ -837,7 +832,7 @@ module Aws::Personalize
     class CreateDataDeletionJobResponse < Struct.new(
       :data_deletion_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -873,7 +868,7 @@ module Aws::Personalize
       :job_output,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_export_job_arn
@@ -882,7 +877,7 @@ module Aws::Personalize
     class CreateDatasetExportJobResponse < Struct.new(
       :dataset_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -914,7 +909,7 @@ module Aws::Personalize
       :domain,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -927,7 +922,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -974,7 +969,7 @@ module Aws::Personalize
       :import_mode,
       :publish_attribution_metrics_to_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_arn
@@ -983,7 +978,7 @@ module Aws::Personalize
     class CreateDatasetImportJobResponse < Struct.new(
       :dataset_import_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1028,7 +1023,7 @@ module Aws::Personalize
       :dataset_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -1037,7 +1032,7 @@ module Aws::Personalize
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1054,7 +1049,7 @@ module Aws::Personalize
       :dataset_group_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_tracker_arn
@@ -1068,7 +1063,7 @@ module Aws::Personalize
       :event_tracker_arn,
       :tracking_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1091,7 +1086,7 @@ module Aws::Personalize
       :filter_expression,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_arn
@@ -1100,7 +1095,7 @@ module Aws::Personalize
     class CreateFilterResponse < Struct.new(
       :filter_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1123,7 +1118,7 @@ module Aws::Personalize
       :metrics,
       :metrics_output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attribution_arn
@@ -1132,7 +1127,7 @@ module Aws::Personalize
     class CreateMetricAttributionResponse < Struct.new(
       :metric_attribution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1159,7 +1154,7 @@ module Aws::Personalize
       :recommender_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -1168,7 +1163,7 @@ module Aws::Personalize
     class CreateRecommenderResponse < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1186,7 +1181,7 @@ module Aws::Personalize
       :schema,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -1195,7 +1190,7 @@ module Aws::Personalize
     class CreateSchemaResponse < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1275,7 +1270,7 @@ module Aws::Personalize
       :solution_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -1284,7 +1279,7 @@ module Aws::Personalize
     class CreateSolutionResponse < Struct.new(
       :solution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1324,7 +1319,7 @@ module Aws::Personalize
       :training_mode,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -1333,7 +1328,7 @@ module Aws::Personalize
     class CreateSolutionVersionResponse < Struct.new(
       :solution_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a job that deletes all
@@ -1390,7 +1385,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a data deletion job. For a complete listing, call the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html">DescribeDataDeletionJob</a>
@@ -1432,7 +1427,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data source that contains the data to upload to a dataset, or the list of 
@@ -1456,7 +1451,7 @@ module Aws::Personalize
     class DataSource < Struct.new(
       :data_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides metadata for a dataset.</p>
@@ -1531,7 +1526,7 @@ module Aws::Personalize
       :latest_dataset_update,
       :tracking_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a job that exports a dataset to an Amazon S3 bucket. For more
@@ -1603,7 +1598,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration parameters of a dataset export job.</p>
@@ -1613,7 +1608,7 @@ module Aws::Personalize
     class DatasetExportJobOutput < Struct.new(
       :s3_data_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a dataset export job. For a complete listing, call the
@@ -1650,7 +1645,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dataset group is a collection of related datasets (Item interactions,
@@ -1712,7 +1707,7 @@ module Aws::Personalize
       :failure_reason,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a dataset group. For a complete listing, call the
@@ -1756,7 +1751,7 @@ module Aws::Personalize
       :failure_reason,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a job that imports training data from a data source (Amazon S3
@@ -1825,7 +1820,7 @@ module Aws::Personalize
       :import_mode,
       :publish_attribution_metrics_to_s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a dataset import job. For a complete listing, call the
@@ -1869,7 +1864,7 @@ module Aws::Personalize
       :failure_reason,
       :import_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the schema for a dataset. For more information on schemas, see
@@ -1900,7 +1895,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a dataset schema. For a complete listing, call the
@@ -1927,7 +1922,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a dataset. For a complete listing, call the
@@ -1981,7 +1976,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an update to a dataset.</p>
@@ -2007,7 +2002,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the name and default range of a categorical hyperparameter
@@ -2027,7 +2022,7 @@ module Aws::Personalize
       :values,
       :is_tunable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_tunable] = false unless options.key?(:is_tunable)
@@ -2056,7 +2051,7 @@ module Aws::Personalize
       :max_value,
       :is_tunable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_value] = 0 unless options.key?(:min_value)
@@ -2082,7 +2077,7 @@ module Aws::Personalize
       :continuous_hyper_parameter_ranges,
       :categorical_hyper_parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the name and default range of a integer-valued hyperparameter
@@ -2106,7 +2101,7 @@ module Aws::Personalize
       :max_value,
       :is_tunable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_value] = 0 unless options.key?(:min_value)
@@ -2122,7 +2117,7 @@ module Aws::Personalize
     class DeleteCampaignRequest < Struct.new(
       :campaign_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -2131,7 +2126,7 @@ module Aws::Personalize
     class DeleteDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -2140,7 +2135,7 @@ module Aws::Personalize
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_tracker_arn
@@ -2149,7 +2144,7 @@ module Aws::Personalize
     class DeleteEventTrackerRequest < Struct.new(
       :event_tracker_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_arn
@@ -2158,7 +2153,7 @@ module Aws::Personalize
     class DeleteFilterRequest < Struct.new(
       :filter_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attribution_arn
@@ -2167,7 +2162,7 @@ module Aws::Personalize
     class DeleteMetricAttributionRequest < Struct.new(
       :metric_attribution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -2176,7 +2171,7 @@ module Aws::Personalize
     class DeleteRecommenderRequest < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2185,7 +2180,7 @@ module Aws::Personalize
     class DeleteSchemaRequest < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -2194,7 +2189,7 @@ module Aws::Personalize
     class DeleteSolutionRequest < Struct.new(
       :solution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm_arn
@@ -2203,7 +2198,7 @@ module Aws::Personalize
     class DescribeAlgorithmRequest < Struct.new(
       :algorithm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute algorithm
@@ -2212,7 +2207,7 @@ module Aws::Personalize
     class DescribeAlgorithmResponse < Struct.new(
       :algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_inference_job_arn
@@ -2221,7 +2216,7 @@ module Aws::Personalize
     class DescribeBatchInferenceJobRequest < Struct.new(
       :batch_inference_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_inference_job
@@ -2230,7 +2225,7 @@ module Aws::Personalize
     class DescribeBatchInferenceJobResponse < Struct.new(
       :batch_inference_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_segment_job_arn
@@ -2239,7 +2234,7 @@ module Aws::Personalize
     class DescribeBatchSegmentJobRequest < Struct.new(
       :batch_segment_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_segment_job
@@ -2248,7 +2243,7 @@ module Aws::Personalize
     class DescribeBatchSegmentJobResponse < Struct.new(
       :batch_segment_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_arn
@@ -2257,7 +2252,7 @@ module Aws::Personalize
     class DescribeCampaignRequest < Struct.new(
       :campaign_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign
@@ -2266,7 +2261,7 @@ module Aws::Personalize
     class DescribeCampaignResponse < Struct.new(
       :campaign,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_deletion_job_arn
@@ -2275,7 +2270,7 @@ module Aws::Personalize
     class DescribeDataDeletionJobRequest < Struct.new(
       :data_deletion_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_deletion_job
@@ -2299,7 +2294,7 @@ module Aws::Personalize
     class DescribeDataDeletionJobResponse < Struct.new(
       :data_deletion_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_export_job_arn
@@ -2309,7 +2304,7 @@ module Aws::Personalize
     class DescribeDatasetExportJobRequest < Struct.new(
       :dataset_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_export_job
@@ -2333,7 +2328,7 @@ module Aws::Personalize
     class DescribeDatasetExportJobResponse < Struct.new(
       :dataset_export_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -2343,7 +2338,7 @@ module Aws::Personalize
     class DescribeDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group
@@ -2352,7 +2347,7 @@ module Aws::Personalize
     class DescribeDatasetGroupResponse < Struct.new(
       :dataset_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_arn
@@ -2362,7 +2357,7 @@ module Aws::Personalize
     class DescribeDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job
@@ -2386,7 +2381,7 @@ module Aws::Personalize
     class DescribeDatasetImportJobResponse < Struct.new(
       :dataset_import_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -2395,7 +2390,7 @@ module Aws::Personalize
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset
@@ -2404,7 +2399,7 @@ module Aws::Personalize
     class DescribeDatasetResponse < Struct.new(
       :dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_tracker_arn
@@ -2413,7 +2408,7 @@ module Aws::Personalize
     class DescribeEventTrackerRequest < Struct.new(
       :event_tracker_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_tracker
@@ -2422,7 +2417,7 @@ module Aws::Personalize
     class DescribeEventTrackerResponse < Struct.new(
       :event_tracker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_transformation_arn
@@ -2431,7 +2426,7 @@ module Aws::Personalize
     class DescribeFeatureTransformationRequest < Struct.new(
       :feature_transformation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute feature_transformation
@@ -2440,7 +2435,7 @@ module Aws::Personalize
     class DescribeFeatureTransformationResponse < Struct.new(
       :feature_transformation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_arn
@@ -2449,7 +2444,7 @@ module Aws::Personalize
     class DescribeFilterRequest < Struct.new(
       :filter_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -2458,7 +2453,7 @@ module Aws::Personalize
     class DescribeFilterResponse < Struct.new(
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attribution_arn
@@ -2467,7 +2462,7 @@ module Aws::Personalize
     class DescribeMetricAttributionRequest < Struct.new(
       :metric_attribution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attribution
@@ -2476,7 +2471,7 @@ module Aws::Personalize
     class DescribeMetricAttributionResponse < Struct.new(
       :metric_attribution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipe_arn
@@ -2485,7 +2480,7 @@ module Aws::Personalize
     class DescribeRecipeRequest < Struct.new(
       :recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipe
@@ -2494,7 +2489,7 @@ module Aws::Personalize
     class DescribeRecipeResponse < Struct.new(
       :recipe,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -2503,7 +2498,7 @@ module Aws::Personalize
     class DescribeRecommenderRequest < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender
@@ -2512,7 +2507,7 @@ module Aws::Personalize
     class DescribeRecommenderResponse < Struct.new(
       :recommender,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -2521,7 +2516,7 @@ module Aws::Personalize
     class DescribeSchemaRequest < Struct.new(
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema
@@ -2530,7 +2525,7 @@ module Aws::Personalize
     class DescribeSchemaResponse < Struct.new(
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -2539,7 +2534,7 @@ module Aws::Personalize
     class DescribeSolutionRequest < Struct.new(
       :solution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution
@@ -2548,7 +2543,7 @@ module Aws::Personalize
     class DescribeSolutionResponse < Struct.new(
       :solution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -2557,7 +2552,7 @@ module Aws::Personalize
     class DescribeSolutionVersionRequest < Struct.new(
       :solution_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version
@@ -2566,12 +2561,7 @@ module Aws::Personalize
     class DescribeSolutionVersionResponse < Struct.new(
       :solution_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Domain
-      ECOMMERCE = 'ECOMMERCE'
-      VIDEO_ON_DEMAND = 'VIDEO_ON_DEMAND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the parameters of events, which are used in solution creation.</p>
@@ -2589,7 +2579,7 @@ module Aws::Personalize
       :event_value_threshold,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an event tracker.</p>
@@ -2637,7 +2627,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of an event tracker. For a complete listing, call the
@@ -2673,7 +2663,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of events, which are used in solution creation.</p>
@@ -2683,7 +2673,7 @@ module Aws::Personalize
     class EventsConfig < Struct.new(
       :event_parameters_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides feature transformation information. Feature transformation is the process
@@ -2720,7 +2710,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string to string map of the configuration details for theme generation.</p>
@@ -2730,7 +2720,7 @@ module Aws::Personalize
     class FieldsForThemeGeneration < Struct.new(
       :item_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a recommendation filter, including its ARN, status, and filter
@@ -2771,7 +2761,7 @@ module Aws::Personalize
       :filter_expression,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A short summary of a filter's attributes.</p>
@@ -2805,7 +2795,7 @@ module Aws::Personalize
       :failure_reason,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -2814,7 +2804,7 @@ module Aws::Personalize
     class GetSolutionMetricsRequest < Struct.new(
       :solution_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -2830,7 +2820,7 @@ module Aws::Personalize
       :solution_version_arn,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties for hyperparameter optimization (HPO).</p>
@@ -2852,7 +2842,7 @@ module Aws::Personalize
       :hpo_resource_config,
       :algorithm_hyper_parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric to optimize during hyperparameter optimization (HPO).</p>
@@ -2874,7 +2864,7 @@ module Aws::Personalize
       :metric_name,
       :metric_regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the resource configuration for hyperparameter optimization (HPO).</p>
@@ -2898,7 +2888,7 @@ module Aws::Personalize
       :max_number_of_training_jobs,
       :max_parallel_training_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the hyperparameters and their ranges.
@@ -2917,18 +2907,7 @@ module Aws::Personalize
       :continuous_hyper_parameter_ranges,
       :categorical_hyper_parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportMode
-      FULL = 'FULL'
-      INCREMENTAL = 'INCREMENTAL'
-    end
-
-    module IngestionMode
-      BULK = 'BULK'
-      PUT = 'PUT'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the name and range of an integer-valued hyperparameter.</p>
@@ -2946,7 +2925,7 @@ module Aws::Personalize
       :min_value,
       :max_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_value] = 0 unless options.key?(:min_value)
@@ -2961,7 +2940,7 @@ module Aws::Personalize
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The token is not valid.</p>
@@ -2970,7 +2949,7 @@ module Aws::Personalize
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second has been exceeded.</p>
@@ -2979,7 +2958,7 @@ module Aws::Personalize
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -2998,7 +2977,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_inference_jobs
@@ -3012,7 +2991,7 @@ module Aws::Personalize
       :batch_inference_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -3030,7 +3009,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_segment_jobs
@@ -3044,7 +3023,7 @@ module Aws::Personalize
       :batch_segment_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -3063,7 +3042,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaigns
@@ -3076,7 +3055,7 @@ module Aws::Personalize
       :campaigns,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3094,7 +3073,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_deletion_jobs
@@ -3108,7 +3087,7 @@ module Aws::Personalize
       :data_deletion_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -3128,7 +3107,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_export_jobs
@@ -3142,7 +3121,7 @@ module Aws::Personalize
       :dataset_export_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3157,7 +3136,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_groups
@@ -3171,7 +3150,7 @@ module Aws::Personalize
       :dataset_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -3191,7 +3170,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_jobs
@@ -3205,7 +3184,7 @@ module Aws::Personalize
       :dataset_import_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3225,7 +3204,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datasets
@@ -3239,7 +3218,7 @@ module Aws::Personalize
       :datasets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3257,7 +3236,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_trackers
@@ -3270,7 +3249,7 @@ module Aws::Personalize
       :event_trackers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3288,7 +3267,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -3301,7 +3280,7 @@ module Aws::Personalize
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attribution_arn
@@ -3318,7 +3297,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metrics
@@ -3331,7 +3310,7 @@ module Aws::Personalize
       :metrics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3348,7 +3327,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attributions
@@ -3361,7 +3340,7 @@ module Aws::Personalize
       :metric_attributions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipe_provider
@@ -3386,7 +3365,7 @@ module Aws::Personalize
       :max_results,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipes
@@ -3399,7 +3378,7 @@ module Aws::Personalize
       :recipes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3418,7 +3397,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommenders
@@ -3431,7 +3410,7 @@ module Aws::Personalize
       :recommenders,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3445,7 +3424,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schemas
@@ -3458,7 +3437,7 @@ module Aws::Personalize
       :schemas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -3476,7 +3455,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_versions
@@ -3489,7 +3468,7 @@ module Aws::Personalize
       :solution_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -3507,7 +3486,7 @@ module Aws::Personalize
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solutions
@@ -3520,7 +3499,7 @@ module Aws::Personalize
       :solutions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3529,7 +3508,7 @@ module Aws::Personalize
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3538,7 +3517,7 @@ module Aws::Personalize
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a metric that a metric attribution reports on. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.</p>
@@ -3557,7 +3536,7 @@ module Aws::Personalize
       :metric_name,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on a metric attribution. A metric attribution creates reports on the data that you import into Amazon Personalize. 
@@ -3597,7 +3576,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration details for a metric attribution.</p>
@@ -3611,7 +3590,7 @@ module Aws::Personalize
       :s3_data_destination,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a metric attribution. For a complete listing, call the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeMetricAttribution.html">DescribeMetricAttribution</a>.</p>
@@ -3641,14 +3620,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ObjectiveSensitivity
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
-      OFF = 'OFF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the additional objective for the solution, such as maximizing streaming 
@@ -3663,7 +3635,7 @@ module Aws::Personalize
       :item_attribute,
       :objective_sensitivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a recipe. Each recipe provides an algorithm
@@ -3719,11 +3691,7 @@ module Aws::Personalize
       :recipe_type,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecipeProvider
-      SERVICE = 'SERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a recipe. For a complete listing, call the
@@ -3754,7 +3722,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a recommendation generator for a Domain dataset group. You create a recommender in a Domain dataset group
@@ -3821,7 +3789,7 @@ module Aws::Personalize
       :latest_recommender_update,
       :model_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the recommender.</p>
@@ -3856,7 +3824,7 @@ module Aws::Personalize
       :training_data_config,
       :enable_metadata_with_recommendations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of the recommender.</p>
@@ -3905,7 +3873,7 @@ module Aws::Personalize
       :creation_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a recommender update. For a complete listing, call the
@@ -3933,7 +3901,7 @@ module Aws::Personalize
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource already exists.</p>
@@ -3942,7 +3910,7 @@ module Aws::Personalize
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is in use.</p>
@@ -3951,7 +3919,7 @@ module Aws::Personalize
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Could not find the specified resource.</p>
@@ -3960,7 +3928,7 @@ module Aws::Personalize
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of an Amazon S3 input or output bucket.</p>
@@ -3975,7 +3943,7 @@ module Aws::Personalize
       :path,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <important>
@@ -4073,7 +4041,7 @@ module Aws::Personalize
       :latest_solution_version,
       :latest_solution_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:perform_hpo] = false unless options.key?(:perform_hpo)
@@ -4126,7 +4094,7 @@ module Aws::Personalize
       :training_data_config,
       :auto_training_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a solution. For a complete listing, call the
@@ -4166,7 +4134,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :recipe_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details of the solution update.</p>
@@ -4180,7 +4148,7 @@ module Aws::Personalize
       :auto_training_config,
       :events_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the properties of a solution update. For a complete listing, call the
@@ -4212,7 +4180,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that provides information about a specific version of a <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_Solution.html">Solution</a> in a Custom dataset group.</p>
@@ -4321,7 +4289,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :training_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:perform_hpo] = false unless options.key?(:perform_hpo)
@@ -4373,7 +4341,7 @@ module Aws::Personalize
       :last_updated_date_time,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -4382,7 +4350,7 @@ module Aws::Personalize
     class StartRecommenderRequest < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -4391,7 +4359,7 @@ module Aws::Personalize
     class StartRecommenderResponse < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -4400,7 +4368,7 @@ module Aws::Personalize
     class StopRecommenderRequest < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -4409,7 +4377,7 @@ module Aws::Personalize
     class StopRecommenderResponse < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_version_arn
@@ -4418,7 +4386,7 @@ module Aws::Personalize
     class StopSolutionVersionCreationRequest < Struct.new(
       :solution_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optional metadata that you apply to resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.
@@ -4434,7 +4402,7 @@ module Aws::Personalize
       :tag_key,
       :tag_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4447,12 +4415,12 @@ module Aws::Personalize
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for generating themes with a batch inference job.</p>
@@ -4462,7 +4430,7 @@ module Aws::Personalize
     class ThemeGenerationConfig < Struct.new(
       :fields_for_theme_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains more tag keys than can be associated with a resource (50 tag keys per resource). </p>
@@ -4471,7 +4439,7 @@ module Aws::Personalize
     class TooManyTagKeysException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of tags you can apply to this resource. </p>
@@ -4480,7 +4448,7 @@ module Aws::Personalize
     class TooManyTagsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The training data configuration to use when creating a domain recommender or custom solution version (trained model).</p>
@@ -4495,18 +4463,7 @@ module Aws::Personalize
     class TrainingDataConfig < Struct.new(
       :excluded_dataset_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingMode
-      FULL = 'FULL'
-      UPDATE = 'UPDATE'
-      AUTOTRAIN = 'AUTOTRAIN'
-    end
-
-    module TrainingType
-      AUTOMATIC = 'AUTOMATIC'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If hyperparameter optimization (HPO) was performed, contains the hyperparameter values of
@@ -4517,7 +4474,7 @@ module Aws::Personalize
     class TunedHPOParams < Struct.new(
       :algorithm_hyper_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4530,12 +4487,12 @@ module Aws::Personalize
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_arn
@@ -4570,7 +4527,7 @@ module Aws::Personalize
       :min_provisioned_tps,
       :campaign_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute campaign_arn
@@ -4579,7 +4536,7 @@ module Aws::Personalize
     class UpdateCampaignResponse < Struct.new(
       :campaign_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -4592,7 +4549,7 @@ module Aws::Personalize
       :dataset_arn,
       :schema_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -4601,7 +4558,7 @@ module Aws::Personalize
     class UpdateDatasetResponse < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute add_metrics
@@ -4622,7 +4579,7 @@ module Aws::Personalize
       :metrics_output_config,
       :metric_attribution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_attribution_arn
@@ -4631,7 +4588,7 @@ module Aws::Personalize
     class UpdateMetricAttributionResponse < Struct.new(
       :metric_attribution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -4644,7 +4601,7 @@ module Aws::Personalize
       :recommender_arn,
       :recommender_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommender_arn
@@ -4653,7 +4610,7 @@ module Aws::Personalize
     class UpdateRecommenderResponse < Struct.new(
       :recommender_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -4683,7 +4640,7 @@ module Aws::Personalize
       :perform_auto_training,
       :solution_update_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute solution_arn
@@ -4692,7 +4649,7 @@ module Aws::Personalize
     class UpdateSolutionResponse < Struct.new(
       :solution_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

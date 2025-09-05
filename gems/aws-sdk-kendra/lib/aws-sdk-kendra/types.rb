@@ -14,7 +14,7 @@ module Aws::Kendra
     class AccessControlConfigurationSummary < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Access Control List files for the documents in a data source. For the format of the
@@ -26,7 +26,7 @@ module Aws::Kendra
     class AccessControlListConfiguration < Struct.new(
       :key_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have sufficient access to perform this action. Please ensure you have the
@@ -36,7 +36,7 @@ module Aws::Kendra
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the column that should be used for filtering the query
@@ -49,7 +49,7 @@ module Aws::Kendra
     class AclConfiguration < Struct.new(
       :allowed_groups_column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute returned from an index query.</p>
@@ -67,7 +67,7 @@ module Aws::Kendra
       :value_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute returned with a document from a search.</p>
@@ -78,11 +78,7 @@ module Aws::Kendra
     class AdditionalResultAttributeValue < Struct.new(
       :text_with_highlights_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdditionalResultAttributeValueType
-      TEXT_WITH_HIGHLIGHTS_VALUE = 'TEXT_WITH_HIGHLIGHTS_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Alfresco as your data
@@ -186,19 +182,13 @@ module Aws::Kendra
       :exclusion_patterns,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_system_folders] = false unless options.key?(:crawl_system_folders)
         options[:crawl_comments] = false unless options.key?(:crawl_comments)
         super
       end
-    end
-
-    module AlfrescoEntity
-      wiki = 'wiki'
-      blog = 'blog'
-      documentLibrary = 'documentLibrary'
     end
 
     # @!attribute id
@@ -215,7 +205,7 @@ module Aws::Kendra
       :index_id,
       :entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entity_list
@@ -225,7 +215,7 @@ module Aws::Kendra
     class AssociateEntitiesToExperienceResponse < Struct.new(
       :failed_entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -246,7 +236,7 @@ module Aws::Kendra
       :index_id,
       :personas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entity_list
@@ -256,7 +246,7 @@ module Aws::Kendra
     class AssociatePersonasToEntitiesResponse < Struct.new(
       :failed_entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the search results based on document attributes or fields.</p>
@@ -356,7 +346,7 @@ module Aws::Kendra
       :less_than,
       :less_than_or_equals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gets information on the configuration of document fields/attributes that you want to base 
@@ -375,7 +365,7 @@ module Aws::Kendra
       :suggestable_config_list,
       :attribute_suggestions_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for the document fields/attributes that you want 
@@ -403,12 +393,7 @@ module Aws::Kendra
       :attribute_filter,
       :user_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeSuggestionsMode
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the configuration information for the document fields/attributes that you want 
@@ -436,7 +421,7 @@ module Aws::Kendra
       :suggestable_config_list,
       :attribute_suggestions_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to websites that require user
@@ -449,7 +434,7 @@ module Aws::Kendra
     class AuthenticationConfiguration < Struct.new(
       :basic_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to websites that require basic user
@@ -478,7 +463,7 @@ module Aws::Kendra
       :port,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -495,7 +480,7 @@ module Aws::Kendra
       :document_id_list,
       :data_source_sync_job_metric_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_documents
@@ -505,7 +490,7 @@ module Aws::Kendra
     class BatchDeleteDocumentResponse < Struct.new(
       :failed_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about documents that could not be removed from an index by the
@@ -528,7 +513,7 @@ module Aws::Kendra
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a set of featured results that couldn't be 
@@ -550,7 +535,7 @@ module Aws::Kendra
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -563,7 +548,7 @@ module Aws::Kendra
       :index_id,
       :featured_results_set_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -573,7 +558,7 @@ module Aws::Kendra
     class BatchDeleteFeaturedResultsSetResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -590,7 +575,7 @@ module Aws::Kendra
       :index_id,
       :document_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -606,7 +591,7 @@ module Aws::Kendra
       :errors,
       :document_status_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a response when the status of a document could not be retrieved.</p>
@@ -630,7 +615,7 @@ module Aws::Kendra
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -666,7 +651,7 @@ module Aws::Kendra
       :documents,
       :custom_document_enrichment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_documents
@@ -679,7 +664,7 @@ module Aws::Kendra
     class BatchPutDocumentResponse < Struct.new(
       :failed_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a document that could not be indexed.</p>
@@ -702,7 +687,7 @@ module Aws::Kendra
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Box as 
@@ -820,7 +805,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_change_log] = false unless options.key?(:use_change_log)
@@ -855,7 +840,7 @@ module Aws::Kendra
       :storage_capacity_units,
       :query_capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -864,7 +849,7 @@ module Aws::Kendra
     class ClearQuerySuggestionsRequest < Struct.new(
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gathers information about when a particular result was clicked by a user. Your
@@ -880,7 +865,7 @@ module Aws::Kendra
       :result_id,
       :click_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how to group results by document attribute value, and how to display them
@@ -928,7 +913,7 @@ module Aws::Kendra
       :expand,
       :expand_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:expand] = false unless options.key?(:expand)
@@ -947,7 +932,7 @@ module Aws::Kendra
       :document_attribute,
       :expanded_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about how Amazon Kendra should use the columns of a database
@@ -976,21 +961,7 @@ module Aws::Kendra
       :field_mappings,
       :change_detecting_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionOperator
-      GreaterThan = 'GreaterThan'
-      GreaterThanOrEquals = 'GreaterThanOrEquals'
-      LessThan = 'LessThan'
-      LessThanOrEquals = 'LessThanOrEquals'
-      Equals = 'Equals'
-      NotEquals = 'NotEquals'
-      Contains = 'Contains'
-      NotContains = 'NotContains'
-      Exists = 'Exists'
-      NotExists = 'NotExists'
-      BeginsWith = 'BeginsWith'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict occurred with the request. Please fix any inconsistences with your
@@ -1000,7 +971,7 @@ module Aws::Kendra
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a conflicting query used across different sets of 
@@ -1022,7 +993,7 @@ module Aws::Kendra
       :set_name,
       :set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of attachment settings for the Confluence data source. Attachment
@@ -1044,26 +1015,12 @@ module Aws::Kendra
       :crawl_attachments,
       :attachment_field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_attachments] = false unless options.key?(:crawl_attachments)
         super
       end
-    end
-
-    module ConfluenceAttachmentFieldName
-      AUTHOR = 'AUTHOR'
-      CONTENT_TYPE = 'CONTENT_TYPE'
-      CREATED_DATE = 'CREATED_DATE'
-      DISPLAY_URL = 'DISPLAY_URL'
-      FILE_SIZE = 'FILE_SIZE'
-      ITEM_TYPE = 'ITEM_TYPE'
-      PARENT_ID = 'PARENT_ID'
-      SPACE_KEY = 'SPACE_KEY'
-      SPACE_NAME = 'SPACE_NAME'
-      URL = 'URL'
-      VERSION = 'VERSION'
     end
 
     # <p>Maps attributes or field names of Confluence attachments to Amazon Kendra index
@@ -1088,12 +1045,7 @@ module Aws::Kendra
       :date_field_format,
       :index_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfluenceAuthenticationType
-      HTTP_BASIC = 'HTTP_BASIC'
-      PAT = 'PAT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of blog settings for the Confluence data source. Blogs are always
@@ -1111,19 +1063,7 @@ module Aws::Kendra
     class ConfluenceBlogConfiguration < Struct.new(
       :blog_field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfluenceBlogFieldName
-      AUTHOR = 'AUTHOR'
-      DISPLAY_URL = 'DISPLAY_URL'
-      ITEM_TYPE = 'ITEM_TYPE'
-      LABELS = 'LABELS'
-      PUBLISH_DATE = 'PUBLISH_DATE'
-      SPACE_KEY = 'SPACE_KEY'
-      SPACE_NAME = 'SPACE_NAME'
-      URL = 'URL'
-      VERSION = 'VERSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps attributes or field names of Confluence blog to Amazon Kendra index field
@@ -1147,7 +1087,7 @@ module Aws::Kendra
       :date_field_format,
       :index_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Confluence as your data
@@ -1234,7 +1174,7 @@ module Aws::Kendra
       :proxy_configuration,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the page settings for the Confluence data source.</p>
@@ -1249,22 +1189,7 @@ module Aws::Kendra
     class ConfluencePageConfiguration < Struct.new(
       :page_field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfluencePageFieldName
-      AUTHOR = 'AUTHOR'
-      CONTENT_STATUS = 'CONTENT_STATUS'
-      CREATED_DATE = 'CREATED_DATE'
-      DISPLAY_URL = 'DISPLAY_URL'
-      ITEM_TYPE = 'ITEM_TYPE'
-      LABELS = 'LABELS'
-      MODIFIED_DATE = 'MODIFIED_DATE'
-      PARENT_ID = 'PARENT_ID'
-      SPACE_KEY = 'SPACE_KEY'
-      SPACE_NAME = 'SPACE_NAME'
-      URL = 'URL'
-      VERSION = 'VERSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps attributes or field names of Confluence pages to Amazon Kendra index field
@@ -1288,7 +1213,7 @@ module Aws::Kendra
       :date_field_format,
       :index_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for indexing Confluence spaces.</p>
@@ -1333,20 +1258,13 @@ module Aws::Kendra
       :exclude_spaces,
       :space_field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_personal_spaces] = false unless options.key?(:crawl_personal_spaces)
         options[:crawl_archived_spaces] = false unless options.key?(:crawl_archived_spaces)
         super
       end
-    end
-
-    module ConfluenceSpaceFieldName
-      DISPLAY_URL = 'DISPLAY_URL'
-      ITEM_TYPE = 'ITEM_TYPE'
-      SPACE_KEY = 'SPACE_KEY'
-      URL = 'URL'
     end
 
     # <p>Maps attributes or field names of Confluence spaces to Amazon Kendra index field
@@ -1370,12 +1288,7 @@ module Aws::Kendra
       :date_field_format,
       :index_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfluenceVersion
-      CLOUD = 'CLOUD'
-      SERVER = 'SERVER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information that's required to connect to a
@@ -1408,7 +1321,7 @@ module Aws::Kendra
       :table_name,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for your content sources, such as data sources, 
@@ -1429,27 +1342,12 @@ module Aws::Kendra
       :faq_ids,
       :direct_put_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:direct_put_content] = false unless options.key?(:direct_put_content)
         super
       end
-    end
-
-    module ContentType
-      PDF = 'PDF'
-      HTML = 'HTML'
-      MS_WORD = 'MS_WORD'
-      PLAIN_TEXT = 'PLAIN_TEXT'
-      PPT = 'PPT'
-      RTF = 'RTF'
-      XML = 'XML'
-      XSLT = 'XSLT'
-      MS_EXCEL = 'MS_EXCEL'
-      CSV = 'CSV'
-      JSON = 'JSON'
-      MD = 'MD'
     end
 
     # <p>A corrected misspelled word in a query.</p>
@@ -1473,7 +1371,7 @@ module Aws::Kendra
       :term,
       :corrected_term,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -1508,7 +1406,7 @@ module Aws::Kendra
       :hierarchical_access_control_list,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1518,7 +1416,7 @@ module Aws::Kendra
     class CreateAccessControlConfigurationResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1601,7 +1499,7 @@ module Aws::Kendra
       :language_code,
       :custom_document_enrichment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1610,7 +1508,7 @@ module Aws::Kendra
     class CreateDataSourceResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1647,7 +1545,7 @@ module Aws::Kendra
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1656,7 +1554,7 @@ module Aws::Kendra
     class CreateExperienceResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -1713,7 +1611,7 @@ module Aws::Kendra
       :client_token,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1722,7 +1620,7 @@ module Aws::Kendra
     class CreateFaqResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -1773,7 +1671,7 @@ module Aws::Kendra
       :featured_documents,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute featured_results_set
@@ -1784,7 +1682,7 @@ module Aws::Kendra
     class CreateFeaturedResultsSetResponse < Struct.new(
       :featured_results_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1877,7 +1775,7 @@ module Aws::Kendra
       :user_context_policy,
       :user_group_resolution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1887,7 +1785,7 @@ module Aws::Kendra
     class CreateIndexResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -1935,7 +1833,7 @@ module Aws::Kendra
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1944,7 +1842,7 @@ module Aws::Kendra
     class CreateQuerySuggestionsBlockListResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -1986,7 +1884,7 @@ module Aws::Kendra
       :source_s3_path,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1996,7 +1894,7 @@ module Aws::Kendra
     class CreateThesaurusResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for altering document metadata and content
@@ -2031,7 +1929,7 @@ module Aws::Kendra
       :post_extraction_hook_configuration,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for an Amazon Kendra data source.</p>
@@ -2171,7 +2069,7 @@ module Aws::Kendra
       :alfresco_configuration,
       :template_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data source information for user context filtering.</p>
@@ -2188,15 +2086,7 @@ module Aws::Kendra
       :group_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceStatus
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for a Amazon Kendra data source.</p>
@@ -2235,7 +2125,7 @@ module Aws::Kendra
       :status,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a data source synchronization job.</p>
@@ -2281,7 +2171,7 @@ module Aws::Kendra
       :data_source_error_code,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps a particular data source sync job to a particular data source.</p>
@@ -2300,7 +2190,7 @@ module Aws::Kendra
       :data_source_id,
       :data_source_sync_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps a batch delete document request to a specific data source sync job. This is optional
@@ -2331,17 +2221,7 @@ module Aws::Kendra
       :documents_failed,
       :documents_scanned,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceSyncJobStatus
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      SYNCING = 'SYNCING'
-      INCOMPLETE = 'INCOMPLETE'
-      STOPPING = 'STOPPING'
-      ABORTED = 'ABORTED'
-      SYNCING_INDEXING = 'SYNCING_INDEXING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Maps attributes or field names of the documents synced from the data source 
@@ -2368,29 +2248,7 @@ module Aws::Kendra
       :date_field_format,
       :index_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceType
-      S3 = 'S3'
-      SHAREPOINT = 'SHAREPOINT'
-      DATABASE = 'DATABASE'
-      SALESFORCE = 'SALESFORCE'
-      ONEDRIVE = 'ONEDRIVE'
-      SERVICENOW = 'SERVICENOW'
-      CUSTOM = 'CUSTOM'
-      CONFLUENCE = 'CONFLUENCE'
-      GOOGLEDRIVE = 'GOOGLEDRIVE'
-      WEBCRAWLER = 'WEBCRAWLER'
-      WORKDOCS = 'WORKDOCS'
-      FSX = 'FSX'
-      SLACK = 'SLACK'
-      BOX = 'BOX'
-      QUIP = 'QUIP'
-      JIRA = 'JIRA'
-      GITHUB = 'GITHUB'
-      ALFRESCO = 'ALFRESCO'
-      TEMPLATE = 'TEMPLATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to an Amazon VPC.</p>
@@ -2407,7 +2265,7 @@ module Aws::Kendra
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to an <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Amazon Kendra supported 
@@ -2441,14 +2299,7 @@ module Aws::Kendra
       :acl_configuration,
       :sql_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseEngineType
-      RDS_AURORA_MYSQL = 'RDS_AURORA_MYSQL'
-      RDS_AURORA_POSTGRESQL = 'RDS_AURORA_POSTGRESQL'
-      RDS_MYSQL = 'RDS_MYSQL'
-      RDS_POSTGRESQL = 'RDS_POSTGRESQL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -2461,12 +2312,12 @@ module Aws::Kendra
       :index_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessControlConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2479,7 +2330,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2492,12 +2343,12 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteExperienceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2510,7 +2361,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2519,7 +2370,7 @@ module Aws::Kendra
     class DeleteIndexRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -2558,7 +2409,7 @@ module Aws::Kendra
       :group_id,
       :ordering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -2571,7 +2422,7 @@ module Aws::Kendra
       :index_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2584,7 +2435,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -2598,7 +2449,7 @@ module Aws::Kendra
       :index_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2627,7 +2478,7 @@ module Aws::Kendra
       :access_control_list,
       :hierarchical_access_control_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2640,7 +2491,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2720,7 +2571,7 @@ module Aws::Kendra
       :language_code,
       :custom_document_enrichment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2733,7 +2584,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2792,7 +2643,7 @@ module Aws::Kendra
       :role_arn,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2805,7 +2656,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2865,7 +2716,7 @@ module Aws::Kendra
       :file_format,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -2879,7 +2730,7 @@ module Aws::Kendra
       :index_id,
       :featured_results_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute featured_results_set_id
@@ -2932,7 +2783,7 @@ module Aws::Kendra
       :last_updated_timestamp,
       :creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2941,7 +2792,7 @@ module Aws::Kendra
     class DescribeIndexRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3024,7 +2875,7 @@ module Aws::Kendra
       :user_context_policy,
       :user_group_resolution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -3044,7 +2895,7 @@ module Aws::Kendra
       :data_source_id,
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -3093,7 +2944,7 @@ module Aws::Kendra
       :group_id,
       :group_ordering_id_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -3106,7 +2957,7 @@ module Aws::Kendra
       :index_id,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -3170,7 +3021,7 @@ module Aws::Kendra
       :file_size_bytes,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -3180,7 +3031,7 @@ module Aws::Kendra
     class DescribeQuerySuggestionsConfigRequest < Struct.new(
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mode
@@ -3251,7 +3102,7 @@ module Aws::Kendra
       :total_suggestions_count,
       :attribute_suggestions_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3264,7 +3115,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3336,7 +3187,7 @@ module Aws::Kendra
       :term_count,
       :synonym_rule_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3353,7 +3204,7 @@ module Aws::Kendra
       :index_id,
       :entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entity_list
@@ -3363,7 +3214,7 @@ module Aws::Kendra
     class DisassociateEntitiesFromExperienceResponse < Struct.new(
       :failed_entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3381,7 +3232,7 @@ module Aws::Kendra
       :index_id,
       :entity_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_entity_list
@@ -3391,7 +3242,7 @@ module Aws::Kendra
     class DisassociatePersonasFromEntitiesResponse < Struct.new(
       :failed_entity_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document in an index.</p>
@@ -3455,7 +3306,7 @@ module Aws::Kendra
       :content_type,
       :access_control_configuration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document attribute or metadata field. To create custom document attributes, see
@@ -3471,7 +3322,7 @@ module Aws::Kendra
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The condition used for the target document attribute or metadata field when ingesting
@@ -3507,7 +3358,7 @@ module Aws::Kendra
       :operator,
       :condition_on_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target document attribute or metadata field you want to alter when ingesting
@@ -3544,7 +3395,7 @@ module Aws::Kendra
       :target_document_attribute_value_deletion,
       :target_document_attribute_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:target_document_attribute_value_deletion] = false unless options.key?(:target_document_attribute_value_deletion)
@@ -3575,7 +3426,7 @@ module Aws::Kendra
       :long_value,
       :date_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the count of documents that match a particular document attribute or field when
@@ -3605,14 +3456,7 @@ module Aws::Kendra
       :count,
       :facet_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentAttributeValueType
-      STRING_VALUE = 'STRING_VALUE'
-      STRING_LIST_VALUE = 'STRING_LIST_VALUE'
-      LONG_VALUE = 'LONG_VALUE'
-      DATE_VALUE = 'DATE_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies a document for which to retrieve status information</p>
@@ -3655,7 +3499,7 @@ module Aws::Kendra
       :document_id,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the properties, such as relevance tuning and searchability, of an index
@@ -3679,7 +3523,7 @@ module Aws::Kendra
       :relevance,
       :search,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Overrides the document relevance properties of a custom index field.</p>
@@ -3695,16 +3539,7 @@ module Aws::Kendra
       :name,
       :relevance,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DocumentStatus
-      NOT_FOUND = 'NOT_FOUND'
-      PROCESSING = 'PROCESSING'
-      INDEXED = 'INDEXED'
-      UPDATED = 'UPDATED'
-      FAILED = 'FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Document metadata files that contain information such as the document access control
@@ -3718,11 +3553,7 @@ module Aws::Kendra
     class DocumentsMetadataConfiguration < Struct.new(
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointType
-      HOME = 'HOME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for users or groups in 
@@ -3740,7 +3571,7 @@ module Aws::Kendra
       :entity_id,
       :entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the user entity.</p>
@@ -3766,7 +3597,7 @@ module Aws::Kendra
       :first_name,
       :last_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for users or groups in your 
@@ -3788,17 +3619,7 @@ module Aws::Kendra
       :entity_id,
       :persona,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityType
-      USER = 'USER'
-      GROUP = 'GROUP'
-    end
-
-    module ErrorCode
-      INTERNAL_ERROR = 'InternalError'
-      INVALID_REQUEST = 'InvalidRequest'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration information needed to customize how collapsed search
@@ -3817,7 +3638,7 @@ module Aws::Kendra
       :max_result_items_to_expand,
       :max_expanded_results_per_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A single expanded result in a collapsed group of search results.</p>
@@ -3853,7 +3674,7 @@ module Aws::Kendra
       :document_uri,
       :document_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for your Amazon Kendra experience. This includes 
@@ -3872,7 +3693,7 @@ module Aws::Kendra
       :content_source_configuration,
       :user_identity_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for the endpoint for your Amazon Kendra
@@ -3889,7 +3710,7 @@ module Aws::Kendra
       :endpoint_type,
       :endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for users or groups in your IAM Identity Center identity
@@ -3912,14 +3733,7 @@ module Aws::Kendra
       :entity_type,
       :display_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExperienceStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for your Amazon Kendra experience. You can create an Amazon Kendra 
@@ -3949,7 +3763,7 @@ module Aws::Kendra
       :status,
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a document attribute or field. You can use document attributes as
@@ -3983,7 +3797,7 @@ module Aws::Kendra
       :facets,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_results] = 0 unless options.key?(:max_results)
@@ -4009,7 +3823,7 @@ module Aws::Kendra
       :document_attribute_value_type,
       :document_attribute_value_count_pairs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the users or groups in your IAM Identity Center identity 
@@ -4026,13 +3840,7 @@ module Aws::Kendra
       :entity_id,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FaqFileFormat
-      CSV = 'CSV'
-      CSV_WITH_HEADER = 'CSV_WITH_HEADER'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides statistical information about the FAQ questions and answers for an
@@ -4043,20 +3851,12 @@ module Aws::Kendra
     class FaqStatistics < Struct.new(
       :indexed_question_answers_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:indexed_question_answers_count] = 0 unless options.key?(:indexed_question_answers_count)
         super
       end
-    end
-
-    module FaqStatus
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
     end
 
     # <p>Summary information for frequently asked questions and answers included in an
@@ -4096,7 +3896,7 @@ module Aws::Kendra
       :file_format,
       :language_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A featured document. This document is displayed at the top of the search 
@@ -4111,7 +3911,7 @@ module Aws::Kendra
     class FeaturedDocument < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A document ID doesn't exist but you have specified as a featured document. 
@@ -4126,7 +3926,7 @@ module Aws::Kendra
     class FeaturedDocumentMissing < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A featured document with its metadata information. This document is displayed 
@@ -4150,7 +3950,7 @@ module Aws::Kendra
       :title,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error message with a list of conflicting queries used across different sets 
@@ -4168,7 +3968,7 @@ module Aws::Kendra
       :message,
       :conflicting_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single featured result item. A featured result is displayed at the top of 
@@ -4219,7 +4019,7 @@ module Aws::Kendra
       :document_attributes,
       :feedback_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of featured results that are displayed at the top of your search results.
@@ -4285,12 +4085,7 @@ module Aws::Kendra
       :last_updated_timestamp,
       :creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeaturedResultsSetStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for a set of featured results. Featured results are placed
@@ -4324,7 +4119,7 @@ module Aws::Kendra
       :last_updated_timestamp,
       :creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Amazon FSx as your data
@@ -4398,11 +4193,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FsxFileSystemType
-      WINDOWS = 'WINDOWS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -4443,7 +4234,7 @@ module Aws::Kendra
       :suggestion_types,
       :attribute_suggestions_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_suggestions_id
@@ -4456,7 +4247,7 @@ module Aws::Kendra
       :query_suggestions_id,
       :suggestions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -4518,7 +4309,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snap_shot_time_filter
@@ -4542,7 +4333,7 @@ module Aws::Kendra
       :snapshots_data,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to GitHub as your data
@@ -4722,7 +4513,7 @@ module Aws::Kendra
       :git_hub_pull_request_document_configuration_field_mappings,
       :git_hub_pull_request_document_attachment_configuration_field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_change_log] = false unless options.key?(:use_change_log)
@@ -4770,7 +4561,7 @@ module Aws::Kendra
       :crawl_pull_request_comment,
       :crawl_pull_request_comment_attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_repository_documents] = false unless options.key?(:crawl_repository_documents)
@@ -4836,7 +4627,7 @@ module Aws::Kendra
       :exclude_user_accounts,
       :exclude_shared_drives,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of users that belong to a group. This is useful for user context
@@ -4866,7 +4657,7 @@ module Aws::Kendra
       :member_users,
       :s3_pathfor_group_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information on the processing of <code>PUT</code> and <code>DELETE</code>
@@ -4900,7 +4691,7 @@ module Aws::Kendra
       :ordering_id,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for groups.</p>
@@ -4915,7 +4706,7 @@ module Aws::Kendra
       :group_id,
       :ordering_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information to define the hierarchy for which documents users should have access to.
@@ -4928,7 +4719,7 @@ module Aws::Kendra
     class HierarchicalPrincipal < Struct.new(
       :principal_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that you can use to highlight a search result so that your users
@@ -4952,17 +4743,12 @@ module Aws::Kendra
       :top_answer,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:top_answer] = false unless options.key?(:top_answer)
         super
       end
-    end
-
-    module HighlightType
-      STANDARD = 'STANDARD'
-      THESAURUS_SYNONYM = 'THESAURUS_SYNONYM'
     end
 
     # <p>Provides the configuration information for invoking a Lambda function in Lambda to alter document metadata and content when ingesting documents into
@@ -4991,7 +4777,7 @@ module Aws::Kendra
       :lambda_arn,
       :s3_bucket,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information on the configuration of an index.</p>
@@ -5025,13 +4811,7 @@ module Aws::Kendra
       :updated_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndexEdition
-      DEVELOPER_EDITION = 'DEVELOPER_EDITION'
-      ENTERPRISE_EDITION = 'ENTERPRISE_EDITION'
-      GEN_AI_ENTERPRISE_EDITION = 'GEN_AI_ENTERPRISE_EDITION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the number of documents and the number of questions and answers
@@ -5046,16 +4826,7 @@ module Aws::Kendra
       :faq_statistics,
       :text_document_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndexStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      UPDATING = 'UPDATING'
-      SYSTEM_UPDATING = 'SYSTEM_UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for applying basic logic to alter document
@@ -5081,7 +4852,7 @@ module Aws::Kendra
       :target,
       :document_content_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:document_content_deletion] = false unless options.key?(:document_content_deletion)
@@ -5096,16 +4867,7 @@ module Aws::Kendra
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Interval
-      THIS_MONTH = 'THIS_MONTH'
-      THIS_WEEK = 'THIS_WEEK'
-      ONE_WEEK_AGO = 'ONE_WEEK_AGO'
-      TWO_WEEKS_AGO = 'TWO_WEEKS_AGO'
-      ONE_MONTH_AGO = 'ONE_MONTH_AGO'
-      TWO_MONTHS_AGO = 'TWO_MONTHS_AGO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input to the request is not valid. Please provide the correct input and try
@@ -5115,13 +4877,7 @@ module Aws::Kendra
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IssueSubEntity
-      COMMENTS = 'COMMENTS'
-      ATTACHMENTS = 'ATTACHMENTS'
-      WORKLOGS = 'WORKLOGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Jira as your data source.</p>
@@ -5240,7 +4996,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_change_log] = false unless options.key?(:use_change_log)
@@ -5259,7 +5015,7 @@ module Aws::Kendra
       :user_name_attribute_field,
       :group_attribute_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for the JWT token type.</p>
@@ -5293,12 +5049,7 @@ module Aws::Kendra
       :issuer,
       :claim_regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyLocation
-      URL = 'URL'
-      SECRET_MANAGER = 'SECRET_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5317,7 +5068,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5332,7 +5083,7 @@ module Aws::Kendra
       :next_token,
       :access_control_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5365,7 +5116,7 @@ module Aws::Kendra
       :start_time_filter,
       :status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute history
@@ -5379,7 +5130,7 @@ module Aws::Kendra
       :history,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5397,7 +5148,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_items
@@ -5411,7 +5162,7 @@ module Aws::Kendra
       :summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5434,7 +5185,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_items
@@ -5448,7 +5199,7 @@ module Aws::Kendra
       :summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -5467,7 +5218,7 @@ module Aws::Kendra
       :index_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_items
@@ -5481,7 +5232,7 @@ module Aws::Kendra
       :summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5500,7 +5251,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary_items
@@ -5514,7 +5265,7 @@ module Aws::Kendra
       :summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5534,7 +5285,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5548,7 +5299,7 @@ module Aws::Kendra
       :next_token,
       :faq_summary_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5567,7 +5318,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute featured_results_set_summary_items
@@ -5581,7 +5332,7 @@ module Aws::Kendra
       :featured_results_set_summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5613,7 +5364,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups_summaries
@@ -5629,7 +5380,7 @@ module Aws::Kendra
       :groups_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5643,7 +5394,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_configuration_summary_items
@@ -5657,7 +5408,7 @@ module Aws::Kendra
       :index_configuration_summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5680,7 +5431,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute block_list_summary_items
@@ -5700,7 +5451,7 @@ module Aws::Kendra
       :block_list_summary_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5714,7 +5465,7 @@ module Aws::Kendra
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5723,7 +5474,7 @@ module Aws::Kendra
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -5743,7 +5494,7 @@ module Aws::Kendra
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5759,7 +5510,7 @@ module Aws::Kendra
       :next_token,
       :thesaurus_summary_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sub groups that belong to a group.</p>
@@ -5773,7 +5524,7 @@ module Aws::Kendra
       :group_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The users that belong to a group.</p>
@@ -5783,27 +5534,7 @@ module Aws::Kendra
     class MemberUser < Struct.new(
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricType
-      QUERIES_BY_COUNT = 'QUERIES_BY_COUNT'
-      QUERIES_BY_ZERO_CLICK_RATE = 'QUERIES_BY_ZERO_CLICK_RATE'
-      QUERIES_BY_ZERO_RESULT_RATE = 'QUERIES_BY_ZERO_RESULT_RATE'
-      DOCS_BY_CLICK_COUNT = 'DOCS_BY_CLICK_COUNT'
-      AGG_QUERY_DOC_METRICS = 'AGG_QUERY_DOC_METRICS'
-      TREND_QUERY_DOC_METRICS = 'TREND_QUERY_DOC_METRICS'
-    end
-
-    module MissingAttributeKeyStrategy
-      IGNORE = 'IGNORE'
-      COLLAPSE = 'COLLAPSE'
-      EXPAND = 'EXPAND'
-    end
-
-    module Mode
-      ENABLED = 'ENABLED'
-      LEARN_ONLY = 'LEARN_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to GitHub Enterprise Server (on
@@ -5830,7 +5561,7 @@ module Aws::Kendra
       :organization_name,
       :ssl_certificate_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to OneDrive as your data
@@ -5883,7 +5614,7 @@ module Aws::Kendra
       :field_mappings,
       :disable_local_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_local_groups] = false unless options.key?(:disable_local_groups)
@@ -5906,17 +5637,7 @@ module Aws::Kendra
       :one_drive_user_list,
       :one_drive_user_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Order
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
-    end
-
-    module Persona
-      OWNER = 'OWNER'
-      VIEWER = 'VIEWER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information for users or groups in your IAM Identity Center identity 
@@ -5948,7 +5669,7 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides user and group information for <a href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">user context
@@ -5971,20 +5692,7 @@ module Aws::Kendra
       :access,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrincipalMappingStatus
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      PROCESSING = 'PROCESSING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-    end
-
-    module PrincipalType
-      USER = 'USER'
-      GROUP = 'GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for a web proxy to connect to website
@@ -6012,7 +5720,7 @@ module Aws::Kendra
       :port,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -6067,12 +5775,7 @@ module Aws::Kendra
       :ordering_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryIdentifiersEnclosingOption
-      DOUBLE_QUOTES = 'DOUBLE_QUOTES'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -6181,7 +5884,7 @@ module Aws::Kendra
       :spell_correction_configuration,
       :collapse_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -6224,12 +5927,7 @@ module Aws::Kendra
       :spell_corrected_queries,
       :featured_results_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryResultFormat
-      TABLE = 'TABLE'
-      TEXT = 'TEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single query result.</p>
@@ -6309,22 +6007,7 @@ module Aws::Kendra
       :table_excerpt,
       :collapsed_result_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryResultType
-      DOCUMENT = 'DOCUMENT'
-      QUESTION_ANSWER = 'QUESTION_ANSWER'
-      ANSWER = 'ANSWER'
-    end
-
-    module QuerySuggestionsBlockListStatus
-      ACTIVE = 'ACTIVE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      ACTIVE_BUT_UPDATE_FAILED = 'ACTIVE_BUT_UPDATE_FAILED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information on a query suggestions block list.</p>
@@ -6360,12 +6043,7 @@ module Aws::Kendra
       :updated_at,
       :item_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuerySuggestionsStatus
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Quip as your data source.</p>
@@ -6456,7 +6134,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_file_comments] = false unless options.key?(:crawl_file_comments)
@@ -6464,11 +6142,6 @@ module Aws::Kendra
         options[:crawl_attachments] = false unless options.key?(:crawl_attachments)
         super
       end
-    end
-
-    module ReadAccessType
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
     end
 
     # <p>Provides information for tuning the relevance of a field in a search. When a query
@@ -6519,7 +6192,7 @@ module Aws::Kendra
       :rank_order,
       :value_importance_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides feedback on how relevant a document is to a search. Your application uses the
@@ -6535,12 +6208,7 @@ module Aws::Kendra
       :result_id,
       :relevance_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelevanceType
-      RELEVANT = 'RELEVANT'
-      NOT_RELEVANT = 'NOT_RELEVANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you want to use already exists. Please check you have provided the
@@ -6550,7 +6218,7 @@ module Aws::Kendra
     class ResourceAlreadyExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you want to use is currently in use. Please check you have provided the
@@ -6560,7 +6228,7 @@ module Aws::Kendra
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you want to use doesn’t exist. Please check you have provided the correct
@@ -6570,7 +6238,7 @@ module Aws::Kendra
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource you want to use isn't available. Please check you have provided the
@@ -6580,7 +6248,7 @@ module Aws::Kendra
     class ResourceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -6644,7 +6312,7 @@ module Aws::Kendra
       :page_size,
       :user_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -6659,7 +6327,7 @@ module Aws::Kendra
       :query_id,
       :result_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single retrieved relevant passage result.</p>
@@ -6697,7 +6365,7 @@ module Aws::Kendra
       :document_attributes,
       :score_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to an Amazon S3
@@ -6834,7 +6502,7 @@ module Aws::Kendra
       :documents_metadata_configuration,
       :access_control_list_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information required to find a specific file in an Amazon S3 bucket.</p>
@@ -6848,7 +6516,7 @@ module Aws::Kendra
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to GitHub Enterprise Cloud
@@ -6867,7 +6535,7 @@ module Aws::Kendra
       :organization_name,
       :host_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration information for syncing a Salesforce chatter feed. The contents of
@@ -6896,12 +6564,7 @@ module Aws::Kendra
       :field_mappings,
       :include_filter_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SalesforceChatterFeedIncludeFilterType
-      ACTIVE_USER = 'ACTIVE_USER'
-      STANDARD_USER = 'STANDARD_USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Salesforce as your data
@@ -6988,7 +6651,7 @@ module Aws::Kendra
       :include_attachment_file_patterns,
       :exclude_attachment_file_patterns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_attachments] = false unless options.key?(:crawl_attachments)
@@ -7020,7 +6683,7 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
@@ -7041,13 +6704,7 @@ module Aws::Kendra
       :standard_knowledge_article_type_configuration,
       :custom_knowledge_article_type_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SalesforceKnowledgeArticleState
-      DRAFT = 'DRAFT'
-      PUBLISHED = 'PUBLISHED'
-      ARCHIVED = 'ARCHIVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for standard Salesforce knowledge
@@ -7069,7 +6726,7 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for processing attachments to Salesforce
@@ -7085,7 +6742,7 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for indexing a single standard object.</p>
@@ -7112,27 +6769,7 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SalesforceStandardObjectName
-      ACCOUNT = 'ACCOUNT'
-      CAMPAIGN = 'CAMPAIGN'
-      CASE = 'CASE'
-      CONTACT = 'CONTACT'
-      CONTRACT = 'CONTRACT'
-      DOCUMENT = 'DOCUMENT'
-      GROUP = 'GROUP'
-      IDEA = 'IDEA'
-      LEAD = 'LEAD'
-      OPPORTUNITY = 'OPPORTUNITY'
-      PARTNER = 'PARTNER'
-      PRICEBOOK = 'PRICEBOOK'
-      PRODUCT = 'PRODUCT'
-      PROFILE = 'PROFILE'
-      SOLUTION = 'SOLUTION'
-      TASK = 'TASK'
-      USER = 'USER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a relative ranking that indicates how confident Amazon Kendra is that the
@@ -7143,16 +6780,7 @@ module Aws::Kendra
     class ScoreAttributes < Struct.new(
       :score_confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Enumeration for query score confidence.
-    module ScoreConfidence
-      VERY_HIGH = 'VERY_HIGH'
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      LOW = 'LOW'
-      NOT_AVAILABLE = 'NOT_AVAILABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about how a custom index field is used during a search.</p>
@@ -7181,7 +6809,7 @@ module Aws::Kendra
       :displayable,
       :sortable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:facetable] = false unless options.key?(:facetable)
@@ -7231,7 +6859,7 @@ module Aws::Kendra
       :seed_urls,
       :web_crawler_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the identifier of the KMS key used to encrypt data
@@ -7244,17 +6872,7 @@ module Aws::Kendra
     class ServerSideEncryptionConfiguration < Struct.new(
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceNowAuthenticationType
-      HTTP_BASIC = 'HTTP_BASIC'
-      OAUTH2 = 'OAUTH2'
-    end
-
-    module ServiceNowBuildVersionType
-      LONDON = 'LONDON'
-      OTHERS = 'OTHERS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to ServiceNow as your data
@@ -7300,7 +6918,7 @@ module Aws::Kendra
       :service_catalog_configuration,
       :authentication_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for crawling knowledge articles in the
@@ -7353,7 +6971,7 @@ module Aws::Kendra
       :field_mappings,
       :filter_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_attachments] = false unless options.key?(:crawl_attachments)
@@ -7405,7 +7023,7 @@ module Aws::Kendra
       :document_title_field_name,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_attachments] = false unless options.key?(:crawl_attachments)
@@ -7422,7 +7040,7 @@ module Aws::Kendra
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Microsoft SharePoint as your data
@@ -7529,7 +7147,7 @@ module Aws::Kendra
       :authentication_type,
       :proxy_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_attachments] = false unless options.key?(:crawl_attachments)
@@ -7537,18 +7155,6 @@ module Aws::Kendra
         options[:disable_local_groups] = false unless options.key?(:disable_local_groups)
         super
       end
-    end
-
-    module SharePointOnlineAuthenticationType
-      HTTP_BASIC = 'HTTP_BASIC'
-      OAUTH2 = 'OAUTH2'
-    end
-
-    module SharePointVersion
-      SHAREPOINT_2013 = 'SHAREPOINT_2013'
-      SHAREPOINT_2016 = 'SHAREPOINT_2016'
-      SHAREPOINT_ONLINE = 'SHAREPOINT_ONLINE'
-      SHAREPOINT_2019 = 'SHAREPOINT_2019'
     end
 
     # <p>Provides the configuration information for the sitemap URLs to crawl.</p>
@@ -7565,7 +7171,7 @@ module Aws::Kendra
     class SiteMapsConfiguration < Struct.new(
       :site_maps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Slack as your data source.</p>
@@ -7681,7 +7287,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_change_log] = false unless options.key?(:use_change_log)
@@ -7689,18 +7295,6 @@ module Aws::Kendra
         options[:exclude_archived] = false unless options.key?(:exclude_archived)
         super
       end
-    end
-
-    module SlackEntity
-      PUBLIC_CHANNEL = 'PUBLIC_CHANNEL'
-      PRIVATE_CHANNEL = 'PRIVATE_CHANNEL'
-      GROUP_MESSAGE = 'GROUP_MESSAGE'
-      DIRECT_MESSAGE = 'DIRECT_MESSAGE'
-    end
-
-    module SortOrder
-      DESC = 'DESC'
-      ASC = 'ASC'
     end
 
     # <p>Specifies the document attribute to use to sort the response to a Amazon Kendra
@@ -7755,7 +7349,7 @@ module Aws::Kendra
       :document_attribute_key,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document ID and its fields/attributes that are used for a query suggestion, if 
@@ -7776,7 +7370,7 @@ module Aws::Kendra
       :suggestion_attributes,
       :additional_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A query with suggested spell corrections. </p>
@@ -7790,7 +7384,7 @@ module Aws::Kendra
       :suggested_query_text,
       :corrections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for suggested query spell corrections.</p>
@@ -7807,7 +7401,7 @@ module Aws::Kendra
     class SpellCorrectionConfiguration < Struct.new(
       :include_query_spell_check_suggestions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_query_spell_check_suggestions] = false unless options.key?(:include_query_spell_check_suggestions)
@@ -7831,7 +7425,7 @@ module Aws::Kendra
     class SqlConfiguration < Struct.new(
       :query_identifiers_enclosing_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -7844,7 +7438,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_id
@@ -7853,7 +7447,7 @@ module Aws::Kendra
     class StartDataSourceSyncJobResponse < Struct.new(
       :execution_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the status of documents submitted for indexing.</p>
@@ -7878,7 +7472,7 @@ module Aws::Kendra
       :failure_code,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -7892,7 +7486,7 @@ module Aws::Kendra
       :id,
       :index_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -7917,7 +7511,7 @@ module Aws::Kendra
       :click_feedback_items,
       :relevance_feedback_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for a document field/attribute that you want to base query 
@@ -7934,7 +7528,7 @@ module Aws::Kendra
       :attribute_name,
       :suggestable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single query suggestion.</p>
@@ -7956,7 +7550,7 @@ module Aws::Kendra
       :value,
       :source_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The text highlights for a single query suggestion.</p>
@@ -7970,7 +7564,7 @@ module Aws::Kendra
       :begin_offset,
       :end_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides text and information about where to highlight the query suggestion text.</p>
@@ -7984,12 +7578,7 @@ module Aws::Kendra
       :text,
       :highlights,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SuggestionType
-      QUERY = 'QUERY'
-      DOCUMENT_ATTRIBUTES = 'DOCUMENT_ATTRIBUTES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>SuggestionTextWithHighlights</code> structure information.</p>
@@ -8000,7 +7589,7 @@ module Aws::Kendra
     class SuggestionValue < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a table cell in a table excerpt.</p>
@@ -8029,7 +7618,7 @@ module Aws::Kendra
       :highlighted,
       :header,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:top_answer] = false unless options.key?(:top_answer)
@@ -8053,7 +7642,7 @@ module Aws::Kendra
       :rows,
       :total_number_of_rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a row in a table excerpt.</p>
@@ -8063,7 +7652,7 @@ module Aws::Kendra
     class TableRow < Struct.new(
       :cells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that identifies or categorizes an index, FAQ, 
@@ -8081,7 +7670,7 @@ module Aws::Kendra
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -8100,12 +7689,12 @@ module Aws::Kendra
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a template for the configuration information to connect to your data
@@ -8119,7 +7708,7 @@ module Aws::Kendra
     class TemplateConfiguration < Struct.new(
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about text documents indexed in an index.</p>
@@ -8133,7 +7722,7 @@ module Aws::Kendra
       :indexed_text_documents_count,
       :indexed_text_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:indexed_text_documents_count] = 0 unless options.key?(:indexed_text_documents_count)
@@ -8153,16 +7742,7 @@ module Aws::Kendra
       :text,
       :highlights,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThesaurusStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-      ACTIVE_BUT_UPDATE_FAILED = 'ACTIVE_BUT_UPDATE_FAILED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of summary information for a thesaurus or multiple thesauri.</p>
@@ -8188,7 +7768,7 @@ module Aws::Kendra
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling. Please reduce the number of requests
@@ -8198,7 +7778,7 @@ module Aws::Kendra
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a range of time.</p>
@@ -8212,12 +7792,7 @@ module Aws::Kendra
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      SAAS = 'SAAS'
-      ON_PREMISE = 'ON_PREMISE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -8236,12 +7811,12 @@ module Aws::Kendra
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -8273,12 +7848,12 @@ module Aws::Kendra
       :access_control_list,
       :hierarchical_access_control_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateAccessControlConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8333,7 +7908,7 @@ module Aws::Kendra
       :language_code,
       :custom_document_enrichment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8365,7 +7940,7 @@ module Aws::Kendra
       :configuration,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -8406,7 +7981,7 @@ module Aws::Kendra
       :query_texts,
       :featured_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute featured_results_set
@@ -8417,7 +7992,7 @@ module Aws::Kendra
     class UpdateFeaturedResultsSetResponse < Struct.new(
       :featured_results_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8484,7 +8059,7 @@ module Aws::Kendra
       :user_context_policy,
       :user_group_resolution_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -8522,7 +8097,7 @@ module Aws::Kendra
       :source_s3_path,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_id
@@ -8584,7 +8159,7 @@ module Aws::Kendra
       :minimum_query_count,
       :attribute_suggestions_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -8614,7 +8189,7 @@ module Aws::Kendra
       :role_arn,
       :source_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information of the URLs to crawl.</p>
@@ -8644,7 +8219,7 @@ module Aws::Kendra
       :seed_url_configuration,
       :site_maps_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the user context for an Amazon Kendra index.</p>
@@ -8696,12 +8271,7 @@ module Aws::Kendra
       :groups,
       :data_source_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserContextPolicy
-      ATTRIBUTE_FILTER = 'ATTRIBUTE_FILTER'
-      USER_TOKEN = 'USER_TOKEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to get users and groups from an IAM Identity Center identity source. This is useful for user context filtering, where search
@@ -8726,12 +8296,7 @@ module Aws::Kendra
     class UserGroupResolutionConfiguration < Struct.new(
       :user_group_resolution_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserGroupResolutionMode
-      AWS_SSO = 'AWS_SSO'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for the identifiers of your users.</p>
@@ -8747,7 +8312,7 @@ module Aws::Kendra
     class UserIdentityConfiguration < Struct.new(
       :identity_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information for a token.</p>
@@ -8766,7 +8331,7 @@ module Aws::Kendra
       :jwt_token_type_configuration,
       :json_token_type_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints set by the Amazon Kendra service.
@@ -8776,7 +8341,7 @@ module Aws::Kendra
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The warning code and message that explains a problem with a query.</p>
@@ -8790,11 +8355,7 @@ module Aws::Kendra
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WarningCode
-      QUERY_LANGUAGE_INVALID_SYNTAX = 'QUERY_LANGUAGE_INVALID_SYNTAX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information required for Amazon Kendra Web
@@ -8877,13 +8438,7 @@ module Aws::Kendra
       :proxy_configuration,
       :authentication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WebCrawlerMode
-      HOST_ONLY = 'HOST_ONLY'
-      SUBDOMAINS = 'SUBDOMAINS'
-      EVERYTHING = 'EVERYTHING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration information to connect to Amazon WorkDocs 
@@ -8948,7 +8503,7 @@ module Aws::Kendra
       :exclusion_patterns,
       :field_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_comments] = false unless options.key?(:crawl_comments)

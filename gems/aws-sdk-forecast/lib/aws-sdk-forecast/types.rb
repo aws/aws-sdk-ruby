@@ -39,7 +39,7 @@ module Aws::Forecast
       :operation,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an additional dataset. This object is part of the <a>DataConfig</a> object. Forecast supports the Weather Index and Holidays additional datasets.</p>
@@ -282,7 +282,7 @@ module Aws::Forecast
       :name,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the method used to transform attributes.</p>
@@ -374,20 +374,7 @@ module Aws::Forecast
       :attribute_name,
       :transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeType
-      STRING = 'string'
-      INTEGER = 'integer'
-      FLOAT = 'float'
-      TIMESTAMP = 'timestamp'
-      GEOLOCATION = 'geolocation'
-    end
-
-    module AutoMLOverrideStrategy
-      LatencyOptimized = 'LatencyOptimized'
-      AccuracyOptimized = 'AccuracyOptimized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics you can use as a baseline for comparison purposes. Use these metrics when you interpret monitoring results for an auto predictor.</p>
@@ -398,7 +385,7 @@ module Aws::Forecast
     class Baseline < Struct.new(
       :predictor_baseline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An individual metric that you can use for comparison as you evaluate your monitoring results.</p>
@@ -412,7 +399,7 @@ module Aws::Forecast
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a categorical hyperparameter and it's range of tunable values.
@@ -427,14 +414,7 @@ module Aws::Forecast
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Condition
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a continuous hyperparameter and it's range of tunable values.
@@ -485,7 +465,7 @@ module Aws::Forecast
       :min_value,
       :scaling_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_name
@@ -626,7 +606,7 @@ module Aws::Forecast
       :monitor_config,
       :time_alignment_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -635,7 +615,7 @@ module Aws::Forecast
     class CreateAutoPredictorResponse < Struct.new(
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_name
@@ -700,7 +680,7 @@ module Aws::Forecast
       :dataset_arns,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -709,7 +689,7 @@ module Aws::Forecast
     class CreateDatasetGroupResponse < Struct.new(
       :dataset_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_name
@@ -829,7 +809,7 @@ module Aws::Forecast
       :format,
       :import_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_arn
@@ -838,7 +818,7 @@ module Aws::Forecast
     class CreateDatasetImportJobResponse < Struct.new(
       :dataset_import_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -941,7 +921,7 @@ module Aws::Forecast
       :encryption_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -950,7 +930,7 @@ module Aws::Forecast
     class CreateDatasetResponse < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_export_name
@@ -1007,7 +987,7 @@ module Aws::Forecast
       :tags,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_export_arn
@@ -1016,7 +996,7 @@ module Aws::Forecast
     class CreateExplainabilityExportResponse < Struct.new(
       :explainability_export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_name
@@ -1097,7 +1077,7 @@ module Aws::Forecast
       :end_date_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_arn
@@ -1106,7 +1086,7 @@ module Aws::Forecast
     class CreateExplainabilityResponse < Struct.new(
       :explainability_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_export_job_name
@@ -1170,7 +1150,7 @@ module Aws::Forecast
       :tags,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_export_job_arn
@@ -1179,7 +1159,7 @@ module Aws::Forecast
     class CreateForecastExportJobResponse < Struct.new(
       :forecast_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_name
@@ -1264,7 +1244,7 @@ module Aws::Forecast
       :tags,
       :time_series_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_arn
@@ -1273,7 +1253,7 @@ module Aws::Forecast
     class CreateForecastResponse < Struct.new(
       :forecast_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -1290,7 +1270,7 @@ module Aws::Forecast
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -1299,7 +1279,7 @@ module Aws::Forecast
     class CreateMonitorResponse < Struct.new(
       :monitor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_backtest_export_job_name
@@ -1356,7 +1336,7 @@ module Aws::Forecast
       :tags,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_backtest_export_job_arn
@@ -1366,7 +1346,7 @@ module Aws::Forecast
     class CreatePredictorBacktestExportJobResponse < Struct.new(
       :predictor_backtest_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_name
@@ -1551,7 +1531,7 @@ module Aws::Forecast
       :tags,
       :optimization_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -1560,7 +1540,7 @@ module Aws::Forecast
     class CreatePredictorResponse < Struct.new(
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_analysis_name
@@ -1600,7 +1580,7 @@ module Aws::Forecast
       :time_series_selector,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_analysis_arn
@@ -1609,7 +1589,7 @@ module Aws::Forecast
     class CreateWhatIfAnalysisResponse < Struct.new(
       :what_if_analysis_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_export_name
@@ -1638,7 +1618,7 @@ module Aws::Forecast
       :tags,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_export_arn
@@ -1647,7 +1627,7 @@ module Aws::Forecast
     class CreateWhatIfForecastExportResponse < Struct.new(
       :what_if_forecast_export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_name
@@ -1679,7 +1659,7 @@ module Aws::Forecast
       :time_series_replacements_data_source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_arn
@@ -1688,7 +1668,7 @@ module Aws::Forecast
     class CreateWhatIfForecastResponse < Struct.new(
       :what_if_forecast_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data configuration for your dataset group and any additional datasets.</p>
@@ -1706,7 +1686,7 @@ module Aws::Forecast
       :attribute_configs,
       :additional_datasets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination for an export job. Provide an S3 path, an Identity and Access Management (IAM) role that allows Amazon Forecast
@@ -1718,7 +1698,7 @@ module Aws::Forecast
     class DataDestination < Struct.new(
       :s3_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of your data, an Identity and Access Management (IAM) role that allows Amazon Forecast to
@@ -1730,7 +1710,7 @@ module Aws::Forecast
     class DataSource < Struct.new(
       :s3_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the dataset group properties used in the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html">ListDatasetGroups</a> operation. To
@@ -1756,7 +1736,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the dataset import job properties used in the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetImportJobs.html">ListDatasetImportJobs</a> operation. To get the complete set of properties, call the
@@ -1846,7 +1826,7 @@ module Aws::Forecast
       :last_modification_time,
       :import_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the dataset properties used in the <a href="https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasets.html">ListDatasets</a> operation. To get the
@@ -1882,23 +1862,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetType
-      TARGET_TIME_SERIES = 'TARGET_TIME_SERIES'
-      RELATED_TIME_SERIES = 'RELATED_TIME_SERIES'
-      ITEM_METADATA = 'ITEM_METADATA'
-    end
-
-    module DayOfWeek
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-      SUNDAY = 'SUNDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -1907,7 +1871,7 @@ module Aws::Forecast
     class DeleteDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_arn
@@ -1916,7 +1880,7 @@ module Aws::Forecast
     class DeleteDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -1925,7 +1889,7 @@ module Aws::Forecast
     class DeleteDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_export_arn
@@ -1934,7 +1898,7 @@ module Aws::Forecast
     class DeleteExplainabilityExportRequest < Struct.new(
       :explainability_export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_arn
@@ -1943,7 +1907,7 @@ module Aws::Forecast
     class DeleteExplainabilityRequest < Struct.new(
       :explainability_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_export_job_arn
@@ -1952,7 +1916,7 @@ module Aws::Forecast
     class DeleteForecastExportJobRequest < Struct.new(
       :forecast_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_arn
@@ -1961,7 +1925,7 @@ module Aws::Forecast
     class DeleteForecastRequest < Struct.new(
       :forecast_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -1970,7 +1934,7 @@ module Aws::Forecast
     class DeleteMonitorRequest < Struct.new(
       :monitor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_backtest_export_job_arn
@@ -1979,7 +1943,7 @@ module Aws::Forecast
     class DeletePredictorBacktestExportJobRequest < Struct.new(
       :predictor_backtest_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -1988,7 +1952,7 @@ module Aws::Forecast
     class DeletePredictorRequest < Struct.new(
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1998,7 +1962,7 @@ module Aws::Forecast
     class DeleteResourceTreeRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_analysis_arn
@@ -2007,7 +1971,7 @@ module Aws::Forecast
     class DeleteWhatIfAnalysisRequest < Struct.new(
       :what_if_analysis_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_export_arn
@@ -2016,7 +1980,7 @@ module Aws::Forecast
     class DeleteWhatIfForecastExportRequest < Struct.new(
       :what_if_forecast_export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_arn
@@ -2025,7 +1989,7 @@ module Aws::Forecast
     class DeleteWhatIfForecastRequest < Struct.new(
       :what_if_forecast_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -2034,7 +1998,7 @@ module Aws::Forecast
     class DescribeAutoPredictorRequest < Struct.new(
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -2174,7 +2138,7 @@ module Aws::Forecast
       :monitor_info,
       :time_alignment_boundary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -2183,7 +2147,7 @@ module Aws::Forecast
     class DescribeDatasetGroupRequest < Struct.new(
       :dataset_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_name
@@ -2250,7 +2214,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_arn
@@ -2259,7 +2223,7 @@ module Aws::Forecast
     class DescribeDatasetImportJobRequest < Struct.new(
       :dataset_import_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_job_name
@@ -2398,7 +2362,7 @@ module Aws::Forecast
       :format,
       :import_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_geolocation_for_time_zone] = false unless options.key?(:use_geolocation_for_time_zone)
@@ -2412,7 +2376,7 @@ module Aws::Forecast
     class DescribeDatasetRequest < Struct.new(
       :dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -2500,7 +2464,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_export_arn
@@ -2509,7 +2473,7 @@ module Aws::Forecast
     class DescribeExplainabilityExportRequest < Struct.new(
       :explainability_export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_export_arn
@@ -2599,7 +2563,7 @@ module Aws::Forecast
       :last_modification_time,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_arn
@@ -2608,7 +2572,7 @@ module Aws::Forecast
     class DescribeExplainabilityRequest < Struct.new(
       :explainability_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_arn
@@ -2723,7 +2687,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_export_job_arn
@@ -2732,7 +2696,7 @@ module Aws::Forecast
     class DescribeForecastExportJobRequest < Struct.new(
       :forecast_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_export_job_arn
@@ -2824,7 +2788,7 @@ module Aws::Forecast
       :last_modification_time,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_arn
@@ -2833,7 +2797,7 @@ module Aws::Forecast
     class DescribeForecastRequest < Struct.new(
       :forecast_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_arn
@@ -2933,7 +2897,7 @@ module Aws::Forecast
       :last_modification_time,
       :time_series_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_arn
@@ -2942,7 +2906,7 @@ module Aws::Forecast
     class DescribeMonitorRequest < Struct.new(
       :monitor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitor_name
@@ -2991,7 +2955,7 @@ module Aws::Forecast
       :last_modification_time,
       :estimated_evaluation_time_remaining_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_backtest_export_job_arn
@@ -3000,7 +2964,7 @@ module Aws::Forecast
     class DescribePredictorBacktestExportJobRequest < Struct.new(
       :predictor_backtest_export_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_backtest_export_job_arn
@@ -3090,7 +3054,7 @@ module Aws::Forecast
       :last_modification_time,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -3099,7 +3063,7 @@ module Aws::Forecast
     class DescribePredictorRequest < Struct.new(
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -3269,7 +3233,7 @@ module Aws::Forecast
       :last_modification_time,
       :optimization_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_analysis_arn
@@ -3278,7 +3242,7 @@ module Aws::Forecast
     class DescribeWhatIfAnalysisRequest < Struct.new(
       :what_if_analysis_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_analysis_name
@@ -3388,7 +3352,7 @@ module Aws::Forecast
       :last_modification_time,
       :time_series_selector,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_export_arn
@@ -3397,7 +3361,7 @@ module Aws::Forecast
     class DescribeWhatIfForecastExportRequest < Struct.new(
       :what_if_forecast_export_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_export_arn
@@ -3495,7 +3459,7 @@ module Aws::Forecast
       :last_modification_time,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_arn
@@ -3504,7 +3468,7 @@ module Aws::Forecast
     class DescribeWhatIfForecastRequest < Struct.new(
       :what_if_forecast_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_name
@@ -3606,17 +3570,7 @@ module Aws::Forecast
       :time_series_replacements_data_source,
       :forecast_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Domain
-      RETAIL = 'RETAIL'
-      CUSTOM = 'CUSTOM'
-      INVENTORY_PLANNING = 'INVENTORY_PLANNING'
-      EC2_CAPACITY = 'EC2_CAPACITY'
-      WORK_FORCE = 'WORK_FORCE'
-      WEB_TRAFFIC = 'WEB_TRAFFIC'
-      METRICS = 'METRICS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Key Management Service (KMS) key and an Identity and Access Management (IAM) role that Amazon Forecast can assume to
@@ -3634,7 +3588,7 @@ module Aws::Forecast
       :role_arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Provides detailed error metrics to evaluate the performance of a predictor. This object
@@ -3661,7 +3615,7 @@ module Aws::Forecast
       :mase,
       :mape,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that define how to split a dataset into training data and testing data, and the
@@ -3685,7 +3639,7 @@ module Aws::Forecast
       :number_of_backtest_windows,
       :back_test_window_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of evaluating an algorithm. Returned as part of the <a>GetAccuracyMetrics</a> response.</p>
@@ -3701,12 +3655,7 @@ module Aws::Forecast
       :algorithm_arn,
       :test_windows,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EvaluationType
-      SUMMARY = 'SUMMARY'
-      COMPUTED = 'COMPUTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ExplainabilityConfig data type defines the number of time series and time points
@@ -3736,7 +3685,7 @@ module Aws::Forecast
       :time_series_granularity,
       :time_point_granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the Explainability export properties used in the <a>ListExplainabilityExports</a> operation. To get a complete set of
@@ -3822,7 +3771,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the Explainability resource.</p>
@@ -3860,7 +3809,7 @@ module Aws::Forecast
       :explainability_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the Explainability properties used in the <a>ListExplainabilities</a> operation. To get a complete set of properties,
@@ -3951,7 +3900,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -3998,7 +3947,7 @@ module Aws::Forecast
       :attribute_name,
       :featurization_pipeline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4067,7 +4016,7 @@ module Aws::Forecast
       :forecast_dimensions,
       :featurizations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the method that featurizes (transforms) a dataset field. The
@@ -4154,11 +4103,7 @@ module Aws::Forecast
       :featurization_method_name,
       :featurization_method_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeaturizationMethodName
-      filling = 'filling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for choosing a subset of objects. Each filter consists of a
@@ -4181,12 +4126,7 @@ module Aws::Forecast
       :value,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterConditionString
-      IS = 'IS'
-      IS_NOT = 'IS_NOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the forecast export job properties used in the <a>ListForecastExportJobs</a> operation. To get the complete set of properties, call
@@ -4273,7 +4213,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the forecast properties used in the <a>ListForecasts</a>
@@ -4369,7 +4309,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_arn
@@ -4378,7 +4318,7 @@ module Aws::Forecast
     class GetAccuracyMetricsRequest < Struct.new(
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_evaluation_results
@@ -4406,7 +4346,7 @@ module Aws::Forecast
       :auto_ml_override_strategy,
       :optimization_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for a hyperparameter tuning job. You specify this object in
@@ -4424,12 +4364,7 @@ module Aws::Forecast
     class HyperParameterTuningJobConfig < Struct.new(
       :parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportMode
-      FULL = 'FULL'
-      INCREMENTAL = 'INCREMENTAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -4450,7 +4385,7 @@ module Aws::Forecast
       :dataset_group_arn,
       :supplementary_features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an integer hyperparameter and it's range of tunable values.
@@ -4500,7 +4435,7 @@ module Aws::Forecast
       :min_value,
       :scaling_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't process the request because it includes an invalid value or a value that exceeds
@@ -4510,7 +4445,7 @@ module Aws::Forecast
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The token is not valid. Tokens expire after 24 hours.</p>
@@ -4519,7 +4454,7 @@ module Aws::Forecast
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of resources per account has been exceeded.</p>
@@ -4528,7 +4463,7 @@ module Aws::Forecast
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4543,7 +4478,7 @@ module Aws::Forecast
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_groups
@@ -4557,7 +4492,7 @@ module Aws::Forecast
       :dataset_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4604,7 +4539,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_import_jobs
@@ -4618,7 +4553,7 @@ module Aws::Forecast
       :dataset_import_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4633,7 +4568,7 @@ module Aws::Forecast
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datasets
@@ -4647,7 +4582,7 @@ module Aws::Forecast
       :datasets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4688,7 +4623,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainabilities
@@ -4703,7 +4638,7 @@ module Aws::Forecast
       :explainabilities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4744,7 +4679,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute explainability_exports
@@ -4759,7 +4694,7 @@ module Aws::Forecast
       :explainability_exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4808,7 +4743,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecast_export_jobs
@@ -4822,7 +4757,7 @@ module Aws::Forecast
       :forecast_export_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4869,7 +4804,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute forecasts
@@ -4883,7 +4818,7 @@ module Aws::Forecast
       :forecasts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4932,7 +4867,7 @@ module Aws::Forecast
       :monitor_arn,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4947,7 +4882,7 @@ module Aws::Forecast
       :next_token,
       :predictor_monitor_evaluations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4992,7 +4927,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute monitors
@@ -5006,7 +4941,7 @@ module Aws::Forecast
       :monitors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5049,7 +4984,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictor_backtest_export_jobs
@@ -5064,7 +4999,7 @@ module Aws::Forecast
       :predictor_backtest_export_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5111,7 +5046,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute predictors
@@ -5125,7 +5060,7 @@ module Aws::Forecast
       :predictors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5135,7 +5070,7 @@ module Aws::Forecast
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -5144,7 +5079,7 @@ module Aws::Forecast
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5191,7 +5126,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_analyses
@@ -5204,7 +5139,7 @@ module Aws::Forecast
       :what_if_analyses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5251,7 +5186,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecast_exports
@@ -5264,7 +5199,7 @@ module Aws::Forecast
       :what_if_forecast_exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -5311,7 +5246,7 @@ module Aws::Forecast
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute what_if_forecasts
@@ -5324,7 +5259,7 @@ module Aws::Forecast
       :what_if_forecasts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An individual metric Forecast calculated when monitoring predictor usage. You can compare the value for this metric to the metric's value in the <a>Baseline</a> to see how your predictor's performance is changing.</p>
@@ -5340,7 +5275,7 @@ module Aws::Forecast
       :metric_name,
       :metric_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides metrics that are used to evaluate the performance of a predictor. This object is
@@ -5368,7 +5303,7 @@ module Aws::Forecast
       :error_metrics,
       :average_weighted_quantile_loss,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration details for the predictor monitor.</p>
@@ -5378,7 +5313,7 @@ module Aws::Forecast
     class MonitorConfig < Struct.new(
       :monitor_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the data the monitor used during the evaluation.</p>
@@ -5396,7 +5331,7 @@ module Aws::Forecast
       :forecast_arn,
       :predictor_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the monitor resource.</p>
@@ -5437,7 +5372,7 @@ module Aws::Forecast
       :monitor_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the monitor properties used in the <a>ListMonitors</a> operation. To get a complete set of properties,
@@ -5516,37 +5451,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Month
-      JANUARY = 'JANUARY'
-      FEBRUARY = 'FEBRUARY'
-      MARCH = 'MARCH'
-      APRIL = 'APRIL'
-      MAY = 'MAY'
-      JUNE = 'JUNE'
-      JULY = 'JULY'
-      AUGUST = 'AUGUST'
-      SEPTEMBER = 'SEPTEMBER'
-      OCTOBER = 'OCTOBER'
-      NOVEMBER = 'NOVEMBER'
-      DECEMBER = 'DECEMBER'
-    end
-
-    module Operation
-      ADD = 'ADD'
-      SUBTRACT = 'SUBTRACT'
-      MULTIPLY = 'MULTIPLY'
-      DIVIDE = 'DIVIDE'
-    end
-
-    module OptimizationMetric
-      WAPE = 'WAPE'
-      RMSE = 'RMSE'
-      AverageWeightedQuantileLoss = 'AverageWeightedQuantileLoss'
-      MASE = 'MASE'
-      MAPE = 'MAPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the categorical, continuous, and integer hyperparameters, and their ranges of
@@ -5567,7 +5472,7 @@ module Aws::Forecast
       :continuous_parameter_ranges,
       :integer_parameter_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the predictor backtest export job properties used in the <a>ListPredictorBacktestExportJobs</a> operation. To get a complete set of
@@ -5652,7 +5557,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics you can use as a baseline for comparison purposes. Use these metrics when you interpret monitoring results for an auto predictor.</p>
@@ -5663,7 +5568,7 @@ module Aws::Forecast
     class PredictorBaseline < Struct.new(
       :baseline_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about a predictor event, such as a retraining.</p>
@@ -5677,7 +5582,7 @@ module Aws::Forecast
       :detail,
       :datetime,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The algorithm used to perform a backtest and the status of those tests.</p>
@@ -5693,7 +5598,7 @@ module Aws::Forecast
       :algorithm_arn,
       :test_windows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details on the backtests performed to evaluate the accuracy of the predictor. The
@@ -5707,7 +5612,7 @@ module Aws::Forecast
     class PredictorExecutionDetails < Struct.new(
       :predictor_executions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the results of a monitor evaluation.</p>
@@ -5757,7 +5662,7 @@ module Aws::Forecast
       :num_items_evaluated,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the predictor properties that are used in the <a>ListPredictors</a> operation. To get the complete set of properties, call the <a>DescribePredictor</a> operation, and provide the listed
@@ -5854,7 +5759,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the reference predictor used when retraining or upgrading a
@@ -5869,7 +5774,7 @@ module Aws::Forecast
       :arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is already a resource with this name. Try again with a different name.</p>
@@ -5878,7 +5783,7 @@ module Aws::Forecast
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is in use.</p>
@@ -5887,7 +5792,7 @@ module Aws::Forecast
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
@@ -5897,7 +5802,7 @@ module Aws::Forecast
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5906,7 +5811,7 @@ module Aws::Forecast
     class ResumeResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket, and an Identity and Access Management (IAM) role that
@@ -5930,14 +5835,7 @@ module Aws::Forecast
       :role_arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScalingType
-      Auto = 'Auto'
-      Linear = 'Linear'
-      Logarithmic = 'Logarithmic'
-      ReverseLogarithmic = 'ReverseLogarithmic'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the fields of a dataset.</p>
@@ -5947,7 +5845,7 @@ module Aws::Forecast
     class Schema < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute of a schema, which defines a dataset field. A schema attribute is required
@@ -5964,12 +5862,7 @@ module Aws::Forecast
       :attribute_name,
       :attribute_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module State
-      Active = 'Active'
-      Deleted = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides statistics for each data field imported into to an Amazon Forecast dataset with
@@ -6032,7 +5925,7 @@ module Aws::Forecast
       :count_null_long,
       :count_nan_long,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6045,7 +5938,7 @@ module Aws::Forecast
     class StopResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <note>
@@ -6289,7 +6182,7 @@ module Aws::Forecast
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optional metadata that you apply to a resource to help you categorize and organize
@@ -6339,7 +6232,7 @@ module Aws::Forecast
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6386,12 +6279,12 @@ module Aws::Forecast
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status, start time, and end time of a backtest, as well as a failure reason if
@@ -6431,7 +6324,7 @@ module Aws::Forecast
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time boundary Forecast uses to align and aggregate your data to match your forecast frequency. Provide the unit of time and the time boundary as a key value pair. If you
@@ -6461,12 +6354,7 @@ module Aws::Forecast
       :day_of_week,
       :hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimePointGranularity
-      ALL = 'ALL'
-      SPECIFIC = 'SPECIFIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a subset of items within an attribute that are modified. For example, you can use this operation to create a subset of items that cost $5 or less. To do this, you specify <code>"AttributeName": "price"</code>, <code>"AttributeValue": "5"</code>, and <code>"Condition": "LESS_THAN"</code>. Pair this operation with the <a>Action</a> operation within the <a>CreateWhatIfForecastRequest$TimeSeriesTransformations</a> operation to define how the attribute is modified.</p>
@@ -6485,12 +6373,7 @@ module Aws::Forecast
       :attribute_value,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeSeriesGranularity
-      ALL = 'ALL'
-      SPECIFIC = 'SPECIFIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the import file that contains the time series for which you want to create forecasts.</p>
@@ -6509,7 +6392,7 @@ module Aws::Forecast
       :schema,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A replacement dataset is a modified version of the baseline related time series that contains only the values
@@ -6537,7 +6420,7 @@ module Aws::Forecast
       :format,
       :timestamp_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the set of time series that are used to create the forecasts in a <code>TimeSeriesIdentifiers</code> object.</p>
@@ -6565,7 +6448,7 @@ module Aws::Forecast
     class TimeSeriesSelector < Struct.new(
       :time_series_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transformation function is a pair of operations that select and modify the rows in a related time series. You select the rows that you want with a condition operation and you modify the rows with a transformation operation. All conditions are joined with an AND operation, meaning that all conditions must be true for the transformation to be applied. Transformations are applied in the order that they are listed.</p>
@@ -6580,7 +6463,7 @@ module Aws::Forecast
       :action,
       :time_series_conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6594,12 +6477,12 @@ module Aws::Forecast
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_group_arn
@@ -6613,12 +6496,12 @@ module Aws::Forecast
       :dataset_group_arn,
       :dataset_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDatasetGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The weighted loss value for a quantile. This object is part of the <a>Metrics</a> object.</p>
@@ -6635,7 +6518,7 @@ module Aws::Forecast
       :quantile,
       :loss_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the what-if analysis properties used in the <a>ListWhatIfAnalyses</a> operation. To get the complete set of properties, call the <a>DescribeWhatIfAnalysis</a> operation, and provide the <code>WhatIfAnalysisArn</code> that is listed in the summary.</p>
@@ -6720,7 +6603,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the what-if forecast export properties used in the <a>ListWhatIfForecastExports</a> operation. To get the complete set of properties, call the <a>DescribeWhatIfForecastExport</a> operation, and provide the <code>WhatIfForecastExportArn</code> that is listed in the summary.</p>
@@ -6809,7 +6692,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of the what-if forecast properties used in the <a>ListWhatIfForecasts</a> operation. To get the complete set of properties, call the <a>DescribeWhatIfForecast</a> operation, and provide the <code>WhatIfForecastArn</code> that is listed in the summary.</p>
@@ -6894,7 +6777,7 @@ module Aws::Forecast
       :creation_time,
       :last_modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metrics for a time range within the evaluation portion of a dataset. This object is
@@ -6933,7 +6816,7 @@ module Aws::Forecast
       :evaluation_type,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

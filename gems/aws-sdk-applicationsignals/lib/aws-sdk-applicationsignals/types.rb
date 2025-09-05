@@ -12,7 +12,7 @@ module Aws::ApplicationSignals
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute timestamp
@@ -25,7 +25,7 @@ module Aws::ApplicationSignals
       :timestamp,
       :slo_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute timestamp
@@ -43,7 +43,7 @@ module Aws::ApplicationSignals
       :reports,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of structures, where each structure includes an error indicating that one of the requests in the array was not valid.</p>
@@ -61,7 +61,7 @@ module Aws::ApplicationSignals
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slo_ids
@@ -78,7 +78,7 @@ module Aws::ApplicationSignals
       :add_exclusion_windows,
       :remove_exclusion_windows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slo_ids
@@ -91,7 +91,7 @@ module Aws::ApplicationSignals
       :slo_ids,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines the length of the look-back window used to calculate one burn rate metric
@@ -108,7 +108,7 @@ module Aws::ApplicationSignals
     class BurnRateConfiguration < Struct.new(
       :look_back_window_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.</p>
@@ -133,7 +133,7 @@ module Aws::ApplicationSignals
       :duration_unit,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation attempted to create a resource that already exists.</p>
@@ -142,7 +142,7 @@ module Aws::ApplicationSignals
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -183,7 +183,7 @@ module Aws::ApplicationSignals
       :tags,
       :burn_rate_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slo
@@ -192,7 +192,7 @@ module Aws::ApplicationSignals
     class CreateServiceLevelObjectiveOutput < Struct.new(
       :slo,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -201,12 +201,12 @@ module Aws::ApplicationSignals
     class DeleteServiceLevelObjectiveInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteServiceLevelObjectiveOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifies the dependency using the <code>DependencyKeyAttributes</code> and <code>DependencyOperationName</code>.</p>
@@ -249,7 +249,7 @@ module Aws::ApplicationSignals
       :dependency_key_attributes,
       :dependency_operation_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dimension is a name/value pair that is part of the identity of a metric. Because dimensions are part of the unique 
@@ -273,19 +273,7 @@ module Aws::ApplicationSignals
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DurationUnit
-      MINUTE = 'MINUTE'
-      HOUR = 'HOUR'
-      DAY = 'DAY'
-      MONTH = 'MONTH'
-    end
-
-    module EvaluationType
-      PERIOD_BASED = 'PeriodBased'
-      REQUEST_BASED = 'RequestBased'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The core SLO time window exclusion object that includes Window, StartTime, RecurrenceRule, and Reason.</p>
@@ -307,7 +295,7 @@ module Aws::ApplicationSignals
       :recurrence_rule,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -359,7 +347,7 @@ module Aws::ApplicationSignals
       :end_time,
       :key_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -370,7 +358,7 @@ module Aws::ApplicationSignals
     class GetServiceLevelObjectiveInput < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slo
@@ -379,7 +367,7 @@ module Aws::ApplicationSignals
     class GetServiceLevelObjectiveOutput < Struct.new(
       :slo,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -424,7 +412,7 @@ module Aws::ApplicationSignals
       :end_time,
       :log_group_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the attributes that determine the goal of an SLO. This includes
@@ -453,7 +441,7 @@ module Aws::ApplicationSignals
       :attainment_goal,
       :warning_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.</p>
@@ -468,7 +456,7 @@ module Aws::ApplicationSignals
       :calendar_interval,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RollingInterval < Interval; end
       class CalendarInterval < Interval; end
@@ -533,7 +521,7 @@ module Aws::ApplicationSignals
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -563,7 +551,7 @@ module Aws::ApplicationSignals
       :service_dependencies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -624,7 +612,7 @@ module Aws::ApplicationSignals
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -654,7 +642,7 @@ module Aws::ApplicationSignals
       :service_dependents,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -675,7 +663,7 @@ module Aws::ApplicationSignals
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute exclusion_windows
@@ -690,7 +678,7 @@ module Aws::ApplicationSignals
       :exclusion_windows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_attributes
@@ -772,7 +760,7 @@ module Aws::ApplicationSignals
       :include_linked_accounts,
       :slo_owner_aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slo_summaries
@@ -786,7 +774,7 @@ module Aws::ApplicationSignals
       :slo_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -847,7 +835,7 @@ module Aws::ApplicationSignals
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -877,7 +865,7 @@ module Aws::ApplicationSignals
       :service_operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -921,7 +909,7 @@ module Aws::ApplicationSignals
       :include_linked_accounts,
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -953,7 +941,7 @@ module Aws::ApplicationSignals
       :service_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -969,7 +957,7 @@ module Aws::ApplicationSignals
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -978,7 +966,7 @@ module Aws::ApplicationSignals
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions</p>
@@ -999,7 +987,7 @@ module Aws::ApplicationSignals
       :metric_name,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to define a metric or metric math expression that you want to use as for a service level objective. </p>
@@ -1081,11 +1069,11 @@ module Aws::ApplicationSignals
       :period,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:return_data] =  unless options.key?(:return_data)
-        options[:period] =  unless options.key?(:period)
+        options[:return_data] = nil unless options.key?(:return_data)
+        options[:period] = nil unless options.key?(:period)
         super
       end
     end
@@ -1117,13 +1105,7 @@ module Aws::ApplicationSignals
       :metric_name,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricSourceType
-      SERVICE_OPERATION = 'ServiceOperation'
-      CLOUDWATCH_METRIC = 'CloudWatchMetric'
-      SERVICE_DEPENDENCY = 'ServiceDependency'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the metric to be used as the service level indicator, along with the statistics, period, and unit.</p>
@@ -1151,7 +1133,7 @@ module Aws::ApplicationSignals
       :stat,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines the metric that is used as the "good request" or "bad request"
@@ -1173,7 +1155,7 @@ module Aws::ApplicationSignals
       :bad_count_metric,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GoodCountMetric < MonitoredRequestCountMetricDataQueries; end
       class BadCountMetric < MonitoredRequestCountMetricDataQueries; end
@@ -1187,7 +1169,7 @@ module Aws::ApplicationSignals
     class RecurrenceRule < Struct.new(
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the performance metric that a request-based SLO monitors.</p>
@@ -1207,7 +1189,7 @@ module Aws::ApplicationSignals
       :metric_threshold,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies the information about the service and the performance metric that a request-based SLO is to monitor.</p>
@@ -1226,7 +1208,7 @@ module Aws::ApplicationSignals
       :metric_threshold,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the information about the metric that is used for a request-based SLO.</p>
@@ -1292,7 +1274,7 @@ module Aws::ApplicationSignals
       :monitored_request_count_metric,
       :dependency_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to specify the information for the metric that a period-based SLO will monitor.</p>
@@ -1360,7 +1342,7 @@ module Aws::ApplicationSignals
       :monitored_request_count_metric,
       :dependency_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource not found.</p>
@@ -1377,7 +1359,7 @@ module Aws::ApplicationSignals
       :resource_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If the interval for this SLO is a rolling interval, this structure contains the interval specifications.</p>
@@ -1392,7 +1374,7 @@ module Aws::ApplicationSignals
       :duration_unit,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one of your services that was discovered by Application Signals.
@@ -1529,7 +1511,7 @@ module Aws::ApplicationSignals
       :metric_references,
       :log_group_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one dependency
@@ -1581,7 +1563,7 @@ module Aws::ApplicationSignals
       :dependency_operation_name,
       :metric_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about a service dependent that was discovered by Application Signals. A 
@@ -1635,7 +1617,7 @@ module Aws::ApplicationSignals
       :dependent_operation_name,
       :metric_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the performance metric that a period-based SLO monitors.</p>
@@ -1654,14 +1636,7 @@ module Aws::ApplicationSignals
       :metric_threshold,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceLevelIndicatorComparisonOperator
-      GREATER_THAN_OR_EQUAL_TO = 'GreaterThanOrEqualTo'
-      GREATER_THAN = 'GreaterThan'
-      LESS_THAN = 'LessThan'
-      LESS_THAN_OR_EQUAL_TO = 'LessThanOrEqualTo'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies the information about the service and the performance metric that a period-based SLO is to monitor.</p>
@@ -1681,7 +1656,7 @@ module Aws::ApplicationSignals
       :metric_threshold,
       :comparison_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the information about the metric that is used for a period-based SLO.</p>
@@ -1736,7 +1711,7 @@ module Aws::ApplicationSignals
       :metric_data_queries,
       :dependency_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to specify the information for the metric that a period-based SLO will monitor.</p>
@@ -1804,12 +1779,7 @@ module Aws::ApplicationSignals
       :metric_data_queries,
       :dependency_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceLevelIndicatorMetricType
-      LATENCY = 'LATENCY'
-      AVAILABILITY = 'AVAILABILITY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about one service level objective (SLO) that has been created in Application Signals.
@@ -1881,7 +1851,7 @@ module Aws::ApplicationSignals
       :burn_rate_configurations,
       :metric_source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing an SLO budget report that you have requested.</p>
@@ -1976,7 +1946,7 @@ module Aws::ApplicationSignals
       :request_based_sli,
       :goal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about one error that occurred during a 
@@ -2000,14 +1970,7 @@ module Aws::ApplicationSignals
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceLevelObjectiveBudgetStatus
-      OK = 'OK'
-      WARNING = 'WARNING'
-      BREACHED = 'BREACHED'
-      INSUFFICIENT_DATA = 'INSUFFICIENT_DATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one service level objective (SLO) created in Application Signals.</p>
@@ -2084,7 +2047,7 @@ module Aws::ApplicationSignals
       :evaluation_type,
       :metric_source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about an operation discovered by Application Signals. An operation
@@ -2103,7 +2066,7 @@ module Aws::ApplicationSignals
       :name,
       :metric_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request exceeds a service quota.</p>
@@ -2112,7 +2075,7 @@ module Aws::ApplicationSignals
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one of your services that
@@ -2227,47 +2190,17 @@ module Aws::ApplicationSignals
       :attribute_maps,
       :metric_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandardUnit
-      MICROSECONDS = 'Microseconds'
-      MILLISECONDS = 'Milliseconds'
-      SECONDS = 'Seconds'
-      BYTES = 'Bytes'
-      KILOBYTES = 'Kilobytes'
-      MEGABYTES = 'Megabytes'
-      GIGABYTES = 'Gigabytes'
-      TERABYTES = 'Terabytes'
-      BITS = 'Bits'
-      KILOBITS = 'Kilobits'
-      MEGABITS = 'Megabits'
-      GIGABITS = 'Gigabits'
-      TERABITS = 'Terabits'
-      PERCENT = 'Percent'
-      COUNT = 'Count'
-      BYTES_SECOND = 'Bytes/Second'
-      KILOBYTES_SECOND = 'Kilobytes/Second'
-      MEGABYTES_SECOND = 'Megabytes/Second'
-      GIGABYTES_SECOND = 'Gigabytes/Second'
-      TERABYTES_SECOND = 'Terabytes/Second'
-      BITS_SECOND = 'Bits/Second'
-      KILOBITS_SECOND = 'Kilobits/Second'
-      MEGABITS_SECOND = 'Megabits/Second'
-      GIGABITS_SECOND = 'Gigabits/Second'
-      TERABITS_SECOND = 'Terabits/Second'
-      COUNT_SECOND = 'Count/Second'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     class StartDiscoveryInput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartDiscoveryOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair associated with a resource. Tags can help you organize and categorize your resources.</p>
@@ -2282,7 +2215,7 @@ module Aws::ApplicationSignals
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2302,12 +2235,12 @@ module Aws::ApplicationSignals
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was throttled because of quota limits.</p>
@@ -2316,7 +2249,7 @@ module Aws::ApplicationSignals
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2336,12 +2269,12 @@ module Aws::ApplicationSignals
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2373,7 +2306,7 @@ module Aws::ApplicationSignals
       :goal,
       :burn_rate_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute slo
@@ -2382,7 +2315,7 @@ module Aws::ApplicationSignals
     class UpdateServiceLevelObjectiveOutput < Struct.new(
       :slo,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is not valid.</p>
@@ -2391,7 +2324,7 @@ module Aws::ApplicationSignals
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that defines the time length of an exclusion window.</p>
@@ -2405,7 +2338,7 @@ module Aws::ApplicationSignals
       :duration_unit,
       :duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

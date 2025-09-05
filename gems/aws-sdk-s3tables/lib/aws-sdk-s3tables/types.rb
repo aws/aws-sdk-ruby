@@ -12,7 +12,7 @@ module Aws::S3Tables
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is invalid or malformed.</p>
@@ -21,7 +21,7 @@ module Aws::S3Tables
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because there is a conflict with a previous write. You can retry the request.</p>
@@ -30,7 +30,7 @@ module Aws::S3Tables
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -43,7 +43,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -56,7 +56,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -69,7 +69,7 @@ module Aws::S3Tables
       :name,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -78,7 +78,7 @@ module Aws::S3Tables
     class CreateTableBucketResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -107,7 +107,7 @@ module Aws::S3Tables
       :metadata,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_arn
@@ -120,7 +120,7 @@ module Aws::S3Tables
       :table_arn,
       :version_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -133,7 +133,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -142,7 +142,7 @@ module Aws::S3Tables
     class DeleteTableBucketEncryptionRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -151,7 +151,7 @@ module Aws::S3Tables
     class DeleteTableBucketPolicyRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -160,7 +160,7 @@ module Aws::S3Tables
     class DeleteTableBucketRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -177,7 +177,7 @@ module Aws::S3Tables
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -198,7 +198,7 @@ module Aws::S3Tables
       :name,
       :version_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration specifying how data should be encrypted. This structure defines the encryption algorithm and optional KMS key to be used for server-side encryption.</p>
@@ -212,7 +212,7 @@ module Aws::S3Tables
       :sse_algorithm,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller isn't authorized to make the request.</p>
@@ -221,7 +221,7 @@ module Aws::S3Tables
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -234,7 +234,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -263,7 +263,7 @@ module Aws::S3Tables
       :namespace_id,
       :table_bucket_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -272,7 +272,7 @@ module Aws::S3Tables
     class GetTableBucketEncryptionRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_configuration
@@ -281,7 +281,7 @@ module Aws::S3Tables
     class GetTableBucketEncryptionResponse < Struct.new(
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -290,7 +290,7 @@ module Aws::S3Tables
     class GetTableBucketMaintenanceConfigurationRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -303,7 +303,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -312,7 +312,7 @@ module Aws::S3Tables
     class GetTableBucketPolicyRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -321,7 +321,7 @@ module Aws::S3Tables
     class GetTableBucketPolicyResponse < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -330,7 +330,7 @@ module Aws::S3Tables
     class GetTableBucketRequest < Struct.new(
       :table_bucket_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -359,7 +359,7 @@ module Aws::S3Tables
       :table_bucket_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -376,7 +376,7 @@ module Aws::S3Tables
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_configuration
@@ -385,7 +385,7 @@ module Aws::S3Tables
     class GetTableEncryptionResponse < Struct.new(
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -402,7 +402,7 @@ module Aws::S3Tables
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_arn
@@ -415,7 +415,7 @@ module Aws::S3Tables
       :table_arn,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -432,7 +432,7 @@ module Aws::S3Tables
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_arn
@@ -445,7 +445,7 @@ module Aws::S3Tables
       :table_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -462,7 +462,7 @@ module Aws::S3Tables
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_token
@@ -479,7 +479,7 @@ module Aws::S3Tables
       :metadata_location,
       :warehouse_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -496,7 +496,7 @@ module Aws::S3Tables
       :namespace,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -505,7 +505,7 @@ module Aws::S3Tables
     class GetTablePolicyResponse < Struct.new(
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -526,7 +526,7 @@ module Aws::S3Tables
       :name,
       :table_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -595,10 +595,10 @@ module Aws::S3Tables
       :format,
       :table_bucket_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:namespace_id] = '' unless options.key?(:namespace_id)
+        options[:namespace_id] = nil unless options.key?(:namespace_id)
         super
       end
     end
@@ -614,14 +614,7 @@ module Aws::S3Tables
       :target_file_size_mb,
       :strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IcebergCompactionStrategy
-      AUTO = 'auto'
-      BINPACK = 'binpack'
-      SORT = 'sort'
-      ZORDER = 'z-order'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the metadata for an Iceberg table.</p>
@@ -631,7 +624,7 @@ module Aws::S3Tables
     class IcebergMetadata < Struct.new(
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the schema for an Iceberg table.</p>
@@ -641,7 +634,7 @@ module Aws::S3Tables
     class IcebergSchema < Struct.new(
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the snapshot management settings for an Iceberg table. The oldest snapshot expires when its age exceeds the <code>maxSnapshotAgeHours</code> and the total number of snapshots exceeds the value for the minimum number of snapshots to keep <code>minSnapshotsToKeep</code>.</p>
@@ -655,7 +648,7 @@ module Aws::S3Tables
       :min_snapshots_to_keep,
       :max_snapshot_age_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the unreferenced file removal settings for an Iceberg table bucket.</p>
@@ -669,7 +662,7 @@ module Aws::S3Tables
       :unreferenced_days,
       :non_current_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed due to an internal server error.</p>
@@ -678,14 +671,7 @@ module Aws::S3Tables
     class InternalServerErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      NOT_YET_RUN = 'Not_Yet_Run'
-      SUCCESSFUL = 'Successful'
-      FAILED = 'Failed'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -706,7 +692,7 @@ module Aws::S3Tables
       :continuation_token,
       :max_namespaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespaces
@@ -719,7 +705,7 @@ module Aws::S3Tables
       :namespaces,
       :continuation_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute prefix
@@ -740,7 +726,7 @@ module Aws::S3Tables
       :max_buckets,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_buckets
@@ -753,7 +739,7 @@ module Aws::S3Tables
       :table_buckets,
       :continuation_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -778,7 +764,7 @@ module Aws::S3Tables
       :continuation_token,
       :max_tables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tables
@@ -791,12 +777,7 @@ module Aws::S3Tables
       :tables,
       :continuation_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaintenanceStatus
-      ENABLED = 'enabled'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a namespace.</p>
@@ -826,7 +807,7 @@ module Aws::S3Tables
       :namespace_id,
       :table_bucket_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified resource could not be found.</p>
@@ -835,11 +816,7 @@ module Aws::S3Tables
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenTableFormat
-      ICEBERG = 'ICEBERG'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -852,7 +829,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -869,7 +846,7 @@ module Aws::S3Tables
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -882,7 +859,7 @@ module Aws::S3Tables
       :table_bucket_arn,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -907,7 +884,7 @@ module Aws::S3Tables
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -928,7 +905,7 @@ module Aws::S3Tables
       :name,
       :resource_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -957,12 +934,7 @@ module Aws::S3Tables
       :new_name,
       :version_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SSEAlgorithm
-      AES256 = 'AES256'
-      AWS_KMS = 'aws:kms'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a schema field.</p>
@@ -980,7 +952,7 @@ module Aws::S3Tables
       :type,
       :required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:required] = false unless options.key?(:required)
@@ -999,7 +971,7 @@ module Aws::S3Tables
       :status,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the maintenance settings for the table bucket.</p>
@@ -1010,14 +982,10 @@ module Aws::S3Tables
       :iceberg_unreferenced_file_removal,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IcebergUnreferencedFileRemoval < TableBucketMaintenanceSettings; end
       class Unknown < TableBucketMaintenanceSettings; end
-    end
-
-    module TableBucketMaintenanceType
-      ICEBERG_UNREFERENCED_FILE_REMOVAL = 'icebergUnreferencedFileRemoval'
     end
 
     # <p>Contains details about a table bucket.</p>
@@ -1047,12 +1015,7 @@ module Aws::S3Tables
       :table_bucket_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableBucketType
-      CUSTOMER = 'customer'
-      AWS = 'aws'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the values that define a maintenance configuration for a table.</p>
@@ -1066,7 +1029,7 @@ module Aws::S3Tables
       :status,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the status of a maintenance job.</p>
@@ -1084,13 +1047,7 @@ module Aws::S3Tables
       :last_run_timestamp,
       :failure_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableMaintenanceJobType
-      ICEBERG_COMPACTION = 'icebergCompaction'
-      ICEBERG_SNAPSHOT_MANAGEMENT = 'icebergSnapshotManagement'
-      ICEBERG_UNREFERENCED_FILE_REMOVAL = 'icebergUnreferencedFileRemoval'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about maintenance settings for the table.</p>
@@ -1105,16 +1062,11 @@ module Aws::S3Tables
       :iceberg_snapshot_management,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IcebergCompaction < TableMaintenanceSettings; end
       class IcebergSnapshotManagement < TableMaintenanceSettings; end
       class Unknown < TableMaintenanceSettings; end
-    end
-
-    module TableMaintenanceType
-      ICEBERG_COMPACTION = 'icebergCompaction'
-      ICEBERG_SNAPSHOT_MANAGEMENT = 'icebergSnapshotManagement'
     end
 
     # <p>Contains details about the table metadata.</p>
@@ -1125,7 +1077,7 @@ module Aws::S3Tables
       :iceberg,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Iceberg < TableMetadata; end
       class Unknown < TableMetadata; end
@@ -1166,12 +1118,7 @@ module Aws::S3Tables
       :namespace_id,
       :table_bucket_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableType
-      CUSTOMER = 'customer'
-      AWS = 'aws'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit on the number of requests per second was exceeded.</p>
@@ -1180,7 +1127,7 @@ module Aws::S3Tables
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_bucket_arn
@@ -1205,7 +1152,7 @@ module Aws::S3Tables
       :version_token,
       :metadata_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1230,7 +1177,7 @@ module Aws::S3Tables
       :version_token,
       :metadata_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

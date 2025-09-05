@@ -154,7 +154,7 @@ module Aws::Amplify
       :waf_configuration,
       :job_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an artifact. </p>
@@ -168,7 +168,7 @@ module Aws::Amplify
       :artifact_file_name,
       :artifact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the automated branch creation configuration. </p>
@@ -219,7 +219,7 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the backend associated with an Amplify
@@ -233,7 +233,7 @@ module Aws::Amplify
     class Backend < Struct.new(
       :stack_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the backend environment associated with a <code>Branch</code> of a Gen 1
@@ -269,7 +269,7 @@ module Aws::Amplify
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request contains unexpected data. </p>
@@ -278,7 +278,7 @@ module Aws::Amplify
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The branch for an Amplify app, which maps to a third-party repository branch. </p>
@@ -427,13 +427,7 @@ module Aws::Amplify
       :backend,
       :compute_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BuildComputeType
-      STANDARD_8GB = 'STANDARD_8GB'
-      LARGE_16GB = 'LARGE_16GB'
-      XLARGE_72GB = 'XLARGE_72GB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the cache configuration for an Amplify app.</p>
@@ -452,12 +446,7 @@ module Aws::Amplify
     class CacheConfig < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CacheConfigType
-      AMPLIFY_MANAGED = 'AMPLIFY_MANAGED'
-      AMPLIFY_MANAGED_NO_COOKIES = 'AMPLIFY_MANAGED_NO_COOKIES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the current SSL/TLS certificate that is in use for the domain. If you are
@@ -487,7 +476,7 @@ module Aws::Amplify
       :custom_certificate_arn,
       :certificate_verification_dns_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of SSL/TLS certificate to use for your custom domain. If a certificate type
@@ -513,12 +502,7 @@ module Aws::Amplify
       :type,
       :custom_certificate_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateType
-      AMPLIFY_MANAGED = 'AMPLIFY_MANAGED'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure used to create apps in Amplify. </p>
@@ -653,7 +637,7 @@ module Aws::Amplify
       :job_config,
       :cache_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app
@@ -663,7 +647,7 @@ module Aws::Amplify
     class CreateAppResult < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the backend environment create request. </p>
@@ -685,7 +669,7 @@ module Aws::Amplify
       :stack_name,
       :deployment_artifacts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the create backend environment request. </p>
@@ -695,7 +679,7 @@ module Aws::Amplify
     class CreateBackendEnvironmentResult < Struct.new(
       :backend_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the create branch request. </p>
@@ -808,7 +792,7 @@ module Aws::Amplify
       :backend,
       :compute_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for create branch request. </p>
@@ -819,7 +803,7 @@ module Aws::Amplify
     class CreateBranchResult < Struct.new(
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the create a new deployment request. </p>
@@ -840,7 +824,7 @@ module Aws::Amplify
       :branch_name,
       :file_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the create a new deployment request. </p>
@@ -860,7 +844,7 @@ module Aws::Amplify
       :file_upload_urls,
       :zip_upload_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the create domain association request. </p>
@@ -897,7 +881,7 @@ module Aws::Amplify
       :auto_sub_domain_iam_role,
       :certificate_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the create domain association request. </p>
@@ -908,7 +892,7 @@ module Aws::Amplify
     class CreateDomainAssociationResult < Struct.new(
       :domain_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the create webhook request. </p>
@@ -926,7 +910,7 @@ module Aws::Amplify
       :branch_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the create webhook request. </p>
@@ -936,7 +920,7 @@ module Aws::Amplify
     class CreateWebhookResult < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a custom rewrite or redirect rule. </p>
@@ -981,7 +965,7 @@ module Aws::Amplify
       :status,
       :condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the request structure for the delete app request. </p>
@@ -991,7 +975,7 @@ module Aws::Amplify
     class DeleteAppRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the delete app request. </p>
@@ -1002,7 +986,7 @@ module Aws::Amplify
     class DeleteAppResult < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the delete backend environment request. </p>
@@ -1016,7 +1000,7 @@ module Aws::Amplify
       :app_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure of the delete backend environment result. </p>
@@ -1026,7 +1010,7 @@ module Aws::Amplify
     class DeleteBackendEnvironmentResult < Struct.new(
       :backend_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the delete branch request. </p>
@@ -1040,7 +1024,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the delete branch request. </p>
@@ -1050,7 +1034,7 @@ module Aws::Amplify
     class DeleteBranchResult < Struct.new(
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the delete domain association request. </p>
@@ -1064,7 +1048,7 @@ module Aws::Amplify
       :app_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_association
@@ -1073,7 +1057,7 @@ module Aws::Amplify
     class DeleteDomainAssociationResult < Struct.new(
       :domain_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the delete job request. </p>
@@ -1091,7 +1075,7 @@ module Aws::Amplify
       :branch_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the delete job request. </p>
@@ -1101,7 +1085,7 @@ module Aws::Amplify
     class DeleteJobResult < Struct.new(
       :job_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the delete webhook request. </p>
@@ -1111,7 +1095,7 @@ module Aws::Amplify
     class DeleteWebhookRequest < Struct.new(
       :webhook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the delete webhook request. </p>
@@ -1121,7 +1105,7 @@ module Aws::Amplify
     class DeleteWebhookResult < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation failed because a dependent service threw an exception. </p>
@@ -1130,7 +1114,7 @@ module Aws::Amplify
     class DependentServiceFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between a custom domain and an Amplify app. </p>
@@ -1232,20 +1216,7 @@ module Aws::Amplify
       :sub_domains,
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainStatus
-      PENDING_VERIFICATION = 'PENDING_VERIFICATION'
-      IN_PROGRESS = 'IN_PROGRESS'
-      AVAILABLE = 'AVAILABLE'
-      IMPORTING_CUSTOM_CERTIFICATE = 'IMPORTING_CUSTOM_CERTIFICATE'
-      PENDING_DEPLOYMENT = 'PENDING_DEPLOYMENT'
-      AWAITING_APP_CNAME = 'AWAITING_APP_CNAME'
-      FAILED = 'FAILED'
-      CREATING = 'CREATING'
-      REQUESTING_CERTIFICATE = 'REQUESTING_CERTIFICATE'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the generate access logs request. </p>
@@ -1269,7 +1240,7 @@ module Aws::Amplify
       :domain_name,
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the generate access logs request. </p>
@@ -1279,7 +1250,7 @@ module Aws::Amplify
     class GenerateAccessLogsResult < Struct.new(
       :log_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the get app request. </p>
@@ -1289,7 +1260,7 @@ module Aws::Amplify
     class GetAppRequest < Struct.new(
       :app_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app
@@ -1299,7 +1270,7 @@ module Aws::Amplify
     class GetAppResult < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the request structure for the get artifact request. </p>
@@ -1309,7 +1280,7 @@ module Aws::Amplify
     class GetArtifactUrlRequest < Struct.new(
       :artifact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the result structure for the get artifact request. </p>
@@ -1323,7 +1294,7 @@ module Aws::Amplify
       :artifact_id,
       :artifact_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the get backend environment request. </p>
@@ -1337,7 +1308,7 @@ module Aws::Amplify
       :app_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the get backend environment result. </p>
@@ -1347,7 +1318,7 @@ module Aws::Amplify
     class GetBackendEnvironmentResult < Struct.new(
       :backend_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the get branch request. </p>
@@ -1361,7 +1332,7 @@ module Aws::Amplify
       :app_id,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute branch
@@ -1370,7 +1341,7 @@ module Aws::Amplify
     class GetBranchResult < Struct.new(
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the get domain association request. </p>
@@ -1384,7 +1355,7 @@ module Aws::Amplify
       :app_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the get domain association request. </p>
@@ -1395,7 +1366,7 @@ module Aws::Amplify
     class GetDomainAssociationResult < Struct.new(
       :domain_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the get job request. </p>
@@ -1413,7 +1384,7 @@ module Aws::Amplify
       :branch_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -1422,7 +1393,7 @@ module Aws::Amplify
     class GetJobResult < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the get webhook request. </p>
@@ -1432,7 +1403,7 @@ module Aws::Amplify
     class GetWebhookRequest < Struct.new(
       :webhook_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the get webhook request. </p>
@@ -1442,7 +1413,7 @@ module Aws::Amplify
     class GetWebhookResult < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service failed to perform an operation due to an internal issue. </p>
@@ -1451,7 +1422,7 @@ module Aws::Amplify
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes an execution job for an Amplify app. </p>
@@ -1465,7 +1436,7 @@ module Aws::Amplify
       :summary,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration details that apply to the jobs for an Amplify app.</p>
@@ -1527,18 +1498,7 @@ module Aws::Amplify
     class JobConfig < Struct.new(
       :build_compute_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      CREATED = 'CREATED'
-      PENDING = 'PENDING'
-      PROVISIONING = 'PROVISIONING'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      SUCCEED = 'SUCCEED'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the summary for an execution job for an Amplify app. </p>
@@ -1600,14 +1560,7 @@ module Aws::Amplify
       :source_url,
       :source_url_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobType
-      RELEASE = 'RELEASE'
-      RETRY = 'RETRY'
-      MANUAL = 'MANUAL'
-      WEB_HOOK = 'WEB_HOOK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource could not be created because service quotas were exceeded. </p>
@@ -1616,7 +1569,7 @@ module Aws::Amplify
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the list apps request. </p>
@@ -1631,7 +1584,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for an Amplify app list request. </p>
@@ -1647,7 +1600,7 @@ module Aws::Amplify
       :apps,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the request structure for the list artifacts request. </p>
@@ -1675,7 +1628,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the list artifacts request. </p>
@@ -1690,7 +1643,7 @@ module Aws::Amplify
       :artifacts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the list backend environments request. </p>
@@ -1714,7 +1667,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the list backend environments result. </p>
@@ -1729,7 +1682,7 @@ module Aws::Amplify
       :backend_environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the list branches request. </p>
@@ -1749,7 +1702,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the list branches request. </p>
@@ -1764,7 +1717,7 @@ module Aws::Amplify
       :branches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the list domain associations request. </p>
@@ -1784,7 +1737,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the list domain association request. </p>
@@ -1799,7 +1752,7 @@ module Aws::Amplify
       :domain_associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the list jobs request. </p>
@@ -1823,7 +1776,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of records to list in a single response. </p>
@@ -1838,7 +1791,7 @@ module Aws::Amplify
       :job_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure to use to list tags for a resource. </p>
@@ -1848,7 +1801,7 @@ module Aws::Amplify
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the list tags for resource request. </p>
@@ -1858,7 +1811,7 @@ module Aws::Amplify
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the list webhooks request. </p>
@@ -1878,7 +1831,7 @@ module Aws::Amplify
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the list webhooks request. </p>
@@ -1893,7 +1846,7 @@ module Aws::Amplify
       :webhooks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity was not found during an operation. </p>
@@ -1902,13 +1855,7 @@ module Aws::Amplify
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Platform
-      WEB = 'WEB'
-      WEB_DYNAMIC = 'WEB_DYNAMIC'
-      WEB_COMPUTE = 'WEB_COMPUTE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information about a production branch for an Amplify app. </p>
@@ -1930,13 +1877,7 @@ module Aws::Amplify
       :thumbnail_url,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepositoryCloneMethod
-      SSH = 'SSH'
-      TOKEN = 'TOKEN'
-      SIGV4 = 'SIGV4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation failed due to a non-existent resource. </p>
@@ -1948,20 +1889,7 @@ module Aws::Amplify
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceUrlType
-      ZIP = 'ZIP'
-      BUCKET_PREFIX = 'BUCKET_PREFIX'
-    end
-
-    module Stage
-      PRODUCTION = 'PRODUCTION'
-      BETA = 'BETA'
-      DEVELOPMENT = 'DEVELOPMENT'
-      EXPERIMENTAL = 'EXPERIMENTAL'
-      PULL_REQUEST = 'PULL_REQUEST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the start a deployment request. </p>
@@ -1994,7 +1922,7 @@ module Aws::Amplify
       :source_url,
       :source_url_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the start a deployment request. </p>
@@ -2004,7 +1932,7 @@ module Aws::Amplify
     class StartDeploymentResult < Struct.new(
       :job_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the start job request. </p>
@@ -2047,7 +1975,7 @@ module Aws::Amplify
       :commit_message,
       :commit_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the run job request. </p>
@@ -2057,7 +1985,7 @@ module Aws::Amplify
     class StartJobResult < Struct.new(
       :job_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes an execution step, for an execution job, for an Amplify app. </p>
@@ -2108,7 +2036,7 @@ module Aws::Amplify
       :status_reason,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the stop job request. </p>
@@ -2126,7 +2054,7 @@ module Aws::Amplify
       :branch_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the stop job request. </p>
@@ -2136,7 +2064,7 @@ module Aws::Amplify
     class StopJobResult < Struct.new(
       :job_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The subdomain for the domain association. </p>
@@ -2154,7 +2082,7 @@ module Aws::Amplify
       :verified,
       :dns_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Describes the settings for the subdomain. </p>
@@ -2168,7 +2096,7 @@ module Aws::Amplify
       :prefix,
       :branch_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure to tag a resource with a tag key and value.</p>
@@ -2182,13 +2110,13 @@ module Aws::Amplify
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the tag resource request. </p>
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An operation failed due to a lack of access. </p>
@@ -2197,7 +2125,7 @@ module Aws::Amplify
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the untag resource request. </p>
@@ -2211,13 +2139,13 @@ module Aws::Amplify
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the untag resource request. </p>
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the update app request. </p>
@@ -2345,7 +2273,7 @@ module Aws::Amplify
       :job_config,
       :cache_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for an Amplify app update request. </p>
@@ -2355,7 +2283,7 @@ module Aws::Amplify
     class UpdateAppResult < Struct.new(
       :app,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the update branch request. </p>
@@ -2464,7 +2392,7 @@ module Aws::Amplify
       :backend,
       :compute_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the update branch request. </p>
@@ -2474,7 +2402,7 @@ module Aws::Amplify
     class UpdateBranchResult < Struct.new(
       :branch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request structure for the update domain association request. </p>
@@ -2509,7 +2437,7 @@ module Aws::Amplify
       :auto_sub_domain_iam_role,
       :certificate_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The result structure for the update domain association request. </p>
@@ -2520,17 +2448,7 @@ module Aws::Amplify
     class UpdateDomainAssociationResult < Struct.new(
       :domain_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateStatus
-      REQUESTING_CERTIFICATE = 'REQUESTING_CERTIFICATE'
-      PENDING_VERIFICATION = 'PENDING_VERIFICATION'
-      IMPORTING_CUSTOM_CERTIFICATE = 'IMPORTING_CUSTOM_CERTIFICATE'
-      PENDING_DEPLOYMENT = 'PENDING_DEPLOYMENT'
-      AWAITING_APP_CNAME = 'AWAITING_APP_CNAME'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      UPDATE_FAILED = 'UPDATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request structure for the update webhook request. </p>
@@ -2548,7 +2466,7 @@ module Aws::Amplify
       :branch_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result structure for the update webhook request. </p>
@@ -2558,7 +2476,7 @@ module Aws::Amplify
     class UpdateWebhookResult < Struct.new(
       :webhook,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Firewall configuration for a hosted Amplify application.
@@ -2580,15 +2498,7 @@ module Aws::Amplify
       :waf_status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WafStatus
-      ASSOCIATING = 'ASSOCIATING'
-      ASSOCIATION_FAILED = 'ASSOCIATION_FAILED'
-      ASSOCIATION_SUCCESS = 'ASSOCIATION_SUCCESS'
-      DISASSOCIATING = 'DISASSOCIATING'
-      DISASSOCIATION_FAILED = 'DISASSOCIATION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a webhook that connects repository events to an Amplify app. </p>
@@ -2628,7 +2538,7 @@ module Aws::Amplify
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

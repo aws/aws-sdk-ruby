@@ -23,7 +23,7 @@ module Aws::TranscribeStreaming
       :items,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper for your audio chunks. Your audio stream consists of one or more audio
@@ -52,7 +52,7 @@ module Aws::TranscribeStreaming
     class AudioEvent < Struct.new(
       :audio_chunk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket 
@@ -71,7 +71,7 @@ module Aws::TranscribeStreaming
       :configuration_event,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AudioEvent < AudioStream; end
       class ConfigurationEvent < AudioStream; end
@@ -87,7 +87,7 @@ module Aws::TranscribeStreaming
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains entities identified as personally identifiable information (PII) in your
@@ -123,7 +123,7 @@ module Aws::TranscribeStreaming
       :content,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word, phrase, or punctuation mark in your Call Analytics transcription output, along with various 
@@ -164,24 +164,12 @@ module Aws::TranscribeStreaming
       :vocabulary_filter_match,
       :stable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:vocabulary_filter_match] = false unless options.key?(:vocabulary_filter_match)
         super
       end
-    end
-
-    module CallAnalyticsLanguageCode
-      EN_US = 'en-US'
-      EN_GB = 'en-GB'
-      ES_US = 'es-US'
-      FR_CA = 'fr-CA'
-      FR_FR = 'fr-FR'
-      EN_AU = 'en-AU'
-      IT_IT = 'it-IT'
-      DE_DE = 'de-DE'
-      PT_BR = 'pt-BR'
     end
 
     # <p>Contains detailed information about your real-time Call Analytics session. These details are 
@@ -225,7 +213,7 @@ module Aws::TranscribeStreaming
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class UtteranceEvent < CallAnalyticsTranscriptResultStream; end
       class CategoryEvent < CallAnalyticsTranscriptResultStream; end
@@ -249,7 +237,7 @@ module Aws::TranscribeStreaming
       :matched_categories,
       :matched_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Makes it possible to specify which speaker is on which audio channel. For example, if your
@@ -267,7 +255,7 @@ module Aws::TranscribeStreaming
       :channel_id,
       :participant_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:channel_id] = 0 unless options.key?(:channel_id)
@@ -289,7 +277,7 @@ module Aws::TranscribeStreaming
       :begin,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for clinical note generation,
@@ -339,7 +327,7 @@ module Aws::TranscribeStreaming
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration for aggregated transcript and clinical note generation.</p>
@@ -385,13 +373,7 @@ module Aws::TranscribeStreaming
       :output_bucket_name,
       :note_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClinicalNoteGenerationStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to set audio channel definitions and post-call analytics settings.</p>
@@ -410,7 +392,7 @@ module Aws::TranscribeStreaming
       :channel_definitions,
       :post_call_analytics_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A new stream started with the same session ID. The current stream has been terminated.</p>
@@ -419,20 +401,7 @@ module Aws::TranscribeStreaming
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentIdentificationType
-      PII = 'PII'
-    end
-
-    module ContentRedactionOutput
-      REDACTED = 'redacted'
-      REDACTED_AND_UNREDACTED = 'redacted_and_unredacted'
-    end
-
-    module ContentRedactionType
-      PII = 'PII'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains entities identified as personally identifiable information (PII) in your
@@ -468,7 +437,7 @@ module Aws::TranscribeStreaming
       :content,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_time] = 0 unless options.key?(:start_time)
@@ -483,7 +452,7 @@ module Aws::TranscribeStreaming
     class GetMedicalScribeStreamRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute medical_scribe_stream_details
@@ -492,7 +461,7 @@ module Aws::TranscribeStreaming
     class GetMedicalScribeStreamResponse < Struct.new(
       :medical_scribe_stream_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A problem occurred while processing the audio. Amazon Transcribe terminated 
@@ -502,7 +471,7 @@ module Aws::TranscribeStreaming
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Lists the issues that were identified in your audio segment.</p>
@@ -512,7 +481,7 @@ module Aws::TranscribeStreaming
     class IssueDetected < Struct.new(
       :character_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word, phrase, or punctuation mark in your transcription output, along with various associated
@@ -558,7 +527,7 @@ module Aws::TranscribeStreaming
       :confidence,
       :stable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_time] = 0 unless options.key?(:start_time)
@@ -566,68 +535,6 @@ module Aws::TranscribeStreaming
         options[:vocabulary_filter_match] = false unless options.key?(:vocabulary_filter_match)
         super
       end
-    end
-
-    module ItemType
-      PRONUNCIATION = 'pronunciation'
-      PUNCTUATION = 'punctuation'
-    end
-
-    module LanguageCode
-      EN_US = 'en-US'
-      EN_GB = 'en-GB'
-      ES_US = 'es-US'
-      FR_CA = 'fr-CA'
-      FR_FR = 'fr-FR'
-      EN_AU = 'en-AU'
-      IT_IT = 'it-IT'
-      DE_DE = 'de-DE'
-      PT_BR = 'pt-BR'
-      JA_JP = 'ja-JP'
-      KO_KR = 'ko-KR'
-      ZH_CN = 'zh-CN'
-      TH_TH = 'th-TH'
-      ES_ES = 'es-ES'
-      AR_SA = 'ar-SA'
-      PT_PT = 'pt-PT'
-      CA_ES = 'ca-ES'
-      AR_AE = 'ar-AE'
-      HI_IN = 'hi-IN'
-      ZH_HK = 'zh-HK'
-      NL_NL = 'nl-NL'
-      NO_NO = 'no-NO'
-      SV_SE = 'sv-SE'
-      PL_PL = 'pl-PL'
-      FI_FI = 'fi-FI'
-      ZH_TW = 'zh-TW'
-      EN_IN = 'en-IN'
-      EN_IE = 'en-IE'
-      EN_NZ = 'en-NZ'
-      EN_AB = 'en-AB'
-      EN_ZA = 'en-ZA'
-      EN_WL = 'en-WL'
-      DE_CH = 'de-CH'
-      AF_ZA = 'af-ZA'
-      EU_ES = 'eu-ES'
-      HR_HR = 'hr-HR'
-      CS_CZ = 'cs-CZ'
-      DA_DK = 'da-DK'
-      FA_IR = 'fa-IR'
-      GL_ES = 'gl-ES'
-      EL_GR = 'el-GR'
-      HE_IL = 'he-IL'
-      ID_ID = 'id-ID'
-      LV_LV = 'lv-LV'
-      MS_MY = 'ms-MY'
-      RO_RO = 'ro-RO'
-      RU_RU = 'ru-RU'
-      SR_RS = 'sr-RS'
-      SK_SK = 'sk-SK'
-      SO_SO = 'so-SO'
-      TL_PH = 'tl-PH'
-      UK_UA = 'uk-UA'
-      VI_VN = 'vi-VN'
-      ZU_ZA = 'zu-ZA'
     end
 
     # <p>The language code that represents the language identified in your audio, including the associated
@@ -644,7 +551,7 @@ module Aws::TranscribeStreaming
       :language_code,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:score] = 0 unless options.key?(:score)
@@ -659,13 +566,7 @@ module Aws::TranscribeStreaming
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MediaEncoding
-      PCM = 'pcm'
-      OGG_OPUS = 'ogg-opus'
-      FLAC = 'flac'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of possible alternative transcriptions for the input audio. Each alternative may
@@ -686,11 +587,7 @@ module Aws::TranscribeStreaming
       :items,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MedicalContentIdentificationType
-      PHI = 'PHI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains entities identified as personal health information (PHI) in your
@@ -721,7 +618,7 @@ module Aws::TranscribeStreaming
       :content,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_time] = 0 unless options.key?(:start_time)
@@ -763,7 +660,7 @@ module Aws::TranscribeStreaming
       :confidence,
       :speaker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_time] = 0 unless options.key?(:start_time)
@@ -808,7 +705,7 @@ module Aws::TranscribeStreaming
       :alternatives,
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_time] = 0 unless options.key?(:start_time)
@@ -844,7 +741,7 @@ module Aws::TranscribeStreaming
     class MedicalScribeAudioEvent < Struct.new(
       :audio_chunk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Makes it possible to specify which speaker is on which channel.
@@ -871,7 +768,7 @@ module Aws::TranscribeStreaming
       :channel_id,
       :participant_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:channel_id] = 0 unless options.key?(:channel_id)
@@ -943,7 +840,7 @@ module Aws::TranscribeStreaming
       :post_stream_analytics_settings,
       :medical_scribe_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>MedicalScribeContext</code> object that contains contextual information which is used during clinical note generation
@@ -954,7 +851,7 @@ module Aws::TranscribeStreaming
     class MedicalScribeContext < Struct.new(
       :patient_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains encryption related settings to be used for data encryption with Key Management Service, including KmsEncryptionContext and KmsKeyId.
@@ -1003,7 +900,7 @@ module Aws::TranscribeStreaming
       :kms_encryption_context,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encoded stream of events. The stream is encoded as HTTP/2 data frames.</p>
@@ -1047,37 +944,12 @@ module Aws::TranscribeStreaming
       :configuration_event,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AudioEvent < MedicalScribeInputStream; end
       class SessionControlEvent < MedicalScribeInputStream; end
       class ConfigurationEvent < MedicalScribeInputStream; end
       class Unknown < MedicalScribeInputStream; end
-    end
-
-    module MedicalScribeLanguageCode
-      EN_US = 'en-US'
-    end
-
-    module MedicalScribeMediaEncoding
-      PCM = 'pcm'
-      OGG_OPUS = 'ogg-opus'
-      FLAC = 'flac'
-    end
-
-    module MedicalScribeNoteTemplate
-      HISTORY_AND_PHYSICAL = 'HISTORY_AND_PHYSICAL'
-      GIRPP = 'GIRPP'
-      DAP = 'DAP'
-      SIRP = 'SIRP'
-      BIRP = 'BIRP'
-      BEHAVIORAL_SOAP = 'BEHAVIORAL_SOAP'
-      PHYSICAL_SOAP = 'PHYSICAL_SOAP'
-    end
-
-    module MedicalScribeParticipantRole
-      PATIENT = 'PATIENT'
-      CLINICIAN = 'CLINICIAN'
     end
 
     # <p>Contains patient-specific information. </p>
@@ -1087,7 +959,7 @@ module Aws::TranscribeStreaming
     class MedicalScribePatientContext < Struct.new(
       :pronouns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for the result of post-stream analytics.
@@ -1098,7 +970,7 @@ module Aws::TranscribeStreaming
     class MedicalScribePostStreamAnalyticsResult < Struct.new(
       :clinical_note_generation_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for post-stream analytics.
@@ -1109,7 +981,7 @@ module Aws::TranscribeStreaming
     class MedicalScribePostStreamAnalyticsSettings < Struct.new(
       :clinical_note_generation_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result stream where you will receive the output events.
@@ -1148,7 +1020,7 @@ module Aws::TranscribeStreaming
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TranscriptEvent < MedicalScribeResultStream; end
       class BadRequestException < MedicalScribeResultStream; end
@@ -1179,11 +1051,7 @@ module Aws::TranscribeStreaming
     class MedicalScribeSessionControlEvent < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MedicalScribeSessionControlEventType
-      END_OF_SESSION = 'END_OF_SESSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a Amazon Web Services HealthScribe streaming session.</p>
@@ -1284,14 +1152,7 @@ module Aws::TranscribeStreaming
       :post_stream_analytics_result,
       :medical_scribe_context_provided,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MedicalScribeStreamStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      PAUSED = 'PAUSED'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event associated with <code>MedicalScribeResultStream</code>.
@@ -1305,7 +1166,7 @@ module Aws::TranscribeStreaming
     class MedicalScribeTranscriptEvent < Struct.new(
       :transcript_segment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word, phrase, or punctuation mark in your transcription output, along with various associated
@@ -1344,18 +1205,13 @@ module Aws::TranscribeStreaming
       :content,
       :vocabulary_filter_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:begin_audio_time] = 0 unless options.key?(:begin_audio_time)
         options[:end_audio_time] = 0 unless options.key?(:end_audio_time)
         super
       end
-    end
-
-    module MedicalScribeTranscriptItemType
-      PRONUNCIATION = 'pronunciation'
-      PUNCTUATION = 'punctuation'
     end
 
     # <p>Contains a set of transcription results, along with additional information of the segment.</p>
@@ -1396,7 +1252,7 @@ module Aws::TranscribeStreaming
       :is_partial,
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:begin_audio_time] = 0 unless options.key?(:begin_audio_time)
@@ -1404,12 +1260,6 @@ module Aws::TranscribeStreaming
         options[:is_partial] = false unless options.key?(:is_partial)
         super
       end
-    end
-
-    module MedicalScribeVocabularyFilterMethod
-      REMOVE = 'remove'
-      MASK = 'mask'
-      TAG = 'tag'
     end
 
     # <p>The <code>MedicalTranscript</code> associated with a 
@@ -1427,7 +1277,7 @@ module Aws::TranscribeStreaming
     class MedicalTranscript < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>MedicalTranscriptEvent</code> associated with a 
@@ -1443,7 +1293,7 @@ module Aws::TranscribeStreaming
     class MedicalTranscriptEvent < Struct.new(
       :transcript,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about your streaming session.</p>
@@ -1484,7 +1334,7 @@ module Aws::TranscribeStreaming
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TranscriptEvent < MedicalTranscriptResultStream; end
       class BadRequestException < MedicalTranscriptResultStream; end
@@ -1495,17 +1345,6 @@ module Aws::TranscribeStreaming
       class Unknown < MedicalTranscriptResultStream; end
     end
 
-    module PartialResultsStability
-      HIGH = 'high'
-      MEDIUM = 'medium'
-      LOW = 'low'
-    end
-
-    module ParticipantRole
-      AGENT = 'AGENT'
-      CUSTOMER = 'CUSTOMER'
-    end
-
     # <p>Contains the timestamps of matched categories.</p>
     # @!attribute timestamp_ranges
     #   <p>Contains the timestamp ranges (start time through end time) of matched categories and rules.</p>
@@ -1513,7 +1352,7 @@ module Aws::TranscribeStreaming
     class PointsOfInterest < Struct.new(
       :timestamp_ranges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to specify additional settings for your Call Analytics post-call request, 
@@ -1606,14 +1445,7 @@ module Aws::TranscribeStreaming
       :content_redaction_output,
       :output_encryption_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module Pronouns
-      HE_HIM = 'HE_HIM'
-      SHE_HER = 'SHE_HER'
-      THEY_THEM = 'THEY_THEM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource which doesn't exist.</p>
@@ -1622,7 +1454,7 @@ module Aws::TranscribeStreaming
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Result</code> associated with a 
@@ -1670,7 +1502,7 @@ module Aws::TranscribeStreaming
       :language_code,
       :language_identification,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start_time] = 0 unless options.key?(:start_time)
@@ -1680,29 +1512,13 @@ module Aws::TranscribeStreaming
       end
     end
 
-    module Sentiment
-      POSITIVE = 'POSITIVE'
-      NEGATIVE = 'NEGATIVE'
-      MIXED = 'MIXED'
-      NEUTRAL = 'NEUTRAL'
-    end
-
     # <p>The service is currently unavailable. Try your request later.</p>
     # @!attribute message
     #   @return [String]
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Specialty
-      PRIMARYCARE = 'PRIMARYCARE'
-      CARDIOLOGY = 'CARDIOLOGY'
-      NEUROLOGY = 'NEUROLOGY'
-      ONCOLOGY = 'ONCOLOGY'
-      RADIOLOGY = 'RADIOLOGY'
-      UROLOGY = 'UROLOGY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language_code
@@ -1836,7 +1652,7 @@ module Aws::TranscribeStreaming
       :content_redaction_type,
       :pii_entity_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -1903,7 +1719,7 @@ module Aws::TranscribeStreaming
       :content_redaction_type,
       :pii_entity_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_partial_results_stabilization] = false unless options.key?(:enable_partial_results_stabilization)
@@ -1958,7 +1774,7 @@ module Aws::TranscribeStreaming
       :media_encoding,
       :input_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1999,7 +1815,7 @@ module Aws::TranscribeStreaming
       :media_encoding,
       :result_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language_code
@@ -2094,7 +1910,7 @@ module Aws::TranscribeStreaming
       :number_of_channels,
       :content_identification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2152,7 +1968,7 @@ module Aws::TranscribeStreaming
       :number_of_channels,
       :content_identification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:show_speaker_label] = false unless options.key?(:show_speaker_label)
@@ -2407,7 +2223,7 @@ module Aws::TranscribeStreaming
       :vocabulary_names,
       :vocabulary_filter_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -2511,7 +2327,7 @@ module Aws::TranscribeStreaming
       :vocabulary_names,
       :vocabulary_filter_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:show_speaker_label] = false unless options.key?(:show_speaker_label)
@@ -2536,7 +2352,7 @@ module Aws::TranscribeStreaming
       :begin_offset_millis,
       :end_offset_millis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Transcript</code> associated with a 
@@ -2554,7 +2370,7 @@ module Aws::TranscribeStreaming
     class Transcript < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>TranscriptEvent</code> associated with a 
@@ -2570,7 +2386,7 @@ module Aws::TranscribeStreaming
     class TranscriptEvent < Struct.new(
       :transcript,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about your streaming session.</p>
@@ -2608,7 +2424,7 @@ module Aws::TranscribeStreaming
       :service_unavailable_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TranscriptEvent < TranscriptResultStream; end
       class BadRequestException < TranscriptResultStream; end
@@ -2617,11 +2433,6 @@ module Aws::TranscribeStreaming
       class ConflictException < TranscriptResultStream; end
       class ServiceUnavailableException < TranscriptResultStream; end
       class Unknown < TranscriptResultStream; end
-    end
-
-    module Type
-      CONVERSATION = 'CONVERSATION'
-      DICTATION = 'DICTATION'
     end
 
     # <p>Contains set of transcription results from one or more audio segments, along with additional 
@@ -2675,18 +2486,12 @@ module Aws::TranscribeStreaming
       :sentiment,
       :issues_detected,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_partial] = false unless options.key?(:is_partial)
         super
       end
-    end
-
-    module VocabularyFilterMethod
-      REMOVE = 'remove'
-      MASK = 'mask'
-      TAG = 'tag'
     end
 
   end

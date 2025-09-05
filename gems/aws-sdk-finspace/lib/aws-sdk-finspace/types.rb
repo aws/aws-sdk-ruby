@@ -12,7 +12,7 @@ module Aws::Finspace
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration based on which FinSpace will scale in or scale out nodes in your cluster. </p>
@@ -42,11 +42,7 @@ module Aws::Finspace
       :scale_in_cooldown_seconds,
       :scale_out_cooldown_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoScalingMetric
-      CPU_UTILIZATION_PERCENTAGE = 'CPU_UTILIZATION_PERCENTAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.</p>
@@ -91,7 +87,7 @@ module Aws::Finspace
       :node_type,
       :node_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of change request objects.</p>
@@ -117,19 +113,7 @@ module Aws::Finspace
       :s3_path,
       :db_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChangeType
-      PUT = 'PUT'
-      DELETE = 'DELETE'
-    end
-
-    module ChangesetStatus
-      PENDING = 'PENDING'
-      PROCESSING = 'PROCESSING'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of the customer code available within the running cluster.</p>
@@ -147,7 +131,7 @@ module Aws::Finspace
       :s3_key,
       :s3_object_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict with this action, and it could not be completed.</p>
@@ -160,7 +144,7 @@ module Aws::Finspace
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -217,7 +201,7 @@ module Aws::Finspace
       :superuser_parameters,
       :data_bundles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -234,7 +218,7 @@ module Aws::Finspace
       :environment_arn,
       :environment_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -311,7 +295,7 @@ module Aws::Finspace
       :change_requests,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute changeset_id
@@ -362,7 +346,7 @@ module Aws::Finspace
       :status,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -484,7 +468,7 @@ module Aws::Finspace
       :tags,
       :scaling_group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -650,7 +634,7 @@ module Aws::Finspace
       :created_timestamp,
       :scaling_group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -675,7 +659,7 @@ module Aws::Finspace
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -704,7 +688,7 @@ module Aws::Finspace
       :created_timestamp,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -785,7 +769,7 @@ module Aws::Finspace
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataview_name
@@ -862,7 +846,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_update] = false unless options.key?(:auto_update)
@@ -893,7 +877,7 @@ module Aws::Finspace
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -926,7 +910,7 @@ module Aws::Finspace
       :kms_key_id,
       :creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1000,7 +984,7 @@ module Aws::Finspace
       :availability_zone_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1064,7 +1048,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1089,7 +1073,7 @@ module Aws::Finspace
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1112,7 +1096,7 @@ module Aws::Finspace
       :environment_id,
       :iam_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -1161,7 +1145,7 @@ module Aws::Finspace
       :availability_zone_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1245,7 +1229,7 @@ module Aws::Finspace
       :availability_zone_ids,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of DNS server name and server IP.  This is used to set up Route-53 outbound resolvers.</p>
@@ -1259,7 +1243,7 @@ module Aws::Finspace
       :custom_dns_server_name,
       :custom_dns_server_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1268,12 +1252,12 @@ module Aws::Finspace
     class DeleteEnvironmentRequest < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1290,12 +1274,12 @@ module Aws::Finspace
       :cluster_name,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxClusterNodeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1312,12 +1296,12 @@ module Aws::Finspace
       :cluster_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxClusterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1334,12 +1318,12 @@ module Aws::Finspace
       :database_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxDatabaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1360,12 +1344,12 @@ module Aws::Finspace
       :dataview_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxDataviewResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1378,12 +1362,12 @@ module Aws::Finspace
       :environment_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxEnvironmentResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1400,12 +1384,12 @@ module Aws::Finspace
       :scaling_group_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxScalingGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -1422,12 +1406,12 @@ module Aws::Finspace
       :environment_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxUserResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1446,12 +1430,12 @@ module Aws::Finspace
       :volume_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteKxVolumeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an FinSpace environment.</p>
@@ -1506,34 +1490,7 @@ module Aws::Finspace
       :federation_mode,
       :federation_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentStatus
-      CREATE_REQUESTED = 'CREATE_REQUESTED'
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      DELETE_REQUESTED = 'DELETE_REQUESTED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      FAILED_CREATION = 'FAILED_CREATION'
-      RETRY_DELETION = 'RETRY_DELETION'
-      FAILED_DELETION = 'FAILED_DELETION'
-      UPDATE_NETWORK_REQUESTED = 'UPDATE_NETWORK_REQUESTED'
-      UPDATING_NETWORK = 'UPDATING_NETWORK'
-      FAILED_UPDATING_NETWORK = 'FAILED_UPDATING_NETWORK'
-      SUSPENDED = 'SUSPENDED'
-    end
-
-    module ErrorDetails
-      VALIDATION = 'The inputs to this request are invalid.'
-      SERVICE_QUOTA_EXCEEDED = 'Service limits have been exceeded.'
-      ACCESS_DENIED = 'Missing required permission to perform this request.'
-      RESOURCE_NOT_FOUND = 'One or more inputs to this request were not found.'
-      THROTTLING = 'The system temporarily lacks sufficient resources to process the request.'
-      INTERNAL_SERVICE_EXCEPTION = 'An internal error has occurred.'
-      CANCELLED = 'Cancelled'
-      USER_RECOVERABLE = 'A user recoverable error has occurred'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details in the event of a failed flow, including the error type and the related error message.</p>
@@ -1547,12 +1504,7 @@ module Aws::Finspace
       :error_message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FederationMode
-      FEDERATED = 'FEDERATED'
-      LOCAL = 'LOCAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information when authentication mode is FEDERATED.</p>
@@ -1586,7 +1538,7 @@ module Aws::Finspace
       :federation_provider_name,
       :attribute_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1595,7 +1547,7 @@ module Aws::Finspace
     class GetEnvironmentRequest < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -1604,7 +1556,7 @@ module Aws::Finspace
     class GetEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1621,7 +1573,7 @@ module Aws::Finspace
       :database_name,
       :changeset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute changeset_id
@@ -1678,7 +1630,7 @@ module Aws::Finspace
       :status,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1691,7 +1643,7 @@ module Aws::Finspace
       :environment_id,
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1853,7 +1805,7 @@ module Aws::Finspace
       :created_timestamp,
       :scaling_group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_arn
@@ -1872,7 +1824,7 @@ module Aws::Finspace
       :environment_id,
       :cluster_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signed_connection_string
@@ -1881,7 +1833,7 @@ module Aws::Finspace
     class GetKxConnectionStringResponse < Struct.new(
       :signed_connection_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -1894,7 +1846,7 @@ module Aws::Finspace
       :environment_id,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -1939,7 +1891,7 @@ module Aws::Finspace
       :num_changesets,
       :num_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:num_bytes] = 0 unless options.key?(:num_bytes)
@@ -1964,7 +1916,7 @@ module Aws::Finspace
       :database_name,
       :dataview_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -2056,7 +2008,7 @@ module Aws::Finspace
       :status,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_update] = false unless options.key?(:auto_update)
@@ -2071,7 +2023,7 @@ module Aws::Finspace
     class GetKxEnvironmentRequest < Struct.new(
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2145,7 +2097,7 @@ module Aws::Finspace
       :availability_zone_ids,
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -2158,7 +2110,7 @@ module Aws::Finspace
       :environment_id,
       :scaling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scaling_group_name
@@ -2278,7 +2230,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2291,7 +2243,7 @@ module Aws::Finspace
       :user_name,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -2314,7 +2266,7 @@ module Aws::Finspace
       :environment_id,
       :iam_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -2327,7 +2279,7 @@ module Aws::Finspace
       :environment_id,
       :volume_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -2424,11 +2376,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :attached_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IPAddressType
-      IP_V4 = 'IP_V4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2447,7 +2395,7 @@ module Aws::Finspace
       :type,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 0 unless options.key?(:type)
@@ -2463,7 +2411,7 @@ module Aws::Finspace
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is invalid. Something is wrong with the input to the request.</p>
@@ -2472,7 +2420,7 @@ module Aws::Finspace
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure containing the metadata of the attached clusters.</p>
@@ -2516,12 +2464,7 @@ module Aws::Finspace
       :cluster_type,
       :cluster_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxAzMode
-      SINGLE = 'SINGLE'
-      MULTI = 'MULTI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for read only disk cache associated with a cluster.</p>
@@ -2547,7 +2490,7 @@ module Aws::Finspace
       :type,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of changeset.</p>
@@ -2590,7 +2533,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a kdb cluster.</p>
@@ -2710,7 +2653,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2737,32 +2680,7 @@ module Aws::Finspace
     class KxClusterCodeDeploymentConfiguration < Struct.new(
       :deployment_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxClusterCodeDeploymentStrategy
-      NO_RESTART = 'NO_RESTART'
-      ROLLING = 'ROLLING'
-      FORCE = 'FORCE'
-    end
-
-    module KxClusterStatus
-      PENDING = 'PENDING'
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      RUNNING = 'RUNNING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
-    module KxClusterType
-      HDB = 'HDB'
-      RDB = 'RDB'
-      GATEWAY = 'GATEWAY'
-      GP = 'GP'
-      TICKERPLANT = 'TICKERPLANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the key-value pairs to make them available inside the cluster.</p>
@@ -2776,7 +2694,7 @@ module Aws::Finspace
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of database cache configuration that is used for mapping database paths to cache types in clusters.</p>
@@ -2802,7 +2720,7 @@ module Aws::Finspace
       :db_paths,
       :dataview_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of data that is available for querying from this database.</p>
@@ -2834,7 +2752,7 @@ module Aws::Finspace
       :dataview_name,
       :dataview_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a FinSpace managed kdb database</p>
@@ -2852,7 +2770,7 @@ module Aws::Finspace
       :created_timestamp,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2887,7 +2805,7 @@ module Aws::Finspace
       :created_timestamp,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2915,7 +2833,7 @@ module Aws::Finspace
       :changeset_id,
       :segment_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3001,7 +2919,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_update] = false unless options.key?(:auto_update)
@@ -3031,20 +2949,12 @@ module Aws::Finspace
       :volume_name,
       :on_demand,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:on_demand] = false unless options.key?(:on_demand)
         super
       end
-    end
-
-    module KxDataviewStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
     end
 
     # <p>
@@ -3068,12 +2978,7 @@ module Aws::Finspace
     class KxDeploymentConfiguration < Struct.new(
       :deployment_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxDeploymentStrategy
-      NO_RESTART = 'NO_RESTART'
-      ROLLING = 'ROLLING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a kdb environment.</p>
@@ -3176,7 +3081,7 @@ module Aws::Finspace
       :availability_zone_ids,
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3199,13 +3104,7 @@ module Aws::Finspace
       :type,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxNAS1Type
-      SSD_1000 = 'SSD_1000'
-      SSD_250 = 'SSD_250'
-      HDD_12 = 'HDD_12'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that stores metadata for a kdb node.</p>
@@ -3238,12 +3137,7 @@ module Aws::Finspace
       :launch_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxNodeStatus
-      RUNNING = 'RUNNING'
-      PROVISIONING = 'PROVISIONING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size and type of temporary storage that is used to hold data during the savedown process. All the data written to this storage space is lost when the cluster node is restarted.</p>
@@ -3269,11 +3163,7 @@ module Aws::Finspace
       :size,
       :volume_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxSavedownStorageType
-      SDS01 = 'SDS01'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3366,7 +3256,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that stores the capacity configuration details of a scaling group.</p>
@@ -3404,16 +3294,7 @@ module Aws::Finspace
       :node_count,
       :cpu,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxScalingGroupStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that stores metadata for a kdb user.</p>
@@ -3441,7 +3322,7 @@ module Aws::Finspace
       :create_timestamp,
       :update_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3519,23 +3400,7 @@ module Aws::Finspace
       :created_timestamp,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KxVolumeStatus
-      CREATING = 'CREATING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      UPDATED = 'UPDATED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETE_FAILED = 'DELETE_FAILED'
-    end
-
-    module KxVolumeType
-      NAS_1 = 'NAS_1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service limit or quota is exceeded.</p>
@@ -3544,7 +3409,7 @@ module Aws::Finspace
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3559,7 +3424,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -3573,7 +3438,7 @@ module Aws::Finspace
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3594,7 +3459,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kx_changesets
@@ -3607,7 +3472,7 @@ module Aws::Finspace
       :kx_changesets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3628,7 +3493,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -3641,7 +3506,7 @@ module Aws::Finspace
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3679,7 +3544,7 @@ module Aws::Finspace
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kx_cluster_summaries
@@ -3692,7 +3557,7 @@ module Aws::Finspace
       :kx_cluster_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3709,7 +3574,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kx_databases
@@ -3722,7 +3587,7 @@ module Aws::Finspace
       :kx_databases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3746,7 +3611,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kx_dataviews
@@ -3762,7 +3627,7 @@ module Aws::Finspace
       :kx_dataviews,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3775,7 +3640,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environments
@@ -3788,7 +3653,7 @@ module Aws::Finspace
       :environments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3806,7 +3671,7 @@ module Aws::Finspace
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scaling_groups
@@ -3821,7 +3686,7 @@ module Aws::Finspace
       :scaling_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3838,7 +3703,7 @@ module Aws::Finspace
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute users
@@ -3851,7 +3716,7 @@ module Aws::Finspace
       :users,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -3874,7 +3739,7 @@ module Aws::Finspace
       :next_token,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kx_volume_summaries
@@ -3889,7 +3754,7 @@ module Aws::Finspace
       :kx_volume_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3898,7 +3763,7 @@ module Aws::Finspace
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3907,7 +3772,7 @@ module Aws::Finspace
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3952,7 +3817,7 @@ module Aws::Finspace
       :icmp_type_code,
       :cidr_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -3972,7 +3837,7 @@ module Aws::Finspace
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:from] = 0 unless options.key?(:from)
@@ -3987,7 +3852,7 @@ module Aws::Finspace
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more resources can't be found.</p>
@@ -3996,12 +3861,7 @@ module Aws::Finspace
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleAction
-      ALLOW = 'allow'
-      DENY = 'deny'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> You have exceeded your service quota. To perform the requested action, 
@@ -4011,7 +3871,7 @@ module Aws::Finspace
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information for the superuser.</p>
@@ -4029,7 +3889,7 @@ module Aws::Finspace
       :first_name,
       :last_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4042,12 +3902,12 @@ module Aws::Finspace
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -4056,7 +3916,7 @@ module Aws::Finspace
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4071,7 +3931,7 @@ module Aws::Finspace
     class TickerplantLogConfiguration < Struct.new(
       :tickerplant_log_volumes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of the transit gateway and network configuration that is used to connect the kdb environment to an internal network.</p>
@@ -4092,7 +3952,7 @@ module Aws::Finspace
       :routable_cidr_space,
       :attachment_network_acl_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4106,12 +3966,12 @@ module Aws::Finspace
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4146,7 +4006,7 @@ module Aws::Finspace
       :federation_mode,
       :federation_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment
@@ -4155,7 +4015,7 @@ module Aws::Finspace
     class UpdateEnvironmentResponse < Struct.new(
       :environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4197,12 +4057,12 @@ module Aws::Finspace
       :command_line_arguments,
       :deployment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateKxClusterCodeConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4229,12 +4089,12 @@ module Aws::Finspace
       :databases,
       :deployment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateKxClusterDatabasesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4255,7 +4115,7 @@ module Aws::Finspace
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -4276,7 +4136,7 @@ module Aws::Finspace
       :description,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4313,7 +4173,7 @@ module Aws::Finspace
       :segment_configurations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4404,7 +4264,7 @@ module Aws::Finspace
       :created_timestamp,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_update] = false unless options.key?(:auto_update)
@@ -4431,7 +4291,7 @@ module Aws::Finspace
       :custom_dns_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4500,7 +4360,7 @@ module Aws::Finspace
       :update_timestamp,
       :availability_zone_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4521,7 +4381,7 @@ module Aws::Finspace
       :description,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4590,7 +4450,7 @@ module Aws::Finspace
       :update_timestamp,
       :availability_zone_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4611,7 +4471,7 @@ module Aws::Finspace
       :iam_role,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_name
@@ -4634,7 +4494,7 @@ module Aws::Finspace
       :environment_id,
       :iam_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4662,7 +4522,7 @@ module Aws::Finspace
       :client_token,
       :nas1_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -4757,7 +4617,7 @@ module Aws::Finspace
       :last_modified_timestamp,
       :attached_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -4766,7 +4626,7 @@ module Aws::Finspace
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4783,11 +4643,7 @@ module Aws::Finspace
       :volume_name,
       :volume_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VolumeType
-      NAS_1 = 'NAS_1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration details about the network where the Privatelink endpoint of the cluster resides.</p>
@@ -4814,23 +4670,7 @@ module Aws::Finspace
       :subnet_ids,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsStatus
-      NONE = 'NONE'
-      UPDATE_REQUESTED = 'UPDATE_REQUESTED'
-      UPDATING = 'UPDATING'
-      FAILED_UPDATE = 'FAILED_UPDATE'
-      SUCCESSFULLY_UPDATED = 'SUCCESSFULLY_UPDATED'
-    end
-
-    module TgwStatus
-      NONE = 'NONE'
-      UPDATE_REQUESTED = 'UPDATE_REQUESTED'
-      UPDATING = 'UPDATING'
-      FAILED_UPDATE = 'FAILED_UPDATE'
-      SUCCESSFULLY_UPDATED = 'SUCCESSFULLY_UPDATED'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -17,7 +17,7 @@ module Aws::CodeGuruProfiler
       :profiling_group_name,
       :channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the AddNotificationChannelsResponse.</p>
@@ -27,7 +27,7 @@ module Aws::CodeGuruProfiler
     class AddNotificationChannelsOutput < Struct.new(
       :notification_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -98,7 +98,7 @@ module Aws::CodeGuruProfiler
       :period_in_seconds,
       :agent_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -117,7 +117,7 @@ module Aws::CodeGuruProfiler
     class AgentOrchestrationConfig < Struct.new(
       :profiling_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -166,7 +166,7 @@ module Aws::CodeGuruProfiler
       :start,
       :period,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -193,7 +193,7 @@ module Aws::CodeGuruProfiler
       :reason,
       :instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specific duration in which the metric is flagged as anomalous.</p>
@@ -227,7 +227,7 @@ module Aws::CodeGuruProfiler
       :end_time,
       :user_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the BatchGetFrameMetricDataRequest.</p>
@@ -298,7 +298,7 @@ module Aws::CodeGuruProfiler
       :target_resolution,
       :frame_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the BatchGetFrameMetricDataResponse.</p>
@@ -364,7 +364,7 @@ module Aws::CodeGuruProfiler
       :unprocessed_end_times,
       :frame_metric_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Notification medium for users to get alerted for events that occur in application profile. We support SNS topic as a notification channel.</p>
@@ -382,7 +382,7 @@ module Aws::CodeGuruProfiler
       :uri,
       :event_publishers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the configureAgentRequest.</p>
@@ -452,7 +452,7 @@ module Aws::CodeGuruProfiler
       :fleet_instance_id,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the configureAgentResponse.</p>
@@ -467,7 +467,7 @@ module Aws::CodeGuruProfiler
     class ConfigureAgentOutput < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation would cause a conflict with the current state 
@@ -479,7 +479,7 @@ module Aws::CodeGuruProfiler
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the createProfiliingGroupRequest.</p>
@@ -515,7 +515,7 @@ module Aws::CodeGuruProfiler
       :agent_orchestration_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the createProfilingGroupResponse.</p>
@@ -528,7 +528,7 @@ module Aws::CodeGuruProfiler
     class CreateProfilingGroupOutput < Struct.new(
       :profiling_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the deleteProfilingGroupRequest.</p>
@@ -538,13 +538,13 @@ module Aws::CodeGuruProfiler
     class DeleteProfilingGroupInput < Struct.new(
       :profiling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the deleteProfilingGroupResponse.</p>
     class DeleteProfilingGroupOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the describeProfilingGroupRequest.</p>
@@ -556,7 +556,7 @@ module Aws::CodeGuruProfiler
     class DescribeProfilingGroupInput < Struct.new(
       :profiling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the describeProfilingGroupResponse.</p>
@@ -571,7 +571,7 @@ module Aws::CodeGuruProfiler
     class DescribeProfilingGroupOutput < Struct.new(
       :profiling_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -608,7 +608,7 @@ module Aws::CodeGuruProfiler
       :profile_end_time,
       :total_number_of_findings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -631,7 +631,7 @@ module Aws::CodeGuruProfiler
       :type,
       :thread_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -651,7 +651,7 @@ module Aws::CodeGuruProfiler
       :frame_metric,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the GetFindingsReportAccountSummaryRequest.</p>
@@ -682,7 +682,7 @@ module Aws::CodeGuruProfiler
       :max_results,
       :daily_reports_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the GetFindingsReportAccountSummaryResponse.</p>
@@ -703,7 +703,7 @@ module Aws::CodeGuruProfiler
       :report_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the GetNotificationConfigurationRequest.</p>
@@ -713,7 +713,7 @@ module Aws::CodeGuruProfiler
     class GetNotificationConfigurationInput < Struct.new(
       :profiling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the GetNotificationConfigurationResponse.</p>
@@ -723,7 +723,7 @@ module Aws::CodeGuruProfiler
     class GetNotificationConfigurationOutput < Struct.new(
       :notification_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -735,7 +735,7 @@ module Aws::CodeGuruProfiler
     class GetPolicyInput < Struct.new(
       :profiling_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the <code>getPolicyResponse</code>.</p>
@@ -749,7 +749,7 @@ module Aws::CodeGuruProfiler
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the getProfileRequest.</p>
@@ -828,7 +828,7 @@ module Aws::CodeGuruProfiler
       :max_depth,
       :accept,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the getProfileResponse.</p>
@@ -848,7 +848,7 @@ module Aws::CodeGuruProfiler
       :content_type,
       :content_encoding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the GetRecommendationsRequest.</p>
@@ -942,7 +942,7 @@ module Aws::CodeGuruProfiler
       :end_time,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the GetRecommendationsResponse.</p>
@@ -978,7 +978,7 @@ module Aws::CodeGuruProfiler
       :recommendations,
       :anomalies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The server encountered an internal error and is unable to complete the request.</p>
@@ -987,7 +987,7 @@ module Aws::CodeGuruProfiler
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the ListFindingsReportsRequest.</p>
@@ -1041,7 +1041,7 @@ module Aws::CodeGuruProfiler
       :max_results,
       :daily_reports_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the ListFindingsReportsResponse.</p>
@@ -1058,7 +1058,7 @@ module Aws::CodeGuruProfiler
       :findings_report_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the listProfileTimesRequest.</p>
@@ -1128,7 +1128,7 @@ module Aws::CodeGuruProfiler
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the listProfileTimesResponse.</p>
@@ -1147,7 +1147,7 @@ module Aws::CodeGuruProfiler
       :profile_times,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the listProfilingGroupsRequest.</p>
@@ -1185,7 +1185,7 @@ module Aws::CodeGuruProfiler
       :max_results,
       :include_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the listProfilingGroupsResponse.</p>
@@ -1223,7 +1223,7 @@ module Aws::CodeGuruProfiler
       :profiling_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1234,7 +1234,7 @@ module Aws::CodeGuruProfiler
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1246,7 +1246,7 @@ module Aws::CodeGuruProfiler
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The part of a profile that contains a recommendation found during analysis.</p>
@@ -1264,7 +1264,7 @@ module Aws::CodeGuruProfiler
       :frame_address,
       :threshold_breach_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1296,7 +1296,7 @@ module Aws::CodeGuruProfiler
       :type,
       :thread_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for notifications stored for each profiling group. This includes up to
@@ -1308,7 +1308,7 @@ module Aws::CodeGuruProfiler
     class NotificationConfiguration < Struct.new(
       :channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1354,7 +1354,7 @@ module Aws::CodeGuruProfiler
       :threshold_percent,
       :counters_to_aggregate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:threshold_percent] = 0 unless options.key?(:threshold_percent)
@@ -1406,13 +1406,13 @@ module Aws::CodeGuruProfiler
       :profile_token,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the postAgentProfileResponse.</p>
     class PostAgentProfileOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1426,7 +1426,7 @@ module Aws::CodeGuruProfiler
     class ProfileTime < Struct.new(
       :start,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1492,7 +1492,7 @@ module Aws::CodeGuruProfiler
       :compute_platform,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1523,7 +1523,7 @@ module Aws::CodeGuruProfiler
       :latest_aggregated_profile,
       :latest_agent_orchestrated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the <code>putPermissionRequest</code>.</p>
@@ -1558,7 +1558,7 @@ module Aws::CodeGuruProfiler
       :principals,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the <code>putPermissionResponse</code>.</p>
@@ -1577,7 +1577,7 @@ module Aws::CodeGuruProfiler
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A potential improvement that was found from analyzing the profiling data.</p>
@@ -1613,7 +1613,7 @@ module Aws::CodeGuruProfiler
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the RemoveNotificationChannelRequest.</p>
@@ -1627,7 +1627,7 @@ module Aws::CodeGuruProfiler
       :profiling_group_name,
       :channel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the RemoveNotificationChannelResponse.</p>
@@ -1637,7 +1637,7 @@ module Aws::CodeGuruProfiler
     class RemoveNotificationChannelOutput < Struct.new(
       :notification_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1664,7 +1664,7 @@ module Aws::CodeGuruProfiler
       :action_group,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the <code>removePermissionResponse</code>.</p>
@@ -1683,7 +1683,7 @@ module Aws::CodeGuruProfiler
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request does not exist.</p>
@@ -1692,7 +1692,7 @@ module Aws::CodeGuruProfiler
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded your service quota. To perform the requested action, 
@@ -1704,7 +1704,7 @@ module Aws::CodeGuruProfiler
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the SubmitFeedbackRequest.</p>
@@ -1732,13 +1732,13 @@ module Aws::CodeGuruProfiler
       :type,
       :comment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the SubmitFeedbackResponse.</p>
     class SubmitFeedbackOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1755,12 +1755,12 @@ module Aws::CodeGuruProfiler
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1769,7 +1769,7 @@ module Aws::CodeGuruProfiler
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1787,7 +1787,7 @@ module Aws::CodeGuruProfiler
     class TimestampStructure < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1805,12 +1805,12 @@ module Aws::CodeGuruProfiler
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the updateProfilingGroupRequest.</p>
@@ -1826,7 +1826,7 @@ module Aws::CodeGuruProfiler
       :profiling_group_name,
       :agent_orchestration_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure representing the updateProfilingGroupResponse.</p>
@@ -1841,7 +1841,7 @@ module Aws::CodeGuruProfiler
     class UpdateProfilingGroupOutput < Struct.new(
       :profiling_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Feedback that can be submitted for each instance of an anomaly by the user. 
@@ -1853,7 +1853,7 @@ module Aws::CodeGuruProfiler
     class UserFeedback < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter is not valid.</p>
@@ -1862,7 +1862,7 @@ module Aws::CodeGuruProfiler
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

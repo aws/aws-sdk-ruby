@@ -13,7 +13,7 @@ module Aws::Ivs
     class AccessDeniedException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a stream’s audio configuration, as set up by the broadcaster (usually in an encoder). This is part of the <a>IngestConfigurations</a> object and the deprecated <a>IngestConfiguration</a> object. It is used for monitoring stream health.</p>
@@ -39,7 +39,7 @@ module Aws::Ivs
       :channels,
       :track,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:target_bitrate] = 0 unless options.key?(:target_bitrate)
@@ -64,7 +64,7 @@ module Aws::Ivs
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arns
@@ -73,7 +73,7 @@ module Aws::Ivs
     class BatchGetChannelInput < Struct.new(
       :arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channels
@@ -86,7 +86,7 @@ module Aws::Ivs
       :channels,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arns
@@ -95,7 +95,7 @@ module Aws::Ivs
     class BatchGetStreamKeyInput < Struct.new(
       :arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_keys
@@ -108,7 +108,7 @@ module Aws::Ivs
       :stream_keys,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error for a request in the batch for BatchStartViewerSessionRevocation. Each error is
@@ -131,7 +131,7 @@ module Aws::Ivs
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute viewer_sessions
@@ -140,7 +140,7 @@ module Aws::Ivs
     class BatchStartViewerSessionRevocationInput < Struct.new(
       :viewer_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -150,7 +150,7 @@ module Aws::Ivs
     class BatchStartViewerSessionRevocationOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A viewer session to revoke in the call to <a>BatchStartViewerSessionRevocation</a>.</p>
@@ -170,7 +170,7 @@ module Aws::Ivs
       :viewer_id,
       :viewer_session_versions_less_than_or_equal_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:viewer_session_versions_less_than_or_equal_to] = 0 unless options.key?(:viewer_session_versions_less_than_or_equal_to)
@@ -257,7 +257,7 @@ module Aws::Ivs
       :multitrack_input_configuration,
       :container_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:authorized] = false unless options.key?(:authorized)
@@ -273,7 +273,7 @@ module Aws::Ivs
     class ChannelNotBroadcasting < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a channel.</p>
@@ -334,20 +334,13 @@ module Aws::Ivs
       :preset,
       :playback_restriction_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:authorized] = false unless options.key?(:authorized)
         options[:insecure_ingest] = false unless options.key?(:insecure_ingest)
         super
       end
-    end
-
-    module ChannelType
-      BasicChannelType = 'BASIC'
-      StandardChannelType = 'STANDARD'
-      AdvancedSDChannelType = 'ADVANCED_SD'
-      AdvancedHDChannelType = 'ADVANCED_HD'
     end
 
     # <p/>
@@ -357,7 +350,7 @@ module Aws::Ivs
     class ConflictException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -418,7 +411,7 @@ module Aws::Ivs
       :multitrack_input_configuration,
       :container_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -431,7 +424,7 @@ module Aws::Ivs
       :channel,
       :stream_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute allowed_countries
@@ -462,7 +455,7 @@ module Aws::Ivs
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute playback_restriction_policy
@@ -471,7 +464,7 @@ module Aws::Ivs
     class CreatePlaybackRestrictionPolicyResponse < Struct.new(
       :playback_restriction_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -504,7 +497,7 @@ module Aws::Ivs
       :recording_reconnect_window_seconds,
       :rendition_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recording_configuration
@@ -513,7 +506,7 @@ module Aws::Ivs
     class CreateRecordingConfigurationOutput < Struct.new(
       :recording_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -527,7 +520,7 @@ module Aws::Ivs
       :channel_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_key
@@ -536,7 +529,7 @@ module Aws::Ivs
     class CreateStreamKeyOutput < Struct.new(
       :stream_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -545,7 +538,7 @@ module Aws::Ivs
     class DeleteChannelInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -554,12 +547,12 @@ module Aws::Ivs
     class DeletePlaybackKeyPairInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePlaybackKeyPairOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -568,7 +561,7 @@ module Aws::Ivs
     class DeletePlaybackRestrictionPolicyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -577,7 +570,7 @@ module Aws::Ivs
     class DeleteRecordingConfigurationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -586,7 +579,7 @@ module Aws::Ivs
     class DeleteStreamKeyInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes a location where recorded videos will be stored. Each member
@@ -598,7 +591,7 @@ module Aws::Ivs
     class DestinationConfiguration < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -607,7 +600,7 @@ module Aws::Ivs
     class GetChannelInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -616,7 +609,7 @@ module Aws::Ivs
     class GetChannelOutput < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -625,7 +618,7 @@ module Aws::Ivs
     class GetPlaybackKeyPairInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair
@@ -634,7 +627,7 @@ module Aws::Ivs
     class GetPlaybackKeyPairOutput < Struct.new(
       :key_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -643,7 +636,7 @@ module Aws::Ivs
     class GetPlaybackRestrictionPolicyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute playback_restriction_policy
@@ -652,7 +645,7 @@ module Aws::Ivs
     class GetPlaybackRestrictionPolicyResponse < Struct.new(
       :playback_restriction_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -661,7 +654,7 @@ module Aws::Ivs
     class GetRecordingConfigurationInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recording_configuration
@@ -670,7 +663,7 @@ module Aws::Ivs
     class GetRecordingConfigurationOutput < Struct.new(
       :recording_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -679,7 +672,7 @@ module Aws::Ivs
     class GetStreamInput < Struct.new(
       :channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -688,7 +681,7 @@ module Aws::Ivs
     class GetStreamKeyInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_key
@@ -697,7 +690,7 @@ module Aws::Ivs
     class GetStreamKeyOutput < Struct.new(
       :stream_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream
@@ -706,7 +699,7 @@ module Aws::Ivs
     class GetStreamOutput < Struct.new(
       :stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -721,7 +714,7 @@ module Aws::Ivs
       :channel_arn,
       :stream_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_session
@@ -730,7 +723,7 @@ module Aws::Ivs
     class GetStreamSessionOutput < Struct.new(
       :stream_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key_material
@@ -748,7 +741,7 @@ module Aws::Ivs
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pair
@@ -757,7 +750,7 @@ module Aws::Ivs
     class ImportPlaybackKeyPairOutput < Struct.new(
       :key_pair,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying the ingest configuration set up by the broadcaster, usually in an
@@ -774,7 +767,7 @@ module Aws::Ivs
       :video,
       :audio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying the ingest configuration set up by the broadcaster, usually in an encoder. </p>
@@ -790,7 +783,7 @@ module Aws::Ivs
       :video_configurations,
       :audio_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -800,7 +793,7 @@ module Aws::Ivs
     class InternalServerException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_by_name
@@ -826,7 +819,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channels
@@ -840,7 +833,7 @@ module Aws::Ivs
       :channels,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -855,7 +848,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_pairs
@@ -869,7 +862,7 @@ module Aws::Ivs
       :key_pairs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -883,7 +876,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute playback_restriction_policies
@@ -897,7 +890,7 @@ module Aws::Ivs
       :playback_restriction_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -912,7 +905,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recording_configurations
@@ -926,7 +919,7 @@ module Aws::Ivs
       :recording_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -944,7 +937,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_keys
@@ -958,7 +951,7 @@ module Aws::Ivs
       :stream_keys,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -976,7 +969,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_sessions
@@ -990,7 +983,7 @@ module Aws::Ivs
       :stream_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_by
@@ -1008,7 +1001,7 @@ module Aws::Ivs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streams
@@ -1022,7 +1015,7 @@ module Aws::Ivs
       :streams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1031,7 +1024,7 @@ module Aws::Ivs
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1041,7 +1034,7 @@ module Aws::Ivs
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that specifies multitrack input configuration.</p>
@@ -1059,23 +1052,12 @@ module Aws::Ivs
       :policy,
       :maximum_resolution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module MultitrackMaximumResolution
-      SD = 'SD'
-      HD = 'HD'
-      FULL_HD = 'FULL_HD'
-    end
-
-    module MultitrackPolicy
-      ALLOW = 'ALLOW'
-      REQUIRE = 'REQUIRE'
     end
 
     # <p/>
@@ -1085,7 +1067,7 @@ module Aws::Ivs
     class PendingVerification < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key pair used to sign and validate a playback authorization token.</p>
@@ -1109,7 +1091,7 @@ module Aws::Ivs
       :fingerprint,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a playback key pair.</p>
@@ -1129,7 +1111,7 @@ module Aws::Ivs
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a policy to constrain playback by country and/or origin
@@ -1167,7 +1149,7 @@ module Aws::Ivs
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a PlaybackRestrictionPolicy.</p>
@@ -1204,7 +1186,7 @@ module Aws::Ivs
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -1218,7 +1200,7 @@ module Aws::Ivs
       :channel_arn,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a configuration to record a channel stream.</p>
@@ -1261,7 +1243,7 @@ module Aws::Ivs
       :recording_reconnect_window_seconds,
       :rendition_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:recording_reconnect_window_seconds] = 0 unless options.key?(:recording_reconnect_window_seconds)
@@ -1295,7 +1277,7 @@ module Aws::Ivs
       :state,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that describes which renditions should be recorded for a stream.</p>
@@ -1316,14 +1298,7 @@ module Aws::Ivs
       :rendition_selection,
       :renditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RenditionConfigurationRendition
-      SD = 'SD'
-      HD = 'HD'
-      FULL_HD = 'FULL_HD'
-      LOWEST_RESOLUTION = 'LOWEST_RESOLUTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1333,7 +1308,7 @@ module Aws::Ivs
     class ResourceNotFoundException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes an S3 location where recorded videos will be stored.</p>
@@ -1343,7 +1318,7 @@ module Aws::Ivs
     class S3DestinationConfiguration < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1353,7 +1328,7 @@ module Aws::Ivs
     class ServiceQuotaExceededException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies information needed to stream using the SRT protocol.</p>
@@ -1369,7 +1344,7 @@ module Aws::Ivs
       :endpoint,
       :passphrase,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -1388,12 +1363,12 @@ module Aws::Ivs
       :viewer_id,
       :viewer_session_versions_less_than_or_equal_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartViewerSessionRevocationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -1402,12 +1377,12 @@ module Aws::Ivs
     class StopStreamInput < Struct.new(
       :channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopStreamOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a live video stream that has been ingested and distributed.</p>
@@ -1447,7 +1422,7 @@ module Aws::Ivs
       :health,
       :viewer_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:viewer_count] = 0 unless options.key?(:viewer_count)
@@ -1512,7 +1487,7 @@ module Aws::Ivs
       :event_time,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying the stream attribute on which to filter.</p>
@@ -1522,7 +1497,7 @@ module Aws::Ivs
     class StreamFilters < Struct.new(
       :health,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a stream key.</p>
@@ -1546,7 +1521,7 @@ module Aws::Ivs
       :channel_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a stream key.</p>
@@ -1566,7 +1541,7 @@ module Aws::Ivs
       :channel_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that captures the Amazon IVS configuration that the customer provisioned, the
@@ -1613,7 +1588,7 @@ module Aws::Ivs
       :recording_configuration,
       :truncated_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a stream session.</p>
@@ -1637,7 +1612,7 @@ module Aws::Ivs
       :end_time,
       :has_error_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:has_error_event] = false unless options.key?(:has_error_event)
@@ -1678,7 +1653,7 @@ module Aws::Ivs
       :viewer_count,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:viewer_count] = 0 unless options.key?(:viewer_count)
@@ -1693,7 +1668,7 @@ module Aws::Ivs
     class StreamUnavailable < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1709,12 +1684,12 @@ module Aws::Ivs
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1724,7 +1699,7 @@ module Aws::Ivs
     class ThrottlingException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a configuration of thumbnails for recorded video.</p>
@@ -1764,19 +1739,7 @@ module Aws::Ivs
       :resolution,
       :storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThumbnailConfigurationResolution
-      SD = 'SD'
-      HD = 'HD'
-      FULL_HD = 'FULL_HD'
-      LOWEST_RESOLUTION = 'LOWEST_RESOLUTION'
-    end
-
-    module TranscodePreset
-      HigherBandwidthTranscodePreset = 'HIGHER_BANDWIDTH_DELIVERY'
-      ConstrainedBandwidthTranscodePreset = 'CONSTRAINED_BANDWIDTH_DELIVERY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1791,12 +1754,12 @@ module Aws::Ivs
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1855,7 +1818,7 @@ module Aws::Ivs
       :multitrack_input_configuration,
       :container_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel
@@ -1864,7 +1827,7 @@ module Aws::Ivs
     class UpdateChannelOutput < Struct.new(
       :channel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1894,7 +1857,7 @@ module Aws::Ivs
       :enable_strict_origin_enforcement,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute playback_restriction_policy
@@ -1903,7 +1866,7 @@ module Aws::Ivs
     class UpdatePlaybackRestrictionPolicyResponse < Struct.new(
       :playback_restriction_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1913,7 +1876,7 @@ module Aws::Ivs
     class ValidationException < Struct.new(
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a stream’s video configuration, as set up by the broadcaster (usually in
@@ -1968,7 +1931,7 @@ module Aws::Ivs
       :track,
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:target_bitrate] = 0 unless options.key?(:target_bitrate)

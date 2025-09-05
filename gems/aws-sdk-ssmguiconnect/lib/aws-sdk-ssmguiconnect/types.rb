@@ -12,7 +12,7 @@ module Aws::SSMGuiConnect
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred due to a conflict.</p>
@@ -21,7 +21,7 @@ module Aws::SSMGuiConnect
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of preferences used for recording RDP connections in the requesting Amazon Web Services account and Amazon Web Services Region. This includes details such as which S3 bucket recordings are stored in.</p>
@@ -35,7 +35,7 @@ module Aws::SSMGuiConnect
       :recording_destinations,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -44,7 +44,7 @@ module Aws::SSMGuiConnect
     class DeleteConnectionRecordingPreferencesRequest < Struct.new(
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -53,7 +53,7 @@ module Aws::SSMGuiConnect
     class DeleteConnectionRecordingPreferencesResponse < Struct.new(
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -66,7 +66,7 @@ module Aws::SSMGuiConnect
       :client_token,
       :connection_recording_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
@@ -75,7 +75,7 @@ module Aws::SSMGuiConnect
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines where recordings of RDP connections are stored.</p>
@@ -85,7 +85,7 @@ module Aws::SSMGuiConnect
     class RecordingDestinations < Struct.new(
       :s3_buckets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -94,7 +94,7 @@ module Aws::SSMGuiConnect
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket where RDP connection recordings are stored.</p>
@@ -108,7 +108,7 @@ module Aws::SSMGuiConnect
       :bucket_owner,
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeds a service quota.</p>
@@ -117,7 +117,7 @@ module Aws::SSMGuiConnect
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -126,7 +126,7 @@ module Aws::SSMGuiConnect
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_recording_preferences
@@ -139,7 +139,7 @@ module Aws::SSMGuiConnect
       :connection_recording_preferences,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -152,7 +152,7 @@ module Aws::SSMGuiConnect
       :client_token,
       :connection_recording_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -161,7 +161,7 @@ module Aws::SSMGuiConnect
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

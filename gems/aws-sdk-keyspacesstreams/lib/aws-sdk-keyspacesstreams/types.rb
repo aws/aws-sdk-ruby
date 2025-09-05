@@ -13,7 +13,7 @@ module Aws::KeyspacesStreams
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shard_iterator
@@ -26,7 +26,7 @@ module Aws::KeyspacesStreams
       :shard_iterator,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute change_records
@@ -39,7 +39,7 @@ module Aws::KeyspacesStreams
       :change_records,
       :next_shard_iterator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -60,7 +60,7 @@ module Aws::KeyspacesStreams
       :shard_iterator_type,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shard_iterator
@@ -69,7 +69,7 @@ module Aws::KeyspacesStreams
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -90,7 +90,7 @@ module Aws::KeyspacesStreams
       :shard_filter,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stream_arn
@@ -131,7 +131,7 @@ module Aws::KeyspacesStreams
       :shards,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Keyspaces service encountered an unexpected error while processing the request. </p> <p>This internal server error is not related to your request parameters. Retry your request after a brief delay. If the issue persists, contact Amazon Web Services Support with details of your request to help identify and resolve the problem.</p>
@@ -141,7 +141,7 @@ module Aws::KeyspacesStreams
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a cell in an Amazon Keyspaces table, containing both the value and metadata about the cell.</p>
@@ -155,7 +155,7 @@ module Aws::KeyspacesStreams
       :value,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a key-value pair within a map data type in Amazon Keyspaces, including the associated metadata.</p>
@@ -173,7 +173,7 @@ module Aws::KeyspacesStreams
       :value,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the value of a cell in an Amazon Keyspaces table, supporting various data types with type-specific fields.</p>
@@ -280,7 +280,7 @@ module Aws::KeyspacesStreams
       :udt_t,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AsciiT < KeyspacesCellValue; end
       class BigintT < KeyspacesCellValue; end
@@ -321,7 +321,7 @@ module Aws::KeyspacesStreams
       :expiration_time,
       :write_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a row in an Amazon Keyspaces table, containing regular column values, static column values, and row-level metadata.</p>
@@ -339,7 +339,7 @@ module Aws::KeyspacesStreams
       :static_cells,
       :row_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute keyspace_name
@@ -360,7 +360,7 @@ module Aws::KeyspacesStreams
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute streams
@@ -373,13 +373,7 @@ module Aws::KeyspacesStreams
       :streams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OriginType
-      USER = 'USER'
-      REPLICATION = 'REPLICATION'
-      TTL = 'TTL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a change data capture record for a row in an Amazon Keyspaces table, containing both the new and old states of the row.</p>
@@ -417,7 +411,7 @@ module Aws::KeyspacesStreams
       :old_image,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource doesn't exist or could not be found. </p> <p>This exception occurs when you attempt to access a keyspace, table, stream, or other Amazon Keyspaces resource that doesn't exist or that has been deleted. Verify that the resource identifier is correct and that the resource exists in your account.</p>
@@ -427,7 +421,7 @@ module Aws::KeyspacesStreams
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a range of sequence numbers within a change data capture stream's shard for Amazon Keyspaces.</p>
@@ -441,7 +435,7 @@ module Aws::KeyspacesStreams
       :starting_sequence_number,
       :ending_sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a uniquely identified group of change records within a change data capture stream for Amazon Keyspaces.</p>
@@ -459,7 +453,7 @@ module Aws::KeyspacesStreams
       :sequence_number_range,
       :parent_shard_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to limit the shards returned by a <code>GetStream</code> operation.</p>
@@ -473,18 +467,7 @@ module Aws::KeyspacesStreams
       :type,
       :shard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShardFilterType
-      CHILD_SHARDS = 'CHILD_SHARDS'
-    end
-
-    module ShardIteratorType
-      TRIM_HORIZON = 'TRIM_HORIZON'
-      LATEST = 'LATEST'
-      AT_SEQUENCE_NUMBER = 'AT_SEQUENCE_NUMBER'
-      AFTER_SEQUENCE_NUMBER = 'AFTER_SEQUENCE_NUMBER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a change data capture stream for an Amazon Keyspaces table, which enables tracking and processing of data changes.</p>
@@ -506,21 +489,7 @@ module Aws::KeyspacesStreams
       :table_name,
       :stream_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamStatus
-      ENABLING = 'ENABLING'
-      ENABLED = 'ENABLED'
-      DISABLING = 'DISABLING'
-      DISABLED = 'DISABLED'
-    end
-
-    module StreamViewType
-      NEW_IMAGE = 'NEW_IMAGE'
-      OLD_IMAGE = 'OLD_IMAGE'
-      NEW_AND_OLD_IMAGES = 'NEW_AND_OLD_IMAGES'
-      KEYS_ONLY = 'KEYS_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request rate is too high and exceeds the service's throughput limits. </p> <p>This exception occurs when you send too many requests in a short period of time. Implement exponential backoff in your retry strategy to handle this exception. Reducing your request frequency or distributing requests more evenly can help avoid throughput exceptions.</p>
@@ -530,7 +499,7 @@ module Aws::KeyspacesStreams
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request validation failed because one or more input parameters failed validation. </p> <p>This exception occurs when there are syntax errors in the request, field constraints are violated, or required parameters are missing. To help you fix the issue, the exception message provides details about which parameter failed and why.</p>
@@ -544,14 +513,7 @@ module Aws::KeyspacesStreams
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionType
-      InvalidFormat = 'InvalidFormat'
-      TrimmedDataAccess = 'TrimmedDataAccess'
-      ExpiredIterator = 'ExpiredIterator'
-      ExpiredNextToken = 'ExpiredNextToken'
+      include ::Smithy::Schema::Structure
     end
 
   end

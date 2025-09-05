@@ -13,12 +13,7 @@ module Aws::SageMakerA2IRuntime
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentClassifier
-      FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = 'FreeOfPersonallyIdentifiableInformation'
-      FREE_OF_ADULT_CONTENT = 'FreeOfAdultContent'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_loop_name
@@ -27,12 +22,12 @@ module Aws::SageMakerA2IRuntime
     class DeleteHumanLoopRequest < Struct.new(
       :human_loop_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteHumanLoopResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_loop_name
@@ -41,7 +36,7 @@ module Aws::SageMakerA2IRuntime
     class DescribeHumanLoopRequest < Struct.new(
       :human_loop_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -83,7 +78,7 @@ module Aws::SageMakerA2IRuntime
       :flow_definition_arn,
       :human_loop_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of the data specified by the customer. Use these to describe the data to be labeled.</p>
@@ -94,7 +89,7 @@ module Aws::SageMakerA2IRuntime
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the human loop input in JSON format.</p>
@@ -104,7 +99,7 @@ module Aws::SageMakerA2IRuntime
     class HumanLoopInput < Struct.new(
       :input_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about where the human output will be stored.</p>
@@ -114,15 +109,7 @@ module Aws::SageMakerA2IRuntime
     class HumanLoopOutput < Struct.new(
       :output_s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HumanLoopStatus
-      IN_PROGRESS = 'InProgress'
-      FAILED = 'Failed'
-      COMPLETED = 'Completed'
-      STOPPED = 'Stopped'
-      STOPPING = 'Stopping'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the human loop.</p>
@@ -150,7 +137,7 @@ module Aws::SageMakerA2IRuntime
       :failure_reason,
       :flow_definition_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We couldn't process your request because of an issue with the server. Try again
@@ -160,7 +147,7 @@ module Aws::SageMakerA2IRuntime
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time_after
@@ -192,7 +179,7 @@ module Aws::SageMakerA2IRuntime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_loop_summaries
@@ -205,7 +192,7 @@ module Aws::SageMakerA2IRuntime
       :human_loop_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We couldn't find the requested resource. Check that your resources exists and were created
@@ -215,7 +202,7 @@ module Aws::SageMakerA2IRuntime
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You exceeded your service quota. Service quotas, also referred to as limits, are the
@@ -229,12 +216,7 @@ module Aws::SageMakerA2IRuntime
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortOrder
-      ASCENDING = 'Ascending'
-      DESCENDING = 'Descending'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_loop_name
@@ -257,7 +239,7 @@ module Aws::SageMakerA2IRuntime
       :human_loop_input,
       :data_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_loop_arn
@@ -266,7 +248,7 @@ module Aws::SageMakerA2IRuntime
     class StartHumanLoopResponse < Struct.new(
       :human_loop_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute human_loop_name
@@ -275,12 +257,12 @@ module Aws::SageMakerA2IRuntime
     class StopHumanLoopRequest < Struct.new(
       :human_loop_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopHumanLoopResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You exceeded
@@ -291,7 +273,7 @@ module Aws::SageMakerA2IRuntime
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The
@@ -301,7 +283,7 @@ module Aws::SageMakerA2IRuntime
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

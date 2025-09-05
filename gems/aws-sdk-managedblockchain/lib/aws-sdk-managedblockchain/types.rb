@@ -12,7 +12,7 @@ module Aws::ManagedBlockchain
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of the Accessor.</p>
@@ -58,21 +58,7 @@ module Aws::ManagedBlockchain
       :tags,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessorNetworkType
-      ETHEREUM_GOERLI = 'ETHEREUM_GOERLI'
-      ETHEREUM_MAINNET = 'ETHEREUM_MAINNET'
-      ETHEREUM_MAINNET_AND_GOERLI = 'ETHEREUM_MAINNET_AND_GOERLI'
-      POLYGON_MAINNET = 'POLYGON_MAINNET'
-      POLYGON_MUMBAI = 'POLYGON_MUMBAI'
-    end
-
-    module AccessorStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING_DELETION = 'PENDING_DELETION'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of accessor properties.</p>
@@ -107,11 +93,7 @@ module Aws::ManagedBlockchain
       :arn,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessorType
-      BILLING_TOKEN = 'BILLING_TOKEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>
@@ -132,7 +114,7 @@ module Aws::ManagedBlockchain
       :proposal_duration_in_hours,
       :threshold_comparator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -196,7 +178,7 @@ module Aws::ManagedBlockchain
       :tags,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accessor_id
@@ -215,7 +197,7 @@ module Aws::ManagedBlockchain
       :billing_token,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -236,7 +218,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_id
@@ -245,7 +227,7 @@ module Aws::ManagedBlockchain
     class CreateMemberOutput < Struct.new(
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -298,7 +280,7 @@ module Aws::ManagedBlockchain
       :member_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -311,7 +293,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -349,7 +331,7 @@ module Aws::ManagedBlockchain
       :node_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_id
@@ -358,7 +340,7 @@ module Aws::ManagedBlockchain
     class CreateNodeOutput < Struct.new(
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_request_token
@@ -394,7 +376,7 @@ module Aws::ManagedBlockchain
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proposal_id
@@ -403,7 +385,7 @@ module Aws::ManagedBlockchain
     class CreateProposalOutput < Struct.new(
       :proposal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accessor_id
@@ -412,12 +394,12 @@ module Aws::ManagedBlockchain
     class DeleteAccessorInput < Struct.new(
       :accessor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAccessorOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -430,12 +412,12 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMemberOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -461,22 +443,12 @@ module Aws::ManagedBlockchain
       :member_id,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNodeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Edition
-      STARTER = 'STARTER'
-      STANDARD = 'STANDARD'
-    end
-
-    module Framework
-      HYPERLEDGER_FABRIC = 'HYPERLEDGER_FABRIC'
-      ETHEREUM = 'ETHEREUM'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accessor_id
@@ -485,7 +457,7 @@ module Aws::ManagedBlockchain
     class GetAccessorInput < Struct.new(
       :accessor_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accessor
@@ -494,7 +466,7 @@ module Aws::ManagedBlockchain
     class GetAccessorOutput < Struct.new(
       :accessor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -507,7 +479,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member
@@ -516,7 +488,7 @@ module Aws::ManagedBlockchain
     class GetMemberOutput < Struct.new(
       :member,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -525,7 +497,7 @@ module Aws::ManagedBlockchain
     class GetNetworkInput < Struct.new(
       :network_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network
@@ -534,7 +506,7 @@ module Aws::ManagedBlockchain
     class GetNetworkOutput < Struct.new(
       :network,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -552,7 +524,7 @@ module Aws::ManagedBlockchain
       :member_id,
       :node_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node
@@ -561,7 +533,7 @@ module Aws::ManagedBlockchain
     class GetNodeOutput < Struct.new(
       :node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -574,7 +546,7 @@ module Aws::ManagedBlockchain
       :network_id,
       :proposal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proposal
@@ -583,7 +555,7 @@ module Aws::ManagedBlockchain
     class GetProposalOutput < Struct.new(
       :proposal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -592,13 +564,13 @@ module Aws::ManagedBlockchain
     class IllegalActionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     class InternalServiceErrorException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action or operation requested is invalid. Verify that the action is typed correctly.</p>
@@ -607,7 +579,7 @@ module Aws::ManagedBlockchain
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invitation to an Amazon Web Services account to create a member and join the network.</p>
@@ -660,15 +632,7 @@ module Aws::ManagedBlockchain
       :network_summary,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InvitationStatus
-      PENDING = 'PENDING'
-      ACCEPTED = 'ACCEPTED'
-      ACCEPTING = 'ACCEPTING'
-      REJECTED = 'REJECTED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action to invite a specific Amazon Web Services account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.</p>
@@ -679,7 +643,7 @@ module Aws::ManagedBlockchain
     class InviteAction < Struct.new(
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -701,7 +665,7 @@ module Aws::ManagedBlockchain
       :next_token,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute accessors
@@ -715,7 +679,7 @@ module Aws::ManagedBlockchain
       :accessors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -728,7 +692,7 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitations
@@ -741,7 +705,7 @@ module Aws::ManagedBlockchain
       :invitations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -772,7 +736,7 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -785,7 +749,7 @@ module Aws::ManagedBlockchain
       :members,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -811,7 +775,7 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute networks
@@ -824,7 +788,7 @@ module Aws::ManagedBlockchain
       :networks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -850,7 +814,7 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -863,7 +827,7 @@ module Aws::ManagedBlockchain
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -892,7 +856,7 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proposal_votes
@@ -909,7 +873,7 @@ module Aws::ManagedBlockchain
       :proposal_votes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -932,7 +896,7 @@ module Aws::ManagedBlockchain
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute proposals
@@ -945,7 +909,7 @@ module Aws::ManagedBlockchain
       :proposals,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -954,7 +918,7 @@ module Aws::ManagedBlockchain
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -963,7 +927,7 @@ module Aws::ManagedBlockchain
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for logging events.</p>
@@ -973,7 +937,7 @@ module Aws::ManagedBlockchain
     class LogConfiguration < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of log configurations.</p>
@@ -983,7 +947,7 @@ module Aws::ManagedBlockchain
     class LogConfigurations < Struct.new(
       :cloudwatch,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Member configuration properties.</p>
@@ -1069,7 +1033,7 @@ module Aws::ManagedBlockchain
       :arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties of the member.</p>
@@ -1116,7 +1080,7 @@ module Aws::ManagedBlockchain
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.</p>
@@ -1130,7 +1094,7 @@ module Aws::ManagedBlockchain
       :admin_username,
       :ca_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network that is using the Hyperledger Fabric framework.</p>
@@ -1144,7 +1108,7 @@ module Aws::ManagedBlockchain
       :admin_username,
       :admin_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.</p>
@@ -1154,7 +1118,7 @@ module Aws::ManagedBlockchain
     class MemberFabricLogPublishingConfiguration < Struct.new(
       :ca_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.</p>
@@ -1164,7 +1128,7 @@ module Aws::ManagedBlockchain
     class MemberFrameworkAttributes < Struct.new(
       :fabric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties relevant to a member for the blockchain framework that the Managed Blockchain network uses.</p>
@@ -1174,7 +1138,7 @@ module Aws::ManagedBlockchain
     class MemberFrameworkConfiguration < Struct.new(
       :fabric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties for logging events associated with a member of a Managed Blockchain network.</p>
@@ -1184,17 +1148,7 @@ module Aws::ManagedBlockchain
     class MemberLogPublishingConfiguration < Struct.new(
       :fabric,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      INACCESSIBLE_ENCRYPTION_KEY = 'INACCESSIBLE_ENCRYPTION_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of configuration properties for a member.</p>
@@ -1262,7 +1216,7 @@ module Aws::ManagedBlockchain
       :is_owned,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network configuration properties.</p>
@@ -1317,7 +1271,7 @@ module Aws::ManagedBlockchain
       :tags,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of Ethereum for a network. </p>
@@ -1333,7 +1287,7 @@ module Aws::ManagedBlockchain
     class NetworkEthereumAttributes < Struct.new(
       :chain_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of Hyperledger Fabric for a network.</p>
@@ -1347,7 +1301,7 @@ module Aws::ManagedBlockchain
       :ordering_service_endpoint,
       :edition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Hyperledger Fabric configuration properties for the network.</p>
@@ -1357,7 +1311,7 @@ module Aws::ManagedBlockchain
     class NetworkFabricConfiguration < Struct.new(
       :edition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes relevant to the network for the blockchain framework that the network uses.</p>
@@ -1371,7 +1325,7 @@ module Aws::ManagedBlockchain
       :fabric,
       :ethereum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1385,15 +1339,7 @@ module Aws::ManagedBlockchain
     class NetworkFrameworkConfiguration < Struct.new(
       :fabric,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of network configuration properties.</p>
@@ -1431,7 +1377,7 @@ module Aws::ManagedBlockchain
       :creation_date,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties of a node.</p>
@@ -1533,7 +1479,7 @@ module Aws::ManagedBlockchain
       :arn,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties of a node.</p>
@@ -1557,7 +1503,7 @@ module Aws::ManagedBlockchain
       :log_publishing_configuration,
       :state_db,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of an Ethereum node.</p>
@@ -1571,7 +1517,7 @@ module Aws::ManagedBlockchain
       :http_endpoint,
       :web_socket_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric network on Managed Blockchain.</p>
@@ -1585,7 +1531,7 @@ module Aws::ManagedBlockchain
       :peer_endpoint,
       :peer_event_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.</p>
@@ -1599,7 +1545,7 @@ module Aws::ManagedBlockchain
       :chaincode_logs,
       :peer_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attributes relevant to a node on a Managed Blockchain network for the blockchain framework that the network uses.</p>
@@ -1613,7 +1559,7 @@ module Aws::ManagedBlockchain
       :fabric,
       :ethereum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain.</p>
@@ -1623,19 +1569,7 @@ module Aws::ManagedBlockchain
     class NodeLogPublishingConfiguration < Struct.new(
       :fabric,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      UNHEALTHY = 'UNHEALTHY'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
-      INACCESSIBLE_ENCRYPTION_KEY = 'INACCESSIBLE_ENCRYPTION_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of configuration properties for a node.</p>
@@ -1665,7 +1599,7 @@ module Aws::ManagedBlockchain
       :instance_type,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of a proposal on a Managed Blockchain network.</p>
@@ -1761,7 +1695,7 @@ module Aws::ManagedBlockchain
       :tags,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1782,15 +1716,7 @@ module Aws::ManagedBlockchain
       :invitations,
       :removals,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProposalStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      APPROVED = 'APPROVED'
-      REJECTED = 'REJECTED'
-      EXPIRED = 'EXPIRED'
-      ACTION_FAILED = 'ACTION_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of a proposal.</p>
@@ -1863,7 +1789,7 @@ module Aws::ManagedBlockchain
       :expiration_date,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute invitation_id
@@ -1872,12 +1798,12 @@ module Aws::ManagedBlockchain
     class RejectInvitationInput < Struct.new(
       :invitation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RejectInvitationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.</p>
@@ -1888,7 +1814,7 @@ module Aws::ManagedBlockchain
     class RemoveAction < Struct.new(
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource request is issued for a resource that already exists.</p>
@@ -1897,7 +1823,7 @@ module Aws::ManagedBlockchain
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of resources of that type already exist. Ensure the resources requested 
@@ -1907,7 +1833,7 @@ module Aws::ManagedBlockchain
     class ResourceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A requested resource doesn't exist. It may have been deleted or referenced incorrectly.</p>
@@ -1920,7 +1846,7 @@ module Aws::ManagedBlockchain
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource exists but isn't in a status that can complete the operation.</p>
@@ -1929,12 +1855,7 @@ module Aws::ManagedBlockchain
     class ResourceNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StateDBType
-      LevelDB = 'LevelDB'
-      CouchDB = 'CouchDB'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1947,17 +1868,12 @@ module Aws::ManagedBlockchain
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThresholdComparator
-      GREATER_THAN = 'GREATER_THAN'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request or operation couldn't be performed because a service is 
@@ -1966,7 +1882,7 @@ module Aws::ManagedBlockchain
     #          Request a limit increase or delete unused resources if possible.</p>
     class ThrottlingException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1979,7 +1895,7 @@ module Aws::ManagedBlockchain
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1992,12 +1908,12 @@ module Aws::ManagedBlockchain
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -2014,12 +1930,12 @@ module Aws::ManagedBlockchain
       :member_id,
       :log_publishing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateMemberOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -2041,12 +1957,12 @@ module Aws::ManagedBlockchain
       :node_id,
       :log_publishing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNodeOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute network_id
@@ -2074,12 +1990,12 @@ module Aws::ManagedBlockchain
       :voter_member_id,
       :vote,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class VoteOnProposalOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2106,12 +2022,7 @@ module Aws::ManagedBlockchain
       :member_name,
       :member_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VoteValue
-      YES = 'YES'
-      NO = 'NO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2124,7 +2035,7 @@ module Aws::ManagedBlockchain
     class VotingPolicy < Struct.new(
       :approval_threshold_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

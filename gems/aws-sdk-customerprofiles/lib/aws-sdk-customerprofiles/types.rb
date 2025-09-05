@@ -12,7 +12,7 @@ module Aws::CustomerProfiles
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -37,7 +37,7 @@ module Aws::CustomerProfiles
       :values,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -50,7 +50,7 @@ module Aws::CustomerProfiles
       :key_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list
@@ -66,7 +66,7 @@ module Aws::CustomerProfiles
       :key_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A generic address associated with the customer that is not mailing, shipping, or
@@ -114,7 +114,7 @@ module Aws::CustomerProfiles
       :country,
       :postal_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that segments on Customer Profile's address object.</p>
@@ -144,7 +144,7 @@ module Aws::CustomerProfiles
       :province,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for workflow of type <code>APPFLOW_INTEGRATION</code>.</p>
@@ -160,7 +160,7 @@ module Aws::CustomerProfiles
       :flow_definition,
       :batches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow
@@ -180,7 +180,7 @@ module Aws::CustomerProfiles
       :connector_profile_name,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code>
@@ -199,7 +199,7 @@ module Aws::CustomerProfiles
       :steps_completed,
       :total_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:records_processed] = 0 unless options.key?(:records_processed)
@@ -252,7 +252,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:records_processed] = 0 unless options.key?(:records_processed)
@@ -275,7 +275,7 @@ module Aws::CustomerProfiles
       :attributes,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that segments on various Customer Profile's fields.</p>
@@ -289,25 +289,7 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeDimensionType
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
-      CONTAINS = 'CONTAINS'
-      BEGINS_WITH = 'BEGINS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      BEFORE = 'BEFORE'
-      AFTER = 'AFTER'
-      BETWEEN = 'BETWEEN'
-      NOT_BETWEEN = 'NOT_BETWEEN'
-      ON = 'ON'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
-      EQUAL = 'EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a single attribute item specified in the mathematical expression.</p>
@@ -317,12 +299,7 @@ module Aws::CustomerProfiles
     class AttributeItem < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttributeMatchingModel
-      ONE_TO_ONE = 'ONE_TO_ONE'
-      MANY_TO_MANY = 'MANY_TO_MANY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about the <code>AttributeTypesSelector </code>where the
@@ -409,7 +386,7 @@ module Aws::CustomerProfiles
       :phone_number,
       :email_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List containing the values for the given attribute.</p>
@@ -419,7 +396,7 @@ module Aws::CustomerProfiles
     class AttributeValueItem < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for how to perform the auto-merging of profiles.</p>
@@ -447,7 +424,7 @@ module Aws::CustomerProfiles
       :conflict_resolution,
       :min_allowed_confidence_score_for_merging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input you provided is invalid.</p>
@@ -456,7 +433,7 @@ module Aws::CustomerProfiles
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Batch defines the boundaries for ingestion for each step in
@@ -472,7 +449,7 @@ module Aws::CustomerProfiles
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error object describing why a specific profile and calculated attribute failed.</p>
@@ -490,7 +467,7 @@ module Aws::CustomerProfiles
       :message,
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculated_attribute_name
@@ -512,7 +489,7 @@ module Aws::CustomerProfiles
       :profile_ids,
       :condition_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -530,7 +507,7 @@ module Aws::CustomerProfiles
       :calculated_attribute_values,
       :condition_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error object describing why a specific profile failed.</p>
@@ -548,7 +525,7 @@ module Aws::CustomerProfiles
       :message,
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -561,7 +538,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :profile_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -575,7 +552,7 @@ module Aws::CustomerProfiles
       :errors,
       :profiles,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that segments on Customer Profile's Calculated Attributes.</p>
@@ -593,7 +570,7 @@ module Aws::CustomerProfiles
       :values,
       :condition_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object containing the values of a single calculated attribute value.</p>
@@ -625,25 +602,7 @@ module Aws::CustomerProfiles
       :value,
       :last_object_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
-      CONTAINS = 'CONTAINS'
-      BEGINS_WITH = 'BEGINS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
-      EQUAL = 'EQUAL'
-      BEFORE = 'BEFORE'
-      AFTER = 'AFTER'
-      ON = 'ON'
-      BETWEEN = 'BETWEEN'
-      NOT_BETWEEN = 'NOT_BETWEEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object to override the original condition block of a calculated attribute.</p>
@@ -655,7 +614,7 @@ module Aws::CustomerProfiles
     class ConditionOverrides < Struct.new(
       :range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditions including range, object count, and threshold for the calculated
@@ -675,7 +634,7 @@ module Aws::CustomerProfiles
       :object_count,
       :threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How the auto-merging process should resolve conflicts between different profiles.</p>
@@ -703,12 +662,7 @@ module Aws::CustomerProfiles
       :conflict_resolving_model,
       :source_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictResolvingModel
-      RECENCY = 'RECENCY'
-      SOURCE = 'SOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation to be performed on the provided source fields.</p>
@@ -734,7 +688,7 @@ module Aws::CustomerProfiles
       :service_now,
       :zendesk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The matching criteria to be used during the auto-merging process. </p>
@@ -744,7 +698,7 @@ module Aws::CustomerProfiles
     class Consolidation < Struct.new(
       :matching_attributes_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that defines users contact preference.</p>
@@ -767,17 +721,7 @@ module Aws::CustomerProfiles
       :profile_id,
       :contact_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactType
-      PHONE_NUMBER = 'PhoneNumber'
-      MOBILE_PHONE_NUMBER = 'MobilePhoneNumber'
-      HOME_PHONE_NUMBER = 'HomePhoneNumber'
-      BUSINESS_PHONE_NUMBER = 'BusinessPhoneNumber'
-      EMAIL_ADDRESS = 'EmailAddress'
-      PERSONAL_EMAIL_ADDRESS = 'PersonalEmailAddress'
-      BUSINESS_EMAIL_ADDRESS = 'BusinessEmailAddress'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -826,7 +770,7 @@ module Aws::CustomerProfiles
       :use_historical_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculated_attribute_name
@@ -889,7 +833,7 @@ module Aws::CustomerProfiles
       :readiness,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -928,7 +872,7 @@ module Aws::CustomerProfiles
       :layout,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layout_definition_name
@@ -976,7 +920,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -1031,7 +975,7 @@ module Aws::CustomerProfiles
       :rule_based_matching,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1087,7 +1031,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1109,7 +1053,7 @@ module Aws::CustomerProfiles
       :event_stream_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_stream_arn
@@ -1122,7 +1066,7 @@ module Aws::CustomerProfiles
       :event_stream_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1161,7 +1105,7 @@ module Aws::CustomerProfiles
       :event_trigger_limits,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_trigger_name
@@ -1204,7 +1148,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1233,7 +1177,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -1246,7 +1190,7 @@ module Aws::CustomerProfiles
       :workflow_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1358,7 +1302,7 @@ module Aws::CustomerProfiles
       :profile_type,
       :engagement_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -1367,7 +1311,7 @@ module Aws::CustomerProfiles
     class CreateProfileResponse < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1397,7 +1341,7 @@ module Aws::CustomerProfiles
       :segment_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_definition_name
@@ -1426,7 +1370,7 @@ module Aws::CustomerProfiles
       :segment_definition_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1439,7 +1383,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :segment_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1458,7 +1402,7 @@ module Aws::CustomerProfiles
       :estimate_id,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -1495,7 +1439,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :destination_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -1504,7 +1448,7 @@ module Aws::CustomerProfiles
     class CreateSegmentSnapshotResponse < Struct.new(
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1534,7 +1478,7 @@ module Aws::CustomerProfiles
       :unique_key,
       :data_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1543,18 +1487,7 @@ module Aws::CustomerProfiles
     class CreateUploadJobResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataFormat
-      CSV = 'CSV'
-      JSONL = 'JSONL'
-      ORC = 'ORC'
-    end
-
-    module DataPullMode
-      INCREMENTAL = 'Incremental'
-      COMPLETE = 'Complete'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that segments on various Customer Profile's date fields.</p>
@@ -1568,15 +1501,7 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DateDimensionType
-      BEFORE = 'BEFORE'
-      AFTER = 'AFTER'
-      BETWEEN = 'BETWEEN'
-      NOT_BETWEEN = 'NOT_BETWEEN'
-      ON = 'ON'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1589,12 +1514,12 @@ module Aws::CustomerProfiles
       :domain_name,
       :calculated_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCalculatedAttributeDefinitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1607,7 +1532,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :layout_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1616,7 +1541,7 @@ module Aws::CustomerProfiles
     class DeleteDomainLayoutResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1625,7 +1550,7 @@ module Aws::CustomerProfiles
     class DeleteDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1634,7 +1559,7 @@ module Aws::CustomerProfiles
     class DeleteDomainResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1647,12 +1572,12 @@ module Aws::CustomerProfiles
       :domain_name,
       :event_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEventStreamResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1665,7 +1590,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :event_trigger_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1674,7 +1599,7 @@ module Aws::CustomerProfiles
     class DeleteEventTriggerResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1687,7 +1612,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1696,7 +1621,7 @@ module Aws::CustomerProfiles
     class DeleteIntegrationResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -1717,7 +1642,7 @@ module Aws::CustomerProfiles
       :values,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1726,7 +1651,7 @@ module Aws::CustomerProfiles
     class DeleteProfileKeyResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -1747,7 +1672,7 @@ module Aws::CustomerProfiles
       :object_type_name,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1756,7 +1681,7 @@ module Aws::CustomerProfiles
     class DeleteProfileObjectResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1769,7 +1694,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :object_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1778,7 +1703,7 @@ module Aws::CustomerProfiles
     class DeleteProfileObjectTypeResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -1791,7 +1716,7 @@ module Aws::CustomerProfiles
       :profile_id,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1800,7 +1725,7 @@ module Aws::CustomerProfiles
     class DeleteProfileResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1813,7 +1738,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :segment_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -1822,7 +1747,7 @@ module Aws::CustomerProfiles
     class DeleteSegmentDefinitionResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -1835,12 +1760,12 @@ module Aws::CustomerProfiles
       :domain_name,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkflowResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the Kinesis data stream</p>
@@ -1859,7 +1784,7 @@ module Aws::CustomerProfiles
       :status,
       :unhealthy_since,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute objects
@@ -1872,7 +1797,7 @@ module Aws::CustomerProfiles
       :objects,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detected_profile_object_types
@@ -1882,7 +1807,7 @@ module Aws::CustomerProfiles
     class DetectProfileObjectTypeResponse < Struct.new(
       :detected_profile_object_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains <code>ProfileObjectType</code> mapping information from the model.</p>
@@ -1901,7 +1826,7 @@ module Aws::CustomerProfiles
       :fields,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that holds what profile and calculated attributes to segment on.</p>
@@ -1916,7 +1841,7 @@ module Aws::CustomerProfiles
       :calculated_attributes,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ProfileAttributes < Dimension; end
       class CalculatedAttributes < Dimension; end
@@ -1944,7 +1869,7 @@ module Aws::CustomerProfiles
       :object_count,
       :total_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:profile_count] = 0 unless options.key?(:profile_count)
@@ -1967,13 +1892,7 @@ module Aws::CustomerProfiles
       :phone,
       :email,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EstimateStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the destination being used for the EventStream.</p>
@@ -1997,17 +1916,7 @@ module Aws::CustomerProfiles
       :unhealthy_since,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventStreamDestinationStatus
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-    end
-
-    module EventStreamState
-      RUNNING = 'RUNNING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An instance of EventStream in a list of EventStreams.</p>
@@ -2041,7 +1950,7 @@ module Aws::CustomerProfiles
       :destination_summary,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the circumstances under which the event should trigger the destination.</p>
@@ -2055,7 +1964,7 @@ module Aws::CustomerProfiles
       :event_trigger_dimensions,
       :logical_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specific event dimension to be assessed.</p>
@@ -2065,7 +1974,7 @@ module Aws::CustomerProfiles
     class EventTriggerDimension < Struct.new(
       :object_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines limits controlling whether an event triggers the destination, based on ingestion
@@ -2081,13 +1990,7 @@ module Aws::CustomerProfiles
       :event_expiration,
       :periods,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EventTriggerLogicalOperator
-      ANY = 'ANY'
-      ALL = 'ALL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of the event trigger.</p>
@@ -2117,7 +2020,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p>
@@ -2132,7 +2035,7 @@ module Aws::CustomerProfiles
     class ExportingConfig < Struct.new(
       :s3_exporting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location where Identity Resolution Jobs write result files.</p>
@@ -2142,7 +2045,7 @@ module Aws::CustomerProfiles
     class ExportingLocation < Struct.new(
       :s3_exporting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that segments on various Customer profile's fields that are larger than
@@ -2157,15 +2060,7 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FieldContentType
-      STRING = 'STRING'
-      NUMBER = 'NUMBER'
-      PHONE_NUMBER = 'PHONE_NUMBER'
-      EMAIL_ADDRESS = 'EMAIL_ADDRESS'
-      NAME = 'NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A duplicate customer profile that is to be merged into a main profile. </p>
@@ -2263,7 +2158,7 @@ module Aws::CustomerProfiles
       :profile_type,
       :engagement_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines how to filter the objects coming in for calculated attributes.</p>
@@ -2278,7 +2173,7 @@ module Aws::CustomerProfiles
       :include,
       :groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that defines how to filter the incoming objects for the calculated
@@ -2293,7 +2188,7 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the map of attribute names to attribute dimensions.</p>
@@ -2303,25 +2198,7 @@ module Aws::CustomerProfiles
     class FilterDimension < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterDimensionType
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
-      CONTAINS = 'CONTAINS'
-      BEGINS_WITH = 'BEGINS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      BEFORE = 'BEFORE'
-      AFTER = 'AFTER'
-      BETWEEN = 'BETWEEN'
-      NOT_BETWEEN = 'NOT_BETWEEN'
-      ON = 'ON'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
-      EQUAL = 'EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that holds the dimensions to filter on.</p>
@@ -2335,7 +2212,7 @@ module Aws::CustomerProfiles
       :type,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations that control how Customer Profiles retrieves data from the source,
@@ -2371,7 +2248,7 @@ module Aws::CustomerProfiles
       :tasks,
       :trigger_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list
@@ -2387,15 +2264,7 @@ module Aws::CustomerProfiles
       :key_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @deprecated
-    # @note This shape contains sensitive data and should be treated as such.
-    module Gender
-      MALE = 'MALE'
-      FEMALE = 'FEMALE'
-      UNSPECIFIED = 'UNSPECIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2417,7 +2286,7 @@ module Aws::CustomerProfiles
       :conflict_resolution,
       :min_allowed_confidence_score_for_merging,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2439,7 +2308,7 @@ module Aws::CustomerProfiles
       :number_of_profiles_in_sample,
       :number_of_profiles_will_be_merged,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_matches_in_sample] = 0 unless options.key?(:number_of_matches_in_sample)
@@ -2459,7 +2328,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :calculated_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculated_attribute_name
@@ -2522,7 +2391,7 @@ module Aws::CustomerProfiles
       :readiness,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2539,7 +2408,7 @@ module Aws::CustomerProfiles
       :profile_id,
       :calculated_attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculated_attribute_name
@@ -2566,7 +2435,7 @@ module Aws::CustomerProfiles
       :value,
       :last_object_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2579,7 +2448,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :layout_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layout_definition_name
@@ -2626,7 +2495,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -2640,7 +2509,7 @@ module Aws::CustomerProfiles
     class GetDomainRequest < Struct.new(
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2700,7 +2569,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2713,7 +2582,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :event_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2746,7 +2615,7 @@ module Aws::CustomerProfiles
       :destination_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2759,7 +2628,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :event_trigger_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_trigger_name
@@ -2802,7 +2671,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2815,7 +2684,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2899,7 +2768,7 @@ module Aws::CustomerProfiles
       :exporting_location,
       :job_stats,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2912,7 +2781,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -2967,7 +2836,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :event_trigger_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2985,7 +2854,7 @@ module Aws::CustomerProfiles
       :max_results,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3006,7 +2875,7 @@ module Aws::CustomerProfiles
       :potential_matches,
       :matches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3019,7 +2888,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :object_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_type_name
@@ -3086,7 +2955,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_profile_creation] = false unless options.key?(:allow_profile_creation)
@@ -3100,7 +2969,7 @@ module Aws::CustomerProfiles
     class GetProfileObjectTypeTemplateRequest < Struct.new(
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -3138,7 +3007,7 @@ module Aws::CustomerProfiles
       :fields,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_profile_creation] = false unless options.key?(:allow_profile_creation)
@@ -3156,7 +3025,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :segment_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_definition_name
@@ -3189,7 +3058,7 @@ module Aws::CustomerProfiles
       :created_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3202,7 +3071,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :estimate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3232,7 +3101,7 @@ module Aws::CustomerProfiles
       :message,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -3254,7 +3123,7 @@ module Aws::CustomerProfiles
       :segment_definition_name,
       :profile_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute segment_definition_name
@@ -3272,7 +3141,7 @@ module Aws::CustomerProfiles
       :profiles,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3289,7 +3158,7 @@ module Aws::CustomerProfiles
       :segment_definition_name,
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -3325,7 +3194,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :destination_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3354,7 +3223,7 @@ module Aws::CustomerProfiles
       :search_key,
       :search_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_ids
@@ -3390,7 +3259,7 @@ module Aws::CustomerProfiles
       :confidence_score,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3404,7 +3273,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -3435,7 +3304,7 @@ module Aws::CustomerProfiles
       :client_token,
       :valid_until,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3448,7 +3317,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3541,7 +3410,7 @@ module Aws::CustomerProfiles
       :results_summary,
       :data_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3554,7 +3423,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :workflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -3591,7 +3460,7 @@ module Aws::CustomerProfiles
       :attributes,
       :metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3613,7 +3482,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow_id
@@ -3634,7 +3503,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains dimensions that determine what to segment on.</p>
@@ -3656,7 +3525,7 @@ module Aws::CustomerProfiles
       :source_type,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:source_type] = 'ALL' unless options.key?(:source_type)
@@ -3735,29 +3604,7 @@ module Aws::CustomerProfiles
       :exporting_location,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdentityResolutionJobStatus
-      PENDING = 'PENDING'
-      PREPROCESSING = 'PREPROCESSING'
-      FIND_MATCHING = 'FIND_MATCHING'
-      MERGING = 'MERGING'
-      COMPLETED = 'COMPLETED'
-      PARTIAL_SUCCESS = 'PARTIAL_SUCCESS'
-      FAILED = 'FAILED'
-    end
-
-    module Include
-      ALL = 'ALL'
-      ANY = 'ANY'
-      NONE = 'NONE'
-    end
-
-    module IncludeOptions
-      ALL = 'ALL'
-      ANY = 'ANY'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration used when importing incremental records from the
@@ -3769,7 +3616,7 @@ module Aws::CustomerProfiles
     class IncrementalPullConfig < Struct.new(
       :datetime_type_field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration data for integration workflow.</p>
@@ -3779,7 +3626,7 @@ module Aws::CustomerProfiles
     class IntegrationConfig < Struct.new(
       :appflow_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service error occurred.</p>
@@ -3788,7 +3635,7 @@ module Aws::CustomerProfiles
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The day and time when do you want to start the Identity Resolution Job every week.</p>
@@ -3802,17 +3649,7 @@ module Aws::CustomerProfiles
       :day_of_the_week,
       :time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobScheduleDayOfTheWeek
-      SUNDAY = 'SUNDAY'
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Statistics about the Identity Resolution Job.</p>
@@ -3830,7 +3667,7 @@ module Aws::CustomerProfiles
       :number_of_matches_found,
       :number_of_merges_done,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_profiles_reviewed] = 0 unless options.key?(:number_of_profiles_reviewed)
@@ -3878,16 +3715,12 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
         super
       end
-    end
-
-    module LayoutType
-      PROFILE_EXPLORER = 'PROFILE_EXPLORER'
     end
 
     # @!attribute uri
@@ -3908,7 +3741,7 @@ module Aws::CustomerProfiles
       :max_results,
       :include_hidden,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3921,7 +3754,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a single calculated attribute definition.</p>
@@ -3962,7 +3795,7 @@ module Aws::CustomerProfiles
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -3980,7 +3813,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -3994,7 +3827,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a single calculated attribute for a profile.</p>
@@ -4022,7 +3855,7 @@ module Aws::CustomerProfiles
       :value,
       :last_object_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4044,7 +3877,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4058,7 +3891,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object in a list that represents a domain.</p>
@@ -4080,7 +3913,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4097,7 +3930,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4110,7 +3943,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4123,7 +3956,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4136,7 +3969,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4153,7 +3986,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4166,7 +3999,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4183,7 +4016,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4196,7 +4029,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4214,7 +4047,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_resolution_jobs_list
@@ -4227,7 +4060,7 @@ module Aws::CustomerProfiles
       :identity_resolution_jobs_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An integration in list of integrations.</p>
@@ -4282,7 +4115,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :event_trigger_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4303,7 +4136,7 @@ module Aws::CustomerProfiles
       :max_results,
       :include_hidden,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4316,7 +4149,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Item that contains the attribute and when it was last updated.</p>
@@ -4330,7 +4163,7 @@ module Aws::CustomerProfiles
       :attribute_name,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4351,7 +4184,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :object_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4364,7 +4197,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A ProfileObjectType instance.</p>
@@ -4398,7 +4231,7 @@ module Aws::CustomerProfiles
       :max_available_profile_object_count,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A ProfileObjectTypeTemplate in a list of ProfileObjectTypeTemplates.</p>
@@ -4416,7 +4249,7 @@ module Aws::CustomerProfiles
       :source_name,
       :source_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4429,7 +4262,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4442,7 +4275,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4459,7 +4292,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4472,7 +4305,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A ProfileObject in a list of ProfileObjects.</p>
@@ -4491,7 +4324,7 @@ module Aws::CustomerProfiles
       :profile_object_unique_key,
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4521,7 +4354,7 @@ module Aws::CustomerProfiles
       :profile_id,
       :object_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4534,7 +4367,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4552,7 +4385,7 @@ module Aws::CustomerProfiles
       :max_results,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute match_ids
@@ -4566,7 +4399,7 @@ module Aws::CustomerProfiles
       :match_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4583,7 +4416,7 @@ module Aws::CustomerProfiles
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4596,7 +4429,7 @@ module Aws::CustomerProfiles
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4605,7 +4438,7 @@ module Aws::CustomerProfiles
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4614,7 +4447,7 @@ module Aws::CustomerProfiles
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4632,7 +4465,7 @@ module Aws::CustomerProfiles
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4645,7 +4478,7 @@ module Aws::CustomerProfiles
       :next_token,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow in list of workflows.</p>
@@ -4675,7 +4508,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4709,7 +4542,7 @@ module Aws::CustomerProfiles
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -4722,26 +4555,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketoConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when Marketo is being used as a source.</p>
@@ -4751,7 +4565,7 @@ module Aws::CustomerProfiles
     class MarketoSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Match group object.</p>
@@ -4775,12 +4589,7 @@ module Aws::CustomerProfiles
       :profile_ids,
       :confidence_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MatchType
-      RULE_BASED_MATCHING = 'RULE_BASED_MATCHING'
-      ML_BASED_MATCHING = 'ML_BASED_MATCHING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The flag that enables the matching process of duplicate profiles.</p>
@@ -4803,7 +4612,7 @@ module Aws::CustomerProfiles
       :auto_merging,
       :exporting_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The flag that enables the matching process of duplicate profiles.</p>
@@ -4826,7 +4635,7 @@ module Aws::CustomerProfiles
       :auto_merging,
       :exporting_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how does the rule-based matching process should match profiles. You can choose
@@ -4893,7 +4702,7 @@ module Aws::CustomerProfiles
     class MatchingRule < Struct.new(
       :rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -4916,7 +4725,7 @@ module Aws::CustomerProfiles
       :profile_ids_to_be_merged,
       :field_source_profile_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute message
@@ -4925,7 +4734,7 @@ module Aws::CustomerProfiles
     class MergeProfilesResponse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria that a specific object attribute must meet to trigger the
@@ -4948,7 +4757,7 @@ module Aws::CustomerProfiles
       :comparison_operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter applied to <code>ListProfileObjects</code> response to include profile
@@ -4967,7 +4776,7 @@ module Aws::CustomerProfiles
       :key_name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a field in a ProfileObjectType.</p>
@@ -4987,7 +4796,7 @@ module Aws::CustomerProfiles
       :target,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the Key element of a ProfileObject. A Key is a special element
@@ -5010,39 +4819,7 @@ module Aws::CustomerProfiles
       :standard_identifiers,
       :field_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Operator
-      EQUAL_TO = 'EQUAL_TO'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-    end
-
-    module OperatorPropertiesKeys
-      VALUE = 'VALUE'
-      VALUES = 'VALUES'
-      DATA_TYPE = 'DATA_TYPE'
-      UPPER_BOUND = 'UPPER_BOUND'
-      LOWER_BOUND = 'LOWER_BOUND'
-      SOURCE_DATA_TYPE = 'SOURCE_DATA_TYPE'
-      DESTINATION_DATA_TYPE = 'DESTINATION_DATA_TYPE'
-      VALIDATION_ACTION = 'VALIDATION_ACTION'
-      MASK_VALUE = 'MASK_VALUE'
-      MASK_LENGTH = 'MASK_LENGTH'
-      TRUNCATE_LENGTH = 'TRUNCATE_LENGTH'
-      MATH_OPERATION_FIELDS_ORDER = 'MATH_OPERATION_FIELDS_ORDER'
-      CONCAT_FORMAT = 'CONCAT_FORMAT'
-      SUBFIELD_CATEGORY_MAP = 'SUBFIELD_CATEGORY_MAP'
-    end
-
-    # @deprecated
-    # @note This shape contains sensitive data and should be treated as such.
-    module PartyType
-      INDIVIDUAL = 'INDIVIDUAL'
-      BUSINESS = 'BUSINESS'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a limit and the time period during which it is enforced.</p>
@@ -5065,19 +4842,12 @@ module Aws::CustomerProfiles
       :max_invocations_per_profile,
       :unlimited,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:unlimited] = false unless options.key?(:unlimited)
         super
       end
-    end
-
-    module PeriodUnit
-      HOURS = 'HOURS'
-      DAYS = 'DAYS'
-      WEEKS = 'WEEKS'
-      MONTHS = 'MONTHS'
     end
 
     # <p>The standard profile of a customer.</p>
@@ -5216,7 +4986,7 @@ module Aws::CustomerProfiles
       :profile_type,
       :engagement_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -5229,7 +4999,7 @@ module Aws::CustomerProfiles
       :domain_name,
       :attribute_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -5250,7 +5020,7 @@ module Aws::CustomerProfiles
       :items,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -5350,7 +5120,7 @@ module Aws::CustomerProfiles
       :attributes,
       :profile_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to hold the dimensions of a profile's fields to segment on.</p>
@@ -5364,7 +5134,7 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that holds failures for membership.</p>
@@ -5382,7 +5152,7 @@ module Aws::CustomerProfiles
       :message,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that holds the results for membership.</p>
@@ -5400,13 +5170,7 @@ module Aws::CustomerProfiles
       :query_result,
       :profile,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module ProfileType
-      ACCOUNT_PROFILE = 'ACCOUNT_PROFILE'
-      PROFILE = 'PROFILE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object to hold the dimension of a profile type field to segment on.</p>
@@ -5420,12 +5184,7 @@ module Aws::CustomerProfiles
       :dimension_type,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProfileTypeDimensionType
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -5466,7 +5225,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :event_trigger_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -5521,7 +5280,7 @@ module Aws::CustomerProfiles
       :role_arn,
       :event_trigger_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_type_name
@@ -5538,7 +5297,7 @@ module Aws::CustomerProfiles
       :object,
       :domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_object_unique_key
@@ -5547,7 +5306,7 @@ module Aws::CustomerProfiles
     class PutProfileObjectResponse < Struct.new(
       :profile_object_unique_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -5612,7 +5371,7 @@ module Aws::CustomerProfiles
       :keys,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute object_type_name
@@ -5680,17 +5439,12 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_profile_creation] = false unless options.key?(:allow_profile_creation)
         super
       end
-    end
-
-    module QueryResult
-      PRESENT = 'PRESENT'
-      ABSENT = 'ABSENT'
     end
 
     # <p>The relative time period over which data is included in the aggregation.</p>
@@ -5728,7 +5482,7 @@ module Aws::CustomerProfiles
       :timestamp_source,
       :timestamp_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -5752,17 +5506,13 @@ module Aws::CustomerProfiles
       :end,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:start] = 366 unless options.key?(:start)
         options[:end] = 0 unless options.key?(:end)
         super
       end
-    end
-
-    module RangeUnit
-      DAYS = 'DAYS'
     end
 
     # <p>Information indicating if the Calculated Attribute is ready for use by confirming all
@@ -5777,14 +5527,7 @@ module Aws::CustomerProfiles
       :progress_percentage,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReadinessStatus
-      PREPARING = 'PREPARING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource does not exist, or access was denied.</p>
@@ -5793,7 +5536,7 @@ module Aws::CustomerProfiles
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of results for an upload job, including the number of updated, created, and
@@ -5812,7 +5555,7 @@ module Aws::CustomerProfiles
       :created_records,
       :failed_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to enable the rule-based matching.</p>
@@ -5855,7 +5598,7 @@ module Aws::CustomerProfiles
       :conflict_resolution,
       :exporting_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response of the Rule-based matching request.</p>
@@ -5925,36 +5668,7 @@ module Aws::CustomerProfiles
       :conflict_resolution,
       :exporting_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleBasedMatchingStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-    end
-
-    module S3ConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about the S3 bucket where Identity Resolution Jobs write result files.</p>
@@ -5968,7 +5682,7 @@ module Aws::CustomerProfiles
       :s3_bucket_name,
       :s3_key_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location where Identity Resolution Jobs write result files.</p>
@@ -5982,7 +5696,7 @@ module Aws::CustomerProfiles
       :s3_bucket_name,
       :s3_key_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when Amazon S3 is being used as the flow source.</p>
@@ -5996,31 +5710,7 @@ module Aws::CustomerProfiles
       :bucket_name,
       :bucket_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SalesforceConnectorOperator
-      PROJECTION = 'PROJECTION'
-      LESS_THAN = 'LESS_THAN'
-      CONTAINS = 'CONTAINS'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when Salesforce is being used as a source.</p>
@@ -6039,7 +5729,7 @@ module Aws::CustomerProfiles
       :enable_dynamic_field_update,
       :include_deleted_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_dynamic_field_update] = false unless options.key?(:enable_dynamic_field_update)
@@ -6085,10 +5775,10 @@ module Aws::CustomerProfiles
       :schedule_offset,
       :first_execution_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:schedule_offset] =  unless options.key?(:schedule_offset)
+        options[:schedule_offset] = nil unless options.key?(:schedule_offset)
         super
       end
     end
@@ -6152,7 +5842,7 @@ module Aws::CustomerProfiles
       :additional_search_keys,
       :logical_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -6165,7 +5855,7 @@ module Aws::CustomerProfiles
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object holding the segment definition fields.</p>
@@ -6195,7 +5885,7 @@ module Aws::CustomerProfiles
       :created_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains all groups of the segment definition.</p>
@@ -6210,7 +5900,7 @@ module Aws::CustomerProfiles
       :groups,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include] = 'ALL' unless options.key?(:include)
@@ -6229,37 +5919,7 @@ module Aws::CustomerProfiles
       :groups,
       :include,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SegmentSnapshotStatus
-      COMPLETED = 'COMPLETED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-    end
-
-    module ServiceNowConnectorOperator
-      PROJECTION = 'PROJECTION'
-      CONTAINS = 'CONTAINS'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when ServiceNow is being used as a source.</p>
@@ -6269,7 +5929,7 @@ module Aws::CustomerProfiles
     class ServiceNowSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the information that is required to query a particular Amazon AppFlow connector.
@@ -6296,15 +5956,7 @@ module Aws::CustomerProfiles
       :service_now,
       :zendesk,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceConnectorType
-      SALESFORCE = 'Salesforce'
-      MARKETO = 'Marketo'
-      ZENDESK = 'Zendesk'
-      SERVICENOW = 'Servicenow'
-      S3 = 'S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configuration of the source connector used in the
@@ -6331,7 +5983,7 @@ module Aws::CustomerProfiles
       :incremental_pull_config,
       :source_connector_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source segments to build off of.</p>
@@ -6341,28 +5993,7 @@ module Aws::CustomerProfiles
     class SourceSegment < Struct.new(
       :segment_definition_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandardIdentifier
-      PROFILE = 'PROFILE'
-      ASSET = 'ASSET'
-      CASE = 'CASE'
-      ORDER = 'ORDER'
-      COMMUNICATION_RECORD = 'COMMUNICATION_RECORD'
-      AIR_PREFERENCE = 'AIR_PREFERENCE'
-      HOTEL_PREFERENCE = 'HOTEL_PREFERENCE'
-      AIR_BOOKING = 'AIR_BOOKING'
-      AIR_SEGMENT = 'AIR_SEGMENT'
-      HOTEL_RESERVATION = 'HOTEL_RESERVATION'
-      HOTEL_STAY_REVENUE = 'HOTEL_STAY_REVENUE'
-      LOYALTY = 'LOYALTY'
-      LOYALTY_TRANSACTION = 'LOYALTY_TRANSACTION'
-      LOYALTY_PROMOTION = 'LOYALTY_PROMOTION'
-      UNIQUE = 'UNIQUE'
-      SECONDARY = 'SECONDARY'
-      LOOKUP_ONLY = 'LOOKUP_ONLY'
-      NEW_ONLY = 'NEW_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6375,39 +6006,12 @@ module Aws::CustomerProfiles
       :domain_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartUploadJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # @note This shape contains sensitive data and should be treated as such.
-    module Statistic
-      FIRST_OCCURRENCE = 'FIRST_OCCURRENCE'
-      LAST_OCCURRENCE = 'LAST_OCCURRENCE'
-      COUNT = 'COUNT'
-      SUM = 'SUM'
-      MINIMUM = 'MINIMUM'
-      MAXIMUM = 'MAXIMUM'
-      AVERAGE = 'AVERAGE'
-      MAX_OCCURRENCE = 'MAX_OCCURRENCE'
-    end
-
-    module Status
-      NOT_STARTED = 'NOT_STARTED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETE = 'COMPLETE'
-      FAILED = 'FAILED'
-      SPLIT = 'SPLIT'
-      RETRY = 'RETRY'
-      CANCELLED = 'CANCELLED'
-    end
-
-    module StatusReason
-      VALIDATION_FAILURE = 'VALIDATION_FAILURE'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6420,20 +6024,12 @@ module Aws::CustomerProfiles
       :domain_name,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopUploadJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StringDimensionType
-      INCLUSIVE = 'INCLUSIVE'
-      EXCLUSIVE = 'EXCLUSIVE'
-      CONTAINS = 'CONTAINS'
-      BEGINS_WITH = 'BEGINS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6446,12 +6042,12 @@ module Aws::CustomerProfiles
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A class for modeling different type of tasks. Task implementation varies based on the
@@ -6480,17 +6076,7 @@ module Aws::CustomerProfiles
       :task_properties,
       :task_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskType
-      ARITHMETIC = 'Arithmetic'
-      FILTER = 'Filter'
-      MAP = 'Map'
-      MASK = 'Mask'
-      MERGE = 'Merge'
-      TRUNCATE = 'Truncate'
-      VALIDATE = 'Validate'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The threshold for the calculated attribute.</p>
@@ -6504,7 +6090,7 @@ module Aws::CustomerProfiles
       :value,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You exceeded the maximum number of requests.</p>
@@ -6513,7 +6099,7 @@ module Aws::CustomerProfiles
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The trigger settings that determine how and when Amazon AppFlow runs the specified
@@ -6529,7 +6115,7 @@ module Aws::CustomerProfiles
       :trigger_type,
       :trigger_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration details that control the trigger for a flow. Currently,
@@ -6540,23 +6126,7 @@ module Aws::CustomerProfiles
     class TriggerProperties < Struct.new(
       :scheduled,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggerType
-      SCHEDULED = 'Scheduled'
-      EVENT = 'Event'
-      ONDEMAND = 'OnDemand'
-    end
-
-    module Type
-      ALL = 'ALL'
-      ANY = 'ANY'
-      NONE = 'NONE'
-    end
-
-    module Unit
-      DAYS = 'DAYS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6569,12 +6139,12 @@ module Aws::CustomerProfiles
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates associated with the address properties of a customer profile.</p>
@@ -6621,7 +6191,7 @@ module Aws::CustomerProfiles
       :country,
       :postal_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6647,7 +6217,7 @@ module Aws::CustomerProfiles
       :description,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute calculated_attribute_name
@@ -6706,7 +6276,7 @@ module Aws::CustomerProfiles
       :readiness,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6741,7 +6311,7 @@ module Aws::CustomerProfiles
       :layout_type,
       :layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute layout_definition_name
@@ -6788,7 +6358,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default] = false unless options.key?(:is_default)
@@ -6845,7 +6415,7 @@ module Aws::CustomerProfiles
       :rule_based_matching,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6901,7 +6471,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -6936,7 +6506,7 @@ module Aws::CustomerProfiles
       :segment_filter,
       :event_trigger_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_trigger_name
@@ -6979,7 +6549,7 @@ module Aws::CustomerProfiles
       :last_updated_at,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_name
@@ -7095,7 +6665,7 @@ module Aws::CustomerProfiles
       :profile_type,
       :engagement_preferences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -7104,7 +6674,7 @@ module Aws::CustomerProfiles
     class UpdateProfileResponse < Struct.new(
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary information for an individual upload job. </p>
@@ -7138,16 +6708,7 @@ module Aws::CustomerProfiles
       :completed_at,
       :data_expiry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UploadJobStatus
-      CREATED = 'CREATED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      PARTIALLY_SUCCEEDED = 'PARTIALLY_SUCCEEDED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure letting customers specify a relative time window over which over which data
@@ -7166,7 +6727,7 @@ module Aws::CustomerProfiles
       :start,
       :end,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure to hold workflow attributes.</p>
@@ -7176,7 +6737,7 @@ module Aws::CustomerProfiles
     class WorkflowAttributes < Struct.new(
       :appflow_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Generic object containing workflow execution metrics.</p>
@@ -7186,7 +6747,7 @@ module Aws::CustomerProfiles
     class WorkflowMetrics < Struct.new(
       :appflow_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List containing steps in workflow.</p>
@@ -7196,28 +6757,7 @@ module Aws::CustomerProfiles
     class WorkflowStepItem < Struct.new(
       :appflow_integration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkflowType
-      APPFLOW_INTEGRATION = 'APPFLOW_INTEGRATION'
-    end
-
-    module ZendeskConnectorOperator
-      PROJECTION = 'PROJECTION'
-      GREATER_THAN = 'GREATER_THAN'
-      ADDITION = 'ADDITION'
-      MULTIPLICATION = 'MULTIPLICATION'
-      DIVISION = 'DIVISION'
-      SUBTRACTION = 'SUBTRACTION'
-      MASK_ALL = 'MASK_ALL'
-      MASK_FIRST_N = 'MASK_FIRST_N'
-      MASK_LAST_N = 'MASK_LAST_N'
-      VALIDATE_NON_NULL = 'VALIDATE_NON_NULL'
-      VALIDATE_NON_ZERO = 'VALIDATE_NON_ZERO'
-      VALIDATE_NON_NEGATIVE = 'VALIDATE_NON_NEGATIVE'
-      VALIDATE_NUMERIC = 'VALIDATE_NUMERIC'
-      NO_OP = 'NO_OP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties that are applied when using Zendesk as a flow source.</p>
@@ -7227,12 +6767,7 @@ module Aws::CustomerProfiles
     class ZendeskSourceProperties < Struct.new(
       :object,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogicalOperator
-      AND = 'AND'
-      OR = 'OR'
+      include ::Smithy::Schema::Structure
     end
 
   end

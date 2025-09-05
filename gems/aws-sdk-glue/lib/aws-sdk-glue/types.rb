@@ -13,7 +13,7 @@ module Aws::Glue
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an action to be initiated by a trigger.</p>
@@ -53,31 +53,7 @@ module Aws::Glue
       :notification_property,
       :crawler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdditionalOptionKeys
-      CacheOption = 'performanceTuning.caching'
-      ObservationsOption = 'observations.scope'
-      CompositeOption = 'compositeRuleEvaluation.method'
-    end
-
-    module AggFunction
-      avg = 'avg'
-      countDistinct = 'countDistinct'
-      count = 'count'
-      first = 'first'
-      last = 'last'
-      kurtosis = 'kurtosis'
-      max = 'max'
-      min = 'min'
-      skewness = 'skewness'
-      stddev_samp = 'stddev_samp'
-      stddev_pop = 'stddev_pop'
-      sum = 'sum'
-      sumDistinct = 'sumDistinct'
-      var_samp = 'var_samp'
-      var_pop = 'var_pop'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that groups rows by chosen fields and computes the aggregated value by specified function.</p>
@@ -99,7 +75,7 @@ module Aws::Glue
       :groups,
       :aggs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the set of parameters needed to perform aggregation in the aggregate transform.</p>
@@ -115,12 +91,7 @@ module Aws::Glue
       :column,
       :agg_func,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AllowFullTableExternalDataAccessEnum
-      True = 'True'
-      False = 'False'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a value allowed for a property.</p>
@@ -134,7 +105,7 @@ module Aws::Glue
       :description,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource to be created or added already exists.</p>
@@ -144,7 +115,7 @@ module Aws::Glue
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an optional value when connecting to the Redshift cluster.</p>
@@ -158,7 +129,7 @@ module Aws::Glue
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon Redshift node.</p>
@@ -268,7 +239,7 @@ module Aws::Glue
       :staging_table,
       :selected_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:upsert] = false unless options.key?(:upsert)
@@ -287,7 +258,7 @@ module Aws::Glue
       :name,
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon Redshift target.</p>
@@ -305,7 +276,7 @@ module Aws::Glue
       :data,
       :inputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A failed annotation.</p>
@@ -323,7 +294,7 @@ module Aws::Glue
       :statistic_id,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that maps data property keys in the data source to data property keys in the data target. You can rename keys, modify the data types for keys, and choose which keys to drop from the dataset.</p>
@@ -341,7 +312,7 @@ module Aws::Glue
       :inputs,
       :mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a connector to an Amazon Athena data source.</p>
@@ -375,7 +346,7 @@ module Aws::Glue
       :schema_name,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the Lake Formation audit context.</p>
@@ -393,7 +364,7 @@ module Aws::Glue
       :requested_columns,
       :all_columns_requested,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication configuration for a connection returned by the <code>DescribeConnectionType</code> API.</p>
@@ -419,7 +390,7 @@ module Aws::Glue
       :basic_authentication_properties,
       :custom_authentication_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the authentication configuration.</p>
@@ -437,7 +408,7 @@ module Aws::Glue
       :secret_arn,
       :o_auth2_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the authentication configuration in the CreateConnection request.</p>
@@ -467,14 +438,7 @@ module Aws::Glue
       :basic_authentication_credentials,
       :custom_authentication_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationType
-      BASIC = 'BASIC'
-      OAUTH2 = 'OAUTH2'
-      CUSTOM = 'CUSTOM'
-      IAM = 'IAM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of properties required for the the OAuth2 <code>AUTHORIZATION_CODE</code> grant type workflow.</p>
@@ -488,7 +452,7 @@ module Aws::Glue
       :authorization_code,
       :redirect_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality 
@@ -503,7 +467,7 @@ module Aws::Glue
       :is_enabled,
       :evaluation_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_enabled] = false unless options.key?(:is_enabled)
@@ -540,15 +504,7 @@ module Aws::Glue
       :code,
       :partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BackfillErrorCode
-      ENCRYPTED_PARTITION_ERROR = 'ENCRYPTED_PARTITION_ERROR'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      INVALID_PARTITION_TYPE_DATA_ERROR = 'INVALID_PARTITION_TYPE_DATA_ERROR'
-      MISSING_PARTITION_VALUE_ERROR = 'MISSING_PARTITION_VALUE_ERROR'
-      UNSUPPORTED_PARTITION_CHARACTER_ERROR = 'UNSUPPORTED_PARTITION_CHARACTER_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For supplying basic auth credentials when not providing a <code>SecretArn</code> value.</p>
@@ -562,7 +518,7 @@ module Aws::Glue
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses a Glue Data Catalog table.</p>
@@ -588,7 +544,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -612,7 +568,7 @@ module Aws::Glue
       :table_name,
       :partition_input_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -621,7 +577,7 @@ module Aws::Glue
     class BatchCreatePartitionResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -635,7 +591,7 @@ module Aws::Glue
       :catalog_id,
       :connection_name_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute succeeded
@@ -650,7 +606,7 @@ module Aws::Glue
       :succeeded,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -674,7 +630,7 @@ module Aws::Glue
       :table_name,
       :partitions_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -683,7 +639,7 @@ module Aws::Glue
     class BatchDeletePartitionResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -706,7 +662,7 @@ module Aws::Glue
       :tables_to_delete,
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -715,7 +671,7 @@ module Aws::Glue
     class BatchDeleteTableResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -739,7 +695,7 @@ module Aws::Glue
       :table_name,
       :version_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -749,7 +705,7 @@ module Aws::Glue
     class BatchDeleteTableVersionResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -766,7 +722,7 @@ module Aws::Glue
       :include_blueprint,
       :include_parameter_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprints
@@ -779,7 +735,7 @@ module Aws::Glue
       :blueprints,
       :missing_blueprints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_names
@@ -789,7 +745,7 @@ module Aws::Glue
     class BatchGetCrawlersRequest < Struct.new(
       :crawler_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawlers
@@ -802,7 +758,7 @@ module Aws::Glue
       :crawlers,
       :crawlers_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -811,7 +767,7 @@ module Aws::Glue
     class BatchGetCustomEntityTypesRequest < Struct.new(
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_entity_types
@@ -824,7 +780,7 @@ module Aws::Glue
       :custom_entity_types,
       :custom_entity_types_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result_ids
@@ -833,7 +789,7 @@ module Aws::Glue
     class BatchGetDataQualityResultRequest < Struct.new(
       :result_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -846,7 +802,7 @@ module Aws::Glue
       :results,
       :results_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dev_endpoint_names
@@ -856,7 +812,7 @@ module Aws::Glue
     class BatchGetDevEndpointsRequest < Struct.new(
       :dev_endpoint_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dev_endpoints
@@ -869,7 +825,7 @@ module Aws::Glue
       :dev_endpoints,
       :dev_endpoints_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_names
@@ -879,7 +835,7 @@ module Aws::Glue
     class BatchGetJobsRequest < Struct.new(
       :job_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -892,7 +848,7 @@ module Aws::Glue
       :jobs,
       :jobs_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -914,7 +870,7 @@ module Aws::Glue
       :table_name,
       :partitions_to_get,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partitions
@@ -928,7 +884,7 @@ module Aws::Glue
       :partitions,
       :unprocessed_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a table optimizer to retrieve in the <code>BatchGetTableOptimizer</code> operation.</p>
@@ -950,7 +906,7 @@ module Aws::Glue
       :table_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details on one of the errors in the error list returned by the <code>BatchGetTableOptimizer</code> operation.</p>
@@ -976,7 +932,7 @@ module Aws::Glue
       :table_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entries
@@ -985,7 +941,7 @@ module Aws::Glue
     class BatchGetTableOptimizerRequest < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_optimizers
@@ -998,7 +954,7 @@ module Aws::Glue
       :table_optimizers,
       :failures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trigger_names
@@ -1007,7 +963,7 @@ module Aws::Glue
     class BatchGetTriggersRequest < Struct.new(
       :trigger_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute triggers
@@ -1020,7 +976,7 @@ module Aws::Glue
       :triggers,
       :triggers_not_found,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute names
@@ -1033,7 +989,7 @@ module Aws::Glue
       :names,
       :include_graph,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflows
@@ -1046,7 +1002,7 @@ module Aws::Glue
       :workflows,
       :missing_workflows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inclusion_annotations
@@ -1059,7 +1015,7 @@ module Aws::Glue
       :inclusion_annotations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_inclusion_annotations
@@ -1068,7 +1024,7 @@ module Aws::Glue
     class BatchPutDataQualityStatisticAnnotationResponse < Struct.new(
       :failed_inclusion_annotations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Records an error that occurred when attempting to stop a
@@ -1087,7 +1043,7 @@ module Aws::Glue
       :job_run_id,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -1101,7 +1057,7 @@ module Aws::Glue
       :job_name,
       :job_run_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute successful_submissions
@@ -1116,7 +1072,7 @@ module Aws::Glue
       :successful_submissions,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Records a successful request to stop a specified <code>JobRun</code>.</p>
@@ -1130,7 +1086,7 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for one of the table optimizers returned by the <code>BatchGetTableOptimizer</code> operation.</p>
@@ -1152,7 +1108,7 @@ module Aws::Glue
       :table_name,
       :table_optimizer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a batch update partition error.</p>
@@ -1166,7 +1122,7 @@ module Aws::Glue
       :partition_value_list,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -1189,7 +1145,7 @@ module Aws::Glue
       :table_name,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the values and structure used to update a partition.</p>
@@ -1203,7 +1159,7 @@ module Aws::Glue
       :partition_value_list,
       :partition_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -1212,7 +1168,7 @@ module Aws::Glue
     class BatchUpdatePartitionResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines column statistics supported for bit sequence data values.</p>
@@ -1230,7 +1186,7 @@ module Aws::Glue
       :average_length,
       :number_of_nulls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:maximum_length] = 0 unless options.key?(:maximum_length)
@@ -1297,7 +1253,7 @@ module Aws::Glue
       :error_message,
       :last_active_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a blueprint.</p>
@@ -1311,7 +1267,7 @@ module Aws::Glue
       :blueprint_name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a blueprint run.</p>
@@ -1371,21 +1327,7 @@ module Aws::Glue
       :parameters,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlueprintRunState
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      ROLLING_BACK = 'ROLLING_BACK'
-    end
-
-    module BlueprintStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines column statistics supported for Boolean data columns.</p>
@@ -1403,7 +1345,7 @@ module Aws::Glue
       :number_of_falses,
       :number_of_nulls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_trues] = 0 unless options.key?(:number_of_trues)
@@ -1419,12 +1361,12 @@ module Aws::Glue
     class CancelDataQualityRuleRecommendationRunRequest < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelDataQualityRuleRecommendationRunResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -1433,12 +1375,12 @@ module Aws::Glue
     class CancelDataQualityRulesetEvaluationRunRequest < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelDataQualityRulesetEvaluationRunResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -1451,7 +1393,7 @@ module Aws::Glue
       :transform_id,
       :task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -1468,7 +1410,7 @@ module Aws::Glue
       :task_run_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -1485,12 +1427,12 @@ module Aws::Glue
       :id,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelStatementResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the supported authentication types returned by the <code>DescribeConnectionType</code> API.</p>
@@ -1508,7 +1450,7 @@ module Aws::Glue
       :supported_data_operations,
       :supported_compute_environments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The catalog object represents a logical grouping of databases in the Glue Data Catalog or a federated source. You can now create a Redshift-federated catalog or a catalog containing resource links to Redshift databases in another account or region.</p>
@@ -1568,7 +1510,7 @@ module Aws::Glue
       :create_database_default_permissions,
       :allow_full_table_external_data_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Delta Lake data source that is registered in the Glue Data Catalog.</p>
@@ -1594,13 +1536,7 @@ module Aws::Glue
       :additional_delta_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CatalogEncryptionMode
-      DISABLED = 'DISABLED'
-      SSEKMS = 'SSE-KMS'
-      SSEKMSWITHSERVICEROLE = 'SSE-KMS-WITH-SERVICE-ROLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a table definition in the Glue Data Catalog.</p>
@@ -1614,7 +1550,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Hudi data source that is registered in the Glue Data Catalog.</p>
@@ -1640,7 +1576,7 @@ module Aws::Glue
       :additional_hudi_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Iceberg data source that is registered in the Glue Data Catalog.</p>
@@ -1666,7 +1602,7 @@ module Aws::Glue
       :additional_iceberg_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing migration status information.</p>
@@ -1685,7 +1621,7 @@ module Aws::Glue
       :import_time,
       :imported_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:import_completed] = false unless options.key?(:import_completed)
@@ -1730,7 +1666,7 @@ module Aws::Glue
       :create_database_default_permissions,
       :allow_full_table_external_data_access,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Kafka data store in the Data Catalog.</p>
@@ -1764,7 +1700,7 @@ module Aws::Glue
       :streaming_options,
       :data_preview_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Kinesis data source in the Glue Data Catalog.</p>
@@ -1798,7 +1734,7 @@ module Aws::Glue
       :streaming_options,
       :data_preview_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that specifies data lake access properties and other custom properties.</p>
@@ -1817,7 +1753,7 @@ module Aws::Glue
       :iceberg_optimization_properties,
       :custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Property attributes that include configuration properties for the catalog resource.</p>
@@ -1836,7 +1772,7 @@ module Aws::Glue
       :iceberg_optimization_properties,
       :custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy that specifies update behavior for the crawler.</p>
@@ -1850,7 +1786,7 @@ module Aws::Glue
       :enable_update_catalog,
       :update_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data store in the Glue Data Catalog.</p>
@@ -1878,7 +1814,7 @@ module Aws::Glue
       :partition_predicate,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Glue Data Catalog target.</p>
@@ -1904,7 +1840,7 @@ module Aws::Glue
       :event_queue_arn,
       :dlq_event_queue_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_format
@@ -1917,7 +1853,7 @@ module Aws::Glue
       :data_format,
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute valid
@@ -1930,7 +1866,7 @@ module Aws::Glue
       :valid,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:valid] = false unless options.key?(:valid)
@@ -1964,7 +1900,7 @@ module Aws::Glue
       :json_classifier,
       :csv_classifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how Amazon CloudWatch data should be encrypted.</p>
@@ -1978,12 +1914,7 @@ module Aws::Glue
       :cloud_watch_encryption_mode,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CloudWatchEncryptionMode
-      DISABLED = 'DISABLED'
-      SSEKMS = 'SSE-KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2307,7 +2238,7 @@ module Aws::Glue
       :s3_hyper_direct_target,
       :dynamo_dbelt_connector_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a directional edge in a directed acyclic graph (DAG).</p>
@@ -2325,7 +2256,7 @@ module Aws::Glue
       :target,
       :target_parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a node in a directed acyclic graph (DAG)</p>
@@ -2347,7 +2278,7 @@ module Aws::Glue
       :args,
       :line_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:line_number] = 0 unless options.key?(:line_number)
@@ -2370,7 +2301,7 @@ module Aws::Glue
       :value,
       :param,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:param] = false unless options.key?(:param)
@@ -2397,7 +2328,7 @@ module Aws::Glue
       :comment,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encapsulates a column name that failed and the reason for failure.</p>
@@ -2411,7 +2342,7 @@ module Aws::Glue
       :column_name,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the column name and column importance score for a column. </p>
@@ -2426,7 +2357,7 @@ module Aws::Glue
       :column_name,
       :importance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that uses both column-level and row-level filtering.</p>
@@ -2440,7 +2371,7 @@ module Aws::Glue
       :column_name,
       :row_filter_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the generated column-level statistics for a table or partition.</p>
@@ -2462,7 +2393,7 @@ module Aws::Glue
       :analyzed_time,
       :statistics_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the individual types of column statistics data. Only one data object should be set and indicated by the <code>Type</code> attribute.</p>
@@ -2504,7 +2435,7 @@ module Aws::Glue
       :string_column_statistics_data,
       :binary_column_statistics_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encapsulates a <code>ColumnStatistics</code> object that failed and the reason for failure.</p>
@@ -2518,15 +2449,7 @@ module Aws::Glue
       :column_statistics,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColumnStatisticsState
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception thrown when you try to stop a task run when there is no task running.</p>
@@ -2536,7 +2459,7 @@ module Aws::Glue
     class ColumnStatisticsTaskNotRunningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that shows the details of the column stats run.</p>
@@ -2618,7 +2541,7 @@ module Aws::Glue
       :error_message,
       :dpu_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sample_size] = 0 unless options.key?(:sample_size)
@@ -2635,7 +2558,7 @@ module Aws::Glue
     class ColumnStatisticsTaskRunningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for a column statistics task.</p>
@@ -2685,7 +2608,7 @@ module Aws::Glue
       :setting_source,
       :last_execution_attempt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sample_size] = 0 unless options.key?(:sample_size)
@@ -2700,17 +2623,7 @@ module Aws::Glue
     class ColumnStatisticsTaskStoppingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColumnStatisticsType
-      BOOLEAN = 'BOOLEAN'
-      DATE = 'DATE'
-      DECIMAL = 'DECIMAL'
-      DOUBLE = 'DOUBLE'
-      LONG = 'LONG'
-      STRING = 'STRING'
-      BINARY = 'BINARY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve 
@@ -2721,7 +2634,7 @@ module Aws::Glue
     class CompactionConfiguration < Struct.new(
       :iceberg_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains compaction metrics for the optimizer run.</p>
@@ -2731,48 +2644,7 @@ module Aws::Glue
     class CompactionMetrics < Struct.new(
       :iceberg_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompactionStrategy
-      BINPACK = 'binpack'
-      SORT = 'sort'
-      ZORDER = 'z-order'
-    end
-
-    module Comparator
-      EQUALS = 'EQUALS'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN_EQUALS = 'GREATER_THAN_EQUALS'
-      LESS_THAN_EQUALS = 'LESS_THAN_EQUALS'
-    end
-
-    module Compatibility
-      NONE = 'NONE'
-      DISABLED = 'DISABLED'
-      BACKWARD = 'BACKWARD'
-      BACKWARD_ALL = 'BACKWARD_ALL'
-      FORWARD = 'FORWARD'
-      FORWARD_ALL = 'FORWARD_ALL'
-      FULL = 'FULL'
-      FULL_ALL = 'FULL_ALL'
-    end
-
-    module CompressionType
-      GZIP = 'gzip'
-      BZIP2 = 'bzip2'
-    end
-
-    module ComputationType
-      FULL = 'FULL'
-      INCREMENTAL = 'INCREMENTAL'
-    end
-
-    module ComputeEnvironment
-      SPARK = 'SPARK'
-      ATHENA = 'ATHENA'
-      PYTHON = 'PYTHON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing configuration for a compute environment (such as Spark, Python or Athena) returned by the <code>DescribeConnectionType</code> API.</p>
@@ -2814,7 +2686,7 @@ module Aws::Glue
       :connection_properties_required_overrides,
       :physical_connection_properties_required,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:connection_properties_required_overrides] = [] unless options.key?(:connection_properties_required_overrides)
@@ -2829,7 +2701,7 @@ module Aws::Glue
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Too many jobs are being run concurrently.</p>
@@ -2839,7 +2711,7 @@ module Aws::Glue
     class ConcurrentRunsExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a condition under which a trigger fires.</p>
@@ -2866,7 +2738,7 @@ module Aws::Glue
       :crawler_name,
       :crawl_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified condition was not satisfied.</p>
@@ -2876,7 +2748,7 @@ module Aws::Glue
     class ConditionCheckFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Condition expression defined in the Glue Studio data preparation recipe node.</p>
@@ -2894,7 +2766,7 @@ module Aws::Glue
       :value,
       :target_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the values that an admin sets for each job or session parameter configured in a Glue usage profile.</p>
@@ -2916,12 +2788,7 @@ module Aws::Glue
       :min_value,
       :max_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationSource
-      CATALOG = 'catalog'
-      TABLE = 'table'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CreatePartitions</code> API was called on a table that has indexes enabled.	</p>
@@ -2931,7 +2798,7 @@ module Aws::Glue
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p>
@@ -2956,7 +2823,7 @@ module Aws::Glue
       :num_true_negatives,
       :num_false_negatives,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a connection to a data source.</p>
@@ -3233,7 +3100,7 @@ module Aws::Glue
       :connection_schema_version,
       :compatible_compute_environments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that is used to specify a connection to create or update.</p>
@@ -3467,7 +3334,7 @@ module Aws::Glue
       :validate_credentials,
       :validate_for_compute_environments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:validate_credentials] = false unless options.key?(:validate_credentials)
@@ -3499,102 +3366,12 @@ module Aws::Glue
       :return_connection_password_encrypted,
       :aws_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:return_connection_password_encrypted] = false unless options.key?(:return_connection_password_encrypted)
         super
       end
-    end
-
-    module ConnectionPropertyKey
-      HOST = 'HOST'
-      PORT = 'PORT'
-      USER_NAME = 'USERNAME'
-      PASSWORD = 'PASSWORD'
-      ENCRYPTED_PASSWORD = 'ENCRYPTED_PASSWORD'
-      JDBC_DRIVER_JAR_URI = 'JDBC_DRIVER_JAR_URI'
-      JDBC_DRIVER_CLASS_NAME = 'JDBC_DRIVER_CLASS_NAME'
-      JDBC_ENGINE = 'JDBC_ENGINE'
-      JDBC_ENGINE_VERSION = 'JDBC_ENGINE_VERSION'
-      CONFIG_FILES = 'CONFIG_FILES'
-      INSTANCE_ID = 'INSTANCE_ID'
-      JDBC_CONNECTION_URL = 'JDBC_CONNECTION_URL'
-      JDBC_ENFORCE_SSL = 'JDBC_ENFORCE_SSL'
-      CUSTOM_JDBC_CERT = 'CUSTOM_JDBC_CERT'
-      SKIP_CUSTOM_JDBC_CERT_VALIDATION = 'SKIP_CUSTOM_JDBC_CERT_VALIDATION'
-      CUSTOM_JDBC_CERT_STRING = 'CUSTOM_JDBC_CERT_STRING'
-      CONNECTION_URL = 'CONNECTION_URL'
-      KAFKA_BOOTSTRAP_SERVERS = 'KAFKA_BOOTSTRAP_SERVERS'
-      KAFKA_SSL_ENABLED = 'KAFKA_SSL_ENABLED'
-      KAFKA_CUSTOM_CERT = 'KAFKA_CUSTOM_CERT'
-      KAFKA_SKIP_CUSTOM_CERT_VALIDATION = 'KAFKA_SKIP_CUSTOM_CERT_VALIDATION'
-      KAFKA_CLIENT_KEYSTORE = 'KAFKA_CLIENT_KEYSTORE'
-      KAFKA_CLIENT_KEYSTORE_PASSWORD = 'KAFKA_CLIENT_KEYSTORE_PASSWORD'
-      KAFKA_CLIENT_KEY_PASSWORD = 'KAFKA_CLIENT_KEY_PASSWORD'
-      ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD = 'ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD'
-      ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD = 'ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD'
-      KAFKA_SASL_MECHANISM = 'KAFKA_SASL_MECHANISM'
-      KAFKA_SASL_PLAIN_USERNAME = 'KAFKA_SASL_PLAIN_USERNAME'
-      KAFKA_SASL_PLAIN_PASSWORD = 'KAFKA_SASL_PLAIN_PASSWORD'
-      ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD = 'ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD'
-      KAFKA_SASL_SCRAM_USERNAME = 'KAFKA_SASL_SCRAM_USERNAME'
-      KAFKA_SASL_SCRAM_PASSWORD = 'KAFKA_SASL_SCRAM_PASSWORD'
-      KAFKA_SASL_SCRAM_SECRETS_ARN = 'KAFKA_SASL_SCRAM_SECRETS_ARN'
-      ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD = 'ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD'
-      KAFKA_SASL_GSSAPI_KEYTAB = 'KAFKA_SASL_GSSAPI_KEYTAB'
-      KAFKA_SASL_GSSAPI_KRB5_CONF = 'KAFKA_SASL_GSSAPI_KRB5_CONF'
-      KAFKA_SASL_GSSAPI_SERVICE = 'KAFKA_SASL_GSSAPI_SERVICE'
-      KAFKA_SASL_GSSAPI_PRINCIPAL = 'KAFKA_SASL_GSSAPI_PRINCIPAL'
-      SECRET_ID = 'SECRET_ID'
-      CONNECTOR_URL = 'CONNECTOR_URL'
-      CONNECTOR_TYPE = 'CONNECTOR_TYPE'
-      CONNECTOR_CLASS_NAME = 'CONNECTOR_CLASS_NAME'
-      ENDPOINT = 'ENDPOINT'
-      ENDPOINT_TYPE = 'ENDPOINT_TYPE'
-      ROLE_ARN = 'ROLE_ARN'
-      REGION = 'REGION'
-      WORKGROUP_NAME = 'WORKGROUP_NAME'
-      CLUSTER_IDENTIFIER = 'CLUSTER_IDENTIFIER'
-      DATABASE = 'DATABASE'
-    end
-
-    module ConnectionStatus
-      READY = 'READY'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-    end
-
-    module ConnectionType
-      JDBC = 'JDBC'
-      SFTP = 'SFTP'
-      MONGODB = 'MONGODB'
-      KAFKA = 'KAFKA'
-      NETWORK = 'NETWORK'
-      MARKETPLACE = 'MARKETPLACE'
-      CUSTOM = 'CUSTOM'
-      SALESFORCE = 'SALESFORCE'
-      VIEW_VALIDATION_REDSHIFT = 'VIEW_VALIDATION_REDSHIFT'
-      VIEW_VALIDATION_ATHENA = 'VIEW_VALIDATION_ATHENA'
-      GOOGLEADS = 'GOOGLEADS'
-      GOOGLESHEETS = 'GOOGLESHEETS'
-      GOOGLEANALYTICS4 = 'GOOGLEANALYTICS4'
-      SERVICENOW = 'SERVICENOW'
-      MARKETO = 'MARKETO'
-      SAPODATA = 'SAPODATA'
-      ZENDESK = 'ZENDESK'
-      JIRACLOUD = 'JIRACLOUD'
-      NETSUITEERP = 'NETSUITEERP'
-      HUBSPOT = 'HUBSPOT'
-      FACEBOOKADS = 'FACEBOOKADS'
-      INSTAGRAMADS = 'INSTAGRAMADS'
-      ZOHOCRM = 'ZOHOCRM'
-      SALESFORCEPARDOT = 'SALESFORCEPARDOT'
-      SALESFORCEMARKETINGCLOUD = 'SALESFORCEMARKETINGCLOUD'
-      SLACK = 'SLACK'
-      STRIPE = 'STRIPE'
-      INTERCOM = 'INTERCOM'
-      SNAPCHATADS = 'SNAPCHATADS'
     end
 
     # <p>Brief information about a supported connection type returned by the <code>ListConnectionTypes</code> API.</p>
@@ -3634,7 +3411,7 @@ module Aws::Glue
       :logo_url,
       :connection_type_variants,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a variant of a connection type in Glue Data Catalog. Connection type variants provide specific configurations and behaviors 
@@ -3658,7 +3435,7 @@ module Aws::Glue
       :description,
       :logo_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the connections used by a job.</p>
@@ -3668,7 +3445,7 @@ module Aws::Glue
     class ConnectionsList < Struct.new(
       :connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a source generated with standard connection options.</p>
@@ -3731,7 +3508,7 @@ module Aws::Glue
       :data,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target generated with standard connection options.</p>
@@ -3794,7 +3571,7 @@ module Aws::Glue
       :data,
       :inputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a crawl in the workflow.</p>
@@ -3824,16 +3601,7 @@ module Aws::Glue
       :log_group,
       :log_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CrawlState
-      RUNNING = 'RUNNING'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a crawler program that examines a data source and uses classifiers to try to
@@ -3927,7 +3695,7 @@ module Aws::Glue
       :crawler_security_configuration,
       :lake_formation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:crawl_elapsed_time] = 0 unless options.key?(:crawl_elapsed_time)
@@ -3979,24 +3747,12 @@ module Aws::Glue
       :message_prefix,
       :dpu_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dpu_hour] = 0 unless options.key?(:dpu_hour)
         super
       end
-    end
-
-    module CrawlerHistoryState
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
-    end
-
-    module CrawlerLineageSettings
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
     end
 
     # <p>Metrics for a specified crawler.</p>
@@ -4034,7 +3790,7 @@ module Aws::Glue
       :tables_updated,
       :tables_deleted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:time_left_seconds] = 0 unless options.key?(:time_left_seconds)
@@ -4055,7 +3811,7 @@ module Aws::Glue
     class CrawlerNodeDetails < Struct.new(
       :crawls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified crawler is not running.</p>
@@ -4065,7 +3821,7 @@ module Aws::Glue
     class CrawlerNotRunningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation cannot be performed because the crawler is already running.</p>
@@ -4075,13 +3831,7 @@ module Aws::Glue
     class CrawlerRunningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CrawlerState
-      READY = 'READY'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified crawler is stopping.</p>
@@ -4091,7 +3841,7 @@ module Aws::Glue
     class CrawlerStoppingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies data stores to crawl.</p>
@@ -4129,7 +3879,7 @@ module Aws::Glue
       :iceberg_targets,
       :hudi_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of fields, comparators and value that you can use to filter the crawler runs for a specified crawler.</p>
@@ -4191,7 +3941,7 @@ module Aws::Glue
       :filter_operator,
       :field_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4212,7 +3962,7 @@ module Aws::Glue
       :blueprint_location,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4221,7 +3971,7 @@ module Aws::Glue
     class CreateBlueprintResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4238,12 +3988,12 @@ module Aws::Glue
       :catalog_input,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateCatalogResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grok_classifier
@@ -4268,12 +4018,12 @@ module Aws::Glue
       :json_classifier,
       :csv_classifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateClassifierResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -4314,12 +4064,12 @@ module Aws::Glue
       :security_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateColumnStatisticsTaskSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -4338,7 +4088,7 @@ module Aws::Glue
       :connection_input,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_connection_status
@@ -4347,7 +4097,7 @@ module Aws::Glue
     class CreateConnectionResponse < Struct.new(
       :create_connection_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4423,12 +4173,12 @@ module Aws::Glue
       :crawler_security_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateCrawlerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.</p>
@@ -4474,7 +4224,7 @@ module Aws::Glue
       :custom_datatypes,
       :serde,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4496,7 +4246,7 @@ module Aws::Glue
       :context_words,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4505,7 +4255,7 @@ module Aws::Glue
     class CreateCustomEntityTypeResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request to create a data quality ruleset.</p>
@@ -4539,7 +4289,7 @@ module Aws::Glue
       :data_quality_security_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4548,7 +4298,7 @@ module Aws::Glue
     class CreateDataQualityRulesetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -4566,12 +4316,12 @@ module Aws::Glue
       :database_input,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateDatabaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -4674,7 +4424,7 @@ module Aws::Glue
       :tags,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -4769,7 +4519,7 @@ module Aws::Glue
       :created_timestamp,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:zeppelin_remote_spark_interpreter_port] = 0 unless options.key?(:zeppelin_remote_spark_interpreter_port)
@@ -4799,7 +4549,7 @@ module Aws::Glue
       :grok_pattern,
       :custom_patterns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, 
@@ -4826,7 +4576,7 @@ module Aws::Glue
       :write_order,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name
@@ -4867,7 +4617,7 @@ module Aws::Glue
       :tags,
       :integration_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4884,7 +4634,7 @@ module Aws::Glue
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4901,7 +4651,7 @@ module Aws::Glue
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -4982,7 +4732,7 @@ module Aws::Glue
       :data_filter,
       :integration_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5006,12 +4756,12 @@ module Aws::Glue
       :source_table_config,
       :target_table_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateIntegrationTablePropertiesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5214,7 +4964,7 @@ module Aws::Glue
       :source_control_details,
       :maintenance_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5223,7 +4973,7 @@ module Aws::Glue
     class CreateJobResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>
@@ -5238,7 +4988,7 @@ module Aws::Glue
       :name,
       :json_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5356,7 +5106,7 @@ module Aws::Glue
       :tags,
       :transform_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -5365,7 +5115,7 @@ module Aws::Glue
     class CreateMLTransformResponse < Struct.new(
       :transform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -5386,12 +5136,12 @@ module Aws::Glue
       :table_name,
       :partition_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreatePartitionIndexResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -5414,12 +5164,12 @@ module Aws::Glue
       :table_name,
       :partition_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreatePartitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -5436,7 +5186,7 @@ module Aws::Glue
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_arn
@@ -5457,7 +5207,7 @@ module Aws::Glue
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -5524,7 +5274,7 @@ module Aws::Glue
       :tags,
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -5585,7 +5335,7 @@ module Aws::Glue
       :schema_version_id,
       :schema_version_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dag_nodes
@@ -5602,7 +5352,7 @@ module Aws::Glue
       :dag_edges,
       :language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute python_script
@@ -5615,7 +5365,7 @@ module Aws::Glue
       :python_script,
       :scala_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5628,7 +5378,7 @@ module Aws::Glue
       :name,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5641,7 +5391,7 @@ module Aws::Glue
       :name,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request to create a new session.</p>
@@ -5735,7 +5485,7 @@ module Aws::Glue
       :tags,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session
@@ -5744,7 +5494,7 @@ module Aws::Glue
     class CreateSessionResponse < Struct.new(
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -5769,12 +5519,12 @@ module Aws::Glue
       :type,
       :table_optimizer_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateTableOptimizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -5811,12 +5561,12 @@ module Aws::Glue
       :transaction_id,
       :open_table_format_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateTableResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5869,7 +5619,7 @@ module Aws::Glue
       :tags,
       :event_batching_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5878,7 +5628,7 @@ module Aws::Glue
     class CreateTriggerResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5899,7 +5649,7 @@ module Aws::Glue
       :configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5908,7 +5658,7 @@ module Aws::Glue
     class CreateUsageProfileResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -5927,12 +5677,12 @@ module Aws::Glue
       :database_name,
       :function_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateUserDefinedFunctionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5958,7 +5708,7 @@ module Aws::Glue
       :tags,
       :max_concurrent_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5967,7 +5717,7 @@ module Aws::Glue
     class CreateWorkflowResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an XML classifier for <code>CreateClassifier</code> to create.</p>
@@ -5989,7 +5739,7 @@ module Aws::Glue
       :name,
       :row_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A classifier for custom <code>CSV</code> content.</p>
@@ -6049,24 +5799,12 @@ module Aws::Glue
       :custom_datatypes,
       :serde,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
         super
       end
-    end
-
-    module CsvHeaderOption
-      UNKNOWN = 'UNKNOWN'
-      PRESENT = 'PRESENT'
-      ABSENT = 'ABSENT'
-    end
-
-    module CsvSerdeOption
-      OpenCSVSerDe = 'OpenCSVSerDe'
-      LazySimpleSerDe = 'LazySimpleSerDe'
-      None = 'None'
     end
 
     # <p>Specifies a transform that uses custom code you provide to perform the data transformation. The output is a collection of DynamicFrames.</p>
@@ -6092,7 +5830,7 @@ module Aws::Glue
       :class_name,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a custom pattern for detecting sensitive data across the columns and rows of your structured data.</p>
@@ -6111,7 +5849,7 @@ module Aws::Glue
       :regex_string,
       :context_words,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies additional options for DynamoDB ELT catalog operations.</p>
@@ -6125,7 +5863,7 @@ module Aws::Glue
       :dynamodb_export,
       :dynamodb_unnest_ddb_json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dynamodb_unnest_ddb_json] = false unless options.key?(:dynamodb_unnest_ddb_json)
@@ -6172,17 +5910,12 @@ module Aws::Glue
       :dynamodb_s3_bucket_owner,
       :dynamodb_sts_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dynamodb_unnest_ddb_json] = false unless options.key?(:dynamodb_unnest_ddb_json)
         super
       end
-    end
-
-    module DQCompositeRuleEvaluationMethod
-      COLUMN = 'COLUMN'
-      ROW = 'ROW'
     end
 
     # <p>Options to configure how your data quality evaluation results are published.</p>
@@ -6204,7 +5937,7 @@ module Aws::Glue
       :cloud_watch_metrics_enabled,
       :results_publishing_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options to configure how your job will stop if your data quality evaluation fails.</p>
@@ -6214,17 +5947,7 @@ module Aws::Glue
     class DQStopJobOnFailureOptions < Struct.new(
       :stop_job_on_failure_timing,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DQStopJobOnFailureTiming
-      Immediate = 'Immediate'
-      AfterDataLoad = 'AfterDataLoad'
-    end
-
-    module DQTransformOutput
-      PrimaryInput = 'PrimaryInput'
-      EvaluationResults = 'EvaluationResults'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information for maintaining Data Catalog security.</p>
@@ -6242,13 +5965,7 @@ module Aws::Glue
       :encryption_at_rest,
       :connection_password_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataFormat
-      AVRO = 'AVRO'
-      JSON = 'JSON'
-      PROTOBUF = 'PROTOBUF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>
@@ -6270,7 +5987,7 @@ module Aws::Glue
       :kms_key,
       :catalog_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:data_lake_access] = false unless options.key?(:data_lake_access)
@@ -6313,7 +6030,7 @@ module Aws::Glue
       :status_message,
       :catalog_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:data_lake_access] = false unless options.key?(:data_lake_access)
@@ -6328,12 +6045,7 @@ module Aws::Glue
     class DataLakePrincipal < Struct.new(
       :data_lake_principal_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataOperation
-      READ = 'READ'
-      WRITE = 'WRITE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of metrics showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results.</p>
@@ -6363,7 +6075,7 @@ module Aws::Glue
       :total_rules_passed,
       :total_rules_failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of the evaluation of a data quality analyzer.</p>
@@ -6385,7 +6097,7 @@ module Aws::Glue
       :evaluation_message,
       :evaluated_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how Data Quality assets in your account should be encrypted.</p>
@@ -6400,12 +6112,7 @@ module Aws::Glue
       :data_quality_encryption_mode,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataQualityEncryptionMode
-      DISABLED = 'DISABLED'
-      SSEKMS = 'SSE-KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional run options you can specify for an evaluation run.</p>
@@ -6423,7 +6130,7 @@ module Aws::Glue
       :results_s3_prefix,
       :composite_rule_evaluation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data quality metric value according to the analysis of historical data.</p>
@@ -6445,13 +6152,7 @@ module Aws::Glue
       :lower_limit,
       :upper_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataQualityModelStatus
-      RUNNING = 'RUNNING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the observation generated after evaluating the rules and analyzers.</p>
@@ -6465,7 +6166,7 @@ module Aws::Glue
       :description,
       :metric_based_observation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data quality result.</p>
@@ -6531,7 +6232,7 @@ module Aws::Glue
       :observations,
       :aggregated_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data quality result.</p>
@@ -6557,7 +6258,7 @@ module Aws::Glue
       :job_run_id,
       :started_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Criteria used to return data quality results.</p>
@@ -6583,7 +6284,7 @@ module Aws::Glue
       :started_after,
       :started_before,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of a data quality rule recommendation run.</p>
@@ -6605,7 +6306,7 @@ module Aws::Glue
       :started_on,
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter for listing data quality recommendation runs.</p>
@@ -6623,7 +6324,7 @@ module Aws::Glue
       :started_before,
       :started_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of the evaluation of a data quality rule.</p>
@@ -6657,13 +6358,7 @@ module Aws::Glue
       :evaluated_rule,
       :rule_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataQualityRuleResultStatus
-      PASS = 'PASS'
-      FAIL = 'FAIL'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the result of a data quality ruleset evaluation run.</p>
@@ -6685,7 +6380,7 @@ module Aws::Glue
       :started_on,
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter criteria.</p>
@@ -6703,7 +6398,7 @@ module Aws::Glue
       :started_before,
       :started_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria used to filter data quality rulesets.</p>
@@ -6737,7 +6432,7 @@ module Aws::Glue
       :last_modified_after,
       :target_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a data quality ruleset returned by <code>GetDataQualityRuleset</code>.</p>
@@ -6771,7 +6466,7 @@ module Aws::Glue
       :recommendation_run_id,
       :rule_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing an Glue table.</p>
@@ -6789,7 +6484,7 @@ module Aws::Glue
       :database_name,
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data source (an Glue table) for which you want data quality results.</p>
@@ -6799,7 +6494,7 @@ module Aws::Glue
     class DataSource < Struct.new(
       :glue_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Database</code> object represents a logical grouping of tables that might reside
@@ -6844,11 +6539,7 @@ module Aws::Glue
       :catalog_id,
       :federated_database,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseAttributes
-      NAME = 'NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a target database for resource linking.</p>
@@ -6866,7 +6557,7 @@ module Aws::Glue
       :database_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure used to create or update a database.</p>
@@ -6903,7 +6594,7 @@ module Aws::Glue
       :target_database,
       :federated_database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Inclusion Annotation.</p>
@@ -6921,7 +6612,7 @@ module Aws::Glue
       :statistic_id,
       :inclusion_annotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure representing the datatype of the value.</p>
@@ -6935,7 +6626,7 @@ module Aws::Glue
       :id,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines column statistics supported for timestamp data columns.</p>
@@ -6957,18 +6648,13 @@ module Aws::Glue
       :number_of_nulls,
       :number_of_distinct_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_nulls] = 0 unless options.key?(:number_of_nulls)
         options[:number_of_distinct_values] = 0 unless options.key?(:number_of_distinct_values)
         super
       end
-    end
-
-    module DdbExportType
-      ddb = 'ddb'
-      s3 = 's3'
     end
 
     # <p>Defines column statistics supported for fixed-point number data columns.</p>
@@ -6990,7 +6676,7 @@ module Aws::Glue
       :number_of_nulls,
       :number_of_distinct_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_nulls] = 0 unless options.key?(:number_of_nulls)
@@ -7011,18 +6697,12 @@ module Aws::Glue
       :unscaled_value,
       :scale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:scale] = 0 unless options.key?(:scale)
         super
       end
-    end
-
-    module DeleteBehavior
-      LOG = 'LOG'
-      DELETE_FROM_DATABASE = 'DELETE_FROM_DATABASE'
-      DEPRECATE_IN_DATABASE = 'DEPRECATE_IN_DATABASE'
     end
 
     # @!attribute name
@@ -7031,7 +6711,7 @@ module Aws::Glue
     class DeleteBlueprintRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7040,7 +6720,7 @@ module Aws::Glue
     class DeleteBlueprintResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7049,12 +6729,12 @@ module Aws::Glue
     class DeleteCatalogRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCatalogResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7063,12 +6743,12 @@ module Aws::Glue
     class DeleteClassifierRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteClassifierResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7094,12 +6774,12 @@ module Aws::Glue
       :partition_values,
       :column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteColumnStatisticsForPartitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7121,12 +6801,12 @@ module Aws::Glue
       :table_name,
       :column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteColumnStatisticsForTableResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -7139,12 +6819,12 @@ module Aws::Glue
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteColumnStatisticsTaskSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7158,12 +6838,12 @@ module Aws::Glue
       :catalog_id,
       :connection_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7172,12 +6852,12 @@ module Aws::Glue
     class DeleteCrawlerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCrawlerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7186,7 +6866,7 @@ module Aws::Glue
     class DeleteCustomEntityTypeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7195,7 +6875,7 @@ module Aws::Glue
     class DeleteCustomEntityTypeResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7204,12 +6884,12 @@ module Aws::Glue
     class DeleteDataQualityRulesetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDataQualityRulesetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7224,12 +6904,12 @@ module Aws::Glue
       :catalog_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDatabaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -7238,12 +6918,12 @@ module Aws::Glue
     class DeleteDevEndpointRequest < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteDevEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_identifier
@@ -7252,7 +6932,7 @@ module Aws::Glue
     class DeleteIntegrationRequest < Struct.new(
       :integration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -7329,7 +7009,7 @@ module Aws::Glue
       :errors,
       :data_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -7342,12 +7022,12 @@ module Aws::Glue
       :resource_arn,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIntegrationTablePropertiesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -7356,7 +7036,7 @@ module Aws::Glue
     class DeleteJobRequest < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -7365,7 +7045,7 @@ module Aws::Glue
     class DeleteJobResponse < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -7374,7 +7054,7 @@ module Aws::Glue
     class DeleteMLTransformRequest < Struct.new(
       :transform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -7383,7 +7063,7 @@ module Aws::Glue
     class DeleteMLTransformResponse < Struct.new(
       :transform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7404,12 +7084,12 @@ module Aws::Glue
       :table_name,
       :index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePartitionIndexResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7432,12 +7112,12 @@ module Aws::Glue
       :table_name,
       :partition_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePartitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -7446,7 +7126,7 @@ module Aws::Glue
     class DeleteRegistryInput < Struct.new(
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -7463,7 +7143,7 @@ module Aws::Glue
       :registry_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_hash_condition
@@ -7476,12 +7156,12 @@ module Aws::Glue
       :policy_hash_condition,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -7490,7 +7170,7 @@ module Aws::Glue
     class DeleteSchemaInput < Struct.new(
       :schema_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -7507,7 +7187,7 @@ module Aws::Glue
       :schema_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -7528,7 +7208,7 @@ module Aws::Glue
       :schema_id,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_version_errors
@@ -7537,7 +7217,7 @@ module Aws::Glue
     class DeleteSchemaVersionsResponse < Struct.new(
       :schema_version_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7546,12 +7226,12 @@ module Aws::Glue
     class DeleteSecurityConfigurationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSecurityConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -7564,7 +7244,7 @@ module Aws::Glue
       :id,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -7573,7 +7253,7 @@ module Aws::Glue
     class DeleteSessionResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7594,12 +7274,12 @@ module Aws::Glue
       :table_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTableOptimizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7623,12 +7303,12 @@ module Aws::Glue
       :name,
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTableResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7652,12 +7332,12 @@ module Aws::Glue
       :table_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTableVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7666,7 +7346,7 @@ module Aws::Glue
     class DeleteTriggerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7675,7 +7355,7 @@ module Aws::Glue
     class DeleteTriggerResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7684,12 +7364,12 @@ module Aws::Glue
     class DeleteUsageProfileRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUsageProfileResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -7707,12 +7387,12 @@ module Aws::Glue
       :database_name,
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteUserDefinedFunctionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7721,7 +7401,7 @@ module Aws::Glue
     class DeleteWorkflowRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7730,7 +7410,7 @@ module Aws::Glue
     class DeleteWorkflowResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Delta data store to crawl one or more Delta tables.</p>
@@ -7752,12 +7432,7 @@ module Aws::Glue
       :write_manifest,
       :create_native_delta_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeltaTargetCompressionType
-      UNCOMPRESSED = 'uncompressed'
-      SNAPPY = 'snappy'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_type
@@ -7766,7 +7441,7 @@ module Aws::Glue
     class DescribeConnectionTypeRequest < Struct.new(
       :connection_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_type
@@ -7815,7 +7490,7 @@ module Aws::Glue
       :python_connection_properties,
       :spark_connection_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_name
@@ -7840,7 +7515,7 @@ module Aws::Glue
       :next_token,
       :data_store_api_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute fields
@@ -7853,7 +7528,7 @@ module Aws::Glue
       :fields,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_arn
@@ -7874,7 +7549,7 @@ module Aws::Glue
       :max_records,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inbound_integrations
@@ -7887,7 +7562,7 @@ module Aws::Glue
       :inbound_integrations,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_identifier
@@ -7908,7 +7583,7 @@ module Aws::Glue
       :max_records,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integrations
@@ -7921,7 +7596,7 @@ module Aws::Glue
       :integrations,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A development endpoint where a developer can remotely debug extract, transform, and load
@@ -8082,7 +7757,7 @@ module Aws::Glue
       :security_configuration,
       :arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:zeppelin_remote_spark_interpreter_port] = 0 unless options.key?(:zeppelin_remote_spark_interpreter_port)
@@ -8113,7 +7788,7 @@ module Aws::Glue
       :extra_python_libs_s3_path,
       :extra_jars_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the direct JDBC source connection.</p>
@@ -8147,7 +7822,7 @@ module Aws::Glue
       :redshift_tmp_dir,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Kafka data store.</p>
@@ -8173,7 +7848,7 @@ module Aws::Glue
       :detect_schema,
       :data_preview_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a direct Amazon Kinesis data source.</p>
@@ -8199,7 +7874,7 @@ module Aws::Glue
       :streaming_options,
       :data_preview_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy that specifies update behavior for the crawler.</p>
@@ -8221,7 +7896,7 @@ module Aws::Glue
       :table,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines column statistics supported for floating-point number data columns.</p>
@@ -8243,7 +7918,7 @@ module Aws::Glue
       :number_of_nulls,
       :number_of_distinct_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:minimum_value] = 0 unless options.key?(:minimum_value)
@@ -8269,7 +7944,7 @@ module Aws::Glue
       :inputs,
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that chooses the data property keys that you want to drop.</p>
@@ -8287,7 +7962,7 @@ module Aws::Glue
       :inputs,
       :paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that removes columns from the dataset if all values in the column are 'null'. By default, Glue Studio will recognize null objects, but some values such as empty strings, strings that are "null", -1 integers or other placeholders such as zeros, are not automatically recognized as nulls.</p>
@@ -8310,7 +7985,7 @@ module Aws::Glue
       :null_check_box_list,
       :null_text_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the set of parameters needed to perform the dynamic transform.</p>
@@ -8348,7 +8023,7 @@ module Aws::Glue
       :version,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a DynamoDB data source in the Glue Data Catalog.</p>
@@ -8375,7 +8050,7 @@ module Aws::Glue
       :pitr_enabled,
       :additional_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a DynamoDB ELT connector source for extracting data from DynamoDB tables.</p>
@@ -8393,7 +8068,7 @@ module Aws::Glue
       :connection_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon DynamoDB table to crawl.</p>
@@ -8413,7 +8088,7 @@ module Aws::Glue
       :scan_all,
       :scan_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An edge represents a directed connection between two Glue components that are part of the workflow the
@@ -8428,12 +8103,7 @@ module Aws::Glue
       :source_id,
       :destination_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnableHybridValues
-      TRUE = 'TRUE'
-      FALSE = 'FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the encryption-at-rest configuration for the Data Catalog.</p>
@@ -8451,7 +8121,7 @@ module Aws::Glue
       :sse_aws_kms_key_id,
       :catalog_encryption_service_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an encryption configuration.</p>
@@ -8473,7 +8143,7 @@ module Aws::Glue
       :job_bookmarks_encryption,
       :data_quality_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entity supported by a given <code>ConnectionType</code>.</p>
@@ -8503,7 +8173,7 @@ module Aws::Glue
       :category,
       :custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified entity does not exist</p>
@@ -8517,7 +8187,7 @@ module Aws::Glue
       :message,
       :from_federation_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about an error.</p>
@@ -8531,7 +8201,7 @@ module Aws::Glue
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing error details.</p>
@@ -8545,7 +8215,7 @@ module Aws::Glue
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies your data quality evaluation criteria.</p>
@@ -8575,7 +8245,7 @@ module Aws::Glue
       :publishing_options,
       :stop_job_on_failure_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies your data quality evaluation criteria.</p>
@@ -8609,7 +8279,7 @@ module Aws::Glue
       :additional_options,
       :stop_job_on_failure_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Evaluation metrics provide an estimate of the quality of your machine learning transform.</p>
@@ -8623,7 +8293,7 @@ module Aws::Glue
       :transform_type,
       :find_matches_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Batch condition that must be met (specified number of events received or batch time window expired)
@@ -8638,7 +8308,7 @@ module Aws::Glue
       :batch_size,
       :batch_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A run attempt for a column statistics task run.</p>
@@ -8660,12 +8330,7 @@ module Aws::Glue
       :execution_timestamp,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExecutionClass
-      FLEX = 'FLEX'
-      STANDARD = 'STANDARD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An execution property of a job.</p>
@@ -8677,23 +8342,12 @@ module Aws::Glue
     class ExecutionProperty < Struct.new(
       :max_concurrent_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_concurrent_runs] = 0 unless options.key?(:max_concurrent_runs)
         super
       end
-    end
-
-    module ExecutionStatus
-      FAILED = 'FAILED'
-      STARTED = 'STARTED'
-    end
-
-    module ExistCondition
-      MUST_EXIST = 'MUST_EXIST'
-      NOT_EXIST = 'NOT_EXIST'
-      NONE = 'NONE'
     end
 
     # <p>Specifies configuration properties for an exporting labels task run.</p>
@@ -8704,7 +8358,7 @@ module Aws::Glue
     class ExportLabelsTaskRunProperties < Struct.new(
       :output_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A catalog that points to an entity outside the Glue Data Catalog.</p>
@@ -8723,7 +8377,7 @@ module Aws::Glue
       :connection_name,
       :connection_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A database that points to an entity outside the Glue Data Catalog.</p>
@@ -8741,7 +8395,7 @@ module Aws::Glue
       :connection_name,
       :connection_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A federated resource already exists.</p>
@@ -8755,7 +8409,7 @@ module Aws::Glue
       :message,
       :associated_glue_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A table that points to an entity outside the Glue Data Catalog.</p>
@@ -8777,20 +8431,7 @@ module Aws::Glue
       :connection_name,
       :connection_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FederationSourceErrorCode
-      AccessDeniedException = 'AccessDeniedException'
-      EntityNotFoundException = 'EntityNotFoundException'
-      InvalidCredentialsException = 'InvalidCredentialsException'
-      InvalidInputException = 'InvalidInputException'
-      InvalidResponseException = 'InvalidResponseException'
-      OperationTimeoutException = 'OperationTimeoutException'
-      OperationNotSupportedException = 'OperationNotSupportedException'
-      InternalServiceException = 'InternalServiceException'
-      PartialFailureException = 'PartialFailureException'
-      ThrottlingException = 'ThrottlingException'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A federation source failed.</p>
@@ -8804,7 +8445,7 @@ module Aws::Glue
       :federation_source_error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A federation source failed, but the operation may be retried.</p>
@@ -8814,7 +8455,7 @@ module Aws::Glue
     class FederationSourceRetryableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Field</code> object has information about the different properties associated with a field in the connector.</p>
@@ -8892,46 +8533,7 @@ module Aws::Glue
       :native_data_type,
       :custom_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FieldDataType
-      INT = 'INT'
-      SMALLINT = 'SMALLINT'
-      BIGINT = 'BIGINT'
-      FLOAT = 'FLOAT'
-      LONG = 'LONG'
-      DATE = 'DATE'
-      BOOLEAN = 'BOOLEAN'
-      MAP = 'MAP'
-      ARRAY = 'ARRAY'
-      STRING = 'STRING'
-      TIMESTAMP = 'TIMESTAMP'
-      DECIMAL = 'DECIMAL'
-      BYTE = 'BYTE'
-      SHORT = 'SHORT'
-      DOUBLE = 'DOUBLE'
-      STRUCT = 'STRUCT'
-    end
-
-    module FieldFilterOperator
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      BETWEEN = 'BETWEEN'
-      EQUAL_TO = 'EQUAL_TO'
-      NOT_EQUAL_TO = 'NOT_EQUAL_TO'
-      GREATER_THAN_OR_EQUAL_TO = 'GREATER_THAN_OR_EQUAL_TO'
-      LESS_THAN_OR_EQUAL_TO = 'LESS_THAN_OR_EQUAL_TO'
-      CONTAINS = 'CONTAINS'
-      ORDER_BY = 'ORDER_BY'
-    end
-
-    module FieldName
-      CRAWL_ID = 'CRAWL_ID'
-      STATE = 'STATE'
-      START_TIME = 'START_TIME'
-      END_TIME = 'END_TIME'
-      DPU_HOUR = 'DPU_HOUR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that locates records in the dataset that have missing values and adds a new field with a value determined by imputation. The input data set is used to train the machine learning model that determines what the missing value should be.</p>
@@ -8953,7 +8555,7 @@ module Aws::Glue
       :imputed_path,
       :filled_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that splits a dataset into two, based on a filter condition.</p>
@@ -8975,7 +8577,7 @@ module Aws::Glue
       :logical_operator,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a filter expression.</p>
@@ -8993,31 +8595,7 @@ module Aws::Glue
       :negated,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterLogicalOperator
-      AND = 'AND'
-      OR = 'OR'
-    end
-
-    module FilterOperation
-      EQ = 'EQ'
-      LT = 'LT'
-      GT = 'GT'
-      LTE = 'LTE'
-      GTE = 'GTE'
-      REGEX = 'REGEX'
-      ISNULL = 'ISNULL'
-    end
-
-    module FilterOperator
-      GT = 'GT'
-      GE = 'GE'
-      LT = 'LT'
-      LE = 'LE'
-      EQ = 'EQ'
-      NE = 'NE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single entry in the list of values for a <code>FilterExpression</code>. </p>
@@ -9031,12 +8609,7 @@ module Aws::Glue
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterValueType
-      COLUMNEXTRACTED = 'COLUMNEXTRACTED'
-      CONSTANT = 'CONSTANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The evaluation metrics for the find matches algorithm. The quality of your machine
@@ -9078,7 +8651,7 @@ module Aws::Glue
       :confusion_matrix,
       :column_importances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters to configure the find matches transform.</p>
@@ -9114,7 +8687,7 @@ module Aws::Glue
       :accuracy_cost_tradeoff,
       :enforce_provided_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration properties for a Find Matches task run.</p>
@@ -9132,7 +8705,7 @@ module Aws::Glue
       :job_name,
       :job_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9149,7 +8722,7 @@ module Aws::Glue
       :include_blueprint,
       :include_parameter_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint
@@ -9158,7 +8731,7 @@ module Aws::Glue
     class GetBlueprintResponse < Struct.new(
       :blueprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint_name
@@ -9171,7 +8744,7 @@ module Aws::Glue
       :blueprint_name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint_run
@@ -9180,7 +8753,7 @@ module Aws::Glue
     class GetBlueprintRunResponse < Struct.new(
       :blueprint_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint_name
@@ -9197,7 +8770,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint_runs
@@ -9210,7 +8783,7 @@ module Aws::Glue
       :blueprint_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9219,7 +8792,7 @@ module Aws::Glue
     class GetCatalogImportStatusRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_status
@@ -9228,7 +8801,7 @@ module Aws::Glue
     class GetCatalogImportStatusResponse < Struct.new(
       :import_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9237,7 +8810,7 @@ module Aws::Glue
     class GetCatalogRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog
@@ -9246,7 +8819,7 @@ module Aws::Glue
     class GetCatalogResponse < Struct.new(
       :catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parent_catalog_id
@@ -9272,7 +8845,7 @@ module Aws::Glue
       :recursive,
       :include_root,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_list
@@ -9285,7 +8858,7 @@ module Aws::Glue
       :catalog_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9294,7 +8867,7 @@ module Aws::Glue
     class GetClassifierRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute classifier
@@ -9303,7 +8876,7 @@ module Aws::Glue
     class GetClassifierResponse < Struct.new(
       :classifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -9316,7 +8889,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute classifiers
@@ -9330,7 +8903,7 @@ module Aws::Glue
       :classifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9356,7 +8929,7 @@ module Aws::Glue
       :partition_values,
       :column_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_list
@@ -9369,7 +8942,7 @@ module Aws::Glue
       :column_statistics_list,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9391,7 +8964,7 @@ module Aws::Glue
       :table_name,
       :column_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_list
@@ -9404,7 +8977,7 @@ module Aws::Glue
       :column_statistics_list,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_task_run_id
@@ -9413,7 +8986,7 @@ module Aws::Glue
     class GetColumnStatisticsTaskRunRequest < Struct.new(
       :column_statistics_task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_task_run
@@ -9422,7 +8995,7 @@ module Aws::Glue
     class GetColumnStatisticsTaskRunResponse < Struct.new(
       :column_statistics_task_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -9443,7 +9016,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_task_runs
@@ -9456,7 +9029,7 @@ module Aws::Glue
       :column_statistics_task_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -9469,7 +9042,7 @@ module Aws::Glue
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_task_settings
@@ -9478,7 +9051,7 @@ module Aws::Glue
     class GetColumnStatisticsTaskSettingsResponse < Struct.new(
       :column_statistics_task_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9504,7 +9077,7 @@ module Aws::Glue
       :hide_password,
       :apply_override_for_compute_environment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -9513,7 +9086,7 @@ module Aws::Glue
     class GetConnectionResponse < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filters the connection definitions that are returned by the <code>GetConnections</code>
@@ -9533,7 +9106,7 @@ module Aws::Glue
       :connection_type,
       :connection_schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9563,7 +9136,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_list
@@ -9577,7 +9150,7 @@ module Aws::Glue
       :connection_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_name_list
@@ -9594,7 +9167,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_metrics_list
@@ -9608,7 +9181,7 @@ module Aws::Glue
       :crawler_metrics_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9617,7 +9190,7 @@ module Aws::Glue
     class GetCrawlerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler
@@ -9626,7 +9199,7 @@ module Aws::Glue
     class GetCrawlerResponse < Struct.new(
       :crawler,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -9639,7 +9212,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawlers
@@ -9653,7 +9226,7 @@ module Aws::Glue
       :crawlers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9662,7 +9235,7 @@ module Aws::Glue
     class GetCustomEntityTypeRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -9679,7 +9252,7 @@ module Aws::Glue
       :regex_string,
       :context_words,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -9689,7 +9262,7 @@ module Aws::Glue
     class GetDataCatalogEncryptionSettingsRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_catalog_encryption_settings
@@ -9698,7 +9271,7 @@ module Aws::Glue
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       :data_catalog_encryption_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistic_id
@@ -9711,7 +9284,7 @@ module Aws::Glue
       :statistic_id,
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9732,7 +9305,7 @@ module Aws::Glue
       :completed_on,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistic_id
@@ -9745,7 +9318,7 @@ module Aws::Glue
       :statistic_id,
       :profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute completed_on
@@ -9759,7 +9332,7 @@ module Aws::Glue
       :completed_on,
       :model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result_id
@@ -9768,7 +9341,7 @@ module Aws::Glue
     class GetDataQualityResultRequest < Struct.new(
       :result_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the data quality result.</p>
@@ -9834,7 +9407,7 @@ module Aws::Glue
       :observations,
       :aggregated_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -9843,7 +9416,7 @@ module Aws::Glue
     class GetDataQualityRuleRecommendationRunRequest < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response for the Data Quality rule recommendation run.</p>
@@ -9905,7 +9478,7 @@ module Aws::Glue
       :created_ruleset_name,
       :data_quality_security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_time] = 0 unless options.key?(:execution_time)
@@ -9919,7 +9492,7 @@ module Aws::Glue
     class GetDataQualityRulesetEvaluationRunRequest < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -9984,7 +9557,7 @@ module Aws::Glue
       :result_ids,
       :additional_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_time] = 0 unless options.key?(:execution_time)
@@ -9998,7 +9571,7 @@ module Aws::Glue
     class GetDataQualityRulesetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the data quality ruleset response.</p>
@@ -10036,7 +9609,7 @@ module Aws::Glue
       :recommendation_run_id,
       :data_quality_security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -10051,7 +9624,7 @@ module Aws::Glue
       :catalog_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database
@@ -10060,7 +9633,7 @@ module Aws::Glue
     class GetDatabaseResponse < Struct.new(
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -10097,7 +9670,7 @@ module Aws::Glue
       :resource_share_type,
       :attributes_to_get,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_list
@@ -10111,7 +9684,7 @@ module Aws::Glue
       :database_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute python_script
@@ -10120,7 +9693,7 @@ module Aws::Glue
     class GetDataflowGraphRequest < Struct.new(
       :python_script,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dag_nodes
@@ -10133,7 +9706,7 @@ module Aws::Glue
       :dag_nodes,
       :dag_edges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -10142,7 +9715,7 @@ module Aws::Glue
     class GetDevEndpointRequest < Struct.new(
       :endpoint_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dev_endpoint
@@ -10151,7 +9724,7 @@ module Aws::Glue
     class GetDevEndpointResponse < Struct.new(
       :dev_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -10164,7 +9737,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dev_endpoints
@@ -10178,7 +9751,7 @@ module Aws::Glue
       :dev_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_name
@@ -10223,7 +9796,7 @@ module Aws::Glue
       :order_by,
       :selected_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records
@@ -10236,7 +9809,7 @@ module Aws::Glue
       :records,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -10245,7 +9818,7 @@ module Aws::Glue
     class GetIntegrationResourcePropertyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -10262,7 +9835,7 @@ module Aws::Glue
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -10278,7 +9851,7 @@ module Aws::Glue
       :resource_arn,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -10302,7 +9875,7 @@ module Aws::Glue
       :source_table_config,
       :target_table_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -10315,7 +9888,7 @@ module Aws::Glue
       :job_name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_bookmark_entry
@@ -10324,7 +9897,7 @@ module Aws::Glue
     class GetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -10333,7 +9906,7 @@ module Aws::Glue
     class GetJobRequest < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -10342,7 +9915,7 @@ module Aws::Glue
     class GetJobResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -10359,7 +9932,7 @@ module Aws::Glue
       :run_id,
       :predecessors_included,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_run
@@ -10368,7 +9941,7 @@ module Aws::Glue
     class GetJobRunResponse < Struct.new(
       :job_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -10385,7 +9958,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_runs
@@ -10398,7 +9971,7 @@ module Aws::Glue
       :job_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -10411,7 +9984,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -10424,7 +9997,7 @@ module Aws::Glue
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -10437,7 +10010,7 @@ module Aws::Glue
       :transform_id,
       :task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -10482,7 +10055,7 @@ module Aws::Glue
       :completed_on,
       :execution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_time] = 0 unless options.key?(:execution_time)
@@ -10512,7 +10085,7 @@ module Aws::Glue
       :filter,
       :sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_runs
@@ -10525,7 +10098,7 @@ module Aws::Glue
       :task_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -10535,7 +10108,7 @@ module Aws::Glue
     class GetMLTransformRequest < Struct.new(
       :transform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -10634,7 +10207,7 @@ module Aws::Glue
       :max_retries,
       :transform_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:label_count] = 0 unless options.key?(:label_count)
@@ -10660,7 +10233,7 @@ module Aws::Glue
       :filter,
       :sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transforms
@@ -10673,7 +10246,7 @@ module Aws::Glue
       :transforms,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source
@@ -10690,7 +10263,7 @@ module Aws::Glue
       :sinks,
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mapping
@@ -10699,7 +10272,7 @@ module Aws::Glue
     class GetMappingResponse < Struct.new(
       :mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -10720,7 +10293,7 @@ module Aws::Glue
       :table_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partition_index_descriptor_list
@@ -10733,7 +10306,7 @@ module Aws::Glue
       :partition_index_descriptor_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -10755,7 +10328,7 @@ module Aws::Glue
       :table_name,
       :partition_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partition
@@ -10765,7 +10338,7 @@ module Aws::Glue
     class GetPartitionResponse < Struct.new(
       :partition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -10916,7 +10489,7 @@ module Aws::Glue
       :transaction_id,
       :query_as_of_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partitions
@@ -10930,7 +10503,7 @@ module Aws::Glue
       :partitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mapping
@@ -10969,7 +10542,7 @@ module Aws::Glue
       :language,
       :additional_plan_options_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute python_script
@@ -10982,7 +10555,7 @@ module Aws::Glue
       :python_script,
       :scala_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -10991,7 +10564,7 @@ module Aws::Glue
     class GetRegistryInput < Struct.new(
       :registry_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -11020,7 +10593,7 @@ module Aws::Glue
       :created_time,
       :updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -11033,7 +10606,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute get_resource_policies_response_list
@@ -11046,7 +10619,7 @@ module Aws::Glue
       :get_resource_policies_response_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -11058,7 +10631,7 @@ module Aws::Glue
     class GetResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_in_json
@@ -11079,7 +10652,7 @@ module Aws::Glue
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -11100,7 +10673,7 @@ module Aws::Glue
       :schema_id,
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_version_id
@@ -11125,7 +10698,7 @@ module Aws::Glue
       :status,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -11142,7 +10715,7 @@ module Aws::Glue
     class GetSchemaInput < Struct.new(
       :schema_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -11199,7 +10772,7 @@ module Aws::Glue
       :created_time,
       :updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -11224,7 +10797,7 @@ module Aws::Glue
       :schema_version_id,
       :schema_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_version_id
@@ -11257,7 +10830,7 @@ module Aws::Glue
       :status,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -11286,7 +10859,7 @@ module Aws::Glue
       :second_schema_version_number,
       :schema_diff_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute diff
@@ -11295,7 +10868,7 @@ module Aws::Glue
     class GetSchemaVersionsDiffResponse < Struct.new(
       :diff,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -11304,7 +10877,7 @@ module Aws::Glue
     class GetSecurityConfigurationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_configuration
@@ -11313,7 +10886,7 @@ module Aws::Glue
     class GetSecurityConfigurationResponse < Struct.new(
       :security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -11326,7 +10899,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute security_configurations
@@ -11340,7 +10913,7 @@ module Aws::Glue
       :security_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -11353,7 +10926,7 @@ module Aws::Glue
       :id,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session
@@ -11362,7 +10935,7 @@ module Aws::Glue
     class GetSessionResponse < Struct.new(
       :session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -11379,7 +10952,7 @@ module Aws::Glue
       :id,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statement
@@ -11388,7 +10961,7 @@ module Aws::Glue
     class GetStatementResponse < Struct.new(
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -11409,7 +10982,7 @@ module Aws::Glue
       :table_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -11430,7 +11003,7 @@ module Aws::Glue
       :table_name,
       :table_optimizer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -11462,7 +11035,7 @@ module Aws::Glue
       :query_as_of_time,
       :include_status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table
@@ -11471,7 +11044,7 @@ module Aws::Glue
     class GetTableResponse < Struct.new(
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -11495,7 +11068,7 @@ module Aws::Glue
       :table_name,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_version
@@ -11504,7 +11077,7 @@ module Aws::Glue
     class GetTableVersionResponse < Struct.new(
       :table_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -11532,7 +11105,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_versions
@@ -11547,7 +11120,7 @@ module Aws::Glue
       :table_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -11602,7 +11175,7 @@ module Aws::Glue
       :include_status_details,
       :attributes_to_get,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table_list
@@ -11615,7 +11188,7 @@ module Aws::Glue
       :table_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -11624,7 +11197,7 @@ module Aws::Glue
     class GetTagsRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -11633,7 +11206,7 @@ module Aws::Glue
     class GetTagsResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -11642,7 +11215,7 @@ module Aws::Glue
     class GetTriggerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trigger
@@ -11651,7 +11224,7 @@ module Aws::Glue
     class GetTriggerResponse < Struct.new(
       :trigger,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -11669,7 +11242,7 @@ module Aws::Glue
       :dependent_job_name,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute triggers
@@ -11683,7 +11256,7 @@ module Aws::Glue
       :triggers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute region
@@ -11720,7 +11293,7 @@ module Aws::Glue
       :supported_permission_types,
       :query_session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute partition
@@ -11738,7 +11311,7 @@ module Aws::Glue
       :authorized_columns,
       :is_registered_with_lake_formation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_registered_with_lake_formation] = false unless options.key?(:is_registered_with_lake_formation)
@@ -11893,7 +11466,7 @@ module Aws::Glue
       :max_results,
       :query_session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute unfiltered_partitions
@@ -11907,7 +11480,7 @@ module Aws::Glue
       :unfiltered_partitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute region
@@ -11976,7 +11549,7 @@ module Aws::Glue
       :permissions,
       :query_session_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table
@@ -12022,7 +11595,7 @@ module Aws::Glue
       :permissions,
       :row_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_registered_with_lake_formation] = false unless options.key?(:is_registered_with_lake_formation)
@@ -12038,7 +11611,7 @@ module Aws::Glue
     class GetUsageProfileRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -12063,7 +11636,7 @@ module Aws::Glue
       :created_on,
       :last_modified_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -12081,7 +11654,7 @@ module Aws::Glue
       :database_name,
       :function_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_defined_function
@@ -12090,7 +11663,7 @@ module Aws::Glue
     class GetUserDefinedFunctionResponse < Struct.new(
       :user_defined_function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -12118,7 +11691,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_defined_functions
@@ -12132,7 +11705,7 @@ module Aws::Glue
       :user_defined_functions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -12145,7 +11718,7 @@ module Aws::Glue
       :name,
       :include_graph,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflow
@@ -12154,7 +11727,7 @@ module Aws::Glue
     class GetWorkflowResponse < Struct.new(
       :workflow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -12167,7 +11740,7 @@ module Aws::Glue
       :name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_properties
@@ -12176,7 +11749,7 @@ module Aws::Glue
     class GetWorkflowRunPropertiesResponse < Struct.new(
       :run_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -12193,7 +11766,7 @@ module Aws::Glue
       :run_id,
       :include_graph,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run
@@ -12202,7 +11775,7 @@ module Aws::Glue
     class GetWorkflowRunResponse < Struct.new(
       :run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -12223,7 +11796,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runs
@@ -12236,7 +11809,7 @@ module Aws::Glue
       :runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An encryption operation failed.</p>
@@ -12246,7 +11819,7 @@ module Aws::Glue
     class GlueEncryptionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for returning a resource policy.</p>
@@ -12268,20 +11841,7 @@ module Aws::Glue
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GlueRecordType
-      DATE = 'DATE'
-      STRING = 'STRING'
-      TIMESTAMP = 'TIMESTAMP'
-      INT = 'INT'
-      FLOAT = 'FLOAT'
-      LONG = 'LONG'
-      BIGDECIMAL = 'BIGDECIMAL'
-      BYTE = 'BYTE'
-      SHORT = 'SHORT'
-      DOUBLE = 'DOUBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a user-defined schema when a schema cannot be determined by Glue.</p>
@@ -12291,7 +11851,7 @@ module Aws::Glue
     class GlueSchema < Struct.new(
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a single column in a Glue schema definition.</p>
@@ -12309,7 +11869,7 @@ module Aws::Glue
       :type,
       :glue_studio_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The database and table in the Glue Data Catalog that is used for input or output data.</p>
@@ -12345,7 +11905,7 @@ module Aws::Glue
       :connection_name,
       :additional_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the data store in the governed Glue Data Catalog.</p>
@@ -12371,7 +11931,7 @@ module Aws::Glue
       :partition_predicate,
       :additional_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data target that writes to Amazon S3 using the Glue Data Catalog.</p>
@@ -12401,7 +11961,7 @@ module Aws::Glue
       :database,
       :schema_change_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A classifier that uses <code>grok</code> patterns.</p>
@@ -12438,7 +11998,7 @@ module Aws::Glue
       :grok_pattern,
       :custom_patterns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -12461,7 +12021,7 @@ module Aws::Glue
       :filters,
       :logical_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Hudi data source.</p>
@@ -12485,18 +12045,7 @@ module Aws::Glue
       :exclusions,
       :maximum_traversal_depth,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HudiTargetCompressionType
-      GZIP = 'gzip'
-      LZO = 'lzo'
-      UNCOMPRESSED = 'uncompressed'
-      SNAPPY = 'snappy'
-    end
-
-    module HyperTargetCompressionType
-      UNCOMPRESSED = 'uncompressed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an Iceberg compaction optimizer. This configuration defines parameters for optimizing the layout of data files in Iceberg tables.</p>
@@ -12537,7 +12086,7 @@ module Aws::Glue
       :min_input_files,
       :delete_file_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Compaction metrics for Iceberg for the optimizer run.</p>
@@ -12563,7 +12112,7 @@ module Aws::Glue
       :number_of_dpus,
       :job_duration_in_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_bytes_compacted] = 0 unless options.key?(:number_of_bytes_compacted)
@@ -12591,12 +12140,7 @@ module Aws::Glue
       :version,
       :create_iceberg_table_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IcebergNullOrder
-      NULLS_FIRST = 'nulls-first'
-      NULLS_LAST = 'nulls-last'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that specifies Iceberg table optimization properties for the catalog, including configurations for compaction, retention, and orphan file deletion operations.</p>
@@ -12618,7 +12162,7 @@ module Aws::Glue
       :retention,
       :orphan_file_deletion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the output properties of Iceberg table optimization configuration for your catalog resource in the Glue 
@@ -12645,7 +12189,7 @@ module Aws::Glue
       :orphan_file_deletion,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an Iceberg orphan file deletion optimizer.</p>
@@ -12663,7 +12207,7 @@ module Aws::Glue
       :location,
       :run_rate_in_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Orphan file deletion metrics for Iceberg for the optimizer run.</p>
@@ -12685,7 +12229,7 @@ module Aws::Glue
       :number_of_dpus,
       :job_duration_in_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_orphan_files_deleted] = 0 unless options.key?(:number_of_orphan_files_deleted)
@@ -12716,7 +12260,7 @@ module Aws::Glue
       :name,
       :field_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:source_id] = 0 unless options.key?(:source_id)
@@ -12736,7 +12280,7 @@ module Aws::Glue
       :fields,
       :spec_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:spec_id] = 0 unless options.key?(:spec_id)
@@ -12763,7 +12307,7 @@ module Aws::Glue
       :clean_expired_files,
       :run_rate_in_hours,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Snapshot retention metrics for Iceberg for the optimizer run.</p>
@@ -12793,7 +12337,7 @@ module Aws::Glue
       :number_of_dpus,
       :job_duration_in_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_data_files_deleted] = 0 unless options.key?(:number_of_data_files_deleted)
@@ -12825,17 +12369,12 @@ module Aws::Glue
       :type,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:schema_id] = 0 unless options.key?(:schema_id)
         super
       end
-    end
-
-    module IcebergSortDirection
-      ASC = 'asc'
-      DESC = 'desc'
     end
 
     # <p>Defines a single field within an Iceberg sort order specification, including the source field, transformation, sort direction, and null value ordering.</p>
@@ -12857,7 +12396,7 @@ module Aws::Glue
       :direction,
       :null_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:source_id] = 0 unless options.key?(:source_id)
@@ -12877,7 +12416,7 @@ module Aws::Glue
       :order_id,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:order_id] = 0 unless options.key?(:order_id)
@@ -12908,17 +12447,13 @@ module Aws::Glue
       :required,
       :doc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:id] = 0 unless options.key?(:id)
         options[:required] = false unless options.key?(:required)
         super
       end
-    end
-
-    module IcebergStructTypeEnum
-      STRUCT = 'struct'
     end
 
     # <p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order 
@@ -12945,7 +12480,7 @@ module Aws::Glue
       :location,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.</p>
@@ -12968,14 +12503,7 @@ module Aws::Glue
       :exclusions,
       :maximum_traversal_depth,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IcebergTargetCompressionType
-      GZIP = 'gzip'
-      LZO = 'lzo'
-      UNCOMPRESSED = 'uncompressed'
-      SNAPPY = 'snappy'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The same unique identifier was associated with two different records.</p>
@@ -12985,7 +12513,7 @@ module Aws::Glue
     class IdempotentParameterMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The blueprint is in an invalid state to perform a requested operation.</p>
@@ -12995,7 +12523,7 @@ module Aws::Glue
     class IllegalBlueprintStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The session is in an invalid state to perform a requested operation.</p>
@@ -13005,7 +12533,7 @@ module Aws::Glue
     class IllegalSessionStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The workflow is in an invalid state to perform a requested operation.</p>
@@ -13015,7 +12543,7 @@ module Aws::Glue
     class IllegalWorkflowStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -13024,12 +12552,12 @@ module Aws::Glue
     class ImportCatalogToGlueRequest < Struct.new(
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ImportCatalogToGlueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration properties for an importing labels task run.</p>
@@ -13044,7 +12572,7 @@ module Aws::Glue
       :input_s3_path,
       :replace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:replace] = false unless options.key?(:replace)
@@ -13106,12 +12634,7 @@ module Aws::Glue
       :integration_config,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InclusionAnnotationValue
-      INCLUDE = 'INCLUDE'
-      EXCLUDE = 'EXCLUDE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a zero-ETL integration.</p>
@@ -13192,7 +12715,7 @@ module Aws::Glue
       :errors,
       :data_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties associated with the integration.</p>
@@ -13211,7 +12734,7 @@ module Aws::Glue
       :refresh_interval,
       :source_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation conflicts with another operation.</p>
@@ -13221,7 +12744,7 @@ module Aws::Glue
     class IntegrationConflictOperationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error associated with a zero-ETL integration.</p>
@@ -13235,7 +12758,7 @@ module Aws::Glue
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that can be used when invoking a <code>DescribeIntegrations</code> request.</p>
@@ -13249,7 +12772,7 @@ module Aws::Glue
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified integration could not be found.</p>
@@ -13259,7 +12782,7 @@ module Aws::Glue
     class IntegrationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes how data is partitioned on the target.</p>
@@ -13318,7 +12841,7 @@ module Aws::Glue
       :function_spec,
       :conversion_spec,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data processed through your integration exceeded your quota.</p>
@@ -13328,17 +12851,7 @@ module Aws::Glue
     class IntegrationQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegrationStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      MODIFYING = 'MODIFYING'
-      FAILED = 'FAILED'
-      DELETING = 'DELETING'
-      SYNCING = 'SYNCING'
-      NEEDS_ATTENTION = 'NEEDS_ATTENTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal server error occurred.</p>
@@ -13348,7 +12861,7 @@ module Aws::Glue
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service error occurred.</p>
@@ -13358,7 +12871,7 @@ module Aws::Glue
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input provided was not valid.</p>
@@ -13372,7 +12885,7 @@ module Aws::Glue
       :message,
       :from_federation_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The integration is in an invalid state.</p>
@@ -13382,7 +12895,7 @@ module Aws::Glue
     class InvalidIntegrationStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that indicates your data is in an invalid state.</p>
@@ -13392,15 +12905,7 @@ module Aws::Glue
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JDBCConnectionType
-      sqlserver = 'sqlserver'
-      mysql = 'mysql'
-      oracle = 'oracle'
-      postgresql = 'postgresql'
-      redshift = 'redshift'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional connection options for the connector.</p>
@@ -13442,7 +12947,7 @@ module Aws::Glue
       :job_bookmark_keys_sort_order,
       :data_type_mapping,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a connector to a JDBC data source.</p>
@@ -13480,7 +12985,7 @@ module Aws::Glue
       :query,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.</p>
@@ -13518,54 +13023,7 @@ module Aws::Glue
       :additional_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JDBCDataType
-      ARRAY = 'ARRAY'
-      BIGINT = 'BIGINT'
-      BINARY = 'BINARY'
-      BIT = 'BIT'
-      BLOB = 'BLOB'
-      BOOLEAN = 'BOOLEAN'
-      CHAR = 'CHAR'
-      CLOB = 'CLOB'
-      DATALINK = 'DATALINK'
-      DATE = 'DATE'
-      DECIMAL = 'DECIMAL'
-      DISTINCT = 'DISTINCT'
-      DOUBLE = 'DOUBLE'
-      FLOAT = 'FLOAT'
-      INTEGER = 'INTEGER'
-      JAVA_OBJECT = 'JAVA_OBJECT'
-      LONGNVARCHAR = 'LONGNVARCHAR'
-      LONGVARBINARY = 'LONGVARBINARY'
-      LONGVARCHAR = 'LONGVARCHAR'
-      NCHAR = 'NCHAR'
-      NCLOB = 'NCLOB'
-      NULL = 'NULL'
-      NUMERIC = 'NUMERIC'
-      NVARCHAR = 'NVARCHAR'
-      OTHER = 'OTHER'
-      REAL = 'REAL'
-      REF = 'REF'
-      REF_CURSOR = 'REF_CURSOR'
-      ROWID = 'ROWID'
-      SMALLINT = 'SMALLINT'
-      SQLXML = 'SQLXML'
-      STRUCT = 'STRUCT'
-      TIME = 'TIME'
-      TIME_WITH_TIMEZONE = 'TIME_WITH_TIMEZONE'
-      TIMESTAMP = 'TIMESTAMP'
-      TIMESTAMP_WITH_TIMEZONE = 'TIMESTAMP_WITH_TIMEZONE'
-      TINYINT = 'TINYINT'
-      VARBINARY = 'VARBINARY'
-      VARCHAR = 'VARCHAR'
-    end
-
-    module JdbcMetadataEntry
-      COMMENTS = 'COMMENTS'
-      RAWTYPES = 'RAWTYPES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a JDBC data store to crawl.</p>
@@ -13589,7 +13047,7 @@ module Aws::Glue
       :exclusions,
       :enable_additional_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a job definition.</p>
@@ -13818,7 +13276,7 @@ module Aws::Glue
       :maintenance_window,
       :profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_retries] = 0 unless options.key?(:max_retries)
@@ -13858,7 +13316,7 @@ module Aws::Glue
       :run_id,
       :job_bookmark,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -13879,12 +13337,7 @@ module Aws::Glue
       :job_bookmarks_encryption_mode,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobBookmarksEncryptionMode
-      DISABLED = 'DISABLED'
-      CSEKMS = 'CSE-KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies code that runs when a job is run.</p>
@@ -13913,13 +13366,7 @@ module Aws::Glue
       :python_version,
       :runtime,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobMode
-      SCRIPT = 'SCRIPT'
-      VISUAL = 'VISUAL'
-      NOTEBOOK = 'NOTEBOOK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a Job node present in the workflow.</p>
@@ -13929,7 +13376,7 @@ module Aws::Glue
     class JobNodeDetails < Struct.new(
       :job_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a job run.</p>
@@ -14158,7 +13605,7 @@ module Aws::Glue
       :state_detail,
       :execution_role_session_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:attempt] = 0 unless options.key?(:attempt)
@@ -14166,19 +13613,6 @@ module Aws::Glue
         options[:execution_time] = 0 unless options.key?(:execution_time)
         super
       end
-    end
-
-    module JobRunState
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMEOUT = 'TIMEOUT'
-      ERROR = 'ERROR'
-      WAITING = 'WAITING'
-      EXPIRED = 'EXPIRED'
     end
 
     # <p>Specifies information used to update an existing job definition. The previous job
@@ -14359,7 +13793,7 @@ module Aws::Glue
       :source_control_details,
       :maintenance_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_retries] = 0 unless options.key?(:max_retries)
@@ -14387,7 +13821,7 @@ module Aws::Glue
       :join_type,
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a column to be joined.</p>
@@ -14401,16 +13835,7 @@ module Aws::Glue
       :from,
       :keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JoinType
-      EQUIJOIN = 'equijoin'
-      LEFT = 'left'
-      RIGHT = 'right'
-      OUTER = 'outer'
-      LEFT_SEMI = 'leftsemi'
-      LEFT_ANTI = 'leftanti'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A classifier for <code>JSON</code> content.</p>
@@ -14437,7 +13862,7 @@ module Aws::Glue
       :version,
       :json_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -14452,7 +13877,7 @@ module Aws::Glue
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options for streaming.</p>
@@ -14537,7 +13962,7 @@ module Aws::Glue
       :emit_consumer_lag_metrics,
       :starting_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A partition key pair consisting of a name and a type.</p>
@@ -14551,7 +13976,7 @@ module Aws::Glue
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options for the Amazon Kinesis streaming data source.</p>
@@ -14647,7 +14072,7 @@ module Aws::Glue
       :starting_timestamp,
       :fanout_consumer_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration properties for a labeling set generation task run.</p>
@@ -14658,7 +14083,7 @@ module Aws::Glue
     class LabelingSetGenerationTaskRunProperties < Struct.new(
       :output_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies Lake Formation configuration settings for the crawler.</p>
@@ -14672,12 +14097,7 @@ module Aws::Glue
       :use_lake_formation_credentials,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Language
-      PYTHON = 'PYTHON'
-      SCALA = 'SCALA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>
@@ -14703,7 +14123,7 @@ module Aws::Glue
       :blueprint_location,
       :blueprint_service_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Status and error information about the most recent crawl.</p>
@@ -14733,13 +14153,7 @@ module Aws::Glue
       :message_prefix,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LastCrawlStatus
-      SUCCEEDED = 'SUCCEEDED'
-      CANCELLED = 'CANCELLED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies data lineage configuration settings for the crawler.</p>
@@ -14757,7 +14171,7 @@ module Aws::Glue
     class LineageConfiguration < Struct.new(
       :crawler_lineage_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -14774,7 +14188,7 @@ module Aws::Glue
       :max_results,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprints
@@ -14787,7 +14201,7 @@ module Aws::Glue
       :blueprints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -14800,7 +14214,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_task_run_ids
@@ -14813,7 +14227,7 @@ module Aws::Glue
       :column_statistics_task_run_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -14826,7 +14240,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_types
@@ -14839,7 +14253,7 @@ module Aws::Glue
       :connection_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -14856,7 +14270,7 @@ module Aws::Glue
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_names
@@ -14870,7 +14284,7 @@ module Aws::Glue
       :crawler_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_name
@@ -14891,7 +14305,7 @@ module Aws::Glue
       :filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawls
@@ -14904,7 +14318,7 @@ module Aws::Glue
       :crawls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -14921,7 +14335,7 @@ module Aws::Glue
       :max_results,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_entity_types
@@ -14934,7 +14348,7 @@ module Aws::Glue
       :custom_entity_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -14951,7 +14365,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -14964,7 +14378,7 @@ module Aws::Glue
       :results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -14981,7 +14395,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runs
@@ -14994,7 +14408,7 @@ module Aws::Glue
       :runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -15011,7 +14425,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runs
@@ -15024,7 +14438,7 @@ module Aws::Glue
       :runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15045,7 +14459,7 @@ module Aws::Glue
       :filter,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rulesets
@@ -15058,7 +14472,7 @@ module Aws::Glue
       :rulesets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistic_id
@@ -15083,7 +14497,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute annotations
@@ -15096,7 +14510,7 @@ module Aws::Glue
       :annotations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistic_id
@@ -15121,7 +14535,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statistics
@@ -15134,7 +14548,7 @@ module Aws::Glue
       :statistics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15151,7 +14565,7 @@ module Aws::Glue
       :max_results,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dev_endpoint_names
@@ -15166,7 +14580,7 @@ module Aws::Glue
       :dev_endpoint_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_name
@@ -15191,7 +14605,7 @@ module Aws::Glue
       :next_token,
       :data_store_api_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -15204,7 +14618,7 @@ module Aws::Glue
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15221,7 +14635,7 @@ module Aws::Glue
       :max_results,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_names
@@ -15235,7 +14649,7 @@ module Aws::Glue
       :job_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15260,7 +14674,7 @@ module Aws::Glue
       :sort,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_ids
@@ -15275,7 +14689,7 @@ module Aws::Glue
       :transform_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -15288,7 +14702,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registries
@@ -15301,7 +14715,7 @@ module Aws::Glue
       :registries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -15326,7 +14740,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schemas
@@ -15339,7 +14753,7 @@ module Aws::Glue
       :schemas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -15356,7 +14770,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schemas
@@ -15369,7 +14783,7 @@ module Aws::Glue
       :schemas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15390,7 +14804,7 @@ module Aws::Glue
       :tags,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ids
@@ -15407,7 +14821,7 @@ module Aws::Glue
       :sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -15424,7 +14838,7 @@ module Aws::Glue
       :request_origin,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statements
@@ -15437,7 +14851,7 @@ module Aws::Glue
       :statements,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -15466,7 +14880,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -15491,7 +14905,7 @@ module Aws::Glue
       :next_token,
       :table_optimizer_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15513,7 +14927,7 @@ module Aws::Glue
       :max_results,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trigger_names
@@ -15527,7 +14941,7 @@ module Aws::Glue
       :trigger_names,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15540,7 +14954,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profiles
@@ -15553,7 +14967,7 @@ module Aws::Glue
       :profiles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -15566,7 +14980,7 @@ module Aws::Glue
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workflows
@@ -15579,7 +14993,7 @@ module Aws::Glue
       :workflows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of resources.</p>
@@ -15597,16 +15011,7 @@ module Aws::Glue
       :s3,
       :dynamo_db,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Logical
-      AND = 'AND'
-      ANY = 'ANY'
-    end
-
-    module LogicalOperator
-      EQUALS = 'EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines column statistics supported for integer data columns.</p>
@@ -15628,7 +15033,7 @@ module Aws::Glue
       :number_of_nulls,
       :number_of_distinct_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:minimum_value] = 0 unless options.key?(:minimum_value)
@@ -15783,7 +15188,7 @@ module Aws::Glue
       :max_retries,
       :transform_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:label_count] = 0 unless options.key?(:label_count)
@@ -15798,7 +15203,7 @@ module Aws::Glue
     class MLTransformNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption-at-rest settings of the transform that apply to accessing user data.</p>
@@ -15820,12 +15225,7 @@ module Aws::Glue
       :ml_user_data_encryption_mode,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MLUserDataEncryptionModeString
-      DISABLED = 'DISABLED'
-      SSEKMS = 'SSE-KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the mapping of data property keys.</p>
@@ -15885,7 +15285,7 @@ module Aws::Glue
       :dropped,
       :children,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a mapping.</p>
@@ -15915,7 +15315,7 @@ module Aws::Glue
       :target_path,
       :target_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that merges a <code>DynamicFrame</code> with a staging <code>DynamicFrame</code> based on the specified primary keys to identify records. Duplicate records (records with the same primary keys) are not de-duplicated. </p>
@@ -15937,7 +15337,7 @@ module Aws::Glue
       :source,
       :primary_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing metadata information for a schema version.</p>
@@ -15955,7 +15355,7 @@ module Aws::Glue
       :created_time,
       :other_metadata_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing a key value pair for metadata.</p>
@@ -15969,11 +15369,7 @@ module Aws::Glue
       :metadata_key,
       :metadata_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetadataOperation
-      CREATE = 'CREATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metric based observation generated based on evaluated data quality metrics.</p>
@@ -15995,7 +15391,7 @@ module Aws::Glue
       :metric_values,
       :new_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Microsoft SQL server data source in the Glue Data Catalog.</p>
@@ -16013,7 +15409,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses Microsoft SQL.</p>
@@ -16035,7 +15431,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_identifier
@@ -16056,7 +15452,7 @@ module Aws::Glue
       :data_filter,
       :integration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -16133,7 +15529,7 @@ module Aws::Glue
       :errors,
       :data_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon DocumentDB or MongoDB data store to crawl.</p>
@@ -16152,7 +15548,7 @@ module Aws::Glue
       :path,
       :scan_all,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a MySQL data source in the Glue Data Catalog.</p>
@@ -16170,7 +15566,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses MySQL.</p>
@@ -16192,7 +15588,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no applicable schedule.</p>
@@ -16202,7 +15598,7 @@ module Aws::Glue
     class NoScheduleException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A node represents an Glue component (trigger, crawler, or job) on a workflow graph.</p>
@@ -16232,13 +15628,7 @@ module Aws::Glue
       :job_details,
       :crawler_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NodeType
-      CRAWLER = 'CRAWLER'
-      JOB = 'JOB'
-      TRIGGER = 'TRIGGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration properties of a notification.</p>
@@ -16249,7 +15639,7 @@ module Aws::Glue
     class NotificationProperty < Struct.new(
       :notify_delay_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents whether certain values are recognized as null values for removal.</p>
@@ -16267,7 +15657,7 @@ module Aws::Glue
       :is_null_string,
       :is_neg_one,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a custom null value such as a zeros or other value being used as a null placeholder unique to the dataset.</p>
@@ -16281,7 +15671,7 @@ module Aws::Glue
       :value,
       :datatype,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth2 client app used for the connection.</p>
@@ -16295,7 +15685,7 @@ module Aws::Glue
       :user_managed_client_application_client_id,
       :aws_managed_client_application_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The credentials used when the authentication type is OAuth2 authentication.</p>
@@ -16317,13 +15707,7 @@ module Aws::Glue
       :refresh_token,
       :jwt_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OAuth2GrantType
-      AUTHORIZATION_CODE = 'AUTHORIZATION_CODE'
-      CLIENT_CREDENTIALS = 'CLIENT_CREDENTIALS'
-      JWT_BEARER = 'JWT_BEARER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing properties for OAuth2 authentication.</p>
@@ -16345,7 +15729,7 @@ module Aws::Glue
       :token_url,
       :token_url_parameters_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing properties for OAuth2 in the CreateConnection request.</p>
@@ -16375,7 +15759,7 @@ module Aws::Glue
       :authorization_code_properties,
       :o_auth2_credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure representing an open format table.</p>
@@ -16385,7 +15769,7 @@ module Aws::Glue
     class OpenTableFormatInput < Struct.new(
       :iceberg_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is not available in the region.</p>
@@ -16395,7 +15779,7 @@ module Aws::Glue
     class OperationNotSupportedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation timed out.</p>
@@ -16405,7 +15789,7 @@ module Aws::Glue
     class OperationTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an option value.</p>
@@ -16423,7 +15807,7 @@ module Aws::Glue
       :label,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Oracle data source in the Glue Data Catalog.</p>
@@ -16441,7 +15825,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses Oracle SQL.</p>
@@ -16463,7 +15847,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the sort order of a sorted column.</p>
@@ -16478,7 +15862,7 @@ module Aws::Glue
       :column,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sort_order] = 0 unless options.key?(:sort_order)
@@ -16493,7 +15877,7 @@ module Aws::Glue
     class OrphanFileDeletionConfiguration < Struct.new(
       :iceberg_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains orphan file deletion metrics for the optimizer run.</p>
@@ -16503,7 +15887,7 @@ module Aws::Glue
     class OrphanFileDeletionMetrics < Struct.new(
       :iceberg_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing other metadata for a schema version belonging to the same metadata key.</p>
@@ -16517,7 +15901,7 @@ module Aws::Glue
       :metadata_value,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that identifies, removes or masks PII data.</p>
@@ -16588,27 +15972,7 @@ module Aws::Glue
       :detection_parameters,
       :detection_sensitivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParamType
-      STR = 'str'
-      INT = 'int'
-      FLOAT = 'float'
-      COMPLEX = 'complex'
-      BOOL = 'bool'
-      LIST = 'list'
-      NULL = 'null'
-    end
-
-    module ParquetCompressionType
-      SNAPPY = 'snappy'
-      LZO = 'lzo'
-      GZIP = 'gzip'
-      BROTLI = 'brotli'
-      LZ4 = 'lz4'
-      UNCOMPRESSED = 'uncompressed'
-      NONE = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a slice of table data.</p>
@@ -16652,7 +16016,7 @@ module Aws::Glue
       :last_analyzed_time,
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a partition error.</p>
@@ -16666,7 +16030,7 @@ module Aws::Glue
       :partition_values,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure for a partition index.</p>
@@ -16680,7 +16044,7 @@ module Aws::Glue
       :keys,
       :index_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A descriptor for a partition index in a table.</p>
@@ -16717,14 +16081,7 @@ module Aws::Glue
       :index_status,
       :backfill_errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartitionIndexStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure used to create and update a partition.</p>
@@ -16752,7 +16109,7 @@ module Aws::Glue
       :parameters,
       :last_analyzed_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of values defining partitions.</p>
@@ -16762,26 +16119,7 @@ module Aws::Glue
     class PartitionValueList < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Permission
-      ALL = 'ALL'
-      SELECT = 'SELECT'
-      ALTER = 'ALTER'
-      DROP = 'DROP'
-      DELETE = 'DELETE'
-      INSERT = 'INSERT'
-      CREATE_DATABASE = 'CREATE_DATABASE'
-      CREATE_TABLE = 'CREATE_TABLE'
-      DATA_LOCATION_ACCESS = 'DATA_LOCATION_ACCESS'
-    end
-
-    module PermissionType
-      COLUMN_PERMISSION = 'COLUMN_PERMISSION'
-      CELL_FILTER_PERMISSION = 'CELL_FILTER_PERMISSION'
-      NESTED_PERMISSION = 'NESTED_PERMISSION'
-      NESTED_CELL_PERMISSION = 'NESTED_CELL_PERMISSION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation timed out.</p>
@@ -16792,7 +16130,7 @@ module Aws::Glue
     class PermissionTypeMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OAuth client app in GetConnection response.</p>
@@ -16810,17 +16148,7 @@ module Aws::Glue
       :security_group_id_list,
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PiiType
-      RowAudit = 'RowAudit'
-      RowHashing = 'RowHashing'
-      RowMasking = 'RowMasking'
-      RowPartialMasking = 'RowPartialMasking'
-      ColumnAudit = 'ColumnAudit'
-      ColumnHashing = 'ColumnHashing'
-      ColumnMasking = 'ColumnMasking'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a PostgresSQL data source in the Glue Data Catalog.</p>
@@ -16838,7 +16166,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses Postgres SQL.</p>
@@ -16860,7 +16188,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job run that was used in the predicate of a conditional trigger
@@ -16875,7 +16203,7 @@ module Aws::Glue
       :job_name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the predicate of the trigger, which determines when it fires.</p>
@@ -16890,7 +16218,7 @@ module Aws::Glue
       :logical,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Permissions granted to a principal.</p>
@@ -16904,13 +16232,7 @@ module Aws::Glue
       :principal,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrincipalType
-      USER = 'USER'
-      ROLE = 'ROLE'
-      GROUP = 'GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the job and session values that an admin configures in an Glue usage profile.</p>
@@ -16924,7 +16246,7 @@ module Aws::Glue
       :session_configuration,
       :job_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines a connection type for a compute environment.</p>
@@ -16958,7 +16280,7 @@ module Aws::Glue
       :allowed_values,
       :data_operation_scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:property_types] = [] unless options.key?(:property_types)
@@ -16981,15 +16303,7 @@ module Aws::Glue
       :value,
       :comparator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PropertyType
-      USER_INPUT = 'USER_INPUT'
-      SECRET = 'SECRET'
-      READ_ONLY = 'READ_ONLY'
-      UNUSED = 'UNUSED'
-      SECRET_OR_USER_INPUT = 'SECRET_OR_USER_INPUT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -17003,12 +16317,12 @@ module Aws::Glue
       :catalog_id,
       :data_catalog_encryption_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutDataCatalogEncryptionSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute profile_id
@@ -17021,13 +16335,13 @@ module Aws::Glue
       :profile_id,
       :inclusion_annotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Left blank.</p>
     class PutDataQualityProfileAnnotationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_in_json
@@ -17068,7 +16382,7 @@ module Aws::Glue
       :policy_exists_condition,
       :enable_hybrid,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_hash
@@ -17079,7 +16393,7 @@ module Aws::Glue
     class PutResourcePolicyResponse < Struct.new(
       :policy_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -17100,7 +16414,7 @@ module Aws::Glue
       :schema_version_id,
       :metadata_key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -17137,7 +16451,7 @@ module Aws::Glue
       :metadata_key,
       :metadata_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:latest_version] = false unless options.key?(:latest_version)
@@ -17160,12 +16474,12 @@ module Aws::Glue
       :run_id,
       :run_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutWorkflowRunPropertiesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -17194,7 +16508,7 @@ module Aws::Glue
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metadata_info_map
@@ -17211,7 +16525,7 @@ module Aws::Glue
       :schema_version_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
@@ -17237,14 +16551,7 @@ module Aws::Glue
       :query_authorization_id,
       :additional_context,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QuoteChar
-      QUOTE = 'quote'
-      QUILLEMET = 'quillemet'
-      SINGLE_QUOTE = 'single_quote'
-      DISABLED = 'disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.</p>
@@ -17266,7 +16573,7 @@ module Aws::Glue
       :recipe_reference,
       :recipe_steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Actions defined in the Glue Studio data preparation recipe node.</p>
@@ -17280,7 +16587,7 @@ module Aws::Glue
       :operation,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference to a Glue DataBrew recipe.</p>
@@ -17294,7 +16601,7 @@ module Aws::Glue
       :recipe_arn,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A recipe step used in a Glue Studio data preparation recipe node.</p>
@@ -17308,13 +16615,7 @@ module Aws::Glue
       :action,
       :condition_expressions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RecrawlBehavior
-      CRAWL_EVERYTHING = 'CRAWL_EVERYTHING'
-      CRAWL_NEW_FOLDERS_ONLY = 'CRAWL_NEW_FOLDERS_ONLY'
-      CRAWL_EVENT_MODE = 'CRAWL_EVENT_MODE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html">Incremental Crawls in Glue</a> in the developer guide.</p>
@@ -17327,7 +16628,7 @@ module Aws::Glue
     class RecrawlPolicy < Struct.new(
       :recrawl_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon Redshift data store.</p>
@@ -17353,7 +16654,7 @@ module Aws::Glue
       :redshift_tmp_dir,
       :tmp_dir_iam_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses Amazon Redshift.</p>
@@ -17387,7 +16688,7 @@ module Aws::Glue
       :tmp_dir_iam_role,
       :upsert_redshift_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -17408,7 +16709,7 @@ module Aws::Glue
       :schema_id,
       :schema_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_version_id
@@ -17425,7 +16726,7 @@ module Aws::Glue
       :version_number,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A wrapper structure that may contain the registry name and Amazon Resource Name (ARN).</p>
@@ -17439,7 +16740,7 @@ module Aws::Glue
       :registry_name,
       :registry_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the details for a registry.</p>
@@ -17469,12 +16770,7 @@ module Aws::Glue
       :created_time,
       :updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistryStatus
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Relational database data source in the Glue Data Catalog.</p>
@@ -17492,7 +16788,7 @@ module Aws::Glue
       :database,
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -17513,7 +16809,7 @@ module Aws::Glue
       :schema_version_id,
       :metadata_key_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -17550,7 +16846,7 @@ module Aws::Glue
       :metadata_key,
       :metadata_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:latest_version] = false unless options.key?(:latest_version)
@@ -17577,7 +16873,7 @@ module Aws::Glue
       :source_path,
       :target_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -17590,7 +16886,7 @@ module Aws::Glue
       :job_name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_bookmark_entry
@@ -17599,12 +16895,7 @@ module Aws::Glue
     class ResetJobBookmarkResponse < Struct.new(
       :job_bookmark_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceAction
-      UPDATE = 'UPDATE'
-      CREATE = 'CREATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -17614,7 +16905,7 @@ module Aws::Glue
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource was not ready for a transaction.</p>
@@ -17624,7 +16915,7 @@ module Aws::Glue
     class ResourceNotReadyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource numerical limit was exceeded.</p>
@@ -17634,27 +16925,7 @@ module Aws::Glue
     class ResourceNumberLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceShareType
-      FOREIGN = 'FOREIGN'
-      ALL = 'ALL'
-      FEDERATED = 'FEDERATED'
-    end
-
-    module ResourceState
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      STOPPED = 'STOPPED'
-      FAILED = 'FAILED'
-    end
-
-    module ResourceType
-      JAR = 'JAR'
-      FILE = 'FILE'
-      ARCHIVE = 'ARCHIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URIs for function resources.</p>
@@ -17668,7 +16939,7 @@ module Aws::Glue
       :resource_type,
       :uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -17685,7 +16956,7 @@ module Aws::Glue
       :run_id,
       :node_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -17698,7 +16969,7 @@ module Aws::Glue
       :run_id,
       :node_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a snapshot retention optimizer.</p>
@@ -17708,7 +16979,7 @@ module Aws::Glue
     class RetentionConfiguration < Struct.new(
       :iceberg_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains retention metrics for the optimizer run.</p>
@@ -17718,7 +16989,7 @@ module Aws::Glue
     class RetentionMetrics < Struct.new(
       :iceberg_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a route node that directs data to different output paths based on defined filtering conditions.</p>
@@ -17736,7 +17007,7 @@ module Aws::Glue
       :inputs,
       :group_filters_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A run identifier.</p>
@@ -17750,7 +17021,7 @@ module Aws::Glue
       :run_id,
       :job_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics for the optimizer run.</p>
@@ -17773,7 +17044,7 @@ module Aws::Glue
       :number_of_dpus,
       :job_duration_in_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -17790,7 +17061,7 @@ module Aws::Glue
       :code,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -17799,7 +17070,7 @@ module Aws::Glue
     class RunStatementResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:id] = 0 unless options.key?(:id)
@@ -17830,7 +17101,7 @@ module Aws::Glue
       :additional_delta_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Hudi data source that is registered in the Glue Data Catalog. The Hudi data source must be stored in Amazon S3.</p>
@@ -17856,7 +17127,7 @@ module Aws::Glue
       :additional_hudi_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Iceberg data source that is registered in the Glue Data Catalog. The Iceberg data source must be stored in Amazon S3.</p>
@@ -17882,7 +17153,7 @@ module Aws::Glue
       :additional_iceberg_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Amazon S3 data store in the Glue Data Catalog.</p>
@@ -17908,7 +17179,7 @@ module Aws::Glue
       :partition_predicate,
       :additional_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data target that writes to Amazon S3 using the Glue Data Catalog.</p>
@@ -17943,7 +17214,7 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a command-separated value (CSV) data store stored in Amazon S3.</p>
@@ -18025,7 +17296,7 @@ module Aws::Glue
       :optimize_performance,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:optimize_performance] = false unless options.key?(:optimize_performance)
@@ -18073,7 +17344,7 @@ module Aws::Glue
       :auto_data_quality,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that writes to a Delta Lake data source in Amazon S3.</p>
@@ -18120,7 +17391,7 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Delta Lake data source stored in Amazon S3.</p>
@@ -18146,7 +17417,7 @@ module Aws::Glue
       :additional_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies additional connection options for the Amazon S3 data store.</p>
@@ -18168,7 +17439,7 @@ module Aws::Glue
       :enable_sample_path,
       :sample_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data target that writes to Amazon S3.</p>
@@ -18215,7 +17486,7 @@ module Aws::Glue
       :auto_data_quality,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how Amazon Simple Storage Service (Amazon S3) data should be encrypted.</p>
@@ -18229,13 +17500,7 @@ module Aws::Glue
       :s3_encryption_mode,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3EncryptionMode
-      DISABLED = 'DISABLED'
-      SSEKMS = 'SSE-KMS'
-      SSES3 = 'SSE-S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an S3 Excel data source.</p>
@@ -18293,7 +17558,7 @@ module Aws::Glue
       :skip_footer,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data target that writes to Amazon S3 in Apache Parquet columnar storage.</p>
@@ -18332,7 +17597,7 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that writes to a Hudi data source in the Glue Data Catalog.</p>
@@ -18375,7 +17640,7 @@ module Aws::Glue
       :auto_data_quality,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that writes to a Hudi data source in Amazon S3.</p>
@@ -18422,7 +17687,7 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Hudi data source stored in Amazon S3.</p>
@@ -18448,7 +17713,7 @@ module Aws::Glue
       :additional_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a HyperDirect data target that writes to Amazon S3.</p>
@@ -18490,7 +17755,7 @@ module Aws::Glue
       :auto_data_quality,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Iceberg catalog target that writes data to Amazon S3 and registers the table in the Glue Data Catalog.</p>
@@ -18528,7 +17793,7 @@ module Aws::Glue
       :schema_change_policy,
       :auto_data_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that writes to an Iceberg data source in Amazon S3.</p>
@@ -18579,7 +17844,7 @@ module Aws::Glue
       :number_target_partitions,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a JSON data store stored in Amazon S3.</p>
@@ -18637,7 +17902,7 @@ module Aws::Glue
       :multiline,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Apache Parquet data store stored in Amazon S3.</p>
@@ -18687,7 +17952,7 @@ module Aws::Glue
       :additional_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies additional connection options for the Amazon S3 data store.</p>
@@ -18701,7 +17966,7 @@ module Aws::Glue
       :bounded_size,
       :bounded_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a data store in Amazon Simple Storage Service (Amazon S3).</p>
@@ -18732,7 +17997,7 @@ module Aws::Glue
       :event_queue_arn,
       :dlq_event_queue_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A scheduling object using a <code>cron</code> statement to schedule an event.</p>
@@ -18748,18 +18013,7 @@ module Aws::Glue
       :schedule_expression,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ScheduleState
-      SCHEDULED = 'SCHEDULED'
-      NOT_SCHEDULED = 'NOT_SCHEDULED'
-      TRANSITIONING = 'TRANSITIONING'
-    end
-
-    module ScheduleType
-      CRON = 'CRON'
-      AUTO = 'AUTO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified scheduler is not running.</p>
@@ -18769,7 +18023,7 @@ module Aws::Glue
     class SchedulerNotRunningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified scheduler is already running.</p>
@@ -18779,7 +18033,7 @@ module Aws::Glue
     class SchedulerRunningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified scheduler is transitioning.</p>
@@ -18789,7 +18043,7 @@ module Aws::Glue
     class SchedulerTransitioningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy that specifies update and deletion behaviors for the crawler.</p>
@@ -18803,7 +18057,7 @@ module Aws::Glue
       :update_behavior,
       :delete_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair representing a column and data type that this transform can
@@ -18818,11 +18072,7 @@ module Aws::Glue
       :name,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaDiffType
-      SYNTAX_DIFF = 'SYNTAX_DIFF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique ID of the schema in the Glue schema registry.</p>
@@ -18840,7 +18090,7 @@ module Aws::Glue
       :schema_name,
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains minimal details for a schema.</p>
@@ -18874,7 +18124,7 @@ module Aws::Glue
       :created_time,
       :updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that references a schema stored in the Glue Schema Registry.</p>
@@ -18892,13 +18142,7 @@ module Aws::Glue
       :schema_version_id,
       :schema_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING = 'PENDING'
-      DELETING = 'DELETING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains the error details for an operation on a schema version.</p>
@@ -18912,7 +18156,7 @@ module Aws::Glue
       :version_number,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the details about a schema version.</p>
@@ -18938,7 +18182,7 @@ module Aws::Glue
       :status,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the schema version information.</p>
@@ -18952,19 +18196,12 @@ module Aws::Glue
       :latest_version,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:latest_version] = false unless options.key?(:latest_version)
         super
       end
-    end
-
-    module SchemaVersionStatus
-      AVAILABLE = 'AVAILABLE'
-      PENDING = 'PENDING'
-      FAILURE = 'FAILURE'
-      DELETING = 'DELETING'
     end
 
     # @!attribute catalog_id
@@ -19013,7 +18250,7 @@ module Aws::Glue
       :resource_share_type,
       :include_status_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -19026,7 +18263,7 @@ module Aws::Glue
       :next_token,
       :table_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a security configuration.</p>
@@ -19044,7 +18281,7 @@ module Aws::Glue
       :created_time_stamp,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a non-overlapping region of a table's partitions, allowing
@@ -19060,7 +18297,7 @@ module Aws::Glue
       :segment_number,
       :total_segments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:segment_number] = 0 unless options.key?(:segment_number)
@@ -19083,7 +18320,7 @@ module Aws::Glue
       :inputs,
       :paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that chooses one <code>DynamicFrame</code> from a collection of <code>DynamicFrames</code>. The output is the selected <code>DynamicFrame</code>
@@ -19102,20 +18339,12 @@ module Aws::Glue
       :inputs,
       :index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:index] = 0 unless options.key?(:index)
         super
       end
-    end
-
-    module Separator
-      COMMA = 'comma'
-      CTRLA = 'ctrla'
-      PIPE = 'pipe'
-      SEMICOLON = 'semicolon'
-      TAB = 'tab'
     end
 
     # <p>Information about a serialization/deserialization program (SerDe) that serves as an
@@ -19135,7 +18364,7 @@ module Aws::Glue
       :serialization_library,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The period in which a remote Spark runtime environment is running.</p>
@@ -19223,7 +18452,7 @@ module Aws::Glue
       :idle_timeout,
       :profile_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:progress] = 0 unless options.key?(:progress)
@@ -19242,21 +18471,7 @@ module Aws::Glue
       :name,
       :python_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionStatus
-      PROVISIONING = 'PROVISIONING'
-      READY = 'READY'
-      FAILED = 'FAILED'
-      TIMEOUT = 'TIMEOUT'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-    end
-
-    module SettingSource
-      CATALOG = 'CATALOG'
-      TABLE = 'TABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies skewed values in a table. Skewed values are those that occur with very high
@@ -19276,7 +18491,7 @@ module Aws::Glue
       :skewed_column_values,
       :skewed_column_value_location_maps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration for Snowflake nodes in Glue Studio.</p>
@@ -19382,7 +18597,7 @@ module Aws::Glue
       :auto_pushdown,
       :table_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:upsert] = false unless options.key?(:upsert)
@@ -19406,7 +18621,7 @@ module Aws::Glue
       :data,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a Snowflake target.</p>
@@ -19424,12 +18639,7 @@ module Aws::Glue
       :data,
       :inputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Sort
-      ASCENDING = 'ASC'
-      DESCENDING = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a field to sort by and a sort order.</p>
@@ -19443,17 +18653,7 @@ module Aws::Glue
       :field_name,
       :sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortDirectionType
-      DESCENDING = 'DESCENDING'
-      ASCENDING = 'ASCENDING'
-    end
-
-    module SourceControlAuthStrategy
-      PERSONAL_ACCESS_TOKEN = 'PERSONAL_ACCESS_TOKEN'
-      AWS_SECRETS_MANAGER = 'AWS_SECRETS_MANAGER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.</p>
@@ -19491,14 +18691,7 @@ module Aws::Glue
       :auth_strategy,
       :auth_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceControlProvider
-      GITHUB = 'GITHUB'
-      GITLAB = 'GITLAB'
-      BITBUCKET = 'BITBUCKET'
-      AWS_CODE_COMMIT = 'AWS_CODE_COMMIT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource properties associated with the integration source.</p>
@@ -19508,7 +18701,7 @@ module Aws::Glue
     class SourceProcessingProperties < Struct.new(
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties used by the source leg to process data from the source.</p>
@@ -19531,7 +18724,7 @@ module Aws::Glue
       :primary_key,
       :record_update_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a connector to an Apache Spark data source.</p>
@@ -19561,7 +18754,7 @@ module Aws::Glue
       :additional_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a target that uses an Apache Spark connector.</p>
@@ -19595,7 +18788,7 @@ module Aws::Glue
       :additional_options,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform where you enter a SQL query using Spark SQL syntax to transform the data. The output is a single <code>DynamicFrame</code>.</p>
@@ -19626,7 +18819,7 @@ module Aws::Glue
       :sql_aliases,
       :output_schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that writes samples of the data to an Amazon S3 bucket.</p>
@@ -19652,7 +18845,7 @@ module Aws::Glue
       :topk,
       :prob,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a transform that splits data property keys into two <code>DynamicFrames</code>. The output is a collection of <code>DynamicFrames</code>: one with selected data property keys, and one with the remaining data property keys.</p>
@@ -19670,7 +18863,7 @@ module Aws::Glue
       :inputs,
       :paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single entry in the list of values for <code>SqlAliases</code>. </p>
@@ -19684,7 +18877,7 @@ module Aws::Glue
       :from,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blueprint_name
@@ -19701,7 +18894,7 @@ module Aws::Glue
       :parameters,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -19710,7 +18903,7 @@ module Aws::Glue
     class StartBlueprintRunResponse < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -19743,7 +18936,7 @@ module Aws::Glue
       :catalog_id,
       :security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute column_statistics_task_run_id
@@ -19752,7 +18945,7 @@ module Aws::Glue
     class StartColumnStatisticsTaskRunResponse < Struct.new(
       :column_statistics_task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -19765,12 +18958,12 @@ module Aws::Glue
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartColumnStatisticsTaskRunScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -19779,12 +18972,12 @@ module Aws::Glue
     class StartCrawlerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartCrawlerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_name
@@ -19793,12 +18986,12 @@ module Aws::Glue
     class StartCrawlerScheduleRequest < Struct.new(
       :crawler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartCrawlerScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request of the Data Quality rule recommendation request.</p>
@@ -19832,7 +19025,7 @@ module Aws::Glue
       :data_quality_security_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -19841,7 +19034,7 @@ module Aws::Glue
     class StartDataQualityRuleRecommendationRunResponse < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -19878,7 +19071,7 @@ module Aws::Glue
       :ruleset_names,
       :additional_data_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -19887,7 +19080,7 @@ module Aws::Glue
     class StartDataQualityRulesetEvaluationRunResponse < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -19900,7 +19093,7 @@ module Aws::Glue
       :transform_id,
       :output_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_run_id
@@ -19909,7 +19102,7 @@ module Aws::Glue
     class StartExportLabelsTaskRunResponse < Struct.new(
       :task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -19927,7 +19120,7 @@ module Aws::Glue
       :input_s3_path,
       :replace_all_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_run_id
@@ -19936,7 +19129,7 @@ module Aws::Glue
     class StartImportLabelsTaskRunResponse < Struct.new(
       :task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -20064,7 +19257,7 @@ module Aws::Glue
       :execution_class,
       :execution_role_session_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_run_id
@@ -20073,7 +19266,7 @@ module Aws::Glue
     class StartJobRunResponse < Struct.new(
       :job_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -20082,7 +19275,7 @@ module Aws::Glue
     class StartMLEvaluationTaskRunRequest < Struct.new(
       :transform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_run_id
@@ -20091,7 +19284,7 @@ module Aws::Glue
     class StartMLEvaluationTaskRunResponse < Struct.new(
       :task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -20105,7 +19298,7 @@ module Aws::Glue
       :transform_id,
       :output_s3_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_run_id
@@ -20114,7 +19307,7 @@ module Aws::Glue
     class StartMLLabelingSetGenerationTaskRunResponse < Struct.new(
       :task_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20123,7 +19316,7 @@ module Aws::Glue
     class StartTriggerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20132,7 +19325,7 @@ module Aws::Glue
     class StartTriggerResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20146,7 +19339,7 @@ module Aws::Glue
       :name,
       :run_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -20155,7 +19348,7 @@ module Aws::Glue
     class StartWorkflowRunResponse < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch condition that started the workflow run. Either the number of events in the batch size arrived,
@@ -20171,14 +19364,7 @@ module Aws::Glue
       :batch_size,
       :batch_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StartingPosition
-      LATEST = 'latest'
-      TRIM_HORIZON = 'trim_horizon'
-      EARLIEST = 'earliest'
-      TIMESTAMP = 'timestamp'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The statement or request for a particular action to occur in a session.</p>
@@ -20212,7 +19398,7 @@ module Aws::Glue
       :started_on,
       :completed_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:id] = 0 unless options.key?(:id)
@@ -20250,7 +19436,7 @@ module Aws::Glue
       :error_value,
       :traceback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_count] = 0 unless options.key?(:execution_count)
@@ -20265,16 +19451,7 @@ module Aws::Glue
     class StatementOutputData < Struct.new(
       :text_plain,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatementState
-      WAITING = 'WAITING'
-      RUNNING = 'RUNNING'
-      AVAILABLE = 'AVAILABLE'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A Statistic Annotation.</p>
@@ -20296,13 +19473,7 @@ module Aws::Glue
       :statistic_recorded_on,
       :inclusion_annotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatisticEvaluationLevel
-      DATASET = 'Dataset'
-      COLUMN = 'Column'
-      MULTICOLUMN = 'Multicolumn'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The statistic model result.</p>
@@ -20332,7 +19503,7 @@ module Aws::Glue
       :date,
       :inclusion_annotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a statistic.</p>
@@ -20383,7 +19554,7 @@ module Aws::Glue
       :recorded_on,
       :inclusion_annotation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:double_value] = 0 unless options.key?(:double_value)
@@ -20402,7 +19573,7 @@ module Aws::Glue
       :requested_change,
       :view_validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -20415,12 +19586,12 @@ module Aws::Glue
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopColumnStatisticsTaskRunResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -20433,12 +19604,12 @@ module Aws::Glue
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopColumnStatisticsTaskRunScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20447,12 +19618,12 @@ module Aws::Glue
     class StopCrawlerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopCrawlerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_name
@@ -20461,12 +19632,12 @@ module Aws::Glue
     class StopCrawlerScheduleRequest < Struct.new(
       :crawler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopCrawlerScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -20479,7 +19650,7 @@ module Aws::Glue
       :id,
       :request_origin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -20488,7 +19659,7 @@ module Aws::Glue
     class StopSessionResponse < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20497,7 +19668,7 @@ module Aws::Glue
     class StopTriggerRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20506,7 +19677,7 @@ module Aws::Glue
     class StopTriggerResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -20519,12 +19690,12 @@ module Aws::Glue
       :name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopWorkflowRunResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the physical storage of table data.</p>
@@ -20596,7 +19767,7 @@ module Aws::Glue
       :stored_as_sub_directories,
       :schema_reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:compressed] = false unless options.key?(:compressed)
@@ -20617,7 +19788,7 @@ module Aws::Glue
       :polling_time,
       :record_polling_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines column statistics supported for character sequence data values.</p>
@@ -20639,7 +19810,7 @@ module Aws::Glue
       :number_of_nulls,
       :number_of_distinct_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:maximum_length] = 0 unless options.key?(:maximum_length)
@@ -20661,7 +19832,7 @@ module Aws::Glue
       :dialect,
       :dialect_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a collection of related data organized in columns and rows.</p>
@@ -20790,18 +19961,13 @@ module Aws::Glue
       :is_multi_dialect_view,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retention] = 0 unless options.key?(:retention)
         options[:is_registered_with_lake_formation] = false unless options.key?(:is_registered_with_lake_formation)
         super
       end
-    end
-
-    module TableAttributes
-      NAME = 'NAME'
-      TABLE_TYPE = 'TABLE_TYPE'
     end
 
     # <p>An error record for table operations.</p>
@@ -20815,7 +19981,7 @@ module Aws::Glue
       :table_name,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a target table for resource linking.</p>
@@ -20837,7 +20003,7 @@ module Aws::Glue
       :name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to define a table.</p>
@@ -20924,7 +20090,7 @@ module Aws::Glue
       :target_table,
       :view_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retention] = 0 unless options.key?(:retention)
@@ -20968,7 +20134,7 @@ module Aws::Glue
       :last_run,
       :configuration_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details on the configuration of a table optimizer. You pass this configuration when creating or updating a table optimizer.</p>
@@ -21000,14 +20166,7 @@ module Aws::Glue
       :retention_configuration,
       :orphan_file_deletion_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableOptimizerEventType
-      STARTING = 'starting'
-      COMPLETED = 'completed'
-      FAILED = 'failed'
-      IN_PROGRESS = 'in_progress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details for a table optimizer run.</p>
@@ -21075,13 +20234,7 @@ module Aws::Glue
       :retention_metrics,
       :orphan_file_deletion_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableOptimizerType
-      COMPACTION = 'compaction'
-      RETENTION = 'retention'
-      ORPHAN_FILE_DELETION = 'orphan_file_deletion'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that describes the VPC configuration for a table optimizer.</p>
@@ -21093,7 +20246,7 @@ module Aws::Glue
       :glue_connection_name,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GlueConnectionName < TableOptimizerVpcConfiguration; end
       class Unknown < TableOptimizerVpcConfiguration; end
@@ -21134,7 +20287,7 @@ module Aws::Glue
       :error,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a version of a table.</p>
@@ -21148,7 +20301,7 @@ module Aws::Glue
       :table,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error record for table-version operations.</p>
@@ -21166,7 +20319,7 @@ module Aws::Glue
       :version_id,
       :error_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Tag</code> object represents a label that you can assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define.</p>
@@ -21183,7 +20336,7 @@ module Aws::Glue
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -21197,25 +20350,12 @@ module Aws::Glue
       :resource_arn,
       :tags_to_add,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetFormat
-      JSON = 'json'
-      CSV = 'csv'
-      AVRO = 'avro'
-      ORC = 'orc'
-      PARQUET = 'parquet'
-      HUDI = 'hudi'
-      DELTA = 'delta'
-      ICEBERG = 'iceberg'
-      HYPER = 'hyper'
-      XML = 'xml'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource properties associated with the integration target.</p>
@@ -21237,7 +20377,7 @@ module Aws::Glue
       :connection_name,
       :event_bus_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes a target catalog for resource linking.</p>
@@ -21247,7 +20387,7 @@ module Aws::Glue
     class TargetRedshiftCatalog < Struct.new(
       :catalog_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target resource could not be found.</p>
@@ -21257,7 +20397,7 @@ module Aws::Glue
     class TargetResourceNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties used by the target leg to partition the data on the target.</p>
@@ -21275,7 +20415,7 @@ module Aws::Glue
       :partition_spec,
       :target_table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sampling parameters that are associated with the machine learning transform.</p>
@@ -21321,7 +20461,7 @@ module Aws::Glue
       :completed_on,
       :execution_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:execution_time] = 0 unless options.key?(:execution_time)
@@ -21349,7 +20489,7 @@ module Aws::Glue
       :started_before,
       :started_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration properties for the task run.</p>
@@ -21375,13 +20515,7 @@ module Aws::Glue
       :labeling_set_generation_task_run_properties,
       :find_matches_task_run_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskRunSortColumnType
-      TASK_RUN_TYPE = 'TASK_RUN_TYPE'
-      STATUS = 'STATUS'
-      STARTED = 'STARTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sorting criteria that are used to sort the list of task runs for the machine learning
@@ -21398,25 +20532,7 @@ module Aws::Glue
       :column,
       :sort_direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaskStatusType
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMEOUT = 'TIMEOUT'
-    end
-
-    module TaskType
-      EVALUATION = 'EVALUATION'
-      LABELING_SET_GENERATION = 'LABELING_SET_GENERATION'
-      IMPORT_LABELS = 'IMPORT_LABELS'
-      EXPORT_LABELS = 'EXPORT_LABELS'
-      FIND_MATCHES = 'FIND_MATCHES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that is used to specify testing a connection to a service.</p>
@@ -21447,7 +20563,7 @@ module Aws::Glue
       :connection_properties,
       :authentication_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_name
@@ -21464,12 +20580,12 @@ module Aws::Glue
       :catalog_id,
       :test_connection_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TestConnectionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The throttling threshhold was exceeded.</p>
@@ -21479,7 +20595,7 @@ module Aws::Glue
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A timestamp filter.</p>
@@ -21493,7 +20609,7 @@ module Aws::Glue
       :recorded_before,
       :recorded_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A timestamped inclusion annotation.</p>
@@ -21507,7 +20623,7 @@ module Aws::Glue
       :value,
       :last_modified_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the parameters in the config file of the dynamic transform.</p>
@@ -21541,7 +20657,7 @@ module Aws::Glue
       :list_type,
       :is_optional,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>
@@ -21556,7 +20672,7 @@ module Aws::Glue
       :ml_user_data_encryption,
       :task_run_security_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria used to filter the machine learning transforms.</p>
@@ -21602,7 +20718,7 @@ module Aws::Glue
       :last_modified_after,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The algorithm-specific parameters that are associated with the machine learning
@@ -21618,15 +20734,7 @@ module Aws::Glue
       :transform_type,
       :find_matches_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransformSortColumnType
-      NAME = 'NAME'
-      TRANSFORM_TYPE = 'TRANSFORM_TYPE'
-      STATUS = 'STATUS'
-      CREATED = 'CREATED'
-      LAST_MODIFIED = 'LAST_MODIFIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sorting criteria that are associated with the machine learning transform.</p>
@@ -21642,17 +20750,7 @@ module Aws::Glue
       :column,
       :sort_direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransformStatusType
-      NOT_READY = 'NOT_READY'
-      READY = 'READY'
-      DELETING = 'DELETING'
-    end
-
-    module TransformType
-      FIND_MATCHES = 'FIND_MATCHES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a specific trigger.</p>
@@ -21702,7 +20800,7 @@ module Aws::Glue
       :predicate,
       :event_batching_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a Trigger node present in the workflow.</p>
@@ -21712,25 +20810,7 @@ module Aws::Glue
     class TriggerNodeDetails < Struct.new(
       :trigger,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggerState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      ACTIVATING = 'ACTIVATING'
-      ACTIVATED = 'ACTIVATED'
-      DEACTIVATING = 'DEACTIVATING'
-      DEACTIVATED = 'DEACTIVATED'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-    end
-
-    module TriggerType
-      SCHEDULED = 'SCHEDULED'
-      CONDITIONAL = 'CONDITIONAL'
-      ON_DEMAND = 'ON_DEMAND'
-      EVENT = 'EVENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to provide information used to update a trigger. This object updates the
@@ -21765,7 +20845,7 @@ module Aws::Glue
       :predicate,
       :event_batching_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A partition that contains unfiltered metadata.</p>
@@ -21783,7 +20863,7 @@ module Aws::Glue
       :authorized_columns,
       :is_registered_with_lake_formation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_registered_with_lake_formation] = false unless options.key?(:is_registered_with_lake_formation)
@@ -21808,18 +20888,7 @@ module Aws::Glue
       :inputs,
       :union_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnionType
-      ALL = 'ALL'
-      DISTINCT = 'DISTINCT'
-    end
-
-    module UnnestSpec
-      TOPLEVEL = 'TOPLEVEL'
-      FULL = 'FULL'
-      NOUNNEST = 'NOUNNEST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -21832,17 +20901,12 @@ module Aws::Glue
       :resource_arn,
       :tags_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateBehavior
-      LOG = 'LOG'
-      UPDATE_IN_DATABASE = 'UPDATE_IN_DATABASE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -21859,7 +20923,7 @@ module Aws::Glue
       :description,
       :blueprint_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -21868,12 +20932,7 @@ module Aws::Glue
     class UpdateBlueprintResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateCatalogBehavior
-      UPDATE_IN_DATABASE = 'UPDATE_IN_DATABASE'
-      LOG = 'LOG'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -21886,12 +20945,12 @@ module Aws::Glue
       :catalog_id,
       :catalog_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCatalogResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute grok_classifier
@@ -21912,12 +20971,12 @@ module Aws::Glue
       :json_classifier,
       :csv_classifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateClassifierResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -21943,7 +21002,7 @@ module Aws::Glue
       :partition_values,
       :column_statistics_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -21952,7 +21011,7 @@ module Aws::Glue
     class UpdateColumnStatisticsForPartitionResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -21974,7 +21033,7 @@ module Aws::Glue
       :table_name,
       :column_statistics_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -21983,7 +21042,7 @@ module Aws::Glue
     class UpdateColumnStatisticsForTableResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -22020,12 +21079,12 @@ module Aws::Glue
       :catalog_id,
       :security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateColumnStatisticsTaskSettingsResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -22044,12 +21103,12 @@ module Aws::Glue
       :name,
       :connection_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22120,12 +21179,12 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCrawlerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute crawler_name
@@ -22140,12 +21199,12 @@ module Aws::Glue
       :crawler_name,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCrawlerScheduleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a custom CSV classifier to be updated.</p>
@@ -22192,7 +21251,7 @@ module Aws::Glue
       :custom_datatypes,
       :serde,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22209,7 +21268,7 @@ module Aws::Glue
       :description,
       :ruleset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22226,7 +21285,7 @@ module Aws::Glue
       :description,
       :ruleset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -22246,12 +21305,12 @@ module Aws::Glue
       :name,
       :database_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDatabaseResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoint_name
@@ -22301,12 +21360,12 @@ module Aws::Glue
       :delete_arguments,
       :add_arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDevEndpointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a grok classifier to update when passed to
@@ -22330,7 +21389,7 @@ module Aws::Glue
       :grok_pattern,
       :custom_patterns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input parameters specific to updating Apache Iceberg tables in Glue Data 
@@ -22344,7 +21403,7 @@ module Aws::Glue
     class UpdateIcebergInput < Struct.new(
       :update_iceberg_table_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the update operations to be applied to an existing Iceberg table inGlue Data Catalog, defining the new state of the table metadata.
@@ -22356,7 +21415,7 @@ module Aws::Glue
     class UpdateIcebergTableInput < Struct.new(
       :updates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -22373,7 +21432,7 @@ module Aws::Glue
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -22390,7 +21449,7 @@ module Aws::Glue
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -22411,12 +21470,12 @@ module Aws::Glue
       :source_table_config,
       :target_table_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateIntegrationTablePropertiesResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -22462,7 +21521,7 @@ module Aws::Glue
       :auth_strategy,
       :auth_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -22471,7 +21530,7 @@ module Aws::Glue
     class UpdateJobFromSourceControlResponse < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -22484,7 +21543,7 @@ module Aws::Glue
       :job_name,
       :job_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -22493,7 +21552,7 @@ module Aws::Glue
     class UpdateJobResponse < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a JSON classifier to be updated.</p>
@@ -22508,7 +21567,7 @@ module Aws::Glue
       :name,
       :json_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -22574,7 +21633,7 @@ module Aws::Glue
       :timeout,
       :max_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transform_id
@@ -22583,7 +21642,7 @@ module Aws::Glue
     class UpdateMLTransformResponse < Struct.new(
       :transform_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Input parameters for updating open table format tables in GlueData Catalog, 
@@ -22596,7 +21655,7 @@ module Aws::Glue
     class UpdateOpenTableFormatInput < Struct.new(
       :update_iceberg_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -22624,12 +21683,12 @@ module Aws::Glue
       :partition_value_list,
       :partition_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdatePartitionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_id
@@ -22642,7 +21701,7 @@ module Aws::Glue
       :registry_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -22655,7 +21714,7 @@ module Aws::Glue
       :registry_name,
       :registry_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_id
@@ -22684,7 +21743,7 @@ module Aws::Glue
       :compatibility,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -22701,7 +21760,7 @@ module Aws::Glue
       :schema_name,
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -22747,7 +21806,7 @@ module Aws::Glue
       :auth_strategy,
       :auth_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -22756,7 +21815,7 @@ module Aws::Glue
     class UpdateSourceControlFromJobResponse < Struct.new(
       :job_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -22781,12 +21840,12 @@ module Aws::Glue
       :type,
       :table_optimizer_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTableOptimizerResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -22838,12 +21897,12 @@ module Aws::Glue
       :force,
       :update_open_table_format_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTableResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22856,7 +21915,7 @@ module Aws::Glue
       :name,
       :trigger_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trigger
@@ -22865,7 +21924,7 @@ module Aws::Glue
     class UpdateTriggerResponse < Struct.new(
       :trigger,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22882,7 +21941,7 @@ module Aws::Glue
       :description,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22891,7 +21950,7 @@ module Aws::Glue
     class UpdateUsageProfileResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute catalog_id
@@ -22915,12 +21974,12 @@ module Aws::Glue
       :function_name,
       :function_input,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateUserDefinedFunctionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22942,7 +22001,7 @@ module Aws::Glue
       :default_run_properties,
       :max_concurrent_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -22951,7 +22010,7 @@ module Aws::Glue
     class UpdateWorkflowResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an XML classifier to be updated.</p>
@@ -22973,7 +22032,7 @@ module Aws::Glue
       :classification,
       :row_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options to configure an upsert operation when writing to a Redshift target .</p>
@@ -22991,7 +22050,7 @@ module Aws::Glue
       :connection_name,
       :upsert_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Glue usage profile.</p>
@@ -23013,7 +22072,7 @@ module Aws::Glue
       :created_on,
       :last_modified_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the equivalent of a Hive user-defined function
@@ -23052,7 +22111,7 @@ module Aws::Glue
       :resource_uris,
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure used to create or update a user-defined function.</p>
@@ -23078,7 +22137,7 @@ module Aws::Glue
       :owner_type,
       :resource_uris,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value could not be validated.</p>
@@ -23088,7 +22147,7 @@ module Aws::Glue
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a version conflict.</p>
@@ -23098,7 +22157,7 @@ module Aws::Glue
     class VersionMismatchException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing details for representations.</p>
@@ -23120,7 +22179,7 @@ module Aws::Glue
       :sub_objects,
       :representations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing details for creating or updating an Glue view.</p>
@@ -23142,13 +22201,7 @@ module Aws::Glue
       :representations,
       :sub_objects,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViewDialect
-      REDSHIFT = 'REDSHIFT'
-      ATHENA = 'ATHENA'
-      SPARK = 'SPARK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the dialect of the view, and the query that defines the view.</p>
@@ -23184,7 +22237,7 @@ module Aws::Glue
       :validation_connection,
       :is_stale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing details of a representation to update or create a Lake Formation view.</p>
@@ -23210,14 +22263,7 @@ module Aws::Glue
       :validation_connection,
       :view_expanded_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViewUpdateAction
-      ADD = 'ADD'
-      REPLACE = 'REPLACE'
-      ADD_OR_REPLACE = 'ADD_OR_REPLACE'
-      DROP = 'DROP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information for an analytical engine to validate a view, prior to persisting the view metadata. Used in the case of direct <code>UpdateTable</code> or <code>CreateTable</code> API calls.</p>
@@ -23247,17 +22293,7 @@ module Aws::Glue
       :state,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkerType
-      Standard = 'Standard'
-      G_1X = 'G.1X'
-      G_2X = 'G.2X'
-      G_025X = 'G.025X'
-      G_4X = 'G.4X'
-      G_8X = 'G.8X'
-      Z_2X = 'Z.2X'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow is a collection of multiple dependent Glue 
@@ -23304,7 +22340,7 @@ module Aws::Glue
       :max_concurrent_runs,
       :blueprint_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow graph represents the complete workflow containing all the Glue components present in the
@@ -23319,7 +22355,7 @@ module Aws::Glue
       :nodes,
       :edges,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A workflow run is an execution of a workflow providing all the runtime information.</p>
@@ -23370,7 +22406,7 @@ module Aws::Glue
       :graph,
       :starting_event_batch_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Workflow run statistics provides statistics about the workflow run.</p>
@@ -23408,7 +22444,7 @@ module Aws::Glue
       :errored_actions,
       :waiting_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_actions] = 0 unless options.key?(:total_actions)
@@ -23421,14 +22457,6 @@ module Aws::Glue
         options[:waiting_actions] = 0 unless options.key?(:waiting_actions)
         super
       end
-    end
-
-    module WorkflowRunStatus
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      ERROR = 'ERROR'
     end
 
     # <p>A classifier for <code>XML</code> content.</p>
@@ -23462,7 +22490,7 @@ module Aws::Glue
       :version,
       :row_tag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)

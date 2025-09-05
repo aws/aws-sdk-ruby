@@ -6,23 +6,13 @@ module Aws::MailManager
   # This module contains the types returned by client operations.
   module Types
 
-    module AcceptAction
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
-    end
-
     # <p>Occurs when a user is denied access to a specific resource or action.</p>
     # @!attribute message
     #   @return [String]
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionFailurePolicy
-      CONTINUE = 'CONTINUE'
-      DROP = 'DROP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to add a header to a message. When executed, this action will add the given header to the message.</p>
@@ -36,7 +26,7 @@ module Aws::MailManager
       :header_name,
       :header_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Add On instance represents a specific configuration of an Add On.</p>
@@ -62,7 +52,7 @@ module Aws::MailManager
       :addon_instance_arn,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A subscription for an Add On representing the acceptance of its terms of use and additional pricing.</p>
@@ -84,7 +74,7 @@ module Aws::MailManager
       :addon_subscription_arn,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Filtering options for ListMembersOfAddressList operation.</p>
@@ -94,7 +84,7 @@ module Aws::MailManager
     class AddressFilter < Struct.new(
       :address_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An address list contains a list of emails and domains that are used in MailManager Ingress endpoints and Rules for email management.</p>
@@ -120,7 +110,7 @@ module Aws::MailManager
       :created_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an analysis can be used in conditions to trigger actions. Analyses can inspect the email content and report a certain aspect of the email.</p>
@@ -134,7 +124,7 @@ module Aws::MailManager
       :analyzer,
       :result_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An archive resource for storing and retaining emails.</p>
@@ -156,7 +146,7 @@ module Aws::MailManager
       :archive_state,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to archive the email by delivering the email to an Amazon SES archive.</p>
@@ -170,11 +160,7 @@ module Aws::MailManager
       :action_failure_policy,
       :target_archive,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArchiveBooleanEmailAttribute
-      HAS_ATTACHMENTS = 'HAS_ATTACHMENTS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A boolean expression to evaluate email attribute values.</p>
@@ -188,12 +174,7 @@ module Aws::MailManager
       :evaluate,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArchiveBooleanOperator
-      IS_TRUE = 'IS_TRUE'
-      IS_FALSE = 'IS_FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attribute to evaluate in a boolean expression.</p>
@@ -204,7 +185,7 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < ArchiveBooleanToEvaluate; end
       class Unknown < ArchiveBooleanToEvaluate; end
@@ -222,7 +203,7 @@ module Aws::MailManager
       :boolean_expression,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringExpression < ArchiveFilterCondition; end
       class BooleanExpression < ArchiveFilterCondition; end
@@ -240,7 +221,7 @@ module Aws::MailManager
       :include,
       :unless,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retention policy for an email archive that specifies how long emails are kept before being automatically deleted. </p>
@@ -251,24 +232,10 @@ module Aws::MailManager
       :retention_period,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RetentionPeriod < ArchiveRetention; end
       class Unknown < ArchiveRetention; end
-    end
-
-    module ArchiveState
-      ACTIVE = 'ACTIVE'
-      PENDING_DELETION = 'PENDING_DELETION'
-    end
-
-    module ArchiveStringEmailAttribute
-      TO = 'TO'
-      FROM = 'FROM'
-      CC = 'CC'
-      SUBJECT = 'SUBJECT'
-      ENVELOPE_TO = 'ENVELOPE_TO'
-      ENVELOPE_FROM = 'ENVELOPE_FROM'
     end
 
     # <p>A string expression to evaluate an email attribute value against one or more string values.</p>
@@ -286,11 +253,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArchiveStringOperator
-      CONTAINS = 'CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the email attribute to evaluate in a string expression.</p>
@@ -301,7 +264,7 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < ArchiveStringToEvaluate; end
       class Unknown < ArchiveStringToEvaluate; end
@@ -313,7 +276,7 @@ module Aws::MailManager
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -330,7 +293,7 @@ module Aws::MailManager
       :addon_subscription_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_instance_id
@@ -339,7 +302,7 @@ module Aws::MailManager
     class CreateAddonInstanceResponse < Struct.new(
       :addon_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -356,7 +319,7 @@ module Aws::MailManager
       :addon_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_subscription_id
@@ -365,7 +328,7 @@ module Aws::MailManager
     class CreateAddonSubscriptionResponse < Struct.new(
       :addon_subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -386,7 +349,7 @@ module Aws::MailManager
       :name,
       :import_data_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -399,7 +362,7 @@ module Aws::MailManager
       :job_id,
       :pre_signed_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -416,7 +379,7 @@ module Aws::MailManager
       :address_list_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -425,7 +388,7 @@ module Aws::MailManager
     class CreateAddressListResponse < Struct.new(
       :address_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to create a new email archive.</p>
@@ -451,7 +414,7 @@ module Aws::MailManager
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from creating a new email archive.</p>
@@ -461,7 +424,7 @@ module Aws::MailManager
     class CreateArchiveResponse < Struct.new(
       :archive_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -498,7 +461,7 @@ module Aws::MailManager
       :network_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingress_point_id
@@ -507,7 +470,7 @@ module Aws::MailManager
     class CreateIngressPointResponse < Struct.new(
       :ingress_point_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -536,7 +499,7 @@ module Aws::MailManager
       :authentication,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relay_id
@@ -545,7 +508,7 @@ module Aws::MailManager
     class CreateRelayResponse < Struct.new(
       :relay_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -566,7 +529,7 @@ module Aws::MailManager
       :rules,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set_id
@@ -575,7 +538,7 @@ module Aws::MailManager
     class CreateRuleSetResponse < Struct.new(
       :rule_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -604,7 +567,7 @@ module Aws::MailManager
       :max_message_size_bytes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_policy_id
@@ -613,7 +576,7 @@ module Aws::MailManager
     class CreateTrafficPolicyResponse < Struct.new(
       :traffic_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_instance_id
@@ -622,12 +585,12 @@ module Aws::MailManager
     class DeleteAddonInstanceRequest < Struct.new(
       :addon_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAddonInstanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_subscription_id
@@ -636,12 +599,12 @@ module Aws::MailManager
     class DeleteAddonSubscriptionRequest < Struct.new(
       :addon_subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAddonSubscriptionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -650,12 +613,12 @@ module Aws::MailManager
     class DeleteAddressListRequest < Struct.new(
       :address_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAddressListResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to initiate deletion of an email archive.</p>
@@ -665,13 +628,13 @@ module Aws::MailManager
     class DeleteArchiveRequest < Struct.new(
       :archive_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response indicating if the archive deletion was successfully initiated.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class DeleteArchiveResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingress_point_id
@@ -680,12 +643,12 @@ module Aws::MailManager
     class DeleteIngressPointRequest < Struct.new(
       :ingress_point_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIngressPointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relay_id
@@ -694,12 +657,12 @@ module Aws::MailManager
     class DeleteRelayRequest < Struct.new(
       :relay_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRelayResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set_id
@@ -708,12 +671,12 @@ module Aws::MailManager
     class DeleteRuleSetRequest < Struct.new(
       :rule_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_policy_id
@@ -722,12 +685,12 @@ module Aws::MailManager
     class DeleteTrafficPolicyRequest < Struct.new(
       :traffic_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTrafficPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This action to delivers an email to a mailbox.</p>
@@ -745,7 +708,7 @@ module Aws::MailManager
       :mailbox_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to deliver incoming emails to an Amazon Q Business application for indexing.</p>
@@ -767,7 +730,7 @@ module Aws::MailManager
       :index_id,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -780,18 +743,18 @@ module Aws::MailManager
       :address_list_id,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterMemberFromAddressListResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This action causes processing to stop and the email to be dropped. If the action applies only to certain recipients, only those recipients are dropped, and processing continues for other recipients.</p>
     class DropAction < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SMTP envelope information of the email.</p>
@@ -809,7 +772,7 @@ module Aws::MailManager
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination configuration for delivering exported email data.</p>
@@ -820,19 +783,10 @@ module Aws::MailManager
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < ExportDestinationConfiguration; end
       class Unknown < ExportDestinationConfiguration; end
-    end
-
-    module ExportState
-      QUEUED = 'QUEUED'
-      PREPROCESSING = 'PREPROCESSING'
-      PROCESSING = 'PROCESSING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
     end
 
     # <p>The current status of an archive export job.</p>
@@ -854,7 +808,7 @@ module Aws::MailManager
       :state,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary statuses of an archive export job.</p>
@@ -868,7 +822,7 @@ module Aws::MailManager
       :export_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_instance_id
@@ -877,7 +831,7 @@ module Aws::MailManager
     class GetAddonInstanceRequest < Struct.new(
       :addon_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_subscription_id
@@ -898,7 +852,7 @@ module Aws::MailManager
       :addon_instance_arn,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_subscription_id
@@ -907,7 +861,7 @@ module Aws::MailManager
     class GetAddonSubscriptionRequest < Struct.new(
       :addon_subscription_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_name
@@ -924,7 +878,7 @@ module Aws::MailManager
       :addon_subscription_arn,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -933,7 +887,7 @@ module Aws::MailManager
     class GetAddressListImportJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -986,7 +940,7 @@ module Aws::MailManager
       :completed_timestamp,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -995,7 +949,7 @@ module Aws::MailManager
     class GetAddressListRequest < Struct.new(
       :address_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -1020,7 +974,7 @@ module Aws::MailManager
       :created_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to retrieve details of a specific archive export job.</p>
@@ -1030,7 +984,7 @@ module Aws::MailManager
     class GetArchiveExportRequest < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing details of the specified archive export job.</p>
@@ -1064,7 +1018,7 @@ module Aws::MailManager
       :export_destination_configuration,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get the textual content of a specific email message stored in an archive.</p>
@@ -1074,7 +1028,7 @@ module Aws::MailManager
     class GetArchiveMessageContentRequest < Struct.new(
       :archived_message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing the textual content of the requested archived email message.</p>
@@ -1084,7 +1038,7 @@ module Aws::MailManager
     class GetArchiveMessageContentResponse < Struct.new(
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to get details of a specific email message stored in an archive.</p>
@@ -1094,7 +1048,7 @@ module Aws::MailManager
     class GetArchiveMessageRequest < Struct.new(
       :archived_message_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing details about the requested archived email message.</p>
@@ -1112,7 +1066,7 @@ module Aws::MailManager
       :metadata,
       :envelope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to retrieve details of an email archive.</p>
@@ -1122,7 +1076,7 @@ module Aws::MailManager
     class GetArchiveRequest < Struct.new(
       :archive_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing details of the requested archive.</p>
@@ -1160,7 +1114,7 @@ module Aws::MailManager
       :last_updated_timestamp,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to retrieve details of a specific archive search job.</p>
@@ -1170,7 +1124,7 @@ module Aws::MailManager
     class GetArchiveSearchRequest < Struct.new(
       :search_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing details of the specified archive search job.</p>
@@ -1200,7 +1154,7 @@ module Aws::MailManager
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to retrieve results from a completed archive search job.</p>
@@ -1210,7 +1164,7 @@ module Aws::MailManager
     class GetArchiveSearchResultsRequest < Struct.new(
       :search_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing search results from a completed archive search.</p>
@@ -1220,7 +1174,7 @@ module Aws::MailManager
     class GetArchiveSearchResultsResponse < Struct.new(
       :rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingress_point_id
@@ -1229,7 +1183,7 @@ module Aws::MailManager
     class GetIngressPointRequest < Struct.new(
       :ingress_point_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingress_point_id
@@ -1282,7 +1236,7 @@ module Aws::MailManager
       :created_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -1295,7 +1249,7 @@ module Aws::MailManager
       :address_list_id,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address
@@ -1308,7 +1262,7 @@ module Aws::MailManager
       :address,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relay_id
@@ -1317,7 +1271,7 @@ module Aws::MailManager
     class GetRelayRequest < Struct.new(
       :relay_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relay_id
@@ -1354,7 +1308,7 @@ module Aws::MailManager
       :created_timestamp,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set_id
@@ -1363,7 +1317,7 @@ module Aws::MailManager
     class GetRuleSetRequest < Struct.new(
       :rule_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set_id
@@ -1392,7 +1346,7 @@ module Aws::MailManager
       :last_modification_date,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_policy_id
@@ -1401,7 +1355,7 @@ module Aws::MailManager
     class GetTrafficPolicyRequest < Struct.new(
       :traffic_policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_policy_name
@@ -1438,7 +1392,7 @@ module Aws::MailManager
       :created_timestamp,
       :last_updated_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The import data format contains the specifications of the input file that would be passed to the address list import job.</p>
@@ -1448,12 +1402,7 @@ module Aws::MailManager
     class ImportDataFormat < Struct.new(
       :import_data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportDataType
-      CSV = 'CSV'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an import job.</p>
@@ -1507,19 +1456,7 @@ module Aws::MailManager
       :completed_timestamp,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportJobStatus
-      CREATED = 'CREATED'
-      PROCESSING = 'PROCESSING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      STOPPED = 'STOPPED'
-    end
-
-    module IngressAddressListEmailAttribute
-      RECIPIENT = 'RECIPIENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Add On ARN and its returned value that is evaluated in a policy statement's conditional expression to either deny or block the incoming email.</p>
@@ -1533,7 +1470,7 @@ module Aws::MailManager
       :analyzer,
       :result_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure for a boolean condition matching on the incoming mail.</p>
@@ -1547,12 +1484,7 @@ module Aws::MailManager
       :evaluate,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngressBooleanOperator
-      IS_TRUE = 'IS_TRUE'
-      IS_FALSE = 'IS_FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The union type representing the allowed types of operands for a boolean condition.</p>
@@ -1567,16 +1499,11 @@ module Aws::MailManager
       :is_in_address_list,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Analysis < IngressBooleanToEvaluate; end
       class IsInAddressList < IngressBooleanToEvaluate; end
       class Unknown < IngressBooleanToEvaluate; end
-    end
-
-    module IngressIpOperator
-      CIDR_MATCHES = 'CIDR_MATCHES'
-      NOT_CIDR_MATCHES = 'NOT_CIDR_MATCHES'
     end
 
     # <p>The structure for an IP based condition matching on the incoming mail.</p>
@@ -1587,14 +1514,10 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < IngressIpToEvaluate; end
       class Unknown < IngressIpToEvaluate; end
-    end
-
-    module IngressIpv4Attribute
-      SENDER_IP = 'SENDER_IP'
     end
 
     # <p>The union type representing the allowed types for the left hand side of an IP condition.</p>
@@ -1612,11 +1535,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngressIpv6Attribute
-      SENDER_IPV6 = 'SENDER_IPV6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The union type representing the allowed types for the left hand side of an IPv6 condition.</p>
@@ -1634,7 +1553,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure for an IPv6 based condition matching on the incoming mail.</p>
@@ -1645,7 +1564,7 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < IngressIpv6ToEvaluate; end
       class Unknown < IngressIpv6ToEvaluate; end
@@ -1662,7 +1581,7 @@ module Aws::MailManager
       :attribute,
       :address_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of an ingress endpoint resource.</p>
@@ -1688,7 +1607,7 @@ module Aws::MailManager
       :type,
       :a_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authentication configuration for the ingress endpoint resource.</p>
@@ -1702,7 +1621,7 @@ module Aws::MailManager
       :ingress_point_password_configuration,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the ingress endpoint resource.</p>
@@ -1717,7 +1636,7 @@ module Aws::MailManager
       :secret_arn,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SmtpPassword < IngressPointConfiguration; end
       class SecretArn < IngressPointConfiguration; end
@@ -1739,30 +1658,7 @@ module Aws::MailManager
       :previous_smtp_password_version,
       :previous_smtp_password_expiry_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngressPointStatus
-      PROVISIONING = 'PROVISIONING'
-      DEPROVISIONING = 'DEPROVISIONING'
-      UPDATING = 'UPDATING'
-      ACTIVE = 'ACTIVE'
-      CLOSED = 'CLOSED'
-      FAILED = 'FAILED'
-    end
-
-    module IngressPointStatusToUpdate
-      ACTIVE = 'ACTIVE'
-      CLOSED = 'CLOSED'
-    end
-
-    module IngressPointType
-      OPEN = 'OPEN'
-      AUTH = 'AUTH'
-    end
-
-    module IngressStringEmailAttribute
-      RECIPIENT = 'RECIPIENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure for a string based condition matching on the incoming mail.</p>
@@ -1780,15 +1676,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngressStringOperator
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The union type representing the allowed types for the left hand side of a string condition.</p>
@@ -1803,20 +1691,11 @@ module Aws::MailManager
       :analysis,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < IngressStringToEvaluate; end
       class Analysis < IngressStringToEvaluate; end
       class Unknown < IngressStringToEvaluate; end
-    end
-
-    module IngressTlsAttribute
-      TLS_PROTOCOL = 'TLS_PROTOCOL'
-    end
-
-    module IngressTlsProtocolAttribute
-      TLS1_2 = 'TLS1_2'
-      TLS1_3 = 'TLS1_3'
     end
 
     # <p>The structure for a TLS related condition matching on the incoming mail.</p>
@@ -1834,12 +1713,7 @@ module Aws::MailManager
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngressTlsProtocolOperator
-      MINIMUM_TLS_VERSION = 'MINIMUM_TLS_VERSION'
-      IS = 'IS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The union type representing the allowed types for the left hand side of a TLS condition.</p>
@@ -1850,15 +1724,10 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < IngressTlsProtocolToEvaluate; end
       class Unknown < IngressTlsProtocolToEvaluate; end
-    end
-
-    module IpType
-      IPV4 = 'IPV4'
-      DUAL_STACK = 'DUAL_STACK'
     end
 
     # @!attribute next_token
@@ -1871,7 +1740,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_instances
@@ -1884,7 +1753,7 @@ module Aws::MailManager
       :addon_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1897,7 +1766,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addon_subscriptions
@@ -1910,7 +1779,7 @@ module Aws::MailManager
       :addon_subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -1927,7 +1796,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_jobs
@@ -1940,7 +1809,7 @@ module Aws::MailManager
       :import_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1953,7 +1822,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_lists
@@ -1966,7 +1835,7 @@ module Aws::MailManager
       :address_lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list archive export jobs in your account.</p>
@@ -1984,7 +1853,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing a list of archive export jobs and their statuses.</p>
@@ -1998,7 +1867,7 @@ module Aws::MailManager
       :exports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list archive search jobs in your account.</p>
@@ -2016,7 +1885,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing a list of archive search jobs and their statuses.</p>
@@ -2030,7 +1899,7 @@ module Aws::MailManager
       :searches,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to list email archives in your account.</p>
@@ -2044,7 +1913,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response containing a list of your email archives.</p>
@@ -2058,7 +1927,7 @@ module Aws::MailManager
       :archives,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -2071,7 +1940,7 @@ module Aws::MailManager
       :page_size,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingress_points
@@ -2084,7 +1953,7 @@ module Aws::MailManager
       :ingress_points,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute address_list_id
@@ -2105,7 +1974,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute addresses
@@ -2118,7 +1987,7 @@ module Aws::MailManager
       :addresses,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -2131,7 +2000,7 @@ module Aws::MailManager
       :page_size,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relays
@@ -2144,7 +2013,7 @@ module Aws::MailManager
       :relays,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2157,7 +2026,7 @@ module Aws::MailManager
       :next_token,
       :page_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_sets
@@ -2170,7 +2039,7 @@ module Aws::MailManager
       :rule_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2179,7 +2048,7 @@ module Aws::MailManager
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2188,7 +2057,7 @@ module Aws::MailManager
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute page_size
@@ -2201,7 +2070,7 @@ module Aws::MailManager
       :page_size,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_policies
@@ -2214,12 +2083,7 @@ module Aws::MailManager
       :traffic_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MailFrom
-      REPLACE = 'REPLACE'
-      PRESERVE = 'PRESERVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The textual body content of an email message.</p>
@@ -2237,7 +2101,7 @@ module Aws::MailManager
       :html,
       :message_malformed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata about the email.</p>
@@ -2295,7 +2159,7 @@ module Aws::MailManager
       :configuration_set,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network type (IPv4-only, Dual-Stack, PrivateLink) of the ingress endpoint resource.</p>
@@ -2310,7 +2174,7 @@ module Aws::MailManager
       :private_network_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PublicNetworkConfiguration < NetworkConfiguration; end
       class PrivateNetworkConfiguration < NetworkConfiguration; end
@@ -2320,7 +2184,7 @@ module Aws::MailManager
     # <p>Explicitly indicate that the relay destination server does not require SMTP credential authentication.</p>
     class NoAuthentication < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The email traffic filtering conditions which are contained in a traffic policy resource.</p>
@@ -2347,7 +2211,7 @@ module Aws::MailManager
       :boolean_expression,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class StringExpression < PolicyCondition; end
       class IpExpression < PolicyCondition; end
@@ -2368,7 +2232,7 @@ module Aws::MailManager
       :conditions,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the network configuration for the private ingress point.</p>
@@ -2378,7 +2242,7 @@ module Aws::MailManager
     class PrivateNetworkConfiguration < Struct.new(
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the network configuration for the public ingress point.</p>
@@ -2388,7 +2252,7 @@ module Aws::MailManager
     class PublicNetworkConfiguration < Struct.new(
       :ip_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:ip_type] = 'IPV4' unless options.key?(:ip_type)
@@ -2406,12 +2270,12 @@ module Aws::MailManager
       :address_list_id,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterMemberToAddressListResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The relay resource that can be used as a rule to relay receiving emails to the destination relay server.</p>
@@ -2429,7 +2293,7 @@ module Aws::MailManager
       :relay_name,
       :last_modified_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action relays the email via SMTP to another specific SMTP server.</p>
@@ -2447,7 +2311,7 @@ module Aws::MailManager
       :relay,
       :mail_from,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Authentication for the relay destination server—specify the secretARN where the SMTP credentials are stored, or specify an empty NoAuthentication structure if the relay destination server does not require SMTP credential authentication.</p>
@@ -2462,7 +2326,7 @@ module Aws::MailManager
       :no_authentication,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SecretArn < RelayAuthentication; end
       class NoAuthentication < RelayAuthentication; end
@@ -2476,7 +2340,7 @@ module Aws::MailManager
     class ReplaceRecipientAction < Struct.new(
       :replace_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a requested resource is not found.</p>
@@ -2485,26 +2349,7 @@ module Aws::MailManager
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetentionPeriod
-      THREE_MONTHS = 'THREE_MONTHS'
-      SIX_MONTHS = 'SIX_MONTHS'
-      NINE_MONTHS = 'NINE_MONTHS'
-      ONE_YEAR = 'ONE_YEAR'
-      EIGHTEEN_MONTHS = 'EIGHTEEN_MONTHS'
-      TWO_YEARS = 'TWO_YEARS'
-      THIRTY_MONTHS = 'THIRTY_MONTHS'
-      THREE_YEARS = 'THREE_YEARS'
-      FOUR_YEARS = 'FOUR_YEARS'
-      FIVE_YEARS = 'FIVE_YEARS'
-      SIX_YEARS = 'SIX_YEARS'
-      SEVEN_YEARS = 'SEVEN_YEARS'
-      EIGHT_YEARS = 'EIGHT_YEARS'
-      NINE_YEARS = 'NINE_YEARS'
-      TEN_YEARS = 'TEN_YEARS'
-      PERMANENT = 'PERMANENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A result row containing metadata for an archived email message.</p>
@@ -2586,7 +2431,7 @@ module Aws::MailManager
       :envelope,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule contains conditions, "unless conditions" and actions. For each envelope recipient of an email, if all conditions match and none of the "unless conditions" match, then all of the actions are executed sequentially. If no conditions are provided, the rule always applies and the actions are implicitly executed. If only "unless conditions" are provided, the rule applies if the email does not match the evaluation of the "unless conditions".</p>
@@ -2608,7 +2453,7 @@ module Aws::MailManager
       :unless,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action for a rule to take. Only one of the contained actions can be set.</p>
@@ -2655,7 +2500,7 @@ module Aws::MailManager
       :publish_to_sns,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Drop < RuleAction; end
       class Relay < RuleAction; end
@@ -2670,21 +2515,6 @@ module Aws::MailManager
       class Unknown < RuleAction; end
     end
 
-    module RuleAddressListEmailAttribute
-      RECIPIENT = 'RECIPIENT'
-      MAIL_FROM = 'MAIL_FROM'
-      SENDER = 'SENDER'
-      FROM = 'FROM'
-      TO = 'TO'
-      CC = 'CC'
-    end
-
-    module RuleBooleanEmailAttribute
-      READ_RECEIPT_REQUESTED = 'READ_RECEIPT_REQUESTED'
-      TLS = 'TLS'
-      TLS_WRAPPED = 'TLS_WRAPPED'
-    end
-
     # <p>A boolean expression to be used in a rule condition.</p>
     # @!attribute evaluate
     #   <p>The operand on which to perform a boolean condition operation.</p>
@@ -2696,12 +2526,7 @@ module Aws::MailManager
       :evaluate,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleBooleanOperator
-      IS_TRUE = 'IS_TRUE'
-      IS_FALSE = 'IS_FALSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The union type representing the allowed types of operands for a boolean condition.</p>
@@ -2720,7 +2545,7 @@ module Aws::MailManager
       :is_in_address_list,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < RuleBooleanToEvaluate; end
       class Analysis < RuleBooleanToEvaluate; end
@@ -2756,7 +2581,7 @@ module Aws::MailManager
       :dmarc_expression,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BooleanExpression < RuleCondition; end
       class StringExpression < RuleCondition; end
@@ -2778,22 +2603,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleDmarcOperator
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-    end
-
-    module RuleDmarcPolicy
-      NONE = 'NONE'
-      QUARANTINE = 'QUARANTINE'
-      REJECT = 'REJECT'
-    end
-
-    module RuleIpEmailAttribute
-      SOURCE_IP = 'SOURCE_IP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An IP address expression matching certain IP addresses within a given range of IP addresses.</p>
@@ -2811,12 +2621,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleIpOperator
-      CIDR_MATCHES = 'CIDR_MATCHES'
-      NOT_CIDR_MATCHES = 'NOT_CIDR_MATCHES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IP address to evaluate for this condition.</p>
@@ -2827,7 +2632,7 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < RuleIpToEvaluate; end
       class Unknown < RuleIpToEvaluate; end
@@ -2844,11 +2649,7 @@ module Aws::MailManager
       :attribute,
       :address_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleNumberEmailAttribute
-      MESSAGE_SIZE = 'MESSAGE_SIZE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A number expression to match numeric conditions with integers from the incoming email.</p>
@@ -2866,16 +2667,7 @@ module Aws::MailManager
       :operator,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleNumberOperator
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      LESS_THAN = 'LESS_THAN'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number to evaluate in a numeric condition expression.</p>
@@ -2886,7 +2678,7 @@ module Aws::MailManager
       :attribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < RuleNumberToEvaluate; end
       class Unknown < RuleNumberToEvaluate; end
@@ -2907,18 +2699,7 @@ module Aws::MailManager
       :rule_set_name,
       :last_modification_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleStringEmailAttribute
-      MAIL_FROM = 'MAIL_FROM'
-      HELO = 'HELO'
-      RECIPIENT = 'RECIPIENT'
-      SENDER = 'SENDER'
-      FROM = 'FROM'
-      SUBJECT = 'SUBJECT'
-      TO = 'TO'
-      CC = 'CC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string expression is evaluated against strings or substrings of the email.</p>
@@ -2936,15 +2717,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleStringOperator
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The string to evaluate in a string condition expression.</p>
@@ -2963,24 +2736,12 @@ module Aws::MailManager
       :analysis,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < RuleStringToEvaluate; end
       class MimeHeaderAttribute < RuleStringToEvaluate; end
       class Analysis < RuleStringToEvaluate; end
       class Unknown < RuleStringToEvaluate; end
-    end
-
-    module RuleVerdict
-      PASS = 'PASS'
-      FAIL = 'FAIL'
-      GRAY = 'GRAY'
-      PROCESSING_FAILED = 'PROCESSING_FAILED'
-    end
-
-    module RuleVerdictAttribute
-      SPF = 'SPF'
-      DKIM = 'DKIM'
     end
 
     # <p>A verdict expression is evaluated against verdicts of the email.</p>
@@ -2998,12 +2759,7 @@ module Aws::MailManager
       :operator,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleVerdictOperator
-      EQUALS = 'EQUALS'
-      NOT_EQUALS = 'NOT_EQUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The verdict to evaluate in a verdict condition expression.</p>
@@ -3018,7 +2774,7 @@ module Aws::MailManager
       :analysis,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Attribute < RuleVerdictToEvaluate; end
       class Analysis < RuleVerdictToEvaluate; end
@@ -3048,7 +2804,7 @@ module Aws::MailManager
       :s3_prefix,
       :s3_sse_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for exporting email data to an Amazon S3 bucket.</p>
@@ -3058,7 +2814,7 @@ module Aws::MailManager
     class S3ExportDestinationConfiguration < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An address that is a member of an address list.</p>
@@ -3072,15 +2828,7 @@ module Aws::MailManager
       :address,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SearchState
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The current status of an archive search job.</p>
@@ -3102,7 +2850,7 @@ module Aws::MailManager
       :state,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary details of an archive search job.</p>
@@ -3116,7 +2864,7 @@ module Aws::MailManager
       :search_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sends the email to the internet using the ses:SendRawEmail API.</p>
@@ -3130,7 +2878,7 @@ module Aws::MailManager
       :action_failure_policy,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when an operation exceeds a predefined service quota or limit.</p>
@@ -3139,7 +2887,7 @@ module Aws::MailManager
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to publish the email content to an Amazon SNS topic. When executed, this action will send the email as a notification to the specified SNS topic.</p>
@@ -3165,7 +2913,7 @@ module Aws::MailManager
       :encoding,
       :payload_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:encoding] = 'UTF-8' unless options.key?(:encoding)
@@ -3174,28 +2922,18 @@ module Aws::MailManager
       end
     end
 
-    module SnsNotificationEncoding
-      UTF_8 = 'UTF-8'
-      BASE64 = 'BASE64'
-    end
-
-    module SnsNotificationPayloadType
-      HEADERS = 'HEADERS'
-      CONTENT = 'CONTENT'
-    end
-
     # @!attribute job_id
     #   <p>The identifier of the import job that needs to be started.</p>
     #   @return [String]
     class StartAddressListImportJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartAddressListImportJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to initiate an export of emails from an archive.</p>
@@ -3229,7 +2967,7 @@ module Aws::MailManager
       :export_destination_configuration,
       :include_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from initiating an archive export.</p>
@@ -3239,7 +2977,7 @@ module Aws::MailManager
     class StartArchiveExportResponse < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to initiate a search across emails in an archive.</p>
@@ -3265,7 +3003,7 @@ module Aws::MailManager
       :to_timestamp,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from initiating an archive search.</p>
@@ -3275,7 +3013,7 @@ module Aws::MailManager
     class StartArchiveSearchResponse < Struct.new(
       :search_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3284,12 +3022,12 @@ module Aws::MailManager
     class StopAddressListImportJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopAddressListImportJobResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to stop an in-progress archive export job.</p>
@@ -3299,13 +3037,13 @@ module Aws::MailManager
     class StopArchiveExportRequest < Struct.new(
       :export_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response indicating if the request to stop the export job succeeded.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class StopArchiveExportResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to stop an in-progress archive search job.</p>
@@ -3315,13 +3053,13 @@ module Aws::MailManager
     class StopArchiveSearchRequest < Struct.new(
       :search_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response indicating if the request to stop the search job succeeded.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class StopArchiveSearchResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair (the value is optional), that you can define and assign to Amazon Web Services resources.</p>
@@ -3335,7 +3073,7 @@ module Aws::MailManager
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3348,12 +3086,12 @@ module Aws::MailManager
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Occurs when a service's request rate limit is exceeded, resulting in throttling of further requests.</p>
@@ -3362,7 +3100,7 @@ module Aws::MailManager
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure of a traffic policy resource which is a container for policy statements.</p>
@@ -3380,7 +3118,7 @@ module Aws::MailManager
       :traffic_policy_id,
       :default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3393,12 +3131,12 @@ module Aws::MailManager
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request to update properties of an existing email archive.</p>
@@ -3416,13 +3154,13 @@ module Aws::MailManager
       :archive_name,
       :retention,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response indicating if the archive update succeeded or failed.</p> <p>On success, returns an HTTP 200 status code. On failure, returns an error message.</p>
     class UpdateArchiveResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingress_point_id
@@ -3451,12 +3189,12 @@ module Aws::MailManager
       :traffic_policy_id,
       :ingress_point_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateIngressPointResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute relay_id
@@ -3481,12 +3219,12 @@ module Aws::MailManager
       :server_port,
       :authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRelayResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_set_id
@@ -3503,12 +3241,12 @@ module Aws::MailManager
       :rule_set_name,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRuleSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute traffic_policy_id
@@ -3533,12 +3271,12 @@ module Aws::MailManager
       :default_action,
       :max_message_size_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateTrafficPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request validation has failed. For details, see the accompanying error message.</p>
@@ -3547,7 +3285,7 @@ module Aws::MailManager
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

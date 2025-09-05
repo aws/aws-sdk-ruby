@@ -12,7 +12,7 @@ module Aws::PaymentCryptographyData
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive the confidentiality and integrity keys for a payment card using Amex derivation method.</p>
@@ -42,7 +42,7 @@ module Aws::PaymentCryptographyData
       :authorization_request_key_identifier,
       :current_pin_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
@@ -52,7 +52,7 @@ module Aws::PaymentCryptographyData
     class AmexCardSecurityCodeVersion1 < Struct.new(
       :card_expiry_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Card data parameters that are required to generate a Card Security Code (CSC2) for an AMEX payment card.</p>
@@ -66,7 +66,7 @@ module Aws::PaymentCryptographyData
       :card_expiry_date,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters for plaintext encryption using asymmetric keys.</p>
@@ -76,7 +76,7 @@ module Aws::PaymentCryptographyData
     class AsymmetricEncryptionAttributes < Struct.new(
       :padding_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Card data parameters that are required to generate Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).</p>
@@ -111,7 +111,7 @@ module Aws::PaymentCryptographyData
       :dynamic_card_verification_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AmexCardSecurityCodeVersion1 < CardGenerationAttributes; end
       class AmexCardSecurityCodeVersion2 < CardGenerationAttributes; end
@@ -138,7 +138,7 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_transaction_counter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Card data parameters that are requried to verify Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).</p>
@@ -177,7 +177,7 @@ module Aws::PaymentCryptographyData
       :discover_dynamic_card_verification_code,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AmexCardSecurityCodeVersion1 < CardVerificationAttributes; end
       class AmexCardSecurityCodeVersion2 < CardVerificationAttributes; end
@@ -201,7 +201,7 @@ module Aws::PaymentCryptographyData
       :card_expiry_date,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Card data parameters that are required to verify Card Verification Value (CVV2) for the payment card.</p>
@@ -211,7 +211,7 @@ module Aws::PaymentCryptographyData
     class CardVerificationValue2 < Struct.new(
       :card_expiry_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required for Authorization Response Cryptogram (ARPC) generation after Authorization Request Cryptogram (ARQC) verification is successful.</p>
@@ -226,7 +226,7 @@ module Aws::PaymentCryptographyData
       :arpc_method2,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ArpcMethod1 < CryptogramAuthResponse; end
       class ArpcMethod2 < CryptogramAuthResponse; end
@@ -240,7 +240,7 @@ module Aws::PaymentCryptographyData
     class CryptogramVerificationArpcMethod1 < Struct.new(
       :auth_response_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required for ARPC response generation using method2 after ARQC verification is successful.</p>
@@ -254,7 +254,7 @@ module Aws::PaymentCryptographyData
       :card_status_update,
       :proprietary_authentication_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameter values of the current PIN to be changed on the EMV chip card.</p>
@@ -268,7 +268,7 @@ module Aws::PaymentCryptographyData
       :current_pin_pek_identifier,
       :current_encrypted_pin_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -289,7 +289,7 @@ module Aws::PaymentCryptographyData
       :decryption_attributes,
       :wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -306,7 +306,7 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :plain_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive the payment card specific confidentiality and integrity keys.</p>
@@ -333,7 +333,7 @@ module Aws::PaymentCryptographyData
       :mastercard,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EmvCommon < DerivationMethodAttributes; end
       class Amex < DerivationMethodAttributes; end
@@ -358,7 +358,7 @@ module Aws::PaymentCryptographyData
       :unpredictable_number,
       :application_transaction_counter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are used for Derived Unique Key Per Transaction (DUKPT) derivation algorithm.</p>
@@ -372,7 +372,7 @@ module Aws::PaymentCryptographyData
       :key_serial_number,
       :dukpt_derivation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters required for encryption or decryption of data using DUKPT.</p>
@@ -390,15 +390,7 @@ module Aws::PaymentCryptographyData
       :dukpt_key_derivation_type,
       :dukpt_key_variant,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DukptDerivationType
-      TDES_2KEY = 'TDES_2KEY'
-      TDES_3KEY = 'TDES_3KEY'
-      AES_128 = 'AES_128'
-      AES_192 = 'AES_192'
-      AES_256 = 'AES_256'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to encrypt plaintext data using DUKPT.</p>
@@ -424,18 +416,7 @@ module Aws::PaymentCryptographyData
       :dukpt_key_variant,
       :initialization_vector,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DukptEncryptionMode
-      ECB = 'ECB'
-      CBC = 'CBC'
-    end
-
-    module DukptKeyVariant
-      BIDIRECTIONAL = 'BIDIRECTIONAL'
-      REQUEST = 'REQUEST'
-      RESPONSE = 'RESPONSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Dynamic Card Verification Value (dCVV).</p>
@@ -457,7 +438,7 @@ module Aws::PaymentCryptographyData
       :application_transaction_counter,
       :track_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Dynamic Card Verification Value (dCVV).</p>
@@ -479,7 +460,7 @@ module Aws::PaymentCryptographyData
       :service_code,
       :application_transaction_counter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters required to establish ECDH based key exchange.</p>
@@ -509,7 +490,7 @@ module Aws::PaymentCryptographyData
       :key_derivation_hash_algorithm,
       :shared_information,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive the confidentiality and integrity keys for a payment card using EMV2000 deruv.</p>
@@ -531,7 +512,7 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_transaction_counter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive the confidentiality and integrity keys for an Emv common payment card.</p>
@@ -565,7 +546,7 @@ module Aws::PaymentCryptographyData
       :pin_block_padding_type,
       :pin_block_length_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters for plaintext encryption using EMV keys.</p>
@@ -595,17 +576,7 @@ module Aws::PaymentCryptographyData
       :mode,
       :initialization_vector,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EmvEncryptionMode
-      ECB = 'ECB'
-      CBC = 'CBC'
-    end
-
-    module EmvMajorKeyDerivationMode
-      EMV_OPTION_A = 'EMV_OPTION_A'
-      EMV_OPTION_B = 'EMV_OPTION_B'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -626,7 +597,7 @@ module Aws::PaymentCryptographyData
       :encryption_attributes,
       :wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -643,7 +614,7 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :cipher_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to perform encryption and decryption operations.</p>
@@ -666,24 +637,13 @@ module Aws::PaymentCryptographyData
       :emv,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Symmetric < EncryptionDecryptionAttributes; end
       class Asymmetric < EncryptionDecryptionAttributes; end
       class Dukpt < EncryptionDecryptionAttributes; end
       class Emv < EncryptionDecryptionAttributes; end
       class Unknown < EncryptionDecryptionAttributes; end
-    end
-
-    module EncryptionMode
-      ECB = 'ECB'
-      CBC = 'CBC'
-      CFB = 'CFB'
-      CFB1 = 'CFB1'
-      CFB8 = 'CFB8'
-      CFB64 = 'CFB64'
-      CFB128 = 'CFB128'
-      OFB = 'OFB'
     end
 
     # @!attribute key_identifier
@@ -704,7 +664,7 @@ module Aws::PaymentCryptographyData
       :generation_attributes,
       :validation_data_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -721,7 +681,7 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :validation_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute new_pin_pek_identifier
@@ -754,7 +714,7 @@ module Aws::PaymentCryptographyData
       :message_data,
       :derivation_method_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute new_pin_pek_arn
@@ -795,7 +755,7 @@ module Aws::PaymentCryptographyData
       :secure_messaging_confidentiality_key_check_value,
       :visa_amex_derivation_outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -816,7 +776,7 @@ module Aws::PaymentCryptographyData
       :generation_attributes,
       :mac_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -833,7 +793,7 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :mac,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generation_key_identifier
@@ -866,7 +826,7 @@ module Aws::PaymentCryptographyData
       :pin_block_format,
       :encryption_wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute generation_key_arn
@@ -895,7 +855,7 @@ module Aws::PaymentCryptographyData
       :encrypted_pin_block,
       :pin_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Ibm3624 natural PIN.</p>
@@ -913,7 +873,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data_pad_character,
       :pin_validation_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Ibm3624 PIN from offset PIN.</p>
@@ -935,7 +895,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data,
       :pin_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Pparameters that are required to generate or verify Ibm3624 PIN offset PIN.</p>
@@ -957,7 +917,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data_pad_character,
       :pin_validation_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Ibm3624 PIN verification PIN.</p>
@@ -979,7 +939,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data,
       :pin_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Ibm3624 random PIN.</p>
@@ -997,7 +957,7 @@ module Aws::PaymentCryptographyData
       :pin_validation_data_pad_character,
       :pin_validation_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
@@ -1006,29 +966,7 @@ module Aws::PaymentCryptographyData
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KeyDerivationFunction
-      NIST_SP800 = 'NIST_SP800'
-      ANSI_X963 = 'ANSI_X963'
-    end
-
-    module KeyDerivationHashAlgorithm
-      SHA_256 = 'SHA_256'
-      SHA_384 = 'SHA_384'
-      SHA_512 = 'SHA_512'
-    end
-
-    module MacAlgorithm
-      ISO9797_ALGORITHM1 = 'ISO9797_ALGORITHM1'
-      ISO9797_ALGORITHM3 = 'ISO9797_ALGORITHM3'
-      CMAC = 'CMAC'
-      HMAC = 'HMAC'
-      HMAC_SHA224 = 'HMAC_SHA224'
-      HMAC_SHA256 = 'HMAC_SHA256'
-      HMAC_SHA384 = 'HMAC_SHA384'
-      HMAC_SHA512 = 'HMAC_SHA512'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters required for DUKPT MAC generation and verification.</p>
@@ -1046,7 +984,7 @@ module Aws::PaymentCryptographyData
       :dukpt_key_variant,
       :dukpt_derivation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required for EMV MAC generation and verification.</p>
@@ -1072,7 +1010,7 @@ module Aws::PaymentCryptographyData
       :session_key_derivation_mode,
       :session_key_derivation_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required for DUKPT, HMAC, or EMV MAC generation or verification.</p>
@@ -1099,7 +1037,7 @@ module Aws::PaymentCryptographyData
       :dukpt_cmac,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Algorithm < MacAttributes; end
       class EmvMac < MacAttributes; end
@@ -1107,11 +1045,6 @@ module Aws::PaymentCryptographyData
       class DukptIso9797Algorithm3 < MacAttributes; end
       class DukptCmac < MacAttributes; end
       class Unknown < MacAttributes; end
-    end
-
-    module MajorKeyDerivationMode
-      EMV_OPTION_A = 'EMV_OPTION_A'
-      EMV_OPTION_B = 'EMV_OPTION_B'
     end
 
     # <p>Parameters to derive the confidentiality and integrity keys for a Mastercard payment card.</p>
@@ -1133,36 +1066,7 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_cryptogram,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PaddingType
-      PKCS1 = 'PKCS1'
-      OAEP_SHA1 = 'OAEP_SHA1'
-      OAEP_SHA256 = 'OAEP_SHA256'
-      OAEP_SHA512 = 'OAEP_SHA512'
-    end
-
-    module PinBlockFormatForEmvPinChange
-      ISO_FORMAT_0 = 'ISO_FORMAT_0'
-      ISO_FORMAT_1 = 'ISO_FORMAT_1'
-      ISO_FORMAT_3 = 'ISO_FORMAT_3'
-    end
-
-    module PinBlockFormatForPinData
-      ISO_FORMAT_0 = 'ISO_FORMAT_0'
-      ISO_FORMAT_3 = 'ISO_FORMAT_3'
-      ISO_FORMAT_4 = 'ISO_FORMAT_4'
-    end
-
-    module PinBlockLengthPosition
-      NONE = 'NONE'
-      FRONT_OF_PIN_BLOCK = 'FRONT_OF_PIN_BLOCK'
-    end
-
-    module PinBlockPaddingType
-      NO_PADDING = 'NO_PADDING'
-      ISO_IEC_7816_4 = 'ISO_IEC_7816_4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate, translate, or verify PIN data.</p>
@@ -1177,7 +1081,7 @@ module Aws::PaymentCryptographyData
       :verification_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PinOffset < PinData; end
       class VerificationValue < PinData; end
@@ -1212,7 +1116,7 @@ module Aws::PaymentCryptographyData
       :ibm3624_pin_from_offset,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class VisaPin < PinGenerationAttributes; end
       class VisaPinVerificationValue < PinGenerationAttributes; end
@@ -1235,7 +1139,7 @@ module Aws::PaymentCryptographyData
       :ibm3624_pin,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class VisaPin < PinVerificationAttributes; end
       class Ibm3624Pin < PinVerificationAttributes; end
@@ -1272,7 +1176,7 @@ module Aws::PaymentCryptographyData
       :incoming_wrapped_key,
       :outgoing_wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -1289,7 +1193,7 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :cipher_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to perform reencryption operation.</p>
@@ -1304,7 +1208,7 @@ module Aws::PaymentCryptographyData
       :dukpt,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Symmetric < ReEncryptionAttributes; end
       class Dukpt < ReEncryptionAttributes; end
@@ -1318,7 +1222,7 @@ module Aws::PaymentCryptographyData
     class ResourceNotFoundException < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive session key for an Amex payment card.</p>
@@ -1332,7 +1236,7 @@ module Aws::PaymentCryptographyData
       :primary_account_number,
       :pan_sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive a session key for Authorization Response Cryptogram (ARQC) verification.</p>
@@ -1359,7 +1263,7 @@ module Aws::PaymentCryptographyData
       :visa,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EmvCommon < SessionKeyDerivation; end
       class Mastercard < SessionKeyDerivation; end
@@ -1367,14 +1271,6 @@ module Aws::PaymentCryptographyData
       class Amex < SessionKeyDerivation; end
       class Visa < SessionKeyDerivation; end
       class Unknown < SessionKeyDerivation; end
-    end
-
-    module SessionKeyDerivationMode
-      EMV_COMMON_SESSION_KEY = 'EMV_COMMON_SESSION_KEY'
-      EMV2000 = 'EMV2000'
-      AMEX = 'AMEX'
-      MASTERCARD_SESSION_KEY = 'MASTERCARD_SESSION_KEY'
-      VISA = 'VISA'
     end
 
     # <p>Parameters to derive session key value using a MAC EMV algorithm.</p>
@@ -1389,7 +1285,7 @@ module Aws::PaymentCryptographyData
       :application_transaction_counter,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ApplicationCryptogram < SessionKeyDerivationValue; end
       class ApplicationTransactionCounter < SessionKeyDerivationValue; end
@@ -1411,7 +1307,7 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_transaction_counter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive session key for an Emv common payment card for ARQC verification.</p>
@@ -1429,7 +1325,7 @@ module Aws::PaymentCryptographyData
       :pan_sequence_number,
       :application_transaction_counter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive session key for Mastercard payment card for ARQC verification.</p>
@@ -1451,7 +1347,7 @@ module Aws::PaymentCryptographyData
       :application_transaction_counter,
       :unpredictable_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive session key for Visa payment card for ARQC verification.</p>
@@ -1465,7 +1361,7 @@ module Aws::PaymentCryptographyData
       :primary_account_number,
       :pan_sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters requried to encrypt plaintext data using symmetric keys.</p>
@@ -1483,19 +1379,7 @@ module Aws::PaymentCryptographyData
       :initialization_vector,
       :padding_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SymmetricKeyAlgorithm
-      TDES_2KEY = 'TDES_2KEY'
-      TDES_3KEY = 'TDES_3KEY'
-      AES_128 = 'AES_128'
-      AES_192 = 'AES_192'
-      AES_256 = 'AES_256'
-      HMAC_SHA256 = 'HMAC_SHA256'
-      HMAC_SHA384 = 'HMAC_SHA384'
-      HMAC_SHA512 = 'HMAC_SHA512'
-      HMAC_SHA224 = 'HMAC_SHA224'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1504,7 +1388,7 @@ module Aws::PaymentCryptographyData
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute incoming_key_identifier
@@ -1545,7 +1429,7 @@ module Aws::PaymentCryptographyData
       :incoming_wrapped_key,
       :outgoing_wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pin_block
@@ -1562,7 +1446,7 @@ module Aws::PaymentCryptographyData
       :key_arn,
       :key_check_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required for translation between ISO9564 PIN block formats 0,1,3,4.</p>
@@ -1585,7 +1469,7 @@ module Aws::PaymentCryptographyData
       :iso_format4,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IsoFormat0 < TranslationIsoFormats; end
       class IsoFormat1 < TranslationIsoFormats; end
@@ -1601,13 +1485,13 @@ module Aws::PaymentCryptographyData
     class TranslationPinDataIsoFormat034 < Struct.new(
       :primary_account_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required for ISO9564 PIN format 1 tranlation.</p>
     class TranslationPinDataIsoFormat1 < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to an invalid request error.</p>
@@ -1620,7 +1504,7 @@ module Aws::PaymentCryptographyData
       :message,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to an invalid request error.</p>
@@ -1634,7 +1518,7 @@ module Aws::PaymentCryptographyData
       :path,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request failed verification.</p>
@@ -1647,7 +1531,7 @@ module Aws::PaymentCryptographyData
       :reason,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -1676,7 +1560,7 @@ module Aws::PaymentCryptographyData
       :session_key_derivation_attributes,
       :auth_response_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -1693,7 +1577,7 @@ module Aws::PaymentCryptographyData
       :key_check_value,
       :auth_response_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -1714,7 +1598,7 @@ module Aws::PaymentCryptographyData
       :verification_attributes,
       :validation_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -1727,7 +1611,7 @@ module Aws::PaymentCryptographyData
       :key_arn,
       :key_check_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_identifier
@@ -1752,7 +1636,7 @@ module Aws::PaymentCryptographyData
       :verification_attributes,
       :mac_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_arn
@@ -1765,7 +1649,7 @@ module Aws::PaymentCryptographyData
       :key_arn,
       :key_check_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verification_key_identifier
@@ -1806,7 +1690,7 @@ module Aws::PaymentCryptographyData
       :dukpt_attributes,
       :encryption_wrapped_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute verification_key_arn
@@ -1827,7 +1711,7 @@ module Aws::PaymentCryptographyData
       :encryption_key_arn,
       :encryption_key_check_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The attributes values used for Amex and Visa derivation methods.</p>
@@ -1849,7 +1733,7 @@ module Aws::PaymentCryptographyData
       :current_pin_pek_arn,
       :current_pin_pek_key_check_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters to derive the confidentiality and integrity keys for a Visa payment card.</p>
@@ -1879,7 +1763,7 @@ module Aws::PaymentCryptographyData
       :authorization_request_key_identifier,
       :current_pin_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Visa PIN.</p>
@@ -1889,7 +1773,7 @@ module Aws::PaymentCryptographyData
     class VisaPin < Struct.new(
       :pin_verification_key_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Visa PIN.</p>
@@ -1903,7 +1787,7 @@ module Aws::PaymentCryptographyData
       :pin_verification_key_index,
       :verification_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters that are required to generate or verify Visa PVV (PIN Verification Value).</p>
@@ -1917,7 +1801,7 @@ module Aws::PaymentCryptographyData
       :encrypted_pin_block,
       :pin_verification_key_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
@@ -1931,7 +1815,7 @@ module Aws::PaymentCryptographyData
       :wrapped_key_material,
       :key_check_value_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter information of a WrappedKeyBlock for encryption key exchange.</p>
@@ -1946,7 +1830,7 @@ module Aws::PaymentCryptographyData
       :diffie_hellman_symmetric_key,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Tr31KeyBlock < WrappedKeyMaterial; end
       class DiffieHellmanSymmetricKey < WrappedKeyMaterial; end

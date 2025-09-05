@@ -45,7 +45,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a configuration for individual participant recording.</p>
@@ -85,7 +85,7 @@ module Aws::IVSRealTime
       :hls_configuration,
       :record_participant_replicas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:recording_reconnect_window_seconds] = 0 unless options.key?(:recording_reconnect_window_seconds)
@@ -107,7 +107,7 @@ module Aws::IVSRealTime
       :channel_arn,
       :encoder_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a Composition resource.</p>
@@ -153,7 +153,7 @@ module Aws::IVSRealTime
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a configuration of HLS recordings for server-side composition.</p>
@@ -163,10 +163,10 @@ module Aws::IVSRealTime
     class CompositionRecordingHlsConfiguration < Struct.new(
       :target_segment_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:target_segment_duration_seconds] =  unless options.key?(:target_segment_duration_seconds)
+        options[:target_segment_duration_seconds] = nil unless options.key?(:target_segment_duration_seconds)
         super
       end
     end
@@ -208,7 +208,7 @@ module Aws::IVSRealTime
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a configuration of thumbnails for recorded video for a <a>Composition</a>.</p>
@@ -229,7 +229,7 @@ module Aws::IVSRealTime
       :target_interval_seconds,
       :storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -271,7 +271,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -293,7 +293,7 @@ module Aws::IVSRealTime
       :video,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encoder_configuration
@@ -302,7 +302,7 @@ module Aws::IVSRealTime
     class CreateEncoderConfigurationResponse < Struct.new(
       :encoder_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -343,7 +343,7 @@ module Aws::IVSRealTime
       :insecure_ingest,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingest_configuration
@@ -352,7 +352,7 @@ module Aws::IVSRealTime
     class CreateIngestConfigurationResponse < Struct.new(
       :ingest_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -385,7 +385,7 @@ module Aws::IVSRealTime
       :attributes,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute participant_token
@@ -394,7 +394,7 @@ module Aws::IVSRealTime
     class CreateParticipantTokenOutput < Struct.new(
       :participant_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -419,7 +419,7 @@ module Aws::IVSRealTime
       :tags,
       :auto_participant_recording_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage
@@ -433,7 +433,7 @@ module Aws::IVSRealTime
       :stage,
       :participant_tokens,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -454,7 +454,7 @@ module Aws::IVSRealTime
       :s3,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_configuration
@@ -463,7 +463,7 @@ module Aws::IVSRealTime
     class CreateStorageConfigurationResponse < Struct.new(
       :storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -472,12 +472,12 @@ module Aws::IVSRealTime
     class DeleteEncoderConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEncoderConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -490,12 +490,12 @@ module Aws::IVSRealTime
       :arn,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIngestConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -504,12 +504,12 @@ module Aws::IVSRealTime
     class DeletePublicKeyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePublicKeyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -518,12 +518,12 @@ module Aws::IVSRealTime
     class DeleteStageInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStageOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -532,12 +532,12 @@ module Aws::IVSRealTime
     class DeleteStorageConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteStorageConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying the status of a Destination.</p>
@@ -569,7 +569,7 @@ module Aws::IVSRealTime
       :configuration,
       :detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Complex data type that defines destination-configuration objects.</p>
@@ -589,7 +589,7 @@ module Aws::IVSRealTime
       :channel,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Complex data type that defines destination-detail objects.</p>
@@ -599,7 +599,7 @@ module Aws::IVSRealTime
     class DestinationDetail < Struct.new(
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a Destination.</p>
@@ -623,7 +623,7 @@ module Aws::IVSRealTime
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -642,12 +642,12 @@ module Aws::IVSRealTime
       :participant_id,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisconnectParticipantOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for transcoding.</p>
@@ -674,7 +674,7 @@ module Aws::IVSRealTime
       :video,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an EncoderConfiguration.</p>
@@ -696,7 +696,7 @@ module Aws::IVSRealTime
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An occurrence during a stage session.</p>
@@ -824,29 +824,12 @@ module Aws::IVSRealTime
       :destination_session_id,
       :replica,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:replica] = false unless options.key?(:replica)
         super
       end
-    end
-
-    module EventErrorCode
-      INSUFFICIENT_CAPABILITIES = 'INSUFFICIENT_CAPABILITIES'
-      QUOTA_EXCEEDED = 'QUOTA_EXCEEDED'
-      PUBLISHER_NOT_FOUND = 'PUBLISHER_NOT_FOUND'
-      BITRATE_EXCEEDED = 'BITRATE_EXCEEDED'
-      RESOLUTION_EXCEEDED = 'RESOLUTION_EXCEEDED'
-      STREAM_DURATION_EXCEEDED = 'STREAM_DURATION_EXCEEDED'
-      INVALID_AUDIO_CODEC = 'INVALID_AUDIO_CODEC'
-      INVALID_VIDEO_CODEC = 'INVALID_VIDEO_CODEC'
-      INVALID_PROTOCOL = 'INVALID_PROTOCOL'
-      INVALID_STREAM_KEY = 'INVALID_STREAM_KEY'
-      REUSE_OF_STREAM_KEY = 'REUSE_OF_STREAM_KEY'
-      B_FRAME_PRESENT = 'B_FRAME_PRESENT'
-      INVALID_INPUT = 'INVALID_INPUT'
-      INTERNAL_SERVER_EXCEPTION = 'INTERNAL_SERVER_EXCEPTION'
     end
 
     # @!attribute arn
@@ -855,7 +838,7 @@ module Aws::IVSRealTime
     class GetCompositionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute composition
@@ -864,7 +847,7 @@ module Aws::IVSRealTime
     class GetCompositionResponse < Struct.new(
       :composition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -873,7 +856,7 @@ module Aws::IVSRealTime
     class GetEncoderConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encoder_configuration
@@ -882,7 +865,7 @@ module Aws::IVSRealTime
     class GetEncoderConfigurationResponse < Struct.new(
       :encoder_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -891,7 +874,7 @@ module Aws::IVSRealTime
     class GetIngestConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingest_configuration
@@ -900,7 +883,7 @@ module Aws::IVSRealTime
     class GetIngestConfigurationResponse < Struct.new(
       :ingest_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -917,7 +900,7 @@ module Aws::IVSRealTime
       :session_id,
       :participant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute participant
@@ -926,7 +909,7 @@ module Aws::IVSRealTime
     class GetParticipantResponse < Struct.new(
       :participant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -935,7 +918,7 @@ module Aws::IVSRealTime
     class GetPublicKeyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key
@@ -944,7 +927,7 @@ module Aws::IVSRealTime
     class GetPublicKeyResponse < Struct.new(
       :public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -953,7 +936,7 @@ module Aws::IVSRealTime
     class GetStageInput < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage
@@ -962,7 +945,7 @@ module Aws::IVSRealTime
     class GetStageOutput < Struct.new(
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -975,7 +958,7 @@ module Aws::IVSRealTime
       :stage_arn,
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_session
@@ -984,7 +967,7 @@ module Aws::IVSRealTime
     class GetStageSessionResponse < Struct.new(
       :stage_session,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -993,7 +976,7 @@ module Aws::IVSRealTime
     class GetStorageConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_configuration
@@ -1002,7 +985,7 @@ module Aws::IVSRealTime
     class GetStorageConfigurationResponse < Struct.new(
       :storage_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information specific to Grid layout, for server-side composition. See
@@ -1039,7 +1022,7 @@ module Aws::IVSRealTime
       :video_fill_mode,
       :grid_gap,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:omit_stopped_video] = false unless options.key?(:omit_stopped_video)
@@ -1066,7 +1049,7 @@ module Aws::IVSRealTime
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_key
@@ -1075,7 +1058,7 @@ module Aws::IVSRealTime
     class ImportPublicKeyResponse < Struct.new(
       :public_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying an ingest configuration.</p>
@@ -1136,7 +1119,7 @@ module Aws::IVSRealTime
       :attributes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about an IngestConfiguration.</p>
@@ -1176,12 +1159,7 @@ module Aws::IVSRealTime
       :state,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestProtocol
-      RTMP = 'RTMP'
-      RTMPS = 'RTMPS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1223,7 +1201,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information of supported layouts for server-side composition.</p>
@@ -1237,7 +1215,7 @@ module Aws::IVSRealTime
       :grid,
       :pip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_by_stage_arn
@@ -1260,7 +1238,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compositions
@@ -1274,7 +1252,7 @@ module Aws::IVSRealTime
       :compositions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1288,7 +1266,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encoder_configurations
@@ -1302,7 +1280,7 @@ module Aws::IVSRealTime
       :encoder_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_by_stage_arn
@@ -1323,7 +1301,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingest_configurations
@@ -1336,7 +1314,7 @@ module Aws::IVSRealTime
       :ingest_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -1362,7 +1340,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -1376,7 +1354,7 @@ module Aws::IVSRealTime
       :events,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_stage_arn
@@ -1399,7 +1377,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replicas
@@ -1412,7 +1390,7 @@ module Aws::IVSRealTime
       :replicas,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -1461,7 +1439,7 @@ module Aws::IVSRealTime
       :max_results,
       :filter_by_recording_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute participants
@@ -1475,7 +1453,7 @@ module Aws::IVSRealTime
       :participants,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1488,7 +1466,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute public_keys
@@ -1501,7 +1479,7 @@ module Aws::IVSRealTime
       :public_keys,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -1519,7 +1497,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_sessions
@@ -1533,7 +1511,7 @@ module Aws::IVSRealTime
       :stage_sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1547,7 +1525,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stages
@@ -1561,7 +1539,7 @@ module Aws::IVSRealTime
       :stages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1576,7 +1554,7 @@ module Aws::IVSRealTime
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute storage_configurations
@@ -1590,7 +1568,7 @@ module Aws::IVSRealTime
       :storage_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1599,7 +1577,7 @@ module Aws::IVSRealTime
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1609,7 +1587,7 @@ module Aws::IVSRealTime
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object describing a participant that has joined a stage.</p>
@@ -1711,19 +1689,12 @@ module Aws::IVSRealTime
       :source_stage_arn,
       :source_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:published] = false unless options.key?(:published)
         super
       end
-    end
-
-    module ParticipantProtocol
-      UNKNOWN = 'UNKNOWN'
-      WHIP = 'WHIP'
-      RTMP = 'RTMP'
-      RTMPS = 'RTMPS'
     end
 
     # <p>An object representing a configuration of participant HLS recordings for individual participant recording.</p>
@@ -1735,18 +1706,12 @@ module Aws::IVSRealTime
     class ParticipantRecordingHlsConfiguration < Struct.new(
       :target_segment_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:target_segment_duration_seconds] =  unless options.key?(:target_segment_duration_seconds)
+        options[:target_segment_duration_seconds] = nil unless options.key?(:target_segment_duration_seconds)
         super
       end
-    end
-
-    module ParticipantRecordingMediaType
-      AUDIO_VIDEO = 'AUDIO_VIDEO'
-      AUDIO_ONLY = 'AUDIO_ONLY'
-      NONE = 'NONE'
     end
 
     # <p>Information about the replicated destination stage for a participant.</p>
@@ -1779,7 +1744,7 @@ module Aws::IVSRealTime
       :destination_session_id,
       :replication_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary object describing a participant that has joined a stage.</p>
@@ -1829,7 +1794,7 @@ module Aws::IVSRealTime
       :source_stage_arn,
       :source_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:published] = false unless options.key?(:published)
@@ -1859,7 +1824,7 @@ module Aws::IVSRealTime
       :storage,
       :recording_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a participant token in a stage.</p>
@@ -1905,7 +1870,7 @@ module Aws::IVSRealTime
       :capabilities,
       :expiration_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a participant token configuration in a stage.</p>
@@ -1937,7 +1902,7 @@ module Aws::IVSRealTime
       :attributes,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1979,12 +1944,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PipBehavior
-      STATIC = 'STATIC'
-      DYNAMIC = 'DYNAMIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information specific to Picture-in-Picture (PiP) layout, for <a href="https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html">server-side composition</a>. </p>
@@ -2045,7 +2005,7 @@ module Aws::IVSRealTime
       :pip_width,
       :pip_height,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:omit_stopped_video] = false unless options.key?(:omit_stopped_video)
@@ -2053,13 +2013,6 @@ module Aws::IVSRealTime
         options[:pip_offset] = 0 unless options.key?(:pip_offset)
         super
       end
-    end
-
-    module PipPosition
-      TOP_LEFT = 'TOP_LEFT'
-      TOP_RIGHT = 'TOP_RIGHT'
-      BOTTOM_LEFT = 'BOTTOM_LEFT'
-      BOTTOM_RIGHT = 'BOTTOM_RIGHT'
     end
 
     # <p>Object specifying a public key used to sign stage participant tokens.</p>
@@ -2090,7 +2043,7 @@ module Aws::IVSRealTime
       :fingerprint,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a public key.</p>
@@ -2112,7 +2065,7 @@ module Aws::IVSRealTime
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a configuration to record a stage stream.</p>
@@ -2126,7 +2079,7 @@ module Aws::IVSRealTime
       :hls_configuration,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2168,7 +2121,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes an S3 location where recorded videos will be
@@ -2196,7 +2149,7 @@ module Aws::IVSRealTime
       :recording_configuration,
       :thumbnail_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Complex data type that defines S3Detail objects.</p>
@@ -2206,7 +2159,7 @@ module Aws::IVSRealTime
     class S3Detail < Struct.new(
       :recording_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes an S3 location where recorded videos will be
@@ -2218,7 +2171,7 @@ module Aws::IVSRealTime
     class S3StorageConfiguration < Struct.new(
       :bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2260,7 +2213,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object specifying a stage.</p>
@@ -2294,7 +2247,7 @@ module Aws::IVSRealTime
       :auto_participant_recording_configuration,
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about various endpoints for a stage. We recommend that you cache
@@ -2317,7 +2270,7 @@ module Aws::IVSRealTime
       :rtmp,
       :rtmps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A stage session begins when the first participant joins a stage and ends after the last
@@ -2339,7 +2292,7 @@ module Aws::IVSRealTime
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a stage session.</p>
@@ -2358,7 +2311,7 @@ module Aws::IVSRealTime
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a stage.</p>
@@ -2384,7 +2337,7 @@ module Aws::IVSRealTime
       :active_session_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage_arn
@@ -2413,7 +2366,7 @@ module Aws::IVSRealTime
       :destinations,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute composition
@@ -2422,7 +2375,7 @@ module Aws::IVSRealTime
     class StartCompositionResponse < Struct.new(
       :composition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_stage_arn
@@ -2457,7 +2410,7 @@ module Aws::IVSRealTime
       :reconnect_window_seconds,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_control_allow_origin
@@ -2490,7 +2443,7 @@ module Aws::IVSRealTime
       :x_content_type_options,
       :x_frame_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2499,12 +2452,12 @@ module Aws::IVSRealTime
     class StopCompositionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopCompositionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_stage_arn
@@ -2524,7 +2477,7 @@ module Aws::IVSRealTime
       :destination_stage_arn,
       :participant_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_control_allow_origin
@@ -2557,7 +2510,7 @@ module Aws::IVSRealTime
       :x_content_type_options,
       :x_frame_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that describes a location where recorded videos will be stored.</p>
@@ -2583,7 +2536,7 @@ module Aws::IVSRealTime
       :s3,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a storage configuration.</p>
@@ -2609,7 +2562,7 @@ module Aws::IVSRealTime
       :s3,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2626,22 +2579,12 @@ module Aws::IVSRealTime
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThumbnailRecordingMode
-      INTERVAL = 'INTERVAL'
-      DISABLED = 'DISABLED'
-    end
-
-    module ThumbnailStorageType
-      SEQUENTIAL = 'SEQUENTIAL'
-      LATEST = 'LATEST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2658,12 +2601,12 @@ module Aws::IVSRealTime
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2676,7 +2619,7 @@ module Aws::IVSRealTime
       :arn,
       :stage_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingest_configuration
@@ -2685,7 +2628,7 @@ module Aws::IVSRealTime
     class UpdateIngestConfigurationResponse < Struct.new(
       :ingest_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2702,7 +2645,7 @@ module Aws::IVSRealTime
       :name,
       :auto_participant_recording_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stage
@@ -2711,7 +2654,7 @@ module Aws::IVSRealTime
     class UpdateStageOutput < Struct.new(
       :stage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2753,7 +2696,7 @@ module Aws::IVSRealTime
       :x_amzn_error_type,
       :exception_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for video.</p>
@@ -2779,20 +2722,7 @@ module Aws::IVSRealTime
       :framerate,
       :bitrate,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VideoAspectRatio
-      AUTO = 'AUTO'
-      VIDEO = 'VIDEO'
-      SQUARE = 'SQUARE'
-      PORTRAIT = 'PORTRAIT'
-    end
-
-    module VideoFillMode
-      FILL = 'FILL'
-      COVER = 'COVER'
-      CONTAIN = 'CONTAIN'
+      include ::Smithy::Schema::Structure
     end
 
   end

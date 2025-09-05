@@ -28,7 +28,7 @@ module Aws::WAFV2
       :creation_timestamp,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version] = 0 unless options.key?(:version)
@@ -89,7 +89,7 @@ module Aws::WAFV2
       :response_inspection,
       :enable_regex_in_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_regex_in_path] = false unless options.key?(:enable_regex_in_path)
@@ -128,7 +128,7 @@ module Aws::WAFV2
       :response_inspection,
       :enable_regex_in_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_regex_in_path] = false unless options.key?(:enable_regex_in_path)
@@ -168,7 +168,7 @@ module Aws::WAFV2
       :client_side_action_config,
       :sensitivity_to_block,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for your use of the Bot Control managed rule group, <code>AWSManagedRulesBotControlRuleSet</code>. This configuration is used in <code>ManagedRuleGroupConfig</code>. </p>
@@ -196,7 +196,7 @@ module Aws::WAFV2
       :inspection_level,
       :enable_machine_learning,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enable_machine_learning] = true unless options.key?(:enable_machine_learning)
@@ -214,16 +214,7 @@ module Aws::WAFV2
     class ActionCondition < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionValue
-      ALLOW = 'ALLOW'
-      BLOCK = 'BLOCK'
-      COUNT = 'COUNT'
-      CAPTCHA = 'CAPTCHA'
-      CHALLENGE = 'CHALLENGE'
-      EXCLUDED_AS_COUNT = 'EXCLUDED_AS_COUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of a field in the request payload that contains part or all of your customer's primary physical address. </p>
@@ -251,7 +242,7 @@ module Aws::WAFV2
     class AddressField < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect all of the elements that WAF has parsed and extracted from the web request
@@ -261,7 +252,7 @@ module Aws::WAFV2
     #          </p>
     class All < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect all query arguments of the web request. </p>
@@ -270,7 +261,7 @@ module Aws::WAFV2
     #          </p>
     class AllQueryArguments < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that WAF should allow the request and optionally defines additional
@@ -285,7 +276,7 @@ module Aws::WAFV2
     class AllowAction < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical rule statement used to combine other rule statements with AND logic. You provide more than one <a>Statement</a> within the <code>AndStatement</code>. </p>
@@ -296,7 +287,7 @@ module Aws::WAFV2
     class AndStatement < Struct.new(
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application details defined during the web ACL creation process. Application attributes help WAF give recommendations for protection packs.</p>
@@ -310,7 +301,7 @@ module Aws::WAFV2
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of <code>ApplicationAttribute</code>s that contains information about the application.</p>
@@ -320,7 +311,7 @@ module Aws::WAFV2
     class ApplicationConfig < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement that inspects web traffic based on the Autonomous System Number (ASN) associated with the request's IP address.</p>
@@ -339,7 +330,7 @@ module Aws::WAFV2
       :asn_list,
       :forwarded_ip_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_arn
@@ -391,20 +382,12 @@ module Aws::WAFV2
       :web_acl_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateWebACLResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociatedResourceType
-      CLOUDFRONT = 'CLOUDFRONT'
-      API_GATEWAY = 'API_GATEWAY'
-      COGNITO_USER_POOL = 'COGNITO_USER_POOL'
-      APP_RUNNER_SERVICE = 'APP_RUNNER_SERVICE'
-      VERIFIED_ACCESS_INSTANCE = 'VERIFIED_ACCESS_INSTANCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>
@@ -429,7 +412,7 @@ module Aws::WAFV2
     class AssociationConfig < Struct.new(
       :request_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that WAF should block the request and optionally defines additional
@@ -444,7 +427,7 @@ module Aws::WAFV2
     class BlockAction < Struct.new(
       :custom_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect the body of the web request. The body immediately follows the request
@@ -492,13 +475,7 @@ module Aws::WAFV2
     class Body < Struct.new(
       :oversize_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BodyParsingFallbackBehavior
-      MATCH = 'MATCH'
-      NO_MATCH = 'NO_MATCH'
-      EVALUATE_AS_STRING = 'EVALUATE_AS_STRING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement that defines a string match search for WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the WAF console and the developer guide, this is called a string match statement.</p>
@@ -610,7 +587,7 @@ module Aws::WAFV2
       :text_transformations,
       :positional_constraint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that WAF should run a <code>CAPTCHA</code> check against the request: </p>
@@ -650,7 +627,7 @@ module Aws::WAFV2
     class CaptchaAction < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how WAF should handle <code>CAPTCHA</code> evaluations. This is
@@ -662,7 +639,7 @@ module Aws::WAFV2
     class CaptchaConfig < Struct.new(
       :immunity_time_property,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result from the inspection of the web request for a valid <code>CAPTCHA</code> token. </p>
@@ -682,7 +659,7 @@ module Aws::WAFV2
       :solve_timestamp,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that WAF should run a <code>Challenge</code> check against the request to verify that the request is coming from a legitimate client session: </p>
@@ -726,7 +703,7 @@ module Aws::WAFV2
     class ChallengeAction < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies how WAF should handle <code>Challenge</code> evaluations. This is
@@ -738,7 +715,7 @@ module Aws::WAFV2
     class ChallengeConfig < Struct.new(
       :immunity_time_property,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result from the inspection of the web request for a valid challenge token. </p>
@@ -757,7 +734,7 @@ module Aws::WAFV2
       :solve_timestamp,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -780,7 +757,7 @@ module Aws::WAFV2
       :scope,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute capacity
@@ -789,7 +766,7 @@ module Aws::WAFV2
     class CheckCapacityResponse < Struct.new(
       :capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:capacity] = 0 unless options.key?(:capacity)
@@ -879,7 +856,7 @@ module Aws::WAFV2
       :sensitivity,
       :exempt_uri_regular_expressions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is part of the configuration for the managed rules <code>AWSManagedRulesAntiDDoSRuleSet</code> 
@@ -895,16 +872,7 @@ module Aws::WAFV2
     class ClientSideActionConfig < Struct.new(
       :challenge,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonOperator
-      EQ = 'EQ'
-      NE = 'NE'
-      LE = 'LE'
-      LT = 'LT'
-      GE = 'GE'
-      GT = 'GT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single match condition for a <a>Filter</a>.</p>
@@ -919,7 +887,7 @@ module Aws::WAFV2
       :action_condition,
       :label_name_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter to use to identify the subset of cookies to inspect in a web request. </p>
@@ -942,7 +910,7 @@ module Aws::WAFV2
       :included_cookies,
       :excluded_cookies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect the cookies in the web request. You can specify the parts of the cookies to
@@ -995,7 +963,7 @@ module Aws::WAFV2
       :match_scope,
       :oversize_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that WAF should count the request. Optionally defines additional custom
@@ -1010,260 +978,7 @@ module Aws::WAFV2
     class CountAction < Struct.new(
       :custom_request_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CountryCode
-      AF = 'AF'
-      AX = 'AX'
-      AL = 'AL'
-      DZ = 'DZ'
-      AS = 'AS'
-      AD = 'AD'
-      AO = 'AO'
-      AI = 'AI'
-      AQ = 'AQ'
-      AG = 'AG'
-      AR = 'AR'
-      AM = 'AM'
-      AW = 'AW'
-      AU = 'AU'
-      AT = 'AT'
-      AZ = 'AZ'
-      BS = 'BS'
-      BH = 'BH'
-      BD = 'BD'
-      BB = 'BB'
-      BY = 'BY'
-      BE = 'BE'
-      BZ = 'BZ'
-      BJ = 'BJ'
-      BM = 'BM'
-      BT = 'BT'
-      BO = 'BO'
-      BQ = 'BQ'
-      BA = 'BA'
-      BW = 'BW'
-      BV = 'BV'
-      BR = 'BR'
-      IO = 'IO'
-      BN = 'BN'
-      BG = 'BG'
-      BF = 'BF'
-      BI = 'BI'
-      KH = 'KH'
-      CM = 'CM'
-      CA = 'CA'
-      CV = 'CV'
-      KY = 'KY'
-      CF = 'CF'
-      TD = 'TD'
-      CL = 'CL'
-      CN = 'CN'
-      CX = 'CX'
-      CC = 'CC'
-      CO = 'CO'
-      KM = 'KM'
-      CG = 'CG'
-      CD = 'CD'
-      CK = 'CK'
-      CR = 'CR'
-      CI = 'CI'
-      HR = 'HR'
-      CU = 'CU'
-      CW = 'CW'
-      CY = 'CY'
-      CZ = 'CZ'
-      DK = 'DK'
-      DJ = 'DJ'
-      DM = 'DM'
-      DO = 'DO'
-      EC = 'EC'
-      EG = 'EG'
-      SV = 'SV'
-      GQ = 'GQ'
-      ER = 'ER'
-      EE = 'EE'
-      ET = 'ET'
-      FK = 'FK'
-      FO = 'FO'
-      FJ = 'FJ'
-      FI = 'FI'
-      FR = 'FR'
-      GF = 'GF'
-      PF = 'PF'
-      TF = 'TF'
-      GA = 'GA'
-      GM = 'GM'
-      GE = 'GE'
-      DE = 'DE'
-      GH = 'GH'
-      GI = 'GI'
-      GR = 'GR'
-      GL = 'GL'
-      GD = 'GD'
-      GP = 'GP'
-      GU = 'GU'
-      GT = 'GT'
-      GG = 'GG'
-      GN = 'GN'
-      GW = 'GW'
-      GY = 'GY'
-      HT = 'HT'
-      HM = 'HM'
-      VA = 'VA'
-      HN = 'HN'
-      HK = 'HK'
-      HU = 'HU'
-      IS = 'IS'
-      IN = 'IN'
-      ID = 'ID'
-      IR = 'IR'
-      IQ = 'IQ'
-      IE = 'IE'
-      IM = 'IM'
-      IL = 'IL'
-      IT = 'IT'
-      JM = 'JM'
-      JP = 'JP'
-      JE = 'JE'
-      JO = 'JO'
-      KZ = 'KZ'
-      KE = 'KE'
-      KI = 'KI'
-      KP = 'KP'
-      KR = 'KR'
-      KW = 'KW'
-      KG = 'KG'
-      LA = 'LA'
-      LV = 'LV'
-      LB = 'LB'
-      LS = 'LS'
-      LR = 'LR'
-      LY = 'LY'
-      LI = 'LI'
-      LT = 'LT'
-      LU = 'LU'
-      MO = 'MO'
-      MK = 'MK'
-      MG = 'MG'
-      MW = 'MW'
-      MY = 'MY'
-      MV = 'MV'
-      ML = 'ML'
-      MT = 'MT'
-      MH = 'MH'
-      MQ = 'MQ'
-      MR = 'MR'
-      MU = 'MU'
-      YT = 'YT'
-      MX = 'MX'
-      FM = 'FM'
-      MD = 'MD'
-      MC = 'MC'
-      MN = 'MN'
-      ME = 'ME'
-      MS = 'MS'
-      MA = 'MA'
-      MZ = 'MZ'
-      MM = 'MM'
-      NA = 'NA'
-      NR = 'NR'
-      NP = 'NP'
-      NL = 'NL'
-      NC = 'NC'
-      NZ = 'NZ'
-      NI = 'NI'
-      NE = 'NE'
-      NG = 'NG'
-      NU = 'NU'
-      NF = 'NF'
-      MP = 'MP'
-      NO = 'NO'
-      OM = 'OM'
-      PK = 'PK'
-      PW = 'PW'
-      PS = 'PS'
-      PA = 'PA'
-      PG = 'PG'
-      PY = 'PY'
-      PE = 'PE'
-      PH = 'PH'
-      PN = 'PN'
-      PL = 'PL'
-      PT = 'PT'
-      PR = 'PR'
-      QA = 'QA'
-      RE = 'RE'
-      RO = 'RO'
-      RU = 'RU'
-      RW = 'RW'
-      BL = 'BL'
-      SH = 'SH'
-      KN = 'KN'
-      LC = 'LC'
-      MF = 'MF'
-      PM = 'PM'
-      VC = 'VC'
-      WS = 'WS'
-      SM = 'SM'
-      ST = 'ST'
-      SA = 'SA'
-      SN = 'SN'
-      RS = 'RS'
-      SC = 'SC'
-      SL = 'SL'
-      SG = 'SG'
-      SX = 'SX'
-      SK = 'SK'
-      SI = 'SI'
-      SB = 'SB'
-      SO = 'SO'
-      ZA = 'ZA'
-      GS = 'GS'
-      SS = 'SS'
-      ES = 'ES'
-      LK = 'LK'
-      SD = 'SD'
-      SR = 'SR'
-      SJ = 'SJ'
-      SZ = 'SZ'
-      SE = 'SE'
-      CH = 'CH'
-      SY = 'SY'
-      TW = 'TW'
-      TJ = 'TJ'
-      TZ = 'TZ'
-      TH = 'TH'
-      TL = 'TL'
-      TG = 'TG'
-      TK = 'TK'
-      TO = 'TO'
-      TT = 'TT'
-      TN = 'TN'
-      TR = 'TR'
-      TM = 'TM'
-      TC = 'TC'
-      TV = 'TV'
-      UG = 'UG'
-      UA = 'UA'
-      AE = 'AE'
-      GB = 'GB'
-      US = 'US'
-      UM = 'UM'
-      UY = 'UY'
-      UZ = 'UZ'
-      VU = 'VU'
-      VE = 'VE'
-      VN = 'VN'
-      VG = 'VG'
-      VI = 'VI'
-      WF = 'WF'
-      EH = 'EH'
-      YE = 'YE'
-      ZM = 'ZM'
-      ZW = 'ZW'
-      XK = 'XK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -1288,7 +1003,7 @@ module Aws::WAFV2
       :scope,
       :token_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute api_key
@@ -1297,7 +1012,7 @@ module Aws::WAFV2
     class CreateAPIKeyResponse < Struct.new(
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1370,7 +1085,7 @@ module Aws::WAFV2
       :addresses,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1379,7 +1094,7 @@ module Aws::WAFV2
     class CreateIPSetResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1413,7 +1128,7 @@ module Aws::WAFV2
       :regular_expression_list,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1422,7 +1137,7 @@ module Aws::WAFV2
     class CreateRegexPatternSetResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1487,7 +1202,7 @@ module Aws::WAFV2
       :tags,
       :custom_response_bodies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1496,7 +1211,7 @@ module Aws::WAFV2
     class CreateRuleGroupResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1591,7 +1306,7 @@ module Aws::WAFV2
       :on_source_d_do_s_protection_config,
       :application_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute summary
@@ -1600,7 +1315,7 @@ module Aws::WAFV2
     class CreateWebACLResponse < Struct.new(
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom header for custom request and response handling. This is used in <a>CustomResponse</a> and <a>CustomRequestHandling</a>.</p>
@@ -1618,7 +1333,7 @@ module Aws::WAFV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Custom request handling behavior that inserts custom headers into a web request. You can
@@ -1635,7 +1350,7 @@ module Aws::WAFV2
     class CustomRequestHandling < Struct.new(
       :insert_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom response to send to the client. You can define a custom response for rule
@@ -1666,7 +1381,7 @@ module Aws::WAFV2
       :custom_response_body_key,
       :response_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response body to use in a custom response to a web request. This is referenced by
@@ -1687,7 +1402,7 @@ module Aws::WAFV2
       :content_type,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the protection behavior for a field type. This is part of the data protection configuration for a web ACL. </p>
@@ -1729,18 +1444,13 @@ module Aws::WAFV2
       :exclude_rule_match_details,
       :exclude_rate_based_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exclude_rule_match_details] = false unless options.key?(:exclude_rule_match_details)
         options[:exclude_rate_based_details] = false unless options.key?(:exclude_rate_based_details)
         super
       end
-    end
-
-    module DataProtectionAction
-      SUBSTITUTION = 'SUBSTITUTION'
-      HASH = 'HASH'
     end
 
     # <p>Specifies data protection to apply to the web request data for the web ACL. This is a web ACL level data protection option. </p>
@@ -1754,7 +1464,7 @@ module Aws::WAFV2
     class DataProtectionConfig < Struct.new(
       :data_protections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In a <a>WebACL</a>, this is the action that you want WAF to perform
@@ -1770,7 +1480,7 @@ module Aws::WAFV2
       :block,
       :allow,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -1792,12 +1502,12 @@ module Aws::WAFV2
       :scope,
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAPIKeyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_arn
@@ -1810,7 +1520,7 @@ module Aws::WAFV2
       :web_acl_arn,
       :web_acl_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_web_acl_lock_token
@@ -1819,7 +1529,7 @@ module Aws::WAFV2
     class DeleteFirewallManagerRuleGroupsResponse < Struct.new(
       :next_web_acl_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1849,12 +1559,12 @@ module Aws::WAFV2
       :id,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIPSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1878,12 +1588,12 @@ module Aws::WAFV2
       :log_type,
       :log_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLoggingConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1894,12 +1604,12 @@ module Aws::WAFV2
     class DeletePermissionPolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePermissionPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1929,12 +1639,12 @@ module Aws::WAFV2
       :id,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRegexPatternSetResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1964,12 +1674,12 @@ module Aws::WAFV2
       :id,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRuleGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1999,12 +1709,12 @@ module Aws::WAFV2
       :id,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWebACLResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -2022,7 +1732,7 @@ module Aws::WAFV2
     class DescribeAllManagedProductsRequest < Struct.new(
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_products
@@ -2031,7 +1741,7 @@ module Aws::WAFV2
     class DescribeAllManagedProductsResponse < Struct.new(
       :managed_products,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vendor_name
@@ -2053,7 +1763,7 @@ module Aws::WAFV2
       :vendor_name,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_products
@@ -2062,7 +1772,7 @@ module Aws::WAFV2
     class DescribeManagedProductsByVendorResponse < Struct.new(
       :managed_products,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vendor_name
@@ -2093,7 +1803,7 @@ module Aws::WAFV2
       :scope,
       :version_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version_name
@@ -2150,7 +1860,7 @@ module Aws::WAFV2
       :available_labels,
       :consumed_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2197,12 +1907,12 @@ module Aws::WAFV2
     class DisassociateWebACLRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateWebACLResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the field in the request payload that contains your customer's email. </p>
@@ -2230,7 +1940,7 @@ module Aws::WAFV2
     class EmailField < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a single rule in a rule group whose action you want to override to <code>Count</code>. </p>
@@ -2243,19 +1953,7 @@ module Aws::WAFV2
     class ExcludedRule < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailureReason
-      TOKEN_MISSING = 'TOKEN_MISSING'
-      TOKEN_EXPIRED = 'TOKEN_EXPIRED'
-      TOKEN_INVALID = 'TOKEN_INVALID'
-      TOKEN_DOMAIN_MISMATCH = 'TOKEN_DOMAIN_MISMATCH'
-    end
-
-    module FallbackBehavior
-      MATCH = 'MATCH'
-      NO_MATCH = 'NO_MATCH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a web request component to be used in a rule match statement or in a logging configuration. </p>
@@ -2452,7 +2150,7 @@ module Aws::WAFV2
       :ja4_fingerprint,
       :uri_fragment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a field type and keys to protect in stored web request data. This is part of the data protection configuration for a web ACL. </p>
@@ -2466,15 +2164,7 @@ module Aws::WAFV2
       :field_type,
       :field_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FieldToProtectType
-      SINGLE_HEADER = 'SINGLE_HEADER'
-      SINGLE_COOKIE = 'SINGLE_COOKIE'
-      SINGLE_QUERY_ARGUMENT = 'SINGLE_QUERY_ARGUMENT'
-      QUERY_STRING = 'QUERY_STRING'
-      BODY = 'BODY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single logging filter, used in <a>LoggingFilter</a>. </p>
@@ -2493,17 +2183,7 @@ module Aws::WAFV2
       :requirement,
       :conditions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterBehavior
-      KEEP = 'KEEP'
-      DROP = 'DROP'
-    end
-
-    module FilterRequirement
-      MEETS_ALL = 'MEETS_ALL'
-      MEETS_ANY = 'MEETS_ANY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule group that's defined for an Firewall Manager WAF policy.</p>
@@ -2537,7 +2217,7 @@ module Aws::WAFV2
       :override_action,
       :visibility_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
@@ -2556,7 +2236,7 @@ module Aws::WAFV2
       :managed_rule_group_statement,
       :rule_group_reference_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for inspecting IP addresses in an HTTP header that you specify, instead of using the IP address that's reported by the web request origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify any header name. </p>
@@ -2594,13 +2274,7 @@ module Aws::WAFV2
       :header_name,
       :fallback_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ForwardedIPPosition
-      FIRST = 'FIRST'
-      LAST = 'LAST'
-      ANY = 'ANY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform
@@ -2614,7 +2288,7 @@ module Aws::WAFV2
       :platform,
       :release_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -2623,7 +2297,7 @@ module Aws::WAFV2
     class GenerateMobileSdkReleaseUrlResponse < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement that labels web requests by country and region and that matches against web requests based on country code. A geo match rule labels every request that it inspects regardless of whether it finds a match.</p>
@@ -2654,7 +2328,7 @@ module Aws::WAFV2
       :country_codes,
       :forwarded_ip_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -2676,7 +2350,7 @@ module Aws::WAFV2
       :scope,
       :api_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_domains
@@ -2689,7 +2363,7 @@ module Aws::WAFV2
       :token_domains,
       :creation_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2715,7 +2389,7 @@ module Aws::WAFV2
       :scope,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_set
@@ -2728,7 +2402,7 @@ module Aws::WAFV2
       :ip_set,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2752,7 +2426,7 @@ module Aws::WAFV2
       :log_type,
       :log_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -2761,7 +2435,7 @@ module Aws::WAFV2
     class GetLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2788,7 +2462,7 @@ module Aws::WAFV2
       :scope,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_rule_set
@@ -2801,7 +2475,7 @@ module Aws::WAFV2
       :managed_rule_set,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform
@@ -2815,7 +2489,7 @@ module Aws::WAFV2
       :platform,
       :release_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute mobile_sdk_release
@@ -2824,7 +2498,7 @@ module Aws::WAFV2
     class GetMobileSdkReleaseResponse < Struct.new(
       :mobile_sdk_release,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2834,7 +2508,7 @@ module Aws::WAFV2
     class GetPermissionPolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2843,7 +2517,7 @@ module Aws::WAFV2
     class GetPermissionPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -2880,7 +2554,7 @@ module Aws::WAFV2
       :rule_group_rule_name,
       :rule_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_keys_ipv4
@@ -2893,7 +2567,7 @@ module Aws::WAFV2
       :managed_keys_ipv4,
       :managed_keys_ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2919,7 +2593,7 @@ module Aws::WAFV2
       :scope,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regex_pattern_set
@@ -2932,7 +2606,7 @@ module Aws::WAFV2
       :regex_pattern_set,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2962,7 +2636,7 @@ module Aws::WAFV2
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group
@@ -2975,7 +2649,7 @@ module Aws::WAFV2
       :rule_group,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_arn
@@ -3019,7 +2693,7 @@ module Aws::WAFV2
       :time_window,
       :max_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sampled_requests
@@ -3044,7 +2718,7 @@ module Aws::WAFV2
       :population_size,
       :time_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:population_size] = 0 unless options.key?(:population_size)
@@ -3096,7 +2770,7 @@ module Aws::WAFV2
     class GetWebACLForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl
@@ -3106,7 +2780,7 @@ module Aws::WAFV2
     class GetWebACLForResourceResponse < Struct.new(
       :web_acl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3136,7 +2810,7 @@ module Aws::WAFV2
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl
@@ -3155,7 +2829,7 @@ module Aws::WAFV2
       :lock_token,
       :application_integration_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Part of the response from <a>GetSampledRequests</a>. This is a complex type
@@ -3172,7 +2846,7 @@ module Aws::WAFV2
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Part of the response from <a>GetSampledRequests</a>. This is a complex type
@@ -3223,7 +2897,7 @@ module Aws::WAFV2
       :http_version,
       :headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter to use to identify the subset of headers to inspect in a web request. </p>
@@ -3246,7 +2920,7 @@ module Aws::WAFV2
       :included_headers,
       :excluded_headers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request
@@ -3279,7 +2953,7 @@ module Aws::WAFV2
     class HeaderOrder < Struct.new(
       :oversize_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect all headers in the web request. You can specify the parts of the headers to
@@ -3335,12 +3009,7 @@ module Aws::WAFV2
       :match_scope,
       :oversize_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IPAddressVersion
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains zero or more IP addresses or blocks of IP addresses specified in Classless
@@ -3410,7 +3079,7 @@ module Aws::WAFV2
       :ip_address_version,
       :addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for inspecting IP addresses in an HTTP header that you specify, instead of using the IP address that's reported by the web request origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify any header name. </p>
@@ -3467,7 +3136,7 @@ module Aws::WAFV2
       :fallback_behavior,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement used to detect web requests coming from particular IP addresses or address ranges. To use this, create an <a>IPSet</a> that specifies the addresses you want to detect, then use the ARN of that set in this statement. To create an IP set, see <a>CreateIPSet</a>.</p>
@@ -3486,7 +3155,7 @@ module Aws::WAFV2
       :arn,
       :ip_set_forwarded_ip_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about an <a>IPSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage an <code>IPSet</code>, and the ARN, that you provide to the <a>IPSetReferenceStatement</a> to use the address set in a <a>Rule</a>.</p>
@@ -3512,7 +3181,7 @@ module Aws::WAFV2
       :lock_token,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used for CAPTCHA and challenge token settings. Determines 
@@ -3525,12 +3194,7 @@ module Aws::WAFV2
     class ImmunityTimeProperty < Struct.new(
       :immunity_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InspectionLevel
-      COMMON = 'COMMON'
-      TARGETED = 'TARGETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each
@@ -3563,7 +3227,7 @@ module Aws::WAFV2
     class JA3Fingerprint < Struct.new(
       :fallback_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a 36-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each
@@ -3596,7 +3260,7 @@ module Aws::WAFV2
     class JA4Fingerprint < Struct.new(
       :fallback_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect the body of the web request as JSON. The body immediately follows the request
@@ -3698,7 +3362,7 @@ module Aws::WAFV2
       :invalid_fallback_behavior,
       :oversize_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The patterns to look for in the JSON body. WAF inspects the results of these
@@ -3729,13 +3393,7 @@ module Aws::WAFV2
       :all,
       :included_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JsonMatchScope
-      ALL = 'ALL'
-      KEY = 'KEY'
-      VALUE = 'VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single label container. This is used as an element of a label array in multiple
@@ -3747,12 +3405,7 @@ module Aws::WAFV2
     class Label < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LabelMatchScope
-      LABEL = 'LABEL'
-      NAMESPACE = 'NAMESPACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement to match against labels that have been added to the web request by rules that have already run in the web ACL. </p>
@@ -3783,7 +3436,7 @@ module Aws::WAFV2
       :scope,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single label name condition for a <a>Condition</a> in a logging
@@ -3795,7 +3448,7 @@ module Aws::WAFV2
     class LabelNameCondition < Struct.new(
       :label_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of labels used by one or more of the rules of a <a>RuleGroup</a>. This
@@ -3818,7 +3471,7 @@ module Aws::WAFV2
     class LabelSummary < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -3848,7 +3501,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3867,7 +3520,7 @@ module Aws::WAFV2
       :api_key_summaries,
       :application_integration_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vendor_name
@@ -3905,7 +3558,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3924,7 +3577,7 @@ module Aws::WAFV2
       :versions,
       :current_default_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -3954,7 +3607,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -3969,7 +3622,7 @@ module Aws::WAFV2
       :next_marker,
       :managed_rule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -3999,7 +3652,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4014,7 +3667,7 @@ module Aws::WAFV2
       :next_marker,
       :ip_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -4053,7 +3706,7 @@ module Aws::WAFV2
       :limit,
       :log_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configurations
@@ -4068,7 +3721,7 @@ module Aws::WAFV2
       :logging_configurations,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -4098,7 +3751,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4113,7 +3766,7 @@ module Aws::WAFV2
       :next_marker,
       :managed_rule_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute platform
@@ -4134,7 +3787,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute release_summaries
@@ -4149,7 +3802,7 @@ module Aws::WAFV2
       :release_summaries,
       :next_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -4179,7 +3832,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4194,7 +3847,7 @@ module Aws::WAFV2
       :next_marker,
       :regex_pattern_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute web_acl_arn
@@ -4215,7 +3868,7 @@ module Aws::WAFV2
       :web_acl_arn,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arns
@@ -4224,7 +3877,7 @@ module Aws::WAFV2
     class ListResourcesForWebACLResponse < Struct.new(
       :resource_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -4254,7 +3907,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4269,7 +3922,7 @@ module Aws::WAFV2
       :next_marker,
       :rule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4290,7 +3943,7 @@ module Aws::WAFV2
       :limit,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4305,7 +3958,7 @@ module Aws::WAFV2
       :next_marker,
       :tag_info_for_resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute scope
@@ -4335,7 +3988,7 @@ module Aws::WAFV2
       :next_marker,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_marker
@@ -4350,16 +4003,7 @@ module Aws::WAFV2
       :next_marker,
       :web_ac_ls,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogScope
-      CUSTOMER = 'CUSTOMER'
-      SECURITY_LAKE = 'SECURITY_LAKE'
-    end
-
-    module LogType
-      WAF_LOGS = 'WAF_LOGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an association between logging destinations and a web ACL resource, for logging
@@ -4458,7 +4102,7 @@ module Aws::WAFV2
       :log_type,
       :log_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:managed_by_firewall_manager] = false unless options.key?(:managed_by_firewall_manager)
@@ -4481,12 +4125,7 @@ module Aws::WAFV2
       :filters,
       :default_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LowReputationMode
-      ACTIVE_UNDER_DDOS = 'ACTIVE_UNDER_DDOS'
-      ALWAYS_ON = 'ALWAYS_ON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a managed product, such as an Amazon Web Services Managed Rules rule group or an Amazon Web Services Marketplace managed rule group. </p>
@@ -4532,7 +4171,7 @@ module Aws::WAFV2
       :is_versioning_supported,
       :is_advanced_managed_rule_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_versioning_supported] = false unless options.key?(:is_versioning_supported)
@@ -4631,7 +4270,7 @@ module Aws::WAFV2
       :aws_managed_rules_acfp_rule_set,
       :aws_managed_rules_anti_d_do_s_rule_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>
@@ -4700,7 +4339,7 @@ module Aws::WAFV2
       :managed_rule_group_configs,
       :rule_action_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. To use any Amazon Web Services Marketplace managed rule group, first subscribe to the rule group through Amazon Web Services Marketplace. </p>
@@ -4723,7 +4362,7 @@ module Aws::WAFV2
       :versioning_supported,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:versioning_supported] = false unless options.key?(:versioning_supported)
@@ -4743,7 +4382,7 @@ module Aws::WAFV2
       :name,
       :last_update_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of rules that is managed by Amazon Web Services and Amazon Web Services Marketplace sellers to provide versioned managed
@@ -4796,7 +4435,7 @@ module Aws::WAFV2
       :recommended_version,
       :label_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information for a managed rule set. </p>
@@ -4844,7 +4483,7 @@ module Aws::WAFV2
       :arn,
       :label_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for a single version of a managed rule set. </p>
@@ -4891,13 +4530,7 @@ module Aws::WAFV2
       :last_update_timestamp,
       :expiry_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MapMatchScope
-      ALL = 'ALL'
-      KEY = 'KEY'
-      VALUE = 'VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect the HTTP method of the web request. The method indicates the type of operation
@@ -4907,7 +4540,7 @@ module Aws::WAFV2
     #          </p>
     class Method < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information for a release of the mobile SDK, including release notes and tags.</p>
@@ -4931,7 +4564,7 @@ module Aws::WAFV2
       :release_notes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies that WAF should do nothing. This is used for the
@@ -4942,7 +4575,7 @@ module Aws::WAFV2
     #          </p>
     class NoneAction < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical rule statement used to negate the results of another rule statement. You provide one <a>Statement</a> within the <code>NotStatement</code>.</p>
@@ -4952,7 +4585,7 @@ module Aws::WAFV2
     class NotStatement < Struct.new(
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the level of DDoS protection that applies to web ACLs associated with Application Load Balancers.</p>
@@ -4964,7 +4597,7 @@ module Aws::WAFV2
     class OnSourceDDoSProtectionConfig < Struct.new(
       :alb_low_reputation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A logical rule statement used to combine other rule statements with OR logic. You provide more than one <a>Statement</a> within the <code>OrStatement</code>. </p>
@@ -4975,7 +4608,7 @@ module Aws::WAFV2
     class OrStatement < Struct.new(
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The action to use in the place of the action that results from the rule group evaluation. Set the override action to none to leave the result of the rule group alone. Set it to count to override the result to count only. </p>
@@ -4998,88 +4631,7 @@ module Aws::WAFV2
       :count,
       :none,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OversizeHandling
-      CONTINUE = 'CONTINUE'
-      MATCH = 'MATCH'
-      NO_MATCH = 'NO_MATCH'
-    end
-
-    module ParameterExceptionField
-      WEB_ACL = 'WEB_ACL'
-      RULE_GROUP = 'RULE_GROUP'
-      REGEX_PATTERN_SET = 'REGEX_PATTERN_SET'
-      IP_SET = 'IP_SET'
-      MANAGED_RULE_SET = 'MANAGED_RULE_SET'
-      RULE = 'RULE'
-      EXCLUDED_RULE = 'EXCLUDED_RULE'
-      STATEMENT = 'STATEMENT'
-      BYTE_MATCH_STATEMENT = 'BYTE_MATCH_STATEMENT'
-      SQLI_MATCH_STATEMENT = 'SQLI_MATCH_STATEMENT'
-      XSS_MATCH_STATEMENT = 'XSS_MATCH_STATEMENT'
-      SIZE_CONSTRAINT_STATEMENT = 'SIZE_CONSTRAINT_STATEMENT'
-      GEO_MATCH_STATEMENT = 'GEO_MATCH_STATEMENT'
-      RATE_BASED_STATEMENT = 'RATE_BASED_STATEMENT'
-      RULE_GROUP_REFERENCE_STATEMENT = 'RULE_GROUP_REFERENCE_STATEMENT'
-      REGEX_PATTERN_REFERENCE_STATEMENT = 'REGEX_PATTERN_REFERENCE_STATEMENT'
-      IP_SET_REFERENCE_STATEMENT = 'IP_SET_REFERENCE_STATEMENT'
-      MANAGED_RULE_SET_STATEMENT = 'MANAGED_RULE_SET_STATEMENT'
-      LABEL_MATCH_STATEMENT = 'LABEL_MATCH_STATEMENT'
-      AND_STATEMENT = 'AND_STATEMENT'
-      OR_STATEMENT = 'OR_STATEMENT'
-      NOT_STATEMENT = 'NOT_STATEMENT'
-      IP_ADDRESS = 'IP_ADDRESS'
-      IP_ADDRESS_VERSION = 'IP_ADDRESS_VERSION'
-      FIELD_TO_MATCH = 'FIELD_TO_MATCH'
-      TEXT_TRANSFORMATION = 'TEXT_TRANSFORMATION'
-      SINGLE_QUERY_ARGUMENT = 'SINGLE_QUERY_ARGUMENT'
-      SINGLE_HEADER = 'SINGLE_HEADER'
-      DEFAULT_ACTION = 'DEFAULT_ACTION'
-      RULE_ACTION = 'RULE_ACTION'
-      ENTITY_LIMIT = 'ENTITY_LIMIT'
-      OVERRIDE_ACTION = 'OVERRIDE_ACTION'
-      SCOPE_VALUE = 'SCOPE_VALUE'
-      RESOURCE_ARN = 'RESOURCE_ARN'
-      RESOURCE_TYPE = 'RESOURCE_TYPE'
-      TAGS = 'TAGS'
-      TAG_KEYS = 'TAG_KEYS'
-      METRIC_NAME = 'METRIC_NAME'
-      FIREWALL_MANAGER_STATEMENT = 'FIREWALL_MANAGER_STATEMENT'
-      FALLBACK_BEHAVIOR = 'FALLBACK_BEHAVIOR'
-      POSITION = 'POSITION'
-      FORWARDED_IP_CONFIG = 'FORWARDED_IP_CONFIG'
-      IP_SET_FORWARDED_IP_CONFIG = 'IP_SET_FORWARDED_IP_CONFIG'
-      HEADER_NAME = 'HEADER_NAME'
-      CUSTOM_REQUEST_HANDLING = 'CUSTOM_REQUEST_HANDLING'
-      RESPONSE_CONTENT_TYPE = 'RESPONSE_CONTENT_TYPE'
-      CUSTOM_RESPONSE = 'CUSTOM_RESPONSE'
-      CUSTOM_RESPONSE_BODY = 'CUSTOM_RESPONSE_BODY'
-      JSON_MATCH_PATTERN = 'JSON_MATCH_PATTERN'
-      JSON_MATCH_SCOPE = 'JSON_MATCH_SCOPE'
-      BODY_PARSING_FALLBACK_BEHAVIOR = 'BODY_PARSING_FALLBACK_BEHAVIOR'
-      LOGGING_FILTER = 'LOGGING_FILTER'
-      FILTER_CONDITION = 'FILTER_CONDITION'
-      EXPIRE_TIMESTAMP = 'EXPIRE_TIMESTAMP'
-      CHANGE_PROPAGATION_STATUS = 'CHANGE_PROPAGATION_STATUS'
-      ASSOCIABLE_RESOURCE = 'ASSOCIABLE_RESOURCE'
-      LOG_DESTINATION = 'LOG_DESTINATION'
-      MANAGED_RULE_GROUP_CONFIG = 'MANAGED_RULE_GROUP_CONFIG'
-      PAYLOAD_TYPE = 'PAYLOAD_TYPE'
-      HEADER_MATCH_PATTERN = 'HEADER_MATCH_PATTERN'
-      COOKIE_MATCH_PATTERN = 'COOKIE_MATCH_PATTERN'
-      MAP_MATCH_SCOPE = 'MAP_MATCH_SCOPE'
-      OVERSIZE_HANDLING = 'OVERSIZE_HANDLING'
-      CHALLENGE_CONFIG = 'CHALLENGE_CONFIG'
-      TOKEN_DOMAIN = 'TOKEN_DOMAIN'
-      ATP_RULE_SET_RESPONSE_INSPECTION = 'ATP_RULE_SET_RESPONSE_INSPECTION'
-      ASSOCIATED_RESOURCE_TYPE = 'ASSOCIATED_RESOURCE_TYPE'
-      SCOPE_DOWN = 'SCOPE_DOWN'
-      CUSTOM_KEYS = 'CUSTOM_KEYS'
-      ACP_RULE_SET_RESPONSE_INSPECTION = 'ACP_RULE_SET_RESPONSE_INSPECTION'
-      DATA_PROTECTION_CONFIG = 'DATA_PROTECTION_CONFIG'
-      LOW_REPUTATION_MODE = 'LOW_REPUTATION_MODE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the field in the request payload that contains your customer's password. </p>
@@ -5107,12 +4659,7 @@ module Aws::WAFV2
     class PasswordField < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PayloadType
-      JSON = 'JSON'
-      FORM_ENCODED = 'FORM_ENCODED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of a field in the request payload that contains part or all of your customer's primary phone number. </p>
@@ -5140,20 +4687,7 @@ module Aws::WAFV2
     class PhoneNumberField < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Platform
-      IOS = 'IOS'
-      ANDROID = 'ANDROID'
-    end
-
-    module PositionalConstraint
-      EXACTLY = 'EXACTLY'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS = 'CONTAINS'
-      CONTAINS_WORD = 'CONTAINS_WORD'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -5162,7 +4696,7 @@ module Aws::WAFV2
     class PutLoggingConfigurationRequest < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute logging_configuration
@@ -5171,7 +4705,7 @@ module Aws::WAFV2
     class PutLoggingConfigurationResponse < Struct.new(
       :logging_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -5212,7 +4746,7 @@ module Aws::WAFV2
       :recommended_version,
       :versions_to_publish,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_lock_token
@@ -5221,7 +4755,7 @@ module Aws::WAFV2
     class PutManagedRuleSetVersionsResponse < Struct.new(
       :next_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -5258,12 +4792,12 @@ module Aws::WAFV2
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutPermissionPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect the query string of the web request. This is the part of a URL that appears
@@ -5273,7 +4807,7 @@ module Aws::WAFV2
     #          </p>
     class QueryString < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rate-based rule counts incoming requests and rate limits requests when they are coming at too fast a rate. The rule categorizes requests according to your aggregation criteria, collects them into aggregation instances, and counts and rate limits the requests for each instance. </p>
@@ -5430,19 +4964,12 @@ module Aws::WAFV2
       :forwarded_ip_config,
       :custom_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_window_sec] = 0 unless options.key?(:evaluation_window_sec)
         super
       end
-    end
-
-    module RateBasedStatementAggregateKeyType
-      IP = 'IP'
-      FORWARDED_IP = 'FORWARDED_IP'
-      CUSTOM_KEYS = 'CUSTOM_KEYS'
-      CONSTANT = 'CONSTANT'
     end
 
     # <p>Specifies a single custom aggregate key for a rate-base rule. </p>
@@ -5519,7 +5046,7 @@ module Aws::WAFV2
       :ja4_fingerprint,
       :asn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of IP addresses that are currently blocked for a <a>RateBasedStatement</a>. This is only available for rate-based rules 
@@ -5536,7 +5063,7 @@ module Aws::WAFV2
       :ip_address_version,
       :addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Autonomous System Number (ASN) derived from the request's originating or forwarded IP address as an aggregate key for a rate-based rule. 
@@ -5544,7 +5071,7 @@ module Aws::WAFV2
     #          If you use a single ASN as your custom key, then each ASN fully defines an aggregation instance. </p>
     class RateLimitAsn < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a cookie as an aggregate key for a rate-based rule. Each distinct value in the cookie contributes to the aggregation instance. If you use a single
@@ -5559,7 +5086,7 @@ module Aws::WAFV2
       :name,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the first IP address in an HTTP header as an aggregate key for a rate-based rule. Each distinct forwarded IP address contributes to the aggregation instance.</p>
@@ -5572,7 +5099,7 @@ module Aws::WAFV2
     #          <p>When you use this specification, you must also configure the forwarded IP address in the rate-based statement's <code>ForwardedIPConfig</code>. </p>
     class RateLimitForwardedIP < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the request's HTTP method as an aggregate key for a rate-based rule. Each distinct HTTP method contributes to the aggregation instance. If you use just the HTTP method
@@ -5581,7 +5108,7 @@ module Aws::WAFV2
     #          </p>
     class RateLimitHTTPMethod < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a header as an aggregate key for a rate-based rule. Each distinct value in the header contributes to the aggregation instance. If you use a single 
@@ -5596,7 +5123,7 @@ module Aws::WAFV2
       :name,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the IP address in the web request as an aggregate key for a rate-based rule. Each distinct IP address contributes to the aggregation instance. </p>
@@ -5607,7 +5134,7 @@ module Aws::WAFV2
     #          </p>
     class RateLimitIP < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -5631,7 +5158,7 @@ module Aws::WAFV2
     class RateLimitJA3Fingerprint < Struct.new(
       :fallback_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use the request's JA4 fingerprint derived from the TLS Client Hello of an incoming request as an aggregate key. If you use a single
@@ -5653,7 +5180,7 @@ module Aws::WAFV2
     class RateLimitJA4Fingerprint < Struct.new(
       :fallback_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a label namespace to use as an aggregate key for a rate-based rule. Each distinct fully qualified label name that has the specified label namespace contributes to the aggregation instance. If you use just one label namespace as your custom key, then each label name fully defines an aggregation instance.  </p>
@@ -5666,7 +5193,7 @@ module Aws::WAFV2
     class RateLimitLabelNamespace < Struct.new(
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a query argument in the request as an aggregate key for a rate-based rule. Each distinct value for the named query argument contributes to the aggregation instance. If you 
@@ -5681,7 +5208,7 @@ module Aws::WAFV2
       :name,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the request's query string as an aggregate key for a rate-based rule. Each distinct string contributes to the aggregation instance. If you use just the 
@@ -5692,7 +5219,7 @@ module Aws::WAFV2
     class RateLimitQueryString < Struct.new(
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the request's URI path as an aggregate key for a rate-based rule. Each distinct URI path contributes to the aggregation instance. If you use just the 
@@ -5703,7 +5230,7 @@ module Aws::WAFV2
     class RateLimitUriPath < Struct.new(
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single regular expression. This is used in a <a>RegexPatternSet</a> and 
@@ -5714,7 +5241,7 @@ module Aws::WAFV2
     class Regex < Struct.new(
       :regex_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement used to search web request components for a match against a single regular expression. </p>
@@ -5732,7 +5259,7 @@ module Aws::WAFV2
       :field_to_match,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains one or more regular expressions. </p>
@@ -5760,7 +5287,7 @@ module Aws::WAFV2
       :description,
       :regular_expression_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement used to search web request components for matches with regular expressions. To use this, create a <a>RegexPatternSet</a> that specifies the expressions that you want to detect, then use the ARN of that set in this statement. A web request matches the pattern set rule statement if the request component matches any of the patterns in the set. To create a regex pattern set, see <a>CreateRegexPatternSet</a>.</p>
@@ -5780,7 +5307,7 @@ module Aws::WAFV2
       :field_to_match,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a <a>RegexPatternSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RegexPatternSet</code>, and the ARN, that you provide to the <a>RegexPatternSetReferenceStatement</a> to use the pattern set in a <a>Rule</a>.</p>
@@ -5806,7 +5333,7 @@ module Aws::WAFV2
       :lock_token,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High level information for an SDK release. </p>
@@ -5820,7 +5347,7 @@ module Aws::WAFV2
       :release_version,
       :timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Customizes the maximum size of the request body that your protected CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward to WAF for inspection. The default size is 16 KB (16,384 bytes). You can change the setting for any of the available resource types. </p>
@@ -5842,7 +5369,7 @@ module Aws::WAFV2
     class RequestBodyAssociatedResourceTypeConfig < Struct.new(
       :default_size_inspection_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria for inspecting login requests, used by the ATP rule group to validate credentials usage.  </p>
@@ -5900,7 +5427,7 @@ module Aws::WAFV2
       :username_field,
       :password_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria for inspecting account creation requests, used by the ACFP rule group to validate and track account creation attempts.  </p>
@@ -6023,23 +5550,7 @@ module Aws::WAFV2
       :phone_number_fields,
       :address_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      APPLICATION_LOAD_BALANCER = 'APPLICATION_LOAD_BALANCER'
-      API_GATEWAY = 'API_GATEWAY'
-      APPSYNC = 'APPSYNC'
-      COGNITIO_USER_POOL = 'COGNITO_USER_POOL'
-      APP_RUNNER_SERVICE = 'APP_RUNNER_SERVICE'
-      VERIFIED_ACCESS_INSTANCE = 'VERIFIED_ACCESS_INSTANCE'
-      AMPLIFY = 'AMPLIFY'
-    end
-
-    module ResponseContentType
-      TEXT_PLAIN = 'TEXT_PLAIN'
-      TEXT_HTML = 'TEXT_HTML'
-      APPLICATION_JSON = 'APPLICATION_JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria for inspecting responses to login requests and account creation requests, used by the ATP and ACFP rule groups to track login and account creation success and failure rates. </p>
@@ -6068,7 +5579,7 @@ module Aws::WAFV2
       :body_contains,
       :json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. 
@@ -6090,7 +5601,7 @@ module Aws::WAFV2
       :success_strings,
       :failure_strings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures inspection of the response header. 
@@ -6118,7 +5629,7 @@ module Aws::WAFV2
       :success_values,
       :failure_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. 
@@ -6146,7 +5657,7 @@ module Aws::WAFV2
       :success_values,
       :failure_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures inspection of the response status code. 
@@ -6168,7 +5679,7 @@ module Aws::WAFV2
       :success_codes,
       :failure_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single rule, which you can use in a <a>WebACL</a> or <a>RuleGroup</a> to identify web requests that you want to manage in some way. 
@@ -6264,7 +5775,7 @@ module Aws::WAFV2
       :captcha_config,
       :challenge_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
@@ -6296,7 +5807,7 @@ module Aws::WAFV2
       :captcha,
       :challenge,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Action setting to use in the place of a rule action that is configured inside the rule group. You specify one override for each rule whose action you want to change. </p>
@@ -6317,7 +5828,7 @@ module Aws::WAFV2
       :name,
       :action_to_use,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A rule group defines a collection of rules to inspect and control web requests that you can use in a <a>WebACL</a>. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. </p>
@@ -6400,7 +5911,7 @@ module Aws::WAFV2
       :available_labels,
       :consumed_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>
@@ -6427,7 +5938,7 @@ module Aws::WAFV2
       :excluded_rules,
       :rule_action_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a <a>RuleGroup</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
@@ -6453,7 +5964,7 @@ module Aws::WAFV2
       :lock_token,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a <a>Rule</a>, returned by operations like <a>DescribeManagedRuleGroup</a>. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
@@ -6468,7 +5979,7 @@ module Aws::WAFV2
       :name,
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single sampled web request. The response from <a>GetSampledRequests</a> includes a <code>SampledHTTPRequests</code> complex type
@@ -6535,28 +6046,12 @@ module Aws::WAFV2
       :challenge_response,
       :overridden_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
         super
       end
-    end
-
-    module Scope
-      CLOUDFRONT = 'CLOUDFRONT'
-      REGIONAL = 'REGIONAL'
-    end
-
-    module SensitivityLevel
-      LOW = 'LOW'
-      HIGH = 'HIGH'
-    end
-
-    module SensitivityToAct
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
     end
 
     # <p>Inspect one of the headers in the web request, identified by name, for example,
@@ -6572,7 +6067,7 @@ module Aws::WAFV2
     class SingleHeader < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect one query argument in the web request, identified by name, for example
@@ -6587,7 +6082,7 @@ module Aws::WAFV2
     class SingleQueryArgument < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>
@@ -6611,19 +6106,12 @@ module Aws::WAFV2
       :size,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:size] = 0 unless options.key?(:size)
         super
       end
-    end
-
-    module SizeInspectionLimit
-      KB_16 = 'KB_16'
-      KB_32 = 'KB_32'
-      KB_48 = 'KB_48'
-      KB_64 = 'KB_64'
     end
 
     # <p>A rule statement that inspects for malicious SQL code. Attackers insert malicious SQL code into web requests to do things like modify your database or extract data from it. </p>
@@ -6652,7 +6140,7 @@ module Aws::WAFV2
       :text_transformations,
       :sensitivity_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The processing guidance for a <a>Rule</a>, used by WAF to determine whether
@@ -6818,7 +6306,7 @@ module Aws::WAFV2
       :regex_match_statement,
       :asn_match_statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag associated with an Amazon Web Services resource. Tags are key:value pairs that you can use to
@@ -6844,7 +6332,7 @@ module Aws::WAFV2
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collection of tagging definitions for an Amazon Web Services resource. Tags are key:value pairs
@@ -6867,7 +6355,7 @@ module Aws::WAFV2
       :resource_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6880,12 +6368,12 @@ module Aws::WAFV2
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Text transformations eliminate some of the unusual formatting that attackers use in web
@@ -6904,36 +6392,12 @@ module Aws::WAFV2
       :priority,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:priority] = 0 unless options.key?(:priority)
         super
       end
-    end
-
-    module TextTransformationType
-      NONE = 'NONE'
-      COMPRESS_WHITE_SPACE = 'COMPRESS_WHITE_SPACE'
-      HTML_ENTITY_DECODE = 'HTML_ENTITY_DECODE'
-      LOWERCASE = 'LOWERCASE'
-      CMD_LINE = 'CMD_LINE'
-      URL_DECODE = 'URL_DECODE'
-      BASE64_DECODE = 'BASE64_DECODE'
-      HEX_DECODE = 'HEX_DECODE'
-      MD5 = 'MD5'
-      REPLACE_COMMENTS = 'REPLACE_COMMENTS'
-      ESCAPE_SEQ_DECODE = 'ESCAPE_SEQ_DECODE'
-      SQL_HEX_DECODE = 'SQL_HEX_DECODE'
-      CSS_DECODE = 'CSS_DECODE'
-      JS_DECODE = 'JS_DECODE'
-      NORMALIZE_PATH = 'NORMALIZE_PATH'
-      NORMALIZE_PATH_WIN = 'NORMALIZE_PATH_WIN'
-      REMOVE_NULLS = 'REMOVE_NULLS'
-      REPLACE_NULLS = 'REPLACE_NULLS'
-      BASE64_DECODE_EXT = 'BASE64_DECODE_EXT'
-      URL_DECODE_UNI = 'URL_DECODE_UNI'
-      UTF8_TO_UNICODE = 'UTF8_TO_UNICODE'
     end
 
     # <p>In a <a>GetSampledRequests</a> request, the <code>StartTime</code> and
@@ -6968,7 +6432,7 @@ module Aws::WAFV2
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6981,12 +6445,12 @@ module Aws::WAFV2
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7059,7 +6523,7 @@ module Aws::WAFV2
       :addresses,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_lock_token
@@ -7068,7 +6532,7 @@ module Aws::WAFV2
     class UpdateIPSetResponse < Struct.new(
       :next_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7109,7 +6573,7 @@ module Aws::WAFV2
       :version_to_expire,
       :expiry_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute expiring_version
@@ -7127,7 +6591,7 @@ module Aws::WAFV2
       :expiry_timestamp,
       :next_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7165,7 +6629,7 @@ module Aws::WAFV2
       :regular_expression_list,
       :lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_lock_token
@@ -7174,7 +6638,7 @@ module Aws::WAFV2
     class UpdateRegexPatternSetResponse < Struct.new(
       :next_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7228,7 +6692,7 @@ module Aws::WAFV2
       :lock_token,
       :custom_response_bodies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_lock_token
@@ -7237,7 +6701,7 @@ module Aws::WAFV2
     class UpdateRuleGroupResponse < Struct.new(
       :next_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -7332,7 +6796,7 @@ module Aws::WAFV2
       :association_config,
       :on_source_d_do_s_protection_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_lock_token
@@ -7341,7 +6805,7 @@ module Aws::WAFV2
     class UpdateWebACLResponse < Struct.new(
       :next_lock_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect fragments of the request URI. You can specify the parts of the URI fragment to 
@@ -7387,7 +6851,7 @@ module Aws::WAFV2
     class UriFragment < Struct.new(
       :fallback_behavior,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Inspect the path component of the URI of the web request. This is the part of the web
@@ -7397,12 +6861,7 @@ module Aws::WAFV2
     #          </p>
     class UriPath < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UsageOfAction
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the field in the request payload that contains your customer's username. </p>
@@ -7432,7 +6891,7 @@ module Aws::WAFV2
     class UsernameField < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A version of the named managed rule group, that the rule group's vendor publishes for
@@ -7453,7 +6912,7 @@ module Aws::WAFV2
       :associated_rule_group_arn,
       :forecasted_lifetime,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>
@@ -7487,7 +6946,7 @@ module Aws::WAFV2
       :cloud_watch_metrics_enabled,
       :metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sampled_requests_enabled] = false unless options.key?(:sampled_requests_enabled)
@@ -7503,7 +6962,7 @@ module Aws::WAFV2
     class WAFAssociatedItemException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you are inspecting the web request body, headers, or
@@ -7522,7 +6981,7 @@ module Aws::WAFV2
     class WAFConfigurationWarningException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t perform the operation because the resource that you tried to save is
@@ -7532,7 +6991,7 @@ module Aws::WAFV2
     class WAFDuplicateItemException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified version for the managed rule group has
@@ -7543,7 +7002,7 @@ module Aws::WAFV2
     class WAFExpiredManagedRuleGroupVersionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request is valid, but WAF couldn’t perform the operation because of a system
@@ -7553,7 +7012,7 @@ module Aws::WAFV2
     class WAFInternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation isn't valid. </p>
@@ -7562,7 +7021,7 @@ module Aws::WAFV2
     class WAFInvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because WAF didn't recognize a parameter in the request. For
@@ -7601,7 +7060,7 @@ module Aws::WAFV2
       :parameter,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because the specified policy isn't in the proper format. </p>
@@ -7633,7 +7092,7 @@ module Aws::WAFV2
     class WAFInvalidPermissionPolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t perform the operation because the resource that you requested isn’t
@@ -7643,7 +7102,7 @@ module Aws::WAFV2
     class WAFInvalidResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t perform the operation because you exceeded your resource limit. For
@@ -7659,7 +7118,7 @@ module Aws::WAFV2
       :message,
       :source_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because you don't have the permissions that your logging
@@ -7670,7 +7129,7 @@ module Aws::WAFV2
     class WAFLogDestinationPermissionIssueException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t perform the operation because your resource doesn't exist. 
@@ -7682,7 +7141,7 @@ module Aws::WAFV2
     class WAFNonexistentItemException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t save your changes because you tried to update or delete a resource
@@ -7693,7 +7152,7 @@ module Aws::WAFV2
     class WAFOptimisticLockException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF is not able to access the service linked role. This can be caused by a
@@ -7709,7 +7168,7 @@ module Aws::WAFV2
     class WAFServiceLinkedRoleErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You tried to use a managed rule group that's available by subscription, but you aren't
@@ -7719,7 +7178,7 @@ module Aws::WAFV2
     class WAFSubscriptionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error occurred during the tagging operation. Retry your request.</p>
@@ -7728,7 +7187,7 @@ module Aws::WAFV2
     class WAFTagOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t perform your tagging operation because of an internal error. Retry
@@ -7738,7 +7197,7 @@ module Aws::WAFV2
     class WAFTagOperationInternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>WAF couldn’t retrieve a resource that you specified for this operation. 
@@ -7751,7 +7210,7 @@ module Aws::WAFV2
     class WAFUnavailableEntityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rule that you've named doesn't aggregate solely on the IP address or solely on the forwarded IP address. This call 
@@ -7761,7 +7220,7 @@ module Aws::WAFV2
     class WAFUnsupportedAggregateKeyTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has a statement that defines what to look for in web requests and an action that WAF applies to requests that match the statement. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resource types include Amazon CloudFront distribution, Amazon API Gateway REST API, Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application, and Amazon Web Services Verified Access instance.  </p>
@@ -7909,7 +7368,7 @@ module Aws::WAFV2
       :on_source_d_do_s_protection_config,
       :application_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:capacity] = 0 unless options.key?(:capacity)
@@ -7942,7 +7401,7 @@ module Aws::WAFV2
       :lock_token,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule statement that inspects for cross-site scripting (XSS) attacks. In XSS attacks, the attacker 
@@ -7957,7 +7416,7 @@ module Aws::WAFV2
       :field_to_match,
       :text_transformations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

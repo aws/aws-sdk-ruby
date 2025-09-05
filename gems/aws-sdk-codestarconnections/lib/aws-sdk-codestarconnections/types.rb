@@ -12,16 +12,7 @@ module Aws::CodeStarconnections
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlockerStatus
-      ACTIVE = 'ACTIVE'
-      RESOLVED = 'RESOLVED'
-    end
-
-    module BlockerType
-      AUTOMATED = 'AUTOMATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time. </p>
@@ -30,7 +21,7 @@ module Aws::CodeStarconnections
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional check failed. Try again later.</p>
@@ -39,7 +30,7 @@ module Aws::CodeStarconnections
     class ConditionalCheckFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two conflicting operations have been made on the same resource.</p>
@@ -48,7 +39,7 @@ module Aws::CodeStarconnections
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that is used to connect third-party source providers with services like CodePipeline.</p>
@@ -86,13 +77,7 @@ module Aws::CodeStarconnections
       :connection_status,
       :host_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionStatus
-      PENDING = 'PENDING'
-      AVAILABLE = 'AVAILABLE'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_type
@@ -114,7 +99,7 @@ module Aws::CodeStarconnections
       :tags,
       :host_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -131,7 +116,7 @@ module Aws::CodeStarconnections
       :connection_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -160,7 +145,7 @@ module Aws::CodeStarconnections
       :vpc_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_arn
@@ -173,7 +158,7 @@ module Aws::CodeStarconnections
       :host_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -199,7 +184,7 @@ module Aws::CodeStarconnections
       :encryption_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_link_info
@@ -208,7 +193,7 @@ module Aws::CodeStarconnections
     class CreateRepositoryLinkOutput < Struct.new(
       :repository_link_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute branch
@@ -248,7 +233,7 @@ module Aws::CodeStarconnections
       :publish_deployment_status,
       :trigger_resource_update_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_configuration
@@ -258,7 +243,7 @@ module Aws::CodeStarconnections
     class CreateSyncConfigurationOutput < Struct.new(
       :sync_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -270,12 +255,12 @@ module Aws::CodeStarconnections
     class DeleteConnectionInput < Struct.new(
       :connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_arn
@@ -284,12 +269,12 @@ module Aws::CodeStarconnections
     class DeleteHostInput < Struct.new(
       :host_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteHostOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_link_id
@@ -298,12 +283,12 @@ module Aws::CodeStarconnections
     class DeleteRepositoryLinkInput < Struct.new(
       :repository_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteRepositoryLinkOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_type
@@ -317,12 +302,12 @@ module Aws::CodeStarconnections
       :sync_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSyncConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -331,7 +316,7 @@ module Aws::CodeStarconnections
     class GetConnectionInput < Struct.new(
       :connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection
@@ -340,7 +325,7 @@ module Aws::CodeStarconnections
     class GetConnectionOutput < Struct.new(
       :connection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_arn
@@ -349,7 +334,7 @@ module Aws::CodeStarconnections
     class GetHostInput < Struct.new(
       :host_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -374,7 +359,7 @@ module Aws::CodeStarconnections
       :provider_endpoint,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_link_id
@@ -383,7 +368,7 @@ module Aws::CodeStarconnections
     class GetRepositoryLinkInput < Struct.new(
       :repository_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_link_info
@@ -392,7 +377,7 @@ module Aws::CodeStarconnections
     class GetRepositoryLinkOutput < Struct.new(
       :repository_link_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute branch
@@ -409,7 +394,7 @@ module Aws::CodeStarconnections
       :repository_link_id,
       :sync_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute latest_sync
@@ -418,7 +403,7 @@ module Aws::CodeStarconnections
     class GetRepositorySyncStatusOutput < Struct.new(
       :latest_sync,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -432,7 +417,7 @@ module Aws::CodeStarconnections
       :resource_name,
       :sync_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute desired_state
@@ -450,7 +435,7 @@ module Aws::CodeStarconnections
       :latest_successful_sync,
       :latest_sync,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_type
@@ -463,7 +448,7 @@ module Aws::CodeStarconnections
       :sync_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_blocker_summary
@@ -472,7 +457,7 @@ module Aws::CodeStarconnections
     class GetSyncBlockerSummaryOutput < Struct.new(
       :sync_blocker_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_type
@@ -486,7 +471,7 @@ module Aws::CodeStarconnections
       :sync_type,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_configuration
@@ -495,7 +480,7 @@ module Aws::CodeStarconnections
     class GetSyncConfigurationOutput < Struct.new(
       :sync_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource that represents the infrastructure where a third-party provider is installed.
@@ -537,7 +522,7 @@ module Aws::CodeStarconnections
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Received an internal server exception. Try again later.</p>
@@ -546,7 +531,7 @@ module Aws::CodeStarconnections
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input is not valid. Verify that the action is typed correctly.</p>
@@ -555,7 +540,7 @@ module Aws::CodeStarconnections
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exceeded the maximum limit for connections.</p>
@@ -564,7 +549,7 @@ module Aws::CodeStarconnections
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider_type_filter
@@ -588,7 +573,7 @@ module Aws::CodeStarconnections
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connections
@@ -604,7 +589,7 @@ module Aws::CodeStarconnections
       :connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -619,7 +604,7 @@ module Aws::CodeStarconnections
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hosts
@@ -635,7 +620,7 @@ module Aws::CodeStarconnections
       :hosts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -650,7 +635,7 @@ module Aws::CodeStarconnections
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_links
@@ -663,7 +648,7 @@ module Aws::CodeStarconnections
       :repository_links,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_link_id
@@ -676,7 +661,7 @@ module Aws::CodeStarconnections
       :repository_link_id,
       :sync_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_sync_definitions
@@ -692,7 +677,7 @@ module Aws::CodeStarconnections
       :repository_sync_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -713,7 +698,7 @@ module Aws::CodeStarconnections
       :repository_link_id,
       :sync_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_configurations
@@ -726,7 +711,7 @@ module Aws::CodeStarconnections
       :sync_configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -735,7 +720,7 @@ module Aws::CodeStarconnections
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -744,20 +729,7 @@ module Aws::CodeStarconnections
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProviderType
-      BITBUCKET = 'Bitbucket'
-      GITHUB = 'GitHub'
-      GITHUB_ENTERPRISE_SERVER = 'GitHubEnterpriseServer'
-      GITLAB = 'GitLab'
-      GITLAB_SELF_MANAGED = 'GitLabSelfManaged'
-    end
-
-    module PublishDeploymentStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the repository link resource, such as the repository link ARN, the associated connection ARN, encryption key ARN, and owner ID.</p>
@@ -792,7 +764,7 @@ module Aws::CodeStarconnections
       :repository_link_id,
       :repository_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository sync attempt for a repository with a sync configuration.</p>
@@ -828,7 +800,7 @@ module Aws::CodeStarconnections
       :status,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a repository with a sync configuration.</p>
@@ -851,7 +823,7 @@ module Aws::CodeStarconnections
       :parent,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a repository sync event.</p>
@@ -873,15 +845,7 @@ module Aws::CodeStarconnections
       :time,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RepositorySyncStatus
-      FAILED = 'FAILED'
-      INITIATED = 'INITIATED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      QUEUED = 'QUEUED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to create resource. Resource already exists.</p>
@@ -890,7 +854,7 @@ module Aws::CodeStarconnections
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource not found. Verify the connection resource ARN and try again.</p>
@@ -899,7 +863,7 @@ module Aws::CodeStarconnections
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a resource sync attempt.</p>
@@ -945,7 +909,7 @@ module Aws::CodeStarconnections
       :target_revision,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a resource sync event for the resource associated with a sync configuration.</p>
@@ -967,14 +931,7 @@ module Aws::CodeStarconnections
       :time,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceSyncStatus
-      FAILED = 'FAILED'
-      INITIATED = 'INITIATED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource not found. Verify the ARN for the host resource and try again.</p>
@@ -983,7 +940,7 @@ module Aws::CodeStarconnections
     class ResourceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrying the latest commit failed. Try again later.</p>
@@ -992,7 +949,7 @@ module Aws::CodeStarconnections
     class RetryLatestCommitFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the revision for a specific sync event, such as the branch, owner ID, and name of the repository.</p>
@@ -1022,7 +979,7 @@ module Aws::CodeStarconnections
       :provider_type,
       :sha,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a blocker for a sync event.</p>
@@ -1060,7 +1017,7 @@ module Aws::CodeStarconnections
       :resolved_reason,
       :resolved_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The context for a specific sync blocker.</p>
@@ -1074,7 +1031,7 @@ module Aws::CodeStarconnections
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to continue. The sync blocker does not exist.</p>
@@ -1083,7 +1040,7 @@ module Aws::CodeStarconnections
     class SyncBlockerDoesNotExistException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary for sync blockers.</p>
@@ -1101,7 +1058,7 @@ module Aws::CodeStarconnections
       :parent_resource_name,
       :latest_blockers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information, such as repository, branch, provider, and resource names for a specific sync configuration.</p>
@@ -1153,7 +1110,7 @@ module Aws::CodeStarconnections
       :publish_deployment_status,
       :trigger_resource_update_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to continue. The sync blocker still exists.</p>
@@ -1162,11 +1119,7 @@ module Aws::CodeStarconnections
     class SyncConfigurationStillExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SyncConfigurationType
-      CFN_STACK_SYNC = 'CFN_STACK_SYNC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag is a key-value pair that is used to manage the resource.</p>
@@ -1181,7 +1134,7 @@ module Aws::CodeStarconnections
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1194,12 +1147,12 @@ module Aws::CodeStarconnections
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1208,12 +1161,7 @@ module Aws::CodeStarconnections
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggerResourceUpdateOn
-      ANY_CHANGE = 'ANY_CHANGE'
-      FILE_CHANGE = 'FILE_CHANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is not supported. Check the connection status and try again.</p>
@@ -1222,7 +1170,7 @@ module Aws::CodeStarconnections
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified provider type is not supported for connections.</p>
@@ -1231,7 +1179,7 @@ module Aws::CodeStarconnections
     class UnsupportedProviderTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1244,12 +1192,12 @@ module Aws::CodeStarconnections
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute host_arn
@@ -1267,12 +1215,12 @@ module Aws::CodeStarconnections
       :provider_endpoint,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateHostOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The update is out of sync. Try syncing again.</p>
@@ -1281,7 +1229,7 @@ module Aws::CodeStarconnections
     class UpdateOutOfSyncException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_arn
@@ -1298,7 +1246,7 @@ module Aws::CodeStarconnections
       :encryption_key_arn,
       :repository_link_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute repository_link_info
@@ -1307,7 +1255,7 @@ module Aws::CodeStarconnections
     class UpdateRepositoryLinkOutput < Struct.new(
       :repository_link_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1328,7 +1276,7 @@ module Aws::CodeStarconnections
       :resource_name,
       :resolved_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -1345,7 +1293,7 @@ module Aws::CodeStarconnections
       :parent_resource_name,
       :sync_blocker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute branch
@@ -1383,7 +1331,7 @@ module Aws::CodeStarconnections
       :publish_deployment_status,
       :trigger_resource_update_on,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sync_configuration
@@ -1392,7 +1340,7 @@ module Aws::CodeStarconnections
     class UpdateSyncConfigurationOutput < Struct.new(
       :sync_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC configuration provisioned for the host.</p>
@@ -1417,7 +1365,7 @@ module Aws::CodeStarconnections
       :security_group_ids,
       :tls_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

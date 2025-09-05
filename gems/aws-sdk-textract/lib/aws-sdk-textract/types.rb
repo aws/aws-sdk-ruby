@@ -16,7 +16,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An adapter selected for use when analyzing documents. Contains an adapter ID and a version number. 
@@ -55,7 +55,7 @@ module Aws::Textract
       :pages,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the adapter, including the adapter ID, Name, Creation time, and feature types.</p>
@@ -77,7 +77,7 @@ module Aws::Textract
       :creation_time,
       :feature_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dataset configuration options for a given version of an adapter. 
@@ -94,7 +94,7 @@ module Aws::Textract
     class AdapterVersionDatasetConfig < Struct.new(
       :manifest_s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information on the metrics used to evalute the peformance of a given adapter version. Includes data for 
@@ -113,7 +113,7 @@ module Aws::Textract
       :adapter_version,
       :feature_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary info for an adapter version. Contains information on the AdapterId, AdapterVersion, CreationTime, FeatureTypes, and Status.</p>
@@ -143,15 +143,7 @@ module Aws::Textract
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdapterVersionStatus
-      ACTIVE = 'ACTIVE'
-      AT_RISK = 'AT_RISK'
-      DEPRECATED = 'DEPRECATED'
-      CREATION_ERROR = 'CREATION_ERROR'
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about adapters used when analyzing a document, 
@@ -162,7 +154,7 @@ module Aws::Textract
     class AdaptersConfig < Struct.new(
       :adapters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -196,7 +188,7 @@ module Aws::Textract
       :queries_config,
       :adapters_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -217,7 +209,7 @@ module Aws::Textract
       :human_loop_activation_output,
       :analyze_document_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -241,7 +233,7 @@ module Aws::Textract
     class AnalyzeExpenseRequest < Struct.new(
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -254,7 +246,7 @@ module Aws::Textract
       :document_metadata,
       :expense_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Used to contain the information detected by an AnalyzeID operation.</p>
@@ -273,7 +265,7 @@ module Aws::Textract
       :normalized_value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_pages
@@ -282,7 +274,7 @@ module Aws::Textract
     class AnalyzeIDRequest < Struct.new(
       :document_pages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_documents
@@ -300,12 +292,7 @@ module Aws::Textract
       :document_metadata,
       :analyze_id_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoUpdate
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Textract isn't able to read the document. For more information on the document
@@ -318,7 +305,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>Block</code> represents items that are recognized in a document within a group
@@ -603,34 +590,7 @@ module Aws::Textract
       :page,
       :query,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlockType
-      KEY_VALUE_SET = 'KEY_VALUE_SET'
-      PAGE = 'PAGE'
-      LINE = 'LINE'
-      WORD = 'WORD'
-      TABLE = 'TABLE'
-      CELL = 'CELL'
-      SELECTION_ELEMENT = 'SELECTION_ELEMENT'
-      MERGED_CELL = 'MERGED_CELL'
-      TITLE = 'TITLE'
-      QUERY = 'QUERY'
-      QUERY_RESULT = 'QUERY_RESULT'
-      SIGNATURE = 'SIGNATURE'
-      TABLE_TITLE = 'TABLE_TITLE'
-      TABLE_FOOTER = 'TABLE_FOOTER'
-      LAYOUT_TEXT = 'LAYOUT_TEXT'
-      LAYOUT_TITLE = 'LAYOUT_TITLE'
-      LAYOUT_HEADER = 'LAYOUT_HEADER'
-      LAYOUT_FOOTER = 'LAYOUT_FOOTER'
-      LAYOUT_SECTION_HEADER = 'LAYOUT_SECTION_HEADER'
-      LAYOUT_PAGE_NUMBER = 'LAYOUT_PAGE_NUMBER'
-      LAYOUT_LIST = 'LAYOUT_LIST'
-      LAYOUT_FIGURE = 'LAYOUT_FIGURE'
-      LAYOUT_TABLE = 'LAYOUT_TABLE'
-      LAYOUT_KEY_VALUE = 'LAYOUT_KEY_VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The bounding box around the detected page, text, key-value pair, table, table cell, or
@@ -667,7 +627,7 @@ module Aws::Textract
       :left,
       :top,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:width] = 0 unless options.key?(:width)
@@ -687,12 +647,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContentClassifier
-      FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = 'FreeOfPersonallyIdentifiableInformation'
-      FREE_OF_ADULT_CONTENT = 'FreeOfAdultContent'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_name
@@ -725,7 +680,7 @@ module Aws::Textract
       :auto_update,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -734,7 +689,7 @@ module Aws::Textract
     class CreateAdapterResponse < Struct.new(
       :adapter_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -782,7 +737,7 @@ module Aws::Textract
       :output_config,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -795,7 +750,7 @@ module Aws::Textract
       :adapter_id,
       :adapter_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -804,12 +759,12 @@ module Aws::Textract
     class DeleteAdapterRequest < Struct.new(
       :adapter_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAdapterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -822,12 +777,12 @@ module Aws::Textract
       :adapter_id,
       :adapter_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAdapterVersionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document
@@ -840,7 +795,7 @@ module Aws::Textract
     class DetectDocumentTextRequest < Struct.new(
       :document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -859,7 +814,7 @@ module Aws::Textract
       :blocks,
       :detect_document_text_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that holds information regarding a detected signature on a page.</p>
@@ -869,7 +824,7 @@ module Aws::Textract
     class DetectedSignature < Struct.new(
       :page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input document, either as bytes or as an S3 object.</p>
@@ -902,7 +857,7 @@ module Aws::Textract
       :bytes,
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about documents grouped by the same document type.</p>
@@ -924,7 +879,7 @@ module Aws::Textract
       :detected_signatures,
       :undetected_signatures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 bucket that contains the document to be processed. It's used by asynchronous
@@ -937,7 +892,7 @@ module Aws::Textract
     class DocumentLocation < Struct.new(
       :s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the input document.</p>
@@ -947,7 +902,7 @@ module Aws::Textract
     class DocumentMetadata < Struct.new(
       :pages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The document can't be processed because it's too large. The maximum document size for
@@ -961,19 +916,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityType
-      KEY = 'KEY'
-      VALUE = 'VALUE'
-      COLUMN_HEADER = 'COLUMN_HEADER'
-      TABLE_TITLE = 'TABLE_TITLE'
-      TABLE_FOOTER = 'TABLE_FOOTER'
-      TABLE_SECTION_TITLE = 'TABLE_SECTION_TITLE'
-      TABLE_SUMMARY = 'TABLE_SUMMARY'
-      STRUCTURED_TABLE = 'STRUCTURED_TABLE'
-      SEMI_STRUCTURED_TABLE = 'SEMI_STRUCTURED_TABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The evaluation metrics (F1 score, Precision, and Recall) for an adapter version.</p>
@@ -991,7 +934,7 @@ module Aws::Textract
       :precision,
       :recall,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:f1_score] = 0 unless options.key?(:f1_score)
@@ -1050,7 +993,7 @@ module Aws::Textract
       :code,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object used to store information about the Value or Label detected by Amazon Textract.</p>
@@ -1069,7 +1012,7 @@ module Aws::Textract
       :geometry,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure holding all the information returned by AnalyzeExpense</p>
@@ -1093,7 +1036,7 @@ module Aws::Textract
       :line_item_groups,
       :blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Breakdown of detected information, seperated into 
@@ -1126,7 +1069,7 @@ module Aws::Textract
       :currency,
       :group_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shows the group that a certain key belongs to. This helps differentiate between
@@ -1142,7 +1085,7 @@ module Aws::Textract
       :types,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object used to store information about the Type detected by Amazon Textract.</p>
@@ -1156,7 +1099,7 @@ module Aws::Textract
       :text,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information extracted by an analysis operation after using StartLendingAnalysis.</p>
@@ -1174,15 +1117,7 @@ module Aws::Textract
       :expense_document,
       :identity_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FeatureType
-      TABLES = 'TABLES'
-      FORMS = 'FORMS'
-      QUERIES = 'QUERIES'
-      SIGNATURES = 'SIGNATURES'
-      LAYOUT = 'LAYOUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about where the following items are located on a document page: detected
@@ -1202,7 +1137,7 @@ module Aws::Textract
       :polygon,
       :rotation_angle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -1211,7 +1146,7 @@ module Aws::Textract
     class GetAdapterRequest < Struct.new(
       :adapter_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -1244,7 +1179,7 @@ module Aws::Textract
       :auto_update,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -1257,7 +1192,7 @@ module Aws::Textract
       :adapter_id,
       :adapter_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -1324,7 +1259,7 @@ module Aws::Textract
       :evaluation_metrics,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1347,7 +1282,7 @@ module Aws::Textract
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -1384,7 +1319,7 @@ module Aws::Textract
       :status_message,
       :analyze_document_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1405,7 +1340,7 @@ module Aws::Textract
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -1441,7 +1376,7 @@ module Aws::Textract
       :status_message,
       :detect_document_text_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1462,7 +1397,7 @@ module Aws::Textract
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -1498,7 +1433,7 @@ module Aws::Textract
       :status_message,
       :analyze_expense_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1521,7 +1456,7 @@ module Aws::Textract
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -1557,7 +1492,7 @@ module Aws::Textract
       :status_message,
       :analyze_lending_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -1567,7 +1502,7 @@ module Aws::Textract
     class GetLendingAnalysisSummaryRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_metadata
@@ -1597,7 +1532,7 @@ module Aws::Textract
       :status_message,
       :analyze_lending_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the
@@ -1617,7 +1552,7 @@ module Aws::Textract
       :human_loop_activation_reasons,
       :human_loop_activation_conditions_evaluation_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets up the human review workflow the document will be sent to if one of the conditions
@@ -1637,7 +1572,7 @@ module Aws::Textract
       :flow_definition_arn,
       :data_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to set attributes of the image. Currently, you can declare an image as free
@@ -1649,7 +1584,7 @@ module Aws::Textract
     class HumanLoopDataAttributes < Struct.new(
       :content_classifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates you have exceeded the maximum number of active human in the loop workflows available</p>
@@ -1673,7 +1608,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>ClientRequestToken</code> input parameter was reused with an operation, but at
@@ -1687,7 +1622,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that lists each document processed in an AnalyzeID operation.</p>
@@ -1707,7 +1642,7 @@ module Aws::Textract
       :identity_document_fields,
       :blocks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Structure containing both the normalized type of the extracted information
@@ -1722,7 +1657,7 @@ module Aws::Textract
       :type,
       :value_detection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Textract experienced a service issue. Try your call again.</p>
@@ -1734,7 +1669,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid job identifier was passed to an asynchronous analysis operation.</p>
@@ -1746,7 +1681,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Indicates you do not have decrypt permissions with the KMS key entered, or the KMS key
@@ -1759,7 +1694,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An input parameter violated a constraint. For example, in synchronous operations, 
@@ -1775,7 +1710,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Textract is unable to access the S3 object that's specified in the request.
@@ -1790,14 +1725,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      PARTIAL_SUCCESS = 'PARTIAL_SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results extracted for a lending document.</p>
@@ -1820,7 +1748,7 @@ module Aws::Textract
       :geometry,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Holds the structured data returned by AnalyzeDocument for lending documents.</p>
@@ -1834,7 +1762,7 @@ module Aws::Textract
       :lending_fields,
       :signature_detections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Holds the normalized key-value pairs returned by AnalyzeDocument, including the document type, detected text, and geometry.</p>
@@ -1852,7 +1780,7 @@ module Aws::Textract
       :key_detection,
       :value_detections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the detections for each page analyzed through the Analyze Lending API.</p>
@@ -1870,7 +1798,7 @@ module Aws::Textract
       :page_classification,
       :extractions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information regarding DocumentGroups and UndetectedDocumentTypes.</p>
@@ -1884,7 +1812,7 @@ module Aws::Textract
       :document_groups,
       :undetected_document_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon Textract service limit was exceeded. For example, if you start too many
@@ -1900,7 +1828,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that holds information about the different lines found in a document's tables.</p>
@@ -1910,7 +1838,7 @@ module Aws::Textract
     class LineItemFields < Struct.new(
       :line_item_expense_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A grouping of tables which contain LineItems, with each table identified by the table's <code>LineItemGroupIndex</code>.</p>
@@ -1924,7 +1852,7 @@ module Aws::Textract
       :line_item_group_index,
       :line_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -1951,7 +1879,7 @@ module Aws::Textract
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_versions
@@ -1964,7 +1892,7 @@ module Aws::Textract
       :adapter_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute after_creation_time
@@ -1987,7 +1915,7 @@ module Aws::Textract
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapters
@@ -2000,7 +1928,7 @@ module Aws::Textract
       :adapters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2009,7 +1937,7 @@ module Aws::Textract
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2018,7 +1946,7 @@ module Aws::Textract
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information relating to dates in a document, including the type
@@ -2033,7 +1961,7 @@ module Aws::Textract
       :value,
       :value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Textract publishes the completion status of
@@ -2048,7 +1976,7 @@ module Aws::Textract
       :sns_topic_arn,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sets whether or not your output will go to a user created bucket. Used to set the name
@@ -2079,7 +2007,7 @@ module Aws::Textract
       :s3_bucket,
       :s3_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The class assigned to a Page object detected in an input document. 
@@ -2096,7 +2024,7 @@ module Aws::Textract
       :page_type,
       :page_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The X and Y coordinates of a point on a document page. The X and Y
@@ -2117,7 +2045,7 @@ module Aws::Textract
       :x,
       :y,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:x] = 0 unless options.key?(:x)
@@ -2138,7 +2066,7 @@ module Aws::Textract
       :value,
       :confidence,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of requests exceeded your throughput limit. If you want to increase this limit, 
@@ -2151,7 +2079,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2161,7 +2089,7 @@ module Aws::Textract
     class QueriesConfig < Struct.new(
       :queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Each query contains the question you want to ask in the Text and the alias you want to associate.</p>
@@ -2199,7 +2127,7 @@ module Aws::Textract
       :alias,
       :pages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how blocks are related to each other. A <code>Block</code> object
@@ -2258,19 +2186,7 @@ module Aws::Textract
       :type,
       :ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationshipType
-      VALUE = 'VALUE'
-      CHILD = 'CHILD'
-      COMPLEX_FEATURES = 'COMPLEX_FEATURES'
-      MERGED_CELL = 'MERGED_CELL'
-      TITLE = 'TITLE'
-      ANSWER = 'ANSWER'
-      TABLE = 'TABLE'
-      TABLE_TITLE = 'TABLE_TITLE'
-      TABLE_FOOTER = 'TABLE_FOOTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Returned when an operation tried to access a nonexistent resource. </p>
@@ -2282,7 +2198,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 bucket name and file name that identifies the document.</p>
@@ -2307,12 +2223,7 @@ module Aws::Textract
       :name,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SelectionStatus
-      SELECTED = 'SELECTED'
-      NOT_SELECTED = 'NOT_SELECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returned when a request cannot be completed as it would exceed a maximum service quota.</p>
@@ -2324,7 +2235,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information regarding a detected signature on a page.</p>
@@ -2339,7 +2250,7 @@ module Aws::Textract
       :confidence,
       :geometry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the pages of a document, defined by logical boundary.</p>
@@ -2353,7 +2264,7 @@ module Aws::Textract
       :index,
       :pages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_location
@@ -2412,7 +2323,7 @@ module Aws::Textract
       :queries_config,
       :adapters_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2423,7 +2334,7 @@ module Aws::Textract
     class StartDocumentAnalysisResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_location
@@ -2465,7 +2376,7 @@ module Aws::Textract
       :output_config,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2476,7 +2387,7 @@ module Aws::Textract
     class StartDocumentTextDetectionResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_location
@@ -2518,7 +2429,7 @@ module Aws::Textract
       :output_config,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2528,7 +2439,7 @@ module Aws::Textract
     class StartExpenseAnalysisResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute document_location
@@ -2586,7 +2497,7 @@ module Aws::Textract
       :output_config,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -2597,7 +2508,7 @@ module Aws::Textract
     class StartLendingAnalysisResponse < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2610,17 +2521,12 @@ module Aws::Textract
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TextType
-      HANDWRITING = 'HANDWRITING'
-      PRINTED = 'PRINTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Textract is temporarily unable to process the request. Try your call again.</p>
@@ -2632,7 +2538,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about an undetected signature on a page where it was expected but not found.</p>
@@ -2642,7 +2548,7 @@ module Aws::Textract
     class UndetectedSignature < Struct.new(
       :page,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the input document isn't supported. Documents for operations can be in
@@ -2655,7 +2561,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2668,12 +2574,12 @@ module Aws::Textract
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -2694,7 +2600,7 @@ module Aws::Textract
       :adapter_name,
       :auto_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute adapter_id
@@ -2723,7 +2629,7 @@ module Aws::Textract
       :feature_types,
       :auto_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>  Indicates that a request was not valid. Check request for proper formatting. </p>
@@ -2735,11 +2641,7 @@ module Aws::Textract
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValueType
-      DATE = 'DATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A warning about an issue that occurred during asynchronous text analysis (<a>StartDocumentAnalysis</a>) or asynchronous document text detection (<a>StartDocumentTextDetection</a>). </p>
@@ -2753,7 +2655,7 @@ module Aws::Textract
       :error_code,
       :pages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

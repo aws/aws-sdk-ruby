@@ -13,15 +13,7 @@ module Aws::LookoutEquipment
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutoPromotionResult
-      MODEL_PROMOTED = 'MODEL_PROMOTED'
-      MODEL_NOT_PROMOTED = 'MODEL_NOT_PROMOTED'
-      RETRAINING_INTERNAL_ERROR = 'RETRAINING_INTERNAL_ERROR'
-      RETRAINING_CUSTOMER_ERROR = 'RETRAINING_CUSTOMER_ERROR'
-      RETRAINING_CANCELLED = 'RETRAINING_CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information on categorical values in data. </p>
@@ -36,7 +28,7 @@ module Aws::LookoutEquipment
       :status,
       :number_of_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The request could not be completed due to a conflict with the current state of the
@@ -46,7 +38,7 @@ module Aws::LookoutEquipment
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information of count and percentage. </p>
@@ -60,7 +52,7 @@ module Aws::LookoutEquipment
       :count,
       :percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percentage] = 0 unless options.key?(:percentage)
@@ -93,7 +85,7 @@ module Aws::LookoutEquipment
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -110,7 +102,7 @@ module Aws::LookoutEquipment
       :dataset_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -174,7 +166,7 @@ module Aws::LookoutEquipment
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_scheduler_arn
@@ -206,7 +198,7 @@ module Aws::LookoutEquipment
       :status,
       :model_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -235,7 +227,7 @@ module Aws::LookoutEquipment
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -249,7 +241,7 @@ module Aws::LookoutEquipment
       :label_group_name,
       :label_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -296,7 +288,7 @@ module Aws::LookoutEquipment
       :equipment,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_id
@@ -305,7 +297,7 @@ module Aws::LookoutEquipment
     class CreateLabelResponse < Struct.new(
       :label_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -391,7 +383,7 @@ module Aws::LookoutEquipment
       :off_condition,
       :model_diagnostics_output_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -404,7 +396,7 @@ module Aws::LookoutEquipment
       :model_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -452,7 +444,7 @@ module Aws::LookoutEquipment
       :promote_mode,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -469,7 +461,7 @@ module Aws::LookoutEquipment
       :model_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a specified data ingestion job, including dataset
@@ -497,7 +489,7 @@ module Aws::LookoutEquipment
       :ingestion_input_configuration,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of
@@ -523,7 +515,7 @@ module Aws::LookoutEquipment
     class DataPreProcessingConfiguration < Struct.new(
       :target_sampling_rate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> DataQualitySummary gives aggregated statistics over all the sensors about a completed
@@ -557,15 +549,7 @@ module Aws::LookoutEquipment
       :unsupported_timestamps,
       :duplicate_timestamps,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataUploadFrequency
-      PT5M = 'PT5M'
-      PT10M = 'PT10M'
-      PT15M = 'PT15M'
-      PT30M = 'PT30M'
-      PT1H = 'PT1H'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the data schema used with the given dataset. </p>
@@ -575,14 +559,7 @@ module Aws::LookoutEquipment
     class DatasetSchema < Struct.new(
       :inline_data_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetStatus
-      CREATED = 'CREATED'
-      INGESTION_IN_PROGRESS = 'INGESTION_IN_PROGRESS'
-      ACTIVE = 'ACTIVE'
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the specific data set, including name, ARN, and status.
@@ -605,7 +582,7 @@ module Aws::LookoutEquipment
       :status,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -614,7 +591,7 @@ module Aws::LookoutEquipment
     class DeleteDatasetRequest < Struct.new(
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_scheduler_name
@@ -623,7 +600,7 @@ module Aws::LookoutEquipment
     class DeleteInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -633,7 +610,7 @@ module Aws::LookoutEquipment
     class DeleteLabelGroupRequest < Struct.new(
       :label_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -648,7 +625,7 @@ module Aws::LookoutEquipment
       :label_group_name,
       :label_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -657,7 +634,7 @@ module Aws::LookoutEquipment
     class DeleteModelRequest < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -667,7 +644,7 @@ module Aws::LookoutEquipment
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -676,7 +653,7 @@ module Aws::LookoutEquipment
     class DeleteRetrainingSchedulerRequest < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -685,7 +662,7 @@ module Aws::LookoutEquipment
     class DescribeDataIngestionJobRequest < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -756,7 +733,7 @@ module Aws::LookoutEquipment
       :data_end_time,
       :source_dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -765,7 +742,7 @@ module Aws::LookoutEquipment
     class DescribeDatasetRequest < Struct.new(
       :dataset_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -837,7 +814,7 @@ module Aws::LookoutEquipment
       :data_end_time,
       :source_dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_scheduler_name
@@ -846,7 +823,7 @@ module Aws::LookoutEquipment
     class DescribeInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -924,7 +901,7 @@ module Aws::LookoutEquipment
       :server_side_kms_key_id,
       :latest_inference_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -933,7 +910,7 @@ module Aws::LookoutEquipment
     class DescribeLabelGroupRequest < Struct.new(
       :label_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -959,7 +936,7 @@ module Aws::LookoutEquipment
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -972,7 +949,7 @@ module Aws::LookoutEquipment
       :label_group_name,
       :label_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -1021,7 +998,7 @@ module Aws::LookoutEquipment
       :equipment,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1030,7 +1007,7 @@ module Aws::LookoutEquipment
     class DescribeModelRequest < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1250,7 +1227,7 @@ module Aws::LookoutEquipment
       :model_diagnostics_output_configuration,
       :model_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1263,7 +1240,7 @@ module Aws::LookoutEquipment
       :model_name,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1453,7 +1430,7 @@ module Aws::LookoutEquipment
       :model_diagnostics_results_object,
       :model_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1463,7 +1440,7 @@ module Aws::LookoutEquipment
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_revision_id
@@ -1484,7 +1461,7 @@ module Aws::LookoutEquipment
       :creation_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1493,7 +1470,7 @@ module Aws::LookoutEquipment
     class DescribeRetrainingSchedulerRequest < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1539,7 +1516,7 @@ module Aws::LookoutEquipment
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information abount duplicate timestamps in the dataset. </p>
@@ -1549,7 +1526,7 @@ module Aws::LookoutEquipment
     class DuplicateTimestamps < Struct.new(
       :total_number_of_duplicate_timestamps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_dataset_arn
@@ -1578,7 +1555,7 @@ module Aws::LookoutEquipment
       :server_side_kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -1599,7 +1576,7 @@ module Aws::LookoutEquipment
       :status,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_model_version_arn
@@ -1660,7 +1637,7 @@ module Aws::LookoutEquipment
       :tags,
       :inference_data_import_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -1685,13 +1662,7 @@ module Aws::LookoutEquipment
       :model_version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceDataImportStrategy
-      NO_IMPORT = 'NO_IMPORT'
-      ADD_WHEN_EMPTY = 'ADD_WHEN_EMPTY'
-      OVERWRITE = 'OVERWRITE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the specific inference event, including start and end time,
@@ -1724,13 +1695,7 @@ module Aws::LookoutEquipment
       :diagnostics,
       :event_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceExecutionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the specific inference execution, including input and output
@@ -1802,7 +1767,7 @@ module Aws::LookoutEquipment
       :model_version,
       :model_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration information for the input data for the inference, including
@@ -1824,7 +1789,7 @@ module Aws::LookoutEquipment
       :input_time_zone_offset,
       :inference_input_name_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration information for the input data for the inference, including
@@ -1840,7 +1805,7 @@ module Aws::LookoutEquipment
       :timestamp_format,
       :component_timestamp_delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies configuration information for the output results from for the inference,
@@ -1856,7 +1821,7 @@ module Aws::LookoutEquipment
       :s3_output_configuration,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies configuration information for the input data for the inference, including
@@ -1871,7 +1836,7 @@ module Aws::LookoutEquipment
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies configuration information for the output results from the inference,
@@ -1886,14 +1851,7 @@ module Aws::LookoutEquipment
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceSchedulerStatus
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the specific inference scheduler, including data delay
@@ -1944,7 +1902,7 @@ module Aws::LookoutEquipment
       :data_upload_frequency,
       :latest_inference_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gives statistics about how many files have been ingested, and which files have not been
@@ -1964,7 +1922,7 @@ module Aws::LookoutEquipment
       :ingested_number_of_files,
       :discarded_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies configuration information for the input data for the data ingestion job,
@@ -1976,14 +1934,7 @@ module Aws::LookoutEquipment
     class IngestionInputConfiguration < Struct.new(
       :s3_input_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IngestionJobStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies S3 configuration information for the input data for the data ingestion job.
@@ -2009,7 +1960,7 @@ module Aws::LookoutEquipment
       :prefix,
       :key_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises aggregated information on sensors having insufficient data.
@@ -2026,7 +1977,7 @@ module Aws::LookoutEquipment
       :missing_complete_sensor_data,
       :sensors_with_short_date_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Processing of the request has failed because of an unknown error, exception or failure.
@@ -2036,7 +1987,7 @@ module Aws::LookoutEquipment
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises aggregated information on sensors having insufficient data.
@@ -2051,7 +2002,7 @@ module Aws::LookoutEquipment
       :affected_sensor_count,
       :total_number_of_invalid_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains information about the label group. </p>
@@ -2073,13 +2024,7 @@ module Aws::LookoutEquipment
       :created_at,
       :updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LabelRating
-      ANOMALY = 'ANOMALY'
-      NO_ANOMALY = 'NO_ANOMALY'
-      NEUTRAL = 'NEUTRAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information about the label. </p>
@@ -2123,7 +2068,7 @@ module Aws::LookoutEquipment
       :equipment,
       :created_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration information for the S3 location being used to hold label
@@ -2138,7 +2083,7 @@ module Aws::LookoutEquipment
       :s3_input_configuration,
       :label_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location information (prefix and bucket name) for the s3 location being used for
@@ -2153,7 +2098,7 @@ module Aws::LookoutEquipment
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information on large gaps between consecutive timestamps in data.
@@ -2173,12 +2118,7 @@ module Aws::LookoutEquipment
       :number_of_large_timestamp_gaps,
       :max_timestamp_gap_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LatestInferenceResult
-      ANOMALOUS = 'ANOMALOUS'
-      NORMAL = 'NORMAL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -2200,7 +2140,7 @@ module Aws::LookoutEquipment
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2215,7 +2155,7 @@ module Aws::LookoutEquipment
       :next_token,
       :data_ingestion_job_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2233,7 +2173,7 @@ module Aws::LookoutEquipment
       :max_results,
       :dataset_name_begins_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2248,7 +2188,7 @@ module Aws::LookoutEquipment
       :next_token,
       :dataset_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2276,7 +2216,7 @@ module Aws::LookoutEquipment
       :interval_start_time,
       :interval_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2292,7 +2232,7 @@ module Aws::LookoutEquipment
       :next_token,
       :inference_event_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2324,7 +2264,7 @@ module Aws::LookoutEquipment
       :data_end_time_before,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2346,7 +2286,7 @@ module Aws::LookoutEquipment
       :next_token,
       :inference_execution_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2373,7 +2313,7 @@ module Aws::LookoutEquipment
       :model_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2388,7 +2328,7 @@ module Aws::LookoutEquipment
       :next_token,
       :inference_scheduler_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name_begins_with
@@ -2406,7 +2346,7 @@ module Aws::LookoutEquipment
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2420,7 +2360,7 @@ module Aws::LookoutEquipment
       :next_token,
       :label_group_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -2455,7 +2395,7 @@ module Aws::LookoutEquipment
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2474,7 +2414,7 @@ module Aws::LookoutEquipment
       :next_token,
       :label_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -2519,7 +2459,7 @@ module Aws::LookoutEquipment
       :max_model_version,
       :min_model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2541,7 +2481,7 @@ module Aws::LookoutEquipment
       :next_token,
       :model_version_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2568,7 +2508,7 @@ module Aws::LookoutEquipment
       :model_name_begins_with,
       :dataset_name_begins_with,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2583,7 +2523,7 @@ module Aws::LookoutEquipment
       :next_token,
       :model_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name_begins_with
@@ -2607,7 +2547,7 @@ module Aws::LookoutEquipment
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute retraining_scheduler_summaries
@@ -2622,7 +2562,7 @@ module Aws::LookoutEquipment
       :retraining_scheduler_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -2646,7 +2586,7 @@ module Aws::LookoutEquipment
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sensor_statistics_summaries
@@ -2662,7 +2602,7 @@ module Aws::LookoutEquipment
       :sensor_statistics_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2672,7 +2612,7 @@ module Aws::LookoutEquipment
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2681,7 +2621,7 @@ module Aws::LookoutEquipment
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information on sensors that have sensor data completely missing.
@@ -2692,7 +2632,7 @@ module Aws::LookoutEquipment
     class MissingCompleteSensorData < Struct.new(
       :affected_sensor_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises aggregated information on sensors having missing data. </p>
@@ -2706,7 +2646,7 @@ module Aws::LookoutEquipment
       :affected_sensor_count,
       :total_number_of_missing_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output configuration information for the pointwise model diagnostics for an Amazon Lookout for Equipment model.</p>
@@ -2720,7 +2660,7 @@ module Aws::LookoutEquipment
       :s3_output_configuration,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location for the pointwise model diagnostics for an Amazon Lookout for Equipment model. </p>
@@ -2741,25 +2681,7 @@ module Aws::LookoutEquipment
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelPromoteMode
-      MANAGED = 'MANAGED'
-      MANUAL = 'MANUAL'
-    end
-
-    module ModelQuality
-      QUALITY_THRESHOLD_MET = 'QUALITY_THRESHOLD_MET'
-      CANNOT_DETERMINE_QUALITY = 'CANNOT_DETERMINE_QUALITY'
-      POOR_QUALITY_DETECTED = 'POOR_QUALITY_DETECTED'
-    end
-
-    module ModelStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the specified machine learning model, including dataset and
@@ -2840,21 +2762,7 @@ module Aws::LookoutEquipment
       :model_diagnostics_output_configuration,
       :model_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModelVersionSourceType
-      TRAINING = 'TRAINING'
-      RETRAINING = 'RETRAINING'
-      IMPORT = 'IMPORT'
-    end
-
-    module ModelVersionStatus
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      IMPORT_IN_PROGRESS = 'IMPORT_IN_PROGRESS'
-      CANCELED = 'CANCELED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the specific model version.</p>
@@ -2902,7 +2810,7 @@ module Aws::LookoutEquipment
       :source_type,
       :model_quality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information on monotonic values in the data. </p>
@@ -2917,13 +2825,7 @@ module Aws::LookoutEquipment
       :status,
       :monotonicity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Monotonicity
-      DECREASING = 'DECREASING'
-      INCREASING = 'INCREASING'
-      STATIC = 'STATIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information on operating modes in data. </p>
@@ -2934,7 +2836,7 @@ module Aws::LookoutEquipment
     class MultipleOperatingModes < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2957,7 +2859,7 @@ module Aws::LookoutEquipment
       :policy_revision_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2970,7 +2872,7 @@ module Aws::LookoutEquipment
       :resource_arn,
       :policy_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The resource requested could not be found. Verify the resource ID and retry your
@@ -2980,14 +2882,7 @@ module Aws::LookoutEquipment
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RetrainingSchedulerStatus
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the specified retraining scheduler, including model name,
@@ -3020,7 +2915,7 @@ module Aws::LookoutEquipment
       :retraining_frequency,
       :lookback_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an S3 bucket. </p>
@@ -3035,7 +2930,7 @@ module Aws::LookoutEquipment
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Summary of ingestion statistics like whether data exists, number of missing values,
@@ -3106,7 +3001,7 @@ module Aws::LookoutEquipment
       :data_start_time,
       :data_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:data_exists] = false unless options.key?(:data_exists)
@@ -3121,7 +3016,7 @@ module Aws::LookoutEquipment
     class SensorsWithShortDateRange < Struct.new(
       :affected_sensor_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Resource limitations have been exceeded. </p>
@@ -3130,7 +3025,7 @@ module Aws::LookoutEquipment
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -3154,7 +3049,7 @@ module Aws::LookoutEquipment
       :role_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -3167,7 +3062,7 @@ module Aws::LookoutEquipment
       :job_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_scheduler_name
@@ -3176,7 +3071,7 @@ module Aws::LookoutEquipment
     class StartInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -3202,7 +3097,7 @@ module Aws::LookoutEquipment
       :inference_scheduler_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3211,7 +3106,7 @@ module Aws::LookoutEquipment
     class StartRetrainingSchedulerRequest < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3228,12 +3123,7 @@ module Aws::LookoutEquipment
       :model_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatisticalIssueStatus
-      POTENTIAL_ISSUE_DETECTED = 'POTENTIAL_ISSUE_DETECTED'
-      NO_ISSUE_DETECTED = 'NO_ISSUE_DETECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_scheduler_name
@@ -3242,7 +3132,7 @@ module Aws::LookoutEquipment
     class StopInferenceSchedulerRequest < Struct.new(
       :inference_scheduler_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_arn
@@ -3269,7 +3159,7 @@ module Aws::LookoutEquipment
       :inference_scheduler_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3278,7 +3168,7 @@ module Aws::LookoutEquipment
     class StopRetrainingSchedulerRequest < Struct.new(
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3295,7 +3185,7 @@ module Aws::LookoutEquipment
       :model_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag is a key-value pair that can be added to a resource as metadata. </p>
@@ -3309,7 +3199,7 @@ module Aws::LookoutEquipment
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3324,26 +3214,12 @@ module Aws::LookoutEquipment
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetSamplingRate
-      PT1S = 'PT1S'
-      PT5S = 'PT5S'
-      PT10S = 'PT10S'
-      PT15S = 'PT15S'
-      PT30S = 'PT30S'
-      PT1M = 'PT1M'
-      PT5M = 'PT5M'
-      PT10M = 'PT10M'
-      PT15M = 'PT15M'
-      PT30M = 'PT30M'
-      PT1H = 'PT1H'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -3352,7 +3228,7 @@ module Aws::LookoutEquipment
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Entity that comprises information abount unsupported timestamps in the dataset. </p>
@@ -3362,7 +3238,7 @@ module Aws::LookoutEquipment
     class UnsupportedTimestamps < Struct.new(
       :total_number_of_unsupported_timestamps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3376,12 +3252,12 @@ module Aws::LookoutEquipment
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3396,7 +3272,7 @@ module Aws::LookoutEquipment
       :model_name,
       :model_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3431,7 +3307,7 @@ module Aws::LookoutEquipment
       :current_active_version_arn,
       :previous_active_version_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inference_scheduler_name
@@ -3473,7 +3349,7 @@ module Aws::LookoutEquipment
       :data_output_configuration,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute label_group_name
@@ -3488,7 +3364,7 @@ module Aws::LookoutEquipment
       :label_group_name,
       :fault_codes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3511,7 +3387,7 @@ module Aws::LookoutEquipment
       :role_arn,
       :model_diagnostics_output_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute model_name
@@ -3554,7 +3430,7 @@ module Aws::LookoutEquipment
       :lookback_window,
       :promote_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services
@@ -3564,7 +3440,7 @@ module Aws::LookoutEquipment
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

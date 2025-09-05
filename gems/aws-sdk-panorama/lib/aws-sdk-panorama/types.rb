@@ -12,7 +12,7 @@ module Aws::Panorama
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a beta appliance software update.</p>
@@ -22,7 +22,7 @@ module Aws::Panorama
     class AlternateSoftwareMetadata < Struct.new(
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An application instance on a device.</p>
@@ -76,7 +76,7 @@ module Aws::Panorama
       :tags,
       :runtime_context_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target resource is in use.</p>
@@ -101,7 +101,7 @@ module Aws::Panorama
       :error_id,
       :error_arguments,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflict exception error argument.</p>
@@ -115,7 +115,7 @@ module Aws::Panorama
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -152,7 +152,7 @@ module Aws::Panorama
       :default_runtime_context_device,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -161,7 +161,7 @@ module Aws::Panorama
     class CreateApplicationInstanceOutput < Struct.new(
       :application_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_ids
@@ -178,7 +178,7 @@ module Aws::Panorama
       :device_job_config,
       :job_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -187,7 +187,7 @@ module Aws::Panorama
     class CreateJobForDevicesOutput < Struct.new(
       :jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_type
@@ -220,7 +220,7 @@ module Aws::Panorama
       :template_parameters,
       :job_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -229,7 +229,7 @@ module Aws::Panorama
     class CreateNodeFromTemplateJobOutput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_type
@@ -254,7 +254,7 @@ module Aws::Panorama
       :client_token,
       :job_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -263,7 +263,7 @@ module Aws::Panorama
     class CreatePackageImportJobOutput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_name
@@ -276,7 +276,7 @@ module Aws::Panorama
       :package_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_id
@@ -293,7 +293,7 @@ module Aws::Panorama
       :arn,
       :storage_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -302,7 +302,7 @@ module Aws::Panorama
     class DeleteDeviceInput < Struct.new(
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -311,7 +311,7 @@ module Aws::Panorama
     class DeleteDeviceOutput < Struct.new(
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_id
@@ -325,12 +325,12 @@ module Aws::Panorama
       :package_id,
       :force_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePackageOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_account
@@ -355,12 +355,12 @@ module Aws::Panorama
       :patch_version,
       :updated_latest_patch_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterPackageVersionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -369,7 +369,7 @@ module Aws::Panorama
     class DescribeApplicationInstanceDetailsInput < Struct.new(
       :application_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -406,7 +406,7 @@ module Aws::Panorama
       :created_time,
       :application_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -415,7 +415,7 @@ module Aws::Panorama
     class DescribeApplicationInstanceInput < Struct.new(
       :application_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -480,7 +480,7 @@ module Aws::Panorama
       :tags,
       :runtime_context_states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -489,7 +489,7 @@ module Aws::Panorama
     class DescribeDeviceInput < Struct.new(
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -498,7 +498,7 @@ module Aws::Panorama
     class DescribeDeviceJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -539,7 +539,7 @@ module Aws::Panorama
       :created_time,
       :job_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -624,7 +624,7 @@ module Aws::Panorama
       :latest_device_job,
       :device_aggregated_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -633,7 +633,7 @@ module Aws::Panorama
     class DescribeNodeFromTemplateJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -686,7 +686,7 @@ module Aws::Panorama
       :template_parameters,
       :job_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_id
@@ -699,7 +699,7 @@ module Aws::Panorama
       :node_id,
       :owner_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_id
@@ -760,7 +760,7 @@ module Aws::Panorama
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -769,7 +769,7 @@ module Aws::Panorama
     class DescribePackageImportJobInput < Struct.new(
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -818,7 +818,7 @@ module Aws::Panorama
       :status_message,
       :job_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_id
@@ -827,7 +827,7 @@ module Aws::Panorama
     class DescribePackageInput < Struct.new(
       :package_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_id
@@ -864,7 +864,7 @@ module Aws::Panorama
       :created_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_account
@@ -885,7 +885,7 @@ module Aws::Panorama
       :package_version,
       :patch_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_account
@@ -930,7 +930,7 @@ module Aws::Panorama
       :status_description,
       :registered_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_latest_patch] = false unless options.key?(:is_latest_patch)
@@ -993,7 +993,7 @@ module Aws::Panorama
       :latest_device_job,
       :device_aggregated_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job that runs on a device.</p>
@@ -1019,7 +1019,7 @@ module Aws::Panorama
       :created_time,
       :job_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job's configuration.</p>
@@ -1029,7 +1029,7 @@ module Aws::Panorama
     class DeviceJobConfig < Struct.new(
       :ota_job_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A device's network configuration.</p>
@@ -1043,7 +1043,7 @@ module Aws::Panorama
       :connection_type,
       :static_ip_connection_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A device's Ethernet status.</p>
@@ -1061,7 +1061,7 @@ module Aws::Panorama
       :connection_status,
       :hw_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
@@ -1074,7 +1074,7 @@ module Aws::Panorama
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retry_after_seconds] = 0 unless options.key?(:retry_after_seconds)
@@ -1093,7 +1093,7 @@ module Aws::Panorama
       :job_id,
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tags for a job.</p>
@@ -1107,7 +1107,7 @@ module Aws::Panorama
       :resource_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about the latest device job.</p>
@@ -1125,7 +1125,7 @@ module Aws::Panorama
       :status,
       :job_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -1142,7 +1142,7 @@ module Aws::Panorama
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_objects
@@ -1155,7 +1155,7 @@ module Aws::Panorama
       :package_objects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -1172,7 +1172,7 @@ module Aws::Panorama
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_instances
@@ -1185,7 +1185,7 @@ module Aws::Panorama
       :node_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -1206,7 +1206,7 @@ module Aws::Panorama
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instances
@@ -1219,7 +1219,7 @@ module Aws::Panorama
       :application_instances,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1248,7 +1248,7 @@ module Aws::Panorama
       :name_filter,
       :device_aggregated_status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -1265,7 +1265,7 @@ module Aws::Panorama
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_jobs
@@ -1278,7 +1278,7 @@ module Aws::Panorama
       :device_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute devices
@@ -1291,7 +1291,7 @@ module Aws::Panorama
       :devices,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1304,7 +1304,7 @@ module Aws::Panorama
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_from_template_jobs
@@ -1317,7 +1317,7 @@ module Aws::Panorama
       :node_from_template_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute category
@@ -1350,7 +1350,7 @@ module Aws::Panorama
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute nodes
@@ -1363,7 +1363,7 @@ module Aws::Panorama
       :nodes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1376,7 +1376,7 @@ module Aws::Panorama
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute package_import_jobs
@@ -1389,7 +1389,7 @@ module Aws::Panorama
       :package_import_jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1402,7 +1402,7 @@ module Aws::Panorama
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute packages
@@ -1415,7 +1415,7 @@ module Aws::Panorama
       :packages,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1424,7 +1424,7 @@ module Aws::Panorama
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1433,7 +1433,7 @@ module Aws::Panorama
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter overrides for an application instance. This is a JSON document that has a single key
@@ -1445,7 +1445,7 @@ module Aws::Panorama
       :payload_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PayloadData < ManifestOverridesPayload; end
       class Unknown < ManifestOverridesPayload; end
@@ -1461,7 +1461,7 @@ module Aws::Panorama
       :payload_data,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PayloadData < ManifestPayload; end
       class Unknown < ManifestPayload; end
@@ -1482,7 +1482,7 @@ module Aws::Panorama
       :ethernet1,
       :ntp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network status of a device.</p>
@@ -1504,7 +1504,7 @@ module Aws::Panorama
       :ntp_status,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An application node that represents a camera stream, a model, code, or output.</p>
@@ -1554,7 +1554,7 @@ module Aws::Panorama
       :description,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job to create a camera stream node.</p>
@@ -1584,7 +1584,7 @@ module Aws::Panorama
       :created_time,
       :node_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A node input port.</p>
@@ -1610,7 +1610,7 @@ module Aws::Panorama
       :default_value,
       :max_connections,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_connections] = 0 unless options.key?(:max_connections)
@@ -1649,7 +1649,7 @@ module Aws::Panorama
       :node_name,
       :current_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A node interface.</p>
@@ -1663,7 +1663,7 @@ module Aws::Panorama
       :inputs,
       :outputs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A node output port.</p>
@@ -1681,7 +1681,7 @@ module Aws::Panorama
       :description,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A signal to a camera node to start or stop processing video.</p>
@@ -1695,7 +1695,7 @@ module Aws::Panorama
       :node_instance_id,
       :signal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network time protocol (NTP) server settings. Use this option to connect to local NTP servers instead of
@@ -1706,7 +1706,7 @@ module Aws::Panorama
     class NtpPayload < Struct.new(
       :ntp_servers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an NTP server connection.</p>
@@ -1724,7 +1724,7 @@ module Aws::Panorama
       :ip_address,
       :ntp_server_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An over-the-air update (OTA) job configuration.</p>
@@ -1738,7 +1738,7 @@ module Aws::Panorama
       :image_version,
       :allow_major_version_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_major_version_update] = false unless options.key?(:allow_major_version_update)
@@ -1757,7 +1757,7 @@ module Aws::Panorama
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A job to import a package version.</p>
@@ -1787,7 +1787,7 @@ module Aws::Panorama
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for a package import job.</p>
@@ -1797,7 +1797,7 @@ module Aws::Panorama
     class PackageImportJobInputConfig < Struct.new(
       :package_version_input_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Results of a package import job.</p>
@@ -1819,7 +1819,7 @@ module Aws::Panorama
       :patch_version,
       :output_s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An output configuration for a package import job.</p>
@@ -1829,7 +1829,7 @@ module Aws::Panorama
     class PackageImportJobOutputConfig < Struct.new(
       :package_version_output_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A package summary.</p>
@@ -1855,7 +1855,7 @@ module Aws::Panorama
       :created_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A package object.</p>
@@ -1873,7 +1873,7 @@ module Aws::Panorama
       :package_version,
       :patch_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A package version input configuration.</p>
@@ -1883,7 +1883,7 @@ module Aws::Panorama
     class PackageVersionInputConfig < Struct.new(
       :s3_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A package version output configuration.</p>
@@ -1901,7 +1901,7 @@ module Aws::Panorama
       :package_version,
       :mark_latest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:mark_latest] = false unless options.key?(:mark_latest)
@@ -1927,7 +1927,7 @@ module Aws::Panorama
       :tags,
       :networking_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -1952,7 +1952,7 @@ module Aws::Panorama
       :certificates,
       :iot_thing_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_account
@@ -1977,12 +1977,12 @@ module Aws::Panorama
       :patch_version,
       :mark_latest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RegisterPackageVersionOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -1991,12 +1991,12 @@ module Aws::Panorama
     class RemoveApplicationInstanceInput < Struct.new(
       :application_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveApplicationInstanceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An application instance's state.</p>
@@ -2018,7 +2018,7 @@ module Aws::Panorama
       :device_reported_status,
       :device_reported_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target resource was not found.</p>
@@ -2035,7 +2035,7 @@ module Aws::Panorama
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A location in Amazon S3.</p>
@@ -2053,7 +2053,7 @@ module Aws::Panorama
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a limit to be exceeded.</p>
@@ -2078,7 +2078,7 @@ module Aws::Panorama
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -2091,7 +2091,7 @@ module Aws::Panorama
       :application_instance_id,
       :node_signals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_instance_id
@@ -2100,7 +2100,7 @@ module Aws::Panorama
     class SignalApplicationInstanceNodeInstancesOutput < Struct.new(
       :application_instance_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A static IP configuration.</p>
@@ -2122,7 +2122,7 @@ module Aws::Panorama
       :dns,
       :default_gateway,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A storage location.</p>
@@ -2148,7 +2148,7 @@ module Aws::Panorama
       :binary_prefix_location,
       :manifest_prefix_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2161,12 +2161,12 @@ module Aws::Panorama
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2179,12 +2179,12 @@ module Aws::Panorama
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -2197,7 +2197,7 @@ module Aws::Panorama
       :device_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_id
@@ -2206,7 +2206,7 @@ module Aws::Panorama
     class UpdateDeviceMetadataOutput < Struct.new(
       :device_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request contains an invalid parameter value.</p>
@@ -2231,7 +2231,7 @@ module Aws::Panorama
       :error_arguments,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validation exception error argument.</p>
@@ -2245,7 +2245,7 @@ module Aws::Panorama
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validation exception field.</p>
@@ -2259,7 +2259,7 @@ module Aws::Panorama
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

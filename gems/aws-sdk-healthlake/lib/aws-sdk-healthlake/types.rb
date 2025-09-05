@@ -12,18 +12,7 @@ module Aws::HealthLake
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthorizationStrategy
-      SMARTV1 = 'SMART_ON_FHIR_V1'
-      SMART_ON_FHIR = 'SMART_ON_FHIR'
-      AWS_AUTH = 'AWS_AUTH'
-    end
-
-    module CmkType
-      CM_CMK = 'CUSTOMER_MANAGED_KMS_KEY'
-      AO_CMK = 'AWS_OWNED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data store is in a transition state and the user requested action can not be performed.</p>
@@ -32,7 +21,7 @@ module Aws::HealthLake
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_name
@@ -70,7 +59,7 @@ module Aws::HealthLake
       :tags,
       :identity_provider_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -93,7 +82,7 @@ module Aws::HealthLake
       :datastore_status,
       :datastore_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filters applied to data store query.</p>
@@ -117,7 +106,7 @@ module Aws::HealthLake
       :created_before,
       :created_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Displays the properties of the data store, including the ID, ARN, name, and the status of the data store.</p>
@@ -169,15 +158,7 @@ module Aws::HealthLake
       :identity_provider_configuration,
       :error_cause,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatastoreStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      CREATE_FAILED = 'CREATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -186,7 +167,7 @@ module Aws::HealthLake
     class DeleteFHIRDatastoreRequest < Struct.new(
       :datastore_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -208,7 +189,7 @@ module Aws::HealthLake
       :datastore_status,
       :datastore_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -217,7 +198,7 @@ module Aws::HealthLake
     class DescribeFHIRDatastoreRequest < Struct.new(
       :datastore_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_properties
@@ -227,7 +208,7 @@ module Aws::HealthLake
     class DescribeFHIRDatastoreResponse < Struct.new(
       :datastore_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -240,7 +221,7 @@ module Aws::HealthLake
       :datastore_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_properties
@@ -249,7 +230,7 @@ module Aws::HealthLake
     class DescribeFHIRExportJobResponse < Struct.new(
       :export_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -262,7 +243,7 @@ module Aws::HealthLake
       :datastore_id,
       :job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job_properties
@@ -271,12 +252,7 @@ module Aws::HealthLake
     class DescribeFHIRImportJobResponse < Struct.new(
       :import_job_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ErrorCategory
-      RETRYABLE_ERROR = 'RETRYABLE_ERROR'
-      NON_RETRYABLE_ERROR = 'NON_RETRYABLE_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error info of the create/delete data store operation.</p>
@@ -290,7 +266,7 @@ module Aws::HealthLake
       :error_message,
       :error_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of a FHIR export job, including the ID, ARN, name, and the status of the job.</p>
@@ -332,11 +308,7 @@ module Aws::HealthLake
       :data_access_role_arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FHIRVersion
-      R4 = 'R4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The identity provider configuration that you gave when the data store was created.</p>
@@ -368,7 +340,7 @@ module Aws::HealthLake
       :metadata,
       :idp_lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fine_grained_authorization_enabled] = false unless options.key?(:fine_grained_authorization_enabled)
@@ -423,7 +395,7 @@ module Aws::HealthLake
       :data_access_role_arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The input properties for an import job.</p>
@@ -434,7 +406,7 @@ module Aws::HealthLake
       :s3_uri,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Uri < InputDataConfig; end
       class Unknown < InputDataConfig; end
@@ -446,7 +418,7 @@ module Aws::HealthLake
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The progress report of an import job.</p>
@@ -484,20 +456,7 @@ module Aws::HealthLake
       :total_number_of_files_read_with_customer_error,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobStatus
-      SUBMITTED = 'SUBMITTED'
-      QUEUED = 'QUEUED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED_WITH_ERRORS = 'COMPLETED_WITH_ERRORS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      CANCEL_SUBMITTED = 'CANCEL_SUBMITTED'
-      CANCEL_IN_PROGRESS = 'CANCEL_IN_PROGRESS'
-      CANCEL_COMPLETED = 'CANCEL_COMPLETED'
-      CANCEL_FAILED = 'CANCEL_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -517,7 +476,7 @@ module Aws::HealthLake
       :cmk_type,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -534,7 +493,7 @@ module Aws::HealthLake
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_properties_list
@@ -547,7 +506,7 @@ module Aws::HealthLake
       :datastore_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -594,7 +553,7 @@ module Aws::HealthLake
       :submitted_before,
       :submitted_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_job_properties_list
@@ -611,7 +570,7 @@ module Aws::HealthLake
       :export_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datastore_id
@@ -658,7 +617,7 @@ module Aws::HealthLake
       :submitted_before,
       :submitted_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_job_properties_list
@@ -675,7 +634,7 @@ module Aws::HealthLake
       :import_job_properties_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -686,7 +645,7 @@ module Aws::HealthLake
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -697,7 +656,7 @@ module Aws::HealthLake
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output data configuration that was supplied when the export job was created.</p>
@@ -710,7 +669,7 @@ module Aws::HealthLake
       :s3_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3Configuration < OutputDataConfig; end
       class Unknown < OutputDataConfig; end
@@ -723,11 +682,7 @@ module Aws::HealthLake
     class PreloadDataConfig < Struct.new(
       :preload_data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PreloadDataType
-      SYNTHEA = 'SYNTHEA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The requested data store was not found.</p>
@@ -736,7 +691,7 @@ module Aws::HealthLake
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -756,7 +711,7 @@ module Aws::HealthLake
       :s3_uri,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -770,7 +725,7 @@ module Aws::HealthLake
     class SseConfiguration < Struct.new(
       :kms_encryption_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -795,7 +750,7 @@ module Aws::HealthLake
       :data_access_role_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -812,7 +767,7 @@ module Aws::HealthLake
       :job_status,
       :datastore_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -841,7 +796,7 @@ module Aws::HealthLake
       :data_access_role_arn,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_id
@@ -858,7 +813,7 @@ module Aws::HealthLake
       :job_status,
       :datastore_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -878,7 +833,7 @@ module Aws::HealthLake
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -895,12 +850,12 @@ module Aws::HealthLake
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user has exceeded their maximum number of allowed calls to the given API. </p>
@@ -909,7 +864,7 @@ module Aws::HealthLake
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -924,12 +879,12 @@ module Aws::HealthLake
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user input parameter was invalid.</p>
@@ -938,7 +893,7 @@ module Aws::HealthLake
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::PCS
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accounting configuration includes configurable settings for Slurm accounting. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>
@@ -26,12 +26,7 @@ module Aws::PCS
       :mode,
       :default_purge_time_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountingMode
-      STANDARD = 'STANDARD'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The accounting configuration includes configurable settings for Slurm accounting. It's a property of the <b>ClusterSlurmConfiguration</b> object.</p>
@@ -45,7 +40,7 @@ module Aws::PCS
       :mode,
       :default_purge_time_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster resource and configuration.</p>
@@ -99,7 +94,7 @@ module Aws::PCS
       :endpoints,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
@@ -121,7 +116,7 @@ module Aws::PCS
       :auth_key,
       :accounting,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
@@ -139,19 +134,7 @@ module Aws::PCS
       :slurm_custom_settings,
       :accounting,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClusterStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      SUSPENDING = 'SUSPENDING'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object returned by the <code>ListClusters</code> API action.</p>
@@ -181,7 +164,7 @@ module Aws::PCS
       :modified_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A compute node group associated with a cluster.</p>
@@ -255,7 +238,7 @@ module Aws::PCS
       :slurm_configuration,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The compute node group configuration for a queue.</p>
@@ -265,7 +248,7 @@ module Aws::PCS
     class ComputeNodeGroupConfiguration < Struct.new(
       :compute_node_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
@@ -275,7 +258,7 @@ module Aws::PCS
     class ComputeNodeGroupSlurmConfiguration < Struct.new(
       :slurm_custom_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
@@ -285,20 +268,7 @@ module Aws::PCS
     class ComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :slurm_custom_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComputeNodeGroupStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETED = 'DELETED'
-      SUSPENDING = 'SUSPENDING'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object returned by the <code>ListComputeNodeGroups</code> API action.</p>
@@ -332,7 +302,7 @@ module Aws::PCS
       :modified_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request has conflicting operations. This can occur if you're trying to perform more than 1 operation on the same resource at the same time.</p> <p> <u>Examples</u> </p> <ul> <li> <p>A cluster with the same name already exists.</p> </li> <li> <p>A cluster isn't in <code>ACTIVE</code> status.</p> </li> <li> <p>A cluster to delete is in an unstable state. For example, because it still has <code>ACTIVE</code> node groups or queues.</p> </li> <li> <p>A queue already exists in a cluster.</p> </li> </ul>
@@ -349,7 +319,7 @@ module Aws::PCS
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -382,7 +352,7 @@ module Aws::PCS
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -391,7 +361,7 @@ module Aws::PCS
     class CreateClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -448,7 +418,7 @@ module Aws::PCS
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_node_group
@@ -457,7 +427,7 @@ module Aws::PCS
     class CreateComputeNodeGroupResponse < Struct.new(
       :compute_node_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -482,7 +452,7 @@ module Aws::PCS
       :client_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue
@@ -491,7 +461,7 @@ module Aws::PCS
     class CreateQueueResponse < Struct.new(
       :queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon EC2 launch template Amazon Web Services PCS uses to launch compute nodes.</p>
@@ -505,7 +475,7 @@ module Aws::PCS
       :id,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -518,12 +488,12 @@ module Aws::PCS
       :cluster_identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteClusterResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -540,12 +510,12 @@ module Aws::PCS
       :compute_node_group_identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteComputeNodeGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -562,12 +532,12 @@ module Aws::PCS
       :queue_identifier,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteQueueResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An endpoint available for interaction with the scheduler.</p>
@@ -593,12 +563,7 @@ module Aws::PCS
       :ipv6_address,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointType
-      SLURMCTLD = 'SLURMCTLD'
-      SLURMDBD = 'SLURMDBD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that occurred during resource creation.</p>
@@ -612,7 +577,7 @@ module Aws::PCS
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -621,7 +586,7 @@ module Aws::PCS
     class GetClusterRequest < Struct.new(
       :cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster
@@ -630,7 +595,7 @@ module Aws::PCS
     class GetClusterResponse < Struct.new(
       :cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -643,7 +608,7 @@ module Aws::PCS
       :cluster_identifier,
       :compute_node_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_node_group
@@ -652,7 +617,7 @@ module Aws::PCS
     class GetComputeNodeGroupResponse < Struct.new(
       :compute_node_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -665,7 +630,7 @@ module Aws::PCS
       :cluster_identifier,
       :queue_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue
@@ -674,7 +639,7 @@ module Aws::PCS
     class GetQueueResponse < Struct.new(
       :queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An EC2 instance configuration Amazon Web Services PCS uses to launch compute nodes.</p>
@@ -684,7 +649,7 @@ module Aws::PCS
     class InstanceConfig < Struct.new(
       :instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services PCS can't process your request right now. Try again later.</p>
@@ -693,7 +658,7 @@ module Aws::PCS
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -706,7 +671,7 @@ module Aws::PCS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute clusters
@@ -719,7 +684,7 @@ module Aws::PCS
       :clusters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -736,7 +701,7 @@ module Aws::PCS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_node_groups
@@ -749,7 +714,7 @@ module Aws::PCS
       :compute_node_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -766,7 +731,7 @@ module Aws::PCS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queues
@@ -779,7 +744,7 @@ module Aws::PCS
       :queues,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -788,7 +753,7 @@ module Aws::PCS
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -797,12 +762,7 @@ module Aws::PCS
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkType
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The networking configuration for the cluster's control plane.</p>
@@ -820,7 +780,7 @@ module Aws::PCS
       :security_group_ids,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The networking configuration for the cluster's control plane.</p>
@@ -838,12 +798,7 @@ module Aws::PCS
       :security_group_ids,
       :network_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PurchaseOption
-      ONDEMAND = 'ONDEMAND'
-      SPOT = 'SPOT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A queue resource.</p>
@@ -885,19 +840,7 @@ module Aws::PCS
       :compute_node_group_configurations,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueStatus
-      CREATING = 'CREATING'
-      ACTIVE = 'ACTIVE'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_FAILED = 'DELETE_FAILED'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      SUSPENDING = 'SUSPENDING'
-      SUSPENDED = 'SUSPENDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object returned by the <code>ListQueues</code> API action.</p>
@@ -931,7 +874,7 @@ module Aws::PCS
       :modified_at,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -944,7 +887,7 @@ module Aws::PCS
       :cluster_identifier,
       :bootstrap_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute node_id
@@ -961,7 +904,7 @@ module Aws::PCS
       :shared_secret,
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource can't be found. The cluster, node group, or queue you're attempting to get, update, list, or delete doesn't exist.</p> <p> <u>Examples</u> </p>
@@ -978,7 +921,7 @@ module Aws::PCS
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the boundaries of the compute node group auto scaling.</p>
@@ -992,7 +935,7 @@ module Aws::PCS
       :min_instance_count,
       :max_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_instance_count] = 0 unless options.key?(:min_instance_count)
@@ -1012,7 +955,7 @@ module Aws::PCS
       :min_instance_count,
       :max_instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:min_instance_count] = 0 unless options.key?(:min_instance_count)
@@ -1032,7 +975,7 @@ module Aws::PCS
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster management and job scheduling software associated with the cluster.</p>
@@ -1046,11 +989,7 @@ module Aws::PCS
       :type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchedulerType
-      SLURM = 'SLURM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You exceeded your service quota. Service quotas, also referred to as limits, are the maximum number of service resources or operations for your Amazon Web Services account. To learn how to increase your service quota, see <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html">Requesting a quota increase</a> in the <i>Service Quotas User Guide</i> </p> <p> <u>Examples</u> </p> <ul> <li> <p>The max number of clusters or queues has been reached for the account.</p> </li> <li> <p>The max number of compute node groups has been reached for the associated cluster.</p> </li> <li> <p>The total of <code>maxInstances</code> across all compute node groups has been reached for associated cluster.</p> </li> </ul>
@@ -1075,13 +1014,7 @@ module Aws::PCS
       :resource_type,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Size
-      SMALL = 'SMALL'
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shared Slurm key for authentication, also known as the <b>cluster secret</b>.</p>
@@ -1095,7 +1028,7 @@ module Aws::PCS
       :secret_arn,
       :secret_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional settings that directly map to Slurm settings.</p>
@@ -1109,13 +1042,7 @@ module Aws::PCS
       :parameter_name,
       :parameter_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpotAllocationStrategy
-      LOWEST_PRICE = 'lowest-price'
-      CAPACITY_OPTIMIZED = 'capacity-optimized'
-      PRICE_CAPACITY_OPTIMIZED = 'price-capacity-optimized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional configuration when you specify <code>SPOT</code> as the <code>purchaseOption</code> for the <code>CreateComputeNodeGroup</code> API action.</p>
@@ -1125,7 +1052,7 @@ module Aws::PCS
     class SpotOptions < Struct.new(
       :allocation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1138,7 +1065,7 @@ module Aws::PCS
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request exceeded a request rate quota. Check the resource's request rate quota and try again.</p>
@@ -1151,7 +1078,7 @@ module Aws::PCS
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1164,7 +1091,7 @@ module Aws::PCS
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -1213,7 +1140,7 @@ module Aws::PCS
       :slurm_configuration,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compute_node_group
@@ -1222,7 +1149,7 @@ module Aws::PCS
     class UpdateComputeNodeGroupResponse < Struct.new(
       :compute_node_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options related to the Slurm scheduler.</p>
@@ -1232,7 +1159,7 @@ module Aws::PCS
     class UpdateComputeNodeGroupSlurmConfigurationRequest < Struct.new(
       :slurm_custom_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_identifier
@@ -1253,7 +1180,7 @@ module Aws::PCS
       :compute_node_group_configurations,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue
@@ -1262,7 +1189,7 @@ module Aws::PCS
     class UpdateQueueResponse < Struct.new(
       :queue,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request isn't valid.</p> <p> <u>Examples</u> </p> <ul> <li> <p>Your request contains malformed JSON or unsupported characters.</p> </li> <li> <p>The scheduler version isn't supported.</p> </li> <li> <p>There are networking related errors, such as network validation failure.</p> </li> <li> <p>AMI type is <code>CUSTOM</code> and the launch template doesn't define the AMI ID, or the AMI type is AL2 and the launch template defines the AMI.</p> </li> </ul>
@@ -1279,7 +1206,7 @@ module Aws::PCS
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field in a request that caused an exception.</p>
@@ -1293,14 +1220,7 @@ module Aws::PCS
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'unknownOperation'
-      CANNOT_PARSE = 'cannotParse'
-      FIELD_VALIDATION_FAILED = 'fieldValidationFailed'
-      OTHER = 'other'
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -14,13 +14,7 @@ module Aws::Route53Resolver
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Action
-      ALLOW = 'ALLOW'
-      BLOCK = 'BLOCK'
-      ALERT = 'ALERT'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -62,7 +56,7 @@ module Aws::Route53Resolver
       :mutation_protection,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association
@@ -72,7 +66,7 @@ module Aws::Route53Resolver
     class AssociateFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint_id
@@ -86,7 +80,7 @@ module Aws::Route53Resolver
       :resolver_endpoint_id,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint
@@ -95,7 +89,7 @@ module Aws::Route53Resolver
     class AssociateResolverEndpointIpAddressResponse < Struct.new(
       :resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_id
@@ -111,7 +105,7 @@ module Aws::Route53Resolver
       :resolver_query_log_config_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_association
@@ -120,7 +114,7 @@ module Aws::Route53Resolver
     class AssociateResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_id
@@ -138,7 +132,7 @@ module Aws::Route53Resolver
       :name,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_association
@@ -147,29 +141,7 @@ module Aws::Route53Resolver
     class AssociateResolverRuleResponse < Struct.new(
       :resolver_rule_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AutodefinedReverseFlag
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
-      USE_LOCAL_RESOURCE_SETTING = 'USE_LOCAL_RESOURCE_SETTING'
-    end
-
-    module BlockOverrideDnsType
-      CNAME = 'CNAME'
-    end
-
-    module BlockResponse
-      NODATA = 'NODATA'
-      NXDOMAIN = 'NXDOMAIN'
-      OVERRIDE = 'OVERRIDE'
-    end
-
-    module ConfidenceThreshold
-      LOW = 'LOW'
-      MEDIUM = 'MEDIUM'
-      HIGH = 'HIGH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested state transition isn't valid. For example, you can't delete a firewall
@@ -180,7 +152,7 @@ module Aws::Route53Resolver
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -199,7 +171,7 @@ module Aws::Route53Resolver
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list
@@ -208,7 +180,7 @@ module Aws::Route53Resolver
     class CreateFirewallDomainListResponse < Struct.new(
       :firewall_domain_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -227,7 +199,7 @@ module Aws::Route53Resolver
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group
@@ -236,7 +208,7 @@ module Aws::Route53Resolver
     class CreateFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -414,7 +386,7 @@ module Aws::Route53Resolver
       :dns_threat_protection,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule
@@ -424,7 +396,7 @@ module Aws::Route53Resolver
     class CreateFirewallRuleResponse < Struct.new(
       :firewall_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -463,7 +435,7 @@ module Aws::Route53Resolver
       :outpost_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_resolver
@@ -473,7 +445,7 @@ module Aws::Route53Resolver
     class CreateOutpostResolverResponse < Struct.new(
       :outpost_resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -589,7 +561,7 @@ module Aws::Route53Resolver
       :resolver_endpoint_type,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint
@@ -598,7 +570,7 @@ module Aws::Route53Resolver
     class CreateResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -649,7 +621,7 @@ module Aws::Route53Resolver
       :creator_request_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config
@@ -658,7 +630,7 @@ module Aws::Route53Resolver
     class CreateResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creator_request_id
@@ -711,7 +683,7 @@ module Aws::Route53Resolver
       :tags,
       :delegation_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule
@@ -720,7 +692,7 @@ module Aws::Route53Resolver
     class CreateResolverRuleResponse < Struct.new(
       :resolver_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list_id
@@ -729,7 +701,7 @@ module Aws::Route53Resolver
     class DeleteFirewallDomainListRequest < Struct.new(
       :firewall_domain_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list
@@ -738,7 +710,7 @@ module Aws::Route53Resolver
     class DeleteFirewallDomainListResponse < Struct.new(
       :firewall_domain_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_id
@@ -747,7 +719,7 @@ module Aws::Route53Resolver
     class DeleteFirewallRuleGroupRequest < Struct.new(
       :firewall_rule_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group
@@ -756,7 +728,7 @@ module Aws::Route53Resolver
     class DeleteFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_id
@@ -830,7 +802,7 @@ module Aws::Route53Resolver
       :firewall_threat_protection_id,
       :qtype,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule
@@ -839,7 +811,7 @@ module Aws::Route53Resolver
     class DeleteFirewallRuleResponse < Struct.new(
       :firewall_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -848,7 +820,7 @@ module Aws::Route53Resolver
     class DeleteOutpostResolverRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_resolver
@@ -858,7 +830,7 @@ module Aws::Route53Resolver
     class DeleteOutpostResolverResponse < Struct.new(
       :outpost_resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint_id
@@ -867,7 +839,7 @@ module Aws::Route53Resolver
     class DeleteResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint
@@ -876,7 +848,7 @@ module Aws::Route53Resolver
     class DeleteResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_id
@@ -885,7 +857,7 @@ module Aws::Route53Resolver
     class DeleteResolverQueryLogConfigRequest < Struct.new(
       :resolver_query_log_config_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config
@@ -894,7 +866,7 @@ module Aws::Route53Resolver
     class DeleteResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_id
@@ -903,7 +875,7 @@ module Aws::Route53Resolver
     class DeleteResolverRuleRequest < Struct.new(
       :resolver_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule
@@ -912,7 +884,7 @@ module Aws::Route53Resolver
     class DeleteResolverRuleResponse < Struct.new(
       :resolver_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association_id
@@ -921,7 +893,7 @@ module Aws::Route53Resolver
     class DisassociateFirewallRuleGroupRequest < Struct.new(
       :firewall_rule_group_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association
@@ -930,7 +902,7 @@ module Aws::Route53Resolver
     class DisassociateFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint_id
@@ -943,7 +915,7 @@ module Aws::Route53Resolver
       :resolver_endpoint_id,
       :ip_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint
@@ -952,7 +924,7 @@ module Aws::Route53Resolver
     class DisassociateResolverEndpointIpAddressResponse < Struct.new(
       :resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_id
@@ -965,7 +937,7 @@ module Aws::Route53Resolver
       :resolver_query_log_config_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_association
@@ -974,7 +946,7 @@ module Aws::Route53Resolver
     class DisassociateResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -987,7 +959,7 @@ module Aws::Route53Resolver
       :vpc_id,
       :resolver_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_association
@@ -996,12 +968,7 @@ module Aws::Route53Resolver
     class DisassociateResolverRuleResponse < Struct.new(
       :resolver_rule_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DnsThreatProtection
-      DGA = 'DGA'
-      DNS_TUNNELING = 'DNS_TUNNELING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For Resolver list operations 
@@ -1260,7 +1227,7 @@ module Aws::Route53Resolver
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from
@@ -1294,11 +1261,7 @@ module Aws::Route53Resolver
       :owner_id,
       :firewall_fail_open,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirewallDomainImportOperation
-      REPLACE = 'REPLACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p>
@@ -1347,7 +1310,7 @@ module Aws::Route53Resolver
       :creation_time,
       :modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Minimal high-level information for a firewall domain list. The action <a>ListFirewallDomainLists</a> returns an array of these objects. </p>
@@ -1376,32 +1339,7 @@ module Aws::Route53Resolver
       :creator_request_id,
       :managed_owner_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirewallDomainListStatus
-      COMPLETE = 'COMPLETE'
-      COMPLETE_IMPORT_FAILED = 'COMPLETE_IMPORT_FAILED'
-      IMPORTING = 'IMPORTING'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
-    end
-
-    module FirewallDomainRedirectionAction
-      INSPECT_REDIRECTION_DOMAIN = 'INSPECT_REDIRECTION_DOMAIN'
-      TRUST_REDIRECTION_DOMAIN = 'TRUST_REDIRECTION_DOMAIN'
-    end
-
-    module FirewallDomainUpdateOperation
-      ADD = 'ADD'
-      REMOVE = 'REMOVE'
-      REPLACE = 'REPLACE'
-    end
-
-    module FirewallFailOpenStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      USE_LOCAL_RESOURCE_SETTING = 'USE_LOCAL_RESOURCE_SETTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single firewall rule in a rule group.</p>
@@ -1596,7 +1534,7 @@ module Aws::Route53Resolver
       :dns_threat_protection,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information for a firewall rule group. A firewall rule group is a collection of rules that DNS Firewall uses to filter DNS network traffic for a VPC. To retrieve the rules for the rule group, call <a>ListFirewallRules</a>.</p>
@@ -1650,7 +1588,7 @@ module Aws::Route53Resolver
       :creation_time,
       :modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An association between a firewall rule group and a VPC, which enables DNS filtering for
@@ -1713,13 +1651,7 @@ module Aws::Route53Resolver
       :creation_time,
       :modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirewallRuleGroupAssociationStatus
-      COMPLETE = 'COMPLETE'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Minimal high-level information for a firewall rule group. The action <a>ListFirewallRuleGroups</a> returns an array of these objects. </p>
@@ -1754,13 +1686,7 @@ module Aws::Route53Resolver
       :creator_request_id,
       :share_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirewallRuleGroupStatus
-      COMPLETE = 'COMPLETE'
-      DELETING = 'DELETING'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1769,7 +1695,7 @@ module Aws::Route53Resolver
     class GetFirewallConfigRequest < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_config
@@ -1779,7 +1705,7 @@ module Aws::Route53Resolver
     class GetFirewallConfigResponse < Struct.new(
       :firewall_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list_id
@@ -1788,7 +1714,7 @@ module Aws::Route53Resolver
     class GetFirewallDomainListRequest < Struct.new(
       :firewall_domain_list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list
@@ -1797,7 +1723,7 @@ module Aws::Route53Resolver
     class GetFirewallDomainListResponse < Struct.new(
       :firewall_domain_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association_id
@@ -1806,7 +1732,7 @@ module Aws::Route53Resolver
     class GetFirewallRuleGroupAssociationRequest < Struct.new(
       :firewall_rule_group_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association
@@ -1815,7 +1741,7 @@ module Aws::Route53Resolver
     class GetFirewallRuleGroupAssociationResponse < Struct.new(
       :firewall_rule_group_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1824,7 +1750,7 @@ module Aws::Route53Resolver
     class GetFirewallRuleGroupPolicyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_policy
@@ -1835,7 +1761,7 @@ module Aws::Route53Resolver
     class GetFirewallRuleGroupPolicyResponse < Struct.new(
       :firewall_rule_group_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_id
@@ -1844,7 +1770,7 @@ module Aws::Route53Resolver
     class GetFirewallRuleGroupRequest < Struct.new(
       :firewall_rule_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group
@@ -1853,7 +1779,7 @@ module Aws::Route53Resolver
     class GetFirewallRuleGroupResponse < Struct.new(
       :firewall_rule_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1862,7 +1788,7 @@ module Aws::Route53Resolver
     class GetOutpostResolverRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_resolver
@@ -1872,7 +1798,7 @@ module Aws::Route53Resolver
     class GetOutpostResolverResponse < Struct.new(
       :outpost_resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1881,7 +1807,7 @@ module Aws::Route53Resolver
     class GetResolverConfigRequest < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_config
@@ -1891,7 +1817,7 @@ module Aws::Route53Resolver
     class GetResolverConfigResponse < Struct.new(
       :resolver_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1900,7 +1826,7 @@ module Aws::Route53Resolver
     class GetResolverDnssecConfigRequest < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_dnssec_config
@@ -1909,7 +1835,7 @@ module Aws::Route53Resolver
     class GetResolverDnssecConfigResponse < Struct.new(
       :resolver_dnssec_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint_id
@@ -1918,7 +1844,7 @@ module Aws::Route53Resolver
     class GetResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint
@@ -1927,7 +1853,7 @@ module Aws::Route53Resolver
     class GetResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_association_id
@@ -1936,7 +1862,7 @@ module Aws::Route53Resolver
     class GetResolverQueryLogConfigAssociationRequest < Struct.new(
       :resolver_query_log_config_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_association
@@ -1945,7 +1871,7 @@ module Aws::Route53Resolver
     class GetResolverQueryLogConfigAssociationResponse < Struct.new(
       :resolver_query_log_config_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1954,7 +1880,7 @@ module Aws::Route53Resolver
     class GetResolverQueryLogConfigPolicyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_policy
@@ -1964,7 +1890,7 @@ module Aws::Route53Resolver
     class GetResolverQueryLogConfigPolicyResponse < Struct.new(
       :resolver_query_log_config_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config_id
@@ -1973,7 +1899,7 @@ module Aws::Route53Resolver
     class GetResolverQueryLogConfigRequest < Struct.new(
       :resolver_query_log_config_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_query_log_config
@@ -1982,7 +1908,7 @@ module Aws::Route53Resolver
     class GetResolverQueryLogConfigResponse < Struct.new(
       :resolver_query_log_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_association_id
@@ -1991,7 +1917,7 @@ module Aws::Route53Resolver
     class GetResolverRuleAssociationRequest < Struct.new(
       :resolver_rule_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_association
@@ -2000,7 +1926,7 @@ module Aws::Route53Resolver
     class GetResolverRuleAssociationResponse < Struct.new(
       :resolver_rule_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2009,7 +1935,7 @@ module Aws::Route53Resolver
     class GetResolverRulePolicyRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_policy
@@ -2018,7 +1944,7 @@ module Aws::Route53Resolver
     class GetResolverRulePolicyResponse < Struct.new(
       :resolver_rule_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_id
@@ -2027,7 +1953,7 @@ module Aws::Route53Resolver
     class GetResolverRuleRequest < Struct.new(
       :resolver_rule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule
@@ -2036,7 +1962,7 @@ module Aws::Route53Resolver
     class GetResolverRuleResponse < Struct.new(
       :resolver_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list_id
@@ -2056,7 +1982,7 @@ module Aws::Route53Resolver
       :operation,
       :domain_file_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2077,7 +2003,7 @@ module Aws::Route53Resolver
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>We encountered an unknown error. Try again in a few minutes.</p>
@@ -2086,7 +2012,7 @@ module Aws::Route53Resolver
     class InternalServiceErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value that you specified for <code>NextToken</code> in a <code>List</code> request isn't valid.</p>
@@ -2095,7 +2021,7 @@ module Aws::Route53Resolver
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters in this request are not valid.</p>
@@ -2108,7 +2034,7 @@ module Aws::Route53Resolver
       :message,
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Resolver rule policy is invalid.</p>
@@ -2117,7 +2043,7 @@ module Aws::Route53Resolver
     class InvalidPolicyDocument < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request is invalid.</p>
@@ -2126,7 +2052,7 @@ module Aws::Route53Resolver
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified tag is invalid.</p>
@@ -2135,7 +2061,7 @@ module Aws::Route53Resolver
     class InvalidTagException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In a 
@@ -2158,7 +2084,7 @@ module Aws::Route53Resolver
       :ip,
       :ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In the response to a 
@@ -2200,23 +2126,7 @@ module Aws::Route53Resolver
       :creation_time,
       :modification_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpAddressStatus
-      Creating = 'CREATING'
-      FailedCreation = 'FAILED_CREATION'
-      Attaching = 'ATTACHING'
-      Attached = 'ATTACHED'
-      RemapDetaching = 'REMAP_DETACHING'
-      RemapAttaching = 'REMAP_ATTACHING'
-      Detaching = 'DETACHING'
-      FailedResourceGone = 'FAILED_RESOURCE_GONE'
-      Deleting = 'DELETING'
-      DeleteFailedFasExpired = 'DELETE_FAILED_FAS_EXPIRED'
-      Updating = 'UPDATING'
-      UpdateFailed = 'UPDATE_FAILED'
-      Isolated = 'ISOLATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In an 
@@ -2246,7 +2156,7 @@ module Aws::Route53Resolver
       :ip,
       :ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request caused one or more limits to be exceeded.</p>
@@ -2259,7 +2169,7 @@ module Aws::Route53Resolver
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2279,7 +2189,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2294,7 +2204,7 @@ module Aws::Route53Resolver
       :next_token,
       :firewall_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2314,7 +2224,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2330,7 +2240,7 @@ module Aws::Route53Resolver
       :next_token,
       :firewall_domain_lists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list_id
@@ -2354,7 +2264,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2370,7 +2280,7 @@ module Aws::Route53Resolver
       :next_token,
       :domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_id
@@ -2410,7 +2320,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2425,7 +2335,7 @@ module Aws::Route53Resolver
       :next_token,
       :firewall_rule_group_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2445,7 +2355,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2460,7 +2370,7 @@ module Aws::Route53Resolver
       :next_token,
       :firewall_rule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_id
@@ -2509,7 +2419,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2525,7 +2435,7 @@ module Aws::Route53Resolver
       :next_token,
       :firewall_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_arn
@@ -2545,7 +2455,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_resolvers
@@ -2560,7 +2470,7 @@ module Aws::Route53Resolver
       :outpost_resolvers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2579,7 +2489,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2598,7 +2508,7 @@ module Aws::Route53Resolver
       :next_token,
       :resolver_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2621,7 +2531,7 @@ module Aws::Route53Resolver
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2642,7 +2552,7 @@ module Aws::Route53Resolver
       :next_token,
       :resolver_dnssec_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint_id
@@ -2663,7 +2573,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2683,7 +2593,7 @@ module Aws::Route53Resolver
       :max_results,
       :ip_addresses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2707,7 +2617,7 @@ module Aws::Route53Resolver
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2725,7 +2635,7 @@ module Aws::Route53Resolver
       :max_results,
       :resolver_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2834,7 +2744,7 @@ module Aws::Route53Resolver
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2861,7 +2771,7 @@ module Aws::Route53Resolver
       :total_filtered_count,
       :resolver_query_log_config_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_count] = 0 unless options.key?(:total_count)
@@ -2981,7 +2891,7 @@ module Aws::Route53Resolver
       :sort_by,
       :sort_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3008,7 +2918,7 @@ module Aws::Route53Resolver
       :total_filtered_count,
       :resolver_query_log_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_count] = 0 unless options.key?(:total_count)
@@ -3038,7 +2948,7 @@ module Aws::Route53Resolver
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3058,7 +2968,7 @@ module Aws::Route53Resolver
       :max_results,
       :resolver_rule_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -3082,7 +2992,7 @@ module Aws::Route53Resolver
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3101,7 +3011,7 @@ module Aws::Route53Resolver
       :max_results,
       :resolver_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3121,7 +3031,7 @@ module Aws::Route53Resolver
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3136,12 +3046,7 @@ module Aws::Route53Resolver
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MutationProtectionStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains settings for an existing Resolver on an Outpost.</p>
@@ -3194,23 +3099,7 @@ module Aws::Route53Resolver
       :status_message,
       :outpost_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OutpostResolverStatus
-      CREATING = 'CREATING'
-      OPERATIONAL = 'OPERATIONAL'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      ACTION_NEEDED = 'ACTION_NEEDED'
-      FAILED_CREATION = 'FAILED_CREATION'
-      FAILED_DELETION = 'FAILED_DELETION'
-    end
-
-    module Protocol
-      DOH = 'DoH'
-      DO53 = 'Do53'
-      DOHFIPS = 'DoH-FIPS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3223,7 +3112,7 @@ module Aws::Route53Resolver
       :arn,
       :firewall_rule_group_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute return_value
@@ -3232,7 +3121,7 @@ module Aws::Route53Resolver
     class PutFirewallRuleGroupPolicyResponse < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:return_value] = false unless options.key?(:return_value)
@@ -3271,7 +3160,7 @@ module Aws::Route53Resolver
       :arn,
       :resolver_query_log_config_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <code>PutResolverQueryLogConfigPolicy</code> request.</p>
@@ -3281,7 +3170,7 @@ module Aws::Route53Resolver
     class PutResolverQueryLogConfigPolicyResponse < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:return_value] = false unless options.key?(:return_value)
@@ -3329,7 +3218,7 @@ module Aws::Route53Resolver
       :arn,
       :resolver_rule_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response to a <code>PutResolverRulePolicy</code> request.</p>
@@ -3339,21 +3228,12 @@ module Aws::Route53Resolver
     class PutResolverRulePolicyResponse < Struct.new(
       :return_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:return_value] = false unless options.key?(:return_value)
         super
       end
-    end
-
-    module ResolverAutodefinedReverseStatus
-      Enabling = 'ENABLING'
-      Enabled = 'ENABLED'
-      Disabling = 'DISABLING'
-      Disabled = 'DISABLED'
-      UpdatingToUseLocalResourceSetting = 'UPDATING_TO_USE_LOCAL_RESOURCE_SETTING'
-      UseLocalResourceSetting = 'USE_LOCAL_RESOURCE_SETTING'
     end
 
     # <p>A complex type that contains information about a Resolver configuration for a VPC.</p>
@@ -3398,16 +3278,7 @@ module Aws::Route53Resolver
       :owner_id,
       :autodefined_reverse,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolverDNSSECValidationStatus
-      Enabling = 'ENABLING'
-      Enabled = 'ENABLED'
-      Disabling = 'DISABLING'
-      Disabled = 'DISABLED'
-      UpdateToUseLocalResourceSetting = 'UPDATING_TO_USE_LOCAL_RESOURCE_SETTING'
-      UseLocalResourceSetting = 'USE_LOCAL_RESOURCE_SETTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains information about a configuration for DNSSEC validation.</p>
@@ -3447,7 +3318,7 @@ module Aws::Route53Resolver
       :resource_id,
       :validation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In the response to a 
@@ -3630,28 +3501,7 @@ module Aws::Route53Resolver
       :resolver_endpoint_type,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolverEndpointDirection
-      Inbound = 'INBOUND'
-      Outbound = 'OUTBOUND'
-      InboundDelegation = 'INBOUND_DELEGATION'
-    end
-
-    module ResolverEndpointStatus
-      Creating = 'CREATING'
-      Operational = 'OPERATIONAL'
-      Updating = 'UPDATING'
-      AutoRecovering = 'AUTO_RECOVERING'
-      ActionNeeded = 'ACTION_NEEDED'
-      Deleting = 'DELETING'
-    end
-
-    module ResolverEndpointType
-      IPV6 = 'IPV6'
-      IPV4 = 'IPV4'
-      DUALSTACK = 'DUALSTACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In the response to a 
@@ -3735,7 +3585,7 @@ module Aws::Route53Resolver
       :creator_request_id,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:association_count] = 0 unless options.key?(:association_count)
@@ -3810,29 +3660,7 @@ module Aws::Route53Resolver
       :error_message,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolverQueryLogConfigAssociationError
-      None = 'NONE'
-      DestinationNotFound = 'DESTINATION_NOT_FOUND'
-      AccessDenied = 'ACCESS_DENIED'
-      InternalServiceError = 'INTERNAL_SERVICE_ERROR'
-    end
-
-    module ResolverQueryLogConfigAssociationStatus
-      Creating = 'CREATING'
-      Active = 'ACTIVE'
-      ActionNeeded = 'ACTION_NEEDED'
-      Deleting = 'DELETING'
-      Failed = 'FAILED'
-    end
-
-    module ResolverQueryLogConfigStatus
-      Creating = 'CREATING'
-      Created = 'CREATED'
-      Deleting = 'DELETING'
-      Failed = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For queries that originate in your VPC, detailed information about a Resolver rule, which specifies how to route DNS queries 
@@ -3921,7 +3749,7 @@ module Aws::Route53Resolver
       :modification_time,
       :delegation_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In the response to an 
@@ -3959,15 +3787,7 @@ module Aws::Route53Resolver
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolverRuleAssociationStatus
-      Creating = 'CREATING'
-      Complete = 'COMPLETE'
-      Deleting = 'DELETING'
-      Failed = 'FAILED'
-      Overridden = 'OVERRIDDEN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In an 
@@ -3988,14 +3808,7 @@ module Aws::Route53Resolver
       :target_ips,
       :resolver_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResolverRuleStatus
-      Complete = 'COMPLETE'
-      Deleting = 'DELETING'
-      Updating = 'UPDATING'
-      Failed = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you tried to create already exists.</p>
@@ -4008,7 +3821,7 @@ module Aws::Route53Resolver
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource that you tried to update or delete is currently in use.</p>
@@ -4021,7 +3834,7 @@ module Aws::Route53Resolver
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -4034,7 +3847,7 @@ module Aws::Route53Resolver
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource isn't available.</p>
@@ -4047,14 +3860,7 @@ module Aws::Route53Resolver
       :message,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleTypeOption
-      Forward = 'FORWARD'
-      System = 'SYSTEM'
-      Recursive = 'RECURSIVE'
-      Delegate = 'DELEGATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Fulfilling the request would cause one or more quotas to be exceeded.</p>
@@ -4063,18 +3869,7 @@ module Aws::Route53Resolver
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShareStatus
-      NotShared = 'NOT_SHARED'
-      SharedWithMe = 'SHARED_WITH_ME'
-      SharedByMe = 'SHARED_BY_ME'
-    end
-
-    module SortOrder
-      Ascending = 'ASCENDING'
-      Descending = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One tag that you want to add to the specified resource. A tag consists of a <code>Key</code> (a name for the tag) and a <code>Value</code>.</p>
@@ -4090,7 +3885,7 @@ module Aws::Route53Resolver
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4136,12 +3931,12 @@ module Aws::Route53Resolver
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>In a 
@@ -4175,7 +3970,7 @@ module Aws::Route53Resolver
       :protocol,
       :server_name_indication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was throttled. Try again in a few minutes.</p>
@@ -4184,7 +3979,7 @@ module Aws::Route53Resolver
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't exist.</p>
@@ -4193,7 +3988,7 @@ module Aws::Route53Resolver
     class UnknownResourceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4239,12 +4034,12 @@ module Aws::Route53Resolver
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -4268,7 +4063,7 @@ module Aws::Route53Resolver
       :resource_id,
       :firewall_fail_open,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_config
@@ -4277,7 +4072,7 @@ module Aws::Route53Resolver
     class UpdateFirewallConfigResponse < Struct.new(
       :firewall_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_domain_list_id
@@ -4326,7 +4121,7 @@ module Aws::Route53Resolver
       :operation,
       :domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4347,7 +4142,7 @@ module Aws::Route53Resolver
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association_id
@@ -4373,7 +4168,7 @@ module Aws::Route53Resolver
       :mutation_protection,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_association
@@ -4382,7 +4177,7 @@ module Aws::Route53Resolver
     class UpdateFirewallRuleGroupAssociationResponse < Struct.new(
       :firewall_rule_group_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule_group_id
@@ -4571,7 +4366,7 @@ module Aws::Route53Resolver
       :dns_threat_protection,
       :confidence_threshold,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_rule
@@ -4580,7 +4375,7 @@ module Aws::Route53Resolver
     class UpdateFirewallRuleResponse < Struct.new(
       :firewall_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4598,7 +4393,7 @@ module Aws::Route53Resolver
       :ip_id,
       :ipv6,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -4621,7 +4416,7 @@ module Aws::Route53Resolver
       :instance_count,
       :preferred_instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute outpost_resolver
@@ -4630,7 +4425,7 @@ module Aws::Route53Resolver
     class UpdateOutpostResolverResponse < Struct.new(
       :outpost_resolver,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -4654,7 +4449,7 @@ module Aws::Route53Resolver
       :resource_id,
       :autodefined_reverse_flag,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_config
@@ -4663,7 +4458,7 @@ module Aws::Route53Resolver
     class UpdateResolverConfigResponse < Struct.new(
       :resolver_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -4677,7 +4472,7 @@ module Aws::Route53Resolver
       :resource_id,
       :validation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_dnssec_config
@@ -4686,7 +4481,7 @@ module Aws::Route53Resolver
     class UpdateResolverDnssecConfigResponse < Struct.new(
       :resolver_dnssec_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint_id
@@ -4764,7 +4559,7 @@ module Aws::Route53Resolver
       :update_ip_addresses,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_endpoint
@@ -4773,7 +4568,7 @@ module Aws::Route53Resolver
     class UpdateResolverEndpointResponse < Struct.new(
       :resolver_endpoint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule_id
@@ -4786,7 +4581,7 @@ module Aws::Route53Resolver
       :resolver_rule_id,
       :config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resolver_rule
@@ -4795,13 +4590,7 @@ module Aws::Route53Resolver
     class UpdateResolverRuleResponse < Struct.new(
       :resolver_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Validation
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
-      USE_LOCAL_RESOURCE_SETTING = 'USE_LOCAL_RESOURCE_SETTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have provided an invalid command. If you ran the <code>UpdateFirewallDomains</code> request. supported values are <code>ADD</code>,
@@ -4811,7 +4600,7 @@ module Aws::Route53Resolver
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

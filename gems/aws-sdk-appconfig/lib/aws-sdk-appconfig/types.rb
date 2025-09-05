@@ -73,7 +73,7 @@ module Aws::AppConfig
       :uri,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An extension that was invoked as part of a deployment event.</p>
@@ -109,18 +109,7 @@ module Aws::AppConfig
       :error_code,
       :invocation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionPoint
-      PRE_CREATE_HOSTED_CONFIGURATION_VERSION = 'PRE_CREATE_HOSTED_CONFIGURATION_VERSION'
-      PRE_START_DEPLOYMENT = 'PRE_START_DEPLOYMENT'
-      AT_DEPLOYMENT_TICK = 'AT_DEPLOYMENT_TICK'
-      ON_DEPLOYMENT_START = 'ON_DEPLOYMENT_START'
-      ON_DEPLOYMENT_STEP = 'ON_DEPLOYMENT_STEP'
-      ON_DEPLOYMENT_BAKING = 'ON_DEPLOYMENT_BAKING'
-      ON_DEPLOYMENT_COMPLETE = 'ON_DEPLOYMENT_COMPLETE'
-      ON_DEPLOYMENT_ROLLED_BACK = 'ON_DEPLOYMENT_ROLLED_BACK'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -137,7 +126,7 @@ module Aws::AppConfig
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An extension that was invoked during a deployment.</p>
@@ -159,7 +148,7 @@ module Aws::AppConfig
       :version_number,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -177,7 +166,7 @@ module Aws::AppConfig
       :invalid_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class InvalidConfiguration < BadRequestDetails; end
       class Unknown < BadRequestDetails; end
@@ -197,15 +186,7 @@ module Aws::AppConfig
       :reason,
       :details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BadRequestReason
-      INVALID_CONFIGURATION = 'InvalidConfiguration'
-    end
-
-    module BytesMeasure
-      KILOBYTES = 'KILOBYTES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of a configuration profile.</p>
@@ -245,7 +226,7 @@ module Aws::AppConfig
       :validator_types,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the
@@ -255,7 +236,7 @@ module Aws::AppConfig
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -272,7 +253,7 @@ module Aws::AppConfig
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -290,7 +271,7 @@ module Aws::AppConfig
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -351,7 +332,7 @@ module Aws::AppConfig
       :kms_key_arn,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -443,7 +424,7 @@ module Aws::AppConfig
       :type,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -482,7 +463,7 @@ module Aws::AppConfig
       :final_bake_time_in_minutes,
       :replicate_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_duration_in_minutes] = 0 unless options.key?(:deployment_duration_in_minutes)
@@ -561,7 +542,7 @@ module Aws::AppConfig
       :replicate_to,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -593,7 +574,7 @@ module Aws::AppConfig
       :state,
       :monitors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -619,7 +600,7 @@ module Aws::AppConfig
       :monitors,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -649,7 +630,7 @@ module Aws::AppConfig
       :parameters,
       :extension_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:extension_version_number] = 0 unless options.key?(:extension_version_number)
@@ -684,7 +665,7 @@ module Aws::AppConfig
       :parameters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -720,7 +701,7 @@ module Aws::AppConfig
       :actions,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -762,7 +743,7 @@ module Aws::AppConfig
       :tags,
       :latest_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -802,7 +783,7 @@ module Aws::AppConfig
       :version_label,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -850,7 +831,7 @@ module Aws::AppConfig
       :latest_version_number,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -859,7 +840,7 @@ module Aws::AppConfig
     class DeleteApplicationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -899,7 +880,7 @@ module Aws::AppConfig
       :configuration_profile_id,
       :deletion_protection_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment_strategy_id
@@ -908,7 +889,7 @@ module Aws::AppConfig
     class DeleteDeploymentStrategyRequest < Struct.new(
       :deployment_strategy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute environment_id
@@ -948,7 +929,7 @@ module Aws::AppConfig
       :application_id,
       :deletion_protection_check,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute extension_association_id
@@ -957,7 +938,7 @@ module Aws::AppConfig
     class DeleteExtensionAssociationRequest < Struct.new(
       :extension_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute extension_identifier
@@ -971,7 +952,7 @@ module Aws::AppConfig
       :extension_identifier,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -988,13 +969,7 @@ module Aws::AppConfig
       :configuration_profile_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionProtectionCheck
-      ACCOUNT_DEFAULT = 'ACCOUNT_DEFAULT'
-      APPLY = 'APPLY'
-      BYPASS = 'BYPASS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter to configure deletion protection. Deletion protection prevents a user from
@@ -1019,10 +994,10 @@ module Aws::AppConfig
       :enabled,
       :protection_period_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:enabled] =  unless options.key?(:enabled)
+        options[:enabled] = nil unless options.key?(:enabled)
         super
       end
     end
@@ -1066,27 +1041,7 @@ module Aws::AppConfig
       :action_invocations,
       :occurred_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeploymentEventType
-      PERCENTAGE_UPDATED = 'PERCENTAGE_UPDATED'
-      ROLLBACK_STARTED = 'ROLLBACK_STARTED'
-      ROLLBACK_COMPLETED = 'ROLLBACK_COMPLETED'
-      BAKE_TIME_STARTED = 'BAKE_TIME_STARTED'
-      DEPLOYMENT_STARTED = 'DEPLOYMENT_STARTED'
-      DEPLOYMENT_COMPLETED = 'DEPLOYMENT_COMPLETED'
-      REVERT_COMPLETED = 'REVERT_COMPLETED'
-    end
-
-    module DeploymentState
-      BAKING = 'BAKING'
-      VALIDATING = 'VALIDATING'
-      DEPLOYING = 'DEPLOYING'
-      COMPLETE = 'COMPLETE'
-      ROLLING_BACK = 'ROLLING_BACK'
-      ROLLED_BACK = 'ROLLED_BACK'
-      REVERTED = 'REVERTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1125,7 +1080,7 @@ module Aws::AppConfig
       :final_bake_time_in_minutes,
       :replicate_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_duration_in_minutes] = 0 unless options.key?(:deployment_duration_in_minutes)
@@ -1187,7 +1142,7 @@ module Aws::AppConfig
       :completed_at,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_number] = 0 unless options.key?(:deployment_number)
@@ -1226,15 +1181,7 @@ module Aws::AppConfig
       :state,
       :monitors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnvironmentState
-      READY_FOR_DEPLOYMENT = 'READY_FOR_DEPLOYMENT'
-      DEPLOYING = 'DEPLOYING'
-      ROLLING_BACK = 'ROLLING_BACK'
-      ROLLED_BACK = 'ROLLED_BACK'
-      REVERTED = 'REVERTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an association between an extension and an AppConfig
@@ -1258,7 +1205,7 @@ module Aws::AppConfig
       :extension_arn,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an extension. Call <code>GetExtension</code> to get more information
@@ -1285,7 +1232,7 @@ module Aws::AppConfig
       :arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -1303,7 +1250,7 @@ module Aws::AppConfig
     class GetAccountSettingsOutput < Struct.new(
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1320,7 +1267,7 @@ module Aws::AppConfig
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1329,7 +1276,7 @@ module Aws::AppConfig
     class GetApplicationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -1354,7 +1301,7 @@ module Aws::AppConfig
       :configuration_version,
       :content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1415,7 +1362,7 @@ module Aws::AppConfig
       :kms_key_arn,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1429,7 +1376,7 @@ module Aws::AppConfig
       :application_id,
       :configuration_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -1476,7 +1423,7 @@ module Aws::AppConfig
       :client_id,
       :client_configuration_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1578,7 +1525,7 @@ module Aws::AppConfig
       :kms_key_identifier,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_number] = 0 unless options.key?(:deployment_number)
@@ -1602,7 +1549,7 @@ module Aws::AppConfig
       :environment_id,
       :deployment_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1641,7 +1588,7 @@ module Aws::AppConfig
       :final_bake_time_in_minutes,
       :replicate_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_duration_in_minutes] = 0 unless options.key?(:deployment_duration_in_minutes)
@@ -1656,7 +1603,7 @@ module Aws::AppConfig
     class GetDeploymentStrategyRequest < Struct.new(
       :deployment_strategy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1688,7 +1635,7 @@ module Aws::AppConfig
       :state,
       :monitors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1701,7 +1648,7 @@ module Aws::AppConfig
       :application_id,
       :environment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1731,7 +1678,7 @@ module Aws::AppConfig
       :parameters,
       :extension_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:extension_version_number] = 0 unless options.key?(:extension_version_number)
@@ -1745,7 +1692,7 @@ module Aws::AppConfig
     class GetExtensionAssociationRequest < Struct.new(
       :extension_association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1781,7 +1728,7 @@ module Aws::AppConfig
       :actions,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -1800,7 +1747,7 @@ module Aws::AppConfig
       :extension_identifier,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1840,7 +1787,7 @@ module Aws::AppConfig
       :version_label,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -1862,12 +1809,7 @@ module Aws::AppConfig
       :configuration_profile_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GrowthType
-      LINEAR = 'LINEAR'
-      EXPONENTIAL = 'EXPONENTIAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configuration.</p>
@@ -1904,7 +1846,7 @@ module Aws::AppConfig
       :version_label,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -1918,7 +1860,7 @@ module Aws::AppConfig
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the bad request exception error when creating a hosted
@@ -1948,7 +1890,7 @@ module Aws::AppConfig
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1962,7 +1904,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1979,7 +1921,7 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1993,7 +1935,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2016,7 +1958,7 @@ module Aws::AppConfig
       :next_token,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2030,7 +1972,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2044,7 +1986,7 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2058,7 +2000,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2083,7 +2025,7 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2097,7 +2039,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2115,7 +2057,7 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2130,7 +2072,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -2157,7 +2099,7 @@ module Aws::AppConfig
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2172,7 +2114,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2190,7 +2132,7 @@ module Aws::AppConfig
       :next_token,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -2204,7 +2146,7 @@ module Aws::AppConfig
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2233,7 +2175,7 @@ module Aws::AppConfig
       :next_token,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2244,7 +2186,7 @@ module Aws::AppConfig
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2253,7 +2195,7 @@ module Aws::AppConfig
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon CloudWatch alarms to monitor during the deployment process.</p>
@@ -2268,7 +2210,7 @@ module Aws::AppConfig
       :alarm_arn,
       :alarm_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A value such as an Amazon Resource Name (ARN) or an Amazon Simple Notification Service topic entered
@@ -2291,7 +2233,7 @@ module Aws::AppConfig
       :required,
       :dynamic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:required] = false unless options.key?(:required)
@@ -2315,18 +2257,13 @@ module Aws::AppConfig
       :limit,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:limit] = 0 unless options.key?(:limit)
         options[:size] = 0 unless options.key?(:size)
         super
       end
-    end
-
-    module ReplicateTo
-      NONE = 'NONE'
-      SSM_DOCUMENT = 'SSM_DOCUMENT'
     end
 
     # <p>The requested resource could not be found.</p>
@@ -2338,7 +2275,7 @@ module Aws::AppConfig
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of one more AppConfig resources exceeds the maximum allowed. Verify that your
@@ -2355,7 +2292,7 @@ module Aws::AppConfig
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2457,7 +2394,7 @@ module Aws::AppConfig
       :kms_key_identifier,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_number] = 0 unless options.key?(:deployment_number)
@@ -2509,7 +2446,7 @@ module Aws::AppConfig
       :kms_key_identifier,
       :dynamic_extension_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2611,7 +2548,7 @@ module Aws::AppConfig
       :kms_key_identifier,
       :version_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_number] = 0 unless options.key?(:deployment_number)
@@ -2641,7 +2578,7 @@ module Aws::AppConfig
       :deployment_number,
       :allow_revert,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2656,14 +2593,7 @@ module Aws::AppConfig
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TriggeredBy
-      USER = 'USER'
-      APPCONFIG = 'APPCONFIG'
-      CLOUDWATCH_ALARM = 'CLOUDWATCH_ALARM'
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2676,7 +2606,7 @@ module Aws::AppConfig
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_protection
@@ -2689,7 +2619,7 @@ module Aws::AppConfig
     class UpdateAccountSettingsOutput < Struct.new(
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deletion_protection
@@ -2702,7 +2632,7 @@ module Aws::AppConfig
     class UpdateAccountSettingsRequest < Struct.new(
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2719,7 +2649,7 @@ module Aws::AppConfig
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2736,7 +2666,7 @@ module Aws::AppConfig
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2797,7 +2727,7 @@ module Aws::AppConfig
       :kms_key_arn,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2839,7 +2769,7 @@ module Aws::AppConfig
       :validators,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2878,7 +2808,7 @@ module Aws::AppConfig
       :final_bake_time_in_minutes,
       :replicate_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:deployment_duration_in_minutes] = 0 unless options.key?(:deployment_duration_in_minutes)
@@ -2942,7 +2872,7 @@ module Aws::AppConfig
       :growth_factor,
       :growth_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2974,7 +2904,7 @@ module Aws::AppConfig
       :state,
       :monitors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -2999,7 +2929,7 @@ module Aws::AppConfig
       :description,
       :monitors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3029,7 +2959,7 @@ module Aws::AppConfig
       :parameters,
       :extension_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:extension_version_number] = 0 unless options.key?(:extension_version_number)
@@ -3047,7 +2977,7 @@ module Aws::AppConfig
       :extension_association_id,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -3083,7 +3013,7 @@ module Aws::AppConfig
       :actions,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:version_number] = 0 unless options.key?(:version_number)
@@ -3113,7 +3043,7 @@ module Aws::AppConfig
       :parameters,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -3130,7 +3060,7 @@ module Aws::AppConfig
       :configuration_profile_id,
       :configuration_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A validator provides a syntactic or semantic check to ensure the configuration that you
@@ -3151,12 +3081,7 @@ module Aws::AppConfig
       :type,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidatorType
-      JSON_SCHEMA = 'JSON_SCHEMA'
-      LAMBDA = 'LAMBDA'
+      include ::Smithy::Schema::Structure
     end
 
   end

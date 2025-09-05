@@ -15,7 +15,7 @@ module Aws::EKSAuth
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -28,7 +28,7 @@ module Aws::EKSAuth
       :cluster_name,
       :token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subject
@@ -66,7 +66,7 @@ module Aws::EKSAuth
       :assumed_role_user,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object with the permanent IAM role identity and the temporary session
@@ -88,7 +88,7 @@ module Aws::EKSAuth
       :arn,
       :assume_role_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <i>Amazon Web Services Signature Version 4</i> type of temporary
@@ -113,7 +113,7 @@ module Aws::EKSAuth
       :access_key_id,
       :expiration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Kubernetes service account token is expired.</p>
@@ -122,7 +122,7 @@ module Aws::EKSAuth
     class ExpiredTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>These errors are usually caused by a server-side issue.</p>
@@ -131,7 +131,7 @@ module Aws::EKSAuth
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified parameter is invalid. Review the available parameters for the API
@@ -141,7 +141,7 @@ module Aws::EKSAuth
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown if the request contains a semantic error. The precise meaning
@@ -151,7 +151,7 @@ module Aws::EKSAuth
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified Kubernetes service account token is invalid.</p>
@@ -160,7 +160,7 @@ module Aws::EKSAuth
     class InvalidTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances.</p>
@@ -174,7 +174,7 @@ module Aws::EKSAuth
       :association_arn,
       :association_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource could not be found.</p>
@@ -183,7 +183,7 @@ module Aws::EKSAuth
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service is unavailable. Back off and retry the operation.</p>
@@ -192,7 +192,7 @@ module Aws::EKSAuth
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object containing the name of the Kubernetes service account inside the cluster to
@@ -210,7 +210,7 @@ module Aws::EKSAuth
       :namespace,
       :service_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because your request rate is too high. Reduce the frequency of requests.</p>
@@ -219,7 +219,7 @@ module Aws::EKSAuth
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

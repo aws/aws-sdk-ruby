@@ -6,28 +6,6 @@ module Aws::WorkSpaces
   # This module contains the types returned by client operations.
   module Types
 
-    module AGAModeForDirectoryEnum
-      ENABLED_AUTO = 'ENABLED_AUTO'
-      DISABLED = 'DISABLED'
-    end
-
-    module AGAModeForWorkSpaceEnum
-      ENABLED_AUTO = 'ENABLED_AUTO'
-      DISABLED = 'DISABLED'
-      INHERITED = 'INHERITED'
-    end
-
-    module AGAPreferredProtocolForDirectory
-      TCP = 'TCP'
-      NONE = 'NONE'
-    end
-
-    module AGAPreferredProtocolForWorkSpace
-      TCP = 'TCP'
-      NONE = 'NONE'
-      INHERITED = 'INHERITED'
-    end
-
     # @!attribute link_id
     #   <p>The identifier of the account link.</p>
     #   @return [String]
@@ -38,7 +16,7 @@ module Aws::WorkSpaces
       :link_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_link
@@ -47,7 +25,7 @@ module Aws::WorkSpaces
     class AcceptAccountLinkInvitationResult < Struct.new(
       :account_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user is not authorized to access a resource.</p>
@@ -56,7 +34,7 @@ module Aws::WorkSpaces
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the access type and endpoint for a WorkSpace.</p>
@@ -70,7 +48,7 @@ module Aws::WorkSpaces
       :access_endpoint_type,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the access endpoint configuration for a WorkSpace.</p>
@@ -84,16 +62,7 @@ module Aws::WorkSpaces
       :access_endpoints,
       :internet_fallback_protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessEndpointType
-      STREAMING_WSP = 'STREAMING_WSP'
-    end
-
-    module AccessPropertyValue
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about about the account link.</p>
@@ -115,15 +84,7 @@ module Aws::WorkSpaces
       :source_account_id,
       :target_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccountLinkStatusEnum
-      LINKED = 'LINKED'
-      LINKING_FAILED = 'LINKING_FAILED'
-      LINK_NOT_FOUND = 'LINK_NOT_FOUND'
-      PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT = 'PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT'
-      REJECTED = 'REJECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a modification to the configuration of Bring Your Own License (BYOL) for the
@@ -156,7 +117,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Active Directory config.</p>
@@ -170,24 +131,13 @@ module Aws::WorkSpaces
       :domain_name,
       :service_account_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Application
-      Microsoft_Office_2016 = 'Microsoft_Office_2016'
-      Microsoft_Office_2019 = 'Microsoft_Office_2019'
-    end
-
-    module ApplicationAssociatedResourceType
-      WORKSPACE = 'WORKSPACE'
-      BUNDLE = 'BUNDLE'
-      IMAGE = 'IMAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified application is not supported.</p>
     class ApplicationNotSupportedException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between an application and an application resource.</p>
@@ -221,7 +171,7 @@ module Aws::WorkSpaces
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The persistent application settings for WorkSpaces Pools users.</p>
@@ -237,7 +187,7 @@ module Aws::WorkSpaces
       :status,
       :settings_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the persistent application settings for WorkSpaces Pools users.</p>
@@ -257,12 +207,7 @@ module Aws::WorkSpaces
       :settings_group,
       :s3_bucket_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplicationSettingsStatusEnum
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -275,7 +220,7 @@ module Aws::WorkSpaces
       :alias_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_identifier
@@ -285,7 +230,7 @@ module Aws::WorkSpaces
     class AssociateConnectionAliasResult < Struct.new(
       :connection_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -298,12 +243,12 @@ module Aws::WorkSpaces
       :directory_id,
       :group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateIpGroupsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -316,7 +261,7 @@ module Aws::WorkSpaces
       :workspace_id,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -325,27 +270,7 @@ module Aws::WorkSpaces
     class AssociateWorkspaceApplicationResult < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationErrorCode
-      INSUFFICIENT_DISKSPACE = 'ValidationError.InsufficientDiskSpace'
-      INSUFFICIENT_MEMORY = 'ValidationError.InsufficientMemory'
-      UNSUPPORTED_OPERATING_SYSTEM = 'ValidationError.UnsupportedOperatingSystem'
-      INTERNAL_SERVER_ERROR = 'DeploymentError.InternalServerError'
-      WORKSPACE_UNREACHABLE = 'DeploymentError.WorkspaceUnreachable'
-    end
-
-    module AssociationState
-      PENDING_INSTALL = 'PENDING_INSTALL'
-      PENDING_INSTALL_DEPLOYMENT = 'PENDING_INSTALL_DEPLOYMENT'
-      PENDING_UNINSTALL = 'PENDING_UNINSTALL'
-      PENDING_UNINSTALL_DEPLOYMENT = 'PENDING_UNINSTALL_DEPLOYMENT'
-      INSTALLING = 'INSTALLING'
-      UNINSTALLING = 'UNINSTALLING'
-      ERROR = 'ERROR'
-      COMPLETED = 'COMPLETED'
-      REMOVED = 'REMOVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates the reason that the association deployment failed, including the error code and error message.</p>
@@ -359,19 +284,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssociationStatus
-      NOT_ASSOCIATED = 'NOT_ASSOCIATED'
-      ASSOCIATED_WITH_OWNER_ACCOUNT = 'ASSOCIATED_WITH_OWNER_ACCOUNT'
-      ASSOCIATED_WITH_SHARED_ACCOUNT = 'ASSOCIATED_WITH_SHARED_ACCOUNT'
-      PENDING_ASSOCIATION = 'PENDING_ASSOCIATION'
-      PENDING_DISASSOCIATION = 'PENDING_DISASSOCIATION'
-    end
-
-    module AuthenticationType
-      SAML = 'SAML'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -384,16 +297,12 @@ module Aws::WorkSpaces
       :group_id,
       :user_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AuthorizeIpRulesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BundleAssociatedResourceType
-      APPLICATION = 'APPLICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between an application and a bundle resource.</p>
@@ -427,12 +336,7 @@ module Aws::WorkSpaces
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BundleType
-      REGULAR = 'REGULAR'
-      STANDBY = 'STANDBY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the user capacity for a pool of WorkSpaces.</p>
@@ -442,7 +346,7 @@ module Aws::WorkSpaces
     class Capacity < Struct.new(
       :desired_user_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the capacity status for a pool of WorkSpaces.</p>
@@ -469,7 +373,7 @@ module Aws::WorkSpaces
       :actual_user_sessions,
       :active_user_sessions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the certificate-based authentication you want to use
@@ -484,21 +388,7 @@ module Aws::WorkSpaces
       :status,
       :certificate_authority_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateBasedAuthStatusEnum
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-    end
-
-    module ClientDeviceType
-      DEVICE_TYPE_WINDOWS = 'DeviceTypeWindows'
-      DEVICE_TYPE_OSX = 'DeviceTypeOsx'
-      DEVICE_TYPE_ANDROID = 'DeviceTypeAndroid'
-      DEVICE_TYPE_IOS = 'DeviceTypeIos'
-      DEVICE_TYPE_LINUX = 'DeviceTypeLinux'
-      DEVICE_TYPE_WEB = 'DeviceTypeWeb'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon WorkSpaces client.</p>
@@ -517,7 +407,7 @@ module Aws::WorkSpaces
       :reconnect_enabled,
       :log_upload_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon WorkSpaces client.</p>
@@ -531,27 +421,13 @@ module Aws::WorkSpaces
       :resource_id,
       :client_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Compute
-      VALUE = 'VALUE'
-      STANDARD = 'STANDARD'
-      PERFORMANCE = 'PERFORMANCE'
-      POWER = 'POWER'
-      GRAPHICS = 'GRAPHICS'
-      POWERPRO = 'POWERPRO'
-      GENERALPURPOSE_4XLARGE = 'GENERALPURPOSE_4XLARGE'
-      GENERALPURPOSE_8XLARGE = 'GENERALPURPOSE_8XLARGE'
-      GRAPHICSPRO = 'GRAPHICSPRO'
-      GRAPHICS_G4DN = 'GRAPHICS_G4DN'
-      GRAPHICSPRO_G4DN = 'GRAPHICSPRO_G4DN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The compute type of the WorkSpace is not compatible with the application.</p>
     class ComputeNotCompatibleException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the compute type of the bundle.</p>
@@ -561,7 +437,7 @@ module Aws::WorkSpaces
     class ComputeType < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>TargetAccountId</code> is already linked or invited.</p>
@@ -570,7 +446,7 @@ module Aws::WorkSpaces
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Connect client add-in.</p>
@@ -592,7 +468,7 @@ module Aws::WorkSpaces
       :name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a connection alias. Connection aliases are used for cross-Region redirection.
@@ -622,7 +498,7 @@ module Aws::WorkSpaces
       :owner_account_id,
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a connection alias association that is used for cross-Region redirection. For
@@ -648,7 +524,7 @@ module Aws::WorkSpaces
       :resource_id,
       :connection_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the permissions for a connection alias. Connection aliases are used for
@@ -666,19 +542,7 @@ module Aws::WorkSpaces
       :shared_account_id,
       :allow_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionAliasState
-      CREATING = 'CREATING'
-      CREATED = 'CREATED'
-      DELETING = 'DELETING'
-    end
-
-    module ConnectionState
-      CONNECTED = 'CONNECTED'
-      DISCONNECTED = 'DISCONNECTED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -703,7 +567,7 @@ module Aws::WorkSpaces
       :source_region,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -712,7 +576,7 @@ module Aws::WorkSpaces
     class CopyWorkspaceImageResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_account_id
@@ -725,7 +589,7 @@ module Aws::WorkSpaces
       :target_account_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_link
@@ -734,7 +598,7 @@ module Aws::WorkSpaces
     class CreateAccountLinkInvitationResult < Struct.new(
       :account_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -751,7 +615,7 @@ module Aws::WorkSpaces
       :name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute add_in_id
@@ -760,7 +624,7 @@ module Aws::WorkSpaces
     class CreateConnectClientAddInResult < Struct.new(
       :add_in_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_string
@@ -779,7 +643,7 @@ module Aws::WorkSpaces
       :connection_string,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -788,7 +652,7 @@ module Aws::WorkSpaces
     class CreateConnectionAliasResult < Struct.new(
       :alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -809,7 +673,7 @@ module Aws::WorkSpaces
       :user_rules,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -818,7 +682,7 @@ module Aws::WorkSpaces
     class CreateIpGroupResult < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute primary_region
@@ -831,7 +695,7 @@ module Aws::WorkSpaces
       :primary_region,
       :standby_workspaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_standby_requests
@@ -844,7 +708,7 @@ module Aws::WorkSpaces
       :failed_standby_requests,
       :pending_standby_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -859,12 +723,12 @@ module Aws::WorkSpaces
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateTagsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -890,7 +754,7 @@ module Aws::WorkSpaces
       :source_image_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -899,7 +763,7 @@ module Aws::WorkSpaces
     class CreateUpdatedWorkspaceImageResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_name
@@ -936,7 +800,7 @@ module Aws::WorkSpaces
       :root_storage,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_bundle
@@ -945,7 +809,7 @@ module Aws::WorkSpaces
     class CreateWorkspaceBundleResult < Struct.new(
       :workspace_bundle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -968,7 +832,7 @@ module Aws::WorkSpaces
       :workspace_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -1009,7 +873,7 @@ module Aws::WorkSpaces
       :created,
       :owner_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_name
@@ -1050,7 +914,7 @@ module Aws::WorkSpaces
       :timeout_settings,
       :running_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces_pool
@@ -1059,7 +923,7 @@ module Aws::WorkSpaces
     class CreateWorkspacesPoolResult < Struct.new(
       :workspaces_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces
@@ -1068,7 +932,7 @@ module Aws::WorkSpaces
     class CreateWorkspacesRequest < Struct.new(
       :workspaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_requests
@@ -1084,12 +948,7 @@ module Aws::WorkSpaces
       :failed_requests,
       :pending_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataReplication
-      NO_REPLICATION = 'NO_REPLICATION'
-      PRIMARY_AS_SOURCE = 'PRIMARY_AS_SOURCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data replication settings.</p>
@@ -1104,27 +963,7 @@ module Aws::WorkSpaces
       :data_replication,
       :recovery_snapshot_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DedicatedTenancyAccountType
-      SOURCE_ACCOUNT = 'SOURCE_ACCOUNT'
-      TARGET_ACCOUNT = 'TARGET_ACCOUNT'
-    end
-
-    module DedicatedTenancyModificationStateEnum
-      PENDING = 'PENDING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-    end
-
-    module DedicatedTenancySupportEnum
-      ENABLED = 'ENABLED'
-    end
-
-    module DedicatedTenancySupportResultEnum
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns default client branding attributes that were imported. These attributes display
@@ -1184,7 +1023,7 @@ module Aws::WorkSpaces
       :forgot_password_link,
       :login_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default client branding attributes to be imported. These attributes display on the
@@ -1244,7 +1083,7 @@ module Aws::WorkSpaces
       :forgot_password_link,
       :login_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the default values that are used to create WorkSpaces. For more information,
@@ -1288,16 +1127,7 @@ module Aws::WorkSpaces
       :enable_maintenance_mode,
       :instance_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletableCertificateBasedAuthProperty
-      CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN = 'CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN'
-    end
-
-    module DeletableSamlProperty
-      SAML_PROPERTIES_USER_ACCESS_URL = 'SAML_PROPERTIES_USER_ACCESS_URL'
-      SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME = 'SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_id
@@ -1310,7 +1140,7 @@ module Aws::WorkSpaces
       :link_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_link
@@ -1319,7 +1149,7 @@ module Aws::WorkSpaces
     class DeleteAccountLinkInvitationResult < Struct.new(
       :account_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1333,12 +1163,12 @@ module Aws::WorkSpaces
       :resource_id,
       :platforms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteClientBrandingResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute add_in_id
@@ -1351,12 +1181,12 @@ module Aws::WorkSpaces
       :add_in_id,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectClientAddInResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -1365,12 +1195,12 @@ module Aws::WorkSpaces
     class DeleteConnectionAliasRequest < Struct.new(
       :alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConnectionAliasResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -1379,12 +1209,12 @@ module Aws::WorkSpaces
     class DeleteIpGroupRequest < Struct.new(
       :group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIpGroupResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1399,12 +1229,12 @@ module Aws::WorkSpaces
       :resource_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTagsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_id
@@ -1413,12 +1243,12 @@ module Aws::WorkSpaces
     class DeleteWorkspaceBundleRequest < Struct.new(
       :bundle_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkspaceBundleResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -1427,12 +1257,12 @@ module Aws::WorkSpaces
     class DeleteWorkspaceImageRequest < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteWorkspaceImageResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1446,7 +1276,7 @@ module Aws::WorkSpaces
       :workspace_id,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deployment
@@ -1455,7 +1285,7 @@ module Aws::WorkSpaces
     class DeployWorkspaceApplicationsResult < Struct.new(
       :deployment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1466,12 +1296,12 @@ module Aws::WorkSpaces
     class DeregisterWorkspaceDirectoryRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterWorkspaceDirectoryResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1481,7 +1311,7 @@ module Aws::WorkSpaces
     class DescribeAccountModificationsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_modifications
@@ -1495,12 +1325,12 @@ module Aws::WorkSpaces
       :account_modifications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dedicated_tenancy_support
@@ -1521,7 +1351,7 @@ module Aws::WorkSpaces
       :dedicated_tenancy_management_cidr_range,
       :dedicated_tenancy_account_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1542,7 +1372,7 @@ module Aws::WorkSpaces
       :application_id,
       :associated_resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -1555,7 +1385,7 @@ module Aws::WorkSpaces
       :associations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_ids
@@ -1588,7 +1418,7 @@ module Aws::WorkSpaces
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -1601,7 +1431,7 @@ module Aws::WorkSpaces
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_id
@@ -1614,7 +1444,7 @@ module Aws::WorkSpaces
       :bundle_id,
       :associated_resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -1623,7 +1453,7 @@ module Aws::WorkSpaces
     class DescribeBundleAssociationsResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1633,7 +1463,7 @@ module Aws::WorkSpaces
     class DescribeClientBrandingRequest < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_type_windows
@@ -1662,7 +1492,7 @@ module Aws::WorkSpaces
       :device_type_linux,
       :device_type_web,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_ids
@@ -1671,7 +1501,7 @@ module Aws::WorkSpaces
     class DescribeClientPropertiesRequest < Struct.new(
       :resource_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_properties_list
@@ -1680,7 +1510,7 @@ module Aws::WorkSpaces
     class DescribeClientPropertiesResult < Struct.new(
       :client_properties_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1698,7 +1528,7 @@ module Aws::WorkSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute add_ins
@@ -1712,7 +1542,7 @@ module Aws::WorkSpaces
       :add_ins,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -1730,7 +1560,7 @@ module Aws::WorkSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -1748,7 +1578,7 @@ module Aws::WorkSpaces
       :connection_alias_permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_ids
@@ -1770,7 +1600,7 @@ module Aws::WorkSpaces
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute connection_aliases
@@ -1784,7 +1614,7 @@ module Aws::WorkSpaces
       :connection_aliases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -1797,7 +1627,7 @@ module Aws::WorkSpaces
       :image_id,
       :associated_resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -1806,7 +1636,7 @@ module Aws::WorkSpaces
     class DescribeImageAssociationsResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_ids
@@ -1824,7 +1654,7 @@ module Aws::WorkSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -1838,7 +1668,7 @@ module Aws::WorkSpaces
       :result,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -1849,7 +1679,7 @@ module Aws::WorkSpaces
     class DescribeTagsRequest < Struct.new(
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -1858,7 +1688,7 @@ module Aws::WorkSpaces
     class DescribeTagsResult < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1871,7 +1701,7 @@ module Aws::WorkSpaces
       :workspace_id,
       :associated_resource_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute associations
@@ -1880,7 +1710,7 @@ module Aws::WorkSpaces
     class DescribeWorkspaceAssociationsResult < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_ids
@@ -1899,7 +1729,7 @@ module Aws::WorkSpaces
       :owner,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundles
@@ -1914,7 +1744,7 @@ module Aws::WorkSpaces
       :bundles,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the filter conditions for the WorkSpaces to return.</p>
@@ -1928,12 +1758,7 @@ module Aws::WorkSpaces
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribeWorkspaceDirectoriesFilterName
-      USER_IDENTITY_TYPE = 'USER_IDENTITY_TYPE'
-      WORKSPACE_TYPE = 'WORKSPACE_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_ids
@@ -1960,7 +1785,7 @@ module Aws::WorkSpaces
       :next_token,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directories
@@ -1974,7 +1799,7 @@ module Aws::WorkSpaces
       :directories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -1992,7 +1817,7 @@ module Aws::WorkSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -2011,7 +1836,7 @@ module Aws::WorkSpaces
       :image_permissions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_ids
@@ -2033,7 +1858,7 @@ module Aws::WorkSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute images
@@ -2047,7 +1872,7 @@ module Aws::WorkSpaces
       :images,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -2056,7 +1881,7 @@ module Aws::WorkSpaces
     class DescribeWorkspaceSnapshotsRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rebuild_snapshots
@@ -2071,7 +1896,7 @@ module Aws::WorkSpaces
       :rebuild_snapshots,
       :restore_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_ids
@@ -2085,7 +1910,7 @@ module Aws::WorkSpaces
       :workspace_ids,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces_connection_status
@@ -2099,7 +1924,7 @@ module Aws::WorkSpaces
       :workspaces_connection_status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -2122,7 +1947,7 @@ module Aws::WorkSpaces
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sessions
@@ -2136,7 +1961,7 @@ module Aws::WorkSpaces
       :sessions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the filter conditions for WorkSpaces Pools to return.</p>
@@ -2154,18 +1979,7 @@ module Aws::WorkSpaces
       :values,
       :operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DescribeWorkspacesPoolsFilterName
-      POOLNAME = 'PoolName'
-    end
-
-    module DescribeWorkspacesPoolsFilterOperator
-      EQUALS = 'EQUALS'
-      NOTEQUALS = 'NOTEQUALS'
-      CONTAINS = 'CONTAINS'
-      NOTCONTAINS = 'NOTCONTAINS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_ids
@@ -2187,7 +2001,7 @@ module Aws::WorkSpaces
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces_pools
@@ -2201,7 +2015,7 @@ module Aws::WorkSpaces
       :workspaces_pools,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_ids
@@ -2242,7 +2056,7 @@ module Aws::WorkSpaces
       :next_token,
       :workspace_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces
@@ -2258,7 +2072,7 @@ module Aws::WorkSpaces
       :workspaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -2267,12 +2081,12 @@ module Aws::WorkSpaces
     class DisassociateConnectionAliasRequest < Struct.new(
       :alias_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateConnectionAliasResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2285,12 +2099,12 @@ module Aws::WorkSpaces
       :directory_id,
       :group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateIpGroupsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -2303,7 +2117,7 @@ module Aws::WorkSpaces
       :workspace_id,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute association
@@ -2312,12 +2126,7 @@ module Aws::WorkSpaces
     class DisassociateWorkspaceApplicationResult < Struct.new(
       :association,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointEncryptionMode
-      STANDARD_TLS = 'STANDARD_TLS'
-      FIPS_VALIDATED = 'FIPS_VALIDATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes in-depth details about the error. These details include the 
@@ -2332,7 +2141,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the standby WorkSpace that could not be created.</p>
@@ -2350,7 +2159,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace that cannot be created.</p>
@@ -2369,7 +2178,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>),
@@ -2389,7 +2198,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_id
@@ -2402,7 +2211,7 @@ module Aws::WorkSpaces
       :link_id,
       :linked_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_link
@@ -2411,7 +2220,7 @@ module Aws::WorkSpaces
     class GetAccountLinkResult < Struct.new(
       :account_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Global Accelerator for directory</p>
@@ -2425,7 +2234,7 @@ module Aws::WorkSpaces
       :mode,
       :preferred_protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Global Accelerator for WorkSpaces.</p>
@@ -2440,7 +2249,7 @@ module Aws::WorkSpaces
       :mode,
       :preferred_protocol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configurations of the identity center.</p>
@@ -2454,11 +2263,7 @@ module Aws::WorkSpaces
       :instance_arn,
       :application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageAssociatedResourceType
-      APPLICATION = 'APPLICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Web Services accounts that have been granted permission to use a
@@ -2471,7 +2276,7 @@ module Aws::WorkSpaces
     class ImagePermission < Struct.new(
       :shared_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between an application and an image resource.</p>
@@ -2505,12 +2310,7 @@ module Aws::WorkSpaces
       :state,
       :state_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageType
-      OWNED = 'OWNED'
-      SHARED = 'SHARED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -2544,7 +2344,7 @@ module Aws::WorkSpaces
       :device_type_linux,
       :device_type_web,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute device_type_windows
@@ -2573,7 +2373,7 @@ module Aws::WorkSpaces
       :device_type_linux,
       :device_type_web,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ec2_image_id
@@ -2629,7 +2429,7 @@ module Aws::WorkSpaces
       :tags,
       :applications,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -2638,13 +2438,13 @@ module Aws::WorkSpaces
     class ImportWorkspaceImageResult < Struct.new(
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified application is not compatible with the resource.</p>
     class IncompatibleApplicationsException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected server error occured.</p>
@@ -2653,11 +2453,7 @@ module Aws::WorkSpaces
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InternetFallbackProtocol
-      PCOIP = 'PCOIP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two or more of the selected parameter values cannot be used together.</p>
@@ -2667,7 +2463,7 @@ module Aws::WorkSpaces
     class InvalidParameterCombinationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameter values are not valid.</p>
@@ -2677,7 +2473,7 @@ module Aws::WorkSpaces
     class InvalidParameterValuesException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the resource is not valid for this operation.</p>
@@ -2686,7 +2482,7 @@ module Aws::WorkSpaces
     class InvalidResourceStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client branding attributes for iOS device types. These attributes are displayed on
@@ -2769,7 +2565,7 @@ module Aws::WorkSpaces
       :forgot_password_link,
       :login_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client branding attributes to import for iOS device types. These attributes are
@@ -2852,7 +2648,7 @@ module Aws::WorkSpaces
       :forgot_password_link,
       :login_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule for an IP access control group.</p>
@@ -2866,7 +2662,7 @@ module Aws::WorkSpaces
       :ip_rule,
       :rule_desc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_status_filter
@@ -2883,7 +2679,7 @@ module Aws::WorkSpaces
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_links
@@ -2896,7 +2692,7 @@ module Aws::WorkSpaces
       :account_links,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute management_cidr_range_constraint
@@ -2915,7 +2711,7 @@ module Aws::WorkSpaces
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute management_cidr_ranges
@@ -2929,12 +2725,7 @@ module Aws::WorkSpaces
       :management_cidr_ranges,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogUploadEnum
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configurations of the Microsoft Entra.</p>
@@ -2948,7 +2739,7 @@ module Aws::WorkSpaces
       :tenant_id,
       :application_config_secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_workspace_id
@@ -2961,7 +2752,7 @@ module Aws::WorkSpaces
       :source_workspace_id,
       :bundle_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_workspace_id
@@ -2976,13 +2767,7 @@ module Aws::WorkSpaces
       :source_workspace_id,
       :target_workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModificationResourceEnum
-      ROOT_VOLUME = 'ROOT_VOLUME'
-      USER_VOLUME = 'USER_VOLUME'
-      COMPUTE_TYPE = 'COMPUTE_TYPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace modification.</p>
@@ -2996,12 +2781,7 @@ module Aws::WorkSpaces
       :resource,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ModificationStateEnum
-      UPDATE_INITIATED = 'UPDATE_INITIATED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dedicated_tenancy_support
@@ -3018,12 +2798,12 @@ module Aws::WorkSpaces
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyAccountResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3040,12 +2820,12 @@ module Aws::WorkSpaces
       :certificate_based_auth_properties,
       :properties_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyCertificateBasedAuthPropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3058,12 +2838,12 @@ module Aws::WorkSpaces
       :resource_id,
       :client_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyClientPropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3077,12 +2857,12 @@ module Aws::WorkSpaces
       :directory_id,
       :endpoint_encryption_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyEndpointEncryptionModeResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3111,12 +2891,12 @@ module Aws::WorkSpaces
       :saml_properties,
       :properties_to_delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifySamlPropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3129,12 +2909,12 @@ module Aws::WorkSpaces
       :resource_id,
       :selfservice_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifySelfservicePermissionsResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3147,12 +2927,12 @@ module Aws::WorkSpaces
       :resource_id,
       :streaming_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyStreamingPropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3165,12 +2945,12 @@ module Aws::WorkSpaces
       :resource_id,
       :workspace_access_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyWorkspaceAccessPropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3183,12 +2963,12 @@ module Aws::WorkSpaces
       :resource_id,
       :workspace_creation_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyWorkspaceCreationPropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3205,12 +2985,12 @@ module Aws::WorkSpaces
       :workspace_properties,
       :data_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyWorkspacePropertiesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3223,12 +3003,12 @@ module Aws::WorkSpaces
       :workspace_id,
       :workspace_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ModifyWorkspaceStateResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the network details of a WorkSpaces Pool.</p>
@@ -3243,7 +3023,7 @@ module Aws::WorkSpaces
       :eni_private_ip_address,
       :eni_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operating system that the image is running.</p>
@@ -3253,34 +3033,13 @@ module Aws::WorkSpaces
     class OperatingSystem < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperatingSystemName
-      AMAZON_LINUX_2 = 'AMAZON_LINUX_2'
-      UBUNTU_18_04 = 'UBUNTU_18_04'
-      UBUNTU_20_04 = 'UBUNTU_20_04'
-      UBUNTU_22_04 = 'UBUNTU_22_04'
-      UNKNOWN = 'UNKNOWN'
-      WINDOWS_10 = 'WINDOWS_10'
-      WINDOWS_11 = 'WINDOWS_11'
-      WINDOWS_7 = 'WINDOWS_7'
-      WINDOWS_SERVER_2016 = 'WINDOWS_SERVER_2016'
-      WINDOWS_SERVER_2019 = 'WINDOWS_SERVER_2019'
-      WINDOWS_SERVER_2022 = 'WINDOWS_SERVER_2022'
-      RHEL_8 = 'RHEL_8'
-      ROCKY_8 = 'ROCKY_8'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operating system of the WorkSpace is not compatible with the application.</p>
     class OperatingSystemNotCompatibleException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OperatingSystemType
-      WINDOWS = 'WINDOWS'
-      LINUX = 'LINUX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties of this WorkSpace are currently being modified. Try again in a moment.</p>
@@ -3289,7 +3048,7 @@ module Aws::WorkSpaces
     class OperationInProgressException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation is not supported.</p>
@@ -3303,7 +3062,7 @@ module Aws::WorkSpaces
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the standby WorkSpace.</p>
@@ -3330,17 +3089,7 @@ module Aws::WorkSpaces
       :state,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PoolsRunningMode
-      AUTO_STOP = 'AUTO_STOP'
-      ALWAYS_ON = 'ALWAYS_ON'
-    end
-
-    module Protocol
-      PCOIP = 'PCOIP'
-      WSP = 'WSP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information used to reboot a WorkSpace.</p>
@@ -3350,7 +3099,7 @@ module Aws::WorkSpaces
     class RebootRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute reboot_workspace_requests
@@ -3359,7 +3108,7 @@ module Aws::WorkSpaces
     class RebootWorkspacesRequest < Struct.new(
       :reboot_workspace_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_requests
@@ -3368,7 +3117,7 @@ module Aws::WorkSpaces
     class RebootWorkspacesResult < Struct.new(
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information used to rebuild a WorkSpace.</p>
@@ -3378,7 +3127,7 @@ module Aws::WorkSpaces
     class RebuildRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rebuild_workspace_requests
@@ -3387,7 +3136,7 @@ module Aws::WorkSpaces
     class RebuildWorkspacesRequest < Struct.new(
       :rebuild_workspace_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_requests
@@ -3396,12 +3145,7 @@ module Aws::WorkSpaces
     class RebuildWorkspacesResult < Struct.new(
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReconnectEnum
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3466,7 +3210,7 @@ module Aws::WorkSpaces
       :workspace_type,
       :active_directory_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3479,7 +3223,7 @@ module Aws::WorkSpaces
       :directory_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute link_id
@@ -3492,7 +3236,7 @@ module Aws::WorkSpaces
       :link_id,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_link
@@ -3501,7 +3245,7 @@ module Aws::WorkSpaces
     class RejectAccountLinkInvitationResult < Struct.new(
       :account_link,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the related WorkSpace. The related WorkSpace could be a standby WorkSpace or 
@@ -3524,7 +3268,7 @@ module Aws::WorkSpaces
       :state,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource already exists.</p>
@@ -3533,7 +3277,7 @@ module Aws::WorkSpaces
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is associated with a directory.</p>
@@ -3542,7 +3286,7 @@ module Aws::WorkSpaces
     class ResourceAssociatedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be created.</p>
@@ -3551,7 +3295,7 @@ module Aws::WorkSpaces
     class ResourceCreationFailedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is currently in use.</p>
@@ -3564,7 +3308,7 @@ module Aws::WorkSpaces
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your resource limits have been exceeded.</p>
@@ -3574,7 +3318,7 @@ module Aws::WorkSpaces
     class ResourceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource could not be found.</p>
@@ -3588,7 +3332,7 @@ module Aws::WorkSpaces
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is not available.</p>
@@ -3602,7 +3346,7 @@ module Aws::WorkSpaces
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -3611,12 +3355,12 @@ module Aws::WorkSpaces
     class RestoreWorkspaceRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RestoreWorkspaceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -3629,12 +3373,12 @@ module Aws::WorkSpaces
       :group_id,
       :user_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RevokeIpRulesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the root volume for a WorkSpace bundle.</p>
@@ -3644,13 +3388,7 @@ module Aws::WorkSpaces
     class RootStorage < Struct.new(
       :capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RunningMode
-      AUTO_STOP = 'AUTO_STOP'
-      ALWAYS_ON = 'ALWAYS_ON'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the enablement status, user access URL, and relay state parameter name that 
@@ -3690,13 +3428,7 @@ module Aws::WorkSpaces
       :user_access_url,
       :relay_state_parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SamlStatusEnum
-      DISABLED = 'DISABLED'
-      ENABLED = 'ENABLED'
-      ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK = 'ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the self-service permissions for a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.</p>
@@ -3724,12 +3456,7 @@ module Aws::WorkSpaces
       :switch_running_mode,
       :rebuild_workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionConnectionState
-      CONNECTED = 'CONNECTED'
-      NOT_CONNECTED = 'NOT_CONNECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a snapshot.</p>
@@ -3739,7 +3466,7 @@ module Aws::WorkSpaces
     class Snapshot < Struct.new(
       :snapshot_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a standby WorkSpace.</p>
@@ -3765,12 +3492,7 @@ module Aws::WorkSpaces
       :tags,
       :data_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandbyWorkspaceRelationshipType
-      PRIMARY = 'PRIMARY'
-      STANDBY = 'STANDBY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the properties of the related standby WorkSpaces. </p>
@@ -3789,7 +3511,7 @@ module Aws::WorkSpaces
       :data_replication,
       :recovery_snapshot_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information used to start a WorkSpace.</p>
@@ -3799,7 +3521,7 @@ module Aws::WorkSpaces
     class StartRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -3808,12 +3530,12 @@ module Aws::WorkSpaces
     class StartWorkspacesPoolRequest < Struct.new(
       :pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartWorkspacesPoolResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_workspace_requests
@@ -3822,7 +3544,7 @@ module Aws::WorkSpaces
     class StartWorkspacesRequest < Struct.new(
       :start_workspace_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_requests
@@ -3831,7 +3553,7 @@ module Aws::WorkSpaces
     class StartWorkspacesResult < Struct.new(
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information used to stop a WorkSpace.</p>
@@ -3841,7 +3563,7 @@ module Aws::WorkSpaces
     class StopRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -3850,12 +3572,12 @@ module Aws::WorkSpaces
     class StopWorkspacesPoolRequest < Struct.new(
       :pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopWorkspacesPoolResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute stop_workspace_requests
@@ -3864,7 +3586,7 @@ module Aws::WorkSpaces
     class StopWorkspacesRequest < Struct.new(
       :stop_workspace_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_requests
@@ -3873,7 +3595,7 @@ module Aws::WorkSpaces
     class StopWorkspacesResult < Struct.new(
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the storage connector.</p>
@@ -3887,21 +3609,7 @@ module Aws::WorkSpaces
       :connector_type,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageConnectorStatusEnum
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module StorageConnectorTypeEnum
-      HOME_FOLDER = 'HOME_FOLDER'
-    end
-
-    module StreamingExperiencePreferredProtocolEnum
-      TCP = 'TCP'
-      UDP = 'UDP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the streaming properties.</p>
@@ -3923,7 +3631,7 @@ module Aws::WorkSpaces
       :storage_connectors,
       :global_accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag.</p>
@@ -3937,17 +3645,7 @@ module Aws::WorkSpaces
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetWorkspaceState
-      AVAILABLE = 'AVAILABLE'
-      ADMIN_MAINTENANCE = 'ADMIN_MAINTENANCE'
-    end
-
-    module Tenancy
-      DEDICATED = 'DEDICATED'
-      SHARED = 'SHARED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information used to terminate a WorkSpace.</p>
@@ -3957,7 +3655,7 @@ module Aws::WorkSpaces
     class TerminateRequest < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -3966,12 +3664,12 @@ module Aws::WorkSpaces
     class TerminateWorkspacesPoolRequest < Struct.new(
       :pool_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TerminateWorkspacesPoolResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute session_id
@@ -3980,12 +3678,12 @@ module Aws::WorkSpaces
     class TerminateWorkspacesPoolSessionRequest < Struct.new(
       :session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TerminateWorkspacesPoolSessionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute terminate_workspace_requests
@@ -3994,7 +3692,7 @@ module Aws::WorkSpaces
     class TerminateWorkspacesRequest < Struct.new(
       :terminate_workspace_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_requests
@@ -4003,7 +3701,7 @@ module Aws::WorkSpaces
     class TerminateWorkspacesResult < Struct.new(
       :failed_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the timeout settings for a pool of WorkSpaces.</p>
@@ -4027,7 +3725,7 @@ module Aws::WorkSpaces
       :idle_disconnect_timeout_in_seconds,
       :max_user_duration_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of this network is not supported for this operation, or your network configuration 
@@ -4039,7 +3737,7 @@ module Aws::WorkSpaces
     class UnsupportedNetworkConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of this WorkSpace is not supported for this operation. For more information, see  
@@ -4050,7 +3748,7 @@ module Aws::WorkSpaces
     class UnsupportedWorkspaceConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute add_in_id
@@ -4071,12 +3769,12 @@ module Aws::WorkSpaces
       :name,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectClientAddInResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_id
@@ -4089,12 +3787,12 @@ module Aws::WorkSpaces
       :alias_id,
       :connection_alias_permission,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateConnectionAliasPermissionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes whether a WorkSpace image needs to be updated with the latest drivers and
@@ -4114,7 +3812,7 @@ module Aws::WorkSpaces
       :update_available,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_id
@@ -4127,12 +3825,12 @@ module Aws::WorkSpaces
       :group_id,
       :user_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateRulesOfIpGroupResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bundle_id
@@ -4145,12 +3843,12 @@ module Aws::WorkSpaces
       :bundle_id,
       :image_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWorkspaceBundleResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute image_id
@@ -4172,12 +3870,12 @@ module Aws::WorkSpaces
       :allow_copy_image,
       :shared_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWorkspaceImagePermissionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pool_id
@@ -4214,7 +3912,7 @@ module Aws::WorkSpaces
       :timeout_settings,
       :running_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces_pool
@@ -4223,13 +3921,7 @@ module Aws::WorkSpaces
     class UpdateWorkspacesPoolResult < Struct.new(
       :workspaces_pool,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserIdentityType
-      CUSTOMER_MANAGED = 'CUSTOMER_MANAGED'
-      AWS_DIRECTORY_SERVICE = 'AWS_DIRECTORY_SERVICE'
-      AWS_IAM_IDENTITY_CENTER = 'AWS_IAM_IDENTITY_CENTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the user's permission settings.</p>
@@ -4247,19 +3939,7 @@ module Aws::WorkSpaces
       :permission,
       :maximum_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UserSettingActionEnum
-      CLIPBOARD_COPY_FROM_LOCAL_DEVICE = 'CLIPBOARD_COPY_FROM_LOCAL_DEVICE'
-      CLIPBOARD_COPY_TO_LOCAL_DEVICE = 'CLIPBOARD_COPY_TO_LOCAL_DEVICE'
-      PRINTING_TO_LOCAL_DEVICE = 'PRINTING_TO_LOCAL_DEVICE'
-      SMART_CARD = 'SMART_CARD'
-    end
-
-    module UserSettingPermissionEnum
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the user volume for a WorkSpace bundle.</p>
@@ -4269,7 +3949,7 @@ module Aws::WorkSpaces
     class UserStorage < Struct.new(
       :capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You either haven't provided a <code>TargetAccountId</code> or 
@@ -4279,7 +3959,7 @@ module Aws::WorkSpaces
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the WorkSpace application.</p>
@@ -4321,7 +4001,7 @@ module Aws::WorkSpaces
       :supported_compute_type_names,
       :supported_operating_system_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the WorkSpace application deployment.</p>
@@ -4331,23 +4011,7 @@ module Aws::WorkSpaces
     class WorkSpaceApplicationDeployment < Struct.new(
       :associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkSpaceApplicationLicenseType
-      LICENSED = 'LICENSED'
-      UNLICENSED = 'UNLICENSED'
-    end
-
-    module WorkSpaceApplicationState
-      PENDING = 'PENDING'
-      ERROR = 'ERROR'
-      AVAILABLE = 'AVAILABLE'
-      UNINSTALL_ONLY = 'UNINSTALL_ONLY'
-    end
-
-    module WorkSpaceAssociatedResourceType
-      APPLICATION = 'APPLICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace.</p>
@@ -4511,7 +4175,7 @@ module Aws::WorkSpaces
       :data_replication_settings,
       :standby_workspaces_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The device types and operating systems that can be used to access a WorkSpace. For more
@@ -4560,7 +4224,7 @@ module Aws::WorkSpaces
       :device_type_work_spaces_thin_client,
       :access_endpoint_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace bundle.</p>
@@ -4616,13 +4280,7 @@ module Aws::WorkSpaces
       :state,
       :bundle_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkspaceBundleState
-      AVAILABLE = 'AVAILABLE'
-      PENDING = 'PENDING'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the connection status of a WorkSpace.</p>
@@ -4645,7 +4303,7 @@ module Aws::WorkSpaces
       :connection_state_check_timestamp,
       :last_known_user_connection_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the default properties that are used for creating WorkSpaces. For more
@@ -4696,7 +4354,7 @@ module Aws::WorkSpaces
       :enable_maintenance_mode,
       :instance_iam_role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a directory that is used with Amazon WorkSpaces.</p>
@@ -4826,22 +4484,7 @@ module Aws::WorkSpaces
       :streaming_properties,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkspaceDirectoryState
-      REGISTERING = 'REGISTERING'
-      REGISTERED = 'REGISTERED'
-      DEREGISTERING = 'DEREGISTERING'
-      DEREGISTERED = 'DEREGISTERED'
-      ERROR = 'ERROR'
-    end
-
-    module WorkspaceDirectoryType
-      SIMPLE_AD = 'SIMPLE_AD'
-      AD_CONNECTOR = 'AD_CONNECTOR'
-      CUSTOMER_MANAGED = 'CUSTOMER_MANAGED'
-      AWS_IAM_IDENTITY_CENTER = 'AWS_IAM_IDENTITY_CENTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace image.</p>
@@ -4900,80 +4543,7 @@ module Aws::WorkSpaces
       :updates,
       :error_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkspaceImageErrorDetailCode
-      OUTDATED_POWERSHELL_VERSION = 'OutdatedPowershellVersion'
-      OFFICE_INSTALLED = 'OfficeInstalled'
-      PCOIP_AGENT_INSTALLED = 'PCoIPAgentInstalled'
-      WINDOWS_UPDATES_ENABLED = 'WindowsUpdatesEnabled'
-      AUTO_MOUNT_DISABLED = 'AutoMountDisabled'
-      WORKSPACES_BYOL_ACCOUNT_NOT_FOUND = 'WorkspacesBYOLAccountNotFound'
-      WORKSPACES_BYOL_ACCOUNT_DISABLED = 'WorkspacesBYOLAccountDisabled'
-      DHCP_DISABLED = 'DHCPDisabled'
-      DISK_FREE_SPACE = 'DiskFreeSpace'
-      ADDITIONAL_DRIVES_ATTACHED = 'AdditionalDrivesAttached'
-      OS_NOT_SUPPORTED = 'OSNotSupported'
-      DOMAIN_JOINED = 'DomainJoined'
-      AZURE_DOMAIN_JOINED = 'AzureDomainJoined'
-      FIREWALL_ENABLED = 'FirewallEnabled'
-      VMWARE_TOOLS_INSTALLED = 'VMWareToolsInstalled'
-      DISK_SIZE_EXCEEDED = 'DiskSizeExceeded'
-      INCOMPATIBLE_PARTITIONING = 'IncompatiblePartitioning'
-      PENDING_REBOOT = 'PendingReboot'
-      AUTO_LOGON_ENABLED = 'AutoLogonEnabled'
-      REALTIME_UNIVERSAL_DISABLED = 'RealTimeUniversalDisabled'
-      MULTIPLE_BOOT_PARTITION = 'MultipleBootPartition'
-      SIXTY_FOUR_BIT_OS = 'Requires64BitOS'
-      ZERO_REARM_COUNT = 'ZeroRearmCount'
-      IN_PLACE_UPGRADE = 'InPlaceUpgrade'
-      ANTI_VIRUS_INSTALLED = 'AntiVirusInstalled'
-      UEFI_NOT_SUPPORTED = 'UEFINotSupported'
-      UNKNOWN_ERROR = 'UnknownError'
-      APPX_PACKAGES_INSTALLED = 'AppXPackagesInstalled'
-      RESERVED_STORAGE_IN_USE = 'ReservedStorageInUse'
-      ADDITIONAL_DRIVES_PRESENT = 'AdditionalDrivesPresent'
-      WINDOWS_UPDATES_REQUIRED = 'WindowsUpdatesRequired'
-      SYSPREP_FILE_MISSING = 'SysPrepFileMissing'
-      USER_PROFILE_MISSING = 'UserProfileMissing'
-      INSUFFICIENT_DISK_SPACE = 'InsufficientDiskSpace'
-      ENVIRONMENT_VARIABLES_PATH_MISSING_ENTRIES = 'EnvironmentVariablesPathMissingEntries'
-      DOMAIN_ACCOUNT_SERVICES_FOUND = 'DomainAccountServicesFound'
-      INVALID_IP = 'InvalidIp'
-      REMOTE_DESKTOP_SERVICES_DISABLED = 'RemoteDesktopServicesDisabled'
-      WINDOWS_MODULES_INSTALLER_DISABLED = 'WindowsModulesInstallerDisabled'
-      AMAZON_SSM_AGENT_ENABLED = 'AmazonSsmAgentEnabled'
-      UNSUPPORTED_SECURITY_PROTOCOL = 'UnsupportedSecurityProtocol'
-      MULTIPLE_USER_PROFILES = 'MultipleUserProfiles'
-      STAGED_APPX_PACKAGE = 'StagedAppxPackage'
-      UNSUPPORTED_OS_UPGRADE = 'UnsupportedOsUpgrade'
-      INSUFFICIENT_REARM_COUNT = 'InsufficientRearmCount'
-      INCOMPATIBLE_PROTOCOL = 'ProtocolOSIncompatibility'
-      INCOMPATIBLE_MEMORY_INTEGRITY = 'MemoryIntegrityIncompatibility'
-      RESTRICTED_DRIVE_LETTER = 'RestrictedDriveLetterInUse'
-    end
-
-    module WorkspaceImageIngestionProcess
-      BYOL_REGULAR = 'BYOL_REGULAR'
-      BYOL_GRAPHICS = 'BYOL_GRAPHICS'
-      BYOL_GRAPHICSPRO = 'BYOL_GRAPHICSPRO'
-      BYOL_GRAPHICS_G4DN = 'BYOL_GRAPHICS_G4DN'
-      BYOL_REGULAR_WSP = 'BYOL_REGULAR_WSP'
-      BYOL_GRAPHICS_G4DN_WSP = 'BYOL_GRAPHICS_G4DN_WSP'
-      BYOL_REGULAR_BYOP = 'BYOL_REGULAR_BYOP'
-      BYOL_GRAPHICS_G4DN_BYOP = 'BYOL_GRAPHICS_G4DN_BYOP'
-    end
-
-    module WorkspaceImageRequiredTenancy
-      DEFAULT = 'DEFAULT'
-      DEDICATED = 'DEDICATED'
-    end
-
-    module WorkspaceImageState
-      AVAILABLE = 'AVAILABLE'
-      PENDING = 'PENDING'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a WorkSpace.</p>
@@ -5042,7 +4612,7 @@ module Aws::WorkSpaces
       :operating_system_name,
       :global_accelerator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the information used to create a WorkSpace.</p>
@@ -5094,7 +4664,7 @@ module Aws::WorkSpaces
       :tags,
       :workspace_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the association between an application and a WorkSpace resource.</p>
@@ -5128,32 +4698,7 @@ module Aws::WorkSpaces
       :state_reason,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkspaceState
-      PENDING = 'PENDING'
-      AVAILABLE = 'AVAILABLE'
-      IMPAIRED = 'IMPAIRED'
-      UNHEALTHY = 'UNHEALTHY'
-      REBOOTING = 'REBOOTING'
-      STARTING = 'STARTING'
-      REBUILDING = 'REBUILDING'
-      RESTORING = 'RESTORING'
-      MAINTENANCE = 'MAINTENANCE'
-      ADMIN_MAINTENANCE = 'ADMIN_MAINTENANCE'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      SUSPENDED = 'SUSPENDED'
-      UPDATING = 'UPDATING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      ERROR = 'ERROR'
-    end
-
-    module WorkspaceType
-      PERSONAL = 'PERSONAL'
-      POOLS = 'POOLS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The workspaces_DefaultRole role could not be found. If this is the first time you are registering a directory, you
@@ -5163,7 +4708,7 @@ module Aws::WorkSpaces
     class WorkspacesDefaultRoleNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an IP access control group.</p>
@@ -5185,7 +4730,7 @@ module Aws::WorkSpaces
       :group_desc,
       :user_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a pool of WorkSpaces.</p>
@@ -5246,7 +4791,7 @@ module Aws::WorkSpaces
       :timeout_settings,
       :running_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:running_mode] = 'AUTO_STOP' unless options.key?(:running_mode)
@@ -5265,50 +4810,7 @@ module Aws::WorkSpaces
       :error_code,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkspacesPoolErrorCode
-      IAM_SERVICE_ROLE_IS_MISSING = 'IAM_SERVICE_ROLE_IS_MISSING'
-      IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION = 'IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION'
-      IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION = 'IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION'
-      IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION = 'IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION'
-      NETWORK_INTERFACE_LIMIT_EXCEEDED = 'NETWORK_INTERFACE_LIMIT_EXCEEDED'
-      INTERNAL_SERVICE_ERROR = 'INTERNAL_SERVICE_ERROR'
-      MACHINE_ROLE_IS_MISSING = 'MACHINE_ROLE_IS_MISSING'
-      STS_DISABLED_IN_REGION = 'STS_DISABLED_IN_REGION'
-      SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES = 'SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES'
-      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION = 'IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION'
-      SUBNET_NOT_FOUND = 'SUBNET_NOT_FOUND'
-      IMAGE_NOT_FOUND = 'IMAGE_NOT_FOUND'
-      INVALID_SUBNET_CONFIGURATION = 'INVALID_SUBNET_CONFIGURATION'
-      SECURITY_GROUPS_NOT_FOUND = 'SECURITY_GROUPS_NOT_FOUND'
-      IGW_NOT_ATTACHED = 'IGW_NOT_ATTACHED'
-      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION = 'IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION'
-      WORKSPACES_POOL_STOPPED = 'WORKSPACES_POOL_STOPPED'
-      WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE = 'WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE'
-      DOMAIN_JOIN_ERROR_FILE_NOT_FOUND = 'DOMAIN_JOIN_ERROR_FILE_NOT_FOUND'
-      DOMAIN_JOIN_ERROR_ACCESS_DENIED = 'DOMAIN_JOIN_ERROR_ACCESS_DENIED'
-      DOMAIN_JOIN_ERROR_LOGON_FAILURE = 'DOMAIN_JOIN_ERROR_LOGON_FAILURE'
-      DOMAIN_JOIN_ERROR_INVALID_PARAMETER = 'DOMAIN_JOIN_ERROR_INVALID_PARAMETER'
-      DOMAIN_JOIN_ERROR_MORE_DATA = 'DOMAIN_JOIN_ERROR_MORE_DATA'
-      DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN = 'DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN'
-      DOMAIN_JOIN_ERROR_NOT_SUPPORTED = 'DOMAIN_JOIN_ERROR_NOT_SUPPORTED'
-      DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME = 'DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME'
-      DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED = 'DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED'
-      DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED = 'DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED'
-      DOMAIN_JOIN_NERR_PASSWORD_EXPIRED = 'DOMAIN_JOIN_NERR_PASSWORD_EXPIRED'
-      DOMAIN_JOIN_INTERNAL_SERVICE_ERROR = 'DOMAIN_JOIN_INTERNAL_SERVICE_ERROR'
-      DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING = 'DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING'
-      DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE = 'DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE'
-      DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID = 'DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID'
-      DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND = 'DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND'
-      DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND = 'DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND'
-      DOMAIN_JOIN_ERROR_SECRET_INVALID = 'DOMAIN_JOIN_ERROR_SECRET_INVALID'
-      BUNDLE_NOT_FOUND = 'BUNDLE_NOT_FOUND'
-      DIRECTORY_NOT_FOUND = 'DIRECTORY_NOT_FOUND'
-      INSUFFICIENT_PERMISSIONS_ERROR = 'INSUFFICIENT_PERMISSIONS_ERROR'
-      DEFAULT_OU_IS_MISSING = 'DEFAULT_OU_IS_MISSING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a pool session.</p>
@@ -5351,17 +4853,7 @@ module Aws::WorkSpaces
       :start_time,
       :user_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkspacesPoolState
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      RUNNING = 'RUNNING'
-      STARTING = 'STARTING'
-      STOPPED = 'STOPPED'
-      STOPPING = 'STOPPING'
-      UPDATING = 'UPDATING'
+      include ::Smithy::Schema::Structure
     end
 
   end

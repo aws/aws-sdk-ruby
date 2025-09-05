@@ -23,7 +23,7 @@ module Aws::NetworkFirewall
     class AZSyncState < Struct.new(
       :attachment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -32,7 +32,7 @@ module Aws::NetworkFirewall
     class AcceptNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -83,7 +83,7 @@ module Aws::NetworkFirewall
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom action to use in stateless rule actions settings. This is used in <a>CustomAction</a>.</p>
@@ -98,7 +98,7 @@ module Aws::NetworkFirewall
     class ActionDefinition < Struct.new(
       :publish_metric_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
@@ -125,7 +125,7 @@ module Aws::NetworkFirewall
     class Address < Struct.new(
       :address_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A report that captures key activity from the last 30 days of network traffic monitored by your firewall.</p>
@@ -150,7 +150,7 @@ module Aws::NetworkFirewall
       :report_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The analysis result for Network Firewall's stateless rule group analyzer. Every time you call <a>CreateRuleGroup</a>, <a>UpdateRuleGroup</a>, or <a>DescribeRuleGroup</a> on a stateless rule group, Network Firewall analyzes the stateless rule groups in your account and identifies the rules that might adversely effect your firewall's functionality. For example, if Network Firewall detects a rule that's routing traffic asymmetrically, which impacts the service's ability to properly process traffic, the service includes the rule in a list of analysis results.</p>
@@ -193,7 +193,7 @@ module Aws::NetworkFirewall
       :identified_type,
       :analysis_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results of a <code>COMPLETED</code> analysis report generated with <a>StartAnalysisReport</a>.</p>
@@ -224,7 +224,7 @@ module Aws::NetworkFirewall
       :hits,
       :unique_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -249,7 +249,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :availability_zone_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -272,7 +272,7 @@ module Aws::NetworkFirewall
       :availability_zone_mappings,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -297,7 +297,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -320,7 +320,7 @@ module Aws::NetworkFirewall
       :firewall_policy_arn,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -345,7 +345,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :subnet_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -368,7 +368,7 @@ module Aws::NetworkFirewall
       :subnet_mappings,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition and status of the firewall endpoint for a single subnet. In each configured subnet, Network Firewall instantiates a firewall
@@ -406,16 +406,7 @@ module Aws::NetworkFirewall
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AttachmentStatus
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      ERROR = 'ERROR'
-      SCALING = 'SCALING'
-      READY = 'READY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the mapping between an Availability Zone and a firewall endpoint for a transit gateway-attached firewall. Each mapping represents where the firewall can process traffic. You use these mappings when calling <a>CreateFirewall</a>, <a>AssociateAvailabilityZones</a>, and <a>DisassociateAvailabilityZones</a>.</p>
@@ -426,7 +417,7 @@ module Aws::NetworkFirewall
     class AvailabilityZoneMapping < Struct.new(
       :availability_zone,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about an Availability Zone where the firewall has an endpoint defined. </p>
@@ -436,7 +427,7 @@ module Aws::NetworkFirewall
     class AvailabilityZoneMetadata < Struct.new(
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes the CIDR blocks used by the IP set references in a firewall. Network Firewall calculates the number of CIDRs by taking an aggregated count of all CIDRs used by the IP sets you are referencing.</p>
@@ -454,7 +445,7 @@ module Aws::NetworkFirewall
       :utilized_cidr_count,
       :ip_set_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The capacity usage summary of the resources used by the <a>ReferenceSets</a> in a firewall.</p>
@@ -464,7 +455,7 @@ module Aws::NetworkFirewall
     class CapacityUsageSummary < Struct.new(
       :cid_rs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the actions to take on the SSL/TLS connection if the certificate presented by the server in the connection has a revoked or unknown status.</p>
@@ -506,13 +497,7 @@ module Aws::NetworkFirewall
       :revoked_status_action,
       :unknown_status_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigurationSyncState
-      PENDING = 'PENDING'
-      IN_SYNC = 'IN_SYNC'
-      CAPACITY_CONSTRAINED = 'CAPACITY_CONSTRAINED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_policy_name
@@ -546,7 +531,7 @@ module Aws::NetworkFirewall
       :dry_run,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -560,7 +545,7 @@ module Aws::NetworkFirewall
       :update_token,
       :firewall_policy_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_name
@@ -638,7 +623,7 @@ module Aws::NetworkFirewall
       :availability_zone_mappings,
       :availability_zone_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall
@@ -652,7 +637,7 @@ module Aws::NetworkFirewall
       :firewall,
       :firewall_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_name
@@ -776,7 +761,7 @@ module Aws::NetworkFirewall
       :analyze_rule_group,
       :summary_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -790,7 +775,7 @@ module Aws::NetworkFirewall
       :update_token,
       :rule_group_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tls_inspection_configuration_name
@@ -819,7 +804,7 @@ module Aws::NetworkFirewall
       :tags,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -833,7 +818,7 @@ module Aws::NetworkFirewall
       :update_token,
       :tls_inspection_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -861,7 +846,7 @@ module Aws::NetworkFirewall
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_association
@@ -875,7 +860,7 @@ module Aws::NetworkFirewall
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional, non-standard action to use for stateless packet handling. You can define
@@ -909,7 +894,7 @@ module Aws::NetworkFirewall
       :action_name,
       :action_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_policy_name
@@ -924,7 +909,7 @@ module Aws::NetworkFirewall
       :firewall_policy_name,
       :firewall_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_policy_response
@@ -934,7 +919,7 @@ module Aws::NetworkFirewall
     class DeleteFirewallPolicyResponse < Struct.new(
       :firewall_policy_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_name
@@ -949,7 +934,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall
@@ -967,7 +952,7 @@ module Aws::NetworkFirewall
       :firewall,
       :firewall_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -976,7 +961,7 @@ module Aws::NetworkFirewall
     class DeleteNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -1028,7 +1013,7 @@ module Aws::NetworkFirewall
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1037,12 +1022,12 @@ module Aws::NetworkFirewall
     class DeleteResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_name
@@ -1065,7 +1050,7 @@ module Aws::NetworkFirewall
       :rule_group_arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_response
@@ -1074,7 +1059,7 @@ module Aws::NetworkFirewall
     class DeleteRuleGroupResponse < Struct.new(
       :rule_group_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tls_inspection_configuration_arn
@@ -1089,7 +1074,7 @@ module Aws::NetworkFirewall
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tls_inspection_configuration_response
@@ -1098,7 +1083,7 @@ module Aws::NetworkFirewall
     class DeleteTLSInspectionConfigurationResponse < Struct.new(
       :tls_inspection_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_association_arn
@@ -1107,7 +1092,7 @@ module Aws::NetworkFirewall
     class DeleteVpcEndpointAssociationRequest < Struct.new(
       :vpc_endpoint_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_association
@@ -1121,7 +1106,7 @@ module Aws::NetworkFirewall
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1130,7 +1115,7 @@ module Aws::NetworkFirewall
     class DescribeFirewallMetadataRequest < Struct.new(
       :firewall_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1165,7 +1150,7 @@ module Aws::NetworkFirewall
       :supported_availability_zones,
       :transit_gateway_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_policy_name
@@ -1180,7 +1165,7 @@ module Aws::NetworkFirewall
       :firewall_policy_name,
       :firewall_policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -1198,7 +1183,7 @@ module Aws::NetworkFirewall
       :firewall_policy_response,
       :firewall_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_name
@@ -1213,7 +1198,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -1233,7 +1218,7 @@ module Aws::NetworkFirewall
       :firewall,
       :firewall_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1259,7 +1244,7 @@ module Aws::NetworkFirewall
       :vpc_endpoint_id,
       :flow_operation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1307,7 +1292,7 @@ module Aws::NetworkFirewall
       :flow_request_timestamp,
       :flow_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1322,7 +1307,7 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :firewall_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1343,7 +1328,7 @@ module Aws::NetworkFirewall
       :logging_configuration,
       :enable_monitoring_dashboard,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1352,7 +1337,7 @@ module Aws::NetworkFirewall
     class DescribeResourcePolicyRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1361,7 +1346,7 @@ module Aws::NetworkFirewall
     class DescribeResourcePolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_name
@@ -1384,7 +1369,7 @@ module Aws::NetworkFirewall
       :rule_group_arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_arn
@@ -1428,7 +1413,7 @@ module Aws::NetworkFirewall
       :stateful_rule_options,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_name
@@ -1455,7 +1440,7 @@ module Aws::NetworkFirewall
       :type,
       :analyze_rule_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -1478,7 +1463,7 @@ module Aws::NetworkFirewall
       :rule_group,
       :rule_group_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_name
@@ -1500,7 +1485,7 @@ module Aws::NetworkFirewall
       :rule_group_arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rule_group_name
@@ -1528,7 +1513,7 @@ module Aws::NetworkFirewall
       :description,
       :summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tls_inspection_configuration_arn
@@ -1543,7 +1528,7 @@ module Aws::NetworkFirewall
       :tls_inspection_configuration_arn,
       :tls_inspection_configuration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -1565,7 +1550,7 @@ module Aws::NetworkFirewall
       :tls_inspection_configuration,
       :tls_inspection_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_association_arn
@@ -1574,7 +1559,7 @@ module Aws::NetworkFirewall
     class DescribeVpcEndpointAssociationRequest < Struct.new(
       :vpc_endpoint_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_endpoint_association
@@ -1588,7 +1573,7 @@ module Aws::NetworkFirewall
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value to use in an Amazon CloudWatch custom metric dimension. This is used in the
@@ -1605,7 +1590,7 @@ module Aws::NetworkFirewall
     class Dimension < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -1630,7 +1615,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :availability_zone_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1653,7 +1638,7 @@ module Aws::NetworkFirewall
       :availability_zone_mappings,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -1678,7 +1663,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -1701,12 +1686,7 @@ module Aws::NetworkFirewall
       :subnet_mappings,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnabledAnalysisType
-      TLS_SNI = 'TLS_SNI'
-      HTTP_HOST = 'HTTP_HOST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that contains optional Amazon Web Services Key Management Service (KMS) encryption settings for your Network Firewall resources. Your data is encrypted by default with an Amazon Web Services owned key that Amazon Web Services owns and manages for you. You can use either the Amazon Web Services owned key, or provide your own customer managed key. To learn more about KMS encryption of your Network Firewall resources, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html">Encryption at rest with Amazon Web Services Key Managment Service</a> in the <i>Network Firewall Developer Guide</i>.</p>
@@ -1720,12 +1700,7 @@ module Aws::NetworkFirewall
       :key_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionType
-      CUSTOMER_KMS = 'CUSTOMER_KMS'
-      AWS_OWNED_KMS_KEY = 'AWS_OWNED_KMS_KEY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A firewall defines the behavior of a firewall, the main VPC where the firewall is used, the Availability Zones where the firewall can be used, and one subnet to use for a firewall endpoint within each of the Availability Zones. The Availability Zones are defined implicitly in the subnet specifications.</p>
@@ -1818,7 +1793,7 @@ module Aws::NetworkFirewall
       :availability_zone_mappings,
       :availability_zone_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:delete_protection] = false unless options.key?(:delete_protection)
@@ -1846,7 +1821,7 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :transit_gateway_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The firewall policy defines the behavior of a firewall using a collection of stateless
@@ -1933,7 +1908,7 @@ module Aws::NetworkFirewall
       :tls_inspection_configuration_arn,
       :policy_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a firewall policy, returned by operations like create and
@@ -1949,7 +1924,7 @@ module Aws::NetworkFirewall
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The high-level properties of a firewall policy. This, along with the <a>FirewallPolicy</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>. </p>
@@ -2006,7 +1981,7 @@ module Aws::NetworkFirewall
       :encryption_configuration,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the current status of a <a>Firewall</a>. You can retrieve this for a firewall by calling <a>DescribeFirewall</a> and providing the firewall name and ARN.</p>
@@ -2049,13 +2024,7 @@ module Aws::NetworkFirewall
       :capacity_usage_summary,
       :transit_gateway_attachment_sync_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FirewallStatusValue
-      PROVISIONING = 'PROVISIONING'
-      DELETING = 'DELETING'
-      READY = 'READY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Any number of arrays, where each array is a single flow identified in the scope of the operation. 
@@ -2099,7 +2068,7 @@ module Aws::NetworkFirewall
       :packet_count,
       :byte_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:byte_count] = 0 unless options.key?(:byte_count)
@@ -2135,7 +2104,7 @@ module Aws::NetworkFirewall
       :destination_port,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a flow operation, such as related statuses, unique identifiers, and all filters defined in the operation.</p>
@@ -2153,7 +2122,7 @@ module Aws::NetworkFirewall
       :minimum_flow_age_in_seconds,
       :flow_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of objects with metadata about the requested <code>FlowOperation</code>.</p>
@@ -2177,19 +2146,7 @@ module Aws::NetworkFirewall
       :flow_request_timestamp,
       :flow_operation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlowOperationStatus
-      COMPLETED = 'COMPLETED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      COMPLETED_WITH_ERRORS = 'COMPLETED_WITH_ERRORS'
-    end
-
-    module FlowOperationType
-      FLOW_FLUSH = 'FLOW_FLUSH'
-      FLOW_CAPTURE = 'FLOW_CAPTURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table. 
@@ -2206,12 +2163,7 @@ module Aws::NetworkFirewall
     class FlowTimeouts < Struct.new(
       :tcp_idle_timeout_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeneratedRulesType
-      ALLOWLIST = 'ALLOWLIST'
-      DENYLIST = 'DENYLIST'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_name
@@ -2242,7 +2194,7 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -2279,7 +2231,7 @@ module Aws::NetworkFirewall
       :next_token,
       :analysis_report_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The basic rule criteria for Network Firewall to use to inspect packet headers in stateful
@@ -2356,7 +2308,7 @@ module Aws::NetworkFirewall
       :destination,
       :destination_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Attempts made to a access domain.</p>
@@ -2366,18 +2318,12 @@ module Aws::NetworkFirewall
     class Hits < Struct.new(
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
         super
       end
-    end
-
-    module IPAddressType
-      DUALSTACK = 'DUALSTACK'
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
     end
 
     # <p>A list of IP addresses and address ranges, in CIDR notation. This is part of a <a>RuleVariables</a>. </p>
@@ -2389,7 +2335,7 @@ module Aws::NetworkFirewall
     class IPSet < Struct.new(
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>General information about the IP set.</p>
@@ -2399,7 +2345,7 @@ module Aws::NetworkFirewall
     class IPSetMetadata < Struct.new(
       :resolved_cidr_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures one or more IP set references for a Suricata-compatible rule group. This is used in <a>CreateRuleGroup</a> or <a>UpdateRuleGroup</a>. An IP set reference is a rule variable that references resources that you create and manage in another Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall IP set references enable you to dynamically update the contents of your rules. When you create, update, or delete the resource you are referencing in your rule, Network Firewall automatically updates the rule's content with the changes. For more information about IP set references in Network Firewall, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references">Using IP set references</a> in the <i>Network Firewall Developer Guide</i>.</p>
@@ -2412,12 +2358,7 @@ module Aws::NetworkFirewall
     class IPSetReference < Struct.new(
       :reference_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdentifiedType
-      STATELESS_RULE_FORWARDING_ASYMMETRICALLY = 'STATELESS_RULE_FORWARDING_ASYMMETRICALLY'
-      STATELESS_RULE_CONTAINS_TCP_FLAGS = 'STATELESS_RULE_CONTAINS_TCP_FLAGS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services doesn't currently have enough available capacity to fulfill your request. Try your
@@ -2427,7 +2368,7 @@ module Aws::NetworkFirewall
     class InsufficientCapacityException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your request is valid, but Network Firewall couldn't perform the operation because of a
@@ -2437,7 +2378,7 @@ module Aws::NetworkFirewall
     class InternalServerError < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because it's not valid. For example, you might have tried to delete
@@ -2447,7 +2388,7 @@ module Aws::NetworkFirewall
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because of a problem with your request. Examples include: </p>
@@ -2469,7 +2410,7 @@ module Aws::NetworkFirewall
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy statement failed validation.</p>
@@ -2478,7 +2419,7 @@ module Aws::NetworkFirewall
     class InvalidResourcePolicyException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The token you provided is stale or isn't valid for the operation. </p>
@@ -2487,7 +2428,7 @@ module Aws::NetworkFirewall
     class InvalidTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to perform the operation because doing so would violate a limit setting. </p>
@@ -2496,7 +2437,7 @@ module Aws::NetworkFirewall
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_name
@@ -2523,7 +2464,7 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_reports
@@ -2538,7 +2479,7 @@ module Aws::NetworkFirewall
       :analysis_reports,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2555,7 +2496,7 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2571,7 +2512,7 @@ module Aws::NetworkFirewall
       :next_token,
       :firewall_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2593,7 +2534,7 @@ module Aws::NetworkFirewall
       :vpc_ids,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2610,7 +2551,7 @@ module Aws::NetworkFirewall
       :next_token,
       :firewalls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -2648,7 +2589,7 @@ module Aws::NetworkFirewall
       :vpc_endpoint_id,
       :vpc_endpoint_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -2700,7 +2641,7 @@ module Aws::NetworkFirewall
       :flows,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -2738,7 +2679,7 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute flow_operations
@@ -2755,7 +2696,7 @@ module Aws::NetworkFirewall
       :flow_operations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2786,7 +2727,7 @@ module Aws::NetworkFirewall
       :managed_type,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2802,7 +2743,7 @@ module Aws::NetworkFirewall
       :next_token,
       :rule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2819,7 +2760,7 @@ module Aws::NetworkFirewall
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2834,7 +2775,7 @@ module Aws::NetworkFirewall
       :next_token,
       :tls_inspection_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2855,7 +2796,7 @@ module Aws::NetworkFirewall
       :max_results,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2870,7 +2811,7 @@ module Aws::NetworkFirewall
       :next_token,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2892,7 +2833,7 @@ module Aws::NetworkFirewall
       :max_results,
       :firewall_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2911,7 +2852,7 @@ module Aws::NetworkFirewall
       :next_token,
       :vpc_endpoint_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines where Network Firewall sends logs for the firewall for one log type. This is used
@@ -2978,7 +2919,7 @@ module Aws::NetworkFirewall
       :log_destination_type,
       :log_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to send logs to a configured logging destination. </p>
@@ -2987,19 +2928,7 @@ module Aws::NetworkFirewall
     class LogDestinationPermissionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogDestinationType
-      S3 = 'S3'
-      CLOUDWATCH_LOGS = 'CloudWatchLogs'
-      KINESIS_DATA_FIREHOSE = 'KinesisDataFirehose'
-    end
-
-    module LogType
-      ALERT = 'ALERT'
-      FLOW = 'FLOW'
-      TLS = 'TLS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines how Network Firewall performs logging for a <a>Firewall</a>. </p>
@@ -3010,7 +2939,7 @@ module Aws::NetworkFirewall
     class LoggingConfiguration < Struct.new(
       :log_destination_configs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Criteria for Network Firewall to use to inspect an individual packet in stateless rule inspection. Each match attributes set can include one or more items such as IP address, CIDR range, port number, protocol, and TCP flags. </p>
@@ -3051,11 +2980,7 @@ module Aws::NetworkFirewall
       :protocols,
       :tcp_flags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OverrideAction
-      DROP_TO_ALERT = 'DROP_TO_ALERT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration status for a single policy or rule group that is used for a firewall endpoint. Network Firewall
@@ -3072,13 +2997,7 @@ module Aws::NetworkFirewall
       :sync_status,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PerObjectSyncStatus
-      PENDING = 'PENDING'
-      IN_SYNC = 'IN_SYNC'
-      CAPACITY_CONSTRAINED = 'CAPACITY_CONSTRAINED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains variables that you can use to override default Suricata settings in your firewall policy.</p>
@@ -3088,7 +3007,7 @@ module Aws::NetworkFirewall
     class PolicyVariables < Struct.new(
       :rule_variables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single port range specification. This is used for source and destination port ranges
@@ -3106,7 +3025,7 @@ module Aws::NetworkFirewall
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:from_port] = 0 unless options.key?(:from_port)
@@ -3123,7 +3042,7 @@ module Aws::NetworkFirewall
     class PortSet < Struct.new(
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stateless inspection criteria that publishes the specified metrics to Amazon CloudWatch for the
@@ -3134,7 +3053,7 @@ module Aws::NetworkFirewall
     class PublishMetricAction < Struct.new(
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3182,12 +3101,12 @@ module Aws::NetworkFirewall
       :resource_arn,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutResourcePolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a set of IP set references.</p>
@@ -3197,7 +3116,7 @@ module Aws::NetworkFirewall
     class ReferenceSets < Struct.new(
       :ip_set_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -3206,7 +3125,7 @@ module Aws::NetworkFirewall
     class RejectNetworkFirewallTransitGatewayAttachmentRequest < Struct.new(
       :transit_gateway_attachment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transit_gateway_attachment_id
@@ -3258,18 +3177,7 @@ module Aws::NetworkFirewall
       :transit_gateway_attachment_id,
       :transit_gateway_attachment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceManagedStatus
-      MANAGED = 'MANAGED'
-      ACCOUNT = 'ACCOUNT'
-    end
-
-    module ResourceManagedType
-      AWS_MANAGED_THREAT_SIGNATURES = 'AWS_MANAGED_THREAT_SIGNATURES'
-      AWS_MANAGED_DOMAIN_LISTS = 'AWS_MANAGED_DOMAIN_LISTS'
-      ACTIVE_THREAT_DEFENSE = 'ACTIVE_THREAT_DEFENSE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to locate a resource using the parameters that you provided.</p>
@@ -3278,7 +3186,7 @@ module Aws::NetworkFirewall
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to change the resource because your account doesn't own it. </p>
@@ -3287,19 +3195,7 @@ module Aws::NetworkFirewall
     class ResourceOwnerCheckException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceStatus
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      ERROR = 'ERROR'
-    end
-
-    module RevocationCheckAction
-      PASS = 'PASS'
-      DROP = 'DROP'
-      REJECT = 'REJECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inspection criteria and action for a single stateless rule. Network Firewall inspects each packet for the specified matching
@@ -3351,7 +3247,7 @@ module Aws::NetworkFirewall
       :match_attributes,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that defines the rules in a rule group. This, along with <a>RuleGroupResponse</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>
@@ -3380,7 +3276,7 @@ module Aws::NetworkFirewall
       :rules_source,
       :stateful_rule_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a rule group, returned by <a>ListRuleGroups</a>.
@@ -3396,7 +3292,7 @@ module Aws::NetworkFirewall
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>
@@ -3488,12 +3384,7 @@ module Aws::NetworkFirewall
       :analysis_results,
       :summary_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleGroupType
-      STATELESS = 'STATELESS'
-      STATEFUL = 'STATEFUL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional settings for a stateful rule. This is part of the <a>StatefulRule</a> configuration.</p>
@@ -3507,12 +3398,7 @@ module Aws::NetworkFirewall
       :keyword,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleOrder
-      DEFAULT_ACTION_ORDER = 'DEFAULT_ACTION_ORDER'
-      STRICT_ORDER = 'STRICT_ORDER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing details about a Suricata rule. Contains:</p>
@@ -3548,7 +3434,7 @@ module Aws::NetworkFirewall
       :msg,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that are available for use in the rules in the <a>RuleGroup</a>
@@ -3563,7 +3449,7 @@ module Aws::NetworkFirewall
       :ip_sets,
       :port_sets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The stateless or stateful rules definitions for use in a single rule group. Each rule
@@ -3597,7 +3483,7 @@ module Aws::NetworkFirewall
       :stateful_rules,
       :stateless_rules_and_custom_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stateful inspection criteria for a domain list rule group. </p>
@@ -3626,7 +3512,7 @@ module Aws::NetworkFirewall
       :target_types,
       :generated_rules_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Any Certificate Manager (ACM) Secure Sockets Layer/Transport Layer Security (SSL/TLS) server certificate that's associated with a <a>ServerCertificateConfiguration</a>. Used in a <a>TLSInspectionConfiguration</a> for inspection of inbound traffic to your firewall. You must request or import a SSL/TLS certificate into ACM for each domain Network Firewall needs to decrypt and inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified inbound SSL/TLS traffic going to your firewall. For information about working with certificates in Certificate Manager, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html">Request a public certificate </a> or <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing certificates</a> in the <i>Certificate Manager User Guide</i>.</p>
@@ -3636,7 +3522,7 @@ module Aws::NetworkFirewall
     class ServerCertificate < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the Certificate Manager certificates and scope that Network Firewall uses to decrypt and re-encrypt traffic using a <a>TLSInspectionConfiguration</a>. You can configure <code>ServerCertificates</code> for inbound SSL/TLS inspection, a <code>CertificateAuthorityArn</code> for outbound SSL/TLS inspection, or both. For information about working with certificates for TLS inspection, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html"> Using SSL/TLS server certficiates with TLS inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
@@ -3672,7 +3558,7 @@ module Aws::NetworkFirewall
       :certificate_authority_arn,
       :check_certificate_revocation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings that define the Secure Sockets Layer/Transport Layer Security (SSL/TLS) traffic that Network Firewall should decrypt for inspection by the stateful rule engine.</p>
@@ -3704,7 +3590,7 @@ module Aws::NetworkFirewall
       :destination_ports,
       :protocols,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about the managed rule group that your own rule group is copied from. You can use the the metadata to track version updates made to the originating rule group. You can retrieve all objects for a rule group by calling <a href="https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html">DescribeRuleGroup</a>.</p>
@@ -3718,7 +3604,7 @@ module Aws::NetworkFirewall
       :source_arn,
       :source_update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_name
@@ -3737,7 +3623,7 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :analysis_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_report_id
@@ -3746,7 +3632,7 @@ module Aws::NetworkFirewall
     class StartAnalysisReportResponse < Struct.new(
       :analysis_report_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -3780,7 +3666,7 @@ module Aws::NetworkFirewall
       :minimum_flow_age_in_seconds,
       :flow_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -3799,7 +3685,7 @@ module Aws::NetworkFirewall
       :flow_operation_id,
       :flow_operation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -3830,7 +3716,7 @@ module Aws::NetworkFirewall
       :minimum_flow_age_in_seconds,
       :flow_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -3849,14 +3735,7 @@ module Aws::NetworkFirewall
       :flow_operation_id,
       :flow_operation_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatefulAction
-      PASS = 'PASS'
-      DROP = 'DROP'
-      ALERT = 'ALERT'
-      REJECT = 'REJECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for the handling of the stateful rule groups in a firewall policy. </p>
@@ -3899,7 +3778,7 @@ module Aws::NetworkFirewall
       :stream_exception_policy,
       :flow_timeouts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single Suricata rules specification, for use in a stateful rule group.
@@ -3949,12 +3828,7 @@ module Aws::NetworkFirewall
       :header,
       :rule_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatefulRuleDirection
-      FORWARD = 'FORWARD'
-      ANY = 'ANY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The setting that allows the policy owner to change the behavior of the rule group within a policy. </p>
@@ -3965,7 +3839,7 @@ module Aws::NetworkFirewall
     class StatefulRuleGroupOverride < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifier for a single stateful rule group, used in a firewall policy to refer to a
@@ -4000,7 +3874,7 @@ module Aws::NetworkFirewall
       :override,
       :deep_threat_inspection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional options governing how Network Firewall handles the rule group. You can only use these for stateful rule groups.</p>
@@ -4014,31 +3888,7 @@ module Aws::NetworkFirewall
     class StatefulRuleOptions < Struct.new(
       :rule_order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StatefulRuleProtocol
-      ANY = 'IP'
-      TCP = 'TCP'
-      UDP = 'UDP'
-      ICMP = 'ICMP'
-      HTTP = 'HTTP'
-      FTP = 'FTP'
-      TLS = 'TLS'
-      SMB = 'SMB'
-      DNS = 'DNS'
-      DCERPC = 'DCERPC'
-      SSH = 'SSH'
-      SMTP = 'SMTP'
-      IMAP = 'IMAP'
-      MSN = 'MSN'
-      KRB5 = 'KRB5'
-      IKEV2 = 'IKEV2'
-      TFTP = 'TFTP'
-      NTP = 'NTP'
-      DHCP = 'DHCP'
-      HTTP2 = 'HTTP2'
-      QUIC = 'QUIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A single stateless rule. This is used in <a>StatelessRulesAndCustomActions</a>.</p>
@@ -4064,7 +3914,7 @@ module Aws::NetworkFirewall
       :rule_definition,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifier for a single stateless rule group, used in a firewall policy to refer to the
@@ -4082,7 +3932,7 @@ module Aws::NetworkFirewall
       :resource_arn,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stateless inspection criteria. Each stateless rule group uses exactly one of these data
@@ -4101,13 +3951,7 @@ module Aws::NetworkFirewall
       :stateless_rules,
       :custom_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamExceptionPolicy
-      DROP = 'DROP'
-      CONTINUE = 'CONTINUE'
-      REJECT = 'REJECT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ID for a subnet that's used in an association with a firewall. This is used in
@@ -4124,7 +3968,7 @@ module Aws::NetworkFirewall
       :subnet_id,
       :ip_address_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type containing summaries of security protections provided by a rule group.</p>
@@ -4135,7 +3979,7 @@ module Aws::NetworkFirewall
     class Summary < Struct.new(
       :rule_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A complex type that specifies which Suricata rule metadata fields to use when displaying threat information. Contains:</p>
@@ -4152,13 +3996,7 @@ module Aws::NetworkFirewall
     class SummaryConfiguration < Struct.new(
       :rule_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SummaryRuleOption
-      SID = 'SID'
-      MSG = 'MSG'
-      METADATA = 'METADATA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the firewall endpoint and firewall policy configuration for a single VPC subnet. 
@@ -4192,18 +4030,7 @@ module Aws::NetworkFirewall
       :attachment,
       :config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TCPFlag
-      FIN = 'FIN'
-      SYN = 'SYN'
-      RST = 'RST'
-      PSH = 'PSH'
-      ACK = 'ACK'
-      URG = 'URG'
-      ECE = 'ECE'
-      CWR = 'CWR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TCP flags and masks to inspect packets for, used in stateless rules <a>MatchAttributes</a> settings.</p>
@@ -4226,7 +4053,7 @@ module Aws::NetworkFirewall
       :flags,
       :masks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
@@ -4240,7 +4067,7 @@ module Aws::NetworkFirewall
     class TLSInspectionConfiguration < Struct.new(
       :server_certificate_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a TLS inspection configuration, returned by <code>ListTLSInspectionConfigurations</code>. You can use the information provided in the metadata to retrieve and manage a TLS configuration.</p>
@@ -4254,7 +4081,7 @@ module Aws::NetworkFirewall
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The high-level properties of a TLS inspection configuration. This, along with the <code>TLSInspectionConfiguration</code>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <code>DescribeTLSInspectionConfiguration</code>.</p>
@@ -4304,7 +4131,7 @@ module Aws::NetworkFirewall
       :certificates,
       :certificate_authority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key:value pair associated with an Amazon Web Services resource. The key:value pair can be anything you
@@ -4324,7 +4151,7 @@ module Aws::NetworkFirewall
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4337,17 +4164,12 @@ module Aws::NetworkFirewall
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      TLS_SNI = 'TLS_SNI'
-      HTTP_HOST = 'HTTP_HOST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unable to process the request due to throttling limitations.</p>
@@ -4356,7 +4178,7 @@ module Aws::NetworkFirewall
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about an Certificate Manager certificate.</p>
@@ -4378,19 +4200,7 @@ module Aws::NetworkFirewall
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TransitGatewayAttachmentStatus
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      FAILED = 'FAILED'
-      ERROR = 'ERROR'
-      READY = 'READY'
-      PENDING_ACCEPTANCE = 'PENDING_ACCEPTANCE'
-      REJECTING = 'REJECTING'
-      REJECTED = 'REJECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the synchronization state of a transit gateway attachment, including its current status and any error messages. Network Firewall uses this to track the state of your transit gateway configuration changes.</p>
@@ -4487,7 +4297,7 @@ module Aws::NetworkFirewall
       :transit_gateway_attachment_status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A unique source IP address that connected to a domain.</p>
@@ -4497,7 +4307,7 @@ module Aws::NetworkFirewall
     class UniqueSources < Struct.new(
       :count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:count] = 0 unless options.key?(:count)
@@ -4511,7 +4321,7 @@ module Aws::NetworkFirewall
     class UnsupportedOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4524,12 +4334,12 @@ module Aws::NetworkFirewall
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4556,7 +4366,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :availability_zone_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4581,7 +4391,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :availability_zone_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:availability_zone_change_protection] = false unless options.key?(:availability_zone_change_protection)
@@ -4611,7 +4421,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_analysis_types
@@ -4636,7 +4446,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4663,7 +4473,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :delete_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -4688,7 +4498,7 @@ module Aws::NetworkFirewall
       :delete_protection,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:delete_protection] = false unless options.key?(:delete_protection)
@@ -4719,7 +4529,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -4742,7 +4552,7 @@ module Aws::NetworkFirewall
       :description,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4765,7 +4575,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -4788,7 +4598,7 @@ module Aws::NetworkFirewall
       :update_token,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4815,7 +4625,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_policy_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4840,7 +4650,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :firewall_policy_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:firewall_policy_change_protection] = false unless options.key?(:firewall_policy_change_protection)
@@ -4886,7 +4696,7 @@ module Aws::NetworkFirewall
       :dry_run,
       :encryption_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -4900,7 +4710,7 @@ module Aws::NetworkFirewall
       :update_token,
       :firewall_policy_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -4930,7 +4740,7 @@ module Aws::NetworkFirewall
       :logging_configuration,
       :enable_monitoring_dashboard,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute firewall_arn
@@ -4955,7 +4765,7 @@ module Aws::NetworkFirewall
       :logging_configuration,
       :enable_monitoring_dashboard,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -5030,7 +4840,7 @@ module Aws::NetworkFirewall
       :analyze_rule_group,
       :summary_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -5044,7 +4854,7 @@ module Aws::NetworkFirewall
       :update_token,
       :rule_group_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -5071,7 +4881,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :subnet_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -5096,7 +4906,7 @@ module Aws::NetworkFirewall
       :firewall_name,
       :subnet_change_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:subnet_change_protection] = false unless options.key?(:subnet_change_protection)
@@ -5135,7 +4945,7 @@ module Aws::NetworkFirewall
       :encryption_configuration,
       :update_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_token
@@ -5149,7 +4959,7 @@ module Aws::NetworkFirewall
       :update_token,
       :tls_inspection_configuration_response,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A VPC endpoint association defines a single subnet to use for a firewall endpoint for a <code>Firewall</code>. 
@@ -5212,7 +5022,7 @@ module Aws::NetworkFirewall
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>High-level information about a VPC endpoint association, returned by <code>ListVpcEndpointAssociations</code>. You can use the information provided in the metadata to retrieve and manage a VPC endpoint association.</p>
@@ -5222,7 +5032,7 @@ module Aws::NetworkFirewall
     class VpcEndpointAssociationMetadata < Struct.new(
       :vpc_endpoint_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
@@ -5237,7 +5047,7 @@ module Aws::NetworkFirewall
       :status,
       :association_sync_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,13 +12,7 @@ module Aws::Notifications
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      PENDING = 'PENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides detailed information about the dimensions used for aggregation.</p>
@@ -28,7 +22,7 @@ module Aws::Notifications
     class AggregationDetail < Struct.new(
       :summarization_dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Key-value collection that indicate how notifications are grouped.</p>
@@ -42,7 +36,7 @@ module Aws::Notifications
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional information about the aggregation key.</p>
@@ -72,7 +66,7 @@ module Aws::Notifications
       :aggregated_organizational_units,
       :additional_summarization_dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -87,12 +81,12 @@ module Aws::Notifications
       :arn,
       :notification_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_identifier
@@ -105,12 +99,12 @@ module Aws::Notifications
       :contact_identifier,
       :managed_notification_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateManagedNotificationAccountContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -124,12 +118,12 @@ module Aws::Notifications
       :channel_arn,
       :managed_notification_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateManagedNotificationAdditionalChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -142,7 +136,7 @@ module Aws::Notifications
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_configuration_arn
@@ -174,7 +168,7 @@ module Aws::Notifications
       :event_pattern,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -191,7 +185,7 @@ module Aws::Notifications
       :notification_configuration_arn,
       :status_summary_by_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -249,7 +243,7 @@ module Aws::Notifications
       :aggregation_duration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -262,7 +256,7 @@ module Aws::Notifications
       :arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -271,12 +265,12 @@ module Aws::Notifications
     class DeleteEventRuleRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteEventRuleResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -286,12 +280,12 @@ module Aws::Notifications
     class DeleteNotificationConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteNotificationConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_hub_region
@@ -300,7 +294,7 @@ module Aws::Notifications
     class DeregisterNotificationHubRequest < Struct.new(
       :notification_hub_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_hub_region
@@ -314,7 +308,7 @@ module Aws::Notifications
       :notification_hub_region,
       :status_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-value pair of properties for an event.</p>
@@ -328,17 +322,17 @@ module Aws::Notifications
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableNotificationsAccessForOrganizationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableNotificationsAccessForOrganizationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -351,12 +345,12 @@ module Aws::Notifications
       :arn,
       :notification_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute contact_identifier
@@ -369,12 +363,12 @@ module Aws::Notifications
       :contact_identifier,
       :managed_notification_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateManagedNotificationAccountContactResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_arn
@@ -387,22 +381,22 @@ module Aws::Notifications
       :channel_arn,
       :managed_notification_configuration_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateManagedNotificationAdditionalChannelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableNotificationsAccessForOrganizationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableNotificationsAccessForOrganizationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional information about the current <code>EventRule</code> status.</p>
@@ -476,7 +470,7 @@ module Aws::Notifications
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a complete list of fields related to an <code>EventRule</code>.</p>
@@ -527,7 +521,7 @@ module Aws::Notifications
       :managed_rules,
       :status_summary_by_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -536,7 +530,7 @@ module Aws::Notifications
     class GetEventRuleRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -585,7 +579,7 @@ module Aws::Notifications
       :managed_rules,
       :status_summary_by_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -598,7 +592,7 @@ module Aws::Notifications
       :arn,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -619,7 +613,7 @@ module Aws::Notifications
       :creation_time,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -628,7 +622,7 @@ module Aws::Notifications
     class GetManagedNotificationConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -653,7 +647,7 @@ module Aws::Notifications
       :category,
       :sub_category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -666,7 +660,7 @@ module Aws::Notifications
       :arn,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -687,7 +681,7 @@ module Aws::Notifications
       :creation_time,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -696,7 +690,7 @@ module Aws::Notifications
     class GetNotificationConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -762,7 +756,7 @@ module Aws::Notifications
       :creation_time,
       :aggregation_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -775,7 +769,7 @@ module Aws::Notifications
       :arn,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -796,12 +790,12 @@ module Aws::Notifications
       :creation_time,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetNotificationsAccessForOrganizationRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notifications_access_for_organization
@@ -810,7 +804,7 @@ module Aws::Notifications
     class GetNotificationsAccessForOrganizationResponse < Struct.new(
       :notifications_access_for_organization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error during processing of request.</p>
@@ -819,7 +813,7 @@ module Aws::Notifications
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_configuration_arn
@@ -837,7 +831,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -850,7 +844,7 @@ module Aws::Notifications
       :next_token,
       :channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_configuration_arn
@@ -868,7 +862,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -881,7 +875,7 @@ module Aws::Notifications
       :next_token,
       :event_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute managed_notification_configuration_arn
@@ -898,7 +892,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -911,7 +905,7 @@ module Aws::Notifications
       :next_token,
       :channel_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aggregate_managed_notification_event_arn
@@ -948,7 +942,7 @@ module Aws::Notifications
       :organizational_unit_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -961,7 +955,7 @@ module Aws::Notifications
       :next_token,
       :managed_notification_child_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute channel_identifier
@@ -978,7 +972,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -991,7 +985,7 @@ module Aws::Notifications
       :next_token,
       :managed_notification_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -1028,7 +1022,7 @@ module Aws::Notifications
       :organizational_unit_id,
       :related_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1041,7 +1035,7 @@ module Aws::Notifications
       :next_token,
       :managed_notification_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_rule_source
@@ -1121,7 +1115,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1134,7 +1128,7 @@ module Aws::Notifications
       :next_token,
       :notification_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute start_time
@@ -1174,7 +1168,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1187,7 +1181,7 @@ module Aws::Notifications
       :next_token,
       :notification_events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1200,7 +1194,7 @@ module Aws::Notifications
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_hubs
@@ -1213,7 +1207,7 @@ module Aws::Notifications
       :notification_hubs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1222,7 +1216,7 @@ module Aws::Notifications
     class ListTagsForResourceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1231,7 +1225,7 @@ module Aws::Notifications
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of channel associations for a managed notification configuration.</p>
@@ -1323,7 +1317,7 @@ module Aws::Notifications
       :channel_type,
       :override_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A ManagedNotificationChildEvent is a notification-focused representation of an event. They contain semantic information used to create aggregated or non-aggregated end-user notifications.</p>
@@ -1455,7 +1449,7 @@ module Aws::Notifications
       :organizational_unit_id,
       :aggregation_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an overview and metadata for a <code>ManagedNotificationChildEvent</code>.</p>
@@ -1489,7 +1483,7 @@ module Aws::Notifications
       :aggregate_managed_notification_event_arn,
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a short summary and metadata for a <code>ManagedNotificationChildEvent</code>.</p>
@@ -1593,7 +1587,7 @@ module Aws::Notifications
       :event_status,
       :notification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the basic structure and properties of a <code>ManagedNotificationConfiguration</code>.</p>
@@ -1611,7 +1605,7 @@ module Aws::Notifications
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A notification-focused representation of an event. They contain semantic information used by AccountContacts or Additional Channels to create end-user notifications.</p>
@@ -1743,7 +1737,7 @@ module Aws::Notifications
       :text_parts,
       :organizational_unit_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an overview and metadata for a ManagedNotificationEvent.</p>
@@ -1822,7 +1816,7 @@ module Aws::Notifications
       :aggregation_summary,
       :aggregated_notification_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A short summary of a <code>ManagedNotificationEvent</code>. This is only used when listing managed notification events.</p>
@@ -1922,7 +1916,7 @@ module Aws::Notifications
       :event_status,
       :notification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A short summary and metadata for a managed notification event.</p>
@@ -1941,7 +1935,7 @@ module Aws::Notifications
       :source,
       :event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a media element.</p>
@@ -1963,7 +1957,7 @@ module Aws::Notifications
       :url,
       :caption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the components of a notification message.</p>
@@ -1988,7 +1982,7 @@ module Aws::Notifications
       :complete_description,
       :dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the headline message component.</p>
@@ -1998,7 +1992,7 @@ module Aws::Notifications
     class MessageComponentsSummary < Struct.new(
       :headline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the complete list of fields for a NotificationConfiguration.</p>
@@ -2067,7 +2061,7 @@ module Aws::Notifications
       :creation_time,
       :aggregation_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a short summary of a <code>NotificationEvent</code>. This is only used when listing notification events.</p>
@@ -2143,7 +2137,7 @@ module Aws::Notifications
       :aggregate_notification_event_arn,
       :aggregation_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>NotificationEvent</code> is a notification-focused representation of an event. They contain semantic information used by Channels to create end-user notifications.</p>
@@ -2322,7 +2316,7 @@ module Aws::Notifications
       :text_parts,
       :media,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a short summary and metadata for a <code>NotificationEvent</code>.</p>
@@ -2422,7 +2416,7 @@ module Aws::Notifications
       :event_status,
       :notification_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an overview of a <code>NotificationHub</code>.</p>
@@ -2445,7 +2439,7 @@ module Aws::Notifications
       :creation_time,
       :last_activation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides additional information about the current <code>NotificationHub</code> status.</p>
@@ -2499,7 +2493,7 @@ module Aws::Notifications
       :status,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Orgs Service trust for User Notifications.</p>
@@ -2509,7 +2503,7 @@ module Aws::Notifications
     class NotificationsAccessForOrganization < Struct.new(
       :access_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_hub_region
@@ -2518,7 +2512,7 @@ module Aws::Notifications
     class RegisterNotificationHubRequest < Struct.new(
       :notification_hub_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute notification_hub_region
@@ -2540,7 +2534,7 @@ module Aws::Notifications
       :creation_time,
       :last_activation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource affected by or closely linked to an event.</p>
@@ -2563,7 +2557,7 @@ module Aws::Notifications
       :detail_url,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which does not exist. </p>
@@ -2576,7 +2570,7 @@ module Aws::Notifications
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would cause a service quota to be exceeded.</p>
@@ -2601,7 +2595,7 @@ module Aws::Notifications
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the metadata for a source event.</p>
@@ -2640,7 +2634,7 @@ module Aws::Notifications
       :event_type,
       :related_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains metadata about the event that caused the <code>NotificationEvent</code>. For
@@ -2662,7 +2656,7 @@ module Aws::Notifications
       :source,
       :event_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides detailed information about the dimensions used for event summarization and aggregation.</p>
@@ -2676,7 +2670,7 @@ module Aws::Notifications
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides an overview of how data is summarized across different dimensions.</p>
@@ -2694,7 +2688,7 @@ module Aws::Notifications
       :count,
       :sample_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2707,12 +2701,12 @@ module Aws::Notifications
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes text information objects containing fields that determine how text part objects are composed.</p>
@@ -2735,7 +2729,7 @@ module Aws::Notifications
       :text_by_locale,
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling. </p>
@@ -2756,7 +2750,7 @@ module Aws::Notifications
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2769,12 +2763,12 @@ module Aws::Notifications
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2793,7 +2787,7 @@ module Aws::Notifications
       :event_pattern,
       :regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2810,7 +2804,7 @@ module Aws::Notifications
       :notification_configuration_arn,
       :status_summary_by_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2868,7 +2862,7 @@ module Aws::Notifications
       :description,
       :aggregation_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -2877,7 +2871,7 @@ module Aws::Notifications
     class UpdateNotificationConfigurationResponse < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is thrown when the notification event fails validation.</p>
@@ -2894,7 +2888,7 @@ module Aws::Notifications
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information about a field passed inside a request that resulted in an exception.</p>
@@ -2908,7 +2902,7 @@ module Aws::Notifications
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

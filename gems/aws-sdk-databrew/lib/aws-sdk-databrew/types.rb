@@ -12,7 +12,7 @@ module Aws::DataBrew
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of statistics that are allowed to be run on columns that 
@@ -24,12 +24,7 @@ module Aws::DataBrew
     class AllowedStatistics < Struct.new(
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalyticsMode
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -44,7 +39,7 @@ module Aws::DataBrew
       :name,
       :recipe_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -57,7 +52,7 @@ module Aws::DataBrew
       :name,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Selector of a column from a dataset for profile job configuration. 
@@ -72,7 +67,7 @@ module Aws::DataBrew
       :regex,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for column evaluations for a profile job. ColumnStatisticsConfiguration can be used to select 
@@ -92,19 +87,7 @@ module Aws::DataBrew
       :selectors,
       :statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CompressionFormat
-      GZIP = 'GZIP'
-      LZ4 = 'LZ4'
-      SNAPPY = 'SNAPPY'
-      BZIP2 = 'BZIP2'
-      DEFLATE = 'DEFLATE'
-      LZO = 'LZO'
-      BROTLI = 'BROTLI'
-      ZSTD = 'ZSTD'
-      ZLIB = 'ZLIB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an individual condition that evaluates to true or false.</p>
@@ -129,7 +112,7 @@ module Aws::DataBrew
       :value,
       :target_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -138,7 +121,7 @@ module Aws::DataBrew
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -170,7 +153,7 @@ module Aws::DataBrew
       :path_options,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -179,7 +162,7 @@ module Aws::DataBrew
     class CreateDatasetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -262,7 +245,7 @@ module Aws::DataBrew
       :timeout,
       :job_sample,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -271,7 +254,7 @@ module Aws::DataBrew
     class CreateProfileJobResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -303,7 +286,7 @@ module Aws::DataBrew
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -312,7 +295,7 @@ module Aws::DataBrew
     class CreateProjectResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -395,7 +378,7 @@ module Aws::DataBrew
       :tags,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -404,7 +387,7 @@ module Aws::DataBrew
     class CreateRecipeJobResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -427,7 +410,7 @@ module Aws::DataBrew
       :steps,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -436,7 +419,7 @@ module Aws::DataBrew
     class CreateRecipeResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -464,7 +447,7 @@ module Aws::DataBrew
       :rules,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -473,7 +456,7 @@ module Aws::DataBrew
     class CreateRulesetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_names
@@ -498,7 +481,7 @@ module Aws::DataBrew
       :tags,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -507,7 +490,7 @@ module Aws::DataBrew
     class CreateScheduleResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of options that define how DataBrew will read a 
@@ -523,7 +506,7 @@ module Aws::DataBrew
       :delimiter,
       :header_row,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of options that define how DataBrew will write a 
@@ -534,7 +517,7 @@ module Aws::DataBrew
     class CsvOutputOptions < Struct.new(
       :delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents how metadata stored in the Glue Data Catalog is defined in a DataBrew
@@ -559,7 +542,7 @@ module Aws::DataBrew
       :table_name,
       :temp_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents options that specify how and where in the Glue Data Catalog DataBrew 
@@ -594,7 +577,7 @@ module Aws::DataBrew
       :database_options,
       :overwrite,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite] = false unless options.key?(:overwrite)
@@ -624,7 +607,7 @@ module Aws::DataBrew
       :temp_directory,
       :query_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a JDBC database output object which defines the output destination for 
@@ -645,11 +628,7 @@ module Aws::DataBrew
       :database_options,
       :database_output_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatabaseOutputMode
-      NEW_TABLE = 'NEW_TABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents options that specify how and where DataBrew writes the database 
@@ -665,7 +644,7 @@ module Aws::DataBrew
       :temp_directory,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a dataset that can be processed by DataBrew.</p>
@@ -725,7 +704,7 @@ module Aws::DataBrew
       :tags,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a dataset parameter that defines type and conditions for a parameter in the
@@ -753,7 +732,7 @@ module Aws::DataBrew
       :create_column,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:create_column] = false unless options.key?(:create_column)
@@ -781,7 +760,7 @@ module Aws::DataBrew
       :timezone_offset,
       :locale_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -790,7 +769,7 @@ module Aws::DataBrew
     class DeleteDatasetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -799,7 +778,7 @@ module Aws::DataBrew
     class DeleteDatasetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -808,7 +787,7 @@ module Aws::DataBrew
     class DeleteJobRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -817,7 +796,7 @@ module Aws::DataBrew
     class DeleteJobResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -826,7 +805,7 @@ module Aws::DataBrew
     class DeleteProjectRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -835,7 +814,7 @@ module Aws::DataBrew
     class DeleteProjectResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -850,7 +829,7 @@ module Aws::DataBrew
       :name,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -863,7 +842,7 @@ module Aws::DataBrew
       :name,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -872,7 +851,7 @@ module Aws::DataBrew
     class DeleteRulesetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -881,7 +860,7 @@ module Aws::DataBrew
     class DeleteRulesetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -890,7 +869,7 @@ module Aws::DataBrew
     class DeleteScheduleRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -899,7 +878,7 @@ module Aws::DataBrew
     class DeleteScheduleResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -908,7 +887,7 @@ module Aws::DataBrew
     class DescribeDatasetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_by
@@ -966,7 +945,7 @@ module Aws::DataBrew
       :tags,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -975,7 +954,7 @@ module Aws::DataBrew
     class DescribeJobRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_date
@@ -1107,7 +1086,7 @@ module Aws::DataBrew
       :timeout,
       :job_sample,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_capacity] = 0 unless options.key?(:max_capacity)
@@ -1127,7 +1106,7 @@ module Aws::DataBrew
       :name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute attempt
@@ -1215,7 +1194,7 @@ module Aws::DataBrew
       :started_on,
       :job_sample,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:attempt] = 0 unless options.key?(:attempt)
@@ -1230,7 +1209,7 @@ module Aws::DataBrew
     class DescribeProjectRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_date
@@ -1307,7 +1286,7 @@ module Aws::DataBrew
       :opened_by,
       :open_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1321,7 +1300,7 @@ module Aws::DataBrew
       :name,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_by
@@ -1379,7 +1358,7 @@ module Aws::DataBrew
       :resource_arn,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1388,7 +1367,7 @@ module Aws::DataBrew
     class DescribeRulesetRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1435,7 +1414,7 @@ module Aws::DataBrew
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1444,7 +1423,7 @@ module Aws::DataBrew
     class DescribeScheduleRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_date
@@ -1487,12 +1466,7 @@ module Aws::DataBrew
       :tags,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionMode
-      SSEKMS = 'SSE-KMS'
-      SSES3 = 'SSE-S3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of entity detection for a profile job. When undefined, entity 
@@ -1570,7 +1544,7 @@ module Aws::DataBrew
       :entity_types,
       :allowed_statistics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of options that define how DataBrew will interpret a Microsoft Excel file when 
@@ -1591,7 +1565,7 @@ module Aws::DataBrew
       :sheet_indexes,
       :header_row,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a limit imposed on number of Amazon S3 files that should be selected for a 
@@ -1613,7 +1587,7 @@ module Aws::DataBrew
       :ordered_by,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a structure for defining parameter conditions. Supported conditions are described
@@ -1632,7 +1606,7 @@ module Aws::DataBrew
       :expression,
       :values_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of options that define the structure of either comma-separated value (CSV),
@@ -1651,7 +1625,7 @@ module Aws::DataBrew
       :excel,
       :csv,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information on how DataBrew can find data, in either the Glue Data Catalog or
@@ -1674,15 +1648,7 @@ module Aws::DataBrew
       :database_input_definition,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputFormat
-      CSV = 'CSV'
-      JSON = 'JSON'
-      PARQUET = 'PARQUET'
-      EXCEL = 'EXCEL'
-      ORC = 'ORC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service failure occurred.</p>
@@ -1691,7 +1657,7 @@ module Aws::DataBrew
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the attributes of a DataBrew job.</p>
@@ -1824,7 +1790,7 @@ module Aws::DataBrew
       :job_sample,
       :validation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_capacity] = 0 unless options.key?(:max_capacity)
@@ -1915,23 +1881,13 @@ module Aws::DataBrew
       :job_sample,
       :validation_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:attempt] = 0 unless options.key?(:attempt)
         options[:execution_time] = 0 unless options.key?(:execution_time)
         super
       end
-    end
-
-    module JobRunState
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      TIMEOUT = 'TIMEOUT'
     end
 
     # <p>A sample configuration for profile jobs only, which determines the number of rows on which the
@@ -1961,12 +1917,7 @@ module Aws::DataBrew
       :mode,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JobType
-      PROFILE = 'PROFILE'
-      RECIPE = 'RECIPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the JSON-specific options that define how input is to be interpreted by Glue DataBrew.</p>
@@ -1977,7 +1928,7 @@ module Aws::DataBrew
     class JsonOptions < Struct.new(
       :multi_line,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:multi_line] = false unless options.key?(:multi_line)
@@ -1995,7 +1946,7 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute datasets
@@ -2009,7 +1960,7 @@ module Aws::DataBrew
       :datasets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2026,7 +1977,7 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_runs
@@ -2040,7 +1991,7 @@ module Aws::DataBrew
       :job_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_name
@@ -2065,7 +2016,7 @@ module Aws::DataBrew
       :next_token,
       :project_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute jobs
@@ -2079,7 +2030,7 @@ module Aws::DataBrew
       :jobs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2092,7 +2043,7 @@ module Aws::DataBrew
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute projects
@@ -2106,7 +2057,7 @@ module Aws::DataBrew
       :projects,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2123,7 +2074,7 @@ module Aws::DataBrew
       :next_token,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2137,7 +2088,7 @@ module Aws::DataBrew
       :next_token,
       :recipes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2159,7 +2110,7 @@ module Aws::DataBrew
       :next_token,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recipes
@@ -2173,7 +2124,7 @@ module Aws::DataBrew
       :recipes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_arn
@@ -2193,7 +2144,7 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute rulesets
@@ -2207,7 +2158,7 @@ module Aws::DataBrew
       :rulesets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_name
@@ -2224,7 +2175,7 @@ module Aws::DataBrew
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedules
@@ -2238,7 +2189,7 @@ module Aws::DataBrew
       :schedules,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2248,7 +2199,7 @@ module Aws::DataBrew
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2257,12 +2208,7 @@ module Aws::DataBrew
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogSubscription
-      ENABLE = 'ENABLE'
-      DISABLE = 'DISABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains additional resource information needed for specific datasets.</p>
@@ -2273,16 +2219,7 @@ module Aws::DataBrew
     class Metadata < Struct.new(
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Order
-      DESCENDING = 'DESCENDING'
-      ASCENDING = 'ASCENDING'
-    end
-
-    module OrderedBy
-      LAST_MODIFIED_DATE = 'LAST_MODIFIED_DATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents options that specify how and where in Amazon S3 DataBrew writes the output generated by
@@ -2319,23 +2256,12 @@ module Aws::DataBrew
       :format_options,
       :max_output_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite] = false unless options.key?(:overwrite)
         super
       end
-    end
-
-    module OutputFormat
-      CSV = 'CSV'
-      JSON = 'JSON'
-      PARQUET = 'PARQUET'
-      GLUEPARQUET = 'GLUEPARQUET'
-      AVRO = 'AVRO'
-      ORC = 'ORC'
-      XML = 'XML'
-      TABLEAUHYPER = 'TABLEAUHYPER'
     end
 
     # <p>Represents a set of options that define the structure of comma-separated (CSV) job output.</p>
@@ -2346,13 +2272,7 @@ module Aws::DataBrew
     class OutputFormatOptions < Struct.new(
       :csv,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterType
-      Datetime = 'Datetime'
-      Number = 'Number'
-      String = 'String'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a set of options that define how DataBrew selects files for a given Amazon S3 
@@ -2372,7 +2292,7 @@ module Aws::DataBrew
       :files_limit,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default 
@@ -2406,7 +2326,7 @@ module Aws::DataBrew
       :column_statistics_configurations,
       :entity_detector_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the attributes of a DataBrew project.</p>
@@ -2470,7 +2390,7 @@ module Aws::DataBrew
       :opened_by,
       :open_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -2483,7 +2403,7 @@ module Aws::DataBrew
       :description,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2492,7 +2412,7 @@ module Aws::DataBrew
     class PublishRecipeResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents one or more actions to be performed on a DataBrew dataset.</p>
@@ -2567,7 +2487,7 @@ module Aws::DataBrew
       :tags,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a transformation and associated parameters that are used to apply a change
@@ -2583,7 +2503,7 @@ module Aws::DataBrew
       :operation,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the name and version of a DataBrew recipe.</p>
@@ -2597,7 +2517,7 @@ module Aws::DataBrew
       :name,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single step from a DataBrew recipe to be performed.</p>
@@ -2615,7 +2535,7 @@ module Aws::DataBrew
       :action,
       :condition_expressions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents any errors encountered when attempting to delete multiple recipe
@@ -2634,7 +2554,7 @@ module Aws::DataBrew
       :error_message,
       :recipe_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more resources can't be found.</p>
@@ -2643,7 +2563,7 @@ module Aws::DataBrew
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a single data quality requirement that should be validated in the 
@@ -2694,7 +2614,7 @@ module Aws::DataBrew
       :threshold,
       :column_selectors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disabled] = false unless options.key?(:disabled)
@@ -2750,7 +2670,7 @@ module Aws::DataBrew
       :tags,
       :target_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:rule_count] = 0 unless options.key?(:rule_count)
@@ -2774,7 +2694,7 @@ module Aws::DataBrew
       :key,
       :bucket_owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents options that specify how and where DataBrew writes the Amazon S3 output 
@@ -2786,7 +2706,7 @@ module Aws::DataBrew
     class S3TableOutputOptions < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the sample size and sampling type for DataBrew to use for interactive data
@@ -2801,18 +2721,7 @@ module Aws::DataBrew
       :size,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SampleMode
-      FULL_DATASET = 'FULL_DATASET'
-      CUSTOM_ROWS = 'CUSTOM_ROWS'
-    end
-
-    module SampleType
-      FIRST_N = 'FIRST_N'
-      LAST_N = 'LAST_N'
-      RANDOM = 'RANDOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents one or more dates and times when a job is to run.</p>
@@ -2860,7 +2769,7 @@ module Aws::DataBrew
       :tags,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute preview
@@ -2892,7 +2801,7 @@ module Aws::DataBrew
       :client_session_id,
       :view_frame,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute result
@@ -2909,7 +2818,7 @@ module Aws::DataBrew
       :name,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service quota is exceeded.</p>
@@ -2918,26 +2827,7 @@ module Aws::DataBrew
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SessionStatus
-      ASSIGNED = 'ASSIGNED'
-      FAILED = 'FAILED'
-      INITIALIZING = 'INITIALIZING'
-      PROVISIONING = 'PROVISIONING'
-      READY = 'READY'
-      RECYCLING = 'RECYCLING'
-      ROTATING = 'ROTATING'
-      TERMINATED = 'TERMINATED'
-      TERMINATING = 'TERMINATING'
-      UPDATING = 'UPDATING'
-    end
-
-    module Source
-      S3 = 'S3'
-      DATACATALOG = 'DATA-CATALOG'
-      DATABASE = 'DATABASE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2946,7 +2836,7 @@ module Aws::DataBrew
     class StartJobRunRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -2955,7 +2845,7 @@ module Aws::DataBrew
     class StartJobRunResponse < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2969,7 +2859,7 @@ module Aws::DataBrew
       :name,
       :assume_control,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2982,7 +2872,7 @@ module Aws::DataBrew
       :name,
       :client_session_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Override of a particular evaluation for a profile job. </p>
@@ -2996,7 +2886,7 @@ module Aws::DataBrew
       :statistic,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration of evaluations for a profile job. This configuration can be used to select 
@@ -3013,7 +2903,7 @@ module Aws::DataBrew
       :included_statistics,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3026,7 +2916,7 @@ module Aws::DataBrew
       :name,
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute run_id
@@ -3035,7 +2925,7 @@ module Aws::DataBrew
     class StopJobRunResponse < Struct.new(
       :run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3050,12 +2940,12 @@ module Aws::DataBrew
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The threshold used with a non-aggregate check expression. The non-aggregate check expression 
@@ -3077,24 +2967,12 @@ module Aws::DataBrew
       :type,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module ThresholdType
-      GREATER_THAN_OR_EQUAL = 'GREATER_THAN_OR_EQUAL'
-      LESS_THAN_OR_EQUAL = 'LESS_THAN_OR_EQUAL'
-      GREATER_THAN = 'GREATER_THAN'
-      LESS_THAN = 'LESS_THAN'
-    end
-
-    module ThresholdUnit
-      COUNT = 'COUNT'
-      PERCENTAGE = 'PERCENTAGE'
     end
 
     # @!attribute resource_arn
@@ -3108,12 +2986,12 @@ module Aws::DataBrew
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3140,7 +3018,7 @@ module Aws::DataBrew
       :input,
       :path_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3149,7 +3027,7 @@ module Aws::DataBrew
     class UpdateDatasetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -3224,7 +3102,7 @@ module Aws::DataBrew
       :timeout,
       :job_sample,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3233,7 +3111,7 @@ module Aws::DataBrew
     class UpdateProfileJobResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sample
@@ -3251,7 +3129,7 @@ module Aws::DataBrew
       :role_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute last_modified_date
@@ -3264,7 +3142,7 @@ module Aws::DataBrew
       :last_modified_date,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute encryption_key_arn
@@ -3329,7 +3207,7 @@ module Aws::DataBrew
       :role_arn,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3338,7 +3216,7 @@ module Aws::DataBrew
     class UpdateRecipeJobResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -3356,7 +3234,7 @@ module Aws::DataBrew
       :name,
       :steps,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3365,7 +3243,7 @@ module Aws::DataBrew
     class UpdateRecipeResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3383,7 +3261,7 @@ module Aws::DataBrew
       :description,
       :rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3392,7 +3270,7 @@ module Aws::DataBrew
     class UpdateRulesetResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_names
@@ -3412,7 +3290,7 @@ module Aws::DataBrew
       :cron_expression,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3421,7 +3299,7 @@ module Aws::DataBrew
     class UpdateScheduleResponse < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for data quality validation. Used to select the Rulesets and Validation Mode 
@@ -3440,7 +3318,7 @@ module Aws::DataBrew
       :ruleset_arn,
       :validation_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input parameters for this request failed validation.</p>
@@ -3449,11 +3327,7 @@ module Aws::DataBrew
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationMode
-      CHECK_ALL = 'CHECK_ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data being transformed during an action.</p>
@@ -3486,7 +3360,7 @@ module Aws::DataBrew
       :row_range,
       :analytics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

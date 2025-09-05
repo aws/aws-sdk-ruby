@@ -12,7 +12,7 @@ module Aws::VerifiedPermissions
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an action for a request for which an authorization decision is made.</p> <p>This data type is used as a request parameter to the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p> <p>Example: <code>{ "actionId": "&lt;action name&gt;", "actionType": "Action" }</code> </p>
@@ -26,7 +26,7 @@ module Aws::VerifiedPermissions
       :action_type,
       :action_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html">ContextDefinition</a> structure which is uses as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
@@ -65,7 +65,7 @@ module Aws::VerifiedPermissions
       :decimal,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Boolean < AttributeValue; end
       class EntityIdentifier < AttributeValue; end
@@ -76,11 +76,6 @@ module Aws::VerifiedPermissions
       class Ipaddr < AttributeValue; end
       class Decimal < AttributeValue; end
       class Unknown < AttributeValue; end
-    end
-
-    module BatchGetPolicyErrorCode
-      POLICY_STORE_NOT_FOUND = 'POLICY_STORE_NOT_FOUND'
-      POLICY_NOT_FOUND = 'POLICY_NOT_FOUND'
     end
 
     # <p>Contains the information about an error resulting from a <code>BatchGetPolicy</code> API call.</p>
@@ -102,7 +97,7 @@ module Aws::VerifiedPermissions
       :policy_id,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute requests
@@ -111,7 +106,7 @@ module Aws::VerifiedPermissions
     class BatchGetPolicyInput < Struct.new(
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a policy that you include in a <code>BatchGetPolicy</code> API request.</p>
@@ -125,7 +120,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -138,7 +133,7 @@ module Aws::VerifiedPermissions
       :results,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy returned from a <code>BatchGetPolicy</code> API request.</p>
@@ -168,7 +163,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -185,7 +180,7 @@ module Aws::VerifiedPermissions
       :entities,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An authorization request that you include in a <code>BatchIsAuthorized</code> API request.</p>
@@ -207,7 +202,7 @@ module Aws::VerifiedPermissions
       :resource,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -216,7 +211,7 @@ module Aws::VerifiedPermissions
     class BatchIsAuthorizedOutput < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The decision, based on policy evaluation, from an individual authorization request in a <code>BatchIsAuthorized</code> API request.</p>
@@ -238,7 +233,7 @@ module Aws::VerifiedPermissions
       :determining_policies,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -263,7 +258,7 @@ module Aws::VerifiedPermissions
       :entities,
       :requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An authorization request that you include in a <code>BatchIsAuthorizedWithToken</code> API request.</p>
@@ -281,7 +276,7 @@ module Aws::VerifiedPermissions
       :resource,
       :context,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute principal
@@ -294,7 +289,7 @@ module Aws::VerifiedPermissions
       :principal,
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The decision, based on policy evaluation, from an individual authorization request in a <code>BatchIsAuthorizedWithToken</code> API request.</p>
@@ -316,12 +311,7 @@ module Aws::VerifiedPermissions
       :determining_policies,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CedarVersion
-      CEDAR_2 = 'CEDAR_2'
-      CEDAR_4 = 'CEDAR_4'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html">CognitoUserPoolConfiguration</a> structure and is a request parameter in <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a>.</p>
@@ -331,7 +321,7 @@ module Aws::VerifiedPermissions
     class CognitoGroupConfiguration < Struct.new(
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p> <p>This data type is part of an <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationItem.html">CognitoUserPoolConfigurationDetail</a> structure and is a response parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html">GetIdentitySource</a>.</p>
@@ -341,7 +331,7 @@ module Aws::VerifiedPermissions
     class CognitoGroupConfigurationDetail < Struct.new(
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of entity that a policy store maps to groups from an Amazon Cognito user pool identity source.</p> <p>This data type is part of an <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationDetail.html">CognitoUserPoolConfigurationItem</a> structure and is a response parameter to <a href="http://forums.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a>.</p>
@@ -351,7 +341,7 @@ module Aws::VerifiedPermissions
     class CognitoGroupConfigurationItem < Struct.new(
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used as an identity provider for Verified Permissions.</p> <p>This data type part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html">Configuration</a> structure that is used as a parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a>.</p> <p>Example:<code>"CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}</code> </p>
@@ -369,7 +359,7 @@ module Aws::VerifiedPermissions
       :client_ids,
       :group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used as an identity provider for Verified Permissions.</p> <p>This data type is used as a field that is part of an <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html">ConfigurationDetail</a> structure that is part of the response to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html">GetIdentitySource</a>.</p> <p>Example:<code>"CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}</code> </p>
@@ -391,7 +381,7 @@ module Aws::VerifiedPermissions
       :issuer,
       :group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used as an identity provider for Verified Permissions.</p> <p>This data type is used as a field that is part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html">ConfigurationItem</a> structure that is part of the response to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a>.</p> <p>Example:<code>"CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType": "MyCorp::Group"}}</code> </p>
@@ -413,7 +403,7 @@ module Aws::VerifiedPermissions
       :issuer,
       :group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information used when creating a new identity source.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a> operation.</p>
@@ -428,7 +418,7 @@ module Aws::VerifiedPermissions
       :open_id_connect_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < Configuration; end
       class OpenIdConnectConfiguration < Configuration; end
@@ -447,7 +437,7 @@ module Aws::VerifiedPermissions
       :open_id_connect_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < ConfigurationDetail; end
       class OpenIdConnectConfiguration < ConfigurationDetail; end
@@ -466,7 +456,7 @@ module Aws::VerifiedPermissions
       :open_id_connect_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < ConfigurationItem; end
       class OpenIdConnectConfiguration < ConfigurationItem; end
@@ -483,7 +473,7 @@ module Aws::VerifiedPermissions
       :message,
       :resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains additional details about the context of the request. Verified Permissions evaluates this information in an authorization request as part of the <code>when</code> and <code>unless</code> clauses in a policy.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p> <p>If you're passing context as part of the request, exactly one instance of <code>context</code> must be passed. If you don't want to pass context, omit the <code>context</code> parameter from your request rather than sending <code>context {}</code>.</p> <p>Example: <code>"context":{"contextMap":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}}}</code> </p>
@@ -498,7 +488,7 @@ module Aws::VerifiedPermissions
       :cedar_json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ContextMap < ContextDefinition; end
       class CedarJson < ContextDefinition; end
@@ -523,7 +513,7 @@ module Aws::VerifiedPermissions
       :configuration,
       :principal_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -544,7 +534,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :policy_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -561,7 +551,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -602,7 +592,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :effect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -627,7 +617,7 @@ module Aws::VerifiedPermissions
       :deletion_protection,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -648,7 +638,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -669,7 +659,7 @@ module Aws::VerifiedPermissions
       :description,
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -690,12 +680,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Decision
-      ALLOW = 'ALLOW'
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -708,12 +693,12 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :identity_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIdentitySourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -726,12 +711,12 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -740,12 +725,12 @@ module Aws::VerifiedPermissions
     class DeletePolicyStoreInput < Struct.new(
       :policy_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyStoreOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -758,17 +743,12 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePolicyTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeletionProtection
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about one of the policies that determined an authorization decision.</p> <p>This data type is used as an element in a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html">BatchIsAuthorized</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p> <p>Example: <code>"determiningPolicies":[{"policyId":"SPEXAMPLEabcdefg111111"}]</code> </p>
@@ -778,7 +758,7 @@ module Aws::VerifiedPermissions
     class DeterminingPolicyItem < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the list of entities to be considered during an authorization request. This includes all principals, resources, and actions required to successfully evaluate the request.</p> <p>This data type is used as a field in the response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>
@@ -793,7 +773,7 @@ module Aws::VerifiedPermissions
       :cedar_json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EntityList < EntitiesDefinition; end
       class CedarJson < EntitiesDefinition; end
@@ -811,7 +791,7 @@ module Aws::VerifiedPermissions
       :entity_type,
       :entity_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an entity that can be referenced in a Cedar policy.</p> <p>This data type is used as one of the fields in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html">EntitiesDefinition</a> structure.</p> <p> <code>{ "identifier": { "entityType": "Photo", "entityId": "VacationPhoto94.jpg" }, "attributes": {}, "parents": [ { "entityType": "Album", "entityId": "alice_folder" } ] }</code> </p>
@@ -829,7 +809,7 @@ module Aws::VerifiedPermissions
       :attributes,
       :parents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a principal or resource that can be referenced in a Cedar policy.</p> <p>This data type is used as part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyFilter.html">PolicyFilter</a> structure that is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operation..</p>
@@ -844,7 +824,7 @@ module Aws::VerifiedPermissions
       :identifier,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Unspecified < EntityReference; end
       class Identifier < EntityReference; end
@@ -859,7 +839,7 @@ module Aws::VerifiedPermissions
     class EvaluationErrorItem < Struct.new(
       :error_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -872,7 +852,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :identity_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -907,7 +887,7 @@ module Aws::VerifiedPermissions
       :principal_entity_type,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -920,7 +900,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -965,7 +945,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :effect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -978,7 +958,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1019,7 +999,7 @@ module Aws::VerifiedPermissions
       :cedar_version,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1032,7 +1012,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :policy_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1061,7 +1041,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1070,7 +1050,7 @@ module Aws::VerifiedPermissions
     class GetSchemaInput < Struct.new(
       :policy_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1095,7 +1075,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :namespaces,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains configuration of the identity source.</p> <p>This data type was a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html">GetIdentitySource</a> operation. Replaced by <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html">ConfigurationDetail</a>.</p>
@@ -1127,7 +1107,7 @@ module Aws::VerifiedPermissions
       :discovery_url,
       :open_id_issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines characteristics of an identity source that you can use to filter.</p> <p>This data type is a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html">ListIdentityStores</a> operation.</p>
@@ -1137,7 +1117,7 @@ module Aws::VerifiedPermissions
     class IdentitySourceFilter < Struct.new(
       :principal_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines an identity source.</p> <p>This data type is a response parameter to the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a> operation.</p>
@@ -1173,7 +1153,7 @@ module Aws::VerifiedPermissions
       :principal_entity_type,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains configuration of the identity source.</p> <p>This data type was a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a> operation. Replaced by <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html">ConfigurationItem</a>.</p>
@@ -1205,7 +1185,7 @@ module Aws::VerifiedPermissions
       :discovery_url,
       :open_id_issuer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because of an internal error. Try your request again later</p>
@@ -1214,7 +1194,7 @@ module Aws::VerifiedPermissions
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The policy store can't be deleted because deletion protection is enabled. To delete this policy store, disable deletion protection.</p>
@@ -1223,7 +1203,7 @@ module Aws::VerifiedPermissions
     class InvalidStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1252,7 +1232,7 @@ module Aws::VerifiedPermissions
       :context,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute decision
@@ -1269,7 +1249,7 @@ module Aws::VerifiedPermissions
       :determining_policies,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1302,7 +1282,7 @@ module Aws::VerifiedPermissions
       :context,
       :entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute decision
@@ -1323,7 +1303,7 @@ module Aws::VerifiedPermissions
       :errors,
       :principal,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1344,7 +1324,7 @@ module Aws::VerifiedPermissions
       :max_results,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1357,7 +1337,7 @@ module Aws::VerifiedPermissions
       :next_token,
       :identity_sources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1378,7 +1358,7 @@ module Aws::VerifiedPermissions
       :max_results,
       :filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1391,7 +1371,7 @@ module Aws::VerifiedPermissions
       :next_token,
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1404,7 +1384,7 @@ module Aws::VerifiedPermissions
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1417,7 +1397,7 @@ module Aws::VerifiedPermissions
       :next_token,
       :policy_stores,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1434,7 +1414,7 @@ module Aws::VerifiedPermissions
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1447,7 +1427,7 @@ module Aws::VerifiedPermissions
       :next_token,
       :policy_templates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1456,7 +1436,7 @@ module Aws::VerifiedPermissions
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1465,7 +1445,7 @@ module Aws::VerifiedPermissions
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an OpenID Connect (OIDC) identity source for handling access token claims. Contains the claim that you want to identify as the principal in an authorization request, and the values of the <code>aud</code> claim, or audiences, that you want to accept.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html">OpenIdConnectTokenSelection</a> structure, which is a parameter of <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a>.</p>
@@ -1479,7 +1459,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -1498,7 +1478,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -1517,7 +1497,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -1544,7 +1524,7 @@ module Aws::VerifiedPermissions
       :group_configuration,
       :token_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or identity source, that Verified Permissions can use to generate entities from authenticated identities. It specifies the issuer URL, token type that you want to use, and policy store entity details.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html">ConfigurationDetail</a> structure, which is a parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html">GetIdentitySource</a>.</p>
@@ -1566,7 +1546,7 @@ module Aws::VerifiedPermissions
       :group_configuration,
       :token_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration details of an OpenID Connect (OIDC) identity provider, or identity source, that Verified Permissions can use to generate entities from authenticated identities. It specifies the issuer URL, token type that you want to use, and policy store entity details.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html">ConfigurationItem</a> structure, which is a parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySources</a>.</p>
@@ -1588,7 +1568,7 @@ module Aws::VerifiedPermissions
       :group_configuration,
       :token_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html">OpenIdConnectConfiguration</a> structure, which is a parameter of <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a>.</p>
@@ -1602,7 +1582,7 @@ module Aws::VerifiedPermissions
       :group_claim,
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html">OpenIdConnectConfigurationDetail</a> structure, which is a parameter of <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html">GetIdentitySource</a>.</p>
@@ -1616,7 +1596,7 @@ module Aws::VerifiedPermissions
       :group_claim,
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html">ListIdentitySourcea</a>.</p>
@@ -1630,7 +1610,7 @@ module Aws::VerifiedPermissions
       :group_claim,
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an OpenID Connect (OIDC) identity source for handling identity (ID) token claims. Contains the claim that you want to identify as the principal in an authorization request, and the values of the <code>aud</code> claim, or audiences, that you want to accept.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html">OpenIdConnectTokenSelection</a> structure, which is a parameter of <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a>.</p>
@@ -1644,7 +1624,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :client_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -1663,7 +1643,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :client_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -1682,7 +1662,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :client_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -1702,7 +1682,7 @@ module Aws::VerifiedPermissions
       :identity_token_only,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccessTokenOnly < OpenIdConnectTokenSelection; end
       class IdentityTokenOnly < OpenIdConnectTokenSelection; end
@@ -1721,7 +1701,7 @@ module Aws::VerifiedPermissions
       :identity_token_only,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccessTokenOnly < OpenIdConnectTokenSelectionDetail; end
       class IdentityTokenOnly < OpenIdConnectTokenSelectionDetail; end
@@ -1740,15 +1720,11 @@ module Aws::VerifiedPermissions
       :identity_token_only,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccessTokenOnly < OpenIdConnectTokenSelectionItem; end
       class IdentityTokenOnly < OpenIdConnectTokenSelectionItem; end
       class Unknown < OpenIdConnectTokenSelectionItem; end
-    end
-
-    module OpenIdIssuer
-      COGNITO = 'COGNITO'
     end
 
     # <p>A structure that contains the details for a Cedar policy definition. It includes the policy type, a description, and a policy body. This is a top level data type used to create a policy.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> operation. This structure must always have either an <code>static</code> or a <code>templateLinked</code> element.</p>
@@ -1763,7 +1739,7 @@ module Aws::VerifiedPermissions
       :template_linked,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Static < PolicyDefinition; end
       class TemplateLinked < PolicyDefinition; end
@@ -1782,7 +1758,7 @@ module Aws::VerifiedPermissions
       :template_linked,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Static < PolicyDefinitionDetail; end
       class TemplateLinked < PolicyDefinitionDetail; end
@@ -1801,16 +1777,11 @@ module Aws::VerifiedPermissions
       :template_linked,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Static < PolicyDefinitionItem; end
       class TemplateLinked < PolicyDefinitionItem; end
       class Unknown < PolicyDefinitionItem; end
-    end
-
-    module PolicyEffect
-      PERMIT = 'Permit'
-      FORBID = 'Forbid'
     end
 
     # <p>Contains information about a filter to refine policies returned in a query.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operation.</p>
@@ -1832,7 +1803,7 @@ module Aws::VerifiedPermissions
       :policy_type,
       :policy_template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operation.</p>
@@ -1878,7 +1849,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :effect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy store.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStores.html">ListPolicyStores</a> operation.</p>
@@ -1904,7 +1875,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about a policy template</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyTemplates.html">ListPolicyTemplates</a> operation.</p>
@@ -1930,12 +1901,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyType
-      STATIC = 'STATIC'
-      TEMPLATE_LINKED = 'TEMPLATE_LINKED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1948,7 +1914,7 @@ module Aws::VerifiedPermissions
       :policy_store_id,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -1969,7 +1935,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a resource conflict.</p>
@@ -1983,7 +1949,7 @@ module Aws::VerifiedPermissions
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it references a resource that doesn't exist.</p>
@@ -2000,15 +1966,7 @@ module Aws::VerifiedPermissions
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      IDENTITY_SOURCE = 'IDENTITY_SOURCE'
-      POLICY_STORE = 'POLICY_STORE'
-      POLICY = 'POLICY'
-      POLICY_TEMPLATE = 'POLICY_TEMPLATE'
-      SCHEMA = 'SCHEMA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of principal types, resource types, and actions that can be specified in policies stored in the same policy store. If the validation mode for the policy store is set to <code>STRICT</code>, then policies that can't be validated by this schema are rejected by Verified Permissions and can't be stored in the policy store.</p>
@@ -2019,7 +1977,7 @@ module Aws::VerifiedPermissions
       :cedar_json,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CedarJson < SchemaDefinition; end
       class Unknown < SchemaDefinition; end
@@ -2047,7 +2005,7 @@ module Aws::VerifiedPermissions
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a static policy.</p> <p>This data type is used as a field that is part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinitionDetail.html">PolicyDefinitionDetail</a> type.</p>
@@ -2061,7 +2019,7 @@ module Aws::VerifiedPermissions
       :description,
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details about a static policy. It includes the description and policy body.</p> <p>This data type is used within a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html">PolicyDefinition</a> structure as part of a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> operation.</p>
@@ -2075,7 +2033,7 @@ module Aws::VerifiedPermissions
       :description,
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains details about a static policy. It includes the description and policy statement.</p> <p>This data type is used within a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html">PolicyDefinition</a> structure as part of a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> operation.</p>
@@ -2085,7 +2043,7 @@ module Aws::VerifiedPermissions
     class StaticPolicyDefinitionItem < Struct.new(
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2098,12 +2056,12 @@ module Aws::VerifiedPermissions
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy created by instantiating a policy template.</p>
@@ -2121,7 +2079,7 @@ module Aws::VerifiedPermissions
       :principal,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy that was created by instantiating a policy template. </p>
@@ -2139,7 +2097,7 @@ module Aws::VerifiedPermissions
       :principal,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a policy created by instantiating a policy template. </p> <p>This </p>
@@ -2157,7 +2115,7 @@ module Aws::VerifiedPermissions
       :principal,
       :resource,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because it exceeded a throttling quota.</p>
@@ -2174,7 +2132,7 @@ module Aws::VerifiedPermissions
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>No more tags be added because the limit (50) has been reached. To add new tags, use <code>UntagResource</code> to remove existing tags.</p>
@@ -2187,7 +2145,7 @@ module Aws::VerifiedPermissions
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2200,12 +2158,12 @@ module Aws::VerifiedPermissions
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user group entities from an Amazon Cognito user pool identity source.</p>
@@ -2215,7 +2173,7 @@ module Aws::VerifiedPermissions
     class UpdateCognitoGroupConfiguration < Struct.new(
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration details of a Amazon Cognito user pool for use with an identity source.</p>
@@ -2233,7 +2191,7 @@ module Aws::VerifiedPermissions
       :client_ids,
       :group_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an update to replace the configuration in an existing identity source.</p>
@@ -2248,7 +2206,7 @@ module Aws::VerifiedPermissions
       :open_id_connect_configuration,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class CognitoUserPoolConfiguration < UpdateConfiguration; end
       class OpenIdConnectConfiguration < UpdateConfiguration; end
@@ -2273,7 +2231,7 @@ module Aws::VerifiedPermissions
       :update_configuration,
       :principal_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -2294,7 +2252,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :policy_store_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an OpenID Connect (OIDC) identity source for handling access token claims. Contains the claim that you want to identify as the principal in an authorization request, and the values of the <code>aud</code> claim, or audiences, that you want to accept.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html">UpdateOpenIdConnectTokenSelection</a> structure, which is a parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html">UpdateIdentitySource</a>.</p>
@@ -2308,7 +2266,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :audiences,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -2335,7 +2293,7 @@ module Aws::VerifiedPermissions
       :group_configuration,
       :token_selection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The claim in OIDC identity provider tokens that indicates a user's group membership, and the entity type that you want to map it to. For example, this object can map the contents of a <code>groups</code> claim to <code>MyCorp::UserGroup</code>.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html">UpdateOpenIdConnectConfiguration</a> structure, which is a parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html">UpdateIdentitySource</a>.</p>
@@ -2349,7 +2307,7 @@ module Aws::VerifiedPermissions
       :group_claim,
       :group_entity_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an OpenID Connect (OIDC) identity source for handling identity (ID) token claims. Contains the claim that you want to identify as the principal in an authorization request, and the values of the <code>aud</code> claim, or audiences, that you want to accept.</p> <p>This data type is part of a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html">UpdateOpenIdConnectTokenSelection</a> structure, which is a parameter to <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html">UpdateIdentitySource</a>.</p>
@@ -2363,7 +2321,7 @@ module Aws::VerifiedPermissions
       :principal_id_claim,
       :client_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:principal_id_claim] = 'sub' unless options.key?(:principal_id_claim)
@@ -2383,7 +2341,7 @@ module Aws::VerifiedPermissions
       :identity_token_only,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AccessTokenOnly < UpdateOpenIdConnectTokenSelection; end
       class IdentityTokenOnly < UpdateOpenIdConnectTokenSelection; end
@@ -2398,7 +2356,7 @@ module Aws::VerifiedPermissions
       :static,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Static < UpdatePolicyDefinition; end
       class Unknown < UpdatePolicyDefinition; end
@@ -2418,7 +2376,7 @@ module Aws::VerifiedPermissions
       :policy_id,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -2459,7 +2417,7 @@ module Aws::VerifiedPermissions
       :last_updated_date,
       :effect,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -2480,7 +2438,7 @@ module Aws::VerifiedPermissions
       :deletion_protection,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -2501,7 +2459,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -2522,7 +2480,7 @@ module Aws::VerifiedPermissions
       :description,
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_store_id
@@ -2543,7 +2501,7 @@ module Aws::VerifiedPermissions
       :created_date,
       :last_updated_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an update to a static policy.</p>
@@ -2557,7 +2515,7 @@ module Aws::VerifiedPermissions
       :description,
       :statement,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request failed because one or more input parameters don't satisfy their constraint requirements. The output is provided as a list of fields and a reason for each field that isn't valid.</p> <p>The possible reasons include the following:</p> <ul> <li> <p> <b>UnrecognizedEntityType</b> </p> <p>The policy includes an entity type that isn't found in the schema.</p> </li> <li> <p> <b>UnrecognizedActionId</b> </p> <p>The policy includes an action id that isn't found in the schema.</p> </li> <li> <p> <b>InvalidActionApplication</b> </p> <p>The policy includes an action that, according to the schema, doesn't support the specified principal and resource.</p> </li> <li> <p> <b>UnexpectedType</b> </p> <p>The policy included an operand that isn't a valid type for the specified operation.</p> </li> <li> <p> <b>IncompatibleTypes</b> </p> <p>The types of elements included in a <code>set</code>, or the types of expressions used in an <code>if...then...else</code> clause aren't compatible in this context.</p> </li> <li> <p> <b>MissingAttribute</b> </p> <p>The policy attempts to access a record or entity attribute that isn't specified in the schema. Test for the existence of the attribute first before attempting to access its value. For more information, see the <a href="https://docs.cedarpolicy.com/policies/syntax-operators.html#has-presence-of-attribute-test">has (presence of attribute test) operator</a> in the <i>Cedar Policy Language Guide</i>.</p> </li> <li> <p> <b>UnsafeOptionalAttributeAccess</b> </p> <p>The policy attempts to access a record or entity attribute that is optional and isn't guaranteed to be present. Test for the existence of the attribute first before attempting to access its value. For more information, see the <a href="https://docs.cedarpolicy.com/policies/syntax-operators.html#has-presence-of-attribute-test">has (presence of attribute test) operator</a> in the <i>Cedar Policy Language Guide</i>.</p> </li> <li> <p> <b>ImpossiblePolicy</b> </p> <p>Cedar has determined that a policy condition always evaluates to false. If the policy is always false, it can never apply to any query, and so it can never affect an authorization decision.</p> </li> <li> <p> <b>WrongNumberArguments</b> </p> <p>The policy references an extension type with the wrong number of arguments.</p> </li> <li> <p> <b>FunctionArgumentValidationError</b> </p> <p>Cedar couldn't parse the argument passed to an extension type. For example, a string that is to be parsed as an IPv4 address can contain only digits and the period character.</p> </li> </ul>
@@ -2570,7 +2528,7 @@ module Aws::VerifiedPermissions
       :message,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a field that failed policy validation.</p>
@@ -2584,12 +2542,7 @@ module Aws::VerifiedPermissions
       :path,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationMode
-      OFF = 'OFF'
-      STRICT = 'STRICT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains Cedar policy validation settings for the policy store. The validation mode determines which validation failures that Cedar considers serious enough to block acceptance of a new or edited static policy or policy template. </p> <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html">CreatePolicyStore</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore.html">UpdatePolicyStore</a> operations.</p>
@@ -2599,7 +2552,7 @@ module Aws::VerifiedPermissions
     class ValidationSettings < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

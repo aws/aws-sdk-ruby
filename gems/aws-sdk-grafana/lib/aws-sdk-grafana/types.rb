@@ -12,7 +12,7 @@ module Aws::Grafana
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that defines which attributes in the IdP assertion are to be used to
@@ -48,7 +48,7 @@ module Aws::Grafana
       :role,
       :org,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -69,7 +69,7 @@ module Aws::Grafana
       :license_type,
       :grafana_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace
@@ -78,7 +78,7 @@ module Aws::Grafana
     class AssociateLicenseOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about the user authentication methods used by the
@@ -101,7 +101,7 @@ module Aws::Grafana
       :saml,
       :aws_sso,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes whether the workspace uses SAML, IAM Identity Center, or
@@ -119,7 +119,7 @@ module Aws::Grafana
       :providers,
       :saml_configuration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about how this workspace works with IAM Identity Center. </p>
@@ -129,7 +129,7 @@ module Aws::Grafana
     class AwsSsoAuthentication < Struct.new(
       :sso_client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource was in an inconsistent state during an update or a deletion.</p>
@@ -147,7 +147,7 @@ module Aws::Grafana
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -171,7 +171,7 @@ module Aws::Grafana
       :seconds_to_live,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -189,7 +189,7 @@ module Aws::Grafana
       :key,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_access_type
@@ -312,7 +312,7 @@ module Aws::Grafana
       :network_access_control,
       :grafana_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace
@@ -321,7 +321,7 @@ module Aws::Grafana
     class CreateWorkspaceOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -343,7 +343,7 @@ module Aws::Grafana
       :grafana_role,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -364,7 +364,7 @@ module Aws::Grafana
       :grafana_role,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -386,7 +386,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_account_token
@@ -404,7 +404,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -417,7 +417,7 @@ module Aws::Grafana
       :key_name,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute key_name
@@ -430,7 +430,7 @@ module Aws::Grafana
       :key_name,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -439,7 +439,7 @@ module Aws::Grafana
     class DeleteWorkspaceInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace
@@ -448,7 +448,7 @@ module Aws::Grafana
     class DeleteWorkspaceOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_account_id
@@ -461,7 +461,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service_account_id
@@ -474,7 +474,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_id
@@ -491,7 +491,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute token_id
@@ -508,7 +508,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -517,7 +517,7 @@ module Aws::Grafana
     class DescribeWorkspaceAuthenticationInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication
@@ -527,7 +527,7 @@ module Aws::Grafana
     class DescribeWorkspaceAuthenticationOutput < Struct.new(
       :authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -536,7 +536,7 @@ module Aws::Grafana
     class DescribeWorkspaceConfigurationInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -551,7 +551,7 @@ module Aws::Grafana
       :configuration,
       :grafana_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -560,7 +560,7 @@ module Aws::Grafana
     class DescribeWorkspaceInput < Struct.new(
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace
@@ -569,7 +569,7 @@ module Aws::Grafana
     class DescribeWorkspaceOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -582,7 +582,7 @@ module Aws::Grafana
       :workspace_id,
       :license_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace
@@ -591,7 +591,7 @@ module Aws::Grafana
     class DisassociateLicenseOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the identity provider (IdP) metadata used to integrate the
@@ -610,7 +610,7 @@ module Aws::Grafana
       :xml,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Url < IdpMetadata; end
       class Xml < IdpMetadata; end
@@ -628,7 +628,7 @@ module Aws::Grafana
       :message,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -659,7 +659,7 @@ module Aws::Grafana
       :group_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -673,7 +673,7 @@ module Aws::Grafana
       :next_token,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -682,7 +682,7 @@ module Aws::Grafana
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -691,7 +691,7 @@ module Aws::Grafana
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -711,7 +711,7 @@ module Aws::Grafana
       :next_token,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -726,7 +726,7 @@ module Aws::Grafana
       :next_token,
       :grafana_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -748,7 +748,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -769,7 +769,7 @@ module Aws::Grafana
       :service_account_id,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -787,7 +787,7 @@ module Aws::Grafana
       :next_token,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -804,7 +804,7 @@ module Aws::Grafana
       :service_accounts,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -818,7 +818,7 @@ module Aws::Grafana
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspaces
@@ -832,7 +832,7 @@ module Aws::Grafana
       :workspaces,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for in-bound network access to your workspace.</p>
@@ -885,7 +885,7 @@ module Aws::Grafana
       :prefix_list_ids,
       :vpce_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the identity of one user or group and the <code>Admin</code>,
@@ -901,7 +901,7 @@ module Aws::Grafana
       :user,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource that does not exist.</p>
@@ -919,7 +919,7 @@ module Aws::Grafana
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure defines which groups defined in the SAML assertion attribute are to be
@@ -938,7 +938,7 @@ module Aws::Grafana
       :editor,
       :admin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about how this workspace works with SAML. </p>
@@ -952,7 +952,7 @@ module Aws::Grafana
       :status,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about how this workspace works with SAML. </p>
@@ -984,7 +984,7 @@ module Aws::Grafana
       :allowed_organizations,
       :login_validity_duration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:login_validity_duration] = 0 unless options.key?(:login_validity_duration)
@@ -1013,7 +1013,7 @@ module Aws::Grafana
       :is_disabled,
       :grafana_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information about a service account token.</p>
@@ -1039,7 +1039,7 @@ module Aws::Grafana
       :expires_at,
       :last_used_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information about a service account token.</p>
@@ -1062,7 +1062,7 @@ module Aws::Grafana
       :name,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request would cause a service quota to be exceeded.</p>
@@ -1088,7 +1088,7 @@ module Aws::Grafana
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1102,12 +1102,12 @@ module Aws::Grafana
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied because of request throttling. Retry the request.</p>
@@ -1129,7 +1129,7 @@ module Aws::Grafana
       :quota_code,
       :retry_after_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1142,12 +1142,12 @@ module Aws::Grafana
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about one error encountered while performing an
@@ -1166,7 +1166,7 @@ module Aws::Grafana
       :message,
       :caused_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the instructions for one Grafana role permission update in a <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a> operation.</p>
@@ -1185,7 +1185,7 @@ module Aws::Grafana
       :role,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_instruction_batch
@@ -1198,7 +1198,7 @@ module Aws::Grafana
       :update_instruction_batch,
       :workspace_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -1207,7 +1207,7 @@ module Aws::Grafana
     class UpdatePermissionsOutput < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace_id
@@ -1229,7 +1229,7 @@ module Aws::Grafana
       :authentication_providers,
       :saml_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authentication
@@ -1239,7 +1239,7 @@ module Aws::Grafana
     class UpdateWorkspaceAuthenticationOutput < Struct.new(
       :authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration
@@ -1263,12 +1263,12 @@ module Aws::Grafana
       :workspace_id,
       :grafana_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateWorkspaceConfigurationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_access_type
@@ -1383,7 +1383,7 @@ module Aws::Grafana
       :network_access_control,
       :remove_network_access_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute workspace
@@ -1392,7 +1392,7 @@ module Aws::Grafana
     class UpdateWorkspaceOutput < Struct.new(
       :workspace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that specifies one user or group in the workspace.</p>
@@ -1409,7 +1409,7 @@ module Aws::Grafana
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of a parameter in the request caused an error.</p>
@@ -1427,7 +1427,7 @@ module Aws::Grafana
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a request parameter that caused an
@@ -1442,7 +1442,7 @@ module Aws::Grafana
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for an Amazon VPC that contains data sources for
@@ -1465,7 +1465,7 @@ module Aws::Grafana
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about an Amazon Managed Grafana workspace in your
@@ -1618,7 +1618,7 @@ module Aws::Grafana
       :network_access_control,
       :grafana_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains some information about one workspace in the account.</p>
@@ -1683,7 +1683,7 @@ module Aws::Grafana
       :license_type,
       :grafana_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -17,7 +17,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :semantic_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Policy statement applied to the application.</p>
@@ -40,7 +40,7 @@ module Aws::ServerlessApplicationRepository
       :principals,
       :statement_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary of details about the application.</p>
@@ -78,7 +78,7 @@ module Aws::ServerlessApplicationRepository
       :name,
       :spdx_license_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the parameters in the request is invalid.</p>
@@ -92,15 +92,7 @@ module Aws::ServerlessApplicationRepository
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Values that must be specified in order to deploy some applications.</p>
-    module Capability
-      CAPABILITY_IAM = 'CAPABILITY_IAM'
-      CAPABILITY_NAMED_IAM = 'CAPABILITY_NAMED_IAM'
-      CAPABILITY_AUTO_EXPAND = 'CAPABILITY_AUTO_EXPAND'
-      CAPABILITY_RESOURCE_POLICY = 'CAPABILITY_RESOURCE_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource already exists.</p>
@@ -114,7 +106,7 @@ module Aws::ServerlessApplicationRepository
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute author
@@ -184,7 +176,7 @@ module Aws::ServerlessApplicationRepository
       :template_body,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -241,7 +233,7 @@ module Aws::ServerlessApplicationRepository
       :verified_author_url,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -270,7 +262,7 @@ module Aws::ServerlessApplicationRepository
       :template_body,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -336,7 +328,7 @@ module Aws::ServerlessApplicationRepository
       :source_code_url,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -425,7 +417,7 @@ module Aws::ServerlessApplicationRepository
       :tags,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -448,7 +440,7 @@ module Aws::ServerlessApplicationRepository
       :semantic_version,
       :stack_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -463,7 +455,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :semantic_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -501,7 +493,7 @@ module Aws::ServerlessApplicationRepository
       :template_id,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -510,7 +502,7 @@ module Aws::ServerlessApplicationRepository
     class DeleteApplicationRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is not authenticated.</p>
@@ -524,7 +516,7 @@ module Aws::ServerlessApplicationRepository
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -533,7 +525,7 @@ module Aws::ServerlessApplicationRepository
     class GetApplicationPolicyRequest < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statements
@@ -542,7 +534,7 @@ module Aws::ServerlessApplicationRepository
     class GetApplicationPolicyResponse < Struct.new(
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -555,7 +547,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :semantic_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -612,7 +604,7 @@ module Aws::ServerlessApplicationRepository
       :verified_author_url,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -625,7 +617,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -663,7 +655,7 @@ module Aws::ServerlessApplicationRepository
       :template_id,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The AWS Serverless Application Repository service encountered an internal error.</p>
@@ -677,7 +669,7 @@ module Aws::ServerlessApplicationRepository
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -698,7 +690,7 @@ module Aws::ServerlessApplicationRepository
       :next_token,
       :semantic_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dependencies
@@ -711,7 +703,7 @@ module Aws::ServerlessApplicationRepository
       :dependencies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -728,7 +720,7 @@ module Aws::ServerlessApplicationRepository
       :max_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -741,7 +733,7 @@ module Aws::ServerlessApplicationRepository
       :next_token,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_items
@@ -754,7 +746,7 @@ module Aws::ServerlessApplicationRepository
       :max_items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -767,7 +759,7 @@ module Aws::ServerlessApplicationRepository
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource (for example, an access policy statement) specified in the request doesn't exist.</p>
@@ -781,7 +773,7 @@ module Aws::ServerlessApplicationRepository
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters supported by the application.</p>
@@ -856,7 +848,7 @@ module Aws::ServerlessApplicationRepository
       :referenced_by_resources,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameter value of the application.</p>
@@ -871,7 +863,7 @@ module Aws::ServerlessApplicationRepository
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -884,7 +876,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute statements
@@ -893,7 +885,7 @@ module Aws::ServerlessApplicationRepository
     class PutApplicationPolicyResponse < Struct.new(
       :statements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
@@ -910,7 +902,7 @@ module Aws::ServerlessApplicationRepository
       :monitoring_time_in_minutes,
       :rollback_triggers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
@@ -927,13 +919,7 @@ module Aws::ServerlessApplicationRepository
       :arn,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      PREPARING = 'PREPARING'
-      ACTIVE = 'ACTIVE'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
@@ -952,7 +938,7 @@ module Aws::ServerlessApplicationRepository
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client is sending more than the allowed number of requests per unit of time.</p>
@@ -966,7 +952,7 @@ module Aws::ServerlessApplicationRepository
       :error_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -979,7 +965,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :organization_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1012,7 +998,7 @@ module Aws::ServerlessApplicationRepository
       :readme_body,
       :readme_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1069,7 +1055,7 @@ module Aws::ServerlessApplicationRepository
       :verified_author_url,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Application version details.</p>
@@ -1136,7 +1122,7 @@ module Aws::ServerlessApplicationRepository
       :source_code_url,
       :template_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An application version summary.</p>
@@ -1160,7 +1146,7 @@ module Aws::ServerlessApplicationRepository
       :semantic_version,
       :source_code_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -16,12 +16,7 @@ module Aws::EBS
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AccessDeniedExceptionReason
-      UNAUTHORIZED_ACCOUNT = 'UNAUTHORIZED_ACCOUNT'
-      DEPENDENCY_ACCESS_DENIED = 'DEPENDENCY_ACCESS_DENIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A block of data in an Amazon Elastic Block Store snapshot.</p>
@@ -35,7 +30,7 @@ module Aws::EBS
       :block_index,
       :block_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of
@@ -58,15 +53,7 @@ module Aws::EBS
       :first_block_token,
       :second_block_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ChecksumAggregationMethod
-      CHECKSUM_AGGREGATION_LINEAR = 'LINEAR'
-    end
-
-    module ChecksumAlgorithm
-      CHECKSUM_ALGORITHM_SHA256 = 'SHA256'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -98,7 +85,7 @@ module Aws::EBS
       :checksum_algorithm,
       :checksum_aggregation_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -107,7 +94,7 @@ module Aws::EBS
     class CompleteSnapshotResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit for concurrent API requests. For more information, see
@@ -118,7 +105,7 @@ module Aws::EBS
     class ConcurrentLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request uses the same client token as a previous, but non-identical
@@ -128,7 +115,7 @@ module Aws::EBS
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -157,7 +144,7 @@ module Aws::EBS
       :block_index,
       :block_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_length
@@ -178,7 +165,7 @@ module Aws::EBS
       :checksum,
       :checksum_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:block_data] = Base64.strict_decode64('') unless options.key?(:block_data)
@@ -192,7 +179,7 @@ module Aws::EBS
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute first_snapshot_id
@@ -238,7 +225,7 @@ module Aws::EBS
       :max_results,
       :starting_block_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute changed_blocks
@@ -264,7 +251,7 @@ module Aws::EBS
       :block_size,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -297,7 +284,7 @@ module Aws::EBS
       :max_results,
       :starting_block_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute blocks
@@ -323,7 +310,7 @@ module Aws::EBS
       :block_size,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_id
@@ -382,7 +369,7 @@ module Aws::EBS
       :checksum,
       :checksum_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute checksum
@@ -395,7 +382,7 @@ module Aws::EBS
       :checksum,
       :checksum_algorithm,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of API requests has exceeded the maximum allowed API request 
@@ -409,13 +396,7 @@ module Aws::EBS
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RequestThrottledExceptionReason
-      ACCOUNT_THROTTLED = 'ACCOUNT_THROTTLED'
-      DEPENDENCY_REQUEST_THROTTLED = 'DEPENDENCY_REQUEST_THROTTLED'
-      RESOURCE_LEVEL_THROTTLE = 'RESOURCE_LEVEL_THROTTLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource does not exist.</p>
@@ -428,20 +409,7 @@ module Aws::EBS
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceNotFoundExceptionReason
-      SNAPSHOT_NOT_FOUND = 'SNAPSHOT_NOT_FOUND'
-      GRANT_NOT_FOUND = 'GRANT_NOT_FOUND'
-      DEPENDENCY_RESOURCE_NOT_FOUND = 'DEPENDENCY_RESOURCE_NOT_FOUND'
-      IMAGE_NOT_FOUND = 'IMAGE_NOT_FOUND'
-    end
-
-    module SSEType
-      SSE_EBS = 'sse-ebs'
-      SSE_KMS = 'sse-kms'
-      NONE = 'none'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your current service quotas do not allow you to perform this action.</p>
@@ -454,11 +422,7 @@ module Aws::EBS
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceQuotaExceededExceptionReason
-      DEPENDENCY_SERVICE_QUOTA_EXCEEDED = 'DEPENDENCY_SERVICE_QUOTA_EXCEEDED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute volume_size
@@ -557,7 +521,7 @@ module Aws::EBS
       :kms_key_arn,
       :timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -608,13 +572,7 @@ module Aws::EBS
       :kms_key_arn,
       :sse_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      COMPLETED = 'completed'
-      PENDING = 'pending'
-      ERROR = 'error'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a tag.</p>
@@ -628,7 +586,7 @@ module Aws::EBS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints of the EBS direct APIs.</p>
@@ -641,25 +599,7 @@ module Aws::EBS
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      INVALID_CUSTOMER_KEY = 'INVALID_CUSTOMER_KEY'
-      INVALID_PAGE_TOKEN = 'INVALID_PAGE_TOKEN'
-      INVALID_BLOCK_TOKEN = 'INVALID_BLOCK_TOKEN'
-      INVALID_GRANT_TOKEN = 'INVALID_GRANT_TOKEN'
-      INVALID_SNAPSHOT_ID = 'INVALID_SNAPSHOT_ID'
-      UNRELATED_SNAPSHOTS = 'UNRELATED_SNAPSHOTS'
-      INVALID_BLOCK = 'INVALID_BLOCK'
-      INVALID_CONTENT_ENCODING = 'INVALID_CONTENT_ENCODING'
-      INVALID_TAG = 'INVALID_TAG'
-      INVALID_DEPENDENCY_REQUEST = 'INVALID_DEPENDENCY_REQUEST'
-      INVALID_PARAMETER_VALUE = 'INVALID_PARAMETER_VALUE'
-      INVALID_VOLUME_SIZE = 'INVALID_VOLUME_SIZE'
-      CONFLICTING_BLOCK_UPDATE = 'CONFLICTING_BLOCK_UPDATE'
-      INVALID_IMAGE_ID = 'INVALID_IMAGE_ID'
-      WRITE_REQUEST_TIMEOUT = 'WRITE_REQUEST_TIMEOUT'
+      include ::Smithy::Schema::Structure
     end
 
   end

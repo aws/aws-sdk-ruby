@@ -16,13 +16,7 @@ module Aws::CleanRooms
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AdditionalAnalyses
-      ALLOWED = 'ALLOWED'
-      REQUIRED = 'REQUIRED'
-      NOT_ALLOWED = 'NOT_ALLOWED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Column in configured table that can be used in aggregate function in query.</p>
@@ -36,7 +30,7 @@ module Aws::CleanRooms
       :column_names,
       :function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Constraint on query output removing output rows that do not meet a minimum number of distinct values of a specified column.</p>
@@ -54,18 +48,7 @@ module Aws::CleanRooms
       :minimum,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisFormat
-      SQL = 'SQL'
-      PYSPARK_1_0 = 'PYSPARK_1_0'
-    end
-
-    module AnalysisMethod
-      DIRECT_QUERY = 'DIRECT_QUERY'
-      DIRECT_JOB = 'DIRECT_JOB'
-      MULTIPLE = 'MULTIPLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional. The member who can query can provide this placeholder for a literal data value in an analysis template.</p>
@@ -84,7 +67,7 @@ module Aws::CleanRooms
       :type,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specification about how data from the configured table can be used in a query.</p>
@@ -122,7 +105,7 @@ module Aws::CleanRooms
       :collaboration_policy,
       :consolidated_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of analysis rule that enables query structure and specified queries that produce aggregate statistics.</p>
@@ -160,7 +143,7 @@ module Aws::CleanRooms
       :output_constraints,
       :additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables. It supports differential privacy.</p>
@@ -186,7 +169,7 @@ module Aws::CleanRooms
       :disallowed_output_columns,
       :differential_privacy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines details for the analysis rule ID mapping table.</p>
@@ -204,7 +187,7 @@ module Aws::CleanRooms
       :query_constraints,
       :dimension_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A type of analysis rule that enables row-level analysis.</p>
@@ -226,7 +209,7 @@ module Aws::CleanRooms
       :list_columns,
       :additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls on the query specifications that can be run on configured table.</p>
@@ -237,7 +220,7 @@ module Aws::CleanRooms
       :v1,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class V1 < AnalysisRulePolicy; end
       class Unknown < AnalysisRulePolicy; end
@@ -263,20 +246,13 @@ module Aws::CleanRooms
       :id_mapping_table,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class List < AnalysisRulePolicyV1; end
       class Aggregation < AnalysisRulePolicyV1; end
       class Custom < AnalysisRulePolicyV1; end
       class IdMappingTable < AnalysisRulePolicyV1; end
       class Unknown < AnalysisRulePolicyV1; end
-    end
-
-    module AnalysisRuleType
-      AGGREGATION = 'AGGREGATION'
-      LIST = 'LIST'
-      CUSTOM = 'CUSTOM'
-      ID_MAPPING_TABLE = 'ID_MAPPING_TABLE'
     end
 
     # <p>A relation within an analysis.</p>
@@ -286,7 +262,7 @@ module Aws::CleanRooms
     class AnalysisSchema < Struct.new(
       :referenced_tables,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that defines the body of the analysis template.</p>
@@ -301,7 +277,7 @@ module Aws::CleanRooms
       :artifacts,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Text < AnalysisSource; end
       class Artifacts < AnalysisSource; end
@@ -316,7 +292,7 @@ module Aws::CleanRooms
       :artifacts,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Artifacts < AnalysisSourceMetadata; end
       class Unknown < AnalysisSourceMetadata; end
@@ -389,7 +365,7 @@ module Aws::CleanRooms
       :analysis_parameters,
       :validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The analysis template artifact.</p>
@@ -399,7 +375,7 @@ module Aws::CleanRooms
     class AnalysisTemplateArtifact < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The analysis template artifact metadata.</p>
@@ -413,7 +389,7 @@ module Aws::CleanRooms
       :entry_point_hash,
       :additional_artifact_hashes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The analysis template artifacts.</p>
@@ -431,7 +407,7 @@ module Aws::CleanRooms
       :additional_artifacts,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of the analysis template.</p>
@@ -477,13 +453,7 @@ module Aws::CleanRooms
       :collaboration_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisTemplateValidationStatus
-      VALID = 'VALID'
-      INVALID = 'INVALID'
-      UNABLE_TO_VALIDATE = 'UNABLE_TO_VALIDATE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status details of the analysis template validation. Clean Rooms Differential Privacy uses a general-purpose query structure to support complex SQL queries and validates whether an analysis template fits that general-purpose query structure. Validation is performed when analysis templates are created and fetched. Because analysis templates are immutable by design, we recommend that you create analysis templates after you associate the configured tables with their analysis rule to your collaboration.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy">https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy</a>.</p>
@@ -501,7 +471,7 @@ module Aws::CleanRooms
       :status,
       :reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reasons for the validation results.</p>
@@ -511,21 +481,7 @@ module Aws::CleanRooms
     class AnalysisTemplateValidationStatusReason < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisTemplateValidationType
-      DIFFERENTIAL_PRIVACY = 'DIFFERENTIAL_PRIVACY'
-    end
-
-    module AnalysisType
-      DIRECT_ANALYSIS = 'DIRECT_ANALYSIS'
-      ADDITIONAL_ANALYSIS = 'ADDITIONAL_ANALYSIS'
-    end
-
-    module AnalyticsEngine
-      SPARK = 'SPARK'
-      CLEAN_ROOMS_SQL = 'CLEAN_ROOMS_SQL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A reference to a table within Athena.</p>
@@ -547,7 +503,7 @@ module Aws::CleanRooms
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of errors thrown by the call to retrieve multiple analysis templates within a collaboration by their identifiers.</p>
@@ -565,7 +521,7 @@ module Aws::CleanRooms
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -578,7 +534,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :analysis_template_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_analysis_templates
@@ -591,7 +547,7 @@ module Aws::CleanRooms
       :collaboration_analysis_templates,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error that describes why a schema could not be fetched.</p>
@@ -613,7 +569,7 @@ module Aws::CleanRooms
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -626,7 +582,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :schema_analysis_rule_requests,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rules
@@ -639,7 +595,7 @@ module Aws::CleanRooms
       :analysis_rules,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error describing why a schema could not be fetched.</p>
@@ -657,7 +613,7 @@ module Aws::CleanRooms
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -670,7 +626,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schemas
@@ -683,7 +639,7 @@ module Aws::CleanRooms
       :schemas,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information related to the utilization of resources that have been billed or charged for in a given context, such as a protected job.</p>
@@ -693,7 +649,7 @@ module Aws::CleanRooms
     class BilledJobResourceUtilization < Struct.new(
       :units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Information related to the utilization of resources that have been billed or charged for in a given context, such as a protected query.</p>
@@ -703,7 +659,7 @@ module Aws::CleanRooms
     class BilledResourceUtilization < Struct.new(
       :units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The multi-party data share environment. The collaboration contains metadata about its purpose and participants.</p>
@@ -769,7 +725,7 @@ module Aws::CleanRooms
       :job_log_status,
       :analytics_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The analysis template within a collaboration.</p>
@@ -835,7 +791,7 @@ module Aws::CleanRooms
       :analysis_parameters,
       :validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of the analysis template within a collaboration.</p>
@@ -877,7 +833,7 @@ module Aws::CleanRooms
       :creator_account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured audience model association within a collaboration.</p>
@@ -923,7 +879,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the configured audience model association in the collaboration.</p>
@@ -965,7 +921,7 @@ module Aws::CleanRooms
       :creator_account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines details for the collaboration ID namespace association.</p>
@@ -1019,7 +975,7 @@ module Aws::CleanRooms
       :input_reference_properties,
       :id_mapping_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about the collaboration ID namespace association.</p>
@@ -1069,12 +1025,7 @@ module Aws::CleanRooms
       :description,
       :input_reference_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CollaborationJobLogStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the collaboration privacy budgets. This summary includes the collaboration information, creation information, epsilon provided, and utility in terms of aggregations.</p>
@@ -1120,7 +1071,7 @@ module Aws::CleanRooms
       :update_time,
       :budget,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array that specifies the information for a collaboration's privacy budget template.</p>
@@ -1166,7 +1117,7 @@ module Aws::CleanRooms
       :auto_refresh,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the collaboration's privacy budget template. This summary includes information about who created the privacy budget template and what collaborations it belongs to.</p>
@@ -1204,12 +1155,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CollaborationQueryLogStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of the collaboration.</p>
@@ -1259,7 +1205,7 @@ module Aws::CleanRooms
       :membership_arn,
       :analytics_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A column within a schema relation, derived from the underlying table.</p>
@@ -1273,7 +1219,7 @@ module Aws::CleanRooms
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration of the compute resources for an analysis with the Spark analytics engine.</p>
@@ -1284,7 +1230,7 @@ module Aws::CleanRooms
       :worker,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Worker < ComputeConfiguration; end
       class Unknown < ComputeConfiguration; end
@@ -1298,7 +1244,7 @@ module Aws::CleanRooms
       :direct_analysis_configuration_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DirectAnalysisConfigurationDetails < ConfigurationDetails; end
       class Unknown < ConfigurationDetails; end
@@ -1355,7 +1301,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the configured audience model association.</p>
@@ -1405,7 +1351,7 @@ module Aws::CleanRooms
       :configured_audience_model_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A table that has been configured for use in a collaboration.</p>
@@ -1455,7 +1401,7 @@ module Aws::CleanRooms
       :allowed_columns,
       :selected_analysis_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configured table analysis rule, which limits how data for this table can be used.</p>
@@ -1485,7 +1431,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls on the query specifications that can be run on a configured table.</p>
@@ -1496,7 +1442,7 @@ module Aws::CleanRooms
       :v1,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class V1 < ConfiguredTableAnalysisRulePolicy; end
       class Unknown < ConfiguredTableAnalysisRulePolicy; end
@@ -1518,18 +1464,12 @@ module Aws::CleanRooms
       :custom,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class List < ConfiguredTableAnalysisRulePolicyV1; end
       class Aggregation < ConfiguredTableAnalysisRulePolicyV1; end
       class Custom < ConfiguredTableAnalysisRulePolicyV1; end
       class Unknown < ConfiguredTableAnalysisRulePolicyV1; end
-    end
-
-    module ConfiguredTableAnalysisRuleType
-      AGGREGATION = 'AGGREGATION'
-      LIST = 'LIST'
-      CUSTOM = 'CUSTOM'
     end
 
     # <p>A configured table association links a configured table to a collaboration.</p>
@@ -1583,7 +1523,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An analysis rule for a configured table association. This analysis rule specifies how data from the table can be used within its associated collaboration. In the console, the <code>ConfiguredTableAssociationAnalysisRule</code> is referred to as the <i>collaboration analysis rule</i>.</p>
@@ -1617,7 +1557,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configured table association analysis rule applied to a configured table with the aggregation analysis rule.</p>
@@ -1631,7 +1571,7 @@ module Aws::CleanRooms
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configured table association analysis rule applied to a configured table with the custom analysis rule.</p>
@@ -1645,7 +1585,7 @@ module Aws::CleanRooms
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configured table association analysis rule applied to a configured table with the list analysis rule.</p>
@@ -1659,7 +1599,7 @@ module Aws::CleanRooms
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Controls on the query specifications that can be run on an associated configured table.</p>
@@ -1670,7 +1610,7 @@ module Aws::CleanRooms
       :v1,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class V1 < ConfiguredTableAssociationAnalysisRulePolicy; end
       class Unknown < ConfiguredTableAssociationAnalysisRulePolicy; end
@@ -1692,18 +1632,12 @@ module Aws::CleanRooms
       :custom,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class List < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Aggregation < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Custom < ConfiguredTableAssociationAnalysisRulePolicyV1; end
       class Unknown < ConfiguredTableAssociationAnalysisRulePolicyV1; end
-    end
-
-    module ConfiguredTableAssociationAnalysisRuleType
-      AGGREGATION = 'AGGREGATION'
-      LIST = 'LIST'
-      CUSTOM = 'CUSTOM'
     end
 
     # <p>The configured table association summary for the objects listed by the request.</p>
@@ -1745,7 +1679,7 @@ module Aws::CleanRooms
       :arn,
       :analysis_rule_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured table summary for the objects listed by the request.</p>
@@ -1783,7 +1717,7 @@ module Aws::CleanRooms
       :analysis_method,
       :selected_analysis_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -1804,7 +1738,7 @@ module Aws::CleanRooms
       :resource_type,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls on the analysis specifications that can be run on a configured table.</p>
@@ -1815,7 +1749,7 @@ module Aws::CleanRooms
       :v1,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class V1 < ConsolidatedPolicy; end
       class Unknown < ConsolidatedPolicy; end
@@ -1864,7 +1798,7 @@ module Aws::CleanRooms
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls on the analysis specifications that can be run on a configured table.</p>
@@ -1898,7 +1832,7 @@ module Aws::CleanRooms
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls on the analysis specifications that can be run on a configured table.</p>
@@ -1928,7 +1862,7 @@ module Aws::CleanRooms
       :allowed_result_receivers,
       :allowed_additional_analyses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls on the analysis specifications that can be run on a configured table.</p>
@@ -1947,7 +1881,7 @@ module Aws::CleanRooms
       :custom,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class List < ConsolidatedPolicyV1; end
       class Aggregation < ConsolidatedPolicyV1; end
@@ -1989,7 +1923,7 @@ module Aws::CleanRooms
       :analysis_parameters,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_template
@@ -1998,7 +1932,7 @@ module Aws::CleanRooms
     class CreateAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members
@@ -2051,7 +1985,7 @@ module Aws::CleanRooms
       :creator_payment_configuration,
       :analytics_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration
@@ -2060,7 +1994,7 @@ module Aws::CleanRooms
     class CreateCollaborationOperationOutput < Struct.new(
       :collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2089,7 +2023,7 @@ module Aws::CleanRooms
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association
@@ -2098,7 +2032,7 @@ module Aws::CleanRooms
     class CreateConfiguredAudienceModelAssociationOutput < Struct.new(
       :configured_audience_model_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -2115,7 +2049,7 @@ module Aws::CleanRooms
       :analysis_rule_type,
       :analysis_rule_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -2124,7 +2058,7 @@ module Aws::CleanRooms
     class CreateConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2145,7 +2079,7 @@ module Aws::CleanRooms
       :analysis_rule_type,
       :analysis_rule_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -2154,7 +2088,7 @@ module Aws::CleanRooms
     class CreateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2183,7 +2117,7 @@ module Aws::CleanRooms
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association
@@ -2192,7 +2126,7 @@ module Aws::CleanRooms
     class CreateConfiguredTableAssociationOperationOutput < Struct.new(
       :configured_table_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2225,7 +2159,7 @@ module Aws::CleanRooms
       :selected_analysis_methods,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table
@@ -2234,7 +2168,7 @@ module Aws::CleanRooms
     class CreateConfiguredTableOperationOutput < Struct.new(
       :configured_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2263,7 +2197,7 @@ module Aws::CleanRooms
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table
@@ -2272,7 +2206,7 @@ module Aws::CleanRooms
     class CreateIdMappingTableOutput < Struct.new(
       :id_mapping_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2301,7 +2235,7 @@ module Aws::CleanRooms
       :description,
       :id_mapping_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_association
@@ -2310,7 +2244,7 @@ module Aws::CleanRooms
     class CreateIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2343,7 +2277,7 @@ module Aws::CleanRooms
       :default_job_result_configuration,
       :payment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership
@@ -2352,7 +2286,7 @@ module Aws::CleanRooms
     class CreateMembershipOperationOutput < Struct.new(
       :membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2377,7 +2311,7 @@ module Aws::CleanRooms
       :parameters,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute privacy_budget_template
@@ -2386,12 +2320,7 @@ module Aws::CleanRooms
     class CreatePrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomMLMemberAbility
-      CAN_RECEIVE_MODEL_OUTPUT = 'CAN_RECEIVE_MODEL_OUTPUT'
-      CAN_RECEIVE_INFERENCE_OUTPUT = 'CAN_RECEIVE_INFERENCE_OUTPUT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for client-side encryption for cryptographic computing.</p>
@@ -2413,7 +2342,7 @@ module Aws::CleanRooms
       :allow_joins_on_columns_with_different_names,
       :preserve_nulls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2426,12 +2355,12 @@ module Aws::CleanRooms
       :membership_identifier,
       :analysis_template_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAnalysisTemplateOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2440,12 +2369,12 @@ module Aws::CleanRooms
     class DeleteCollaborationOperationInput < Struct.new(
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCollaborationOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association_identifier
@@ -2458,12 +2387,12 @@ module Aws::CleanRooms
       :configured_audience_model_association_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConfiguredAudienceModelAssociationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -2476,13 +2405,13 @@ module Aws::CleanRooms
       :configured_table_identifier,
       :analysis_rule_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty response that indicates a successful delete.</p>
     class DeleteConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2499,12 +2428,12 @@ module Aws::CleanRooms
       :configured_table_association_identifier,
       :analysis_rule_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association_identifier
@@ -2517,12 +2446,12 @@ module Aws::CleanRooms
       :configured_table_association_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteConfiguredTableAssociationOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -2531,13 +2460,13 @@ module Aws::CleanRooms
     class DeleteConfiguredTableOperationInput < Struct.new(
       :configured_table_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The empty output for a successful deletion.</p>
     class DeleteConfiguredTableOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table_identifier
@@ -2550,12 +2479,12 @@ module Aws::CleanRooms
       :id_mapping_table_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIdMappingTableOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_association_identifier
@@ -2568,12 +2497,12 @@ module Aws::CleanRooms
       :id_namespace_association_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIdNamespaceAssociationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2586,12 +2515,12 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMemberOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2600,12 +2529,12 @@ module Aws::CleanRooms
     class DeleteMembershipOperationInput < Struct.new(
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteMembershipOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2618,20 +2547,12 @@ module Aws::CleanRooms
       :membership_identifier,
       :privacy_budget_template_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeletePrivacyBudgetTemplateOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DifferentialPrivacyAggregationType
-      AVG = 'AVG'
-      COUNT = 'COUNT'
-      COUNT_DISTINCT = 'COUNT_DISTINCT'
-      SUM = 'SUM'
-      STDDEV = 'STDDEV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the name of the column that contains the unique identifier of your users, whose privacy you want to protect.</p>
@@ -2641,7 +2562,7 @@ module Aws::CleanRooms
     class DifferentialPrivacyColumn < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the unique identifier for your users.</p>
@@ -2651,7 +2572,7 @@ module Aws::CleanRooms
     class DifferentialPrivacyConfiguration < Struct.new(
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array that contains the sensitivity parameters.</p>
@@ -2661,7 +2582,7 @@ module Aws::CleanRooms
     class DifferentialPrivacyParameters < Struct.new(
       :sensitivity_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides an estimate of the number of aggregation functions that the member who can query can run given the epsilon and noise parameters.</p>
@@ -2675,7 +2596,7 @@ module Aws::CleanRooms
       :type,
       :max_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The epsilon and noise parameters that you want to preview.</p>
@@ -2689,7 +2610,7 @@ module Aws::CleanRooms
       :epsilon,
       :users_noise_per_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configured epsilon value and the utility in terms of total aggregations, as well as the remaining aggregations available.</p>
@@ -2703,7 +2624,7 @@ module Aws::CleanRooms
       :aggregations,
       :epsilon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the total number of aggregations, as well as the remaining aggregations.</p>
@@ -2721,7 +2642,7 @@ module Aws::CleanRooms
       :max_count,
       :remaining_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the number of aggregation functions that the member who can query can run given the epsilon and noise parameters.</p>
@@ -2731,7 +2652,7 @@ module Aws::CleanRooms
     class DifferentialPrivacyPrivacyImpact < Struct.new(
       :aggregations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the sensitivity parameters.</p>
@@ -2757,7 +2678,7 @@ module Aws::CleanRooms
       :min_column_value,
       :max_column_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The epsilon and noise parameter values that you want to use for the differential privacy template.</p>
@@ -2771,7 +2692,7 @@ module Aws::CleanRooms
       :epsilon,
       :users_noise_per_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The epsilon and noise parameter values that were used for the differential privacy template.</p>
@@ -2785,7 +2706,7 @@ module Aws::CleanRooms
       :epsilon,
       :users_noise_per_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The epsilon and noise parameter values that you want to update in the differential privacy template.</p>
@@ -2799,7 +2720,7 @@ module Aws::CleanRooms
       :epsilon,
       :users_noise_per_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The direct analysis configuration details.</p>
@@ -2809,7 +2730,7 @@ module Aws::CleanRooms
     class DirectAnalysisConfigurationDetails < Struct.new(
       :receiver_account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2822,7 +2743,7 @@ module Aws::CleanRooms
       :membership_identifier,
       :analysis_template_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_template
@@ -2831,7 +2752,7 @@ module Aws::CleanRooms
     class GetAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2844,7 +2765,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :analysis_template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_analysis_template
@@ -2853,7 +2774,7 @@ module Aws::CleanRooms
     class GetCollaborationAnalysisTemplateOperationOutput < Struct.new(
       :collaboration_analysis_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2866,7 +2787,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :configured_audience_model_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_configured_audience_model_association
@@ -2875,7 +2796,7 @@ module Aws::CleanRooms
     class GetCollaborationConfiguredAudienceModelAssociationOutput < Struct.new(
       :collaboration_configured_audience_model_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2888,7 +2809,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :id_namespace_association_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_id_namespace_association
@@ -2897,7 +2818,7 @@ module Aws::CleanRooms
     class GetCollaborationIdNamespaceAssociationOutput < Struct.new(
       :collaboration_id_namespace_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2906,7 +2827,7 @@ module Aws::CleanRooms
     class GetCollaborationOperationInput < Struct.new(
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration
@@ -2915,7 +2836,7 @@ module Aws::CleanRooms
     class GetCollaborationOperationOutput < Struct.new(
       :collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -2928,7 +2849,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :privacy_budget_template_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_privacy_budget_template
@@ -2937,7 +2858,7 @@ module Aws::CleanRooms
     class GetCollaborationPrivacyBudgetTemplateOutput < Struct.new(
       :collaboration_privacy_budget_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association_identifier
@@ -2950,7 +2871,7 @@ module Aws::CleanRooms
       :configured_audience_model_association_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association
@@ -2959,7 +2880,7 @@ module Aws::CleanRooms
     class GetConfiguredAudienceModelAssociationOutput < Struct.new(
       :configured_audience_model_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -2972,7 +2893,7 @@ module Aws::CleanRooms
       :configured_table_identifier,
       :analysis_rule_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -2981,7 +2902,7 @@ module Aws::CleanRooms
     class GetConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2998,7 +2919,7 @@ module Aws::CleanRooms
       :configured_table_association_identifier,
       :analysis_rule_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -3007,7 +2928,7 @@ module Aws::CleanRooms
     class GetConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association_identifier
@@ -3020,7 +2941,7 @@ module Aws::CleanRooms
       :configured_table_association_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association
@@ -3029,7 +2950,7 @@ module Aws::CleanRooms
     class GetConfiguredTableAssociationOperationOutput < Struct.new(
       :configured_table_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -3038,7 +2959,7 @@ module Aws::CleanRooms
     class GetConfiguredTableOperationInput < Struct.new(
       :configured_table_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table
@@ -3047,7 +2968,7 @@ module Aws::CleanRooms
     class GetConfiguredTableOperationOutput < Struct.new(
       :configured_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table_identifier
@@ -3060,7 +2981,7 @@ module Aws::CleanRooms
       :id_mapping_table_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table
@@ -3069,7 +2990,7 @@ module Aws::CleanRooms
     class GetIdMappingTableOutput < Struct.new(
       :id_mapping_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_association_identifier
@@ -3082,7 +3003,7 @@ module Aws::CleanRooms
       :id_namespace_association_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_association
@@ -3091,7 +3012,7 @@ module Aws::CleanRooms
     class GetIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3100,7 +3021,7 @@ module Aws::CleanRooms
     class GetMembershipOperationInput < Struct.new(
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership
@@ -3109,7 +3030,7 @@ module Aws::CleanRooms
     class GetMembershipOperationOutput < Struct.new(
       :membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3122,7 +3043,7 @@ module Aws::CleanRooms
       :membership_identifier,
       :privacy_budget_template_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute privacy_budget_template
@@ -3131,7 +3052,7 @@ module Aws::CleanRooms
     class GetPrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3144,7 +3065,7 @@ module Aws::CleanRooms
       :membership_identifier,
       :protected_job_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_job
@@ -3153,7 +3074,7 @@ module Aws::CleanRooms
     class GetProtectedJobOutput < Struct.new(
       :protected_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3166,7 +3087,7 @@ module Aws::CleanRooms
       :membership_identifier,
       :protected_query_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_query
@@ -3175,7 +3096,7 @@ module Aws::CleanRooms
     class GetProtectedQueryOperationOutput < Struct.new(
       :protected_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3192,7 +3113,7 @@ module Aws::CleanRooms
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -3201,7 +3122,7 @@ module Aws::CleanRooms
     class GetSchemaAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3214,7 +3135,7 @@ module Aws::CleanRooms
       :collaboration_identifier,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema
@@ -3223,7 +3144,7 @@ module Aws::CleanRooms
     class GetSchemaOperationOutput < Struct.new(
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A reference to a table within an Glue data catalog.</p>
@@ -3237,7 +3158,7 @@ module Aws::CleanRooms
       :table_name,
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Hash</p>
@@ -3247,7 +3168,7 @@ module Aws::CleanRooms
     class Hash < Struct.new(
       :sha256,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the ID mapping table.</p>
@@ -3257,7 +3178,7 @@ module Aws::CleanRooms
     class IdMappingConfig < Struct.new(
       :allow_use_as_dimension_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:allow_use_as_dimension_column] = false unless options.key?(:allow_use_as_dimension_column)
@@ -3320,7 +3241,7 @@ module Aws::CleanRooms
       :input_reference_properties,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the input reference configuration for the ID mapping table.</p>
@@ -3334,7 +3255,7 @@ module Aws::CleanRooms
       :input_reference_arn,
       :manage_resource_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input reference properties for the ID mapping table.</p>
@@ -3344,7 +3265,7 @@ module Aws::CleanRooms
     class IdMappingTableInputReferenceProperties < Struct.new(
       :id_mapping_table_input_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input source of the ID mapping table.</p>
@@ -3358,7 +3279,7 @@ module Aws::CleanRooms
       :id_namespace_association_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional properties that are specific to the type of the associated schema.</p>
@@ -3368,7 +3289,7 @@ module Aws::CleanRooms
     class IdMappingTableSchemaTypeProperties < Struct.new(
       :id_mapping_table_input_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the ID mapping table.</p>
@@ -3418,7 +3339,7 @@ module Aws::CleanRooms
       :input_reference_config,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information to create the ID namespace association.</p>
@@ -3476,7 +3397,7 @@ module Aws::CleanRooms
       :input_reference_properties,
       :id_mapping_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the information for the ID namespace association input reference configuration.</p>
@@ -3490,7 +3411,7 @@ module Aws::CleanRooms
       :input_reference_arn,
       :manage_resource_policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the information for the ID namespace association input reference properties.</p>
@@ -3504,7 +3425,7 @@ module Aws::CleanRooms
       :id_namespace_type,
       :id_mapping_workflows_supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the ID namespace association input reference properties.</p>
@@ -3514,7 +3435,7 @@ module Aws::CleanRooms
     class IdNamespaceAssociationInputReferencePropertiesSummary < Struct.new(
       :id_namespace_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Detailed information about the ID namespace association.</p>
@@ -3568,12 +3489,7 @@ module Aws::CleanRooms
       :description,
       :input_reference_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IdNamespaceType
-      SOURCE = 'SOURCE'
-      TARGET = 'TARGET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error during processing of request.</p>
@@ -3582,7 +3498,7 @@ module Aws::CleanRooms
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's payment responsibilities set by the collaboration creator for query and job compute costs.</p>
@@ -3592,7 +3508,7 @@ module Aws::CleanRooms
     class JobComputePaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3609,7 +3525,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3622,7 +3538,7 @@ module Aws::CleanRooms
       :next_token,
       :analysis_template_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3639,7 +3555,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3652,7 +3568,7 @@ module Aws::CleanRooms
       :next_token,
       :collaboration_analysis_template_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3669,7 +3585,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_configured_audience_model_association_summaries
@@ -3682,7 +3598,7 @@ module Aws::CleanRooms
       :collaboration_configured_audience_model_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3699,7 +3615,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3712,7 +3628,7 @@ module Aws::CleanRooms
       :next_token,
       :collaboration_id_namespace_association_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3729,7 +3645,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3742,7 +3658,7 @@ module Aws::CleanRooms
       :next_token,
       :collaboration_privacy_budget_template_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3763,7 +3679,7 @@ module Aws::CleanRooms
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_privacy_budget_summaries
@@ -3776,7 +3692,7 @@ module Aws::CleanRooms
       :collaboration_privacy_budget_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3793,7 +3709,7 @@ module Aws::CleanRooms
       :max_results,
       :member_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3806,7 +3722,7 @@ module Aws::CleanRooms
       :next_token,
       :collaboration_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3823,7 +3739,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association_summaries
@@ -3836,7 +3752,7 @@ module Aws::CleanRooms
       :configured_audience_model_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3853,7 +3769,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association_summaries
@@ -3866,7 +3782,7 @@ module Aws::CleanRooms
       :configured_table_association_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3879,7 +3795,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_summaries
@@ -3892,7 +3808,7 @@ module Aws::CleanRooms
       :configured_table_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3909,7 +3825,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table_summaries
@@ -3922,7 +3838,7 @@ module Aws::CleanRooms
       :id_mapping_table_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3939,7 +3855,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3952,7 +3868,7 @@ module Aws::CleanRooms
       :next_token,
       :id_namespace_association_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -3969,7 +3885,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3982,7 +3898,7 @@ module Aws::CleanRooms
       :next_token,
       :member_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3999,7 +3915,7 @@ module Aws::CleanRooms
       :max_results,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4012,7 +3928,7 @@ module Aws::CleanRooms
       :next_token,
       :membership_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -4029,7 +3945,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4042,7 +3958,7 @@ module Aws::CleanRooms
       :next_token,
       :privacy_budget_template_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -4063,7 +3979,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute privacy_budget_summaries
@@ -4076,7 +3992,7 @@ module Aws::CleanRooms
       :privacy_budget_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -4097,7 +4013,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4110,7 +4026,7 @@ module Aws::CleanRooms
       :next_token,
       :protected_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -4131,7 +4047,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -4144,7 +4060,7 @@ module Aws::CleanRooms
       :next_token,
       :protected_queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -4165,7 +4081,7 @@ module Aws::CleanRooms
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_summaries
@@ -4178,7 +4094,7 @@ module Aws::CleanRooms
       :schema_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4187,7 +4103,7 @@ module Aws::CleanRooms
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -4196,7 +4112,7 @@ module Aws::CleanRooms
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ML member abilities for a collaboration member.</p>
@@ -4206,7 +4122,7 @@ module Aws::CleanRooms
     class MLMemberAbilities < Struct.new(
       :custom_ml_member_abilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's machine learning payment responsibilities set by the collaboration creator.</p>
@@ -4220,13 +4136,7 @@ module Aws::CleanRooms
       :model_training,
       :model_inference,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberAbility
-      CAN_QUERY = 'CAN_QUERY'
-      CAN_RECEIVE_RESULTS = 'CAN_RECEIVE_RESULTS'
-      CAN_RUN_JOB = 'CAN_RUN_JOB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Basic metadata used to construct a new member.</p>
@@ -4252,7 +4162,7 @@ module Aws::CleanRooms
       :display_name,
       :payment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The member object listed by the request.</p>
@@ -4298,7 +4208,7 @@ module Aws::CleanRooms
       :membership_arn,
       :payment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The membership object.</p>
@@ -4372,7 +4282,7 @@ module Aws::CleanRooms
       :default_job_result_configuration,
       :payment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the payment responsibilities accepted by the collaboration member for query and job compute costs.</p>
@@ -4382,12 +4292,7 @@ module Aws::CleanRooms
     class MembershipJobComputePaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipJobLogStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's machine learning payment responsibilities set by the collaboration creator.</p>
@@ -4401,7 +4306,7 @@ module Aws::CleanRooms
       :model_training,
       :model_inference,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's model inference payment responsibilities set by the collaboration creator.</p>
@@ -4411,7 +4316,7 @@ module Aws::CleanRooms
     class MembershipModelInferencePaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's model training payment responsibilities set by the collaboration creator.</p>
@@ -4421,7 +4326,7 @@ module Aws::CleanRooms
     class MembershipModelTrainingPaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the payment responsibilities accepted by the collaboration member.</p>
@@ -4439,7 +4344,7 @@ module Aws::CleanRooms
       :machine_learning,
       :job_compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for protected job results.</p>
@@ -4450,7 +4355,7 @@ module Aws::CleanRooms
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < MembershipProtectedJobOutputConfiguration; end
       class Unknown < MembershipProtectedJobOutputConfiguration; end
@@ -4467,7 +4372,7 @@ module Aws::CleanRooms
       :output_configuration,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for protected query results.</p>
@@ -4478,7 +4383,7 @@ module Aws::CleanRooms
       :s3,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < MembershipProtectedQueryOutputConfiguration; end
       class Unknown < MembershipProtectedQueryOutputConfiguration; end
@@ -4495,7 +4400,7 @@ module Aws::CleanRooms
       :output_configuration,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the payment responsibilities accepted by the collaboration member for query compute costs.</p>
@@ -4505,12 +4410,7 @@ module Aws::CleanRooms
     class MembershipQueryComputePaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MembershipQueryLogStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The membership object listed by the request.</p>
@@ -4568,7 +4468,7 @@ module Aws::CleanRooms
       :ml_member_abilities,
       :payment_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's model inference payment responsibilities set by the collaboration creator.</p>
@@ -4578,7 +4478,7 @@ module Aws::CleanRooms
     class ModelInferencePaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's model training payment responsibilities set by the collaboration creator.</p>
@@ -4588,38 +4488,7 @@ module Aws::CleanRooms
     class ModelTrainingPaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterType
-      SMALLINT = 'SMALLINT'
-      INTEGER = 'INTEGER'
-      BIGINT = 'BIGINT'
-      DECIMAL = 'DECIMAL'
-      REAL = 'REAL'
-      DOUBLE_PRECISION = 'DOUBLE_PRECISION'
-      BOOLEAN = 'BOOLEAN'
-      CHAR = 'CHAR'
-      VARCHAR = 'VARCHAR'
-      DATE = 'DATE'
-      TIMESTAMP = 'TIMESTAMP'
-      TIMESTAMPTZ = 'TIMESTAMPTZ'
-      TIME = 'TIME'
-      TIMETZ = 'TIMETZ'
-      VARBYTE = 'VARBYTE'
-      BINARY = 'BINARY'
-      BYTE = 'BYTE'
-      CHARACTER = 'CHARACTER'
-      DOUBLE = 'DOUBLE'
-      FLOAT = 'FLOAT'
-      INT = 'INT'
-      LONG = 'LONG'
-      NUMERIC = 'NUMERIC'
-      SHORT = 'SHORT'
-      STRING = 'STRING'
-      TIMESTAMP_LTZ = 'TIMESTAMP_LTZ'
-      TIMESTAMP_NTZ = 'TIMESTAMP_NTZ'
-      TINYINT = 'TINYINT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the collaboration member's payment responsibilities set by the collaboration creator.</p>
@@ -4637,7 +4506,7 @@ module Aws::CleanRooms
       :machine_learning,
       :job_compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table_identifier
@@ -4650,7 +4519,7 @@ module Aws::CleanRooms
       :id_mapping_table_identifier,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_job_id
@@ -4659,7 +4528,7 @@ module Aws::CleanRooms
     class PopulateIdMappingTableOutput < Struct.new(
       :id_mapping_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -4672,7 +4541,7 @@ module Aws::CleanRooms
       :membership_identifier,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute privacy_impact
@@ -4681,7 +4550,7 @@ module Aws::CleanRooms
     class PreviewPrivacyImpactOutput < Struct.new(
       :privacy_impact,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the updated epsilon and noise parameters to preview. The preview allows you to see how the maximum number of each type of aggregation function would change with the new parameters.</p>
@@ -4692,7 +4561,7 @@ module Aws::CleanRooms
       :differential_privacy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PreviewPrivacyImpactParametersInput; end
       class Unknown < PreviewPrivacyImpactParametersInput; end
@@ -4706,7 +4575,7 @@ module Aws::CleanRooms
       :differential_privacy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudget; end
       class Unknown < PrivacyBudget; end
@@ -4759,7 +4628,7 @@ module Aws::CleanRooms
       :update_time,
       :budget,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that defines the privacy budget template.</p>
@@ -4809,12 +4678,7 @@ module Aws::CleanRooms
       :auto_refresh,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrivacyBudgetTemplateAutoRefresh
-      CALENDAR_MONTH = 'CALENDAR_MONTH'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The epsilon and noise parameters that you want to use for the privacy budget template.</p>
@@ -4825,7 +4689,7 @@ module Aws::CleanRooms
       :differential_privacy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput; end
       class Unknown < PrivacyBudgetTemplateParametersInput; end
@@ -4839,7 +4703,7 @@ module Aws::CleanRooms
       :differential_privacy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput; end
       class Unknown < PrivacyBudgetTemplateParametersOutput; end
@@ -4884,7 +4748,7 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The epsilon and noise parameters that you want to update in the privacy budget template.</p>
@@ -4895,14 +4759,10 @@ module Aws::CleanRooms
       :differential_privacy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters; end
       class Unknown < PrivacyBudgetTemplateUpdateParameters; end
-    end
-
-    module PrivacyBudgetType
-      DIFFERENTIAL_PRIVACY = 'DIFFERENTIAL_PRIVACY'
     end
 
     # <p>Provides an estimate of the number of aggregation functions that the member who can query can run given the epsilon and noise parameters.</p>
@@ -4913,7 +4773,7 @@ module Aws::CleanRooms
       :differential_privacy,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DifferentialPrivacy < PrivacyImpact; end
       class Unknown < PrivacyImpact; end
@@ -4962,11 +4822,7 @@ module Aws::CleanRooms
       :result,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProtectedJobAnalysisType
-      DIRECT_ANALYSIS = 'DIRECT_ANALYSIS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The protected job configuration details.</p>
@@ -4977,7 +4833,7 @@ module Aws::CleanRooms
       :direct_analysis_configuration_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class DirectAnalysisConfigurationDetails < ProtectedJobConfigurationDetails; end
       class Unknown < ProtectedJobConfigurationDetails; end
@@ -4990,7 +4846,7 @@ module Aws::CleanRooms
     class ProtectedJobDirectAnalysisConfigurationDetails < Struct.new(
       :receiver_account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The protected job error.</p>
@@ -5004,7 +4860,7 @@ module Aws::CleanRooms
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The protected job member output configuration input.</p>
@@ -5014,7 +4870,7 @@ module Aws::CleanRooms
     class ProtectedJobMemberOutputConfigurationInput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The protected job member output configuration output.</p>
@@ -5024,7 +4880,7 @@ module Aws::CleanRooms
     class ProtectedJobMemberOutputConfigurationOutput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the protected job output.</p>
@@ -5039,7 +4895,7 @@ module Aws::CleanRooms
       :member_list,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < ProtectedJobOutput; end
       class MemberList < ProtectedJobOutput; end
@@ -5054,7 +4910,7 @@ module Aws::CleanRooms
       :member,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Member < ProtectedJobOutputConfigurationInput; end
       class Unknown < ProtectedJobOutputConfigurationInput; end
@@ -5072,7 +4928,7 @@ module Aws::CleanRooms
       :member,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < ProtectedJobOutputConfigurationOutput; end
       class Member < ProtectedJobOutputConfigurationOutput; end
@@ -5086,7 +4942,7 @@ module Aws::CleanRooms
     class ProtectedJobParameters < Struct.new(
       :analysis_template_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The protected job receiver configuration.</p>
@@ -5100,7 +4956,7 @@ module Aws::CleanRooms
       :analysis_type,
       :configuration_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the job results.</p>
@@ -5110,7 +4966,7 @@ module Aws::CleanRooms
     class ProtectedJobResult < Struct.new(
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The protected job result configuration input.</p>
@@ -5120,7 +4976,7 @@ module Aws::CleanRooms
     class ProtectedJobResultConfigurationInput < Struct.new(
       :output_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The output configuration for a protected job result.</p>
@@ -5130,7 +4986,7 @@ module Aws::CleanRooms
     class ProtectedJobResultConfigurationOutput < Struct.new(
       :output_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains output information for protected jobs with an S3 output type.</p>
@@ -5140,7 +4996,7 @@ module Aws::CleanRooms
     class ProtectedJobS3Output < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains input information for protected jobs with an S3 output type.</p>
@@ -5154,7 +5010,7 @@ module Aws::CleanRooms
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The output configuration for a protected job's S3 output.</p>
@@ -5168,7 +5024,7 @@ module Aws::CleanRooms
       :bucket,
       :key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the member who received the job result.</p>
@@ -5178,7 +5034,7 @@ module Aws::CleanRooms
     class ProtectedJobSingleMemberOutput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains statistics about the execution of the protected job.</p>
@@ -5192,16 +5048,7 @@ module Aws::CleanRooms
       :total_duration_in_millis,
       :billed_resource_utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProtectedJobStatus
-      SUBMITTED = 'SUBMITTED'
-      STARTED = 'STARTED'
-      CANCELLED = 'CANCELLED'
-      CANCELLING = 'CANCELLING'
-      FAILED = 'FAILED'
-      SUCCESS = 'SUCCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The protected job summary for the objects listed by the request.</p>
@@ -5231,16 +5078,12 @@ module Aws::CleanRooms
       :status,
       :receiver_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:receiver_configurations] = [] unless options.key?(:receiver_configurations)
         super
       end
-    end
-
-    module ProtectedJobType
-      PYSPARK = 'PYSPARK'
     end
 
     # <p>The parameters for an Clean Rooms protected query.</p>
@@ -5294,7 +5137,7 @@ module Aws::CleanRooms
       :differential_privacy,
       :compute_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the output information for a protected query with a distribute output configuration.</p> <p> This output type allows query results to be distributed to multiple receivers, including S3 and collaboration members. It is only available for queries using the Spark analytics engine.</p>
@@ -5308,7 +5151,7 @@ module Aws::CleanRooms
       :s3,
       :member_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies the configuration for distributing protected query results to multiple receivers, including S3 and collaboration members.</p>
@@ -5318,7 +5161,7 @@ module Aws::CleanRooms
     class ProtectedQueryDistributeOutputConfiguration < Struct.new(
       :locations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Specifies where you'll distribute the results of your protected query. You must configure either an S3 destination or a collaboration member destination.</p>
@@ -5333,7 +5176,7 @@ module Aws::CleanRooms
       :member,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < ProtectedQueryDistributeOutputConfigurationLocation; end
       class Member < ProtectedQueryDistributeOutputConfigurationLocation; end
@@ -5351,7 +5194,7 @@ module Aws::CleanRooms
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains configuration details for the protected query member output.</p>
@@ -5361,7 +5204,7 @@ module Aws::CleanRooms
     class ProtectedQueryMemberOutputConfiguration < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the protected query output.</p>
@@ -5380,7 +5223,7 @@ module Aws::CleanRooms
       :distribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < ProtectedQueryOutput; end
       class MemberList < ProtectedQueryOutput; end
@@ -5404,7 +5247,7 @@ module Aws::CleanRooms
       :distribute,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class S3 < ProtectedQueryOutputConfiguration; end
       class Member < ProtectedQueryOutputConfiguration; end
@@ -5419,7 +5262,7 @@ module Aws::CleanRooms
     class ProtectedQueryResult < Struct.new(
       :output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configurations for protected query results.</p>
@@ -5429,7 +5272,7 @@ module Aws::CleanRooms
     class ProtectedQueryResultConfiguration < Struct.new(
       :output_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains output information for protected queries with an S3 output type.</p>
@@ -5439,7 +5282,7 @@ module Aws::CleanRooms
     class ProtectedQueryS3Output < Struct.new(
       :location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration to write the query results to S3.</p>
@@ -5461,7 +5304,7 @@ module Aws::CleanRooms
       :key_prefix,
       :single_file_output,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for the SQL type Protected Query.</p>
@@ -5480,7 +5323,7 @@ module Aws::CleanRooms
       :analysis_template_arn,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the member who received the query result.</p>
@@ -5490,7 +5333,7 @@ module Aws::CleanRooms
     class ProtectedQuerySingleMemberOutput < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains statistics about the execution of the protected query.</p>
@@ -5504,7 +5347,7 @@ module Aws::CleanRooms
       :total_duration_in_millis,
       :billed_resource_utilization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The protected query summary for the objects listed by the request.</p>
@@ -5534,7 +5377,7 @@ module Aws::CleanRooms
       :status,
       :receiver_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:receiver_configurations] = [] unless options.key?(:receiver_configurations)
@@ -5549,7 +5392,7 @@ module Aws::CleanRooms
     class QueryComputePaymentConfig < Struct.new(
       :is_responsible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides any necessary query constraint information.</p>
@@ -5560,7 +5403,7 @@ module Aws::CleanRooms
       :require_overlap,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RequireOverlap < QueryConstraint; end
       class Unknown < QueryConstraint; end
@@ -5573,7 +5416,7 @@ module Aws::CleanRooms
     class QueryConstraintRequireOverlap < Struct.new(
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The receiver configuration for a protected query.</p>
@@ -5587,7 +5430,7 @@ module Aws::CleanRooms
       :analysis_type,
       :configuration_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request references a resource which does not exist.</p>
@@ -5604,7 +5447,7 @@ module Aws::CleanRooms
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The S3 location.</p>
@@ -5618,7 +5461,7 @@ module Aws::CleanRooms
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A schema is a relation within a collaboration.</p>
@@ -5684,7 +5527,7 @@ module Aws::CleanRooms
       :schema_status_details,
       :schema_type_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:schema_status_details] = [] unless options.key?(:schema_status_details)
@@ -5703,16 +5546,7 @@ module Aws::CleanRooms
       :name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaConfiguration
-      DIFFERENTIAL_PRIVACY = 'DIFFERENTIAL_PRIVACY'
-    end
-
-    module SchemaStatus
-      READY = 'READY'
-      NOT_READY = 'NOT_READY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the schema status.</p> <p>A status of <code>READY</code> means that based on the schema analysis rule, queries of the given analysis rule type are properly configured to run queries on this schema.</p>
@@ -5738,10 +5572,10 @@ module Aws::CleanRooms
       :configurations,
       :analysis_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:analysis_type] = '' unless options.key?(:analysis_type)
+        options[:analysis_type] = nil unless options.key?(:analysis_type)
         super
       end
     end
@@ -5757,21 +5591,7 @@ module Aws::CleanRooms
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaStatusReasonCode
-      ANALYSIS_RULE_MISSING = 'ANALYSIS_RULE_MISSING'
-      ANALYSIS_TEMPLATES_NOT_CONFIGURED = 'ANALYSIS_TEMPLATES_NOT_CONFIGURED'
-      ANALYSIS_PROVIDERS_NOT_CONFIGURED = 'ANALYSIS_PROVIDERS_NOT_CONFIGURED'
-      DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED = 'DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED'
-      ID_MAPPING_TABLE_NOT_POPULATED = 'ID_MAPPING_TABLE_NOT_POPULATED'
-      COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED = 'COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED'
-      ADDITIONAL_ANALYSES_NOT_CONFIGURED = 'ADDITIONAL_ANALYSES_NOT_CONFIGURED'
-      RESULT_RECEIVERS_NOT_CONFIGURED = 'RESULT_RECEIVERS_NOT_CONFIGURED'
-      ADDITIONAL_ANALYSES_NOT_ALLOWED = 'ADDITIONAL_ANALYSES_NOT_ALLOWED'
-      RESULT_RECEIVERS_NOT_ALLOWED = 'RESULT_RECEIVERS_NOT_ALLOWED'
-      ANALYSIS_RULE_TYPES_NOT_COMPATIBLE = 'ANALYSIS_RULE_TYPES_NOT_COMPATIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schema summary for the objects listed by the request.</p>
@@ -5817,12 +5637,7 @@ module Aws::CleanRooms
       :analysis_method,
       :selected_analysis_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaType
-      TABLE = 'TABLE'
-      ID_MAPPING_TABLE = 'ID_MAPPING_TABLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the schema type properties.</p>
@@ -5833,15 +5648,10 @@ module Aws::CleanRooms
       :id_mapping_table,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IdMappingTable < SchemaTypeProperties; end
       class Unknown < SchemaTypeProperties; end
-    end
-
-    module SelectedAnalysisMethod
-      DIRECT_QUERY = 'DIRECT_QUERY'
-      DIRECT_JOB = 'DIRECT_JOB'
     end
 
     # <p>Request denied because service quota has been exceeded.</p>
@@ -5858,7 +5668,7 @@ module Aws::CleanRooms
       :quota_name,
       :quota_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A reference to a table within Snowflake.</p>
@@ -5888,7 +5698,7 @@ module Aws::CleanRooms
       :schema_name,
       :table_schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The schema of a Snowflake table.</p>
@@ -5899,7 +5709,7 @@ module Aws::CleanRooms
       :v1,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class V1 < SnowflakeTableSchema; end
       class Unknown < SnowflakeTableSchema; end
@@ -5916,7 +5726,7 @@ module Aws::CleanRooms
       :column_name,
       :column_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5937,7 +5747,7 @@ module Aws::CleanRooms
       :job_parameters,
       :result_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_job
@@ -5946,7 +5756,7 @@ module Aws::CleanRooms
     class StartProtectedJobOutput < Struct.new(
       :protected_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type
@@ -5971,7 +5781,7 @@ module Aws::CleanRooms
       :result_configuration,
       :compute_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_query
@@ -5980,7 +5790,7 @@ module Aws::CleanRooms
     class StartProtectedQueryOperationOutput < Struct.new(
       :protected_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pointer to the dataset that underlies this table.</p>
@@ -5999,7 +5809,7 @@ module Aws::CleanRooms
       :athena,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Glue < TableReference; end
       class Snowflake < TableReference; end
@@ -6017,16 +5827,12 @@ module Aws::CleanRooms
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetProtectedJobStatus
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request was denied due to request throttling.</p>
@@ -6035,7 +5841,7 @@ module Aws::CleanRooms
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6048,12 +5854,12 @@ module Aws::CleanRooms
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -6070,7 +5876,7 @@ module Aws::CleanRooms
       :analysis_template_identifier,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_template
@@ -6079,7 +5885,7 @@ module Aws::CleanRooms
     class UpdateAnalysisTemplateOperationOutput < Struct.new(
       :analysis_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration_identifier
@@ -6100,7 +5906,7 @@ module Aws::CleanRooms
       :description,
       :analytics_engine,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute collaboration
@@ -6109,7 +5915,7 @@ module Aws::CleanRooms
     class UpdateCollaborationOperationOutput < Struct.new(
       :collaboration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association_identifier
@@ -6130,7 +5936,7 @@ module Aws::CleanRooms
       :description,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_association
@@ -6139,7 +5945,7 @@ module Aws::CleanRooms
     class UpdateConfiguredAudienceModelAssociationOutput < Struct.new(
       :configured_audience_model_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -6156,7 +5962,7 @@ module Aws::CleanRooms
       :analysis_rule_type,
       :analysis_rule_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -6165,7 +5971,7 @@ module Aws::CleanRooms
     class UpdateConfiguredTableAnalysisRuleOperationOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -6186,7 +5992,7 @@ module Aws::CleanRooms
       :analysis_rule_type,
       :analysis_rule_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_rule
@@ -6195,7 +6001,7 @@ module Aws::CleanRooms
     class UpdateConfiguredTableAssociationAnalysisRuleOutput < Struct.new(
       :analysis_rule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association_identifier
@@ -6216,7 +6022,7 @@ module Aws::CleanRooms
       :description,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_association
@@ -6225,7 +6031,7 @@ module Aws::CleanRooms
     class UpdateConfiguredTableAssociationOperationOutput < Struct.new(
       :configured_table_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table_identifier
@@ -6258,7 +6064,7 @@ module Aws::CleanRooms
       :analysis_method,
       :selected_analysis_methods,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_table
@@ -6267,7 +6073,7 @@ module Aws::CleanRooms
     class UpdateConfiguredTableOperationOutput < Struct.new(
       :configured_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table_identifier
@@ -6288,7 +6094,7 @@ module Aws::CleanRooms
       :description,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_mapping_table
@@ -6297,7 +6103,7 @@ module Aws::CleanRooms
     class UpdateIdMappingTableOutput < Struct.new(
       :id_mapping_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_association_identifier
@@ -6322,7 +6128,7 @@ module Aws::CleanRooms
       :description,
       :id_mapping_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id_namespace_association
@@ -6331,7 +6137,7 @@ module Aws::CleanRooms
     class UpdateIdNamespaceAssociationOutput < Struct.new(
       :id_namespace_association,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -6356,7 +6162,7 @@ module Aws::CleanRooms
       :default_result_configuration,
       :default_job_result_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership
@@ -6365,7 +6171,7 @@ module Aws::CleanRooms
     class UpdateMembershipOperationOutput < Struct.new(
       :membership,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -6386,7 +6192,7 @@ module Aws::CleanRooms
       :privacy_budget_type,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute privacy_budget_template
@@ -6395,7 +6201,7 @@ module Aws::CleanRooms
     class UpdatePrivacyBudgetTemplateOutput < Struct.new(
       :privacy_budget_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -6412,7 +6218,7 @@ module Aws::CleanRooms
       :protected_job_identifier,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_job
@@ -6421,7 +6227,7 @@ module Aws::CleanRooms
     class UpdateProtectedJobOutput < Struct.new(
       :protected_job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -6438,7 +6244,7 @@ module Aws::CleanRooms
       :protected_query_identifier,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protected_query
@@ -6447,7 +6253,7 @@ module Aws::CleanRooms
     class UpdateProtectedQueryOperationOutput < Struct.new(
       :protected_query,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the specified constraints.</p>
@@ -6464,7 +6270,7 @@ module Aws::CleanRooms
       :reason,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes validation errors for specific input parameters.</p>
@@ -6478,7 +6284,7 @@ module Aws::CleanRooms
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The configuration of the compute resources for workers running an analysis with the Clean Rooms SQL analytics engine.</p>
@@ -6492,12 +6298,7 @@ module Aws::CleanRooms
       :type,
       :number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WorkerComputeType
-      CR1X = 'CR.1X'
-      CR4X = 'CR.4X'
+      include ::Smithy::Schema::Structure
     end
 
   end

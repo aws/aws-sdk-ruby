@@ -13,7 +13,7 @@ module Aws::Kafka
     class AmazonMskCluster < Struct.new(
       :msk_cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -27,7 +27,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associates sasl scram secrets to cluster.</p>
@@ -41,7 +41,7 @@ module Aws::Kafka
       :cluster_arn,
       :secret_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -54,7 +54,7 @@ module Aws::Kafka
       :cluster_arn,
       :unprocessed_scram_secrets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Disassociates sasl scram secrets to cluster.</p>
@@ -68,7 +68,7 @@ module Aws::Kafka
       :cluster_arn,
       :secret_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -81,13 +81,7 @@ module Aws::Kafka
       :cluster_arn,
       :unprocessed_scram_secrets,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>
-    #          <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>
-    module BrokerAZDistribution
-      DEFAULT = 'DEFAULT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information regarding UpdateBrokerCount.</p>
@@ -101,7 +95,7 @@ module Aws::Kafka
       :created_broker_ids,
       :deleted_broker_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the EBS volume upgrade information. The broker identifier must be set to the keyword ALL. This means the changes apply to all the brokers in the cluster.</p>
@@ -119,7 +113,7 @@ module Aws::Kafka
       :provisioned_throughput,
       :volume_size_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cloud_watch_logs
@@ -133,7 +127,7 @@ module Aws::Kafka
       :firehose,
       :s3,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the setup to be used for Apache Kafka broker nodes in the cluster.</p>
@@ -169,7 +163,7 @@ module Aws::Kafka
       :connectivity_info,
       :zone_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>BrokerNodeInfo</p>
@@ -199,7 +193,7 @@ module Aws::Kafka
       :current_broker_software_info,
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the current software installed on the cluster.</p>
@@ -217,7 +211,7 @@ module Aws::Kafka
       :configuration_revision,
       :kafka_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes all client authentication information.</p>
@@ -235,14 +229,7 @@ module Aws::Kafka
       :tls,
       :unauthenticated,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Client-broker encryption in transit setting.</p>
-    module ClientBroker
-      TLS = 'TLS'
-      TLS_PLAINTEXT = 'TLS_PLAINTEXT'
-      PLAINTEXT = 'PLAINTEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The client VPC connection object.</p>
@@ -268,7 +255,7 @@ module Aws::Kafka
       :vpc_connection_arn,
       :owner,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled
@@ -279,7 +266,7 @@ module Aws::Kafka
       :enabled,
       :log_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a cluster.</p>
@@ -329,7 +316,7 @@ module Aws::Kafka
       :provisioned,
       :serverless,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a cluster.</p>
@@ -413,7 +400,7 @@ module Aws::Kafka
       :storage_mode,
       :customer_action_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a cluster operation.</p>
@@ -467,7 +454,7 @@ module Aws::Kafka
       :target_cluster_info,
       :vpc_connection_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Step taken during a cluster operation.</p>
@@ -481,7 +468,7 @@ module Aws::Kafka
       :step_info,
       :step_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>State information about the operation step.</p>
@@ -491,7 +478,7 @@ module Aws::Kafka
     class ClusterOperationStepInfo < Struct.new(
       :step_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a cluster operation.</p>
@@ -537,7 +524,7 @@ module Aws::Kafka
       :provisioned,
       :serverless,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a provisioned cluster operation.</p>
@@ -559,7 +546,7 @@ module Aws::Kafka
       :target_cluster_info,
       :vpc_connection_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a serverless cluster operation.</p>
@@ -569,7 +556,7 @@ module Aws::Kafka
     class ClusterOperationV2Serverless < Struct.new(
       :vpc_connection_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about a cluster operation.</p>
@@ -603,25 +590,7 @@ module Aws::Kafka
       :operation_state,
       :operation_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The state of the Apache Kafka cluster.</p>
-    module ClusterState
-      ACTIVE = 'ACTIVE'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      HEALING = 'HEALING'
-      MAINTENANCE = 'MAINTENANCE'
-      REBOOTING_BROKER = 'REBOOTING_BROKER'
-      UPDATING = 'UPDATING'
-    end
-
-    # <p>The type of cluster.</p>
-    module ClusterType
-      PROVISIONED = 'PROVISIONED'
-      SERVERLESS = 'SERVERLESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains source Apache Kafka versions and compatible target Apache Kafka versions.</p>
@@ -635,7 +604,7 @@ module Aws::Kafka
       :source_version,
       :target_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an MSK Configuration.</p>
@@ -669,7 +638,7 @@ module Aws::Kafka
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the configuration to use for the brokers.</p>
@@ -683,7 +652,7 @@ module Aws::Kafka
       :arn,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a configuration revision.</p>
@@ -701,14 +670,7 @@ module Aws::Kafka
       :description,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The state of a configuration.</p>
-    module ConfigurationState
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -722,7 +684,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the broker access configuration.</p>
@@ -736,7 +698,7 @@ module Aws::Kafka
       :public_access,
       :vpc_connectivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about consumer group replication.</p>
@@ -758,7 +720,7 @@ module Aws::Kafka
       :detect_and_copy_new_consumer_groups,
       :synchronise_consumer_group_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about consumer group replication.</p>
@@ -780,7 +742,7 @@ module Aws::Kafka
       :detect_and_copy_new_consumer_groups,
       :synchronise_consumer_group_offsets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controller node information.</p>
@@ -790,7 +752,7 @@ module Aws::Kafka
     class ControllerNodeInfo < Struct.new(
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_node_group_info
@@ -842,7 +804,7 @@ module Aws::Kafka
       :tags,
       :storage_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -859,7 +821,7 @@ module Aws::Kafka
       :cluster_name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name
@@ -880,7 +842,7 @@ module Aws::Kafka
       :provisioned,
       :serverless,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -901,7 +863,7 @@ module Aws::Kafka
       :state,
       :cluster_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -923,7 +885,7 @@ module Aws::Kafka
       :name,
       :server_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -948,7 +910,7 @@ module Aws::Kafka
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates a replicator using the specified configuration.</p>
@@ -978,7 +940,7 @@ module Aws::Kafka
       :service_execution_role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replicator_arn
@@ -995,7 +957,7 @@ module Aws::Kafka
       :replicator_name,
       :replicator_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_cluster_arn
@@ -1024,7 +986,7 @@ module Aws::Kafka
       :security_groups,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connection_arn
@@ -1061,14 +1023,7 @@ module Aws::Kafka
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>A type of an action required from the customer.</p>
-    module CustomerActionStatus
-      CRITICAL_ACTION_REQUIRED = 'CRITICAL_ACTION_REQUIRED'
-      ACTION_RECOMMENDED = 'ACTION_RECOMMENDED'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1077,12 +1032,12 @@ module Aws::Kafka
     class DeleteClusterPolicyRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteClusterPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1095,7 +1050,7 @@ module Aws::Kafka
       :cluster_arn,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1108,7 +1063,7 @@ module Aws::Kafka
       :cluster_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1117,7 +1072,7 @@ module Aws::Kafka
     class DeleteConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1130,7 +1085,7 @@ module Aws::Kafka
       :arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute current_version
@@ -1143,7 +1098,7 @@ module Aws::Kafka
       :current_version,
       :replicator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replicator_arn
@@ -1156,7 +1111,7 @@ module Aws::Kafka
       :replicator_arn,
       :replicator_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1165,7 +1120,7 @@ module Aws::Kafka
     class DeleteVpcConnectionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connection_arn
@@ -1178,7 +1133,7 @@ module Aws::Kafka
       :vpc_connection_arn,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_operation_arn
@@ -1187,7 +1142,7 @@ module Aws::Kafka
     class DescribeClusterOperationRequest < Struct.new(
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_operation_info
@@ -1196,7 +1151,7 @@ module Aws::Kafka
     class DescribeClusterOperationResponse < Struct.new(
       :cluster_operation_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_operation_arn
@@ -1205,7 +1160,7 @@ module Aws::Kafka
     class DescribeClusterOperationV2Request < Struct.new(
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_operation_info
@@ -1214,7 +1169,7 @@ module Aws::Kafka
     class DescribeClusterOperationV2Response < Struct.new(
       :cluster_operation_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1223,7 +1178,7 @@ module Aws::Kafka
     class DescribeClusterRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_info
@@ -1232,7 +1187,7 @@ module Aws::Kafka
     class DescribeClusterResponse < Struct.new(
       :cluster_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1241,7 +1196,7 @@ module Aws::Kafka
     class DescribeClusterV2Request < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_info
@@ -1250,7 +1205,7 @@ module Aws::Kafka
     class DescribeClusterV2Response < Struct.new(
       :cluster_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1259,7 +1214,7 @@ module Aws::Kafka
     class DescribeConfigurationRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1292,7 +1247,7 @@ module Aws::Kafka
       :name,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1305,7 +1260,7 @@ module Aws::Kafka
       :arn,
       :revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1331,7 +1286,7 @@ module Aws::Kafka
       :revision,
       :server_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replicator_arn
@@ -1340,7 +1295,7 @@ module Aws::Kafka
     class DescribeReplicatorRequest < Struct.new(
       :replicator_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_time
@@ -1397,7 +1352,7 @@ module Aws::Kafka
       :state_info,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1406,7 +1361,7 @@ module Aws::Kafka
     class DescribeVpcConnectionRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connection_arn
@@ -1447,7 +1402,7 @@ module Aws::Kafka
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the EBS storage volumes attached to Apache Kafka broker nodes.</p>
@@ -1461,7 +1416,7 @@ module Aws::Kafka
       :provisioned_throughput,
       :volume_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data-volume encryption details.</p>
@@ -1471,7 +1426,7 @@ module Aws::Kafka
     class EncryptionAtRest < Struct.new(
       :data_volume_kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for encrypting data in transit.</p>
@@ -1493,7 +1448,7 @@ module Aws::Kafka
       :client_broker,
       :in_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes encryption-related information, such as the AWS KMS key used for encrypting data at rest and whether you want MSK to encrypt your data in transit.</p>
@@ -1507,15 +1462,7 @@ module Aws::Kafka
       :encryption_at_rest,
       :encryption_in_transit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href="https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html">Monitoring</a>.</p>
-    module EnhancedMonitoring
-      DEFAULT = 'DEFAULT'
-      PER_BROKER = 'PER_BROKER'
-      PER_TOPIC_PER_BROKER = 'PER_TOPIC_PER_BROKER'
-      PER_TOPIC_PER_PARTITION = 'PER_TOPIC_PER_PARTITION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error state of the cluster.</p>
@@ -1529,7 +1476,7 @@ module Aws::Kafka
       :error_code,
       :error_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_stream
@@ -1540,7 +1487,7 @@ module Aws::Kafka
       :delivery_stream,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -1554,7 +1501,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1563,7 +1510,7 @@ module Aws::Kafka
     class GetBootstrapBrokersRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bootstrap_broker_string
@@ -1608,7 +1555,7 @@ module Aws::Kafka
       :bootstrap_broker_string_vpc_connectivity_sasl_scram,
       :bootstrap_broker_string_vpc_connectivity_sasl_iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1617,7 +1564,7 @@ module Aws::Kafka
     class GetClusterPolicyRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute current_version
@@ -1630,7 +1577,7 @@ module Aws::Kafka
       :current_version,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1639,7 +1586,7 @@ module Aws::Kafka
     class GetCompatibleKafkaVersionsRequest < Struct.new(
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute compatible_kafka_versions
@@ -1648,7 +1595,7 @@ module Aws::Kafka
     class GetCompatibleKafkaVersionsResponse < Struct.new(
       :compatible_kafka_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for IAM access control.</p>
@@ -1658,7 +1605,7 @@ module Aws::Kafka
     class Iam < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -1672,7 +1619,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>
@@ -1682,7 +1629,7 @@ module Aws::Kafka
     class JmxExporter < Struct.new(
       :enabled_in_broker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>
@@ -1692,7 +1639,7 @@ module Aws::Kafka
     class JmxExporterInfo < Struct.new(
       :enabled_in_broker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about Kafka Cluster to be used as source / target for replication.</p>
@@ -1706,7 +1653,7 @@ module Aws::Kafka
       :amazon_msk_cluster,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>
@@ -1720,7 +1667,7 @@ module Aws::Kafka
       :security_group_ids,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about Kafka Cluster used as source / target for replication.</p>
@@ -1738,7 +1685,7 @@ module Aws::Kafka
       :kafka_cluster_alias,
       :vpc_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized information about Kafka Cluster used as source / target for replication.</p>
@@ -1752,7 +1699,7 @@ module Aws::Kafka
       :amazon_msk_cluster,
       :kafka_cluster_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -1763,12 +1710,7 @@ module Aws::Kafka
       :version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KafkaVersionStatus
-      ACTIVE = 'ACTIVE'
-      DEPRECATED = 'DEPRECATED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1786,7 +1728,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_vpc_connections
@@ -1800,7 +1742,7 @@ module Aws::Kafka
       :client_vpc_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1818,7 +1760,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_operation_info_list
@@ -1831,7 +1773,7 @@ module Aws::Kafka
       :cluster_operation_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -1848,7 +1790,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_operation_info_list
@@ -1861,7 +1803,7 @@ module Aws::Kafka
       :cluster_operation_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name_filter
@@ -1879,7 +1821,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_info_list
@@ -1893,7 +1835,7 @@ module Aws::Kafka
       :cluster_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_name_filter
@@ -1915,7 +1857,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_info_list
@@ -1929,7 +1871,7 @@ module Aws::Kafka
       :cluster_info_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -1947,7 +1889,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1960,7 +1902,7 @@ module Aws::Kafka
       :next_token,
       :revisions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1974,7 +1916,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configurations
@@ -1988,7 +1930,7 @@ module Aws::Kafka
       :configurations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2001,7 +1943,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute kafka_versions
@@ -2012,7 +1954,7 @@ module Aws::Kafka
       :kafka_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -2030,7 +1972,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2044,7 +1986,7 @@ module Aws::Kafka
       :next_token,
       :node_info_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2061,7 +2003,7 @@ module Aws::Kafka
       :next_token,
       :replicator_name_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2074,7 +2016,7 @@ module Aws::Kafka
       :next_token,
       :replicators,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -2091,7 +2033,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2104,7 +2046,7 @@ module Aws::Kafka
       :next_token,
       :secret_arn_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2113,7 +2055,7 @@ module Aws::Kafka
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2122,7 +2064,7 @@ module Aws::Kafka
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -2136,7 +2078,7 @@ module Aws::Kafka
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connections
@@ -2150,7 +2092,7 @@ module Aws::Kafka
       :vpc_connections,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute broker_logs
@@ -2158,7 +2100,7 @@ module Aws::Kafka
     class LoggingInfo < Struct.new(
       :broker_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about cluster attributes that can be updated via update APIs.</p>
@@ -2216,7 +2158,7 @@ module Aws::Kafka
       :storage_mode,
       :broker_count_update_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether you want to turn on or turn off the Node Exporter.</p>
@@ -2226,7 +2168,7 @@ module Aws::Kafka
     class NodeExporter < Struct.new(
       :enabled_in_broker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates whether you want to turn on or turn off the Node Exporter.</p>
@@ -2236,7 +2178,7 @@ module Aws::Kafka
     class NodeExporterInfo < Struct.new(
       :enabled_in_broker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The node information object.</p>
@@ -2270,12 +2212,7 @@ module Aws::Kafka
       :node_type,
       :zookeeper_node_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The broker or Zookeeper node.</p>
-    module NodeType
-      BROKER = 'BROKER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -2289,7 +2226,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>JMX and Node monitoring for the MSK cluster.</p>
@@ -2299,7 +2236,7 @@ module Aws::Kafka
     class OpenMonitoring < Struct.new(
       :prometheus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>JMX and Node monitoring for the MSK cluster.</p>
@@ -2309,7 +2246,7 @@ module Aws::Kafka
     class OpenMonitoringInfo < Struct.new(
       :prometheus,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Prometheus settings.</p>
@@ -2323,7 +2260,7 @@ module Aws::Kafka
       :jmx_exporter,
       :node_exporter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Prometheus settings.</p>
@@ -2337,7 +2274,7 @@ module Aws::Kafka
       :jmx_exporter,
       :node_exporter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provisioned cluster.</p>
@@ -2391,7 +2328,7 @@ module Aws::Kafka
       :storage_mode,
       :customer_action_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provisioned cluster request.</p>
@@ -2437,7 +2374,7 @@ module Aws::Kafka
       :number_of_broker_nodes,
       :storage_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about provisioned throughput for EBS storage volumes attached to kafka broker nodes.</p>
@@ -2451,7 +2388,7 @@ module Aws::Kafka
       :enabled,
       :volume_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Public access control for brokers.
@@ -2461,7 +2398,7 @@ module Aws::Kafka
     class PublicAccess < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -2478,7 +2415,7 @@ module Aws::Kafka
       :current_version,
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute current_version
@@ -2487,7 +2424,7 @@ module Aws::Kafka
     class PutClusterPolicyResponse < Struct.new(
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Reboots a node.
@@ -2501,7 +2438,7 @@ module Aws::Kafka
       :broker_ids,
       :cluster_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -2514,7 +2451,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -2527,12 +2464,12 @@ module Aws::Kafka
       :cluster_arn,
       :vpc_connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RejectClientVpcConnectionResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration for replication between a source and target Kafka cluster.</p>
@@ -2558,7 +2495,7 @@ module Aws::Kafka
       :target_kafka_cluster_arn,
       :topic_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies configuration for replication between a source and target Kafka cluster (sourceKafkaClusterAlias -> targetKafkaClusterAlias)</p>
@@ -2584,7 +2521,7 @@ module Aws::Kafka
       :target_kafka_cluster_alias,
       :topic_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarized information of replication between clusters.</p>
@@ -2598,7 +2535,7 @@ module Aws::Kafka
       :source_kafka_cluster_alias,
       :target_kafka_cluster_alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for specifying the position in the topics to start replicating from.</p>
@@ -2608,13 +2545,7 @@ module Aws::Kafka
     class ReplicationStartingPosition < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of replication starting position.</p>
-    module ReplicationStartingPositionType
-      LATEST = 'LATEST'
-      EARLIEST = 'EARLIEST'
+      include ::Smithy::Schema::Structure
     end
 
     # Details about the state of a replicator
@@ -2628,7 +2559,7 @@ module Aws::Kafka
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.</p>
@@ -2638,22 +2569,7 @@ module Aws::Kafka
     class ReplicationTopicNameConfiguration < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of replicated topic name.</p>
-    module ReplicationTopicNameConfigurationType
-      PREFIXED_WITH_SOURCE_CLUSTER_ALIAS = 'PREFIXED_WITH_SOURCE_CLUSTER_ALIAS'
-      IDENTICAL = 'IDENTICAL'
-    end
-
-    # <p>The state of a replicator.</p>
-    module ReplicatorState
-      RUNNING = 'RUNNING'
-      CREATING = 'CREATING'
-      UPDATING = 'UPDATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a replicator.</p>
@@ -2695,7 +2611,7 @@ module Aws::Kafka
       :replicator_resource_arn,
       :replicator_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute bucket
@@ -2709,7 +2625,7 @@ module Aws::Kafka
       :enabled,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for client authentication using SASL.</p>
@@ -2723,7 +2639,7 @@ module Aws::Kafka
       :scram,
       :iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for SASL/SCRAM client authentication.</p>
@@ -2733,7 +2649,7 @@ module Aws::Kafka
     class Scram < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Serverless cluster.</p>
@@ -2747,7 +2663,7 @@ module Aws::Kafka
       :vpc_configs,
       :client_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes all client authentication information.</p>
@@ -2757,7 +2673,7 @@ module Aws::Kafka
     class ServerlessClientAuthentication < Struct.new(
       :sasl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Serverless cluster request.</p>
@@ -2771,7 +2687,7 @@ module Aws::Kafka
       :vpc_configs,
       :client_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for client authentication using SASL.</p>
@@ -2781,7 +2697,7 @@ module Aws::Kafka
     class ServerlessSasl < Struct.new(
       :iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -2795,7 +2711,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -2806,7 +2722,7 @@ module Aws::Kafka
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about storage volumes attached to MSK broker nodes.</p>
@@ -2816,13 +2732,7 @@ module Aws::Kafka
     class StorageInfo < Struct.new(
       :ebs_storage_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # Controls storage mode for various supported storage tiers.
-    module StorageMode
-      LOCAL = 'LOCAL'
-      TIERED = 'TIERED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2835,16 +2745,7 @@ module Aws::Kafka
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The type of compression to use producing records to the target cluster.</p>
-    module TargetCompressionType
-      NONE = 'NONE'
-      GZIP = 'GZIP'
-      SNAPPY = 'SNAPPY'
-      LZ4 = 'LZ4'
-      ZSTD = 'ZSTD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for client authentication using TLS.</p>
@@ -2858,7 +2759,7 @@ module Aws::Kafka
       :certificate_authority_arn_list,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -2872,7 +2773,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about topic replication.</p>
@@ -2906,7 +2807,7 @@ module Aws::Kafka
       :topics_to_exclude,
       :topics_to_replicate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for updating the topic replication of a replicator.</p>
@@ -2932,7 +2833,7 @@ module Aws::Kafka
       :topics_to_exclude,
       :topics_to_replicate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled
@@ -2941,7 +2842,7 @@ module Aws::Kafka
     class Unauthenticated < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an error.</p>
@@ -2955,7 +2856,7 @@ module Aws::Kafka
       :invalid_parameter,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error info for scram secret associate/disassociate failure.</p>
@@ -2973,7 +2874,7 @@ module Aws::Kafka
       :error_message,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3005,7 +2906,7 @@ module Aws::Kafka
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3022,7 +2923,7 @@ module Aws::Kafka
       :current_version,
       :target_number_of_broker_nodes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3035,7 +2936,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3052,7 +2953,7 @@ module Aws::Kafka
       :current_version,
       :target_broker_ebs_volume_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3065,7 +2966,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3082,7 +2983,7 @@ module Aws::Kafka
       :current_version,
       :target_instance_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3095,7 +2996,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3112,7 +3013,7 @@ module Aws::Kafka
       :configuration_info,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3125,7 +3026,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3146,7 +3047,7 @@ module Aws::Kafka
       :current_version,
       :target_kafka_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3159,7 +3060,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3177,7 +3078,7 @@ module Aws::Kafka
       :description,
       :server_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3190,7 +3091,7 @@ module Aws::Kafka
       :arn,
       :latest_revision,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request body for UpdateConnectivity.
@@ -3208,7 +3109,7 @@ module Aws::Kafka
       :connectivity_info,
       :current_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3221,7 +3122,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Request body for UpdateMonitoring.
@@ -3246,7 +3147,7 @@ module Aws::Kafka
       :open_monitoring,
       :logging_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3259,7 +3160,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Update information relating to replication between a given source and target Kafka cluster.</p>
@@ -3289,7 +3190,7 @@ module Aws::Kafka
       :target_kafka_cluster_arn,
       :topic_replication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute replicator_arn
@@ -3302,7 +3203,7 @@ module Aws::Kafka
       :replicator_arn,
       :replicator_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_authentication
@@ -3323,7 +3224,7 @@ module Aws::Kafka
       :current_version,
       :encryption_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3336,7 +3237,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request object for UpdateStorage api. Its used to update the storage attributes for the cluster.</p>
@@ -3362,7 +3263,7 @@ module Aws::Kafka
       :storage_mode,
       :volume_size_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute cluster_arn
@@ -3375,7 +3276,7 @@ module Aws::Kafka
       :cluster_arn,
       :cluster_operation_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Description of the requester that calls the API operation.</p>
@@ -3389,13 +3290,7 @@ module Aws::Kafka
       :type,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The identity type of the requester that calls the API operation.</p>
-    module UserIdentityType
-      AWSACCOUNT = 'AWSACCOUNT'
-      AWSSERVICE = 'AWSSERVICE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the Amazon VPCs for the cluster.</p>
@@ -3409,7 +3304,7 @@ module Aws::Kafka
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC connection object.</p>
@@ -3439,7 +3334,7 @@ module Aws::Kafka
       :vpc_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Description of the VPC connection.</p>
@@ -3461,7 +3356,7 @@ module Aws::Kafka
       :user_identity,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # Description of the VPC connection.
@@ -3483,19 +3378,7 @@ module Aws::Kafka
       :user_identity,
       :vpc_connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The state of a VPC connection.</p>
-    module VpcConnectionState
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      INACTIVE = 'INACTIVE'
-      DEACTIVATING = 'DEACTIVATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      REJECTED = 'REJECTED'
-      REJECTING = 'REJECTING'
+      include ::Smithy::Schema::Structure
     end
 
     # VPC connectivity access control for brokers.
@@ -3505,7 +3388,7 @@ module Aws::Kafka
     class VpcConnectivity < Struct.new(
       :client_authentication,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Includes all client authentication information for VPC connectivity.</p>
@@ -3519,7 +3402,7 @@ module Aws::Kafka
       :sasl,
       :tls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for IAM access control for VPC connectivity.</p>
@@ -3529,7 +3412,7 @@ module Aws::Kafka
     class VpcConnectivityIam < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for SASL client authentication for VPC connectivity.</p>
@@ -3543,7 +3426,7 @@ module Aws::Kafka
       :scram,
       :iam,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for SASL/SCRAM client authentication for VPC connectivity.</p>
@@ -3553,7 +3436,7 @@ module Aws::Kafka
     class VpcConnectivityScram < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for TLS client authentication for VPC connectivity.</p>
@@ -3563,7 +3446,7 @@ module Aws::Kafka
     class VpcConnectivityTls < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Zookeeper node information.</p>
@@ -3589,7 +3472,7 @@ module Aws::Kafka
       :zookeeper_id,
       :zookeeper_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

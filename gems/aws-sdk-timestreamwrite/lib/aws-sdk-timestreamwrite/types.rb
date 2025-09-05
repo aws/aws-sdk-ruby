@@ -12,11 +12,7 @@ module Aws::TimestreamWrite
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BatchLoadDataFormat
-      CSV = 'CSV'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the progress of a batch load task.</p>
@@ -46,7 +42,7 @@ module Aws::TimestreamWrite
       :file_failures,
       :bytes_metered,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:records_processed] = 0 unless options.key?(:records_processed)
@@ -57,15 +53,6 @@ module Aws::TimestreamWrite
         options[:bytes_metered] = 0 unless options.key?(:bytes_metered)
         super
       end
-    end
-
-    module BatchLoadStatus
-      CREATED = 'CREATED'
-      IN_PROGRESS = 'IN_PROGRESS'
-      FAILED = 'FAILED'
-      SUCCEEDED = 'SUCCEEDED'
-      PROGRESS_STOPPED = 'PROGRESS_STOPPED'
-      PENDING_RESUME = 'PENDING_RESUME'
     end
 
     # <p>Details about a batch load task.</p>
@@ -100,7 +87,7 @@ module Aws::TimestreamWrite
       :last_updated_time,
       :resumable_until,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a batch load task.</p>
@@ -161,7 +148,7 @@ module Aws::TimestreamWrite
       :last_updated_time,
       :resumable_until,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:record_version] = 0 unless options.key?(:record_version)
@@ -176,7 +163,7 @@ module Aws::TimestreamWrite
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token
@@ -210,7 +197,7 @@ module Aws::TimestreamWrite
       :target_table_name,
       :record_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -219,7 +206,7 @@ module Aws::TimestreamWrite
     class CreateBatchLoadTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -237,7 +224,7 @@ module Aws::TimestreamWrite
       :kms_key_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database
@@ -246,7 +233,7 @@ module Aws::TimestreamWrite
     class CreateDatabaseResponse < Struct.new(
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -276,7 +263,7 @@ module Aws::TimestreamWrite
       :magnetic_store_write_properties,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table
@@ -285,7 +272,7 @@ module Aws::TimestreamWrite
     class CreateTableResponse < Struct.new(
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A delimited data format where the column separator can be a comma and the record
@@ -313,7 +300,7 @@ module Aws::TimestreamWrite
       :null_value,
       :trim_white_space,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data model for a batch load task.</p>
@@ -345,7 +332,7 @@ module Aws::TimestreamWrite
       :mixed_measure_mappings,
       :measure_name_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -359,7 +346,7 @@ module Aws::TimestreamWrite
       :data_model,
       :data_model_s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -373,7 +360,7 @@ module Aws::TimestreamWrite
       :bucket_name,
       :object_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines configuration details about the data source.</p>
@@ -392,7 +379,7 @@ module Aws::TimestreamWrite
       :csv_configuration,
       :data_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -408,7 +395,7 @@ module Aws::TimestreamWrite
       :bucket_name,
       :object_key_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A top-level container for a table. Databases and tables are the fundamental management
@@ -441,7 +428,7 @@ module Aws::TimestreamWrite
       :creation_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:table_count] = 0 unless options.key?(:table_count)
@@ -455,7 +442,7 @@ module Aws::TimestreamWrite
     class DeleteDatabaseRequest < Struct.new(
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -468,7 +455,7 @@ module Aws::TimestreamWrite
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -477,7 +464,7 @@ module Aws::TimestreamWrite
     class DescribeBatchLoadTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute batch_load_task_description
@@ -486,7 +473,7 @@ module Aws::TimestreamWrite
     class DescribeBatchLoadTaskResponse < Struct.new(
       :batch_load_task_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -495,7 +482,7 @@ module Aws::TimestreamWrite
     class DescribeDatabaseRequest < Struct.new(
       :database_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database
@@ -504,12 +491,12 @@ module Aws::TimestreamWrite
     class DescribeDatabaseResponse < Struct.new(
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DescribeEndpointsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute endpoints
@@ -519,7 +506,7 @@ module Aws::TimestreamWrite
     class DescribeEndpointsResponse < Struct.new(
       :endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -532,7 +519,7 @@ module Aws::TimestreamWrite
       :database_name,
       :table_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table
@@ -541,7 +528,7 @@ module Aws::TimestreamWrite
     class DescribeTableResponse < Struct.new(
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the metadata attributes of the time series. For example, the name and
@@ -565,7 +552,7 @@ module Aws::TimestreamWrite
       :value,
       :dimension_value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -580,11 +567,7 @@ module Aws::TimestreamWrite
       :source_column,
       :destination_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DimensionValueType
-      VARCHAR = 'VARCHAR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an available endpoint against which to make API calls against, as well as the
@@ -599,7 +582,7 @@ module Aws::TimestreamWrite
       :address,
       :cache_period_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cache_period_in_minutes] = 0 unless options.key?(:cache_period_in_minutes)
@@ -615,7 +598,7 @@ module Aws::TimestreamWrite
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested endpoint was not valid.</p>
@@ -624,7 +607,7 @@ module Aws::TimestreamWrite
     class InvalidEndpointException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -645,7 +628,7 @@ module Aws::TimestreamWrite
       :max_results,
       :task_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -659,7 +642,7 @@ module Aws::TimestreamWrite
       :next_token,
       :batch_load_tasks,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -676,7 +659,7 @@ module Aws::TimestreamWrite
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute databases
@@ -689,7 +672,7 @@ module Aws::TimestreamWrite
       :databases,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -710,7 +693,7 @@ module Aws::TimestreamWrite
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tables
@@ -724,7 +707,7 @@ module Aws::TimestreamWrite
       :tables,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -734,7 +717,7 @@ module Aws::TimestreamWrite
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -743,7 +726,7 @@ module Aws::TimestreamWrite
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location to write error reports for records rejected, asynchronously, during
@@ -755,7 +738,7 @@ module Aws::TimestreamWrite
     class MagneticStoreRejectedDataLocation < Struct.new(
       :s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set of properties on a table for configuring magnetic store writes.</p>
@@ -770,7 +753,7 @@ module Aws::TimestreamWrite
       :enable_magnetic_store_writes,
       :magnetic_store_rejected_data_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Represents the data attribute of the time series. For example, the CPU utilization of
@@ -795,16 +778,7 @@ module Aws::TimestreamWrite
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MeasureValueType
-      DOUBLE = 'DOUBLE'
-      BIGINT = 'BIGINT'
-      VARCHAR = 'VARCHAR'
-      BOOLEAN = 'BOOLEAN'
-      TIMESTAMP = 'TIMESTAMP'
-      MULTI = 'MULTI'
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -830,7 +804,7 @@ module Aws::TimestreamWrite
       :measure_value_type,
       :multi_measure_attribute_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -848,7 +822,7 @@ module Aws::TimestreamWrite
       :target_multi_measure_attribute_name,
       :measure_value_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -862,7 +836,7 @@ module Aws::TimestreamWrite
       :target_multi_measure_name,
       :multi_measure_attribute_mappings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An attribute used in partitioning data in a table. A dimension key partitions data
@@ -886,17 +860,7 @@ module Aws::TimestreamWrite
       :name,
       :enforcement_in_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PartitionKeyEnforcementLevel
-      REQUIRED = 'REQUIRED'
-      OPTIONAL = 'OPTIONAL'
-    end
-
-    module PartitionKeyType
-      DIMENSION = 'DIMENSION'
-      MEASURE = 'MEASURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a time-series data point being written into Timestream. Each record
@@ -965,10 +929,10 @@ module Aws::TimestreamWrite
       :version,
       :measure_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:version] =  unless options.key?(:version)
+        options[:version] = nil unless options.key?(:version)
         super
       end
     end
@@ -988,7 +952,7 @@ module Aws::TimestreamWrite
       :memory_store,
       :magnetic_store,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total] = 0 unless options.key?(:total)
@@ -1057,11 +1021,11 @@ module Aws::TimestreamWrite
       :reason,
       :existing_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:record_index] = 0 unless options.key?(:record_index)
-        options[:existing_version] =  unless options.key?(:existing_version)
+        options[:existing_version] = nil unless options.key?(:existing_version)
         super
       end
     end
@@ -1106,7 +1070,7 @@ module Aws::TimestreamWrite
       :message,
       :rejected_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Report configuration for a batch load task. This contains details about where error
@@ -1118,7 +1082,7 @@ module Aws::TimestreamWrite
     class ReportConfiguration < Struct.new(
       :report_s3_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1140,7 +1104,7 @@ module Aws::TimestreamWrite
       :encryption_option,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation tried to access a nonexistent resource. The resource might not be
@@ -1150,7 +1114,7 @@ module Aws::TimestreamWrite
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1159,12 +1123,12 @@ module Aws::TimestreamWrite
     class ResumeBatchLoadTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResumeBatchLoadTaskResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retention properties contain the duration for which your time-series data must be stored
@@ -1179,7 +1143,7 @@ module Aws::TimestreamWrite
       :memory_store_retention_period_in_hours,
       :magnetic_store_retention_period_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that specifies an S3 location.</p>
@@ -1203,20 +1167,7 @@ module Aws::TimestreamWrite
       :encryption_option,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3EncryptionOption
-      SSE_S3 = 'SSE_S3'
-      SSE_KMS = 'SSE_KMS'
-    end
-
-    module ScalarMeasureValueType
-      DOUBLE = 'DOUBLE'
-      BIGINT = 'BIGINT'
-      BOOLEAN = 'BOOLEAN'
-      VARCHAR = 'VARCHAR'
-      TIMESTAMP = 'TIMESTAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A Schema specifies the expected data model of the table. </p>
@@ -1229,7 +1180,7 @@ module Aws::TimestreamWrite
     class Schema < Struct.new(
       :composite_partition_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The instance quota of resource exceeded for this account.</p>
@@ -1238,7 +1189,7 @@ module Aws::TimestreamWrite
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a database table in Timestream. Tables contain one or more related
@@ -1292,13 +1243,7 @@ module Aws::TimestreamWrite
       :magnetic_store_write_properties,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableStatus
-      ACTIVE = 'ACTIVE'
-      DELETING = 'DELETING'
-      RESTORING = 'RESTORING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> A tag is a label that you assign to a Timestream database and/or table. Each
@@ -1314,7 +1259,7 @@ module Aws::TimestreamWrite
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1328,12 +1273,12 @@ module Aws::TimestreamWrite
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Too many requests were made by a user and they exceeded the service quotas. The request
@@ -1343,14 +1288,7 @@ module Aws::TimestreamWrite
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeUnit
-      MILLISECONDS = 'MILLISECONDS'
-      SECONDS = 'SECONDS'
-      MICROSECONDS = 'MICROSECONDS'
-      NANOSECONDS = 'NANOSECONDS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1365,12 +1303,12 @@ module Aws::TimestreamWrite
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -1407,7 +1345,7 @@ module Aws::TimestreamWrite
       :database_name,
       :kms_key_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database
@@ -1418,7 +1356,7 @@ module Aws::TimestreamWrite
     class UpdateDatabaseResponse < Struct.new(
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -1443,7 +1381,7 @@ module Aws::TimestreamWrite
       :magnetic_store_write_properties,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute table
@@ -1452,7 +1390,7 @@ module Aws::TimestreamWrite
     class UpdateTableResponse < Struct.new(
       :table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An invalid or malformed request.</p>
@@ -1461,7 +1399,7 @@ module Aws::TimestreamWrite
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute database_name
@@ -1488,7 +1426,7 @@ module Aws::TimestreamWrite
       :common_attributes,
       :records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute records_ingested
@@ -1497,7 +1435,7 @@ module Aws::TimestreamWrite
     class WriteRecordsResponse < Struct.new(
       :records_ingested,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

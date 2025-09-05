@@ -39,7 +39,7 @@ module Aws::SQS
       :aws_account_ids,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two or more batch entries in the request have the same <code>Id</code>.</p>
@@ -48,7 +48,7 @@ module Aws::SQS
     class BatchEntryIdsNotDistinct < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The length of all the messages put together is more than the limit.</p>
@@ -57,7 +57,7 @@ module Aws::SQS
     class BatchRequestTooLong < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Gives a detailed description of the result of an action on each entry in the
@@ -80,7 +80,7 @@ module Aws::SQS
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sender_fault] = false unless options.key?(:sender_fault)
@@ -94,7 +94,7 @@ module Aws::SQS
     class CancelMessageMoveTaskRequest < Struct.new(
       :task_handle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute approximate_number_of_messages_moved
@@ -103,7 +103,7 @@ module Aws::SQS
     class CancelMessageMoveTaskResult < Struct.new(
       :approximate_number_of_messages_moved,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:approximate_number_of_messages_moved] = 0 unless options.key?(:approximate_number_of_messages_moved)
@@ -124,7 +124,7 @@ module Aws::SQS
       :queue_url,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encloses a receipt handle and an entry ID for each message in <code>
@@ -149,7 +149,7 @@ module Aws::SQS
       :receipt_handle,
       :visibility_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For each message in the batch, the response contains a <code>
@@ -174,7 +174,7 @@ module Aws::SQS
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encloses the <code>Id</code> of an entry in <code>
@@ -186,7 +186,7 @@ module Aws::SQS
     class ChangeMessageVisibilityBatchResultEntry < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_url
@@ -209,7 +209,7 @@ module Aws::SQS
       :receipt_handle,
       :visibility_timeout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -505,7 +505,7 @@ module Aws::SQS
       :attributes,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the <code>QueueUrl</code> attribute of the created queue.</p>
@@ -515,7 +515,7 @@ module Aws::SQS
     class CreateQueueResult < Struct.new(
       :queue_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -530,7 +530,7 @@ module Aws::SQS
       :queue_url,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encloses a receipt handle and an identifier for it.</p>
@@ -549,7 +549,7 @@ module Aws::SQS
       :id,
       :receipt_handle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For each message in the batch, the response contains a <code>
@@ -573,7 +573,7 @@ module Aws::SQS
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encloses the <code>Id</code> of an entry in <code>
@@ -585,7 +585,7 @@ module Aws::SQS
     class DeleteMessageBatchResultEntry < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -600,7 +600,7 @@ module Aws::SQS
       :queue_url,
       :receipt_handle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -611,7 +611,7 @@ module Aws::SQS
     class DeleteQueueRequest < Struct.new(
       :queue_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch request doesn't contain any entries.</p>
@@ -620,7 +620,7 @@ module Aws::SQS
     class EmptyBatchRequest < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -861,7 +861,7 @@ module Aws::SQS
       :queue_url,
       :attribute_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of returned queue attributes.</p>
@@ -871,7 +871,7 @@ module Aws::SQS
     class GetQueueAttributesResult < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves the URL of an existing queue based on its name and, optionally, the Amazon Web Services
@@ -890,7 +890,7 @@ module Aws::SQS
       :queue_name,
       :queue_owner_aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For more information, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-api-responses.html">Interpreting Responses</a> in the <i>Amazon SQS Developer
@@ -901,7 +901,7 @@ module Aws::SQS
     class GetQueueUrlResult < Struct.new(
       :queue_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified ID is invalid.</p>
@@ -910,7 +910,7 @@ module Aws::SQS
     class InvalidAddress < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified attribute doesn't exist.</p>
@@ -919,7 +919,7 @@ module Aws::SQS
     class InvalidAttributeName < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A queue attribute value is invalid.</p>
@@ -928,7 +928,7 @@ module Aws::SQS
     class InvalidAttributeValue < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>Id</code> of a batch entry in a batch request doesn't abide by the
@@ -938,7 +938,7 @@ module Aws::SQS
     class InvalidBatchEntryId < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified receipt handle isn't valid for the current version.</p>
@@ -946,7 +946,7 @@ module Aws::SQS
     #   exception has been included in ReceiptHandleIsInvalid
     class InvalidIdFormat < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The message contains characters outside the allowed set.</p>
@@ -955,7 +955,7 @@ module Aws::SQS
     class InvalidMessageContents < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was not made over HTTPS or did not use SigV4 for signing.</p>
@@ -964,7 +964,7 @@ module Aws::SQS
     class InvalidSecurity < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The caller doesn't have the required KMS access.</p>
@@ -973,7 +973,7 @@ module Aws::SQS
     class KmsAccessDenied < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -982,7 +982,7 @@ module Aws::SQS
     class KmsDisabled < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected for one of the following reasons:</p>
@@ -1001,7 +1001,7 @@ module Aws::SQS
     class KmsInvalidKeyUsage < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the state of the specified resource is not valid for
@@ -1011,7 +1011,7 @@ module Aws::SQS
     class KmsInvalidState < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified entity or resource could not be found.
@@ -1021,7 +1021,7 @@ module Aws::SQS
     class KmsNotFound < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was rejected because the specified key policy isn't syntactically or
@@ -1031,7 +1031,7 @@ module Aws::SQS
     class KmsOptInRequired < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon Web Services KMS throttles requests for the following conditions.</p>
@@ -1040,7 +1040,7 @@ module Aws::SQS
     class KmsThrottled < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1061,7 +1061,7 @@ module Aws::SQS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of your dead letter source queues.</p>
@@ -1078,7 +1078,7 @@ module Aws::SQS
       :queue_urls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -1092,7 +1092,7 @@ module Aws::SQS
       :source_arn,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute results
@@ -1101,7 +1101,7 @@ module Aws::SQS
     class ListMessageMoveTasksResult < Struct.new(
       :results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a message movement task. </p>
@@ -1154,7 +1154,7 @@ module Aws::SQS
       :failure_reason,
       :started_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:approximate_number_of_messages_moved] = 0 unless options.key?(:approximate_number_of_messages_moved)
@@ -1169,7 +1169,7 @@ module Aws::SQS
     class ListQueueTagsRequest < Struct.new(
       :queue_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1178,7 +1178,7 @@ module Aws::SQS
     class ListQueueTagsResult < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1200,7 +1200,7 @@ module Aws::SQS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of your queues.</p>
@@ -1217,7 +1217,7 @@ module Aws::SQS
       :queue_urls,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Amazon SQS message.</p>
@@ -1301,7 +1301,7 @@ module Aws::SQS
       :md5_of_message_attributes,
       :message_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user-specified message attribute value. For string data types, the
@@ -1342,30 +1342,13 @@ module Aws::SQS
       :binary_list_values,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified message isn't in flight.</p>
     class MessageNotInflight < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MessageSystemAttributeName
-      All = 'All'
-      SenderId = 'SenderId'
-      SentTimestamp = 'SentTimestamp'
-      ApproximateReceiveCount = 'ApproximateReceiveCount'
-      ApproximateFirstReceiveTimestamp = 'ApproximateFirstReceiveTimestamp'
-      SequenceNumber = 'SequenceNumber'
-      MessageDeduplicationId = 'MessageDeduplicationId'
-      MessageGroupId = 'MessageGroupId'
-      AWSTraceHeader = 'AWSTraceHeader'
-      DeadLetterQueueSourceArn = 'DeadLetterQueueSourceArn'
-    end
-
-    module MessageSystemAttributeNameForSends
-      AWSTraceHeader = 'AWSTraceHeader'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user-specified message system attribute value. For string data types, the
@@ -1404,7 +1387,7 @@ module Aws::SQS
       :binary_list_values,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified action violates a limit. For example, <code>ReceiveMessage</code>
@@ -1416,7 +1399,7 @@ module Aws::SQS
     class OverLimit < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that the specified queue previously received a <code>PurgeQueue</code>
@@ -1427,7 +1410,7 @@ module Aws::SQS
     class PurgeQueueInProgress < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1439,32 +1422,7 @@ module Aws::SQS
     class PurgeQueueRequest < Struct.new(
       :queue_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueueAttributeName
-      All = 'All'
-      Policy = 'Policy'
-      VisibilityTimeout = 'VisibilityTimeout'
-      MaximumMessageSize = 'MaximumMessageSize'
-      MessageRetentionPeriod = 'MessageRetentionPeriod'
-      ApproximateNumberOfMessages = 'ApproximateNumberOfMessages'
-      ApproximateNumberOfMessagesNotVisible = 'ApproximateNumberOfMessagesNotVisible'
-      CreatedTimestamp = 'CreatedTimestamp'
-      LastModifiedTimestamp = 'LastModifiedTimestamp'
-      QueueArn = 'QueueArn'
-      ApproximateNumberOfMessagesDelayed = 'ApproximateNumberOfMessagesDelayed'
-      DelaySeconds = 'DelaySeconds'
-      ReceiveMessageWaitTimeSeconds = 'ReceiveMessageWaitTimeSeconds'
-      RedrivePolicy = 'RedrivePolicy'
-      FifoQueue = 'FifoQueue'
-      ContentBasedDeduplication = 'ContentBasedDeduplication'
-      KmsMasterKeyId = 'KmsMasterKeyId'
-      KmsDataKeyReusePeriodSeconds = 'KmsDataKeyReusePeriodSeconds'
-      DeduplicationScope = 'DeduplicationScope'
-      FifoThroughputLimit = 'FifoThroughputLimit'
-      RedriveAllowPolicy = 'RedriveAllowPolicy'
-      SqsManagedSseEnabled = 'SqsManagedSseEnabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You must wait 60 seconds after deleting a queue before you can create another queue
@@ -1474,7 +1432,7 @@ module Aws::SQS
     class QueueDeletedRecently < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Ensure that the <code>QueueUrl</code> is correct and that the queue has not been
@@ -1484,7 +1442,7 @@ module Aws::SQS
     class QueueDoesNotExist < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A queue with this name already exists. Amazon SQS returns this error only if the request
@@ -1494,7 +1452,7 @@ module Aws::SQS
     class QueueNameExists < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified receipt handle isn't valid.</p>
@@ -1503,7 +1461,7 @@ module Aws::SQS
     class ReceiptHandleIsInvalid < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Retrieves one or more messages from a specified queue.</p>
@@ -1820,7 +1778,7 @@ module Aws::SQS
       :wait_time_seconds,
       :receive_request_attempt_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of received messages.</p>
@@ -1830,7 +1788,7 @@ module Aws::SQS
     class ReceiveMessageResult < Struct.new(
       :messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1848,7 +1806,7 @@ module Aws::SQS
       :queue_url,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1868,7 +1826,7 @@ module Aws::SQS
     class RequestThrottled < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more specified resources don't exist.</p>
@@ -1877,7 +1835,7 @@ module Aws::SQS
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1894,7 +1852,7 @@ module Aws::SQS
       :queue_url,
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of a single Amazon SQS message along with an <code>Id</code>.</p>
@@ -2055,7 +2013,7 @@ module Aws::SQS
       :message_deduplication_id,
       :message_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>For each message in the batch, the response contains a <code>
@@ -2080,7 +2038,7 @@ module Aws::SQS
       :successful,
       :failed,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Encloses a <code>MessageId</code> for a successfully-enqueued message in a <code>
@@ -2116,7 +2074,7 @@ module Aws::SQS
       :md5_of_message_system_attributes,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2282,7 +2240,7 @@ module Aws::SQS
       :message_deduplication_id,
       :message_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>MD5OfMessageBody</code> and <code>MessageId</code> elements.</p>
@@ -2314,7 +2272,7 @@ module Aws::SQS
       :message_id,
       :sequence_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -2557,7 +2515,7 @@ module Aws::SQS
       :queue_url,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_arn
@@ -2584,7 +2542,7 @@ module Aws::SQS
       :destination_arn,
       :max_number_of_messages_per_second,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_handle
@@ -2595,7 +2553,7 @@ module Aws::SQS
     class StartMessageMoveTaskResult < Struct.new(
       :task_handle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_url
@@ -2608,7 +2566,7 @@ module Aws::SQS
       :queue_url,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The batch request contains more entries than permissible. For Amazon SQS, the
@@ -2618,7 +2576,7 @@ module Aws::SQS
     class TooManyEntriesInBatchRequest < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error code 400. Unsupported operation.</p>
@@ -2627,7 +2585,7 @@ module Aws::SQS
     class UnsupportedOperation < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queue_url
@@ -2640,7 +2598,7 @@ module Aws::SQS
       :queue_url,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

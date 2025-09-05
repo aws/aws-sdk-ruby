@@ -12,7 +12,7 @@ module Aws::Synthetics
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration for canary artifacts, including the 
@@ -28,7 +28,7 @@ module Aws::Synthetics
     class ArtifactConfigInput < Struct.new(
       :s3_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration for canary artifacts, including 
@@ -39,7 +39,7 @@ module Aws::Synthetics
     class ArtifactConfigOutput < Struct.new(
       :s3_encryption,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_identifier
@@ -53,12 +53,12 @@ module Aws::Synthetics
       :group_identifier,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AssociateResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was not valid.</p>
@@ -67,7 +67,7 @@ module Aws::Synthetics
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure representing a screenshot that is used as a baseline during visual monitoring comparisons made by the canary.</p>
@@ -87,7 +87,7 @@ module Aws::Synthetics
       :screenshot_name,
       :ignore_coordinates,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains all information about one canary in your account.</p>
@@ -193,7 +193,7 @@ module Aws::Synthetics
       :artifact_config,
       :dry_run_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to input your script code for the canary. This structure contains the
@@ -261,7 +261,7 @@ module Aws::Synthetics
       :handler,
       :dependencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the canary's Lambda handler and 
@@ -280,7 +280,7 @@ module Aws::Synthetics
       :handler,
       :dependencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the dry run configurations set for a canary.</p>
@@ -290,7 +290,7 @@ module Aws::Synthetics
     class CanaryDryRunConfigOutput < Struct.new(
       :dry_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the most recent run of a single canary.</p>
@@ -304,7 +304,7 @@ module Aws::Synthetics
       :canary_name,
       :last_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the details about one run of one canary.</p>
@@ -343,7 +343,7 @@ module Aws::Synthetics
       :artifact_s3_location,
       :dry_run_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains input information for a canary run.</p>
@@ -391,7 +391,7 @@ module Aws::Synthetics
       :environment_variables,
       :ephemeral_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a canary run.</p>
@@ -414,18 +414,7 @@ module Aws::Synthetics
       :active_tracing,
       :ephemeral_storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CanaryRunState
-      RUNNING = 'RUNNING'
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-    end
-
-    module CanaryRunStateReasonCode
-      CANARY_FAILURE = 'CANARY_FAILURE'
-      EXECUTION_FAILURE = 'EXECUTION_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the status information about a canary run.</p>
@@ -451,13 +440,7 @@ module Aws::Synthetics
       :state_reason_code,
       :test_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CanaryRunTestResult
-      PASSED = 'PASSED'
-      FAILED = 'FAILED'
-      UNKNOWN = 'UNKNOWN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the start and end times of a single canary run.</p>
@@ -475,7 +458,7 @@ module Aws::Synthetics
       :completed,
       :metric_timestamp_for_run_and_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure specifies how often a canary is to make runs and the date and time
@@ -509,7 +492,7 @@ module Aws::Synthetics
       :duration_in_seconds,
       :retry_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>How long, in seconds, for the canary to continue making regular runs according to the schedule in the 
@@ -543,34 +526,7 @@ module Aws::Synthetics
       :duration_in_seconds,
       :retry_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CanaryState
-      CREATING = 'CREATING'
-      READY = 'READY'
-      STARTING = 'STARTING'
-      RUNNING = 'RUNNING'
-      UPDATING = 'UPDATING'
-      STOPPING = 'STOPPING'
-      STOPPED = 'STOPPED'
-      ERROR = 'ERROR'
-      DELETING = 'DELETING'
-    end
-
-    module CanaryStateReasonCode
-      INVALID_PERMISSIONS = 'INVALID_PERMISSIONS'
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      UPDATE_PENDING = 'UPDATE_PENDING'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_COMPLETE = 'UPDATE_COMPLETE'
-      ROLLBACK_COMPLETE = 'ROLLBACK_COMPLETE'
-      ROLLBACK_FAILED = 'ROLLBACK_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
-      SYNC_DELETE_IN_PROGRESS = 'SYNC_DELETE_IN_PROGRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the current state of the canary.</p>
@@ -588,7 +544,7 @@ module Aws::Synthetics
       :state_reason,
       :state_reason_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about when the canary was created and modified.</p>
@@ -610,7 +566,7 @@ module Aws::Synthetics
       :last_started,
       :last_stopped,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A conflicting operation is already in progress.</p>
@@ -619,7 +575,7 @@ module Aws::Synthetics
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -766,7 +722,7 @@ module Aws::Synthetics
       :tags,
       :artifact_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute canary
@@ -775,7 +731,7 @@ module Aws::Synthetics
     class CreateCanaryResponse < Struct.new(
       :canary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -794,7 +750,7 @@ module Aws::Synthetics
       :name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -803,7 +759,7 @@ module Aws::Synthetics
     class CreateGroupResponse < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -821,12 +777,12 @@ module Aws::Synthetics
       :name,
       :delete_lambda,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteCanaryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_identifier
@@ -836,12 +792,12 @@ module Aws::Synthetics
     class DeleteGroupRequest < Struct.new(
       :group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteGroupResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about a dependency for a canary.</p>
@@ -856,11 +812,7 @@ module Aws::Synthetics
       :type,
       :reference,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DependencyType
-      LambdaLayer = 'LambdaLayer'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -888,7 +840,7 @@ module Aws::Synthetics
       :max_results,
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute canaries_last_run
@@ -904,7 +856,7 @@ module Aws::Synthetics
       :canaries_last_run,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -932,7 +884,7 @@ module Aws::Synthetics
       :max_results,
       :names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute canaries
@@ -948,7 +900,7 @@ module Aws::Synthetics
       :canaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -964,7 +916,7 @@ module Aws::Synthetics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute runtime_versions
@@ -980,7 +932,7 @@ module Aws::Synthetics
       :runtime_versions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_identifier
@@ -994,12 +946,12 @@ module Aws::Synthetics
       :group_identifier,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the dry run configurations set for a canary.</p>
@@ -1013,12 +965,7 @@ module Aws::Synthetics
       :dry_run_id,
       :last_dry_run_execution_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EncryptionMode
-      SSE_S3 = 'SSE_S3'
-      SSE_KMS = 'SSE_KMS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1031,7 +978,7 @@ module Aws::Synthetics
       :name,
       :dry_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute canary
@@ -1040,7 +987,7 @@ module Aws::Synthetics
     class GetCanaryResponse < Struct.new(
       :canary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1088,7 +1035,7 @@ module Aws::Synthetics
       :dry_run_id,
       :run_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute canary_runs
@@ -1105,7 +1052,7 @@ module Aws::Synthetics
       :canary_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_identifier
@@ -1115,7 +1062,7 @@ module Aws::Synthetics
     class GetGroupRequest < Struct.new(
       :group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -1124,7 +1071,7 @@ module Aws::Synthetics
     class GetGroupResponse < Struct.new(
       :group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one group.</p>
@@ -1154,7 +1101,7 @@ module Aws::Synthetics
       :created_time,
       :last_modified_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing some information about a group.</p>
@@ -1172,7 +1119,7 @@ module Aws::Synthetics
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal failure occurred. Try the operation again.</p>
@@ -1181,7 +1128,7 @@ module Aws::Synthetics
     class InternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An unknown internal error occurred.</p>
@@ -1190,7 +1137,7 @@ module Aws::Synthetics
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1210,7 +1157,7 @@ module Aws::Synthetics
       :max_results,
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -1225,7 +1172,7 @@ module Aws::Synthetics
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1246,7 +1193,7 @@ module Aws::Synthetics
       :max_results,
       :group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resources
@@ -1261,7 +1208,7 @@ module Aws::Synthetics
       :resources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1277,7 +1224,7 @@ module Aws::Synthetics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute groups
@@ -1292,7 +1239,7 @@ module Aws::Synthetics
       :groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1308,7 +1255,7 @@ module Aws::Synthetics
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1317,7 +1264,7 @@ module Aws::Synthetics
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -1326,12 +1273,7 @@ module Aws::Synthetics
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ProvisionedResourceCleanupSetting
-      AUTOMATIC = 'AUTOMATIC'
-      OFF = 'OFF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the input resources is larger than is allowed.</p>
@@ -1340,7 +1282,7 @@ module Aws::Synthetics
     class RequestEntityTooLargeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the specified resources was not found.</p>
@@ -1349,11 +1291,7 @@ module Aws::Synthetics
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceToTag
-      LAMBDA_FUNCTION = 'lambda-function'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the canary's retry configuration.</p>
@@ -1370,7 +1308,7 @@ module Aws::Synthetics
     class RetryConfigInput < Struct.new(
       :max_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the canary's retry configuration.</p>
@@ -1380,12 +1318,7 @@ module Aws::Synthetics
     class RetryConfigOutput < Struct.new(
       :max_retries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RunType
-      CANARY_RUN = 'CANARY_RUN'
-      DRY_RUN = 'DRY_RUN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one canary runtime version. For more information about
@@ -1411,7 +1344,7 @@ module Aws::Synthetics
       :release_date,
       :deprecation_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary
@@ -1436,7 +1369,7 @@ module Aws::Synthetics
       :encryption_mode,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded a service quota value.</p>
@@ -1445,7 +1378,7 @@ module Aws::Synthetics
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1552,7 +1485,7 @@ module Aws::Synthetics
       :artifact_config,
       :provisioned_resource_cleanup,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dry_run_config
@@ -1561,7 +1494,7 @@ module Aws::Synthetics
     class StartCanaryDryRunResponse < Struct.new(
       :dry_run_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1571,12 +1504,12 @@ module Aws::Synthetics
     class StartCanaryRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartCanaryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1586,12 +1519,12 @@ module Aws::Synthetics
     class StopCanaryRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopCanaryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1611,12 +1544,12 @@ module Aws::Synthetics
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There were too many simultaneous requests. Try the operation again.</p>
@@ -1625,7 +1558,7 @@ module Aws::Synthetics
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1645,12 +1578,12 @@ module Aws::Synthetics
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1791,12 +1724,12 @@ module Aws::Synthetics
       :provisioned_resource_cleanup,
       :dry_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateCanaryResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter could not be validated.</p>
@@ -1805,7 +1738,7 @@ module Aws::Synthetics
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary. It can
@@ -1830,7 +1763,7 @@ module Aws::Synthetics
       :base_screenshots,
       :base_canary_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run that is used as the baseline for screenshots, and the coordinates
@@ -1847,7 +1780,7 @@ module Aws::Synthetics
       :base_screenshots,
       :base_canary_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If this canary is to test an endpoint in a VPC, this structure contains
@@ -1869,7 +1802,7 @@ module Aws::Synthetics
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If this canary is to test an endpoint in a VPC, this structure contains
@@ -1894,7 +1827,7 @@ module Aws::Synthetics
       :security_group_ids,
       :ipv6_allowed_for_dual_stack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

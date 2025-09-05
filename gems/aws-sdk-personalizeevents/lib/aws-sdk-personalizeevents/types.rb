@@ -25,7 +25,7 @@ module Aws::PersonalizeEvents
       :action_id,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an action interaction event sent using the
@@ -112,7 +112,7 @@ module Aws::PersonalizeEvents
       :impression,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents item interaction event information sent using the
@@ -205,7 +205,7 @@ module Aws::PersonalizeEvents
       :impression,
       :metric_attribution,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provide a valid value for the field or parameter.</p>
@@ -214,7 +214,7 @@ module Aws::PersonalizeEvents
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents item metadata added to an Items dataset using the 
@@ -236,7 +236,7 @@ module Aws::PersonalizeEvents
       :item_id,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a metric attribution associated with an event. For more information about metric attributions, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html">Measuring impact of recommendations</a>.</p>
@@ -246,7 +246,7 @@ module Aws::PersonalizeEvents
     class MetricAttribution < Struct.new(
       :event_attribution_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_id
@@ -260,7 +260,7 @@ module Aws::PersonalizeEvents
       :tracking_id,
       :action_interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -273,7 +273,7 @@ module Aws::PersonalizeEvents
       :dataset_arn,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tracking_id
@@ -298,7 +298,7 @@ module Aws::PersonalizeEvents
       :session_id,
       :event_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -311,7 +311,7 @@ module Aws::PersonalizeEvents
       :dataset_arn,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dataset_arn
@@ -324,7 +324,7 @@ module Aws::PersonalizeEvents
       :dataset_arn,
       :users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource is in use.</p>
@@ -333,7 +333,7 @@ module Aws::PersonalizeEvents
     class ResourceInUseException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Could not find the specified resource.</p>
@@ -342,7 +342,7 @@ module Aws::PersonalizeEvents
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents user metadata added to a Users dataset using the 
@@ -364,7 +364,7 @@ module Aws::PersonalizeEvents
       :user_id,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::CloudControl
     class AlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_token
@@ -22,7 +22,7 @@ module Aws::CloudControl
     class CancelResourceRequestOperationInput < Struct.new(
       :request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_event
@@ -33,7 +33,7 @@ module Aws::CloudControl
     class CancelResourceRequestOperationOutput < Struct.new(
       :progress_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified client token has already been used in another resource request.</p>
@@ -44,7 +44,7 @@ module Aws::CloudControl
     class ClientTokenConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is currently being modified by another operation.</p>
@@ -53,7 +53,7 @@ module Aws::CloudControl
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Another resource operation is currently being performed on this resource.</p>
@@ -62,7 +62,7 @@ module Aws::CloudControl
     class ConcurrentOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -128,7 +128,7 @@ module Aws::CloudControl
       :client_token,
       :desired_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_event
@@ -140,7 +140,7 @@ module Aws::CloudControl
     class CreateResourceOperationOutput < Struct.new(
       :progress_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -200,7 +200,7 @@ module Aws::CloudControl
       :client_token,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_event
@@ -212,7 +212,7 @@ module Aws::CloudControl
     class DeleteResourceOperationOutput < Struct.new(
       :progress_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that the downstream service generated an error that
@@ -222,7 +222,7 @@ module Aws::CloudControl
     class GeneralServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -268,7 +268,7 @@ module Aws::CloudControl
       :role_arn,
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -281,7 +281,7 @@ module Aws::CloudControl
       :type_name,
       :resource_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_token
@@ -292,7 +292,7 @@ module Aws::CloudControl
     class GetResourceRequestStatusOperationInput < Struct.new(
       :request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_event
@@ -305,7 +305,7 @@ module Aws::CloudControl
       :progress_event,
       :hooks_progress_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has failed without a returning a more specific error code. This can
@@ -315,7 +315,7 @@ module Aws::CloudControl
     class HandlerFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that an unexpected error occurred within the resource
@@ -325,7 +325,7 @@ module Aws::CloudControl
     class HandlerInternalFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the current status of applicable Hooks for a resource operation request. It contains list of 
@@ -398,7 +398,7 @@ module Aws::CloudControl
       :hook_status_message,
       :failure_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that the credentials provided by the user are
@@ -408,7 +408,7 @@ module Aws::CloudControl
     class InvalidCredentialsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that invalid input from the user has generated a generic
@@ -418,7 +418,7 @@ module Aws::CloudControl
     class InvalidRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -444,7 +444,7 @@ module Aws::CloudControl
       :next_token,
       :resource_request_status_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_request_status_summaries
@@ -461,7 +461,7 @@ module Aws::CloudControl
       :resource_request_status_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -509,7 +509,7 @@ module Aws::CloudControl
       :max_results,
       :resource_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -531,7 +531,7 @@ module Aws::CloudControl
       :resource_descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that the request couldn't be completed due to networking
@@ -541,7 +541,7 @@ module Aws::CloudControl
     class NetworkFailureException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that the downstream resource failed to complete all of
@@ -551,7 +551,7 @@ module Aws::CloudControl
     class NotStabilizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more properties included in this resource operation are defined as create-only, and
@@ -561,7 +561,7 @@ module Aws::CloudControl
     class NotUpdatableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cloud Control API hasn't received a valid response from the resource handler, due to a configuration
@@ -572,7 +572,7 @@ module Aws::CloudControl
     class PrivateTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the current status of a resource operation request. For more information, see
@@ -661,7 +661,7 @@ module Aws::CloudControl
       :error_code,
       :retry_after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource operation with the specified request token can't be found.</p>
@@ -670,7 +670,7 @@ module Aws::CloudControl
     class RequestTokenNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is temporarily unavailable to be acted upon. For example, if the resource is
@@ -681,7 +681,7 @@ module Aws::CloudControl
     class ResourceConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents information about a provisioned resource.</p>
@@ -697,7 +697,7 @@ module Aws::CloudControl
       :identifier,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the specified identifier can't be found.</p>
@@ -706,7 +706,7 @@ module Aws::CloudControl
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter criteria to use in determining the requests returned.</p>
@@ -747,7 +747,7 @@ module Aws::CloudControl
       :operations,
       :operation_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that the downstream service returned an internal error,
@@ -757,7 +757,7 @@ module Aws::CloudControl
     class ServiceInternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource handler has returned that a non-transient resource limit was reached on the
@@ -767,7 +767,7 @@ module Aws::CloudControl
     class ServiceLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -776,7 +776,7 @@ module Aws::CloudControl
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified extension doesn't exist in the CloudFormation registry.</p>
@@ -785,7 +785,7 @@ module Aws::CloudControl
     class TypeNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource doesn't support this resource operation.</p>
@@ -794,7 +794,7 @@ module Aws::CloudControl
     class UnsupportedActionException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute type_name
@@ -860,7 +860,7 @@ module Aws::CloudControl
       :identifier,
       :patch_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute progress_event
@@ -871,7 +871,7 @@ module Aws::CloudControl
     class UpdateResourceOperationOutput < Struct.new(
       :progress_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

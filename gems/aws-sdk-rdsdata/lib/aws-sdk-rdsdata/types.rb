@@ -12,7 +12,7 @@ module Aws::RDSData
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains an array.</p>
@@ -39,7 +39,7 @@ module Aws::RDSData
       :array_values,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class BooleanValues < ArrayValue; end
       class LongValues < ArrayValue; end
@@ -56,7 +56,7 @@ module Aws::RDSData
     class BadRequestException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters represent the input of a SQL statement over an array of
@@ -113,7 +113,7 @@ module Aws::RDSData
       :parameter_sets,
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the output of a SQL statement over an array of
@@ -124,7 +124,7 @@ module Aws::RDSData
     class BatchExecuteStatementOutput < Struct.new(
       :update_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters represent the input of a request to start a SQL
@@ -147,7 +147,7 @@ module Aws::RDSData
       :database,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the output of a request to start a SQL
@@ -158,7 +158,7 @@ module Aws::RDSData
     class BeginTransactionOutput < Struct.new(
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the metadata for a column.</p>
@@ -220,7 +220,7 @@ module Aws::RDSData
       :scale,
       :array_base_column_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 0 unless options.key?(:type)
@@ -251,7 +251,7 @@ module Aws::RDSData
       :secret_arn,
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the output of a commit transaction request.</p>
@@ -261,7 +261,7 @@ module Aws::RDSData
     class CommitTransactionOutput < Struct.new(
       :transaction_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was an error in processing the SQL statement.</p>
@@ -270,7 +270,7 @@ module Aws::RDSData
     class DatabaseErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB cluster doesn't have a DB instance.</p>
@@ -279,7 +279,7 @@ module Aws::RDSData
     class DatabaseNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A request was cancelled because the Aurora Serverless v2 DB instance was paused.
@@ -290,13 +290,13 @@ module Aws::RDSData
     class DatabaseResumingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The writer instance in the DB cluster isn't available.</p>
     class DatabaseUnavailableException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters represent the input of a request to run one or more SQL
@@ -328,7 +328,7 @@ module Aws::RDSData
       :database,
       :schema,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the output of a request to run one or more SQL
@@ -339,7 +339,7 @@ module Aws::RDSData
     class ExecuteSqlOutput < Struct.new(
       :sql_statement_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters represent the input of a request to run a SQL statement against
@@ -414,7 +414,7 @@ module Aws::RDSData
       :result_set_options,
       :format_records_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the output of a request to run a SQL statement against
@@ -453,7 +453,7 @@ module Aws::RDSData
       :generated_fields,
       :formatted_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_records_updated] = 0 unless options.key?(:number_of_records_updated)
@@ -493,7 +493,7 @@ module Aws::RDSData
       :array_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IsNull < Field; end
       class BooleanValue < Field; end
@@ -512,7 +512,7 @@ module Aws::RDSData
     class ForbiddenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The HTTP endpoint for using RDS Data API isn't enabled for the DB cluster.</p>
@@ -521,13 +521,13 @@ module Aws::RDSData
     class HttpEndpointNotEnabledException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred.</p>
     class InternalServerErrorException < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource is in an invalid state.</p>
@@ -536,7 +536,7 @@ module Aws::RDSData
     class InvalidResourceStateException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Secrets Manager secret used with the request isn't valid.</p>
@@ -545,7 +545,7 @@ module Aws::RDSData
     class InvalidSecretException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>resourceArn</code>, <code>secretArn</code>, or <code>transactionId</code> value can't be found.</p>
@@ -555,7 +555,7 @@ module Aws::RDSData
     class NotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A record returned by a call.</p>
@@ -569,7 +569,7 @@ module Aws::RDSData
     class Record < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result set returned by a SQL statement.</p>
@@ -587,7 +587,7 @@ module Aws::RDSData
       :result_set_metadata,
       :records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata of the result set returned by a SQL statement.</p>
@@ -601,7 +601,7 @@ module Aws::RDSData
       :column_count,
       :column_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:column_count] = 0 unless options.key?(:column_count)
@@ -632,7 +632,7 @@ module Aws::RDSData
       :decimal_return_type,
       :long_return_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters represent the input of a request to perform a rollback of a
@@ -651,7 +651,7 @@ module Aws::RDSData
       :secret_arn,
       :transaction_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the output of a request to perform a rollback of a
@@ -662,7 +662,7 @@ module Aws::RDSData
     class RollbackTransactionOutput < Struct.new(
       :transaction_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p>
@@ -682,14 +682,14 @@ module Aws::RDSData
     class SecretsErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service specified by the <code>resourceArn</code> parameter isn't
     #             available.</p>
     class ServiceUnavailableError < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter used in a SQL statement.</p>
@@ -741,7 +741,7 @@ module Aws::RDSData
       :value,
       :type_hint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a SQL statement.</p>
@@ -759,7 +759,7 @@ module Aws::RDSData
       :result_frame,
       :number_of_records_updated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_records_updated] = 0 unless options.key?(:number_of_records_updated)
@@ -778,7 +778,7 @@ module Aws::RDSData
       :message,
       :db_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:db_connection_id] = 0 unless options.key?(:db_connection_id)
@@ -797,7 +797,7 @@ module Aws::RDSData
     class StructValue < Struct.new(
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The transaction ID wasn't found.</p>
@@ -806,7 +806,7 @@ module Aws::RDSData
     class TransactionNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a problem with the result because of one of the following conditions:</p>
@@ -826,7 +826,7 @@ module Aws::RDSData
     class UnsupportedResultException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response elements represent the results of an update.</p>
@@ -836,7 +836,7 @@ module Aws::RDSData
     class UpdateResult < Struct.new(
       :generated_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the value of a column.</p>
@@ -887,7 +887,7 @@ module Aws::RDSData
       :struct_value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class IsNull < Value; end
       class BitValue < Value; end

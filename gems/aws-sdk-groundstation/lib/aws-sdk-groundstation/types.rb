@@ -36,14 +36,7 @@ module Aws::GroundStation
       :agent_cpu_cores,
       :component_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AgentStatus
-      SUCCESS = 'SUCCESS'
-      FAILED = 'FAILED'
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregate status of Agent components.</p>
@@ -57,12 +50,7 @@ module Aws::GroundStation
       :status,
       :signature_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AngleUnits
-      DEGREE_ANGLE = 'DEGREE_ANGLE'
-      RADIAN = 'RADIAN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an antenna demod decode <code>Config</code> used in a contact.</p>
@@ -72,7 +60,7 @@ module Aws::GroundStation
     class AntennaDemodDecodeDetails < Struct.new(
       :output_node,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how AWS Ground Station should configure an
@@ -83,7 +71,7 @@ module Aws::GroundStation
     class AntennaDownlinkConfig < Struct.new(
       :spectrum_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how AWS Ground Station should conﬁgure an antenna for downlink demod decode during a contact.</p>
@@ -101,7 +89,7 @@ module Aws::GroundStation
       :demodulation_config,
       :decode_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the uplink <code>Config</code> of an antenna.</p>
@@ -119,12 +107,7 @@ module Aws::GroundStation
       :spectrum_config,
       :target_eirp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuditResults
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about AwsGroundStationAgentEndpoint.</p>
@@ -150,13 +133,7 @@ module Aws::GroundStation
       :agent_status,
       :audit_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BandwidthUnits
-      GHZ = 'GHz'
-      MHZ = 'MHz'
-      KHZ = 'kHz'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -166,7 +143,7 @@ module Aws::GroundStation
     class CancelContactInput < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -176,22 +153,7 @@ module Aws::GroundStation
     class CancelContactOutput < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapabilityHealth
-      HEALTHY = 'HEALTHY'
-      UNHEALTHY = 'UNHEALTHY'
-    end
-
-    module CapabilityHealthReason
-      NO_REGISTERED_AGENT = 'NO_REGISTERED_AGENT'
-      INVALID_IP_OWNERSHIP = 'INVALID_IP_OWNERSHIP'
-      NOT_AUTHORIZED_TO_CREATE_SLR = 'NOT_AUTHORIZED_TO_CREATE_SLR'
-      UNVERIFIED_IP_OWNERSHIP = 'UNVERIFIED_IP_OWNERSHIP'
-      INITIALIZING_DATAPLANE = 'INITIALIZING_DATAPLANE'
-      DATAPLANE_FAILURE = 'DATAPLANE_FAILURE'
-      HEALTHY = 'HEALTHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data on the status of agent components.</p>
@@ -225,7 +187,7 @@ module Aws::GroundStation
       :packets_dropped,
       :dataflow_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Version information for agent components.</p>
@@ -239,17 +201,7 @@ module Aws::GroundStation
       :component_type,
       :versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfigCapabilityType
-      ANTENNA_DOWNLINK = 'antenna-downlink'
-      ANTENNA_DOWNLINK_DEMOD_DECODE = 'antenna-downlink-demod-decode'
-      TRACKING = 'tracking'
-      DATAFLOW_ENDPOINT = 'dataflow-endpoint'
-      ANTENNA_UPLINK = 'antenna-uplink'
-      UPLINK_ECHO = 'uplink-echo'
-      S3_RECORDING = 's3-recording'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details for certain <code>Config</code> object types in a contact.</p>
@@ -268,7 +220,7 @@ module Aws::GroundStation
       :s3_recording_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class EndpointDetails < ConfigDetails; end
       class AntennaDemodDecodeDetails < ConfigDetails; end
@@ -295,7 +247,7 @@ module Aws::GroundStation
       :config_arn,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object containing the parameters of a <code>Config</code>.</p>
@@ -332,7 +284,7 @@ module Aws::GroundStation
       :s3_recording_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AntennaDownlinkConfig < ConfigTypeData; end
       class TrackingConfig < ConfigTypeData; end
@@ -355,7 +307,7 @@ module Aws::GroundStation
       :socket_address,
       :mtu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data describing a contact.</p>
@@ -433,23 +385,7 @@ module Aws::GroundStation
       :visibility_start_time,
       :visibility_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContactStatus
-      SCHEDULING = 'SCHEDULING'
-      FAILED_TO_SCHEDULE = 'FAILED_TO_SCHEDULE'
-      SCHEDULED = 'SCHEDULED'
-      CANCELLED = 'CANCELLED'
-      AWS_CANCELLED = 'AWS_CANCELLED'
-      PREPASS = 'PREPASS'
-      PASS = 'PASS'
-      POSTPASS = 'POSTPASS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      AVAILABLE = 'AVAILABLE'
-      CANCELLING = 'CANCELLING'
-      AWS_FAILED = 'AWS_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -467,7 +403,7 @@ module Aws::GroundStation
       :config_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -485,7 +421,7 @@ module Aws::GroundStation
       :config_type,
       :config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -515,7 +451,7 @@ module Aws::GroundStation
       :contact_pre_pass_duration_seconds,
       :contact_post_pass_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -525,7 +461,7 @@ module Aws::GroundStation
     class CreateDataflowEndpointGroupOutput < Struct.new(
       :dataflow_endpoint_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute satellite_id
@@ -565,7 +501,7 @@ module Aws::GroundStation
       :ephemeris,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -574,7 +510,7 @@ module Aws::GroundStation
     class CreateEphemerisOutput < Struct.new(
       :ephemeris_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -618,7 +554,7 @@ module Aws::GroundStation
       :streams_kms_key,
       :streams_kms_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -628,13 +564,7 @@ module Aws::GroundStation
     class CreateMissionProfileOutput < Struct.new(
       :mission_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Criticality
-      REQUIRED = 'REQUIRED'
-      PREFERRED = 'PREFERRED'
-      REMOVED = 'REMOVED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a dataflow edge used in a contact.</p>
@@ -652,7 +582,7 @@ module Aws::GroundStation
       :destination,
       :error_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a dataflow endpoint.</p>
@@ -674,7 +604,7 @@ module Aws::GroundStation
       :status,
       :mtu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the dataflow endpoint <code>Config</code>.</p>
@@ -688,7 +618,7 @@ module Aws::GroundStation
       :dataflow_endpoint_name,
       :dataflow_endpoint_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Item in a list of <code>DataflowEndpoint</code> groups.</p>
@@ -702,7 +632,7 @@ module Aws::GroundStation
       :dataflow_endpoint_group_id,
       :dataflow_endpoint_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the decode <code>Config</code>.</p>
@@ -712,7 +642,7 @@ module Aws::GroundStation
     class DecodeConfig < Struct.new(
       :unvalidated_json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -726,7 +656,7 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -744,7 +674,7 @@ module Aws::GroundStation
       :config_type,
       :config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -754,7 +684,7 @@ module Aws::GroundStation
     class DeleteDataflowEndpointGroupInput < Struct.new(
       :dataflow_endpoint_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -764,7 +694,7 @@ module Aws::GroundStation
     class DeleteDataflowEndpointGroupOutput < Struct.new(
       :dataflow_endpoint_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -773,7 +703,7 @@ module Aws::GroundStation
     class DeleteEphemerisInput < Struct.new(
       :ephemeris_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -782,7 +712,7 @@ module Aws::GroundStation
     class DeleteEphemerisOutput < Struct.new(
       :ephemeris_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -792,7 +722,7 @@ module Aws::GroundStation
     class DeleteMissionProfileInput < Struct.new(
       :mission_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -802,7 +732,7 @@ module Aws::GroundStation
     class DeleteMissionProfileOutput < Struct.new(
       :mission_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the demodulation <code>Config</code>.</p>
@@ -812,7 +742,7 @@ module Aws::GroundStation
     class DemodulationConfig < Struct.new(
       :unvalidated_json,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dependency encountered an error.</p>
@@ -825,7 +755,7 @@ module Aws::GroundStation
       :message,
       :parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -835,7 +765,7 @@ module Aws::GroundStation
     class DescribeContactInput < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -915,7 +845,7 @@ module Aws::GroundStation
       :visibility_start_time,
       :visibility_end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -924,7 +854,7 @@ module Aws::GroundStation
     class DescribeEphemerisInput < Struct.new(
       :ephemeris_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -971,7 +901,7 @@ module Aws::GroundStation
       :supplied_data,
       :invalid_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dataflow details for the destination side.</p>
@@ -993,7 +923,7 @@ module Aws::GroundStation
       :config_details,
       :dataflow_destination_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data for agent discovery.</p>
@@ -1011,7 +941,7 @@ module Aws::GroundStation
       :private_ip_addresses,
       :capability_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that represents EIRP.</p>
@@ -1025,11 +955,7 @@ module Aws::GroundStation
       :value,
       :units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EirpUnits
-      DBW = 'dBW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Elevation angle of the satellite in the sky during a contact.</p>
@@ -1043,7 +969,7 @@ module Aws::GroundStation
       :value,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the endpoint details.</p>
@@ -1069,15 +995,7 @@ module Aws::GroundStation
       :health_status,
       :health_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EndpointStatus
-      created = 'created'
-      creating = 'creating'
-      deleted = 'deleted'
-      deleting = 'deleting'
-      failed = 'failed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Ephemeris data.</p>
@@ -1097,7 +1015,7 @@ module Aws::GroundStation
       :oem,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Tle < EphemerisData; end
       class Oem < EphemerisData; end
@@ -1115,20 +1033,7 @@ module Aws::GroundStation
       :source_s3_object,
       :ephemeris_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EphemerisInvalidReason
-      # Provided spacecraft identifiers such as spacecraft NORAD Id are invalid
-      METADATA_INVALID = 'METADATA_INVALID'
-      # Start, end, or expiration time(s) are invalid for the provided ephemeris
-      TIME_RANGE_INVALID = 'TIME_RANGE_INVALID'
-      # Provided ephemeris defines invalid spacecraft trajectory
-      TRAJECTORY_INVALID = 'TRAJECTORY_INVALID'
-      # Provided KMS key is invalid
-      KMS_KEY_INVALID = 'KMS_KEY_INVALID'
-      # Internal Service Error occurred while processing ephemeris
-      VALIDATION_ERROR = 'VALIDATION_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Ephemeris item.</p>
@@ -1164,7 +1069,7 @@ module Aws::GroundStation
       :name,
       :source_s3_object,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata describing a particular ephemeris.</p>
@@ -1189,21 +1094,7 @@ module Aws::GroundStation
       :epoch,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EphemerisSource
-      CUSTOMER_PROVIDED = 'CUSTOMER_PROVIDED'
-      SPACE_TRACK = 'SPACE_TRACK'
-    end
-
-    module EphemerisStatus
-      VALIDATING = 'VALIDATING'
-      INVALID = 'INVALID'
-      ERROR = 'ERROR'
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      EXPIRED = 'EXPIRED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1218,7 +1109,7 @@ module Aws::GroundStation
       :oem,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Tle < EphemerisTypeDescription; end
       class Oem < EphemerisTypeDescription; end
@@ -1236,7 +1127,7 @@ module Aws::GroundStation
       :value,
       :units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that describes the frequency bandwidth. </p>
@@ -1261,13 +1152,7 @@ module Aws::GroundStation
       :value,
       :units,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FrequencyUnits
-      GHZ = 'GHz'
-      MHZ = 'MHz'
-      KHZ = 'kHz'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -1276,7 +1161,7 @@ module Aws::GroundStation
     class GetAgentConfigurationInput < Struct.new(
       :agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -1289,7 +1174,7 @@ module Aws::GroundStation
       :agent_id,
       :tasking_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1303,7 +1188,7 @@ module Aws::GroundStation
       :config_id,
       :config_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1334,7 +1219,7 @@ module Aws::GroundStation
       :config_data,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1344,7 +1229,7 @@ module Aws::GroundStation
     class GetDataflowEndpointGroupInput < Struct.new(
       :dataflow_endpoint_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1374,7 +1259,7 @@ module Aws::GroundStation
       :contact_pre_pass_duration_seconds,
       :contact_post_pass_duration_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1388,7 +1273,7 @@ module Aws::GroundStation
       :month,
       :year,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1414,7 +1299,7 @@ module Aws::GroundStation
       :total_scheduled_minutes,
       :estimated_minutes_remaining,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1424,7 +1309,7 @@ module Aws::GroundStation
     class GetMissionProfileInput < Struct.new(
       :mission_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1480,7 +1365,7 @@ module Aws::GroundStation
       :streams_kms_key,
       :streams_kms_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1490,7 +1375,7 @@ module Aws::GroundStation
     class GetSatelliteInput < Struct.new(
       :satellite_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1516,7 +1401,7 @@ module Aws::GroundStation
       :ground_stations,
       :current_ephemeris,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:norad_satellite_id] = 0 unless options.key?(:norad_satellite_id)
@@ -1539,7 +1424,7 @@ module Aws::GroundStation
       :ground_station_name,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An integer range that has a minimum and maximum value.</p>
@@ -1553,7 +1438,7 @@ module Aws::GroundStation
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters are not valid.</p>
@@ -1566,7 +1451,7 @@ module Aws::GroundStation
       :message,
       :parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>KMS key info.</p>
@@ -1585,7 +1470,7 @@ module Aws::GroundStation
       :kms_alias_name,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class KmsKeyArn < KmsKey; end
       class KmsAliasArn < KmsKey; end
@@ -1604,7 +1489,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1618,7 +1503,7 @@ module Aws::GroundStation
       :next_token,
       :config_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1656,7 +1541,7 @@ module Aws::GroundStation
       :satellite_arn,
       :mission_profile_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1670,7 +1555,7 @@ module Aws::GroundStation
       :next_token,
       :contact_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1684,7 +1569,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1698,7 +1583,7 @@ module Aws::GroundStation
       :next_token,
       :dataflow_endpoint_group_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute satellite_id
@@ -1727,7 +1612,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1740,7 +1625,7 @@ module Aws::GroundStation
       :next_token,
       :ephemerides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1758,7 +1643,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1772,7 +1657,7 @@ module Aws::GroundStation
       :next_token,
       :ground_station_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1786,7 +1671,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1800,7 +1685,7 @@ module Aws::GroundStation
       :next_token,
       :mission_profile_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1814,7 +1699,7 @@ module Aws::GroundStation
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1828,7 +1713,7 @@ module Aws::GroundStation
       :next_token,
       :satellites,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1838,7 +1723,7 @@ module Aws::GroundStation
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1848,7 +1733,7 @@ module Aws::GroundStation
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Item in a list of mission profiles.</p>
@@ -1870,7 +1755,7 @@ module Aws::GroundStation
       :region,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1889,13 +1774,7 @@ module Aws::GroundStation
       :s3_object,
       :oem_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Polarization
-      RIGHT_HAND = 'RIGHT_HAND'
-      LEFT_HAND = 'LEFT_HAND'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Ingress address of AgentEndpoint with a port range and an optional mtu.</p>
@@ -1909,7 +1788,7 @@ module Aws::GroundStation
       :socket_address,
       :mtu,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A socket address with a port range.</p>
@@ -1923,7 +1802,7 @@ module Aws::GroundStation
       :name,
       :port_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discovery_data
@@ -1940,7 +1819,7 @@ module Aws::GroundStation
       :agent_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -1949,7 +1828,7 @@ module Aws::GroundStation
     class RegisterAgentOutput < Struct.new(
       :agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1979,7 +1858,7 @@ module Aws::GroundStation
       :ground_station,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -1989,7 +1868,7 @@ module Aws::GroundStation
     class ReserveContactOutput < Struct.new(
       :contact_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Account limits for this resource have been exceeded.</p>
@@ -2002,7 +1881,7 @@ module Aws::GroundStation
       :message,
       :parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Resource was not found.</p>
@@ -2011,7 +1890,7 @@ module Aws::GroundStation
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object stored in S3 containing ephemeris data.</p>
@@ -2029,7 +1908,7 @@ module Aws::GroundStation
       :key,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an S3 recording <code>Config</code>.</p>
@@ -2047,7 +1926,7 @@ module Aws::GroundStation
       :role_arn,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an S3 recording <code>Config</code> used in a contact.</p>
@@ -2061,7 +1940,7 @@ module Aws::GroundStation
       :bucket_arn,
       :key_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Item in a list of satellites.</p>
@@ -2087,7 +1966,7 @@ module Aws::GroundStation
       :ground_stations,
       :current_ephemeris,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:norad_satellite_id] = 0 unless options.key?(:norad_satellite_id)
@@ -2110,7 +1989,7 @@ module Aws::GroundStation
       :security_group_ids,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the socket address.</p>
@@ -2124,7 +2003,7 @@ module Aws::GroundStation
       :name,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dataflow details for the source side.</p>
@@ -2147,7 +2026,7 @@ module Aws::GroundStation
       :config_details,
       :dataflow_source_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that describes a spectral <code>Config</code>.</p>
@@ -2176,7 +2055,7 @@ module Aws::GroundStation
       :bandwidth,
       :polarization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two-line element set (TLE) data.</p>
@@ -2194,7 +2073,7 @@ module Aws::GroundStation
       :tle_line2,
       :valid_time_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Two-line element set (TLE) ephemeris.</p>
@@ -2208,7 +2087,7 @@ module Aws::GroundStation
       :s3_object,
       :tle_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2222,13 +2101,13 @@ module Aws::GroundStation
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time range with a start and end time.</p>
@@ -2242,7 +2121,7 @@ module Aws::GroundStation
       :start_time,
       :end_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Object that determines whether tracking should be used during a contact
@@ -2253,7 +2132,7 @@ module Aws::GroundStation
     class TrackingConfig < Struct.new(
       :autotrack,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2267,13 +2146,13 @@ module Aws::GroundStation
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2294,7 +2173,7 @@ module Aws::GroundStation
       :aggregate_status,
       :component_statuses,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute agent_id
@@ -2303,7 +2182,7 @@ module Aws::GroundStation
     class UpdateAgentStatusOutput < Struct.new(
       :agent_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2325,7 +2204,7 @@ module Aws::GroundStation
       :config_type,
       :config_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2343,7 +2222,7 @@ module Aws::GroundStation
       :config_type,
       :config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -2366,7 +2245,7 @@ module Aws::GroundStation
       :name,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ephemeris_id
@@ -2375,7 +2254,7 @@ module Aws::GroundStation
     class UpdateEphemerisOutput < Struct.new(
       :ephemeris_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2419,7 +2298,7 @@ module Aws::GroundStation
       :streams_kms_key,
       :streams_kms_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p/>
@@ -2429,7 +2308,7 @@ module Aws::GroundStation
     class UpdateMissionProfileOutput < Struct.new(
       :mission_profile_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about an uplink echo <code>Config</code>.</p>
@@ -2446,7 +2325,7 @@ module Aws::GroundStation
       :enabled,
       :antenna_uplink_config_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the uplink spectral <code>Config</code>.</p>
@@ -2460,7 +2339,7 @@ module Aws::GroundStation
       :center_frequency,
       :polarization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

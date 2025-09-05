@@ -12,7 +12,7 @@ module Aws::CostOptimizationHub
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the enrollment status of an organization's member accounts in Cost Optimization Hub.</p>
@@ -34,23 +34,7 @@ module Aws::CostOptimizationHub
       :last_updated_timestamp,
       :created_timestamp,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ActionType
-      RIGHTSIZE = 'Rightsize'
-      STOP = 'Stop'
-      UPGRADE = 'Upgrade'
-      PURCHASE_SAVINGS_PLANS = 'PurchaseSavingsPlans'
-      PURCHASE_RESERVED_INSTANCES = 'PurchaseReservedInstances'
-      MIGRATE_TO_GRAVITON = 'MigrateToGraviton'
-      DELETE = 'Delete'
-      SCALE_IN = 'ScaleIn'
-    end
-
-    module AllocationStrategy
-      PRIORITIZED = 'Prioritized'
-      LOWEST_PRICE = 'LowestPrice'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Aurora DB cluster storage.</p>
@@ -64,7 +48,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Aurora DB cluster storage configuration used for recommendations.</p>
@@ -74,7 +58,7 @@ module Aws::CostOptimizationHub
     class AuroraDbClusterStorageConfiguration < Struct.new(
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Elastic Block Store performance configuration of the current and recommended resource configuration for a recommendation.</p>
@@ -88,7 +72,7 @@ module Aws::CostOptimizationHub
       :iops,
       :throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the performance configuration for compute services such as Amazon EC2, Lambda, and ECS.</p>
@@ -110,7 +94,7 @@ module Aws::CostOptimizationHub
       :architecture,
       :platform,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Compute Savings Plans recommendation details.</p>
@@ -124,7 +108,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Compute Savings Plans configuration used for recommendations.</p>
@@ -146,7 +130,7 @@ module Aws::CostOptimizationHub
       :payment_option,
       :hourly_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB instance configuration used for recommendations.</p>
@@ -156,7 +140,7 @@ module Aws::CostOptimizationHub
     class DbInstanceConfiguration < Struct.new(
       :db_instance_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DynamoDB reserved capacity recommendation details.</p>
@@ -170,7 +154,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DynamoDB reserved capacity configuration used for recommendations.</p>
@@ -212,7 +196,7 @@ module Aws::CostOptimizationHub
       :number_of_capacity_units_to_purchase,
       :capacity_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the Amazon Elastic Block Store volume configuration of the current and recommended resource configuration for a recommendation.</p>
@@ -226,7 +210,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon Elastic Block Store volume configuration used for recommendations.</p>
@@ -244,7 +228,7 @@ module Aws::CostOptimizationHub
       :performance,
       :attachment_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 Auto Scaling group recommendation details.</p>
@@ -258,7 +242,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 Auto Scaling group configuration used for recommendations.</p>
@@ -280,12 +264,7 @@ module Aws::CostOptimizationHub
       :type,
       :allocation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Ec2AutoScalingGroupType
-      SINGLE_INSTANCE_TYPE = 'SingleInstanceType'
-      MIXED_INSTANCE_TYPES = 'MixedInstanceTypes'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the EC2 instance configuration of the current and recommended resource configuration for a recommendation.</p>
@@ -299,7 +278,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 instance configuration used for recommendations.</p>
@@ -309,7 +288,7 @@ module Aws::CostOptimizationHub
     class Ec2InstanceConfiguration < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 instance Savings Plans recommendation details.</p>
@@ -323,7 +302,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 instance Savings Plans configuration used for recommendations.</p>
@@ -353,7 +332,7 @@ module Aws::CostOptimizationHub
       :instance_family,
       :savings_plans_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 reserved instances recommendation details.</p>
@@ -367,7 +346,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The EC2 reserved instances configuration used for recommendations.</p>
@@ -437,7 +416,7 @@ module Aws::CostOptimizationHub
       :tenancy,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ECS service recommendation details.</p>
@@ -451,7 +430,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ECS service configuration used for recommendations.</p>
@@ -461,7 +440,7 @@ module Aws::CostOptimizationHub
     class EcsServiceConfiguration < Struct.new(
       :compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ElastiCache reserved instances recommendation details.</p>
@@ -475,7 +454,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ElastiCache reserved instances configuration used for recommendations.</p>
@@ -533,12 +512,7 @@ module Aws::CostOptimizationHub
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EnrollmentStatus
-      ACTIVE = 'Active'
-      INACTIVE = 'Inactive'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Estimated discount details of the current and recommended resource configuration for a recommendation.</p>
@@ -556,7 +530,7 @@ module Aws::CostOptimizationHub
       :reserved_instances_discount,
       :other_discount,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter that returns a more specific list of recommendations. Filters recommendations by different dimensions.</p>
@@ -606,12 +580,12 @@ module Aws::CostOptimizationHub
       :resource_arns,
       :recommendation_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetPreferencesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_estimation_mode
@@ -628,7 +602,7 @@ module Aws::CostOptimizationHub
       :member_account_discount_visibility,
       :preferred_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_id
@@ -637,7 +611,7 @@ module Aws::CostOptimizationHub
     class GetRecommendationRequest < Struct.new(
       :recommendation_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute recommendation_id
@@ -734,15 +708,7 @@ module Aws::CostOptimizationHub
       :recommended_resource_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImplementationEffort
-      VERY_LOW = 'VeryLow'
-      LOW = 'Low'
-      MEDIUM = 'Medium'
-      HIGH = 'High'
-      VERY_HIGH = 'VeryHigh'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instance configuration used for recommendations.</p>
@@ -752,7 +718,7 @@ module Aws::CostOptimizationHub
     class InstanceConfiguration < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An error on the server occurred during the processing of your request. Try again later.</p>
@@ -761,7 +727,7 @@ module Aws::CostOptimizationHub
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lambda function recommendation details.</p>
@@ -775,7 +741,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Lambda function configuration used for recommendations.</p>
@@ -785,7 +751,7 @@ module Aws::CostOptimizationHub
     class LambdaFunctionConfiguration < Struct.new(
       :compute,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute include_organization_info
@@ -806,7 +772,7 @@ module Aws::CostOptimizationHub
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -823,7 +789,7 @@ module Aws::CostOptimizationHub
       :include_member_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -848,7 +814,7 @@ module Aws::CostOptimizationHub
       :metrics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute estimated_total_deduped_savings
@@ -877,7 +843,7 @@ module Aws::CostOptimizationHub
       :metrics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter
@@ -902,7 +868,7 @@ module Aws::CostOptimizationHub
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -915,12 +881,7 @@ module Aws::CostOptimizationHub
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberAccountDiscountVisibility
-      ALL = 'All'
-      NONE = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The MemoryDB reserved instances recommendation details.</p> <note> <p>While the API reference uses "MemoryDB reserved instances", the user guide and other documentation refer to them as "MemoryDB reserved nodes", as the terms are used interchangeably.</p> </note>
@@ -934,7 +895,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The MemoryDB reserved instances configuration used for recommendations.</p> <note> <p>While the API reference uses "MemoryDB reserved instances", the user guide and other documentation refer to them as "MemoryDB reserved nodes", as the terms are used interchangeably.</p> </note>
@@ -992,7 +953,7 @@ module Aws::CostOptimizationHub
       :size_flex_eligible,
       :current_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the EC2 Auto Scaling group with mixed instance types.</p>
@@ -1002,7 +963,7 @@ module Aws::CostOptimizationHub
     class MixedInstanceConfiguration < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpenSearch reserved instances recommendation details.</p>
@@ -1016,7 +977,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The OpenSearch reserved instances configuration used for recommendations.</p>
@@ -1070,12 +1031,7 @@ module Aws::CostOptimizationHub
       :current_generation,
       :size_flex_eligible,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Order
-      ASC = 'Asc'
-      DESC = 'Desc'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines how rows will be sorted in the response.</p>
@@ -1089,13 +1045,7 @@ module Aws::CostOptimizationHub
       :dimension,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PaymentOption
-      ALL_UPFRONT = 'AllUpfront'
-      PARTIAL_UPFRONT = 'PartialUpfront'
-      NO_UPFRONT = 'NoUpfront'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The preferred configuration for Reserved Instances and Savings Plans commitment-based discounts, consisting of a payment option and a commitment duration.</p>
@@ -1109,7 +1059,7 @@ module Aws::CostOptimizationHub
       :term,
       :payment_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB instance.</p>
@@ -1123,7 +1073,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon RDS DB instance configuration used for recommendations.</p>
@@ -1133,7 +1083,7 @@ module Aws::CostOptimizationHub
     class RdsDbInstanceConfiguration < Struct.new(
       :instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon RDS DB instance storage.</p>
@@ -1147,7 +1097,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon RDS DB instance storage configuration used for recommendations.</p>
@@ -1169,7 +1119,7 @@ module Aws::CostOptimizationHub
       :iops,
       :storage_throughput,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RDS reserved instances recommendation details.</p>
@@ -1183,7 +1133,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The RDS reserved instances configuration used for recommendations.</p>
@@ -1257,7 +1207,7 @@ module Aws::CostOptimizationHub
       :database_engine,
       :deployment_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a recommendation.</p>
@@ -1347,7 +1297,7 @@ module Aws::CostOptimizationHub
       :source,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of rightsizing recommendations, including de-duped savings from all types of recommendations.</p>
@@ -1365,7 +1315,7 @@ module Aws::CostOptimizationHub
       :estimated_monthly_savings,
       :recommendation_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Redshift reserved instances recommendation details.</p>
@@ -1379,7 +1329,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Redshift reserved instances configuration used for recommendations.</p>
@@ -1437,7 +1387,7 @@ module Aws::CostOptimizationHub
       :size_flex_eligible,
       :current_generation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cost impact of the purchase recommendation.</p>
@@ -1447,7 +1397,7 @@ module Aws::CostOptimizationHub
     class ReservedInstancesCostCalculation < Struct.new(
       :pricing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Pricing details for your recommended reserved instance.</p>
@@ -1469,7 +1419,7 @@ module Aws::CostOptimizationHub
       :savings_percentage,
       :estimated_monthly_amortized_reservation_cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cost impact of the resource recommendation.</p>
@@ -1483,7 +1433,7 @@ module Aws::CostOptimizationHub
       :usages,
       :pricing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about the specified resource.</p>
@@ -1562,7 +1512,7 @@ module Aws::CostOptimizationHub
       :memory_db_reserved_instances,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class LambdaFunction < ResourceDetails; end
       class EcsService < ResourceDetails; end
@@ -1595,7 +1545,7 @@ module Aws::CostOptimizationHub
       :message,
       :resource_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains pricing information about the specified resource.</p>
@@ -1617,28 +1567,7 @@ module Aws::CostOptimizationHub
       :estimated_discounts,
       :estimated_cost_after_discounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceType
-      EC2_INSTANCE = 'Ec2Instance'
-      LAMBDA_FUNCTION = 'LambdaFunction'
-      EBS_VOLUME = 'EbsVolume'
-      ECS_SERVICE = 'EcsService'
-      EC2_AUTO_SCALING_GROUP = 'Ec2AutoScalingGroup'
-      EC2_INSTANCE_SAVINGS_PLANS = 'Ec2InstanceSavingsPlans'
-      COMPUTE_SAVINGS_PLANS = 'ComputeSavingsPlans'
-      SAGE_MAKER_SAVINGS_PLANS = 'SageMakerSavingsPlans'
-      EC2_RESERVED_INSTANCES = 'Ec2ReservedInstances'
-      RDS_RESERVED_INSTANCES = 'RdsReservedInstances'
-      OPEN_SEARCH_RESERVED_INSTANCES = 'OpenSearchReservedInstances'
-      REDSHIFT_RESERVED_INSTANCES = 'RedshiftReservedInstances'
-      ELASTI_CACHE_RESERVED_INSTANCES = 'ElastiCacheReservedInstances'
-      RDS_DB_INSTANCE_STORAGE = 'RdsDbInstanceStorage'
-      RDS_DB_INSTANCE = 'RdsDbInstance'
-      AURORA_DB_CLUSTER_STORAGE = 'AuroraDbClusterStorage'
-      DYNAMO_DB_RESERVED_CAPACITY = 'DynamoDbReservedCapacity'
-      MEMORY_DB_RESERVED_INSTANCES = 'MemoryDbReservedInstances'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SageMaker Savings Plans recommendation details.</p>
@@ -1652,7 +1581,7 @@ module Aws::CostOptimizationHub
       :configuration,
       :cost_calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SageMaker Savings Plans configuration used for recommendations.</p>
@@ -1674,12 +1603,7 @@ module Aws::CostOptimizationHub
       :payment_option,
       :hourly_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SavingsEstimationMode
-      BEFORE_DISCOUNTS = 'BeforeDiscounts'
-      AFTER_DISCOUNTS = 'AfterDiscounts'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cost impact of the purchase recommendation.</p>
@@ -1689,7 +1613,7 @@ module Aws::CostOptimizationHub
     class SavingsPlansCostCalculation < Struct.new(
       :pricing,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Pricing information about a Savings Plan.</p>
@@ -1711,12 +1635,7 @@ module Aws::CostOptimizationHub
       :savings_percentage,
       :estimated_on_demand_cost,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Source
-      COMPUTE_OPTIMIZER = 'ComputeOptimizer'
-      COST_EXPLORER = 'CostExplorer'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The storage configuration used for recommendations.</p>
@@ -1730,11 +1649,7 @@ module Aws::CostOptimizationHub
       :type,
       :size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SummaryMetrics
-      SAVINGS_PERCENTAGE = 'SavingsPercentage'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The results or descriptions for the additional metrics, based on whether the metrics were or were not requested.</p>
@@ -1744,7 +1659,7 @@ module Aws::CostOptimizationHub
     class SummaryMetricsResult < Struct.new(
       :savings_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tag structure that contains a tag key and value.</p>
@@ -1758,12 +1673,7 @@ module Aws::CostOptimizationHub
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Term
-      ONE_YEAR = 'OneYear'
-      THREE_YEARS = 'ThreeYears'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -1772,7 +1682,7 @@ module Aws::CostOptimizationHub
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1785,7 +1695,7 @@ module Aws::CostOptimizationHub
       :status,
       :include_member_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1794,7 +1704,7 @@ module Aws::CostOptimizationHub
     class UpdateEnrollmentStatusResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_estimation_mode
@@ -1811,7 +1721,7 @@ module Aws::CostOptimizationHub
       :member_account_discount_visibility,
       :preferred_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute savings_estimation_mode
@@ -1828,7 +1738,7 @@ module Aws::CostOptimizationHub
       :member_account_discount_visibility,
       :preferred_commitment,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the usage.</p>
@@ -1854,7 +1764,7 @@ module Aws::CostOptimizationHub
       :product_code,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -1871,7 +1781,7 @@ module Aws::CostOptimizationHub
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input failed to meet the constraints specified by the Amazon Web Services service in a specified field.</p>
@@ -1885,12 +1795,7 @@ module Aws::CostOptimizationHub
       :field_name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      FIELD_VALIDATION_FAILED = 'FieldValidationFailed'
-      OTHER = 'Other'
+      include ::Smithy::Schema::Structure
     end
 
   end

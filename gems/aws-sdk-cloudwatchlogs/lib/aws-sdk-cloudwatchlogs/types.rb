@@ -12,7 +12,7 @@ module Aws::CloudWatchLogs
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one CloudWatch Logs account policy.</p>
@@ -47,7 +47,7 @@ module Aws::CloudWatchLogs
       :selection_criteria,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one key that will be added with the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-addKey"> addKeys</a> processor.</p>
@@ -66,7 +66,7 @@ module Aws::CloudWatchLogs
       :value,
       :overwrite_if_exists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite_if_exists] = false unless options.key?(:overwrite_if_exists)
@@ -83,7 +83,7 @@ module Aws::CloudWatchLogs
     class AddKeys < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure represents one anomaly that has been found by a logs anomaly
@@ -185,7 +185,7 @@ module Aws::CloudWatchLogs
       :suppressed_until,
       :is_pattern_level_suppression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:first_seen] = 0 unless options.key?(:first_seen)
@@ -244,22 +244,13 @@ module Aws::CloudWatchLogs
       :last_modified_time_stamp,
       :anomaly_visibility_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:creation_time_stamp] = 0 unless options.key?(:creation_time_stamp)
         options[:last_modified_time_stamp] = 0 unless options.key?(:last_modified_time_stamp)
         super
       end
-    end
-
-    module AnomalyDetectorStatus
-      INITIALIZING = 'INITIALIZING'
-      TRAINING = 'TRAINING'
-      ANALYZING = 'ANALYZING'
-      FAILED = 'FAILED'
-      DELETED = 'DELETED'
-      PAUSED = 'PAUSED'
     end
 
     # @!attribute log_group_name
@@ -304,7 +295,7 @@ module Aws::CloudWatchLogs
       :kms_key_id,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>CSV</code> processor parses comma-separated values (CSV) from the log events
@@ -334,7 +325,7 @@ module Aws::CloudWatchLogs
       :columns,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -343,7 +334,7 @@ module Aws::CloudWatchLogs
     class CancelExportTaskRequest < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing information about the deafult settings and available settings that
@@ -400,7 +391,7 @@ module Aws::CloudWatchLogs
       :allowed_field_delimiters,
       :allowed_suffix_path_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the default values that are used for each configuration parameter
@@ -424,7 +415,7 @@ module Aws::CloudWatchLogs
       :field_delimiter,
       :s3_delivery_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This operation attempted to create a resource that already exists.</p>
@@ -433,7 +424,7 @@ module Aws::CloudWatchLogs
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor copies values within a log event. You can also use this processor to add
@@ -448,7 +439,7 @@ module Aws::CloudWatchLogs
     class CopyValue < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one value to be copied with the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-copoyValue"> copyValue</a> processor.</p>
@@ -467,7 +458,7 @@ module Aws::CloudWatchLogs
       :target,
       :overwrite_if_exists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite_if_exists] = false unless options.key?(:overwrite_if_exists)
@@ -506,7 +497,7 @@ module Aws::CloudWatchLogs
       :s3_delivery_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery
@@ -515,7 +506,7 @@ module Aws::CloudWatchLogs
     class CreateDeliveryResponse < Struct.new(
       :delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_name
@@ -558,7 +549,7 @@ module Aws::CloudWatchLogs
       :destination,
       :destination_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -567,7 +558,7 @@ module Aws::CloudWatchLogs
     class CreateExportTaskResponse < Struct.new(
       :task_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_arn_list
@@ -619,7 +610,7 @@ module Aws::CloudWatchLogs
       :anomaly_visibility_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -628,7 +619,7 @@ module Aws::CloudWatchLogs
     class CreateLogAnomalyDetectorResponse < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -682,7 +673,7 @@ module Aws::CloudWatchLogs
       :tags,
       :log_group_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -695,7 +686,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :log_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event was already logged.</p>
@@ -713,14 +704,7 @@ module Aws::CloudWatchLogs
       :expected_sequence_token,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataProtectionStatus
-      ACTIVATED = 'ACTIVATED'
-      DELETED = 'DELETED'
-      ARCHIVED = 'ARCHIVED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor converts a datetime string into a format that you specify. </p>
@@ -760,7 +744,7 @@ module Aws::CloudWatchLogs
       :target_timezone,
       :locale,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -773,7 +757,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :policy_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -783,7 +767,7 @@ module Aws::CloudWatchLogs
     class DeleteDataProtectionPolicyRequest < Struct.new(
       :log_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_destination_name
@@ -792,7 +776,7 @@ module Aws::CloudWatchLogs
     class DeleteDeliveryDestinationPolicyRequest < Struct.new(
       :delivery_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -802,7 +786,7 @@ module Aws::CloudWatchLogs
     class DeleteDeliveryDestinationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -811,7 +795,7 @@ module Aws::CloudWatchLogs
     class DeleteDeliveryRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -820,7 +804,7 @@ module Aws::CloudWatchLogs
     class DeleteDeliverySourceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -829,7 +813,7 @@ module Aws::CloudWatchLogs
     class DeleteDestinationRequest < Struct.new(
       :destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -839,12 +823,12 @@ module Aws::CloudWatchLogs
     class DeleteIndexPolicyRequest < Struct.new(
       :log_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIndexPolicyResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name
@@ -859,12 +843,12 @@ module Aws::CloudWatchLogs
       :integration_name,
       :force,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteIntegrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor deletes entries from a log event. These entries are key-value pairs. </p>
@@ -875,7 +859,7 @@ module Aws::CloudWatchLogs
     class DeleteKeys < Struct.new(
       :with_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -885,7 +869,7 @@ module Aws::CloudWatchLogs
     class DeleteLogAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -894,7 +878,7 @@ module Aws::CloudWatchLogs
     class DeleteLogGroupRequest < Struct.new(
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -907,7 +891,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :log_stream_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -920,7 +904,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :filter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_definition_id
@@ -930,7 +914,7 @@ module Aws::CloudWatchLogs
     class DeleteQueryDefinitionRequest < Struct.new(
       :query_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -940,7 +924,7 @@ module Aws::CloudWatchLogs
     class DeleteQueryDefinitionResponse < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:success] = false unless options.key?(:success)
@@ -962,7 +946,7 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :expected_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -971,7 +955,7 @@ module Aws::CloudWatchLogs
     class DeleteRetentionPolicyRequest < Struct.new(
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -984,7 +968,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :filter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -995,7 +979,7 @@ module Aws::CloudWatchLogs
     class DeleteTransformerRequest < Struct.new(
       :log_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one <i>delivery</i> in your
@@ -1044,7 +1028,7 @@ module Aws::CloudWatchLogs
       :s3_delivery_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one <i>delivery destination</i> in
@@ -1101,7 +1085,7 @@ module Aws::CloudWatchLogs
       :delivery_destination_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one logs delivery destination.</p>
@@ -1112,14 +1096,7 @@ module Aws::CloudWatchLogs
     class DeliveryDestinationConfiguration < Struct.new(
       :destination_resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DeliveryDestinationType
-      S3 = 'S3'
-      CWL = 'CWL'
-      FH = 'FH'
-      XRAY = 'XRAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one <i>delivery source</i> in your
@@ -1181,7 +1158,7 @@ module Aws::CloudWatchLogs
       :log_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_type
@@ -1209,7 +1186,7 @@ module Aws::CloudWatchLogs
       :account_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_policies
@@ -1224,7 +1201,7 @@ module Aws::CloudWatchLogs
       :account_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute service
@@ -1259,7 +1236,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configuration_templates
@@ -1274,7 +1251,7 @@ module Aws::CloudWatchLogs
       :configuration_templates,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1288,7 +1265,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute deliveries
@@ -1303,7 +1280,7 @@ module Aws::CloudWatchLogs
       :deliveries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1318,7 +1295,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_destinations
@@ -1333,7 +1310,7 @@ module Aws::CloudWatchLogs
       :delivery_destinations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1348,7 +1325,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_sources
@@ -1363,7 +1340,7 @@ module Aws::CloudWatchLogs
       :delivery_sources,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name_prefix
@@ -1383,7 +1360,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destinations
@@ -1397,7 +1374,7 @@ module Aws::CloudWatchLogs
       :destinations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_id
@@ -1422,7 +1399,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute export_tasks
@@ -1436,7 +1413,7 @@ module Aws::CloudWatchLogs
       :export_tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifiers
@@ -1451,7 +1428,7 @@ module Aws::CloudWatchLogs
       :log_group_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute field_indexes
@@ -1465,7 +1442,7 @@ module Aws::CloudWatchLogs
       :field_indexes,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifiers
@@ -1480,7 +1457,7 @@ module Aws::CloudWatchLogs
       :log_group_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_policies
@@ -1494,7 +1471,7 @@ module Aws::CloudWatchLogs
       :index_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_identifiers
@@ -1584,7 +1561,7 @@ module Aws::CloudWatchLogs
       :log_group_class,
       :log_group_identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_groups
@@ -1599,7 +1576,7 @@ module Aws::CloudWatchLogs
       :log_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -1656,7 +1633,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_streams
@@ -1670,7 +1647,7 @@ module Aws::CloudWatchLogs
       :log_streams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -1706,7 +1683,7 @@ module Aws::CloudWatchLogs
       :metric_name,
       :metric_namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_filters
@@ -1720,7 +1697,7 @@ module Aws::CloudWatchLogs
       :metric_filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -1749,7 +1726,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :query_language,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queries
@@ -1763,7 +1740,7 @@ module Aws::CloudWatchLogs
       :queries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_language
@@ -1788,7 +1765,7 @@ module Aws::CloudWatchLogs
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_definitions
@@ -1802,7 +1779,7 @@ module Aws::CloudWatchLogs
       :query_definitions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1825,7 +1802,7 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :policy_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policies
@@ -1839,7 +1816,7 @@ module Aws::CloudWatchLogs
       :resource_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -1863,7 +1840,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_filters
@@ -1877,7 +1854,7 @@ module Aws::CloudWatchLogs
       :subscription_filters,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a cross-account destination that receives subscription log events.</p>
@@ -1910,7 +1887,7 @@ module Aws::CloudWatchLogs
       :arn,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -1951,14 +1928,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :resource_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The method used to distribute log data to the destination, which can be either random
-    #       or grouped by log stream.</p>
-    module Distribution
-      Random = 'Random'
-      ByLogStream = 'ByLogStream'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The entity associated with the log events in a <code>PutLogEvents</code> call.</p>
@@ -1984,34 +1954,7 @@ module Aws::CloudWatchLogs
       :key_attributes,
       :attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityRejectionErrorType
-      INVALID_ENTITY = 'InvalidEntity'
-      INVALID_TYPE_VALUE = 'InvalidTypeValue'
-      INVALID_KEY_ATTRIBUTE = 'InvalidKeyAttributes'
-      INVALID_ATTRIBUTES = 'InvalidAttributes'
-      ENTITY_SIZE_TOO_LARGE = 'EntitySizeTooLarge'
-      UNSUPPORTED_LOG_GROUP_TYPE = 'UnsupportedLogGroupType'
-      MISSING_REQUIRED_FIELDS = 'MissingRequiredFields'
-    end
-
-    module EvaluationFrequency
-      ONE_MIN = 'ONE_MIN'
-      FIVE_MIN = 'FIVE_MIN'
-      TEN_MIN = 'TEN_MIN'
-      FIFTEEN_MIN = 'FIFTEEN_MIN'
-      THIRTY_MIN = 'THIRTY_MIN'
-      ONE_HOUR = 'ONE_HOUR'
-    end
-
-    module EventSource
-      CLOUD_TRAIL = 'CloudTrail'
-      ROUTE53_RESOLVER = 'Route53Resolver'
-      VPC_FLOW = 'VPCFlow'
-      EKS_AUDIT = 'EKSAudit'
-      AWSWAF = 'AWSWAF'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents an export task.</p>
@@ -2056,7 +1999,7 @@ module Aws::CloudWatchLogs
       :status,
       :execution_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the status of an export task.</p>
@@ -2072,7 +2015,7 @@ module Aws::CloudWatchLogs
       :creation_time,
       :completion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the status of an export task.</p>
@@ -2086,16 +2029,7 @@ module Aws::CloudWatchLogs
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportTaskStatusCode
-      CANCELLED = 'CANCELLED'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      PENDING = 'PENDING'
-      PENDING_CANCEL = 'PENDING_CANCEL'
-      RUNNING = 'RUNNING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure describes one log event field that is used as an index in at least one
@@ -2126,7 +2060,7 @@ module Aws::CloudWatchLogs
       :first_event_time,
       :last_event_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure containing the extracted fields from a log event. These fields are extracted based on the log format and can be used for structured querying and analysis.</p>
@@ -2136,7 +2070,7 @@ module Aws::CloudWatchLogs
     class FieldsData < Struct.new(
       :data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -2221,7 +2155,7 @@ module Aws::CloudWatchLogs
       :interleaved,
       :unmask,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -2245,7 +2179,7 @@ module Aws::CloudWatchLogs
       :searched_log_streams,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a matched event.</p>
@@ -2273,12 +2207,7 @@ module Aws::CloudWatchLogs
       :ingestion_time,
       :event_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FlattenedElement
-      FIRST = 'first'
-      LAST = 'last'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -2288,7 +2217,7 @@ module Aws::CloudWatchLogs
     class GetDataProtectionPolicyRequest < Struct.new(
       :log_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -2305,7 +2234,7 @@ module Aws::CloudWatchLogs
       :policy_document,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_destination_name
@@ -2314,7 +2243,7 @@ module Aws::CloudWatchLogs
     class GetDeliveryDestinationPolicyRequest < Struct.new(
       :delivery_destination_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -2323,7 +2252,7 @@ module Aws::CloudWatchLogs
     class GetDeliveryDestinationPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2332,7 +2261,7 @@ module Aws::CloudWatchLogs
     class GetDeliveryDestinationRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_destination
@@ -2341,7 +2270,7 @@ module Aws::CloudWatchLogs
     class GetDeliveryDestinationResponse < Struct.new(
       :delivery_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2350,7 +2279,7 @@ module Aws::CloudWatchLogs
     class GetDeliveryRequest < Struct.new(
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery
@@ -2359,7 +2288,7 @@ module Aws::CloudWatchLogs
     class GetDeliveryResponse < Struct.new(
       :delivery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -2368,7 +2297,7 @@ module Aws::CloudWatchLogs
     class GetDeliverySourceRequest < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_source
@@ -2377,7 +2306,7 @@ module Aws::CloudWatchLogs
     class GetDeliverySourceResponse < Struct.new(
       :delivery_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name
@@ -2388,7 +2317,7 @@ module Aws::CloudWatchLogs
     class GetIntegrationRequest < Struct.new(
       :integration_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name
@@ -2412,7 +2341,7 @@ module Aws::CloudWatchLogs
       :integration_status,
       :integration_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -2422,7 +2351,7 @@ module Aws::CloudWatchLogs
     class GetLogAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detector_name
@@ -2472,7 +2401,7 @@ module Aws::CloudWatchLogs
       :last_modified_time_stamp,
       :anomaly_visibility_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:creation_time_stamp] = 0 unless options.key?(:creation_time_stamp)
@@ -2542,7 +2471,7 @@ module Aws::CloudWatchLogs
       :start_from_head,
       :unmask,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -2563,7 +2492,7 @@ module Aws::CloudWatchLogs
       :next_forward_token,
       :next_backward_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -2593,7 +2522,7 @@ module Aws::CloudWatchLogs
       :time,
       :log_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_fields
@@ -2604,7 +2533,7 @@ module Aws::CloudWatchLogs
     class GetLogGroupFieldsResponse < Struct.new(
       :log_group_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for the GetLogObject operation.</p>
@@ -2618,7 +2547,7 @@ module Aws::CloudWatchLogs
       :unmask,
       :log_object_pointer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response from the GetLogObject operation.</p>
@@ -2628,7 +2557,7 @@ module Aws::CloudWatchLogs
     class GetLogObjectResponse < Struct.new(
       :field_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A stream of structured log data returned by the GetLogObject operation. This stream contains log events with their associated metadata and extracted fields.</p>
@@ -2643,7 +2572,7 @@ module Aws::CloudWatchLogs
       :internal_streaming_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Fields < GetLogObjectResponseStream; end
       class InternalStreamingException < GetLogObjectResponseStream; end
@@ -2666,7 +2595,7 @@ module Aws::CloudWatchLogs
       :log_record_pointer,
       :unmask,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_record
@@ -2675,7 +2604,7 @@ module Aws::CloudWatchLogs
     class GetLogRecordResponse < Struct.new(
       :log_record,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -2684,7 +2613,7 @@ module Aws::CloudWatchLogs
     class GetQueryResultsRequest < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_language
@@ -2723,7 +2652,7 @@ module Aws::CloudWatchLogs
       :status,
       :encryption_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -2734,7 +2663,7 @@ module Aws::CloudWatchLogs
     class GetTransformerRequest < Struct.new(
       :log_group_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -2757,7 +2686,7 @@ module Aws::CloudWatchLogs
       :last_modified_time,
       :transformer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor uses pattern matching to parse and structure unstructured data. This
@@ -2775,7 +2704,7 @@ module Aws::CloudWatchLogs
       :source,
       :match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about one field index policy in this account.</p>
@@ -2803,16 +2732,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndexSource
-      ACCOUNT = 'ACCOUNT'
-      LOG_GROUP = 'LOG_GROUP'
-    end
-
-    module InheritedProperty
-      ACCOUNT_DATA_PROTECTION = 'ACCOUNT_DATA_PROTECTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a log event, which is a record of activity that was recorded by the
@@ -2828,7 +2748,7 @@ module Aws::CloudWatchLogs
       :timestamp,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the integration configuration. For an
@@ -2842,16 +2762,10 @@ module Aws::CloudWatchLogs
       :open_search_integration_details,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OpenSearchIntegrationDetails < IntegrationDetails; end
       class Unknown < IntegrationDetails; end
-    end
-
-    module IntegrationStatus
-      PROVISIONING = 'PROVISIONING'
-      ACTIVE = 'ACTIVE'
-      FAILED = 'FAILED'
     end
 
     # <p>This structure contains information about one CloudWatch Logs integration. This
@@ -2871,11 +2785,7 @@ module Aws::CloudWatchLogs
       :integration_type,
       :integration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IntegrationType
-      OPENSEARCH = 'OPENSEARCH'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error occurred during the streaming of log data. This exception is thrown when there's an issue with the internal streaming mechanism used by the GetLogObject operation.</p>
@@ -2884,7 +2794,7 @@ module Aws::CloudWatchLogs
     class InternalStreamingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is not valid on the specified resource.</p>
@@ -2893,7 +2803,7 @@ module Aws::CloudWatchLogs
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter is specified incorrectly.</p>
@@ -2902,7 +2812,7 @@ module Aws::CloudWatchLogs
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sequence token is not valid. You can get the correct sequence token in the
@@ -2922,7 +2832,7 @@ module Aws::CloudWatchLogs
       :expected_sequence_token,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the maximum number of resources that can be created.</p>
@@ -2931,7 +2841,7 @@ module Aws::CloudWatchLogs
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -2956,7 +2866,7 @@ module Aws::CloudWatchLogs
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomalies
@@ -2971,7 +2881,7 @@ module Aws::CloudWatchLogs
       :anomalies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name_prefix
@@ -2990,7 +2900,7 @@ module Aws::CloudWatchLogs
       :integration_type,
       :integration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_summaries
@@ -3000,7 +2910,7 @@ module Aws::CloudWatchLogs
     class ListIntegrationsResponse < Struct.new(
       :integration_summaries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_log_group_arn
@@ -3020,7 +2930,7 @@ module Aws::CloudWatchLogs
       :limit,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detectors
@@ -3035,7 +2945,7 @@ module Aws::CloudWatchLogs
       :anomaly_detectors,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -3053,7 +2963,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifiers
@@ -3067,7 +2977,7 @@ module Aws::CloudWatchLogs
       :log_group_identifiers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name_pattern
@@ -3126,7 +3036,7 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_groups
@@ -3141,7 +3051,7 @@ module Aws::CloudWatchLogs
       :log_groups,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3160,7 +3070,7 @@ module Aws::CloudWatchLogs
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3169,7 +3079,7 @@ module Aws::CloudWatchLogs
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -3180,7 +3090,7 @@ module Aws::CloudWatchLogs
     class ListTagsLogGroupRequest < Struct.new(
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -3191,7 +3101,7 @@ module Aws::CloudWatchLogs
     class ListTagsLogGroupResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor takes a list of objects that contain key fields, and converts them into a
@@ -3231,7 +3141,7 @@ module Aws::CloudWatchLogs
       :flatten,
       :flattened_element,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:flatten] = false unless options.key?(:flatten)
@@ -3263,7 +3173,7 @@ module Aws::CloudWatchLogs
       :timestamp,
       :ingestion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object contains the metadata for one <code>LiveTailSessionUpdate</code> structure. It
@@ -3280,7 +3190,7 @@ module Aws::CloudWatchLogs
     class LiveTailSessionMetadata < Struct.new(
       :sampled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sampled] = false unless options.key?(:sampled)
@@ -3326,7 +3236,7 @@ module Aws::CloudWatchLogs
       :log_stream_name_prefixes,
       :log_event_filter_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object contains the log events and metadata for a Live Tail session.</p>
@@ -3344,7 +3254,7 @@ module Aws::CloudWatchLogs
       :session_metadata,
       :session_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the information for one sample log event that is associated with
@@ -3359,7 +3269,7 @@ module Aws::CloudWatchLogs
       :timestamp,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a log group.</p>
@@ -3454,13 +3364,7 @@ module Aws::CloudWatchLogs
       :log_group_class,
       :log_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogGroupClass
-      STANDARD = 'STANDARD'
-      INFREQUENT_ACCESS = 'INFREQUENT_ACCESS'
-      DELIVERY = 'DELIVERY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The fields contained in log events found by a <code>GetLogGroupFields</code> operation,
@@ -3475,7 +3379,7 @@ module Aws::CloudWatchLogs
       :name,
       :percent,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:percent] = 0 unless options.key?(:percent)
@@ -3500,7 +3404,7 @@ module Aws::CloudWatchLogs
       :log_group_arn,
       :log_group_class,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a log stream, which is a sequence of log events from a single emitter of
@@ -3560,7 +3464,7 @@ module Aws::CloudWatchLogs
       :arn,
       :stored_bytes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor converts a string to lowercase.</p>
@@ -3571,7 +3475,7 @@ module Aws::CloudWatchLogs
     class LowerCaseString < Struct.new(
       :with_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The query string is not valid. Details about this error are displayed in a
@@ -3587,7 +3491,7 @@ module Aws::CloudWatchLogs
       :query_compile_error,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metric filters express how CloudWatch Logs would extract metric observations from
@@ -3624,7 +3528,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :apply_on_transformed_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:apply_on_transformed_logs] = false unless options.key?(:apply_on_transformed_logs)
@@ -3647,7 +3551,7 @@ module Aws::CloudWatchLogs
       :event_message,
       :extracted_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:event_number] = 0 unless options.key?(:event_number)
@@ -3701,7 +3605,7 @@ module Aws::CloudWatchLogs
       :dimensions,
       :unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one key that will be moved with the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-moveKey"> moveKey</a> processor.</p>
@@ -3720,7 +3624,7 @@ module Aws::CloudWatchLogs
       :target,
       :overwrite_if_exists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite_if_exists] = false unless options.key?(:overwrite_if_exists)
@@ -3737,11 +3641,7 @@ module Aws::CloudWatchLogs
     class MoveKeys < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OCSFVersion
-      V1_1 = 'V1.1'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service application used for this
@@ -3766,7 +3666,7 @@ module Aws::CloudWatchLogs
       :application_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service collection used for this
@@ -3788,7 +3688,7 @@ module Aws::CloudWatchLogs
       :collection_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service data access policy used
@@ -3808,7 +3708,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service data source used for this
@@ -3828,7 +3728,7 @@ module Aws::CloudWatchLogs
       :data_source_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service encryption policy used
@@ -3845,7 +3745,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains complete information about one CloudWatch Logs integration.
@@ -3912,7 +3812,7 @@ module Aws::CloudWatchLogs
       :access_policy,
       :lifecycle_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service data lifecycle policy
@@ -3932,7 +3832,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service network policy used for
@@ -3949,7 +3849,7 @@ module Aws::CloudWatchLogs
       :policy_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains configuration details about an integration between CloudWatch Logs and OpenSearch Service.</p>
@@ -3990,7 +3890,7 @@ module Aws::CloudWatchLogs
       :application_arn,
       :retention_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the status of an OpenSearch Service
@@ -4005,13 +3905,7 @@ module Aws::CloudWatchLogs
       :status,
       :status_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OpenSearchResourceStatusType
-      ACTIVE = 'ACTIVE'
-      NOT_FOUND = 'NOT_FOUND'
-      ERROR = 'ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information about the OpenSearch Service workspace used for this
@@ -4030,7 +3924,7 @@ module Aws::CloudWatchLogs
       :workspace_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Multiple concurrent requests to update the same resource were in conflict.</p>
@@ -4039,20 +3933,7 @@ module Aws::CloudWatchLogs
     class OperationAbortedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrderBy
-      LogStreamName = 'LogStreamName'
-      LastEventTime = 'LastEventTime'
-    end
-
-    module OutputFormat
-      JSON = 'json'
-      PLAIN = 'plain'
-      W3C = 'w3c'
-      RAW = 'raw'
-      PARQUET = 'parquet'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a log event.</p>
@@ -4072,7 +3953,7 @@ module Aws::CloudWatchLogs
       :message,
       :ingestion_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor parses CloudFront vended logs, extract fields, and convert them into
@@ -4089,7 +3970,7 @@ module Aws::CloudWatchLogs
     class ParseCloudfront < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor parses log events that are in JSON format. It can extract JSON key-value
@@ -4111,7 +3992,7 @@ module Aws::CloudWatchLogs
       :source,
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor parses a specified field in the original log event into key-value pairs. </p>
@@ -4153,7 +4034,7 @@ module Aws::CloudWatchLogs
       :non_match_value,
       :overwrite_if_exists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite_if_exists] = false unless options.key?(:overwrite_if_exists)
@@ -4176,7 +4057,7 @@ module Aws::CloudWatchLogs
     class ParsePostgres < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this processor to parse Route 53 vended logs, extract fields, and and
@@ -4192,7 +4073,7 @@ module Aws::CloudWatchLogs
     class ParseRoute53 < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor converts logs into <a href="https://ocsf.io">Open Cybersecurity Schema
@@ -4214,7 +4095,7 @@ module Aws::CloudWatchLogs
       :event_source,
       :ocsf_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this processor to parse Amazon VPC vended logs, extract fields, and and
@@ -4233,7 +4114,7 @@ module Aws::CloudWatchLogs
     class ParseVPC < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this processor to parse WAF vended logs, extract fields, and and
@@ -4251,7 +4132,7 @@ module Aws::CloudWatchLogs
     class ParseWAF < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about one pattern token related to an
@@ -4291,7 +4172,7 @@ module Aws::CloudWatchLogs
       :enumerations,
       :inferred_token_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:dynamic_token_position] = 0 unless options.key?(:dynamic_token_position)
@@ -4306,20 +4187,7 @@ module Aws::CloudWatchLogs
     class Policy < Struct.new(
       :delivery_destination_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyScope
-      ACCOUNT = 'ACCOUNT'
-      RESOURCE = 'RESOURCE'
-    end
-
-    module PolicyType
-      DATA_PROTECTION_POLICY = 'DATA_PROTECTION_POLICY'
-      SUBSCRIPTION_FILTER_POLICY = 'SUBSCRIPTION_FILTER_POLICY'
-      FIELD_INDEX_POLICY = 'FIELD_INDEX_POLICY'
-      TRANSFORMER_POLICY = 'TRANSFORMER_POLICY'
-      METRIC_EXTRACTION_POLICY = 'METRIC_EXTRACTION_POLICY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains the information about one processor in a log transformer.</p>
@@ -4422,7 +4290,7 @@ module Aws::CloudWatchLogs
       :type_converter,
       :upper_case_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -4574,7 +4442,7 @@ module Aws::CloudWatchLogs
       :scope,
       :selection_criteria,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_policy
@@ -4583,7 +4451,7 @@ module Aws::CloudWatchLogs
     class PutAccountPolicyResponse < Struct.new(
       :account_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -4631,7 +4499,7 @@ module Aws::CloudWatchLogs
       :log_group_identifier,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -4648,7 +4516,7 @@ module Aws::CloudWatchLogs
       :policy_document,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_destination_name
@@ -4661,7 +4529,7 @@ module Aws::CloudWatchLogs
       :delivery_destination_name,
       :delivery_destination_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -4670,7 +4538,7 @@ module Aws::CloudWatchLogs
     class PutDeliveryDestinationPolicyResponse < Struct.new(
       :policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4722,7 +4590,7 @@ module Aws::CloudWatchLogs
       :delivery_destination_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_destination
@@ -4732,7 +4600,7 @@ module Aws::CloudWatchLogs
     class PutDeliveryDestinationResponse < Struct.new(
       :delivery_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -4806,7 +4674,7 @@ module Aws::CloudWatchLogs
       :log_type,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute delivery_source
@@ -4816,7 +4684,7 @@ module Aws::CloudWatchLogs
     class PutDeliverySourceResponse < Struct.new(
       :delivery_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -4843,7 +4711,7 @@ module Aws::CloudWatchLogs
       :access_policy,
       :force_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_name
@@ -4867,7 +4735,7 @@ module Aws::CloudWatchLogs
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination
@@ -4876,7 +4744,7 @@ module Aws::CloudWatchLogs
     class PutDestinationResponse < Struct.new(
       :destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -4900,7 +4768,7 @@ module Aws::CloudWatchLogs
       :log_group_identifier,
       :policy_document,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute index_policy
@@ -4909,7 +4777,7 @@ module Aws::CloudWatchLogs
     class PutIndexPolicyResponse < Struct.new(
       :index_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name
@@ -4928,7 +4796,7 @@ module Aws::CloudWatchLogs
       :resource_config,
       :integration_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute integration_name
@@ -4943,7 +4811,7 @@ module Aws::CloudWatchLogs
       :integration_name,
       :integration_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -4975,7 +4843,7 @@ module Aws::CloudWatchLogs
       :sequence_token,
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_sequence_token
@@ -5004,7 +4872,7 @@ module Aws::CloudWatchLogs
       :rejected_log_events_info,
       :rejected_entity_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -5033,7 +4901,7 @@ module Aws::CloudWatchLogs
       :metric_transformations,
       :apply_on_transformed_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_language
@@ -5078,7 +4946,7 @@ module Aws::CloudWatchLogs
       :query_string,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_definition_id
@@ -5087,7 +4955,7 @@ module Aws::CloudWatchLogs
     class PutQueryDefinitionResponse < Struct.new(
       :query_definition_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_name
@@ -5126,7 +4994,7 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :expected_revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_policy
@@ -5139,7 +5007,7 @@ module Aws::CloudWatchLogs
       :resource_policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -5155,7 +5023,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :retention_in_days,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_name
@@ -5221,7 +5089,7 @@ module Aws::CloudWatchLogs
       :distribution,
       :apply_on_transformed_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifier
@@ -5236,7 +5104,7 @@ module Aws::CloudWatchLogs
       :log_group_identifier,
       :transformer_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved.</p>
@@ -5250,7 +5118,7 @@ module Aws::CloudWatchLogs
       :location,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Reserved.</p>
@@ -5264,7 +5132,7 @@ module Aws::CloudWatchLogs
       :start_char_offset,
       :end_char_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains details about a saved CloudWatch Logs Insights query
@@ -5299,7 +5167,7 @@ module Aws::CloudWatchLogs
       :last_modified,
       :log_group_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about one CloudWatch Logs Insights query that matches the request in a
@@ -5334,13 +5202,7 @@ module Aws::CloudWatchLogs
       :create_time,
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryLanguage
-      CWLI = 'CWLI'
-      SQL = 'SQL'
-      PPL = 'PPL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the number of log events scanned by the query, the number of log events that
@@ -5382,7 +5244,7 @@ module Aws::CloudWatchLogs
       :estimated_bytes_skipped,
       :log_groups_scanned,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:records_matched] = 0 unless options.key?(:records_matched)
@@ -5393,16 +5255,6 @@ module Aws::CloudWatchLogs
         options[:log_groups_scanned] = 0 unless options.key?(:log_groups_scanned)
         super
       end
-    end
-
-    module QueryStatus
-      Scheduled = 'Scheduled'
-      Running = 'Running'
-      Complete = 'Complete'
-      Failed = 'Failed'
-      Cancelled = 'Cancelled'
-      Timeout = 'Timeout'
-      Unknown = 'Unknown'
     end
 
     # <p>A structure that represents a valid record field header and whether it is
@@ -5418,7 +5270,7 @@ module Aws::CloudWatchLogs
       :name,
       :mandatory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If an entity is rejected when a <code>PutLogEvents</code> request was made, this includes
@@ -5430,7 +5282,7 @@ module Aws::CloudWatchLogs
     class RejectedEntityInfo < Struct.new(
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the rejected events.</p>
@@ -5448,7 +5300,7 @@ module Aws::CloudWatchLogs
       :too_old_log_event_end_index,
       :expired_log_event_end_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one key that will be renamed with the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-renameKey"> renameKey</a> processor.</p>
@@ -5468,7 +5320,7 @@ module Aws::CloudWatchLogs
       :rename_to,
       :overwrite_if_exists,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:overwrite_if_exists] = false unless options.key?(:overwrite_if_exists)
@@ -5485,7 +5337,7 @@ module Aws::CloudWatchLogs
     class RenameKeys < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource already exists.</p>
@@ -5494,7 +5346,7 @@ module Aws::CloudWatchLogs
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains configuration details about an integration between CloudWatch Logs and another entity.</p>
@@ -5505,7 +5357,7 @@ module Aws::CloudWatchLogs
       :open_search_resource_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class OpenSearchResourceConfig < ResourceConfig; end
       class Unknown < ResourceConfig; end
@@ -5517,7 +5369,7 @@ module Aws::CloudWatchLogs
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A policy enabling one or more entities to put logs to a log group in this
@@ -5549,7 +5401,7 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains one field from one log event returned by a CloudWatch Logs Insights query, along
@@ -5566,7 +5418,7 @@ module Aws::CloudWatchLogs
       :field,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains delivery configurations that apply only when the delivery
@@ -5585,11 +5437,7 @@ module Aws::CloudWatchLogs
       :suffix_path,
       :enable_hive_compatible_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Scope
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the search status of a log stream.</p>
@@ -5603,7 +5451,7 @@ module Aws::CloudWatchLogs
       :log_stream_name,
       :searched_completely,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This request exceeds a service quota.</p>
@@ -5612,7 +5460,7 @@ module Aws::CloudWatchLogs
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The service cannot complete the request.</p>
@@ -5621,7 +5469,7 @@ module Aws::CloudWatchLogs
     class ServiceUnavailableException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is returned if an unknown error occurs during a Live Tail session.</p>
@@ -5630,7 +5478,7 @@ module Aws::CloudWatchLogs
     class SessionStreamingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This exception is returned in a Live Tail stream when the Live Tail session times out.
@@ -5640,7 +5488,7 @@ module Aws::CloudWatchLogs
     class SessionTimeoutException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this processor to split a field into an array of strings using a delimiting
@@ -5653,7 +5501,7 @@ module Aws::CloudWatchLogs
     class SplitString < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one log field that will be split with the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-splitString"> splitString</a> processor.</p>
@@ -5667,37 +5515,7 @@ module Aws::CloudWatchLogs
       :source,
       :delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StandardUnit
-      Seconds = 'Seconds'
-      Microseconds = 'Microseconds'
-      Milliseconds = 'Milliseconds'
-      Bytes = 'Bytes'
-      Kilobytes = 'Kilobytes'
-      Megabytes = 'Megabytes'
-      Gigabytes = 'Gigabytes'
-      Terabytes = 'Terabytes'
-      Bits = 'Bits'
-      Kilobits = 'Kilobits'
-      Megabits = 'Megabits'
-      Gigabits = 'Gigabits'
-      Terabits = 'Terabits'
-      Percent = 'Percent'
-      Count = 'Count'
-      BytesSecond = 'Bytes/Second'
-      KilobytesSecond = 'Kilobytes/Second'
-      MegabytesSecond = 'Megabytes/Second'
-      GigabytesSecond = 'Gigabytes/Second'
-      TerabytesSecond = 'Terabytes/Second'
-      BitsSecond = 'Bits/Second'
-      KilobitsSecond = 'Kilobits/Second'
-      MegabitsSecond = 'Megabits/Second'
-      GigabitsSecond = 'Gigabits/Second'
-      TerabitsSecond = 'Terabits/Second'
-      CountSecond = 'Count/Second'
-      None = 'None'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_group_identifiers
@@ -5745,7 +5563,7 @@ module Aws::CloudWatchLogs
       :log_stream_name_prefixes,
       :log_event_filter_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute response_stream
@@ -5755,7 +5573,7 @@ module Aws::CloudWatchLogs
     class StartLiveTailResponse < Struct.new(
       :response_stream,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object includes the stream returned by your <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartLiveTail.html">StartLiveTail</a>
@@ -5781,7 +5599,7 @@ module Aws::CloudWatchLogs
       :session_streaming_exception,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SessionStart < StartLiveTailResponseStream; end
       class SessionUpdate < StartLiveTailResponseStream; end
@@ -5858,7 +5676,7 @@ module Aws::CloudWatchLogs
       :query_string,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -5867,13 +5685,7 @@ module Aws::CloudWatchLogs
     class StartQueryResponse < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module State
-      Active = 'Active'
-      Suppressed = 'Suppressed'
-      Baseline = 'Baseline'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute query_id
@@ -5883,7 +5695,7 @@ module Aws::CloudWatchLogs
     class StopQueryRequest < Struct.new(
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute success
@@ -5892,7 +5704,7 @@ module Aws::CloudWatchLogs
     class StopQueryResponse < Struct.new(
       :success,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:success] = false unless options.key?(:success)
@@ -5942,7 +5754,7 @@ module Aws::CloudWatchLogs
       :apply_on_transformed_logs,
       :creation_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:apply_on_transformed_logs] = false unless options.key?(:apply_on_transformed_logs)
@@ -5960,7 +5772,7 @@ module Aws::CloudWatchLogs
     class SubstituteString < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one log field key that will be replaced using the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-substituteString"> substituteString</a> processor.</p>
@@ -5981,7 +5793,7 @@ module Aws::CloudWatchLogs
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>If you are suppressing an anomaly temporariliy, this structure defines how long the
@@ -5997,28 +5809,12 @@ module Aws::CloudWatchLogs
       :value,
       :suppression_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module SuppressionState
-      SUPPRESSED = 'SUPPRESSED'
-      UNSUPPRESSED = 'UNSUPPRESSED'
-    end
-
-    module SuppressionType
-      LIMITED = 'LIMITED'
-      INFINITE = 'INFINITE'
-    end
-
-    module SuppressionUnit
-      SECONDS = 'SECONDS'
-      MINUTES = 'MINUTES'
-      HOURS = 'HOURS'
     end
 
     # @deprecated
@@ -6033,7 +5829,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6056,7 +5852,7 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filter_pattern
@@ -6071,7 +5867,7 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :log_event_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute matches
@@ -6080,7 +5876,7 @@ module Aws::CloudWatchLogs
     class TestMetricFilterResponse < Struct.new(
       :matches,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transformer_config
@@ -6095,7 +5891,7 @@ module Aws::CloudWatchLogs
       :transformer_config,
       :log_event_messages,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute transformed_logs
@@ -6105,7 +5901,7 @@ module Aws::CloudWatchLogs
     class TestTransformerResponse < Struct.new(
       :transformed_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was throttled because of quota limits.</p>
@@ -6114,7 +5910,7 @@ module Aws::CloudWatchLogs
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource can have no more than 50 tags.</p>
@@ -6127,7 +5923,7 @@ module Aws::CloudWatchLogs
       :message,
       :resource_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This structure contains information for one log event that has been processed by a log
@@ -6146,7 +5942,7 @@ module Aws::CloudWatchLogs
       :event_message,
       :transformed_event_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:event_number] = 0 unless options.key?(:event_number)
@@ -6162,14 +5958,7 @@ module Aws::CloudWatchLogs
     class TrimString < Struct.new(
       :with_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      BOOLEAN = 'boolean'
-      INTEGER = 'integer'
-      DOUBLE = 'double'
-      STRING = 'string'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this processor to convert a value type associated with the specified key to the
@@ -6184,7 +5973,7 @@ module Aws::CloudWatchLogs
     class TypeConverter < Struct.new(
       :entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This object defines one value type that will be converted using the <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html#CloudWatch-Logs-Transformation-typeConverter"> typeConverter</a> processor.</p>
@@ -6199,7 +5988,7 @@ module Aws::CloudWatchLogs
       :key,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The most likely cause is an Amazon Web Services access key ID or secret key that's not
@@ -6209,7 +5998,7 @@ module Aws::CloudWatchLogs
     class UnrecognizedClientException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @deprecated
@@ -6224,7 +6013,7 @@ module Aws::CloudWatchLogs
       :log_group_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -6247,7 +6036,7 @@ module Aws::CloudWatchLogs
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_id
@@ -6288,7 +6077,7 @@ module Aws::CloudWatchLogs
       :suppression_period,
       :baseline,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -6312,12 +6101,12 @@ module Aws::CloudWatchLogs
       :field_delimiter,
       :s3_delivery_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDeliveryConfigurationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -6350,7 +6139,7 @@ module Aws::CloudWatchLogs
       :anomaly_visibility_time,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This processor converts a string field to uppercase.</p>
@@ -6361,7 +6150,7 @@ module Aws::CloudWatchLogs
     class UpperCaseString < Struct.new(
       :with_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the parameters for the request is not valid.</p>
@@ -6370,7 +6159,7 @@ module Aws::CloudWatchLogs
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

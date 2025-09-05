@@ -13,7 +13,7 @@ module Aws::Codestarnotifications
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CodeStar Notifications can't complete the request because the resource is being modified by
@@ -23,7 +23,7 @@ module Aws::Codestarnotifications
     class ConcurrentModificationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Some or all of the configuration is incomplete, missing, or not valid.</p>
@@ -32,7 +32,7 @@ module Aws::Codestarnotifications
     class ConfigurationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -82,7 +82,7 @@ module Aws::Codestarnotifications
       :tags,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -91,7 +91,7 @@ module Aws::Codestarnotifications
     class CreateNotificationRuleResult < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -100,7 +100,7 @@ module Aws::Codestarnotifications
     class DeleteNotificationRuleRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -109,7 +109,7 @@ module Aws::Codestarnotifications
     class DeleteNotificationRuleResult < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute target_address
@@ -124,12 +124,12 @@ module Aws::Codestarnotifications
       :target_address,
       :force_unsubscribe_all,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTargetResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -138,7 +138,7 @@ module Aws::Codestarnotifications
     class DescribeNotificationRuleRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -192,12 +192,7 @@ module Aws::Codestarnotifications
       :last_modified_timestamp,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DetailType
-      BASIC = 'BASIC'
-      FULL = 'FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns information about an event that has triggered a notification rule.</p>
@@ -221,7 +216,7 @@ module Aws::Codestarnotifications
       :event_type_name,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value for the enumeration token used in the request to return the next batch of the results is not valid. </p>
@@ -230,7 +225,7 @@ module Aws::Codestarnotifications
     class InvalidNextTokenException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One of the CodeStar Notifications limits has been exceeded. Limits apply to
@@ -241,7 +236,7 @@ module Aws::Codestarnotifications
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a filter to apply to the list of returned event types. You can filter
@@ -257,12 +252,7 @@ module Aws::Codestarnotifications
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListEventTypesFilterName
-      RESOURCE_TYPE = 'RESOURCE_TYPE'
-      SERVICE_NAME = 'SERVICE_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -281,7 +271,7 @@ module Aws::Codestarnotifications
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_types
@@ -295,7 +285,7 @@ module Aws::Codestarnotifications
       :event_types,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a filter to apply to the list of returned notification rules. You can
@@ -311,14 +301,7 @@ module Aws::Codestarnotifications
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListNotificationRulesFilterName
-      EVENT_TYPE_ID = 'EVENT_TYPE_ID'
-      CREATED_BY = 'CREATED_BY'
-      RESOURCE = 'RESOURCE'
-      TARGET_ADDRESS = 'TARGET_ADDRESS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -341,7 +324,7 @@ module Aws::Codestarnotifications
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -354,7 +337,7 @@ module Aws::Codestarnotifications
       :next_token,
       :notification_rules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -363,7 +346,7 @@ module Aws::Codestarnotifications
     class ListTagsForResourceRequest < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -372,7 +355,7 @@ module Aws::Codestarnotifications
     class ListTagsForResourceResult < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a filter to apply to the list of returned targets. You can filter by
@@ -392,13 +375,7 @@ module Aws::Codestarnotifications
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ListTargetsFilterName
-      TARGET_TYPE = 'TARGET_TYPE'
-      TARGET_ADDRESS = 'TARGET_ADDRESS'
-      TARGET_STATUS = 'TARGET_STATUS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute filters
@@ -421,7 +398,7 @@ module Aws::Codestarnotifications
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute targets
@@ -435,12 +412,7 @@ module Aws::Codestarnotifications
       :targets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NotificationRuleStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a specified notification rule.</p>
@@ -454,7 +426,7 @@ module Aws::Codestarnotifications
       :id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource with the same name or ID already exists. Notification rule names must be
@@ -464,7 +436,7 @@ module Aws::Codestarnotifications
     class ResourceAlreadyExistsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>CodeStar Notifications can't find a resource that matches the provided ARN. </p>
@@ -473,7 +445,7 @@ module Aws::Codestarnotifications
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -491,7 +463,7 @@ module Aws::Codestarnotifications
       :target,
       :client_request_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -500,7 +472,7 @@ module Aws::Codestarnotifications
     class SubscribeResult < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -513,7 +485,7 @@ module Aws::Codestarnotifications
       :arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -522,7 +494,7 @@ module Aws::Codestarnotifications
     class TagResourceResult < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Chatbot topics or Chatbot clients associated with a  notification rule.</p>
@@ -544,15 +516,7 @@ module Aws::Codestarnotifications
       :target_type,
       :target_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetStatus
-      PENDING = 'PENDING'
-      ACTIVE = 'ACTIVE'
-      UNREACHABLE = 'UNREACHABLE'
-      INACTIVE = 'INACTIVE'
-      DEACTIVATED = 'DEACTIVATED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the targets specified for a notification rule.</p>
@@ -578,7 +542,7 @@ module Aws::Codestarnotifications
       :target_type,
       :target_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -591,7 +555,7 @@ module Aws::Codestarnotifications
       :arn,
       :target_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -600,7 +564,7 @@ module Aws::Codestarnotifications
     class UnsubscribeResult < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -614,12 +578,12 @@ module Aws::Codestarnotifications
       :arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -654,12 +618,12 @@ module Aws::Codestarnotifications
       :targets,
       :detail_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNotificationRuleResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameter values are not valid.</p>
@@ -668,7 +632,7 @@ module Aws::Codestarnotifications
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

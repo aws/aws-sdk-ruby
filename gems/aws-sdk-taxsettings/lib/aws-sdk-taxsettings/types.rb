@@ -13,7 +13,7 @@ module Aws::TaxSettings
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An object with your <code>accountId</code> and TRN information. </p>
@@ -41,7 +41,7 @@ module Aws::TaxSettings
       :tax_inheritance_details,
       :account_meta_data,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -78,7 +78,7 @@ module Aws::TaxSettings
       :address_type,
       :address_role_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your tax registration number (TRN). Depending
@@ -183,7 +183,7 @@ module Aws::TaxSettings
       :greece_additional_info,
       :uzbekistan_additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Additional tax information associated with your TRN. The Tax Settings API returns
@@ -294,7 +294,7 @@ module Aws::TaxSettings
       :greece_additional_info,
       :uzbekistan_additional_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The details of the address associated with the TRN information. </p>
@@ -340,13 +340,7 @@ module Aws::TaxSettings
       :postal_code,
       :country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AddressRoleType
-      TAX_ADDRESS = 'TaxAddress'
-      BILLING_ADDRESS = 'BillingAddress'
-      CONTACT_ADDRESS = 'ContactAddress'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Failed to upload the tax exemption document to Amazon Web ServicesSupport case.
@@ -356,7 +350,7 @@ module Aws::TaxSettings
     class AttachmentUploadException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The address domain associate with the tax information.
@@ -375,7 +369,7 @@ module Aws::TaxSettings
       :country,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The error object for representing failures in the <code>BatchDeleteTaxRegistration</code>
@@ -396,7 +390,7 @@ module Aws::TaxSettings
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -405,7 +399,7 @@ module Aws::TaxSettings
     class BatchDeleteTaxRegistrationRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute errors
@@ -414,7 +408,7 @@ module Aws::TaxSettings
     class BatchDeleteTaxRegistrationResponse < Struct.new(
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -425,7 +419,7 @@ module Aws::TaxSettings
     class BatchGetTaxExemptionsRequest < Struct.new(
       :account_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tax_exemption_details_map
@@ -440,7 +434,7 @@ module Aws::TaxSettings
       :tax_exemption_details_map,
       :failed_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The error object for representing failures in the <code>BatchPutTaxRegistration</code>
@@ -462,7 +456,7 @@ module Aws::TaxSettings
       :message,
       :code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -476,7 +470,7 @@ module Aws::TaxSettings
       :account_ids,
       :tax_registration_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -492,7 +486,7 @@ module Aws::TaxSettings
       :status,
       :errors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your TRN in Brazil.</p>
@@ -507,7 +501,7 @@ module Aws::TaxSettings
       :ccm_code,
       :legal_nature_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Additional tax information associated with your TRN in Canada .</p>
@@ -552,7 +546,7 @@ module Aws::TaxSettings
       :canada_retail_sales_tax_number,
       :is_reseller_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You've exceeded the Amazon Web ServicesSupport case creation limit for your account.
@@ -562,7 +556,7 @@ module Aws::TaxSettings
     class CaseCreationLimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception when the input is creating conflict with the given state.</p>
@@ -575,7 +569,7 @@ module Aws::TaxSettings
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authority_id
@@ -586,12 +580,12 @@ module Aws::TaxSettings
     class DeleteSupplementalTaxRegistrationRequest < Struct.new(
       :authority_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteSupplementalTaxRegistrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -602,12 +596,12 @@ module Aws::TaxSettings
     class DeleteTaxRegistrationRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteTaxRegistrationResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The location of the Amazon S3 bucket that you specify to download your tax documents to.</p>
@@ -621,7 +615,7 @@ module Aws::TaxSettings
       :bucket,
       :prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information to specify for a TRN in Egypt.</p>
@@ -635,14 +629,7 @@ module Aws::TaxSettings
       :unique_identification_number,
       :unique_identification_number_expiration_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntityExemptionAccountStatus
-      None = 'None'
-      Valid = 'Valid'
-      Expired = 'Expired'
-      Pending = 'Pending'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Additional tax information associated with your TRN in Estonia.</p>
@@ -653,7 +640,7 @@ module Aws::TaxSettings
     class EstoniaAdditionalInfo < Struct.new(
       :registry_commercial_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exemption certificate.
@@ -670,7 +657,7 @@ module Aws::TaxSettings
       :document_name,
       :document_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -684,12 +671,12 @@ module Aws::TaxSettings
     class GeorgiaAdditionalInfo < Struct.new(
       :person_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetTaxExemptionTypesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tax_exemption_types
@@ -699,12 +686,12 @@ module Aws::TaxSettings
     class GetTaxExemptionTypesResponse < Struct.new(
       :tax_exemption_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetTaxInheritanceRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute heritage_status
@@ -714,7 +701,7 @@ module Aws::TaxSettings
     class GetTaxInheritanceResponse < Struct.new(
       :heritage_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_s3_location
@@ -727,7 +714,7 @@ module Aws::TaxSettings
       :destination_s3_location,
       :tax_document_metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute destination_file_path
@@ -741,7 +728,7 @@ module Aws::TaxSettings
       :destination_file_path,
       :presigned_s3_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -750,7 +737,7 @@ module Aws::TaxSettings
     class GetTaxRegistrationRequest < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tax_registration
@@ -759,7 +746,7 @@ module Aws::TaxSettings
     class GetTaxRegistrationResponse < Struct.new(
       :tax_registration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information to specify for a TRN in Greece.
@@ -770,12 +757,7 @@ module Aws::TaxSettings
     class GreeceAdditionalInfo < Struct.new(
       :contracting_authority_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HeritageStatus
-      OptIn = 'OptIn'
-      OptOut = 'OptOut'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -789,7 +771,7 @@ module Aws::TaxSettings
     class IndiaAdditionalInfo < Struct.new(
       :pan,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your TRN in Indonesia.</p>
@@ -807,23 +789,7 @@ module Aws::TaxSettings
       :ppn_exception_designation_code,
       :decision_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IndonesiaTaxRegistrationNumberType
-      NIK = 'NIK'
-      PASSPORT_NUMBER = 'PassportNumber'
-      NPWP = 'NPWP'
-      NITKU = 'NITKU'
-    end
-
-    module Industries
-      CIRCULATING_ORG = 'CirculatingOrg'
-      PROFESSIONAL_ORG = 'ProfessionalOrg'
-      BANKS = 'Banks'
-      INSURANCE = 'Insurance'
-      PENSION_AND_BENEFIT_FUNDS = 'PensionAndBenefitFunds'
-      DEVELOPMENT_AGENCIES = 'DevelopmentAgencies'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception thrown when an unexpected error occurs when processing a request.</p>
@@ -836,7 +802,7 @@ module Aws::TaxSettings
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Additional tax information associated with your TRN in Israel.</p>
@@ -854,17 +820,7 @@ module Aws::TaxSettings
       :dealer_type,
       :customer_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IsraelCustomerType
-      BUSINESS = 'Business'
-      INDIVIDUAL = 'Individual'
-    end
-
-    module IsraelDealerType
-      AUTHORIZED = 'Authorized'
-      NON_AUTHORIZED = 'Non-authorized'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -895,7 +851,7 @@ module Aws::TaxSettings
       :cup_number,
       :tax_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The jurisdiction details of the TRN information of the customers. This doesn't contain
@@ -911,7 +867,7 @@ module Aws::TaxSettings
       :state_or_region,
       :country_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your TRN in Kenya.</p>
@@ -921,7 +877,7 @@ module Aws::TaxSettings
     class KenyaAdditionalInfo < Struct.new(
       :person_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -938,7 +894,7 @@ module Aws::TaxSettings
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tax_registrations
@@ -955,7 +911,7 @@ module Aws::TaxSettings
       :tax_registrations,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -969,7 +925,7 @@ module Aws::TaxSettings
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -983,7 +939,7 @@ module Aws::TaxSettings
       :next_token,
       :tax_exemption_details_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -996,7 +952,7 @@ module Aws::TaxSettings
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_details
@@ -1010,7 +966,7 @@ module Aws::TaxSettings
       :account_details,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Additional tax information associated with your TRN in Malaysia.</p>
@@ -1035,25 +991,12 @@ module Aws::TaxSettings
       :tax_information_number,
       :business_registration_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:service_tax_codes] = [] unless options.key?(:service_tax_codes)
         super
       end
-    end
-
-    module MalaysiaServiceTaxCode
-      CONSULTANCY = 'Consultancy'
-      DIGITAL_SVC_ELECTRONIC_MEDIUM = 'Digital Service And Electronic Medium'
-      IT_SERVICES = 'IT Services'
-      TRAINING_OR_COACHING = 'Training Or Coaching'
-    end
-
-    module PersonType
-      LEGAL_PERSON = 'Legal Person'
-      PHYSICAL_PERSON = 'Physical Person'
-      BUSINESS = 'Business'
     end
 
     # <p>
@@ -1073,7 +1016,7 @@ module Aws::TaxSettings
       :individual_registration_number,
       :is_group_vat_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tax_registration_entry
@@ -1084,7 +1027,7 @@ module Aws::TaxSettings
     class PutSupplementalTaxRegistrationRequest < Struct.new(
       :tax_registration_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute authority_id
@@ -1101,7 +1044,7 @@ module Aws::TaxSettings
       :authority_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_ids
@@ -1127,7 +1070,7 @@ module Aws::TaxSettings
       :exemption_type,
       :exemption_certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute case_id
@@ -1137,7 +1080,7 @@ module Aws::TaxSettings
     class PutTaxExemptionResponse < Struct.new(
       :case_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute heritage_status
@@ -1147,12 +1090,12 @@ module Aws::TaxSettings
     class PutTaxInheritanceRequest < Struct.new(
       :heritage_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutTaxInheritanceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_id
@@ -1166,7 +1109,7 @@ module Aws::TaxSettings
       :account_id,
       :tax_registration_entry,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -1177,12 +1120,7 @@ module Aws::TaxSettings
     class PutTaxRegistrationResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegistrationType
-      INTRA_EU = 'Intra-EU'
-      LOCAL = 'Local'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception thrown when the input doesn't have a resource associated to it.</p>
@@ -1195,7 +1133,7 @@ module Aws::TaxSettings
       :message,
       :error_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information to specify for a TRN in Romania.
@@ -1208,7 +1146,7 @@ module Aws::TaxSettings
     class RomaniaAdditionalInfo < Struct.new(
       :tax_registration_number_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1222,19 +1160,7 @@ module Aws::TaxSettings
     class SaudiArabiaAdditionalInfo < Struct.new(
       :tax_registration_number_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SaudiArabiaTaxRegistrationNumberType
-      TAX_REGISTRATION_NUMBER = 'TaxRegistrationNumber'
-      TAX_IDENTIFICATION_NUMBER = 'TaxIdentificationNumber'
-      COMMERCIAL_REGISTRATION_NUMBER = 'CommercialRegistrationNumber'
-    end
-
-    module Sector
-      BUSINESS = 'Business'
-      INDIVIDUAL = 'Individual'
-      PUBLIC_INSTITUTIONS = 'Government'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 bucket in your account where your tax document is located.</p>
@@ -1248,7 +1174,7 @@ module Aws::TaxSettings
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your TRN in South Korea.</p>
@@ -1266,7 +1192,7 @@ module Aws::TaxSettings
       :line_of_business,
       :item_of_business,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your TRN in Spain.</p>
@@ -1276,7 +1202,7 @@ module Aws::TaxSettings
     class SpainAdditionalInfo < Struct.new(
       :registration_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1319,7 +1245,7 @@ module Aws::TaxSettings
       :authority_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1350,11 +1276,7 @@ module Aws::TaxSettings
       :legal_name,
       :address,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SupplementalTaxRegistrationType
-      VAT = 'VAT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metadata for your tax document.</p>
@@ -1371,7 +1293,7 @@ module Aws::TaxSettings
       :tax_document_access_token,
       :tax_document_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tax exemption.
@@ -1408,7 +1330,7 @@ module Aws::TaxSettings
       :system_effective_date,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tax exemption details.
@@ -1435,7 +1357,7 @@ module Aws::TaxSettings
       :heritage_obtained_parent_entity,
       :heritage_obtained_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tax exemption type.
@@ -1457,7 +1379,7 @@ module Aws::TaxSettings
       :description,
       :applicable_jurisdictions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1477,7 +1399,7 @@ module Aws::TaxSettings
       :parent_entity_id,
       :inheritance_obtained_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your TRN information. </p>
@@ -1523,7 +1445,7 @@ module Aws::TaxSettings
       :additional_tax_information,
       :legal_address,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tax registration document.
@@ -1540,7 +1462,7 @@ module Aws::TaxSettings
       :file_name,
       :file_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tax registration document information.</p>
@@ -1555,7 +1477,7 @@ module Aws::TaxSettings
       :s3_location,
       :file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The TRN information you provide when you add a new TRN, or update. </p>
@@ -1613,29 +1535,7 @@ module Aws::TaxSettings
       :verification_details,
       :certified_email_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TaxRegistrationNumberType
-      TAX_REGISTRATION_NUMBER = 'TaxRegistrationNumber'
-      LOCAL_REGISTRATION_NUMBER = 'LocalRegistrationNumber'
-    end
-
-    module TaxRegistrationStatus
-      VERIFIED = 'Verified'
-      PENDING = 'Pending'
-      DELETED = 'Deleted'
-      REJECTED = 'Rejected'
-    end
-
-    module TaxRegistrationType
-      VAT = 'VAT'
-      GST = 'GST'
-      CPF = 'CPF'
-      CNPJ = 'CNPJ'
-      SST = 'SST'
-      TIN = 'TIN'
-      NRIC = 'NRIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Your TRN information with jurisdiction details. This doesn't contain the full legal
@@ -1682,7 +1582,7 @@ module Aws::TaxSettings
       :additional_tax_information,
       :jurisdiction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information associated with your TRN in Turkey.</p>
@@ -1708,7 +1608,7 @@ module Aws::TaxSettings
       :secondary_tax_id,
       :industries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1722,12 +1622,7 @@ module Aws::TaxSettings
     class UkraineAdditionalInfo < Struct.new(
       :ukraine_trn_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UkraineTrnType
-      BUSINESS = 'Business'
-      INDIVIDUAL = 'Individual'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1747,12 +1642,7 @@ module Aws::TaxSettings
       :tax_registration_number_type,
       :vat_registration_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UzbekistanTaxRegistrationNumberType
-      BUSINESS = 'Business'
-      INDIVIDUAL = 'Individual'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception when the input doesn't pass validation for at least one of the input
@@ -1770,15 +1660,7 @@ module Aws::TaxSettings
       :error_code,
       :field_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionErrorCode
-      MALFORMED_TOKEN = 'MalformedToken'
-      EXPIRED_TOKEN = 'ExpiredToken'
-      INVALID_TOKEN = 'InvalidToken'
-      FIELD_VALIDATION_FAILED = 'FieldValidationFailed'
-      MISSING_INPUT = 'MissingInput'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The information about the specified parameter in the request that caused an error.</p>
@@ -1788,7 +1670,7 @@ module Aws::TaxSettings
     class ValidationExceptionField < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Required information to verify your TRN.</p>
@@ -1802,7 +1684,7 @@ module Aws::TaxSettings
       :date_of_birth,
       :tax_registration_documents,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Additional tax information to specify for a TRN in Vietnam.</p>
@@ -1824,7 +1706,7 @@ module Aws::TaxSettings
       :payment_voucher_number,
       :payment_voucher_number_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -13,11 +13,7 @@ module Aws::NeptuneGraph
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BlankNodeHandling
-      CONVERT_TO_IRI = 'convertToIri'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_identifier
@@ -26,7 +22,7 @@ module Aws::NeptuneGraph
     class CancelExportTaskInput < Struct.new(
       :task_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -68,7 +64,7 @@ module Aws::NeptuneGraph
       :parquet_type,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_identifier
@@ -77,7 +73,7 @@ module Aws::NeptuneGraph
     class CancelImportTaskInput < Struct.new(
       :task_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -114,7 +110,7 @@ module Aws::NeptuneGraph
       :role_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -127,7 +123,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Raised when a conflict is encountered.</p>
@@ -141,11 +137,7 @@ module Aws::NeptuneGraph
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConflictExceptionReason
-      CONCURRENT_MODIFICATION = 'CONCURRENT_MODIFICATION'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_name
@@ -194,7 +186,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :provisioned_memory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -269,7 +261,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :build_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -290,7 +282,7 @@ module Aws::NeptuneGraph
       :snapshot_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -323,7 +315,7 @@ module Aws::NeptuneGraph
       :status,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_name
@@ -419,7 +411,7 @@ module Aws::NeptuneGraph
       :blank_node_handling,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -464,7 +456,7 @@ module Aws::NeptuneGraph
       :status,
       :import_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -485,7 +477,7 @@ module Aws::NeptuneGraph
       :subnet_ids,
       :vpc_security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -506,7 +498,7 @@ module Aws::NeptuneGraph
       :status,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -521,7 +513,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :skip_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -586,7 +578,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :build_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_identifier
@@ -595,7 +587,7 @@ module Aws::NeptuneGraph
     class DeleteGraphSnapshotInput < Struct.new(
       :snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -631,7 +623,7 @@ module Aws::NeptuneGraph
       :status,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -644,7 +636,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -665,7 +657,7 @@ module Aws::NeptuneGraph
       :status,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an edge in a Neptune Analytics graph.</p>
@@ -679,7 +671,7 @@ module Aws::NeptuneGraph
       :count,
       :edge_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -716,7 +708,7 @@ module Aws::NeptuneGraph
       :explain_mode,
       :query_timeout_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute payload
@@ -725,12 +717,7 @@ module Aws::NeptuneGraph
     class ExecuteQueryOutput < Struct.new(
       :payload,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExplainMode
-      STATIC = 'STATIC'
-      DETAILS = 'DETAILS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This is the top-level field for specifying vertex or edge filters. If the ExportFilter is not provided, 
@@ -748,7 +735,7 @@ module Aws::NeptuneGraph
       :vertex_filter,
       :edge_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies whihc properties of that label should be included in the export.</p>
@@ -759,7 +746,7 @@ module Aws::NeptuneGraph
     class ExportFilterElement < Struct.new(
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure representing a property's attributes. It is a map object of outputType, sourcePropertyName 
@@ -784,17 +771,12 @@ module Aws::NeptuneGraph
       :source_property_name,
       :multi_value_handling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:multi_value_handling] = 'PICK_FIRST' unless options.key?(:multi_value_handling)
         super
       end
-    end
-
-    module ExportFormat
-      PARQUET = 'PARQUET'
-      CSV = 'CSV'
     end
 
     # <p>Contains details about the specified export task.</p>
@@ -820,17 +802,7 @@ module Aws::NeptuneGraph
       :num_vertices_written,
       :num_edges_written,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExportTaskStatus
-      INITIALIZING = 'INITIALIZING'
-      EXPORTING = 'EXPORTING'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides details about an export task.</p>
@@ -872,14 +844,7 @@ module Aws::NeptuneGraph
       :parquet_type,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Format
-      CSV = 'CSV'
-      OPEN_CYPHER = 'OPEN_CYPHER'
-      PARQUET = 'PARQUET'
-      NTRIPLES = 'NTRIPLES'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_identifier
@@ -888,7 +853,7 @@ module Aws::NeptuneGraph
     class GetExportTaskInput < Struct.new(
       :task_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -937,7 +902,7 @@ module Aws::NeptuneGraph
       :export_task_details,
       :export_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -946,7 +911,7 @@ module Aws::NeptuneGraph
     class GetGraphInput < Struct.new(
       :graph_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1011,7 +976,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :build_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_identifier
@@ -1020,7 +985,7 @@ module Aws::NeptuneGraph
     class GetGraphSnapshotInput < Struct.new(
       :snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1056,7 +1021,7 @@ module Aws::NeptuneGraph
       :status,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1070,7 +1035,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute version
@@ -1087,7 +1052,7 @@ module Aws::NeptuneGraph
       :last_statistics_computation_time,
       :graph_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute task_identifier
@@ -1096,7 +1061,7 @@ module Aws::NeptuneGraph
     class GetImportTaskInput < Struct.new(
       :task_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -1209,7 +1174,7 @@ module Aws::NeptuneGraph
       :attempt_number,
       :status_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1222,7 +1187,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_id
@@ -1243,7 +1208,7 @@ module Aws::NeptuneGraph
       :status,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1256,7 +1221,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :query_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -1281,7 +1246,7 @@ module Aws::NeptuneGraph
       :elapsed,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the graph.</p>
@@ -1344,7 +1309,7 @@ module Aws::NeptuneGraph
       :node_structures,
       :edge_structures,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a graph snapshot.</p>
@@ -1381,18 +1346,7 @@ module Aws::NeptuneGraph
       :status,
       :kms_key_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GraphStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      RESETTING = 'RESETTING'
-      UPDATING = 'UPDATING'
-      SNAPSHOTTING = 'SNAPSHOTTING'
-      FAILED = 'FAILED'
-      IMPORTING = 'IMPORTING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary details about a graph.</p>
@@ -1438,12 +1392,7 @@ module Aws::NeptuneGraph
       :kms_key_identifier,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GraphSummaryMode
-      BASIC = 'BASIC'
-      DETAILED = 'DETAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for how to perform an import.</p>
@@ -1454,7 +1403,7 @@ module Aws::NeptuneGraph
       :neptune,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Neptune < ImportOptions; end
       class Unknown < ImportOptions; end
@@ -1495,21 +1444,7 @@ module Aws::NeptuneGraph
       :statement_count,
       :dictionary_entry_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImportTaskStatus
-      INITIALIZING = 'INITIALIZING'
-      EXPORTING = 'EXPORTING'
-      ANALYZING_DATA = 'ANALYZING_DATA'
-      IMPORTING = 'IMPORTING'
-      REPROVISIONING = 'REPROVISIONING'
-      ROLLING_BACK = 'ROLLING_BACK'
-      SUCCEEDED = 'SUCCEEDED'
-      FAILED = 'FAILED'
-      CANCELLING = 'CANCELLING'
-      CANCELLED = 'CANCELLED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an import task.</p>
@@ -1547,7 +1482,7 @@ module Aws::NeptuneGraph
       :role_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A failure occurred on the server.</p>
@@ -1557,7 +1492,7 @@ module Aws::NeptuneGraph
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1574,7 +1509,7 @@ module Aws::NeptuneGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -1587,7 +1522,7 @@ module Aws::NeptuneGraph
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1612,7 +1547,7 @@ module Aws::NeptuneGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_snapshots
@@ -1628,7 +1563,7 @@ module Aws::NeptuneGraph
       :graph_snapshots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1649,7 +1584,7 @@ module Aws::NeptuneGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graphs
@@ -1665,7 +1600,7 @@ module Aws::NeptuneGraph
       :graphs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1686,7 +1621,7 @@ module Aws::NeptuneGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tasks
@@ -1702,7 +1637,7 @@ module Aws::NeptuneGraph
       :tasks,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1727,7 +1662,7 @@ module Aws::NeptuneGraph
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute private_graph_endpoints
@@ -1743,7 +1678,7 @@ module Aws::NeptuneGraph
       :private_graph_endpoints,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1760,7 +1695,7 @@ module Aws::NeptuneGraph
       :max_results,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute queries
@@ -1769,7 +1704,7 @@ module Aws::NeptuneGraph
     class ListQueriesOutput < Struct.new(
       :queries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1778,7 +1713,7 @@ module Aws::NeptuneGraph
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1787,12 +1722,7 @@ module Aws::NeptuneGraph
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MultiValueHandlingType
-      TO_LIST = 'TO_LIST'
-      PICK_FIRST = 'PICK_FIRST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options for how to import Neptune data.</p>
@@ -1821,7 +1751,7 @@ module Aws::NeptuneGraph
       :preserve_default_vertex_labels,
       :preserve_edge_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a node.</p>
@@ -1839,24 +1769,7 @@ module Aws::NeptuneGraph
       :node_properties,
       :distinct_outgoing_edge_labels,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParquetType
-      COLUMNAR = 'COLUMNAR'
-    end
-
-    module PlanCacheType
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-      AUTO = 'AUTO'
-    end
-
-    module PrivateGraphEndpointStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a private graph endpoint.</p>
@@ -1878,24 +1791,7 @@ module Aws::NeptuneGraph
       :status,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QueryLanguage
-      OPEN_CYPHER = 'OPEN_CYPHER'
-    end
-
-    module QueryState
-      RUNNING = 'RUNNING'
-      WAITING = 'WAITING'
-      CANCELLING = 'CANCELLING'
-    end
-
-    module QueryStateInput
-      ALL = 'ALL'
-      RUNNING = 'RUNNING'
-      WAITING = 'WAITING'
-      CANCELLING = 'CANCELLING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the query listed.</p>
@@ -1921,7 +1817,7 @@ module Aws::NeptuneGraph
       :elapsed,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -1936,7 +1832,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :skip_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2001,7 +1897,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :build_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A specified resource could not be located.</p>
@@ -2011,7 +1907,7 @@ module Aws::NeptuneGraph
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute snapshot_identifier
@@ -2056,7 +1952,7 @@ module Aws::NeptuneGraph
       :replica_count,
       :public_connectivity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2121,7 +2017,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :build_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A service quota was exceeded.</p>
@@ -2146,14 +2042,7 @@ module Aws::NeptuneGraph
       :service_code,
       :quota_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -2190,7 +2079,7 @@ module Aws::NeptuneGraph
       :export_filter,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -2235,7 +2124,7 @@ module Aws::NeptuneGraph
       :status_reason,
       :export_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute import_options
@@ -2277,7 +2166,7 @@ module Aws::NeptuneGraph
       :graph_identifier,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_id
@@ -2316,7 +2205,7 @@ module Aws::NeptuneGraph
       :status,
       :import_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2344,12 +2233,12 @@ module Aws::NeptuneGraph
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exception was interrupted by throttling.</p>
@@ -2359,7 +2248,7 @@ module Aws::NeptuneGraph
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request cannot be processed due to known reasons. Eg. partition full.</p>
@@ -2372,15 +2261,7 @@ module Aws::NeptuneGraph
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UnprocessableExceptionReason
-      QUERY_TIMEOUT = 'QUERY_TIMEOUT'
-      INTERNAL_LIMIT_EXCEEDED = 'INTERNAL_LIMIT_EXCEEDED'
-      MEMORY_LIMIT_EXCEEDED = 'MEMORY_LIMIT_EXCEEDED'
-      STORAGE_LIMIT_EXCEEDED = 'STORAGE_LIMIT_EXCEEDED'
-      PARTITION_FULL = 'PARTITION_FULL'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2393,12 +2274,12 @@ module Aws::NeptuneGraph
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute graph_identifier
@@ -2422,7 +2303,7 @@ module Aws::NeptuneGraph
       :provisioned_memory,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute id
@@ -2487,7 +2368,7 @@ module Aws::NeptuneGraph
       :deletion_protection,
       :build_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource could not be validated.</p>
@@ -2501,17 +2382,7 @@ module Aws::NeptuneGraph
       :message,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      CONSTRAINT_VIOLATION = 'CONSTRAINT_VIOLATION'
-      ILLEGAL_ARGUMENT = 'ILLEGAL_ARGUMENT'
-      MALFORMED_QUERY = 'MALFORMED_QUERY'
-      QUERY_CANCELLED = 'QUERY_CANCELLED'
-      QUERY_TOO_LARGE = 'QUERY_TOO_LARGE'
-      UNSUPPORTED_OPERATION = 'UNSUPPORTED_OPERATION'
-      BAD_REQUEST = 'BAD_REQUEST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the number of dimensions for vector embeddings loaded into the graph. Max = 65535</p>
@@ -2521,7 +2392,7 @@ module Aws::NeptuneGraph
     class VectorSearchConfiguration < Struct.new(
       :dimension,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

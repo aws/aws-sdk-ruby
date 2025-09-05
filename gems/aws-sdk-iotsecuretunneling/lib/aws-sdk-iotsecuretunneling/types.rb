@@ -6,12 +6,6 @@ module Aws::IoTSecureTunneling
   # This module contains the types returned by client operations.
   module Types
 
-    module ClientMode
-      SOURCE = 'SOURCE'
-      DESTINATION = 'DESTINATION'
-      ALL = 'ALL'
-    end
-
     # @!attribute tunnel_id
     #   <p>The ID of the tunnel to close.</p>
     #   @return [String]
@@ -23,12 +17,12 @@ module Aws::IoTSecureTunneling
       :tunnel_id,
       :delete,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CloseTunnelResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of a connection.</p>
@@ -43,12 +37,7 @@ module Aws::IoTSecureTunneling
       :status,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConnectionStatus
-      CONNECTED = 'CONNECTED'
-      DISCONNECTED = 'DISCONNECTED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tunnel_id
@@ -57,7 +46,7 @@ module Aws::IoTSecureTunneling
     class DescribeTunnelRequest < Struct.new(
       :tunnel_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tunnel
@@ -66,7 +55,7 @@ module Aws::IoTSecureTunneling
     class DescribeTunnelResponse < Struct.new(
       :tunnel,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The destination configuration.</p>
@@ -83,7 +72,7 @@ module Aws::IoTSecureTunneling
       :thing_name,
       :services,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when a tunnel limit is exceeded.</p>
@@ -92,7 +81,7 @@ module Aws::IoTSecureTunneling
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -101,7 +90,7 @@ module Aws::IoTSecureTunneling
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -110,7 +99,7 @@ module Aws::IoTSecureTunneling
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute thing_name
@@ -128,7 +117,7 @@ module Aws::IoTSecureTunneling
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tunnel_summaries
@@ -142,7 +131,7 @@ module Aws::IoTSecureTunneling
       :tunnel_summaries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -163,7 +152,7 @@ module Aws::IoTSecureTunneling
       :destination_config,
       :timeout_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tunnel_id
@@ -186,7 +175,7 @@ module Aws::IoTSecureTunneling
       :source_access_token,
       :destination_access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Thrown when an operation is attempted on a resource that does not exist.</p>
@@ -195,7 +184,7 @@ module Aws::IoTSecureTunneling
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tunnel_id
@@ -213,7 +202,7 @@ module Aws::IoTSecureTunneling
       :client_mode,
       :destination_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tunnel_arn
@@ -232,7 +221,7 @@ module Aws::IoTSecureTunneling
       :source_access_token,
       :destination_access_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An arbitary key/value pair used to add searchable metadata to secure tunnel
@@ -247,7 +236,7 @@ module Aws::IoTSecureTunneling
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -260,12 +249,12 @@ module Aws::IoTSecureTunneling
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tunnel timeout configuration.</p>
@@ -277,7 +266,7 @@ module Aws::IoTSecureTunneling
     class TimeoutConfig < Struct.new(
       :max_lifetime_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A connection between a source computer and a destination device.</p>
@@ -329,12 +318,7 @@ module Aws::IoTSecureTunneling
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TunnelStatus
-      OPEN = 'OPEN'
-      CLOSED = 'CLOSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the tunnel.</p>
@@ -364,7 +348,7 @@ module Aws::IoTSecureTunneling
       :created_at,
       :last_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -377,12 +361,12 @@ module Aws::IoTSecureTunneling
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -101,7 +101,7 @@ module Aws::EMRServerless
       :scheduler_configuration,
       :identity_center_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of attributes associated with an application.</p>
@@ -147,7 +147,7 @@ module Aws::EMRServerless
       :updated_at,
       :architecture,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an application to automatically start on job submission.</p>
@@ -157,7 +157,7 @@ module Aws::EMRServerless
     class AutoStartConfig < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for an application to automatically stop after a certain amount of time being idle.</p>
@@ -171,10 +171,10 @@ module Aws::EMRServerless
       :enabled,
       :idle_timeout_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:idle_timeout_minutes] =  unless options.key?(:idle_timeout_minutes)
+        options[:idle_timeout_minutes] = nil unless options.key?(:idle_timeout_minutes)
         super
       end
     end
@@ -193,7 +193,7 @@ module Aws::EMRServerless
       :job_run_id,
       :shutdown_grace_period_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -206,7 +206,7 @@ module Aws::EMRServerless
       :application_id,
       :job_run_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon CloudWatch configuration for monitoring logs. You can configure your jobs to send log information to CloudWatch.</p>
@@ -232,7 +232,7 @@ module Aws::EMRServerless
       :encryption_key_arn,
       :log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration specification to be used when provisioning an application. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file.</p>
@@ -250,7 +250,7 @@ module Aws::EMRServerless
       :properties,
       :configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration specification to be used to override existing configurations.</p>
@@ -264,7 +264,7 @@ module Aws::EMRServerless
       :application_configuration,
       :monitoring_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request could not be processed because of conflict in the current state of the resource.</p>
@@ -273,7 +273,7 @@ module Aws::EMRServerless
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -350,7 +350,7 @@ module Aws::EMRServerless
       :scheduler_configuration,
       :identity_center_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -367,7 +367,7 @@ module Aws::EMRServerless
       :name,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -376,12 +376,12 @@ module Aws::EMRServerless
     class DeleteApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -390,7 +390,7 @@ module Aws::EMRServerless
     class GetApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -399,7 +399,7 @@ module Aws::EMRServerless
     class GetApplicationOutput < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -420,7 +420,7 @@ module Aws::EMRServerless
       :attempt,
       :access_system_profile_logs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute url
@@ -429,7 +429,7 @@ module Aws::EMRServerless
     class GetDashboardForJobRunOutput < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -446,7 +446,7 @@ module Aws::EMRServerless
       :job_run_id,
       :attempt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_run
@@ -455,7 +455,7 @@ module Aws::EMRServerless
     class GetJobRunOutput < Struct.new(
       :job_run,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations for the Hive job driver.</p>
@@ -473,7 +473,7 @@ module Aws::EMRServerless
       :init_query_file,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The IAM Identity Center Configuration that includes the Identify Center instance and application ARNs that provide trusted-identity propagation.</p>
@@ -487,7 +487,7 @@ module Aws::EMRServerless
       :identity_center_instance_arn,
       :identity_center_application_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the IAM Identity Center configuration used to enable or disable trusted identity propagation. When provided, this configuration determines how the application interacts with IAM Identity Center for user authentication and access control.</p>
@@ -497,7 +497,7 @@ module Aws::EMRServerless
     class IdentityCenterConfigurationInput < Struct.new(
       :identity_center_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The applied image configuration.</p>
@@ -511,7 +511,7 @@ module Aws::EMRServerless
       :image_uri,
       :resolved_image_digest,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image configuration.</p>
@@ -521,7 +521,7 @@ module Aws::EMRServerless
     class ImageConfigurationInput < Struct.new(
       :image_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The initial capacity configuration per worker.</p>
@@ -537,7 +537,7 @@ module Aws::EMRServerless
       :worker_count,
       :worker_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:worker_count] = 0 unless options.key?(:worker_count)
@@ -556,7 +556,7 @@ module Aws::EMRServerless
       :studio_enabled,
       :livy_endpoint_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request processing failed because of an error or failure with the service.</p>
@@ -565,7 +565,7 @@ module Aws::EMRServerless
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The driver that the job runs on.</p>
@@ -580,7 +580,7 @@ module Aws::EMRServerless
       :hive,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class SparkSubmit < JobDriver; end
       class Hive < JobDriver; end
@@ -702,10 +702,10 @@ module Aws::EMRServerless
       :ended_at,
       :queued_duration_milliseconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:execution_timeout_minutes] =  unless options.key?(:execution_timeout_minutes)
+        options[:execution_timeout_minutes] = nil unless options.key?(:execution_timeout_minutes)
         super
       end
     end
@@ -773,7 +773,7 @@ module Aws::EMRServerless
       :type,
       :attempt,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Optional IAM policy. The resulting job IAM role permissions will be an intersection of the policies passed and the policy associated with your job execution role.</p>
@@ -787,7 +787,7 @@ module Aws::EMRServerless
       :policy,
       :policy_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary of attributes associated with a job run.</p>
@@ -857,7 +857,7 @@ module Aws::EMRServerless
       :attempt_created_at,
       :attempt_updated_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -874,7 +874,7 @@ module Aws::EMRServerless
       :max_results,
       :states,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute applications
@@ -887,7 +887,7 @@ module Aws::EMRServerless
       :applications,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -908,7 +908,7 @@ module Aws::EMRServerless
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_run_attempts
@@ -921,7 +921,7 @@ module Aws::EMRServerless
       :job_run_attempts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -954,7 +954,7 @@ module Aws::EMRServerless
       :states,
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_runs
@@ -967,7 +967,7 @@ module Aws::EMRServerless
       :job_runs,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -976,7 +976,7 @@ module Aws::EMRServerless
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -985,7 +985,7 @@ module Aws::EMRServerless
     class ListTagsForResourceOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The managed log persistence configuration for a job run.</p>
@@ -999,7 +999,7 @@ module Aws::EMRServerless
       :enabled,
       :encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum allowed cumulative resources for an application. No new resources will be created once the limit is hit.</p>
@@ -1017,7 +1017,7 @@ module Aws::EMRServerless
       :memory,
       :disk,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration setting for monitoring.</p>
@@ -1039,7 +1039,7 @@ module Aws::EMRServerless
       :cloud_watch_logging_configuration,
       :prometheus_monitoring_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The network configuration for customer VPC connectivity.</p>
@@ -1053,7 +1053,7 @@ module Aws::EMRServerless
       :subnet_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The monitoring configuration object you can configure to send metrics to Amazon Managed Service for Prometheus for a job run.</p>
@@ -1063,7 +1063,7 @@ module Aws::EMRServerless
     class PrometheusMonitoringConfiguration < Struct.new(
       :remote_write_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -1072,7 +1072,7 @@ module Aws::EMRServerless
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource utilization for memory, storage, and vCPU for jobs.</p>
@@ -1090,7 +1090,7 @@ module Aws::EMRServerless
       :memory_gb_hour,
       :storage_gb_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The retry policy to use for a job run.</p>
@@ -1104,10 +1104,10 @@ module Aws::EMRServerless
       :max_attempts,
       :max_failed_attempts_per_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:max_failed_attempts_per_hour] =  unless options.key?(:max_failed_attempts_per_hour)
+        options[:max_failed_attempts_per_hour] = nil unless options.key?(:max_failed_attempts_per_hour)
         super
       end
     end
@@ -1123,7 +1123,7 @@ module Aws::EMRServerless
       :log_uri,
       :encryption_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scheduler configuration for batch and streaming jobs running on this application. Supported with release labels emr-7.0.0 and above.</p>
@@ -1137,7 +1137,7 @@ module Aws::EMRServerless
       :queue_timeout_minutes,
       :max_concurrent_runs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of resources per account has been reached.</p>
@@ -1146,7 +1146,7 @@ module Aws::EMRServerless
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configurations for the Spark submit job driver.</p>
@@ -1164,7 +1164,7 @@ module Aws::EMRServerless
       :entry_point_arguments,
       :spark_submit_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1173,12 +1173,12 @@ module Aws::EMRServerless
     class StartApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StartApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1227,7 +1227,7 @@ module Aws::EMRServerless
       :mode,
       :retry_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1244,7 +1244,7 @@ module Aws::EMRServerless
       :job_run_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1253,12 +1253,12 @@ module Aws::EMRServerless
     class StopApplicationInput < Struct.new(
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class StopApplicationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1271,12 +1271,12 @@ module Aws::EMRServerless
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregate vCPU, memory, and storage resources used from the time job start executing till the time job is terminated, rounded up to the nearest second.</p>
@@ -1294,7 +1294,7 @@ module Aws::EMRServerless
       :memory_gb_hour,
       :storage_gb_hour,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1307,12 +1307,12 @@ module Aws::EMRServerless
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application_id
@@ -1381,7 +1381,7 @@ module Aws::EMRServerless
       :scheduler_configuration,
       :identity_center_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute application
@@ -1390,7 +1390,7 @@ module Aws::EMRServerless
     class UpdateApplicationOutput < Struct.new(
       :application,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
@@ -1399,7 +1399,7 @@ module Aws::EMRServerless
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cumulative configuration requirements for every worker instance of the worker type.</p>
@@ -1421,7 +1421,7 @@ module Aws::EMRServerless
       :disk,
       :disk_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specifications for a worker type.</p>
@@ -1431,7 +1431,7 @@ module Aws::EMRServerless
     class WorkerTypeSpecification < Struct.new(
       :image_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specifications for a worker type.</p>
@@ -1441,7 +1441,7 @@ module Aws::EMRServerless
     class WorkerTypeSpecificationInput < Struct.new(
       :image_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -12,7 +12,7 @@ module Aws::CleanRoomsML
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Amazon S3 bucket where the configured audience is stored.</p>
@@ -22,14 +22,7 @@ module Aws::CleanRoomsML
     class AudienceDestination < Struct.new(
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudienceExportJobStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the audience export job.</p>
@@ -71,7 +64,7 @@ module Aws::CleanRoomsML
       :status_details,
       :output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored.</p>
@@ -93,17 +86,7 @@ module Aws::CleanRoomsML
       :sql_parameters,
       :sql_compute_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudienceGenerationJobStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the configured audience generation job.</p>
@@ -145,17 +128,7 @@ module Aws::CleanRoomsML
       :collaboration_id,
       :started_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudienceModelStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the audience model.</p>
@@ -189,7 +162,7 @@ module Aws::CleanRoomsML
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metrics that describe the quality of the generated audience.</p>
@@ -203,7 +176,7 @@ module Aws::CleanRoomsML
       :relevance_metrics,
       :recall_metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The size of the generated audience. Must match one of the sizes in the configured audience model.</p>
@@ -217,7 +190,7 @@ module Aws::CleanRoomsML
       :type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Returns the relevance scores at these audience sizes when used in the <a>GetAudienceGenerationJob</a> for a specified audience generation job and configured audience model.</p> <p>Specifies the list of allowed <code>audienceSize</code> values when used in the <a>StartAudienceExportJob</a> for an audience generation job. You can use the <code>ABSOLUTE</code> <a>AudienceSize</a> to configure out audience sizes using the count of identifiers in the output. You can use the <code>Percentage</code> <a>AudienceSize</a> to configure sizes in the range 1-100 percent.</p>
@@ -231,12 +204,7 @@ module Aws::CleanRoomsML
       :audience_size_type,
       :audience_size_bins,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AudienceSizeType
-      ABSOLUTE = 'ABSOLUTE'
-      PERCENTAGE = 'PERCENTAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -249,7 +217,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :trained_model_inference_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -266,7 +234,7 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a configured model algorithm in a collaboration.</p>
@@ -308,7 +276,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_arn,
       :creator_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about an ML input channel in a collaboration.</p>
@@ -354,7 +322,7 @@ module Aws::CleanRoomsML
       :creator_account_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a trained model export job in a collaboration.</p>
@@ -408,7 +376,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a trained model inference job in a collaboration.</p>
@@ -482,7 +450,7 @@ module Aws::CleanRoomsML
       :update_time,
       :creator_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a trained model in a collaboration.</p>
@@ -536,7 +504,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_association_arn,
       :creator_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a column.</p>
@@ -550,15 +518,7 @@ module Aws::CleanRoomsML
       :column_name,
       :column_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColumnType
-      USER_ID = 'USER_ID'
-      ITEM_ID = 'ITEM_ID'
-      TIMESTAMP = 'TIMESTAMP'
-      CATEGORICAL_FEATURE = 'CATEGORICAL_FEATURE'
-      NUMERICAL_FEATURE = 'NUMERICAL_FEATURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for the instances that will perform the compute work.</p>
@@ -569,7 +529,7 @@ module Aws::CleanRoomsML
       :worker,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Worker < ComputeConfiguration; end
       class Unknown < ComputeConfiguration; end
@@ -586,11 +546,7 @@ module Aws::CleanRoomsML
       :destination,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConfiguredAudienceModelStatus
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the configured audience model.</p>
@@ -628,7 +584,7 @@ module Aws::CleanRoomsML
       :configured_audience_model_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about the configured model algorithm association.</p>
@@ -666,7 +622,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about a configured model algorithm.</p>
@@ -692,7 +648,7 @@ module Aws::CleanRoomsML
       :name,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You can't complete this action because another resource depends on this resource.</p>
@@ -701,7 +657,7 @@ module Aws::CleanRoomsML
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for the dockerized container where the model algorithm is stored.</p>
@@ -723,7 +679,7 @@ module Aws::CleanRoomsML
       :arguments,
       :metric_definitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_data_start_time
@@ -756,7 +712,7 @@ module Aws::CleanRoomsML
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audience_model_arn
@@ -765,7 +721,7 @@ module Aws::CleanRoomsML
     class CreateAudienceModelResponse < Struct.new(
       :audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -806,7 +762,7 @@ module Aws::CleanRoomsML
       :tags,
       :child_resource_tag_on_create_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -815,7 +771,7 @@ module Aws::CleanRoomsML
     class CreateConfiguredAudienceModelResponse < Struct.new(
       :configured_audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -844,7 +800,7 @@ module Aws::CleanRoomsML
       :privacy_configuration,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_association_arn
@@ -853,7 +809,7 @@ module Aws::CleanRoomsML
     class CreateConfiguredModelAlgorithmAssociationResponse < Struct.new(
       :configured_model_algorithm_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -886,7 +842,7 @@ module Aws::CleanRoomsML
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_arn
@@ -895,7 +851,7 @@ module Aws::CleanRoomsML
     class CreateConfiguredModelAlgorithmResponse < Struct.new(
       :configured_model_algorithm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -932,7 +888,7 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_input_channel_arn
@@ -941,7 +897,7 @@ module Aws::CleanRoomsML
     class CreateMLInputChannelResponse < Struct.new(
       :ml_input_channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -998,7 +954,7 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trained_model_arn
@@ -1011,7 +967,7 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1036,7 +992,7 @@ module Aws::CleanRoomsML
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_dataset_arn
@@ -1045,7 +1001,7 @@ module Aws::CleanRoomsML
     class CreateTrainingDatasetResponse < Struct.new(
       :training_dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines information about the Glue data source that contains the training data.</p>
@@ -1055,7 +1011,7 @@ module Aws::CleanRoomsML
     class DataSource < Struct.new(
       :glue_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines where the training dataset is located, what type of data it contains, and how to access the data.</p>
@@ -1069,7 +1025,7 @@ module Aws::CleanRoomsML
       :type,
       :input_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Glue data source and schema mapping information.</p>
@@ -1083,11 +1039,7 @@ module Aws::CleanRoomsML
       :schema,
       :data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DatasetType
-      INTERACTIONS = 'INTERACTIONS'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audience_generation_job_arn
@@ -1096,7 +1048,7 @@ module Aws::CleanRoomsML
     class DeleteAudienceGenerationJobRequest < Struct.new(
       :audience_generation_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audience_model_arn
@@ -1105,7 +1057,7 @@ module Aws::CleanRoomsML
     class DeleteAudienceModelRequest < Struct.new(
       :audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -1114,7 +1066,7 @@ module Aws::CleanRoomsML
     class DeleteConfiguredAudienceModelPolicyRequest < Struct.new(
       :configured_audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -1123,7 +1075,7 @@ module Aws::CleanRoomsML
     class DeleteConfiguredAudienceModelRequest < Struct.new(
       :configured_audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_association_arn
@@ -1136,7 +1088,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_association_arn,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_arn
@@ -1145,7 +1097,7 @@ module Aws::CleanRoomsML
     class DeleteConfiguredModelAlgorithmRequest < Struct.new(
       :configured_model_algorithm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -1154,7 +1106,7 @@ module Aws::CleanRoomsML
     class DeleteMLConfigurationRequest < Struct.new(
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_input_channel_arn
@@ -1167,7 +1119,7 @@ module Aws::CleanRoomsML
       :ml_input_channel_arn,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trained_model_arn
@@ -1184,7 +1136,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_dataset_arn
@@ -1193,7 +1145,7 @@ module Aws::CleanRoomsML
     class DeleteTrainingDatasetRequest < Struct.new(
       :training_dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 location where the exported model artifacts are stored.</p>
@@ -1203,7 +1155,7 @@ module Aws::CleanRoomsML
     class Destination < Struct.new(
       :s3_destination,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audience_generation_job_arn
@@ -1212,7 +1164,7 @@ module Aws::CleanRoomsML
     class GetAudienceGenerationJobRequest < Struct.new(
       :audience_generation_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1277,7 +1229,7 @@ module Aws::CleanRoomsML
       :tags,
       :protected_query_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audience_model_arn
@@ -1286,7 +1238,7 @@ module Aws::CleanRoomsML
     class GetAudienceModelRequest < Struct.new(
       :audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1339,7 +1291,7 @@ module Aws::CleanRoomsML
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_association_arn
@@ -1352,7 +1304,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_association_arn,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1397,7 +1349,7 @@ module Aws::CleanRoomsML
       :creator_account_id,
       :privacy_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_input_channel_arn
@@ -1410,7 +1362,7 @@ module Aws::CleanRoomsML
       :ml_input_channel_arn,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1467,7 +1419,7 @@ module Aws::CleanRoomsML
       :number_of_records,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trained_model_arn
@@ -1484,7 +1436,7 @@ module Aws::CleanRoomsML
       :collaboration_identifier,
       :version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -1573,7 +1525,7 @@ module Aws::CleanRoomsML
       :update_time,
       :creator_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -1582,7 +1534,7 @@ module Aws::CleanRoomsML
     class GetConfiguredAudienceModelPolicyRequest < Struct.new(
       :configured_audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -1599,7 +1551,7 @@ module Aws::CleanRoomsML
       :configured_audience_model_policy,
       :policy_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -1608,7 +1560,7 @@ module Aws::CleanRoomsML
     class GetConfiguredAudienceModelRequest < Struct.new(
       :configured_audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1665,7 +1617,7 @@ module Aws::CleanRoomsML
       :tags,
       :child_resource_tag_on_create_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_association_arn
@@ -1678,7 +1630,7 @@ module Aws::CleanRoomsML
       :configured_model_algorithm_association_arn,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1723,7 +1675,7 @@ module Aws::CleanRoomsML
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_model_algorithm_arn
@@ -1732,7 +1684,7 @@ module Aws::CleanRoomsML
     class GetConfiguredModelAlgorithmRequest < Struct.new(
       :configured_model_algorithm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1777,7 +1729,7 @@ module Aws::CleanRoomsML
       :tags,
       :kms_key_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -1786,7 +1738,7 @@ module Aws::CleanRoomsML
     class GetMLConfigurationRequest < Struct.new(
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -1807,7 +1759,7 @@ module Aws::CleanRoomsML
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ml_input_channel_arn
@@ -1820,7 +1772,7 @@ module Aws::CleanRoomsML
       :ml_input_channel_arn,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -1897,7 +1849,7 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -1910,7 +1862,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :trained_model_inference_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -2007,7 +1959,7 @@ module Aws::CleanRoomsML
       :logs_status_details,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trained_model_arn
@@ -2024,7 +1976,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -2129,7 +2081,7 @@ module Aws::CleanRoomsML
       :tags,
       :data_channels,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute training_dataset_arn
@@ -2138,7 +2090,7 @@ module Aws::CleanRoomsML
     class GetTrainingDatasetRequest < Struct.new(
       :training_dataset_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute create_time
@@ -2179,7 +2131,7 @@ module Aws::CleanRoomsML
       :tags,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Glue data source that contains the training data.</p>
@@ -2197,7 +2149,7 @@ module Aws::CleanRoomsML
       :database_name,
       :catalog_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines an incremental training data channel that references a previously trained model. Incremental training allows you to update an existing trained model with new data, building upon the knowledge from a base model rather than training from scratch. This can significantly reduce training time and computational costs while improving model performance with additional data.</p>
@@ -2215,7 +2167,7 @@ module Aws::CleanRoomsML
       :version_identifier,
       :channel_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an incremental training data channel that was used to create a trained model. This structure provides details about the base model and channel configuration used during incremental training.</p>
@@ -2233,7 +2185,7 @@ module Aws::CleanRoomsML
       :version_identifier,
       :model_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for the inference container.</p>
@@ -2243,7 +2195,7 @@ module Aws::CleanRoomsML
     class InferenceContainerConfig < Struct.new(
       :image_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides execution parameters for the inference container.</p>
@@ -2253,104 +2205,7 @@ module Aws::CleanRoomsML
     class InferenceContainerExecutionParameters < Struct.new(
       :max_payload_in_mb,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InferenceInstanceType
-      ML_R7I_48XLARGE = 'ml.r7i.48xlarge'
-      ML_R6I_16XLARGE = 'ml.r6i.16xlarge'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_R7I_16XLARGE = 'ml.r7i.16xlarge'
-      ML_M7I_XLARGE = 'ml.m7i.xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_R7I_8XLARGE = 'ml.r7i.8xlarge'
-      ML_R7I_LARGE = 'ml.r7i.large'
-      ML_M7I_12XLARGE = 'ml.m7i.12xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M7I_24XLARGE = 'ml.m7i.24xlarge'
-      ML_R6I_8XLARGE = 'ml.r6i.8xlarge'
-      ML_R6I_LARGE = 'ml.r6i.large'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_M7I_48XLARGE = 'ml.m7i.48xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_M7I_16XLARGE = 'ml.m7i.16xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_C7I_XLARGE = 'ml.c7i.xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_C7I_12XLARGE = 'ml.c7i.12xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_C7I_24XLARGE = 'ml.c7i.24xlarge'
-      ML_C7I_2XLARGE = 'ml.c7i.2xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_C7I_48XLARGE = 'ml.c7i.48xlarge'
-      ML_C7I_4XLARGE = 'ml.c7i.4xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_C7I_16XLARGE = 'ml.c7i.16xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_C7I_8XLARGE = 'ml.c7i.8xlarge'
-      ML_C7I_LARGE = 'ml.c7i.large'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_LARGE = 'ml.c6i.large'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_M7I_2XLARGE = 'ml.m7i.2xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_M7I_4XLARGE = 'ml.m7i.4xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_R6I_32XLARGE = 'ml.r6i.32xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_R6I_XLARGE = 'ml.r6i.xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_R7I_2XLARGE = 'ml.r7i.2xlarge'
-      ML_R7I_XLARGE = 'ml.r7i.xlarge'
-      ML_R6I_12XLARGE = 'ml.r6i.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_R7I_12XLARGE = 'ml.r7i.12xlarge'
-      ML_M7I_8XLARGE = 'ml.m7i.8xlarge'
-      ML_M7I_LARGE = 'ml.m7i.large'
-      ML_R6I_24XLARGE = 'ml.r6i.24xlarge'
-      ML_R6I_2XLARGE = 'ml.r6i.2xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_R7I_24XLARGE = 'ml.r7i.24xlarge'
-      ML_R7I_4XLARGE = 'ml.r7i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_R6I_4XLARGE = 'ml.r6i.4xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about how the inference output is stored.</p>
@@ -2364,7 +2219,7 @@ module Aws::CleanRoomsML
       :accept,
       :members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:accept] = 'application/json' unless options.key?(:accept)
@@ -2379,7 +2234,7 @@ module Aws::CleanRoomsML
     class InferenceReceiverMember < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the resources used to perform model inference.</p>
@@ -2393,7 +2248,7 @@ module Aws::CleanRoomsML
       :instance_type,
       :instance_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:instance_count] = 1 unless options.key?(:instance_count)
@@ -2412,7 +2267,7 @@ module Aws::CleanRoomsML
       :data_source,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the data source that is used to define an input channel.</p>
@@ -2423,102 +2278,10 @@ module Aws::CleanRoomsML
       :protected_query_input_parameters,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ProtectedQueryInputParameters < InputChannelDataSource; end
       class Unknown < InputChannelDataSource; end
-    end
-
-    module InstanceType
-      ML_M4_XLARGE = 'ml.m4.xlarge'
-      ML_M4_2XLARGE = 'ml.m4.2xlarge'
-      ML_M4_4XLARGE = 'ml.m4.4xlarge'
-      ML_M4_10XLARGE = 'ml.m4.10xlarge'
-      ML_M4_16XLARGE = 'ml.m4.16xlarge'
-      ML_G4DN_XLARGE = 'ml.g4dn.xlarge'
-      ML_G4DN_2XLARGE = 'ml.g4dn.2xlarge'
-      ML_G4DN_4XLARGE = 'ml.g4dn.4xlarge'
-      ML_G4DN_8XLARGE = 'ml.g4dn.8xlarge'
-      ML_G4DN_12XLARGE = 'ml.g4dn.12xlarge'
-      ML_G4DN_16XLARGE = 'ml.g4dn.16xlarge'
-      ML_M5_LARGE = 'ml.m5.large'
-      ML_M5_XLARGE = 'ml.m5.xlarge'
-      ML_M5_2XLARGE = 'ml.m5.2xlarge'
-      ML_M5_4XLARGE = 'ml.m5.4xlarge'
-      ML_M5_12XLARGE = 'ml.m5.12xlarge'
-      ML_M5_24XLARGE = 'ml.m5.24xlarge'
-      ML_C4_XLARGE = 'ml.c4.xlarge'
-      ML_C4_2XLARGE = 'ml.c4.2xlarge'
-      ML_C4_4XLARGE = 'ml.c4.4xlarge'
-      ML_C4_8XLARGE = 'ml.c4.8xlarge'
-      ML_P2_XLARGE = 'ml.p2.xlarge'
-      ML_P2_8XLARGE = 'ml.p2.8xlarge'
-      ML_P2_16XLARGE = 'ml.p2.16xlarge'
-      ML_P3_2XLARGE = 'ml.p3.2xlarge'
-      ML_P3_8XLARGE = 'ml.p3.8xlarge'
-      ML_P3_16XLARGE = 'ml.p3.16xlarge'
-      ML_P3DN_24XLARGE = 'ml.p3dn.24xlarge'
-      ML_P4D_24XLARGE = 'ml.p4d.24xlarge'
-      ML_P4DE_24XLARGE = 'ml.p4de.24xlarge'
-      ML_P5_48XLARGE = 'ml.p5.48xlarge'
-      ML_C5_XLARGE = 'ml.c5.xlarge'
-      ML_C5_2XLARGE = 'ml.c5.2xlarge'
-      ML_C5_4XLARGE = 'ml.c5.4xlarge'
-      ML_C5_9XLARGE = 'ml.c5.9xlarge'
-      ML_C5_18XLARGE = 'ml.c5.18xlarge'
-      ML_C5N_XLARGE = 'ml.c5n.xlarge'
-      ML_C5N_2XLARGE = 'ml.c5n.2xlarge'
-      ML_C5N_4XLARGE = 'ml.c5n.4xlarge'
-      ML_C5N_9XLARGE = 'ml.c5n.9xlarge'
-      ML_C5N_18XLARGE = 'ml.c5n.18xlarge'
-      ML_G5_XLARGE = 'ml.g5.xlarge'
-      ML_G5_2XLARGE = 'ml.g5.2xlarge'
-      ML_G5_4XLARGE = 'ml.g5.4xlarge'
-      ML_G5_8XLARGE = 'ml.g5.8xlarge'
-      ML_G5_16XLARGE = 'ml.g5.16xlarge'
-      ML_G5_12XLARGE = 'ml.g5.12xlarge'
-      ML_G5_24XLARGE = 'ml.g5.24xlarge'
-      ML_G5_48XLARGE = 'ml.g5.48xlarge'
-      ML_TRN1_2XLARGE = 'ml.trn1.2xlarge'
-      ML_TRN1_32XLARGE = 'ml.trn1.32xlarge'
-      ML_TRN1N_32XLARGE = 'ml.trn1n.32xlarge'
-      ML_M6I_LARGE = 'ml.m6i.large'
-      ML_M6I_XLARGE = 'ml.m6i.xlarge'
-      ML_M6I_2XLARGE = 'ml.m6i.2xlarge'
-      ML_M6I_4XLARGE = 'ml.m6i.4xlarge'
-      ML_M6I_8XLARGE = 'ml.m6i.8xlarge'
-      ML_M6I_12XLARGE = 'ml.m6i.12xlarge'
-      ML_M6I_16XLARGE = 'ml.m6i.16xlarge'
-      ML_M6I_24XLARGE = 'ml.m6i.24xlarge'
-      ML_M6I_32XLARGE = 'ml.m6i.32xlarge'
-      ML_C6I_XLARGE = 'ml.c6i.xlarge'
-      ML_C6I_2XLARGE = 'ml.c6i.2xlarge'
-      ML_C6I_8XLARGE = 'ml.c6i.8xlarge'
-      ML_C6I_4XLARGE = 'ml.c6i.4xlarge'
-      ML_C6I_12XLARGE = 'ml.c6i.12xlarge'
-      ML_C6I_16XLARGE = 'ml.c6i.16xlarge'
-      ML_C6I_24XLARGE = 'ml.c6i.24xlarge'
-      ML_C6I_32XLARGE = 'ml.c6i.32xlarge'
-      ML_R5D_LARGE = 'ml.r5d.large'
-      ML_R5D_XLARGE = 'ml.r5d.xlarge'
-      ML_R5D_2XLARGE = 'ml.r5d.2xlarge'
-      ML_R5D_4XLARGE = 'ml.r5d.4xlarge'
-      ML_R5D_8XLARGE = 'ml.r5d.8xlarge'
-      ML_R5D_12XLARGE = 'ml.r5d.12xlarge'
-      ML_R5D_16XLARGE = 'ml.r5d.16xlarge'
-      ML_R5D_24XLARGE = 'ml.r5d.24xlarge'
-      ML_T3_MEDIUM = 'ml.t3.medium'
-      ML_T3_LARGE = 'ml.t3.large'
-      ML_T3_XLARGE = 'ml.t3.xlarge'
-      ML_T3_2XLARGE = 'ml.t3.2xlarge'
-      ML_R5_LARGE = 'ml.r5.large'
-      ML_R5_XLARGE = 'ml.r5.xlarge'
-      ML_R5_2XLARGE = 'ml.r5.2xlarge'
-      ML_R5_4XLARGE = 'ml.r5.4xlarge'
-      ML_R5_8XLARGE = 'ml.r5.8xlarge'
-      ML_R5_12XLARGE = 'ml.r5.12xlarge'
-      ML_R5_16XLARGE = 'ml.r5.16xlarge'
-      ML_R5_24XLARGE = 'ml.r5.24xlarge'
     end
 
     # <p>An internal service error occurred. Retry your request. If the problem persists, contact AWS Support.</p>
@@ -2527,7 +2290,7 @@ module Aws::CleanRoomsML
     class InternalServiceException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2544,7 +2307,7 @@ module Aws::CleanRoomsML
       :max_results,
       :audience_generation_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2557,7 +2320,7 @@ module Aws::CleanRoomsML
       :next_token,
       :audience_export_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2578,7 +2341,7 @@ module Aws::CleanRoomsML
       :configured_audience_model_arn,
       :collaboration_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2591,7 +2354,7 @@ module Aws::CleanRoomsML
       :next_token,
       :audience_generation_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2604,7 +2367,7 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2617,7 +2380,7 @@ module Aws::CleanRoomsML
       :next_token,
       :audience_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2634,7 +2397,7 @@ module Aws::CleanRoomsML
       :max_results,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2647,7 +2410,7 @@ module Aws::CleanRoomsML
       :next_token,
       :collaboration_configured_model_algorithm_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2664,7 +2427,7 @@ module Aws::CleanRoomsML
       :max_results,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2677,7 +2440,7 @@ module Aws::CleanRoomsML
       :next_token,
       :collaboration_ml_input_channels_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2702,7 +2465,7 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :trained_model_version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2715,7 +2478,7 @@ module Aws::CleanRoomsML
       :next_token,
       :collaboration_trained_model_export_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2740,7 +2503,7 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :trained_model_version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2753,7 +2516,7 @@ module Aws::CleanRoomsML
       :next_token,
       :collaboration_trained_model_inference_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2770,7 +2533,7 @@ module Aws::CleanRoomsML
       :max_results,
       :collaboration_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2783,7 +2546,7 @@ module Aws::CleanRoomsML
       :next_token,
       :collaboration_trained_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2796,7 +2559,7 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2809,7 +2572,7 @@ module Aws::CleanRoomsML
       :next_token,
       :configured_audience_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2826,7 +2589,7 @@ module Aws::CleanRoomsML
       :max_results,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2839,7 +2602,7 @@ module Aws::CleanRoomsML
       :next_token,
       :configured_model_algorithm_associations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2852,7 +2615,7 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2865,7 +2628,7 @@ module Aws::CleanRoomsML
       :next_token,
       :configured_model_algorithms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2882,7 +2645,7 @@ module Aws::CleanRoomsML
       :max_results,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2895,7 +2658,7 @@ module Aws::CleanRoomsML
       :next_token,
       :ml_input_channels_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2904,7 +2667,7 @@ module Aws::CleanRoomsML
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -2913,7 +2676,7 @@ module Aws::CleanRoomsML
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2938,7 +2701,7 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :trained_model_version_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2951,7 +2714,7 @@ module Aws::CleanRoomsML
       :next_token,
       :trained_model_inference_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2976,7 +2739,7 @@ module Aws::CleanRoomsML
       :trained_model_arn,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -2989,7 +2752,7 @@ module Aws::CleanRoomsML
       :next_token,
       :trained_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3006,7 +2769,7 @@ module Aws::CleanRoomsML
       :max_results,
       :membership_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3019,7 +2782,7 @@ module Aws::CleanRoomsML
       :next_token,
       :trained_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3032,7 +2795,7 @@ module Aws::CleanRoomsML
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3045,7 +2808,7 @@ module Aws::CleanRoomsML
       :next_token,
       :training_datasets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the information necessary for a user to access the logs.</p>
@@ -3059,23 +2822,7 @@ module Aws::CleanRoomsML
       :allowed_account_ids,
       :filter_pattern,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LogsStatus
-      PUBLISH_SUCCEEDED = 'PUBLISH_SUCCEEDED'
-      PUBLISH_FAILED = 'PUBLISH_FAILED'
-    end
-
-    module MLInputChannelStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides summary information about the ML input channel.</p>
@@ -3121,7 +2868,7 @@ module Aws::CleanRoomsML
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about how the exported model artifacts are stored.</p>
@@ -3135,7 +2882,7 @@ module Aws::CleanRoomsML
       :destination,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the model metric that is reported for a trained model.</p>
@@ -3149,7 +2896,7 @@ module Aws::CleanRoomsML
       :name,
       :regex,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the configuration policy for metrics generation.</p>
@@ -3159,12 +2906,7 @@ module Aws::CleanRoomsML
     class MetricsConfigurationPolicy < Struct.new(
       :noise_level,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MetricsStatus
-      PUBLISH_SUCCEEDED = 'PUBLISH_SUCCEEDED'
-      PUBLISH_FAILED = 'PUBLISH_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines information about the data source used for model inference.</p>
@@ -3174,7 +2916,7 @@ module Aws::CleanRoomsML
     class ModelInferenceDataSource < Struct.new(
       :ml_input_channel_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the model training data channel. A training data channel is a named data source that the training algorithms can consume. </p>
@@ -3192,24 +2934,12 @@ module Aws::CleanRoomsML
       :channel_name,
       :s3_data_distribution_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:s3_data_distribution_type] = 'FullyReplicated' unless options.key?(:s3_data_distribution_type)
         super
       end
-    end
-
-    module NoiseLevelType
-      HIGH = 'HIGH'
-      MEDIUM = 'MEDIUM'
-      LOW = 'LOW'
-      NONE = 'NONE'
-    end
-
-    module PolicyExistenceCondition
-      POLICY_MUST_EXIST = 'POLICY_MUST_EXIST'
-      POLICY_MUST_NOT_EXIST = 'POLICY_MUST_NOT_EXIST'
     end
 
     # <p>Information about the privacy configuration for a configured model algorithm association.</p>
@@ -3219,7 +2949,7 @@ module Aws::CleanRoomsML
     class PrivacyConfiguration < Struct.new(
       :policies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the privacy configuration policies for a configured model algorithm association.</p>
@@ -3237,7 +2967,7 @@ module Aws::CleanRoomsML
       :trained_model_exports,
       :trained_model_inference_jobs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information necessary to perform the protected query.</p>
@@ -3255,7 +2985,7 @@ module Aws::CleanRoomsML
       :compute_configuration,
       :result_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:result_format] = 'CSV' unless options.key?(:result_format)
@@ -3279,7 +3009,7 @@ module Aws::CleanRoomsML
       :analysis_template_arn,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -3300,7 +3030,7 @@ module Aws::CleanRoomsML
       :previous_policy_hash,
       :policy_existence_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_policy
@@ -3313,7 +3043,7 @@ module Aws::CleanRoomsML
       :configured_audience_model_policy,
       :policy_hash,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3326,7 +3056,7 @@ module Aws::CleanRoomsML
       :membership_identifier,
       :default_output_location,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The relevance score of a generated audience.</p>
@@ -3340,7 +3070,7 @@ module Aws::CleanRoomsML
       :audience_size,
       :score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the EC2 resources that are used to train the model.</p>
@@ -3358,7 +3088,7 @@ module Aws::CleanRoomsML
       :instance_type,
       :volume_size_in_gb,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:instance_count] = 1 unless options.key?(:instance_count)
@@ -3372,13 +3102,7 @@ module Aws::CleanRoomsML
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # File format of the returned data.
-    module ResultFormat
-      CSV = 'CSV'
-      PARQUET = 'PARQUET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about an Amazon S3 bucket and path.</p>
@@ -3388,12 +3112,7 @@ module Aws::CleanRoomsML
     class S3ConfigMap < Struct.new(
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module S3DataDistributionType
-      FULLY_REPLICATED = 'FullyReplicated'
-      SHARDED_BY_S3_KEY = 'ShardedByS3Key'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded your service quota.</p>
@@ -3410,12 +3129,7 @@ module Aws::CleanRoomsML
       :quota_name,
       :quota_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SharedAudienceMetrics
-      ALL = 'ALL'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3436,7 +3150,7 @@ module Aws::CleanRoomsML
       :audience_size,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3469,7 +3183,7 @@ module Aws::CleanRoomsML
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute audience_generation_job_arn
@@ -3478,7 +3192,7 @@ module Aws::CleanRoomsML
     class StartAudienceGenerationJobResponse < Struct.new(
       :audience_generation_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -3507,7 +3221,7 @@ module Aws::CleanRoomsML
       :output_configuration,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute membership_identifier
@@ -3564,7 +3278,7 @@ module Aws::CleanRoomsML
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trained_model_inference_job_arn
@@ -3573,7 +3287,7 @@ module Aws::CleanRoomsML
     class StartTrainedModelInferenceJobResponse < Struct.new(
       :trained_model_inference_job_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the status of a resource.</p>
@@ -3587,7 +3301,7 @@ module Aws::CleanRoomsML
       :status_code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The criteria used to stop model training.</p>
@@ -3597,17 +3311,12 @@ module Aws::CleanRoomsML
     class StoppingCondition < Struct.new(
       :max_runtime_in_seconds,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:max_runtime_in_seconds] = 86400 unless options.key?(:max_runtime_in_seconds)
         super
       end
-    end
-
-    module TagOnCreatePolicy
-      FROM_PARENT_RESOURCE = 'FROM_PARENT_RESOURCE'
-      NONE = 'NONE'
     end
 
     # @!attribute resource_arn
@@ -3620,12 +3329,12 @@ module Aws::CleanRoomsML
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -3634,7 +3343,7 @@ module Aws::CleanRoomsML
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the maximum size limit for trained model artifacts. This configuration helps control storage costs and ensures that trained models don't exceed specified size constraints. The size limit applies to the total size of all artifacts produced by the training job.</p>
@@ -3648,23 +3357,7 @@ module Aws::CleanRoomsML
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainedModelArtifactMaxSizeUnitType
-      GB = 'GB'
-    end
-
-    module TrainedModelExportFileType
-      MODEL = 'MODEL'
-      OUTPUT = 'OUTPUT'
-    end
-
-    module TrainedModelExportJobStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the output of the trained model export job.</p>
@@ -3674,7 +3367,7 @@ module Aws::CleanRoomsML
     class TrainedModelExportOutputConfiguration < Struct.new(
       :members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the member who will receive trained model exports.</p>
@@ -3684,7 +3377,7 @@ module Aws::CleanRoomsML
     class TrainedModelExportReceiverMember < Struct.new(
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about how the trained model exports are configured.</p>
@@ -3698,7 +3391,7 @@ module Aws::CleanRoomsML
       :max_size,
       :files_to_export,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum size of the trained model metrics that can be exported. If the trained model metrics dataset is larger than this value, it will not be exported.</p>
@@ -3712,22 +3405,7 @@ module Aws::CleanRoomsML
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainedModelExportsMaxSizeUnitType
-      GB = 'GB'
-    end
-
-    module TrainedModelInferenceJobStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      CANCEL_PENDING = 'CANCEL_PENDING'
-      CANCEL_IN_PROGRESS = 'CANCEL_IN_PROGRESS'
-      CANCEL_FAILED = 'CANCEL_FAILED'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the trained model inference job.</p>
@@ -3797,7 +3475,7 @@ module Aws::CleanRoomsML
       :create_time,
       :update_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides configuration information for the trained model inference job.</p>
@@ -3811,7 +3489,7 @@ module Aws::CleanRoomsML
       :container_logs,
       :max_output_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the maximum output size for a trained model inference job.</p>
@@ -3825,25 +3503,7 @@ module Aws::CleanRoomsML
       :unit,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainedModelInferenceMaxOutputSizeUnitType
-      GB = 'GB'
-    end
-
-    module TrainedModelStatus
-      CREATE_PENDING = 'CREATE_PENDING'
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_FAILED = 'CREATE_FAILED'
-      ACTIVE = 'ACTIVE'
-      DELETE_PENDING = 'DELETE_PENDING'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
-      INACTIVE = 'INACTIVE'
-      CANCEL_PENDING = 'CANCEL_PENDING'
-      CANCEL_IN_PROGRESS = 'CANCEL_IN_PROGRESS'
-      CANCEL_FAILED = 'CANCEL_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about the trained model.</p>
@@ -3893,7 +3553,7 @@ module Aws::CleanRoomsML
       :status,
       :configured_model_algorithm_association_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration policy for the trained models.</p>
@@ -3911,11 +3571,7 @@ module Aws::CleanRoomsML
       :container_metrics,
       :max_artifact_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingDatasetStatus
-      ACTIVE = 'ACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the training dataset.</p>
@@ -3945,13 +3601,7 @@ module Aws::CleanRoomsML
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrainingInputMode
-      FILE = 'File'
-      FAST_FILE = 'FastFile'
-      PIPE = 'Pipe'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -3964,12 +3614,12 @@ module Aws::CleanRoomsML
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -4002,7 +3652,7 @@ module Aws::CleanRoomsML
       :audience_size_config,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute configured_audience_model_arn
@@ -4011,7 +3661,7 @@ module Aws::CleanRoomsML
     class UpdateConfiguredAudienceModelResponse < Struct.new(
       :configured_audience_model_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request parameters for this request are incorrect.</p>
@@ -4020,7 +3670,7 @@ module Aws::CleanRoomsML
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration information about the compute workers that perform the transform job.</p>
@@ -4034,18 +3684,13 @@ module Aws::CleanRoomsML
       :type,
       :number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:type] = 'CR.1X' unless options.key?(:type)
         options[:number] = 16 unless options.key?(:number)
         super
       end
-    end
-
-    module WorkerComputeType
-      CR1X = 'CR.1X'
-      CR4X = 'CR.4X'
     end
 
   end

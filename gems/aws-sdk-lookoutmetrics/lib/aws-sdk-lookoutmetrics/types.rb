@@ -12,7 +12,7 @@ module Aws::LookoutMetrics
     class AccessDeniedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration that specifies the action to perform when anomalies are detected.</p>
@@ -26,7 +26,7 @@ module Aws::LookoutMetrics
       :sns_configuration,
       :lambda_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -35,17 +35,12 @@ module Aws::LookoutMetrics
     class ActivateAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ActivateAnomalyDetectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggregationFunction
-      AVG = 'AVG'
-      SUM = 'SUM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A configuration for Amazon SNS-integrated notifications.</p>
@@ -95,7 +90,7 @@ module Aws::LookoutMetrics
       :creation_time,
       :alert_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:alert_sensitivity_threshold] = 0 unless options.key?(:alert_sensitivity_threshold)
@@ -114,12 +109,7 @@ module Aws::LookoutMetrics
       :metric_list,
       :dimension_filter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AlertStatus
-      ACTIVE = 'ACTIVE'
-      INACTIVE = 'INACTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a summary of an alert's configuration.</p>
@@ -161,25 +151,12 @@ module Aws::LookoutMetrics
       :creation_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:alert_sensitivity_threshold] = 0 unless options.key?(:alert_sensitivity_threshold)
         super
       end
-    end
-
-    module AlertType
-      SNS = 'SNS'
-      LAMBDA = 'LAMBDA'
-    end
-
-    module AnomalyDetectionTaskStatus
-      PENDING = 'PENDING'
-      IN_PROGRESS = 'IN_PROGRESS'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
-      FAILED_TO_SCHEDULE = 'FAILED_TO_SCHEDULE'
     end
 
     # <p>Contains information about a detector's configuration.</p>
@@ -189,7 +166,7 @@ module Aws::LookoutMetrics
     class AnomalyDetectorConfig < Struct.new(
       :anomaly_detector_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a detector's configuration.</p>
@@ -199,7 +176,7 @@ module Aws::LookoutMetrics
     class AnomalyDetectorConfigSummary < Struct.new(
       :anomaly_detector_frequency,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregated details about the data quality metrics collected for the <code>AnomalyDetectorArn</code> provided in the <a>GetDataQualityMetrics</a> object.</p>
@@ -213,28 +190,7 @@ module Aws::LookoutMetrics
       :start_timestamp,
       :metric_set_data_quality_metric_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnomalyDetectorFailureType
-      ACTIVATION_FAILURE = 'ACTIVATION_FAILURE'
-      BACK_TEST_ACTIVATION_FAILURE = 'BACK_TEST_ACTIVATION_FAILURE'
-      DELETION_FAILURE = 'DELETION_FAILURE'
-      DEACTIVATION_FAILURE = 'DEACTIVATION_FAILURE'
-    end
-
-    module AnomalyDetectorStatus
-      ACTIVE = 'ACTIVE'
-      ACTIVATING = 'ACTIVATING'
-      DELETING = 'DELETING'
-      FAILED = 'FAILED'
-      INACTIVE = 'INACTIVE'
-      LEARNING = 'LEARNING'
-      BACK_TEST_ACTIVATING = 'BACK_TEST_ACTIVATING'
-      BACK_TEST_ACTIVE = 'BACK_TEST_ACTIVE'
-      BACK_TEST_COMPLETE = 'BACK_TEST_COMPLETE'
-      DEACTIVATED = 'DEACTIVATED'
-      DEACTIVATING = 'DEACTIVATING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an an anomaly detector.</p>
@@ -268,7 +224,7 @@ module Aws::LookoutMetrics
       :status,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A group of anomalous metrics</p>
@@ -298,7 +254,7 @@ module Aws::LookoutMetrics
       :primary_metric_name,
       :metric_level_impact_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregated statistics for a group of anomalous metrics.</p>
@@ -316,7 +272,7 @@ module Aws::LookoutMetrics
       :total_count,
       :itemized_metric_stats_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:total_count] = 0 unless options.key?(:total_count)
@@ -347,7 +303,7 @@ module Aws::LookoutMetrics
       :anomaly_group_score,
       :primary_metric_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An anomalous metric in an anomaly group.</p>
@@ -361,7 +317,7 @@ module Aws::LookoutMetrics
       :anomaly_group_id,
       :time_series_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Feedback for an anomalous metric.</p>
@@ -379,7 +335,7 @@ module Aws::LookoutMetrics
       :time_series_id,
       :is_anomaly,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon AppFlow flow datasource.</p>
@@ -393,7 +349,7 @@ module Aws::LookoutMetrics
       :role_arn,
       :flow_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon Athena datasource.</p>
@@ -427,7 +383,7 @@ module Aws::LookoutMetrics
       :s3_results_path,
       :back_test_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An attribute value.</p>
@@ -457,7 +413,7 @@ module Aws::LookoutMetrics
       :ns,
       :bs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An auto detection metric source.</p>
@@ -467,7 +423,7 @@ module Aws::LookoutMetrics
     class AutoDetectionMetricSource < Struct.new(
       :s3_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An auto detection source config.</p>
@@ -481,7 +437,7 @@ module Aws::LookoutMetrics
       :templated_path_list,
       :historical_data_path_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -490,12 +446,12 @@ module Aws::LookoutMetrics
     class BackTestAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class BackTestAnomalyDetectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Settings for backtest mode.</p>
@@ -505,12 +461,7 @@ module Aws::LookoutMetrics
     class BackTestConfiguration < Struct.new(
       :run_back_test_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CSVFileCompression
-      NONE = 'NONE'
-      GZIP = 'GZIP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about an Amazon CloudWatch datasource.</p>
@@ -524,13 +475,7 @@ module Aws::LookoutMetrics
       :role_arn,
       :back_test_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Confidence
-      HIGH = 'HIGH'
-      LOW = 'LOW'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There was a conflict processing the request. Try your request again.</p>
@@ -547,7 +492,7 @@ module Aws::LookoutMetrics
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about dimensions that contributed to an anomaly.</p>
@@ -557,7 +502,7 @@ module Aws::LookoutMetrics
     class ContributionMatrix < Struct.new(
       :dimension_contribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_name
@@ -590,7 +535,7 @@ module Aws::LookoutMetrics
       :tags,
       :alert_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_arn
@@ -599,7 +544,7 @@ module Aws::LookoutMetrics
     class CreateAlertResponse < Struct.new(
       :alert_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_name
@@ -624,7 +569,7 @@ module Aws::LookoutMetrics
       :kms_key_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -633,7 +578,7 @@ module Aws::LookoutMetrics
     class CreateAnomalyDetectorResponse < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -686,7 +631,7 @@ module Aws::LookoutMetrics
       :tags,
       :dimension_filter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_set_arn
@@ -695,7 +640,7 @@ module Aws::LookoutMetrics
     class CreateMetricSetResponse < Struct.new(
       :metric_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about how a source CSV data file should be analyzed.</p>
@@ -725,7 +670,7 @@ module Aws::LookoutMetrics
       :header_list,
       :quote_symbol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array that describes a data quality metric. Each <code>DataQualityMetric</code> object contains the data quality metric name, its value, a description of the metric, and the affected column.</p>
@@ -747,20 +692,7 @@ module Aws::LookoutMetrics
       :related_column_name,
       :metric_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataQualityMetricType
-      COLUMN_COMPLETENESS = 'COLUMN_COMPLETENESS'
-      DIMENSION_UNIQUENESS = 'DIMENSION_UNIQUENESS'
-      TIME_SERIES_COUNT = 'TIME_SERIES_COUNT'
-      ROWS_PROCESSED = 'ROWS_PROCESSED'
-      ROWS_PARTIAL_COMPLIANCE = 'ROWS_PARTIAL_COMPLIANCE'
-      INVALID_ROWS_COMPLIANCE = 'INVALID_ROWS_COMPLIANCE'
-      BACKTEST_TRAINING_DATA_START_TIME_STAMP = 'BACKTEST_TRAINING_DATA_START_TIME_STAMP'
-      BACKTEST_TRAINING_DATA_END_TIME_STAMP = 'BACKTEST_TRAINING_DATA_END_TIME_STAMP'
-      BACKTEST_INFERENCE_DATA_START_TIME_STAMP = 'BACKTEST_INFERENCE_DATA_START_TIME_STAMP'
-      BACKTEST_INFERENCE_DATA_END_TIME_STAMP = 'BACKTEST_INFERENCE_DATA_END_TIME_STAMP'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -769,12 +701,12 @@ module Aws::LookoutMetrics
     class DeactivateAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeactivateAnomalyDetectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_arn
@@ -783,12 +715,12 @@ module Aws::LookoutMetrics
     class DeleteAlertRequest < Struct.new(
       :alert_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAlertResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -797,12 +729,12 @@ module Aws::LookoutMetrics
     class DeleteAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteAnomalyDetectorResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_arn
@@ -811,7 +743,7 @@ module Aws::LookoutMetrics
     class DescribeAlertRequest < Struct.new(
       :alert_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert
@@ -820,7 +752,7 @@ module Aws::LookoutMetrics
     class DescribeAlertResponse < Struct.new(
       :alert,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -841,7 +773,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute execution_list
@@ -854,7 +786,7 @@ module Aws::LookoutMetrics
       :execution_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -863,7 +795,7 @@ module Aws::LookoutMetrics
     class DescribeAnomalyDetectorRequest < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -908,7 +840,7 @@ module Aws::LookoutMetrics
       :kms_key_arn,
       :failure_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_set_arn
@@ -917,7 +849,7 @@ module Aws::LookoutMetrics
     class DescribeMetricSetRequest < Struct.new(
       :metric_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_set_arn
@@ -978,10 +910,10 @@ module Aws::LookoutMetrics
       :metric_source,
       :dimension_filter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:offset] =  unless options.key?(:offset)
+        options[:offset] = nil unless options.key?(:offset)
         super
       end
     end
@@ -996,7 +928,7 @@ module Aws::LookoutMetrics
       :anomaly_detector_arn,
       :auto_detection_metric_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute detected_metric_set_config
@@ -1005,7 +937,7 @@ module Aws::LookoutMetrics
     class DetectMetricSetConfigResponse < Struct.new(
       :detected_metric_set_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of an inferred CSV format.</p>
@@ -1035,7 +967,7 @@ module Aws::LookoutMetrics
       :header_list,
       :quote_symbol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An inferred field.</p>
@@ -1053,7 +985,7 @@ module Aws::LookoutMetrics
       :confidence,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties of an inferred data format.</p>
@@ -1067,7 +999,7 @@ module Aws::LookoutMetrics
       :csv_format_descriptor,
       :json_format_descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A detected JSON format descriptor.</p>
@@ -1081,7 +1013,7 @@ module Aws::LookoutMetrics
       :file_compression,
       :charset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An inferred dataset configuration.</p>
@@ -1099,7 +1031,7 @@ module Aws::LookoutMetrics
       :metric_set_frequency,
       :metric_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An inferred data source.</p>
@@ -1109,7 +1041,7 @@ module Aws::LookoutMetrics
     class DetectedMetricSource < Struct.new(
       :s3_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An inferred source configuration.</p>
@@ -1119,7 +1051,7 @@ module Aws::LookoutMetrics
     class DetectedS3SourceConfig < Struct.new(
       :file_format_descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a dimension that contributed to an anomaly.</p>
@@ -1133,7 +1065,7 @@ module Aws::LookoutMetrics
       :dimension_name,
       :dimension_value_contribution_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dimension filter, containing DimensionName and DimensionValueList.</p>
@@ -1147,7 +1079,7 @@ module Aws::LookoutMetrics
       :dimension_name,
       :dimension_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dimension name and value.</p>
@@ -1161,7 +1093,7 @@ module Aws::LookoutMetrics
       :dimension_name,
       :dimension_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The severity of a value of a dimension that contributed to an anomaly.</p>
@@ -1175,7 +1107,7 @@ module Aws::LookoutMetrics
       :dimension_value,
       :contribution_score,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of an anomaly detector run.</p>
@@ -1193,7 +1125,7 @@ module Aws::LookoutMetrics
       :status,
       :failure_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a source file's formatting.</p>
@@ -1207,7 +1139,7 @@ module Aws::LookoutMetrics
       :csv_format_descriptor,
       :json_format_descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a filter for choosing a subset of dimension values. Each filter consists of the dimension that you want to include and the condition statement. The condition statement is specified in the <code>FilterOperation</code> object.</p>
@@ -1221,18 +1153,7 @@ module Aws::LookoutMetrics
       :dimension_value,
       :filter_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterOperation
-      EQUALS = 'EQUALS'
-    end
-
-    module Frequency
-      P1D = 'P1D'
-      PT1H = 'PT1H'
-      PT10M = 'PT10M'
-      PT5M = 'PT5M'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_group_id
@@ -1245,7 +1166,7 @@ module Aws::LookoutMetrics
       :anomaly_group_id,
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_group
@@ -1254,7 +1175,7 @@ module Aws::LookoutMetrics
     class GetAnomalyGroupResponse < Struct.new(
       :anomaly_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1267,7 +1188,7 @@ module Aws::LookoutMetrics
       :anomaly_detector_arn,
       :metric_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_data_quality_metric_list
@@ -1276,7 +1197,7 @@ module Aws::LookoutMetrics
     class GetDataQualityMetricsResponse < Struct.new(
       :anomaly_detector_data_quality_metric_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1297,7 +1218,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_group_time_series_feedback
@@ -1310,7 +1231,7 @@ module Aws::LookoutMetrics
       :anomaly_group_time_series_feedback,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute s3_source_config
@@ -1319,7 +1240,7 @@ module Aws::LookoutMetrics
     class GetSampleDataRequest < Struct.new(
       :s3_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute header_values
@@ -1332,7 +1253,7 @@ module Aws::LookoutMetrics
       :header_values,
       :sample_rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregated details about the measures contributing to the anomaly group, and the measures
@@ -1359,7 +1280,7 @@ module Aws::LookoutMetrics
       :relationship_type,
       :contribution_percentage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request processing has failed because of an unknown error, exception, or failure.</p>
@@ -1368,7 +1289,7 @@ module Aws::LookoutMetrics
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregated statistics about a measure affected by an anomaly.</p>
@@ -1382,17 +1303,12 @@ module Aws::LookoutMetrics
       :metric_name,
       :occurrence_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:occurrence_count] = 0 unless options.key?(:occurrence_count)
         super
       end
-    end
-
-    module JsonFileCompression
-      NONE = 'NONE'
-      GZIP = 'GZIP'
     end
 
     # <p>Contains information about how a source JSON data file should be analyzed.</p>
@@ -1406,7 +1322,7 @@ module Aws::LookoutMetrics
       :file_compression,
       :charset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a Lambda configuration.</p>
@@ -1420,7 +1336,7 @@ module Aws::LookoutMetrics
       :role_arn,
       :lambda_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1438,7 +1354,7 @@ module Aws::LookoutMetrics
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_summary_list
@@ -1452,7 +1368,7 @@ module Aws::LookoutMetrics
       :alert_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute max_results
@@ -1466,7 +1382,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_summary_list
@@ -1480,7 +1396,7 @@ module Aws::LookoutMetrics
       :anomaly_detector_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1507,7 +1423,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute inter_metric_impact_list
@@ -1521,7 +1437,7 @@ module Aws::LookoutMetrics
       :inter_metric_impact_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1542,7 +1458,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_group_summary_list
@@ -1559,7 +1475,7 @@ module Aws::LookoutMetrics
       :anomaly_group_statistics,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1584,7 +1500,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_group_id
@@ -1609,7 +1525,7 @@ module Aws::LookoutMetrics
       :next_token,
       :time_series_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1628,7 +1544,7 @@ module Aws::LookoutMetrics
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_set_summary_list
@@ -1642,7 +1558,7 @@ module Aws::LookoutMetrics
       :metric_set_summary_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1651,7 +1567,7 @@ module Aws::LookoutMetrics
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1660,7 +1576,7 @@ module Aws::LookoutMetrics
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A calculation made by contrasting a measure and a dimension from your source data.</p>
@@ -1678,7 +1594,7 @@ module Aws::LookoutMetrics
       :aggregation_function,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a measure affected by an anomaly.</p>
@@ -1696,7 +1612,7 @@ module Aws::LookoutMetrics
       :num_time_series,
       :contribution_matrix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:num_time_series] = 0 unless options.key?(:num_time_series)
@@ -1715,7 +1631,7 @@ module Aws::LookoutMetrics
       :metric_set_arn,
       :data_quality_metric_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a list of filters for choosing a subset of dimension values. Each filter consists of the dimension and one of its values that you want to include. When multiple dimensions or values are specified, the dimensions are joined with an AND operation and the values are joined with an OR operation. </p>
@@ -1729,7 +1645,7 @@ module Aws::LookoutMetrics
       :name,
       :filter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a dataset.</p>
@@ -1763,7 +1679,7 @@ module Aws::LookoutMetrics
       :last_modification_time,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about source data used to generate metrics.</p>
@@ -1793,7 +1709,7 @@ module Aws::LookoutMetrics
       :redshift_source_config,
       :athena_source_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -1806,12 +1722,12 @@ module Aws::LookoutMetrics
       :anomaly_detector_arn,
       :anomaly_group_time_series_feedback,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class PutFeedbackResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the Amazon Relational Database Service (RDS) configuration.</p>
@@ -1849,7 +1765,7 @@ module Aws::LookoutMetrics
       :role_arn,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the Amazon Redshift database configuration.</p>
@@ -1887,12 +1803,7 @@ module Aws::LookoutMetrics
       :role_arn,
       :vpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelationshipType
-      CAUSE_OF_INPUT_ANOMALY_GROUP = 'CAUSE_OF_INPUT_ANOMALY_GROUP'
-      EFFECT_OF_INPUT_ANOMALY_GROUP = 'EFFECT_OF_INPUT_ANOMALY_GROUP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource cannot be found. Check the ARN of the resource and try again.</p>
@@ -1909,7 +1820,7 @@ module Aws::LookoutMetrics
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configuration of the S3 bucket that contains source files.</p>
@@ -1931,7 +1842,7 @@ module Aws::LookoutMetrics
       :historical_data_path_list,
       :file_format_descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the SNS topic to which you want to send your alerts and the IAM role that has
@@ -1964,7 +1875,7 @@ module Aws::LookoutMetrics
       :sns_topic_arn,
       :sns_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the source configuration in Amazon S3.</p>
@@ -1986,7 +1897,7 @@ module Aws::LookoutMetrics
       :historical_data_path_list,
       :file_format_descriptor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeded the service's quotas. Check the service quotas and try again.</p>
@@ -2011,13 +1922,7 @@ module Aws::LookoutMetrics
       :quota_code,
       :service_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnsFormat
-      LONG_TEXT = 'LONG_TEXT'
-      SHORT_TEXT = 'SHORT_TEXT'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2032,12 +1937,12 @@ module Aws::LookoutMetrics
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about a metric. A metric is an aggregation of the values of a measure for a dimension value, such as
@@ -2056,7 +1961,7 @@ module Aws::LookoutMetrics
       :dimension_list,
       :metric_value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about feedback submitted for an anomalous metric.</p>
@@ -2070,7 +1975,7 @@ module Aws::LookoutMetrics
       :time_series_id,
       :is_anomaly,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the column used to track time in a source data file.</p>
@@ -2084,7 +1989,7 @@ module Aws::LookoutMetrics
       :column_name,
       :column_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to too many requests being submitted at the same time.</p>
@@ -2093,7 +1998,7 @@ module Aws::LookoutMetrics
     class TooManyRequestsException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2106,12 +2011,12 @@ module Aws::LookoutMetrics
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_arn
@@ -2136,7 +2041,7 @@ module Aws::LookoutMetrics
       :action,
       :alert_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alert_arn
@@ -2145,7 +2050,7 @@ module Aws::LookoutMetrics
     class UpdateAlertResponse < Struct.new(
       :alert_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -2166,7 +2071,7 @@ module Aws::LookoutMetrics
       :anomaly_detector_description,
       :anomaly_detector_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute anomaly_detector_arn
@@ -2175,7 +2080,7 @@ module Aws::LookoutMetrics
     class UpdateAnomalyDetectorResponse < Struct.new(
       :anomaly_detector_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_set_arn
@@ -2219,7 +2124,7 @@ module Aws::LookoutMetrics
       :metric_source,
       :dimension_filter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute metric_set_arn
@@ -2228,7 +2133,7 @@ module Aws::LookoutMetrics
     class UpdateMetricSetResponse < Struct.new(
       :metric_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by the AWS service. Check your input values and try
@@ -2246,7 +2151,7 @@ module Aws::LookoutMetrics
       :reason,
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a a field in a validation exception.</p>
@@ -2260,14 +2165,7 @@ module Aws::LookoutMetrics
       :name,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationExceptionReason
-      UNKNOWN_OPERATION = 'UNKNOWN_OPERATION'
-      CANNOT_PARSE = 'CANNOT_PARSE'
-      FIELD_VALIDATION_FAILED = 'FIELD_VALIDATION_FAILED'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration information about the Amazon Virtual Private Cloud (VPC).</p>
@@ -2281,7 +2179,7 @@ module Aws::LookoutMetrics
       :subnet_id_list,
       :security_group_id_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

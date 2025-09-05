@@ -16,7 +16,7 @@ module Aws::CloudHSM
       :resource_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -25,12 +25,7 @@ module Aws::CloudHSM
     class AddTagsToResourceResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientVersion
-      FIVE_ONE = '5.1'
-      FIVE_THREE = '5.3'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that an internal error occurred.</p>
@@ -44,18 +39,12 @@ module Aws::CloudHSM
       :message,
       :retryable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retryable] = false unless options.key?(:retryable)
         super
       end
-    end
-
-    module CloudHsmObjectState
-      READY = 'READY'
-      UPDATING = 'UPDATING'
-      DEGRADED = 'DEGRADED'
     end
 
     # <p>Indicates that an exception occurred in the AWS CloudHSM service.</p>
@@ -69,7 +58,7 @@ module Aws::CloudHSM
       :message,
       :retryable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retryable] = false unless options.key?(:retryable)
@@ -84,7 +73,7 @@ module Aws::CloudHSM
     class CreateHapgRequest < Struct.new(
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>CreateHAPartitionGroup</a> action.</p>
@@ -94,7 +83,7 @@ module Aws::CloudHSM
     class CreateHapgResponse < Struct.new(
       :hapg_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <code>CreateHsm</code> operation.</p>
@@ -149,7 +138,7 @@ module Aws::CloudHSM
       :client_token,
       :syslog_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <code>CreateHsm</code> operation.</p>
@@ -159,7 +148,7 @@ module Aws::CloudHSM
     class CreateHsmResponse < Struct.new(
       :hsm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>CreateLunaClient</a> action.</p>
@@ -174,7 +163,7 @@ module Aws::CloudHSM
       :label,
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>CreateLunaClient</a> action.</p>
@@ -184,7 +173,7 @@ module Aws::CloudHSM
     class CreateLunaClientResponse < Struct.new(
       :client_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DeleteHapg</a> action.</p>
@@ -194,7 +183,7 @@ module Aws::CloudHSM
     class DeleteHapgRequest < Struct.new(
       :hapg_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>DeleteHapg</a> action.</p>
@@ -204,7 +193,7 @@ module Aws::CloudHSM
     class DeleteHapgResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DeleteHsm</a> operation.</p>
@@ -214,7 +203,7 @@ module Aws::CloudHSM
     class DeleteHsmRequest < Struct.new(
       :hsm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>DeleteHsm</a> operation.</p>
@@ -224,7 +213,7 @@ module Aws::CloudHSM
     class DeleteHsmResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_arn
@@ -233,7 +222,7 @@ module Aws::CloudHSM
     class DeleteLunaClientRequest < Struct.new(
       :client_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -242,7 +231,7 @@ module Aws::CloudHSM
     class DeleteLunaClientResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DescribeHapg</a> action.</p>
@@ -252,7 +241,7 @@ module Aws::CloudHSM
     class DescribeHapgRequest < Struct.new(
       :hapg_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>DescribeHapg</a> action.</p>
@@ -295,7 +284,7 @@ module Aws::CloudHSM
       :partition_serial_list,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DescribeHsm</a> operation.</p>
@@ -311,7 +300,7 @@ module Aws::CloudHSM
       :hsm_arn,
       :hsm_serial_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>DescribeHsm</a> operation.</p>
@@ -413,7 +402,7 @@ module Aws::CloudHSM
       :server_cert_last_updated,
       :partitions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_arn
@@ -426,7 +415,7 @@ module Aws::CloudHSM
       :client_arn,
       :certificate_fingerprint,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_arn
@@ -451,7 +440,7 @@ module Aws::CloudHSM
       :last_modified_timestamp,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_arn
@@ -469,7 +458,7 @@ module Aws::CloudHSM
       :client_version,
       :hapg_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute config_type
@@ -486,17 +475,7 @@ module Aws::CloudHSM
       :config_file,
       :config_cred,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HsmStatus
-      PENDING = 'PENDING'
-      RUNNING = 'RUNNING'
-      UPDATING = 'UPDATING'
-      SUSPENDED = 'SUSPENDED'
-      TERMINATING = 'TERMINATING'
-      TERMINATED = 'TERMINATED'
-      DEGRADED = 'DEGRADED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Indicates that one or more of the request parameters are not valid.</p>
@@ -510,7 +489,7 @@ module Aws::CloudHSM
       :message,
       :retryable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:retryable] = false unless options.key?(:retryable)
@@ -521,7 +500,7 @@ module Aws::CloudHSM
     # <p>Contains the inputs for the <a>ListAvailableZones</a> action.</p>
     class ListAvailableZonesRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute az_list
@@ -530,7 +509,7 @@ module Aws::CloudHSM
     class ListAvailableZonesResponse < Struct.new(
       :az_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -540,7 +519,7 @@ module Aws::CloudHSM
     class ListHapgsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hapg_list
@@ -554,7 +533,7 @@ module Aws::CloudHSM
       :hapg_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -564,7 +543,7 @@ module Aws::CloudHSM
     class ListHsmsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <code>ListHsms</code> operation.</p>
@@ -579,7 +558,7 @@ module Aws::CloudHSM
       :hsm_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -589,7 +568,7 @@ module Aws::CloudHSM
     class ListLunaClientsRequest < Struct.new(
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_list
@@ -603,7 +582,7 @@ module Aws::CloudHSM
       :client_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -612,7 +591,7 @@ module Aws::CloudHSM
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -621,7 +600,7 @@ module Aws::CloudHSM
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hapg_arn
@@ -639,7 +618,7 @@ module Aws::CloudHSM
       :label,
       :partition_serial_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute hapg_arn
@@ -648,7 +627,7 @@ module Aws::CloudHSM
     class ModifyHapgResponse < Struct.new(
       :hapg_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>ModifyHsm</a> operation.</p>
@@ -683,7 +662,7 @@ module Aws::CloudHSM
       :external_id,
       :syslog_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the output of the <a>ModifyHsm</a> operation.</p>
@@ -693,7 +672,7 @@ module Aws::CloudHSM
     class ModifyHsmResponse < Struct.new(
       :hsm_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_arn
@@ -706,7 +685,7 @@ module Aws::CloudHSM
       :client_arn,
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_arn
@@ -715,7 +694,7 @@ module Aws::CloudHSM
     class ModifyLunaClientResponse < Struct.new(
       :client_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -730,7 +709,7 @@ module Aws::CloudHSM
       :resource_arn,
       :tag_key_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -739,24 +718,7 @@ module Aws::CloudHSM
     class RemoveTagsFromResourceResponse < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>Specifies the type of subscription for the HSM.</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <b>PRODUCTION</b> - The HSM is being used in a production
-    #           environment.</p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <b>TRIAL</b> - The HSM is being used in a product
-    #           trial.</p>
-    #             </li>
-    #          </ul>
-    module SubscriptionType
-      PRODUCTION = 'PRODUCTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that identifies or specifies metadata about an AWS CloudHSM
@@ -771,7 +733,7 @@ module Aws::CloudHSM
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

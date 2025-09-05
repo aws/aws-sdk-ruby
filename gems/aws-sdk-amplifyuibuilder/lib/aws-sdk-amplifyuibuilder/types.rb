@@ -53,7 +53,7 @@ module Aws::AmplifyUIBuilder
       :fields,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the API configuration for a code generation job.</p>
@@ -72,7 +72,7 @@ module Aws::AmplifyUIBuilder
       :no_api_config,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class GraphQLConfig < ApiConfiguration; end
       class DataStoreConfig < ApiConfiguration; end
@@ -99,7 +99,7 @@ module Aws::AmplifyUIBuilder
       :is_sem_ver,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the feature flags that you can specify for a code generation job.</p>
@@ -113,7 +113,7 @@ module Aws::AmplifyUIBuilder
       :is_relationship_supported,
       :is_non_model_supported,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the enums in a generic data schema.</p>
@@ -123,7 +123,7 @@ module Aws::AmplifyUIBuilder
     class CodegenGenericDataEnum < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a field in a generic data schema.</p>
@@ -153,27 +153,7 @@ module Aws::AmplifyUIBuilder
       :is_array,
       :relationship,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodegenGenericDataFieldDataType
-      ID = 'ID'
-      STRING = 'String'
-      INT = 'Int'
-      FLOAT = 'Float'
-      AWS_DATE = 'AWSDate'
-      AWS_TIME = 'AWSTime'
-      AWS_DATE_TIME = 'AWSDateTime'
-      AWS_TIMESTAMP = 'AWSTimestamp'
-      AWS_EMAIL = 'AWSEmail'
-      AWS_URL = 'AWSURL'
-      AWS_IP_ADDRESS = 'AWSIPAddress'
-      BOOLEAN = 'Boolean'
-      AWS_JSON = 'AWSJSON'
-      AWS_PHONE = 'AWSPhone'
-      ENUM = 'Enum'
-      MODEL = 'Model'
-      NON_MODEL = 'NonModel'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a model in a generic data schema.</p>
@@ -191,7 +171,7 @@ module Aws::AmplifyUIBuilder
       :is_join_table,
       :primary_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a non-model in a generic data schema.</p>
@@ -201,7 +181,7 @@ module Aws::AmplifyUIBuilder
     class CodegenGenericDataNonModel < Struct.new(
       :fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the relationship between generic data models.</p>
@@ -243,7 +223,7 @@ module Aws::AmplifyUIBuilder
       :associated_fields,
       :is_has_many_index,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for a code generation job that is associated with an Amplify app.</p>
@@ -305,7 +285,7 @@ module Aws::AmplifyUIBuilder
       :modified_at,
       :dependencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an asset for a code generation job.</p>
@@ -315,7 +295,7 @@ module Aws::AmplifyUIBuilder
     class CodegenJobAsset < Struct.new(
       :download_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data schema for a code generation job.</p>
@@ -337,11 +317,7 @@ module Aws::AmplifyUIBuilder
       :enums,
       :non_models,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodegenJobGenericDataSourceType
-      DATA_STORE = 'DataStore'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration information for rendering the UI component associated with the code generation job.</p>
@@ -352,16 +328,10 @@ module Aws::AmplifyUIBuilder
       :react,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class React < CodegenJobRenderConfig; end
       class Unknown < CodegenJobRenderConfig; end
-    end
-
-    module CodegenJobStatus
-      IN_PROGRESS = 'in_progress'
-      FAILED = 'failed'
-      SUCCEEDED = 'succeeded'
     end
 
     # <p>A summary of the basic information about the code generation job.</p>
@@ -387,7 +357,7 @@ module Aws::AmplifyUIBuilder
       :created_at,
       :modified_at,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration settings for a user interface (UI) element for an Amplify app. A component is configured as a primary, stand-alone UI element. Use
@@ -476,7 +446,7 @@ module Aws::AmplifyUIBuilder
       :events,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data binding configuration for a component at runtime. You can use
@@ -497,7 +467,7 @@ module Aws::AmplifyUIBuilder
       :binding_properties,
       :default_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data binding configuration for a specific property using data stored in
@@ -538,7 +508,7 @@ module Aws::AmplifyUIBuilder
       :default_value,
       :slot_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A nested UI configuration within a parent <code>Component</code>.</p>
@@ -571,7 +541,7 @@ module Aws::AmplifyUIBuilder
       :events,
       :source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a conditional expression to set a component property. Use
@@ -608,7 +578,7 @@ module Aws::AmplifyUIBuilder
       :else,
       :operand_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for binding a component's properties to data.</p>
@@ -632,7 +602,7 @@ module Aws::AmplifyUIBuilder
       :predicate,
       :identifiers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of an event. You can bind an event and a corresponding action
@@ -653,7 +623,7 @@ module Aws::AmplifyUIBuilder
       :parameters,
       :binding_event,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for all of a component's properties. Use
@@ -724,7 +694,7 @@ module Aws::AmplifyUIBuilder
       :component_name,
       :property,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associates a component property to a binding property. This enables exposed properties on
@@ -739,7 +709,7 @@ module Aws::AmplifyUIBuilder
       :property,
       :field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a summary of a component. This is a read-only data type that is returned by
@@ -767,7 +737,7 @@ module Aws::AmplifyUIBuilder
       :name,
       :component_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the style configuration of a unique variation of a main component.</p>
@@ -784,7 +754,7 @@ module Aws::AmplifyUIBuilder
       :variant_values,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the information that is required to create a component.</p>
@@ -841,7 +811,7 @@ module Aws::AmplifyUIBuilder
       :events,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -863,7 +833,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :component_to_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -872,7 +842,7 @@ module Aws::AmplifyUIBuilder
     class CreateComponentOutput < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the information that is required to create a form.</p>
@@ -920,7 +890,7 @@ module Aws::AmplifyUIBuilder
       :tags,
       :label_decorator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -941,7 +911,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :form_to_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -950,7 +920,7 @@ module Aws::AmplifyUIBuilder
     class CreateFormOutput < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents all of the information that is required to create a theme.</p>
@@ -973,7 +943,7 @@ module Aws::AmplifyUIBuilder
       :overrides,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -995,7 +965,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :theme_to_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -1004,13 +974,13 @@ module Aws::AmplifyUIBuilder
     class CreateThemeOutput < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the DataStore configuration for an API for a code generation job.</p>
     class DataStoreRenderConfig < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1029,7 +999,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1046,7 +1016,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1065,7 +1035,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute provider
@@ -1078,7 +1048,7 @@ module Aws::AmplifyUIBuilder
       :provider,
       :request,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -1096,7 +1066,7 @@ module Aws::AmplifyUIBuilder
       :expires_in,
       :refresh_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a request to exchange an access code for a token.</p>
@@ -1114,7 +1084,7 @@ module Aws::AmplifyUIBuilder
       :redirect_uri,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1132,7 +1102,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1145,7 +1115,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1162,7 +1132,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1175,7 +1145,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1192,7 +1162,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1205,7 +1175,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration information for a field in a table.</p>
@@ -1231,7 +1201,7 @@ module Aws::AmplifyUIBuilder
       :input_type,
       :validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for the default input values to display for a field.</p>
@@ -1302,7 +1272,7 @@ module Aws::AmplifyUIBuilder
       :is_array,
       :file_uploader_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the field position.</p>
@@ -1321,7 +1291,7 @@ module Aws::AmplifyUIBuilder
       :below,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class Fixed < FieldPosition; end
       class RightOf < FieldPosition; end
@@ -1349,7 +1319,7 @@ module Aws::AmplifyUIBuilder
       :num_values,
       :validation_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for the file uploader field.</p>
@@ -1391,11 +1361,7 @@ module Aws::AmplifyUIBuilder
       :max_file_count,
       :max_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FixedPosition
-      FIRST = 'first'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration settings for a <code>Form</code> user interface (UI) element
@@ -1456,12 +1422,7 @@ module Aws::AmplifyUIBuilder
       :cta,
       :label_decorator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FormActionType
-      CREATE = 'create'
-      UPDATE = 'update'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how to bind a component property to form data.</p>
@@ -1475,7 +1436,7 @@ module Aws::AmplifyUIBuilder
       :element,
       :property,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for a button UI element that is a part of a form.</p>
@@ -1493,13 +1454,7 @@ module Aws::AmplifyUIBuilder
       :children,
       :position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FormButtonsPosition
-      TOP = 'top'
-      BOTTOM = 'bottom'
-      TOP_AND_BOTTOM = 'top_and_bottom'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the call to action button configuration for the form.</p>
@@ -1521,7 +1476,7 @@ module Aws::AmplifyUIBuilder
       :cancel,
       :submit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the data type configuration for the data source associated with a form.</p>
@@ -1535,7 +1490,7 @@ module Aws::AmplifyUIBuilder
       :data_source_type,
       :data_type_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data binding configuration for a form's input fields at runtime.You can use
@@ -1551,7 +1506,7 @@ module Aws::AmplifyUIBuilder
       :type,
       :binding_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data binding configuration for a specific property using data stored in
@@ -1563,7 +1518,7 @@ module Aws::AmplifyUIBuilder
     class FormInputBindingPropertiesValueProperties < Struct.new(
       :model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for an input field on a form. Use
@@ -1584,7 +1539,7 @@ module Aws::AmplifyUIBuilder
       :binding_properties,
       :concat,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associates a form property to a binding property. This enables exposed properties on the
@@ -1599,7 +1554,7 @@ module Aws::AmplifyUIBuilder
       :property,
       :field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for the form's style.</p>
@@ -1617,7 +1572,7 @@ module Aws::AmplifyUIBuilder
       :vertical_gap,
       :outer_padding,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration settings for the form's style properties.</p>
@@ -1633,7 +1588,7 @@ module Aws::AmplifyUIBuilder
       :value,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class TokenReference < FormStyleConfig; end
       class Value < FormStyleConfig; end
@@ -1667,13 +1622,7 @@ module Aws::AmplifyUIBuilder
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GenericDataRelationshipType
-      HAS_MANY = 'HAS_MANY'
-      HAS_ONE = 'HAS_ONE'
-      BELONGS_TO = 'BELONGS_TO'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1690,7 +1639,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job
@@ -1699,7 +1648,7 @@ module Aws::AmplifyUIBuilder
     class GetCodegenJobResponse < Struct.new(
       :job,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1716,7 +1665,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute component
@@ -1725,7 +1674,7 @@ module Aws::AmplifyUIBuilder
     class GetComponentOutput < Struct.new(
       :component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1742,7 +1691,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute form
@@ -1751,7 +1700,7 @@ module Aws::AmplifyUIBuilder
     class GetFormOutput < Struct.new(
       :form,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1764,7 +1713,7 @@ module Aws::AmplifyUIBuilder
       :app_id,
       :environment_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute features
@@ -1773,7 +1722,7 @@ module Aws::AmplifyUIBuilder
     class GetMetadataOutput < Struct.new(
       :features,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1790,7 +1739,7 @@ module Aws::AmplifyUIBuilder
       :environment_name,
       :id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme
@@ -1799,7 +1748,7 @@ module Aws::AmplifyUIBuilder
     class GetThemeOutput < Struct.new(
       :theme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the GraphQL configuration for an API for a code generation job.</p>
@@ -1825,7 +1774,7 @@ module Aws::AmplifyUIBuilder
       :subscriptions_file_path,
       :fragments_file_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal error has occurred. Please retry your request.</p>
@@ -1834,7 +1783,7 @@ module Aws::AmplifyUIBuilder
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An invalid or out-of-range value was supplied for the input parameter.</p>
@@ -1843,23 +1792,7 @@ module Aws::AmplifyUIBuilder
     class InvalidParameterException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module JSModule
-      ES2020 = 'es2020'
-      ESNEXT = 'esnext'
-    end
-
-    module JSScript
-      JSX = 'jsx'
-      TSX = 'tsx'
-      JS = 'js'
-    end
-
-    module JSTarget
-      ES2015 = 'es2015'
-      ES2020 = 'es2020'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1880,7 +1813,7 @@ module Aws::AmplifyUIBuilder
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1893,7 +1826,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1915,7 +1848,7 @@ module Aws::AmplifyUIBuilder
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1928,7 +1861,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -1949,7 +1882,7 @@ module Aws::AmplifyUIBuilder
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -1962,7 +1895,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1971,7 +1904,7 @@ module Aws::AmplifyUIBuilder
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -1980,7 +1913,7 @@ module Aws::AmplifyUIBuilder
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2002,7 +1935,7 @@ module Aws::AmplifyUIBuilder
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entities
@@ -2015,7 +1948,7 @@ module Aws::AmplifyUIBuilder
       :entities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the state configuration when an action modifies a property of another element
@@ -2034,13 +1967,13 @@ module Aws::AmplifyUIBuilder
       :property,
       :set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration for an application with no API being used.</p>
     class NoApiRenderConfig < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores information for generating Amplify DataStore queries. Use a
@@ -2071,7 +2004,7 @@ module Aws::AmplifyUIBuilder
       :operand,
       :operand_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores the metadata information about a feature on a form.</p>
@@ -2081,7 +2014,7 @@ module Aws::AmplifyUIBuilder
     class PutMetadataFlagBody < Struct.new(
       :new_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2102,7 +2035,7 @@ module Aws::AmplifyUIBuilder
       :feature_name,
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the code generation job configuration for a React project.</p>
@@ -2136,7 +2069,7 @@ module Aws::AmplifyUIBuilder
       :api_configuration,
       :dependencies,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:render_type_declarations] = false unless options.key?(:render_type_declarations)
@@ -2155,7 +2088,7 @@ module Aws::AmplifyUIBuilder
       :provider,
       :refresh_token_body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute access_token
@@ -2168,7 +2101,7 @@ module Aws::AmplifyUIBuilder
       :access_token,
       :expires_in,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a refresh token.</p>
@@ -2183,7 +2116,7 @@ module Aws::AmplifyUIBuilder
       :token,
       :client_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified in the request conflicts with an existing resource.</p>
@@ -2192,7 +2125,7 @@ module Aws::AmplifyUIBuilder
     class ResourceConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested resource does not exist, or access was denied.</p>
@@ -2201,7 +2134,7 @@ module Aws::AmplifyUIBuilder
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Stores the configuration information for a visual helper element for a form. A sectional
@@ -2238,7 +2171,7 @@ module Aws::AmplifyUIBuilder
       :orientation,
       :excluded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You exceeded your service quota. Service quotas, also referred to as limits, are the
@@ -2248,12 +2181,7 @@ module Aws::AmplifyUIBuilder
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortDirection
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes how to sort the data that you bind to a component.</p>
@@ -2267,7 +2195,7 @@ module Aws::AmplifyUIBuilder
       :field,
       :direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The code generation job resource configuration.</p>
@@ -2293,7 +2221,7 @@ module Aws::AmplifyUIBuilder
       :features,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2314,7 +2242,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :codegen_job_to_create,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -2323,13 +2251,7 @@ module Aws::AmplifyUIBuilder
     class StartCodegenJobResponse < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StorageAccessLevel
-      PUBLIC = 'public'
-      PROTECTED = 'protected'
-      PRIVATE = 'private'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2342,12 +2264,12 @@ module Aws::AmplifyUIBuilder
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A theme is a collection of style settings that apply globally to the components associated
@@ -2391,7 +2313,7 @@ module Aws::AmplifyUIBuilder
       :overrides,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the basic information about a theme.</p>
@@ -2413,7 +2335,7 @@ module Aws::AmplifyUIBuilder
       :id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of a theme's properties.</p>
@@ -2427,7 +2349,7 @@ module Aws::AmplifyUIBuilder
       :value,
       :children,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key-value pair that defines a property of a theme.</p>
@@ -2441,7 +2363,7 @@ module Aws::AmplifyUIBuilder
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -2450,7 +2372,7 @@ module Aws::AmplifyUIBuilder
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have permission to perform this operation.</p>
@@ -2459,7 +2381,7 @@ module Aws::AmplifyUIBuilder
     class UnauthorizedException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -2472,12 +2394,12 @@ module Aws::AmplifyUIBuilder
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates and saves all of the information about a component, based on component ID.</p>
@@ -2533,7 +2455,7 @@ module Aws::AmplifyUIBuilder
       :events,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2558,7 +2480,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :updated_component,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -2567,7 +2489,7 @@ module Aws::AmplifyUIBuilder
     class UpdateComponentOutput < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates and saves all of the information about a form, based on form ID.</p>
@@ -2611,7 +2533,7 @@ module Aws::AmplifyUIBuilder
       :cta,
       :label_decorator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2636,7 +2558,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :updated_form,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -2645,7 +2567,7 @@ module Aws::AmplifyUIBuilder
     class UpdateFormOutput < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Saves the data binding information for a theme.</p>
@@ -2667,7 +2589,7 @@ module Aws::AmplifyUIBuilder
       :values,
       :overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute app_id
@@ -2692,7 +2614,7 @@ module Aws::AmplifyUIBuilder
       :client_token,
       :updated_theme,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute entity
@@ -2701,7 +2623,7 @@ module Aws::AmplifyUIBuilder
     class UpdateThemeOutput < Struct.new(
       :entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Associates a complex object with a display value. Use <code>ValueMapping</code> to store
@@ -2716,7 +2638,7 @@ module Aws::AmplifyUIBuilder
       :display_value,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents the data binding configuration for a value map.</p>
@@ -2730,7 +2652,7 @@ module Aws::AmplifyUIBuilder
       :values,
       :binding_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

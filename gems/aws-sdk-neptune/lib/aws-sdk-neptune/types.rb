@@ -22,7 +22,7 @@ module Aws::Neptune
       :role_arn,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_name
@@ -55,7 +55,7 @@ module Aws::Neptune
       :subscription_name,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -64,7 +64,7 @@ module Aws::Neptune
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -79,12 +79,7 @@ module Aws::Neptune
       :resource_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ApplyMethod
-      immediate = 'immediate'
-      pending_reboot = 'pending-reboot'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -123,7 +118,7 @@ module Aws::Neptune
       :apply_action,
       :opt_in_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_pending_maintenance_actions
@@ -132,7 +127,7 @@ module Aws::Neptune
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified CIDRIP or EC2 security group is not authorized for the specified DB security group.</p>
@@ -143,7 +138,7 @@ module Aws::Neptune
     class AuthorizationNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies an Availability Zone.</p>
@@ -153,7 +148,7 @@ module Aws::Neptune
     class AvailabilityZone < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -164,7 +159,7 @@ module Aws::Neptune
     class CertificateNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a character set.</p>
@@ -178,7 +173,7 @@ module Aws::Neptune
       :character_set_name,
       :character_set_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration setting for the log types to be enabled for export
@@ -198,7 +193,7 @@ module Aws::Neptune
       :enable_log_types,
       :disable_log_types,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <code>ModifyDBCluster</code> operation and
@@ -260,7 +255,7 @@ module Aws::Neptune
       :allocated_storage,
       :iops,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_db_cluster_parameter_group_identifier
@@ -316,7 +311,7 @@ module Aws::Neptune
       :target_db_cluster_parameter_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group
@@ -326,7 +321,7 @@ module Aws::Neptune
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_db_cluster_snapshot_identifier
@@ -395,7 +390,7 @@ module Aws::Neptune
       :copy_tags,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -405,7 +400,7 @@ module Aws::Neptune
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_db_parameter_group_identifier
@@ -455,7 +450,7 @@ module Aws::Neptune
       :target_db_parameter_group_description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group
@@ -465,7 +460,7 @@ module Aws::Neptune
     class CopyDBParameterGroupResult < Struct.new(
       :db_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -497,7 +492,7 @@ module Aws::Neptune
       :excluded_members,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Neptune DB cluster.
@@ -573,7 +568,7 @@ module Aws::Neptune
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -822,7 +817,7 @@ module Aws::Neptune
       :global_cluster_identifier,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -855,7 +850,7 @@ module Aws::Neptune
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group
@@ -865,7 +860,7 @@ module Aws::Neptune
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -875,7 +870,7 @@ module Aws::Neptune
     class CreateDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_identifier
@@ -916,7 +911,7 @@ module Aws::Neptune
       :db_cluster_identifier,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -926,7 +921,7 @@ module Aws::Neptune
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_name
@@ -1224,7 +1219,7 @@ module Aws::Neptune
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -1234,7 +1229,7 @@ module Aws::Neptune
     class CreateDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -1272,7 +1267,7 @@ module Aws::Neptune
       :description,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group
@@ -1282,7 +1277,7 @@ module Aws::Neptune
     class CreateDBParameterGroupResult < Struct.new(
       :db_parameter_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group_name
@@ -1307,7 +1302,7 @@ module Aws::Neptune
       :subnet_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group
@@ -1317,7 +1312,7 @@ module Aws::Neptune
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_name
@@ -1387,7 +1382,7 @@ module Aws::Neptune
       :enabled,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -1396,7 +1391,7 @@ module Aws::Neptune
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -1433,7 +1428,7 @@ module Aws::Neptune
       :deletion_protection,
       :storage_encrypted,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -1449,7 +1444,7 @@ module Aws::Neptune
     class CreateGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Neptune DB cluster.</p>
@@ -1693,7 +1688,7 @@ module Aws::Neptune
       :io_optimized_next_allowed_modification_time,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User already has a DB cluster with the given identifier.</p>
@@ -1703,7 +1698,7 @@ module Aws::Neptune
     class DBClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Neptune DB cluster.
@@ -1779,7 +1774,7 @@ module Aws::Neptune
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified custom endpoint cannot be created because it already exists.</p>
@@ -1789,7 +1784,7 @@ module Aws::Neptune
     class DBClusterEndpointAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -1807,7 +1802,7 @@ module Aws::Neptune
       :marker,
       :db_cluster_endpoints,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified custom endpoint doesn't exist.</p>
@@ -1817,7 +1812,7 @@ module Aws::Neptune
     class DBClusterEndpointNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster already has the maximum number of custom endpoints.</p>
@@ -1827,7 +1822,7 @@ module Aws::Neptune
     class DBClusterEndpointQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an instance that is part of a DB cluster.</p>
@@ -1852,7 +1847,7 @@ module Aws::Neptune
       :db_cluster_parameter_group_status,
       :promotion_tier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -1865,7 +1860,7 @@ module Aws::Neptune
       :marker,
       :db_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1876,7 +1871,7 @@ module Aws::Neptune
     class DBClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Not supported by Neptune.</p>
@@ -1890,7 +1885,7 @@ module Aws::Neptune
       :db_cluster_option_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Neptune DB cluster parameter group.</p>
@@ -1914,7 +1909,7 @@ module Aws::Neptune
       :description,
       :db_cluster_parameter_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -1926,7 +1921,7 @@ module Aws::Neptune
     class DBClusterParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -1942,7 +1937,7 @@ module Aws::Neptune
       :marker,
       :db_cluster_parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User attempted to create a new DB cluster and the user has already reached the maximum allowed DB cluster quota.</p>
@@ -1952,7 +1947,7 @@ module Aws::Neptune
     class DBClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an Amazon Identity and Access Management (IAM) role that is associated with a DB
@@ -1993,7 +1988,7 @@ module Aws::Neptune
       :status,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified IAM role Amazon Resource Name (ARN) is already associated with the specified DB cluster.</p>
@@ -2003,7 +1998,7 @@ module Aws::Neptune
     class DBClusterRoleAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified IAM role Amazon Resource Name (ARN) is not associated with the specified DB cluster.</p>
@@ -2013,7 +2008,7 @@ module Aws::Neptune
     class DBClusterRoleNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of IAM roles that can be associated with the specified DB cluster.</p>
@@ -2023,7 +2018,7 @@ module Aws::Neptune
     class DBClusterRoleQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details for an Amazon Neptune DB cluster snapshot</p>
@@ -2132,7 +2127,7 @@ module Aws::Neptune
       :iam_database_authentication_enabled,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User already has a DB cluster snapshot with the given identifier.</p>
@@ -2142,7 +2137,7 @@ module Aws::Neptune
     class DBClusterSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the name and values of a manual DB cluster snapshot attribute.</p>
@@ -2165,7 +2160,7 @@ module Aws::Neptune
       :attribute_name,
       :attribute_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful call to the <a>DescribeDBClusterSnapshotAttributes</a> API action.</p>
@@ -2181,7 +2176,7 @@ module Aws::Neptune
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2196,7 +2191,7 @@ module Aws::Neptune
       :marker,
       :db_cluster_snapshots,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2208,7 +2203,7 @@ module Aws::Neptune
     class DBClusterSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>.</p>
@@ -2273,7 +2268,7 @@ module Aws::Neptune
       :supports_read_replica,
       :supports_global_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2288,7 +2283,7 @@ module Aws::Neptune
       :marker,
       :db_engine_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Neptune DB instance.</p>
@@ -2541,7 +2536,7 @@ module Aws::Neptune
       :enabled_cloudwatch_logs_exports,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>User already has a DB instance with the given identifier.</p>
@@ -2551,7 +2546,7 @@ module Aws::Neptune
     class DBInstanceAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2566,7 +2561,7 @@ module Aws::Neptune
       :marker,
       :db_instances,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2577,7 +2572,7 @@ module Aws::Neptune
     class DBInstanceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides a list of status information for a DB instance.</p>
@@ -2602,7 +2597,7 @@ module Aws::Neptune
       :status,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Neptune DB parameter group.</p>
@@ -2626,7 +2621,7 @@ module Aws::Neptune
       :description,
       :db_parameter_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DB parameter group with the same name exists.</p>
@@ -2636,7 +2631,7 @@ module Aws::Neptune
     class DBParameterGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2648,7 +2643,7 @@ module Aws::Neptune
     class DBParameterGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would result in user exceeding the allowed number of DB parameter groups.</p>
@@ -2658,7 +2653,7 @@ module Aws::Neptune
     class DBParameterGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The status of the DB parameter group.</p>
@@ -2695,7 +2690,7 @@ module Aws::Neptune
       :db_parameter_group_name,
       :parameter_apply_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2710,7 +2705,7 @@ module Aws::Neptune
       :marker,
       :db_parameter_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies membership in a designated DB security group.</p>
@@ -2724,7 +2719,7 @@ module Aws::Neptune
       :db_security_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2736,7 +2731,7 @@ module Aws::Neptune
     class DBSecurityGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2747,7 +2742,7 @@ module Aws::Neptune
     class DBSnapshotAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2758,7 +2753,7 @@ module Aws::Neptune
     class DBSnapshotNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Neptune DB subnet group.</p>
@@ -2789,7 +2784,7 @@ module Aws::Neptune
       :subnets,
       :db_subnet_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2800,7 +2795,7 @@ module Aws::Neptune
     class DBSubnetGroupAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Subnets in the DB subnet group should cover at least two Availability
@@ -2811,7 +2806,7 @@ module Aws::Neptune
     class DBSubnetGroupDoesNotCoverEnoughAZs < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -2826,7 +2821,7 @@ module Aws::Neptune
       :marker,
       :db_subnet_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -2838,7 +2833,7 @@ module Aws::Neptune
     class DBSubnetGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would result in user exceeding the allowed number of DB subnet groups.</p>
@@ -2848,7 +2843,7 @@ module Aws::Neptune
     class DBSubnetGroupQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would result in user exceeding the allowed number of subnets in a DB subnet groups.</p>
@@ -2858,7 +2853,7 @@ module Aws::Neptune
     class DBSubnetQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB upgrade failed because a resource the DB depends on could not be modified.</p>
@@ -2868,7 +2863,7 @@ module Aws::Neptune
     class DBUpgradeDependencyFailureFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_endpoint_identifier
@@ -2877,7 +2872,7 @@ module Aws::Neptune
     class DeleteDBClusterEndpointMessage < Struct.new(
       :db_cluster_endpoint_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Neptune DB cluster.
@@ -2953,7 +2948,7 @@ module Aws::Neptune
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -3003,7 +2998,7 @@ module Aws::Neptune
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -3024,7 +3019,7 @@ module Aws::Neptune
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -3034,7 +3029,7 @@ module Aws::Neptune
     class DeleteDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_identifier
@@ -3045,7 +3040,7 @@ module Aws::Neptune
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot
@@ -3055,7 +3050,7 @@ module Aws::Neptune
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -3111,7 +3106,7 @@ module Aws::Neptune
       :skip_final_snapshot,
       :final_db_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -3121,7 +3116,7 @@ module Aws::Neptune
     class DeleteDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -3142,7 +3137,7 @@ module Aws::Neptune
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group_name
@@ -3158,7 +3153,7 @@ module Aws::Neptune
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_name
@@ -3167,7 +3162,7 @@ module Aws::Neptune
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -3176,7 +3171,7 @@ module Aws::Neptune
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -3185,7 +3180,7 @@ module Aws::Neptune
     class DeleteGlobalClusterMessage < Struct.new(
       :global_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -3201,7 +3196,7 @@ module Aws::Neptune
     class DeleteGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -3243,7 +3238,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -3277,7 +3272,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -3316,7 +3311,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -3331,7 +3326,7 @@ module Aws::Neptune
       :parameters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_identifier
@@ -3340,7 +3335,7 @@ module Aws::Neptune
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_attributes_result
@@ -3351,7 +3346,7 @@ module Aws::Neptune
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -3456,7 +3451,7 @@ module Aws::Neptune
       :include_shared,
       :include_public,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -3506,7 +3501,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -3566,7 +3561,7 @@ module Aws::Neptune
       :list_supported_character_sets,
       :list_supported_timezones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -3616,7 +3611,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -3649,7 +3644,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -3689,7 +3684,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute parameters
@@ -3704,7 +3699,7 @@ module Aws::Neptune
       :parameters,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group_name
@@ -3731,7 +3726,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_family
@@ -3760,7 +3755,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_defaults
@@ -3769,7 +3764,7 @@ module Aws::Neptune
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_family
@@ -3797,7 +3792,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine_defaults
@@ -3806,7 +3801,7 @@ module Aws::Neptune
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_type
@@ -3820,7 +3815,7 @@ module Aws::Neptune
       :source_type,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_name
@@ -3847,7 +3842,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute source_identifier
@@ -3929,7 +3924,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -3957,7 +3952,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute engine
@@ -4004,7 +3999,7 @@ module Aws::Neptune
       :max_records,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_identifier
@@ -4048,7 +4043,7 @@ module Aws::Neptune
       :marker,
       :max_records,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -4057,7 +4052,7 @@ module Aws::Neptune
     class DescribeValidDBInstanceModificationsMessage < Struct.new(
       :db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute valid_db_instance_modifications_message
@@ -4069,7 +4064,7 @@ module Aws::Neptune
     class DescribeValidDBInstanceModificationsResult < Struct.new(
       :valid_db_instance_modifications_message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Active Directory Domain membership record associated with a DB instance.</p>
@@ -4092,7 +4087,7 @@ module Aws::Neptune
       :fqdn,
       :iam_role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4103,7 +4098,7 @@ module Aws::Neptune
     class DomainNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of double values.</p>
@@ -4117,7 +4112,7 @@ module Aws::Neptune
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a connection endpoint.</p>
@@ -4137,7 +4132,7 @@ module Aws::Neptune
       :port,
       :hosted_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Contains the result of a successful invocation of the <a>DescribeEngineDefaultParameters</a> action.</p>
@@ -4158,7 +4153,7 @@ module Aws::Neptune
       :marker,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> This data type is used as a response element in the <a>DescribeEvents</a>
@@ -4189,7 +4184,7 @@ module Aws::Neptune
       :date,
       :source_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful invocation of the <a>DescribeEventCategories</a> action.</p>
@@ -4203,7 +4198,7 @@ module Aws::Neptune
       :source_type,
       :event_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_categories_map_list
@@ -4212,7 +4207,7 @@ module Aws::Neptune
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of a successful invocation of the <a>DescribeEventSubscriptions</a> action.</p>
@@ -4265,7 +4260,7 @@ module Aws::Neptune
       :enabled,
       :event_subscription_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the number of events you can subscribe to.</p>
@@ -4275,7 +4270,7 @@ module Aws::Neptune
     class EventSubscriptionQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -4290,7 +4285,7 @@ module Aws::Neptune
       :marker,
       :event_subscriptions_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -4305,7 +4300,7 @@ module Aws::Neptune
       :marker,
       :events,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -4327,7 +4322,7 @@ module Aws::Neptune
       :db_cluster_identifier,
       :target_db_instance_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -4337,7 +4332,7 @@ module Aws::Neptune
     class FailoverDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -4369,7 +4364,7 @@ module Aws::Neptune
       :allow_data_loss,
       :switchover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -4385,7 +4380,7 @@ module Aws::Neptune
     class FailoverGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the state of scheduled or in-process operations on a
@@ -4430,13 +4425,7 @@ module Aws::Neptune
       :to_db_cluster_arn,
       :is_data_loss_allowed,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailoverStatus
-      PENDING = 'pending'
-      FAILING_OVER = 'failing-over'
-      CANCELLING = 'cancelling'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This type is not currently supported.</p>
@@ -4450,7 +4439,7 @@ module Aws::Neptune
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the details of an Amazon Neptune global database.</p>
@@ -4509,7 +4498,7 @@ module Aws::Neptune
       :global_cluster_members,
       :failover_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>
@@ -4519,7 +4508,7 @@ module Aws::Neptune
     class GlobalClusterAlreadyExistsFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -4549,7 +4538,7 @@ module Aws::Neptune
       :readers,
       :is_writer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster. </p>
@@ -4559,7 +4548,7 @@ module Aws::Neptune
     class GlobalClusterNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of global database clusters for this account is already at the maximum allowed.</p>
@@ -4569,7 +4558,7 @@ module Aws::Neptune
     class GlobalClusterQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute marker
@@ -4584,7 +4573,7 @@ module Aws::Neptune
       :marker,
       :global_clusters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would result in user exceeding the allowed number of DB instances.</p>
@@ -4594,7 +4583,7 @@ module Aws::Neptune
     class InstanceQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB cluster does not have enough capacity for the current operation.</p>
@@ -4604,7 +4593,7 @@ module Aws::Neptune
     class InsufficientDBClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specified DB instance class is not available in the specified Availability Zone.</p>
@@ -4614,7 +4603,7 @@ module Aws::Neptune
     class InsufficientDBInstanceCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is insufficient storage available for the current action. You may
@@ -4626,7 +4615,7 @@ module Aws::Neptune
     class InsufficientStorageClusterCapacityFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested operation cannot be performed on the endpoint while the endpoint is in this state.</p>
@@ -4636,7 +4625,7 @@ module Aws::Neptune
     class InvalidDBClusterEndpointStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The supplied value is not a valid DB cluster snapshot state.</p>
@@ -4646,7 +4635,7 @@ module Aws::Neptune
     class InvalidDBClusterSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB cluster is not in a valid state.</p>
@@ -4656,7 +4645,7 @@ module Aws::Neptune
     class InvalidDBClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified DB instance is not in the <i>available</i> state.</p>
@@ -4666,7 +4655,7 @@ module Aws::Neptune
     class InvalidDBInstanceStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB parameter group is in use or is in an invalid state. If you are attempting to
@@ -4677,7 +4666,7 @@ module Aws::Neptune
     class InvalidDBParameterGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the DB security group does not allow deletion.</p>
@@ -4687,7 +4676,7 @@ module Aws::Neptune
     class InvalidDBSecurityGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The state of the DB snapshot does not allow deletion.</p>
@@ -4697,7 +4686,7 @@ module Aws::Neptune
     class InvalidDBSnapshotStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet group cannot be deleted because it is in use.</p>
@@ -4707,7 +4696,7 @@ module Aws::Neptune
     class InvalidDBSubnetGroupStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet is not in the <i>available</i> state.</p>
@@ -4717,7 +4706,7 @@ module Aws::Neptune
     class InvalidDBSubnetStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The event subscription is in an invalid state.</p>
@@ -4727,7 +4716,7 @@ module Aws::Neptune
     class InvalidEventSubscriptionStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The global cluster is in an invalid state and can't perform the requested operation. </p>
@@ -4737,7 +4726,7 @@ module Aws::Neptune
     class InvalidGlobalClusterStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Cannot restore from vpc backup to non-vpc DB instance.</p>
@@ -4747,7 +4736,7 @@ module Aws::Neptune
     class InvalidRestoreFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The requested subnet is invalid, or multiple subnets were requested that are
@@ -4758,7 +4747,7 @@ module Aws::Neptune
     class InvalidSubnet < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>DB subnet group does not cover all Availability Zones after it is created
@@ -4769,7 +4758,7 @@ module Aws::Neptune
     class InvalidVPCNetworkStateFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error accessing KMS key.</p>
@@ -4779,7 +4768,7 @@ module Aws::Neptune
     class KMSKeyNotAccessibleFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -4794,7 +4783,7 @@ module Aws::Neptune
       :resource_name,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_endpoint_identifier
@@ -4817,7 +4806,7 @@ module Aws::Neptune
       :static_members,
       :excluded_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type represents the information you need to connect to an Amazon Neptune DB cluster.
@@ -4893,7 +4882,7 @@ module Aws::Neptune
       :excluded_members,
       :db_cluster_endpoint_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -5107,7 +5096,7 @@ module Aws::Neptune
       :serverless_v2_scaling_configuration,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -5120,7 +5109,7 @@ module Aws::Neptune
       :db_cluster_parameter_group_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -5144,7 +5133,7 @@ module Aws::Neptune
     class ModifyDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -5154,7 +5143,7 @@ module Aws::Neptune
     class ModifyDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_identifier
@@ -5189,7 +5178,7 @@ module Aws::Neptune
       :values_to_add,
       :values_to_remove,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_snapshot_attributes_result
@@ -5200,7 +5189,7 @@ module Aws::Neptune
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -5501,7 +5490,7 @@ module Aws::Neptune
       :cloudwatch_logs_export_configuration,
       :deletion_protection,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -5511,7 +5500,7 @@ module Aws::Neptune
     class ModifyDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -5539,7 +5528,7 @@ module Aws::Neptune
       :db_parameter_group_name,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -5548,7 +5537,7 @@ module Aws::Neptune
     class ModifyDBParameterGroupOutput < Struct.new(
       :db_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group_name
@@ -5569,7 +5558,7 @@ module Aws::Neptune
       :db_subnet_group_description,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_subnet_group
@@ -5579,7 +5568,7 @@ module Aws::Neptune
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_name
@@ -5612,7 +5601,7 @@ module Aws::Neptune
       :event_categories,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -5621,7 +5610,7 @@ module Aws::Neptune
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -5674,7 +5663,7 @@ module Aws::Neptune
       :engine_version,
       :allow_major_version_upgrade,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -5690,7 +5679,7 @@ module Aws::Neptune
     class ModifyGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Not supported by Neptune.</p>
@@ -5704,7 +5693,7 @@ module Aws::Neptune
       :option_group_name,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The designated option group could not be found.</p>
@@ -5714,7 +5703,7 @@ module Aws::Neptune
     class OptionGroupNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains a list of available options for a DB instance.</p>
@@ -5808,7 +5797,7 @@ module Aws::Neptune
       :max_iops_per_gib,
       :supports_global_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute orderable_db_instance_options
@@ -5824,7 +5813,7 @@ module Aws::Neptune
       :orderable_db_instance_options,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a parameter.</p>
@@ -5872,7 +5861,7 @@ module Aws::Neptune
       :minimum_engine_version,
       :apply_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of the log types whose configuration is still pending. In other
@@ -5892,7 +5881,7 @@ module Aws::Neptune
       :log_types_to_enable,
       :log_types_to_disable,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about a pending maintenance action for a resource.</p>
@@ -5930,7 +5919,7 @@ module Aws::Neptune
       :current_apply_date,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute pending_maintenance_actions
@@ -5946,7 +5935,7 @@ module Aws::Neptune
       :pending_maintenance_actions,
       :marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element in the <a>ModifyDBInstance</a>
@@ -6014,7 +6003,7 @@ module Aws::Neptune
       :db_subnet_group_name,
       :pending_cloudwatch_logs_exports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -6023,7 +6012,7 @@ module Aws::Neptune
     class PromoteReadReplicaDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -6033,7 +6022,7 @@ module Aws::Neptune
     class PromoteReadReplicaDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provisioned IOPS not available in the specified Availability Zone.</p>
@@ -6043,7 +6032,7 @@ module Aws::Neptune
     class ProvisionedIopsNotAvailableInAZFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A range of integer values.</p>
@@ -6064,7 +6053,7 @@ module Aws::Neptune
       :to,
       :step,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance_identifier
@@ -6085,7 +6074,7 @@ module Aws::Neptune
       :db_instance_identifier,
       :force_failover,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_instance
@@ -6095,7 +6084,7 @@ module Aws::Neptune
     class RebootDBInstanceResult < Struct.new(
       :db_instance,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -6110,7 +6099,7 @@ module Aws::Neptune
       :global_cluster_identifier,
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -6126,7 +6115,7 @@ module Aws::Neptune
     class RemoveFromGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -6145,7 +6134,7 @@ module Aws::Neptune
       :role_arn,
       :feature_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute subscription_name
@@ -6160,7 +6149,7 @@ module Aws::Neptune
       :subscription_name,
       :source_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute event_subscription
@@ -6169,7 +6158,7 @@ module Aws::Neptune
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_name
@@ -6184,7 +6173,7 @@ module Aws::Neptune
       :resource_name,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -6206,7 +6195,7 @@ module Aws::Neptune
       :reset_all_parameters,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_parameter_group_name
@@ -6230,7 +6219,7 @@ module Aws::Neptune
     class ResetDBClusterParameterGroupOutput < Struct.new(
       :db_cluster_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -6261,7 +6250,7 @@ module Aws::Neptune
       :reset_all_parameters,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_parameter_group_name
@@ -6270,7 +6259,7 @@ module Aws::Neptune
     class ResetDBParameterGroupOutput < Struct.new(
       :db_parameter_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource ID was not found.</p>
@@ -6280,7 +6269,7 @@ module Aws::Neptune
     class ResourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the pending maintenance actions for a resource.</p>
@@ -6295,7 +6284,7 @@ module Aws::Neptune
       :resource_identifier,
       :pending_maintenance_action_details,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute availability_zones
@@ -6449,7 +6438,7 @@ module Aws::Neptune
       :serverless_v2_scaling_configuration,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -6459,7 +6448,7 @@ module Aws::Neptune
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -6638,7 +6627,7 @@ module Aws::Neptune
       :serverless_v2_scaling_configuration,
       :storage_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -6648,7 +6637,7 @@ module Aws::Neptune
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The SNS topic is invalid.</p>
@@ -6658,7 +6647,7 @@ module Aws::Neptune
     class SNSInvalidTopicFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>There is no SNS authorization.</p>
@@ -6668,7 +6657,7 @@ module Aws::Neptune
     class SNSNoAuthorizationFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The ARN of the SNS topic could not be found.</p>
@@ -6678,7 +6667,7 @@ module Aws::Neptune
     class SNSTopicArnNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the scaling configuration of a Neptune Serverless DB cluster.</p>
@@ -6696,7 +6685,7 @@ module Aws::Neptune
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Shows the scaling configuration for a Neptune Serverless DB cluster.</p>
@@ -6714,7 +6703,7 @@ module Aws::Neptune
       :min_capacity,
       :max_capacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have exceeded the maximum number of accounts that you can share a manual DB snapshot with.</p>
@@ -6724,7 +6713,7 @@ module Aws::Neptune
     class SharedSnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would result in user exceeding the allowed number of DB snapshots.</p>
@@ -6734,7 +6723,7 @@ module Aws::Neptune
     class SnapshotQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source could not be found.</p>
@@ -6744,16 +6733,7 @@ module Aws::Neptune
     class SourceNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SourceType
-      db_instance = 'db-instance'
-      db_parameter_group = 'db-parameter-group'
-      db_security_group = 'db-security-group'
-      db_snapshot = 'db-snapshot'
-      db_cluster = 'db-cluster'
-      db_cluster_snapshot = 'db-cluster-snapshot'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -6763,7 +6743,7 @@ module Aws::Neptune
     class StartDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -6773,7 +6753,7 @@ module Aws::Neptune
     class StartDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster_identifier
@@ -6783,7 +6763,7 @@ module Aws::Neptune
     class StopDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute db_cluster
@@ -6793,7 +6773,7 @@ module Aws::Neptune
     class StopDBClusterResult < Struct.new(
       :db_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Request would result in user exceeding the allowed amount of storage available across all DB instances.</p>
@@ -6803,7 +6783,7 @@ module Aws::Neptune
     class StorageQuotaExceededFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>
@@ -6814,7 +6794,7 @@ module Aws::Neptune
     class StorageTypeNotSupportedFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies a subnet.</p>
@@ -6833,7 +6813,7 @@ module Aws::Neptune
       :subnet_availability_zone,
       :subnet_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The DB subnet is already in use in the Availability Zone.</p>
@@ -6843,7 +6823,7 @@ module Aws::Neptune
     class SubnetAlreadyInUse < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This subscription already exists.</p>
@@ -6853,7 +6833,7 @@ module Aws::Neptune
     class SubscriptionAlreadyExistFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The designated subscription category could not be found.</p>
@@ -6863,7 +6843,7 @@ module Aws::Neptune
     class SubscriptionCategoryNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The designated subscription could not be found.</p>
@@ -6873,7 +6853,7 @@ module Aws::Neptune
     class SubscriptionNotFoundFault < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster_identifier
@@ -6888,7 +6868,7 @@ module Aws::Neptune
       :global_cluster_identifier,
       :target_db_cluster_identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute global_cluster
@@ -6904,7 +6884,7 @@ module Aws::Neptune
     class SwitchoverGlobalClusterResult < Struct.new(
       :global_cluster,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to an Amazon Neptune resource consisting of a key-value pair.</p>
@@ -6924,7 +6904,7 @@ module Aws::Neptune
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -6933,7 +6913,7 @@ module Aws::Neptune
     class TagListMessage < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A time zone associated with a <a>DBInstance</a>.</p>
@@ -6943,7 +6923,7 @@ module Aws::Neptune
     class Timezone < Struct.new(
       :timezone_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The version of the database engine that a DB instance can be upgraded to.</p>
@@ -6974,7 +6954,7 @@ module Aws::Neptune
       :is_major_version_upgrade,
       :supports_global_databases,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about valid modifications that you can make to your DB instance. Contains the
@@ -6987,7 +6967,7 @@ module Aws::Neptune
     class ValidDBInstanceModificationsMessage < Struct.new(
       :storage,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Not applicable. In Neptune the storage type is managed at the DB Cluster level.</p>
@@ -7009,7 +6989,7 @@ module Aws::Neptune
       :provisioned_iops,
       :iops_to_storage_ratio,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This data type is used as a response element for queries on VPC security group
@@ -7024,7 +7004,7 @@ module Aws::Neptune
       :vpc_security_group_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

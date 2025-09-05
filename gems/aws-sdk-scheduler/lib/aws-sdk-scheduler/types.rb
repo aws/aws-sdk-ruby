@@ -22,7 +22,7 @@ module Aws::Scheduler
       :security_groups,
       :assign_public_ip,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a capacity provider strategy.</p>
@@ -42,7 +42,7 @@ module Aws::Scheduler
       :weight,
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:weight] = 0 unless options.key?(:weight)
@@ -57,7 +57,7 @@ module Aws::Scheduler
     class ConflictException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -77,7 +77,7 @@ module Aws::Scheduler
       :tags,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedule_group_arn
@@ -86,7 +86,7 @@ module Aws::Scheduler
     class CreateScheduleGroupOperationOutput < Struct.new(
       :schedule_group_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -183,7 +183,7 @@ module Aws::Scheduler
       :client_token,
       :action_after_completion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedule_arn
@@ -192,7 +192,7 @@ module Aws::Scheduler
     class CreateScheduleOperationOutput < Struct.new(
       :schedule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information about an Amazon SQS queue that EventBridge Scheduler uses as a dead-letter queue for your schedule. If specified, EventBridge Scheduler delivers failed events that could not be successfully delivered to a target to the queue.</p>
@@ -202,7 +202,7 @@ module Aws::Scheduler
     class DeadLetterConfig < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -218,12 +218,12 @@ module Aws::Scheduler
       :name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduleGroupOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -243,12 +243,12 @@ module Aws::Scheduler
       :group_name,
       :client_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteScheduleOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The templated target type for the Amazon ECS <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html">
@@ -323,7 +323,7 @@ module Aws::Scheduler
       :reference_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The templated target type for the EventBridge <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html">
@@ -339,7 +339,7 @@ module Aws::Scheduler
       :detail_type,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows you to configure a time window during which EventBridge Scheduler invokes the schedule.</p>
@@ -353,7 +353,7 @@ module Aws::Scheduler
       :mode,
       :maximum_window_in_minutes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -362,7 +362,7 @@ module Aws::Scheduler
     class GetScheduleGroupOperationInput < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -387,7 +387,7 @@ module Aws::Scheduler
       :creation_date,
       :last_modification_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -400,7 +400,7 @@ module Aws::Scheduler
       :name,
       :group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -502,7 +502,7 @@ module Aws::Scheduler
       :flexible_time_window,
       :action_after_completion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Unexpected error encountered while processing the request.</p>
@@ -511,7 +511,7 @@ module Aws::Scheduler
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The templated target type for the Amazon Kinesis <a href="kinesis/latest/APIReference/API_PutRecord.html">
@@ -524,7 +524,7 @@ module Aws::Scheduler
     class KinesisParameters < Struct.new(
       :partition_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name_prefix
@@ -541,7 +541,7 @@ module Aws::Scheduler
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -554,7 +554,7 @@ module Aws::Scheduler
       :next_token,
       :schedule_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_name
@@ -579,7 +579,7 @@ module Aws::Scheduler
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -592,7 +592,7 @@ module Aws::Scheduler
       :next_token,
       :schedules,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -601,7 +601,7 @@ module Aws::Scheduler
     class ListTagsForResourceOperationInput < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -610,7 +610,7 @@ module Aws::Scheduler
     class ListTagsForResourceOperationOutput < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the network configuration for an ECS task.</p>
@@ -620,7 +620,7 @@ module Aws::Scheduler
     class NetworkConfiguration < Struct.new(
       :awsvpc_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing a constraint on task placement.</p>
@@ -635,7 +635,7 @@ module Aws::Scheduler
       :type,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The task placement strategy for a task or service.</p>
@@ -653,7 +653,7 @@ module Aws::Scheduler
       :type,
       :field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request references a resource which does not exist.</p>
@@ -662,7 +662,7 @@ module Aws::Scheduler
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>RetryPolicy</code> object that includes information about the retry policy settings, including the maximum age of an event, and the maximum number of times EventBridge Scheduler will try to deliver the event to a target.</p>
@@ -677,7 +677,7 @@ module Aws::Scheduler
       :maximum_event_age_in_seconds,
       :maximum_retry_attempts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name and value pair of a parameter to use to start execution of a SageMaker Model Building Pipeline.</p>
@@ -691,7 +691,7 @@ module Aws::Scheduler
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The templated target type for the Amazon SageMaker <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html">
@@ -703,7 +703,7 @@ module Aws::Scheduler
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a schedule group.</p>
@@ -729,7 +729,7 @@ module Aws::Scheduler
       :creation_date,
       :last_modification_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a schedule.</p>
@@ -763,7 +763,7 @@ module Aws::Scheduler
       :last_modification_date,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request exceeds a service quota.</p>
@@ -772,7 +772,7 @@ module Aws::Scheduler
     class ServiceQuotaExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The templated target type for the Amazon SQS <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html">
@@ -788,7 +788,7 @@ module Aws::Scheduler
     class SqsParameters < Struct.new(
       :message_group_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Tag to associate with a schedule group.</p>
@@ -802,7 +802,7 @@ module Aws::Scheduler
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -815,12 +815,12 @@ module Aws::Scheduler
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schedule's target. EventBridge Scheduler supports templated target that invoke common API operations, as well as universal targets that you can customize to
@@ -882,7 +882,7 @@ module Aws::Scheduler
       :sage_maker_pipeline_parameters,
       :sqs_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of a target.</p>
@@ -892,7 +892,7 @@ module Aws::Scheduler
     class TargetSummary < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The request was denied due to request throttling.</p>
@@ -901,7 +901,7 @@ module Aws::Scheduler
     class ThrottlingException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -914,12 +914,12 @@ module Aws::Scheduler
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceOperationOutput < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -1017,7 +1017,7 @@ module Aws::Scheduler
       :client_token,
       :action_after_completion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schedule_arn
@@ -1026,7 +1026,7 @@ module Aws::Scheduler
     class UpdateScheduleOperationOutput < Struct.new(
       :schedule_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The input fails to satisfy the constraints specified by an AWS service.</p>
@@ -1035,7 +1035,7 @@ module Aws::Scheduler
     class ValidationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

@@ -6,14 +6,6 @@ module Aws::FMS
   # This module contains the types returned by client operations.
   module Types
 
-    module AccountRoleStatus
-      Ready = 'READY'
-      Creating = 'CREATING'
-      PendingDeletion = 'PENDING_DELETION'
-      Deleting = 'DELETING'
-      Deleted = 'DELETED'
-    end
-
     # <p>Configures the accounts within the administrator's Organizations organization that the specified Firewall Manager administrator can apply policies to.</p>
     # @!attribute accounts
     #   <p>The list of accounts within the organization that the specified Firewall Manager administrator either can or cannot apply policies to, based on the value of <code>ExcludeSpecifiedAccounts</code>. If <code>ExcludeSpecifiedAccounts</code> is set to <code>true</code>, then the Firewall Manager administrator can apply policies to all members of the organization except for the accounts in this list. If <code>ExcludeSpecifiedAccounts</code> is set to <code>false</code>, then the Firewall Manager administrator can only apply policies to the accounts in this list.</p>
@@ -29,7 +21,7 @@ module Aws::FMS
       :all_accounts_enabled,
       :exclude_specified_accounts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_accounts_enabled] = false unless options.key?(:all_accounts_enabled)
@@ -49,7 +41,7 @@ module Aws::FMS
       :resource_id,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains high level information about the Firewall Manager administrator account.</p>
@@ -85,7 +77,7 @@ module Aws::FMS
       :default_admin,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_admin] = false unless options.key?(:default_admin)
@@ -113,7 +105,7 @@ module Aws::FMS
       :region_scope,
       :policy_type_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An individual Firewall Manager application.</p>
@@ -131,7 +123,7 @@ module Aws::FMS
       :protocol,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Firewall Manager applications list.</p>
@@ -167,7 +159,7 @@ module Aws::FMS
       :apps_list,
       :previous_apps_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Firewall Manager applications list.</p>
@@ -189,7 +181,7 @@ module Aws::FMS
       :list_name,
       :apps_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account
@@ -202,7 +194,7 @@ module Aws::FMS
     class AssociateAdminAccountRequest < Struct.new(
       :admin_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall
@@ -211,7 +203,7 @@ module Aws::FMS
     class AssociateThirdPartyFirewallRequest < Struct.new(
       :third_party_firewall,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall_status
@@ -242,7 +234,7 @@ module Aws::FMS
     class AssociateThirdPartyFirewallResponse < Struct.new(
       :third_party_firewall_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for an EC2 instance resource.</p>
@@ -256,7 +248,7 @@ module Aws::FMS
       :violation_target,
       :aws_ec2_network_interface_violations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for network interfaces associated with an EC2 instance.</p>
@@ -270,7 +262,7 @@ module Aws::FMS
       :violation_target,
       :violating_security_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for the rule violation in a security group when compared to the primary security group of the Firewall Manager policy.</p>
@@ -292,7 +284,7 @@ module Aws::FMS
       :partial_matches,
       :possible_security_group_remediation_actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set_identifier
@@ -305,7 +297,7 @@ module Aws::FMS
       :resource_set_identifier,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set_identifier
@@ -318,7 +310,7 @@ module Aws::FMS
       :resource_set_identifier,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set_identifier
@@ -331,7 +323,7 @@ module Aws::FMS
       :resource_set_identifier,
       :items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set_identifier
@@ -344,7 +336,7 @@ module Aws::FMS
       :resource_set_identifier,
       :failed_items,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the resource that is not protected by the policy.</p>
@@ -369,7 +361,7 @@ module Aws::FMS
       :resource_type,
       :metadata,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <code>CreateNetworkAcl</code> action in Amazon EC2. This is a remediation option in <code>RemediationAction</code>.</p>
@@ -387,7 +379,7 @@ module Aws::FMS
       :vpc,
       :fms_can_remediate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fms_can_remediate] = false unless options.key?(:fms_can_remediate)
@@ -414,22 +406,12 @@ module Aws::FMS
       :network_acl_entries_to_be_created,
       :fms_can_remediate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fms_can_remediate] = false unless options.key?(:fms_can_remediate)
         super
       end
-    end
-
-    module CustomerPolicyScopeIdType
-      ACCOUNT = 'ACCOUNT'
-      ORG_UNIT = 'ORG_UNIT'
-    end
-
-    module CustomerPolicyStatus
-      ACTIVE = 'ACTIVE'
-      OUT_OF_ADMIN_SCOPE = 'OUT_OF_ADMIN_SCOPE'
     end
 
     # @!attribute list_id
@@ -439,7 +421,7 @@ module Aws::FMS
     class DeleteAppsListRequest < Struct.new(
       :list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the <code>DeleteNetworkAclEntries</code> action in Amazon EC2. This is a remediation option in <code>RemediationAction</code>. </p>
@@ -461,7 +443,7 @@ module Aws::FMS
       :network_acl_entries_to_be_deleted,
       :fms_can_remediate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fms_can_remediate] = false unless options.key?(:fms_can_remediate)
@@ -471,7 +453,7 @@ module Aws::FMS
 
     class DeleteNotificationChannelRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -517,7 +499,7 @@ module Aws::FMS
       :policy_id,
       :delete_all_policy_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute list_id
@@ -527,7 +509,7 @@ module Aws::FMS
     class DeleteProtocolsListRequest < Struct.new(
       :list_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -536,25 +518,12 @@ module Aws::FMS
     class DeleteResourceSetRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DependentServiceName
-      AWSConfig = 'AWSCONFIG'
-      AWSWAF = 'AWSWAF'
-      AWSShieldAdvanced = 'AWSSHIELD_ADVANCED'
-      AWSVirtualPrivateCloud = 'AWSVPC'
-    end
-
-    module DestinationType
-      IPV4 = 'IPV4'
-      IPV6 = 'IPV6'
-      PrefixList = 'PREFIX_LIST'
+      include ::Smithy::Schema::Structure
     end
 
     class DisassociateAdminAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall
@@ -563,7 +532,7 @@ module Aws::FMS
     class DisassociateThirdPartyFirewallRequest < Struct.new(
       :third_party_firewall,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall_status
@@ -572,7 +541,7 @@ module Aws::FMS
     class DisassociateThirdPartyFirewallResponse < Struct.new(
       :third_party_firewall_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource in the organization that's available to be associated with a Firewall Manager resource set.</p>
@@ -594,7 +563,7 @@ module Aws::FMS
       :type,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A DNS Firewall rule group that Firewall Manager
@@ -609,7 +578,7 @@ module Aws::FMS
       :violation_target,
       :violation_target_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The VPC that Firewall Manager was applying a DNS Fireall policy to reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed due to the limit. </p>
@@ -627,7 +596,7 @@ module Aws::FMS
       :violation_target_description,
       :number_of_rule_groups_already_associated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:number_of_rule_groups_already_associated] = 0 unless options.key?(:number_of_rule_groups_already_associated)
@@ -661,7 +630,7 @@ module Aws::FMS
       :conflicting_policy_id,
       :unavailable_priorities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:conflicting_priority] = 0 unless options.key?(:conflicting_priority)
@@ -688,7 +657,7 @@ module Aws::FMS
       :subnet_id,
       :gateway_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An action that copies the EC2 route table for use in remediation.</p>
@@ -706,7 +675,7 @@ module Aws::FMS
       :vpc_id,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the CreateRoute action in Amazon EC2.</p>
@@ -740,7 +709,7 @@ module Aws::FMS
       :gateway_id,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the CreateRouteTable action in Amazon EC2.</p>
@@ -754,7 +723,7 @@ module Aws::FMS
       :description,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the DeleteRoute action in Amazon EC2.</p>
@@ -780,7 +749,7 @@ module Aws::FMS
       :destination_ipv6_cidr_block,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the ReplaceRoute action in Amazon EC2.</p>
@@ -810,7 +779,7 @@ module Aws::FMS
       :gateway_id,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the ReplaceRouteTableAssociation action in Amazon EC2.</p>
@@ -828,7 +797,7 @@ module Aws::FMS
       :association_id,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a single rule in a network ACL.</p>
@@ -854,18 +823,12 @@ module Aws::FMS
       :entry_rule_number,
       :entry_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:entry_rule_number] = 0 unless options.key?(:entry_rule_number)
         super
       end
-    end
-
-    module EntryType
-      FMSManagedFirstEntry = 'FMS_MANAGED_FIRST_ENTRY'
-      FMSManagedLastEntry = 'FMS_MANAGED_LAST_ENTRY'
-      CustomEntry = 'CUSTOM_ENTRY'
     end
 
     # <p>Detailed information about an entry violation in a network ACL. The violation is against the network ACL specification inside the
@@ -896,13 +859,7 @@ module Aws::FMS
       :entries_with_conflicts,
       :entry_violation_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module EntryViolationReason
-      MissingExpectedEntry = 'MISSING_EXPECTED_ENTRY'
-      IncorrectEntryOrder = 'INCORRECT_ENTRY_ORDER'
-      EntryConflict = 'ENTRY_CONFLICT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the compliance status for the account. An account is considered noncompliant if
@@ -926,7 +883,7 @@ module Aws::FMS
       :violator_count,
       :evaluation_limit_exceeded,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:violator_count] = 0 unless options.key?(:violator_count)
@@ -962,7 +919,7 @@ module Aws::FMS
       :allowed_targets,
       :route_table_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the actions that you can take to remediate scope violations
@@ -980,7 +937,7 @@ module Aws::FMS
       :description,
       :firewall_creation_config,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of a resource that failed when trying to update it's association to a resource set.</p>
@@ -994,21 +951,7 @@ module Aws::FMS
       :uri,
       :reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FailedItemReason
-      NotValidArn = 'NOT_VALID_ARN'
-      NotValidPartition = 'NOT_VALID_PARTITION'
-      NotValidRegion = 'NOT_VALID_REGION'
-      NotValidService = 'NOT_VALID_SERVICE'
-      NotValidResourceType = 'NOT_VALID_RESOURCE_TYPE'
-      NotValidAccountId = 'NOT_VALID_ACCOUNT_ID'
-    end
-
-    module FirewallDeploymentModel
-      CENTRALIZED = 'CENTRALIZED'
-      DISTRIBUTED = 'DISTRIBUTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the firewall subnet that violates the policy scope.</p>
@@ -1034,7 +977,7 @@ module Aws::FMS
       :subnet_availability_zone_id,
       :vpc_endpoint_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The violation details for a firewall subnet's VPC endpoint that's deleted or missing.</p>
@@ -1056,12 +999,12 @@ module Aws::FMS
       :subnet_availability_zone,
       :subnet_availability_zone_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetAdminAccountRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account
@@ -1075,7 +1018,7 @@ module Aws::FMS
       :admin_account,
       :role_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account
@@ -1084,7 +1027,7 @@ module Aws::FMS
     class GetAdminScopeRequest < Struct.new(
       :admin_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_scope
@@ -1115,7 +1058,7 @@ module Aws::FMS
       :admin_scope,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute list_id
@@ -1128,7 +1071,7 @@ module Aws::FMS
       :list_id,
       :default_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps_list
@@ -1141,7 +1084,7 @@ module Aws::FMS
       :apps_list,
       :apps_list_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1155,7 +1098,7 @@ module Aws::FMS
       :policy_id,
       :member_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_compliance_detail
@@ -1165,12 +1108,12 @@ module Aws::FMS
     class GetComplianceDetailResponse < Struct.new(
       :policy_compliance_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class GetNotificationChannelRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sns_topic_arn
@@ -1183,7 +1126,7 @@ module Aws::FMS
       :sns_topic_arn,
       :sns_role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1192,7 +1135,7 @@ module Aws::FMS
     class GetPolicyRequest < Struct.new(
       :policy_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -1205,7 +1148,7 @@ module Aws::FMS
       :policy,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1244,7 +1187,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account_id
@@ -1291,7 +1234,7 @@ module Aws::FMS
       :data,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute list_id
@@ -1304,7 +1247,7 @@ module Aws::FMS
       :list_id,
       :default_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocols_list
@@ -1317,7 +1260,7 @@ module Aws::FMS
       :protocols_list,
       :protocols_list_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1326,7 +1269,7 @@ module Aws::FMS
     class GetResourceSetRequest < Struct.new(
       :identifier,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set
@@ -1339,7 +1282,7 @@ module Aws::FMS
       :resource_set,
       :resource_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall
@@ -1348,7 +1291,7 @@ module Aws::FMS
     class GetThirdPartyFirewallAssociationStatusRequest < Struct.new(
       :third_party_firewall,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall_status
@@ -1397,7 +1340,7 @@ module Aws::FMS
       :third_party_firewall_status,
       :marketplace_onboarding_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1449,7 +1392,7 @@ module Aws::FMS
       :resource_id,
       :resource_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute violation_detail
@@ -1458,7 +1401,7 @@ module Aws::FMS
     class GetViolationDetailsResponse < Struct.new(
       :violation_detail,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because of a system problem, even though the request was valid. Retry
@@ -1468,7 +1411,7 @@ module Aws::FMS
     class InternalErrorException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters of the request were invalid.</p>
@@ -1477,7 +1420,7 @@ module Aws::FMS
     class InvalidInputException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for the entries in a network ACL resource.</p>
@@ -1503,7 +1446,7 @@ module Aws::FMS
       :current_associated_network_acl,
       :entry_violations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation failed because there was nothing to do or the operation wasn't possible. For example, you might have
@@ -1516,7 +1459,7 @@ module Aws::FMS
     class InvalidOperationException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value of the <code>Type</code> parameter is invalid.</p>
@@ -1525,7 +1468,7 @@ module Aws::FMS
     class InvalidTypeException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation exceeds a resource limit, for example, the maximum number of
@@ -1537,7 +1480,7 @@ module Aws::FMS
     class LimitExceededException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1554,7 +1497,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_accounts
@@ -1569,7 +1512,7 @@ module Aws::FMS
       :admin_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1586,7 +1529,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_accounts
@@ -1601,7 +1544,7 @@ module Aws::FMS
       :admin_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_lists
@@ -1623,7 +1566,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps_lists
@@ -1637,7 +1580,7 @@ module Aws::FMS
       :apps_lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_id
@@ -1664,7 +1607,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_compliance_status_list
@@ -1682,7 +1625,7 @@ module Aws::FMS
       :policy_compliance_status_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_account_ids
@@ -1707,7 +1650,7 @@ module Aws::FMS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1722,7 +1665,7 @@ module Aws::FMS
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1743,7 +1686,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute member_accounts
@@ -1760,7 +1703,7 @@ module Aws::FMS
       :member_accounts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1782,7 +1725,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy_list
@@ -1799,7 +1742,7 @@ module Aws::FMS
       :policy_list,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute default_lists
@@ -1821,7 +1764,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocols_lists
@@ -1835,7 +1778,7 @@ module Aws::FMS
       :protocols_lists,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identifier
@@ -1856,7 +1799,7 @@ module Aws::FMS
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute items
@@ -1871,7 +1814,7 @@ module Aws::FMS
       :items,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -1888,7 +1831,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_sets
@@ -1903,7 +1846,7 @@ module Aws::FMS
       :resource_sets,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1912,7 +1855,7 @@ module Aws::FMS
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tag_list
@@ -1921,7 +1864,7 @@ module Aws::FMS
     class ListTagsForResourceResponse < Struct.new(
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall
@@ -1947,7 +1890,7 @@ module Aws::FMS
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute third_party_firewall_firewall_policies
@@ -1961,13 +1904,7 @@ module Aws::FMS
       :third_party_firewall_firewall_policies,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MarketplaceSubscriptionOnboardingStatus
-      NO_SUBSCRIPTION = 'NO_SUBSCRIPTION'
-      NOT_COMPLETE = 'NOT_COMPLETE'
-      COMPLETE = 'COMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines a Firewall Manager network ACL policy. This is used in the <code>PolicyOption</code> of a <code>SecurityServicePolicyData</code> for a <code>Policy</code>, when 
@@ -1981,7 +1918,7 @@ module Aws::FMS
     class NetworkAclCommonPolicy < Struct.new(
       :network_acl_entry_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a rule in a network ACL.</p>
@@ -2022,7 +1959,7 @@ module Aws::FMS
       :rule_action,
       :egress,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the first and last rules for the network ACL policy, and the remediation settings for each. </p>
@@ -2064,7 +2001,7 @@ module Aws::FMS
       :last_entries,
       :force_remediate_for_last_entries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>ICMP protocol: The ICMP type and code.</p>
@@ -2078,7 +2015,7 @@ module Aws::FMS
       :code,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>TCP or UDP protocols: The range of ports the rule applies to.</p>
@@ -2092,12 +2029,7 @@ module Aws::FMS
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkAclRuleAction
-      ALLOW = 'allow'
-      DENY = 'deny'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for an internet gateway route with an inactive state in the customer subnet route table or Network Firewall subnet route table.</p>
@@ -2119,7 +2051,7 @@ module Aws::FMS
       :vpc_id,
       :violating_routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for the subnet for which internet traffic that hasn't been inspected.</p>
@@ -2185,7 +2117,7 @@ module Aws::FMS
       :actual_internet_gateway_routes,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_route_table_used_in_different_az] = false unless options.key?(:is_route_table_used_in_different_az)
@@ -2261,7 +2193,7 @@ module Aws::FMS
       :actual_internet_gateway_routes,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_route_table_used_in_different_az] = false unless options.key?(:is_route_table_used_in_different_az)
@@ -2293,7 +2225,7 @@ module Aws::FMS
       :current_route_table,
       :expected_route_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for an expected route missing in Network Firewall.</p>
@@ -2311,7 +2243,7 @@ module Aws::FMS
       :expected_routes,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for Network Firewall for a subnet that doesn't have a
@@ -2334,7 +2266,7 @@ module Aws::FMS
       :availability_zone,
       :target_violation_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for Network Firewall for an Availability Zone that's
@@ -2357,11 +2289,7 @@ module Aws::FMS
       :availability_zone,
       :target_violation_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkFirewallOverrideAction
-      DROP_TO_ALERT = 'DROP_TO_ALERT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the firewall policy deployment model of Network Firewall. For information about
@@ -2375,7 +2303,7 @@ module Aws::FMS
     class NetworkFirewallPolicy < Struct.new(
       :firewall_deployment_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the Network Firewall firewall policy.</p>
@@ -2429,7 +2357,7 @@ module Aws::FMS
       :stateful_default_actions,
       :stateful_engine_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for Network Firewall for a firewall policy that has a different
@@ -2448,7 +2376,7 @@ module Aws::FMS
       :current_policy_description,
       :expected_policy_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The setting that allows the policy owner to change the behavior of the rule group within a policy.</p>
@@ -2458,7 +2386,7 @@ module Aws::FMS
     class NetworkFirewallStatefulRuleGroupOverride < Struct.new(
       :action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for an unexpected route that's present in a route table.</p>
@@ -2484,7 +2412,7 @@ module Aws::FMS
       :firewall_endpoint,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail for an unexpected gateway route that’s present in a route table.</p>
@@ -2506,14 +2434,7 @@ module Aws::FMS
       :route_table_id,
       :vpc_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OrganizationStatus
-      Onboarding = 'ONBOARDING'
-      OnboardingComplete = 'ONBOARDING_COMPLETE'
-      Offboarding = 'OFFBOARDING'
-      OffboardingComplete = 'OFFBOARDING_COMPLETE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Organizations organizational units (OUs) that the specified Firewall Manager administrator can apply policies to. For more information about OUs in Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html">Managing organizational units (OUs)
@@ -2532,7 +2453,7 @@ module Aws::FMS
       :all_organizational_units_enabled,
       :exclude_specified_organizational_units,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_organizational_units_enabled] = false unless options.key?(:all_organizational_units_enabled)
@@ -2552,7 +2473,7 @@ module Aws::FMS
       :reference,
       :target_violation_reasons,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Firewall Manager policy.</p>
@@ -2713,7 +2634,7 @@ module Aws::FMS
       :policy_status,
       :resource_tag_logical_operator,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:exclude_resource_tags] = false unless options.key?(:exclude_resource_tags)
@@ -2760,7 +2681,7 @@ module Aws::FMS
       :expired_at,
       :issue_info_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:evaluation_limit_exceeded] = false unless options.key?(:evaluation_limit_exceeded)
@@ -2803,12 +2724,7 @@ module Aws::FMS
       :last_updated,
       :issue_info_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PolicyComplianceStatusType
-      Compliant = 'COMPLIANT'
-      NonCompliant = 'NON_COMPLIANT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the settings to configure a network ACL policy, a Network Firewall firewall policy deployment model, or a third-party firewall policy.</p>
@@ -2826,7 +2742,7 @@ module Aws::FMS
       :third_party_firewall_policy,
       :network_acl_common_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Firewall Manager policy. </p>
@@ -2881,7 +2797,7 @@ module Aws::FMS
       :delete_unused_fm_managed_resources,
       :policy_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:remediation_enabled] = false unless options.key?(:remediation_enabled)
@@ -2901,7 +2817,7 @@ module Aws::FMS
       :policy_types,
       :all_policy_types_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_policy_types_enabled] = false unless options.key?(:all_policy_types_enabled)
@@ -2924,7 +2840,7 @@ module Aws::FMS
       :ordered_remediation_actions,
       :is_default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_action] = false unless options.key?(:is_default_action)
@@ -2943,7 +2859,7 @@ module Aws::FMS
       :description,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Firewall Manager protocols list.</p>
@@ -2979,7 +2895,7 @@ module Aws::FMS
       :protocols_list,
       :previous_protocols_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details of the Firewall Manager protocols list.</p>
@@ -3001,7 +2917,7 @@ module Aws::FMS
       :list_name,
       :protocols_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute admin_account
@@ -3015,7 +2931,7 @@ module Aws::FMS
       :admin_account,
       :admin_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps_list
@@ -3028,7 +2944,7 @@ module Aws::FMS
       :apps_list,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute apps_list
@@ -3041,7 +2957,7 @@ module Aws::FMS
       :apps_list,
       :apps_list_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute sns_topic_arn
@@ -3056,7 +2972,7 @@ module Aws::FMS
       :sns_topic_arn,
       :sns_role_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -3069,7 +2985,7 @@ module Aws::FMS
       :policy,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -3082,7 +2998,7 @@ module Aws::FMS
       :policy,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocols_list
@@ -3095,7 +3011,7 @@ module Aws::FMS
       :protocols_list,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute protocols_list
@@ -3108,7 +3024,7 @@ module Aws::FMS
       :protocols_list,
       :protocols_list_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set
@@ -3125,7 +3041,7 @@ module Aws::FMS
       :resource_set,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_set
@@ -3138,7 +3054,7 @@ module Aws::FMS
       :resource_set,
       :resource_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines the Amazon Web Services Regions that the specified Firewall Manager administrator can manage.</p>
@@ -3152,7 +3068,7 @@ module Aws::FMS
       :regions,
       :all_regions_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:all_regions_enabled] = false unless options.key?(:all_regions_enabled)
@@ -3215,12 +3131,7 @@ module Aws::FMS
       :create_network_acl_entries_action,
       :delete_network_acl_entries_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RemediationActionType
-      Remove = 'REMOVE'
-      Modify = 'MODIFY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An ordered list of actions you can take to remediate a violation.</p>
@@ -3234,7 +3145,7 @@ module Aws::FMS
       :remediation_action,
       :order,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:order] = 0 unless options.key?(:order)
@@ -3261,7 +3172,7 @@ module Aws::FMS
       :network_acl_id,
       :fms_can_remediate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:fms_can_remediate] = false unless options.key?(:fms_can_remediate)
@@ -3280,7 +3191,7 @@ module Aws::FMS
       :uri,
       :account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified resource was not found.</p>
@@ -3289,7 +3200,7 @@ module Aws::FMS
     class ResourceNotFoundException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of resources to include in a policy.</p>
@@ -3338,12 +3249,7 @@ module Aws::FMS
       :last_update_time,
       :resource_set_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceSetStatus
-      ACTIVE = 'ACTIVE'
-      OUT_OF_ADMIN_SCOPE = 'OUT_OF_ADMIN_SCOPE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summarizes the resource sets used in a policy.</p>
@@ -3379,7 +3285,7 @@ module Aws::FMS
       :last_update_time,
       :resource_set_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource tags that Firewall Manager uses to determine if a particular resource
@@ -3402,12 +3308,7 @@ module Aws::FMS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceTagLogicalOperator
-      AND = 'AND'
-      OR = 'OR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violation detail based on resource type.</p>
@@ -3525,7 +3426,7 @@ module Aws::FMS
       :web_acl_has_incompatible_configuration_violation,
       :web_acl_has_out_of_scope_resources_violation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a route in a route table.</p>
@@ -3547,7 +3448,7 @@ module Aws::FMS
       :destination,
       :target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains details about the route endpoint that violates the policy scope.</p>
@@ -3601,12 +3502,7 @@ module Aws::FMS
       :current_internet_gateway_route_table,
       :internet_gateway_routes,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RuleOrder
-      STRICT_ORDER = 'STRICT_ORDER'
-      DEFAULT_ACTION_ORDER = 'DEFAULT_ACTION_ORDER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Remediation option for the rule specified in the <code>ViolationTarget</code>.</p>
@@ -3628,7 +3524,7 @@ module Aws::FMS
       :remediation_result,
       :is_default_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_default_action] = false unless options.key?(:is_default_action)
@@ -3663,7 +3559,7 @@ module Aws::FMS
       :from_port,
       :to_port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the security service that is being used to protect the resources.</p>
@@ -3945,21 +3841,7 @@ module Aws::FMS
       :managed_service_data,
       :policy_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SecurityServiceType
-      WAF = 'WAF'
-      WAFV2 = 'WAFV2'
-      SHIELD_ADVANCED = 'SHIELD_ADVANCED'
-      SECURITY_GROUPS_COMMON = 'SECURITY_GROUPS_COMMON'
-      SECURITY_GROUPS_CONTENT_AUDIT = 'SECURITY_GROUPS_CONTENT_AUDIT'
-      SECURITY_GROUPS_USAGE_AUDIT = 'SECURITY_GROUPS_USAGE_AUDIT'
-      NETWORK_FIREWALL = 'NETWORK_FIREWALL'
-      DNS_FIREWALL = 'DNS_FIREWALL'
-      THIRD_PARTY_FIREWALL = 'THIRD_PARTY_FIREWALL'
-      IMPORT_NETWORK_FIREWALL = 'IMPORT_NETWORK_FIREWALL'
-      NETWORK_ACL_COMMON = 'NETWORK_ACL_COMMON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration settings for the handling of the stateful rule groups in a Network Firewall firewall policy.</p>
@@ -4002,7 +3884,7 @@ module Aws::FMS
       :rule_order,
       :stream_exception_policy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network Firewall stateful rule group, used in a <a>NetworkFirewallPolicyDescription</a>. </p>
@@ -4034,7 +3916,7 @@ module Aws::FMS
       :priority,
       :override,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Network Firewall stateless rule group, used in a <a>NetworkFirewallPolicyDescription</a>. </p>
@@ -4052,14 +3934,7 @@ module Aws::FMS
       :resource_id,
       :priority,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StreamExceptionPolicy
-      DROP = 'DROP'
-      CONTINUE = 'CONTINUE'
-      REJECT = 'REJECT'
-      FMS_IGNORE = 'FMS_IGNORE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of key:value pairs associated with an Amazon Web Services resource. The key:value pair can be anything you define. Typically, the tag key represents a category (such as "environment") and the tag value represents a specific value within that category (such as "test," "development," or "production"). You can add up to 50 tags to each Amazon Web Services resource.  </p>
@@ -4073,7 +3948,7 @@ module Aws::FMS
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4086,38 +3961,12 @@ module Aws::FMS
       :resource_arn,
       :tag_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class TagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      Gateway = 'GATEWAY'
-      CarrierGateway = 'CARRIER_GATEWAY'
-      Instance = 'INSTANCE'
-      LocalGateway = 'LOCAL_GATEWAY'
-      NatGateway = 'NAT_GATEWAY'
-      NetworkInterface = 'NETWORK_INTERFACE'
-      VPCEndpoint = 'VPC_ENDPOINT'
-      VPCPeeringConnection = 'VPC_PEERING_CONNECTION'
-      EgressOnlyInternetGateway = 'EGRESS_ONLY_INTERNET_GATEWAY'
-      TransitGateway = 'TRANSIT_GATEWAY'
-    end
-
-    module ThirdPartyFirewall
-      PALO_ALTO_NETWORKS_CLOUD_NGFW = 'PALO_ALTO_NETWORKS_CLOUD_NGFW'
-      FORTIGATE_CLOUD_NATIVE_FIREWALL = 'FORTIGATE_CLOUD_NATIVE_FIREWALL'
-    end
-
-    module ThirdPartyFirewallAssociationStatus
-      ONBOARDING = 'ONBOARDING'
-      ONBOARD_COMPLETE = 'ONBOARD_COMPLETE'
-      OFFBOARDING = 'OFFBOARDING'
-      OFFBOARD_COMPLETE = 'OFFBOARD_COMPLETE'
-      NOT_EXIST = 'NOT_EXIST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the third-party firewall's firewall policy.</p>
@@ -4131,7 +3980,7 @@ module Aws::FMS
       :firewall_policy_id,
       :firewall_policy_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The violation details for a third-party firewall that's not associated with an Firewall Manager managed route table.</p>
@@ -4157,7 +4006,7 @@ module Aws::FMS
       :current_route_table,
       :expected_route_table,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The violation details about a third-party firewall's subnet that doesn't have a Firewall Manager managed firewall in its VPC.</p>
@@ -4179,7 +4028,7 @@ module Aws::FMS
       :availability_zone,
       :target_violation_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The violation details for a third-party firewall for an Availability Zone that's missing the Firewall Manager managed subnet.</p>
@@ -4201,7 +4050,7 @@ module Aws::FMS
       :availability_zone,
       :target_violation_reason,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the deployment model for the third-party firewall.</p>
@@ -4211,7 +4060,7 @@ module Aws::FMS
     class ThirdPartyFirewallPolicy < Struct.new(
       :firewall_deployment_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -4224,12 +4073,12 @@ module Aws::FMS
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UntagResourceResponse < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Violations for a resource based on the specified Firewall Manager policy and Amazon Web Services account.</p>
@@ -4263,40 +4112,7 @@ module Aws::FMS
       :resource_tags,
       :resource_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ViolationReason
-      WebAclMissingRuleGroup = 'WEB_ACL_MISSING_RULE_GROUP'
-      ResourceMissingWebAcl = 'RESOURCE_MISSING_WEB_ACL'
-      ResourceIncorrectWebAcl = 'RESOURCE_INCORRECT_WEB_ACL'
-      ResourceMissingShieldProtection = 'RESOURCE_MISSING_SHIELD_PROTECTION'
-      ResourceMissingWebaclOrShieldProtection = 'RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION'
-      ResourceMissingSecurityGroup = 'RESOURCE_MISSING_SECURITY_GROUP'
-      ResourceViolatesAuditSecurityGroup = 'RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP'
-      SecurityGroupUnused = 'SECURITY_GROUP_UNUSED'
-      SecurityGroupRedundant = 'SECURITY_GROUP_REDUNDANT'
-      FMSCreatedSecurityGroupEdited = 'FMS_CREATED_SECURITY_GROUP_EDITED'
-      MissingFirewall = 'MISSING_FIREWALL'
-      MissingFirewallSubnetInAZ = 'MISSING_FIREWALL_SUBNET_IN_AZ'
-      MissingExpectedRouteTable = 'MISSING_EXPECTED_ROUTE_TABLE'
-      NetworkFirewallPolicyModified = 'NETWORK_FIREWALL_POLICY_MODIFIED'
-      FirewallSubnetIsOutOfScope = 'FIREWALL_SUBNET_IS_OUT_OF_SCOPE'
-      InternetGatewayMissingExpectedRoute = 'INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE'
-      FirewallSubnetMissingExpectedRoute = 'FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE'
-      UnexpectedFirewallRoutes = 'UNEXPECTED_FIREWALL_ROUTES'
-      UnexpectedTargetGatewayRoutes = 'UNEXPECTED_TARGET_GATEWAY_ROUTES'
-      TrafficInspectionCrossesAZBoundary = 'TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY'
-      InvalidRouteConfiguration = 'INVALID_ROUTE_CONFIGURATION'
-      MissingTargetGateway = 'MISSING_TARGET_GATEWAY'
-      InternetTrafficNotInspected = 'INTERNET_TRAFFIC_NOT_INSPECTED'
-      BlackHoleRouteDetected = 'BLACK_HOLE_ROUTE_DETECTED'
-      BlackHoleRouteDetectedInFirewallSubnet = 'BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET'
-      ResourceMissingDnsFirewall = 'RESOURCE_MISSING_DNS_FIREWALL'
-      RouteHasOutOfScopeEndpoint = 'ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT'
-      FirewallSubnetMissingVPCEndpoint = 'FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT'
-      InvalidNetworkAclEntry = 'INVALID_NETWORK_ACL_ENTRY'
-      WebACLConfigurationOrScopeOfUse = 'WEB_ACL_CONFIGURATION_OR_SCOPE_OF_USE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The violation details for a web ACL whose configuration is incompatible with the Firewall Manager policy. </p>
@@ -4310,7 +4126,7 @@ module Aws::FMS
       :web_acl_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The violation details for a web ACL that's associated with at least one resource that's out of scope of the Firewall Manager policy. </p>
@@ -4324,7 +4140,7 @@ module Aws::FMS
       :web_acl_arn,
       :out_of_scope_resource_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

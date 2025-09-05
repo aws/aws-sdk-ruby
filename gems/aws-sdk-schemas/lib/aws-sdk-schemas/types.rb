@@ -16,13 +16,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CodeGenerationStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_COMPLETE = 'CREATE_COMPLETE'
-      CREATE_FAILED = 'CREATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -35,7 +29,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -56,7 +50,7 @@ module Aws::Schemas
       :cross_account,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -89,7 +83,7 @@ module Aws::Schemas
       :cross_account,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -106,7 +100,7 @@ module Aws::Schemas
       :registry_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -127,7 +121,7 @@ module Aws::Schemas
       :registry_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -156,7 +150,7 @@ module Aws::Schemas
       :tags,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -193,7 +187,7 @@ module Aws::Schemas
       :type,
       :version_created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id
@@ -202,7 +196,7 @@ module Aws::Schemas
     class DeleteDiscovererRequest < Struct.new(
       :discoverer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -211,7 +205,7 @@ module Aws::Schemas
     class DeleteRegistryRequest < Struct.new(
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -220,7 +214,7 @@ module Aws::Schemas
     class DeleteResourcePolicyRequest < Struct.new(
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -233,7 +227,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -250,7 +244,7 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language
@@ -271,7 +265,7 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_date
@@ -292,7 +286,7 @@ module Aws::Schemas
       :schema_version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id
@@ -301,7 +295,7 @@ module Aws::Schemas
     class DescribeDiscovererRequest < Struct.new(
       :discoverer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -334,7 +328,7 @@ module Aws::Schemas
       :cross_account,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -343,7 +337,7 @@ module Aws::Schemas
     class DescribeRegistryRequest < Struct.new(
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -364,7 +358,7 @@ module Aws::Schemas
       :registry_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -381,7 +375,7 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -422,12 +416,7 @@ module Aws::Schemas
       :type,
       :version_created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DiscovererState
-      STARTED = 'STARTED'
-      STOPPED = 'STOPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_arn
@@ -456,7 +445,7 @@ module Aws::Schemas
       :cross_account,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -476,7 +465,7 @@ module Aws::Schemas
       :schema_version,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -496,7 +485,7 @@ module Aws::Schemas
       :schema_version,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -509,7 +498,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language
@@ -530,7 +519,7 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute body
@@ -538,7 +527,7 @@ module Aws::Schemas
     class GetCodeBindingSourceResponse < Struct.new(
       :body,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute events
@@ -551,7 +540,7 @@ module Aws::Schemas
       :events,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute content
@@ -560,7 +549,7 @@ module Aws::Schemas
     class GetDiscoveredSchemaResponse < Struct.new(
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -569,7 +558,7 @@ module Aws::Schemas
     class GetResourcePolicyRequest < Struct.new(
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -582,7 +571,7 @@ module Aws::Schemas
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -595,7 +584,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -608,7 +597,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id_prefix
@@ -628,7 +617,7 @@ module Aws::Schemas
       :next_token,
       :source_arn_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverers
@@ -641,7 +630,7 @@ module Aws::Schemas
       :discoverers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -661,7 +650,7 @@ module Aws::Schemas
       :registry_name_prefix,
       :scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -674,7 +663,7 @@ module Aws::Schemas
       :next_token,
       :registries,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -694,7 +683,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -707,7 +696,7 @@ module Aws::Schemas
       :next_token,
       :schema_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute limit
@@ -727,7 +716,7 @@ module Aws::Schemas
       :registry_name,
       :schema_name_prefix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -740,7 +729,7 @@ module Aws::Schemas
       :next_token,
       :schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -749,7 +738,7 @@ module Aws::Schemas
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -758,7 +747,7 @@ module Aws::Schemas
     class ListTagsForResourceResponse < Struct.new(
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -771,7 +760,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -784,7 +773,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute language
@@ -805,7 +794,7 @@ module Aws::Schemas
       :schema_name,
       :schema_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute creation_date
@@ -826,7 +815,7 @@ module Aws::Schemas
       :schema_version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The name of the policy.</p>
@@ -844,7 +833,7 @@ module Aws::Schemas
       :registry_name,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute policy
@@ -857,7 +846,7 @@ module Aws::Schemas
       :policy,
       :revision_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_arn
@@ -874,7 +863,7 @@ module Aws::Schemas
       :registry_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of schema details.</p>
@@ -900,7 +889,7 @@ module Aws::Schemas
       :tags,
       :version_count,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_arn
@@ -921,7 +910,7 @@ module Aws::Schemas
       :schema_version,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute registry_name
@@ -942,7 +931,7 @@ module Aws::Schemas
       :schema_name,
       :schema_versions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute created_date
@@ -959,7 +948,7 @@ module Aws::Schemas
       :schema_version,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute keywords
@@ -979,7 +968,7 @@ module Aws::Schemas
       :next_token,
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -992,7 +981,7 @@ module Aws::Schemas
       :next_token,
       :schemas,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -1005,7 +994,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id
@@ -1014,7 +1003,7 @@ module Aws::Schemas
     class StartDiscovererRequest < Struct.new(
       :discoverer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id
@@ -1027,7 +1016,7 @@ module Aws::Schemas
       :discoverer_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id
@@ -1036,7 +1025,7 @@ module Aws::Schemas
     class StopDiscovererRequest < Struct.new(
       :discoverer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute discoverer_id
@@ -1049,7 +1038,7 @@ module Aws::Schemas
       :discoverer_id,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p></p>
@@ -1063,7 +1052,7 @@ module Aws::Schemas
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -1076,12 +1065,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Type
-      OpenApi3 = 'OpenApi3'
-      JSONSchemaDraft4 = 'JSONSchemaDraft4'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute code
@@ -1094,7 +1078,7 @@ module Aws::Schemas
       :code,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -1107,7 +1091,7 @@ module Aws::Schemas
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -1124,7 +1108,7 @@ module Aws::Schemas
       :discoverer_id,
       :cross_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -1157,7 +1141,7 @@ module Aws::Schemas
       :cross_account,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates the registry.</p>
@@ -1171,7 +1155,7 @@ module Aws::Schemas
       :description,
       :registry_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -1192,7 +1176,7 @@ module Aws::Schemas
       :registry_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_token_id
@@ -1221,7 +1205,7 @@ module Aws::Schemas
       :schema_name,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute description
@@ -1258,7 +1242,7 @@ module Aws::Schemas
       :type,
       :version_created_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

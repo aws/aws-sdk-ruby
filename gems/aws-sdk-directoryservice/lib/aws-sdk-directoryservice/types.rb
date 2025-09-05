@@ -25,7 +25,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directory_id
@@ -35,7 +35,7 @@ module Aws::DirectoryService
     class AcceptSharedDirectoryRequest < Struct.new(
       :shared_directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directory
@@ -44,7 +44,7 @@ module Aws::DirectoryService
     class AcceptSharedDirectoryResult < Struct.new(
       :shared_directory,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You do not have sufficient access to perform this action.</p>
@@ -58,7 +58,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -143,12 +143,12 @@ module Aws::DirectoryService
       :ip_routes,
       :update_security_group_for_directory_controllers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddIpRoutesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -166,12 +166,12 @@ module Aws::DirectoryService
       :region_name,
       :vpc_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddRegionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -184,12 +184,12 @@ module Aws::DirectoryService
       :resource_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class AddTagsToResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about a directory assessment, including configuration
@@ -265,7 +265,7 @@ module Aws::DirectoryService
       :report_type,
       :version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration parameters required to perform a directory assessment.</p>
@@ -296,7 +296,7 @@ module Aws::DirectoryService
       :instance_ids,
       :security_group_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of validation tests performed against a specific domain
@@ -312,7 +312,7 @@ module Aws::DirectoryService
       :domain_controller_ip,
       :validations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains summary information about a directory assessment, providing a high-level
@@ -355,7 +355,7 @@ module Aws::DirectoryService
       :customer_dns_ips,
       :report_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a specific validation test performed during a directory
@@ -393,7 +393,7 @@ module Aws::DirectoryService
       :start_time,
       :last_update_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a named directory attribute.</p>
@@ -407,7 +407,7 @@ module Aws::DirectoryService
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An authentication error occurred.</p>
@@ -421,7 +421,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -434,12 +434,12 @@ module Aws::DirectoryService
       :directory_id,
       :schema_extension_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CancelSchemaExtensionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the certificate.</p>
@@ -480,7 +480,7 @@ module Aws::DirectoryService
       :type,
       :client_cert_auth_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate has already been registered into the system.</p>
@@ -494,7 +494,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate is not present in the system for describe or deregister activities.</p>
@@ -508,7 +508,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate is being used for the LDAP security connection and cannot be removed
@@ -523,7 +523,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains general information about a certificate.</p>
@@ -551,7 +551,7 @@ module Aws::DirectoryService
       :expiry_date_time,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate could not be added because the certificate limit has been reached.</p>
@@ -565,21 +565,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CertificateState
-      REGISTERING = 'Registering'
-      REGISTERED = 'Registered'
-      REGISTER_FAILED = 'RegisterFailed'
-      DEREGISTERING = 'Deregistering'
-      DEREGISTERED = 'Deregistered'
-      DEREGISTER_FAILED = 'DeregisterFailed'
-    end
-
-    module CertificateType
-      CLIENT_CERT_AUTH = 'ClientCertAuth'
-      CLIENT_LDAPS = 'ClientLDAPS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a client authentication method for a directory.</p>
@@ -601,17 +587,7 @@ module Aws::DirectoryService
       :status,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ClientAuthenticationStatus
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
-    end
-
-    module ClientAuthenticationType
-      SMART_CARD = 'SmartCard'
-      SMART_CARD_OR_PASSWORD = 'SmartCardOrPassword'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the client certificate authentication settings for the
@@ -623,7 +599,7 @@ module Aws::DirectoryService
     class ClientCertAuthSettings < Struct.new(
       :ocsp_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A client exception has occurred.</p>
@@ -637,7 +613,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a computer account in a directory.</p>
@@ -656,7 +632,7 @@ module Aws::DirectoryService
       :computer_name,
       :computer_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Points to a remote domain with which you are setting up a trust relationship.
@@ -680,7 +656,7 @@ module Aws::DirectoryService
       :dns_ip_addrs,
       :replication_scope,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>
@@ -716,7 +692,7 @@ module Aws::DirectoryService
       :connect_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>ConnectDirectory</a> operation.</p>
@@ -726,7 +702,7 @@ module Aws::DirectoryService
     class ConnectDirectoryResult < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>CreateAlias</a> operation.</p>
@@ -742,7 +718,7 @@ module Aws::DirectoryService
       :directory_id,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>CreateAlias</a> operation.</p>
@@ -756,7 +732,7 @@ module Aws::DirectoryService
       :directory_id,
       :alias,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>CreateComputer</a> operation.</p>
@@ -783,7 +759,7 @@ module Aws::DirectoryService
       :organizational_unit_distinguished_name,
       :computer_attributes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results for the <a>CreateComputer</a> operation.</p>
@@ -793,7 +769,7 @@ module Aws::DirectoryService
     class CreateComputerResult < Struct.new(
       :computer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active
@@ -815,13 +791,13 @@ module Aws::DirectoryService
       :remote_domain_name,
       :dns_ip_addrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a CreateConditinalForwarder request.</p>
     class CreateConditionalForwarderResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>
@@ -884,7 +860,7 @@ module Aws::DirectoryService
       :vpc_settings,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>CreateDirectory</a> operation.</p>
@@ -894,7 +870,7 @@ module Aws::DirectoryService
     class CreateDirectoryResult < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute secret_arn
@@ -920,7 +896,7 @@ module Aws::DirectoryService
       :assessment_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -929,7 +905,7 @@ module Aws::DirectoryService
     class CreateHybridADResult < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -944,12 +920,12 @@ module Aws::DirectoryService
       :directory_id,
       :log_group_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class CreateLogSubscriptionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Creates an Managed Microsoft AD directory.</p>
@@ -990,7 +966,7 @@ module Aws::DirectoryService
       :edition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result of a CreateMicrosoftAD request.</p>
@@ -1000,7 +976,7 @@ module Aws::DirectoryService
     class CreateMicrosoftADResult < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>CreateSnapshot</a> operation.</p>
@@ -1014,7 +990,7 @@ module Aws::DirectoryService
       :directory_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>CreateSnapshot</a> operation.</p>
@@ -1024,7 +1000,7 @@ module Aws::DirectoryService
     class CreateSnapshotResult < Struct.new(
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Directory Service for Microsoft Active Directory allows you to configure trust relationships. For
@@ -1066,7 +1042,7 @@ module Aws::DirectoryService
       :conditional_forwarder_ip_addrs,
       :selective_auth,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a CreateTrust request.</p>
@@ -1076,15 +1052,7 @@ module Aws::DirectoryService
     class CreateTrustResult < Struct.new(
       :trust_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataAccessStatus
-      DISABLED = 'Disabled'
-      DISABLING = 'Disabling'
-      ENABLED = 'Enabled'
-      ENABLING = 'Enabling'
-      FAILED = 'Failed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1093,7 +1061,7 @@ module Aws::DirectoryService
     class DeleteADAssessmentRequest < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1102,7 +1070,7 @@ module Aws::DirectoryService
     class DeleteADAssessmentResult < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes a conditional forwarder.</p>
@@ -1117,13 +1085,13 @@ module Aws::DirectoryService
       :directory_id,
       :remote_domain_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DeleteConditionalForwarder request.</p>
     class DeleteConditionalForwarderResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DeleteDirectory</a> operation.</p>
@@ -1133,7 +1101,7 @@ module Aws::DirectoryService
     class DeleteDirectoryRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DeleteDirectory</a> operation.</p>
@@ -1143,7 +1111,7 @@ module Aws::DirectoryService
     class DeleteDirectoryResult < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1152,12 +1120,12 @@ module Aws::DirectoryService
     class DeleteLogSubscriptionRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeleteLogSubscriptionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DeleteSnapshot</a> operation.</p>
@@ -1167,7 +1135,7 @@ module Aws::DirectoryService
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DeleteSnapshot</a> operation.</p>
@@ -1177,7 +1145,7 @@ module Aws::DirectoryService
     class DeleteSnapshotResult < Struct.new(
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Deletes the local side of an existing trust relationship between the Managed Microsoft AD
@@ -1192,7 +1160,7 @@ module Aws::DirectoryService
       :trust_id,
       :delete_associated_conditional_forwarder,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DeleteTrust request.</p>
@@ -1202,7 +1170,7 @@ module Aws::DirectoryService
     class DeleteTrustResult < Struct.new(
       :trust_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1215,12 +1183,12 @@ module Aws::DirectoryService
       :directory_id,
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DeregisterCertificateResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Removes the specified directory as a publisher to the specified Amazon SNS topic.</p>
@@ -1236,13 +1204,13 @@ module Aws::DirectoryService
       :directory_id,
       :topic_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DeregisterEventTopic request.</p>
     class DeregisterEventTopicResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -1251,7 +1219,7 @@ module Aws::DirectoryService
     class DescribeADAssessmentRequest < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment
@@ -1266,7 +1234,7 @@ module Aws::DirectoryService
       :assessment,
       :assessment_reports,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1279,7 +1247,7 @@ module Aws::DirectoryService
       :directory_id,
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate
@@ -1289,7 +1257,7 @@ module Aws::DirectoryService
     class DescribeCertificateResult < Struct.new(
       :certificate,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1315,7 +1283,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute client_authentication_settings_info
@@ -1332,7 +1300,7 @@ module Aws::DirectoryService
       :client_authentication_settings_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a conditional forwarder.</p>
@@ -1349,7 +1317,7 @@ module Aws::DirectoryService
       :directory_id,
       :remote_domain_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DescribeConditionalForwarder request.</p>
@@ -1359,7 +1327,7 @@ module Aws::DirectoryService
     class DescribeConditionalForwardersResult < Struct.new(
       :conditional_forwarders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DescribeDirectories</a> operation.</p>
@@ -1380,7 +1348,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DescribeDirectories</a> operation.</p>
@@ -1400,7 +1368,7 @@ module Aws::DirectoryService
       :directory_descriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1409,7 +1377,7 @@ module Aws::DirectoryService
     class DescribeDirectoryDataAccessRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_access_status
@@ -1418,7 +1386,7 @@ module Aws::DirectoryService
     class DescribeDirectoryDataAccessResult < Struct.new(
       :data_access_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1443,7 +1411,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute domain_controllers
@@ -1458,7 +1426,7 @@ module Aws::DirectoryService
       :domain_controllers,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes event topics.</p>
@@ -1476,7 +1444,7 @@ module Aws::DirectoryService
       :directory_id,
       :topic_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DescribeEventTopic request.</p>
@@ -1487,7 +1455,7 @@ module Aws::DirectoryService
     class DescribeEventTopicsResult < Struct.new(
       :event_topics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1507,7 +1475,7 @@ module Aws::DirectoryService
       :update_type,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_activities
@@ -1523,7 +1491,7 @@ module Aws::DirectoryService
       :update_activities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1545,7 +1513,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ldaps_settings_info
@@ -1560,7 +1528,7 @@ module Aws::DirectoryService
       :ldaps_settings_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1577,7 +1545,7 @@ module Aws::DirectoryService
       :region_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute regions_description
@@ -1592,7 +1560,7 @@ module Aws::DirectoryService
       :regions_description,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1609,7 +1577,7 @@ module Aws::DirectoryService
       :status,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1632,7 +1600,7 @@ module Aws::DirectoryService
       :setting_entries,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute owner_directory_id
@@ -1654,7 +1622,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directories
@@ -1668,7 +1636,7 @@ module Aws::DirectoryService
       :shared_directories,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DescribeSnapshots</a> operation.</p>
@@ -1693,7 +1661,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DescribeSnapshots</a> operation.</p>
@@ -1712,7 +1680,7 @@ module Aws::DirectoryService
       :snapshots,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the trust relationships for a particular Managed Microsoft AD directory. If no input
@@ -1741,7 +1709,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a DescribeTrust request.</p>
@@ -1760,7 +1728,7 @@ module Aws::DirectoryService
       :trusts,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -1782,7 +1750,7 @@ module Aws::DirectoryService
       :region_name,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute update_activities
@@ -1796,7 +1764,7 @@ module Aws::DirectoryService
       :update_activities,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Region you specified is the same Region where the Managed Microsoft AD directory was created.
@@ -1811,7 +1779,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified directory has already been shared with this Amazon Web Services account.</p>
@@ -1825,15 +1793,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectoryConfigurationStatus
-      REQUESTED = 'Requested'
-      UPDATING = 'Updating'
-      UPDATED = 'Updated'
-      FAILED = 'Failed'
-      DEFAULT = 'Default'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information for the <a>ConnectDirectory</a> operation when an AD
@@ -1869,7 +1829,7 @@ module Aws::DirectoryService
       :customer_dns_ips,
       :customer_user_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an AD Connector directory.</p>
@@ -1899,7 +1859,7 @@ module Aws::DirectoryService
       :availability_zones,
       :connect_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about an Directory Service directory.</p>
@@ -2031,7 +1991,7 @@ module Aws::DirectoryService
       :os_version,
       :hybrid_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:sso_enabled] = false unless options.key?(:sso_enabled)
@@ -2050,12 +2010,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectoryEdition
-      ENTERPRISE = 'Enterprise'
-      STANDARD = 'Standard'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The directory is already updated to desired update type settings. </p>
@@ -2069,7 +2024,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of directories in the region has been reached. You can use the
@@ -2085,7 +2040,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains directory limit information for a Region.</p>
@@ -2127,7 +2082,7 @@ module Aws::DirectoryService
       :connected_directories_current_count,
       :connected_directories_limit_reached,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:cloud_only_directories_limit_reached] = false unless options.key?(:cloud_only_directories_limit_reached)
@@ -2148,34 +2103,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DirectorySize
-      SMALL = 'Small'
-      LARGE = 'Large'
-    end
-
-    module DirectoryStage
-      REQUESTED = 'Requested'
-      CREATING = 'Creating'
-      CREATED = 'Created'
-      ACTIVE = 'Active'
-      INOPERABLE = 'Inoperable'
-      IMPAIRED = 'Impaired'
-      RESTORING = 'Restoring'
-      RESTOREFAILED = 'RestoreFailed'
-      DELETING = 'Deleting'
-      DELETED = 'Deleted'
-      FAILED = 'Failed'
-      UPDATING = 'Updating'
-    end
-
-    module DirectoryType
-      SIMPLE_AD = 'SimpleAD'
-      AD_CONNECTOR = 'ADConnector'
-      MICROSOFT_AD = 'MicrosoftAD'
-      SHARED_MICROSOFT_AD = 'SharedMicrosoftAD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified directory is unavailable.</p>
@@ -2189,7 +2117,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains VPC information for the <a>CreateDirectory</a>, <a>CreateMicrosoftAD</a>, or <a>CreateHybridAD</a> operation.</p>
@@ -2205,7 +2133,7 @@ module Aws::DirectoryService
       :vpc_id,
       :subnet_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the directory.</p>
@@ -2227,7 +2155,7 @@ module Aws::DirectoryService
       :security_group_id,
       :availability_zones,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2241,12 +2169,12 @@ module Aws::DirectoryService
       :directory_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableClientAuthenticationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2255,12 +2183,12 @@ module Aws::DirectoryService
     class DisableDirectoryDataAccessRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableDirectoryDataAccessResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2274,12 +2202,12 @@ module Aws::DirectoryService
       :directory_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class DisableLDAPSResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DisableRadius</a> operation.</p>
@@ -2289,13 +2217,13 @@ module Aws::DirectoryService
     class DisableRadiusRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DisableRadius</a> operation.</p>
     class DisableRadiusResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>DisableSso</a> operation.</p>
@@ -2322,13 +2250,13 @@ module Aws::DirectoryService
       :user_name,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>DisableSso</a> operation.</p>
     class DisableSsoResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the domain controllers for a specified directory.</p>
@@ -2374,7 +2302,7 @@ module Aws::DirectoryService
       :launch_time,
       :status_last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum allowed number of domain controllers per directory was exceeded. The
@@ -2389,18 +2317,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DomainControllerStatus
-      CREATING = 'Creating'
-      ACTIVE = 'Active'
-      IMPAIRED = 'Impaired'
-      RESTORING = 'Restoring'
-      DELETING = 'Deleting'
-      DELETED = 'Deleted'
-      FAILED = 'Failed'
-      UPDATING = 'Updating'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2416,12 +2333,12 @@ module Aws::DirectoryService
       :directory_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableClientAuthenticationResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2430,12 +2347,12 @@ module Aws::DirectoryService
     class EnableDirectoryDataAccessRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableDirectoryDataAccessResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2449,12 +2366,12 @@ module Aws::DirectoryService
       :directory_id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class EnableLDAPSResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>EnableRadius</a> operation.</p>
@@ -2469,13 +2386,13 @@ module Aws::DirectoryService
       :directory_id,
       :radius_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>EnableRadius</a> operation.</p>
     class EnableRadiusResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>EnableSso</a> operation.</p>
@@ -2502,13 +2419,13 @@ module Aws::DirectoryService
       :user_name,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>EnableSso</a> operation.</p>
     class EnableSsoResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified entity already exists.</p>
@@ -2522,7 +2439,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified entity could not be found.</p>
@@ -2536,7 +2453,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about Amazon SNS topic and Directory Service directory associations.</p>
@@ -2563,13 +2480,13 @@ module Aws::DirectoryService
       :created_date_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>GetDirectoryLimits</a> operation.</p>
     class GetDirectoryLimitsRequest < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>
@@ -2580,7 +2497,7 @@ module Aws::DirectoryService
     class GetDirectoryLimitsResult < Struct.new(
       :directory_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>GetSnapshotLimits</a> operation.</p>
@@ -2590,7 +2507,7 @@ module Aws::DirectoryService
     class GetSnapshotLimitsRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>GetSnapshotLimits</a> operation.</p>
@@ -2601,7 +2518,7 @@ module Aws::DirectoryService
     class GetSnapshotLimitsResult < Struct.new(
       :snapshot_limits,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> Use to recover to the hybrid directory administrator account credentials.</p>
@@ -2618,7 +2535,7 @@ module Aws::DirectoryService
     class HybridAdministratorAccountUpdate < Struct.new(
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains configuration settings for self-managed instances with SSM used in hybrid
@@ -2635,7 +2552,7 @@ module Aws::DirectoryService
       :customer_dns_ips,
       :instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the current hybrid directory configuration settings for a directory.</p>
@@ -2650,7 +2567,7 @@ module Aws::DirectoryService
       :self_managed_dns_ip_addrs,
       :self_managed_instance_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about update activities for different components of a hybrid
@@ -2667,7 +2584,7 @@ module Aws::DirectoryService
       :self_managed_instances,
       :hybrid_administrator_account,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains detailed information about a specific update activity for a hybrid directory
@@ -2709,12 +2626,7 @@ module Aws::DirectoryService
       :last_updated_date_time,
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HybridUpdateType
-      SELF_MANAGED_INSTANCES = 'SelfManagedInstances'
-      HYBRID_ADMINISTRATOR_ACCOUNT = 'HybridAdministratorAccount'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the configuration values for a hybrid directory update, including Amazon Web Services
@@ -2731,7 +2643,7 @@ module Aws::DirectoryService
       :instance_ids,
       :dns_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified directory setting is not compatible with other settings.</p>
@@ -2745,7 +2657,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The account does not have sufficient permission to perform the operation.</p>
@@ -2759,7 +2671,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The certificate PEM that was provided has incorrect encoding.</p>
@@ -2773,7 +2685,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Client authentication is already enabled.</p>
@@ -2787,7 +2699,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The LDAP activities could not be performed because they are limited by the LDAPS
@@ -2802,7 +2714,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>NextToken</code> value is not valid.</p>
@@ -2816,7 +2728,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters are not valid.</p>
@@ -2830,7 +2742,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The new password provided by the user does not meet the password complexity
@@ -2845,7 +2757,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified shared target is not valid.</p>
@@ -2859,7 +2771,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IP address block. This is often the address block of the DNS server used for your
@@ -2876,7 +2788,7 @@ module Aws::DirectoryService
       :cidr_ip,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about one or more IP address blocks.</p>
@@ -2906,7 +2818,7 @@ module Aws::DirectoryService
       :ip_route_status_reason,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum allowed number of IP addresses was exceeded. The default limit is 100 IP
@@ -2921,16 +2833,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IpRouteStatusMsg
-      ADDING = 'Adding'
-      ADDED = 'Added'
-      REMOVING = 'Removing'
-      REMOVED = 'Removed'
-      ADD_FAILED = 'AddFailed'
-      REMOVE_FAILED = 'RemoveFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains general information about the LDAPS settings.</p>
@@ -2948,18 +2851,7 @@ module Aws::DirectoryService
       :ldaps_status_reason,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LDAPSStatus
-      ENABLING = 'Enabling'
-      ENABLED = 'Enabled'
-      ENABLE_FAILED = 'EnableFailed'
-      DISABLED = 'Disabled'
-    end
-
-    module LDAPSType
-      CLIENT = 'Client'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -2978,7 +2870,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessments
@@ -2994,7 +2886,7 @@ module Aws::DirectoryService
       :assessments,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3014,7 +2906,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -3029,7 +2921,7 @@ module Aws::DirectoryService
       :next_token,
       :certificates_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3048,7 +2940,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ip_routes_info
@@ -3062,7 +2954,7 @@ module Aws::DirectoryService
       :ip_routes_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3082,7 +2974,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute log_subscriptions
@@ -3096,7 +2988,7 @@ module Aws::DirectoryService
       :log_subscriptions,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3115,7 +3007,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_extensions_info
@@ -3130,7 +3022,7 @@ module Aws::DirectoryService
       :schema_extensions_info,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3147,7 +3039,7 @@ module Aws::DirectoryService
       :next_token,
       :limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -3160,7 +3052,7 @@ module Aws::DirectoryService
       :tags,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a log subscription, which tracks real-time data from a chosen log group to a
@@ -3180,7 +3072,7 @@ module Aws::DirectoryService
       :log_group_name,
       :subscription_created_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Client authentication setup could not be completed because at least one valid certificate
@@ -3195,7 +3087,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> OS version that the directory needs to be updated to. </p>
@@ -3205,12 +3097,7 @@ module Aws::DirectoryService
     class OSUpdateSettings < Struct.new(
       :os_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module OSVersion
-      VERSION_2012 = 'SERVER_2012'
-      VERSION_2019 = 'SERVER_2019'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Exception encountered while trying to access your Amazon Web Services organization.</p>
@@ -3224,7 +3111,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the directory owner account details that have been shared to the directory
@@ -3256,14 +3143,7 @@ module Aws::DirectoryService
       :radius_settings,
       :radius_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RadiusAuthenticationProtocol
-      PAP = 'PAP'
-      CHAP = 'CHAP'
-      MSCHAPV1 = 'MS-CHAPv1'
-      MSCHAPV2 = 'MS-CHAPv2'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about a Remote Authentication Dial In User Service (RADIUS)
@@ -3305,19 +3185,13 @@ module Aws::DirectoryService
       :display_label,
       :use_same_username,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:radius_retries] = 0 unless options.key?(:radius_retries)
         options[:use_same_username] = false unless options.key?(:use_same_username)
         super
       end
-    end
-
-    module RadiusStatus
-      CREATING = 'Creating'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
     end
 
     # <p>The replicated Region information for a directory.</p>
@@ -3360,7 +3234,7 @@ module Aws::DirectoryService
       :status_last_updated_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You have reached the limit for maximum number of simultaneous Region replications per
@@ -3375,12 +3249,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RegionType
-      PRIMARY = 'Primary'
-      ADDITIONAL = 'Additional'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information about the Regions that are configured for multi-Region
@@ -3396,7 +3265,7 @@ module Aws::DirectoryService
       :primary_region,
       :additional_regions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3420,7 +3289,7 @@ module Aws::DirectoryService
       :type,
       :client_cert_auth_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute certificate_id
@@ -3429,7 +3298,7 @@ module Aws::DirectoryService
     class RegisterCertificateResult < Struct.new(
       :certificate_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Registers a new event topic.</p>
@@ -3444,13 +3313,13 @@ module Aws::DirectoryService
       :directory_id,
       :topic_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of a RegisterEventTopic request.</p>
     class RegisterEventTopicResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directory_id
@@ -3460,7 +3329,7 @@ module Aws::DirectoryService
     class RejectSharedDirectoryRequest < Struct.new(
       :shared_directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directory_id
@@ -3469,7 +3338,7 @@ module Aws::DirectoryService
     class RejectSharedDirectoryResult < Struct.new(
       :shared_directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3483,12 +3352,12 @@ module Aws::DirectoryService
       :directory_id,
       :cidr_ips,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveIpRoutesResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3497,12 +3366,12 @@ module Aws::DirectoryService
     class RemoveRegionRequest < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveRegionResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_id
@@ -3515,16 +3384,12 @@ module Aws::DirectoryService
       :resource_id,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class RemoveTagsFromResourceResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReplicationScope
-      Domain = 'Domain'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3541,12 +3406,12 @@ module Aws::DirectoryService
       :user_name,
       :new_password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class ResetUserPasswordResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object representing the inputs for the <a>RestoreFromSnapshot</a> operation.</p>
@@ -3556,13 +3421,13 @@ module Aws::DirectoryService
     class RestoreFromSnapshotRequest < Struct.new(
       :snapshot_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>RestoreFromSnapshot</a> operation.</p>
     class RestoreFromSnapshotResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a schema extension.</p>
@@ -3597,24 +3462,7 @@ module Aws::DirectoryService
       :start_date_time,
       :end_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SchemaExtensionStatus
-      INITIALIZING = 'Initializing'
-      CREATING_SNAPSHOT = 'CreatingSnapshot'
-      UPDATING_SCHEMA = 'UpdatingSchema'
-      REPLICATING = 'Replicating'
-      CANCEL_IN_PROGRESS = 'CancelInProgress'
-      ROLLBACK_IN_PROGRESS = 'RollbackInProgress'
-      CANCELLED = 'Cancelled'
-      FAILED = 'Failed'
-      COMPLETED = 'Completed'
-    end
-
-    module SelectiveAuth
-      ENABLED = 'Enabled'
-      DISABLED = 'Disabled'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An exception has occurred in Directory Service.</p>
@@ -3628,7 +3476,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the configurable settings for a directory.</p>
@@ -3647,7 +3495,7 @@ module Aws::DirectoryService
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains information about the specified configurable setting for a directory.</p>
@@ -3710,7 +3558,7 @@ module Aws::DirectoryService
       :last_requested_date_time,
       :data_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3737,7 +3585,7 @@ module Aws::DirectoryService
       :share_target,
       :share_method,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directory_id
@@ -3747,7 +3595,7 @@ module Aws::DirectoryService
     class ShareDirectoryResult < Struct.new(
       :shared_directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of Amazon Web Services accounts that you can share with this directory has been
@@ -3762,24 +3610,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ShareMethod
-      ORGANIZATIONS = 'ORGANIZATIONS'
-      HANDSHAKE = 'HANDSHAKE'
-    end
-
-    module ShareStatus
-      SHARED = 'Shared'
-      PENDING_ACCEPTANCE = 'PendingAcceptance'
-      REJECTED = 'Rejected'
-      REJECTING = 'Rejecting'
-      REJECT_FAILED = 'RejectFailed'
-      SHARING = 'Sharing'
-      SHARE_FAILED = 'ShareFailed'
-      DELETED = 'Deleted'
-      DELETING = 'Deleting'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifier that contains details about the directory consumer account.</p>
@@ -3793,7 +3624,7 @@ module Aws::DirectoryService
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Details about the shared directory in the directory owner account for which the share
@@ -3843,7 +3674,7 @@ module Aws::DirectoryService
       :created_date_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a directory snapshot.</p>
@@ -3873,7 +3704,7 @@ module Aws::DirectoryService
       :status,
       :start_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum number of manual snapshots for the directory has been reached. You can
@@ -3889,7 +3720,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains manual snapshot limit information for a directory.</p>
@@ -3907,23 +3738,12 @@ module Aws::DirectoryService
       :manual_snapshots_current_count,
       :manual_snapshots_limit_reached,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:manual_snapshots_limit_reached] = false unless options.key?(:manual_snapshots_limit_reached)
         super
       end
-    end
-
-    module SnapshotStatus
-      CREATING = 'Creating'
-      COMPLETED = 'Completed'
-      FAILED = 'Failed'
-    end
-
-    module SnapshotType
-      AUTO = 'Auto'
-      MANUAL = 'Manual'
     end
 
     # @!attribute assessment_configuration
@@ -3940,7 +3760,7 @@ module Aws::DirectoryService
       :assessment_configuration,
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assessment_id
@@ -3950,7 +3770,7 @@ module Aws::DirectoryService
     class StartADAssessmentResult < Struct.new(
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -3975,7 +3795,7 @@ module Aws::DirectoryService
       :ldif_content,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute schema_extension_id
@@ -3984,7 +3804,7 @@ module Aws::DirectoryService
     class StartSchemaExtensionResult < Struct.new(
       :schema_extension_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata assigned to a directory consisting of a key-value pair.</p>
@@ -4003,7 +3823,7 @@ module Aws::DirectoryService
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum allowed number of tags was exceeded.</p>
@@ -4017,18 +3837,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TargetType
-      ACCOUNT = 'ACCOUNT'
-    end
-
-    module TopicStatus
-      REGISTERED = 'Registered'
-      TOPIC_NOT_FOUND = 'Topic not found'
-      FAILED = 'Failed'
-      DELETED = 'Deleted'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a trust relationship between an Managed Microsoft AD directory and an external
@@ -4080,32 +3889,7 @@ module Aws::DirectoryService
       :trust_state_reason,
       :selective_auth,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TrustDirection
-      ONE_WAY_OUTGOING = 'One-Way: Outgoing'
-      ONE_WAY_INCOMING = 'One-Way: Incoming'
-      TWO_WAY = 'Two-Way'
-    end
-
-    module TrustState
-      CREATING = 'Creating'
-      CREATED = 'Created'
-      VERIFYING = 'Verifying'
-      VERIFY_FAILED = 'VerifyFailed'
-      VERIFIED = 'Verified'
-      UPDATING = 'Updating'
-      UPDATE_FAILED = 'UpdateFailed'
-      UPDATED = 'Updated'
-      DELETING = 'Deleting'
-      DELETED = 'Deleted'
-      FAILED = 'Failed'
-    end
-
-    module TrustType
-      FOREST = 'Forest'
-      EXTERNAL = 'External'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4119,7 +3903,7 @@ module Aws::DirectoryService
       :directory_id,
       :unshare_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute shared_directory_id
@@ -4129,7 +3913,7 @@ module Aws::DirectoryService
     class UnshareDirectoryResult < Struct.new(
       :shared_directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Identifier that contains details about the directory consumer account with whom the
@@ -4144,7 +3928,7 @@ module Aws::DirectoryService
       :id,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation is not supported.</p>
@@ -4158,7 +3942,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The specified directory setting is not supported.</p>
@@ -4172,7 +3956,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updates a conditional forwarder.</p>
@@ -4193,13 +3977,13 @@ module Aws::DirectoryService
       :remote_domain_name,
       :dns_ip_addrs,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The result of an UpdateConditionalForwarder request.</p>
     class UpdateConditionalForwarderResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4221,12 +4005,12 @@ module Aws::DirectoryService
       :os_update_settings,
       :create_snapshot_before_update,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateDirectorySetupResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4252,7 +4036,7 @@ module Aws::DirectoryService
       :hybrid_administrator_account_update,
       :self_managed_instances_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4266,7 +4050,7 @@ module Aws::DirectoryService
       :directory_id,
       :assessment_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p> An entry of update information related to a requested update type. </p>
@@ -4305,7 +4089,7 @@ module Aws::DirectoryService
       :start_time,
       :last_updated_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4319,12 +4103,12 @@ module Aws::DirectoryService
       :directory_id,
       :desired_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     class UpdateNumberOfDomainControllersResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>
@@ -4340,13 +4124,13 @@ module Aws::DirectoryService
       :directory_id,
       :radius_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Contains the results of the <a>UpdateRadius</a> operation.</p>
     class UpdateRadiusResult < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4359,7 +4143,7 @@ module Aws::DirectoryService
       :directory_id,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute directory_id
@@ -4368,13 +4152,7 @@ module Aws::DirectoryService
     class UpdateSettingsResult < Struct.new(
       :directory_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateStatus
-      UPDATED = 'Updated'
-      UPDATING = 'Updating'
-      UPDATE_FAILED = 'UpdateFailed'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute trust_id
@@ -4387,7 +4165,7 @@ module Aws::DirectoryService
       :trust_id,
       :selective_auth,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4400,11 +4178,7 @@ module Aws::DirectoryService
       :request_id,
       :trust_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UpdateType
-      OS = 'OS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p> The value for a given type of <code>UpdateSettings</code>. </p>
@@ -4414,7 +4188,7 @@ module Aws::DirectoryService
     class UpdateValue < Struct.new(
       :os_update_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user provided a username that does not exist in your directory.</p>
@@ -4428,7 +4202,7 @@ module Aws::DirectoryService
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Initiates the verification of an existing trust relationship between an Managed Microsoft AD
@@ -4439,7 +4213,7 @@ module Aws::DirectoryService
     class VerifyTrustRequest < Struct.new(
       :trust_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Result of a VerifyTrust request.</p>
@@ -4449,7 +4223,7 @@ module Aws::DirectoryService
     class VerifyTrustResult < Struct.new(
       :trust_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end

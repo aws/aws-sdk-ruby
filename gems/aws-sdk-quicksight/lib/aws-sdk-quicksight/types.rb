@@ -19,7 +19,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a QuickSight namespace in a specific Amazon Web Services Region.</p>
@@ -33,7 +33,7 @@ module Aws::QuickSight
       :default_theme,
       :default_email_customization_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the following account information
@@ -84,7 +84,7 @@ module Aws::QuickSight
       :account_subscription_status,
       :iam_identity_center_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon QuickSight settings associated with your Amazon Web Services account.</p>
@@ -117,7 +117,7 @@ module Aws::QuickSight
       :public_sharing_enabled,
       :termination_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:public_sharing_enabled] = false unless options.key?(:public_sharing_enabled)
@@ -137,7 +137,7 @@ module Aws::QuickSight
       :assignment_name,
       :policy_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An ad hoc (one-time) filtering option.</p>
@@ -147,7 +147,7 @@ module Aws::QuickSight
     class AdHocFilteringOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of an Agg function.</p>
@@ -169,30 +169,7 @@ module Aws::QuickSight
       :period,
       :period_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AggType
-      SUM = 'SUM'
-      MIN = 'MIN'
-      MAX = 'MAX'
-      COUNT = 'COUNT'
-      AVERAGE = 'AVERAGE'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      STDEV = 'STDEV'
-      STDEVP = 'STDEVP'
-      VAR = 'VAR'
-      VARP = 'VARP'
-      PERCENTILE = 'PERCENTILE'
-      MEDIAN = 'MEDIAN'
-      PTD_SUM = 'PTD_SUM'
-      PTD_MIN = 'PTD_MIN'
-      PTD_MAX = 'PTD_MAX'
-      PTD_COUNT = 'PTD_COUNT'
-      PTD_DISTINCT_COUNT = 'PTD_DISTINCT_COUNT'
-      PTD_AVERAGE = 'PTD_AVERAGE'
-      COLUMN = 'COLUMN'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation function aggregates values from a dimension or measure.</p>
@@ -243,7 +220,7 @@ module Aws::QuickSight
       :date_aggregation_function,
       :attribute_aggregation_function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of an <code>AggregationPartitionBy</code>.</p>
@@ -257,7 +234,7 @@ module Aws::QuickSight
       :field_name,
       :time_granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration options to sort aggregated values.</p>
@@ -285,14 +262,14 @@ module Aws::QuickSight
       :sort_direction,
       :aggregation_function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty object that represents that the <code>AllSheets</code> option is the chosen value for the <code>FilterScopeConfiguration</code> parameter. This structure applies the filter to all visuals on all sheets of an Analysis, Dashboard, or Template.</p>
     #          <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>
     class AllSheetsFilterScopeConfiguration < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for OpenSearch.</p>
@@ -302,7 +279,7 @@ module Aws::QuickSight
     class AmazonElasticsearchParameters < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for OpenSearch.</p>
@@ -312,7 +289,7 @@ module Aws::QuickSight
     class AmazonOpenSearchParameters < Struct.new(
       :domain,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of Amazon Q feature configurations in an embedded Amazon QuickSight console.</p>
@@ -334,7 +311,7 @@ module Aws::QuickSight
       :executive_summary,
       :data_stories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of Amazon Q feature configurations in an embedded Amazon QuickSight dashboard.</p>
@@ -344,7 +321,7 @@ module Aws::QuickSight
     class AmazonQInQuickSightDashboardConfigurations < Struct.new(
       :executive_summary,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata structure for an analysis in Amazon QuickSight</p>
@@ -390,7 +367,7 @@ module Aws::QuickSight
       :last_updated_time,
       :sheets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for default analysis settings.</p>
@@ -400,7 +377,7 @@ module Aws::QuickSight
     class AnalysisDefaults < Struct.new(
       :default_new_sheet_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of an analysis.</p>
@@ -454,7 +431,7 @@ module Aws::QuickSight
       :query_execution_options,
       :static_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Analysis error.</p>
@@ -472,30 +449,7 @@ module Aws::QuickSight
       :message,
       :violated_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnalysisErrorType
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      SOURCE_NOT_FOUND = 'SOURCE_NOT_FOUND'
-      DATA_SET_NOT_FOUND = 'DATA_SET_NOT_FOUND'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      PARAMETER_VALUE_INCOMPATIBLE = 'PARAMETER_VALUE_INCOMPATIBLE'
-      PARAMETER_TYPE_INVALID = 'PARAMETER_TYPE_INVALID'
-      PARAMETER_NOT_FOUND = 'PARAMETER_NOT_FOUND'
-      COLUMN_TYPE_MISMATCH = 'COLUMN_TYPE_MISMATCH'
-      COLUMN_GEOGRAPHIC_ROLE_MISMATCH = 'COLUMN_GEOGRAPHIC_ROLE_MISMATCH'
-      COLUMN_REPLACEMENT_MISSING = 'COLUMN_REPLACEMENT_MISSING'
-    end
-
-    module AnalysisFilterAttribute
-      QUICKSIGHT_USER = 'QUICKSIGHT_USER'
-      QUICKSIGHT_VIEWER_OR_OWNER = 'QUICKSIGHT_VIEWER_OR_OWNER'
-      DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = 'DIRECT_QUICKSIGHT_VIEWER_OR_OWNER'
-      QUICKSIGHT_OWNER = 'QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_OWNER = 'DIRECT_QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_SOLE_OWNER = 'DIRECT_QUICKSIGHT_SOLE_OWNER'
-      ANALYSIS_NAME = 'ANALYSIS_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that you apply when searching for one or more analyses.</p>
@@ -545,7 +499,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source entity of an analysis.</p>
@@ -555,7 +509,7 @@ module Aws::QuickSight
     class AnalysisSourceEntity < Struct.new(
       :source_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source template of an analysis.</p>
@@ -569,7 +523,7 @@ module Aws::QuickSight
       :data_set_references,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary metadata that describes an analysis.</p>
@@ -600,7 +554,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the Anchor.</p>
@@ -618,7 +572,7 @@ module Aws::QuickSight
       :time_granularity,
       :offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:offset] = 0 unless options.key?(:offset)
@@ -644,15 +598,7 @@ module Aws::QuickSight
       :anchor_option,
       :parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnchorOption
-      NOW = 'NOW'
-    end
-
-    module AnchorType
-      TODAY = 'TODAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the dashboard that you want to embed.</p>
@@ -675,15 +621,7 @@ module Aws::QuickSight
       :disabled_features,
       :feature_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AnonymousUserDashboardEmbeddingConfigurationDisabledFeature
-      SHARED_VIEW = 'SHARED_VIEW'
-    end
-
-    module AnonymousUserDashboardEmbeddingConfigurationEnabledFeature
-      SHARED_VIEW = 'SHARED_VIEW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The feature configuration for an embedded dashboard.</p>
@@ -693,7 +631,7 @@ module Aws::QuickSight
     class AnonymousUserDashboardFeatureConfigurations < Struct.new(
       :shared_view,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The experience that you are embedding. You can use this object to generate a url that embeds a visual into your application.</p>
@@ -704,7 +642,7 @@ module Aws::QuickSight
     class AnonymousUserDashboardVisualEmbeddingConfiguration < Struct.new(
       :initial_dashboard_visual_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of experience you want to embed. For anonymous users, you can embed Amazon QuickSight dashboards.</p>
@@ -726,7 +664,7 @@ module Aws::QuickSight
       :q_search_bar,
       :generative_qn_a,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings that you want to use for the Generative Q&A experience.</p>
@@ -737,7 +675,7 @@ module Aws::QuickSight
     class AnonymousUserGenerativeQnAEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings that you want to use with the Q search bar.</p>
@@ -748,7 +686,7 @@ module Aws::QuickSight
     class AnonymousUserQSearchBarEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the file groups that are requested for the artifact generation in a <code>StartDashboardSnapshotJob</code> API call.
@@ -759,7 +697,7 @@ module Aws::QuickSight
     class AnonymousUserSnapshotJobResult < Struct.new(
       :file_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The application theme.</p>
@@ -773,7 +711,7 @@ module Aws::QuickSight
       :brand_color_palette,
       :brand_element_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The arc axis configuration of a <code>GaugeChartVisual</code>.</p>
@@ -787,7 +725,7 @@ module Aws::QuickSight
       :range,
       :reserve_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:reserve_range] = 0 unless options.key?(:reserve_range)
@@ -806,11 +744,11 @@ module Aws::QuickSight
       :min,
       :max,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:min] =  unless options.key?(:min)
-        options[:max] =  unless options.key?(:max)
+        options[:min] = nil unless options.key?(:min)
+        options[:max] = nil unless options.key?(:max)
         super
       end
     end
@@ -826,10 +764,10 @@ module Aws::QuickSight
       :arc_angle,
       :arc_thickness,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:arc_angle] =  unless options.key?(:arc_angle)
+        options[:arc_angle] = nil unless options.key?(:arc_angle)
         super
       end
     end
@@ -841,20 +779,7 @@ module Aws::QuickSight
     class ArcOptions < Struct.new(
       :arc_thickness,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ArcThickness
-      SMALL = 'SMALL'
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
-      WHOLE = 'WHOLE'
-    end
-
-    module ArcThicknessOptions
-      SMALL = 'SMALL'
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional collection of CloudFormation property configurations that control how the export job is generated.</p>
@@ -896,12 +821,7 @@ module Aws::QuickSight
       :dashboards,
       :folders,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportFormat
-      CLOUDFORMATION_JSON = 'CLOUDFORMATION_JSON'
-      QUICKSIGHT_JSON = 'QUICKSIGHT_JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>Analysis</code> resource is parameterized in the returned CloudFormation template.</p>
@@ -915,11 +835,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobAnalysisPropertyToOverride
-      NAME = 'Name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>Dashboard</code> resource is parameterized in the returned CloudFormation template.</p>
@@ -933,11 +849,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobDashboardPropertyToOverride
-      NAME = 'Name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>DataSet</code> resource is parameterized in the returned CloudFormation template.</p>
@@ -951,12 +863,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobDataSetPropertyToOverride
-      NAME = 'Name'
-      REFRESH_FAILURE_EMAIL_ALERT_STATUS = 'RefreshFailureEmailAlertStatus'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>DataSource</code> resource is parameterized in the returned CloudFormation template.</p>
@@ -970,28 +877,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobDataSourcePropertyToOverride
-      NAME = 'Name'
-      DISABLE_SSL = 'DisableSsl'
-      SECRET_ARN = 'SecretArn'
-      USERNAME = 'Username'
-      PASSWORD = 'Password'
-      DOMAIN = 'Domain'
-      WORK_GROUP = 'WorkGroup'
-      HOST = 'Host'
-      PORT = 'Port'
-      DATABASE = 'Database'
-      DATA_SET_NAME = 'DataSetName'
-      CATALOG = 'Catalog'
-      INSTANCE_ID = 'InstanceId'
-      CLUSTER_ID = 'ClusterId'
-      MANIFEST_FILE_LOCATION = 'ManifestFileLocation'
-      WAREHOUSE = 'Warehouse'
-      ROLE_ARN = 'RoleArn'
-      PRODUCT_TYPE = 'ProductType'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error that occurred during an Asset Bundle export job.</p>
@@ -1009,7 +895,7 @@ module Aws::QuickSight
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>Folder</code> resource is parameterized in the returned CloudFormation template.</p>
@@ -1023,12 +909,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobFolderPropertyToOverride
-      NAME = 'Name'
-      PARENT_FOLDER_ARN = 'ParentFolderArn'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>RefreshSchedule</code> resource is parameterized in the returned CloudFormation template.</p>
@@ -1042,11 +923,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobRefreshSchedulePropertyToOverride
-      START_AFTER_DATE_TIME = 'StartAfterDateTime'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional structure that configures resource ID overrides for the export job.</p>
@@ -1056,19 +933,12 @@ module Aws::QuickSight
     class AssetBundleExportJobResourceIdOverrideConfiguration < Struct.new(
       :prefix_for_all_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:prefix_for_all_resources] = false unless options.key?(:prefix_for_all_resources)
         super
       end
-    end
-
-    module AssetBundleExportJobStatus
-      QUEUED_FOR_IMMEDIATE_EXECUTION = 'QUEUED_FOR_IMMEDIATE_EXECUTION'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
     end
 
     # <p>A summary of the export job that includes details of the job's configuration and its current status.</p>
@@ -1106,7 +976,7 @@ module Aws::QuickSight
       :include_permissions,
       :include_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_all_dependencies] = false unless options.key?(:include_all_dependencies)
@@ -1127,11 +997,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobThemePropertyToOverride
-      NAME = 'Name'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Controls how a specific <code>VPCConnection</code> resource is parameterized in the outputted CloudFormation template.</p>
@@ -1145,13 +1011,7 @@ module Aws::QuickSight
       :arn,
       :properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleExportJobVPCConnectionPropertyToOverride
-      NAME = 'Name'
-      DNS_RESOLVERS = 'DnsResolvers'
-      ROLE_ARN = 'RoleArn'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option to relax the validation that is required to export each asset. When <code>StrictModeForAllResource</code> is set to <code>false</code>, validation is skipped for specific UI errors.</p>
@@ -1161,7 +1021,7 @@ module Aws::QuickSight
     class AssetBundleExportJobValidationStrategy < Struct.new(
       :strict_mode_for_all_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:strict_mode_for_all_resources] = false unless options.key?(:strict_mode_for_all_resources)
@@ -1180,12 +1040,7 @@ module Aws::QuickSight
       :arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleImportFailureAction
-      DO_NOTHING = 'DO_NOTHING'
-      ROLLBACK = 'ROLLBACK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single analysis that is being imported.</p>
@@ -1199,7 +1054,7 @@ module Aws::QuickSight
       :analysis_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of permissions to be applied to a list of analysis IDs.</p>
@@ -1213,7 +1068,7 @@ module Aws::QuickSight
       :analysis_ids,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of analysis IDs.</p>
@@ -1227,7 +1082,7 @@ module Aws::QuickSight
       :analysis_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single dashboard that is being imported.</p>
@@ -1241,7 +1096,7 @@ module Aws::QuickSight
       :dashboard_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of permissions to be applied to a list of dashboard IDs.</p>
@@ -1259,7 +1114,7 @@ module Aws::QuickSight
       :permissions,
       :link_sharing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of dashboard IDs.</p>
@@ -1273,7 +1128,7 @@ module Aws::QuickSight
       :dashboard_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single dataset that is being imported.</p>
@@ -1291,7 +1146,7 @@ module Aws::QuickSight
       :name,
       :data_set_refresh_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of permissions to be applied to a list of dataset IDs.</p>
@@ -1305,7 +1160,7 @@ module Aws::QuickSight
       :data_set_ids,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of dataset IDs.</p>
@@ -1319,7 +1174,7 @@ module Aws::QuickSight
       :data_set_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A username and password credential pair to use to import a data source resource.</p>
@@ -1334,7 +1189,7 @@ module Aws::QuickSight
       :username,
       :password,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The login credentials to use to import a data source resource.</p>
@@ -1348,7 +1203,7 @@ module Aws::QuickSight
       :credential_pair,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single data source that is being imported.</p>
@@ -1381,7 +1236,7 @@ module Aws::QuickSight
       :ssl_properties,
       :credentials,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of permissions to be applied to a list of data source IDs.</p>
@@ -1395,7 +1250,7 @@ module Aws::QuickSight
       :data_source_ids,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of data source IDs.</p>
@@ -1409,7 +1264,7 @@ module Aws::QuickSight
       :data_source_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes an error that occurred within an Asset Bundle import execution.</p>
@@ -1427,7 +1282,7 @@ module Aws::QuickSight
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single folder that is being imported.</p>
@@ -1445,7 +1300,7 @@ module Aws::QuickSight
       :name,
       :parent_folder_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of permissions to be applied to a list of folder IDs.</p>
@@ -1459,7 +1314,7 @@ module Aws::QuickSight
       :folder_ids,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of folder IDs.</p>
@@ -1473,7 +1328,7 @@ module Aws::QuickSight
       :folder_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of overrides that modify the asset bundle resource configuration before the resource is imported.</p>
@@ -1515,7 +1370,7 @@ module Aws::QuickSight
       :dashboards,
       :folders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the override permission configurations that modify the permissions for specified resources before the resource is imported.</p>
@@ -1545,7 +1400,7 @@ module Aws::QuickSight
       :dashboards,
       :folders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the override tag configuration that modify the tags that are assigned to specified resources before the resource is imported.</p>
@@ -1579,7 +1434,7 @@ module Aws::QuickSight
       :dashboards,
       :folders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional parameter that overrides the validation strategy for all analyses and dashboards before the resource is imported.</p>
@@ -1589,7 +1444,7 @@ module Aws::QuickSight
     class AssetBundleImportJobOverrideValidationStrategy < Struct.new(
       :strict_mode_for_all_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:strict_mode_for_all_resources] = false unless options.key?(:strict_mode_for_all_resources)
@@ -1614,7 +1469,7 @@ module Aws::QuickSight
       :schedule_id,
       :start_after_date_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional structure that configures resource ID overrides for the import job.</p>
@@ -1624,17 +1479,7 @@ module Aws::QuickSight
     class AssetBundleImportJobResourceIdOverrideConfiguration < Struct.new(
       :prefix_for_all_resources,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssetBundleImportJobStatus
-      QUEUED_FOR_IMMEDIATE_EXECUTION = 'QUEUED_FOR_IMMEDIATE_EXECUTION'
-      IN_PROGRESS = 'IN_PROGRESS'
-      SUCCESSFUL = 'SUCCESSFUL'
-      FAILED = 'FAILED'
-      FAILED_ROLLBACK_IN_PROGRESS = 'FAILED_ROLLBACK_IN_PROGRESS'
-      FAILED_ROLLBACK_COMPLETED = 'FAILED_ROLLBACK_COMPLETED'
-      FAILED_ROLLBACK_ERROR = 'FAILED_ROLLBACK_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the import job that includes details of the requested job's configuration and its current status.</p>
@@ -1660,7 +1505,7 @@ module Aws::QuickSight
       :asset_bundle_import_job_id,
       :failure_action,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single theme that is imported.</p>
@@ -1674,7 +1519,7 @@ module Aws::QuickSight
       :theme_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of permissions to be applied to a list of theme IDs.</p>
@@ -1688,7 +1533,7 @@ module Aws::QuickSight
       :theme_ids,
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of theme IDs.</p>
@@ -1702,7 +1547,7 @@ module Aws::QuickSight
       :theme_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override parameters for a single VPC connection that is imported.</p>
@@ -1734,7 +1579,7 @@ module Aws::QuickSight
       :dns_resolvers,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains a list of tags to be assigned to a list of VPC connection IDs.</p>
@@ -1748,7 +1593,7 @@ module Aws::QuickSight
       :vpc_connection_ids,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes a warning that occurred during an Asset Bundle import job.</p>
@@ -1762,7 +1607,7 @@ module Aws::QuickSight
       :arn,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.</p>
@@ -1777,7 +1622,7 @@ module Aws::QuickSight
       :body,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code>, depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.</p>
@@ -1791,7 +1636,7 @@ module Aws::QuickSight
       :body,
       :s3_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration of a shared link to an Amazon QuickSight dashboard.</p>
@@ -1801,7 +1646,7 @@ module Aws::QuickSight
     class AssetBundleResourceLinkSharingConfiguration < Struct.new(
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the permissions for the resource that you want to override in an asset bundle import job.</p>
@@ -1815,7 +1660,7 @@ module Aws::QuickSight
       :principals,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An array of analysis level configurations.</p>
@@ -1841,13 +1686,7 @@ module Aws::QuickSight
       :excluded_data_set_arns,
       :custom_action_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AssignmentStatus
-      ENABLED = 'ENABLED'
-      DRAFT = 'DRAFT'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters for Amazon Athena.</p>
@@ -1866,7 +1705,7 @@ module Aws::QuickSight
       :role_arn,
       :identity_center_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregation for attributes.</p>
@@ -1886,7 +1725,7 @@ module Aws::QuickSight
       :simple_attribute_aggregation,
       :value_for_multiple_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters for Amazon Aurora.</p>
@@ -1904,7 +1743,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>
@@ -1922,35 +1761,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AuthenticationMethodOption
-      IAM_AND_QUICKSIGHT = 'IAM_AND_QUICKSIGHT'
-      IAM_ONLY = 'IAM_ONLY'
-      ACTIVE_DIRECTORY = 'ACTIVE_DIRECTORY'
-      IAM_IDENTITY_CENTER = 'IAM_IDENTITY_CENTER'
-    end
-
-    module AuthenticationType
-      PASSWORD = 'PASSWORD'
-      TOKEN = 'TOKEN'
-      X509 = 'X509'
-    end
-
-    module AuthorSpecifiedAggregation
-      COUNT = 'COUNT'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      MIN = 'MIN'
-      MAX = 'MAX'
-      MEDIAN = 'MEDIAN'
-      SUM = 'SUM'
-      AVERAGE = 'AVERAGE'
-      STDEV = 'STDEV'
-      STDEVP = 'STDEVP'
-      VAR = 'VAR'
-      VARP = 'VARP'
-      PERCENTILE = 'PERCENTILE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The authorized targets that are associated with a service.</p>
@@ -1964,7 +1775,7 @@ module Aws::QuickSight
       :service,
       :authorized_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for IoT Analytics.</p>
@@ -1974,12 +1785,7 @@ module Aws::QuickSight
     class AwsIotAnalyticsParameters < Struct.new(
       :data_set_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module AxisBinding
-      PRIMARY_YAXIS = 'PRIMARY_YAXIS'
-      SECONDARY_YAXIS = 'SECONDARY_YAXIS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data options for an axis.</p>
@@ -1994,13 +1800,13 @@ module Aws::QuickSight
       :numeric_axis_options,
       :date_axis_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that are saved for future extension.</p>
     class AxisDisplayDataDrivenRange < Struct.new(
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum and maximum setup for an axis display range.</p>
@@ -2014,11 +1820,11 @@ module Aws::QuickSight
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:minimum] =  unless options.key?(:minimum)
-        options[:maximum] =  unless options.key?(:maximum)
+        options[:minimum] = nil unless options.key?(:minimum)
+        options[:maximum] = nil unless options.key?(:maximum)
         super
       end
     end
@@ -2050,7 +1856,7 @@ module Aws::QuickSight
       :scrollbar_options,
       :axis_offset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range setup of a numeric axis display range.</p>
@@ -2065,7 +1871,7 @@ module Aws::QuickSight
       :min_max,
       :data_driven,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The label options for a chart axis. You must specify the field that the label is targeted to.</p>
@@ -2083,7 +1889,7 @@ module Aws::QuickSight
       :custom_label,
       :apply_to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The reference that specifies where the axis label is applied to.</p>
@@ -2097,7 +1903,7 @@ module Aws::QuickSight
       :field_id,
       :column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The liner axis scale setup.</p>
@@ -2112,11 +1918,11 @@ module Aws::QuickSight
       :step_count,
       :step_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:step_count] =  unless options.key?(:step_count)
-        options[:step_size] =  unless options.key?(:step_size)
+        options[:step_count] = nil unless options.key?(:step_count)
+        options[:step_size] = nil unless options.key?(:step_size)
         super
       end
     end
@@ -2128,10 +1934,10 @@ module Aws::QuickSight
     class AxisLogarithmicScale < Struct.new(
       :base,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:base] =  unless options.key?(:base)
+        options[:base] = nil unless options.key?(:base)
         super
       end
     end
@@ -2149,7 +1955,7 @@ module Aws::QuickSight
       :linear,
       :logarithmic,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tick label options of an axis.</p>
@@ -2163,10 +1969,10 @@ module Aws::QuickSight
       :label_options,
       :rotation_angle,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:rotation_angle] =  unless options.key?(:rotation_angle)
+        options[:rotation_angle] = nil unless options.key?(:rotation_angle)
         super
       end
     end
@@ -2191,7 +1997,7 @@ module Aws::QuickSight
       :colors,
       :small_multiples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>BarChartVisual</code>.</p>
@@ -2275,7 +2081,7 @@ module Aws::QuickSight
       :contribution_analysis_defaults,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a <code>BarChartVisual</code>.</p>
@@ -2286,12 +2092,7 @@ module Aws::QuickSight
     class BarChartFieldWells < Struct.new(
       :bar_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BarChartOrientation
-      HORIZONTAL = 'HORIZONTAL'
-      VERTICAL = 'VERTICAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>sort-configuration-description</p>
@@ -2321,7 +2122,7 @@ module Aws::QuickSight
       :small_multiples_sort,
       :small_multiples_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A bar chart.</p>
@@ -2377,20 +2178,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BarsArrangement
-      CLUSTERED = 'CLUSTERED'
-      STACKED = 'STACKED'
-      STACKED_PERCENT = 'STACKED_PERCENT'
-    end
-
-    module BaseMapStyleType
-      LIGHT_GRAY = 'LIGHT_GRAY'
-      DARK_GRAY = 'DARK_GRAY'
-      STREET = 'STREET'
-      IMAGERY = 'IMAGERY'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -2407,7 +2195,7 @@ module Aws::QuickSight
       :topic_id,
       :answers,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -2437,7 +2225,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -2459,7 +2247,7 @@ module Aws::QuickSight
       :topic_id,
       :answer_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -2488,7 +2276,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -2507,7 +2295,7 @@ module Aws::QuickSight
       :project_id,
       :data_set_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the bin count of a histogram.</p>
@@ -2517,7 +2305,7 @@ module Aws::QuickSight
     class BinCountOptions < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the bin width of a histogram.</p>
@@ -2531,7 +2319,7 @@ module Aws::QuickSight
       :value,
       :bin_count_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a body section.</p>
@@ -2557,7 +2345,7 @@ module Aws::QuickSight
       :page_break_configuration,
       :repeat_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of content in a body section.</p>
@@ -2567,7 +2355,7 @@ module Aws::QuickSight
     class BodySectionContent < Struct.new(
       :layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the <b>Category</b> dataset column and constraints for the dynamic values used to repeat the contents of a section.</p>
@@ -2585,7 +2373,7 @@ module Aws::QuickSight
       :limit,
       :sort_by_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the <b>Numeric</b> dataset column and constraints for the dynamic values used to repeat the  contents of a section.</p>
@@ -2603,7 +2391,7 @@ module Aws::QuickSight
       :limit,
       :sort_by_metrics,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configurations that are required to declare a section as repeating.</p>
@@ -2621,7 +2409,7 @@ module Aws::QuickSight
       :page_break_configuration,
       :non_repeating_visuals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the dataset column and constraints for the dynamic values used to repeat the contents of a section. The dataset column is either <b>Category</b> or <b>Numeric</b> column configuration</p>
@@ -2635,7 +2423,7 @@ module Aws::QuickSight
       :dynamic_category_dimension_configuration,
       :dynamic_numeric_dimension_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The page break configuration to apply for each repeating instance.</p>
@@ -2645,7 +2433,7 @@ module Aws::QuickSight
     class BodySectionRepeatPageBreakConfiguration < Struct.new(
       :after,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The bookmarks configuration of an embedded dashboard.</p>
@@ -2656,7 +2444,7 @@ module Aws::QuickSight
     class BookmarksConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -2671,10 +2459,10 @@ module Aws::QuickSight
     class BorderStyle < Struct.new(
       :show,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:show] =  unless options.key?(:show)
+        options[:show] = nil unless options.key?(:show)
         super
       end
     end
@@ -2690,7 +2478,7 @@ module Aws::QuickSight
       :group_by,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>BoxPlotVisual</code>.</p>
@@ -2744,7 +2532,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a <code>BoxPlotVisual</code>.</p>
@@ -2755,12 +2543,7 @@ module Aws::QuickSight
     class BoxPlotFieldWells < Struct.new(
       :box_plot_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BoxPlotFillStyle
-      SOLID = 'SOLID'
-      TRANSPARENT = 'TRANSPARENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options of a box plot visual.</p>
@@ -2778,7 +2561,7 @@ module Aws::QuickSight
       :outlier_visibility,
       :all_data_points_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a <code>BoxPlotVisual</code>.</p>
@@ -2792,7 +2575,7 @@ module Aws::QuickSight
       :category_sort,
       :pagination_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The style options of the box plot.</p>
@@ -2802,7 +2585,7 @@ module Aws::QuickSight
     class BoxPlotStyleOptions < Struct.new(
       :fill_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A box plot.</p>
@@ -2837,7 +2620,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color palette.</p>
@@ -2879,7 +2662,7 @@ module Aws::QuickSight
       :warning,
       :danger,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of the brand.</p>
@@ -2901,7 +2684,7 @@ module Aws::QuickSight
       :application_theme,
       :logo_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details of the brand.</p>
@@ -2943,7 +2726,7 @@ module Aws::QuickSight
       :errors,
       :logo,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The element style.</p>
@@ -2953,15 +2736,7 @@ module Aws::QuickSight
     class BrandElementStyle < Struct.new(
       :navbar_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BrandStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_SUCCEEDED = 'CREATE_SUCCEEDED'
-      CREATE_FAILED = 'CREATE_FAILED'
-      DELETE_IN_PROGRESS = 'DELETE_IN_PROGRESS'
-      DELETE_FAILED = 'DELETE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of the brand.</p>
@@ -2995,13 +2770,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module BrandVersionStatus
-      CREATE_IN_PROGRESS = 'CREATE_IN_PROGRESS'
-      CREATE_SUCCEEDED = 'CREATE_SUCCEEDED'
-      CREATE_FAILED = 'CREATE_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A calculated column for a dataset.</p>
@@ -3021,7 +2790,7 @@ module Aws::QuickSight
       :column_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The calculated field of an analysis.</p>
@@ -3039,7 +2808,7 @@ module Aws::QuickSight
       :name,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The table calculation measure field for pivot tables.</p>
@@ -3053,7 +2822,7 @@ module Aws::QuickSight
       :field_id,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -3070,7 +2839,7 @@ module Aws::QuickSight
       :data_set_id,
       :ingestion_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -3091,7 +2860,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -3194,11 +2963,7 @@ module Aws::QuickSight
       :export_to_excel_in_scheduled_reports,
       :include_content_in_scheduled_reports_email,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CapabilityState
-      DENY = 'DENY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>
@@ -3208,7 +2973,7 @@ module Aws::QuickSight
     class CascadingControlConfiguration < Struct.new(
       :source_controls,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source controls that are used in a <code>CascadingControlConfiguration</code>.</p>
@@ -3222,7 +2987,7 @@ module Aws::QuickSight
       :source_sheet_control_id,
       :column_to_match,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that casts a column to a different type.</p>
@@ -3245,12 +3010,7 @@ module Aws::QuickSight
       :sub_type,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CategoricalAggregationFunction
-      COUNT = 'COUNT'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dimension type field with categorical type columns..</p>
@@ -3272,7 +3032,7 @@ module Aws::QuickSight
       :hierarchy_id,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The measure type field with categorical type columns.</p>
@@ -3294,7 +3054,7 @@ module Aws::QuickSight
       :aggregation_function,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The category drill down filter.</p>
@@ -3308,7 +3068,7 @@ module Aws::QuickSight
       :column,
       :category_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>CategoryFilter</code> filters text values.</p>
@@ -3331,7 +3091,7 @@ module Aws::QuickSight
       :configuration,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a <code>CategoryFilter</code>.</p>
@@ -3350,31 +3110,7 @@ module Aws::QuickSight
       :custom_filter_list_configuration,
       :custom_filter_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CategoryFilterFunction
-      EXACT = 'EXACT'
-      CONTAINS = 'CONTAINS'
-    end
-
-    module CategoryFilterMatchOperator
-      EQUALS = 'EQUALS'
-      DOES_NOT_EQUAL = 'DOES_NOT_EQUAL'
-      CONTAINS = 'CONTAINS'
-      DOES_NOT_CONTAIN = 'DOES_NOT_CONTAIN'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-    end
-
-    module CategoryFilterSelectAllOptions
-      FILTER_ALL_VALUES = 'FILTER_ALL_VALUES'
-    end
-
-    module CategoryFilterType
-      CUSTOM_FILTER = 'CUSTOM_FILTER'
-      CUSTOM_FILTER_LIST = 'CUSTOM_FILTER_LIST'
-      FILTER_LIST = 'FILTER_LIST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>CategoryInnerFilter</code> filters text values for the <code>NestedFilter</code>.</p>
@@ -3393,7 +3129,7 @@ module Aws::QuickSight
       :configuration,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents the cell value synonym.</p>
@@ -3407,7 +3143,7 @@ module Aws::QuickSight
       :cell_value,
       :synonyms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The label options for an axis on a chart.</p>
@@ -3435,7 +3171,7 @@ module Aws::QuickSight
       :sort_icon_visibility,
       :axis_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster marker that is a part of the cluster marker
@@ -3446,7 +3182,7 @@ module Aws::QuickSight
     class ClusterMarker < Struct.new(
       :simple_cluster_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cluster marker configuration of the geospatial map selected point style.</p>
@@ -3456,7 +3192,7 @@ module Aws::QuickSight
     class ClusterMarkerConfiguration < Struct.new(
       :cluster_marker,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a collective constant.</p>
@@ -3466,7 +3202,7 @@ module Aws::QuickSight
     class CollectiveConstant < Struct.new(
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>CollectiveConstantEntry</code>.</p>
@@ -3480,12 +3216,7 @@ module Aws::QuickSight
       :constant_type,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColorFillType
-      DISCRETE = 'DISCRETE'
-      GRADIENT = 'GRADIENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the color scale that is applied to the visual.</p>
@@ -3503,7 +3234,7 @@ module Aws::QuickSight
       :color_fill_type,
       :null_value_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color configurations for a column.</p>
@@ -3513,7 +3244,7 @@ module Aws::QuickSight
     class ColorsConfiguration < Struct.new(
       :custom_colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The general configuration of a column.</p>
@@ -3535,24 +3266,7 @@ module Aws::QuickSight
       :role,
       :colors_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColumnDataRole
-      DIMENSION = 'DIMENSION'
-      MEASURE = 'MEASURE'
-    end
-
-    module ColumnDataSubType
-      FLOAT = 'FLOAT'
-      FIXED = 'FIXED'
-    end
-
-    module ColumnDataType
-      STRING = 'STRING'
-      INTEGER = 'INTEGER'
-      DECIMAL = 'DECIMAL'
-      DATETIME = 'DATETIME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata that contains a description for a column.</p>
@@ -3562,7 +3276,7 @@ module Aws::QuickSight
     class ColumnDescription < Struct.new(
       :text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Groupings of columns that work together in certain Amazon QuickSight features. This is
@@ -3574,7 +3288,7 @@ module Aws::QuickSight
     class ColumnGroup < Struct.new(
       :geo_spatial_column_group,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure describing the name, data type, and geographic role of the columns.</p>
@@ -3584,7 +3298,7 @@ module Aws::QuickSight
     class ColumnGroupColumnSchema < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The column group schema.</p>
@@ -3598,7 +3312,7 @@ module Aws::QuickSight
       :name,
       :column_group_column_schema_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the hierarchy of the fields for a visual element.</p>
@@ -3616,7 +3330,7 @@ module Aws::QuickSight
       :date_time_hierarchy,
       :predefined_hierarchy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A column of a data set.</p>
@@ -3630,7 +3344,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A rule defined to grant access on one or more restricted columns.
@@ -3649,18 +3363,7 @@ module Aws::QuickSight
       :principals,
       :column_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColumnOrderingType
-      GREATER_IS_BETTER = 'GREATER_IS_BETTER'
-      LESSER_IS_BETTER = 'LESSER_IS_BETTER'
-      SPECIFIED = 'SPECIFIED'
-    end
-
-    module ColumnRole
-      DIMENSION = 'DIMENSION'
-      MEASURE = 'MEASURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The column schema.</p>
@@ -3678,7 +3381,7 @@ module Aws::QuickSight
       :data_type,
       :geographic_role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration for a column that is not used in a field well.</p>
@@ -3696,7 +3399,7 @@ module Aws::QuickSight
       :direction,
       :aggregation_function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tag for a column in a
@@ -3716,12 +3419,7 @@ module Aws::QuickSight
       :column_geographic_role,
       :column_description,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ColumnTagName
-      COLUMN_GEOGRAPHIC_ROLE = 'COLUMN_GEOGRAPHIC_ROLE'
-      COLUMN_DESCRIPTION = 'COLUMN_DESCRIPTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tooltip item for the columns that are not part of a field well.</p>
@@ -3747,7 +3445,7 @@ module Aws::QuickSight
       :aggregation,
       :tooltip_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field wells of a combo chart.</p>
@@ -3769,7 +3467,7 @@ module Aws::QuickSight
       :colors,
       :line_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>ComboChartVisual</code>.</p>
@@ -3863,7 +3561,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of the visual.</p>
@@ -3874,7 +3572,7 @@ module Aws::QuickSight
     class ComboChartFieldWells < Struct.new(
       :combo_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a <code>ComboChartVisual</code>.</p>
@@ -3896,7 +3594,7 @@ module Aws::QuickSight
       :color_sort,
       :color_items_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A combo chart.</p>
@@ -3932,12 +3630,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CommitMode
-      AUTO = 'AUTO'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a comparative order.</p>
@@ -3955,7 +3648,7 @@ module Aws::QuickSight
       :specifed_order,
       :treat_undefined_specified_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The comparison display configuration of a KPI or gauge chart.</p>
@@ -3986,7 +3679,7 @@ module Aws::QuickSight
       :comparison_method,
       :comparison_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The format of the comparison.</p>
@@ -4001,26 +3694,7 @@ module Aws::QuickSight
       :number_display_format_configuration,
       :percentage_display_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ComparisonMethod
-      DIFFERENCE = 'DIFFERENCE'
-      PERCENT_DIFFERENCE = 'PERCENT_DIFFERENCE'
-      PERCENT = 'PERCENT'
-    end
-
-    module ComparisonMethodType
-      DIFF = 'DIFF'
-      PERC_DIFF = 'PERC_DIFF'
-      DIFF_AS_PERC = 'DIFF_AS_PERC'
-      POP_CURRENT_DIFF_AS_PERC = 'POP_CURRENT_DIFF_AS_PERC'
-      POP_CURRENT_DIFF = 'POP_CURRENT_DIFF'
-      POP_OVERTIME_DIFF_AS_PERC = 'POP_OVERTIME_DIFF_AS_PERC'
-      POP_OVERTIME_DIFF = 'POP_OVERTIME_DIFF'
-      PERCENT_OF_TOTAL = 'PERCENT_OF_TOTAL'
-      RUNNING_SUM = 'RUNNING_SUM'
-      MOVING_AVERAGE = 'MOVING_AVERAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The computation union that is used in an insight visual.</p>
@@ -4067,7 +3741,7 @@ module Aws::QuickSight
       :unique_values,
       :forecast,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A resource is already in a state that indicates an operation is happening that must complete
@@ -4080,7 +3754,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The formatting configuration for the color.</p>
@@ -4094,7 +3768,7 @@ module Aws::QuickSight
       :solid,
       :gradient,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the custom condition for an icon set.</p>
@@ -4116,7 +3790,7 @@ module Aws::QuickSight
       :color,
       :display_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Custom icon options for an icon set.</p>
@@ -4130,7 +3804,7 @@ module Aws::QuickSight
       :icon,
       :unicode_icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting configuration for gradient color.</p>
@@ -4144,7 +3818,7 @@ module Aws::QuickSight
       :expression,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The formatting configuration for the icon.</p>
@@ -4158,7 +3832,7 @@ module Aws::QuickSight
       :icon_set,
       :custom_condition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the icon display configuration.</p>
@@ -4168,11 +3842,7 @@ module Aws::QuickSight
     class ConditionalFormattingIconDisplayConfiguration < Struct.new(
       :icon_display_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionalFormattingIconDisplayOption
-      ICON_ONLY = 'ICON_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting configuration for icon set.</p>
@@ -4186,21 +3856,7 @@ module Aws::QuickSight
       :expression,
       :icon_set_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConditionalFormattingIconSetType
-      PLUS_MINUS = 'PLUS_MINUS'
-      CHECK_X = 'CHECK_X'
-      THREE_COLOR_ARROW = 'THREE_COLOR_ARROW'
-      THREE_GRAY_ARROW = 'THREE_GRAY_ARROW'
-      CARET_UP_MINUS_DOWN = 'CARET_UP_MINUS_DOWN'
-      THREE_SHAPE = 'THREE_SHAPE'
-      THREE_CIRCLE = 'THREE_CIRCLE'
-      FLAGS = 'FLAGS'
-      BARS = 'BARS'
-      FOUR_COLOR_ARROW = 'FOUR_COLOR_ARROW'
-      FOUR_GRAY_ARROW = 'FOUR_GRAY_ARROW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting configuration for solid color.</p>
@@ -4214,7 +3870,7 @@ module Aws::QuickSight
       :expression,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Updating or deleting a resource can cause an inconsistent state.</p>
@@ -4227,13 +3883,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ConstantType
-      SINGULAR = 'SINGULAR'
-      RANGE = 'RANGE'
-      COLLECTIVE = 'COLLECTIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The context menu options for a visual's interactions.</p>
@@ -4243,7 +3893,7 @@ module Aws::QuickSight
     class ContextMenuOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contribution analysis visual display for a line, pie, or bar chart.</p>
@@ -4258,13 +3908,7 @@ module Aws::QuickSight
       :measure_field_id,
       :contributor_dimensions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContributionAnalysisDirection
-      INCREASE = 'INCREASE'
-      DECREASE = 'DECREASE'
-      NEUTRAL = 'NEUTRAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for the <code>ContributionAnalysisFactor</code>.</p>
@@ -4274,14 +3918,7 @@ module Aws::QuickSight
     class ContributionAnalysisFactor < Struct.new(
       :field_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ContributionAnalysisSortType
-      ABSOLUTE_DIFFERENCE = 'ABSOLUTE_DIFFERENCE'
-      CONTRIBUTION_PERCENTAGE = 'CONTRIBUTION_PERCENTAGE'
-      DEVIATION_FROM_EXPECTED = 'DEVIATION_FROM_EXPECTED'
-      PERCENTAGE_DIFFERENCE = 'PERCENTAGE_DIFFERENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for the <code>ContributionAnalysisTimeRanges</code>.</p>
@@ -4295,7 +3932,7 @@ module Aws::QuickSight
       :start_range,
       :end_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -4323,7 +3960,7 @@ module Aws::QuickSight
       :account_customization,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4352,7 +3989,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -4483,7 +4120,7 @@ module Aws::QuickSight
       :contact_number,
       :iam_identity_center_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute signup_response
@@ -4500,7 +4137,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -4569,7 +4206,7 @@ module Aws::QuickSight
       :validation_strategy,
       :folder_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4594,7 +4231,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -4620,7 +4257,7 @@ module Aws::QuickSight
       :brand_definition,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -4637,7 +4274,7 @@ module Aws::QuickSight
       :brand_detail,
       :brand_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that creates calculated columns. Columns created in one such
@@ -4648,7 +4285,7 @@ module Aws::QuickSight
     class CreateColumnsOperation < Struct.new(
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -4669,7 +4306,7 @@ module Aws::QuickSight
       :capabilities,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -4686,7 +4323,7 @@ module Aws::QuickSight
       :arn,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -4806,7 +4443,7 @@ module Aws::QuickSight
       :link_sharing_configuration,
       :link_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4836,7 +4473,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -4920,7 +4557,7 @@ module Aws::QuickSight
       :performance_configuration,
       :use_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -4951,7 +4588,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5009,7 +4646,7 @@ module Aws::QuickSight
       :tags,
       :folder_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5034,7 +4671,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5060,7 +4697,7 @@ module Aws::QuickSight
       :member_id,
       :member_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -5077,7 +4714,7 @@ module Aws::QuickSight
       :folder_member,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5122,7 +4759,7 @@ module Aws::QuickSight
       :tags,
       :sharing_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -5143,7 +4780,7 @@ module Aws::QuickSight
       :folder_id,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5170,7 +4807,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_member
@@ -5187,7 +4824,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5215,7 +4852,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The response object for this operation.</p>
@@ -5233,7 +4870,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5290,7 +4927,7 @@ module Aws::QuickSight
       :identities,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_name
@@ -5344,7 +4981,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5370,7 +5007,7 @@ module Aws::QuickSight
       :aws_account_id,
       :ingestion_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5395,7 +5032,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5422,7 +5059,7 @@ module Aws::QuickSight
       :identity_store,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5461,7 +5098,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5483,7 +5120,7 @@ module Aws::QuickSight
       :aws_account_id,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -5504,7 +5141,7 @@ module Aws::QuickSight
       :schedule_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5530,7 +5167,7 @@ module Aws::QuickSight
       :namespace,
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -5543,7 +5180,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5571,7 +5208,7 @@ module Aws::QuickSight
       :alias_name,
       :template_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_alias
@@ -5588,7 +5225,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5652,7 +5289,7 @@ module Aws::QuickSight
       :definition,
       :validation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5682,7 +5319,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5710,7 +5347,7 @@ module Aws::QuickSight
       :alias_name,
       :theme_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_alias
@@ -5727,7 +5364,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5778,7 +5415,7 @@ module Aws::QuickSight
       :permissions,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5807,7 +5444,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5838,7 +5475,7 @@ module Aws::QuickSight
       :dataset_name,
       :refresh_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -5863,7 +5500,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5898,7 +5535,7 @@ module Aws::QuickSight
       :folder_arns,
       :custom_instructions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -5924,7 +5561,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -5959,7 +5596,7 @@ module Aws::QuickSight
       :primary_visual,
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -6000,7 +5637,7 @@ module Aws::QuickSight
       :role_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -6031,7 +5668,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -6062,12 +5699,7 @@ module Aws::QuickSight
       :password,
       :alternate_data_source_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CrossDatasetTypes
-      ALL_DATASETS = 'ALL_DATASETS'
-      SINGLE_DATASET = 'SINGLE_DATASET'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the currency display format configuration.</p>
@@ -6105,7 +5737,7 @@ module Aws::QuickSight
       :negative_value_configuration,
       :null_value_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter operation that filters data included in a visual or in an entire sheet.</p>
@@ -6119,7 +5751,7 @@ module Aws::QuickSight
       :selected_fields_configuration,
       :target_visuals_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The navigation operation that navigates between different sheets in the same analysis.</p>
@@ -6130,7 +5762,7 @@ module Aws::QuickSight
     class CustomActionNavigationOperation < Struct.new(
       :local_navigation_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The set parameter operation that sets parameters in custom action.</p>
@@ -6140,7 +5772,7 @@ module Aws::QuickSight
     class CustomActionSetParametersOperation < Struct.new(
       :parameter_value_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URL operation that opens a link to another webpage.</p>
@@ -6169,7 +5801,7 @@ module Aws::QuickSight
       :url_template,
       :url_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the color that's applied to a particular data value in a column.</p>
@@ -6187,7 +5819,7 @@ module Aws::QuickSight
       :color,
       :special_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>CustomContentVisual</code>.</p>
@@ -6209,19 +5841,7 @@ module Aws::QuickSight
       :image_scaling,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module CustomContentImageScalingConfiguration
-      FIT_TO_HEIGHT = 'FIT_TO_HEIGHT'
-      FIT_TO_WIDTH = 'FIT_TO_WIDTH'
-      DO_NOT_SCALE = 'DO_NOT_SCALE'
-      SCALE_TO_VISUAL = 'SCALE_TO_VISUAL'
-    end
-
-    module CustomContentType
-      IMAGE = 'IMAGE'
-      OTHER_EMBEDDED_CONTENT = 'OTHER_EMBEDDED_CONTENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A visual that contains custom content.</p>
@@ -6256,7 +5876,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom filter that filters based on a single value. This filter can be partially matched.</p>
@@ -6305,7 +5925,7 @@ module Aws::QuickSight
       :parameter_name,
       :null_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of custom filter values.</p>
@@ -6348,7 +5968,7 @@ module Aws::QuickSight
       :select_all_options,
       :null_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Instructions that provide additional guidance and context for response generation.</p>
@@ -6358,7 +5978,7 @@ module Aws::QuickSight
     class CustomInstructions < Struct.new(
       :custom_instructions_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom narrative options.</p>
@@ -6368,7 +5988,7 @@ module Aws::QuickSight
     class CustomNarrativeOptions < Struct.new(
       :narrative,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The customized parameter values.</p>
@@ -6391,7 +6011,7 @@ module Aws::QuickSight
       :decimal_values,
       :date_time_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom permissions profile.</p>
@@ -6409,7 +6029,7 @@ module Aws::QuickSight
       :custom_permissions_name,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A physical table type built from the results of the custom SQL query.</p>
@@ -6431,7 +6051,7 @@ module Aws::QuickSight
       :sql_query,
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of custom values for the destination parameter in <code>DestinationParameterValueConfiguration</code>.</p>
@@ -6446,7 +6066,7 @@ module Aws::QuickSight
       :include_null_value,
       :custom_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The customer managed key that is registered to your Amazon QuickSight account is unavailable.</p>
@@ -6459,7 +6079,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard.</p>
@@ -6497,12 +6117,7 @@ module Aws::QuickSight
       :last_updated_time,
       :link_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashboardBehavior
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard error.</p>
@@ -6520,30 +6135,7 @@ module Aws::QuickSight
       :message,
       :violated_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashboardErrorType
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      SOURCE_NOT_FOUND = 'SOURCE_NOT_FOUND'
-      DATA_SET_NOT_FOUND = 'DATA_SET_NOT_FOUND'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      PARAMETER_VALUE_INCOMPATIBLE = 'PARAMETER_VALUE_INCOMPATIBLE'
-      PARAMETER_TYPE_INVALID = 'PARAMETER_TYPE_INVALID'
-      PARAMETER_NOT_FOUND = 'PARAMETER_NOT_FOUND'
-      COLUMN_TYPE_MISMATCH = 'COLUMN_TYPE_MISMATCH'
-      COLUMN_GEOGRAPHIC_ROLE_MISMATCH = 'COLUMN_GEOGRAPHIC_ROLE_MISMATCH'
-      COLUMN_REPLACEMENT_MISSING = 'COLUMN_REPLACEMENT_MISSING'
-    end
-
-    module DashboardFilterAttribute
-      QUICKSIGHT_USER = 'QUICKSIGHT_USER'
-      QUICKSIGHT_VIEWER_OR_OWNER = 'QUICKSIGHT_VIEWER_OR_OWNER'
-      DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = 'DIRECT_QUICKSIGHT_VIEWER_OR_OWNER'
-      QUICKSIGHT_OWNER = 'QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_OWNER = 'DIRECT_QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_SOLE_OWNER = 'DIRECT_QUICKSIGHT_SOLE_OWNER'
-      DASHBOARD_NAME = 'DASHBOARD_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard publish options.</p>
@@ -6599,7 +6191,7 @@ module Aws::QuickSight
       :data_point_tooltip_option,
       :data_qa_enabled_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that you apply when searching for dashboards. </p>
@@ -6649,7 +6241,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard source entity.</p>
@@ -6659,7 +6251,7 @@ module Aws::QuickSight
     class DashboardSourceEntity < Struct.new(
       :source_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard source template.</p>
@@ -6673,7 +6265,7 @@ module Aws::QuickSight
       :data_set_references,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard summary.</p>
@@ -6707,12 +6299,7 @@ module Aws::QuickSight
       :published_version_number,
       :last_published_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashboardUIState
-      EXPANDED = 'EXPANDED'
-      COLLAPSED = 'COLLAPSED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard version.</p>
@@ -6759,7 +6346,7 @@ module Aws::QuickSight
       :theme_arn,
       :sheets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The contents of a dashboard.</p>
@@ -6806,7 +6393,7 @@ module Aws::QuickSight
       :options,
       :static_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dashboard version summary.</p>
@@ -6836,7 +6423,7 @@ module Aws::QuickSight
       :source_entity_arn,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the following elements:</p>
@@ -6866,7 +6453,7 @@ module Aws::QuickSight
       :sheet_id,
       :visual_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The visual publish options of a visual in a dashboard</p>
@@ -6876,7 +6463,7 @@ module Aws::QuickSight
     class DashboardVisualPublishOptions < Struct.new(
       :export_hidden_fields_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The QA result that is made from dashboard visual.</p>
@@ -6914,12 +6501,7 @@ module Aws::QuickSight
       :visual_subtitle,
       :dashboard_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DashboardsQAStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a data aggregation.</p>
@@ -6933,7 +6515,7 @@ module Aws::QuickSight
       :dataset_row_date_granularity,
       :default_date_column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for data bars.</p>
@@ -6951,7 +6533,7 @@ module Aws::QuickSight
       :positive_color,
       :negative_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the color that is applied to a particular data value.</p>
@@ -6965,10 +6547,10 @@ module Aws::QuickSight
       :color,
       :data_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:data_value] =  unless options.key?(:data_value)
+        options[:data_value] = nil unless options.key?(:data_value)
         super
       end
     end
@@ -6991,7 +6573,7 @@ module Aws::QuickSight
       :min_max_gradient,
       :empty_fill_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data field series item configuration of a line chart.</p>
@@ -7013,13 +6595,7 @@ module Aws::QuickSight
       :axis_binding,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLabelContent
-      VALUE = 'VALUE'
-      PERCENT = 'PERCENT'
-      VALUE_AND_PERCENT = 'VALUE_AND_PERCENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of the data labels.</p>
@@ -7065,21 +6641,7 @@ module Aws::QuickSight
       :overlap,
       :totals_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataLabelOverlap
-      DISABLE_OVERLAP = 'DISABLE_OVERLAP'
-      ENABLE_OVERLAP = 'ENABLE_OVERLAP'
-    end
-
-    module DataLabelPosition
-      INSIDE = 'INSIDE'
-      OUTSIDE = 'OUTSIDE'
-      LEFT = 'LEFT'
-      TOP = 'TOP'
-      BOTTOM = 'BOTTOM'
-      RIGHT = 'RIGHT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the data label type.</p>
@@ -7106,7 +6668,7 @@ module Aws::QuickSight
       :minimum_label_type,
       :maximum_label_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color map that determines the color options for a particular element.</p>
@@ -7124,7 +6686,7 @@ module Aws::QuickSight
       :color,
       :time_granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that specifies individual data values for labels.</p>
@@ -7142,7 +6704,7 @@ module Aws::QuickSight
       :field_value,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Allows data paths to be sorted by a specific data value.</p>
@@ -7156,7 +6718,7 @@ module Aws::QuickSight
       :direction,
       :sort_paths,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of the data path value.</p>
@@ -7184,7 +6746,7 @@ module Aws::QuickSight
     class DataPathType < Struct.new(
       :pivot_table_data_path_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data path that needs to be sorted.</p>
@@ -7202,7 +6764,7 @@ module Aws::QuickSight
       :field_value,
       :data_path_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The drill down options for data points in a dashbaord.</p>
@@ -7212,7 +6774,7 @@ module Aws::QuickSight
     class DataPointDrillUpDownOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data point menu options of a dashboard.</p>
@@ -7222,7 +6784,7 @@ module Aws::QuickSight
     class DataPointMenuLabelOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data point tooltip options.</p>
@@ -7232,7 +6794,7 @@ module Aws::QuickSight
     class DataPointTooltipOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Adds Q&A capabilities to a dashboard. If no topic is linked, Dashboard Q&A uses the data values that are rendered on the dashboard. End users can use Dashboard Q&A to ask for different slices of the data that they see on the dashboard. If a topic is linked, Topic Q&A is enabled.</p>
@@ -7242,7 +6804,7 @@ module Aws::QuickSight
     class DataQAEnabledOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The generative Q&A settings of an embedded Amazon QuickSight console.</p>
@@ -7252,7 +6814,7 @@ module Aws::QuickSight
     class DataQnAConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -7345,7 +6907,7 @@ module Aws::QuickSight
       :performance_configuration,
       :use_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:consumed_spice_capacity_in_bytes] = 0 unless options.key?(:consumed_spice_capacity_in_bytes)
@@ -7368,16 +6930,7 @@ module Aws::QuickSight
       :data_set_schema,
       :column_group_schema_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSetFilterAttribute
-      QUICKSIGHT_VIEWER_OR_OWNER = 'QUICKSIGHT_VIEWER_OR_OWNER'
-      QUICKSIGHT_OWNER = 'QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = 'DIRECT_QUICKSIGHT_VIEWER_OR_OWNER'
-      DIRECT_QUICKSIGHT_OWNER = 'DIRECT_QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_SOLE_OWNER = 'DIRECT_QUICKSIGHT_SOLE_OWNER'
-      DATASET_NAME = 'DATASET_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data set.</p>
@@ -7391,12 +6944,7 @@ module Aws::QuickSight
       :identifier,
       :data_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSetImportMode
-      SPICE = 'SPICE'
-      DIRECT_QUERY = 'DIRECT_QUERY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dataset reference.</p>
@@ -7410,7 +6958,7 @@ module Aws::QuickSight
       :data_set_placeholder,
       :data_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The refresh properties of a dataset.</p>
@@ -7424,7 +6972,7 @@ module Aws::QuickSight
       :refresh_configuration,
       :failure_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dataset schema.</p>
@@ -7434,7 +6982,7 @@ module Aws::QuickSight
     class DataSetSchema < Struct.new(
       :column_schema_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that you apply when searching for datasets.</p>
@@ -7484,7 +7032,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Dataset summary.</p>
@@ -7530,7 +7078,7 @@ module Aws::QuickSight
       :column_level_permission_rules_applied,
       :use_as,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:row_level_permission_tag_configuration_applied] = false unless options.key?(:row_level_permission_tag_configuration_applied)
@@ -7550,17 +7098,13 @@ module Aws::QuickSight
       :disable_use_as_direct_query_source,
       :disable_use_as_imported_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_use_as_direct_query_source] = false unless options.key?(:disable_use_as_direct_query_source)
         options[:disable_use_as_imported_source] = false unless options.key?(:disable_use_as_imported_source)
         super
       end
-    end
-
-    module DataSetUseAs
-      RLS_RULES = 'RLS_RULES'
     end
 
     # <p>The structure of a data source.</p>
@@ -7632,7 +7176,7 @@ module Aws::QuickSight
       :error_info,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Data source credentials. This is a variant type structure. For this structure to be
@@ -7658,7 +7202,7 @@ module Aws::QuickSight
       :copy_source_arn,
       :secret_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information for the data source creation or update.</p>
@@ -7672,25 +7216,7 @@ module Aws::QuickSight
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceErrorInfoType
-      ACCESS_DENIED = 'ACCESS_DENIED'
-      COPY_SOURCE_NOT_FOUND = 'COPY_SOURCE_NOT_FOUND'
-      TIMEOUT = 'TIMEOUT'
-      ENGINE_VERSION_NOT_SUPPORTED = 'ENGINE_VERSION_NOT_SUPPORTED'
-      UNKNOWN_HOST = 'UNKNOWN_HOST'
-      GENERIC_SQL_FAILURE = 'GENERIC_SQL_FAILURE'
-      CONFLICT = 'CONFLICT'
-      UNKNOWN = 'UNKNOWN'
-    end
-
-    module DataSourceFilterAttribute
-      DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = 'DIRECT_QUICKSIGHT_VIEWER_OR_OWNER'
-      DIRECT_QUICKSIGHT_OWNER = 'DIRECT_QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_SOLE_OWNER = 'DIRECT_QUICKSIGHT_SOLE_OWNER'
-      DATASOURCE_NAME = 'DATASOURCE_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
@@ -7807,7 +7333,7 @@ module Aws::QuickSight
       :impala_parameters,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class AmazonElasticsearchParameters < DataSourceParameters; end
       class AthenaParameters < DataSourceParameters; end
@@ -7878,7 +7404,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>DataSourceSummary</code> object that returns a summary of a data source.</p>
@@ -7908,39 +7434,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DataSourceType
-      ADOBE_ANALYTICS = 'ADOBE_ANALYTICS'
-      AMAZON_ELASTICSEARCH = 'AMAZON_ELASTICSEARCH'
-      ATHENA = 'ATHENA'
-      AURORA = 'AURORA'
-      AURORA_POSTGRESQL = 'AURORA_POSTGRESQL'
-      AWS_IOT_ANALYTICS = 'AWS_IOT_ANALYTICS'
-      GITHUB = 'GITHUB'
-      JIRA = 'JIRA'
-      MARIADB = 'MARIADB'
-      MYSQL = 'MYSQL'
-      ORACLE = 'ORACLE'
-      POSTGRESQL = 'POSTGRESQL'
-      PRESTO = 'PRESTO'
-      REDSHIFT = 'REDSHIFT'
-      S3 = 'S3'
-      SALESFORCE = 'SALESFORCE'
-      SERVICENOW = 'SERVICENOW'
-      SNOWFLAKE = 'SNOWFLAKE'
-      SPARK = 'SPARK'
-      SQLSERVER = 'SQLSERVER'
-      TERADATA = 'TERADATA'
-      TWITTER = 'TWITTER'
-      TIMESTREAM = 'TIMESTREAM'
-      AMAZON_OPENSEARCH = 'AMAZON_OPENSEARCH'
-      EXASOL = 'EXASOL'
-      DATABRICKS = 'DATABRICKS'
-      STARBURST = 'STARBURST'
-      TRINO = 'TRINO'
-      BIGQUERY = 'BIGQUERY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data story settings of an embedded Amazon QuickSight console.</p>
@@ -7950,7 +7444,7 @@ module Aws::QuickSight
     class DataStoriesConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -7973,7 +7467,7 @@ module Aws::QuickSight
       :port,
       :sql_endpoint_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a dataset.</p>
@@ -8011,7 +7505,7 @@ module Aws::QuickSight
       :calculated_fields,
       :named_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter that is created in a dataset. The parameter can be a string, integer, decimal, or datetime data type.</p>
@@ -8033,20 +7527,7 @@ module Aws::QuickSight
       :integer_dataset_parameter,
       :date_time_dataset_parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    # <p>The value type of the parameter. The value type is used to validate the parameter before it is evaluated.</p>
-    module DatasetParameterValueType
-      MULTI_VALUED = 'MULTI_VALUED'
-      SINGLE_VALUED = 'SINGLE_VALUED'
-    end
-
-    module DateAggregationFunction
-      COUNT = 'COUNT'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      MIN = 'MIN'
-      MAX = 'MAX'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine how a date axis is displayed.</p>
@@ -8056,7 +7537,7 @@ module Aws::QuickSight
     class DateAxisOptions < Struct.new(
       :missing_date_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dimension type field with date type columns.</p>
@@ -8129,7 +7610,7 @@ module Aws::QuickSight
       :hierarchy_id,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The measure type field with date type columns.</p>
@@ -8151,7 +7632,7 @@ module Aws::QuickSight
       :aggregation_function,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A date time parameter for a dataset.</p>
@@ -8177,7 +7658,7 @@ module Aws::QuickSight
       :time_granularity,
       :default_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of a date time parameter.</p>
@@ -8187,7 +7668,7 @@ module Aws::QuickSight
     class DateTimeDatasetParameterDefaultValues < Struct.new(
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of the <code>DateTimeParameterDeclaration</code>.</p>
@@ -8205,7 +7686,7 @@ module Aws::QuickSight
       :static_values,
       :rolling_date,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting configuration for <code>DateTime</code> fields.</p>
@@ -8223,7 +7704,7 @@ module Aws::QuickSight
       :null_value_format_configuration,
       :numeric_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the hierarchy of any <code>DateTime</code> fields.</p>
@@ -8238,7 +7719,7 @@ module Aws::QuickSight
       :hierarchy_id,
       :drill_down_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A date-time parameter.</p>
@@ -8252,7 +7733,7 @@ module Aws::QuickSight
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter declaration for the <code>DateTime</code> data type.</p>
@@ -8278,7 +7759,7 @@ module Aws::QuickSight
       :value_when_unset,
       :mapped_data_set_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -8304,7 +7785,7 @@ module Aws::QuickSight
       :helper_text_visibility,
       :date_icon_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that defines the default value of a <code>DateTime</code> parameter when a value has not been set.</p>
@@ -8328,27 +7809,7 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DayOfTheWeek
-      SUNDAY = 'SUNDAY'
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
-    end
-
-    module DayOfWeek
-      SUNDAY = 'SUNDAY'
-      MONDAY = 'MONDAY'
-      TUESDAY = 'TUESDAY'
-      WEDNESDAY = 'WEDNESDAY'
-      THURSDAY = 'THURSDAY'
-      FRIDAY = 'FRIDAY'
-      SATURDAY = 'SATURDAY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A decimal parameter for a dataset.</p>
@@ -8370,7 +7831,7 @@ module Aws::QuickSight
       :value_type,
       :default_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of a decimal parameter.</p>
@@ -8380,7 +7841,7 @@ module Aws::QuickSight
     class DecimalDatasetParameterDefaultValues < Struct.new(
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of the <code>DecimalParameterDeclaration</code>.</p>
@@ -8394,7 +7855,7 @@ module Aws::QuickSight
       :dynamic_value,
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A decimal parameter.</p>
@@ -8408,7 +7869,7 @@ module Aws::QuickSight
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter declaration for the <code>Decimal</code> data type.</p>
@@ -8434,7 +7895,7 @@ module Aws::QuickSight
       :value_when_unset,
       :mapped_data_set_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the decimal places configuration.</p>
@@ -8444,7 +7905,7 @@ module Aws::QuickSight
     class DecimalPlacesConfiguration < Struct.new(
       :decimal_places,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that defines the default value of a <code>Decimal</code> parameter when a value has not been set.</p>
@@ -8468,26 +7929,12 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:custom_value] =  unless options.key?(:custom_value)
+        options[:custom_value] = nil unless options.key?(:custom_value)
         super
       end
-    end
-
-    module DefaultAggregation
-      SUM = 'SUM'
-      MAX = 'MAX'
-      MIN = 'MIN'
-      COUNT = 'COUNT'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      AVERAGE = 'AVERAGE'
-      MEDIAN = 'MEDIAN'
-      STDEV = 'STDEV'
-      STDEVP = 'STDEVP'
-      VAR = 'VAR'
-      VARP = 'VARP'
     end
 
     # <p>The default options that correspond to the filter control type of a <code>DateTimePicker</code>.</p>
@@ -8515,7 +7962,7 @@ module Aws::QuickSight
       :display_options,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default configuration for all dependent controls of the filter.</p>
@@ -8529,7 +7976,7 @@ module Aws::QuickSight
       :title,
       :control_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that corresponds to the control type of the filter.</p>
@@ -8563,7 +8010,7 @@ module Aws::QuickSight
       :default_slider_options,
       :default_relative_date_time_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default options that correspond to the <code>Dropdown</code> filter control type.</p>
@@ -8595,7 +8042,7 @@ module Aws::QuickSight
       :selectable_values,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default options that correspond to the <code>List</code> filter control type.</p>
@@ -8623,7 +8070,7 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a default formatting definition.</p>
@@ -8639,7 +8086,7 @@ module Aws::QuickSight
       :display_format,
       :display_format_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the default settings of a free-form layout configuration.</p>
@@ -8649,7 +8096,7 @@ module Aws::QuickSight
     class DefaultFreeFormLayoutConfiguration < Struct.new(
       :canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the default settings for a grid layout configuration.</p>
@@ -8659,7 +8106,7 @@ module Aws::QuickSight
     class DefaultGridLayoutConfiguration < Struct.new(
       :canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the default settings for interactive layout configuration.</p>
@@ -8673,7 +8120,7 @@ module Aws::QuickSight
       :grid,
       :free_form,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for default new sheet settings.</p>
@@ -8691,7 +8138,7 @@ module Aws::QuickSight
       :paginated_layout_configuration,
       :sheet_content_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the default settings for a paginated layout configuration.</p>
@@ -8701,7 +8148,7 @@ module Aws::QuickSight
     class DefaultPaginatedLayoutConfiguration < Struct.new(
       :section_based,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>
@@ -8715,7 +8162,7 @@ module Aws::QuickSight
       :display_options,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the default settings for a section-based layout configuration.</p>
@@ -8725,7 +8172,7 @@ module Aws::QuickSight
     class DefaultSectionBasedLayoutConfiguration < Struct.new(
       :canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default options that correspond to the <code>Slider</code> filter control type.</p>
@@ -8761,7 +8208,7 @@ module Aws::QuickSight
       :minimum_value,
       :step_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:maximum_value] = 0 unless options.key?(:maximum_value)
@@ -8782,7 +8229,7 @@ module Aws::QuickSight
       :delimiter,
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default options that correspond to the <code>TextField</code> filter control type.</p>
@@ -8792,7 +8239,7 @@ module Aws::QuickSight
     class DefaultTextFieldControlOptions < Struct.new(
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -8806,7 +8253,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -8819,7 +8266,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -8833,7 +8280,7 @@ module Aws::QuickSight
     class DeleteAccountSubscriptionRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -8846,7 +8293,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -8876,7 +8323,7 @@ module Aws::QuickSight
       :recovery_window_in_days,
       :force_delete_without_recovery,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -8901,7 +8348,7 @@ module Aws::QuickSight
       :deletion_time,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -8915,7 +8362,7 @@ module Aws::QuickSight
     class DeleteBrandAssignmentRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -8924,7 +8371,7 @@ module Aws::QuickSight
     class DeleteBrandAssignmentResponse < Struct.new(
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -8937,7 +8384,7 @@ module Aws::QuickSight
       :aws_account_id,
       :brand_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -8946,7 +8393,7 @@ module Aws::QuickSight
     class DeleteBrandResponse < Struct.new(
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -8959,7 +8406,7 @@ module Aws::QuickSight
       :aws_account_id,
       :custom_permissions_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -8976,7 +8423,7 @@ module Aws::QuickSight
       :arn,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9000,7 +8447,7 @@ module Aws::QuickSight
       :dashboard_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9021,7 +8468,7 @@ module Aws::QuickSight
       :dashboard_id,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9039,7 +8486,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9052,7 +8499,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9070,7 +8517,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -9091,7 +8538,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9109,7 +8556,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -9130,7 +8577,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9148,7 +8595,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9161,7 +8608,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9187,7 +8634,7 @@ module Aws::QuickSight
       :member_id,
       :member_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9200,7 +8647,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9218,7 +8665,7 @@ module Aws::QuickSight
       :aws_account_id,
       :folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9239,7 +8686,7 @@ module Aws::QuickSight
       :folder_id,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9266,7 +8713,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9279,7 +8726,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9302,7 +8749,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9315,7 +8762,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9338,7 +8785,7 @@ module Aws::QuickSight
       :assignment_name,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_name
@@ -9355,7 +8802,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9373,7 +8820,7 @@ module Aws::QuickSight
       :aws_account_id,
       :service,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9386,7 +8833,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9404,7 +8851,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9417,7 +8864,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9439,7 +8886,7 @@ module Aws::QuickSight
       :aws_account_id,
       :schedule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9460,7 +8907,7 @@ module Aws::QuickSight
       :schedule_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9483,7 +8930,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9496,7 +8943,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9522,7 +8969,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9535,7 +8982,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9560,7 +9007,7 @@ module Aws::QuickSight
       :template_id,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -9585,7 +9032,7 @@ module Aws::QuickSight
       :arn,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9609,7 +9056,7 @@ module Aws::QuickSight
       :template_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9630,7 +9077,7 @@ module Aws::QuickSight
       :template_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9652,7 +9099,7 @@ module Aws::QuickSight
       :theme_id,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute alias_name
@@ -9677,7 +9124,7 @@ module Aws::QuickSight
       :status,
       :theme_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9702,7 +9149,7 @@ module Aws::QuickSight
       :theme_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -9723,7 +9170,7 @@ module Aws::QuickSight
       :status,
       :theme_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9745,7 +9192,7 @@ module Aws::QuickSight
       :topic_id,
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -9770,7 +9217,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9789,7 +9236,7 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -9810,7 +9257,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9834,7 +9281,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9847,7 +9294,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9869,7 +9316,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9882,7 +9329,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9905,7 +9352,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -9918,7 +9365,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9938,7 +9385,7 @@ module Aws::QuickSight
       :aws_account_id,
       :vpc_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -9969,7 +9416,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -9997,7 +9444,7 @@ module Aws::QuickSight
       :namespace,
       :resolved,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -10026,7 +9473,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10040,7 +9487,7 @@ module Aws::QuickSight
     class DescribeAccountSettingsRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_settings
@@ -10063,7 +9510,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10077,7 +9524,7 @@ module Aws::QuickSight
     class DescribeAccountSubscriptionRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute account_info
@@ -10113,7 +9560,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10133,7 +9580,7 @@ module Aws::QuickSight
       :aws_account_id,
       :analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_id
@@ -10208,7 +9655,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10228,7 +9675,7 @@ module Aws::QuickSight
       :aws_account_id,
       :analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_id
@@ -10255,7 +9702,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10275,7 +9722,7 @@ module Aws::QuickSight
       :aws_account_id,
       :analysis_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis
@@ -10293,7 +9740,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10311,7 +9758,7 @@ module Aws::QuickSight
       :aws_account_id,
       :asset_bundle_export_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -10398,7 +9845,7 @@ module Aws::QuickSight
       :include_folder_memberships,
       :include_folder_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_all_dependencies] = false unless options.key?(:include_all_dependencies)
@@ -10420,7 +9867,7 @@ module Aws::QuickSight
       :aws_account_id,
       :asset_bundle_import_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute job_status
@@ -10514,7 +9961,7 @@ module Aws::QuickSight
       :override_validation_strategy,
       :warnings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10528,7 +9975,7 @@ module Aws::QuickSight
     class DescribeBrandAssignmentRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -10541,7 +9988,7 @@ module Aws::QuickSight
       :request_id,
       :brand_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10554,7 +10001,7 @@ module Aws::QuickSight
       :aws_account_id,
       :brand_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -10571,7 +10018,7 @@ module Aws::QuickSight
       :brand_detail,
       :brand_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10588,7 +10035,7 @@ module Aws::QuickSight
       :brand_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -10605,7 +10052,7 @@ module Aws::QuickSight
       :brand_detail,
       :brand_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10618,7 +10065,7 @@ module Aws::QuickSight
       :aws_account_id,
       :custom_permissions_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -10635,7 +10082,7 @@ module Aws::QuickSight
       :custom_permissions,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10663,7 +10110,7 @@ module Aws::QuickSight
       :version_number,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -10765,7 +10212,7 @@ module Aws::QuickSight
       :request_id,
       :dashboard_publish_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10784,7 +10231,7 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboard_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -10816,7 +10263,7 @@ module Aws::QuickSight
       :request_id,
       :link_sharing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10844,7 +10291,7 @@ module Aws::QuickSight
       :version_number,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard
@@ -10861,7 +10308,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10883,7 +10330,7 @@ module Aws::QuickSight
       :dashboard_id,
       :snapshot_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -10958,7 +10405,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -10980,7 +10427,7 @@ module Aws::QuickSight
       :dashboard_id,
       :snapshot_job_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -11017,7 +10464,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11031,7 +10478,7 @@ module Aws::QuickSight
     class DescribeDashboardsQAConfigurationRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboards_qa_status
@@ -11048,7 +10495,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11066,7 +10513,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_arn
@@ -11091,7 +10538,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11109,7 +10556,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -11126,7 +10573,7 @@ module Aws::QuickSight
       :status,
       :data_set_refresh_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11144,7 +10591,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set
@@ -11161,7 +10608,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11179,7 +10626,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_arn
@@ -11204,7 +10651,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11222,7 +10669,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_source_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source
@@ -11239,7 +10686,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11257,7 +10704,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -11274,7 +10721,7 @@ module Aws::QuickSight
       :status,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11304,7 +10751,7 @@ module Aws::QuickSight
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -11333,7 +10780,7 @@ module Aws::QuickSight
       :request_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11351,7 +10798,7 @@ module Aws::QuickSight
       :aws_account_id,
       :folder_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -11376,7 +10823,7 @@ module Aws::QuickSight
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -11405,7 +10852,7 @@ module Aws::QuickSight
       :request_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11427,7 +10874,7 @@ module Aws::QuickSight
       :folder,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11454,7 +10901,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_member
@@ -11472,7 +10919,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11495,7 +10942,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -11512,7 +10959,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11535,7 +10982,7 @@ module Aws::QuickSight
       :assignment_name,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_policy_assignment
@@ -11552,7 +10999,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11574,7 +11021,7 @@ module Aws::QuickSight
       :data_set_id,
       :ingestion_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestion
@@ -11591,7 +11038,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11605,7 +11052,7 @@ module Aws::QuickSight
     class DescribeIpRestrictionRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -11639,7 +11086,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11657,7 +11104,7 @@ module Aws::QuickSight
       :aws_account_id,
       :default_key_only,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -11678,7 +11125,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11696,7 +11143,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespace
@@ -11716,7 +11163,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11730,7 +11177,7 @@ module Aws::QuickSight
     class DescribeQPersonalizationConfigurationRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute personalization_mode
@@ -11747,7 +11194,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11761,7 +11208,7 @@ module Aws::QuickSight
     class DescribeQuickSightQSearchConfigurationRequest < Struct.new(
       :aws_account_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute q_search_status
@@ -11778,7 +11225,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11800,7 +11247,7 @@ module Aws::QuickSight
       :data_set_id,
       :schedule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute refresh_schedule
@@ -11821,7 +11268,7 @@ module Aws::QuickSight
       :request_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11843,7 +11290,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute custom_permissions_name
@@ -11860,7 +11307,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11886,7 +11333,7 @@ module Aws::QuickSight
       :template_id,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_alias
@@ -11903,7 +11350,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -11933,7 +11380,7 @@ module Aws::QuickSight
       :version_number,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute name
@@ -12008,7 +11455,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12026,7 +11473,7 @@ module Aws::QuickSight
       :aws_account_id,
       :template_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -12051,7 +11498,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12081,7 +11528,7 @@ module Aws::QuickSight
       :version_number,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template
@@ -12098,7 +11545,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12121,7 +11568,7 @@ module Aws::QuickSight
       :theme_id,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_alias
@@ -12138,7 +11585,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12156,7 +11603,7 @@ module Aws::QuickSight
       :aws_account_id,
       :theme_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_id
@@ -12181,7 +11628,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12211,7 +11658,7 @@ module Aws::QuickSight
       :version_number,
       :alias_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme
@@ -12228,7 +11675,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12247,7 +11694,7 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -12272,7 +11719,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12295,7 +11742,7 @@ module Aws::QuickSight
       :topic_id,
       :refresh_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute refresh_details
@@ -12312,7 +11759,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12335,7 +11782,7 @@ module Aws::QuickSight
       :topic_id,
       :dataset_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -12365,7 +11812,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12383,7 +11830,7 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -12412,7 +11859,7 @@ module Aws::QuickSight
       :status,
       :custom_instructions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12435,7 +11882,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -12452,7 +11899,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12472,7 +11919,7 @@ module Aws::QuickSight
       :aws_account_id,
       :vpc_connection_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connection
@@ -12489,7 +11936,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -12521,12 +11968,7 @@ module Aws::QuickSight
       :source_field,
       :source_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DigitGroupingStyle
-      DEFAULT = 'DEFAULT'
-      LAKHS = 'LAKHS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dimension type field.</p>
@@ -12544,16 +11986,7 @@ module Aws::QuickSight
       :categorical_dimension_field,
       :date_dimension_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module DisplayFormat
-      AUTO = 'AUTO'
-      PERCENT = 'PERCENT'
-      CURRENCY = 'CURRENCY'
-      NUMBER = 'NUMBER'
-      DATE = 'DATE'
-      STRING = 'STRING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents additional options for display formatting.</p>
@@ -12610,7 +12043,7 @@ module Aws::QuickSight
       :negative_format,
       :currency_symbol,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_blank_cell_format] = false unless options.key?(:use_blank_cell_format)
@@ -12631,7 +12064,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The label options of the label that is displayed in the center of a donut chart. This option isn't available for pie charts.</p>
@@ -12641,7 +12074,7 @@ module Aws::QuickSight
     class DonutCenterOptions < Struct.new(
       :label_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for configuring a donut chart or pie chart.</p>
@@ -12673,7 +12106,7 @@ module Aws::QuickSight
       :arc_options,
       :donut_center_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The drill down filter for the column hierarchies.</p>
@@ -12692,7 +12125,7 @@ module Aws::QuickSight
       :category_filter,
       :time_range_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -12711,7 +12144,7 @@ module Aws::QuickSight
       :title_options,
       :info_icon_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines different defaults to the users or groups based on mapping.</p>
@@ -12729,19 +12162,7 @@ module Aws::QuickSight
       :group_name_column,
       :default_value_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Edition
-      STANDARD = 'STANDARD'
-      ENTERPRISE = 'ENTERPRISE'
-      ENTERPRISE_AND_Q = 'ENTERPRISE_AND_Q'
-    end
-
-    module EmbeddingIdentityType
-      IAM = 'IAM'
-      QUICKSIGHT = 'QUICKSIGHT'
-      ANONYMOUS = 'ANONYMOUS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An empty visual.</p>
@@ -12760,7 +12181,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object, structure, or sub-structure of an analysis, template, or dashboard.</p>
@@ -12770,7 +12191,7 @@ module Aws::QuickSight
     class Entity < Struct.new(
       :path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Error information for the SPICE ingestion of a dataset.</p>
@@ -12784,7 +12205,7 @@ module Aws::QuickSight
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The required parameters for connecting to an Exasol data source.</p>
@@ -12798,19 +12219,7 @@ module Aws::QuickSight
       :host,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ExceptionResourceType
-      USER = 'USER'
-      GROUP = 'GROUP'
-      NAMESPACE = 'NAMESPACE'
-      ACCOUNT_SETTINGS = 'ACCOUNT_SETTINGS'
-      IAMPOLICY_ASSIGNMENT = 'IAMPOLICY_ASSIGNMENT'
-      DATA_SOURCE = 'DATA_SOURCE'
-      DATA_SET = 'DATA_SET'
-      VPC_CONNECTION = 'VPC_CONNECTION'
-      INGESTION = 'INGESTION'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The exclude period of <code>TimeRangeFilter</code> or <code>RelativeDatesFilter</code>.</p>
@@ -12840,10 +12249,10 @@ module Aws::QuickSight
       :granularity,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:amount] =  unless options.key?(:amount)
+        options[:amount] = nil unless options.key?(:amount)
         super
       end
     end
@@ -12855,7 +12264,7 @@ module Aws::QuickSight
     class ExecutiveSummaryConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -12878,7 +12287,7 @@ module Aws::QuickSight
       :columns,
       :drill_down_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines if hidden fields are included in an exported dashboard.</p>
@@ -12888,7 +12297,7 @@ module Aws::QuickSight
     class ExportHiddenFieldsOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Export to .csv option.</p>
@@ -12898,7 +12307,7 @@ module Aws::QuickSight
     class ExportToCSVOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines whether or not hidden fields are visible on exported dashbaords.</p>
@@ -12908,7 +12317,7 @@ module Aws::QuickSight
     class ExportWithHiddenFieldsOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An entry that appears when a <code>KeyRegistration</code> update to Amazon QuickSight fails.</p>
@@ -12931,7 +12340,7 @@ module Aws::QuickSight
       :status_code,
       :sender_fault,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -12966,7 +12375,7 @@ module Aws::QuickSight
       :tooltip_title_type,
       :tooltip_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A FieldFolder element is a folder that contains fields and nested subfolders.</p>
@@ -12980,7 +12389,7 @@ module Aws::QuickSight
       :description,
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field label type.</p>
@@ -12995,7 +12404,7 @@ module Aws::QuickSight
       :field_id,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field series item configuration of a line chart.</p>
@@ -13013,7 +12422,7 @@ module Aws::QuickSight
       :axis_binding,
       :settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration for a field in a
@@ -13039,7 +12448,7 @@ module Aws::QuickSight
       :field_id,
       :direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field sort options in a chart configuration.</p>
@@ -13053,7 +12462,7 @@ module Aws::QuickSight
       :field_sort,
       :column_sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tooltip item for the fields.</p>
@@ -13075,16 +12484,7 @@ module Aws::QuickSight
       :visibility,
       :tooltip_target,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FileFormat
-      CSV = 'CSV'
-      TSV = 'TSV'
-      CLF = 'CLF'
-      ELF = 'ELF'
-      XLSX = 'XLSX'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field well of the filled map.</p>
@@ -13098,7 +12498,7 @@ module Aws::QuickSight
       :geospatial,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting of a <code>FilledMapVisual</code>.</p>
@@ -13108,7 +12508,7 @@ module Aws::QuickSight
     class FilledMapConditionalFormatting < Struct.new(
       :conditional_formatting_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Conditional formatting options of a <code>FilledMapVisual</code>.</p>
@@ -13118,7 +12518,7 @@ module Aws::QuickSight
     class FilledMapConditionalFormattingOption < Struct.new(
       :shape,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a <code>FilledMapVisual</code>.</p>
@@ -13152,7 +12552,7 @@ module Aws::QuickSight
       :map_style_options,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a <code>FilledMapVisual</code>.</p>
@@ -13163,7 +12563,7 @@ module Aws::QuickSight
     class FilledMapFieldWells < Struct.new(
       :filled_map_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting that determines the shape of the filled map.</p>
@@ -13177,7 +12577,7 @@ module Aws::QuickSight
       :field_id,
       :format,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a <code>FilledMapVisual</code>.</p>
@@ -13187,7 +12587,7 @@ module Aws::QuickSight
     class FilledMapSortConfiguration < Struct.new(
       :category_sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filled map.</p>
@@ -13226,7 +12626,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>With a <code>Filter</code>, you can remove portions of data from a particular visual or view.</p>
@@ -13267,7 +12667,7 @@ module Aws::QuickSight
       :top_bottom_filter,
       :nested_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for the <code>FilterAggMetrics</code>.</p>
@@ -13285,13 +12685,7 @@ module Aws::QuickSight
       :function,
       :sort_direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterClass
-      ENFORCED_VALUE_FILTER = 'ENFORCED_VALUE_FILTER'
-      CONDITIONAL_VALUE_FILTER = 'CONDITIONAL_VALUE_FILTER'
-      NAMED_VALUE_FILTER = 'NAMED_VALUE_FILTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The control of a filter that is used to interact with a dashboard or an analysis.</p>
@@ -13330,7 +12724,7 @@ module Aws::QuickSight
       :relative_date_time,
       :cross_sheet,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>
@@ -13348,7 +12742,7 @@ module Aws::QuickSight
       :source_filter_id,
       :cascading_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control from a date filter that is used to specify date and time.</p>
@@ -13388,7 +12782,7 @@ module Aws::QuickSight
       :type,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
@@ -13436,7 +12830,7 @@ module Aws::QuickSight
       :cascading_control_configuration,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A grouping of individual filters. Filter groups are applied to the same group of visuals.</p>
@@ -13476,7 +12870,7 @@ module Aws::QuickSight
       :status,
       :cross_dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of filter configurations.</p>
@@ -13519,7 +12913,7 @@ module Aws::QuickSight
       :select_all_options,
       :null_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a list of buttons or boxes. This is used to select either a single value or multiple values.</p>
@@ -13563,13 +12957,7 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterNullOption
-      ALL_VALUES = 'ALL_VALUES'
-      NULLS_ONLY = 'NULLS_ONLY'
-      NON_NULLS_ONLY = 'NON_NULLS_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that filters rows based on a condition.</p>
@@ -13580,7 +12968,7 @@ module Aws::QuickSight
     class FilterOperation < Struct.new(
       :condition_expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of selected fields in the<code>CustomActionFilterOperation</code>.</p>
@@ -13606,7 +12994,7 @@ module Aws::QuickSight
       :selected_field_options,
       :selected_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of target visuals that you want to be filtered.</p>
@@ -13617,12 +13005,7 @@ module Aws::QuickSight
     class FilterOperationTargetVisualsConfiguration < Struct.new(
       :same_sheet_target_visual_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterOperator
-      StringEquals = 'StringEquals'
-      StringLike = 'StringLike'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control from a date filter that is used to specify the relative date.</p>
@@ -13648,7 +13031,7 @@ module Aws::QuickSight
       :display_options,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scope configuration for a <code>FilterGroup</code>.</p>
@@ -13663,7 +13046,7 @@ module Aws::QuickSight
       :selected_sheets,
       :all_sheets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of selectable values that are used in a control.</p>
@@ -13673,7 +13056,7 @@ module Aws::QuickSight
     class FilterSelectableValues < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
@@ -13721,7 +13104,7 @@ module Aws::QuickSight
       :minimum_value,
       :step_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:maximum_value] = 0 unless options.key?(:maximum_value)
@@ -13754,7 +13137,7 @@ module Aws::QuickSight
       :delimiter,
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a text box that is used to enter a single entry.</p>
@@ -13776,12 +13159,7 @@ module Aws::QuickSight
       :source_filter_id,
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FilterVisualScope
-      ALL_VISUALS = 'ALL_VISUALS'
-      SELECTED_VISUALS = 'SELECTED_VISUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A folder in Amazon QuickSight.</p>
@@ -13819,17 +13197,7 @@ module Aws::QuickSight
       :last_updated_time,
       :sharing_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FolderFilterAttribute
-      PARENT_FOLDER_ARN = 'PARENT_FOLDER_ARN'
-      DIRECT_QUICKSIGHT_OWNER = 'DIRECT_QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_SOLE_OWNER = 'DIRECT_QUICKSIGHT_SOLE_OWNER'
-      DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = 'DIRECT_QUICKSIGHT_VIEWER_OR_OWNER'
-      QUICKSIGHT_OWNER = 'QUICKSIGHT_OWNER'
-      QUICKSIGHT_VIEWER_OR_OWNER = 'QUICKSIGHT_VIEWER_OR_OWNER'
-      FOLDER_NAME = 'FOLDER_NAME'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An asset in a Amazon QuickSight folder, such as a dashboard, analysis, or dataset.</p>
@@ -13843,7 +13211,7 @@ module Aws::QuickSight
       :member_id,
       :member_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter to use to search an Amazon QuickSight folder.</p>
@@ -13894,7 +13262,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A summary of information about an existing Amazon QuickSight folder. </p>
@@ -13928,12 +13296,7 @@ module Aws::QuickSight
       :last_updated_time,
       :sharing_model,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FolderType
-      SHARED = 'SHARED'
-      RESTRICTED = 'RESTRICTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the font settings.</p>
@@ -13943,7 +13306,7 @@ module Aws::QuickSight
     class Font < Struct.new(
       :font_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the display properties of the given text.</p>
@@ -13973,12 +13336,7 @@ module Aws::QuickSight
       :font_style,
       :font_family,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FontDecoration
-      UNDERLINE = 'UNDERLINE'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the text display size.</p>
@@ -13992,12 +13350,7 @@ module Aws::QuickSight
       :relative,
       :absolute,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FontStyle
-      NORMAL = 'NORMAL'
-      ITALIC = 'ITALIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the text display weight, or boldness.</p>
@@ -14007,12 +13360,7 @@ module Aws::QuickSight
     class FontWeight < Struct.new(
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FontWeightName
-      NORMAL = 'NORMAL'
-      BOLD = 'BOLD'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The forecast computation configuration.</p>
@@ -14073,18 +13421,13 @@ module Aws::QuickSight
       :seasonality,
       :custom_seasonality_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:upper_boundary] =  unless options.key?(:upper_boundary)
-        options[:lower_boundary] =  unless options.key?(:lower_boundary)
+        options[:upper_boundary] = nil unless options.key?(:upper_boundary)
+        options[:lower_boundary] = nil unless options.key?(:lower_boundary)
         super
       end
-    end
-
-    module ForecastComputationSeasonality
-      AUTOMATIC = 'AUTOMATIC'
-      CUSTOM = 'CUSTOM'
     end
 
     # <p>The forecast configuration that is used in a line chart's display properties.</p>
@@ -14099,7 +13442,7 @@ module Aws::QuickSight
       :forecast_properties,
       :scenario,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The forecast scenario of a forecast in the line chart.</p>
@@ -14113,7 +13456,7 @@ module Aws::QuickSight
       :what_if_point_scenario,
       :what_if_range_scenario,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The formatting configuration for all types of field.</p>
@@ -14131,7 +13474,7 @@ module Aws::QuickSight
       :number_format_configuration,
       :date_time_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configuration options for the canvas of a free-form layout.</p>
@@ -14141,7 +13484,7 @@ module Aws::QuickSight
     class FreeFormLayoutCanvasSizeOptions < Struct.new(
       :screen_canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a free-form layout.</p>
@@ -14155,7 +13498,7 @@ module Aws::QuickSight
       :elements,
       :canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An element within a free-form layout.</p>
@@ -14209,7 +13552,7 @@ module Aws::QuickSight
       :background_style,
       :loading_animation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The background style configuration of a free-form layout element.</p>
@@ -14223,7 +13566,7 @@ module Aws::QuickSight
       :visibility,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The background style configuration of a free-form layout element.</p>
@@ -14237,7 +13580,7 @@ module Aws::QuickSight
       :visibility,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the sizing of the canvas used in a free-form layout.</p>
@@ -14247,7 +13590,7 @@ module Aws::QuickSight
     class FreeFormLayoutScreenCanvasSizeOptions < Struct.new(
       :optimized_view_port_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The free-form layout configuration of a section.</p>
@@ -14257,7 +13600,7 @@ module Aws::QuickSight
     class FreeFormSectionLayoutConfiguration < Struct.new(
       :elements,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a <code>FunnelChartVisual</code>.</p>
@@ -14271,7 +13614,7 @@ module Aws::QuickSight
       :category,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>FunnelChartVisual</code>.</p>
@@ -14309,7 +13652,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of the data labels.</p>
@@ -14344,7 +13687,7 @@ module Aws::QuickSight
       :label_color,
       :measure_data_label_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a <code>FunnelChartVisual</code>.</p>
@@ -14355,15 +13698,7 @@ module Aws::QuickSight
     class FunnelChartFieldWells < Struct.new(
       :funnel_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module FunnelChartMeasureDataLabelStyle
-      VALUE_ONLY = 'VALUE_ONLY'
-      PERCENTAGE_BY_FIRST_STAGE = 'PERCENTAGE_BY_FIRST_STAGE'
-      PERCENTAGE_BY_PREVIOUS_STAGE = 'PERCENTAGE_BY_PREVIOUS_STAGE'
-      VALUE_AND_PERCENTAGE_BY_FIRST_STAGE = 'VALUE_AND_PERCENTAGE_BY_FIRST_STAGE'
-      VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE = 'VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a <code>FunnelChartVisual</code>.</p>
@@ -14377,7 +13712,7 @@ module Aws::QuickSight
       :category_sort,
       :category_items_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A funnel chart.</p>
@@ -14412,7 +13747,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of the arc of a <code>GaugeChartVisual</code>.</p>
@@ -14422,7 +13757,7 @@ module Aws::QuickSight
     class GaugeChartArcConditionalFormatting < Struct.new(
       :foreground_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color configuration of a <code>GaugeChartVisual</code>.</p>
@@ -14436,7 +13771,7 @@ module Aws::QuickSight
       :foreground_color,
       :background_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting of a <code>GaugeChartVisual</code>.</p>
@@ -14446,7 +13781,7 @@ module Aws::QuickSight
     class GaugeChartConditionalFormatting < Struct.new(
       :conditional_formatting_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Conditional formatting options of a <code>GaugeChartVisual</code>.</p>
@@ -14460,7 +13795,7 @@ module Aws::QuickSight
       :primary_value,
       :arc,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>GaugeChartVisual</code>.</p>
@@ -14494,7 +13829,7 @@ module Aws::QuickSight
       :color_configuration,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a <code>GaugeChartVisual</code>.</p>
@@ -14508,7 +13843,7 @@ module Aws::QuickSight
       :values,
       :target_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of the <code>GaugeChartVisual</code>.</p>
@@ -14534,7 +13869,7 @@ module Aws::QuickSight
       :arc,
       :primary_value_font_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for the primary value of a <code>GaugeChartVisual</code>.</p>
@@ -14548,7 +13883,7 @@ module Aws::QuickSight
       :text_color,
       :icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A gauge chart.</p>
@@ -14583,7 +13918,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -14629,7 +13964,7 @@ module Aws::QuickSight
       :experience_configuration,
       :allowed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute embed_url
@@ -14650,7 +13985,7 @@ module Aws::QuickSight
       :request_id,
       :anonymous_user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -14687,7 +14022,7 @@ module Aws::QuickSight
       :experience_configuration,
       :allowed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute embed_url
@@ -14704,7 +14039,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -14735,7 +14070,7 @@ module Aws::QuickSight
       :experience_configuration,
       :allowed_domains,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute embed_url
@@ -14752,7 +14087,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -14795,13 +14130,7 @@ module Aws::QuickSight
       :answer_id,
       :question_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeneratedAnswerStatus
-      ANSWER_GENERATED = 'ANSWER_GENERATED'
-      ANSWER_RETRIEVED = 'ANSWER_RETRIEVED'
-      ANSWER_DOWNGRADE = 'ANSWER_DOWNGRADE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The generative BI authoring settings of an embedded Amazon QuickSight console.</p>
@@ -14811,7 +14140,7 @@ module Aws::QuickSight
     class GenerativeAuthoringConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -14834,21 +14163,7 @@ module Aws::QuickSight
       :country_code,
       :columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeoSpatialCountryCode
-      US = 'US'
-    end
-
-    module GeoSpatialDataRole
-      COUNTRY = 'COUNTRY'
-      STATE = 'STATE'
-      COUNTY = 'COUNTY'
-      CITY = 'CITY'
-      POSTCODE = 'POSTCODE'
-      LONGITUDE = 'LONGITUDE'
-      LATITUDE = 'LATITUDE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a categorical color.</p>
@@ -14870,7 +14185,7 @@ module Aws::QuickSight
       :null_data_settings,
       :default_opacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The categorical data color for a single category.</p>
@@ -14884,7 +14199,7 @@ module Aws::QuickSight
       :color,
       :data_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The geospatial radius for a circle.</p>
@@ -14894,7 +14209,7 @@ module Aws::QuickSight
     class GeospatialCircleRadius < Struct.new(
       :radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for a circle symbol style.</p>
@@ -14916,7 +14231,7 @@ module Aws::QuickSight
       :stroke_width,
       :circle_radius,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The visualization properties for solid, gradient, and categorical colors.</p>
@@ -14934,12 +14249,7 @@ module Aws::QuickSight
       :gradient,
       :categorical,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeospatialColorState
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The bound
@@ -14962,7 +14272,7 @@ module Aws::QuickSight
       :west,
       :east,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data source properties for the geospatial data.</p>
@@ -14972,7 +14282,7 @@ module Aws::QuickSight
     class GeospatialDataSourceItem < Struct.new(
       :static_file_data_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a gradient color.</p>
@@ -14994,7 +14304,7 @@ module Aws::QuickSight
       :null_data_settings,
       :default_opacity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The gradient step color for a single step.</p>
@@ -15008,7 +14318,7 @@ module Aws::QuickSight
       :color,
       :data_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:data_value] = 0 unless options.key?(:data_value)
@@ -15023,7 +14333,7 @@ module Aws::QuickSight
     class GeospatialHeatmapColorScale < Struct.new(
       :colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The heatmap configuration of the geospatial point style.</p>
@@ -15033,7 +14343,7 @@ module Aws::QuickSight
     class GeospatialHeatmapConfiguration < Struct.new(
       :heatmap_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color to be used in the heatmap point style.</p>
@@ -15043,7 +14353,7 @@ module Aws::QuickSight
     class GeospatialHeatmapDataColor < Struct.new(
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color field that defines a gradient or categorical style.</p>
@@ -15057,7 +14367,7 @@ module Aws::QuickSight
       :color_dimensions_fields,
       :color_values_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition properties for a geospatial layer.</p>
@@ -15075,7 +14385,7 @@ module Aws::QuickSight
       :line_layer,
       :polygon_layer,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for a single geospatial layer.</p>
@@ -15117,7 +14427,7 @@ module Aws::QuickSight
       :join_definition,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom actions for a layer.</p>
@@ -15135,7 +14445,7 @@ module Aws::QuickSight
       :dataset_key_field,
       :color_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The map definition that defines map state, map style, and geospatial layers.</p>
@@ -15161,13 +14471,7 @@ module Aws::QuickSight
       :map_style,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeospatialLayerType
-      POINT = 'POINT'
-      LINE = 'LINE'
-      POLYGON = 'POLYGON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The geospatial Line layer.</p>
@@ -15177,7 +14481,7 @@ module Aws::QuickSight
     class GeospatialLineLayer < Struct.new(
       :style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The visualization style for a line layer.</p>
@@ -15187,7 +14491,7 @@ module Aws::QuickSight
     class GeospatialLineStyle < Struct.new(
       :line_symbol_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The symbol style for a line layer.</p>
@@ -15201,7 +14505,7 @@ module Aws::QuickSight
       :fill_color,
       :line_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The width properties for a line.</p>
@@ -15211,7 +14515,7 @@ module Aws::QuickSight
     class GeospatialLineWidth < Struct.new(
       :line_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field wells for a geospatial map.</p>
@@ -15229,7 +14533,7 @@ module Aws::QuickSight
       :values,
       :colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>GeospatialMapVisual</code>.</p>
@@ -15267,7 +14571,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a <code>GeospatialMapVisual</code>.</p>
@@ -15278,12 +14582,7 @@ module Aws::QuickSight
     class GeospatialMapFieldWells < Struct.new(
       :geospatial_map_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeospatialMapNavigation
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The map state properties for a map.</p>
@@ -15298,7 +14597,7 @@ module Aws::QuickSight
       :bounds,
       :map_navigation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The map style properties for a map.</p>
@@ -15316,7 +14615,7 @@ module Aws::QuickSight
       :background_color,
       :base_map_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The map style options of the geospatial map.</p>
@@ -15326,7 +14625,7 @@ module Aws::QuickSight
     class GeospatialMapStyleOptions < Struct.new(
       :base_map_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A geospatial map or a points on map visual.</p>
@@ -15361,7 +14660,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The properties for the visualization of null data.</p>
@@ -15371,7 +14670,7 @@ module Aws::QuickSight
     class GeospatialNullDataSettings < Struct.new(
       :symbol_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The symbol style for null data.</p>
@@ -15389,7 +14688,7 @@ module Aws::QuickSight
       :stroke_color,
       :stroke_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The geospatial Point layer.</p>
@@ -15399,7 +14698,7 @@ module Aws::QuickSight
     class GeospatialPointLayer < Struct.new(
       :style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The point style for a point layer.</p>
@@ -15409,7 +14708,7 @@ module Aws::QuickSight
     class GeospatialPointStyle < Struct.new(
       :circle_symbol_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The point style of the geospatial map.</p>
@@ -15427,7 +14726,7 @@ module Aws::QuickSight
       :cluster_marker_configuration,
       :heatmap_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The geospatial polygon layer.</p>
@@ -15437,7 +14736,7 @@ module Aws::QuickSight
     class GeospatialPolygonLayer < Struct.new(
       :style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The polygon style for a polygon layer.</p>
@@ -15447,7 +14746,7 @@ module Aws::QuickSight
     class GeospatialPolygonStyle < Struct.new(
       :polygon_symbol_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The polygon symbol style for a polygon layer.</p>
@@ -15465,13 +14764,7 @@ module Aws::QuickSight
       :stroke_color,
       :stroke_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GeospatialSelectedPointStyle
-      POINT = 'POINT'
-      CLUSTER = 'CLUSTER'
-      HEATMAP = 'HEATMAP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a solid color.</p>
@@ -15485,7 +14778,7 @@ module Aws::QuickSight
       :color,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source properties for a geospatial static file.</p>
@@ -15495,7 +14788,7 @@ module Aws::QuickSight
     class GeospatialStaticFileSource < Struct.new(
       :static_file_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The window options of the geospatial map visual.</p>
@@ -15509,7 +14802,7 @@ module Aws::QuickSight
       :bounds,
       :map_zoom_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -15580,7 +14873,7 @@ module Aws::QuickSight
       :namespace,
       :additional_dashboard_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Output returned from the <code>GetDashboardEmbedUrl</code> operation.</p>
@@ -15601,7 +14894,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -15677,7 +14970,7 @@ module Aws::QuickSight
       :session_lifetime_in_minutes,
       :user_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute embed_url
@@ -15697,7 +14990,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -15716,7 +15009,7 @@ module Aws::QuickSight
       :uniform_border,
       :side_specific_border,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the gradient color settings.</p>
@@ -15726,7 +15019,7 @@ module Aws::QuickSight
     class GradientColor < Struct.new(
       :stops,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the gradient stop configuration.</p>
@@ -15744,11 +15037,11 @@ module Aws::QuickSight
       :data_value,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:gradient_offset] = 0 unless options.key?(:gradient_offset)
-        options[:data_value] =  unless options.key?(:data_value)
+        options[:data_value] = nil unless options.key?(:data_value)
         super
       end
     end
@@ -15760,7 +15053,7 @@ module Aws::QuickSight
     class GridLayoutCanvasSizeOptions < Struct.new(
       :screen_canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a grid layout. Also called a tiled layout.</p>
@@ -15775,7 +15068,7 @@ module Aws::QuickSight
       :elements,
       :canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An element within a grid layout.</p>
@@ -15805,7 +15098,7 @@ module Aws::QuickSight
       :row_index,
       :row_span,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the sizing of the canvas used in a grid layout.</p>
@@ -15831,7 +15124,7 @@ module Aws::QuickSight
       :resize_option,
       :optimized_view_port_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <i>group</i> in Amazon QuickSight consists of a set of users. You can
@@ -15854,15 +15147,7 @@ module Aws::QuickSight
       :description,
       :principal_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module GroupFilterAttribute
-      GROUP_NAME = 'GROUP_NAME'
-    end
-
-    module GroupFilterOperator
-      StartsWith = 'StartsWith'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A member of an Amazon QuickSight group. Currently, group members must be users. Groups
@@ -15877,7 +15162,7 @@ module Aws::QuickSight
       :arn,
       :member_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>GroupSearchFilter</code> object that you want to apply to your search.</p>
@@ -15899,7 +15184,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The growth rate computation configuration.</p>
@@ -15925,7 +15210,7 @@ module Aws::QuickSight
       :value,
       :period_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options for gutter spacing between tiles on a sheet.</p>
@@ -15936,10 +15221,10 @@ module Aws::QuickSight
     class GutterStyle < Struct.new(
       :show,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:show] =  unless options.key?(:show)
+        options[:show] = nil unless options.key?(:show)
         super
       end
     end
@@ -15959,7 +15244,7 @@ module Aws::QuickSight
       :layout,
       :style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field wells of a heat map.</p>
@@ -15977,7 +15262,7 @@ module Aws::QuickSight
       :columns,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a heat map.</p>
@@ -16027,7 +15312,7 @@ module Aws::QuickSight
       :tooltip,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a heat map.</p>
@@ -16038,7 +15323,7 @@ module Aws::QuickSight
     class HeatMapFieldWells < Struct.new(
       :heat_map_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a heat map.</p>
@@ -16060,7 +15345,7 @@ module Aws::QuickSight
       :heat_map_row_items_limit_configuration,
       :heat_map_column_items_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A heat map.</p>
@@ -16095,7 +15380,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a histogram.</p>
@@ -16105,7 +15390,7 @@ module Aws::QuickSight
     class HistogramAggregatedFieldWells < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of histogram bins.</p>
@@ -16127,17 +15412,12 @@ module Aws::QuickSight
       :bin_width,
       :start_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:start_value] =  unless options.key?(:start_value)
+        options[:start_value] = nil unless options.key?(:start_value)
         super
       end
-    end
-
-    module HistogramBinType
-      BIN_COUNT = 'BIN_COUNT'
-      BIN_WIDTH = 'BIN_WIDTH'
     end
 
     # <p>The configuration for a <code>HistogramVisual</code>.</p>
@@ -16179,7 +15459,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a histogram.</p>
@@ -16189,7 +15469,7 @@ module Aws::QuickSight
     class HistogramFieldWells < Struct.new(
       :histogram_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A histogram.</p>
@@ -16220,14 +15500,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module HorizontalTextAlignment
-      LEFT = 'LEFT'
-      CENTER = 'CENTER'
-      RIGHT = 'RIGHT'
-      AUTO = 'AUTO'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An Identity and Access Management (IAM) policy assignment.</p>
@@ -16257,7 +15530,7 @@ module Aws::QuickSight
       :identities,
       :assignment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>IAM policy assignment summary.</p>
@@ -16271,36 +15544,7 @@ module Aws::QuickSight
       :assignment_name,
       :assignment_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Icon
-      CARET_UP = 'CARET_UP'
-      CARET_DOWN = 'CARET_DOWN'
-      PLUS = 'PLUS'
-      MINUS = 'MINUS'
-      ARROW_UP = 'ARROW_UP'
-      ARROW_DOWN = 'ARROW_DOWN'
-      ARROW_LEFT = 'ARROW_LEFT'
-      ARROW_UP_LEFT = 'ARROW_UP_LEFT'
-      ARROW_DOWN_LEFT = 'ARROW_DOWN_LEFT'
-      ARROW_RIGHT = 'ARROW_RIGHT'
-      ARROW_UP_RIGHT = 'ARROW_UP_RIGHT'
-      ARROW_DOWN_RIGHT = 'ARROW_DOWN_RIGHT'
-      FACE_UP = 'FACE_UP'
-      FACE_DOWN = 'FACE_DOWN'
-      FACE_FLAT = 'FACE_FLAT'
-      ONE_BAR = 'ONE_BAR'
-      TWO_BAR = 'TWO_BAR'
-      THREE_BAR = 'THREE_BAR'
-      CIRCLE = 'CIRCLE'
-      TRIANGLE = 'TRIANGLE'
-      SQUARE = 'SQUARE'
-      FLAG = 'FLAG'
-      THUMBS_UP = 'THUMBS_UP'
-      THUMBS_DOWN = 'THUMBS_DOWN'
-      CHECKMARK = 'CHECKMARK'
-      X = 'X'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for the identifier.</p>
@@ -16310,7 +15554,7 @@ module Aws::QuickSight
     class Identifier < Struct.new(
       :identity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for an IAM Identity Center configuration.</p>
@@ -16320,22 +15564,12 @@ module Aws::QuickSight
     class IdentityCenterConfiguration < Struct.new(
       :enable_identity_propagation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:enable_identity_propagation] =  unless options.key?(:enable_identity_propagation)
+        options[:enable_identity_propagation] = nil unless options.key?(:enable_identity_propagation)
         super
       end
-    end
-
-    module IdentityStore
-      QUICKSIGHT = 'QUICKSIGHT'
-    end
-
-    module IdentityType
-      IAM = 'IAM'
-      QUICKSIGHT = 'QUICKSIGHT'
-      IAM_IDENTITY_CENTER = 'IAM_IDENTITY_CENTER'
     end
 
     # <p>The identity type specified isn't supported. Supported identity types include
@@ -16349,7 +15583,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logo image.</p>
@@ -16363,7 +15597,7 @@ module Aws::QuickSight
       :source,
       :generated_image_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logo image configuration.</p>
@@ -16373,7 +15607,7 @@ module Aws::QuickSight
     class ImageConfiguration < Struct.new(
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom action defined on an image.</p>
@@ -16411,7 +15645,7 @@ module Aws::QuickSight
       :trigger,
       :action_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation that is defined by the custom action.</p>
@@ -16431,12 +15665,7 @@ module Aws::QuickSight
       :url_operation,
       :set_parameters_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ImageCustomActionTrigger
-      CLICK = 'CLICK'
-      MENU = 'MENU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The general image interactions setup for image publish options.</p>
@@ -16446,7 +15675,7 @@ module Aws::QuickSight
     class ImageInteractionOptions < Struct.new(
       :image_menu_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The menu options for the interactions of an image.</p>
@@ -16456,7 +15685,7 @@ module Aws::QuickSight
     class ImageMenuOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image set.</p>
@@ -16474,7 +15703,7 @@ module Aws::QuickSight
       :height64,
       :height32,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image set configuration.</p>
@@ -16484,7 +15713,7 @@ module Aws::QuickSight
     class ImageSetConfiguration < Struct.new(
       :original,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the image.</p>
@@ -16499,7 +15728,7 @@ module Aws::QuickSight
       :s3_uri,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class PublicUrl < ImageSource; end
       class S3Uri < ImageSource; end
@@ -16517,7 +15746,7 @@ module Aws::QuickSight
       :static_file_id,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters that are required to connect to a Impala data source.</p>
@@ -16539,23 +15768,7 @@ module Aws::QuickSight
       :database,
       :sql_endpoint_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module IncludeFolderMembers
-      RECURSE = 'RECURSE'
-      ONE_LEVEL = 'ONE_LEVEL'
-      NONE = 'NONE'
-    end
-
-    module IncludeGeneratedAnswer
-      INCLUDE = 'INCLUDE'
-      EXCLUDE = 'EXCLUDE'
-    end
-
-    module IncludeQuickSightQIndex
-      INCLUDE = 'INCLUDE'
-      EXCLUDE = 'EXCLUDE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The incremental refresh configuration for a dataset.</p>
@@ -16565,7 +15778,7 @@ module Aws::QuickSight
     class IncrementalRefresh < Struct.new(
       :lookback_window,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the SPICE ingestion for a dataset.</p>
@@ -16615,89 +15828,13 @@ module Aws::QuickSight
       :request_source,
       :request_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:ingestion_time_in_seconds] =  unless options.key?(:ingestion_time_in_seconds)
-        options[:ingestion_size_in_bytes] =  unless options.key?(:ingestion_size_in_bytes)
+        options[:ingestion_time_in_seconds] = nil unless options.key?(:ingestion_time_in_seconds)
+        options[:ingestion_size_in_bytes] = nil unless options.key?(:ingestion_size_in_bytes)
         super
       end
-    end
-
-    module IngestionErrorType
-      FAILURE_TO_ASSUME_ROLE = 'FAILURE_TO_ASSUME_ROLE'
-      INGESTION_SUPERSEDED = 'INGESTION_SUPERSEDED'
-      INGESTION_CANCELED = 'INGESTION_CANCELED'
-      DATA_SET_DELETED = 'DATA_SET_DELETED'
-      DATA_SET_NOT_SPICE = 'DATA_SET_NOT_SPICE'
-      S3_UPLOADED_FILE_DELETED = 'S3_UPLOADED_FILE_DELETED'
-      S3_MANIFEST_ERROR = 'S3_MANIFEST_ERROR'
-      DATA_TOLERANCE_EXCEPTION = 'DATA_TOLERANCE_EXCEPTION'
-      SPICE_TABLE_NOT_FOUND = 'SPICE_TABLE_NOT_FOUND'
-      DATA_SET_SIZE_LIMIT_EXCEEDED = 'DATA_SET_SIZE_LIMIT_EXCEEDED'
-      ROW_SIZE_LIMIT_EXCEEDED = 'ROW_SIZE_LIMIT_EXCEEDED'
-      ACCOUNT_CAPACITY_LIMIT_EXCEEDED = 'ACCOUNT_CAPACITY_LIMIT_EXCEEDED'
-      CUSTOMER_ERROR = 'CUSTOMER_ERROR'
-      DATA_SOURCE_NOT_FOUND = 'DATA_SOURCE_NOT_FOUND'
-      IAM_ROLE_NOT_AVAILABLE = 'IAM_ROLE_NOT_AVAILABLE'
-      CONNECTION_FAILURE = 'CONNECTION_FAILURE'
-      SQL_TABLE_NOT_FOUND = 'SQL_TABLE_NOT_FOUND'
-      PERMISSION_DENIED = 'PERMISSION_DENIED'
-      SSL_CERTIFICATE_VALIDATION_FAILURE = 'SSL_CERTIFICATE_VALIDATION_FAILURE'
-      OAUTH_TOKEN_FAILURE = 'OAUTH_TOKEN_FAILURE'
-      SOURCE_API_LIMIT_EXCEEDED_FAILURE = 'SOURCE_API_LIMIT_EXCEEDED_FAILURE'
-      PASSWORD_AUTHENTICATION_FAILURE = 'PASSWORD_AUTHENTICATION_FAILURE'
-      SQL_SCHEMA_MISMATCH_ERROR = 'SQL_SCHEMA_MISMATCH_ERROR'
-      INVALID_DATE_FORMAT = 'INVALID_DATE_FORMAT'
-      INVALID_DATAPREP_SYNTAX = 'INVALID_DATAPREP_SYNTAX'
-      SOURCE_RESOURCE_LIMIT_EXCEEDED = 'SOURCE_RESOURCE_LIMIT_EXCEEDED'
-      SQL_INVALID_PARAMETER_VALUE = 'SQL_INVALID_PARAMETER_VALUE'
-      QUERY_TIMEOUT = 'QUERY_TIMEOUT'
-      SQL_NUMERIC_OVERFLOW = 'SQL_NUMERIC_OVERFLOW'
-      UNRESOLVABLE_HOST = 'UNRESOLVABLE_HOST'
-      UNROUTABLE_HOST = 'UNROUTABLE_HOST'
-      SQL_EXCEPTION = 'SQL_EXCEPTION'
-      S3_FILE_INACCESSIBLE = 'S3_FILE_INACCESSIBLE'
-      IOT_FILE_NOT_FOUND = 'IOT_FILE_NOT_FOUND'
-      IOT_DATA_SET_FILE_EMPTY = 'IOT_DATA_SET_FILE_EMPTY'
-      INVALID_DATA_SOURCE_CONFIG = 'INVALID_DATA_SOURCE_CONFIG'
-      DATA_SOURCE_AUTH_FAILED = 'DATA_SOURCE_AUTH_FAILED'
-      DATA_SOURCE_CONNECTION_FAILED = 'DATA_SOURCE_CONNECTION_FAILED'
-      FAILURE_TO_PROCESS_JSON_FILE = 'FAILURE_TO_PROCESS_JSON_FILE'
-      INTERNAL_SERVICE_ERROR = 'INTERNAL_SERVICE_ERROR'
-      REFRESH_SUPPRESSED_BY_EDIT = 'REFRESH_SUPPRESSED_BY_EDIT'
-      PERMISSION_NOT_FOUND = 'PERMISSION_NOT_FOUND'
-      ELASTICSEARCH_CURSOR_NOT_ENABLED = 'ELASTICSEARCH_CURSOR_NOT_ENABLED'
-      CURSOR_NOT_ENABLED = 'CURSOR_NOT_ENABLED'
-      DUPLICATE_COLUMN_NAMES_FOUND = 'DUPLICATE_COLUMN_NAMES_FOUND'
-    end
-
-    module IngestionRequestSource
-      MANUAL = 'MANUAL'
-      SCHEDULED = 'SCHEDULED'
-    end
-
-    # This defines the type of ingestion request. This is returned as part of create ingestion response.
-    module IngestionRequestType
-      INITIAL_INGESTION = 'INITIAL_INGESTION'
-      EDIT = 'EDIT'
-      INCREMENTAL_REFRESH = 'INCREMENTAL_REFRESH'
-      FULL_REFRESH = 'FULL_REFRESH'
-    end
-
-    module IngestionStatus
-      INITIALIZED = 'INITIALIZED'
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
-    end
-
-    # This defines the type of ingestion user wants to trigger. This is part of create ingestion request.
-    module IngestionType
-      INCREMENTAL_REFRESH = 'INCREMENTAL_REFRESH'
-      FULL_REFRESH = 'FULL_REFRESH'
     end
 
     # <p>The <code>InnerFilter</code> defines the subset of data to be used with the <code>NestedFilter</code>.</p>
@@ -16707,7 +15844,7 @@ module Aws::QuickSight
     class InnerFilter < Struct.new(
       :category_inner_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Metadata for a column that is used as the input of a transform operation.</p>
@@ -16725,17 +15862,7 @@ module Aws::QuickSight
       :type,
       :sub_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module InputColumnDataType
-      STRING = 'STRING'
-      INTEGER = 'INTEGER'
-      DECIMAL = 'DECIMAL'
-      DATETIME = 'DATETIME'
-      BIT = 'BIT'
-      BOOLEAN = 'BOOLEAN'
-      JSON = 'JSON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of an insight visual.</p>
@@ -16753,7 +15880,7 @@ module Aws::QuickSight
       :custom_narrative,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An insight visual.</p>
@@ -16788,7 +15915,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An integer parameter for a dataset.</p>
@@ -16810,7 +15937,7 @@ module Aws::QuickSight
       :value_type,
       :default_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of an integer parameter.</p>
@@ -16820,7 +15947,7 @@ module Aws::QuickSight
     class IntegerDatasetParameterDefaultValues < Struct.new(
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of the <code>IntegerParameterDeclaration</code>.</p>
@@ -16834,7 +15961,7 @@ module Aws::QuickSight
       :dynamic_value,
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An integer parameter.</p>
@@ -16848,7 +15975,7 @@ module Aws::QuickSight
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter declaration for the <code>Integer</code> data type.</p>
@@ -16874,7 +16001,7 @@ module Aws::QuickSight
       :value_when_unset,
       :mapped_data_set_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter declaration for the <code>Integer</code> data type.</p>
@@ -16899,10 +16026,10 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:custom_value] =  unless options.key?(:custom_value)
+        options[:custom_value] = nil unless options.key?(:custom_value)
         super
       end
     end
@@ -16917,7 +16044,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An internal service exception.</p>
@@ -16926,7 +16053,7 @@ module Aws::QuickSight
     class InternalServerException < Struct.new(
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>NextToken</code> value isn't valid.</p>
@@ -16939,7 +16066,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more parameters has a value that isn't valid.</p>
@@ -16952,7 +16079,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>You don't have this feature activated for your account. To fix this issue, contact Amazon Web Services support.</p>
@@ -16965,7 +16092,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>InvalidTopicReviewedAnswer</code>.</p>
@@ -16979,7 +16106,7 @@ module Aws::QuickSight
       :answer_id,
       :error,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The limit configuration of the visual display for an axis.</p>
@@ -17007,10 +16134,10 @@ module Aws::QuickSight
       :items_limit,
       :other_categories,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:items_limit] =  unless options.key?(:items_limit)
+        options[:items_limit] = nil unless options.key?(:items_limit)
         super
       end
     end
@@ -17022,7 +16149,7 @@ module Aws::QuickSight
     class JiraParameters < Struct.new(
       :site_base_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The instructions associated with a join. </p>
@@ -17052,7 +16179,7 @@ module Aws::QuickSight
       :type,
       :on_clause,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Properties associated with the columns participating in a join.</p>
@@ -17063,19 +16190,12 @@ module Aws::QuickSight
     class JoinKeyProperties < Struct.new(
       :unique_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:unique_key] =  unless options.key?(:unique_key)
+        options[:unique_key] = nil unless options.key?(:unique_key)
         super
       end
-    end
-
-    module JoinType
-      INNER = 'INNER'
-      OUTER = 'OUTER'
-      LEFT = 'LEFT'
-      RIGHT = 'RIGHT'
     end
 
     # <p>The conditional formatting for the actual value of a KPI visual.</p>
@@ -17089,7 +16209,7 @@ module Aws::QuickSight
       :text_color,
       :icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for the comparison value of a KPI visual.</p>
@@ -17103,7 +16223,7 @@ module Aws::QuickSight
       :text_color,
       :icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting of a KPI visual.</p>
@@ -17113,7 +16233,7 @@ module Aws::QuickSight
     class KPIConditionalFormatting < Struct.new(
       :conditional_formatting_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting options of a KPI visual.</p>
@@ -17135,7 +16255,7 @@ module Aws::QuickSight
       :actual_value,
       :comparison_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a KPI visual.</p>
@@ -17157,7 +16277,7 @@ module Aws::QuickSight
       :kpi_options,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a KPI visual.</p>
@@ -17175,7 +16295,7 @@ module Aws::QuickSight
       :target_values,
       :trend_groups,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of a KPI visual.</p>
@@ -17217,7 +16337,7 @@ module Aws::QuickSight
       :sparkline,
       :visual_layout_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for the primary value of a KPI visual.</p>
@@ -17231,7 +16351,7 @@ module Aws::QuickSight
       :text_color,
       :icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for the progress bar of a KPI visual.</p>
@@ -17241,7 +16361,7 @@ module Aws::QuickSight
     class KPIProgressBarConditionalFormatting < Struct.new(
       :foreground_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a KPI visual.</p>
@@ -17251,7 +16371,7 @@ module Aws::QuickSight
     class KPISortConfiguration < Struct.new(
       :trend_group_sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the visibility, color, type, and tooltip visibility of the sparkline of a KPI visual.</p>
@@ -17273,12 +16393,7 @@ module Aws::QuickSight
       :color,
       :tooltip_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KPISparklineType
-      LINE = 'LINE'
-      AREA = 'AREA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A key performance indicator (KPI).</p>
@@ -17317,7 +16432,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the layout a KPI visual.</p>
@@ -17327,7 +16442,7 @@ module Aws::QuickSight
     class KPIVisualLayoutOptions < Struct.new(
       :standard_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The standard layout of the KPI visual.</p>
@@ -17337,12 +16452,7 @@ module Aws::QuickSight
     class KPIVisualStandardLayout < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module KPIVisualStandardLayoutType
-      CLASSIC = 'CLASSIC'
-      VERTICAL = 'VERTICAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The share label options for the labels.</p>
@@ -17360,7 +16470,7 @@ module Aws::QuickSight
       :font_configuration,
       :custom_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A layer custom action.</p>
@@ -17398,7 +16508,7 @@ module Aws::QuickSight
       :trigger,
       :action_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation that is defined by the custom action.</p>
@@ -17422,12 +16532,7 @@ module Aws::QuickSight
       :url_operation,
       :set_parameters_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayerCustomActionTrigger
-      DATA_POINT_CLICK = 'DATA_POINT_CLICK'
-      DATA_POINT_MENU = 'DATA_POINT_MENU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A layer map visual.</p>
@@ -17457,7 +16562,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>Layout</code> defines the placement of elements within a sheet.</p>
@@ -17469,7 +16574,7 @@ module Aws::QuickSight
     class Layout < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that determines what the type of layout will be used on a sheet.</p>
@@ -17488,15 +16593,7 @@ module Aws::QuickSight
       :free_form_layout,
       :section_based_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LayoutElementType
-      VISUAL = 'VISUAL'
-      FILTER_CONTROL = 'FILTER_CONTROL'
-      PARAMETER_CONTROL = 'PARAMETER_CONTROL'
-      TEXT_BOX = 'TEXT_BOX'
-      IMAGE = 'IMAGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for the legend setup of a visual.</p>
@@ -17550,14 +16647,7 @@ module Aws::QuickSight
       :height,
       :value_font_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LegendPosition
-      AUTO = 'AUTO'
-      RIGHT = 'RIGHT'
-      BOTTOM = 'BOTTOM'
-      TOP = 'TOP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A limit is exceeded.</p>
@@ -17574,7 +16664,7 @@ module Aws::QuickSight
       :resource_type,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a line chart.</p>
@@ -17596,7 +16686,7 @@ module Aws::QuickSight
       :colors,
       :small_multiples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a line chart.</p>
@@ -17686,7 +16776,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the default presentation of all line series in <code>LineChartVisual</code>.</p>
@@ -17704,7 +16794,7 @@ module Aws::QuickSight
       :line_style_settings,
       :marker_style_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a line chart.</p>
@@ -17714,13 +16804,7 @@ module Aws::QuickSight
     class LineChartFieldWells < Struct.new(
       :line_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineChartLineStyle
-      SOLID = 'SOLID'
-      DOTTED = 'DOTTED'
-      DASHED = 'DASHED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Line styles options for a line series in <code>LineChartVisual</code>.</p>
@@ -17770,15 +16854,7 @@ module Aws::QuickSight
       :line_style,
       :line_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineChartMarkerShape
-      CIRCLE = 'CIRCLE'
-      TRIANGLE = 'TRIANGLE'
-      SQUARE = 'SQUARE'
-      DIAMOND = 'DIAMOND'
-      ROUNDED_SQUARE = 'ROUNDED_SQUARE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Marker styles options for a line series in <code>LineChartVisual</code>.</p>
@@ -17822,7 +16898,7 @@ module Aws::QuickSight
       :marker_size,
       :marker_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of a line series in the visual</p>
@@ -17836,7 +16912,7 @@ module Aws::QuickSight
       :line_style_settings,
       :marker_style_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a line chart.</p>
@@ -17862,13 +16938,7 @@ module Aws::QuickSight
       :small_multiples_sort,
       :small_multiples_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineChartType
-      LINE = 'LINE'
-      AREA = 'AREA'
-      STACKED_AREA = 'STACKED_AREA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A line chart.</p>
@@ -17903,13 +16973,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LineInterpolation
-      LINEAR = 'LINEAR'
-      SMOOTH = 'SMOOTH'
-      STEPPED = 'STEPPED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The series axis configuration of a line chart.</p>
@@ -17923,7 +16987,7 @@ module Aws::QuickSight
       :axis_options,
       :missing_data_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the configuration of a shareable link to the dashboard.</p>
@@ -17933,7 +16997,7 @@ module Aws::QuickSight
     class LinkSharingConfiguration < Struct.new(
       :permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -17950,7 +17014,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_summary_list
@@ -17971,7 +17035,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -17993,7 +17057,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_bundle_export_job_summary_list
@@ -18014,7 +17078,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18036,7 +17100,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute asset_bundle_import_job_summary_list
@@ -18057,7 +17121,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18079,7 +17143,7 @@ module Aws::QuickSight
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute next_token
@@ -18093,7 +17157,7 @@ module Aws::QuickSight
       :next_token,
       :brands,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -18115,7 +17179,7 @@ module Aws::QuickSight
       :title_options,
       :info_icon_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the search options in a list control.</p>
@@ -18125,7 +17189,7 @@ module Aws::QuickSight
     class ListControlSearchOptions < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the <code>Select all</code> options in a list control.</p>
@@ -18135,7 +17199,7 @@ module Aws::QuickSight
     class ListControlSelectAllOptions < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -18152,7 +17216,7 @@ module Aws::QuickSight
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -18173,7 +17237,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18200,7 +17264,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_version_summary_list
@@ -18221,7 +17285,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18244,7 +17308,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_summary_list
@@ -18266,7 +17330,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18288,7 +17352,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_summaries
@@ -18309,7 +17373,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18331,7 +17395,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_sources
@@ -18352,7 +17416,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18378,7 +17442,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -18399,7 +17463,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18425,7 +17489,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -18446,7 +17510,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18468,7 +17532,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -18489,7 +17553,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18520,7 +17584,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_member_list
@@ -18541,7 +17605,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18568,7 +17632,7 @@ module Aws::QuickSight
       :max_results,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_list
@@ -18589,7 +17653,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18619,7 +17683,7 @@ module Aws::QuickSight
       :max_results,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute active_assignments
@@ -18640,7 +17704,7 @@ module Aws::QuickSight
       :next_token,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18671,7 +17735,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute iam_policy_assignments
@@ -18692,7 +17756,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18714,7 +17778,7 @@ module Aws::QuickSight
       :max_results,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute services
@@ -18735,7 +17799,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18761,7 +17825,7 @@ module Aws::QuickSight
       :aws_account_id,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute ingestions
@@ -18782,7 +17846,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18804,7 +17868,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute namespaces
@@ -18827,7 +17891,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18845,7 +17909,7 @@ module Aws::QuickSight
       :aws_account_id,
       :data_set_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute refresh_schedules
@@ -18862,7 +17926,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18892,7 +17956,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute members_list
@@ -18913,7 +17977,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18927,7 +17991,7 @@ module Aws::QuickSight
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute tags
@@ -18945,7 +18009,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -18971,7 +18035,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_alias_list
@@ -18992,7 +18056,7 @@ module Aws::QuickSight
       :request_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19018,7 +18082,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_version_summary_list
@@ -19039,7 +18103,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19061,7 +18125,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_summary_list
@@ -19082,7 +18146,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19108,7 +18172,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_alias_list
@@ -19129,7 +18193,7 @@ module Aws::QuickSight
       :request_id,
       :next_token,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19155,7 +18219,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_version_summary_list
@@ -19176,7 +18240,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19216,7 +18280,7 @@ module Aws::QuickSight
       :max_results,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_summary_list
@@ -19237,7 +18301,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19256,7 +18320,7 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -19281,7 +18345,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19299,7 +18363,7 @@ module Aws::QuickSight
       :aws_account_id,
       :topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -19324,7 +18388,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19347,7 +18411,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topics_summaries
@@ -19368,7 +18432,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19399,7 +18463,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_list
@@ -19420,7 +18484,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19447,7 +18511,7 @@ module Aws::QuickSight
       :max_results,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user_list
@@ -19468,7 +18532,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19491,7 +18555,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute vpc_connection_summaries
@@ -19514,7 +18578,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -19529,7 +18593,7 @@ module Aws::QuickSight
     class LoadingAnimation < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The navigation configuration for <code>CustomActionNavigationOperation</code>.</p>
@@ -19539,7 +18603,7 @@ module Aws::QuickSight
     class LocalNavigationConfiguration < Struct.new(
       :target_sheet_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <i>logical table</i> is a unit that joins and that data
@@ -19560,7 +18624,7 @@ module Aws::QuickSight
       :data_transforms,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the source of a logical table. This is a variant type structure. For
@@ -19579,7 +18643,7 @@ module Aws::QuickSight
       :physical_table_id,
       :data_set_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logo configuration.</p>
@@ -19593,7 +18657,7 @@ module Aws::QuickSight
       :alt_text,
       :logo_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logo configuration.</p>
@@ -19607,7 +18671,7 @@ module Aws::QuickSight
       :alt_text,
       :logo_set,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of logos.</p>
@@ -19621,7 +18685,7 @@ module Aws::QuickSight
       :primary,
       :favicon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The logo set configuration.</p>
@@ -19635,7 +18699,7 @@ module Aws::QuickSight
       :primary,
       :favicon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The text format for a subtitle.</p>
@@ -19650,7 +18714,7 @@ module Aws::QuickSight
       :plain_text,
       :rich_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The lookback window setup of an incremental refresh configuration.</p>
@@ -19668,13 +18732,7 @@ module Aws::QuickSight
       :size,
       :size_unit,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module LookbackWindowSizeUnit
-      HOUR = 'HOUR'
-      DAY = 'DAY'
-      WEEK = 'WEEK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Amazon S3 manifest file location.</p>
@@ -19688,12 +18746,7 @@ module Aws::QuickSight
       :bucket,
       :key,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MapZoomMode
-      AUTO = 'AUTO'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A dataset parameter that is mapped to an analysis parameter.</p>
@@ -19707,7 +18760,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :data_set_parameter_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options for margins around the outside edge of sheets.</p>
@@ -19717,10 +18770,10 @@ module Aws::QuickSight
     class MarginStyle < Struct.new(
       :show,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:show] =  unless options.key?(:show)
+        options[:show] = nil unless options.key?(:show)
         super
       end
     end
@@ -19740,7 +18793,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum label of a data path label.</p>
@@ -19750,7 +18803,7 @@ module Aws::QuickSight
     class MaximumLabelType < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The maximum and minimum computation configuration.</p>
@@ -19784,12 +18837,7 @@ module Aws::QuickSight
       :value,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MaximumMinimumComputationType
-      MAXIMUM = 'MAXIMUM'
-      MINIMUM = 'MINIMUM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The measure (metric) type field.</p>
@@ -19811,7 +18859,7 @@ module Aws::QuickSight
       :date_measure_field,
       :calculated_measure_field,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that consists of a member Amazon Resource Name (ARN) and a member ID.</p>
@@ -19825,15 +18873,7 @@ module Aws::QuickSight
       :member_id,
       :member_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MemberType
-      DASHBOARD = 'DASHBOARD'
-      ANALYSIS = 'ANALYSIS'
-      DATASET = 'DATASET'
-      DATASOURCE = 'DATASOURCE'
-      TOPIC = 'TOPIC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The metric comparison computation configuration.</p>
@@ -19859,7 +18899,7 @@ module Aws::QuickSight
       :from_value,
       :target_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The minimum label of a data path label.</p>
@@ -19869,7 +18909,7 @@ module Aws::QuickSight
     class MinimumLabelType < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration options that determine how missing data is treated during the rendering of a line chart.</p>
@@ -19894,13 +18934,7 @@ module Aws::QuickSight
     class MissingDataConfiguration < Struct.new(
       :treatment_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module MissingDataTreatmentOption
-      INTERPOLATE = 'INTERPOLATE'
-      SHOW_AS_ZERO = 'SHOW_AS_ZERO'
-      SHOW_AS_BLANK = 'SHOW_AS_BLANK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for MySQL.</p>
@@ -19918,23 +18952,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamedEntityAggType
-      SUM = 'SUM'
-      MIN = 'MIN'
-      MAX = 'MAX'
-      COUNT = 'COUNT'
-      AVERAGE = 'AVERAGE'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      STDEV = 'STDEV'
-      STDEVP = 'STDEVP'
-      VAR = 'VAR'
-      VARP = 'VARP'
-      PERCENTILE = 'PERCENTILE'
-      MEDIAN = 'MEDIAN'
-      CUSTOM = 'CUSTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a named entity.</p>
@@ -19962,7 +18980,7 @@ module Aws::QuickSight
       :property_usage,
       :metric,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a metric.</p>
@@ -19981,7 +18999,7 @@ module Aws::QuickSight
       :aggregation,
       :aggregation_function_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>NamedEntityRef</code>.</p>
@@ -19991,30 +19009,7 @@ module Aws::QuickSight
     class NamedEntityRef < Struct.new(
       :named_entity_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamedFilterAggType
-      NO_AGGREGATION = 'NO_AGGREGATION'
-      SUM = 'SUM'
-      AVERAGE = 'AVERAGE'
-      COUNT = 'COUNT'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      MAX = 'MAX'
-      MEDIAN = 'MEDIAN'
-      MIN = 'MIN'
-      STDEV = 'STDEV'
-      STDEVP = 'STDEVP'
-      VAR = 'VAR'
-      VARP = 'VARP'
-    end
-
-    module NamedFilterType
-      CATEGORY_FILTER = 'CATEGORY_FILTER'
-      NUMERIC_EQUALITY_FILTER = 'NUMERIC_EQUALITY_FILTER'
-      NUMERIC_RANGE_FILTER = 'NUMERIC_RANGE_FILTER'
-      DATE_RANGE_FILTER = 'DATE_RANGE_FILTER'
-      RELATIVE_DATE_FILTER = 'RELATIVE_DATE_FILTER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Errors that occur during namespace creation.</p>
@@ -20028,12 +19023,7 @@ module Aws::QuickSight
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamespaceErrorType
-      PERMISSION_DENIED = 'PERMISSION_DENIED'
-      INTERNAL_SERVICE_ERROR = 'INTERNAL_SERVICE_ERROR'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The error type.</p>
@@ -20071,15 +19061,7 @@ module Aws::QuickSight
       :iam_identity_center_application_arn,
       :iam_identity_center_instance_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NamespaceStatus
-      CREATED = 'CREATED'
-      CREATING = 'CREATING'
-      DELETING = 'DELETING'
-      RETRYABLE_FAILURE = 'RETRYABLE_FAILURE'
-      NON_RETRYABLE_FAILURE = 'NON_RETRYABLE_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The navigation bar style.</p>
@@ -20093,7 +19075,7 @@ module Aws::QuickSight
       :global_navbar,
       :contextual_navbar,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a negative format.</p>
@@ -20107,7 +19089,7 @@ module Aws::QuickSight
       :prefix,
       :suffix,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the negative value configuration.</p>
@@ -20117,12 +19099,7 @@ module Aws::QuickSight
     class NegativeValueConfiguration < Struct.new(
       :display_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NegativeValueDisplayMode
-      POSITIVE = 'POSITIVE'
-      NEGATIVE = 'NEGATIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>NestedFilter</code> filters data with a subset of data that is defined by the nested inner filter.</p>
@@ -20144,7 +19121,7 @@ module Aws::QuickSight
       :include_inner_set,
       :inner_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:include_inner_set] = false unless options.key?(:include_inner_set)
@@ -20175,20 +19152,7 @@ module Aws::QuickSight
       :status,
       :network_interface_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NetworkInterfaceStatus
-      CREATING = 'CREATING'
-      AVAILABLE = 'AVAILABLE'
-      CREATION_FAILED = 'CREATION_FAILED'
-      UPDATING = 'UPDATING'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETING = 'DELETING'
-      DELETED = 'DELETED'
-      DELETION_FAILED = 'DELETION_FAILED'
-      DELETION_SCHEDULED = 'DELETION_SCHEDULED'
-      ATTACHMENT_FAILED_ROLLBACK_FAILED = 'ATTACHMENT_FAILED_ROLLBACK_FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that overrides the existing default values for a dataset parameter that is inherited from another dataset.</p>
@@ -20210,13 +19174,7 @@ module Aws::QuickSight
       :date_time_static_values,
       :integer_static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NullFilterOption
-      ALL_VALUES = 'ALL_VALUES'
-      NON_NULLS_ONLY = 'NON_NULLS_ONLY'
-      NULLS_ONLY = 'NULLS_ONLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the null value format configuration.</p>
@@ -20226,7 +19184,7 @@ module Aws::QuickSight
     class NullValueFormatConfiguration < Struct.new(
       :null_string,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the number display format configuration.</p>
@@ -20260,7 +19218,7 @@ module Aws::QuickSight
       :negative_value_configuration,
       :null_value_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting configuration for number fields.</p>
@@ -20270,18 +19228,7 @@ module Aws::QuickSight
     class NumberFormatConfiguration < Struct.new(
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NumberScale
-      NONE = 'NONE'
-      AUTO = 'AUTO'
-      THOUSANDS = 'THOUSANDS'
-      MILLIONS = 'MILLIONS'
-      BILLIONS = 'BILLIONS'
-      TRILLIONS = 'TRILLIONS'
-      LAKHS = 'LAKHS'
-      CRORES = 'CRORES'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for an axis with a numeric field.</p>
@@ -20295,7 +19242,7 @@ module Aws::QuickSight
       :scale,
       :range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The numeric equality type drill down filter.</p>
@@ -20309,7 +19256,7 @@ module Aws::QuickSight
       :column,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -20377,21 +19324,12 @@ module Aws::QuickSight
       :null_option,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:value] =  unless options.key?(:value)
+        options[:value] = nil unless options.key?(:value)
         super
       end
-    end
-
-    module NumericEqualityMatchOperator
-      EQUALS = 'EQUALS'
-      DOES_NOT_EQUAL = 'DOES_NOT_EQUAL'
-    end
-
-    module NumericFilterSelectAllOptions
-      FILTER_ALL_VALUES = 'FILTER_ALL_VALUES'
     end
 
     # <p>The options that determine the numeric format configuration.</p>
@@ -20410,7 +19348,7 @@ module Aws::QuickSight
       :currency_display_format_configuration,
       :percentage_display_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>NumericRangeFilter</code> filters values that are within the value range.</p>
@@ -20477,11 +19415,11 @@ module Aws::QuickSight
       :null_option,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:include_minimum] =  unless options.key?(:include_minimum)
-        options[:include_maximum] =  unless options.key?(:include_maximum)
+        options[:include_minimum] = nil unless options.key?(:include_minimum)
+        options[:include_maximum] = nil unless options.key?(:include_maximum)
         super
       end
     end
@@ -20497,10 +19435,10 @@ module Aws::QuickSight
       :static_value,
       :parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:static_value] =  unless options.key?(:static_value)
+        options[:static_value] = nil unless options.key?(:static_value)
         super
       end
     end
@@ -20516,13 +19454,7 @@ module Aws::QuickSight
       :decimal_separator,
       :thousands_separator,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module NumericSeparatorSymbol
-      COMMA = 'COMMA'
-      DOT = 'DOT'
-      SPACE = 'SPACE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregation for numerical values.</p>
@@ -20582,7 +19514,7 @@ module Aws::QuickSight
       :simple_numerical_aggregation,
       :percentile_aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dimension type field with numerical type columns.</p>
@@ -20604,7 +19536,7 @@ module Aws::QuickSight
       :hierarchy_id,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The measure type field with numerical type columns.</p>
@@ -20626,7 +19558,7 @@ module Aws::QuickSight
       :aggregation_function,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake and Starburst.</p>
@@ -20648,7 +19580,7 @@ module Aws::QuickSight
       :identity_provider_vpc_connection_properties,
       :identity_provider_resource_uri,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for Oracle.</p>
@@ -20670,17 +19602,12 @@ module Aws::QuickSight
       :database,
       :use_service_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:use_service_name] = false unless options.key?(:use_service_name)
         super
       end
-    end
-
-    module OtherCategories
-      INCLUDE = 'INCLUDE'
-      EXCLUDE = 'EXCLUDE'
     end
 
     # <p>Output column.</p>
@@ -20702,7 +19629,7 @@ module Aws::QuickSight
       :type,
       :sub_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that overrides the dataset parameter values that are defined in another dataset.</p>
@@ -20720,7 +19647,7 @@ module Aws::QuickSight
       :new_parameter_name,
       :new_default_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The pagination configuration for a table visual or boxplot.</p>
@@ -20734,10 +19661,10 @@ module Aws::QuickSight
       :page_size,
       :page_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:page_size] =  unless options.key?(:page_size)
+        options[:page_size] = nil unless options.key?(:page_size)
         super
       end
     end
@@ -20753,13 +19680,7 @@ module Aws::QuickSight
       :foreground,
       :background,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PanelBorderStyle
-      SOLID = 'SOLID'
-      DASHED = 'DASHED'
-      DOTTED = 'DOTTED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of options that configure how each panel displays in a small multiples chart.</p>
@@ -20801,7 +19722,7 @@ module Aws::QuickSight
       :background_visibility,
       :background_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the title styles for each small multiples
@@ -20820,26 +19741,7 @@ module Aws::QuickSight
       :font_configuration,
       :horizontal_text_alignment,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PaperOrientation
-      PORTRAIT = 'PORTRAIT'
-      LANDSCAPE = 'LANDSCAPE'
-    end
-
-    module PaperSize
-      US_LETTER = 'US_LETTER'
-      US_LEGAL = 'US_LEGAL'
-      US_TABLOID_LEDGER = 'US_TABLOID_LEDGER'
-      A0 = 'A0'
-      A1 = 'A1'
-      A2 = 'A2'
-      A3 = 'A3'
-      A4 = 'A4'
-      A5 = 'A5'
-      JIS_B4 = 'JIS_B4'
-      JIS_B5 = 'JIS_B5'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The control of a parameter that users can interact with in a dashboard or an analysis.</p>
@@ -20870,7 +19772,7 @@ module Aws::QuickSight
       :text_area,
       :slider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control from a date parameter that specifies date and time.</p>
@@ -20892,7 +19794,7 @@ module Aws::QuickSight
       :source_parameter_name,
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The declaration definition of a parameter.</p>
@@ -20916,7 +19818,7 @@ module Aws::QuickSight
       :integer_parameter_declaration,
       :date_time_parameter_declaration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a dropdown list with buttons that are used to select a single value.</p>
@@ -20954,7 +19856,7 @@ module Aws::QuickSight
       :cascading_control_configuration,
       :commit_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a list with buttons or boxes that are used to select either a single value or multiple values.</p>
@@ -20988,7 +19890,7 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of selectable values that are used in a control.</p>
@@ -21002,7 +19904,7 @@ module Aws::QuickSight
       :values,
       :link_to_data_set_column,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a horizontal toggle bar. This is used to change a value by sliding the toggle.</p>
@@ -21036,7 +19938,7 @@ module Aws::QuickSight
       :minimum_value,
       :step_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:maximum_value] = 0 unless options.key?(:maximum_value)
@@ -21069,7 +19971,7 @@ module Aws::QuickSight
       :delimiter,
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display a text box that is used to enter a single entry.</p>
@@ -21091,12 +19993,7 @@ module Aws::QuickSight
       :source_parameter_name,
       :display_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ParameterValueType
-      MULTI_VALUED = 'MULTI_VALUED'
-      SINGLE_VALUED = 'SINGLE_VALUED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of Amazon QuickSight parameters and the list's override values.</p>
@@ -21118,7 +20015,7 @@ module Aws::QuickSight
       :decimal_parameters,
       :date_time_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The percent range in the visible range.</p>
@@ -21132,11 +20029,11 @@ module Aws::QuickSight
       :from,
       :to,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:from] =  unless options.key?(:from)
-        options[:to] =  unless options.key?(:to)
+        options[:from] = nil unless options.key?(:from)
+        options[:to] = nil unless options.key?(:to)
         super
       end
     end
@@ -21168,7 +20065,7 @@ module Aws::QuickSight
       :negative_value_configuration,
       :null_value_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation based on the percentile of values in a dimension or measure.</p>
@@ -21178,7 +20075,7 @@ module Aws::QuickSight
     class PercentileAggregation < Struct.new(
       :percentile_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for the performance optimization of the dataset that contains a <code>UniqueKey</code> configuration.</p>
@@ -21188,7 +20085,7 @@ module Aws::QuickSight
     class PerformanceConfiguration < Struct.new(
       :unique_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The period over period computation configuration.</p>
@@ -21210,7 +20107,7 @@ module Aws::QuickSight
       :time,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The period to date computation configuration.</p>
@@ -21244,12 +20141,7 @@ module Aws::QuickSight
       :value,
       :period_time_granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PersonalizationMode
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A view of a data source that contains information about the shape of the data in the
@@ -21270,7 +20162,7 @@ module Aws::QuickSight
       :s3_source,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class RelationalTable < PhysicalTable; end
       class CustomSql < PhysicalTable; end
@@ -21293,7 +20185,7 @@ module Aws::QuickSight
       :values,
       :small_multiples,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a pie chart.</p>
@@ -21347,7 +20239,7 @@ module Aws::QuickSight
       :contribution_analysis_defaults,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a pie chart.</p>
@@ -21358,7 +20250,7 @@ module Aws::QuickSight
     class PieChartFieldWells < Struct.new(
       :pie_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a pie chart.</p>
@@ -21380,7 +20272,7 @@ module Aws::QuickSight
       :small_multiples_sort,
       :small_multiples_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pie or donut chart.</p>
@@ -21426,7 +20318,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field sort options for a pivot table sort configuration.</p>
@@ -21440,7 +20332,7 @@ module Aws::QuickSight
       :field_id,
       :sort_by,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field well for the pivot table.</p>
@@ -21458,7 +20350,7 @@ module Aws::QuickSight
       :columns,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cell conditional formatting option for a pivot table.</p>
@@ -21480,7 +20372,7 @@ module Aws::QuickSight
       :scope,
       :scopes,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for a <code>PivotTableVisual</code>.</p>
@@ -21490,7 +20382,7 @@ module Aws::QuickSight
     class PivotTableConditionalFormatting < Struct.new(
       :conditional_formatting_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Conditional formatting options for a <code>PivotTableVisual</code>.</p>
@@ -21500,7 +20392,7 @@ module Aws::QuickSight
     class PivotTableConditionalFormattingOption < Struct.new(
       :cell,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The scope of the cell for conditional formatting.</p>
@@ -21510,13 +20402,7 @@ module Aws::QuickSight
     class PivotTableConditionalFormattingScope < Struct.new(
       :role,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PivotTableConditionalFormattingScopeRole
-      FIELD = 'FIELD'
-      FIELD_TOTAL = 'FIELD_TOTAL'
-      GRAND_TOTAL = 'GRAND_TOTAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a <code>PivotTableVisual</code>.</p>
@@ -21550,7 +20436,7 @@ module Aws::QuickSight
       :paginated_report_options,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data path options for the pivot table field options.</p>
@@ -21564,19 +20450,7 @@ module Aws::QuickSight
       :data_path_list,
       :width,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PivotTableDataPathType
-      HIERARCHY_ROWS_LAYOUT_COLUMN = 'HIERARCHY_ROWS_LAYOUT_COLUMN'
-      MULTIPLE_ROW_METRICS_COLUMN = 'MULTIPLE_ROW_METRICS_COLUMN'
-      EMPTY_COLUMN_HEADER = 'EMPTY_COLUMN_HEADER'
-      COUNT_METRIC_COLUMN = 'COUNT_METRIC_COLUMN'
-    end
-
-    module PivotTableFieldCollapseState
-      COLLAPSED = 'COLLAPSED'
-      EXPANDED = 'EXPANDED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The collapse state options for the pivot table field options.</p>
@@ -21602,7 +20476,7 @@ module Aws::QuickSight
       :target,
       :state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The target of a pivot table field collapse state.</p>
@@ -21616,7 +20490,7 @@ module Aws::QuickSight
       :field_id,
       :field_data_path_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The selected field options for the pivot table field options.</p>
@@ -21634,7 +20508,7 @@ module Aws::QuickSight
       :custom_label,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field options for a pivot table visual.</p>
@@ -21652,7 +20526,7 @@ module Aws::QuickSight
       :data_path_options,
       :collapse_state_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optional configuration of subtotals cells.</p>
@@ -21662,7 +20536,7 @@ module Aws::QuickSight
     class PivotTableFieldSubtotalOptions < Struct.new(
       :field_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells for a pivot table visual.</p>
@@ -21673,12 +20547,7 @@ module Aws::QuickSight
     class PivotTableFieldWells < Struct.new(
       :pivot_table_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PivotTableMetricPlacement
-      ROW = 'ROW'
-      COLUMN = 'COLUMN'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The table options for a pivot table visual.</p>
@@ -21746,7 +20615,7 @@ module Aws::QuickSight
       :rows_label_options,
       :default_cell_width,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The paginated report options for a pivot table visual.</p>
@@ -21760,7 +20629,7 @@ module Aws::QuickSight
       :vertical_overflow_visibility,
       :overflow_column_header_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for the label thta is located above the row headers. This option is only applicable when <code>RowsLayout</code> is set to <code>HIERARCHY</code>.</p>
@@ -21774,12 +20643,7 @@ module Aws::QuickSight
       :visibility,
       :custom_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PivotTableRowsLayout
-      TABULAR = 'TABULAR'
-      HIERARCHY = 'HIERARCHY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort by field for the field sort options.</p>
@@ -21797,7 +20661,7 @@ module Aws::QuickSight
       :column,
       :data_path,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration for a <code>PivotTableVisual</code>.</p>
@@ -21807,13 +20671,7 @@ module Aws::QuickSight
     class PivotTableSortConfiguration < Struct.new(
       :field_sort_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PivotTableSubtotalLevel
-      ALL = 'ALL'
-      CUSTOM = 'CUSTOM'
-      LAST = 'LAST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total options for a pivot table visual.</p>
@@ -21835,7 +20693,7 @@ module Aws::QuickSight
       :row_total_options,
       :column_total_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A pivot table.</p>
@@ -21870,7 +20728,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The optional configuration of totals cells in a <code>PivotTableVisual</code>.</p>
@@ -21908,7 +20766,7 @@ module Aws::QuickSight
       :metric_header_cell_style,
       :total_aggregation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A flexible visualization type that allows engineers 
@@ -21945,12 +20803,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PluginVisualAxisName
-      GROUP_BY = 'GROUP_BY'
-      VALUE = 'VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The plugin visual configuration. This includes the field wells, sorting options, and persisted options of the plugin visual.</p>
@@ -21968,7 +20821,7 @@ module Aws::QuickSight
       :visual_options,
       :sort_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A collection of field wells for a plugin visual.</p>
@@ -21990,7 +20843,7 @@ module Aws::QuickSight
       :measures,
       :unaggregated,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A query limits configuration.</p>
@@ -22000,10 +20853,10 @@ module Aws::QuickSight
     class PluginVisualItemsLimitConfiguration < Struct.new(
       :items_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:items_limit] =  unless options.key?(:items_limit)
+        options[:items_limit] = nil unless options.key?(:items_limit)
         super
       end
     end
@@ -22015,7 +20868,7 @@ module Aws::QuickSight
     class PluginVisualOptions < Struct.new(
       :visual_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key value pair of the persisted property.</p>
@@ -22029,7 +20882,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines how the plugin visual sorts the data during query.</p>
@@ -22039,7 +20892,7 @@ module Aws::QuickSight
     class PluginVisualSortConfiguration < Struct.new(
       :plugin_visual_table_query_sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The table query sorting options for the plugin visual.</p>
@@ -22053,7 +20906,7 @@ module Aws::QuickSight
       :row_sort,
       :items_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for PostgreSQL.</p>
@@ -22071,7 +20924,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more preconditions aren't met.</p>
@@ -22084,7 +20937,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option that determines the hierarchy of the fields that are defined during data preparation. These fields are available to use in any analysis that uses the data source.</p>
@@ -22102,7 +20955,7 @@ module Aws::QuickSight
       :columns,
       :drill_down_filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -22127,7 +20980,7 @@ module Aws::QuickSight
       :include_generated_answer,
       :max_topics_to_consider,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute primary_result
@@ -22148,7 +21001,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -22171,13 +21024,7 @@ module Aws::QuickSight
       :port,
       :catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PrimaryValueDisplayType
-      HIDDEN = 'HIDDEN'
-      COMPARISON = 'COMPARISON'
-      ACTUAL = 'ACTUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of the progress bar of a KPI visual.</p>
@@ -22187,7 +21034,7 @@ module Aws::QuickSight
     class ProgressBarOptions < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that projects columns. Operations that come after a projection
@@ -22198,23 +21045,7 @@ module Aws::QuickSight
     class ProjectOperation < Struct.new(
       :projected_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module PropertyRole
-      PRIMARY = 'PRIMARY'
-      ID = 'ID'
-    end
-
-    module PropertyUsage
-      INHERIT = 'INHERIT'
-      DIMENSION = 'DIMENSION'
-      MEASURE = 'MEASURE'
-    end
-
-    module PurchaseMode
-      MANUAL = 'MANUAL'
-      AUTO_PURCHASE = 'AUTO_PURCHASE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -22231,7 +21062,7 @@ module Aws::QuickSight
       :data_set_id,
       :data_set_refresh_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -22244,7 +21075,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -22267,28 +21098,7 @@ module Aws::QuickSight
       :dashboard_visual,
       :generated_answer,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module QAResultType
-      DASHBOARD_VISUAL = 'DASHBOARD_VISUAL'
-      GENERATED_ANSWER = 'GENERATED_ANSWER'
-      NO_ANSWER = 'NO_ANSWER'
-    end
-
-    module QBusinessInsightsStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module QSearchStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
-    end
-
-    module QueryExecutionMode
-      AUTO = 'AUTO'
-      MANUAL = 'MANUAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the query execution options.</p>
@@ -22298,7 +21108,7 @@ module Aws::QuickSight
     class QueryExecutionOptions < Struct.new(
       :query_execution_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about a queued dataset SPICE ingestion.</p>
@@ -22313,7 +21123,7 @@ module Aws::QuickSight
       :waiting_on_ingestion,
       :queued_ingestion,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The user with the provided name isn't found. This error can happen in any operation
@@ -22328,7 +21138,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field well configuration of a <code>RadarChartVisual</code>.</p>
@@ -22346,7 +21156,7 @@ module Aws::QuickSight
       :color,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configured style settings of a radar chart.</p>
@@ -22356,13 +21166,7 @@ module Aws::QuickSight
     class RadarChartAreaStyleSettings < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RadarChartAxesRangeScale
-      AUTO = 'AUTO'
-      INDEPENDENT = 'INDEPENDENT'
-      SHARED = 'SHARED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a <code>RadarChartVisual</code>.</p>
@@ -22432,7 +21236,7 @@ module Aws::QuickSight
       :axes_range_scale,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a radar chart visual.</p>
@@ -22442,7 +21246,7 @@ module Aws::QuickSight
     class RadarChartFieldWells < Struct.new(
       :radar_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The series settings of a radar chart.</p>
@@ -22452,12 +21256,7 @@ module Aws::QuickSight
     class RadarChartSeriesSettings < Struct.new(
       :area_style_settings,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RadarChartShape
-      CIRCLE = 'CIRCLE'
-      POLYGON = 'POLYGON'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a <code>RadarChartVisual</code>.</p>
@@ -22479,7 +21278,7 @@ module Aws::QuickSight
       :color_sort,
       :color_items_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A radar chart visual.</p>
@@ -22513,7 +21312,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a range constant.</p>
@@ -22527,7 +21326,7 @@ module Aws::QuickSight
       :minimum,
       :maximum,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range ends label type of a data path label.</p>
@@ -22537,7 +21336,7 @@ module Aws::QuickSight
     class RangeEndsLabelType < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for Amazon RDS.</p>
@@ -22551,7 +21350,7 @@ module Aws::QuickSight
       :instance_id,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The recent snapshots configuration for an embedded Amazon QuickSight dashboard.</p>
@@ -22561,7 +21360,7 @@ module Aws::QuickSight
     class RecentSnapshotsConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -22590,7 +21389,7 @@ module Aws::QuickSight
       :database_groups,
       :auto_create_database_user,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:auto_create_database_user] = false unless options.key?(:auto_create_database_user)
@@ -22628,7 +21427,7 @@ module Aws::QuickSight
       :iam_parameters,
       :identity_center_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:port] = 0 unless options.key?(:port)
@@ -22667,7 +21466,7 @@ module Aws::QuickSight
       :style_configuration,
       :label_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a custom label on a <code>ReferenceLine</code>.</p>
@@ -22677,7 +21476,7 @@ module Aws::QuickSight
     class ReferenceLineCustomLabelConfiguration < Struct.new(
       :custom_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The data configuration of the reference line.</p>
@@ -22723,7 +21522,7 @@ module Aws::QuickSight
       :axis_binding,
       :series_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The dynamic configuration of the reference line data configuration.</p>
@@ -22741,7 +21540,7 @@ module Aws::QuickSight
       :measure_aggregation_function,
       :calculation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The label configuration of a reference line.</p>
@@ -22801,29 +21600,7 @@ module Aws::QuickSight
       :horizontal_position,
       :vertical_position,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReferenceLineLabelHorizontalPosition
-      LEFT = 'LEFT'
-      CENTER = 'CENTER'
-      RIGHT = 'RIGHT'
-    end
-
-    module ReferenceLineLabelVerticalPosition
-      ABOVE = 'ABOVE'
-      BELOW = 'BELOW'
-    end
-
-    module ReferenceLinePatternType
-      SOLID = 'SOLID'
-      DASHED = 'DASHED'
-      DOTTED = 'DOTTED'
-    end
-
-    module ReferenceLineSeriesType
-      BAR = 'BAR'
-      LINE = 'LINE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The static data configuration of the reference line data configuration.</p>
@@ -22833,7 +21610,7 @@ module Aws::QuickSight
     class ReferenceLineStaticDataConfiguration < Struct.new(
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -22870,7 +21647,7 @@ module Aws::QuickSight
       :pattern,
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The value label configuration of the label in a reference line.</p>
@@ -22896,12 +21673,7 @@ module Aws::QuickSight
       :relative_position,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ReferenceLineValueLabelRelativePosition
-      BEFORE_CUSTOM_LABEL = 'BEFORE_CUSTOM_LABEL'
-      AFTER_CUSTOM_LABEL = 'AFTER_CUSTOM_LABEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The refresh configuration of a dataset.</p>
@@ -22911,12 +21683,7 @@ module Aws::QuickSight
     class RefreshConfiguration < Struct.new(
       :incremental_refresh,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RefreshFailureAlertStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The failure configuration of a dataset.</p>
@@ -22926,7 +21693,7 @@ module Aws::QuickSight
     class RefreshFailureConfiguration < Struct.new(
       :email_alert,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration settings for the email alerts that are sent when a dataset refresh fails.</p>
@@ -22936,7 +21703,7 @@ module Aws::QuickSight
     class RefreshFailureEmailAlert < Struct.new(
       :alert_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Specifies the interval between each scheduled refresh of a dataset.</p>
@@ -22984,16 +21751,7 @@ module Aws::QuickSight
       :timezone,
       :time_of_the_day,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RefreshInterval
-      MINUTE15 = 'MINUTE15'
-      MINUTE30 = 'MINUTE30'
-      HOURLY = 'HOURLY'
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The refresh schedule of a dataset.</p>
@@ -23030,7 +21788,7 @@ module Aws::QuickSight
       :refresh_type,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute identity_type
@@ -23174,7 +21932,7 @@ module Aws::QuickSight
       :external_login_id,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -23196,7 +21954,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -23225,7 +21983,7 @@ module Aws::QuickSight
       :key_arn,
       :default_key,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:default_key] = false unless options.key?(:default_key)
@@ -23260,7 +22018,7 @@ module Aws::QuickSight
       :recent_snapshots,
       :threshold_alerts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the dashboard you want to embed.</p>
@@ -23275,7 +22033,7 @@ module Aws::QuickSight
       :initial_dashboard_id,
       :feature_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The feature configuration for an embedded dashboard.</p>
@@ -23309,7 +22067,7 @@ module Aws::QuickSight
       :recent_snapshots,
       :threshold_alerts,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The experience that you are embedding. You can use this object to generate a url that embeds a visual into your application.</p>
@@ -23320,7 +22078,7 @@ module Aws::QuickSight
     class RegisteredUserDashboardVisualEmbeddingConfiguration < Struct.new(
       :initial_dashboard_visual_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The type of experience you want to embed. For registered users, you can embed Amazon QuickSight dashboards or the Amazon QuickSight console.</p>
@@ -23384,7 +22142,7 @@ module Aws::QuickSight
       :dashboard_visual,
       :generative_qn_a,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that provides information about the configuration of a Generative Q&A experience.</p>
@@ -23397,7 +22155,7 @@ module Aws::QuickSight
     class RegisteredUserGenerativeQnAEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Q search bar embedding experience.</p>
@@ -23409,7 +22167,7 @@ module Aws::QuickSight
     class RegisteredUserQSearchBarEmbeddingConfiguration < Struct.new(
       :initial_topic_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about the Amazon QuickSight console that you want to embed.</p>
@@ -23454,7 +22212,7 @@ module Aws::QuickSight
       :initial_path,
       :feature_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A physical table type for relational data sources.</p>
@@ -23480,7 +22238,7 @@ module Aws::QuickSight
       :name,
       :input_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -23498,15 +22256,7 @@ module Aws::QuickSight
       :date_time_format,
       :info_icon_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RelativeDateType
-      PREVIOUS = 'PREVIOUS'
-      THIS = 'THIS'
-      LAST = 'LAST'
-      NOW = 'NOW'
-      NEXT = 'NEXT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>RelativeDatesFilter</code> filters relative dates values.</p>
@@ -23597,20 +22347,12 @@ module Aws::QuickSight
       :exclude_period_configuration,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:relative_date_value] =  unless options.key?(:relative_date_value)
+        options[:relative_date_value] = nil unless options.key?(:relative_date_value)
         super
       end
-    end
-
-    module RelativeFontSize
-      EXTRA_SMALL = 'EXTRA_SMALL'
-      SMALL = 'SMALL'
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
-      EXTRA_LARGE = 'EXTRA_LARGE'
     end
 
     # <p>A transform operation that renames a column.</p>
@@ -23624,12 +22366,7 @@ module Aws::QuickSight
       :column_name,
       :new_column_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResizeOption
-      FIXED = 'FIXED'
-      RESPONSIVE = 'RESPONSIVE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The resource specified already exists. </p>
@@ -23646,7 +22383,7 @@ module Aws::QuickSight
       :resource_type,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>One or more resources can't be found.</p>
@@ -23663,7 +22400,7 @@ module Aws::QuickSight
       :resource_type,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Permission for the resource.</p>
@@ -23691,17 +22428,7 @@ module Aws::QuickSight
       :principal,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ResourceStatus
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      CREATION_SUCCESSFUL = 'CREATION_SUCCESSFUL'
-      CREATION_FAILED = 'CREATION_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This resource is currently unavailable.</p>
@@ -23718,7 +22445,7 @@ module Aws::QuickSight
       :resource_type,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -23735,7 +22462,7 @@ module Aws::QuickSight
       :analysis_id,
       :restore_to_folders,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -23761,31 +22488,12 @@ module Aws::QuickSight
       :request_id,
       :restoration_failed_folder_arns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
         super
       end
-    end
-
-    module ReviewedAnswerErrorCode
-      INTERNAL_ERROR = 'INTERNAL_ERROR'
-      MISSING_ANSWER = 'MISSING_ANSWER'
-      DATASET_DOES_NOT_EXIST = 'DATASET_DOES_NOT_EXIST'
-      INVALID_DATASET_ARN = 'INVALID_DATASET_ARN'
-      DUPLICATED_ANSWER = 'DUPLICATED_ANSWER'
-      INVALID_DATA = 'INVALID_DATA'
-      MISSING_REQUIRED_FIELDS = 'MISSING_REQUIRED_FIELDS'
-    end
-
-    module Role
-      ADMIN = 'ADMIN'
-      AUTHOR = 'AUTHOR'
-      READER = 'READER'
-      ADMIN_PRO = 'ADMIN_PRO'
-      AUTHOR_PRO = 'AUTHOR_PRO'
-      READER_PRO = 'READER_PRO'
     end
 
     # <p>The rolling date configuration of a date time filter.</p>
@@ -23799,7 +22507,7 @@ module Aws::QuickSight
       :data_set_identifier,
       :expression,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the row alternate color options.</p>
@@ -23817,7 +22525,7 @@ module Aws::QuickSight
       :row_alternate_colors,
       :use_primary_background_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information about rows for a data set SPICE ingestion.</p>
@@ -23835,12 +22543,12 @@ module Aws::QuickSight
       :rows_dropped,
       :total_rows_in_dataset,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:rows_ingested] =  unless options.key?(:rows_ingested)
-        options[:rows_dropped] =  unless options.key?(:rows_dropped)
-        options[:total_rows_in_dataset] =  unless options.key?(:total_rows_in_dataset)
+        options[:rows_ingested] = nil unless options.key?(:rows_ingested)
+        options[:rows_dropped] = nil unless options.key?(:rows_dropped)
+        options[:total_rows_in_dataset] = nil unless options.key?(:total_rows_in_dataset)
         super
       end
     end
@@ -23875,17 +22583,7 @@ module Aws::QuickSight
       :format_version,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module RowLevelPermissionFormatVersion
-      VERSION_1 = 'VERSION_1'
-      VERSION_2 = 'VERSION_2'
-    end
-
-    module RowLevelPermissionPolicy
-      GRANT_ACCESS = 'GRANT_ACCESS'
-      DENY_ACCESS = 'DENY_ACCESS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of tags on a dataset to set row-level security. </p>
@@ -23903,7 +22601,7 @@ module Aws::QuickSight
       :tag_rules,
       :tag_rule_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A set of rules associated with a tag.</p>
@@ -23925,7 +22623,7 @@ module Aws::QuickSight
       :tag_multi_value_delimiter,
       :match_all_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An optional structure that contains the Amazon S3 bucket configuration that the generated snapshots are stored in. If you don't provide this information, generated snapshots are stored in the default Amazon QuickSight bucket.</p>
@@ -23943,7 +22641,7 @@ module Aws::QuickSight
       :bucket_prefix,
       :bucket_region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for S3.</p>
@@ -23958,7 +22656,7 @@ module Aws::QuickSight
       :manifest_file_location,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A physical table type for an S3 data source.</p>
@@ -23979,7 +22677,7 @@ module Aws::QuickSight
       :upload_settings,
       :input_columns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the same-sheet target visuals that you want to be filtered.</p>
@@ -24001,7 +22699,7 @@ module Aws::QuickSight
       :target_visuals,
       :target_visual_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a sankey diagram.</p>
@@ -24019,7 +22717,7 @@ module Aws::QuickSight
       :destination,
       :weight,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a sankey diagram.</p>
@@ -24041,7 +22739,7 @@ module Aws::QuickSight
       :data_labels,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a sankey diagram.</p>
@@ -24051,7 +22749,7 @@ module Aws::QuickSight
     class SankeyDiagramFieldWells < Struct.new(
       :sankey_diagram_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a sankey diagram.</p>
@@ -24069,7 +22767,7 @@ module Aws::QuickSight
       :source_items_limit,
       :destination_items_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A sankey diagram.</p>
@@ -24100,7 +22798,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The aggregated field well of a scatter plot.</p>
@@ -24128,7 +22826,7 @@ module Aws::QuickSight
       :size,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a scatter plot.</p>
@@ -24178,7 +22876,7 @@ module Aws::QuickSight
       :visual_palette,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a scatter plot.</p>
@@ -24194,7 +22892,7 @@ module Aws::QuickSight
       :scatter_plot_categorically_aggregated_field_wells,
       :scatter_plot_unaggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a scatter plot.</p>
@@ -24204,7 +22902,7 @@ module Aws::QuickSight
     class ScatterPlotSortConfiguration < Struct.new(
       :scatter_plot_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unaggregated field wells of a scatter plot.</p>
@@ -24232,7 +22930,7 @@ module Aws::QuickSight
       :category,
       :label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A scatter plot.</p>
@@ -24267,7 +22965,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The refresh on entity for weekly or monthly schedules.</p>
@@ -24281,7 +22979,7 @@ module Aws::QuickSight
       :day_of_week,
       :day_of_month,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The schedules configuration for an embedded Amazon QuickSight dashboard.</p>
@@ -24291,7 +22989,7 @@ module Aws::QuickSight
     class SchedulesConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -24310,7 +23008,7 @@ module Aws::QuickSight
       :visibility,
       :visible_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -24332,7 +23030,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_summary_list
@@ -24354,7 +23052,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24384,7 +23082,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_summary_list
@@ -24406,7 +23104,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24432,7 +23130,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_summaries
@@ -24453,7 +23151,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24479,7 +23177,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_summaries
@@ -24500,7 +23198,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24526,7 +23224,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -24547,7 +23245,7 @@ module Aws::QuickSight
       :next_token,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24578,7 +23276,7 @@ module Aws::QuickSight
       :namespace,
       :filters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group_list
@@ -24599,7 +23297,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24625,7 +23323,7 @@ module Aws::QuickSight
       :next_token,
       :max_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_summary_list
@@ -24646,7 +23344,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -24661,7 +23359,7 @@ module Aws::QuickSight
     class SecondaryValueOptions < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a page break after a section.</p>
@@ -24671,7 +23369,7 @@ module Aws::QuickSight
     class SectionAfterPageBreak < Struct.new(
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for the canvas of a section-based layout.</p>
@@ -24681,7 +23379,7 @@ module Aws::QuickSight
     class SectionBasedLayoutCanvasSizeOptions < Struct.new(
       :paper_canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a
@@ -24704,7 +23402,7 @@ module Aws::QuickSight
       :footer_sections,
       :canvas_size_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for a paper canvas of a section-based layout.</p>
@@ -24732,7 +23430,7 @@ module Aws::QuickSight
       :paper_orientation,
       :paper_margin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The layout configuration of a section.</p>
@@ -24742,7 +23440,7 @@ module Aws::QuickSight
     class SectionLayoutConfiguration < Struct.new(
       :free_form_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a page break for a section.</p>
@@ -24752,12 +23450,7 @@ module Aws::QuickSight
     class SectionPageBreakConfiguration < Struct.new(
       :after,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SectionPageBreakStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that style a section.</p>
@@ -24773,15 +23466,7 @@ module Aws::QuickSight
       :height,
       :padding,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SelectAllValueOptions
-      ALL_VALUES = 'ALL_VALUES'
-    end
-
-    module SelectedFieldOptions
-      ALL_FIELDS = 'ALL_FIELDS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for applying a filter to specific sheets or visuals. You can apply this filter to multiple visuals that are on one sheet or to all visuals on a sheet.</p>
@@ -24792,12 +23477,7 @@ module Aws::QuickSight
     class SelectedSheetsFilterScopeConfiguration < Struct.new(
       :sheet_visual_scoping_configurations,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SelectedTooltipType
-      BASIC = 'BASIC'
-      DETAILED = 'DETAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a semantic entity type.</p>
@@ -24815,7 +23495,7 @@ module Aws::QuickSight
       :sub_type_name,
       :type_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a semantic type.</p>
@@ -24849,7 +23529,7 @@ module Aws::QuickSight
       :falsey_cell_value,
       :falsey_cell_value_synonyms,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The series item configuration of a line chart.</p>
@@ -24864,7 +23544,7 @@ module Aws::QuickSight
       :field_series_item,
       :data_field_series_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for ServiceNow.</p>
@@ -24874,13 +23554,7 @@ module Aws::QuickSight
     class ServiceNowParameters < Struct.new(
       :site_base_url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ServiceType
-      REDSHIFT = 'REDSHIFT'
-      QBUSINESS = 'QBUSINESS'
-      ATHENA = 'ATHENA'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The number of minutes specified for the lifetime of a session isn't valid. The session
@@ -24894,7 +23568,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key-value pair used for the row-level security tags feature.</p>
@@ -24908,7 +23582,7 @@ module Aws::QuickSight
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of adding parameters in action.</p>
@@ -24923,7 +23597,7 @@ module Aws::QuickSight
       :destination_parameter_name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shape conditional formatting of a filled map visual.</p>
@@ -24933,7 +23607,7 @@ module Aws::QuickSight
     class ShapeConditionalFormat < Struct.new(
       :background_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The shared view settings of an embedded dashboard.</p>
@@ -24943,17 +23617,12 @@ module Aws::QuickSight
     class SharedViewConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
         super
       end
-    end
-
-    module SharingModel
-      ACCOUNT = 'ACCOUNT'
-      NAMESPACE = 'NAMESPACE'
     end
 
     # <p>A <i>sheet</i>, which is an object that contains a set of visuals that
@@ -24976,17 +23645,7 @@ module Aws::QuickSight
       :name,
       :images,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SheetContentType
-      PAGINATED = 'PAGINATED'
-      INTERACTIVE = 'INTERACTIVE'
-    end
-
-    module SheetControlDateTimePickerType
-      SINGLE_VALUED = 'SINGLE_VALUED'
-      DATE_RANGE = 'DATE_RANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A control to display info icons for filters and parameters.</p>
@@ -25000,7 +23659,7 @@ module Aws::QuickSight
       :visibility,
       :info_icon_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A grid layout to define the placement of sheet control.</p>
@@ -25010,7 +23669,7 @@ module Aws::QuickSight
     class SheetControlLayout < Struct.new(
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that determines the elements and canvas size options of sheet control.</p>
@@ -25020,17 +23679,7 @@ module Aws::QuickSight
     class SheetControlLayoutConfiguration < Struct.new(
       :grid_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SheetControlListType
-      MULTI_SELECT = 'MULTI_SELECT'
-      SINGLE_SELECT = 'SINGLE_SELECT'
-    end
-
-    module SheetControlSliderType
-      SINGLE_POINT = 'SINGLE_POINT'
-      RANGE = 'RANGE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Sheet controls option.</p>
@@ -25040,7 +23689,7 @@ module Aws::QuickSight
     class SheetControlsOption < Struct.new(
       :visibility_state,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A sheet is an object that contains a set of visuals that
@@ -25113,7 +23762,7 @@ module Aws::QuickSight
       :content_type,
       :custom_action_defaults,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The override configuration of the rendering rules of a sheet.</p>
@@ -25135,7 +23784,7 @@ module Aws::QuickSight
     class SheetElementConfigurationOverrides < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The rendering rules of a sheet that uses a free-form layout.</p>
@@ -25149,7 +23798,7 @@ module Aws::QuickSight
       :expression,
       :configuration_overrides,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An image that is located on a sheet.</p>
@@ -25183,7 +23832,7 @@ module Aws::QuickSight
       :interactions,
       :actions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines how the image is scaled</p>
@@ -25212,14 +23861,7 @@ module Aws::QuickSight
     class SheetImageScalingConfiguration < Struct.new(
       :scaling_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SheetImageScalingType
-      SCALE_TO_WIDTH = 'SCALE_TO_WIDTH'
-      SCALE_TO_HEIGHT = 'SCALE_TO_HEIGHT'
-      SCALE_TO_CONTAINER = 'SCALE_TO_CONTAINER'
-      SCALE_NONE = 'SCALE_NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the image.</p>
@@ -25229,7 +23871,7 @@ module Aws::QuickSight
     class SheetImageSource < Struct.new(
       :sheet_image_static_file_source,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the static file that contains the image.</p>
@@ -25239,7 +23881,7 @@ module Aws::QuickSight
     class SheetImageStaticFileSource < Struct.new(
       :static_file_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tooltip configuration for a sheet image.</p>
@@ -25253,7 +23895,7 @@ module Aws::QuickSight
       :tooltip_text,
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The text that appears in the sheet image tooltip.</p>
@@ -25263,7 +23905,7 @@ module Aws::QuickSight
     class SheetImageTooltipText < Struct.new(
       :plain_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sheet layout maximization options of a dashbaord.</p>
@@ -25273,7 +23915,7 @@ module Aws::QuickSight
     class SheetLayoutElementMaximizationOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The theme display options for sheets. </p>
@@ -25287,7 +23929,7 @@ module Aws::QuickSight
       :tile,
       :tile_layout,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A text box.</p>
@@ -25305,7 +23947,7 @@ module Aws::QuickSight
       :content,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter that is applied to the options.</p>
@@ -25335,7 +23977,7 @@ module Aws::QuickSight
       :scope,
       :visual_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The text format for the title.</p>
@@ -25350,7 +23992,7 @@ module Aws::QuickSight
       :plain_text,
       :rich_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>SignupResponse</code> object that contains a summary of a newly created account.</p>
@@ -25375,16 +24017,12 @@ module Aws::QuickSight
       :account_name,
       :directory_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:iam_user] = false unless options.key?(:iam_user)
         super
       end
-    end
-
-    module SimpleAttributeAggregationFunction
-      UNIQUE_VALUE = 'UNIQUE_VALUE'
     end
 
     # <p>The simple cluster marker of the cluster marker.</p>
@@ -25394,30 +24032,7 @@ module Aws::QuickSight
     class SimpleClusterMarker < Struct.new(
       :color,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SimpleNumericalAggregationFunction
-      SUM = 'SUM'
-      AVERAGE = 'AVERAGE'
-      MIN = 'MIN'
-      MAX = 'MAX'
-      COUNT = 'COUNT'
-      DISTINCT_COUNT = 'DISTINCT_COUNT'
-      VAR = 'VAR'
-      VARP = 'VARP'
-      STDEV = 'STDEV'
-      STDEVP = 'STDEVP'
-      MEDIAN = 'MEDIAN'
-    end
-
-    module SimpleTotalAggregationFunction
-      DEFAULT = 'DEFAULT'
-      SUM = 'SUM'
-      AVERAGE = 'AVERAGE'
-      MIN = 'MIN'
-      MAX = 'MAX'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings of a chart's single axis configuration.</p>
@@ -25427,11 +24042,7 @@ module Aws::QuickSight
     class SingleAxisOptions < Struct.new(
       :y_axis_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SingleYAxisOption
-      PRIMARY_Y_AXIS = 'PRIMARY_Y_AXIS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -25445,7 +24056,7 @@ module Aws::QuickSight
       :title_options,
       :info_icon_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for the slot.</p>
@@ -25459,12 +24070,7 @@ module Aws::QuickSight
       :slot_id,
       :visual_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SmallMultiplesAxisPlacement
-      OUTSIDE = 'OUTSIDE'
-      INSIDE = 'INSIDE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Configures the properties of a chart's axes that are used by small multiples panels.</p>
@@ -25478,12 +24084,7 @@ module Aws::QuickSight
       :scale,
       :placement,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SmallMultiplesAxisScale
-      SHARED = 'SHARED'
-      INDEPENDENT = 'INDEPENDENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Options that determine the layout and display options of a chart's small multiples.</p>
@@ -25513,7 +24114,7 @@ module Aws::QuickSight
       :x_axis,
       :y_axis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information on the anonymous user configuration.</p>
@@ -25524,7 +24125,7 @@ module Aws::QuickSight
     class SnapshotAnonymousUser < Struct.new(
       :row_level_permission_tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Use this structure to redact sensitive information that you provide about an anonymous user from the snapshot.</p>
@@ -25534,7 +24135,7 @@ module Aws::QuickSight
     class SnapshotAnonymousUserRedacted < Struct.new(
       :row_level_permission_tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Describes the configuration of the dashboard snapshot.</p>
@@ -25552,7 +24153,7 @@ module Aws::QuickSight
       :destination_configuration,
       :parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information on the Amazon S3 destinations of the generated snapshot.</p>
@@ -25564,7 +24165,7 @@ module Aws::QuickSight
     class SnapshotDestinationConfiguration < Struct.new(
       :s3_destinations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information for the snapshot that you want to generate. This information is provided by you when you start a new snapshot job.</p>
@@ -25578,13 +24179,7 @@ module Aws::QuickSight
       :sheet_selections,
       :format_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotFileFormatType
-      CSV = 'CSV'
-      PDF = 'PDF'
-      EXCEL = 'EXCEL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains the information on the snapshot files.</p>
@@ -25594,7 +24189,7 @@ module Aws::QuickSight
     class SnapshotFileGroup < Struct.new(
       :files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information that identifies the snapshot that needs to be generated.</p>
@@ -25624,12 +24219,7 @@ module Aws::QuickSight
       :selection_scope,
       :visual_ids,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotFileSheetSelectionScope
-      ALL_VISUALS = 'ALL_VISUALS'
-      SELECTED_VISUALS = 'SELECTED_VISUALS'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that contains information on the error that caused the snapshot job to fail.</p>
@@ -25643,7 +24233,7 @@ module Aws::QuickSight
       :error_message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An object that provides information on the result of a snapshot job. This object provides information about the job, the job status, and the location of the generated file.</p>
@@ -25653,7 +24243,7 @@ module Aws::QuickSight
     class SnapshotJobResult < Struct.new(
       :anonymous_users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Information on the error that caused the snapshot job to fail.</p>
@@ -25667,7 +24257,7 @@ module Aws::QuickSight
       :error_message,
       :error_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information on the generated snapshot file groups.</p>
@@ -25681,7 +24271,7 @@ module Aws::QuickSight
       :files,
       :s3_results,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The Amazon S3 result from the snapshot job. The result includes the <code>DestinationConfiguration</code> and the Amazon S3 Uri. If an error occured during the job, the result returns information on the error.</p>
@@ -25700,14 +24290,7 @@ module Aws::QuickSight
       :s3_uri,
       :error_info,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SnapshotJobStatus
-      QUEUED = 'QUEUED'
-      RUNNING = 'RUNNING'
-      COMPLETED = 'COMPLETED'
-      FAILED = 'FAILED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that describes the Amazon S3 settings to use to save the generated dashboard snapshot.</p>
@@ -25717,7 +24300,7 @@ module Aws::QuickSight
     class SnapshotS3DestinationConfiguration < Struct.new(
       :bucket_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about the users that the dashboard snapshot is generated for.</p>
@@ -25727,7 +24310,7 @@ module Aws::QuickSight
     class SnapshotUserConfiguration < Struct.new(
       :anonymous_users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that contains information about the users that the dashboard snapshot is generated for. Sensitive user information is excluded.
@@ -25740,7 +24323,7 @@ module Aws::QuickSight
     class SnapshotUserConfigurationRedacted < Struct.new(
       :anonymous_users,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for Snowflake.</p>
@@ -25770,12 +24353,7 @@ module Aws::QuickSight
       :database_access_control_role,
       :o_auth_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SortDirection
-      ASC = 'ASC'
-      DESC = 'DESC'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of spacing (often a margin or padding).</p>
@@ -25797,7 +24375,7 @@ module Aws::QuickSight
       :left,
       :right,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for Spark.</p>
@@ -25811,7 +24389,7 @@ module Aws::QuickSight
       :host,
       :port,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A static file that contains the geospatial data.</p>
@@ -25825,13 +24403,7 @@ module Aws::QuickSight
       :static_file_id,
       :source,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module SpecialValue
-      EMPTY = 'EMPTY'
-      NULL = 'NULL'
-      OTHER = 'OTHER'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for SQL Server.</p>
@@ -25849,7 +24421,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
@@ -25860,7 +24432,7 @@ module Aws::QuickSight
     class SslProperties < Struct.new(
       :disable_ssl,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:disable_ssl] = false unless options.key?(:disable_ssl)
@@ -25899,12 +24471,7 @@ module Aws::QuickSight
       :authentication_type,
       :o_auth_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StarburstProductType
-      GALAXY = 'GALAXY'
-      ENTERPRISE = 'ENTERPRISE'
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -25997,7 +24564,7 @@ module Aws::QuickSight
       :include_folder_memberships,
       :include_folder_members,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -26018,7 +24585,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -26064,7 +24631,7 @@ module Aws::QuickSight
       :override_tags,
       :override_validation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -26085,7 +24652,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -26117,7 +24684,7 @@ module Aws::QuickSight
       :user_configuration,
       :snapshot_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -26140,7 +24707,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -26163,7 +24730,7 @@ module Aws::QuickSight
       :dashboard_id,
       :schedule_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -26178,7 +24745,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -26193,7 +24760,7 @@ module Aws::QuickSight
     class StatePersistenceConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -26212,7 +24779,7 @@ module Aws::QuickSight
       :image_static_file,
       :spatial_static_file,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains the Amazon S3 location to download the static file from.</p>
@@ -26230,7 +24797,7 @@ module Aws::QuickSight
       :object_key,
       :region,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source of the static file.</p>
@@ -26244,7 +24811,7 @@ module Aws::QuickSight
       :url_options,
       :s3_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The structure that contains the URL to download the static file from.</p>
@@ -26254,12 +24821,7 @@ module Aws::QuickSight
     class StaticFileUrlSourceOptions < Struct.new(
       :url,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module Status
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string parameter for a dataset.</p>
@@ -26281,7 +24843,7 @@ module Aws::QuickSight
       :value_type,
       :default_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of a string parameter.</p>
@@ -26291,7 +24853,7 @@ module Aws::QuickSight
     class StringDatasetParameterDefaultValues < Struct.new(
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The default values of the <code>StringParameterDeclaration</code>.</p>
@@ -26305,7 +24867,7 @@ module Aws::QuickSight
       :dynamic_value,
       :static_values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Formatting configuration for string fields.</p>
@@ -26319,7 +24881,7 @@ module Aws::QuickSight
       :null_value_format_configuration,
       :numeric_format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A string parameter.</p>
@@ -26333,7 +24895,7 @@ module Aws::QuickSight
       :name,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A parameter declaration for the <code>String</code> data type.</p>
@@ -26359,7 +24921,7 @@ module Aws::QuickSight
       :value_when_unset,
       :mapped_data_set_parameters,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.</p>
@@ -26383,13 +24945,7 @@ module Aws::QuickSight
       :value_when_unset_option,
       :custom_value,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module StyledCellType
-      TOTAL = 'TOTAL'
-      METRIC_HEADER = 'METRIC_HEADER'
-      VALUE = 'VALUE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subtotal options.</p>
@@ -26427,7 +24983,7 @@ module Aws::QuickSight
       :metric_header_cell_style,
       :style_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>SucceededTopicReviewedAnswer</code>.</p>
@@ -26437,7 +24993,7 @@ module Aws::QuickSight
     class SucceededTopicReviewedAnswer < Struct.new(
       :answer_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A success entry that occurs when a <code>KeyRegistration</code> job is successfully applied to the Amazon QuickSight account.</p>
@@ -26451,7 +25007,7 @@ module Aws::QuickSight
       :key_arn,
       :status_code,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status_code] = 0 unless options.key?(:status_code)
@@ -26470,7 +25026,7 @@ module Aws::QuickSight
       :group_by,
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The border options for a table border.</p>
@@ -26488,12 +25044,7 @@ module Aws::QuickSight
       :thickness,
       :style,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableBorderStyle
-      NONE = 'NONE'
-      SOLID = 'SOLID'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The cell conditional formatting option for a table.</p>
@@ -26507,13 +25058,7 @@ module Aws::QuickSight
       :field_id,
       :text_format,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableCellImageScalingConfiguration
-      FIT_TO_CELL_HEIGHT = 'FIT_TO_CELL_HEIGHT'
-      FIT_TO_CELL_WIDTH = 'FIT_TO_CELL_WIDTH'
-      DO_NOT_SCALE = 'DO_NOT_SCALE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sizing options for the table image configuration.</p>
@@ -26523,7 +25068,7 @@ module Aws::QuickSight
     class TableCellImageSizingConfiguration < Struct.new(
       :table_cell_image_scaling_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The table cell style for a cell in pivot table or table visual.</p>
@@ -26561,7 +25106,7 @@ module Aws::QuickSight
       :height,
       :border,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for a <code>PivotTableVisual</code>.</p>
@@ -26571,7 +25116,7 @@ module Aws::QuickSight
     class TableConditionalFormatting < Struct.new(
       :conditional_formatting_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Conditional formatting options for a <code>PivotTableVisual</code>.</p>
@@ -26585,7 +25130,7 @@ module Aws::QuickSight
       :cell,
       :row,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a <code>TableVisual</code>.</p>
@@ -26623,7 +25168,7 @@ module Aws::QuickSight
       :table_inline_visualizations,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom icon content for the table link content configuration.</p>
@@ -26633,7 +25178,7 @@ module Aws::QuickSight
     class TableFieldCustomIconContent < Struct.new(
       :icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The custom text content (value, font configuration) for the table link content configuration.</p>
@@ -26647,11 +25192,7 @@ module Aws::QuickSight
       :value,
       :font_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableFieldIconSetType
-      LINK = 'LINK'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The image configuration of a table field URL.</p>
@@ -26661,7 +25202,7 @@ module Aws::QuickSight
     class TableFieldImageConfiguration < Struct.new(
       :sizing_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The link configuration of a table field URL.</p>
@@ -26675,7 +25216,7 @@ module Aws::QuickSight
       :target,
       :content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URL content (text, icon) for the table link configuration.</p>
@@ -26689,7 +25230,7 @@ module Aws::QuickSight
       :custom_text_content,
       :custom_icon_content,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options for a table field.</p>
@@ -26715,7 +25256,7 @@ module Aws::QuickSight
       :visibility,
       :url_styling,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field options of a table visual.</p>
@@ -26737,7 +25278,7 @@ module Aws::QuickSight
       :pinned_field_options,
       :transposed_table_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The URL configuration for a table field.</p>
@@ -26751,7 +25292,7 @@ module Aws::QuickSight
       :link_configuration,
       :image_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells for a table visual.</p>
@@ -26766,7 +25307,7 @@ module Aws::QuickSight
       :table_aggregated_field_wells,
       :table_unaggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The inline visualization of a specific type to display within a chart.</p>
@@ -26776,7 +25317,7 @@ module Aws::QuickSight
     class TableInlineVisualization < Struct.new(
       :data_bars,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The table options for a table visual.</p>
@@ -26798,12 +25339,7 @@ module Aws::QuickSight
       :cell_style,
       :row_alternate_color_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableOrientation
-      VERTICAL = 'VERTICAL'
-      HORIZONTAL = 'HORIZONTAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The paginated report options for a table visual.</p>
@@ -26817,7 +25353,7 @@ module Aws::QuickSight
       :vertical_overflow_visibility,
       :overflow_column_header_visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The settings for the pinned columns of a table visual.</p>
@@ -26827,7 +25363,7 @@ module Aws::QuickSight
     class TablePinnedFieldOptions < Struct.new(
       :pinned_left_fields,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting of a table row.</p>
@@ -26841,7 +25377,7 @@ module Aws::QuickSight
       :background_color,
       :text_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The side border options for a table.</p>
@@ -26871,7 +25407,7 @@ module Aws::QuickSight
       :top,
       :bottom,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration for a <code>TableVisual</code>.</p>
@@ -26885,7 +25421,7 @@ module Aws::QuickSight
       :row_sort,
       :pagination_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The table style target.</p>
@@ -26895,18 +25431,7 @@ module Aws::QuickSight
     class TableStyleTarget < Struct.new(
       :cell_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TableTotalsPlacement
-      START = 'START'
-      END = 'END'
-      AUTO = 'AUTO'
-    end
-
-    module TableTotalsScrollStatus
-      PINNED = 'PINNED'
-      SCROLLED = 'SCROLLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unaggregated field well for the table.</p>
@@ -26916,7 +25441,7 @@ module Aws::QuickSight
     class TableUnaggregatedFieldWells < Struct.new(
       :values,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A table visual.</p>
@@ -26951,7 +25476,7 @@ module Aws::QuickSight
       :actions,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The key or keys of the key-value pairs for the resource tag or tags assigned to the
@@ -26966,7 +25491,7 @@ module Aws::QuickSight
       :key,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that tags a column with additional information.</p>
@@ -26983,7 +25508,7 @@ module Aws::QuickSight
       :column_name,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -26996,7 +25521,7 @@ module Aws::QuickSight
       :resource_arn,
       :tags,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -27009,16 +25534,12 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
         super
       end
-    end
-
-    module TargetVisualOptions
-      ALL_VISUALS = 'ALL_VISUALS'
     end
 
     # <p>A template object. A <i>template</i> is an entity in Amazon QuickSight that
@@ -27055,7 +25576,7 @@ module Aws::QuickSight
       :last_updated_time,
       :created_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template alias.</p>
@@ -27073,7 +25594,7 @@ module Aws::QuickSight
       :arn,
       :template_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>List of errors that occurred when the template version creation failed.</p>
@@ -27091,14 +25612,7 @@ module Aws::QuickSight
       :message,
       :violated_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TemplateErrorType
-      SOURCE_NOT_FOUND = 'SOURCE_NOT_FOUND'
-      DATA_SET_NOT_FOUND = 'DATA_SET_NOT_FOUND'
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
-      ACCESS_DENIED = 'ACCESS_DENIED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source analysis of the template.</p>
@@ -27113,7 +25627,7 @@ module Aws::QuickSight
       :arn,
       :data_set_references,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source entity of the template.</p>
@@ -27127,7 +25641,7 @@ module Aws::QuickSight
       :source_analysis,
       :source_template,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The source template of the template.</p>
@@ -27137,7 +25651,7 @@ module Aws::QuickSight
     class TemplateSourceTemplate < Struct.new(
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template summary.</p>
@@ -27167,7 +25681,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A version of a template.</p>
@@ -27249,7 +25763,7 @@ module Aws::QuickSight
       :theme_arn,
       :sheets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The detailed definition of a template.</p>
@@ -27303,7 +25817,7 @@ module Aws::QuickSight
       :query_execution_options,
       :static_files,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The template version.</p>
@@ -27329,7 +25843,7 @@ module Aws::QuickSight
       :status,
       :description,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for Teradata.</p>
@@ -27347,7 +25861,7 @@ module Aws::QuickSight
       :port,
       :database,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -27365,7 +25879,7 @@ module Aws::QuickSight
       :placeholder_options,
       :info_icon_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The general textbox interactions setup for textbox publish options.</p>
@@ -27375,7 +25889,7 @@ module Aws::QuickSight
     class TextBoxInteractionOptions < Struct.new(
       :text_box_menu_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The menu options for the interactions of a textbox.</p>
@@ -27385,7 +25899,7 @@ module Aws::QuickSight
     class TextBoxMenuOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The conditional formatting for the text.</p>
@@ -27403,7 +25917,7 @@ module Aws::QuickSight
       :text_color,
       :icon,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of the placeholder options in a text control.</p>
@@ -27413,7 +25927,7 @@ module Aws::QuickSight
     class TextControlPlaceholderOptions < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options of a control.</p>
@@ -27431,17 +25945,7 @@ module Aws::QuickSight
       :placeholder_options,
       :info_icon_label_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TextQualifier
-      DOUBLE_QUOTE = 'DOUBLE_QUOTE'
-      SINGLE_QUOTE = 'SINGLE_QUOTE'
-    end
-
-    module TextWrap
-      NONE = 'NONE'
-      WRAP = 'WRAP'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Summary information about a theme.</p>
@@ -27476,7 +25980,7 @@ module Aws::QuickSight
       :last_updated_time,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An alias for a theme.</p>
@@ -27494,7 +25998,7 @@ module Aws::QuickSight
       :alias_name,
       :theme_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The theme configuration. This configuration contains all of the display properties for
@@ -27518,7 +26022,7 @@ module Aws::QuickSight
       :sheet,
       :typography,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Theme error.</p>
@@ -27532,11 +26036,7 @@ module Aws::QuickSight
       :type,
       :message,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThemeErrorType
-      INTERNAL_FAILURE = 'INTERNAL_FAILURE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The theme summary.</p>
@@ -27566,13 +26066,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ThemeType
-      QUICKSIGHT = 'QUICKSIGHT'
-      CUSTOM = 'CUSTOM'
-      ALL = 'ALL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A version of a theme.</p>
@@ -27611,7 +26105,7 @@ module Aws::QuickSight
       :errors,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The theme version.</p>
@@ -27637,7 +26131,7 @@ module Aws::QuickSight
       :created_time,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the thousands separator configuration.</p>
@@ -27655,7 +26149,7 @@ module Aws::QuickSight
       :visibility,
       :grouping_style,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The threshold alerts configuration for an embedded Amazon QuickSight dashboard.</p>
@@ -27665,7 +26159,7 @@ module Aws::QuickSight
     class ThresholdAlertsConfigurations < Struct.new(
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:enabled] = false unless options.key?(:enabled)
@@ -27683,7 +26177,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options for the layout of tiles on a sheet.</p>
@@ -27697,7 +26191,7 @@ module Aws::QuickSight
       :gutter,
       :margin,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Display options related to tiles on a sheet.</p>
@@ -27707,7 +26201,7 @@ module Aws::QuickSight
     class TileStyle < Struct.new(
       :border,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The forecast properties setup of a forecast in the line chart.</p>
@@ -27747,11 +26241,11 @@ module Aws::QuickSight
       :prediction_interval,
       :seasonality,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:upper_boundary] =  unless options.key?(:upper_boundary)
-        options[:lower_boundary] =  unless options.key?(:lower_boundary)
+        options[:upper_boundary] = nil unless options.key?(:upper_boundary)
+        options[:lower_boundary] = nil unless options.key?(:lower_boundary)
         super
       end
     end
@@ -27790,19 +26284,7 @@ module Aws::QuickSight
       :rolling_date,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TimeGranularity
-      YEAR = 'YEAR'
-      QUARTER = 'QUARTER'
-      MONTH = 'MONTH'
-      WEEK = 'WEEK'
-      DAY = 'DAY'
-      HOUR = 'HOUR'
-      MINUTE = 'MINUTE'
-      SECOND = 'SECOND'
-      MILLISECOND = 'MILLISECOND'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The time range drill down filter.</p>
@@ -27824,7 +26306,7 @@ module Aws::QuickSight
       :range_maximum,
       :time_granularity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>TimeRangeFilter</code> filters values that are between two specified values.</p>
@@ -27884,11 +26366,11 @@ module Aws::QuickSight
       :time_granularity,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:include_minimum] =  unless options.key?(:include_minimum)
-        options[:include_maximum] =  unless options.key?(:include_maximum)
+        options[:include_minimum] = nil unless options.key?(:include_minimum)
+        options[:include_maximum] = nil unless options.key?(:include_maximum)
         super
       end
     end
@@ -27909,7 +26391,7 @@ module Aws::QuickSight
       :rolling_date,
       :parameter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The tooltip.</p>
@@ -27924,7 +26406,7 @@ module Aws::QuickSight
       :field_tooltip_item,
       :column_tooltip_item,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The display options for the visual tooltip.</p>
@@ -27952,23 +26434,7 @@ module Aws::QuickSight
       :selected_tooltip_type,
       :field_based_tooltip,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TooltipTarget
-      BOTH = 'BOTH'
-      BAR = 'BAR'
-      LINE = 'LINE'
-    end
-
-    module TooltipTitleType
-      NONE = 'NONE'
-      PRIMARY_VALUE = 'PRIMARY_VALUE'
-    end
-
-    module TopBottomComputationType
-      TOP = 'TOP'
-      BOTTOM = 'BOTTOM'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>TopBottomFilter</code> filters values that are at the top or the bottom.</p>
@@ -28002,10 +26468,10 @@ module Aws::QuickSight
       :parameter_name,
       :default_filter_control_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:limit] =  unless options.key?(:limit)
+        options[:limit] = nil unless options.key?(:limit)
         super
       end
     end
@@ -28053,7 +26519,7 @@ module Aws::QuickSight
       :sort_order,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The top ranked and bottom ranked computation configuration.</p>
@@ -28091,12 +26557,7 @@ module Aws::QuickSight
       :result_size,
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopBottomSortOrder
-      PERCENT_DIFFERENCE = 'PERCENT_DIFFERENCE'
-      ABSOLUTE_DIFFERENCE = 'ABSOLUTE_DIFFERENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a calculated field.</p>
@@ -28183,7 +26644,7 @@ module Aws::QuickSight
       :cell_value_synonyms,
       :non_additive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_included_in_topic] = false unless options.key?(:is_included_in_topic)
@@ -28211,7 +26672,7 @@ module Aws::QuickSight
       :constant,
       :inverse,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inverse] = false unless options.key?(:inverse)
@@ -28235,7 +26696,7 @@ module Aws::QuickSight
       :singular_constant,
       :collective_constant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Represents a column in a dataset.</p>
@@ -28323,7 +26784,7 @@ module Aws::QuickSight
       :cell_value_synonyms,
       :non_additive,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:is_included_in_topic] = false unless options.key?(:is_included_in_topic)
@@ -28339,7 +26800,7 @@ module Aws::QuickSight
     class TopicConfigOptions < Struct.new(
       :q_business_insights_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicConstantValue</code>.</p>
@@ -28365,7 +26826,7 @@ module Aws::QuickSight
       :maximum,
       :value_list,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter used to restrict data based on a range of dates or times.</p>
@@ -28381,7 +26842,7 @@ module Aws::QuickSight
       :inclusive,
       :constant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inclusive] = false unless options.key?(:inclusive)
@@ -28412,7 +26873,7 @@ module Aws::QuickSight
       :data_sets,
       :config_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a filter used to select items for a topic.</p>
@@ -28469,22 +26930,7 @@ module Aws::QuickSight
       :date_range_filter,
       :relative_date_filter,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicFilterAttribute
-      QUICKSIGHT_USER = 'QUICKSIGHT_USER'
-      QUICKSIGHT_VIEWER_OR_OWNER = 'QUICKSIGHT_VIEWER_OR_OWNER'
-      DIRECT_QUICKSIGHT_VIEWER_OR_OWNER = 'DIRECT_QUICKSIGHT_VIEWER_OR_OWNER'
-      QUICKSIGHT_OWNER = 'QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_OWNER = 'DIRECT_QUICKSIGHT_OWNER'
-      DIRECT_QUICKSIGHT_SOLE_OWNER = 'DIRECT_QUICKSIGHT_SOLE_OWNER'
-      TOPIC_NAME = 'TOPIC_NAME'
-    end
-
-    module TopicFilterOperator
-      StringEquals = 'StringEquals'
-      StringLike = 'StringLike'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicIR</code>.</p>
@@ -28514,7 +26960,7 @@ module Aws::QuickSight
       :contribution_analysis,
       :visual,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition of a <code>TopicIRComparisonMethod</code>.</p>
@@ -28532,7 +26978,7 @@ module Aws::QuickSight
       :period,
       :window_size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:window_size] = 0 unless options.key?(:window_size)
@@ -28559,20 +27005,7 @@ module Aws::QuickSight
       :direction,
       :sort_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicIRFilterFunction
-      CONTAINS = 'CONTAINS'
-      EXACT = 'EXACT'
-      STARTS_WITH = 'STARTS_WITH'
-      ENDS_WITH = 'ENDS_WITH'
-      CONTAINS_STRING = 'CONTAINS_STRING'
-      PREVIOUS = 'PREVIOUS'
-      THIS = 'THIS'
-      LAST = 'LAST'
-      NEXT = 'NEXT'
-      NOW = 'NOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicIRFilterOption</code>.</p>
@@ -28650,25 +27083,13 @@ module Aws::QuickSight
       :sort_direction,
       :anchor,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inverse] = false unless options.key?(:inverse)
         options[:inclusive] = false unless options.key?(:inclusive)
         super
       end
-    end
-
-    module TopicIRFilterType
-      CATEGORY_FILTER = 'CATEGORY_FILTER'
-      NUMERIC_EQUALITY_FILTER = 'NUMERIC_EQUALITY_FILTER'
-      NUMERIC_RANGE_FILTER = 'NUMERIC_RANGE_FILTER'
-      DATE_RANGE_FILTER = 'DATE_RANGE_FILTER'
-      RELATIVE_DATE_FILTER = 'RELATIVE_DATE_FILTER'
-      TOP_BOTTOM_FILTER = 'TOP_BOTTOM_FILTER'
-      EQUALS = 'EQUALS'
-      RANK_LIMIT_FILTER = 'RANK_LIMIT_FILTER'
-      ACCEPT_ALL_FILTER = 'ACCEPT_ALL_FILTER'
     end
 
     # <p>The definition for a <code>TopicIRGroupBy</code>.</p>
@@ -28698,7 +27119,7 @@ module Aws::QuickSight
       :display_format_options,
       :named_entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicIRMetric</code>.</p>
@@ -28740,7 +27161,7 @@ module Aws::QuickSight
       :display_format_options,
       :named_entity,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a named entity.</p>
@@ -28767,7 +27188,7 @@ module Aws::QuickSight
       :semantic_entity_type,
       :definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that filters topics based on the value of a numeric field. The filter includes only topics whose numeric field value matches the specified value.</p>
@@ -28786,7 +27207,7 @@ module Aws::QuickSight
       :constant,
       :aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A filter that filters topics based on the value of a numeric field. The filter includes only topics whose numeric field value falls within the specified range.</p>
@@ -28813,17 +27234,12 @@ module Aws::QuickSight
       :constant,
       :aggregation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:inclusive] = false unless options.key?(:inclusive)
         super
       end
-    end
-
-    module TopicNumericSeparatorSymbol
-      COMMA = 'COMMA'
-      DOT = 'DOT'
     end
 
     # <p>A constant value that is used in a range filter to specify the endpoints of the range.</p>
@@ -28838,7 +27254,7 @@ module Aws::QuickSight
       :constant_type,
       :range_constant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The details about the refresh of a topic.</p>
@@ -28856,7 +27272,7 @@ module Aws::QuickSight
       :refresh_id,
       :refresh_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a topic refresh schedule.</p>
@@ -28891,7 +27307,7 @@ module Aws::QuickSight
       :repeat_at,
       :topic_schedule_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:based_on_spice_schedule] = false unless options.key?(:based_on_spice_schedule)
@@ -28918,15 +27334,7 @@ module Aws::QuickSight
       :dataset_name,
       :refresh_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicRefreshStatus
-      INITIALIZED = 'INITIALIZED'
-      RUNNING = 'RUNNING'
-      FAILED = 'FAILED'
-      COMPLETED = 'COMPLETED'
-      CANCELLED = 'CANCELLED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a relative date filter.</p>
@@ -28945,15 +27353,7 @@ module Aws::QuickSight
       :relative_date_filter_function,
       :constant,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicRelativeDateFilterFunction
-      PREVIOUS = 'PREVIOUS'
-      THIS = 'THIS'
-      LAST = 'LAST'
-      NEXT = 'NEXT'
-      NOW = 'NOW'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The deinition for a <code>TopicReviewedAnswer</code>.</p>
@@ -28987,14 +27387,7 @@ module Aws::QuickSight
       :primary_visual,
       :template,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicScheduleType
-      HOURLY = 'HOURLY'
-      DAILY = 'DAILY'
-      WEEKLY = 'WEEKLY'
-      MONTHLY = 'MONTHLY'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The filter that is used to search for a topic.</p>
@@ -29012,7 +27405,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A structure that represents a singular filter constant, used in filters to specify a single value to match against.</p>
@@ -29027,7 +27420,7 @@ module Aws::QuickSight
       :constant_type,
       :singular_constant,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicSortClause</code>.</p>
@@ -29041,12 +27434,7 @@ module Aws::QuickSight
       :operand,
       :sort_direction,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicSortDirection
-      ASCENDING = 'ASCENDING'
-      DESCENDING = 'DESCENDING'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A topic summary.</p>
@@ -29068,7 +27456,7 @@ module Aws::QuickSight
       :name,
       :user_experience_version,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicTemplate</code>.</p>
@@ -29082,23 +27470,7 @@ module Aws::QuickSight
       :template_type,
       :slots,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module TopicTimeGranularity
-      SECOND = 'SECOND'
-      MINUTE = 'MINUTE'
-      HOUR = 'HOUR'
-      DAY = 'DAY'
-      WEEK = 'WEEK'
-      MONTH = 'MONTH'
-      QUARTER = 'QUARTER'
-      YEAR = 'YEAR'
-    end
-
-    module TopicUserExperienceVersion
-      LEGACY = 'LEGACY'
-      NEW_READER_EXPERIENCE = 'NEW_READER_EXPERIENCE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>TopicVisual</code>.</p>
@@ -29120,7 +27492,7 @@ module Aws::QuickSight
       :ir,
       :supporting_visuals,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total aggregation computation configuration.</p>
@@ -29138,7 +27510,7 @@ module Aws::QuickSight
       :name,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>An aggregation function that aggregates the total values of a measure.</p>
@@ -29148,7 +27520,7 @@ module Aws::QuickSight
     class TotalAggregationFunction < Struct.new(
       :simple_total_aggregation_function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total aggregation settings map of a field id.</p>
@@ -29162,7 +27534,7 @@ module Aws::QuickSight
       :field_id,
       :total_aggregation_function,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The total options for a table visual.</p>
@@ -29192,7 +27564,7 @@ module Aws::QuickSight
       :total_cell_style,
       :total_aggregation_options,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A data transformation on a logical table. This is a variant type structure. For this
@@ -29234,7 +27606,7 @@ module Aws::QuickSight
       :override_dataset_parameter_operation,
       :unknown,
       keyword_init: true)
-      include Smithy::Schema::Union
+      include ::Smithy::Schema::Union
 
       class ProjectOperation < TransformOperation; end
       class FilterOperation < TransformOperation; end
@@ -29245,11 +27617,6 @@ module Aws::QuickSight
       class UntagColumnOperation < TransformOperation; end
       class OverrideDatasetParameterOperation < TransformOperation; end
       class Unknown < TransformOperation; end
-    end
-
-    module TransposedColumnType
-      ROW_HEADER_COLUMN = 'ROW_HEADER_COLUMN'
-      VALUE_COLUMN = 'VALUE_COLUMN'
     end
 
     # <p>The column option of the transposed table.</p>
@@ -29277,7 +27644,7 @@ module Aws::QuickSight
       :column_width,
       :column_type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Aggregated field wells of a tree map.</p>
@@ -29295,7 +27662,7 @@ module Aws::QuickSight
       :sizes,
       :colors,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a tree map.</p>
@@ -29341,7 +27708,7 @@ module Aws::QuickSight
       :tooltip,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a tree map.</p>
@@ -29352,7 +27719,7 @@ module Aws::QuickSight
     class TreeMapFieldWells < Struct.new(
       :tree_map_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a tree map.</p>
@@ -29366,7 +27733,7 @@ module Aws::QuickSight
       :tree_map_sort,
       :tree_map_group_items_limit_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A tree map.</p>
@@ -29401,7 +27768,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of trend arrows in a KPI visual.</p>
@@ -29411,7 +27778,7 @@ module Aws::QuickSight
     class TrendArrowOptions < Struct.new(
       :visibility,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters that are required to connect to a Trino data source.</p>
@@ -29429,7 +27796,7 @@ module Aws::QuickSight
       :port,
       :catalog,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The parameters for Twitter.</p>
@@ -29443,7 +27810,7 @@ module Aws::QuickSight
       :query,
       :max_rows,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Determines the typography options.</p>
@@ -29453,7 +27820,7 @@ module Aws::QuickSight
     class Typography < Struct.new(
       :font_families,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
@@ -29537,13 +27904,7 @@ module Aws::QuickSight
       :measure,
       :measure_foreground,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module URLTargetConfiguration
-      NEW_TAB = 'NEW_TAB'
-      NEW_WINDOW = 'NEW_WINDOW'
-      SAME_TAB = 'SAME_TAB'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unaggregated field for a table.</p>
@@ -29561,12 +27922,7 @@ module Aws::QuickSight
       :column,
       :format_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module UndefinedSpecifiedValueType
-      LEAST = 'LEAST'
-      MOST = 'MOST'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A <code>UniqueKey</code> configuration that references a dataset column.</p>
@@ -29576,7 +27932,7 @@ module Aws::QuickSight
     class UniqueKey < Struct.new(
       :column_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The unique values computation configuration.</p>
@@ -29594,7 +27950,7 @@ module Aws::QuickSight
       :name,
       :category,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error indicates that you are calling an embedding operation in Amazon QuickSight
@@ -29615,7 +27971,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>This error indicates that you are calling an operation on an Amazon QuickSight
@@ -29631,7 +27987,7 @@ module Aws::QuickSight
       :message,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A transform operation that removes tags associated with a column.</p>
@@ -29645,7 +28001,7 @@ module Aws::QuickSight
       :column_name,
       :tag_names,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute resource_arn
@@ -29658,7 +28014,7 @@ module Aws::QuickSight
       :resource_arn,
       :tag_keys,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -29671,7 +28027,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -29694,7 +28050,7 @@ module Aws::QuickSight
       :namespace,
       :account_customization,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -29724,7 +28080,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -29756,7 +28112,7 @@ module Aws::QuickSight
       :notification_email,
       :termination_protection_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -29769,7 +28125,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -29799,7 +28155,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute analysis_arn
@@ -29825,7 +28181,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -29874,7 +28230,7 @@ module Aws::QuickSight
       :definition,
       :validation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -29899,7 +28255,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -29917,7 +28273,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -29930,7 +28286,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -29948,7 +28304,7 @@ module Aws::QuickSight
       :aws_account_id,
       :brand_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -29961,7 +28317,7 @@ module Aws::QuickSight
       :request_id,
       :brand_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -29978,7 +28334,7 @@ module Aws::QuickSight
       :brand_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -29991,7 +28347,7 @@ module Aws::QuickSight
       :request_id,
       :version_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -30008,7 +28364,7 @@ module Aws::QuickSight
       :brand_id,
       :brand_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -30025,7 +28381,7 @@ module Aws::QuickSight
       :brand_detail,
       :brand_definition,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -30042,7 +28398,7 @@ module Aws::QuickSight
       :custom_permissions_name,
       :capabilities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -30059,7 +28415,7 @@ module Aws::QuickSight
       :arn,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30081,7 +28437,7 @@ module Aws::QuickSight
       :dashboard_id,
       :link_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -30102,7 +28458,7 @@ module Aws::QuickSight
       :dashboard_arn,
       :link_entities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30137,7 +28493,7 @@ module Aws::QuickSight
       :grant_link_permissions,
       :revoke_link_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_arn
@@ -30166,7 +28522,7 @@ module Aws::QuickSight
       :status,
       :link_sharing_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30189,7 +28545,7 @@ module Aws::QuickSight
       :dashboard_id,
       :version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboard_id
@@ -30210,7 +28566,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30302,7 +28658,7 @@ module Aws::QuickSight
       :definition,
       :validation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -30331,7 +28687,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30349,7 +28705,7 @@ module Aws::QuickSight
       :aws_account_id,
       :dashboards_qa_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute dashboards_qa_status
@@ -30366,7 +28722,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30393,7 +28749,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_set_arn
@@ -30415,7 +28771,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30484,7 +28840,7 @@ module Aws::QuickSight
       :dataset_parameters,
       :performance_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -30515,7 +28871,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30541,7 +28897,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute data_source_arn
@@ -30562,7 +28918,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30603,7 +28959,7 @@ module Aws::QuickSight
       :vpc_connection_properties,
       :ssl_properties,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -30628,7 +28984,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30650,7 +29006,7 @@ module Aws::QuickSight
       :namespace,
       :application_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -30663,7 +29019,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30689,7 +29045,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -30714,7 +29070,7 @@ module Aws::QuickSight
       :permissions,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30736,7 +29092,7 @@ module Aws::QuickSight
       :folder_id,
       :name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -30757,7 +29113,7 @@ module Aws::QuickSight
       :folder_id,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30784,7 +29140,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute group
@@ -30801,7 +29157,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30858,7 +29214,7 @@ module Aws::QuickSight
       :policy_arn,
       :identities,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute assignment_name
@@ -30910,7 +29266,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30932,7 +29288,7 @@ module Aws::QuickSight
       :service,
       :authorized_targets,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -30945,7 +29301,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -30975,7 +29331,7 @@ module Aws::QuickSight
       :vpc_endpoint_id_restriction_rule_map,
       :enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -30992,7 +29348,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31010,7 +29366,7 @@ module Aws::QuickSight
       :aws_account_id,
       :key_registration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute failed_key_registration
@@ -31027,7 +29383,7 @@ module Aws::QuickSight
       :successful_key_registration,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute aws_account_id
@@ -31040,7 +29396,7 @@ module Aws::QuickSight
       :aws_account_id,
       :public_sharing_enabled,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -31053,7 +29409,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31071,7 +29427,7 @@ module Aws::QuickSight
       :aws_account_id,
       :personalization_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute personalization_mode
@@ -31088,7 +29444,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31106,7 +29462,7 @@ module Aws::QuickSight
       :aws_account_id,
       :q_search_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute q_search_status
@@ -31123,7 +29479,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31145,7 +29501,7 @@ module Aws::QuickSight
       :aws_account_id,
       :schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute status
@@ -31166,7 +29522,7 @@ module Aws::QuickSight
       :schedule_id,
       :arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31192,7 +29548,7 @@ module Aws::QuickSight
       :aws_account_id,
       :namespace,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -31205,7 +29561,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31233,7 +29589,7 @@ module Aws::QuickSight
       :aws_account_id,
       :purchase_mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -31246,7 +29602,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31275,7 +29631,7 @@ module Aws::QuickSight
       :alias_name,
       :template_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_alias
@@ -31292,7 +29648,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31318,7 +29674,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -31343,7 +29699,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31394,7 +29750,7 @@ module Aws::QuickSight
       :definition,
       :validation_strategy,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute template_id
@@ -31423,7 +29779,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31449,7 +29805,7 @@ module Aws::QuickSight
       :alias_name,
       :theme_version_number,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_alias
@@ -31466,7 +29822,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31492,7 +29848,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_id
@@ -31517,7 +29873,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31554,7 +29910,7 @@ module Aws::QuickSight
       :version_description,
       :configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute theme_id
@@ -31583,7 +29939,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31610,7 +29966,7 @@ module Aws::QuickSight
       :grant_permissions,
       :revoke_permissions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -31635,7 +29991,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31662,7 +30018,7 @@ module Aws::QuickSight
       :dataset_id,
       :refresh_schedule,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -31687,7 +30043,7 @@ module Aws::QuickSight
       :status,
       :request_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31714,7 +30070,7 @@ module Aws::QuickSight
       :topic,
       :custom_instructions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute topic_id
@@ -31739,7 +30095,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31765,7 +30121,7 @@ module Aws::QuickSight
       :namespace,
       :custom_permissions_name,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute request_id
@@ -31778,7 +30134,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31907,7 +30263,7 @@ module Aws::QuickSight
       :custom_federation_provider_url,
       :external_login_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute user
@@ -31924,7 +30280,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -31965,7 +30321,7 @@ module Aws::QuickSight
       :dns_resolvers,
       :role_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute arn
@@ -31994,7 +30350,7 @@ module Aws::QuickSight
       :request_id,
       :status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:status] = 0 unless options.key?(:status)
@@ -32025,10 +30381,10 @@ module Aws::QuickSight
       :text_qualifier,
       :delimiter,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
-        options[:contains_header] =  unless options.key?(:contains_header)
+        options[:contains_header] = nil unless options.key?(:contains_header)
         super
       end
     end
@@ -32133,23 +30489,12 @@ module Aws::QuickSight
       :external_login_federation_provider_url,
       :external_login_id,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:active] = false unless options.key?(:active)
         super
       end
-    end
-
-    module UserRole
-      ADMIN = 'ADMIN'
-      AUTHOR = 'AUTHOR'
-      READER = 'READER'
-      RESTRICTED_AUTHOR = 'RESTRICTED_AUTHOR'
-      RESTRICTED_READER = 'RESTRICTED_READER'
-      ADMIN_PRO = 'ADMIN_PRO'
-      AUTHOR_PRO = 'AUTHOR_PRO'
-      READER_PRO = 'READER_PRO'
     end
 
     # <p>The structure of a VPC connection.</p>
@@ -32206,25 +30551,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VPCConnectionAvailabilityStatus
-      AVAILABLE = 'AVAILABLE'
-      UNAVAILABLE = 'UNAVAILABLE'
-      PARTIALLY_AVAILABLE = 'PARTIALLY_AVAILABLE'
-    end
-
-    module VPCConnectionResourceStatus
-      CREATION_IN_PROGRESS = 'CREATION_IN_PROGRESS'
-      CREATION_SUCCESSFUL = 'CREATION_SUCCESSFUL'
-      CREATION_FAILED = 'CREATION_FAILED'
-      UPDATE_IN_PROGRESS = 'UPDATE_IN_PROGRESS'
-      UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL'
-      UPDATE_FAILED = 'UPDATE_FAILED'
-      DELETION_IN_PROGRESS = 'DELETION_IN_PROGRESS'
-      DELETION_FAILED = 'DELETION_FAILED'
-      DELETED = 'DELETED'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The summary metadata that describes a VPC connection.</p>
@@ -32282,7 +30609,7 @@ module Aws::QuickSight
       :created_time,
       :last_updated_time,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The option to relax the validation that is required to create and update analyses, dashboards, and templates with definition objects. When you set this value to <code>LENIENT</code>, validation is skipped for specific errors.</p>
@@ -32292,29 +30619,7 @@ module Aws::QuickSight
     class ValidationStrategy < Struct.new(
       :mode,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module ValidationStrategyMode
-      STRICT = 'STRICT'
-      LENIENT = 'LENIENT'
-    end
-
-    module ValueWhenUnsetOption
-      RECOMMENDED_VALUE = 'RECOMMENDED_VALUE'
-      NULL = 'NULL'
-    end
-
-    module VerticalTextAlignment
-      TOP = 'TOP'
-      MIDDLE = 'MIDDLE'
-      BOTTOM = 'BOTTOM'
-      AUTO = 'AUTO'
-    end
-
-    module Visibility
-      HIDDEN = 'HIDDEN'
-      VISIBLE = 'VISIBLE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The range options for the data zoom scroll bar.</p>
@@ -32324,7 +30629,7 @@ module Aws::QuickSight
     class VisibleRangeOptions < Struct.new(
       :percent_range,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A visual displayed on a sheet in an analysis, dashboard, or template.</p>
@@ -32453,7 +30758,7 @@ module Aws::QuickSight
       :radar_chart_visual,
       :plugin_visual,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The axis sort options for a visual.</p>
@@ -32463,7 +30768,7 @@ module Aws::QuickSight
     class VisualAxisSortOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A custom action defined on a visual.</p>
@@ -32501,7 +30806,7 @@ module Aws::QuickSight
       :trigger,
       :action_operations,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A list of custom actions applied to visuals in an analysis or sheet.</p>
@@ -32511,7 +30816,7 @@ module Aws::QuickSight
     class VisualCustomActionDefaults < Struct.new(
       :highlight_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The operation that is defined by the custom action.</p>
@@ -32534,12 +30839,7 @@ module Aws::QuickSight
       :url_operation,
       :set_parameters_operation,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VisualCustomActionTrigger
-      DATA_POINT_CLICK = 'DATA_POINT_CLICK'
-      DATA_POINT_MENU = 'DATA_POINT_MENU'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Defines what initiates a highlight operation on a visual, such as a click or hover.</p>
@@ -32549,13 +30849,7 @@ module Aws::QuickSight
     class VisualHighlightOperation < Struct.new(
       :trigger,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VisualHighlightTrigger
-      DATA_POINT_CLICK = 'DATA_POINT_CLICK'
-      DATA_POINT_HOVER = 'DATA_POINT_HOVER'
-      NONE = 'NONE'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The general visual interactions setup for visual publish options</p>
@@ -32569,7 +30863,7 @@ module Aws::QuickSight
       :visual_menu_option,
       :context_menu_option,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The menu options for a visual.</p>
@@ -32579,7 +30873,7 @@ module Aws::QuickSight
     class VisualMenuOption < Struct.new(
       :availability_status,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The definition for a <code>VisualOptions</code>.</p>
@@ -32589,7 +30883,7 @@ module Aws::QuickSight
     class VisualOptions < Struct.new(
       :type,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The visual display options for the visual palette.</p>
@@ -32603,15 +30897,7 @@ module Aws::QuickSight
       :chart_color,
       :color_map,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module VisualRole
-      PRIMARY = 'PRIMARY'
-      COMPLIMENTARY = 'COMPLIMENTARY'
-      MULTI_INTENT = 'MULTI_INTENT'
-      FALLBACK = 'FALLBACK'
-      FRAGMENT = 'FRAGMENT'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The subtitle label options for a visual.</p>
@@ -32625,7 +30911,7 @@ module Aws::QuickSight
       :visibility,
       :format_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The title label options for a visual.</p>
@@ -32639,7 +30925,7 @@ module Aws::QuickSight
       :visibility,
       :format_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>VPC connection properties.</p>
@@ -32649,7 +30935,7 @@ module Aws::QuickSight
     class VpcConnectionProperties < Struct.new(
       :vpc_connection_arn,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a waterfall visual.</p>
@@ -32667,7 +30953,7 @@ module Aws::QuickSight
       :values,
       :breakdowns,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color configuration of a waterfall visual.</p>
@@ -32677,7 +30963,7 @@ module Aws::QuickSight
     class WaterfallChartColorConfiguration < Struct.new(
       :group_color_configuration,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration for a waterfall visual.</p>
@@ -32731,7 +31017,7 @@ module Aws::QuickSight
       :color_configuration,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field well configuration of a waterfall visual.</p>
@@ -32741,7 +31027,7 @@ module Aws::QuickSight
     class WaterfallChartFieldWells < Struct.new(
       :waterfall_chart_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The color configuration for individual groups within a waterfall visual.</p>
@@ -32759,7 +31045,7 @@ module Aws::QuickSight
       :negative_bar_color,
       :total_bar_color,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that determine the presentation of a waterfall visual.</p>
@@ -32769,7 +31055,7 @@ module Aws::QuickSight
     class WaterfallChartOptions < Struct.new(
       :total_bar_label,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a waterfall visual.</p>
@@ -32783,7 +31069,7 @@ module Aws::QuickSight
       :category_sort,
       :breakdown_items_limit,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A waterfall chart.</p>
@@ -32818,7 +31104,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides the forecast to meet the target for a particular date.</p>
@@ -32832,7 +31118,7 @@ module Aws::QuickSight
       :date,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
@@ -32855,17 +31141,12 @@ module Aws::QuickSight
       :end_date,
       :value,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
 
       def initialize(options = {})
         options[:value] = 0 unless options.key?(:value)
         super
       end
-    end
-
-    module WidgetStatus
-      ENABLED = 'ENABLED'
-      DISABLED = 'DISABLED'
     end
 
     # <p>The aggregated field wells of a word cloud.</p>
@@ -32879,7 +31160,7 @@ module Aws::QuickSight
       :group_by,
       :size,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The configuration of a word cloud visual.</p>
@@ -32905,12 +31186,7 @@ module Aws::QuickSight
       :word_cloud_options,
       :interactions,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WordCloudCloudLayout
-      FLUID = 'FLUID'
-      NORMAL = 'NORMAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The field wells of a word cloud visual.</p>
@@ -32921,7 +31197,7 @@ module Aws::QuickSight
     class WordCloudFieldWells < Struct.new(
       :word_cloud_aggregated_field_wells,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The word cloud options for a word cloud visual.</p>
@@ -32951,7 +31227,7 @@ module Aws::QuickSight
       :word_padding,
       :maximum_string_length,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The sort configuration of a word cloud visual.</p>
@@ -32965,7 +31241,7 @@ module Aws::QuickSight
       :category_items_limit,
       :category_sort,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
     # <p>A word cloud.</p>
@@ -33000,29 +31276,7 @@ module Aws::QuickSight
       :column_hierarchies,
       :visual_content_alt_text,
       keyword_init: true)
-      include Smithy::Schema::Structure
-    end
-
-    module WordCloudWordCasing
-      LOWER_CASE = 'LOWER_CASE'
-      EXISTING_CASE = 'EXISTING_CASE'
-    end
-
-    module WordCloudWordOrientation
-      HORIZONTAL = 'HORIZONTAL'
-      HORIZONTAL_AND_VERTICAL = 'HORIZONTAL_AND_VERTICAL'
-    end
-
-    module WordCloudWordPadding
-      NONE = 'NONE'
-      SMALL = 'SMALL'
-      MEDIUM = 'MEDIUM'
-      LARGE = 'LARGE'
-    end
-
-    module WordCloudWordScaling
-      EMPHASIZE = 'EMPHASIZE'
-      NORMAL = 'NORMAL'
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The options that are available for a single Y axis in a chart.</p>
@@ -33033,7 +31287,7 @@ module Aws::QuickSight
     class YAxisOptions < Struct.new(
       :y_axis,
       keyword_init: true)
-      include Smithy::Schema::Structure
+      include ::Smithy::Schema::Structure
     end
 
   end
